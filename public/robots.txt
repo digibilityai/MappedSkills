@@ -1,0 +1,39 @@
+# Robots.txt for MappedSkills
+# Allow all crawlers to access the site
+# Reference sitemap for discovery
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://mappedskills.com/sitemap.xml
+
+# Crawl delay (in seconds) - optional, allows 10 requests per second
+Crawl-delay: 0.1
+
+# Common bot rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+# Disallow private directories
+Disallow: /admin/
+Disallow: /api/
+
+# Allow specific API endpoints that should be publicly crawlable
+Allow: /api/sitemap
+Allow: /api/rss

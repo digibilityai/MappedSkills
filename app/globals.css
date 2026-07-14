@@ -1,0 +1,330 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* MappedSkills Brand Design System */
+:root {
+  /* Brand Colors */
+  --ms-red: #C41E3A;
+  --ms-dark: #2C2C2C;
+  --ms-light: #F5F5F5;
+  --ms-white: #FFFFFF;
+  --ms-navy: #1A2A3A;
+  --ms-gray: #666666;
+  --ms-success: #2D8C5F;
+  --ms-alert: #E67E22;
+
+  /* Light mode - sophisticated light theme */
+  --background: #f8f8f8;
+  --foreground: #1a1a1a;
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+  --primary: #1a1a1a;
+  --primary-foreground: #ffffff;
+  --secondary: #e0e0e0;
+  --secondary-foreground: #1a1a1a;
+  --muted: #e0e0e0;
+  --muted-foreground: #666666;
+  --accent: #C41E3A;
+  --accent-foreground: #ffffff;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #e0e0e0;
+  --input: #f0f0f0;
+  --ring: #C41E3A;
+  --chart-1: #C41E3A;
+  --chart-2: #2D8C5F;
+  --chart-3: #ffaa00;
+  --chart-4: #ff6600;
+  --chart-5: #cc00ff;
+  --radius: 0.75rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-primary: #1a1a1a;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #C41E3A;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #e0e0e0;
+  --sidebar-ring: #C41E3A;
+}
+
+.dark {
+  /* Dark mode - primary experience - sophisticated dark aesthetic */
+  --background: #0F0F0F;
+  --foreground: #f5f5f5;
+  --card: #1a1a1a;
+  --card-foreground: #f5f5f5;
+  --popover: #1a1a1a;
+  --popover-foreground: #f5f5f5;
+  --primary: #ffffff;
+  --primary-foreground: #0F0F0F;
+  --secondary: #2a2a2a;
+  --secondary-foreground: #f5f5f5;
+  --muted: #3a3a3a;
+  /* Lighter than brand gray for readable secondary copy on dark bg */
+  --muted-foreground: #b8b8b8;
+  --accent: #C41E3A;
+  --accent-foreground: #ffffff;
+  --destructive: #ff4444;
+  --destructive-foreground: #0F0F0F;
+  --border: #2a2a2a;
+  --input: #1a1a1a;
+  --ring: #C41E3A;
+  --chart-1: #FF5566;
+  --chart-2: #2D8C5F;
+  --chart-3: #ffaa00;
+  --chart-4: #ff6600;
+  --chart-5: #cc00ff;
+  --sidebar: #1a1a1a;
+  --sidebar-foreground: #f5f5f5;
+  --sidebar-primary: #ffffff;
+  --sidebar-primary-foreground: #0F0F0F;
+  --sidebar-accent: #C41E3A;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #2a2a2a;
+  --sidebar-ring: #C41E3A;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
+  --font-heading: var(--font-montserrat), 'Montserrat', sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  /* Brand palette — use as text-ms-dark, bg-ms-dark, etc. */
+  --color-ms-red: var(--ms-red);
+  --color-ms-dark: var(--ms-dark);
+  --color-ms-light: var(--ms-light);
+  --color-ms-white: var(--ms-white);
+  --color-ms-navy: var(--ms-navy);
+  --color-ms-gray: var(--ms-gray);
+  --color-ms-success: var(--ms-success);
+  --color-ms-alert: var(--ms-alert);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/*
+ * Light surfaces under forced dark mode: keep backgrounds, switch text
+ * tokens to brand dark/gray so text-foreground/muted remain readable.
+ */
+.bg-white,
+.bg-ms-light,
+.bg-ms-white,
+.bg-red-50,
+.bg-orange-50,
+.bg-amber-50,
+.bg-yellow-50,
+.bg-green-50,
+.bg-blue-50,
+.bg-indigo-50,
+.bg-purple-50,
+.bg-red-50\/50,
+.bg-orange-50\/50,
+.bg-amber-50\/50,
+.bg-yellow-50\/50,
+.bg-green-50\/50,
+.bg-blue-50\/50,
+.bg-indigo-50\/50,
+.bg-purple-50\/50,
+.from-red-50 {
+  --foreground: #1a1a1a;
+  --card-foreground: #1a1a1a;
+  --popover-foreground: #1a1a1a;
+  --primary: #1a1a1a;
+  --secondary-foreground: #1a1a1a;
+  --muted-foreground: #666666;
+  --border: #e0e0e0;
+  color: #1a1a1a;
+}
+
+/* Dark-mode callouts that keep dark tinted backgrounds (text stays light) */
+html.dark .dark\:bg-green-950\/20,
+html.dark .dark\:bg-amber-950\/20,
+html.dark .dark\:bg-blue-950\/20,
+html.dark .dark\:bg-purple-950\/20,
+html.dark .dark\:bg-indigo-950\/20,
+html.dark .dark\:bg-yellow-950 {
+  --foreground: #f5f5f5;
+  --card-foreground: #f5f5f5;
+  --popover-foreground: #f5f5f5;
+  --primary: #ffffff;
+  --secondary-foreground: #f5f5f5;
+  --muted-foreground: #b8b8b8;
+  color: #f5f5f5;
+}
+
+/* Typography Hierarchy */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold leading-tight;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl lg:text-4xl;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl lg:text-3xl;
+  }
+
+  p, li, label {
+    @apply font-sans text-base leading-relaxed;
+  }
+
+  small, .text-sm {
+    @apply text-sm font-normal leading-relaxed;
+  }
+
+  /* Text Hierarchy - High Contrast (brand: dark #1a1a1a / gray #666) */
+  .text-primary-body {
+    @apply text-foreground;
+  }
+
+  .text-secondary-body {
+    @apply text-muted-foreground;
+  }
+
+  .text-tertiary-body {
+    @apply text-muted-foreground;
+  }
+
+  /* Improve Description Text Contrast */
+  .description {
+    @apply text-lg leading-relaxed text-foreground;
+  }
+
+  /* Improve Subtitle Contrast */
+  .subtitle {
+    @apply text-lg md:text-xl leading-relaxed text-muted-foreground;
+  }
+
+  /* Section Subheadings */
+  .section-subtitle {
+    @apply text-lg md:text-xl leading-relaxed text-muted-foreground mb-8;
+  }
+
+  /* Input Focus States */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-background;
+  }
+
+  /* Link Styling */
+  a {
+    @apply text-accent hover:text-accent/80 transition-colors;
+  }
+
+  /* Button Reset */
+  button {
+    @apply cursor-pointer;
+  }
+
+  /* Card Hover Effects */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  /* Badge Styling */
+  .badge {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-accent/10 text-accent;
+  }
+
+  /* Section Spacing */
+  section {
+    @apply py-16;
+  }
+
+  /* Enhanced Readability - Section Content */
+  .section-content {
+    @apply space-y-6 md:space-y-8;
+  }
+
+  /* Card Content Spacing */
+  .card-content {
+    @apply space-y-4;
+  }
+
+  /* Improved spacing between heading and description */
+  h1 + p,
+  h2 + p,
+  h3 + p {
+    @apply mt-4 md:mt-6;
+  }
+
+  /* Better spacing for lists */
+  ul, ol {
+    @apply space-y-3 pl-6;
+  }
+
+  /* Link styling with better visibility */
+  a {
+    @apply text-accent hover:text-accent/80 transition-colors underline-offset-4 hover:underline;
+  }
+
+  /* Improved button text */
+  button {
+    @apply cursor-pointer font-medium;
+  }
+
+  /* Better contrast for labels */
+  label {
+    @apply font-medium text-foreground;
+  }
+}

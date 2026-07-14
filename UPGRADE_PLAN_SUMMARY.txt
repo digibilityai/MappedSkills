@@ -1,0 +1,334 @@
+================================================================================
+MappedSkills Brand Upgrade Plan - Complete Audit & Strategy
+Generated: May 29, 2026
+================================================================================
+
+PROJECT STATUS
+================================================================================
+
+Current State: Vanilla Next.js marketing website (fully functional)
+Target State: Modern, branded, interactive performance marketing agency site
+Preservation: All routes, pages, and content PRESERVED
+Approach: Strategic component and styling upgrades
+
+Build Status: ✓ Currently compiles successfully
+Pages: 21 live pages + dynamic routes (blog, results)
+Components: 30+ reusable components
+Dependencies: Tailwind CSS v4, Next.js 16, Radix UI, Lucide Icons
+
+================================================================================
+DELIVERABLE: COMPREHENSIVE UPGRADE PLAN
+================================================================================
+
+Document: BRAND_UPGRADE_PLAN.md (659 lines, detailed specifications)
+
+The plan covers:
+
+1. STYLING SYSTEM UPGRADE
+   - globals.css: Color token replacement (#0066ff → #C41E3A)
+   - Typography: Montserrat (headings) + Inter (body)
+   - Dark mode: Charcoal-based (#2C2C2C, #0F0F0F backgrounds)
+   - New CSS variables: --brand-red, --dark-charcoal, --light-gray
+
+2. CORE COMPONENTS (11 components to upgrade)
+   ✓ Header.tsx - Logo image, red buttons, Montserrat nav
+   ✓ Footer.tsx - Brand mark, red headers, consistency
+   ✓ Hero.tsx - Gradient bg, red accents, scroll animations
+   ✓ HeroDashboard.tsx - Red highlights, parallax effects
+   ✓ ServiceCard.tsx - Red left borders, hover scale animations
+   ✓ CaseStudyCard.tsx - Red badges, animated metrics
+   ✓ PricingCard.tsx - Red highlight on featured plan
+   ✓ TestimonialCard.tsx - Red accents, social proof
+   ✓ StatCard.tsx - Large Montserrat numbers, animated counters
+   ✓ ValueCard.tsx - Red icon backgrounds
+   ✓ CTASection.tsx - Strong red emphasis, animations
+
+3. PAGE UPGRADES (18 pages)
+   Priority Pages:
+   ✓ Homepage - Hero gradient, card animations, stats counters
+   ✓ Service Pages (6) - Service-specific accents, red borders
+   ✓ Results Page - Card animations, metric animations
+   ✓ How It Works - Red step numbers, animated timeline
+   ✓ Pricing Page - Red featured plan highlight
+   ✓ Contact Page - Red form focus states, submit button
+   ✓ Schedule Call Page - Red calendar highlight
+   ✓ FAQ Page - Red accordion active states
+   ✓ Blog Pages - Red featured badge, article accents
+   ✓ About Page - Red team card borders
+   ✓ Thank You & 404 Pages - Red success/error accents
+
+4. ANIMATION & INTERACTION STRATEGY
+   ✓ Fade-in animations on scroll (using Framer Motion)
+   ✓ Slide-in animations for text
+   ✓ Scale animations on hover (1.03-1.05x)
+   ✓ Stagger animations for lists
+   ✓ Count-up animations for stats
+   ✓ Parallax effects
+   ✓ Micro-interactions (hover states, focus states)
+   ✓ Arrow slide animations on CTAs
+
+5. LOGO & FAVICON UPDATES
+   ✓ Replace Header logo: Text → Logo.png image
+   ✓ Update Favicon: /public/favicon.ico
+   ✓ Add to Footer (smaller version)
+   ✓ Update app/layout.tsx icon configuration
+
+6. TYPOGRAPHY SYSTEM
+   ✓ Add Montserrat font (headings)
+   ✓ Add Inter font (body)
+   ✓ Create typography utility classes
+   ✓ Update all page headings to Montserrat
+   ✓ Ensure Inter used for body text
+
+7. COLOR SYSTEM INTEGRATION
+   ✓ Create /lib/colors.ts constants file
+   ✓ Update globals.css variables
+   ✓ Replace blue (#0066ff) → red (#C41E3A) throughout
+   ✓ Apply charcoal backgrounds (#2C2C2C)
+   ✓ Use light gray (#F5F5F5) for subtle accents
+
+================================================================================
+CURRENT CODEBASE AUDIT RESULTS
+================================================================================
+
+Existing Assets Identified:
+✓ 21 live pages (18 main + 3 dynamic)
+✓ 30+ reusable components
+✓ Tailwind CSS v4 styling system
+✓ Next.js 16 App Router
+✓ Radix UI component library
+✓ 50+ pre-built UI components
+
+Pages Currently:
+- Homepage (/) - Multi-section marketing page
+- Services (/services, /google-ads, /social-media-ads, /lead-generation, /seo, /conversion-optimization)
+- Results (/results, /results/[slug]) - Case studies
+- How It Works (/how-it-works)
+- About (/about)
+- Pricing (/pricing)
+- Blog (/blog, /blog/[slug]) - 8 published articles
+- Contact (/contact)
+- Schedule Call (/schedule-call)
+- FAQ (/faq)
+- Thank You (/thank-you)
+- 404 (not-found)
+- Admin (/launch-checklist)
+
+Components Available:
+- Layout: Header, Footer, Section, Container
+- Hero: Hero, HeroDashboard
+- Cards: ServiceCard, CaseStudyCard, BlogCard, PricingCard, TestimonialCard, StatCard, ValueCard, IndustryCard, TeamCard, ProblemCard
+- Forms: ContactForm, BlogNewsletterForm, CategoryFilter, ResultsFilter
+- Sections: FAQSection, CTASection, SocialProofStrip, BeforeAfterMetric
+- Blog: BlogHero, BlogIntroduction, ContentBlock, TableOfContents, RelatedPosts, RelatedServices, AuthorBio, SocialShare, StickySidebarCTA
+- UI: Button, Card, Input, Form, Accordion, Dialog, and 80+ more
+
+Current Styling:
+- Tailwind CSS v4 with custom theme tokens
+- Dark mode primary (--dark theme applied globally)
+- Blue accent color (#0066ff)
+- Generic Geist font family
+- Responsive design (mobile-first)
+
+================================================================================
+IMPLEMENTATION ROADMAP
+================================================================================
+
+Phase 1: Foundation (2 days)
+1. Update globals.css with new colors and fonts
+2. Add Montserrat & Inter fonts to layout.tsx
+3. Update Header.tsx with logo image
+4. Save favicon files to /public/
+5. Verify Framer Motion dependencies
+
+Phase 2: Component Upgrades (3 days)
+1. Upgrade Hero.tsx - gradient, red accents, animations
+2. Upgrade ServiceCard.tsx - red borders, hover effects
+3. Upgrade CaseStudyCard.tsx - animated metrics
+4. Upgrade PricingCard.tsx - featured plan highlight
+5. Upgrade Card Components - consistent red accents
+6. Upgrade CTASection.tsx - strong emphasis
+7. Update Footer.tsx - brand consistency
+
+Phase 3: Page Updates (5 days)
+1. Homepage - Hero animations, card effects
+2. Service Pages (6 pages) - Consistent styling
+3. Results Page - Card and metric animations
+4. How It Works - Timeline animations
+5. Pricing Page - Feature comparisons
+6. Contact & Schedule Pages - Form styling
+7. Blog Pages - Article styling
+
+Phase 4: Animations & Polish (2 days)
+1. Add Framer Motion scroll animations
+2. Add hover/interaction micro-effects
+3. Add count-up animations to stats
+4. Test animation performance
+5. Mobile animation optimization
+
+Phase 5: QA & Launch (2 days)
+1. Visual design QA (all pages)
+2. Mobile responsiveness check
+3. Browser compatibility testing
+4. Performance audit (Lighthouse)
+5. Final polish and fixes
+
+TOTAL: 14 days (2 weeks) for full upgrade
+
+================================================================================
+PRIORITY UPGRADE SEQUENCE
+================================================================================
+
+CRITICAL (Do First) - Affects all pages:
+1. globals.css - Color system overhaul
+2. layout.tsx - Font system update
+3. Header.tsx - Logo and navigation
+4. Button styling - All CTAs depend on this
+5. Hero.tsx - Homepage impact
+
+HIGH (Do Next) - Major conversion pages:
+1. ServiceCard.tsx - Service page consistency
+2. CaseStudyCard.tsx - Results page impact
+3. CTASection.tsx - All conversion CTAs
+4. Homepage - Biggest traffic page
+5. Service pages (6)
+6. Results page
+
+MEDIUM (Then Do) - Important pages:
+1. Blog cards and templates
+2. Pricing page
+3. Contact page
+4. FAQ and other pages
+5. Interior page updates
+
+LOW (Optional) - Polish:
+1. Admin pages
+2. Internal tools
+3. Development improvements
+
+================================================================================
+KEY DESIGN TOKENS
+================================================================================
+
+Brand Colors (MappedSkills):
+- Primary Red: #C41E3A (CTAs, accents, hover states)
+- Dark Charcoal: #2C2C2C (backgrounds, primary text)
+- Light Gray: #F5F5F5 (card backgrounds, subtle accents)
+- White: #FFFFFF (highest contrast)
+
+Typography:
+- Headings: Montserrat (bold, weight 600-700)
+- Body: Inter (regular, weight 400-500)
+- Display: Montserrat (weight 700-900)
+
+Interactions:
+- Hover Scale: 1.03-1.05x
+- Animation Duration: 0.3-0.6s
+- Easing: Spring or ease-in-out
+- Delay: 0.1-0.2s for staggered lists
+
+Spacing:
+- Preserved from current system
+- Improved visual hierarchy
+- Consistent padding/margin
+
+================================================================================
+SUCCESS METRICS (Post-Upgrade)
+================================================================================
+
+Design:
+✓ All pages have brand red accents
+✓ Montserrat used for all headings
+✓ Inter used for all body text
+✓ Consistent color palette throughout
+✓ No remnants of old blue accent color
+
+Interactions:
+✓ All CTAs have hover scale animations
+✓ Cards lift on hover with shadow
+✓ Forms have red focus states
+✓ Scroll animations activate properly
+✓ Smooth 60fps animations (no jank)
+
+Performance:
+✓ Lighthouse Performance > 85
+✓ Lighthouse SEO > 95
+✓ Page load time < 3 seconds
+✓ No layout shift (CLS < 0.1)
+✓ LCP < 2.5 seconds
+
+Functionality:
+✓ All routes preserved and working
+✓ All forms fully functional
+✓ All CTAs link correctly
+✓ Mobile responsive (320px+)
+✓ All browsers compatible
+
+Brand Expression:
+✓ Logo prominent and clear
+✓ Red accent subtle but visible
+✓ Modern, premium B2B SaaS feel
+✓ Conversion-focused design
+✓ Professional and trustworthy
+
+================================================================================
+NEXT STEPS FOR EXECUTION
+================================================================================
+
+1. Review BRAND_UPGRADE_PLAN.md (659 lines, comprehensive details)
+2. Approve design direction and brand application
+3. Begin Phase 1: Foundation work
+4. Track progress through phases
+5. QA each completed section
+6. Final deployment and launch
+
+The plan is detailed, organized, and ready to execute.
+All components, pages, and sequences are clearly identified.
+Implementation can begin immediately upon approval.
+
+================================================================================
+FILES PROVIDED
+================================================================================
+
+📄 BRAND_UPGRADE_PLAN.md (659 lines)
+   - Comprehensive upgrade specifications
+   - Component-by-component details
+   - Page-by-page upgrade list
+   - Implementation phases
+   - Testing checklist
+   - Success metrics
+
+🖼️ Logo.png
+   - MappedSkills brand logo
+   - "Clicks to Customers" tagline
+   - Red triangle accent
+   - Modern B2B SaaS design
+
+📌 Favicon.png
+   - Growth chart icon
+   - Charcoal and red colors
+   - 32x32px favicon
+   - Represents performance/growth
+
+================================================================================
+CURRENT STATUS
+================================================================================
+
+Audit: ✓ COMPLETE
+Plan: ✓ CREATED (659 lines, detailed)
+Brand Assets: ✓ PROVIDED (Logo + Favicon)
+Design System: ✓ DOCUMENTED
+Build: ✓ VERIFIED (compiles successfully)
+
+Ready For: Implementation Phase 1 (Foundation)
+
+Estimated Timeline: 14 days (2 weeks)
+Estimated Hours: 80-120 hours of development work
+Team Size Recommended: 2-3 developers
+
+================================================================================
+Generated by v0 AI Assistant
+Date: May 29, 2026
+Project: MappedSkills Brand Upgrade
+Status: READY FOR IMPLEMENTATION
+================================================================================

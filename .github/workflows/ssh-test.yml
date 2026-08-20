@@ -15,12 +15,20 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_PORT: ${{ secrets.SSH_PORT }}
         run: |
+          set -e
+
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
 
           printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
 
+          echo "Checking private key format..."
+          ssh-keygen -y -f ~/.ssh/deploy_key > /tmp/github_actions_public_key.pub
+
+          echo "Private key is valid."
+
+          echo "Testing SSH connection..."
           ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
 
           ssh \

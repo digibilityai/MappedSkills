@@ -1,14 +1,17 @@
-name: Test Hosting SSH
+name: Deploy MappedSkills
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
-  ssh-test:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test SSH connection
+      - name: Test deployment server
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
@@ -23,12 +26,6 @@ jobs:
           printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
 
-          echo "Checking private key format..."
-          ssh-keygen -y -f ~/.ssh/deploy_key > /tmp/github_actions_public_key.pub
-
-          echo "Private key is valid."
-
-          echo "Testing SSH connection..."
           ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
 
           ssh \
@@ -36,4 +33,4 @@ jobs:
             -p "$SSH_PORT" \
             -o IdentitiesOnly=yes \
             "$SSH_USER@$SSH_HOST" \
-            "echo 'SSH connection successful'; hostname; whoami"
+            "echo 'Deployment server connected'; hostname; whoami; pwd"

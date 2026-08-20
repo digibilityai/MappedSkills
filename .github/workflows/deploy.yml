@@ -11,7 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test deployment server
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Preview deployment
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
@@ -28,9 +31,20 @@ jobs:
 
           ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
 
+          echo "Checking deployment target..."
           ssh \
             -i ~/.ssh/deploy_key \
             -p "$SSH_PORT" \
             -o IdentitiesOnly=yes \
             "$SSH_USER@$SSH_HOST" \
-            "echo 'Deployment server connected'; hostname; whoami; pwd"
+            "mkdir -p /home/$SSH_USER/mappedskills.com && echo 'Target directory ready'"
+
+          echo "Previewing files that would be deployed..."
+
+          rsync -avz --dry-run \
+            --exclude='.git/' \
+            --exclude='node_modules/' \
+            --exclude='.env' \
+            --exclude='.env.*' \
+            -e "ssh -i ~/.ssh/deploy_key -p $SSH_PORT -o IdentitiesOnly=yes" \
+            ./ "$SSH_USER@$SSH_HOST:/home/$SSH_USER/mappedskills.com/"

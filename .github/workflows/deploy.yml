@@ -41,7 +41,7 @@ jobs:
 
           echo "Previewing files that would be deployed..."
 
-          rsync -avz --dry-run \
+          rsync -avz --delete \
             --exclude='.git/' \
             --exclude='node_modules/' \
             --exclude='.env' \

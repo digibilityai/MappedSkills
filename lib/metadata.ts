@@ -50,10 +50,39 @@ export const siteMetadata = {
   siteName,
   author,
   baseUrl,
+  logoPath: '/ms_Logo.webp',
+  faviconPath: '/ms_icon.png',
   email: process.env.NEXT_PUBLIC_BUSINESS_EMAIL || 'info@mappedskills.com',
   phone: process.env.NEXT_PUBLIC_BUSINESS_PHONE || '+91 9873232662',
   address: process.env.NEXT_PUBLIC_BUSINESS_ADDRESS || 'Pune, Maharashtra, India',
 };
+
+export const offices = [
+  {
+    city: 'Pune',
+    label: 'Pune Office',
+    addressLines: [
+      'Tower C3, #503',
+      'Nyati Esteban I',
+      'Near Country Club, Undri',
+      'Pune, Maharashtra 411060',
+    ],
+    phone: '+919873232662',
+    phoneDisplay: '+91 9873232662',
+  },
+  {
+    city: 'Mumbai',
+    label: 'Mumbai Office',
+    addressLines: [
+      '#1002, Casa Urbano-O Wing',
+      'Lodha Palava Phase 2',
+      'Off Khoni-Taloja Bypass',
+      'Dombivli (E), Maharashtra 421 204',
+    ],
+    phone: '+919272189706',
+    phoneDisplay: '+91 9272189706',
+  },
+] as const;
 
 // Analytics IDs
 export const analytics = {

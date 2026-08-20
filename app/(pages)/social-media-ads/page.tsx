@@ -50,7 +50,7 @@ export default function SocialMediaAdsPage() {
             {/* Left: Copy and CTAs */}
             <div>
               {/* Eyebrow */}
-              <Badge className="mb-6 bg-accent/10 text-accent border-0 text-xs font-bold uppercase tracking-wider">
+              <Badge className="mb-6 bg-accent/10 text-accent border-0 text-xs font-bold uppercase tracking-wider h-auto max-w-full whitespace-normal break-words text-left leading-snug">
                 Facebook & Instagram Ads Management
               </Badge>
 
@@ -398,7 +398,7 @@ export default function SocialMediaAdsPage() {
 
           <div className="text-center">
             <Button size="lg" variant="outline" asChild>
-              <Link href="/results">
+              <Link href="/work">
                 View Results
               </Link>
             </Button>

@@ -325,10 +325,10 @@ export default function AboutPage() {
         }}
         secondaryCta={{
           text: 'See Our Results',
-          href: '/results',
+          href: '/work',
         }}
       >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-6">
           <StatCard stat="2017" label="Founded" />
           <StatCard stat="50+" label="Clients Served" />
           <StatCard stat="₹100Cr+" label="Revenue Influenced" />
@@ -512,7 +512,7 @@ export default function AboutPage() {
               </div>
 
               <Button size="lg" variant="outline" asChild>
-                <Link href="/results">Know More About Our Work</Link>
+                <Link href="/work">Know More About Our Work</Link>
               </Button>
             </div>
           </div>
@@ -646,7 +646,7 @@ export default function AboutPage() {
 
           <div className="text-center">
             <Button size="lg" asChild>
-              <Link href="/results">View Case Studies</Link>
+              <Link href="/work">View Case Studies</Link>
             </Button>
           </div>
         </Container>
@@ -708,7 +708,7 @@ export default function AboutPage() {
         }}
         secondaryCta={{
           text: 'See Our Results',
-          href: '/results',
+          href: '/work',
         }}
       />
     </>

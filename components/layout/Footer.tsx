@@ -1,6 +1,8 @@
 ﻿import Link from 'next/link';
 import { Mail, Linkedin, Facebook, Instagram } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Logo } from '@/components/Logo';
+import { offices, siteMetadata } from '@/lib/metadata';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -44,7 +46,7 @@ export function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
             {/* Column 1: Brand */}
             <div>
-              <h3 className="text-lg font-bold font-heading mb-4">MappedSkills Marketing</h3>
+              <Logo href="/" className="h-8 mb-4" />
               <p className="text-sm text-white/85 leading-relaxed mb-4">
                 Performance marketing agency helping businesses generate qualified leads, improve ROI, and scale revenue through Google Ads, Meta Ads, SEO, lead generation, and conversion optimization.
               </p>
@@ -122,10 +124,10 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/results"
+                    href="/work"
                     className="text-sm text-white/85 hover:text-accent transition-colors"
                   >
-                    Results
+                    Case Studies
                   </Link>
                 </li>
                 <li>
@@ -166,32 +168,30 @@ export function Footer() {
             {/* Column 4: Contact */}
             <div>
               <h4 className="text-sm font-bold font-heading uppercase tracking-wider text-white/90 mb-4">Contact</h4>
-              <ul className="space-y-3 mb-6">
-                <li>
-                  <p className="text-xs text-white/80 uppercase tracking-wider mb-1">Phone</p>
-                  <a
-                    href="tel:+919873232662"
-                    className="text-sm text-white/85 hover:text-accent transition-colors"
-                  >
-                    +91 9873232662
-                  </a>
-                </li>
+              <ul className="space-y-4 mb-6">
                 <li>
                   <p className="text-xs text-white/80 uppercase tracking-wider mb-1">Email</p>
                   <a
-                    href="mailto:info@mappedskills.com"
-                    className="text-sm text-white/85 hover:text-accent transition-colors"
+                    href={`mailto:${siteMetadata.email}`}
+                    className="text-sm text-white/85 hover:text-accent transition-colors break-all"
                   >
-                    info@mappedskills.com
+                    {siteMetadata.email}
                   </a>
                 </li>
-                <li>
-                  <p className="text-xs text-white/80 uppercase tracking-wider mb-1">Location</p>
-                  <p className="text-sm text-white/85">Pune, Maharashtra, India</p>
-                </li>
+                {offices.map((office) => (
+                  <li key={office.city}>
+                    <p className="text-xs text-white/80 uppercase tracking-wider mb-1">{office.city}</p>
+                    <a
+                      href={`tel:${office.phone}`}
+                      className="text-sm text-white/85 hover:text-accent transition-colors"
+                    >
+                      {office.phone}
+                    </a>
+                  </li>
+                ))}
                 <li>
                   <p className="text-xs text-white/80 uppercase tracking-wider mb-1">Service Area</p>
-                  <p className="text-sm text-white/85">Pune, Mumbai, India-wide consulting</p>
+                  <p className="text-sm text-white/85">Pune, Mumbai, and India-wide consulting</p>
                 </li>
               </ul>
               <div className="pt-4 border-t border-white/10">
@@ -265,7 +265,7 @@ export function Footer() {
                   <Instagram className="h-5 w-5" />
                 </a>
                 <a
-                  href="mailto:info@mappedskills.com"
+                  href={`mailto:${siteMetadata.email}`}
                   className="text-white/80 hover:text-accent transition-colors"
                   aria-label="Email"
                 >

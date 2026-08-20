@@ -8,10 +8,9 @@ import { FAQSection } from '@/components/FAQSection';
 import { CTASection } from '@/components/CTASection';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { createMetadata } from '@/lib/metadata';
+import { createMetadata, offices, siteMetadata } from '@/lib/metadata';
 import type { Metadata } from 'next';
 import {
-  Phone,
   Mail,
   MapPin,
   Clock,
@@ -81,7 +80,7 @@ const FAQ_ITEMS = [
   },
   {
     question: 'Can I contact you directly by phone or email?',
-    answer: 'Yes. You can call +91 9873232662 or email info@mappedskills.com.',
+    answer: `Yes. You can call our Pune office at ${offices[0].phoneDisplay}, our Mumbai office at ${offices[1].phoneDisplay}, or email ${siteMetadata.email}.`,
   },
   {
     question: 'Will I get a proposal after contacting you?',
@@ -178,7 +177,7 @@ export default function ContactPage() {
         }}
       >
         {/* Trust Metrics */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-6">
           <Card className="p-4 sm:p-6 text-center">
             <p className="text-xs sm:text-sm text-muted-foreground">Free Initial Audit</p>
           </Card>
@@ -230,24 +229,6 @@ export default function ContactPage() {
                 </h3>
               </div>
 
-              {/* Phone Card - Tracking: phone_click */}
-              <Card className="p-6">
-                <div className="flex items-start gap-4">
-                  <Phone className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-semibold mb-1">Phone</h4>
-                    <p className="text-accent font-medium mb-2">
-                      <a href="tel:+919873232662" className="hover:underline">
-                        +91 9873232662
-                      </a>
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Call us for immediate assistance
-                    </p>
-                  </div>
-                </div>
-              </Card>
-
               {/* Email Card - Tracking: email_click */}
               <Card className="p-6">
                 <div className="flex items-start gap-4">
@@ -256,34 +237,41 @@ export default function ContactPage() {
                     <h4 className="font-semibold mb-1">Email</h4>
                     <p className="text-accent font-medium mb-2">
                       <a
-                        href="mailto:info@mappedskills.com"
+                        href={`mailto:${siteMetadata.email}`}
                         className="hover:underline break-all"
                       >
-                        info@mappedskills.com
+                        {siteMetadata.email}
                       </a>
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      We respond within 24 hours
+                      Shared inbox for both offices · We respond within 24 hours
                     </p>
                   </div>
                 </div>
               </Card>
 
-              {/* Location Card */}
-              <Card className="p-6">
-                <div className="flex items-start gap-4">
-                  <MapPin className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-semibold mb-1">Location</h4>
-                    <p className="text-foreground font-medium mb-1">
-                      Pune, Maharashtra, India
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Pune, Mumbai, and India-wide consulting
-                    </p>
+              {offices.map((office) => (
+                <Card key={office.city} className="p-6">
+                  <div className="flex items-start gap-4">
+                    <MapPin className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
+                    <div>
+                      <h4 className="font-semibold mb-1">{office.label}</h4>
+                      <address className="not-italic text-sm text-foreground mb-3 space-y-0.5">
+                        {office.addressLines.map((line) => (
+                          <span key={line} className="block">
+                            {line}
+                          </span>
+                        ))}
+                      </address>
+                      <p className="text-accent font-medium">
+                        <a href={`tel:${office.phone}`} className="hover:underline">
+                          {office.phoneDisplay}
+                        </a>
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Card>
+                </Card>
+              ))}
 
               {/* Hours Card */}
               <Card className="p-6">

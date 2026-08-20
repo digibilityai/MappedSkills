@@ -1,10 +1,16 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { BLOG_POSTS_DATA, BlogPost } from '@/lib/blog-data';
-import { createMetadata } from '@/lib/metadata';
+import { createMetadata, siteMetadata } from '@/lib/metadata';
+import {
+  getBlogDetailPost,
+  getBlogStaticParams,
+  getRelatedBlogCards,
+} from '@/lib/contentful/posts';
+import type { CmsBlogPost } from '@/lib/contentful/types';
 import { BlogHero } from '@/components/blog/BlogHero';
 import { BlogIntroduction } from '@/components/blog/BlogIntroduction';
 import { TableOfContents } from '@/components/blog/TableOfContents';
+import { RichTextContent } from '@/components/blog/RichTextContent';
 import { CTABlockFromType } from '@/components/blog/CTABlock';
 import { StickySidebarCTA } from '@/components/blog/StickySidebarCTA';
 import { RelatedPosts } from '@/components/blog/RelatedPosts';
@@ -17,96 +23,99 @@ import { CTASection } from '@/components/CTASection';
 import { Container } from '@/components/Container';
 import { Section } from '@/components/Section';
 
+// Must be a literal — Next.js cannot follow imported identifiers for route segment config
+export const revalidate = 60;
+
 interface BlogPostPageProps {
   params: Promise<{
     slug: string;
   }>;
 }
 
-// Generate static params for blog posts
-export function generateStaticParams() {
-  return Object.keys(BLOG_POSTS_DATA).map((slug) => ({
-    slug,
-  }));
+export async function generateStaticParams() {
+  return getBlogStaticParams();
 }
 
-// Generate metadata
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = BLOG_POSTS_DATA[slug];
-  
+  const post = await getBlogDetailPost(slug);
+
   if (!post) {
     return createMetadata('Blog Post Not Found', 'The blog post you are looking for does not exist.', '/blog');
   }
 
+  const title = post.metaTitle || post.title;
+  const description = post.metaDescription || post.excerpt;
+  const ogImage = post.openGraphImage || post.featuredImageUrl;
+
   return {
-    title: post.metaTitle,
-    description: post.metaDescription,
-    keywords: [post.primaryKeyword, ...post.secondaryKeywords],
-    canonical: post.canonicalUrl,
+    title,
+    description,
+    keywords: post.focusKeyword ? [post.focusKeyword] : undefined,
     alternates: {
       canonical: post.canonicalUrl,
     },
     openGraph: {
-      title: post.openGraphTitle,
-      description: post.openGraphDescription,
+      title,
+      description,
       url: post.canonicalUrl,
       type: 'article',
-      publishedTime: post.publishedDate,
-      modifiedTime: post.updatedDate,
+      publishedTime: post.publishedAtISO,
+      modifiedTime: post.updatedAtISO,
       siteName: 'MappedSkills',
-      images: [
-        {
-          url: post.openGraphImage,
-          width: 1200,
-          height: 630,
-          alt: post.heroImageAlt,
-        },
-      ],
+      images: ogImage
+        ? [
+            {
+              url: ogImage,
+              width: 1200,
+              height: 630,
+              alt: post.featuredImageAlt,
+            },
+          ]
+        : undefined,
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.openGraphTitle,
-      description: post.openGraphDescription,
-      images: [post.openGraphImage],
+      title,
+      description,
+      images: ogImage ? [ogImage] : undefined,
     },
-    authors: [{ name: post.author }],
+    authors: [{ name: post.author.name }],
     publisher: 'MappedSkills',
   };
 }
 
-// Article schema generator
-function generateArticleSchema(post: BlogPost, url: string) {
+function generateArticleSchema(post: CmsBlogPost, url: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: post.title,
-    description: post.metaDescription,
-    image: post.openGraphImage,
+    description: post.metaDescription || post.excerpt,
+    ...(post.focusKeyword ? { keywords: post.focusKeyword } : {}),
+    image: post.openGraphImage || post.featuredImageUrl || undefined,
     author: {
       '@type': 'Person',
-      name: post.author,
+      name: post.author.name,
     },
     publisher: {
       '@type': 'Organization',
       name: 'MappedSkills',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://mappedskills.com/logo.png',
+        url: `${siteMetadata.baseUrl}${siteMetadata.logoPath}`,
       },
     },
-    datePublished: post.publishedDate,
-    dateModified: post.updatedDate,
+    datePublished: post.publishedAtISO,
+    dateModified: post.updatedAtISO,
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': url,
     },
-    keywords: [post.primaryKeyword, ...post.secondaryKeywords],
   };
 }
 
-// FAQ schema generator
-function generateFAQSchema(post: BlogPost) {
+function generateFAQSchema(post: CmsBlogPost) {
+  if (!post.faqs?.length) return null;
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -121,8 +130,7 @@ function generateFAQSchema(post: BlogPost) {
   };
 }
 
-// Breadcrumb schema generator
-function generateBreadcrumbSchema(post: BlogPost) {
+function generateBreadcrumbSchema(post: CmsBlogPost) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -149,8 +157,10 @@ function generateBreadcrumbSchema(post: BlogPost) {
   };
 }
 
-// Service mapping by category
-const SERVICE_MAP = {
+const SERVICE_MAP: Record<
+  string,
+  Array<{ title: string; description: string; link: string }>
+> = {
   'Google Ads': [
     {
       title: 'Google Ads Management',
@@ -202,7 +212,7 @@ const SERVICE_MAP = {
       link: '/seo',
     },
   ],
-  'SEO': [
+  SEO: [
     {
       title: 'SEO Services',
       description: 'Keyword strategy, technical SEO, and content optimization.',
@@ -291,26 +301,19 @@ const SERVICE_MAP = {
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = BLOG_POSTS_DATA[slug];
-  
+  const post = await getBlogDetailPost(slug);
+
   if (!post) {
     notFound();
   }
 
-  const relatedServices = SERVICE_MAP[post.category as keyof typeof SERVICE_MAP] || SERVICE_MAP['Google Ads'];
-  
-  const relatedPosts = post.relatedPostSlugs
-    .map((slug) => BLOG_POSTS_DATA[slug])
-    .filter(Boolean)
-    .map((p) => ({
-      slug: p.slug,
-      title: p.title,
-      excerpt: p.excerpt,
-      category: p.category,
-      readingTime: p.readingTime,
-    }));
-
+  const relatedServices = SERVICE_MAP[post.category] || SERVICE_MAP['Marketing Strategy'];
+  const relatedPosts = await getRelatedBlogCards(post);
+  const faqSchema = generateFAQSchema(post);
   const canonicalUrl = post.canonicalUrl;
+  const authorBio =
+    post.author.description ||
+    `${post.author.name} contributes performance marketing insights for MappedSkills.`;
 
   return (
     <>
@@ -326,86 +329,88 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           __html: JSON.stringify(generateBreadcrumbSchema(post)),
         }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(generateFAQSchema(post)),
-        }}
-      />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqSchema),
+          }}
+        />
+      )}
 
-      {/* Blog Hero */}
       <BlogHero
         title={post.title}
         category={post.category}
-        author={post.author}
+        author={post.author.name}
         publishedDate={post.publishedDate}
         updatedDate={post.updatedDate}
         readingTime={post.readingTime}
-        heroImage={post.heroImage}
-        heroImageAlt={post.heroImageAlt}
+        heroImage={post.featuredImageUrl}
+        heroImageAlt={post.featuredImageAlt}
       />
 
-      {/* Main Content */}
       <Section>
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-            {/* Main Content Column */}
             <div className="lg:col-span-2">
-              {/* Introduction */}
-              <BlogIntroduction
-                hook={post.introduction.hook}
-                problem={post.introduction.problem}
-                promise={post.introduction.promise}
-              />
+              {post.introduction && (
+                <BlogIntroduction
+                  hook={post.introduction.hook}
+                  problem={post.introduction.problem}
+                  promise={post.introduction.promise}
+                />
+              )}
 
-              {/* Table of Contents */}
+              {!post.introduction && post.excerpt && (
+                <p className="text-lg text-foreground leading-relaxed mb-12 border-b border-border pb-8">
+                  {post.excerpt}
+                </p>
+              )}
+
               <div className="mb-12">
                 <TableOfContents items={post.tableOfContents} />
               </div>
 
-              {/* Article Content */}
               <article className="prose dark:prose-invert max-w-none mb-12">
-                <p className="text-base leading-relaxed text-foreground">
-                  Article content will be rendered here from post.content.
-                  This is a placeholder for your article body.
-                </p>
+                {post.contentJson && (
+                  <RichTextContent document={post.contentJson} links={post.contentLinks} />
+                )}
 
-                {/* CTA Block */}
-                <CTABlockFromType ctaType={post.ctaType} />
+                <CTABlockFromType ctaType={post.ctaType || 'generic'} />
               </article>
 
-              {/* Social Share */}
               <SocialShare title={post.title} url={canonicalUrl} />
 
-              {/* Related Posts */}
               {relatedPosts.length > 0 && (
-                <RelatedPosts posts={relatedPosts} />
+                <RelatedPosts
+                  posts={relatedPosts.map((p) => ({
+                    slug: p.slug,
+                    title: p.title,
+                    excerpt: p.excerpt,
+                    category: p.category,
+                    readingTime: p.readingTime,
+                  }))}
+                />
               )}
 
-              {/* Related Services */}
               <RelatedServices services={relatedServices} />
 
-              {/* Author Bio */}
               <AuthorBio
-                name={post.author}
+                name={post.author.name}
                 role="Performance Marketing Strategist"
-                bio="Amit Gupta is the Founder of MappedSkills Marketing. He helps businesses turn digital marketing into a measurable growth system through performance marketing, lead generation, SEO, funnel strategy, tracking, and campaign optimization."
+                bio={authorBio}
                 linkedinUrl="https://linkedin.com/in/amit-gupta"
+                avatarUrl={post.author.profileUrl}
               />
 
-              {/* FAQ Section */}
-              {post.faqs.length > 0 && (
-                <FAQSection faqs={post.faqs} />
-              )}
+              {post.faqs && post.faqs.length > 0 && <FAQSection faqs={post.faqs} />}
 
-              {/* Newsletter */}
               <div className="border-t border-border pt-12 mb-12">
                 <h2 className="text-3xl font-bold tracking-tight mb-8">Get More Growth Insights</h2>
                 <BlogNewsletterForm />
               </div>
             </div>
 
-            {/* Sidebar */}
             <div className="lg:col-span-1">
               <StickySidebarCTA
                 ctaHeadline="Want Us to Review This for Your Business?"
@@ -417,7 +422,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </Container>
       </Section>
 
-      {/* Final CTA */}
       <CTASection
         title="Ready to Turn This Insight Into Action?"
         description="Book a free strategy call and get clear recommendations based on your current ads, SEO, leads, or conversion funnel."

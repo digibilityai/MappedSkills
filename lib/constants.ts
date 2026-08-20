@@ -155,7 +155,7 @@ export const FEATURED_CASE_STUDIES = [
     after: '50 qualified leads/month',
     primaryResult: '3.3x increase in qualified leads',
     summary: 'MappedSkills helped improve campaign structure, targeting, lead capture, and follow-up clarity to generate more serious property enquiries.',
-    href: '/results/real-estate-lead-generation',
+    href: '/portfolio/real-estate-lead-generation',
   },
   {
     title: 'E-commerce Revenue Growth Campaign',
@@ -165,7 +165,7 @@ export const FEATURED_CASE_STUDIES = [
     after: '₹100L monthly revenue',
     primaryResult: '5x revenue growth',
     summary: 'MappedSkills improved paid social strategy, product visibility, retargeting, and conversion paths to support scalable revenue growth.',
-    href: '/results/ecommerce-revenue-growth',
+    href: '/portfolio/ecommerce-revenue-growth',
   },
   {
     title: 'Online Education Enrollment Campaign',
@@ -175,7 +175,7 @@ export const FEATURED_CASE_STUDIES = [
     after: '500 course enrollments',
     primaryResult: '5x increase in enrollments',
     summary: 'MappedSkills improved targeting, campaign structure, lead capture, and nurturing to increase course enrollments.',
-    href: '/results/online-education-enrollments',
+    href: '/portfolio/online-education-enrollments',
   },
 ];
 

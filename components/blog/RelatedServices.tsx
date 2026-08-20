@@ -20,7 +20,7 @@ export function RelatedServices({ services }: RelatedServicesProps) {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
         {services.map((service, idx) => (
           <Card key={idx} className="p-6 sm:p-8 hover:shadow-lg transition-shadow">
-            <h3 className="text-accent font-semibold mb-2">{service.title}</h3>
+            <h4 className="text-accent font-semibold mb-2">{service.title}</h4>
             <p className="text-sm text-muted-foreground mb-6">{service.description}</p>
             <Button variant="outline" asChild size="sm">
               <Link href={service.link}>

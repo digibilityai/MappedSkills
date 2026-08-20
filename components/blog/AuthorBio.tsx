@@ -12,17 +12,22 @@ interface AuthorBioProps {
   avatarUrl?: string;
 }
 
-export function AuthorBio({ name, role, bio, linkedinUrl }: AuthorBioProps) {
+export function AuthorBio({ name, role, bio, linkedinUrl, avatarUrl }: AuthorBioProps) {
   return (
     <Card className="p-6 sm:p-8 border-t border-b border-border my-12">
       <div className="flex gap-4 sm:gap-6">
         <Avatar className="h-16 w-16 sm:h-20 sm:w-20 flex-shrink-0">
-          <AvatarImage src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${name}`} />
+          <AvatarImage
+            // src={avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(name)}`}
+            src={avatarUrl || "https://api.dicebear.com/10.x/toon-head/svg?seed=Alex%20Whi"}
+            alt={name}
+          />
           <AvatarFallback>{name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
         </Avatar>
         <div className="flex-grow">
           <h3 className="text-lg font-semibold mb-1">About the Author</h3>
-          <p className="text-accent font-semibold mb-3">{name}</p>
+          <p className="text-accent font-semibold mb-1">{name}</p>
+          {role ? <p className="text-sm text-muted-foreground mb-3">{role}</p> : null}
           <p className="text-sm text-foreground leading-relaxed mb-4">{bio}</p>
           {linkedinUrl && (
             <Button variant="outline" size="sm" asChild>

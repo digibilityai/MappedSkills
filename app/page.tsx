@@ -27,13 +27,16 @@ import {
   METRICS_TRACKED,
   BENEFITS,
   FEATURED_CASE_STUDIES,
-  BLOG_ARTICLES,
   TESTIMONIALS,
   FAQs,
   PROCESS_STEPS,
 } from '@/lib/constants';
 import { createMetadata } from '@/lib/metadata';
+import { getBlogListPosts } from '@/lib/contentful/posts';
 import { ArrowRight, CheckCircle } from 'lucide-react';
+
+// Must be a literal — Next.js cannot follow imported identifiers for route segment config
+export const revalidate = 60;
 
 export const metadata = createMetadata(
   'Performance Marketing Agency | 300%+ ROI | MappedSkills',
@@ -41,7 +44,8 @@ export const metadata = createMetadata(
   '/'
 );
 
-export default function Home() {
+export default async function Home() {
+  const blogArticles = (await getBlogListPosts()).slice(0, 3);
   return (
     <>
       {/* 1. Hero Section */}
@@ -283,7 +287,7 @@ export default function Home() {
                 variant="outline"
                 asChild
               >
-                <Link href="/results">
+                <Link href="/work">
                   View Results
                 </Link>
               </Button>
@@ -353,7 +357,7 @@ export default function Home() {
                 variant="outline"
                 asChild
               >
-                <Link href="/results">
+                <Link href="/work">
                   View All Results
                 </Link>
               </Button>
@@ -634,12 +638,12 @@ export default function Home() {
 
           {/* Blog Cards - First 3 Articles */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12">
-            {BLOG_ARTICLES.slice(0, 3).map((article, idx) => (
+            {blogArticles.map((article) => (
               <BlogCard
-                key={idx}
+                key={article.href}
                 title={article.title}
                 category={article.category}
-                publishDate={article.publishDate}
+                publishDate={article.publishedDate}
                 excerpt={article.excerpt}
                 readingTime={article.readingTime}
                 href={article.href}

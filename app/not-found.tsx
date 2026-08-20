@@ -32,7 +32,7 @@ const HELPFUL_LINKS = [
 const POPULAR_PAGES = [
   { label: 'Services', href: '/services' },
   { label: 'How It Works', href: '/how-it-works' },
-  { label: 'Results', href: '/results' },
+  { label: 'Case Studies', href: '/work' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
   { label: 'Schedule Call', href: '/schedule-call' },

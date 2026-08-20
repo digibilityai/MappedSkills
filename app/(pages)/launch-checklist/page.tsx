@@ -88,7 +88,7 @@ export default function LaunchChecklistPage() {
             <ol className="space-y-3 text-muted-foreground">
               <li className="flex gap-3">
                 <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">1</span>
-                <span><strong>Download the checklist:</strong> LAUNCH_QA_CHECKLIST.md in project root</span>
+                <span><strong>Review the sections below:</strong> Use this page as your launch QA reference</span>
               </li>
               <li className="flex gap-3">
                 <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">2</span>
@@ -178,7 +178,7 @@ export default function LaunchChecklistPage() {
         {/* Footer */}
         <div className="mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
           <p>This page is protected and not indexed by search engines.</p>
-          <p className="mt-2">For questions about QA process, refer to LAUNCH_QA_CHECKLIST.md</p>
+          <p className="mt-2">Work through each section on this page before marking the site launch-ready.</p>
         </div>
       </div>
     </div>

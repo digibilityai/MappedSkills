@@ -41,7 +41,10 @@ export function Hero({
           <div className="flex flex-col">
             {/* Eyebrow Badge */}
             {(subtitle || subheadline) && (
-              <Badge variant="red" className="w-fit mb-4 sm:mb-6">
+              <Badge
+                variant="red"
+                className="mb-4 sm:mb-6 h-auto max-w-full whitespace-normal break-words text-left leading-snug"
+              >
                 {subtitle || subheadline}
               </Badge>
             )}

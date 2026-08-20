@@ -138,10 +138,10 @@ export default function HowItWorksPage() {
         }}
         secondaryCta={{
           text: 'See Our Results',
-          href: '/results',
+          href: '/work',
         }}
       >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-6">
           <Card className="p-4 sm:p-6 text-center">
             <p className="text-2xl sm:text-3xl font-bold text-accent mb-2">6-Step</p>
             <p className="text-xs sm:text-sm text-muted-foreground">Growth Process</p>

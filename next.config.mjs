@@ -1,10 +1,41 @@
 /** @type {import('next').NextConfig} */
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+const isCpanelBuild = process.env.CPANEL_BUILD === '1'
+
 const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  // Shared hosts (CloudLinux) kill Next worker processes during static generation.
+  // Force a single worker when CPANEL_BUILD=1.
+  ...(isCpanelBuild
+    ? {
+        experimental: {
+          workerThreads: false,
+          cpus: 1,
+        },
+      }
+    : {}),
+  // Explicit alias so webpack resolves @/ even if tsconfig paths are missing on host
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname),
+    }
+    return config
+  },
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.ctfassets.net',
+      },
+    ],
   },
   headers: async () => [
     {
@@ -87,12 +118,16 @@ const nextConfig = {
       permanent: true,
     },
     {
-      source: '/work',
-      destination: '/results',
+      source: '/results',
+      destination: '/work',
+      permanent: true,
+    },
+    {
+      source: '/results/:slug',
+      destination: '/portfolio/:slug',
       permanent: true,
     },
   ],
 }
 
 export default nextConfig
-

@@ -353,7 +353,7 @@ export default function PricingPage() {
           href: '/schedule-call',
         }}
       >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-6">
           <Card className="p-4 sm:p-6 text-center">
             <p className="text-2xl sm:text-3xl font-bold text-accent mb-2">₹50K</p>
             <p className="text-xs sm:text-sm text-muted-foreground">Starting From</p>

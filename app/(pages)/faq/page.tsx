@@ -167,7 +167,7 @@ export default function FAQPage() {
           href: '/contact',
         }}
       >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-6">
           <Card className="p-4 sm:p-6 text-center">
             <p className="text-sm text-accent font-semibold mb-1">Free</p>
             <p className="text-xs sm:text-sm text-muted-foreground">Initial Audit</p>

@@ -370,7 +370,7 @@ export default function ServicesPage() {
           href: '/contact',
         }}
       >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-6">
           <StatCard stat="5" label="Core Growth Services" />
           <StatCard stat="300%+" label="Average ROI" />
           <StatCard stat="50+" label="Clients Served" />
@@ -577,7 +577,7 @@ export default function ServicesPage() {
 
           <div className="text-center">
             <Button size="lg" variant="outline" asChild>
-              <Link href="/results">View Full Case Studies</Link>
+              <Link href="/work">View Full Case Studies</Link>
             </Button>
           </div>
         </Container>

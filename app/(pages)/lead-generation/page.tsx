@@ -61,7 +61,7 @@ export default function LeadGenerationPage() {
             {/* Left: Copy and CTAs */}
             <div>
               {/* Eyebrow */}
-              <Badge className="mb-6 bg-accent/10 text-accent border-0 text-xs font-bold uppercase tracking-wider">
+              <Badge className="mb-6 bg-accent/10 text-accent border-0 text-xs font-bold uppercase tracking-wider h-auto max-w-full whitespace-normal break-words text-left leading-snug">
                 B2B Lead Generation Services
               </Badge>
 
@@ -534,7 +534,7 @@ export default function LeadGenerationPage() {
 
           <div className="text-center">
             <Button size="lg" variant="outline" asChild>
-              <Link href="/results">
+              <Link href="/work">
                 View Results
               </Link>
             </Button>

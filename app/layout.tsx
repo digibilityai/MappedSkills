@@ -6,6 +6,7 @@ import { Footer } from '@/components/Footer'
 import { GoogleTagManager } from '@/lib/gtm'
 import { MetaPixel } from '@/lib/meta-pixel'
 import { generateOrganizationSchema, generateLocalBusinessSchema } from '@/lib/schema'
+import { siteMetadata } from '@/lib/metadata'
 import './globals.css'
 
 const montserrat = Montserrat({ 
@@ -24,21 +25,8 @@ export const metadata: Metadata = {
   description: 'Accelerate your SaaS growth with data-driven performance marketing. Google Ads, social media, lead generation, and conversion optimization.',
   generator: 'v0.app',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: siteMetadata.faviconPath,
+    apple: siteMetadata.faviconPath,
   },
 }
 

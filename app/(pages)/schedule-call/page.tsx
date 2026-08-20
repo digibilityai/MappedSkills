@@ -228,7 +228,7 @@ export default function ScheduleCallPage() {
           href: '/contact',
         }}
       >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-6">
           <Card className="p-4 sm:p-6 text-center">
             <p className="text-2xl sm:text-3xl font-bold text-accent mb-1">20</p>
             <p className="text-xs sm:text-sm text-muted-foreground">Minute Strategy Call</p>

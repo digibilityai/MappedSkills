@@ -34,7 +34,7 @@ export function generateLocalBusinessSchema() {
     '@type': 'LocalBusiness',
     '@id': `${siteMetadata.baseUrl}/#business`,
     name: siteMetadata.siteName,
-    image: `${siteMetadata.baseUrl}/logo.png`,
+    image: `${siteMetadata.baseUrl}${siteMetadata.logoPath}`,
     description: 'Performance marketing agency specializing in Google Ads, social media ads, lead generation, SEO, and conversion optimization.',
     url: siteMetadata.baseUrl,
     telephone: siteMetadata.phone,
@@ -161,7 +161,7 @@ export function generateArticleSchema(
       name: siteMetadata.siteName,
       logo: {
         '@type': 'ImageObject',
-        url: `${siteMetadata.baseUrl}/logo.png`,
+        url: `${siteMetadata.baseUrl}${siteMetadata.logoPath}`,
       },
     },
   };

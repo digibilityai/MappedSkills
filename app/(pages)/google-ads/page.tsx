@@ -1,4 +1,4 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import { Hero } from '@/components/Hero';
 import { Section } from '@/components/Section';
 import { Container } from '@/components/Container';
@@ -55,7 +55,7 @@ export default function GoogleAdsPage() {
           href: '/schedule-call',
         }}
       >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-6">
           <Card className="p-4 sm:p-6 text-center">
             <p className="text-2xl sm:text-3xl font-bold text-accent mb-2">300%+</p>
             <p className="text-xs sm:text-sm text-muted-foreground">Average ROI</p>
@@ -350,7 +350,7 @@ export default function GoogleAdsPage() {
           </div>
           <div className="mt-8 text-center">
             <Button variant="outline" size="lg" asChild>
-              <Link href="/results">
+              <Link href="/work">
                 Read Full Case Studies <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>

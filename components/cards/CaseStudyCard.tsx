@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 interface CaseStudyCardProps {
   title: string;
   industry?: string;
-  service: string;
+  service?: string;
   before?: string;
   after?: string;
   primaryResult?: string;
@@ -21,12 +21,11 @@ interface CaseStudyCardProps {
 export function CaseStudyCard({
   title,
   industry,
-  service,
   before,
   after,
   primaryResult,
   summary,
-  href = '/results',
+  href = '/work',
   featured = true,
   // Legacy props
   result,
@@ -41,21 +40,17 @@ export function CaseStudyCard({
   return (
     <Link href={href}>
       <Card className={`h-full hover:shadow-xl hover:border-accent/30 transition-all duration-300 hover:-translate-y-1 group cursor-pointer border border-border/50 bg-white ${featured ? 'p-8 sm:p-10' : 'p-6 sm:p-8'}`}>
-        {/* Badges */}
-        {(industry || service) && (
-          <div className="mb-6 flex flex-wrap gap-2">
-            {industry && (
-              <Badge variant="secondary" className="bg-foreground/10 text-muted-foreground border-0">
-                {industry}
-              </Badge>
-            )}
-            {service && (
-              <Badge variant="default" className="bg-accent/10 text-accent border-0">
-                {service}
-              </Badge>
-            )}
+        {/* Industry chip */}
+        {industry ? (
+          <div className="mb-6">
+            <Badge
+              variant="secondary"
+              className="bg-foreground/10 text-muted-foreground border-0 h-auto max-w-full whitespace-normal break-words text-left leading-snug py-1.5 shrink"
+            >
+              {industry}
+            </Badge>
           </div>
-        )}
+        ) : null}
 
         {/* Title */}
         <h3 className={`font-bold font-heading mb-4 group-hover:text-accent transition-colors ${featured ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'}`}>
@@ -95,7 +90,7 @@ export function CaseStudyCard({
 
         {/* Summary */}
         {displaySummary && (
-          <p className="text-sm text-muted-foreground mb-6 leading-relaxed line-clamp-3">
+          <p className="text-sm text-muted-foreground mb-4 mt-0 leading-relaxed line-clamp-3">
             {displaySummary}
           </p>
         )}

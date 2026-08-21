@@ -63,9 +63,8 @@ jobs:
             -p "$SSH_PORT" \
             -o IdentitiesOnly=yes \
             "$SSH_USER@$SSH_HOST" \
-            "mkdir -p /home/$SSH_USER/mappedskills.com/tmp && \
-             touch /home/$SSH_USER/mappedskills.com/tmp/restart.txt && \
-             source /home/$SSH_USER/nodevenv/mappedskills.com/22/bin/activate && \
+            "source /home/$SSH_USER/nodevenv/mappedskills.com/22/bin/activate && \
              cd /home/$SSH_USER/mappedskills.com && \
              npm install && \
-             npm run build:cpanel"
+             npm run build:cpanel && \
+             mkdir -p tmp && touch tmp/restart.txt"

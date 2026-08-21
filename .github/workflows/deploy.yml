@@ -14,24 +14,26 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deploy files
+      - name: Setup SSH
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+        run: |
+          set -e
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
+
+      - name: Deploy files
+        env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_PORT: ${{ secrets.SSH_PORT }}
         run: |
           set -e
-
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-
-          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-
-          ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
-
-          echo "Checking deployment target..."
           ssh \
             -i ~/.ssh/deploy_key \
             -p "$SSH_PORT" \
@@ -39,12 +41,31 @@ jobs:
             "$SSH_USER@$SSH_HOST" \
             "mkdir -p /home/$SSH_USER/mappedskills.com && echo 'Target directory ready'"
 
-          echo "Previewing files that would be deployed..."
-
           rsync -avz --delete \
             --exclude='.git/' \
             --exclude='node_modules/' \
+            --exclude='.next/' \
+            --exclude='tmp/' \
             --exclude='.env' \
             --exclude='.env.*' \
             -e "ssh -i ~/.ssh/deploy_key -p $SSH_PORT -o IdentitiesOnly=yes" \
             ./ "$SSH_USER@$SSH_HOST:/home/$SSH_USER/mappedskills.com/"
+
+      - name: Restart, build, and redeploy app
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+        run: |
+          set -e
+          ssh \
+            -i ~/.ssh/deploy_key \
+            -p "$SSH_PORT" \
+            -o IdentitiesOnly=yes \
+            "$SSH_USER@$SSH_HOST" \
+            "mkdir -p /home/$SSH_USER/mappedskills.com/tmp && \
+             touch /home/$SSH_USER/mappedskills.com/tmp/restart.txt && \
+             source /home/$SSH_USER/nodevenv/mappedskills.com/22/bin/activate && \
+             cd /home/$SSH_USER/mappedskills.com && \
+             npm install && \
+             npm run build:cpanel"

@@ -50,7 +50,7 @@ export default async function Home() {
     <>
       {/* 1. Hero Section */}
       <Hero
-        title="Performance Marketing That Delivers Measurable Results"
+        title="Performance Marketing That Delivers Measurable Resultsss"
         subtitle="Performance Marketing Agency for Measurable Growth"
         description="We help businesses generate qualified leads, improve ROI, and scale revenue through Google Ads, Meta Ads, SEO, lead generation, and conversion optimization."
         cta={{

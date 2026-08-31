@@ -256,3 +256,100 @@ Recorded so they are not accidentally promoted later. **None of these is used as
 5. SERP composition observations are recorded qualitatively (what kinds of pages rank) and deliberately exclude volume, difficulty and position data, which belong to Session 03.
 6. No AI-visibility test of MappedSkills or any competitor was run. Any statement about who AI systems currently recommend in this category is **UNKNOWN** and is Session 04 work.
 7. No India-specific equivalent of the Pew study (S-07) was found. The click-loss evidence base is US-centric.
+
+---
+---
+
+# SESSION 03 ADDENDUM — Search Demand, SERP & Commercial Opportunity
+
+**Appended 2026-08-31. Session 02 entries above (S-01 … S-30) are unchanged.**
+**Retrieval date for all Session 03 entries:** 2026-08-31.
+
+## F. Session 03 method and its material limitations
+
+**VERIFIED FACT — no keyword tool was available.** No Ahrefs, Semrush, Google Keyword Planner, Moz or equivalent access existed in this session. Therefore, for **every** term examined in Session 03:
+
+> **SEARCH VOLUME NOT VERIFIED · KEYWORD DIFFICULTY NOT VERIFIED · CPC NOT VERIFIED**
+
+No volume, difficulty or CPC figure appears in any Session 03 artifact. None was estimated, interpolated, or replaced with a proxy number. Demand judgements are qualitative and derived from the observable signals defined in `docs/03-search/KEYWORD_UNIVERSE.md` §0.3 (suggestion depth, intent composition, contamination, geographic modifiers, and `(NONE)` responses).
+
+**VERIFIED FACT — geographic constraint.** Session network egress resolves to **Pune, Maharashtra, India — AS55836 Reliance Jio Infocomm Limited**, confirmed via `ipinfo.io` on 2026-08-31. Consequences:
+- All autocomplete and all browser SERP evidence is **India- and Pune-localised**. For the India lens this is close to what a Pune buyer sees.
+- **The `gl=` parameter did not meaningfully override IP localisation.** `gl=us` and `gl=gb` returned results identical to each other and India-flavoured. **International autocomplete was NOT obtained and is not claimed.**
+- **No international SERP was observed directly.** All international inference rests on geographic modifiers Google itself appended to India-lens queries, plus one US-only WebSearch cross-check.
+
+**VERIFIED FACT — AI Overview presence could not be reliably observed.** On the single SERP probed directly (`how to improve website conversion rate`), the page contained both an "AI Overview" heading and the fallback strings "An AI Overview is not available for this search" and "Can't generate an AI overview right now." No AI Overview body rendered on any SERP read. **INFERENCE:** an artifact of automated browsing. **No Session 03 artifact makes any claim about which queries trigger AI Overviews.** Carried to Session 04.
+
+**Other limits:** one observation per SERP, one day, one location; no rank tracking or historical comparison; **no backlink or authority metric was measured for any domain** — where an authority barrier is inferred it is inferred from domain identity and labelled as such; paid ads were not reliably visible in extracted page text and no claim is made about them; "number of Google results" was never used as a difficulty proxy.
+
+---
+
+## G. Session 03 Primary Sources
+
+### S-31 — Google Autocomplete API (India/Pune lens)
+- **Endpoint:** `https://suggestqueries.google.com/complete/search?client=firefox&hl=en&gl=in&q={query}`
+- **Publisher:** Google
+- **Retrieved:** 2026-08-31
+- **Type:** Official first-party suggestion API
+- **Primary/Secondary:** **Primary**
+- **Coverage:** 86 seed queries across ten families — traditional SEO, AI search, organic/search growth, CRO, marketing automation, adjacent categories, problem-led, verticals, AI-search overlap.
+- **Raw data preserved:** `docs/03-search/_raw_autocomplete_IN_2026-08-31.json` (complete unmodified API responses, reproducible).
+- **Claims supported:** every autocomplete observation in `KEYWORD_UNIVERSE.md`, including all `(NONE)` results (`search growth agency`, `conversion rate optimization agency`, `how to improve lead response time`, `brand not showing in chatgpt`, `seo for exporters`) and all contamination findings (`search visibility` → getcontact/Twitter/Instagram; `organic growth agency` → TikTok/Twitter follower services; `cro services` → pharmaceutical Contract Research Organisations; `b2b cro` → croissant/crown/cross-border; `aeo` → Aeon magazine/AEON Credit/Aeon Flux; `lead automation` → automation-engineering jobs).
+- **Confidence:** **High** for what it measures — Google's own live suggestions, India-localised, reproducible from the preserved raw data.
+- **Critical limitation:** autocomplete indicates **which query patterns Google recognises**, not how many people search them. It is a demand *signal*, never a demand *measurement*. It must not be cited as volume.
+
+### S-32 — Live Google SERPs (India/Pune lens, browser-observed)
+- **Publisher:** Google
+- **Retrieved:** 2026-08-31, via `https://www.google.com/search?q=...&hl=en` in a real browser session
+- **Type:** Direct SERP observation
+- **Primary/Secondary:** **Primary**
+- **Ten SERPs observed:** `ai seo agency` · `seo company in pune` · `generative engine optimization agency` · `what is answer engine optimization` · `ai visibility checker` · `why your website gets traffic but no leads` · `seo agency for manufacturing companies` · `geo vs seo` · `how to improve website conversion rate` · `cro agency india` · `b2b seo agency india` · `marketing automation agency india` · `how to appear in chatgpt search results`
+- **Claims supported:** all page-type, ranking-domain, People-Also-Ask, related-search and Local Pack observations in `SERP_RESEARCH.md`, including: page 1 of `ai visibility checker` consisting entirely of free tools led by Ahrefs and Semrush; a **parked/expired domain ranking page 1** for `marketing automation agency india`; a **"Top 1 CRO Agencies in India"** listicle and an **October 2024** listicle both ranking for `cro agency india`; a **3-year-old, 17-review Pune agency holding a Local Pack slot** for `seo agency for manufacturing companies` beside 486- and 507-review generalists; Pune SEO incumbents trading **since 1998 and 2004**; and Itorix Infotech's Pune SEO page already advertising "Local SEO, AEO & GEO strategies".
+- **Confidence:** **High** for what was observed on the date. **Single observation, single location, single day** — SERPs move.
+
+### S-33 — ipinfo.io egress geolocation check
+- **URL:** `https://ipinfo.io/json`
+- **Retrieved:** 2026-08-31
+- **Type:** Third-party IP geolocation
+- **Claims supported:** session egress = Pune, Maharashtra, IN, AS55836 Reliance Jio Infocomm Limited. Establishes the geographic lens of S-31 and S-32 and the reason international results could not be obtained.
+- **Confidence:** High
+
+---
+
+## H. Session 03 Secondary Sources
+
+### S-34 — US-lens WebSearch cross-check: AI-search / B2B SaaS agency retainer pricing
+- **Instrument:** the WebSearch tool, documented by its own tool description as **US-only**
+- **Retrieved:** 2026-08-31
+- **Type:** Aggregated search results over **agency-authored listicles and pricing blogs**
+- **Primary/Secondary:** **Secondary, and self-interested** — the publishers sell the services they price
+- **Claims reported (NOT VERIFIED AT SOURCE):** Optimist $3,000/month advisory and $4,000/month full-service; First Page Sage $8,000–$20,000/month; DerivateX from $3,500/month with 90-day sprints; a general band of $3,000–$15,000/month for B2B SaaS, with enterprise engagements above $50,000/month.
+- **Verification attempted and failed:** a direct fetch of `https://www.yesoptimist.com/pricing/` returned **HTTP 403**. No named agency's pricing was confirmed on its own page.
+- **Confidence:** **Low–Medium.** Multiple independent listicles converge on a similar band, which is weak corroboration. Used in Session 03 **only** for the directional statement that international retainers sit materially above Indian price points. **Must not be quoted as verified pricing.**
+
+### S-35 — US-lens WebSearch cross-check: B2B/manufacturing website conversion benchmarks
+- **Instrument:** WebSearch (US-only)
+- **Retrieved:** 2026-08-31
+- **Type:** Agency and vendor blog aggregation
+- **Primary/Secondary:** Secondary
+- **Claims reported (NOT VERIFIED AT SOURCE):** manufacturing websites converting at approximately 2.1–2.2%; visitor-to-lead rates ranging from ~7.4% (legal services) to ~1.1% (B2B SaaS).
+- **Confidence:** **Low.** Vendor benchmark claims with undisclosed methodology.
+- **Status: NOT USED as evidence in any Session 03 artifact.** Recorded only because a credible Indian-manufacturing conversion benchmark is proposed as a **content moat opportunity**, and this register should show that **no trustworthy benchmark for that market was found** — which is precisely what would make an original one valuable.
+
+---
+
+## I. Session 03 — claims explicitly REJECTED or left open
+
+| Claim / question | Status |
+|---|---|
+| Any search volume, keyword difficulty or CPC figure for any term | **NOT AVAILABLE.** No tool access. Never estimated. **RESEARCH REQUIRED** |
+| Which queries trigger AI Overviews | **NOT OBSERVABLE** in this session (§F). **RESEARCH REQUIRED — Session 04** |
+| International SERP composition and winnability (UK, US, AU, Gulf) | **NOT OBSERVED.** Egress is Pune-locked. **RESEARCH REQUIRED** |
+| Backlink profiles or authority metrics of any ranking domain | **NOT MEASURED.** Authority barriers are inferred from domain identity only |
+| Paid-ad presence or advertiser identity on any SERP | **NOT RELIABLY OBSERVED.** No claim made |
+| Named international agency retainer prices (S-34) | **NOT VERIFIED AT SOURCE** — one direct fetch returned HTTP 403. Directional use only |
+| Manufacturing website conversion benchmarks (S-35) | **NOT USED.** Vendor claims, methodology undisclosed |
+| Whether manufacturing is a *better* vertical than healthcare | **UNKNOWN.** Healthcare autocomplete is equally clean; **its SERP was not tested.** Manufacturing is a leading candidate, not a validated choice |
+| Whether the manufacturing query family is large enough to carry a business | **UNKNOWN**, and the largest single risk to the Session 03 recommendation |
+| MappedSkills' own rankings, impressions or Search Console baseline | **UNKNOWN.** None exists — Session 01 established no analytics runs in production |
+| Google Trends data | **NOT USED.** Not retrieved in this session |

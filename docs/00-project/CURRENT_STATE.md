@@ -1,13 +1,15 @@
 # Current Project State
 
 ## Current Phase
+**Session 03 Completed — Awaiting Orchestrator Review (Quality Gate 3)**
 **Session 02 Completed — Awaiting Orchestrator Review (Quality Gate 2)**
 **Session 01 + 01B Completed — Awaiting Orchestrator Review (Quality Gate 1)**
 
-Two review gates are now open in parallel. Neither has been approved by Claude; Claude has no authority to approve either.
+Three review gates are now open in parallel. None has been approved by Claude; Claude has no authority to approve any of them.
 
 - **Gate 1 (existing site audit)** — Session 01 + 01B artifacts delivered 2026-08-31.
 - **Gate 2 (business/category validation)** — Session 02 artifacts delivered 2026-08-31. Claude's research recommendation is **MODIFY CURRENT HYPOTHESIS**. See `docs/01-business/STRATEGIC_VALIDATION.md`. **The business strategy is NOT approved.**
+- **Gate 3 (search demand / SERP / commercial opportunity)** — Session 03 artifacts delivered 2026-08-31. Claude's research recommendation is **OPTION D** (vertical search-to-enquiry). See `docs/03-search/SEARCH_STRATEGY_VALIDATION.md`. **No search strategy, keyword map or content plan is approved.**
 
 A read-only audit of the existing website/codebase was completed on 2026-08-31 on branch `test_branch` at HEAD `566d3e3`, followed by a narrowly scoped **live production verification pass (Session 01B)** on the same date. Artifacts are listed below. Quality Gate 1 has **not** been independently approved by Claude; it awaits orchestrator and owner review. Claude's recommendation is recorded in the Session 01B handoff.
 
@@ -138,15 +140,62 @@ Web research and direct page retrieval only. **No paid research tool, no keyword
 
 **Any session touching business strategy, positioning, ICP, service architecture, offers, IA or content must read `docs/01-business/STRATEGIC_VALIDATION.md` alongside those documents.** Once the orchestrator decides, the five business documents should be revised **together, in one pass**, and the outcome recorded in `DECISION_LOG.md`.
 
+## Session 03 — Search Demand, SERP & Commercial Opportunity Validation (completed 2026-08-31)
+
+**Purpose:** determine where real organic-search opportunity exists, and use search evidence to challenge — not confirm — the business hypotheses.
+
+### Artifacts created
+- `docs/03-search/SEARCH_MARKET_RESEARCH.md`
+- `docs/03-search/SERP_RESEARCH.md`
+- `docs/03-search/KEYWORD_UNIVERSE.md`
+- `docs/03-search/KEYWORD_PRIORITY_MATRIX.md`
+- `docs/03-search/SEARCH_STRATEGY_VALIDATION.md`
+- `docs/03-search/_raw_autocomplete_IN_2026-08-31.json` (raw Google Autocomplete API responses, preserved for reproduction)
+- `docs/00-project/handoffs/SESSION_03_SEARCH_VALIDATION.md`
+- `docs/02-research/SOURCE_REGISTER.md` — **appended** with a Session 03 addendum (S-31 … S-35). Session 02 entries were not altered.
+
+### Research recommendation (NOT approved)
+**RECOMMEND OPTION D** — vertical search-to-enquiry: *getting found and getting enquiries for industrial/B2B businesses*, with AI search as a **capability and credibility layer** rather than a category, conversion **integrated into a single outcome** rather than sold as "CRO", and **manufacturing as the leading vertical candidate requiring confirmation**.
+
+Three qualifications attached by Claude:
+- **absolute search volume is UNKNOWN** — no keyword tool was available; whether the manufacturing family can carry a business is unverified and is the largest risk to the recommendation;
+- **the vertical is a leading candidate, not a validated choice** — healthcare's autocomplete is equally clean and its SERP was **not** tested;
+- **Option D is gated on proof MappedSkills does not have** (a manufacturing case study, client benchmark data), which requires owner action.
+
+### Session 03 method limitations (VERIFIED FACT)
+- **SEARCH VOLUME NOT VERIFIED · KEYWORD DIFFICULTY NOT VERIFIED · CPC NOT VERIFIED.** No Ahrefs, Semrush, Keyword Planner or equivalent access existed. **No volume, difficulty or CPC figure appears in any Session 03 artifact, and none was estimated.** Demand judgements are qualitative, from Google Autocomplete depth/intent/contamination and live SERP composition.
+- **Geographic lens:** session egress resolves to **Pune, Maharashtra, India (AS55836 Reliance Jio)**, confirmed via `ipinfo.io`. All autocomplete and SERP evidence is **India/Pune-localised**. The `gl=` parameter did **not** override IP localisation, so **international autocomplete was not obtained and no international SERP was observed directly.**
+- **AI Overview presence could not be reliably observed** — the container rendered fallback text under automation. **No Session 03 artifact claims which queries trigger AI Overviews.** Carried to Session 04.
+- No backlink or authority metric was measured; authority barriers are inferred from ranking-domain identity. Paid ads were not reliably visible and no claim is made about them. One observation per SERP, one day, one location.
+- No production code was read for modification and none was changed. No build, lint or test was run.
+
+### Load-bearing Session 03 findings
+1. **Three audiences share one vocabulary, and the contamination falls precisely on the hypothesis's own terminology.** `generative engine optimization` → course, meaning, **jobs**, certification ahead of *agency*; `conversion rate optimization` → meaning, course, **jobs**; `lead automation` → entirely automation-engineering jobs; `seo consultant` → **salary, jobs** first. Ranking for these terms would attract students, job-seekers and competitors.
+2. **"Search Visibility" and "organic growth" are already owned by other industries.** `search growth agency` returns **(NONE)**; `search visibility` returns **getcontact, Twitter/X, Instagram** profile settings; `organic growth agency` returns **TikTok and Twitter follower-growth services**. This is direct search evidence against the positioning territory in `POSITIONING.md`.
+3. **"CRO" is a broken acronym in the Indian market.** `cro services` returns pharmaceutical **Contract Research Organisations**; `b2b cro` returns croissants and crown rings; `conversion rate optimization agency` returns **(NONE)**.
+4. **AI-visibility demand resolves to free software, not agencies.** Autocomplete returns checker/score/tool/tracker/free with **no agency term in the top nine**, and page 1 of `ai visibility checker` is **ten free tools led by Ahrefs and Semrush** — including one already run by an Indian agency. **An AI Visibility Score is not a viable acquisition asset.**
+5. **Buyers do not use the industry's acronyms.** They search "how to appear in ChatGPT" (8 clean variants) and "how to get cited by AI" (8 clean variants).
+6. **The authority barrier is bimodal and tracks framing, not topic.** `how to improve website conversion rate` is held by CXL and Baymard; `why your website gets traffic but no leads` is held by small agencies publishing four days ago. Same discipline, opposite winnability.
+7. **Specialisation substitutes for tenure — observed directly.** A 3-year-old Pune agency with 17 reviews holds a Local Pack slot for `seo agency for manufacturing companies`, beside 486- and 507-review generalists — while `seo company in pune` is held by firms trading since **1998 and 2004**.
+8. **Manufacturing/industrial B2B is the cleanest commercial query family observed anywhere in the session** — eight variants, six explicitly provider-seeking, **zero contamination** — on an open SERP, in a city that is a major Indian engineering centre, with an RFQ-shaped (conversion) buyer outcome and a natural export bridge to international work.
+9. **Marketing automation fails a second, independent test.** A **parked, expired domain ranks page 1** for `marketing automation agency india`; the credible ranking entity is a Salesforce implementation partner; `hubspot partner` shows buyers routing to the platform's own directory.
+10. **MappedSkills' current category has strong Pune demand it is not capturing.** `digital marketing agency pune` and `performance marketing agency pune` are top autocomplete completions. **The owner-supplied absence of enquiries therefore cannot be attributed to absent search demand** — the barrier is tenure, reviews, Google Business Profile, and a website with no working conversion path.
+11. **Google Search Console reporting and the local incumbents both confirm Session 02's commoditisation finding locally:** a Pune SEO incumbent (Itorix Infotech) already advertises "Local SEO, AEO & GEO strategies" on its core SEO page.
+
+### Relationship to Session 02
+Session 03 **independently corroborates Session 02's MODIFY recommendation from a different evidence base** — search behaviour rather than competitor positioning. It additionally supplies supporting evidence and a leading candidate for the **vertical narrowing decision** that Session 02 proposed as a Gate 2 requirement.
+
 ## Next Intended Phase
 1. **Quality Gate 1** — orchestrator and owner review of the Session 01 + 01B evidence. Claude recommends **PASS** with owner confirmations attached; see the 01B handoff. Claude has no authority to approve the gate.
 2. **Quality Gate 2** — orchestrator and owner review of `docs/01-business/STRATEGIC_VALIDATION.md`. A decision is required on each of the five proposed modifications **and** on the implied price-point/ICP change. Claude does not approve strategy.
+2b. **Quality Gate 3** — orchestrator and owner review of `docs/03-search/SEARCH_STRATEGY_VALIDATION.md`. Decisions required: whether to adopt **Option D**; whether to pursue a vertical at all; and if so, whether to test **healthcare** against manufacturing before committing (healthcare's autocomplete is equally clean and its SERP was not tested). Note that Gates 2 and 3 are coupled — Session 03 corroborates Session 02 from an independent evidence base, and Option D presupposes the MODIFY decision.
 3. Two owner inputs that no Claude session can produce, and which gate any premium positioning:
    - which client results, if any, may be published as case studies (`ASSUMPTIONS_AND_OPEN_QUESTIONS.md` flags AnybodyCanBake and Digibility as candidates; publishability is **UNKNOWN**);
    - whether the owner accepts the implied price-point and ICP change.
 4. **Only after Gate 2 is decided:** revise `BUSINESS_STRATEGY.md`, `POSITIONING.md`, `ICP.md`, `SERVICE_ARCHITECTURE.md` and `OFFER_ARCHITECTURE.md` **together, in one pass**, and record the outcome in `DECISION_LOG.md` (updating or superseding `DEC-004`).
-5. **Then** commission Session 03 (search-market validation), which must answer the seven questions in `STRATEGIC_VALIDATION.md` §12. **Sequencing note:** Session 03 cannot sensibly build a final keyword universe until the orchestrator decides whether the spearhead is a technique category or an outcome, because that determines which term family is researched. If Session 03 is to run first, its brief should be scoped to test *competing term families* rather than to produce a final keyword map.
-6. No design, IA, or implementation phase should begin until both gates are reviewed.
+5. **Session 03 has now run** ahead of the Gate 2 decision, scoped as term-family testing rather than as a final keyword map, consistent with the sequencing note previously recorded here. Its findings answer questions 2–5 of `STRATEGIC_VALIDATION.md` §12; **question 1 (magnitude of AI referral traffic versus organic) remains unresolved** and is carried to Session 04.
+6. **Then** commission Session 04 (AI visibility), which must answer the seven questions in `SEARCH_STRATEGY_VALIDATION.md` §20. Two prerequisites Session 03 could not satisfy: AI Overview presence must be checked **manually**, since it was not observable under automation; and international SERPs must be observed from an international vantage point, since session egress is Pune-locked.
+7. No design, IA, or implementation phase should begin until the open gates are reviewed. **No sitemap, URL architecture, page inventory or content roadmap should be produced until Gates 2 and 3 are decided** — Session 03 deliberately stopped short of all four.
 
 ### Status of the two Session 01B owner confirmations
 Both were addressed by the owner-supplied facts recorded above on 2026-08-31, within the limits of what the owner actually stated:
@@ -165,7 +214,9 @@ Recorded so they are not lost, and judged safe to address during implementation 
 ## Not Yet Approved
 - Quality Gate 1 (existing site audit) — artifacts delivered, review pending;
 - **Quality Gate 2 (business/category validation) — artifacts delivered, review pending;**
+- **Quality Gate 3 (search demand / SERP / commercial opportunity) — artifacts delivered, review pending;**
 - **the business strategy and the direction recommended in `STRATEGIC_VALIDATION.md`;**
+- **the search architecture recommended in `SEARCH_STRATEGY_VALIDATION.md` (Option D), including the manufacturing vertical candidate;**
 - `DEC-004` (three-pillar direction) — remains **Proposed / Not Yet Final**;
 - final positioning;
 - final services;

@@ -1,15 +1,19 @@
 # Current Project State
 
 ## Current Phase
+**Session 04 Completed — Awaiting Orchestrator Review (Quality Gate 4)**
 **Session 03 Completed — Awaiting Orchestrator Review (Quality Gate 3)**
 **Session 02 Completed — Awaiting Orchestrator Review (Quality Gate 2)**
 **Session 01 + 01B Completed — Awaiting Orchestrator Review (Quality Gate 1)**
 
-Three review gates are now open in parallel. None has been approved by Claude; Claude has no authority to approve any of them.
+Four review gates are now open in parallel. None has been approved by Claude; Claude has no authority to approve any of them.
+
+**Final strategic synthesis of Sessions 02–04 is PENDING and has not begun.**
 
 - **Gate 1 (existing site audit)** — Session 01 + 01B artifacts delivered 2026-08-31.
 - **Gate 2 (business/category validation)** — Session 02 artifacts delivered 2026-08-31. Claude's research recommendation is **MODIFY CURRENT HYPOTHESIS**. See `docs/01-business/STRATEGIC_VALIDATION.md`. **The business strategy is NOT approved.**
 - **Gate 3 (search demand / SERP / commercial opportunity)** — Session 03 artifacts delivered 2026-08-31. Claude's research recommendation is **OPTION D** (vertical search-to-enquiry). See `docs/03-search/SEARCH_STRATEGY_VALIDATION.md`. **No search strategy, keyword map or content plan is approved.**
+- **Gate 4 (AI visibility, citation & discovery baseline)** — Session 04 artifacts delivered 2026-08-31. Claude's research recommendation is **AI SEARCH SHOULD BE A SUPPORTING CAPABILITY**. See `docs/04-ai-visibility/AI_STRATEGIC_VALIDATION.md`. **No positioning is approved.**
 
 A read-only audit of the existing website/codebase was completed on 2026-08-31 on branch `test_branch` at HEAD `566d3e3`, followed by a narrowly scoped **live production verification pass (Session 01B)** on the same date. Artifacts are listed below. Quality Gate 1 has **not** been independently approved by Claude; it awaits orchestrator and owner review. Claude's recommendation is recorded in the Session 01B handoff.
 
@@ -185,6 +189,64 @@ Three qualifications attached by Claude:
 ### Relationship to Session 02
 Session 03 **independently corroborates Session 02's MODIFY recommendation from a different evidence base** — search behaviour rather than competitor positioning. It additionally supplies supporting evidence and a leading candidate for the **vertical narrowing decision** that Session 02 proposed as a Gate 2 requirement.
 
+## Session 04 — AI Visibility, Citation & Discovery Baseline (completed 2026-08-31)
+
+**Purpose:** determine what can actually and defensibly be measured about MappedSkills' visibility across AI-assisted discovery environments today, separating what was measured from what could not be measured.
+
+### Artifacts created
+- `docs/04-ai-visibility/AI_ACCESS_CAPABILITY.md`
+- `docs/04-ai-visibility/AI_PROMPT_UNIVERSE.md`
+- `docs/04-ai-visibility/AI_VISIBILITY_BASELINE.md`
+- `docs/04-ai-visibility/AI_CITATION_RESEARCH.md`
+- `docs/04-ai-visibility/AI_CRAWLER_POLICY.md`
+- `docs/04-ai-visibility/AI_MEASUREMENT_FRAMEWORK.md`
+- `docs/04-ai-visibility/AI_TOOLING_LANDSCAPE.md`
+- `docs/04-ai-visibility/AI_STRATEGIC_VALIDATION.md`
+- `docs/00-project/handoffs/SESSION_04_AI_VISIBILITY.md`
+- `docs/02-research/SOURCE_REGISTER.md` — **appended** with a Session 04 addendum (§J–§M, sources S-36 … S-52). Session 02 and Session 03 entries were not altered.
+
+### Research recommendation (NOT approved)
+**AI SEARCH SHOULD BE A SUPPORTING CAPABILITY.**
+
+This sits **one notch below** Session 03's "capability and credibility layer, never the category". The orchestrator should close that gap deliberately rather than let it drift. Reasoning in `AI_STRATEGIC_VALIDATION.md` §16.
+
+### Session 04 method limitations (VERIFIED FACT)
+- **Two of the six systems named in `PROJECT_CHARTER.md` were NOT TESTABLE.** `claude.ai` requires login; `grok.com` gates the first message behind sign-up and never returned an answer. **No baseline exists for Claude or Grok**, and no substitute was used for either.
+- **Every system was tested SIGNED OUT**, at its lowest available tier. Gemini ran on "3.5 Flash-Lite" and exposed **no citations at all**; Perplexity's answers were markedly abbreviated; ChatGPT's model tier is undisclosed.
+- **39 runs on one day inside a ~40-minute window**, from one location, in English only. **No day-to-day variance data exists** — the largest unmeasured quantity in the session.
+- **Egress was Pune-locked again** (AS55836 Reliance Jio). **Session 03's international gap is NOT closed.** No Hindi or Marathi prompt was run.
+- **Google surfaces exposed source domains but not anchor hrefs**, so linked-citation frequency was unmeasurable and is not reported.
+- **A Google search-operator query triggered a bot check. It was NOT bypassed** and operator queries were abandoned, so **no exhaustive off-site mention count exists**.
+- **No AI-visibility tool was trialled.** All vendor capability claims are unverified.
+- **No production code, config or `robots.txt` was changed.** No build, lint or test was run.
+
+### Load-bearing Session 04 findings
+1. **MappedSkills has working branded retrieval and zero unbranded discovery.** Identified accurately in **7 of 8** branded runs; **0 appearances in 28 unbranded runs** across four systems and six prompt classes — including a 16-entry ChatGPT list of Pune SEO agencies. Retrieval, discovery, recommendation and citation are four different things and are not collapsed into a score.
+2. **MappedSkills' AI presence is entirely retrieval-dependent.** ChatGPT with web search **disabled** did not know the company and read the name compositionally. No system tested carries it in parametric knowledge.
+3. **Directory listings are the load-bearing citation source for agency prompts.** `agencies.semrush.com` appeared in **10 of 28** unbranded runs and `clutch.co` in **5** — together **15 of 28**. ChatGPT stated its own reasoning verbatim: *"Semrush... specifically identifies SEO Yodha, e intelligence, GO MO Group and others as serving manufacturing clients in India; Clutch's August 2026 B2B rankings also include e intelligence."* **MappedSkills has a profile on neither.**
+4. **Selling GEO did not produce AI visibility.** upGrowth, SEOTonic and DigiMark each appeared **0 times in 28 unbranded runs**, including on GEO- and AI-SEO-specific prompts. Qoulomb — the narrow specialist — appeared 3 times.
+5. **Google AI Overviews ARE observable — this closes the Session 03 blocker.** Present on national and informational queries; **ABSENT on `best SEO agencies in Pune`, which served a Local Pack instead.** For Pune local demand the observed lever is Google Business Profile, reviews and tenure — not AI optimisation. This corroborates Session 03 finding #10 from the AI surface.
+6. **Within-system membership is often stable; order never was; cross-system agreement collapses.** Google AI Mode returned the same four Pune names in **3 of 3** runs with the same five source domains, in a different order each time — while **no agency appeared in three or more of the four systems tested**. A blended cross-system "AI Visibility Score" is therefore rejected on **methodological** grounds, not just commercial ones.
+7. **AI systems are actively redistributing MappedSkills' unsubstantiated claims.** Google AI Mode surfaced the site's "300%+ ROI" title and Perplexity repeated it. Session 02 recorded that figure as copy of **unknown provenance**. Only ChatGPT qualified it as a self-reported marketing claim. **This is a live exposure and an owner decision.**
+8. **A staging subdomain is being ingested.** Perplexity cited **`testing.mappedskills.com`** among ten sources. Verified live: resolves on the same host, returns HTTP 403 at the root and **404 for `/robots.txt`**.
+9. **Crawler access is not the constraint.** Full server-rendered HTML is served to `OAI-SearchBot/1.4` and `ClaudeBot/1.0`; `robots.txt` blocks no AI crawler. **Access is necessary and demonstrably not sufficient** — every system has complete access and none mentions MappedSkills unprompted.
+10. **Training crawlers and search crawlers are different and were kept separate.** `GPTBot`, `ClaudeBot`, `Google-Extended` and `CCBot` govern **training**; `OAI-SearchBot`, `Claude-SearchBot` and `PerplexityBot` govern **retrieval**. Google states verbatim that Google-Extended "does not impact a site's inclusion in Google Search". **xAI/Grok crawler policy is UNKNOWN** — no first-party documentation was found.
+11. **The measurement tools now occupy the AI answer layer itself.** Google AI Mode answered *"companies that improve visibility in AI search"* with **Semrush, SE Ranking and Ahrefs** before naming any agency, and named **Profound** for *"who can help my company get found in Google and AI search"*. Session 03 found tool companies own the tool SERPs; Session 04 finds they are recommended over agencies inside AI answers.
+12. **Manufacturing is thinly and unstably claimed.** Across Google AI Mode (2 runs), Perplexity and ChatGPT, **exactly one name — PageTraffic — was common to all three systems** (Techmagnate to two); AI Mode run 1 alone shared no name with Perplexity. Pune agencies do surface (Awrange in both AI Mode runs; Dimakh/Osumare/Koffeetech with street addresses), all three systems used **RFQ** language unprompted, and ChatGPT's top pick was framed for "a Pune-based industrial company". But manufacturing was also the **least stable** prompt tested (only 2 of ~5 names recurring), and the observed entry mechanism was a directory or a single listicle — **not vertical content**. Manufacturing remains a **WORKING HYPOTHESIS**; healthcare was again not tested; volume is still **UNKNOWN**.
+13. **No research asset was observed being cited in any unbranded agency prompt.** Sessions 02 and 03 both proposed original benchmark research as the most durable moat. This is the first evidence gathered *against* that thesis. It is not a refutation — the prompt universe was vendor-selection-weighted — but it must be weighed at synthesis, not dropped.
+
+### Session 02 / Session 03 open question now substantially answered
+**AI referral traffic magnitude.** Ahrefs (2026-05-15), citing the chatgpt-vs-google.com panel of 74,752 websites: *"all AI chatbots combined sent 3.5 million visitors in March 2026 — just 0.28% of total web traffic"*, against Google's 345.2 million visitors and 28.12% share — **roughly 98× larger by volume**. This addresses `STRATEGIC_VALIDATION.md` §12 Q1 and `SEARCH_STRATEGY_VALIDATION.md` §20 Q7, open since Session 02.
+
+**Caveats that must travel with the figure:** vendor blog, unaudited third-party panel, **re-verify before any client-facing use**. The accompanying conversion multipliers (23x from Ahrefs' own analytics; 185% from Buffer) are **single-company figures with self-selecting audiences and must NOT be quoted as benchmarks**.
+
+**Two Session 02 rejections were re-tested and STAND:** the Similarweb page was re-fetched and still contains **no** "0.13% of referral traffic" and **no** "11.4% vs 5.3% conversion" figure. The rejected "345x" claim appears to have been a misreading of Google's **345.2 million** visitors.
+
+### Relationship to Sessions 02 and 03
+Session 04 **independently corroborates the MODIFY recommendation from a third distinct evidence base** — direct observation of AI answers, rather than competitor positioning (Session 02) or search behaviour (Session 03). It also corroborates Session 03's specific findings that AI-visibility demand resolves to software rather than agencies, that specialisation substitutes for tenure, and that Pune local demand is gated by Google Business Profile and reviews.
+
+**One point of divergence the orchestrator must resolve:** Session 03 placed AI search as a "capability and credibility layer"; Session 04's direct measurement places it **one notch lower, as a supporting capability**.
+
 ## Next Intended Phase
 1. **Quality Gate 1** — orchestrator and owner review of the Session 01 + 01B evidence. Claude recommends **PASS** with owner confirmations attached; see the 01B handoff. Claude has no authority to approve the gate.
 2. **Quality Gate 2** — orchestrator and owner review of `docs/01-business/STRATEGIC_VALIDATION.md`. A decision is required on each of the five proposed modifications **and** on the implied price-point/ICP change. Claude does not approve strategy.
@@ -194,8 +256,17 @@ Session 03 **independently corroborates Session 02's MODIFY recommendation from 
    - whether the owner accepts the implied price-point and ICP change.
 4. **Only after Gate 2 is decided:** revise `BUSINESS_STRATEGY.md`, `POSITIONING.md`, `ICP.md`, `SERVICE_ARCHITECTURE.md` and `OFFER_ARCHITECTURE.md` **together, in one pass**, and record the outcome in `DECISION_LOG.md` (updating or superseding `DEC-004`).
 5. **Session 03 has now run** ahead of the Gate 2 decision, scoped as term-family testing rather than as a final keyword map, consistent with the sequencing note previously recorded here. Its findings answer questions 2–5 of `STRATEGIC_VALIDATION.md` §12; **question 1 (magnitude of AI referral traffic versus organic) remains unresolved** and is carried to Session 04.
-6. **Then** commission Session 04 (AI visibility), which must answer the seven questions in `SEARCH_STRATEGY_VALIDATION.md` §20. Two prerequisites Session 03 could not satisfy: AI Overview presence must be checked **manually**, since it was not observable under automation; and international SERPs must be observed from an international vantage point, since session egress is Pune-locked.
-7. No design, IA, or implementation phase should begin until the open gates are reviewed. **No sitemap, URL architecture, page inventory or content roadmap should be produced until Gates 2 and 3 are decided** — Session 03 deliberately stopped short of all four.
+6. **Session 04 (AI visibility) has now run**, ahead of the Gate 2 and Gate 3 decisions. Against `SEARCH_STRATEGY_VALIDATION.md` §20 its seven questions stand as follows:
+   - **Q1 (do AI systems recommend anyone for Indian industrial/manufacturing prompts?)** — **ANSWERED.** Yes, but thinly and unstably; the three systems tested shared almost no names.
+   - **Q2 (which queries trigger AI Overviews?)** — **ANSWERED.** AI Overviews *are* observable in this environment; present on national/informational queries, **absent on `best SEO agencies in Pune`**, which served a Local Pack instead. **The Session 03 blocker is closed.**
+   - **Q3 (MappedSkills' baseline vs upGrowth, SEOTonic, DigiMark, Qoulomb)** — **ANSWERED.** MappedSkills 0/28 unbranded; upGrowth, SEOTonic and DigiMark also 0/28; Qoulomb 3/28.
+   - **Q4 (which source domains do AI systems cite, and can MappedSkills enter that set?)** — **ANSWERED.** Directories dominate — `agencies.semrush.com` in 10 of 28 runs, `clutch.co` in 5. MappedSkills is on neither, and both are self-serve.
+   - **Q5 (does the professional-services AI-citation weakness apply to industrial categories?)** — **NOT ANSWERED.** Similarweb's category figures were re-confirmed but no industrial-category equivalent was found. **RESEARCH REQUIRED.**
+   - **Q6 (does a variance-aware method produce results stable enough to sell?)** — **PARTIALLY ANSWERED.** Within-system membership is often stable and order never was; cross-system agreement collapsed. Stability is prompt-dependent (~100% to ~40% in one system on one day). **No day-to-day variance was measured.**
+   - **Q7 (magnitude of AI referral traffic vs organic)** — **SUBSTANTIALLY ANSWERED.** See the Session 04 section above.
+   **One Session 03 prerequisite was NOT satisfied:** international SERPs and AI answers were again not observed, because egress remained Pune-locked. **That gap is unchanged and is carried forward.**
+7. **Then** the **final strategic synthesis of Sessions 02–04**, which has **not** begun. Its required inputs are listed in `docs/04-ai-visibility/AI_STRATEGIC_VALIDATION.md` §15. Note the one divergence the synthesis must resolve: Session 03 placed AI search as a "capability and credibility layer"; Session 04's direct measurement places it **one notch lower, as a supporting capability**.
+8. No design, IA, or implementation phase should begin until the open gates are reviewed. **No sitemap, URL architecture, page inventory or content roadmap should be produced until Gates 2, 3 and 4 are decided** — Sessions 03 and 04 both deliberately stopped short of all four.
 
 ### Status of the two Session 01B owner confirmations
 Both were addressed by the owner-supplied facts recorded above on 2026-08-31, within the limits of what the owner actually stated:
@@ -217,6 +288,9 @@ Recorded so they are not lost, and judged safe to address during implementation 
 - **Quality Gate 3 (search demand / SERP / commercial opportunity) — artifacts delivered, review pending;**
 - **the business strategy and the direction recommended in `STRATEGIC_VALIDATION.md`;**
 - **the search architecture recommended in `SEARCH_STRATEGY_VALIDATION.md` (Option D), including the manufacturing vertical candidate;**
+- **Quality Gate 4 (AI visibility, citation & discovery baseline) — artifacts delivered, review pending;**
+- **the strategic role for AI search recommended in `docs/04-ai-visibility/AI_STRATEGIC_VALIDATION.md` (SUPPORTING CAPABILITY);**
+- **the final strategic synthesis of Sessions 02–04, which has not begun;**
 - `DEC-004` (three-pillar direction) — remains **Proposed / Not Yet Final**;
 - final positioning;
 - final services;

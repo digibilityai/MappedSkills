@@ -353,3 +353,166 @@ No volume, difficulty or CPC figure appears in any Session 03 artifact. None was
 | Whether the manufacturing query family is large enough to carry a business | **UNKNOWN**, and the largest single risk to the Session 03 recommendation |
 | MappedSkills' own rankings, impressions or Search Console baseline | **UNKNOWN.** None exists — Session 01 established no analytics runs in production |
 | Google Trends data | **NOT USED.** Not retrieved in this session |
+
+---
+---
+
+# SESSION 04 ADDENDUM — AI Visibility, Citation & Discovery Baseline
+
+**Appended 2026-08-31. Session 02 entries (S-01 … S-30) and Session 03 entries (S-31 … S-35) are unchanged.**
+**Retrieval date for all Session 04 entries:** 2026-08-31.
+
+## J. Session 04 method and its material limitations
+
+**VERIFIED FACT — geographic and authentication lens.** Session network egress resolved to **Pune, Maharashtra, India — AS55836 Reliance Jio Infocomm Limited** (`ipinfo.io`, 2026-08-31), the same lens as Session 03. **Every AI system was tested SIGNED OUT.** No account was created, no credential was entered, and no existing authenticated session was reused. One cookie banner (grok.com) was answered with "Reject All"; no terms were accepted anywhere.
+
+**VERIFIED FACT — two of six charter systems were NOT TESTABLE.**
+- **Claude** — `https://claude.ai/new` redirects to `/login`. Login required. **No baseline exists.**
+- **Grok** — `https://grok.com/` accepts a first message, then replaces the answer area with "Continue your conversation — Sign up to continue seamlessly with Grok's full power". **No answer was ever returned. No baseline exists.**
+
+No substitute system was used for either, and none should be inferred from any Session 04 artifact.
+
+**VERIFIED FACT — reduced tiers.** Gemini ran on the signed-out **"3.5 Flash-Lite"** tier and exposed **no source citations at all**. Perplexity's signed-out answers were markedly abbreviated (one run returned three bare agency names). ChatGPT's signed-out model tier is undisclosed; its **"Web search" tool was explicitly enabled** for search-behaviour runs, while "Create image", "Deep research" and "Add files" were login-gated.
+
+**VERIFIED FACT — a Google bot check was encountered and NOT bypassed.** A search-operator query (`"MappedSkills" -site:mappedskills.com`) returned Google's unusual-traffic interstitial. Operator queries were abandoned. **No exhaustive count of off-site MappedSkills mentions was obtainable and none is asserted.**
+
+**Other limits:** 39 total runs (28 unbranded, 8 MappedSkills-branded, 2 competitor-branded) on **one day within a ~40-minute window**, from one location, in English only. **No day-to-day variance data exists.** Google surfaces exposed **source domains but not anchor hrefs**, so linked-citation frequency was unmeasurable and is not reported. **No international lens** — Session 03's international gap is unchanged. **No Hindi/Marathi prompt** was run. **No AI-visibility tool was trialled**; all vendor capability claims are unverified. **No causal claim** is made anywhere between site/entity state and AI outcomes.
+
+---
+
+## K. Session 04 Primary Sources
+
+### S-36 — Google AI Mode (`udm=50`), India/Pune lens, browser-observed
+- **Endpoint:** `https://www.google.com/search?q={query}&udm=50&hl=en&gl=in`
+- **Publisher:** Google
+- **Retrieved:** 2026-08-31 | **Type:** Direct AI-surface observation | **Primary/Secondary:** **Primary**
+- **Coverage:** 25 runs — 19 unbranded, 4 MappedSkills-branded, 2 competitor-branded. Repeats: `best SEO agencies in Pune` ×3, `best AI SEO agencies in India` ×2, `best SEO agencies for manufacturing companies in India` ×2.
+- **Claims supported:** all Google AI Mode observations in `AI_VISIBILITY_BASELINE.md`; the within-system variance results (core set of 4 recurring 3/3 on the Pune prompt with identical source domains 3/3; 2 of ~5 recurring on the manufacturing prompt); the source-domain frequency counts; MappedSkills' branded retrieval and its zero unbranded appearances; upGrowth/SEOTonic/DigiMark zero unbranded appearances.
+- **Confidence:** **High** for what was observed on the date. **Signed out, Pune-localised, single day.** SERPs and AI answers move.
+- **Critical limitation:** source **domains** were recoverable from rendered HTML; **exact cited URLs were not.**
+
+### S-37 — Google AI Overviews (classic SERP), India/Pune lens, browser-observed
+- **Endpoint:** `https://www.google.com/search?q={query}&hl=en&gl=in`
+- **Publisher:** Google | **Retrieved:** 2026-08-31 | **Primary/Secondary:** **Primary**
+- **Claims supported:** AI Overview **PRESENT** and fully rendered for `how to appear in chatgpt search results` (citing YouTube, Rank Math SEO), `why is my website getting traffic but no leads` (citing YouTube/Ajay Dhunna, TechArk, Gill Andrews) and `best SEO agencies for manufacturing companies in India` (citing **Clutch**, Viwork Digital, Wildnet; naming PageTraffic, Techmagnate, Wildnet). AI Overview **ABSENT** for `best SEO agencies in Pune`, which returned a **Local Pack** (Opstech Solution, 4.9/507 reviews, "7+ years in business").
+- **Confidence:** **High** for the four observations. **This closes the Session 03 blocker** recorded in §F ("AI Overview presence could not be reliably observed").
+- **Critical limitation:** **four queries, one day.** The local-vs-national pattern inferred from them is a **WORKING HYPOTHESIS**, not a measurement.
+
+### S-38 — ChatGPT, signed out, Web search tool enabled
+- **URL:** `https://chatgpt.com/` | **Publisher:** OpenAI | **Retrieved:** 2026-08-31 | **Primary/Secondary:** **Primary**
+- **Coverage:** 4 runs — branded with search OFF, branded with search ON, and two unbranded (Pune agencies; manufacturing/industrial SEO India).
+- **Claims supported:** with search **disabled**, ChatGPT did not recognise MappedSkills and interpreted the name compositionally; with search **enabled** it described the company accurately from `mappedskills.com` alone and flagged its on-site result figures as unverified marketing claims. The Pune run returned a **16-entry local business list with star ratings and review counts**, excluding MappedSkills. The manufacturing run shortlisted seven agencies and ranked a top three (Keyword Riser, Techmagnate, GO MO Group) while stating verbatim: *"Semrush… specifically identifies SEO Yodha, e intelligence, GO MO Group and others as serving manufacturing clients in India; Clutch's August 2026 B2B rankings also include e intelligence."*
+- **Confidence:** **High** for what was observed. **Signed-out tier; model tier undisclosed and not necessarily what a paying user receives.**
+
+### S-39 — Perplexity, signed out
+- **URL:** `https://www.perplexity.ai/search/new?q=…` | **Retrieved:** 2026-08-31 | **Primary/Secondary:** **Primary**
+- **Coverage:** 4 runs (1 branded, 3 unbranded). Source lists recovered by activating the "N sources" control.
+- **Claims supported:** branded identification of MappedSkills including its disambiguation from the unrelated "MappingSkills"; **the citation of `testing.mappedskills.com` as one of ten sources**; single-listicle dominance on the manufacturing prompt (**`xsquareseo.com` supplying 4 of 4 attributions**); the Pune and AI-SEO source lists (incl. `goodfirms.co`, `agencies.semrush.com`, `clutch.co`, `aninews.in`).
+- **Confidence:** **Medium-High.** Answers were **markedly abbreviated at the signed-out tier**, which may suppress both brand and source counts.
+
+### S-40 — Gemini, signed out ("3.5 Flash-Lite")
+- **URL:** `https://gemini.google.com/app` | **Retrieved:** 2026-08-31 | **Primary/Secondary:** **Primary**
+- **Coverage:** 2 runs (1 branded, 1 unbranded).
+- **Claims supported:** Gemini identified MappedSkills accurately **from the bare brand name with no domain supplied**; its Pune answer named Osumare, SRV Media, Brainmine, IKF, Techmagnate, Dimakh and Codexxa, excluding MappedSkills.
+- **Confidence:** **Medium.** Explicitly reduced signed-out model tier. **Exposed no citations of any kind**, so this source contributes mention data only.
+
+### S-41 — mappedskills.com live technical/entity inspection
+- **Retrieved:** 2026-08-31 by direct `curl` against production | **Primary/Secondary:** **Primary**
+- **Claims supported:** full server-rendered HTML returned to `OAI-SearchBot/1.4` (233KB homepage, `<h1>` present) and `ClaudeBot/1.0` (`/seo`, 226KB); `robots.txt` is the 681-byte static `public/robots.txt` served by LiteSpeed with **no AI-crawler directive of any kind**; `llms.txt` returns **404**; `sitemap.xml` contains **15** URLs; homepage and `/seo` each emit exactly **two** JSON-LD blocks from the layout (`Organization`, `LocalBusiness`) with **`sameAs: []` on both**, `streetAddress` = "Pune, Maharashtra, India" and **`postalCode` = "India"**, and no `geo`, `openingHours` or `aggregateRating`; **`testing.mappedskills.com` and `ms.mappedskills.com` both resolve on the same LiteSpeed host, return HTTP 403 at the root and HTTP 404 for `/robots.txt`**; `/seo-company-in-pune/` and `/content-marketing-services-in-pune/` return **404** although still listed by a third-party index, while `/content-marketing-services/` returns 200 serving the blog page.
+- **Confidence:** **High.** Direct observation. **No file was modified.**
+
+### S-42 — OpenAI crawler documentation
+- **URL:** `https://developers.openai.com/api/docs/bots` (301 from `https://platform.openai.com/docs/bots`)
+- **Publisher:** OpenAI | **Retrieved:** 2026-08-31 | **Type:** Official platform documentation | **Primary**
+- **Claims supported:** `OAI-SearchBot/1.4` — "used to surface websites in search results in ChatGPT's search features"; `GPTBot/1.4` — "used to crawl content that may be used in training our generative AI foundation models"; `ChatGPT-User/1.0` — user-initiated, robots.txt rules may not apply, "not used for automatic crawling or search determination"; `OAI-AdsBot/1.0` — ad-page safety validation only. Opt-out changes take ~24 hours.
+- **Confidence:** High. **Rule 19 applies — re-verify at implementation time.**
+
+### S-43 — Anthropic crawler documentation
+- **URL:** `https://support.claude.com/en/articles/8896518-…` (301 from `support.anthropic.com`)
+- **Publisher:** Anthropic | **Retrieved:** 2026-08-31 | **Type:** Official platform documentation | **Primary**
+- **Claims supported:** `ClaudeBot` — training ("collecting web content that could potentially contribute to their training"); `Claude-User` — user-initiated retrieval; `Claude-SearchBot` — "navigates the web to improve search result quality for users."
+- **Confidence:** High. **Note:** the page gives descriptive names; exact token strings were not printed on it.
+
+### S-44 — Perplexity crawler documentation
+- **URL:** `https://docs.perplexity.ai/guides/bots` | **Publisher:** Perplexity | **Retrieved:** 2026-08-31 | **Primary**
+- **Claims supported:** `PerplexityBot` — "designed to surface and link websites in search results on Perplexity. It is not used to crawl content for AI foundation models."; `Perplexity-User` — user-triggered, "not used for web crawling or to collect content for training AI foundation models."
+- **Confidence:** High.
+
+### S-45 — Google crawler documentation (Google-Extended)
+- **URL:** `https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers`
+- **Publisher:** Google | **Retrieved:** 2026-08-31 | **Primary**
+- **Claims supported:** Google-Extended controls Gemini Apps training, Vertex AI Gemini training, grounding in Gemini Apps, and grounding with Google Search on Vertex AI. Verbatim: **"Google-Extended does not impact a site's inclusion in Google Search nor is it used as a ranking signal in Google Search."** It has no separate HTTP user-agent string and is a robots.txt product token only.
+- **Confidence:** High.
+
+### S-46 — Google AI features documentation (re-verified)
+- **URL:** `https://developers.google.com/search/docs/appearance/ai-features` | **Publisher:** Google | **Retrieved:** 2026-08-31 | **Primary**
+- **Claims supported:** **"There are no additional requirements to appear in AI Overviews or AI Mode, nor other special optimizations necessary."** Documented preview controls are `nosnippet`, `data-nosnippet`, `max-snippet` and `noindex` — general controls, not AI-specific. **"robots.txt directives for Googlebot is the control for site owners to manage access to how their sites are crawled for Search."**
+- **Confidence:** High. Re-verifies and extends Session 02's S-02.
+- **Note:** the page did **not** address whether snippet controls affect Search ranking; the inference that no AI-Overview-specific opt-out preserves snippets follows from the controls documented, and is labelled as an inference in `AI_CRAWLER_POLICY.md`.
+
+### S-47 — Profound pricing (re-verified)
+- **URL:** `https://www.tryprofound.com/pricing` | **Retrieved:** 2026-08-31 | **Primary (vendor first-party)**
+- **Claims supported:** Starter $99/mo (1 engine — ChatGPT — 50 unique prompts, 1 seat); Growth $399/mo (3 engines, 100 prompts, 3 seats); Enterprise custom (up to 9 engines). Page names ChatGPT, Perplexity, Google AI Overviews, Gemini, Copilot, Grok, DeepSeek and Claude as trackable. Describes running "structured prompts across AI platforms daily, analyzing where and how your brand appears in responses, tracking citations, sentiment, ranking, and competitive presence." **No run-to-run variance methodology is published.**
+- **Confidence:** High for prices and plan contents. **Capability claims are vendor claims and were not trialled.**
+
+### S-48 — Semrush AI Visibility Toolkit pricing
+- **URL:** `https://www.semrush.com/pricing/ai/` | **Retrieved:** 2026-08-31 | **Primary (vendor first-party)**
+- **Claims supported:** Base plan **"$99/mo per domain billed annually"**, 25 custom prompts, 1 domain, daily AI rankings; "Mentions from ChatGPT, Google AI, Gemini, and Perplexity". **No run-to-run variance methodology is published.**
+- **Confidence:** High for the figures read off the page. Resolves Session 02's rejected "Semrush AI Toolkit is $99/month" entry (§D) — **the $99/mo figure is now verified at source**, as a per-domain annually-billed price for the standalone AI Visibility Toolkit.
+
+---
+
+## L. Session 04 Secondary Sources
+
+### S-49 — Ahrefs: "AI Chatbot Traffic: What It Is, and How to Get More"
+- **URL:** `https://ahrefs.com/blog/ai-chatbot-traffic/`
+- **Publisher:** Ahrefs | **Published:** 2026-05-15 | **Retrieved:** 2026-08-31
+- **Type:** Vendor blog reporting a third-party panel plus the vendor's own analytics | **Primary/Secondary:** **Secondary, and self-interested**
+- **Claims supported (verbatim where quoted):**
+  - *"all AI chatbots combined sent 3.5 million visitors in March 2026—just 0.28% of total web traffic"*, from `chatgpt-vs-google.com` tracking **74,752 websites**.
+  - Google sent **345.2 million** visitors, **28.12%** traffic share, in the same period — **roughly 98× larger by volume**.
+  - Ahrefs' own analytics: *"AI search visitors accounted for just 0.5% of total visitors but drove 12.1% of signups"* (~23×).
+  - Buffer (Simon Heaton), single company: LLM-driven traffic converting **20.15%** versus **7.06%** organic.
+- **Confidence:** **Medium** for the volume figures; **Low** for the conversion multipliers.
+- **Notes — and this entry must not be quoted without them.** The panel methodology is not independently auditable. **The 23× and 185% conversion figures are single-company data from an SEO tool company and a social-media tool company, whose audiences are disproportionately AI-curious marketers. They do not generalise and must not be presented to a client as a benchmark.** The volume figure is the load-bearing claim.
+- **Status against Session 02 §D:** this **substantially answers** `STRATEGIC_VALIDATION.md` §12 Q1 and `SEARCH_STRATEGY_VALIDATION.md` §20 Q7, which had been open since Session 02. **It should be re-verified before any client-facing use.**
+
+### S-50 — Similarweb AI Search Stats (re-fetched to test a rejected claim)
+- **URL:** `https://aisearch.similarweb.com/blog/gen-ai-stats/` | **Publisher:** Similarweb | **Published:** 2026-07-29 | **Retrieved:** 2026-08-31
+- **Claims supported:** re-confirms the Session 02 S-08 figures — ChatGPT citation rate rising from ~1.6% (Jun 2025) to ~6.8% (May 2026); citation rate by category Travel & Hospitality ~23%, Automotive ~20%, **Professional Services under 4%**.
+- **Decisive negative finding:** the page **again did not contain** any figure for AI search as a share of total web **referral** traffic, nor any AI-vs-organic **conversion-rate** comparison. **The Session 02 §D rejections of the "0.13% of referral traffic" and "11.4% vs 5.3% conversion" claims therefore STAND. They remain attributed to Similarweb in circulating snippets and are not on Similarweb's page.**
+- **Confidence:** High for the negative finding.
+
+### S-51 — WebSearch (US lens) cross-checks on MappedSkills' off-site footprint
+- **Instrument:** the WebSearch tool, documented by its own tool description as **US-only**
+- **Retrieved:** 2026-08-31 | **Primary/Secondary:** **Secondary**
+- **Claims supported:** off-site MappedSkills surfaces located were `facebook.com/MappedSkill`, `in.linkedin.com/company/mappedskills`, `pune.infoisinfo.co.in` and `justdial.com`. **No Clutch, GoodFirms or DesignRush profile for MappedSkills was found.** Also surfaced the stale `/seo-company-in-pune/` and `/content-marketing-services-in-pune/` URLs subsequently verified as 404 (S-41).
+- **Confidence:** **Medium.** **This is NOT an exhaustive census.** The Google operator query that would have produced one triggered a bot check and was abandoned (§J). **Absence of evidence at this search depth is not proof of non-existence.**
+
+### S-52 — xAI / Grok crawler documentation
+- **Status: NOT FOUND.** No first-party xAI crawler documentation page was located in this session.
+- **Claims supported:** none. Tokens circulating in secondary sources (`GrokBot`, `xAI-Grok`, `Grok-DeepSearch`, `xAI-Bot`) are recorded as **UNVERIFIED** and are **not** used as evidence in any Session 04 artifact.
+- **Confidence:** n/a. **UNKNOWN.**
+
+---
+
+## M. Session 04 — claims explicitly REJECTED or left open
+
+| Claim / question | Status |
+|---|---|
+| Any statement about how Claude or Grok respond to any prompt | **NOT TESTABLE.** Both are login/sign-up gated. **No baseline exists. RESEARCH REQUIRED** |
+| "AI search drives ~0.13% of total web referral traffic" (Similarweb) | **STILL REJECTED.** Re-checked at source in S-50; the figure is not on the page |
+| "AI referral conversion 11.4% vs 5.3% organic" (Similarweb) | **STILL REJECTED.** Not on the page (S-50) |
+| "Organic search drives ~345x more traffic than ChatGPT, Gemini and Perplexity combined" | **STILL REJECTED AS STATED.** Appears to be a misreading of Google's **345.2 million** visitors in S-49. The defensible figure is **~98× by volume for March 2026**, and only with S-49's caveats attached |
+| AI-vs-organic conversion multipliers (23×, 185%) | **RECORDED, NOT USABLE AS A BENCHMARK.** Single-company data with self-selecting audiences (S-49) |
+| Whether MappedSkills has a Google Business Profile | **INFERRED ABSENT OR INEFFECTIVE, NOT VERIFIED.** No system surfaced an address or rating; MappedSkills was absent from a 16-entry ChatGPT local list. **Owner confirmation required** |
+| Whether the empty `sameAs`, malformed `postalCode` or absent GBP *cause* the zero unbranded appearances | **NOT ESTABLISHED.** Consistent with, not causal. Google states no special markup is required (S-46) |
+| Whether allowing AI search crawlers *increases* citation likelihood | **NOT ESTABLISHED.** All systems have full access to `mappedskills.com` and it appeared in 0 of 28 unbranded runs. **Access is necessary and demonstrably not sufficient** |
+| Whether `llms.txt` confers any benefit | **UNKNOWN.** No system tested is documented as consuming one. **No claim made in either direction** |
+| Whether the manufacturing query family carries enough volume to sustain a business | **STILL UNKNOWN.** No keyword tool in this session either. Unchanged from Session 03 |
+| Whether manufacturing is a better vertical than healthcare | **STILL UNKNOWN.** Healthcare was not tested in Session 04 either |
+| International AI-answer composition (UK, US, AU, Gulf) | **NOT OBSERVED.** Egress Pune-locked. Unchanged from Session 03. **RESEARCH REQUIRED** |
+| Day-to-day or week-to-week variance in AI answers | **NOT MEASURED.** All repeats sit in one ~40-minute window. **The largest unmeasured quantity in Session 04** |
+| Linked-citation frequency (clickable link vs attribution) | **NOT MEASURABLE** on Google surfaces in this environment. Not reported |
+| Any AI-visibility tool's accuracy, coverage or citation fidelity | **NOT VERIFIED.** No tool was trialled; all capability claims are vendor claims |
+| "Founded 2016", "Pooja Mane", "over half of clients continue beyond one campaign" (facts AI systems reported about MappedSkills) | **NOT VERIFIED.** Reported by AI from LinkedIn and first-party copy. Two systems repeating one source is not corroboration |

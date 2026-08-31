@@ -1,6 +1,7 @@
 # Current Project State
 
 ## Current Phase
+**Session 08 Completed — CRO & QUALIFIED-ENQUIRY FUNNEL SPECIFIED. Quality Gate 6 NOT passed; Gate 5 remains OPEN.**
 **Session 07 Completed — WEBSITE IA & SEARCH ARCHITECTURE PROPOSED. Quality Gate 5 OPEN, awaiting orchestrator and owner review.**
 **Session 06 Completed — BUSINESS STRATEGY GATE PASSED. Business strategy documents FROZEN.**
 
@@ -23,7 +24,9 @@ This is an **APPROVED DECISION**. It supersedes the previous working hypotheses 
 | **Quality Gate 2 — business / market validation** | **PASSED** (2026-08-31) |
 | **Session 07 — website IA, search architecture & page system** | **COMPLETE** (2026-08-31). Architecture **PROPOSED, NOT APPROVED** |
 | **Quality Gate 5 — information architecture** | **OPEN.** Artifacts delivered; orchestrator and owner review pending |
-| Next phase — CRO architecture (Gate 6) or content architecture (Gate 7) | **NOT STARTED.** Neither is approved or implied by Session 07 |
+| **Session 08 — CRO & qualified-enquiry funnel specification** | **COMPLETE** (2026-08-31). **PROPOSED, NOT APPROVED** |
+| **Quality Gate 6 — CRO architecture** | **NOT PASSED.** Artifacts delivered; orchestrator and owner review pending |
+| Next phase — content architecture (Gate 7), or the technical prerequisites the funnel depends on | **NOT STARTED.** Neither is approved or implied by Session 08 |
 
 **Research is CLOSED for the business-strategy phase.** No further business-direction research is commissioned by this state.
 
@@ -35,7 +38,9 @@ Any session touching IA, search architecture, content, CRO, design, copy or deve
 ### Gates not passed
 Gates 1, 3 and 4 artifacts were delivered and their conclusions were consumed by the approved strategy, but **Session 06 did not mark them passed** — that remains an orchestrator action.
 
-**Gate 5 (information architecture) is OPEN, not passed.** Session 07 delivered its artifacts; Claude has no authority to approve information architecture. **No gate from 6 onwards is passed, approached or implied.**
+**Gate 5 (information architecture) is OPEN, not passed.** Session 07 delivered its artifacts; Claude has no authority to approve information architecture.
+
+**Gate 6 (CRO architecture) is NOT passed.** Session 08 delivered its artifacts. **No gate from 7 onwards is passed, approached or implied.**
 
 ## Production Website
 **OWNER-SUPPLIED FACT:** the production website visitors use is **`https://mappedskills.com`**.
@@ -421,49 +426,136 @@ Unchanged by the correction pass: commercial-page decisions · problem-page deci
 8. **Whether the booking tool can carry source, landing context, interest and qualification data.** The two-surface conversion model depends on it; if it cannot, booking degrades to a secondary conversion.
 9. FAQ schema eligibility — re-verify at implementation (Project Rule 19).
 
+## Session 08 — CRO & Qualified-Enquiry Funnel Specification (completed 2026-08-31)
+
+**Purpose:** define exactly how the website turns visitors into measurable qualified enquiries. **Specification only — no UI designed, no page or email copy written, no vendor selected, no code changed.** The frozen strategy and the approved IA were not reopened.
+
+*Model note: the session brief specified Claude Sonnet 5; the session ran on Claude Opus 5. Recorded accurately.*
+
+### Artifacts created
+- `docs/07-cro/QUALIFIED_ENQUIRY_DEFINITION.md`
+- `docs/07-cro/FORM_AND_BOOKING_SPEC.md`
+- `docs/07-cro/CTA_SYSTEM.md`
+- `docs/07-cro/PAGE_TYPE_CRO_RULES.md`
+- `docs/07-cro/POST_SUBMISSION_AND_FOLLOWUP.md`
+- `docs/12-analytics/ATTRIBUTION_MODEL.md`
+- `docs/12-analytics/EVENT_TAXONOMY.md`
+- `docs/13-automation/CRM_DATA_CONTRACT.md`
+- `docs/13-automation/ENQUIRY_LIFECYCLE.md`
+- `docs/13-automation/FOLLOWUP_ARCHITECTURE.md`
+- `docs/00-project/handoffs/SESSION_08_CRO_FUNNEL_SPEC.md`
+
+`docs/07-cro/FUNNEL_ARCHITECTURE.md` was updated with a pointer to the specification layer and three previously-open items marked resolved. **Its substance is unchanged.**
+
+### The definition of a qualified enquiry (NOT approved)
+**Website-Qualified Enquiry** — the business conversion, set automatically at submission when **all five** conditions hold: passes abuse screening · reachable identity (**email verification advisory and failing open**) · **business context (any one of** company name, website URL, or non-free-mail domain**)** · stated need · not a duplicate — and no hard disqualifier applies.
+
+**Attribution is NOT a qualification condition.** `qualification_status` and `attribution_status` (`complete` / `partial` / `unavailable`) are **independent dimensions**. Direct traffic, a missing referrer, privacy restrictions, blocked analytics, unavailable campaign data and attribution-storage failure **can never disqualify a legitimate enquiry.** Measurement gaps are reported, never hidden by moving enquiries out of the qualified count.
+
+**Sales-Qualified Enquiry** is a separate, human, downstream judgement against `ICP.md` §2. **The website is never reported as producing it.**
+
+**The honest consequence:** `ICP.md` names *value per opportunity* as the single most important qualifier, and **the website cannot verify it.** It is excluded from the definition and handled in conversation rather than collected as an unverifiable self-reported number.
+
+**Four states:** Qualified · Unqualified · Spam · Review Required. **No legitimate enquiry is ever deleted**; **Review Required does not count while unresolved**; reporting always shows all four **and breaks Qualified down by `attribution_status`**. **Confident spam creates no conversion, no CRM lead and no sales notification, and is quarantined under a defined retention policy then deleted or anonymised** — uncertain submissions go to Review Required instead.
+
+**No scoring model** — MappedSkills has zero historical enquiries to calibrate against, so any weights would be invented.
+
+### Determinations worth recording in state
+- **Primary conversion remains qualified enquiry creation, mechanism-independent.** A qualified meeting booking is a qualified enquiry. **A booking whose attribution does not survive is still qualified** — it is recorded with `attribution_status = unavailable`. The booking capability requirements stand as a **measurement** requirement, not a qualification gate.
+- **Form: 4 required fields** — name, work email, company, what you're trying to fix. **Budget is removed from the required set** (it is required in production today, is unverifiable, and cannot qualify anything). Phone is **optional on the form, required on the booking surface**. Service/problem is **pre-filled from page context, never asked**.
+- **Persist-first architecture.** Validate → screen → **persist** → return success → *then* notify, email, CRM and analytics asynchronously. **A legitimate enquiry must never be silently lost because a secondary integration failed, and a false success is never acceptable.**
+- **Email verification fails open.** Five outcomes — invalid / disposable / valid-looking / **verification unavailable** / suspicious. Domain-MX checking is advisory and asynchronous; **a DNS, network or API failure passes the enquiry with an advisory flag rather than rejecting it.** Disposable domains and specific negative signals route to **Review Required**, never automatic rejection. **No new visitor-facing field.**
+- **Both conversion events fire server-side.** A `/thank-you` pageview can never inflate the business metric.
+- **A phone click is conversion *intent*, never a qualified enquiry.** CTA clicks are diagnostic, never business conversions.
+- **PII is prohibited in analytics**; an opaque `enquiry_id` is the only join to identified data.
+- **Attribution: first-touch + conversion-touch, no multi-touch model**, with ten limitations published rather than hidden. Internal links must never carry UTMs, and the site's own hostnames are excluded as referrers — relevant because **`www.mappedskills.com` returns HTTP 200 rather than redirecting** and **`testing.mappedskills.com` was observed being cited by Perplexity**.
+- **Lifecycle: seven stages.** System sets everything up to and including Website Qualified; **every stage beyond it is human.** No MQL stage, no scoring, no per-service funnels.
+- **Follow-up: five automated touches and nothing else.** Nurture is **not built**; eligibility is recorded so it stays possible later.
+- **Response time: internal target of one business day, no public numeric SLA** until one has been measured — publishing an unmeasured promise would demonstrate the failure MappedSkills sells the fix for.
+- **CRM: a vendor-neutral data contract, no vendor selected.** Durable storage plus a spreadsheet would satisfy it at launch volume.
+
+### Baseline — UNKNOWN, and no benchmark invented
+**No analytics baseline exists.** Conversion rate, enquiry volume, traffic and source mix are all **UNKNOWN**. **A pre/post conversion comparison is impossible and must not be presented**; any future improvement claim must be measured from a post-launch baseline period forward. **No conversion benchmark or target was invented** — none exists in this programme's evidence base.
+
+### Session 08 correction pass (2026-08-31)
+A narrow orchestrator correction pass was applied within the same session. **The funnel strategy was not reopened, no research was performed, and no complexity was added.**
+
+1. **Qualification separated from attribution completeness** — attribution removed as a WQE condition (six → five); `qualification_status` and `attribution_status` are now independent.
+2. **Email verification fails open** — advisory, asynchronous, with uncertainty routed to Review Required rather than rejection.
+3. **Spam retention made controlled** — quarantined, excluded from CRM and notifications, then deleted or anonymised under a defined retention policy.
+4. **Production analytics wording corrected** — see below.
+
+**Analytics production-state wording (corrected).** **Repository code contains GTM and Meta Pixel tracking implementation, while Session 01B live verification found no active third-party analytics scripts in production — `dataLayer`, `gtag` and `fbq` were all undefined.** Consent requirements must be implemented **before** any analytics or advertising tracking requiring consent is activated. Session 08 documents no longer state as current fact that these scripts load unconditionally in live production. **Session 01 historical audit artifacts were not altered** — the Session 01B critical findings above record the repository state and the live state separately, as they did originally.
+
+**Preserved unchanged by the correction pass:** 4 required form fields · budget removed · phone optional · dual conversion surfaces · booking capability requirements · no weighted scoring · Website-Qualified vs Sales-Qualified · first-touch + conversion-touch attribution · UTM governance · server-confirmed conversion events · lifecycle simplicity · limited follow-up automation · no arbitrary benchmarks.
+
+### Session 08 method limitations (VERIFIED FACT)
+- **No fresh research was performed.** Two production files were read **read-only** to ground the specification: `components/forms/ContactForm.tsx` and `lib/gtm.tsx`.
+- **No conversion rate, benchmark, traffic figure or industry statistic was gathered or estimated**, and none appears in any Session 08 artifact.
+- **No production code, configuration or content was changed. No build, lint or test was run. No form was submitted and no page was rendered.**
+- **No vendor was selected** for CRM, booking, email, analytics, consent or spam protection.
+
+### Unresolved decisions
+1. **There is no backend** — no `app/api/`, no route handler, no email capability. **Everything specified is unbuildable until a server endpoint exists.**
+2. Removing budget from required fields, and phone remaining optional — both change existing production behaviour.
+3. **Whether the booking tool supports runtime custom fields and a server-side webhook.** If not, booking demotes to a secondary conversion.
+4. CRM selection, or the deliberate decision to defer one.
+5. Internal response-time target and published business hours — an operating commitment.
+6. Consent mechanism, and retention periods including the spam-quarantine duration — **privacy, security and legal review required**.
+7. Length of the post-launch baseline period.
+
 ## Next Intended Phase
 
-**Immediate: Quality Gate 5 (information architecture) review by the orchestrator and owner.** The architecture is proposed, not approved. Claude has no authority to approve it.
+**Immediate: Quality Gate 5 (information architecture) and Quality Gate 6 (CRO architecture) review by the orchestrator and owner.** Neither is approved. Claude has no authority to approve either.
 
-**On approval, the next phase is the CRO / funnel specification (Gate 6)** — exactly how an unknown visitor becomes a measurable qualified enquiry: visitor journeys, CTA hierarchy, the two conversion surfaces and how qualification data is split between them, form strategy, and trust architecture. Content architecture (Gate 7) follows.
+**On approval, two candidates:**
+- **Content architecture (Gate 7)** — pillars, clusters, launch content roadmap, editorial and evidence standards; or
+- **The technical prerequisites the funnel depends on** — a backend endpoint, durable enquiry storage, transactional email, and the consent mechanism.
 
-Neither has started and neither is implied by Session 07.
+**Recommendation: scope the technical prerequisites early.** The entire funnel specification is inert without them, and fixing MappedSkills' own conversion and measurement layer is simultaneously a launch prerequisite, the hard precondition on every outcome claim, and the first available proof asset.
 
 ### Restrictions the next phase must respect
-Carried from the Session 06 freeze, plus the Session 07 architecture:
-1. **Do not reopen `DEC-005`.** The business direction is frozen.
-2. **Capabilities are not pages.** No page without a named query family and a stated reason to exist.
-3. **Do not build anything in the DO NOT BUILD list** — 17 named rejections, each with its evidence.
+Carried forward, plus the Session 08 specification:
+1. **Do not reopen `DEC-005` or the approved IA.**
+2. **Capabilities are not pages**; no page without a named query family and a reason to exist.
+3. **Do not build anything in the DO NOT BUILD list** — 17 named rejections.
 4. **The homepage must not rank for service terms** and must carry no technique category.
 5. **`/work` stays `noindex`, out of navigation and out of the sitemap** until a permissioned case study exists.
-5b. **Do not ship `/industries/manufacturing` or its supporting article** unless the manufacturing validation gate has cleared before content freeze, and **never describe MappedSkills as a manufacturing agency.**
+5b. **Do not ship `/industries/manufacturing` or its supporting article** unless the manufacturing validation gate has cleared, and **never describe MappedSkills as a manufacturing agency.**
 5c. **Do not make proof a required step** between a commercial page and the conversion.
-5d. **Do not require one conversion mechanism** — a qualified meeting booking is a qualified enquiry when it carries the same data as a form.
-6. **No location pages, no city grid, no industry grid, no sub-vertical pages, no page per AI acronym or platform.**
-7. **No AI Visibility Score** as a page, tool, product or deliverable.
-8. **Do not retire or merge any current URL** until backlink and Search Console data exist.
-9. **Do not create redirect chains.** Re-point legacy rules directly.
-10. **Problem pages must be materially useful without hiring anyone** — a service pitch behind a question-shaped headline is a doorway page (Project Rule 10).
-11. **Do not pre-empt the entry-offer decision** with a self-serve diagnostic tool or an entry-model URL.
-12. **No page may promise revenue, guaranteed rankings, guaranteed AI citations or guaranteed enquiry counts**, or reuse "300%+ ROI", "₹100Cr+" or "₹10Cr+" (`DEC-007`).
-13. **Do not write final homepage copy or taglines.** Messaging remains a separate, later, approval-gated phase.
+5d. **Do not require one conversion mechanism.**
+6. **Do not count a phone click, email click or CTA click as a qualified enquiry.**
+7. **Do not fire a conversion event from a `/thank-you` pageview.**
+8. **Do not put PII into analytics.**
+8b. **Do not make attribution completeness a qualification condition**, and do not let an email-verification outage reject an enquiry.
+8c. **Do not retain spam indefinitely, and do not send it to the CRM or to sales notifications.**
+9. **Do not let a secondary integration failure lose an enquiry, and never show a false success.**
+10. **Do not add form fields** without displacing one, and never re-add budget as required.
+11. **Do not build nurture sequences, lead scoring or lifecycle automation** — outside the approved scope.
+12. **Do not invent a conversion benchmark or a "before" figure.** Where data does not exist, write UNKNOWN.
+13. **Do not publish a response-time SLA** until one has been measured.
+14. **No page may promise revenue, guaranteed rankings, guaranteed AI citations or guaranteed enquiry counts**, or reuse "300%+ ROI", "₹100Cr+" or "₹10Cr+" (`DEC-007`).
+15. **Do not write final homepage copy or taglines.**
 
-### Actions that do not depend on the gate and should not wait for it
-1. **The off-site listings, profiles and reviews programme** — Clutch, Semrush Agency Partners, GoodFirms, Google Business Profile and review generation. Directory sources appeared in **15 of 28** unbranded AI runs and gate the category SERPs and the Local Pack simultaneously. **Roughly half of what the approved strategy needs from "search" is not a page and cannot be built by this project.**
-2. **Fixing the conversion and measurement layer** — a working contact form, a working booking path, analytics, enquiry-source capture, and `/thank-you` wired up. This is simultaneously a launch prerequisite, the hard precondition on every outcome claim, and the first available proof asset.
+### Actions that do not depend on the gates and should not wait for them
+1. **The off-site listings, profiles and reviews programme** — Clutch, Semrush Agency Partners, GoodFirms, Google Business Profile. Directory sources appeared in **15 of 28** unbranded AI runs and gate the category SERPs and the Local Pack simultaneously.
+2. **Fixing the conversion and measurement layer** — a working form with a real backend, a working booking path, analytics, enquiry-source capture, `/thank-you` wired up, and a consent mechanism.
 
 ### Owner actions that no Claude session can produce
 1. **Which client results may be published**, with permissions. **The last remaining Session 02 owner blocker**; it gates all premium positioning and the `/work` indexation decision.
-2. **Whether and when to remove or substantiate** "300%+ ROI", "₹100Cr+" and "₹10Cr+" in production (`DEC-007`). This now also blocks the homepage title.
+2. **Whether and when to remove or substantiate** "300%+ ROI", "₹100Cr+" and "₹10Cr+" in production (`DEC-007`). This also blocks the homepage title.
 3. **Funding keyword tooling**, a second AI measurement round, and a healthcare SERP test.
 4. **The entry-offer model decision** — free / paid / hybrid.
 5. **Retrieving the server `.htaccess`** and the Contentful slug inventory, both of which gate the migration.
+6. **Who owns enquiry response**, and the business hours to publish.
+7. **Legal review** of consent, retention and WhatsApp follow-up.
 
 ### Gates
 - **Gate 2 — PASSED** (2026-08-31).
 - **Gates 1, 3 and 4** — artifacts delivered; conclusions consumed by the approved strategy; **not marked passed.** Orchestrator action.
 - **Gate 5 — OPEN.** Artifacts delivered 2026-08-31; review pending. **Not passed.**
-- **Gates 6 onwards** — untouched, unapproached and not implied.
+- **Gate 6 — NOT PASSED.** Artifacts delivered 2026-08-31; review pending.
+- **Gates 7 onwards** — untouched, unapproached and not implied.
 
 ## Status of the Two Session 01B Owner Confirmations
 Both were addressed by the owner-supplied facts recorded above on 2026-08-31, within the limits of what the owner actually stated:
@@ -487,7 +579,8 @@ Still **not** approved:
 - Quality Gate 3 (search demand / SERP / commercial opportunity) — artifacts delivered, orchestrator review pending;
 - Quality Gate 4 (AI visibility, citation & discovery baseline) — artifacts delivered, orchestrator review pending;
 - **Quality Gate 5 (information architecture) — artifacts delivered 2026-08-31, review pending. The proposed IA, page inventory, URL migration map, navigation, search architecture and funnel architecture are NOT approved;**
-- Quality Gates 6 onwards — not started;
+- **Quality Gate 6 (CRO architecture) — artifacts delivered 2026-08-31, review pending. The qualified-enquiry definition, form/booking spec, CTA system, page-type rules, attribution model, event taxonomy, CRM data contract, lifecycle and follow-up architecture are NOT approved;**
+- Quality Gates 7 onwards — not started;
 - **manufacturing as an exclusive or company-level specialisation** — it is candidate beachhead #1 only, gated on volume verification, a healthcare comparison, and one publishable industrial result;
 - final offer names, packaging and the free/paid/hybrid entry model;
 - final pricing;

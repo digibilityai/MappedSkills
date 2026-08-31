@@ -8,6 +8,30 @@
 
 ---
 
+## 0A. Session 08 — this document is now the funnel *overview*
+
+Session 08 specified the funnel in detail. **This document remains the approved-architecture overview and is unchanged in substance**; the specification layer beneath it lives in:
+
+| Document | What it specifies |
+|---|---|
+| `QUALIFIED_ENQUIRY_DEFINITION.md` | The operational definition — **five** machine-evaluable conditions, hard disqualifiers, four states, the **independent `qualification_status` / `attribution_status` dimensions**, and the Website-Qualified vs Sales-Qualified distinction |
+| `FORM_AND_BOOKING_SPEC.md` | Fields (**4 required**), form behaviour, booking capability requirements, routing, mobile, accessibility, layered spam protection |
+| `CTA_SYSTEM.md` | CTA roles, placement, repetition rules, and where **not** to push conversion |
+| `PAGE_TYPE_CRO_RULES.md` | Reusable rules per page type rather than per URL |
+| `POST_SUBMISSION_AND_FOLLOWUP.md` | Persist-first architecture, failure states, response-time model, privacy/consent, measurement QA, baseline, success metrics |
+| `../12-analytics/ATTRIBUTION_MODEL.md` | First-touch + conversion-touch, UTM governance, stated limitations |
+| `../12-analytics/EVENT_TAXONOMY.md` | Event names, parameters, firing rules, PII prohibition |
+| `../13-automation/CRM_DATA_CONTRACT.md` | The data the website must send to an eventual CRM |
+| `../13-automation/ENQUIRY_LIFECYCLE.md` | Seven stages; what is automatic and what is human |
+| `../13-automation/FOLLOWUP_ARCHITECTURE.md` | Five automated touches, and what is deliberately not built |
+
+**Three specifications sharpen what this document left open, without changing it:**
+1. **Attribution completeness is measured, not used as a gate.** `qualification_status` and `attribution_status` are independent: a legitimate enquiry stays qualified even when attribution is partial or unavailable, and the gap is reported rather than hidden.
+2. **Persist-first** answers §0's production defect: success is shown only after durable persistence, and no secondary integration failure can lose a legitimate enquiry.
+3. **Both conversion events fire server-side**, so a `/thank-you` pageview can never inflate the business metric.
+
+---
+
 ## 0. The precondition that governs this entire document
 
 > **VERIFIED FACT (Session 01B, live): neither documented conversion path currently functions.**
@@ -54,13 +78,19 @@ The approved business outcome is **measurable qualified enquiries**. That is a s
 - **service or problem interest** (which capability, vertical or problem brought them);
 - **qualification information** (the signals below).
 
-Analytics distinguishes the mechanisms — `lead_form_submitted` versus `meeting_booked` — while both roll into one business-level **qualified-enquiry** model. A booking that cannot carry this data is a booking, not a qualified enquiry, and must not be counted as one.
+Analytics distinguishes the mechanisms — `lead_form_submitted` versus `meeting_booked` — while both roll into one business-level **qualified-enquiry** model.
 
-**Not designed here:** the forms, the booking flow, field sets, or how qualification is split between the two surfaces. Those are CRO-phase decisions (Gate 6).
+> **SUPERSEDED by the Session 08 correction pass.** This section previously read: *"A booking that cannot carry this data is a booking, not a qualified enquiry, and must not be counted as one."*
+>
+> **Corrected position:** attribution completeness is **not** a qualification condition. A booking whose attribution does not survive is **still a qualified enquiry**, recorded with `attribution_status = unavailable`. The four data requirements above remain **measurement** requirements — the reason to insist a booking tool can carry them is channel measurement, not qualification. See `QUALIFIED_ENQUIRY_DEFINITION.md` §2A. The original wording is preserved here rather than overwritten, so the decision trail stays intact.
+
+**Specified in Session 08:** the forms, the booking capability requirements, field sets, and how qualification is split between the surfaces. See `FORM_AND_BOOKING_SPEC.md`. **Still not designed:** layout, copy, and vendor selection.
 
 ### Qualification signals to capture at enquiry
 
-Derived from `ICP.md` §2 — the seven strong-fit conditions. These are **fields and follow-up questions**, not marketing copy.
+Derived from `ICP.md` §2 — the seven strong-fit conditions. These are **the information required**, not a form specification.
+
+**Session 08 resolved how they are gathered, and the answer is: mostly not on the form.** `QUALIFIED_ENQUIRY_DEFINITION.md` §1 establishes that the website can verify reachability, business context, stated need and attribution — and **cannot** verify opportunity economics, authority or timeframe. Those move to the conversation.
 
 | Signal | Maps to ICP condition |
 |---|---|
@@ -71,7 +101,7 @@ Derived from `ICP.md` §2 — the seven strong-fit conditions. These are **field
 | Who follows up enquiries today | Ability to handle enquiries |
 | Who can approve site and measurement changes | Internal capacity to act |
 
-**Form-design constraint:** every field costs conversions. The qualification set above is the *information required*, not a specification for a long form. How much is asked at first contact versus in follow-up is a CRO-phase decision (Gate 6), not an IA decision.
+**Form-design constraint:** every field costs conversions. **Resolved in Session 08:** 4 required fields (name, work email, company, what you're trying to fix), 3 optional, service/problem pre-filled from page context, and **budget removed from the required set** — it is currently required in production, is unverifiable, and cannot qualify anything. See `FORM_AND_BOOKING_SPEC.md` §1.
 
 ---
 
@@ -173,7 +203,7 @@ The funnel is only real if it is instrumented. **None of this exists today.**
 | **Referrer and landing-page capture** able to distinguish AI-assistant referrals | Distinguishes AI *referrals* from AI *crawlers* — the crawler taxonomy is what makes the separation possible |
 | **UTM discipline** across paid and outbound | Paid is retained as a demand source on the same measurement layer |
 | **CRM handoff carrying source through to opportunity** | The chain must reach client-supplied revenue data to be reportable |
-| **Consent management** | GTM and Meta Pixel currently load unconditionally with no consent mechanism, and the site's own privacy policy states a banner is required. **A pre-launch blocker, not a live breach — because nothing currently fires** |
+| **Consent management** | No consent mechanism exists. **Repository code contains GTM and Meta Pixel implementation, while Session 01B live verification found no active third-party analytics scripts in production.** The site's own privacy policy states a banner is required. **Consent must be implemented before any analytics or advertising tracking requiring consent is activated — a pre-launch blocker, not a live breach** |
 | **Form delivery verification** | **DELIVERY NOT VERIFIED.** No test enquiry has ever been submitted. A success UI is not proof of delivery |
 
 **Rule carried from the frozen strategy:** MappedSkills must be able to report against a **published baseline**, and must state plainly what cannot be attributed. That statement belongs on `/how-it-works` and is a differentiator, not a disclaimer.
@@ -185,7 +215,7 @@ The funnel is only real if it is instrumented. **None of this exists today.**
 | # | Decision | Owner |
 |---|---|---|
 | 1 | **The entry-offer model — free, paid or hybrid.** Everything in §1 is structured to survive any answer, but the answer is still needed | Owner |
-| 2 | **How much qualification happens in the form versus in follow-up** | CRO phase (Gate 6) |
+| 2 | ~~How much qualification happens in the form versus in follow-up~~ **RESOLVED in Session 08** — four required fields; economics, authority and timeframe move to conversation | — |
 | 3 | **How qualification data is captured on the booking surface**, and whether the current booking tool can carry it at all | CRO phase (Gate 6) + technical phase. **The two-surface model depends on this being solvable** |
 | 3b | **Which surface leads on which page type** — both are primary; page-level emphasis is a design decision | CRO phase (Gate 6) |
 | 4 | **What the enquiry actually reaches** — inbox, CRM, or both — and who responds, within what time | Owner. **Enquiry-routing capability is in scope; the operational commitment is not a Claude decision** |

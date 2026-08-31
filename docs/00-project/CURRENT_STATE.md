@@ -1,21 +1,36 @@
 # Current Project State
 
 ## Current Phase
-**Session 04 Completed — Awaiting Orchestrator Review (Quality Gate 4)**
-**Session 03 Completed — Awaiting Orchestrator Review (Quality Gate 3)**
-**Session 02 Completed — Awaiting Orchestrator Review (Quality Gate 2)**
-**Session 01 + 01B Completed — Awaiting Orchestrator Review (Quality Gate 1)**
+**Session 06 Completed — BUSINESS STRATEGY GATE PASSED. Business strategy documents FROZEN.**
 
-Four review gates are now open in parallel. None has been approved by Claude; Claude has no authority to approve any of them.
+**The owner has approved the fundamental business direction.** Recorded as `DEC-005` in `DECISION_LOG.md`:
 
-**Final strategic synthesis of Sessions 02–04 is PENDING and has not begun.**
+> **MappedSkills exists to help businesses capture buyer demand and turn it into measurable qualified enquiries.**
 
-- **Gate 1 (existing site audit)** — Session 01 + 01B artifacts delivered 2026-08-31.
-- **Gate 2 (business/category validation)** — Session 02 artifacts delivered 2026-08-31. Claude's research recommendation is **MODIFY CURRENT HYPOTHESIS**. See `docs/01-business/STRATEGIC_VALIDATION.md`. **The business strategy is NOT approved.**
-- **Gate 3 (search demand / SERP / commercial opportunity)** — Session 03 artifacts delivered 2026-08-31. Claude's research recommendation is **OPTION D** (vertical search-to-enquiry). See `docs/03-search/SEARCH_STRATEGY_VALIDATION.md`. **No search strategy, keyword map or content plan is approved.**
-- **Gate 4 (AI visibility, citation & discovery baseline)** — Session 04 artifacts delivered 2026-08-31. Claude's research recommendation is **AI SEARCH SHOULD BE A SUPPORTING CAPABILITY**. See `docs/04-ai-visibility/AI_STRATEGIC_VALIDATION.md`. **No positioning is approved.**
+This is an **APPROVED DECISION**. It supersedes the previous working hypotheses where they conflict, and it is not to be reopened.
 
-A read-only audit of the existing website/codebase was completed on 2026-08-31 on branch `test_branch` at HEAD `566d3e3`, followed by a narrowly scoped **live production verification pass (Session 01B)** on the same date. Artifacts are listed below. Quality Gate 1 has **not** been independently approved by Claude; it awaits orchestrator and owner review. Claude's recommendation is recorded in the Session 01B handoff.
+### Programme status
+| Phase | Status |
+|---|---|
+| Session 01 + 01B — existing site/codebase audit | Complete (2026-08-31). Artifacts delivered |
+| Session 02 — business, category and competitive validation | **Research complete** (2026-08-31) |
+| Session 03 — search demand, SERP and commercial opportunity validation | **Research complete** (2026-08-31) |
+| Session 04 — AI visibility, citation and discovery baseline | **Research complete** (2026-08-31) |
+| Session 05 — final strategic synthesis | **Complete** (2026-08-31). `docs/01-business/FINAL_STRATEGY_SYNTHESIS.md`, preserved unmodified as the pre-approval record |
+| **Owner fundamental strategy approval** | **COMPLETE** (2026-08-31) |
+| **Session 06 — business strategy freeze** | **COMPLETE** (2026-08-31). Five business documents rewritten together in one pass |
+| **Quality Gate 2 — business / market validation** | **PASSED** (2026-08-31) |
+| Next phase — website / search architecture | **NOT STARTED.** Not approved by the Session 06 freeze |
+
+**Research is CLOSED for the business-strategy phase.** No further business-direction research is commissioned by this state.
+
+### What is authoritative now
+`docs/01-business/BUSINESS_STRATEGY.md` is the **primary strategic source of truth**. Alongside it, `POSITIONING.md`, `ICP.md`, `SERVICE_ARCHITECTURE.md` and `OFFER_ARCHITECTURE.md` are approved and frozen (`DEC-006`).
+
+Any session touching IA, search architecture, content, CRO, design, copy or development must read those five documents. The research artifacts remain intact as evidence and history; **they are no longer the strategic instruction.**
+
+### Gates not passed by Session 06
+Gates 1, 3 and 4 artifacts were delivered and their conclusions were consumed by the approved strategy, but **Session 06 did not mark them passed** — that remains an orchestrator action. **No later gate (5 onwards) is passed, approached or implied by the strategy freeze.**
 
 ## Production Website
 **OWNER-SUPPLIED FACT:** the production website visitors use is **`https://mappedskills.com`**.
@@ -24,25 +39,34 @@ A read-only audit of the existing website/codebase was completed on 2026-08-31 o
 
 **VERIFIED FACT (live):** the production edge is `Server: LiteSpeed` with HTTP/2 and HTTP/3, running Next.js behind it. Server-side ISR is functioning.
 
-## Current Working Business Direction
-**WORKING HYPOTHESIS:**
-MappedSkills may reposition around:
-1. AI + Search Visibility
-2. Conversion Rate Optimisation
-3. Marketing Automation
+## Current Approved Business Direction
+**APPROVED DECISION (`DEC-005`, 2026-08-31).**
 
-Working journey:
-**GET FOUND → CONVERT → AUTOMATE → GROW**
+> **MappedSkills exists to help businesses capture buyer demand and turn it into measurable qualified enquiries.**
 
-## Current Positioning Territory
-**WORKING HYPOTHESIS:**
-Potential messaging territory includes:
-- “Get Found. Convert More. Automate Growth.”
-- “Search Visibility → CRO → Marketing Automation.”
-- AI + Search Visibility as the likely spearhead acquisition category.
-- CRO and Marketing Automation as expansion/value-multiplier services.
+- **Primary outcome:** measurable qualified enquiries. Revenue is measured, attributed where possible and reported — **never promised**.
+- **Primary buyer:** considered-purchase businesses where each qualified opportunity has meaningful economic value, and which already have or can reasonably access market demand.
+- **Core spearhead:** capture existing buyer/search demand and turn it into enquiries. Search is the strongest acquisition spearhead; **the company is not an SEO agency**.
+- **AI Search:** highly visible supporting capability and differentiator — **not the company category**. No universal "AI Visibility Score" as the core proposition.
+- **Conversion:** integrated into the core delivery system, in buyer/business language rather than the acronym "CRO".
+- **Measurement:** a mandatory foundation of the operating model.
+- **Paid media:** retained as a capability, removed from company-level positioning. **Existing paid-media URLs are not removed for positioning reasons.**
+- **Automation:** limited downstream expansion capability only.
+- **Vertical strategy:** horizontal proposition with vertical beachheads. **Manufacturing / industrial B2B is candidate vertical beachhead #1 — not approved exclusive specialisation.**
+- **Geography:** India-first. No international SEO or location strategy yet.
+- **Rejected company-level positioning:** full-service digital marketing agency · generic performance marketing agency · SEO agency · GEO/AEO/LLMO agency · marketing automation agency · RevOps consultancy · AI visibility dashboard company.
 
-This requires market and search validation.
+Full detail in `docs/01-business/BUSINESS_STRATEGY.md`. Full principle list in `DECISION_LOG.md` `DEC-005`.
+
+### Superseded
+The **three-pillar hypothesis** (AI + Search Visibility / CRO / Marketing Automation), the journey **"GET FOUND → CONVERT → AUTOMATE → GROW"** as a strategic structure, and the candidate line **"Get Found. Convert More. Automate Growth."** are **SUPERSEDED** and must not be reintroduced. `DEC-004` is closed as **never approved / not adopted**. The research that closed it is preserved unaltered.
+
+## Current Positioning Status
+**APPROVED at strategic level; NOT approved at copy level.**
+
+The approved strategic sentence in the section above is a **foundation, not a headline**. **No final homepage copy, tagline, headline or page-level messaging exists or is approved.** Later messaging work may find a sharper buyer-facing articulation; the underlying meaning must be preserved.
+
+Language rules that all later copy must obey are in `docs/01-business/POSITIONING.md` §5 and §9.
 
 ## Current Site Facts
 **OWNER-SUPPLIED FACTS:**
@@ -118,7 +142,13 @@ The customer journey **GET FOUND → CONVERT → AUTOMATE → GROW** survives. T
 4. treat proof architecture as the gating constraint, ahead of positioning;
 5. make a segment-narrowing decision a Gate 2 requirement.
 
-**Flagged for explicit owner attention:** the recommended direction implies an order-of-magnitude price-point and ICP change against the ₹2,500–₹5,000/month plans currently displayed on `/pricing`. This is a business-model change, not a messaging refresh.
+**Flagged for explicit owner attention — SUBSEQUENTLY WITHDRAWN.** Session 02 stated that the recommended direction implied an order-of-magnitude price-point and ICP change against "₹2,500–₹5,000/month plans currently displayed on `/pricing`".
+
+**CORRECTION (VERIFIED FACT, Session 05 live check, applied here in Session 06):** that premise is wrong. The production `/pricing` page displays **STARTER ₹50K–₹75K/month**, **GROWTH ₹1L–₹2L/month** and Custom Pricing, with "Starting From ₹50K" in the hero and an FAQ recommending a management fee of at least ₹50K/month excluding ad spend — confirmed live. The ₹2,500/₹5,000 figures live in `PRICING_PLANS` and `GOOGLE_ADS_PRICING_TIERS` in `lib/constants.ts` and are **referenced by no file in `app/`, `components/` or `lib/`** — dead code, displayed nowhere.
+
+**Consequence:** there is **no order-of-magnitude price or ICP change**. MappedSkills already prices in the premium Indian band. The repositioning is a **proof and messaging change, not a business-model change**, and the "price and ICP discontinuity" risk is **withdrawn** — replaced by a sharper one: **a premium price already displayed and currently unbacked by any proof.** This is a live credibility exposure at the point of sale today.
+
+**Still outstanding:** `docs/10-technical/CURRENT_ROUTE_INVENTORY.md` line 47 and `docs/01-business/STRATEGIC_VALIDATION.md` §10/§13 carry the uncorrected premise. **Session 06 was not permitted to modify research or technical documents**, so those two corrections remain open and are recorded in `ASSUMPTIONS_AND_OPEN_QUESTIONS.md`.
 
 ### Session 02 method limitation (VERIFIED FACT)
 Web research and direct page retrieval only. **No paid research tool, no keyword tool, no rank tracker and no AI-visibility platform was used.** No search volume, keyword difficulty, ranking, traffic, backlink or AI-citation figure was gathered for MappedSkills or any competitor, and none was estimated. Twelve competitors were examined by direct page retrieval on a single date — a purposive sample, not a census — and no competitor's revenue, retention, headcount or actual client results were independently verified. No code was read for modification, no build/lint/test was run, and no application file was changed.
@@ -139,10 +169,12 @@ Web research and direct page retrieval only. **No paid research tool, no keyword
 ### Largest unresolved research gap
 **RESEARCH REQUIRED.** The actual magnitude of AI referral traffic versus organic search is unverified. Figures circulating in search results ("0.13% of referral traffic", "11.4% vs 5.3% conversion", "345x") were **not present** on the Similarweb page retrieved and are excluded from all Session 02 artifacts. Until this is resolved, **no MappedSkills claim that AI visibility drives revenue today is supportable.** See `SOURCE_REGISTER.md` §D for the full list of claims explicitly rejected, so they are not accidentally revived later.
 
-### Live documentation contradiction (deliberate)
-`BUSINESS_STRATEGY.md`, `POSITIONING.md`, `ICP.md`, `SERVICE_ARCHITECTURE.md`, `OFFER_ARCHITECTURE.md` and `DECISION_LOG.md` were **deliberately left unmodified** and still assert the unmodified hypothesis, which `STRATEGIC_VALIDATION.md` recommends changing. `DEC-004` remains **Proposed / Not Yet Final**.
+### Live documentation contradiction — RESOLVED 2026-08-31 (Session 06)
+Between Sessions 02 and 05 the five business documents were **deliberately left unmodified** and continued to assert the unmodified three-pillar hypothesis while `STRATEGIC_VALIDATION.md` recommended changing it.
 
-**Any session touching business strategy, positioning, ICP, service architecture, offers, IA or content must read `docs/01-business/STRATEGIC_VALIDATION.md` alongside those documents.** Once the orchestrator decides, the five business documents should be revised **together, in one pass**, and the outcome recorded in `DECISION_LOG.md`.
+**This contradiction is now closed.** All five business documents were rewritten **together, in one pass** in Session 06 against the owner-approved direction, and the outcome is recorded in `DECISION_LOG.md` as `DEC-005` … `DEC-008`. `DEC-004` is **superseded** and closed as never approved.
+
+`STRATEGIC_VALIDATION.md` remains **unmodified as a research record**. It is evidence and history, not strategic instruction. Where it conflicts with `BUSINESS_STRATEGY.md`, `BUSINESS_STRATEGY.md` governs.
 
 ## Session 03 — Search Demand, SERP & Commercial Opportunity Validation (completed 2026-08-31)
 
@@ -247,28 +279,81 @@ Session 04 **independently corroborates the MODIFY recommendation from a third d
 
 **One point of divergence the orchestrator must resolve:** Session 03 placed AI search as a "capability and credibility layer"; Session 04's direct measurement places it **one notch lower, as a supporting capability**.
 
-## Next Intended Phase
-1. **Quality Gate 1** — orchestrator and owner review of the Session 01 + 01B evidence. Claude recommends **PASS** with owner confirmations attached; see the 01B handoff. Claude has no authority to approve the gate.
-2. **Quality Gate 2** — orchestrator and owner review of `docs/01-business/STRATEGIC_VALIDATION.md`. A decision is required on each of the five proposed modifications **and** on the implied price-point/ICP change. Claude does not approve strategy.
-2b. **Quality Gate 3** — orchestrator and owner review of `docs/03-search/SEARCH_STRATEGY_VALIDATION.md`. Decisions required: whether to adopt **Option D**; whether to pursue a vertical at all; and if so, whether to test **healthcare** against manufacturing before committing (healthcare's autocomplete is equally clean and its SERP was not tested). Note that Gates 2 and 3 are coupled — Session 03 corroborates Session 02 from an independent evidence base, and Option D presupposes the MODIFY decision.
-3. Two owner inputs that no Claude session can produce, and which gate any premium positioning:
-   - which client results, if any, may be published as case studies (`ASSUMPTIONS_AND_OPEN_QUESTIONS.md` flags AnybodyCanBake and Digibility as candidates; publishability is **UNKNOWN**);
-   - whether the owner accepts the implied price-point and ICP change.
-4. **Only after Gate 2 is decided:** revise `BUSINESS_STRATEGY.md`, `POSITIONING.md`, `ICP.md`, `SERVICE_ARCHITECTURE.md` and `OFFER_ARCHITECTURE.md` **together, in one pass**, and record the outcome in `DECISION_LOG.md` (updating or superseding `DEC-004`).
-5. **Session 03 has now run** ahead of the Gate 2 decision, scoped as term-family testing rather than as a final keyword map, consistent with the sequencing note previously recorded here. Its findings answer questions 2–5 of `STRATEGIC_VALIDATION.md` §12; **question 1 (magnitude of AI referral traffic versus organic) remains unresolved** and is carried to Session 04.
-6. **Session 04 (AI visibility) has now run**, ahead of the Gate 2 and Gate 3 decisions. Against `SEARCH_STRATEGY_VALIDATION.md` §20 its seven questions stand as follows:
-   - **Q1 (do AI systems recommend anyone for Indian industrial/manufacturing prompts?)** — **ANSWERED.** Yes, but thinly and unstably; the three systems tested shared almost no names.
-   - **Q2 (which queries trigger AI Overviews?)** — **ANSWERED.** AI Overviews *are* observable in this environment; present on national/informational queries, **absent on `best SEO agencies in Pune`**, which served a Local Pack instead. **The Session 03 blocker is closed.**
-   - **Q3 (MappedSkills' baseline vs upGrowth, SEOTonic, DigiMark, Qoulomb)** — **ANSWERED.** MappedSkills 0/28 unbranded; upGrowth, SEOTonic and DigiMark also 0/28; Qoulomb 3/28.
-   - **Q4 (which source domains do AI systems cite, and can MappedSkills enter that set?)** — **ANSWERED.** Directories dominate — `agencies.semrush.com` in 10 of 28 runs, `clutch.co` in 5. MappedSkills is on neither, and both are self-serve.
-   - **Q5 (does the professional-services AI-citation weakness apply to industrial categories?)** — **NOT ANSWERED.** Similarweb's category figures were re-confirmed but no industrial-category equivalent was found. **RESEARCH REQUIRED.**
-   - **Q6 (does a variance-aware method produce results stable enough to sell?)** — **PARTIALLY ANSWERED.** Within-system membership is often stable and order never was; cross-system agreement collapsed. Stability is prompt-dependent (~100% to ~40% in one system on one day). **No day-to-day variance was measured.**
-   - **Q7 (magnitude of AI referral traffic vs organic)** — **SUBSTANTIALLY ANSWERED.** See the Session 04 section above.
-   **One Session 03 prerequisite was NOT satisfied:** international SERPs and AI answers were again not observed, because egress remained Pune-locked. **That gap is unchanged and is carried forward.**
-7. **Then** the **final strategic synthesis of Sessions 02–04**, which has **not** begun. Its required inputs are listed in `docs/04-ai-visibility/AI_STRATEGIC_VALIDATION.md` §15. Note the one divergence the synthesis must resolve: Session 03 placed AI search as a "capability and credibility layer"; Session 04's direct measurement places it **one notch lower, as a supporting capability**.
-8. No design, IA, or implementation phase should begin until the open gates are reviewed. **No sitemap, URL architecture, page inventory or content roadmap should be produced until Gates 2, 3 and 4 are decided** — Sessions 03 and 04 both deliberately stopped short of all four.
+## Session 05 — Final Strategic Synthesis (completed 2026-08-31)
 
-### Status of the two Session 01B owner confirmations
+**Purpose:** synthesise Sessions 02–04 into comparable strategic models and a single recommendation, without rerunning research.
+
+**Artifact created:** `docs/01-business/FINAL_STRATEGY_SYNTHESIS.md`.
+
+**Recommendation made (at the time, NOT approved):** a specialist enquiry-generation firm for considered-purchase B2B, taken to market through one vertical beachhead at a time.
+
+**Status now:** the synthesis is the **pre-approval record**. It is preserved unmodified and must not be edited. Where it differs from the owner-approved direction — for example in treating "Enquiry Diagnostic" and "Enquiry System" as offer names, or in forcing a paid entry model — the **approved business documents govern**.
+
+**Session 05 method limitation (VERIFIED FACT):** no research was rerun. One narrowly targeted factual check was performed — the `/pricing` verification recorded above. No business document, decision log entry or research artifact was modified in that session.
+
+## Session 06 — Business Strategy Freeze (completed 2026-08-31)
+
+**Purpose:** convert the owner-approved business direction into the authoritative business documents that every subsequent session will use. **Strategy was not reopened. Research was closed.**
+
+### Owner approval received
+**APPROVED DECISION:** *MappedSkills exists to help businesses capture buyer demand and turn it into measurable qualified enquiries.* Recorded with its full set of approved strategic principles as `DEC-005`.
+
+### Files rewritten (together, in one pass)
+- `docs/01-business/BUSINESS_STRATEGY.md` — now the primary strategic source of truth
+- `docs/01-business/POSITIONING.md`
+- `docs/01-business/ICP.md` — rewritten as an operational fit-assessment document
+- `docs/01-business/SERVICE_ARCHITECTURE.md` — rewritten around the commercial system, not a service menu
+- `docs/01-business/OFFER_ARCHITECTURE.md` — commercial architecture approved; names, packaging, pricing and the entry model deliberately left open
+
+### Project files updated
+`DECISION_LOG.md` (`DEC-004` superseded; `DEC-005`–`DEC-008` added) · `CURRENT_STATE.md` · `ASSUMPTIONS_AND_OPEN_QUESTIONS.md` · `QUALITY_GATES.md` · `handoffs/SESSION_06_STRATEGY_FREEZE.md`.
+
+### Session 06 scope limitations (VERIFIED FACT)
+- **No production code, configuration or content was changed.** No build, lint or test was run.
+- **No research artifact was modified.** Sessions 02–04 documents and `FINAL_STRATEGY_SYNTHESIS.md` are untouched.
+- **No design, IA, content or technical implementation document was modified.**
+- **No new research was performed** and no new evidence was introduced.
+- **No sitemap, URL architecture, page inventory, keyword map, content roadmap or website copy was produced.**
+- History was not rewritten to make the approved strategy look inevitable. `DEC-004` is recorded as a reasonable hypothesis that evidence changed.
+
+### Business strategy gate
+**Quality Gate 2 (business / market validation) is marked PASSED** in `QUALITY_GATES.md`, on the basis that the repository now reflects the approved strategy consistently across the five business documents, the decision log and this state file.
+
+## Next Intended Phase
+
+**Next logical phase: website and search architecture, built on the approved strategy.** It has **not** started and is **not** approved by the Session 06 freeze.
+
+Its likely scope: information architecture and sitemap · URL architecture and migration/redirect safety · the mapping from approved capabilities to pages · search architecture and the keyword map · funnel and enquiry-path architecture. Each requires its own brief, its own gate and its own approval.
+
+### Restrictions the next phase must respect
+1. **Do not reopen the approved business direction** (`DEC-005`). Capabilities may be arranged; the proposition may not be changed.
+2. **Capabilities are not pages.** `SERVICE_ARCHITECTURE.md` is a commercial system, not a navigation structure.
+3. **Do not create company-level SEO/GEO/AEO/LLMO positioning.** Pages may target those queries (`DEC-008`); the company is not that category.
+4. **Do not remove existing paid-media URLs** for positioning reasons. They carry SEO equity and are targets of legacy 308 redirects. Final URL decisions belong to that phase, made on migration-safety grounds.
+5. **Do not build an international SEO or location strategy.** India-first; no international SERP or AI answer has ever been observed.
+6. **No city-page grids, doorway pages or scaled location SEO** (Project Rule 10).
+7. **Do not create a universal or blended "AI Visibility Score"** — rejected methodologically as well as commercially.
+8. **Do not write final homepage copy or taglines.** Messaging is a separate, later, approval-gated phase.
+9. **Do not reuse "300%+ ROI", "₹100Cr+" or "₹10Cr+"** as reasons-to-believe (`DEC-007`).
+10. **Do not promise revenue, guaranteed rankings, guaranteed AI citations or guaranteed enquiry counts.**
+11. **Analytics, enquiry capture and a working conversion path are a precondition** of any outcome-based claim — including on MappedSkills' own site.
+
+### Actions that do not depend on the next phase and can begin independently
+- **The listings, profiles and reviews programme** — Clutch, Semrush Agency Partners, GoodFirms, Google Business Profile and review generation. Cheapest, fastest and best-evidenced action available; needs no case study and no repositioning.
+- **Fixing MappedSkills' own conversion and measurement layer** — the form that transmits nothing, the empty booking widget, the absent analytics. This is both a precondition and the first proof asset.
+
+### Owner actions that no Claude session can produce, and which still gate premium positioning
+1. **Which client results may be published**, with permissions (`AnybodyCanBake`, `Digibility`, or others). **The last remaining Session 02 owner blocker.**
+2. **Whether and when to remove or substantiate** "300%+ ROI", "₹100Cr+" and "₹10Cr+" in production (`DEC-007`).
+3. **Funding keyword tooling**, a second AI measurement round, and a healthcare SERP test — without which beachhead volume stays permanently UNKNOWN and the vertical choice is a default rather than a comparison.
+4. **The entry-offer model decision** — free / paid / hybrid (`OFFER_ARCHITECTURE.md` §2).
+
+### Gates
+- **Gate 2 — PASSED** (2026-08-31).
+- **Gates 1, 3 and 4** — artifacts delivered; their conclusions fed the approved strategy; **not marked passed by Session 06.** Orchestrator action.
+- **Gates 5 onwards** — untouched, unapproached and not implied by the strategy freeze.
+
+## Status of the Two Session 01B Owner Confirmations
 Both were addressed by the owner-supplied facts recorded above on 2026-08-31, within the limits of what the owner actually stated:
 - **C1 (enquiries):** the owner states the contact form **has not been generating enquiries**. Recorded as an owner-supplied fact. Note the owner did not state that a delivery mechanism was tested, so the *technical* finding — the production form has no `action` and no `method` and transmits nothing — stands unchanged as the documented cause.
 - **C8 (Contentful):** the owner states there are **no blog or case-study assets inside Contentful that must be preserved**. This resolves the **migration** question: there is no CMS content to protect. It does **not** by itself distinguish between an empty Contentful space and missing production credentials, so that root cause remains **UNKNOWN** and is a pre-launch engineering item rather than a strategy blocker.
@@ -283,22 +368,20 @@ Recorded so they are not lost, and judged safe to address during implementation 
 - backlink inventory against the nine legacy redirect sources.
 
 ## Not Yet Approved
-- Quality Gate 1 (existing site audit) — artifacts delivered, review pending;
-- **Quality Gate 2 (business/category validation) — artifacts delivered, review pending;**
-- **Quality Gate 3 (search demand / SERP / commercial opportunity) — artifacts delivered, review pending;**
-- **the business strategy and the direction recommended in `STRATEGIC_VALIDATION.md`;**
-- **the search architecture recommended in `SEARCH_STRATEGY_VALIDATION.md` (Option D), including the manufacturing vertical candidate;**
-- **Quality Gate 4 (AI visibility, citation & discovery baseline) — artifacts delivered, review pending;**
-- **the strategic role for AI search recommended in `docs/04-ai-visibility/AI_STRATEGIC_VALIDATION.md` (SUPPORTING CAPABILITY);**
-- **the final strategic synthesis of Sessions 02–04, which has not begun;**
-- `DEC-004` (three-pillar direction) — remains **Proposed / Not Yet Final**;
-- final positioning;
-- final services;
-- final homepage messaging;
-- final sitemap;
-- final keywords;
-- final content plan;
-- final industries;
+Approved and closed by Session 06: the fundamental business direction (`DEC-005`), the frozen business documents (`DEC-006`), the strategic rule on unsupported claims (`DEC-007`), and the page-targets-query rule (`DEC-008`).
+
+Still **not** approved:
+- Quality Gate 1 (existing site audit) — artifacts delivered, orchestrator review pending;
+- Quality Gate 3 (search demand / SERP / commercial opportunity) — artifacts delivered, orchestrator review pending;
+- Quality Gate 4 (AI visibility, citation & discovery baseline) — artifacts delivered, orchestrator review pending;
+- Quality Gates 5 onwards — not started;
+- **manufacturing as an exclusive or company-level specialisation** — it is candidate beachhead #1 only, gated on volume verification, a healthcare comparison, and one publishable industrial result;
+- final offer names, packaging and the free/paid/hybrid entry model;
 - final pricing;
+- final website messaging, homepage copy and taglines;
+- final information architecture, sitemap and URL architecture;
+- final keyword map and content plan;
+- international expansion, and any international SEO or location strategy;
 - final design direction;
-- final technical migration plan.
+- the technical migration plan;
+- any change to production code, content or configuration.

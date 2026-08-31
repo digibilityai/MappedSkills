@@ -2,22 +2,58 @@
 
 No phase should advance merely because an artifact exists.
 
+## Gate Status Summary (as at 2026-08-31)
+
+| Gate | Status |
+|---|---|
+| **Gate 1 — Existing Site Audit** | Artifacts delivered (Sessions 01/01B). **Orchestrator review pending.** Not marked passed |
+| **Gate 2 — Business / Market Validation** | **PASSED — 2026-08-31** |
+| **Gate 3 — Search Opportunity Validation** | Artifacts delivered (Session 03). Conclusions consumed by the approved strategy. **Orchestrator review pending.** Not marked passed |
+| **Gate 4 — AI Visibility Strategy** | Artifacts delivered (Session 04). Conclusions consumed by the approved strategy. **Orchestrator review pending.** Not marked passed |
+| **Gates 5–22** | **NOT STARTED, NOT APPROACHED, NOT PASSED** |
+
+**Session 06 marked Gate 2 only.** No later gate is passed, approached or implied by the business strategy freeze.
+
 ## Gate 1 — Existing Site Audit
+**Status: artifacts delivered; orchestrator review pending. NOT marked passed.**
 **Required:** codebase/site audit, route inventory, SEO inventory, integrations, analytics, performance risks.
 **Acceptance:** evidence-backed, read-only, identifies unknowns and migration risks.
 **Do not proceed to:** structural redesign decisions before audit review.
 
 ## Gate 2 — Business / Market Validation
+**Status: PASSED — 2026-08-31 (Session 06).**
+
 **Required:** market, competitor, buyer, category, commercial opportunity research.
 **Acceptance:** clear evidence, alternatives compared, hypotheses challenged.
 **Do not proceed to:** final positioning before owner approval.
 
+### Why this gate passes
+| Acceptance criterion | Evidence |
+|---|---|
+| Clear evidence gathered | `docs/02-research/MARKET_RESEARCH.md`, `COMPETITOR_RESEARCH.md`, `SOURCE_REGISTER.md`, plus corroborating search (Session 03) and AI-answer (Session 04) evidence bases |
+| Alternatives compared | Three complete strategic models compared in `docs/01-business/FINAL_STRATEGY_SYNTHESIS.md` §3–§5, with a stated comparison matrix and stated trade-offs |
+| Hypotheses challenged | Session 02 was explicitly instructed to look for evidence the hypothesis was wrong, and returned **MODIFY**. Sessions 03 and 04 independently corroborated from different evidence bases. `DEC-004` was closed as **not adopted** |
+| Owner approval obtained | **APPROVED DECISION `DEC-005`, 2026-08-31:** *MappedSkills exists to help businesses capture buyer demand and turn it into measurable qualified enquiries*, with its full set of approved strategic principles |
+| Repository reflects the approved strategy consistently | `BUSINESS_STRATEGY.md`, `POSITIONING.md`, `ICP.md`, `SERVICE_ARCHITECTURE.md` and `OFFER_ARCHITECTURE.md` rewritten together in one pass (`DEC-006`); `DECISION_LOG.md`, `CURRENT_STATE.md` and `ASSUMPTIONS_AND_OPEN_QUESTIONS.md` updated; the documentation contradiction live since Session 02 is closed |
+| Evidence integrity preserved | No research artifact was modified. `FINAL_STRATEGY_SYNTHESIS.md` is preserved as the pre-approval record. History was not rewritten to make the approved strategy look inevitable |
+
+### Explicitly NOT passed by this gate
+Final messaging and homepage copy · taglines · information architecture and sitemap · URL architecture · keyword map · content plan · offer names, packaging and pricing · the free/paid/hybrid entry model · design direction · the technical migration plan · **manufacturing as an exclusive or company-level specialisation** (candidate beachhead #1 only, gated on three tests) · any international strategy.
+
+### Conditions carried forward, not resolved by the gate
+1. **No publishable client proof exists.** The last remaining owner blocker; gates all premium positioning.
+2. **Analytics, enquiry capture and a working conversion path are absent in production** and are a hard precondition of any outcome-based claim, including on MappedSkills' own site.
+3. **"300%+ ROI", "₹100Cr+", "₹10Cr+"** must not be used as reasons-to-believe (`DEC-007`); production remediation remains an open owner decision.
+4. **Manufacturing beachhead volume is UNKNOWN** — no keyword tool has ever been available in this programme.
+
 ## Gate 3 — Search Opportunity Validation
+**Status: artifacts delivered; conclusions consumed by the approved strategy (`DEC-005`); orchestrator review pending. NOT marked passed.**
 **Required:** keyword universe, SERP analysis, intent classification, difficulty/feasibility methodology, topic clusters.
 **Acceptance:** traceable data and prioritized opportunity matrix.
 **Do not proceed to:** final site architecture based on unresearched keywords.
 
 ## Gate 4 — AI Visibility Strategy
+**Status: artifacts delivered; conclusions consumed by the approved strategy (`DEC-005`); orchestrator review pending. NOT marked passed.**
 **Required:** baseline, prompt universe, crawler policy, entity/citation strategy, measurement method.
 **Acceptance:** platform-specific evidence; no unsupported ranking guarantees.
 
@@ -92,3 +128,8 @@ No phase should advance merely because an artifact exists.
 ## Gate 22 — Post-Launch Validation
 **Required:** indexing, crawl, performance, analytics, AI visibility, conversion monitoring.
 **Acceptance:** no critical regression and baseline metrics captured.
+
+---
+
+## Rule on Gate Advancement
+A gate is passed only when an owner or orchestrator approves it and the approval is recorded in `DECISION_LOG.md`. **Claude has no authority to approve a gate on its own judgement**, and no gate may be marked passed because the phase after it looks ready to start.

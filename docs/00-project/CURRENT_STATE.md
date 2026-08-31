@@ -1,6 +1,7 @@
 # Current Project State
 
 ## Current Phase
+**Session 07 Completed — WEBSITE IA & SEARCH ARCHITECTURE PROPOSED. Quality Gate 5 OPEN, awaiting orchestrator and owner review.**
 **Session 06 Completed — BUSINESS STRATEGY GATE PASSED. Business strategy documents FROZEN.**
 
 **The owner has approved the fundamental business direction.** Recorded as `DEC-005` in `DECISION_LOG.md`:
@@ -20,7 +21,9 @@ This is an **APPROVED DECISION**. It supersedes the previous working hypotheses 
 | **Owner fundamental strategy approval** | **COMPLETE** (2026-08-31) |
 | **Session 06 — business strategy freeze** | **COMPLETE** (2026-08-31). Five business documents rewritten together in one pass |
 | **Quality Gate 2 — business / market validation** | **PASSED** (2026-08-31) |
-| Next phase — website / search architecture | **NOT STARTED.** Not approved by the Session 06 freeze |
+| **Session 07 — website IA, search architecture & page system** | **COMPLETE** (2026-08-31). Architecture **PROPOSED, NOT APPROVED** |
+| **Quality Gate 5 — information architecture** | **OPEN.** Artifacts delivered; orchestrator and owner review pending |
+| Next phase — CRO architecture (Gate 6) or content architecture (Gate 7) | **NOT STARTED.** Neither is approved or implied by Session 07 |
 
 **Research is CLOSED for the business-strategy phase.** No further business-direction research is commissioned by this state.
 
@@ -29,8 +32,10 @@ This is an **APPROVED DECISION**. It supersedes the previous working hypotheses 
 
 Any session touching IA, search architecture, content, CRO, design, copy or development must read those five documents. The research artifacts remain intact as evidence and history; **they are no longer the strategic instruction.**
 
-### Gates not passed by Session 06
-Gates 1, 3 and 4 artifacts were delivered and their conclusions were consumed by the approved strategy, but **Session 06 did not mark them passed** — that remains an orchestrator action. **No later gate (5 onwards) is passed, approached or implied by the strategy freeze.**
+### Gates not passed
+Gates 1, 3 and 4 artifacts were delivered and their conclusions were consumed by the approved strategy, but **Session 06 did not mark them passed** — that remains an orchestrator action.
+
+**Gate 5 (information architecture) is OPEN, not passed.** Session 07 delivered its artifacts; Claude has no authority to approve information architecture. **No gate from 6 onwards is passed, approached or implied.**
 
 ## Production Website
 **OWNER-SUPPLIED FACT:** the production website visitors use is **`https://mappedskills.com`**.
@@ -319,39 +324,146 @@ Session 04 **independently corroborates the MODIFY recommendation from a third d
 ### Business strategy gate
 **Quality Gate 2 (business / market validation) is marked PASSED** in `QUALITY_GATES.md`, on the basis that the repository now reflects the approved strategy consistently across the five business documents, the decision log and this state file.
 
+## Session 07 — Website IA, Search Architecture & Page System (completed 2026-08-31)
+
+**Purpose:** determine the complete website architecture required to deliver the approved business strategy. **Architecture only — no design, no copy, no code.** The approved business direction was **not** reopened.
+
+### Artifacts created
+- `docs/06-IA/WEBSITE_INFORMATION_ARCHITECTURE.md`
+- `docs/06-IA/PAGE_INVENTORY.md`
+- `docs/06-IA/PAGE_REASON_TO_EXIST_MATRIX.md`
+- `docs/06-IA/CURRENT_TO_FUTURE_URL_MAP.md`
+- `docs/06-IA/NAVIGATION_ARCHITECTURE.md`
+- `docs/03-search/SEARCH_ARCHITECTURE.md`
+- `docs/07-cro/FUNNEL_ARCHITECTURE.md`
+- `docs/00-project/handoffs/SESSION_07_IA_SEARCH_ARCHITECTURE.md`
+
+*(A narrow orchestrator correction pass was applied within Session 07 on 2026-08-31 — see "Session 07 correction pass" below. The architecture was not reopened.)*
+
+### Major architectural recommendation (NOT approved)
+**A 22-page unconditional indexable launch site — 24 if the manufacturing gate clears — organised around one outcome rather than a service menu**, with existing flat URLs preserved wherever they carry equity, and the proof deficit designed into the architecture rather than around it.
+
+Five governing decisions:
+1. `/services` is **repositioned** from an agency catalogue into the page that *is* the proposition; capability pages sit beneath it.
+2. **Existing flat URLs are preserved.** Five commercial pages are already 308 targets; moving them under `/services/*` would create two-hop chains for no search benefit. Prefixed families (`/problems/`, `/industries/`, `/research/`) are introduced only where a family must scale.
+3. **Launch scope is deliberately small.** The binding constraint is proof, not page count.
+4. **Search landing pages and company positioning stay architecturally separate** (`DEC-008`). `/seo` and `/ai-seo` target their query families; neither is the company's category.
+5. **`/research` launches with MappedSkills' own published diagnostics, `/how-it-works` becomes the published methodology including what cannot be attributed, and `/work` is NOT indexable until at least one permissioned case study exists.**
+
+### Proposed launch inventory
+
+| Figure | Count |
+|---|---|
+| **Unconditional indexable launch pages** | **22** |
+| **Conditional launch pages** | **2** |
+| **Non-indexable launch routes** | **5** |
+| **Total routes if the manufacturing gate clears** | **29** |
+| Total routes if it does not | 27 |
+
+Of the 22 unconditional pages, 13 already exist; 9 are new. Both conditional pages are new.
+
+| Group | Count |
+|---|---|
+| Homepage | 1 |
+| Commercial | 8 |
+| Problem | 1 |
+| Proof | 4 |
+| Editorial (index + 3 articles) | 4 |
+| Company / conversion | 4 |
+| **CONDITIONAL** (`/industries/manufacturing`, `/blog/{industrial-b2b-article}`) | **2** |
+| Non-indexable (`/work` held back, `/thank-you`, `/privacy-policy`, `/terms`, 404) | 5 |
+
+**PHASE 2:** 11 pages (13 if the manufacturing gate does not clear) · **FUTURE:** 8 · **DO NOT BUILD:** 17 named rejections.
+
+### Determinations worth recording in state
+- **No location pages of any kind.** Pune demand is decided by a Local Pack and by local listing data — Google Business Profile, reviews and complete NAP. Replaced with entity architecture, not page architecture.
+- **Manufacturing gets exactly one indexable page** (`/industries/manufacturing`), classified **LAUNCH — CONDITIONAL** — not a cluster, not a grid, and **no `/industries` hub** until a second vertical exists. It ships only if the manufacturing validation gate clears before content freeze; otherwise it and its supporting article move to PHASE 2 with no other change. **Manufacturing remains candidate beachhead #1, not an approved specialisation — search evidence is not a business decision.**
+- **AI Search occupies a four-surface minimum cluster** — one commercial page, two buyer-question guides, one published baseline (plus a PHASE 2 technical guide and checker). **No page per acronym or platform. No AI Visibility Score, ever.**
+- **`/blog` is retained** (existing 308 target; the best-implemented SEO surface in the codebase), with `/research` added as a distinct family because the job, cadence, schema and evidence standard differ.
+- **Zero tools at launch.** The `/tools/` namespace is reserved.
+- **Analytics/attribution and follow-up automation get no pages** — no query family supports either, and `how to improve lead response time` returns **(NONE)**.
+- **Primary conversion is qualified enquiry creation — outcome-defined and mechanism-independent.** Two surfaces satisfy it: a qualified form submission **or** a qualified meeting booking, both capturing source, landing context, interest and qualification data. Analytics distinguishes `lead_form_submitted` from `meeting_booked` while both roll into one business-level measure. The funnel is also **model-agnostic**, so the unresolved free/paid/hybrid entry decision forces no re-architecture.
+- **Proof is prominently available and integrated into commercial pages — never a required navigational step.** Commercial page → qualified enquiry is the default path; commercial page → method/research → enquiry is available for evaluators who choose it. **Buyer intent determines evaluation depth.**
+
+### Current URL decisions
+**32 routes and redirect rules covered; every current route appears in the migration map.**
+**KEEP 12 · REPOSITION 9 · MERGE 0 · REDIRECT 11 · RETIRE/410 0 · INVESTIGATE 4 flags.**
+
+**Nothing is merged and nothing is retired, deliberately.** There is **no backlink, ranking, impression or traffic data for any URL on this site**, and no analytics in production. Every classification rests on intent, redirect history and strategic fit. The one structural change — consolidating `/portfolio/{slug}` into `/work/{slug}` with the legacy `/results/:slug` rule **re-pointed directly** so no chain is created — is safe only because zero case studies are currently published, and is **blocked** on enumerating the Contentful slug set.
+
+### Session 07 method limitations (VERIFIED FACT)
+- **No fresh research was performed.** Every architecture question was answered from Sessions 01–06 artifacts. **No volume, difficulty, ranking, traffic, backlink or AI-citation figure was gathered or estimated, and none appears in any Session 07 artifact.**
+- **No backlink, ranking, impression or traffic data exists for any URL** — the largest limitation in the session, and the reason nothing is retired or merged.
+- **The `/blog/{slug}` and `/portfolio/{slug}` slug sets are UNKNOWN;** production publishes zero of each.
+- **Host-level redirects are UNKNOWN** — no `.htaccess` is committed.
+- **No international lens.** All search judgements inherit Session 03's Pune-locked egress.
+- **No production code, configuration or content was changed. No build, lint or test was run. No page was designed and no copy was written.**
+- **The correction pass performed no research and added no page.** Its only filesystem change beyond documentation was the authorised removal of the obsolete stub IA directory.
+
+### Session 07 correction pass (2026-08-31)
+A narrow orchestrator correction pass was applied within the same session. **The architecture was not reopened, no research was performed, and no page was added.**
+
+1. **Manufacturing reclassified LAUNCH — CONDITIONAL**, with launch counts now separating unconditional from conditional so an unvalidated business case is never folded into the headline launch number.
+2. **The mandatory proof checkpoint was removed** from the funnel and from every affected document.
+3. **Primary conversion redefined as qualified enquiry creation**, mechanism-independent across two surfaces.
+4. **IA directory cleanup — RESOLVED.** `docs/06-information-architecture/` was inspected and contained exactly one file: a 115-byte two-line placeholder README from scaffold commit `566d3e3`, with **no substantive artifact** and no reference from any code or configuration. It was removed under explicit owner authorisation. **The project standardises on `docs/06-IA/`; one IA directory now exists.**
+
+Unchanged by the correction pass: commercial-page decisions · problem-page decisions · geographic strategy · the AI-search cluster · research/proof architecture · schema recommendations · all current→future URL decisions · the frozen business strategy.
+
+### Unresolved architecture decisions
+1. `/work/{slug}` consolidation — requires the full Contentful case-study slug set.
+2. The entry-offer model (free / paid / hybrid) — blocks a diagnostic tool; nothing else waits on it.
+3. Whether `/social-media-ads` is eventually merged — needs backlink data.
+4. Whether `/privacy-policy` becomes indexable.
+5. Whether blog categories get real archive URLs — do not build both a parameter and a path.
+6. **The manufacturing validation gate** — volume verification, a healthcare SERP comparison, and one publishable industrial result. **This determines whether the two conditional pages ship at launch or move to PHASE 2.**
+7. If that gate does not clear: whether the editorial stream launches with 3 articles or a PHASE 2 article is promoted to hold the floor at 4.
+8. **Whether the booking tool can carry source, landing context, interest and qualification data.** The two-surface conversion model depends on it; if it cannot, booking degrades to a secondary conversion.
+9. FAQ schema eligibility — re-verify at implementation (Project Rule 19).
+
 ## Next Intended Phase
 
-**Next logical phase: website and search architecture, built on the approved strategy.** It has **not** started and is **not** approved by the Session 06 freeze.
+**Immediate: Quality Gate 5 (information architecture) review by the orchestrator and owner.** The architecture is proposed, not approved. Claude has no authority to approve it.
 
-Its likely scope: information architecture and sitemap · URL architecture and migration/redirect safety · the mapping from approved capabilities to pages · search architecture and the keyword map · funnel and enquiry-path architecture. Each requires its own brief, its own gate and its own approval.
+**On approval, the next phase is the CRO / funnel specification (Gate 6)** — exactly how an unknown visitor becomes a measurable qualified enquiry: visitor journeys, CTA hierarchy, the two conversion surfaces and how qualification data is split between them, form strategy, and trust architecture. Content architecture (Gate 7) follows.
+
+Neither has started and neither is implied by Session 07.
 
 ### Restrictions the next phase must respect
-1. **Do not reopen the approved business direction** (`DEC-005`). Capabilities may be arranged; the proposition may not be changed.
-2. **Capabilities are not pages.** `SERVICE_ARCHITECTURE.md` is a commercial system, not a navigation structure.
-3. **Do not create company-level SEO/GEO/AEO/LLMO positioning.** Pages may target those queries (`DEC-008`); the company is not that category.
-4. **Do not remove existing paid-media URLs** for positioning reasons. They carry SEO equity and are targets of legacy 308 redirects. Final URL decisions belong to that phase, made on migration-safety grounds.
-5. **Do not build an international SEO or location strategy.** India-first; no international SERP or AI answer has ever been observed.
-6. **No city-page grids, doorway pages or scaled location SEO** (Project Rule 10).
-7. **Do not create a universal or blended "AI Visibility Score"** — rejected methodologically as well as commercially.
-8. **Do not write final homepage copy or taglines.** Messaging is a separate, later, approval-gated phase.
-9. **Do not reuse "300%+ ROI", "₹100Cr+" or "₹10Cr+"** as reasons-to-believe (`DEC-007`).
-10. **Do not promise revenue, guaranteed rankings, guaranteed AI citations or guaranteed enquiry counts.**
-11. **Analytics, enquiry capture and a working conversion path are a precondition** of any outcome-based claim — including on MappedSkills' own site.
+Carried from the Session 06 freeze, plus the Session 07 architecture:
+1. **Do not reopen `DEC-005`.** The business direction is frozen.
+2. **Capabilities are not pages.** No page without a named query family and a stated reason to exist.
+3. **Do not build anything in the DO NOT BUILD list** — 17 named rejections, each with its evidence.
+4. **The homepage must not rank for service terms** and must carry no technique category.
+5. **`/work` stays `noindex`, out of navigation and out of the sitemap** until a permissioned case study exists.
+5b. **Do not ship `/industries/manufacturing` or its supporting article** unless the manufacturing validation gate has cleared before content freeze, and **never describe MappedSkills as a manufacturing agency.**
+5c. **Do not make proof a required step** between a commercial page and the conversion.
+5d. **Do not require one conversion mechanism** — a qualified meeting booking is a qualified enquiry when it carries the same data as a form.
+6. **No location pages, no city grid, no industry grid, no sub-vertical pages, no page per AI acronym or platform.**
+7. **No AI Visibility Score** as a page, tool, product or deliverable.
+8. **Do not retire or merge any current URL** until backlink and Search Console data exist.
+9. **Do not create redirect chains.** Re-point legacy rules directly.
+10. **Problem pages must be materially useful without hiring anyone** — a service pitch behind a question-shaped headline is a doorway page (Project Rule 10).
+11. **Do not pre-empt the entry-offer decision** with a self-serve diagnostic tool or an entry-model URL.
+12. **No page may promise revenue, guaranteed rankings, guaranteed AI citations or guaranteed enquiry counts**, or reuse "300%+ ROI", "₹100Cr+" or "₹10Cr+" (`DEC-007`).
+13. **Do not write final homepage copy or taglines.** Messaging remains a separate, later, approval-gated phase.
 
-### Actions that do not depend on the next phase and can begin independently
-- **The listings, profiles and reviews programme** — Clutch, Semrush Agency Partners, GoodFirms, Google Business Profile and review generation. Cheapest, fastest and best-evidenced action available; needs no case study and no repositioning.
-- **Fixing MappedSkills' own conversion and measurement layer** — the form that transmits nothing, the empty booking widget, the absent analytics. This is both a precondition and the first proof asset.
+### Actions that do not depend on the gate and should not wait for it
+1. **The off-site listings, profiles and reviews programme** — Clutch, Semrush Agency Partners, GoodFirms, Google Business Profile and review generation. Directory sources appeared in **15 of 28** unbranded AI runs and gate the category SERPs and the Local Pack simultaneously. **Roughly half of what the approved strategy needs from "search" is not a page and cannot be built by this project.**
+2. **Fixing the conversion and measurement layer** — a working contact form, a working booking path, analytics, enquiry-source capture, and `/thank-you` wired up. This is simultaneously a launch prerequisite, the hard precondition on every outcome claim, and the first available proof asset.
 
-### Owner actions that no Claude session can produce, and which still gate premium positioning
-1. **Which client results may be published**, with permissions (`AnybodyCanBake`, `Digibility`, or others). **The last remaining Session 02 owner blocker.**
-2. **Whether and when to remove or substantiate** "300%+ ROI", "₹100Cr+" and "₹10Cr+" in production (`DEC-007`).
-3. **Funding keyword tooling**, a second AI measurement round, and a healthcare SERP test — without which beachhead volume stays permanently UNKNOWN and the vertical choice is a default rather than a comparison.
-4. **The entry-offer model decision** — free / paid / hybrid (`OFFER_ARCHITECTURE.md` §2).
+### Owner actions that no Claude session can produce
+1. **Which client results may be published**, with permissions. **The last remaining Session 02 owner blocker**; it gates all premium positioning and the `/work` indexation decision.
+2. **Whether and when to remove or substantiate** "300%+ ROI", "₹100Cr+" and "₹10Cr+" in production (`DEC-007`). This now also blocks the homepage title.
+3. **Funding keyword tooling**, a second AI measurement round, and a healthcare SERP test.
+4. **The entry-offer model decision** — free / paid / hybrid.
+5. **Retrieving the server `.htaccess`** and the Contentful slug inventory, both of which gate the migration.
 
 ### Gates
 - **Gate 2 — PASSED** (2026-08-31).
-- **Gates 1, 3 and 4** — artifacts delivered; their conclusions fed the approved strategy; **not marked passed by Session 06.** Orchestrator action.
-- **Gates 5 onwards** — untouched, unapproached and not implied by the strategy freeze.
+- **Gates 1, 3 and 4** — artifacts delivered; conclusions consumed by the approved strategy; **not marked passed.** Orchestrator action.
+- **Gate 5 — OPEN.** Artifacts delivered 2026-08-31; review pending. **Not passed.**
+- **Gates 6 onwards** — untouched, unapproached and not implied.
 
 ## Status of the Two Session 01B Owner Confirmations
 Both were addressed by the owner-supplied facts recorded above on 2026-08-31, within the limits of what the owner actually stated:
@@ -374,12 +486,13 @@ Still **not** approved:
 - Quality Gate 1 (existing site audit) — artifacts delivered, orchestrator review pending;
 - Quality Gate 3 (search demand / SERP / commercial opportunity) — artifacts delivered, orchestrator review pending;
 - Quality Gate 4 (AI visibility, citation & discovery baseline) — artifacts delivered, orchestrator review pending;
-- Quality Gates 5 onwards — not started;
+- **Quality Gate 5 (information architecture) — artifacts delivered 2026-08-31, review pending. The proposed IA, page inventory, URL migration map, navigation, search architecture and funnel architecture are NOT approved;**
+- Quality Gates 6 onwards — not started;
 - **manufacturing as an exclusive or company-level specialisation** — it is candidate beachhead #1 only, gated on volume verification, a healthcare comparison, and one publishable industrial result;
 - final offer names, packaging and the free/paid/hybrid entry model;
 - final pricing;
 - final website messaging, homepage copy and taglines;
-- final information architecture, sitemap and URL architecture;
+- final information architecture, sitemap and URL architecture (proposed in Session 07, not approved);
 - final keyword map and content plan;
 - international expansion, and any international SEO or location strategy;
 - final design direction;

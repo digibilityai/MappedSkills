@@ -1,7 +1,8 @@
 # Current Project State
 
 ## Current Phase
-**Gates 5, 6 and 7 PASSED — 2026-09-01 (orchestrator approval, `DEC-010`/`DEC-011`/`DEC-012`). The programme is now ready to move into messaging / page-copy architecture. No visual design or production implementation has started as a result of these approvals.**
+**Session 10 Completed — MESSAGING ARCHITECTURE, including a narrow orchestrator correction pass (2026-09-01). Quality Gate 8 (Messaging Architecture) is PASSED (2026-09-01; `DEC-013`). No page copy was written, no design was done, and no production code was changed. Session 11 — Page Copy Production is the next intended substantive phase.**
+**Gates 5, 6 and 7 PASSED — 2026-09-01 (orchestrator approval, `DEC-010`/`DEC-011`/`DEC-012`). No visual design or production implementation has started as a result of these approvals.**
 **Session 09 Completed — CONTENT STRATEGY & LAUNCH CONTENT ARCHITECTURE. Quality Gate 7 PASSED (2026-09-01).**
 **Session 08 Completed — CRO & QUALIFIED-ENQUIRY FUNNEL SPECIFIED. Quality Gate 6 PASSED (2026-09-01).**
 **Session 07 Completed — WEBSITE IA & SEARCH ARCHITECTURE. Quality Gate 5 PASSED (2026-09-01).**
@@ -32,7 +33,10 @@ This is an **APPROVED DECISION**. It supersedes the previous working hypotheses 
 | **Quality Gate 6 — CRO architecture** | **PASSED — 2026-09-01.** See `DEC-011` |
 | **Session 09 — content strategy & launch content architecture** | **COMPLETE** (2026-09-01), including a narrow orchestrator correction pass. **APPROVED — Gate 7 PASSED 2026-09-01 (`DEC-012`)** |
 | **Quality Gate 7 — content architecture** | **PASSED — 2026-09-01.** See `DEC-012` |
-| Next phase — messaging / page-copy architecture, and the technical prerequisites the funnel and the content programme both depend on | **NOT STARTED.** Programme is now ready to enter this phase; not yet begun and no visual design or production implementation has occurred |
+| **Session 10 — messaging architecture** | **COMPLETE** (2026-09-01), including a narrow orchestrator correction pass. **APPROVED — Gate 8 PASSED 2026-09-01 (`DEC-013`).** No page copy, no design, no production code |
+| **Quality Gate 8 — messaging architecture** | **PASSED — 2026-09-01.** See `DEC-013` |
+| **Session 11 — page copy production** | **NOT STARTED.** Next intended substantive phase |
+| Next phase — page copy (Session 11), and the technical prerequisites the funnel and the content programme both depend on | **NOT STARTED.** Constrained: `/how-it-works`, `/about`, `/contact` and `/pricing` are owner-blocked; the AI-visibility research entry and the problem page are not |
 
 **Research is CLOSED for the business-strategy phase.** No further business-direction research is commissioned by this state.
 
@@ -596,11 +600,88 @@ A second narrow orchestrator pass, run **before Quality Gate 7 review**, to make
 
 **Gate status was not changed by this pass, and Claude has no authority to change it.** At the time of this reconciliation pass the repository recorded **Gate 5 as OPEN**. **Gate 5, along with Gates 6 and 7, was subsequently reviewed and approved by the orchestrator on 2026-09-01**, recorded in `DECISION_LOG.md` as `DEC-010`, `DEC-011` and `DEC-012` and reflected in `QUALITY_GATES.md` and the summary above — a separate, later administrative reconciliation, not a Claude self-approval.
 
+## Session 10 — Messaging Architecture (completed 2026-09-01)
+
+**Purpose:** turn the approved business strategy, IA, funnel and content architecture into one coherent messaging system — what MappedSkills says, in what order, in what language, with what evidence, and at what degree of confidence. **Language only — no page copy, no complete page, no approved headline or tagline, no design, no code.** The frozen business strategy and the approved IA, CRO and content architectures were **not** reopened.
+
+### Artifacts created
+- `docs/08-messaging/MESSAGING_ARCHITECTURE.md`
+- `docs/08-messaging/POSITIONING_MESSAGE_SYSTEM.md`
+- `docs/08-messaging/VALUE_PROPOSITION_ARCHITECTURE.md`
+- `docs/08-messaging/PROBLEM_AND_OUTCOME_LANGUAGE.md`
+- `docs/08-messaging/CAPABILITY_LANGUAGE.md`
+- `docs/08-messaging/AI_SEARCH_LANGUAGE.md`
+- `docs/08-messaging/CLAIMS_LADDER.md`
+- `docs/08-messaging/VOICE_AND_TONE.md`
+- `docs/08-messaging/TERMINOLOGY_DICTIONARY.md`
+- `docs/08-messaging/CTA_LANGUAGE_SYSTEM.md`
+- `docs/08-messaging/HOMEPAGE_MESSAGE_ARCHITECTURE.md`
+- `docs/08-messaging/COMMERCIAL_PAGE_MESSAGE_PATTERN.md`
+- `docs/08-messaging/MESSAGE_CONSISTENCY_MATRIX.md`
+- `docs/08-messaging/COPY_PLACEHOLDER_STANDARD.md`
+- `docs/08-messaging/MESSAGE_QUALITY_GATE.md`
+- `docs/00-project/handoffs/SESSION_10_MESSAGING_ARCHITECTURE.md`
+
+### The central problem it solved
+The approved direction defines the company by an **outcome**, while the buyers who will find it search almost entirely in **technique vocabulary**. Session 10 resolves this as a two-move rule binding on every commercial landing page: **confirm the searched capability in the first screen, in the searcher's own word — then bridge to the company outcome within one or two sentences.** Both failure modes are named and both are disqualifying: **category capture** (a strong `/seo` page pulls the homepage and `/services` into becoming an SEO agency by accumulation) and **coy positioning** (refusing to say "SEO" plainly, so the visitor cannot tell within one screen whether the page is relevant). **Protecting the positioning by being vague is explicitly not a defensible trade.**
+
+### Determinations worth recording in state
+- **A seven-level message hierarchy exists** — company proposition · commercial outcome · buyer problem · mechanism · capabilities · evidence · action. **Levels 1 and 2 are fixed sitewide**, and **no capability may rise to Level 1** on any page, in any profile, or in any company description. That is recorded as the single most damaging failure the system exists to prevent.
+- **No new company category was invented**, and none may be introduced later without an owner decision in `DECISION_LOG.md`.
+- **Three internal positioning statements were drafted and one recommended** — "Accountable to the enquiry". The rejected diagnostic-led formulation was **reassigned** to the entry offer and the problem page rather than discarded, because it positions the firm as a diagnostic practice rather than a delivery engagement. **Not approved.** **Corrected in the correction pass** so the approved buyer definition is not narrowed and no owner-blocked engagement model is asserted — see below.
+- **Three versions of "what does MappedSkills do?"** — plain, slightly expanded and search-aware — all describing the same business. **Only the search-aware version may lead with capability vocabulary**, and even it ends on the outcome.
+- **One primary value proposition and exactly four supporting propositions.** Three of the brief's candidate concepts were **excluded at company level** with reasons recorded — notably paid media, whose elevation to a value proposition would quietly recreate the rejected performance-marketing identity. **S1 was rewritten in the correction pass** to *"the joins between the parts are somebody's job"*.
+- **"Enquiries" is the default buyer-facing noun. "Qualified enquiries" is used wherever qualification can be explained on the same page, and always where accountability is stated.** "Lead" is permitted only where the query requires it. **Internal analytics vocabulary — WQE, SQE, `qualification_status`, `attribution_status`, `lead_form_submitted` — never appears in buyer-facing copy.** The operational WQE definition is unchanged.
+- **Outcome language is tiered into four strict bands**, with a per-term ruling on traffic, rankings, visibility, enquiries, qualified enquiries, leads, opportunities, pipeline, revenue, ROI, AI recommendations and AI citations. **Pipeline and ROI are prohibited outright.**
+- **India-first language rulings on sixteen terms**, keeping necessary technical vocabulary — attribution, indexation, structured data — while excluding US SaaS and RevOps imports. **British/Indian spelling in prose; American spelling preserved only in URLs, code identifiers and query phrases a page must match.**
+- **"AI search" is the preferred umbrella term.** GEO, AEO and LLMO are permitted **at most once each per asset, defined in place, inside explanatory content only** — never in a title, heading, navigation label, meta description or CTA, and never as MappedSkills' framing. **Seven permitted claims and ten prohibited claims are enumerated**, and **the four discovery layers are kept separate and never blended into a score.**
+- **A six-level claims ladder** — FACT · OBSERVATION · CAPABILITY · EXPECTED EFFECT · CLIENT OUTCOME · PROHIBITED — **mapped onto the six-class evidence governance rather than replacing it.** Both are assigned per claim at brief stage. A **verb ladder** makes the most common failure — a claim climbing a level through its verb — checkable. **Level E is currently empty: no client outcome may be published in any form.**
+- **A terminology dictionary with an eighteen-item PROHIBITED list and a fourteen-item USE-ONLY-WHEN-JUSTIFIED list**, each entry carrying its specific reason so a ban cannot be argued away. **Metadata is explicitly not a loophole.**
+- **CTA language was mapped onto the approved CRO roles without creating a new one.** The brief's "meeting CTA" is PRIMARY on the booking surface; the "editorial CTA" is LOW-COMMITMENT. **All DIAGNOSTIC wording is blocked on the entry-offer decision, and no candidate may say "free" until it is made.**
+- **The homepage message sequence was derived, not inherited.** Because the homepage is **not primarily a cold organic entry point**, it leads with the proposition rather than the problem — and **the accountability boundary sits high, at block 4**, because it is the differentiator and burying it wastes the only genuinely distinctive thing the page has to say.
+- **Five genuinely different hero territories exist**, stress-tested in the correction pass on buyer comprehension. **Territory 1 is reframed as "Judged on the enquiries" and recommended — not approved.** **Territory 3 (measurement honesty) is explicitly recorded as the wrong lead** — Session 04 evidence says it is a proof principle, not a proposition — **Territory 4 belongs to the problem page**, and **Territory 5 is partly prohibited** because its name asserts that MappedSkills replaces three suppliers. **No sixth territory was invented.**
+- **A reusable nine-move commercial-page pattern**, with mandatory and optional moves stated per page and per intent. **Identical structures are not forced where buyer intent differs.**
+- **`/services` introduces capabilities positionally, under three groups — capture, convert, measure — never as a card grid of six.** Paid search, paid social and organic sit together as alternative demand sources.
+- **Four structural separations keep the problem page from becoming `/conversion-optimization` with another title**, the load-bearing one being that **the page's own argument is that conversion work is the wrong fix in at least two of the four loss zones.**
+- **A fourteen-row message consistency matrix**, plus the conditional manufacturing row, whose **prohibited-drift column is the operative guardrail for the copywriting session.**
+- **`/faq` gets twelve recommended launch questions**, grouped, with an inclusion test — a real buyer has asked it, or it demonstrably stops a decision — and explicit prohibitions on SEO FAQ spam, definitions, service duplication and schema bait.
+- **A six-type placeholder taxonomy** — OWNER INPUT · EVIDENCE · DECISION · VALIDATION · LEGAL REVIEW · TECHNICAL PREREQUISITE — with the rule that **a placeholder is never filled with a plausible default, and a gap is never written around so the missing fact stops being needed.**
+- **A twenty-item message quality gate** with four named tests, complementing rather than replacing the approved content quality gate. **Both apply, in full, to every asset.**
+
+### Owner inputs classified against copy
+**Five BLOCK COPY:** the real delivery process · verified company facts · people and authorship · confirmed prices · the entry-offer model *(CTA wording only)*. **Ten proceed with placeholders. Four are not required yet.**
+
+**The single most consequential line:** `/how-it-works` **cannot be written** — the delivery process is owner-blocked, and that page is the root dependency of the entire content programme.
+
+### Session 10 orchestrator correction pass (2026-09-01)
+
+A narrow orchestrator correction pass was applied within the same session. **The messaging architecture was not restarted, no research was performed, no scope was expanded, no page copy was written, no production code was touched, and no gate status was changed.** Three corrections:
+
+**1. The approved buyer definition is no longer narrowed.** The internal positioning opened *"…businesses in India whose buyers are already searching…"*, making **findability in search an eligibility condition for the buyer**. It now reads to the approved definition — **considered-purchase businesses where each qualified opportunity has meaningful economic value, and where demand for what they sell already exists or can reasonably be reached.** India-first orientation is retained, existing buyer demand remains central to the acquisition story, **search remains the primary acquisition capability without being a test of market membership**, and **paid media is preserved as a legitimate route to that demand.** MappedSkills is **not** broadened into generic demand generation — demand capture, not creation, is unchanged. The same narrowing was corrected in Candidate B and in the expanded company explanation.
+
+**2. Unproven engagement-model absolutes are removed.** *"One supplier owns the seams where enquiries are actually lost"* and *"acquisition, conversion and measurement are one engagement"* both went beyond what is currently supportable: **the real delivery process and engagement model are owner-blocked**, packaging and tiering are explicitly undecided in `OFFER_ARCHITECTURE.md` §9, and asserting that the loss *is* in the seams contradicts the approved four-zone diagnostic, whose credibility rests on not pre-judging the cause. The formulation is now: **the parts are connected rather than handed off, and the joins between them are somebody's job here.** A new `POSITIONING_MESSAGE_SYSTEM.md` §3.5 records **five prohibited absolutes** — every client buys all three · engagements cannot be scoped · MappedSkills replaces three suppliers · paid media is included by default · an engagement structure has been approved — with the counterpart that **the measurement is the part that is not optional**. Recorded as a binding rule in `MESSAGING_ARCHITECTURE.md` §5.
+
+**3. The hero territory was stress-tested and reframed.** All five territories were tested on buyer comprehension, commercial relevance, differentiation, defensibility with today's proof, ability to bridge search + conversion + measurement, jargon avoidance and IA support — each now carrying its underlying buyer insight, what a visitor understands in about five seconds, its principal weakness and one illustrative headline direction. **The finding: Territory 1's content survived and its expression did not** — "accountable" is a governance word before a commercial one, and the original name sat one step from turning the approved outcome phrase into a slogan. **No strategic gap was revealed and no sixth territory was invented.** Territory 1 is reframed as **"Judged on the enquiries"**, with Territory 2's concrete opening as the supporting line; Territories 2–5 are placed rather than discarded.
+
+**Preserved unchanged by the correction pass:** the message hierarchy · the company-message / search-landing-message rule · the primary value proposition and the other three supporting propositions · problem architecture · the outcome tiers · qualified-enquiry language · India-first rulings · capability and AI-search language · the claims ladder · voice and tone · the terminology dictionary and both language lists · the CTA system · the eight-block homepage sequence · the nine-move commercial-page pattern · every per-page message architecture · the placeholder taxonomy · the message quality gate · the frozen business strategy and every approved architecture.
+
+**Files modified by the pass:** six documents in `docs/08-messaging/` — `POSITIONING_MESSAGE_SYSTEM.md`, `VALUE_PROPOSITION_ARCHITECTURE.md`, `HOMEPAGE_MESSAGE_ARCHITECTURE.md`, `MESSAGING_ARCHITECTURE.md`, `COMMERCIAL_PAGE_MESSAGE_PATTERN.md` and `MESSAGE_CONSISTENCY_MATRIX.md` — plus the Session 10 handoff and this file. **No decision was approved, no decision-log entry was created, and no gate status was changed.**
+
+### Session 10 method limitations (VERIFIED FACT)
+- **No fresh research was performed.** Every language decision was derived from Sessions 01–09 artifacts with their original evidence labels intact.
+- **No search volume, keyword difficulty, CPC, ranking, traffic, backlink, conversion-rate, benchmark or AI-citation figure was gathered or estimated, and none appears in any Session 10 artifact.** Existing figures are reproduced with their original scope, date and caveats.
+- **No application code, configuration or content was read for modification, and none was changed. No build, lint or test was run. No page was rendered.**
+- **No page copy, headline, tagline or meta title was written. No design was performed.**
+- **No decision was approved and no gate status was changed.** Claude has no authority to change either.
+- **The correction pass performed no research, wrote no copy, expanded no scope and created no decision-log entry.** Its only filesystem changes were within the Session 10 documentation paths.
+
 ## Next Intended Phase
 
-**Quality Gates 5, 6 and 7 are PASSED (2026-09-01; `DEC-010`, `DEC-011`, `DEC-012`).** The programme is now ready to move into messaging / page-copy architecture. **No visual design or production implementation has started as a result of these approvals.**
+**Quality Gates 5, 6, 7 and 8 are PASSED (2026-09-01; `DEC-010`, `DEC-011`, `DEC-012`, `DEC-013`).** **No visual design or production implementation has started.**
 
-**The next phase is messaging/page-copy architecture, together with the technical prerequisites** — a backend endpoint, durable enquiry storage, transactional email, analytics and the consent mechanism.
+**SESSION 11 — PAGE COPY PRODUCTION is the next intended substantive phase**, together with the technical prerequisites — a backend endpoint, durable enquiry storage, transactional email, analytics and the consent mechanism. Session 11 must determine the actual homepage headline/copy within the approved hero territory (`DEC-013`) and is bound by the twenty-item Message Quality Gate.
+
+**The copy phase is constrained by owner inputs and should be sequenced accordingly.** `/research/{ai-visibility-baseline}` is READY and requires no owner input or client permission; `/problems/traffic-but-no-enquiries` has no blocking owner input and sits on the most winnable surface in the programme. **`/how-it-works`, `/about`, `/contact` and `/pricing` must not be started until their owner inputs arrive.**
 
 **Recommendation: scope the technical prerequisites early, and Session 09 strengthens the case.** The entire funnel specification is inert without them, and **the own-site research entry, the problem page's worked example and launch article 3 all depend on those fixes being shipped.** Fixing MappedSkills' own conversion and measurement layer is simultaneously a launch prerequisite, the hard precondition on every outcome claim, and the first available proof asset.
 
@@ -625,7 +706,12 @@ Carried forward, plus the Session 08 specification:
 12. **Do not invent a conversion benchmark or a "before" figure.** Where data does not exist, write UNKNOWN.
 13. **Do not publish a response-time SLA** until one has been measured.
 14. **No page may promise revenue, guaranteed rankings, guaranteed AI citations or guaranteed enquiry counts**, or reuse "300%+ ROI", "₹100Cr+" or "₹10Cr+" (`DEC-007`).
-15. **Do not write final homepage copy or taglines.**
+15. **Do not write final homepage copy or taglines outside the approved hero territory.** The messaging gate (Gate 8) is passed and the hero territory (`DEC-013`) is approved as a strategic territory; Session 11 chooses the actual headline/copy within it, not a different territory.
+16. **Do not let a capability rise to Level 1 of the message hierarchy** — not on the homepage, not on `/services`, not in any company description or external profile.
+17. **Do not use GEO, AEO or LLMO as positioning**, in a title, heading, navigation label, meta description or CTA.
+18. **Do not use "CRO" in body copy**, and do not use "leads" as MappedSkills' own outcome word.
+19. **Do not fill a placeholder with a plausible default**, and do not reshape copy so a missing load-bearing fact stops being needed.
+20. **The positioning statement and the hero territory are approved (`DEC-013`) — the hero territory as a strategic territory, not final homepage copy.** Do not treat the exact phrase *"Judged on the enquiries."* as frozen launch copy; do not treat either as open to reopening the underlying strategy.
 
 ### Actions that do not depend on the gates and should not wait for them
 1. **The off-site listings, profiles and reviews programme** — Clutch, Semrush Agency Partners, GoodFirms, Google Business Profile. Directory sources appeared in **15 of 28** unbranded AI runs and gate the category SERPs and the Local Pack simultaneously.
@@ -647,7 +733,8 @@ Carried forward, plus the Session 08 specification:
 - **Gate 5 — PASSED** (2026-09-01). See `DEC-010`.
 - **Gate 6 — PASSED** (2026-09-01). See `DEC-011`.
 - **Gate 7 — PASSED** (2026-09-01). See `DEC-012`.
-- **Gates 8 onwards** — untouched, unapproached and not implied.
+- **Gate 8 — Messaging Architecture — PASSED** (2026-09-01, Session 10, including its correction pass). See `DEC-013`.
+- **Gates 9 onwards** — untouched, unapproached and not implied.
 
 ## Status of the Two Session 01B Owner Confirmations
 Both were addressed by the owner-supplied facts recorded above on 2026-08-31, within the limits of what the owner actually stated:
@@ -666,17 +753,17 @@ Recorded so they are not lost, and judged safe to address during implementation 
 ## Not Yet Approved
 Approved and closed by Session 06: the fundamental business direction (`DEC-005`), the frozen business documents (`DEC-006`), the strategic rule on unsupported claims (`DEC-007`), and the page-targets-query rule (`DEC-008`).
 
-**Approved 2026-09-01:** Quality Gate 5 (information architecture — the IA, page inventory, URL migration map, navigation, search architecture and funnel architecture), Quality Gate 6 (CRO architecture — the qualified-enquiry definition, form/booking spec, CTA system, page-type rules, attribution model, event taxonomy, CRM data contract, lifecycle and follow-up architecture), and Quality Gate 7 (content architecture — the content strategy, launch content inventory, cluster architecture, editorial strategy, research strategy, AI citation principles, claims governance, content quality gate, and all 24 page, editorial and research briefs). Recorded as `DEC-010`, `DEC-011`, `DEC-012`.
+**Approved 2026-09-01:** Quality Gate 5 (information architecture — the IA, page inventory, URL migration map, navigation, search architecture and funnel architecture), Quality Gate 6 (CRO architecture — the qualified-enquiry definition, form/booking spec, CTA system, page-type rules, attribution model, event taxonomy, CRM data contract, lifecycle and follow-up architecture), Quality Gate 7 (content architecture — the content strategy, launch content inventory, cluster architecture, editorial strategy, research strategy, AI citation principles, claims governance, content quality gate, and all 24 page, editorial and research briefs), and Quality Gate 8 (messaging architecture — the corrected internal positioning, the hero strategic territory, engagement-model safeguards, default buyer-facing terminology, AI-search umbrella terminology, the prohibited/restricted language system, the claims ladder, and the twenty-item Message Quality Gate). Recorded as `DEC-010`, `DEC-011`, `DEC-012`, `DEC-013`.
 
 Still **not** approved:
 - Quality Gate 1 (existing site audit) — artifacts delivered, orchestrator review pending;
 - Quality Gate 3 (search demand / SERP / commercial opportunity) — artifacts delivered, orchestrator review pending;
 - Quality Gate 4 (AI visibility, citation & discovery baseline) — artifacts delivered, orchestrator review pending;
-- Quality Gates 8 onwards — not started;
+- Quality Gates 9 onwards — not started;
 - **manufacturing as an exclusive or company-level specialisation** — it is candidate beachhead #1 only, gated on volume verification, a healthcare comparison, and one publishable industrial result;
 - final offer names, packaging and the free/paid/hybrid entry model;
 - final pricing;
-- final website messaging, homepage copy and taglines;
+- **final website homepage copy and taglines** — the messaging *architecture and territory* are approved (`DEC-013`), but **the actual homepage headline/copy is not yet written**; the hero territory *"Judged on the enquiries."* is approved as a strategic territory, not as frozen final copy — Session 11 determines the actual wording within it;
 - final information architecture, sitemap and URL architecture (proposed in Session 07, not approved);
 - final keyword map and content plan (proposed in Session 09, not approved);
 - international expansion, and any international SEO or location strategy;

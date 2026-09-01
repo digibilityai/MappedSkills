@@ -191,3 +191,23 @@ Use this file only for meaningful project decisions.
 - **Impacted files:** `QUALITY_GATES.md`, `CURRENT_STATE.md`.
 - **Supersedes:** the "NOT PASSED" status of Gate 7 recorded after Session 09.
 - **Approved by:** Project orchestrator, 2026-09-01.
+
+---
+
+### DEC-013
+- **Date:** 2026-09-01
+- **Status:** **Approved — gate approval.**
+- **Decision:** **Quality Gate 8 — Messaging Architecture — PASSED**, on the corrected Session 10 messaging architecture, with the following decisions approved individually:
+  1. **Corrected internal positioning** — approved.
+  2. **Homepage strategic hero territory — *"Judged on the enquiries."*** — **approved as a strategic territory, not final homepage copy.** Session 11 must determine the actual homepage headline/copy within the approved territory; the phrase itself is not frozen as launch copy.
+  3. **Engagement-model safeguards / five prohibited absolutes** — approved.
+  4. **"Enquiries" as the default buyer-facing noun; "qualified enquiries" where qualification can be explained** — approved.
+  5. **"AI search" as umbrella terminology, with GEO/AEO/LLMO constrained as documented** — approved.
+  6. **Prohibited/restricted language system** — approved.
+  7. **Claims ladder** — approved.
+  8. **Twenty-item Message Quality Gate** — approved and **binding on Session 11**.
+- **Reason / basis:** Session 10 delivered the messaging architecture, including a narrow orchestrator correction pass that reopened no research, expanded no scope and wrote no page copy. The orchestrator reviewed the corrected artifacts and approved them. The existing-demand idea represented by Territory 2 may support the hero/subhero architecture, as documented, without replacing the approved primary territory.
+- **Evidence:** `docs/08-messaging/MESSAGING_ARCHITECTURE.md`, `POSITIONING_MESSAGE_SYSTEM.md`, `VALUE_PROPOSITION_ARCHITECTURE.md`, `PROBLEM_AND_OUTCOME_LANGUAGE.md`, `CAPABILITY_LANGUAGE.md`, `AI_SEARCH_LANGUAGE.md`, `CLAIMS_LADDER.md`, `VOICE_AND_TONE.md`, `TERMINOLOGY_DICTIONARY.md`, `CTA_LANGUAGE_SYSTEM.md`, `HOMEPAGE_MESSAGE_ARCHITECTURE.md`, `COMMERCIAL_PAGE_MESSAGE_PATTERN.md`, `MESSAGE_CONSISTENCY_MATRIX.md`, `COPY_PLACEHOLDER_STANDARD.md`, `MESSAGE_QUALITY_GATE.md`; `handoffs/SESSION_10_MESSAGING_ARCHITECTURE.md`.
+- **Impacted files:** `QUALITY_GATES.md`, `CURRENT_STATE.md`.
+- **Supersedes:** the "PROPOSED — NOT APPROVED" / "THE MESSAGING GATE IS NOT PASSED" status recorded at the end of Session 10.
+- **Approved by:** Project orchestrator, 2026-09-01.

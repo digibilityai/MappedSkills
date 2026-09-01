@@ -13,9 +13,10 @@ No phase should advance merely because an artifact exists.
 | **Gate 5 — Information Architecture** | **PASSED — 2026-09-01** |
 | **Gate 6 — CRO Architecture** | **PASSED — 2026-09-01** |
 | **Gate 7 — Content Architecture** | **PASSED — 2026-09-01** |
-| **Gates 8–22** | **NOT STARTED, NOT APPROACHED, NOT PASSED** |
+| **Gate 8 — Messaging Architecture** | **PASSED — 2026-09-01** |
+| **Gates 9–22** | **NOT STARTED, NOT APPROACHED, NOT PASSED** |
 
-**Session 06 marked Gate 2 only.** Gates 5, 6 and 7 were approved by the orchestrator on 2026-09-01, recorded in `DECISION_LOG.md` as `DEC-010`, `DEC-011` and `DEC-012`. No gate from 8 onwards is passed, approached or implied by any of these approvals.
+**Session 06 marked Gate 2 only.** Gates 5, 6 and 7 were approved by the orchestrator on 2026-09-01, recorded in `DECISION_LOG.md` as `DEC-010`, `DEC-011` and `DEC-012`. **Gate 8 (Messaging Architecture) was approved by the orchestrator on 2026-09-01, recorded as `DEC-013`** — see the note under Gate 8 below on its relationship to this file's original Gate 8 placeholder. No gate from 9 onwards is passed, approached or implied by any of these approvals.
 
 ## Gate 1 — Existing Site Audit
 **Status: artifacts delivered; orchestrator review pending. NOT marked passed.**
@@ -84,7 +85,18 @@ Session 08 was reviewed and corrected so that Website Qualified and Sales Qualif
 ### Why this gate passes
 Session 09 was reviewed through its original strategy, an editorial correction pass, and a cross-gate reconciliation pass. The final approved unconditional editorial launch set is: (1) AI-assisted discovery / appearing in ChatGPT, (2) search → qualified enquiry / measurement, (3) the website enquiry-loss diagnostic — plus one conditional industrial/B2B article paired with the conditional manufacturing page. AI Search remains a supporting capability, not the company category. The AI Visibility Baseline remains the canonical research home for the Session 04 dataset. Article 2's search target remains **UNVALIDATED** — no search demand may be claimed for it until targeted validation supports it. `how to get cited by ai` is unbuilt at launch, reconsiderable only in PHASE 2 if it can support a distinct, non-duplicating asset. The own-site diagnostic remains research, not a case study. `/research` may launch with one genuine entry if the second research asset is not ready. No fabricated evidence was accepted, and claims/evidence governance is binding. The orchestrator approved the corrected content strategy.
 
-## Gate 8 — Creative Direction
+## Gate 8 — Messaging Architecture
+**Status: PASSED — 2026-09-01.** See `DEC-013` in `DECISION_LOG.md`.
+
+**Note on this gate's numbering:** this file's original Gate 8 was titled "Creative Direction," with the criteria preserved verbatim immediately below. That placeholder gate had no session assigned to it, no artifacts delivered against it, and was never started or approached — it is renumbered here to accommodate Session 10 — Messaging Architecture, which the orchestrator has designated Gate 8 in the programme's actual execution order. **Visual/creative-direction criteria are not dropped**; they remain required later in the programme (see the visual-principles, imagery-policy and motion-philosophy criteria preserved below) and must be assigned a gate number by the orchestrator before that phase begins.
+
+**Required:** internal positioning statement; hero/strategic messaging territory; engagement-model safeguards (prohibited absolutes); default buyer-facing terminology for enquiries/qualified enquiries; AI search umbrella terminology with GEO/AEO/LLMO usage rules; prohibited/restricted language system; claims ladder; message quality gate.
+**Acceptance:** consistent with the frozen business strategy (`DEC-005`–`DEC-008`), the approved IA (`DEC-010`), CRO specification (`DEC-011`) and content architecture (`DEC-012`); no unsupported claim; no reintroduced prohibited absolute; binding on Session 11 page-copy production.
+
+### Why this gate passes
+Session 10 delivered the messaging architecture, including a narrow orchestrator correction pass. The orchestrator reviewed the corrected artifacts and approved: the corrected internal positioning; the homepage strategic hero territory *"Judged on the enquiries."* — approved **as a strategic territory, not final homepage copy**, with Session 11 required to determine the actual homepage headline/copy within that territory; the engagement-model safeguards and five prohibited absolutes; "enquiries" as the default buyer-facing noun with "qualified enquiries" where qualification can be explained; "AI search" as umbrella terminology with GEO/AEO/LLMO usage constrained as documented; the prohibited/restricted language system; the claims ladder; and the twenty-item Message Quality Gate, which is now binding on Session 11.
+
+**Original criteria preserved below, unassigned to a gate number pending orchestrator action:**
 **Required:** visual principles, references, data-visualization language, imagery policy, motion philosophy.
 **Acceptance:** distinctive, coherent, avoids generic agency/AI clichés.
 

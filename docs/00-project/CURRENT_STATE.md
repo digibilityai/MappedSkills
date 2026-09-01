@@ -1,7 +1,8 @@
 # Current Project State
 
 ## Current Phase
-**Session 10 Completed — MESSAGING ARCHITECTURE, including a narrow orchestrator correction pass (2026-09-01). Quality Gate 8 (Messaging Architecture) is PASSED (2026-09-01; `DEC-013`). No page copy was written, no design was done, and no production code was changed. Session 11 — Page Copy Production is the next intended substantive phase.**
+**Session 11 Completed — PAGE COPY PRODUCTION, including a second-reader / orchestrator correction pass (2026-09-01). Quality Gate 9 (Page Copy Production) is PASSED (2026-09-01; `DEC-014`). Gate approval is NOT publication readiness for every route — the documented PARTIALLY BLOCKED, BLOCKED and CONDITIONAL statuses are unchanged. No design was done, no production code, configuration or content was changed, and no prior gate decision was altered. Creative / Art Direction is the next intended substantive phase and has not begun.**
+**Session 10 Completed — MESSAGING ARCHITECTURE, including a narrow orchestrator correction pass (2026-09-01). Quality Gate 8 (Messaging Architecture) is PASSED (2026-09-01; `DEC-013`). No page copy was written, no design was done, and no production code was changed.**
 **Gates 5, 6 and 7 PASSED — 2026-09-01 (orchestrator approval, `DEC-010`/`DEC-011`/`DEC-012`). No visual design or production implementation has started as a result of these approvals.**
 **Session 09 Completed — CONTENT STRATEGY & LAUNCH CONTENT ARCHITECTURE. Quality Gate 7 PASSED (2026-09-01).**
 **Session 08 Completed — CRO & QUALIFIED-ENQUIRY FUNNEL SPECIFIED. Quality Gate 6 PASSED (2026-09-01).**
@@ -35,8 +36,10 @@ This is an **APPROVED DECISION**. It supersedes the previous working hypotheses 
 | **Quality Gate 7 — content architecture** | **PASSED — 2026-09-01.** See `DEC-012` |
 | **Session 10 — messaging architecture** | **COMPLETE** (2026-09-01), including a narrow orchestrator correction pass. **APPROVED — Gate 8 PASSED 2026-09-01 (`DEC-013`).** No page copy, no design, no production code |
 | **Quality Gate 8 — messaging architecture** | **PASSED — 2026-09-01.** See `DEC-013` |
-| **Session 11 — page copy production** | **NOT STARTED.** Next intended substantive phase |
-| Next phase — page copy (Session 11), and the technical prerequisites the funnel and the content programme both depend on | **NOT STARTED.** Constrained: `/how-it-works`, `/about`, `/contact` and `/pricing` are owner-blocked; the AI-visibility research entry and the problem page are not |
+| **Session 11 — page copy production** | **COMPLETE** (2026-09-01), including a second-reader correction pass. **APPROVED — Gate 9 PASSED 2026-09-01 (`DEC-014`).** 18 page-copy files plus one conditional record; **7 routes with copy APPROVED (not automatically publication-ready), 8 PARTIALLY BLOCKED, 1 BLOCKED, 3 CONDITIONAL** |
+| **Quality Gate 9 — page copy production** | **PASSED — 2026-09-01.** See `DEC-014`. Approval does not upgrade any route's blocked/partially-blocked/conditional status |
+| **Session 12 — Creative / Art Direction** | **NOT STARTED.** Next intended substantive phase; **not begun by this reconciliation** |
+| Technical prerequisites the funnel and the content programme both depend on, plus the research and editorial assets not produced in Session 11 | **NOT STARTED.** Constrained: `/how-it-works`, `/about`, `/contact` and `/pricing` remain owner-blocked; the AI-visibility research entry and the problem page are not |
 
 **Research is CLOSED for the business-strategy phase.** No further business-direction research is commissioned by this state.
 
@@ -675,11 +678,82 @@ A narrow orchestrator correction pass was applied within the same session. **The
 - **No decision was approved and no gate status was changed.** Claude has no authority to change either.
 - **The correction pass performed no research, wrote no copy, expanded no scope and created no decision-log entry.** Its only filesystem changes were within the Session 10 documentation paths.
 
+## Session 11 — Page Copy Production (completed 2026-09-01)
+
+**Status: PAGE COPY PRODUCTION — APPROVED. Quality Gate 9 (Page Copy Production) PASSED 2026-09-01, `DEC-014`.** Approval covers the page-copy system, copy standards, the approved routes' substantive copy, the homepage H1/direction and documented blocker handling — **it does not make any PARTIALLY BLOCKED, BLOCKED or CONDITIONAL route publication-ready.**
+
+**Purpose:** turn the approved messaging architecture and the approved page briefs into actual page copy. **No strategy was restarted, no research was performed, no design was started, no route was added or removed, and no production code, configuration or content was changed.**
+
+### Artifacts created
+- `docs/09-content-pages/copy/` — **17 page-copy files**, plus `industries-manufacturing.md` as a **conditional record with no copy drafted**
+- `docs/09-content-pages/PAGE_COPY_INDEX.md`
+- `docs/09-content-pages/PAGE_COPY_AUDIT.md`
+- `docs/00-project/handoffs/SESSION_11_PAGE_COPY_PRODUCTION.md`
+
+### Copy statuses
+- **FINAL-CANDIDATE (7)** — `/services` · `/seo` · `/ai-seo` · `/social-media-ads` · `/lead-generation` · `/conversion-optimization` · `/problems/traffic-but-no-enquiries`. **Ready for orchestrator review; not approved, and several are sequence-blocked behind `/how-it-works`.**
+- **PARTIALLY BLOCKED (7)** — `/` · `/google-ads` · `/pricing` · `/about` · `/contact` · `/schedule-call` · `/faq`
+- **BLOCKED (1)** — `/how-it-works`. The real delivery process is owner-blocked, and **a methodology page describing an invented process would be fabricated proof**
+- **CONDITIONAL (3)** — `/research` · `/blog` · `/industries/manufacturing`
+
+**Not produced, and recorded as such:** the two research entries · the three unconditional launch articles · the conditional article · the five non-indexable routes, none of which has a page brief.
+
+### Determinations worth recording in state
+- **The homepage headline was determined inside the approved hero territory, not lifted from it.** Three options were drafted and critically compared; **Option A — *"Judge us on the enquiries, not the traffic."*** — is recommended. Option B fails the swap test; Option C reads as a promise of a result. **Not approved — selection is an owner and orchestrator decision**, and `DEC-013` item 2 already records that the territory phrase is not frozen as launch copy.
+- **Every commercial page confirms its searched capability in the first screen, in the searcher's own word**, then bridges to the outcome within two sentences. No page delays confirmation to protect the positioning.
+- **Zero claims at claims-ladder level E or F across the whole set.** No client outcome appears in any form, including anonymised.
+- **No price, person, founding date, address, business hour or response time was invented anywhere.** Every missing fact carries a placeholder from the approved taxonomy, and no gap was written around so that a load-bearing fact stopped being needed.
+- **`/lead-generation` publishes the qualified-enquiry definition in buyer language**, and it appears in full on no other page.
+- **The problem page's five-check diagnostic is genuinely runnable without contact**, and two of its five findings point away from conversion work.
+- **The attribution limitations are stated once, at full strength, on `/how-it-works`.** A draft of `/faq` that restated them was trimmed during the session's own audit.
+- **Four defects were found and corrected inside the session** — a missing outcome bridge on `/conversion-optimization`, a missing boundary statement on `/social-media-ads`, the `/faq` duplication above, and two innocent uses of a prohibited superlative.
+
+### Session 11 second-reader / orchestrator correction pass (2026-09-01)
+
+A correction pass was run **within the same session, in a different role**: a skeptical second reading of every word of every copy file, instructed to distrust the session's own audit and summary until the sentences supported them. **No copy production was restarted, no research was performed, no approved document was modified, no production code was touched, and no gate status changed.**
+
+**Orchestrator decisions applied:** the homepage H1 — *"Judge us on the enquiries, not the traffic."* — is **approved as a copy direction**, subject to the page surviving review · `/lead-generation` may use the query phrase in its H1 provided it bridges immediately to the outcome · **the conditional manufacturing page stays undrafted**, resolving the reported contradiction in favour of the approved `COPY_PLACEHOLDER_STANDARD.md` rule · `/thank-you` receives a dedicated copy artifact.
+
+**What the second reading found, recorded because it matters more than the original pass's self-assessment:** the first pass **over-reported its own quality** — its audit recorded four defects, the second reading made **twenty-five substantive corrections**. The material ones were a **prohibited engagement-model absolute on `/services`** that the first audit claimed to have checked and passed; a **homepage hero that could pull the whole proposition towards SEO-only** and used "qualified enquiry" in the first screen against the approved terminology ruling; **three claims that went beyond their evidence**; **`/google-ads` printing a rejected company category in order to deny it**, which is a live risk given that this site's assertions are verifiably redistributed by AI systems; a **missing mandatory message move on `/lead-generation`**; and a **problem page with no honest "we cannot tell yet" outcome**, which has since gained one along with an outcome telling the reader to fix two findings themselves without hiring anyone.
+
+**Revised statuses:** 7 FINAL-CANDIDATE · 8 PARTIALLY BLOCKED · 1 BLOCKED · 3 CONDITIONAL. **`/schedule-call` is recorded as structurally correct and substantively hollow** until its owner inputs arrive.
+
+### Session 11 final orchestrator-directed check (2026-09-01)
+
+A third, narrow pass was run on orchestrator direction: **no rewrite, no new positioning, no research.** It re-read the first screen and full copy of the seven FINAL-CANDIDATE pages plus the corrected homepage, against seven fixed tests — first-screen comprehension, category, claims, engagement model, terminology, swap and AI-writing.
+
+**The one directed change: the ~0.28% AI-referral-traffic statistic was removed from `/ai-seo` and no replacement statistic was added.** The source was a vendor blog citing an unaudited third-party panel, and the page's argument does not depend on it. The page now sizes the opportunity qualitatively and states plainly that it will not publish a share figure it cannot stand behind. **The figure must not be reintroduced anywhere in page copy.** *(The Session 04 research record of that figure, elsewhere in this file, is evidence history and is unchanged.)*
+
+**Four further corrections were made, all small:** `/social-media-ads` used "qualified enquiry" in its first screen where the approved ruling reserves it for pages that can explain qualification immediately · `/conversion-optimization` carried a stacked "not X, it is Y" construction · `/seo` repeated one rhetorical construction four times in body copy.
+
+**All seven FINAL-CANDIDATE pages passed all seven tests after those corrections.** **Statuses were not upgraded**: every blocked and partially blocked page remains exactly as it was, because a review does not supply a missing owner fact.
+
+**One standing rule recorded:** a claim carrying `[VALIDATION REQUIRED]` — currently Google's published statement, on `/ai-seo` and `/faq` — **remains documented but must not be represented as publication-ready evidence until it is re-verified.**
+
+**Route counts unchanged** — 22 unconditional indexable, 2 conditional, 5 non-indexable. `/thank-you` is an existing non-indexable route and stays `noindex` and out of the sitemap.
+
+### Contradictions reported rather than resolved
+1. **The conditional vertical page.** The session brief's production sequence includes conditional pages; `COPY_PLACEHOLDER_STANDARD.md` §1 item 19 — approved at Gate 8 — states the two conditional assets are not written until the manufacturing gate clears. **Copy was not drafted**, a record file was created instead, and the conflict was referred to the orchestrator. **RESOLVED in the correction pass: the approved rule controls and the page stays undrafted until the gate clears.**
+2. **`/thank-you`** had a launch content requirement and no page brief. **RESOLVED in the correction pass: drafted on orchestrator instruction, against the content requirement in `LAUNCH_CONTENT_INVENTORY.md` §3. PARTIALLY BLOCKED — the "what happens next" section is owner-blocked and was not filled with a default.**
+
+### Production observation — recorded, not acted on (VERIFIED FACT)
+Read-only inspection, performed solely to establish what must not migrate into new copy. **The prohibited "300%+ ROI" claim appears on at least seven production surfaces** — the homepage title and a homepage statistic block, the `/google-ads` title and a statistic block, statistic blocks on `/lead-generation`, `/about` (twice), `/how-it-works` and `/work`, and a hard-coded blog metadata description. The approved documentation records **the homepage title** only, so **the known exposure is materially wider than documented.** Separately, **the sitewide default title is *"MappedSkills - Performance Marketing for SaaS"*, carrying a rejected company-level positioning and a segment claim that contradicts the approved ICP.** **Remediation is an owner decision (`DEC-007`) and no production content was changed.**
+
+### Session 11 method limitations (VERIFIED FACT)
+- **No research was performed.** Every copy decision derives from Sessions 01–10 artifacts with their evidence labels intact.
+- **No search volume, keyword difficulty, CPC, ranking, traffic, backlink, conversion-rate, benchmark or AI-citation figure was gathered, estimated or written.** Existing figures appear only with their original scope, date and caveats.
+- **No production code, configuration, content or asset was modified. No build, lint or test was run. No page was rendered.** Production source was read only.
+- **No design, layout, styling, component, typography or motion decision was made.** Where copy alone would be inefficient, the file notes *"visual explanation useful here"* and nothing more.
+- **No approved upstream document was modified**, including `DECISION_LOG.md`, `QUALITY_GATES.md` and the existing page briefs.
+- **No decision was approved and no gate status was changed.** Claude has no authority to change either.
+
 ## Next Intended Phase
 
-**Quality Gates 5, 6, 7 and 8 are PASSED (2026-09-01; `DEC-010`, `DEC-011`, `DEC-012`, `DEC-013`).** **No visual design or production implementation has started.**
+**Quality Gates 5, 6, 7, 8 and 9 are PASSED (2026-09-01; `DEC-010`, `DEC-011`, `DEC-012`, `DEC-013`, `DEC-014`). The next substantive phase is CREATIVE / ART DIRECTION (Gate 9A) — it has not started.** **No visual design or production implementation has started.**
 
-**SESSION 11 — PAGE COPY PRODUCTION is the next intended substantive phase**, together with the technical prerequisites — a backend endpoint, durable enquiry storage, transactional email, analytics and the consent mechanism. Session 11 must determine the actual homepage headline/copy within the approved hero territory (`DEC-013`) and is bound by the twenty-item Message Quality Gate.
+**SESSION 11 — PAGE COPY PRODUCTION IS COMPLETE AND APPROVED (Gate 9 PASSED, `DEC-014`).** The orchestrator's independent review approved the homepage H1 as actual copy — *"Judge us on the enquiries, not the traffic."* — and the revised homepage supporting direction, approved substantive copy for `/services`, `/seo`, `/ai-seo`, `/social-media-ads`, `/lead-generation`, `/conversion-optimization` and `/problems/traffic-but-no-enquiries`, and applied the twenty-item Message Quality Gate. **Gate passage is not publication readiness.** The homepage remains PARTIALLY BLOCKED; every other documented PARTIALLY BLOCKED, BLOCKED and CONDITIONAL status is unchanged, the removed ~0.28% AI-referral statistic stays removed, and Google's generative-AI/SEO claim stays `[VALIDATION REQUIRED]`. The next step is Session 12 — Creative / Art Direction, not yet begun.
+
+**The technical prerequisites remain the parallel priority** — a backend endpoint, durable enquiry storage, transactional email, analytics and the consent mechanism. They gate the own-site research entry, the worked example used on three pages, and every outcome claim.
 
 **The copy phase is constrained by owner inputs and should be sequenced accordingly.** `/research/{ai-visibility-baseline}` is READY and requires no owner input or client permission; `/problems/traffic-but-no-enquiries` has no blocking owner input and sits on the most winnable surface in the programme. **`/how-it-works`, `/about`, `/contact` and `/pricing` must not be started until their owner inputs arrive.**
 
@@ -706,12 +780,12 @@ Carried forward, plus the Session 08 specification:
 12. **Do not invent a conversion benchmark or a "before" figure.** Where data does not exist, write UNKNOWN.
 13. **Do not publish a response-time SLA** until one has been measured.
 14. **No page may promise revenue, guaranteed rankings, guaranteed AI citations or guaranteed enquiry counts**, or reuse "300%+ ROI", "₹100Cr+" or "₹10Cr+" (`DEC-007`).
-15. **Do not write final homepage copy or taglines outside the approved hero territory.** The messaging gate (Gate 8) is passed and the hero territory (`DEC-013`) is approved as a strategic territory; Session 11 chooses the actual headline/copy within it, not a different territory.
+15. **The homepage H1 is approved as actual copy** — *"Judge us on the enquiries, not the traffic."* (`DEC-014`), within the approved hero territory (`DEC-013`). Do not write alternative final homepage copy or taglines outside the approved territory, and do not treat the homepage's remaining PARTIALLY BLOCKED status as resolved.
 16. **Do not let a capability rise to Level 1 of the message hierarchy** — not on the homepage, not on `/services`, not in any company description or external profile.
 17. **Do not use GEO, AEO or LLMO as positioning**, in a title, heading, navigation label, meta description or CTA.
 18. **Do not use "CRO" in body copy**, and do not use "leads" as MappedSkills' own outcome word.
 19. **Do not fill a placeholder with a plausible default**, and do not reshape copy so a missing load-bearing fact stops being needed.
-20. **The positioning statement and the hero territory are approved (`DEC-013`) — the hero territory as a strategic territory, not final homepage copy.** Do not treat the exact phrase *"Judged on the enquiries."* as frozen launch copy; do not treat either as open to reopening the underlying strategy.
+20. **The positioning statement, the hero territory and the homepage H1 are approved** (`DEC-013`, `DEC-014`). Do not treat any of them as open to reopening the underlying strategy. **Do not treat Gate 9 passing as publication approval for any PARTIALLY BLOCKED, BLOCKED or CONDITIONAL route** — see the Session 11 section and `DEC-014` for the preserved list.
 
 ### Actions that do not depend on the gates and should not wait for them
 1. **The off-site listings, profiles and reviews programme** — Clutch, Semrush Agency Partners, GoodFirms, Google Business Profile. Directory sources appeared in **15 of 28** unbranded AI runs and gate the category SERPs and the Local Pack simultaneously.
@@ -734,7 +808,8 @@ Carried forward, plus the Session 08 specification:
 - **Gate 6 — PASSED** (2026-09-01). See `DEC-011`.
 - **Gate 7 — PASSED** (2026-09-01). See `DEC-012`.
 - **Gate 8 — Messaging Architecture — PASSED** (2026-09-01, Session 10, including its correction pass). See `DEC-013`.
-- **Gates 9 onwards** — untouched, unapproached and not implied.
+- **Gate 9 — Page Copy Production — PASSED** (2026-09-01, Session 11, including its correction pass). See `DEC-014`. **Approval is not publication readiness** — PARTIALLY BLOCKED, BLOCKED and CONDITIONAL routes are preserved unchanged.
+- **Gate 9A (Creative Direction) and Gate 9B (UX) onwards** — untouched, unapproached and not implied. See `QUALITY_GATES.md` for the numbering reconciliation.
 
 ## Status of the Two Session 01B Owner Confirmations
 Both were addressed by the owner-supplied facts recorded above on 2026-08-31, within the limits of what the owner actually stated:
@@ -753,17 +828,18 @@ Recorded so they are not lost, and judged safe to address during implementation 
 ## Not Yet Approved
 Approved and closed by Session 06: the fundamental business direction (`DEC-005`), the frozen business documents (`DEC-006`), the strategic rule on unsupported claims (`DEC-007`), and the page-targets-query rule (`DEC-008`).
 
-**Approved 2026-09-01:** Quality Gate 5 (information architecture — the IA, page inventory, URL migration map, navigation, search architecture and funnel architecture), Quality Gate 6 (CRO architecture — the qualified-enquiry definition, form/booking spec, CTA system, page-type rules, attribution model, event taxonomy, CRM data contract, lifecycle and follow-up architecture), Quality Gate 7 (content architecture — the content strategy, launch content inventory, cluster architecture, editorial strategy, research strategy, AI citation principles, claims governance, content quality gate, and all 24 page, editorial and research briefs), and Quality Gate 8 (messaging architecture — the corrected internal positioning, the hero strategic territory, engagement-model safeguards, default buyer-facing terminology, AI-search umbrella terminology, the prohibited/restricted language system, the claims ladder, and the twenty-item Message Quality Gate). Recorded as `DEC-010`, `DEC-011`, `DEC-012`, `DEC-013`.
+**Approved 2026-09-01:** Quality Gate 5 (information architecture — the IA, page inventory, URL migration map, navigation, search architecture and funnel architecture), Quality Gate 6 (CRO architecture — the qualified-enquiry definition, form/booking spec, CTA system, page-type rules, attribution model, event taxonomy, CRM data contract, lifecycle and follow-up architecture), Quality Gate 7 (content architecture — the content strategy, launch content inventory, cluster architecture, editorial strategy, research strategy, AI citation principles, claims governance, content quality gate, and all 24 page, editorial and research briefs), Quality Gate 8 (messaging architecture — the corrected internal positioning, the hero strategic territory, engagement-model safeguards, default buyer-facing terminology, AI-search umbrella terminology, the prohibited/restricted language system, the claims ladder, and the twenty-item Message Quality Gate), and Quality Gate 9 (page copy production — the page-copy system, copy standards, approved substantive copy for `/services`, `/seo`, `/ai-seo`, `/social-media-ads`, `/lead-generation`, `/conversion-optimization`, `/problems/traffic-but-no-enquiries`, and the homepage H1 *"Judge us on the enquiries, not the traffic."* with its supporting direction). Recorded as `DEC-010`, `DEC-011`, `DEC-012`, `DEC-013`, `DEC-014`. **Gate 9 approval is explicitly not publication readiness** — see the preserved route statuses below.
 
 Still **not** approved:
 - Quality Gate 1 (existing site audit) — artifacts delivered, orchestrator review pending;
 - Quality Gate 3 (search demand / SERP / commercial opportunity) — artifacts delivered, orchestrator review pending;
 - Quality Gate 4 (AI visibility, citation & discovery baseline) — artifacts delivered, orchestrator review pending;
-- Quality Gates 9 onwards — not started;
+- Quality Gates 9A (Creative Direction), 9B (UX) and 10 onwards — not started;
 - **manufacturing as an exclusive or company-level specialisation** — it is candidate beachhead #1 only, gated on volume verification, a healthcare comparison, and one publishable industrial result;
 - final offer names, packaging and the free/paid/hybrid entry model;
 - final pricing;
-- **final website homepage copy and taglines** — the messaging *architecture and territory* are approved (`DEC-013`), but **the actual homepage headline/copy is not yet written**; the hero territory *"Judged on the enquiries."* is approved as a strategic territory, not as frozen final copy — Session 11 determines the actual wording within it;
+- **publication of the PARTIALLY BLOCKED routes** (`/`, `/google-ads`, `/pricing`, `/about`, `/contact`, `/schedule-call`, `/faq`, `/thank-you`), **the BLOCKED route** (`/how-it-works`), and **the CONDITIONAL routes** (`/research`, `/blog`, `/industries/manufacturing`) — their copy status is unchanged by Gate 9 and remains gated on the documented owner inputs, the manufacturing validation gate, and technical prerequisites;
+- **the two `[VALIDATION REQUIRED]` re-verifications on `/ai-seo` and `/faq`** (Google's published generative-AI/SEO position) — not publication-ready evidence until re-verified against the primary source;
 - final information architecture, sitemap and URL architecture (proposed in Session 07, not approved);
 - final keyword map and content plan (proposed in Session 09, not approved);
 - international expansion, and any international SEO or location strategy;

@@ -211,3 +211,22 @@ Use this file only for meaningful project decisions.
 - **Impacted files:** `QUALITY_GATES.md`, `CURRENT_STATE.md`.
 - **Supersedes:** the "PROPOSED — NOT APPROVED" / "THE MESSAGING GATE IS NOT PASSED" status recorded at the end of Session 10.
 - **Approved by:** Project orchestrator, 2026-09-01.
+
+---
+
+### DEC-014
+- **Date:** 2026-09-01
+- **Status:** **Approved — gate approval.**
+- **Decision:** **Quality Gate 9 — Page Copy Production — PASSED**, on the Session 11 page-copy system, copy standards, approved substantive page copy, homepage messaging direction and documented blocker handling. **Gate approval is explicitly NOT publication readiness for every route.**
+  1. **Substantive copy APPROVED** for: `/services` · `/seo` · `/ai-seo` · `/social-media-ads` · `/lead-generation` · `/conversion-optimization` · `/problems/traffic-but-no-enquiries`.
+  2. **Homepage H1 APPROVED as actual copy:** *"Judge us on the enquiries, not the traffic."* The revised homepage supporting direction is approved. **The homepage retains its documented PARTIALLY BLOCKED status** — unresolved owner inputs remain elsewhere on the page (team/people, enquiry-response owner and hours, published phone, the production-claims decision).
+  3. **PARTIALLY BLOCKED, preserved:** `/` · `/google-ads` · `/pricing` · `/about` · `/contact` · `/schedule-call` · `/faq` · `/thank-you`.
+  4. **BLOCKED, preserved:** `/how-it-works` — the single most consequential blocker (the real delivery process).
+  5. **CONDITIONAL, preserved:** `/research` · `/blog` · `/industries/manufacturing` (copy not drafted, pending the manufacturing gate).
+  6. **Evidence rules preserved:** the ~0.28% AI-referral statistic stays removed from `/ai-seo`, with no replacement figure invented. Google's published position on generative-AI optimisation and SEO remains flagged **`[VALIDATION REQUIRED]`** on `/ai-seo` and `/faq` and is **not publication-ready evidence** until re-verified against the primary source.
+  7. **All documented owner-input blockers are preserved**, including: the real delivery process; verified company facts; team/people/authorship; pricing/inclusions/minimums; spend vs fee; the entry-offer model; the enquiry-response owner; business hours; the production-claims decision; client permissions; and the manufacturing gate. Documented technical prerequisites are likewise preserved. **No blocker was resolved by inventing an answer.**
+- **Reason / basis:** Session 11 delivered the page-copy production system, including a second-reader/orchestrator correction pass and a final orchestrator-directed check. The orchestrator's independent review approved the copy standards, the approved routes' substantive copy, and the homepage H1 and supporting direction, while confirming that gate passage does not upgrade any page's blocked, partially blocked or conditional status and does not make an unvalidated claim publication-ready.
+- **Evidence:** `docs/09-content-pages/PAGE_COPY_INDEX.md`, `docs/09-content-pages/PAGE_COPY_AUDIT.md`, `docs/09-content-pages/copy/*`; `handoffs/SESSION_11_PAGE_COPY_PRODUCTION.md`; governed by `docs/08-messaging/MESSAGE_CONSISTENCY_MATRIX.md` and `MESSAGE_QUALITY_GATE.md` (Gate 8, `DEC-013`) and `docs/05-content/CONTENT_QUALITY_GATE.md` (Gate 7, `DEC-012`).
+- **Impacted files:** `QUALITY_GATES.md`, `CURRENT_STATE.md`.
+- **Supersedes:** the "PROPOSED — NOT APPROVED" status recorded on `PAGE_COPY_INDEX.md`, `PAGE_COPY_AUDIT.md` and the Session 11 handoff.
+- **Approved by:** Project orchestrator, 2026-09-01.

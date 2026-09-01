@@ -214,7 +214,7 @@ Of the 22 unconditional pages, 13 already exist; 9 are new. Both conditional pag
 Content architecture (Gate 7) follows, building on `SEARCH_ARCHITECTURE.md` §5.
 
 **Two workstreams that do not depend on the gate and should not wait for it:**
-1. **The off-site listings, profiles and reviews programme** — Clutch, Semrush Agency Partners, GoodFirms, Google Business Profile. Directory sources appeared in **15 of 28** unbranded AI runs and gate the category SERPs and the Local Pack simultaneously. **Roughly half of what the strategy needs from "search" is not a page and cannot be built by this project.**
+1. **The off-site listings, profiles and reviews programme** — Clutch, Semrush Agency Partners, GoodFirms, Google Business Profile. Directory sources appeared in **15 of 28** unbranded AI runs and gate the category SERPs and the Local Pack simultaneously. **Roughly half of what the strategy needs from "search" is not a page and cannot be built by this project.** *(See the correction note at the end of this handoff.)*
 2. **Fixing the conversion and measurement layer** — a working form, a working booking path, analytics, enquiry-source capture, and `/thank-you` wired up. This is a launch prerequisite, and it is also the first proof asset.
 
 ## 15. Next session should read
@@ -231,3 +231,29 @@ Content architecture (Gate 7) follows, building on `SEARCH_ARCHITECTURE.md` §5.
 **Session 07 stops here.** The architecture is proposed and Quality Gate 5 is open.
 
 **Do not begin CRO/funnel specification, content architecture, creative direction, UX, UI, copy or development work.** **No form, booking flow, field set or CTA copy was designed in the correction pass.** **No page was designed, no copy was written, and no code was changed.** The next phase requires an explicit brief from the orchestrator.
+
+---
+
+## 17. Correction notes added after this session
+
+**This handoff is a historical record and its original wording is preserved above.** The notes below were added later and do not rewrite it.
+
+### 17.1 Unsupported quantitative wording — corrected 2026-09-01 (Session 09 reconciliation pass)
+
+**§14 statement 1 says:** *"Roughly half of what the strategy needs from 'search' is not a page and cannot be built by this project."*
+
+**That ratio was never measured, no evidence in this programme supports it, and it must not be quoted or reused.** The evidence-safe formulation, which carries the same meaning without the invented proportion, is:
+
+> **A material part of search and AI-discovery authority is off-site and cannot be created through owned-site publishing alone.**
+
+**No substitute percentage, ratio or estimate is introduced.** The underlying Session 04 evidence is unaltered and stands on its own: directory sources appeared in **15 of 28** unbranded AI runs, `agencies.semrush.com` in 10 and `clutch.co` in 5, and **MappedSkills has a profile on neither**. The same correction was applied to `docs/03-search/SEARCH_ARCHITECTURE.md` §4.
+
+### 17.2 Editorial slot 2 — superseded 2026-09-01
+
+**SUPERSEDED BY SESSION 09 — CONTENT STRATEGY REFINEMENT.** Where this handoff and the Session 07 artifacts associate the **second unconditional editorial launch slot** with the `how to get cited by ai` family, that association no longer holds. **The slot remains**; its topic is now the search → enquiries → qualified enquiries → measurement article, carrying **`PRIMARY SEARCH TARGET = UNVALIDATED`**.
+
+**Unchanged by that refinement:** the launch article count (3 unconditional + 1 conditional) · every URL and route · the sitemap · navigation · commercial-page targeting · the problem page · the manufacturing conditional gate · indexable and non-indexable counts. **The Session 03 research evidence for the `how to get cited by ai` family is unaltered and remains valid.** Decision trail: `DEC-009`.
+
+### 17.3 Gate 5 approved — 2026-09-01
+
+**Quality Gate 5 (Information Architecture) was reviewed and PASSED by the orchestrator on 2026-09-01**, on the basis of the architecture as corrected by §0 above and the editorial-slot refinement in §17.2 (`DEC-009`). Decision trail: `DEC-010` in `DECISION_LOG.md`. This handoff's original §1 status line ("PROPOSED — NOT APPROVED") is preserved above as the record of the session's own stop state; it is superseded as current fact by this note and by `QUALITY_GATES.md` / `CURRENT_STATE.md`.

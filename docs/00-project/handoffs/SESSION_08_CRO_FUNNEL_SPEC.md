@@ -220,3 +220,7 @@ Confident spam receives the same success state as a legitimate submission, **cre
 **Session 08 stops here.** The funnel is specified; **Quality Gate 6 is not passed.**
 
 **Do not begin content architecture, creative direction, UX, UI, copy, or any implementation.** The next phase requires an explicit brief from the orchestrator.
+
+## 21. Gate 6 approved — 2026-09-01 (annotation added later)
+
+**Quality Gate 6 (CRO + Qualified-Enquiry Funnel Specification) was reviewed and PASSED by the orchestrator on 2026-09-01**, on the basis of the specification as corrected in §0/§17 above. Decision trail: `DEC-011` in `DECISION_LOG.md`. **§20's original stop condition is preserved above as the record of this session's own stop state**; it is superseded as current fact by this note and by `QUALITY_GATES.md` / `CURRENT_STATE.md`. This annotation performs no new research and reopens nothing.

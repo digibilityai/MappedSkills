@@ -2,7 +2,7 @@
 
 No phase should advance merely because an artifact exists.
 
-## Gate Status Summary (as at 2026-08-31)
+## Gate Status Summary (as at 2026-09-01)
 
 | Gate | Status |
 |---|---|
@@ -10,9 +10,12 @@ No phase should advance merely because an artifact exists.
 | **Gate 2 — Business / Market Validation** | **PASSED — 2026-08-31** |
 | **Gate 3 — Search Opportunity Validation** | Artifacts delivered (Session 03). Conclusions consumed by the approved strategy. **Orchestrator review pending.** Not marked passed |
 | **Gate 4 — AI Visibility Strategy** | Artifacts delivered (Session 04). Conclusions consumed by the approved strategy. **Orchestrator review pending.** Not marked passed |
-| **Gates 5–22** | **NOT STARTED, NOT APPROACHED, NOT PASSED** |
+| **Gate 5 — Information Architecture** | **PASSED — 2026-09-01** |
+| **Gate 6 — CRO Architecture** | **PASSED — 2026-09-01** |
+| **Gate 7 — Content Architecture** | **PASSED — 2026-09-01** |
+| **Gates 8–22** | **NOT STARTED, NOT APPROACHED, NOT PASSED** |
 
-**Session 06 marked Gate 2 only.** No later gate is passed, approached or implied by the business strategy freeze.
+**Session 06 marked Gate 2 only.** Gates 5, 6 and 7 were approved by the orchestrator on 2026-09-01, recorded in `DECISION_LOG.md` as `DEC-010`, `DEC-011` and `DEC-012`. No gate from 8 onwards is passed, approached or implied by any of these approvals.
 
 ## Gate 1 — Existing Site Audit
 **Status: artifacts delivered; orchestrator review pending. NOT marked passed.**
@@ -58,16 +61,28 @@ Final messaging and homepage copy · taglines · information architecture and si
 **Acceptance:** platform-specific evidence; no unsupported ranking guarantees.
 
 ## Gate 5 — Information Architecture
+**Status: PASSED — 2026-09-01.** See `DEC-010` in `DECISION_LOG.md`.
 **Required:** sitemap, URL architecture, navigation, page inventory, internal linking logic.
 **Acceptance:** every page has audience, intent, funnel role, target topic, CTA.
 
+### Why this gate passes
+Session 07 delivered the required artifacts; an orchestrator correction pass made manufacturing launch-conditional, removed the mandatory proof detour, made qualified-enquiry creation mechanism-independent, and resolved the duplicate IA directory. Launch counts were reconciled. Session 09 later refined the topic occupying one existing editorial slot (`DEC-009`) — that refinement changed no route, no count, no navigation entry and no commercial intent, and did not reopen this gate. The orchestrator approved the corrected architecture.
+
 ## Gate 6 — CRO Architecture
+**Status: PASSED — 2026-09-01.** See `DEC-011` in `DECISION_LOG.md`.
 **Required:** visitor journeys, CTA hierarchy, form strategy, trust architecture, funnel architecture.
 **Acceptance:** page journeys mapped by intent and conversion goal.
 
+### Why this gate passes
+Session 08 was reviewed and corrected so that Website Qualified and Sales Qualified remain distinct; attribution completeness is independent of commercial qualification; both a form and a meeting booking can create a qualified enquiry, with booking never automatically qualified merely by existing; the four required form fields stand with budget removed and phone optional; email/MX verification fails open; spam handling is controlled; attribution is first-touch + conversion-touch; the CRM lifecycle stays simple; analytics carries no unnecessary PII; a legitimate enquiry cannot be silently lost to a secondary-integration failure; and the production analytics wording was reconciled with Session 01B live verification. The orchestrator approved the corrected specification.
+
 ## Gate 7 — Content Architecture
+**Status: PASSED — 2026-09-01.** See `DEC-012` in `DECISION_LOG.md`.
 **Required:** content pillars, clusters, launch content roadmap, editorial standards, evidence standards.
 **Acceptance:** supports commercial pages, topical authority, AI citation potential, and user usefulness.
+
+### Why this gate passes
+Session 09 was reviewed through its original strategy, an editorial correction pass, and a cross-gate reconciliation pass. The final approved unconditional editorial launch set is: (1) AI-assisted discovery / appearing in ChatGPT, (2) search → qualified enquiry / measurement, (3) the website enquiry-loss diagnostic — plus one conditional industrial/B2B article paired with the conditional manufacturing page. AI Search remains a supporting capability, not the company category. The AI Visibility Baseline remains the canonical research home for the Session 04 dataset. Article 2's search target remains **UNVALIDATED** — no search demand may be claimed for it until targeted validation supports it. `how to get cited by ai` is unbuilt at launch, reconsiderable only in PHASE 2 if it can support a distinct, non-duplicating asset. The own-site diagnostic remains research, not a case study. `/research` may launch with one genuine entry if the second research asset is not ready. No fabricated evidence was accepted, and claims/evidence governance is binding. The orchestrator approved the corrected content strategy.
 
 ## Gate 8 — Creative Direction
 **Required:** visual principles, references, data-visualization language, imagery policy, motion philosophy.

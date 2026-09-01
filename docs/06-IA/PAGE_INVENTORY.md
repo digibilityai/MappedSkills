@@ -79,10 +79,19 @@ Of the 22 unconditional pages, **13 already exist** as routes (repositioned or k
 |---|---|---|---|---|
 | 15 | `/blog` | Editorial index | C | EXISTS — keep URL, populate |
 | 16 | `/blog/{ai-search-guide-1}` | Article | C | **NEW** — `how to appear in chatgpt` family |
-| 17 | `/blog/{ai-search-guide-2}` | Article | C | **NEW** — `how to get cited by ai` family |
+| 17 | `/blog/{ai-search-guide-2}` | Article | C | **NEW** — `how to get cited by ai` family · **[SUPERSEDED — see §1.5A]** |
 | 18 | `/blog/{enquiry-conversion-article}` | Article | C, B | **NEW** — supports `/problems/traffic-but-no-enquiries` |
 
 **Slugs are indicative.** Final slugs, titles and briefs belong to the content phase.
+
+### 1.5A Supersession note — editorial slot 17
+
+> **SUPERSEDED BY SESSION 09 — CONTENT STRATEGY REFINEMENT (2026-09-01).**
+> The **second unconditional editorial slot remains**, and its topic changed. It is now *"how to tell whether SEO is actually producing qualified enquiries"* — the search → enquiries → qualified enquiries → measurement article — carrying **`PRIMARY SEARCH TARGET = UNVALIDATED`** and classified as buyer education and conversion support, **not** as keyword-demand-led.
+> **`how to get cited by ai` is UNBUILT at launch.** It may be reconsidered in PHASE 2 only if it can support a distinct asset without duplicating the canonical `/research/{ai-visibility-baseline}` dataset, methodology, findings, charts or conclusion.
+> **Unchanged by this refinement:** the launch article count (3 unconditional + 1 conditional) · every URL and route · the sitemap · navigation · commercial-page targeting · the problem page · the manufacturing conditional gate · indexable and non-indexable counts. **This is a content-topic refinement, not an IA redesign.** Rationale and decision trail: `DEC-009`, `docs/05-content/EDITORIAL_STRATEGY.md` §2A.
+
+
 
 ### 1.6 Company and conversion (4)
 

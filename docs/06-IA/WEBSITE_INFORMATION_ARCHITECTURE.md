@@ -274,7 +274,7 @@ Today the index is `/work` and details are `/portfolio/{slug}`; bare `/portfolio
 | # | Surface | URL | Role |
 |---|---|---|---|
 | 1 | **Commercial** | `/ai-seo` | The one AI category term with buyer intent. Delivery capability, framed as a capability inside the enquiry outcome |
-| 2 | **Buyer-question content** | `/blog/{how-to-appear-in-chatgpt}`, `/blog/{how-to-get-cited-by-ai}` | The buyer's own words — 8 clean variants each. Refreshed on a cadence, because this topic decays fast |
+| 2 | **Buyer-question content** | `/blog/{how-to-appear-in-chatgpt}`, `/blog/{how-to-get-cited-by-ai}` **[the second is SUPERSEDED — see §12]** | The buyer's own words — 8 clean variants each. Refreshed on a cadence, because this topic decays fast |
 | 3 | **Own proof** | `/research/{ai-visibility-baseline}` | The published, variance-aware baseline. The proof mechanism |
 | 4 | **Technical depth** | Crawler/retrieval access guide + checker | **PHASE 2.** `ai crawler access checker` is a clean diagnostic family and MappedSkills' own audit is the credential |
 
@@ -312,7 +312,7 @@ Today the index is `/work` and details are `/portfolio/{slug}`; bare `/portfolio
 | Cluster | Anchor page | Launch? | Evidence |
 |---|---|---|---|
 | **Website enquiry conversion** (buyer-symptom) | `/problems/traffic-but-no-enquiries` | **LAUNCH** — 1 article | The most winnable SERP observed; freshness-rewarded; peer-level incumbents |
-| **AI-assisted discovery** (buyer-phrased) | `/ai-seo` | **LAUNCH** — 2 articles | `how to appear in chatgpt` and `how to get cited by ai`: 8 clean variants each, PRIORITY 1 |
+| **AI-assisted discovery** (buyer-phrased) | `/ai-seo` | **LAUNCH** — 2 articles **[SUPERSEDED — now 1 article; see the note below this table]** | `how to appear in chatgpt` and `how to get cited by ai`: 8 clean variants each, PRIORITY 1 |
 | **Industrial / B2B acquisition** | `/industries/manufacturing` | **LAUNCH — CONDITIONAL** — 1 article | The cleanest commercial family observed; zero contamination. **Ships only if the manufacturing gate clears** (§7) |
 | **Search demand and B2B SEO** | `/seo` | PHASE 2 | `b2b seo` / `enterprise seo` clean but small |
 | **AI crawler access and citability** | `/ai-seo` | PHASE 2 | Clean diagnostic family; MappedSkills' own audit is the credential |
@@ -321,7 +321,14 @@ Today the index is `/work` and details are `/portfolio/{slug}`; bare `/portfolio
 | **Paid demand capture** | `/google-ads` | PHASE 3 / as needed | Off-positioning. Support existing pages; do not build a cluster |
 | **GEO/AEO explainers and glossaries** | — | **DO NOT BUILD** | Institutionally owned SERPs; course/jobs upstream intent |
 
-**Launch editorial target: 4 articles — 3 unconditional + 1 conditional.** Fewer than 4 makes `/blog` read as abandoned; more inflates launch scope against a proof deficit.
+> **SUPERSEDED BY SESSION 09 — CONTENT STRATEGY REFINEMENT (2026-09-01).**
+> The **second unconditional editorial slot remains**, and its topic changed. It is now *"how to tell whether SEO is actually producing qualified enquiries"* — the search → enquiries → qualified enquiries → measurement article — carrying **`PRIMARY SEARCH TARGET = UNVALIDATED`** and classified as buyer education and conversion support, **not** as keyword-demand-led.
+> **`how to get cited by ai` is UNBUILT at launch.** It may be reconsidered in PHASE 2 only if it can support a distinct asset without duplicating the canonical `/research/{ai-visibility-baseline}` dataset, methodology, findings, charts or conclusion.
+> **Unchanged by this refinement:** the launch article count (3 unconditional + 1 conditional) · every URL and route · the sitemap · navigation · commercial-page targeting · the problem page · the manufacturing conditional gate · indexable and non-indexable counts. **This is a content-topic refinement, not an IA redesign.** Rationale and decision trail: `DEC-009`, `docs/05-content/EDITORIAL_STRATEGY.md` §2A.
+
+**Additionally superseded in the same refinement:** the AI-assisted discovery cluster carries **one** launch article rather than two, and the measurement / search-to-enquiry territory carries **one**. **The cluster count and the launch article count are unchanged**, and no cluster was added or removed.
+
+**Launch editorial target: 4 articles — 3 unconditional + 1 conditional.** *(Unchanged.)* Fewer than 4 makes `/blog` read as abandoned; more inflates launch scope against a proof deficit.
 
 **Open consequence, flagged rather than decided:** if the manufacturing gate does not clear, the editorial stream launches with **3** articles. Either that is accepted, or a PHASE 2 article is promoted to hold the floor at 4. **This is an orchestrator decision — no page is added here to pre-empt it.**
 

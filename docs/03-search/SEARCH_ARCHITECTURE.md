@@ -29,7 +29,7 @@ One page per intent. Every assignment traces to a Session 03 priority band.
 | **P1** | `seo agency for manufacturing companies`, `seo for manufacturing industry`, `digital marketing agency for b2b manufacturing companies` | `/industries/manufacturing` | **LAUNCH — CONDITIONAL** | 8 variants, 6 provider-seeking, **zero contamination** — the only family with that property. Open SERP; specialisation observed beating tenure. **Ships only if the manufacturing validation gate clears before content freeze; otherwise PHASE 2.** Manufacturing remains candidate beachhead #1, not an approved specialisation — **search evidence is not a business decision** |
 | **P1** | `why your website gets traffic but no leads`, `why is my website not generating leads`, `how to get more leads from website` | `/problems/traffic-but-no-enquiries` | **LAUNCH** | One consolidated page for three families with one intent. The most winnable SERP observed; freshness-rewarded |
 | **P1** | `how to appear in chatgpt` (8 clean variants) | `/blog/{ai-search-guide-1}` | **LAUNCH** | Informational SERP shape (Reddit, YouTube, HubSpot, OpenAI Help Centre) — a guide, not a service page |
-| **P1** | `how to get cited by ai` (8 clean variants) | `/blog/{ai-search-guide-2}` | **LAUNCH** | Distinct family: citation and mention, not appearance |
+| **P1** | `how to get cited by ai` (8 clean variants) | `/blog/{ai-search-guide-2}` | **LAUNCH** **[SUPERSEDED — see §2A]** | Distinct family: citation and mention, not appearance |
 | **P2** | `ai seo agency` + Pune/city/neighbourhood variants | `/ai-seo` | **LAUNCH** | The one AI category term with genuine provider intent. **Listicle-gated, not authority-gated** — see §5 |
 | **P2** | `b2b seo`, `enterprise seo` | `/seo` | **LAUNCH** | The cleanest generic-SEO sub-family: no course, jobs or acronym contamination |
 | **P2** | `seo services cost`, `how much does seo cost in pune`, `how much does ai seo cost` | `/pricing` + a PHASE 2 article | **LAUNCH (page)** | PAA asks it twice; a ranking snippet already quotes Pune pricing; under-served. **Caveat: attracts price-shoppers** |
@@ -47,6 +47,15 @@ One page per intent. Every assignment traces to a Session 03 priority band.
 | **REJECT** | `seo consultant`, `technical seo`, `lead automation`, `crm automation`, `ai marketing automation` | **No page** | — | Career and education audiences. **`how to improve lead response time` returns (NONE)** |
 | **REJECT** | `reduce cost per lead` | **No page** | — | A paid-media problem in buyers' minds, not organic or conversion |
 | **REJECT** | City grids, `seo for exporters`, `growth marketing agency`, `revenue marketing agency`, `revops agency` | **No page** | — | Non-queries, or terms with no independent identity. **`seo for exporters` returns (NONE)** |
+
+### 2A. Supersession note — the second editorial slot
+
+> **SUPERSEDED BY SESSION 09 — CONTENT STRATEGY REFINEMENT (2026-09-01).**
+> The **second unconditional editorial slot remains**, and its topic changed. It is now the search → enquiries → qualified enquiries → measurement article, carrying **`PRIMARY SEARCH TARGET = UNVALIDATED`** and classified as buyer education and conversion support, **not** as keyword-demand-led. **No query family recorded in Session 03 was reassigned to it, and no search demand was invented for it.**
+> **`how to get cited by ai` is UNBUILT at launch.** It may be reconsidered in PHASE 2 only if it can support a distinct asset without duplicating the canonical `/research/{ai-visibility-baseline}` dataset, methodology, findings, charts or conclusion.
+> **Unchanged:** the launch article count (3 unconditional + 1 conditional) · every URL, route and page assignment in the table above · the sitemap · navigation · commercial-page targeting · the problem page · the manufacturing conditional gate. **This is a content-topic refinement, not a search-architecture change.** Decision trail: `DEC-009`.
+>
+> **The Session 03 evidence for the `how to get cited by ai` family is unaltered and remains valid** — 8 clean variants, PRIORITY 1. It is the *assignment to a launch slot* that is superseded, not the research finding.
 
 ---
 
@@ -83,7 +92,9 @@ Recorded so the architecture is not asked to do a job it cannot do.
 | AI answer inclusion | Directory sources appeared in **15 of 28** unbranded AI runs; MappedSkills is on none. Crawler access is already full and produced zero appearances | **The same directory and listings programme.** Access is necessary and demonstrably not sufficient |
 | Near-term enquiry volume | Organic is a **12-month-plus** engine on three independent evidence bases | **Paid media** (retained capability), owner network, outbound |
 
-**This table is the most important page in this document.** Roughly half of what the approved strategy needs from "search" is not a page and cannot be built by this project.
+**This table is the most important page in this document.** **A material part of what the approved strategy needs from "search" and from AI-discovery authority is off-site — it is not a page, it cannot be created through owned-site publishing alone, and it cannot be built by this project.**
+
+> **CORRECTED 2026-09-01 (Session 09 reconciliation pass).** This sentence previously read *"Roughly half of what the approved strategy needs from 'search' is not a page and cannot be built by this project."* **That ratio was never measured and is not supported by any evidence in this programme**, so it has been replaced with evidence-safe wording. **No substitute ratio is introduced.** The underlying Session 04 evidence is unchanged and is stated in the table above: directory sources appeared in **15 of 28** unbranded AI runs, and MappedSkills has a profile on none.
 
 ---
 
@@ -92,7 +103,7 @@ Recorded so the architecture is not asked to do a job it cannot do.
 | Cluster | Anchor | Launch volume | Cadence requirement |
 |---|---|---|---|
 | Website enquiry conversion | `/problems/traffic-but-no-enquiries` | 1 article | **Freshness is a live ranking lever here** — results dated "4 days ago" rank. Requires a sustained cadence or the page decays |
-| AI-assisted discovery | `/ai-seo` | 2 articles | **Fastest-decaying topic on the site.** Refresh dates and findings on a defined schedule |
+| AI-assisted discovery | `/ai-seo` | 2 articles **[SUPERSEDED — 1 article; see §2A]** | **Fastest-decaying topic on the site.** Refresh dates and findings on a defined schedule |
 | Industrial / B2B acquisition **(conditional)** | `/industries/manufacturing` | 1 article, **conditional with its parent page** | Slower decay. Depth matters more than frequency. **Both defer to PHASE 2 together if the gate does not clear** |
 | Search demand / B2B SEO | `/seo` | 0 at launch | PHASE 2 |
 | Crawler access and citability | `/ai-seo` | 0 at launch | PHASE 2, paired with the tool |

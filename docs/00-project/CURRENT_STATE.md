@@ -1,9 +1,13 @@
 # Current Project State
 
 ## Current Phase
-**Session 08 Completed — CRO & QUALIFIED-ENQUIRY FUNNEL SPECIFIED. Quality Gate 6 NOT passed; Gate 5 remains OPEN.**
-**Session 07 Completed — WEBSITE IA & SEARCH ARCHITECTURE PROPOSED. Quality Gate 5 OPEN, awaiting orchestrator and owner review.**
+**Gates 5, 6 and 7 PASSED — 2026-09-01 (orchestrator approval, `DEC-010`/`DEC-011`/`DEC-012`). The programme is now ready to move into messaging / page-copy architecture. No visual design or production implementation has started as a result of these approvals.**
+**Session 09 Completed — CONTENT STRATEGY & LAUNCH CONTENT ARCHITECTURE. Quality Gate 7 PASSED (2026-09-01).**
+**Session 08 Completed — CRO & QUALIFIED-ENQUIRY FUNNEL SPECIFIED. Quality Gate 6 PASSED (2026-09-01).**
+**Session 07 Completed — WEBSITE IA & SEARCH ARCHITECTURE. Quality Gate 5 PASSED (2026-09-01).**
 **Session 06 Completed — BUSINESS STRATEGY GATE PASSED. Business strategy documents FROZEN.**
+
+**Historical note, preserved:** at the time each of Sessions 07, 08 and 09 completed, its gate was open/not passed pending orchestrator and owner review — recorded accurately in the programme-status table and handoffs below. Gates 5, 6 and 7 were subsequently reviewed and approved by the orchestrator on 2026-09-01. The historical "OPEN" / "NOT PASSED" language elsewhere in this file describes that earlier state and is not rewritten; this section states the current state.
 
 **The owner has approved the fundamental business direction.** Recorded as `DEC-005` in `DECISION_LOG.md`:
 
@@ -22,11 +26,13 @@ This is an **APPROVED DECISION**. It supersedes the previous working hypotheses 
 | **Owner fundamental strategy approval** | **COMPLETE** (2026-08-31) |
 | **Session 06 — business strategy freeze** | **COMPLETE** (2026-08-31). Five business documents rewritten together in one pass |
 | **Quality Gate 2 — business / market validation** | **PASSED** (2026-08-31) |
-| **Session 07 — website IA, search architecture & page system** | **COMPLETE** (2026-08-31). Architecture **PROPOSED, NOT APPROVED** |
-| **Quality Gate 5 — information architecture** | **OPEN.** Artifacts delivered; orchestrator and owner review pending |
-| **Session 08 — CRO & qualified-enquiry funnel specification** | **COMPLETE** (2026-08-31). **PROPOSED, NOT APPROVED** |
-| **Quality Gate 6 — CRO architecture** | **NOT PASSED.** Artifacts delivered; orchestrator and owner review pending |
-| Next phase — content architecture (Gate 7), or the technical prerequisites the funnel depends on | **NOT STARTED.** Neither is approved or implied by Session 08 |
+| **Session 07 — website IA, search architecture & page system** | **COMPLETE** (2026-08-31). Architecture **APPROVED — Gate 5 PASSED 2026-09-01 (`DEC-010`)** |
+| **Quality Gate 5 — information architecture** | **PASSED — 2026-09-01.** See `DEC-010` |
+| **Session 08 — CRO & qualified-enquiry funnel specification** | **COMPLETE** (2026-08-31). **APPROVED — Gate 6 PASSED 2026-09-01 (`DEC-011`)** |
+| **Quality Gate 6 — CRO architecture** | **PASSED — 2026-09-01.** See `DEC-011` |
+| **Session 09 — content strategy & launch content architecture** | **COMPLETE** (2026-09-01), including a narrow orchestrator correction pass. **APPROVED — Gate 7 PASSED 2026-09-01 (`DEC-012`)** |
+| **Quality Gate 7 — content architecture** | **PASSED — 2026-09-01.** See `DEC-012` |
+| Next phase — messaging / page-copy architecture, and the technical prerequisites the funnel and the content programme both depend on | **NOT STARTED.** Programme is now ready to enter this phase; not yet begun and no visual design or production implementation has occurred |
 
 **Research is CLOSED for the business-strategy phase.** No further business-direction research is commissioned by this state.
 
@@ -38,9 +44,7 @@ Any session touching IA, search architecture, content, CRO, design, copy or deve
 ### Gates not passed
 Gates 1, 3 and 4 artifacts were delivered and their conclusions were consumed by the approved strategy, but **Session 06 did not mark them passed** — that remains an orchestrator action.
 
-**Gate 5 (information architecture) is OPEN, not passed.** Session 07 delivered its artifacts; Claude has no authority to approve information architecture.
-
-**Gate 6 (CRO architecture) is NOT passed.** Session 08 delivered its artifacts. **No gate from 7 onwards is passed, approached or implied.**
+**Gates 5, 6 and 7 are PASSED — 2026-09-01**, recorded as `DEC-010`, `DEC-011` and `DEC-012`. **No gate from 8 onwards is passed, approached or implied.**
 
 ## Production Website
 **OWNER-SUPPLIED FACT:** the production website visitors use is **`https://mappedskills.com`**.
@@ -504,15 +508,101 @@ A narrow orchestrator correction pass was applied within the same session. **The
 6. Consent mechanism, and retention periods including the spam-quarantine duration — **privacy, security and legal review required**.
 7. Length of the post-launch baseline period.
 
+## Session 09 — Content Strategy & Launch Content Architecture (completed 2026-09-01)
+
+**Purpose:** determine what MappedSkills must publish, why it deserves to exist, what evidence it requires, how it supports search and AI-assisted discovery, and how it contributes to qualified enquiries. **Strategy only — no final page copy, no complete article, no headline or tagline, no design, no code.** The frozen business strategy, the proposed IA and the proposed CRO funnel were **not** reopened.
+
+### Artifacts created
+- `docs/05-content/CONTENT_STRATEGY.md`
+- `docs/05-content/LAUNCH_CONTENT_INVENTORY.md`
+- `docs/05-content/CONTENT_CLUSTER_ARCHITECTURE.md`
+- `docs/05-content/EDITORIAL_STRATEGY.md`
+- `docs/05-content/RESEARCH_CONTENT_STRATEGY.md`
+- `docs/05-content/AI_CITATION_CONTENT_PRINCIPLES.md`
+- `docs/05-content/CLAIMS_AND_EVIDENCE_GOVERNANCE.md`
+- `docs/05-content/CONTENT_QUALITY_GATE.md`
+- `docs/05-content/OWNER_INPUT_REGISTER.md`
+- `docs/05-content/CONTENT_EVIDENCE_GAPS.md`
+- `docs/05-content/editorial-briefs/` — 4 briefs (3 unconditional, 1 conditional)
+- `docs/05-content/research-briefs/` — 2 briefs
+- `docs/09-content-pages/briefs/` — 18 page briefs (17 unconditional, 1 conditional)
+- `docs/00-project/handoffs/SESSION_09_CONTENT_STRATEGY.md`
+
+### Launch content inventory — reconciles to the approved IA
+**22 unconditional indexable launch assets, 2 conditional, 5 non-indexable routes.** Brief coverage is **22 of 22 unconditional and 2 of 2 conditional**: 17 page briefs plus 3 editorial briefs plus 2 research briefs cover the unconditional set; 1 page brief plus 1 editorial brief cover the conditional pair. **No indexable URL was added, removed or renamed.**
+
+### Determinations worth recording in state
+- **Every asset must do at least one of seven named content jobs and be able to say which.** An asset that cannot name its job, its evidence and the page or decision it supports does not publish. "A keyword exists" is not a job.
+- **An operational information-gain standard exists**, with five permitted sources — first-party measurement, first-party diagnosis, disclosed method, expert interpretation of primary sources, a reusable artefact — and a **delete-test**: remove every sentence that could have been written by someone who had not done the work, and if the asset still says the same thing it does not publish.
+- **No word-count target appears anywhere, and none may be introduced.**
+- **Three launch content clusters carrying one article each, plus one conditional** — website enquiry conversion, AI-assisted discovery, measurement and the search-to-enquiry chain, and industrial/B2B acquisition (conditional). Three more are PHASE 2, one is support-only, and four are DO NOT BUILD. **Six capabilities do not get six silos**; two of the six have no supporting query family at all, and one returns **(NONE)**.
+- **The three launch article topics are determined within the three IA-assigned article slots.** The slot count was not changed — that would be an IA change. Article 3's narrower verification sub-intent carries an explicit **RESEARCH REQUIRED** flag and a recorded fallback: publish with **no primary query target claimed** rather than invent one.
+- **Launch article 2 was replaced in the correction pass** (see below). The unconditional set remains **exactly three**, and **exactly one of them is primarily AI Search**.
+- **The manufacturing article remains LAUNCH — CONDITIONAL**, shipping or deferring as a pair with `/industries/manufacturing`. **No fourth unconditional article was invented to fill the slot** if the gate does not clear; that promotion decision remains with the orchestrator.
+- **The own-site enquiry diagnostic is classified as research** — a diagnostic protocol applied to MappedSkills itself — **not** a client-style case study (no baseline exists), not a build-in-public series (it would commit to an unproven cadence), and not marketing. **It must publish only once the fixes are shipped, or it is a list of live defects rather than proof.**
+- **`/research` may launch with one entry** if those fixes slip. That is the correct outcome, not a compromise.
+- **`/how-it-works` is the root dependency of the entire content programme.** Every commercial page's proof link, the attribution-limits statement and both research entries point to it — and it is **owner-blocked** on the real delivery process.
+- **Claims governance is a six-class model** — first-party measured · client-supplied · primary-source verified · secondary-source supported · opinion/inference · **unsupported, prohibited** — assigned at brief stage, before the sentence is written. A **ten-point case-study evidence threshold** governs `/work`.
+- **A fifteen-item content quality gate** applies per asset, with a generic-agency test. It does not score, and there is **no exception for launch pressure**.
+- **Content-to-conversion intensity follows reader intent.** No sticky CTA on research, methodology or editorial pages; **a research asset must not become an advert halfway through the methodology**; and the correct response to poor editorial conversion is the hard disqualifier, **not more CTA pressure**.
+- **Visual storytelling opportunities are identified per content type** — what is better shown than described — with **no design performed** and a standing rule that **no visualisation may depict a number that does not exist**.
+- **Owned content and third-party authority are kept structurally separate.** Recorded plainly: **publishing more articles does not solve the authority problem.** Directory sources appeared in 15 of 28 unbranded AI runs and MappedSkills is on none.
+- **Author pages are PHASE 2**; named team profiles on `/about` are sufficient at launch. A **"reviewed by" byline is used only where a genuine second reviewer exists** — a manufactured one is fabricated proof.
+
+### Evidence gaps and owner inputs, made explicit
+`CONTENT_EVIDENCE_GAPS.md` records **14 claims MappedSkills would want to make and cannot support**, each with what exists, what is missing, who can close it, and whether content is blocked. **Nine close only through owner action.** Consequences: two assets outright blocked (`/work`, `/work/{slug}`), two conditional, one sequence-blocked, every commercial page constrained to method and own-diagnostic proof, and **no number about volume, traffic, ranking, revenue or improvement permitted anywhere.**
+
+`OWNER_INPUT_REGISTER.md` records ten priority inputs, of which **items 1, 3, 4, 5 and 9 cannot be delegated to any Claude session**: publishable client results · verified company facts · people and authorship · the decision on the production claims · confirmed prices · and the real delivery process.
+
+### Session 09 correction pass (2026-09-01)
+A narrow orchestrator correction pass was applied within the same session. **The content strategy was not reopened, no broad research was performed, and no launch article was added.**
+
+1. **Launch articles 1 and 3 retained** — the `how to appear in chatgpt` guide and the enquiry-loss verification article.
+2. **Launch article 2 replaced.** The proposed *"Which sources AI systems actually cite when recommending a supplier — measured across 28 runs"* was **withdrawn**, because the measured 28-run findings belong primarily to the **AI Visibility Baseline** research asset and an editorial article on substantially the same dataset would duplicate `/research` in `/blog`. **The superseded brief was deleted.** The replacement addresses **SEO / organic visibility → enquiries → qualified enquiries → measurement**, supports `/seo`, `/services`, `/lead-generation`, `/problems/traffic-but-no-enquiries` and `/how-it-works`, and — because **no recorded Session 03 family covers that intent** — carries **PRIMARY SEARCH TARGET = UNVALIDATED**, is classified as **buyer education and conversion support**, and records a targeted validation requirement before final copy. **No search demand was invented.**
+3. **A canonical-research rule is now binding.** **An original first-party dataset or measured study has exactly one canonical research URL.** Editorial may interpret or apply it only where the user intent is materially different, and must summarise only what is necessary, link to the canonical research, and add materially different application — **never reproducing substantially the same dataset, methodology, findings, charts or conclusion to create another search page.** Recorded in the content strategy, the research strategy, the editorial strategy, the internal-linking rules and as **quality-gate item 9b**, taking the gate to sixteen items.
+4. **AI Search kept proportionate.** The unconditional editorial launch set is **one AI-assisted discovery article, one search-to-qualified-enquiry article, one enquiry-loss diagnostic article.** **No second AI launch article**, and no article per capability for balance. **AI Search remains a highly visible supporting capability and is not the company category.**
+5. **Unsupported pseudo-quantification removed.** "Roughly half of what the strategy needs from search is off-site" and its variants were replaced with **"a material part of search and AI-discovery authority is off-site and cannot be created through owned-site publishing alone."** **No replacement ratio was introduced**, and the underlying Session 04 evidence — directory sources in **15 of 28** unbranded runs, MappedSkills on none — is preserved.
+
+**Cluster consequence, and the only one:** AI-assisted discovery dropped from 2 articles to 1, and the measurement territory was promoted from PHASE 2 to LAUNCH with **one** article to receive the replacement. **No cluster was added or removed and no other classification changed.**
+
+**Research assets unchanged in substance.** The **AI Visibility Baseline remains the canonical home for the Session 04 measured dataset**; the own-site diagnostic remains **blocked until the relevant fixes exist** and remains classified as **research rather than a case study**; **`/research` may still launch with one genuine entry** if the second is not ready.
+
+**The Gate 5 item this raised is now closed by the reconciliation pass below**, not left as a flag.
+
+**Preserved unchanged by the correction pass:** the seven content jobs · the information-gain standard · three unconditional launch articles · the conditional manufacturing pair · claims governance · the evidence-gap register · the owner-input register · author strategy · freshness strategy · visual-information requirements · every commercial page brief · the page inventory · the IA · the CRO specification · the business strategy.
+
+### Session 09 method limitations (VERIFIED FACT)
+- **No fresh research was performed.** Every content decision was derived from Sessions 01–08 artifacts with their original evidence labels intact.
+- **No search volume, keyword difficulty, CPC, ranking, traffic, backlink, conversion-rate, benchmark or AI-citation figure was gathered or estimated, and none appears in any Session 09 artifact.**
+- **Two narrow phrasing checks were flagged for the writing phase rather than performed** — the long-tail phrasings for launch article 3 and for the conditional article 4 — because running them from this session's vantage point would have produced evidence not comparable with Session 03's India-lens observations. Both carry recorded fallbacks.
+- **The correction pass performed no research and added no launch article.** Its only filesystem changes were within the Session 09 documentation paths, including the deletion of one superseded brief.
+- **Two pre-existing occurrences of the "roughly half" wording were outside the correction pass's permitted scope and are now corrected in the reconciliation pass below.**
+- **No application code, configuration or content was read for modification, and none was changed. No build, lint or test was run. No page was rendered and no copy was written.**
+
+### Session 09 repository reconciliation pass (2026-09-01)
+A second narrow orchestrator pass, run **before Quality Gate 7 review**, to make the repository accurately express the correction pass. **No research was performed. No strategy, IA, CRO or editorial decision was changed. No production code was touched.**
+
+**1. The superseded editorial slot binding is now annotated everywhere it was authoritative.** Five locations across four artifacts — `docs/06-IA/PAGE_INVENTORY.md` §1.5 row 17 plus a new §1.5A, `docs/06-IA/PAGE_REASON_TO_EXIST_MATRIX.md` §5, `docs/06-IA/WEBSITE_INFORMATION_ARCHITECTURE.md` §10 and §12, and `docs/03-search/SEARCH_ARCHITECTURE.md` §2 plus a new §2A and §5 — each carrying **SUPERSEDED BY SESSION 09 — CONTENT STRATEGY REFINEMENT (2026-09-01)**. **Nothing was rewritten or deleted; the original statements stand beside the annotations.**
+
+**What the annotations record, and it is the whole point of the pass:** the launch article count is **unchanged** (3 unconditional + 1 conditional) · **no URL was added** · **no IA route changed** · **no commercial-page intent changed** · **only the editorial topic occupying one existing slot changed** · **`how to get cited by ai` is UNBUILT at launch**, reconsiderable in PHASE 2 only if it can support a distinct asset without duplicating the canonical `/research/{ai-visibility-baseline}` dataset · and **the replacement has no validated primary search target and must not be represented as keyword-demand-led.**
+
+**2. The unsupported "roughly half" wording is corrected in both remaining locations.** `SEARCH_ARCHITECTURE.md` §4 now reads that **a material part of what the strategy needs from search and AI-discovery authority is off-site and cannot be created through owned-site publishing alone**, with a dated correction note recording the original sentence. The historical `handoffs/SESSION_07_IA_SEARCH_ARCHITECTURE.md` **keeps its original sentence** and gains a dated §17 correction note, so the record is preserved rather than erased. **No substitute percentage, ratio or estimate was introduced.** The underlying Session 04 evidence is unaltered: directory sources appeared in **15 of 28** unbranded AI runs, `agencies.semrush.com` in 10 and `clutch.co` in 5, and MappedSkills has a profile on neither.
+
+**3. The decision trail is recorded as `DEC-009`** — a **refinement, explicitly not a company-level strategic decision, not an IA decision and not a gate approval.** It records the earlier Gate 5 state, the three reasons for the replacement, and the explicit statements that it **does not validate search demand**, that the replacement remains **`PRIMARY SEARCH TARGET = UNVALIDATED`**, that **targeted validation is required before any search target is claimed**, and that publication is justified on **buyer-education and conversion-support** grounds without inventing keyword demand.
+
+**4. Session 09 file accounting corrected.** **35 new files · 7 tracked files modified across all three passes · 1 file deleted (never tracked).** The earlier "Files Modified — 13" was wrong; the correction pass modified **16**. The untracked root `README.md` pre-dates this session and is excluded from every count.
+
+**Research canonicalisation confirmed unchanged:** `/research/{ai-visibility-baseline}` remains the canonical future public home for the Session 04 measured dataset, and **no launch article may reproduce substantially the same dataset, methodology, findings, charts or conclusion.**
+
+**Gate status was not changed by this pass, and Claude has no authority to change it.** At the time of this reconciliation pass the repository recorded **Gate 5 as OPEN**. **Gate 5, along with Gates 6 and 7, was subsequently reviewed and approved by the orchestrator on 2026-09-01**, recorded in `DECISION_LOG.md` as `DEC-010`, `DEC-011` and `DEC-012` and reflected in `QUALITY_GATES.md` and the summary above — a separate, later administrative reconciliation, not a Claude self-approval.
+
 ## Next Intended Phase
 
-**Immediate: Quality Gate 5 (information architecture) and Quality Gate 6 (CRO architecture) review by the orchestrator and owner.** Neither is approved. Claude has no authority to approve either.
+**Quality Gates 5, 6 and 7 are PASSED (2026-09-01; `DEC-010`, `DEC-011`, `DEC-012`).** The programme is now ready to move into messaging / page-copy architecture. **No visual design or production implementation has started as a result of these approvals.**
 
-**On approval, two candidates:**
-- **Content architecture (Gate 7)** — pillars, clusters, launch content roadmap, editorial and evidence standards; or
-- **The technical prerequisites the funnel depends on** — a backend endpoint, durable enquiry storage, transactional email, and the consent mechanism.
+**The next phase is messaging/page-copy architecture, together with the technical prerequisites** — a backend endpoint, durable enquiry storage, transactional email, analytics and the consent mechanism.
 
-**Recommendation: scope the technical prerequisites early.** The entire funnel specification is inert without them, and fixing MappedSkills' own conversion and measurement layer is simultaneously a launch prerequisite, the hard precondition on every outcome claim, and the first available proof asset.
+**Recommendation: scope the technical prerequisites early, and Session 09 strengthens the case.** The entire funnel specification is inert without them, and **the own-site research entry, the problem page's worked example and launch article 3 all depend on those fixes being shipped.** Fixing MappedSkills' own conversion and measurement layer is simultaneously a launch prerequisite, the hard precondition on every outcome claim, and the first available proof asset.
 
 ### Restrictions the next phase must respect
 Carried forward, plus the Session 08 specification:
@@ -540,6 +630,7 @@ Carried forward, plus the Session 08 specification:
 ### Actions that do not depend on the gates and should not wait for them
 1. **The off-site listings, profiles and reviews programme** — Clutch, Semrush Agency Partners, GoodFirms, Google Business Profile. Directory sources appeared in **15 of 28** unbranded AI runs and gate the category SERPs and the Local Pack simultaneously.
 2. **Fixing the conversion and measurement layer** — a working form with a real backend, a working booking path, analytics, enquiry-source capture, `/thank-you` wired up, and a consent mechanism.
+3. **Collecting the owner inputs in `docs/05-content/OWNER_INPUT_REGISTER.md`.** Items 1–5 and 9 block content that cannot begin without them, and none of them requires a gate to be passed first.
 
 ### Owner actions that no Claude session can produce
 1. **Which client results may be published**, with permissions. **The last remaining Session 02 owner blocker**; it gates all premium positioning and the `/work` indexation decision.
@@ -553,9 +644,10 @@ Carried forward, plus the Session 08 specification:
 ### Gates
 - **Gate 2 — PASSED** (2026-08-31).
 - **Gates 1, 3 and 4** — artifacts delivered; conclusions consumed by the approved strategy; **not marked passed.** Orchestrator action.
-- **Gate 5 — OPEN.** Artifacts delivered 2026-08-31; review pending. **Not passed.**
-- **Gate 6 — NOT PASSED.** Artifacts delivered 2026-08-31; review pending.
-- **Gates 7 onwards** — untouched, unapproached and not implied.
+- **Gate 5 — PASSED** (2026-09-01). See `DEC-010`.
+- **Gate 6 — PASSED** (2026-09-01). See `DEC-011`.
+- **Gate 7 — PASSED** (2026-09-01). See `DEC-012`.
+- **Gates 8 onwards** — untouched, unapproached and not implied.
 
 ## Status of the Two Session 01B Owner Confirmations
 Both were addressed by the owner-supplied facts recorded above on 2026-08-31, within the limits of what the owner actually stated:
@@ -574,19 +666,19 @@ Recorded so they are not lost, and judged safe to address during implementation 
 ## Not Yet Approved
 Approved and closed by Session 06: the fundamental business direction (`DEC-005`), the frozen business documents (`DEC-006`), the strategic rule on unsupported claims (`DEC-007`), and the page-targets-query rule (`DEC-008`).
 
+**Approved 2026-09-01:** Quality Gate 5 (information architecture — the IA, page inventory, URL migration map, navigation, search architecture and funnel architecture), Quality Gate 6 (CRO architecture — the qualified-enquiry definition, form/booking spec, CTA system, page-type rules, attribution model, event taxonomy, CRM data contract, lifecycle and follow-up architecture), and Quality Gate 7 (content architecture — the content strategy, launch content inventory, cluster architecture, editorial strategy, research strategy, AI citation principles, claims governance, content quality gate, and all 24 page, editorial and research briefs). Recorded as `DEC-010`, `DEC-011`, `DEC-012`.
+
 Still **not** approved:
 - Quality Gate 1 (existing site audit) — artifacts delivered, orchestrator review pending;
 - Quality Gate 3 (search demand / SERP / commercial opportunity) — artifacts delivered, orchestrator review pending;
 - Quality Gate 4 (AI visibility, citation & discovery baseline) — artifacts delivered, orchestrator review pending;
-- **Quality Gate 5 (information architecture) — artifacts delivered 2026-08-31, review pending. The proposed IA, page inventory, URL migration map, navigation, search architecture and funnel architecture are NOT approved;**
-- **Quality Gate 6 (CRO architecture) — artifacts delivered 2026-08-31, review pending. The qualified-enquiry definition, form/booking spec, CTA system, page-type rules, attribution model, event taxonomy, CRM data contract, lifecycle and follow-up architecture are NOT approved;**
-- Quality Gates 7 onwards — not started;
+- Quality Gates 8 onwards — not started;
 - **manufacturing as an exclusive or company-level specialisation** — it is candidate beachhead #1 only, gated on volume verification, a healthcare comparison, and one publishable industrial result;
 - final offer names, packaging and the free/paid/hybrid entry model;
 - final pricing;
 - final website messaging, homepage copy and taglines;
 - final information architecture, sitemap and URL architecture (proposed in Session 07, not approved);
-- final keyword map and content plan;
+- final keyword map and content plan (proposed in Session 09, not approved);
 - international expansion, and any international SEO or location strategy;
 - final design direction;
 - the technical migration plan;

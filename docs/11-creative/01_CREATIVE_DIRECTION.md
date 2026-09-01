@@ -21,8 +21,8 @@
 
 **A second test was added by the 2026-09-01 correction pass, and it is equally binding:** *does the result read as a firm that does commercial work, or as a research publisher?* The original direction did not answer it — see `16_COMMERCIAL_ENERGY_SYSTEM.md` §1.
 
-### Numbering collision — recorded, not resolved
-`docs/11-schema/` already exists in this repository. This session was instructed to create `docs/11-creative/`, and did so. **Two directories now share the `11-` prefix**, and `docs/08-design/` (currently an empty placeholder README describing "future creative direction … artifacts") overlaps this directory's purpose. **No file outside the permitted set was renamed, moved or modified.** Resolution is an orchestrator decision — see `docs/00-project/handoffs/SESSION_12_CREATIVE_ART_DIRECTION.md` §"Decisions requiring orchestrator approval".
+### Numbering collision — recorded at the time, since resolved
+`docs/11-schema/` already existed in this repository. This session was instructed to create `docs/11-creative/`, and did so. **Two directories shared the `11-` prefix**, and `docs/08-design/` (an empty placeholder README describing "future creative direction … artifacts") overlapped this directory's purpose. **No file outside the permitted set was renamed, moved or modified in this session.** Resolution was an orchestrator decision, approved as `DEC-015` and **executed 2026-09-01**: `docs/08-design/` was retired (removed) and `docs/11-schema/` was moved to `docs/15-schema/`. `docs/11-creative/` was not moved.
 
 ---
 

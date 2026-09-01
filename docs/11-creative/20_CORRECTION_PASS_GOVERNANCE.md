@@ -151,7 +151,9 @@ Inference-class statements may be set plainly in the argument register. They mus
 - the start of the phase that first writes real content into a schema directory; or
 - the start of Gate 9B (UX), which is when a designer would first plausibly open `08-design/` and find the wrong thing.
 
-**Not now.** This pass is a creative correction and must not carry a repository restructure. **The reconciliation was not performed.**
+**Not now.** This pass is a creative correction and must not carry a repository restructure. **The reconciliation was not performed in this pass.**
+
+**Executed 2026-09-01, as a standalone documentation-directory hygiene session, exactly as recommended above:** `docs/08-design/` retired (removed — confirmed to hold only the placeholder README); `docs/11-schema/` moved to `docs/15-schema/`, contents unchanged; `docs/11-creative/` left in place; `08-messaging` and every content-bearing directory untouched. No creative, strategy or copy content changed.
 
 ---
 

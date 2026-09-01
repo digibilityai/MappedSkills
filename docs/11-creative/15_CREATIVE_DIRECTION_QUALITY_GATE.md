@@ -123,7 +123,7 @@ These are legitimate decisions that are **not** gate items, and the gate must no
 3. **India-first register.** T1's weakest score (3/5) is a genuine risk. The owner is better placed than any Claude session to judge whether the record register will land with a Pune owner-buyer.
 4. **Investment level.** The figures are the site's principal assets and require real craft. Whether that budget exists is an owner decision.
 5. **Photography.** Whether named-person portraits will be produced, and of whom, depends on the blocked team input.
-6. **The `docs/11-creative` / `docs/11-schema` / `docs/08-design` numbering and overlap.** A repository-hygiene decision, not a creative one.
+6. **The `docs/11-creative` / `docs/11-schema` / `docs/08-design` numbering and overlap.** A repository-hygiene decision, not a creative one. **Resolved 2026-09-01** — `docs/08-design/` retired, `docs/11-schema/` moved to `docs/15-schema/`, `docs/11-creative/` unchanged.
 
 ---
 

@@ -419,3 +419,7 @@ Read at **implementation level**, not by name.
 **§ "Gate status after this pass" above and every historical research/stress-test section are preserved as the record of this session's own stop state**; they are superseded as current fact by this note and by `QUALITY_GATES.md` / `CURRENT_STATE.md`. This annotation performs no new research, produces no wireframe or mockup, and reopens nothing beyond the one explicitly authorised copy correction described above.
 
 **Next phase: Gate 9B — UX, after the approved documentation-directory hygiene change.** Neither has begun. **Session 12 is closed.**
+
+## Documentation-directory hygiene reconciliation performed — 2026-09-01 (annotation added later)
+
+**The directory-reconciliation recommendation above (item 14) was executed on 2026-09-01, in a dedicated housekeeping session, exactly as recommended:** `docs/08-design/` was retired — removed, since inspection confirmed it held only the single placeholder README with no substantive historical material — and `docs/11-schema/` was moved to `docs/15-schema/` with its contents unchanged. `docs/11-creative/` was left exactly where it is, and `docs/08-messaging/` was not touched. **This was a repository-structure change only: no strategy, IA, CRO, content, messaging, creative direction or copy was altered, and no production code was touched.** No new decision-log entry was created for this execution step, consistent with `DEC-015` already recording the approval. **This does not begin Gate 9B — UX**, which remains NOT STARTED.

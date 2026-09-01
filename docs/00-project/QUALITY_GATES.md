@@ -15,11 +15,11 @@ No phase should advance merely because an artifact exists.
 | **Gate 7 — Content Architecture** | **PASSED — 2026-09-01** |
 | **Gate 8 — Messaging Architecture** | **PASSED — 2026-09-01** |
 | **Gate 9 — Page Copy Production** | **PASSED — 2026-09-01.** Approval is not publication readiness for every route — see the gate's "Why this gate passes" note |
-| **Gate 9A — Creative Direction** | NOT STARTED, NOT APPROACHED, NOT PASSED |
-| **Gate 9B — UX** | NOT STARTED, NOT APPROACHED, NOT PASSED |
+| **Gate 9A — Creative Direction** | **PASSED — 2026-09-01** |
+| **Gate 9B — UX** | NOT STARTED, NOT APPROACHED, NOT PASSED. **Before substantive UX work begins, the approved documentation-directory hygiene reconciliation (see Gate 9A note below) must be performed as a standalone change** |
 | **Gates 10–22** | **NOT STARTED, NOT APPROACHED, NOT PASSED** |
 
-**Session 06 marked Gate 2 only.** Gates 5, 6 and 7 were approved by the orchestrator on 2026-09-01, recorded in `DECISION_LOG.md` as `DEC-010`, `DEC-011` and `DEC-012`. **Gate 8 (Messaging Architecture) was approved by the orchestrator on 2026-09-01, recorded as `DEC-013`.** **Gate 9 (Page Copy Production) was approved by the orchestrator on 2026-09-01, recorded as `DEC-014`** — see the numbering reconciliation note under Gate 9 below, which repurposes the former "UX" placeholder for Page Copy Production and preserves the displaced Creative Direction and UX criteria as Gates 9A and 9B. No gate from 9A/10 onwards is passed, approached or implied by any of these approvals.
+**Session 06 marked Gate 2 only.** Gates 5, 6 and 7 were approved by the orchestrator on 2026-09-01, recorded in `DECISION_LOG.md` as `DEC-010`, `DEC-011` and `DEC-012`. **Gate 8 (Messaging Architecture) was approved by the orchestrator on 2026-09-01, recorded as `DEC-013`.** **Gate 9 (Page Copy Production) was approved by the orchestrator on 2026-09-01, recorded as `DEC-014`** — see the numbering reconciliation note under Gate 9 below, which repurposes the former "UX" placeholder for Page Copy Production and preserves the displaced Creative Direction and UX criteria as Gates 9A and 9B. **Gate 9A (Creative Direction) was approved by the orchestrator on 2026-09-01, recorded as `DEC-015`.** No gate from 9B/10 onwards is passed, approached or implied by any of these approvals.
 
 ## Gate 1 — Existing Site Audit
 **Status: artifacts delivered; orchestrator review pending. NOT marked passed.**
@@ -115,12 +115,19 @@ Neither has a session assigned yet. Gate 10 onward are untouched by this reconci
 Session 11 produced substantive copy for `/services`, `/seo`, `/ai-seo`, `/social-media-ads`, `/lead-generation`, `/conversion-optimization`, `/problems/traffic-but-no-enquiries`, and the homepage H1 and revised supporting direction. The orchestrator's independent review approved this copy and the homepage H1 **"Judge us on the enquiries, not the traffic."**, while confirming the homepage remains **PARTIALLY BLOCKED** on unresolved owner inputs elsewhere on the page. The review confirmed that all documented page statuses — partially blocked, blocked, and conditional routes — remain unchanged by this gate passing, that the removed ~0.28% AI-referral statistic stays removed, and that Google's published position on generative-AI optimisation and SEO remains **[VALIDATION REQUIRED]** and not publication-ready evidence. See `DEC-014`.
 
 ## Gate 9A — Creative Direction
+**Status: PASSED — 2026-09-01.** See `DEC-015` in `DECISION_LOG.md`.
+
 **Required:** visual principles, references, data-visualization language, imagery policy, motion philosophy.
 **Acceptance:** distinctive, coherent, avoids generic agency/AI clichés.
 
+### Why this gate passes
+Session 12 delivered the creative direction, including a stress-test / correction pass. The orchestrator approved: the creative territory **The Record**, with the binding qualifier *"a working record, not an archive"*; the refined thesis that MappedSkills should look like the working record of a firm that finds what is broken, fixes it, and records what changed, with commercial meaning leading every screen and evidence never competing with the commercial argument for first attention; the argument/apparatus visual hierarchy and its "emphasis is commercial, presence is evidential" rule; the Tier 1 figure prioritisation (the run, the four causes, the four AI layers separated per system, what cannot be attributed) with its evidence constraints preserved; the India-first refinements R1–R10; the refined `14_DESIGN_ANTI_PATTERNS.md`, now binding on Gate 9B; the responder-portrait decision (approved in principle for `/contact` and `/schedule-call`, implementation blocked on owner-supplied people/response-ownership information); the component-kit classification as future implementation guidance with no code changed; and the directory-reconciliation recommendation as approved future standalone housekeeping, not executed now. **F17 (`/how-it-works` stages) remains BLOCKED — no sketch, placeholder or speculative process diagram.** One explicitly authorised narrow correction to previously approved Session 11 copy — an unsupported quantity claim ("most of them never reach you") — was applied without reopening homepage messaging architecture or the approved H1. See `DEC-015`.
+
+**Before substantive Gate 9B (UX) work begins, the approved documentation-directory hygiene reconciliation must be performed as a standalone governance change** (retire or pointer-only `docs/08-design/`; move `docs/11-schema/` → `docs/15-schema/`; leave `docs/11-creative/` in place). It was not performed in this pass.
+
 ## Gate 9B — UX
 **Required:** wireframes/page templates, responsive behaviours, component inventory.
-**Acceptance:** clear hierarchy, usable at target breakpoints, aligned to CRO.
+**Acceptance:** clear hierarchy, usable at target breakpoints, aligned to CRO. **Binding input:** the refined `14_DESIGN_ANTI_PATTERNS.md` (approved, Gate 9A, `DEC-015`).
 
 ## Gate 10 — UI / Design System
 **Required:** typography, colors, spacing, grids, controls, states, charts, forms, accessibility patterns.

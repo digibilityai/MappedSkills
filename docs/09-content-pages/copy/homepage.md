@@ -32,7 +32,9 @@ You are judged on the enquiries your business gets. So are we — and we can sho
 
 > **H1:** Judge us on the enquiries, not the traffic.
 >
-> **Support:** There are buyers for what you sell, and most of them never reach you. We work on what brings them in, the path they take to enquire, and the measurement that shows where each one came from — accountable up to the qualified enquiry, and plain about what cannot be attributed.
+> **Support:** There is buyer demand for what you sell, and some of it never reaches you. We work on what brings them in, the path they take to enquire, and the measurement that shows where each one came from — accountable up to the qualified enquiry, and plain about what cannot be attributed.
+>
+> **[Corrected 2026-09-01, Gate 9A, `DEC-015`.]** The original wording — *"There are buyers for what you sell, and most of them never reach you"* — made an unsupported second-person quantity assertion ("most") about the specific reader's own buyers. Corrected to describe buyer demand in general, with no invented proportion. No new positioning idea introduced; the H1 and hero territory are unchanged.
 
 **What a buyer understands in about five seconds:** *"They are on the hook for the enquiries rather than the traffic chart, and they will show me the evidence."*
 
@@ -76,7 +78,7 @@ It is the only one of the three that scores acceptably on every criterion the ap
 Judge us on the enquiries, not the traffic.
 
 # Hero Supporting Copy
-There are buyers for what you sell, and most of them never reach you. We work on the whole route to an enquiry — being found when someone searches, paid demand where it earns its place, the page they arrive on, and the measurement that shows where each enquiry came from.
+There is buyer demand for what you sell, and some of it never reaches you. We work on the whole route to an enquiry — being found when someone searches, paid demand where it earns its place, the page they arrive on, and the measurement that shows where each enquiry came from.
 
 Traffic is where that route starts. The enquiries are the part we answer for.
 
@@ -234,7 +236,7 @@ If you would rather just call, the number is here and WhatsApp works.
 
 | Claim on the page | Governance class | Ladder level | Basis |
 |---|---|---|---|
-| "There are buyers for what you sell, and most of them never reach you" | E (inference), written as a **situation**, not a diagnosis of this reader | **D** | Stated as what this usually looks like, never as a measured fact about the visitor's market. The verb form is deliberately descriptive |
+| "There is buyer demand for what you sell, and some of it never reaches you" *(corrected 2026-09-01, Gate 9A, `DEC-015` — originally "most of them never reach you," an unsupported second-person quantity claim)* | E (inference), written as a **situation**, not a diagnosis of this reader | **D** | Stated as what this usually looks like, never as a measured fact about the visitor's market. No quantity ("most") is asserted; the verb form is deliberately descriptive |
 | "We are accountable for the qualified enquiry… what counts as one is published" | A | **C** | `QUALIFIED_ENQUIRY_DEFINITION.md`; demonstrable on `/lead-generation` and `/how-it-works` |
 | "We report through to the deals and revenue your own system recorded" | B (client-supplied, when it exists) | **C** as a capability; **E** for any actual figure, which is currently empty | No client figure appears anywhere |
 | "Zero appearances across 28 unbranded runs on four systems, on one day, from Pune, in English, signed out" | A | **B** | Session 04 first-party measurement. **Sample, date, location, language and access tier travel with it, as written** |

@@ -26,7 +26,9 @@ One outcome, three connected parts, and a supplier who owns the joins between th
 One outcome: enquiries you can act on.
 
 # Hero Supporting Copy
-There are buyers for what you sell, and most never reach you. Getting them in front of you, getting the enquiry to actually complete, and being able to see which part worked are three different skills, usually bought from three different suppliers. Here they are connected, the joins between them are ours, and the enquiry at the end is what we answer for.
+There is buyer demand for what you sell, and some of it never reaches you. Getting them in front of you, getting the enquiry to actually complete, and being able to see which part worked are three different skills, usually bought from three different suppliers. Here they are connected, the joins between them are ours, and the enquiry at the end is what we answer for.
+
+*[Corrected 2026-09-01, Gate 9A, `DEC-015`. Original wording — "and most never reach you" — made an unsupported quantity assertion. Corrected to describe buyer demand generally, with no invented proportion. No other change to this page's copy.]*
 
 # Primary CTA
 **Role: PRIMARY**, both surfaces. **Tell us what you're trying to fix** / **Book a call**.

@@ -236,7 +236,7 @@ Carried from the approved brief and made explicit as messaging rules.
 | **Underlying buyer insight** | *"There are people who want what I sell. They are buying it from someone."* |
 | **Understood in ~5 seconds** | **Strongly.** It is concrete, it is about the reader's market, and it needs no marketing vocabulary |
 | **Principal weakness** | It **asserts something about the reader's market that has not been verified**, and it can read as an accusation. It also does not, on its own, reach conversion or measurement — it is an acquisition idea, and used alone it would let the site drift toward being read as a search firm |
-| **Illustrative headline direction** | *"The buyers are already out there. Most of them never reach you."* |
+| **Illustrative headline direction** | *"The buyers are already out there. Some of them never reach you."* **[Corrected 2026-09-01, Gate 9A, `DEC-015`. Original: "Most of them never reach you" — an unsupported second-person quantity claim, flagged by this document's own "Principal weakness" row above and corrected on that basis. No new positioning idea introduced.]** |
 
 **Scores well on:** buyer comprehension · commercial relevance · jargon avoidance.
 **Scores badly on:** bridging search + conversion + measurement · differentiation *(many agencies say a version of this)*.
@@ -301,7 +301,7 @@ Carried from the approved brief and made explicit as messaging rules.
 | **Core thought** | Most suppliers are judged on their own part going up. MappedSkills is judged on the enquiries the business actually gets — and can show where they came from |
 | **What the visitor understands in ~5 seconds** | *"They're on the hook for the enquiries, not the traffic — and they'll show me the evidence."* A commercial idea, not a strategic one |
 | **Headline direction** | A plain statement of what the firm is judged on, set against what other suppliers report. **Ordinary words. No "measurable qualified enquiries", no "accountability", no "outcome"** |
-| **Supporting-line direction** | Territory 2's concrete opening does the acquisition work — that buyers for this business already exist and most never arrive — followed by the boundary in one clause: owned to the enquiry, revenue reported from the client's own data, and honest about what cannot be attributed |
+| **Supporting-line direction** | Territory 2's concrete opening does the acquisition work — that buyer demand for this business already exists and some of it never arrives — followed by the boundary in one clause: owned to the enquiry, revenue reported from the client's own data, and honest about what cannot be attributed. **[Corrected 2026-09-01, Gate 9A, `DEC-015`; see the illustrative-headline correction above.]** |
 | **Why this one** | It is the only formulation that scores acceptably on **all seven** criteria at once, and the reframing fixes the single criterion the original failed |
 
 **Against the seven criteria:**

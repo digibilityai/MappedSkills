@@ -1,6 +1,7 @@
 # Current Project State
 
 ## Current Phase
+**Session 12 Completed — CREATIVE / ART DIRECTION, including an orchestrator correction / stress-test pass on T1 (2026-09-01). The approved creative territory is **T1 "The Record" — a WORKING record, not an archive** — a firm that finds what is broken, fixes it, and records what changed. Twenty artifacts exist in `docs/11-creative/`. Quality Gate 9A (Creative Direction) is PASSED (2026-09-01; `DEC-015`). No page layout, wireframe, design system, component, final font or final colour value was produced — Gate 9B (UX) has not started. No production code, configuration, content or asset was changed. One explicitly authorised narrow correction was made to previously approved Session 11 homepage/`/services` copy (an unsupported quantity claim); the H1 and hero territory are unchanged. Before substantive Gate 9B work begins, the approved documentation-directory hygiene reconciliation must be performed as a standalone change — it was not performed in this pass.**
 **Session 11 Completed — PAGE COPY PRODUCTION, including a second-reader / orchestrator correction pass (2026-09-01). Quality Gate 9 (Page Copy Production) is PASSED (2026-09-01; `DEC-014`). Gate approval is NOT publication readiness for every route — the documented PARTIALLY BLOCKED, BLOCKED and CONDITIONAL statuses are unchanged. No design was done, no production code, configuration or content was changed, and no prior gate decision was altered. Creative / Art Direction is the next intended substantive phase and has not begun.**
 **Session 10 Completed — MESSAGING ARCHITECTURE, including a narrow orchestrator correction pass (2026-09-01). Quality Gate 8 (Messaging Architecture) is PASSED (2026-09-01; `DEC-013`). No page copy was written, no design was done, and no production code was changed.**
 **Gates 5, 6 and 7 PASSED — 2026-09-01 (orchestrator approval, `DEC-010`/`DEC-011`/`DEC-012`). No visual design or production implementation has started as a result of these approvals.**
@@ -38,7 +39,10 @@ This is an **APPROVED DECISION**. It supersedes the previous working hypotheses 
 | **Quality Gate 8 — messaging architecture** | **PASSED — 2026-09-01.** See `DEC-013` |
 | **Session 11 — page copy production** | **COMPLETE** (2026-09-01), including a second-reader correction pass. **APPROVED — Gate 9 PASSED 2026-09-01 (`DEC-014`).** 18 page-copy files plus one conditional record; **7 routes with copy APPROVED (not automatically publication-ready), 8 PARTIALLY BLOCKED, 1 BLOCKED, 3 CONDITIONAL** |
 | **Quality Gate 9 — page copy production** | **PASSED — 2026-09-01.** See `DEC-014`. Approval does not upgrade any route's blocked/partially-blocked/conditional status |
-| **Session 12 — Creative / Art Direction** | **NOT STARTED.** Next intended substantive phase; **not begun by this reconciliation** |
+| **Session 12 — Creative / Art Direction** | **COMPLETE** (2026-09-01), including an orchestrator correction / stress-test pass on T1. **APPROVED — Gate 9A PASSED 2026-09-01 (`DEC-015`).** **20 artifacts** in `docs/11-creative/`; 4 territories developed and scored against 20 criteria; **T1 "The Record" APPROVED**, refined to 92/100. No UX, no layout, no design system, no implementation |
+| **Quality Gate 9A — creative direction** | **PASSED — 2026-09-01.** See `DEC-015`. Gate at `docs/11-creative/15_CREATIVE_DIRECTION_QUALITY_GATE.md` |
+| **Documentation-directory hygiene reconciliation** | **APPROVED as future standalone housekeeping, NOT executed.** Must occur before substantive Gate 9B work begins |
+| **Session 12 — Gate 9B — UX** | **NOT STARTED.** Next substantive phase, blocked on the directory-hygiene reconciliation above being performed first |
 | Technical prerequisites the funnel and the content programme both depend on, plus the research and editorial assets not produced in Session 11 | **NOT STARTED.** Constrained: `/how-it-works`, `/about`, `/contact` and `/pricing` remain owner-blocked; the AI-visibility research entry and the problem page are not |
 
 **Research is CLOSED for the business-strategy phase.** No further business-direction research is commissioned by this state.
@@ -747,11 +751,87 @@ Read-only inspection, performed solely to establish what must not migrate into n
 - **No approved upstream document was modified**, including `DECISION_LOG.md`, `QUALITY_GATES.md` and the existing page briefs.
 - **No decision was approved and no gate status was changed.** Claude has no authority to change either.
 
+## Session 12 — Creative / Art Direction (completed 2026-09-01)
+
+**Status: CREATIVE / ART DIRECTION — APPROVED. Quality Gate 9A (Creative Direction) PASSED 2026-09-01 — see `DEC-015` in `DECISION_LOG.md`.**
+
+**Purpose:** determine what the transformed MappedSkills website should look and feel like, strategically, **before** UX, page design, component design or implementation begins. **No strategy was reopened, no approved decision was altered, no page copy was changed, no route was added or removed, and no production code, configuration, content or asset was modified.**
+
+### Artifacts created
+- `docs/11-creative/` — **15 documents**: creative direction · visual research · competitor visual patterns · four creative territories · territory evaluation · recommended art direction · visual grammar · evidence design language · search/AI/conversion/measurement visual language · imagery, photography and illustration · motion and interaction · visual storytelling opportunities · responsive and accessibility principles · design anti-patterns · the proposed Gate 9A
+- `docs/00-project/handoffs/SESSION_12_CREATIVE_ART_DIRECTION.md`
+
+### The recommendation — APPROVED, Gate 9A, `DEC-015` (recorded below as a recommendation at the time it was made)
+**T1 — "The Record".** The site behaves like the working record of a firm that measures things: kept, dated, revised in the open, and left available for inspection. Two typographic registers — a plain, commercially direct **argument** register leading every page, and an **apparatus** register carrying provenance, status, dates and limits. Structure from rules and space rather than cards. Light-first, warm, one accent, colour doing one job: distinguishing known from unknown. Explanatory weight carried by a small number of high-quality figures.
+
+**The load-bearing idea:** provenance moves **out of the prose** into a persistent designed evidence layer — so the prose gets shorter (the owner's not-text-heavy requirement) while the honesty becomes *more* visible.
+
+**Scored 90/100 overall and 30/30 on six load-bearing criteria**, against T2 "The Run" (65), T3 "The Standing" (64) and T4 "The Straight Answer" (58). **T1's two honest weaknesses are India-first register (3/5) and motion potential (3/5).**
+
+**At the time this section was written, this was a recommendation only.** It was subsequently approved by the orchestrator on 2026-09-01 (`DEC-015`), together with the refined thesis recorded in the correction pass below — see the Gate 9A closure note at the end of this Session 12 section.
+
+### Other recommendations, all PROPOSED ONLY
+- **Visual metaphor:** one recurring figure — "the run", the continuous route from demand to qualified enquiry, with the accountability boundary, unmeasured stretches, unattributed arrivals and the client-data segment drawn on it. **Recommended AGAINST making it ambient or a brand device.**
+- **Graphic motif:** the annotation tie, plus the dashed segment for honest absence. The tie is recommended to double as the focus indicator.
+- **Photography: HIGHLY SELECTIVE** — named identified people and real specific places only; no stock, ever.
+- **Illustration: LIMITED AND STRICTLY EXPLANATORY** — conventional illustration absent; the budget goes into five explanatory figures.
+- **Iconography: MINIMAL AND FUNCTIONAL** — no capability icons, no icon-card grid.
+- **Motion:** "motion resolves an uncertainty, or it does not ship"; the static state is the primary state.
+- **22 visual storytelling opportunities** identified and classified against actual approved Session 11 copy — 12 already flagged by Session 11, 10 newly identified. **One (`/how-it-works` §2 stages) is BLOCKED and must not be designed** until the owner supplies the real delivery process.
+
+### External research performed (VERIFIED FACT)
+**17 websites loaded in a real browser and observed directly on 2026-09-01** — 11 references (deliberately weighted to research organisations, publications, documentation and search products rather than agencies) and 6 competitors already examined in Session 02.
+
+**Method limits, recorded in the artifacts:** entry screens only in most cases; desktop only at 1440x900; one location, one date; **no consent banner was accepted or dismissed**; **no accessibility, performance or code inspection was run on any external site**; no colour value or font name was measured. A purposive sample supporting statements about convention and principle — **not** about prevalence or trend.
+
+### Session 12 method limitations (VERIFIED FACT)
+- **No build, lint or test was run. No page was rendered. No Lighthouse run, contrast measurement or accessibility audit was executed** — on MappedSkills' site or on any external site. Nothing in the artifacts is a compliance or performance assessment.
+- **No production code, configuration, content or asset was modified.** Production source and styles were read only.
+- **No page layout, wireframe, design system, component specification, final font, final colour value, type scale, spacing scale or grid definition was produced**, deliberately.
+- **No search volume, ranking, traffic, conversion, benchmark or AI-citation figure was gathered, estimated or invented.**
+- **No approved upstream document was modified**, including `DECISION_LOG.md`, `QUALITY_GATES.md`, the business documents, the IA, the CRO specification, the messaging system and all Session 11 page copy.
+- **No decision was approved and no gate status was changed.** Claude has no authority to change either.
+
+### Correction / stress-test pass (2026-09-01) — appended to the same session
+
+**Scope:** T1 only. **The four-territory competition was not rerun, no fifth territory was created, no UX was begun, and no approved page copy was modified.**
+
+**The finding.** The original T1 score of 3/5 on India-first appropriateness was correct and its diagnosis was incomplete. The defect was not register but **a genuine contradiction in the specification: the territory had a complete visual vocabulary for measurement and none for action.** A record of a firm that measures is a record of an observer; MappedSkills intervenes.
+
+**The refined thesis — a RECOMMENDATION ONLY.**
+
+> **THE RECORD — A WORKING RECORD, NOT AN ARCHIVE.** The site is the working record of a firm that **finds what is broken, fixes it, and records what changed**. **Commercial meaning leads every screen; the evidence stands beside it, always present and never in front.** Energy comes from consequence and contrast, never from colour, motion, scale or claim.
+
+**Two new binding rules proposed:** *emphasis is commercial, presence is evidential* · *every page opens fast; no page opens slow.*
+
+**Revised T1 scores — conditional on refinements R1–R10 being binding:** India-first appropriateness **3 → 4**; buyer comprehension **4 → 5**; total **90 → 92**. Commercial credibility unchanged at 5. **No other territory was rescored and the six load-bearing criteria are unchanged at 30/30.** If the refinements are not adopted, the original scores stand.
+
+**Territory name:** retain **THE RECORD** with a binding qualifier (*a working record, not an archive*). Alternative if a rename is preferred: **THE WORKING RECORD**.
+
+**Artifacts added (5):** `16_COMMERCIAL_ENERGY_SYSTEM.md` · `17_ARGUMENT_APPARATUS_HIERARCHY.md` · `18_HOMEPAGE_VISUAL_NARRATIVE.md` · `19_FIGURE_PRIORITISATION.md` · `20_CORRECTION_PASS_GOVERNANCE.md`. **Artifacts amended (8):** `01`, `04`, `05`, `06`, `08`, `12`, `14`, `15`, each with a dated revision note; **no original analysis, research record or score was deleted or rewritten.**
+
+**Three findings recorded for the orchestrator at the time — status now updated:**
+
+1. **Homepage copy concern — ACTED ON at Gate 9A closure (`DEC-015`).** The approved hero supporting line *"most of them never reach you"* was a second-person, unhedged quantity claim carrying no provenance, which `VOICE_AND_TONE.md` §12 and §8.1 prohibit. It appeared on `/` and `/services` and in `docs/08-messaging/HOMEPAGE_MESSAGE_ARCHITECTURE.md`. **The orchestrator authorised one narrow, explicitly scoped correction**, applied to exactly those files: corrected to *"There is buyer demand for what you sell, and some of it never reaches you."* The H1, hero territory and homepage messaging architecture were not reopened. See the Gate 9A closure note below.
+2. **`DEC-007` exposure is component-level, not only page-level — still an owner decision, unresolved.** Read-only inspection found the prohibited claims **hard-coded inside `HeroDashboard` and `SocialProofStrip`**, which are imported by six routes; and `TestimonialCard` carries a `placeholder` prop rendering the literal string `Client Name`. Session 11 documented seven surfaces as page *content*; this is the mechanism beneath them. **The Gate 9A closure recorded a component classification (RETIRE / REPURPOSABLE-CONDITIONAL / NEUTRAL PRIMITIVE) as approved future implementation guidance. Remediation itself remains an owner decision under `DEC-007`. No production code was touched.**
+3. **The directory collision is cheap to fix and remains not fixed.** `docs/08-design/` and `docs/11-schema/` each hold **one placeholder README and no substantive content**, with zero substantive inbound references. Recommendation: retire `08-design`, renumber `11-schema`, leave `11-creative` in place — as a standalone hygiene change at the start of the schema phase or Gate 9B. **Approved as future housekeeping at Gate 9A closure (`DEC-015`); still NOT performed, and must occur before substantive Gate 9B work begins.**
+
+### Gate 9A closure — 2026-09-01 (`DEC-015`)
+
+**Gate 9A (Creative Direction) is PASSED.** The orchestrator approved: the creative territory **The Record**, qualified *"a working record, not an archive"*; the refined thesis above; the binding creative decisions (argument/apparatus hierarchy, Tier 1 figure prioritisation with its evidence constraints, India-first refinements R1–R10, the refined anti-pattern framework including the A19/A23 corrections, now binding on Gate 9B); the responder-portrait decision (approved in principle for `/contact` and `/schedule-call`, implementation BLOCKED on owner-supplied people/response-ownership information); the component-kit classification as approved future guidance with no code changed; and the directory-reconciliation recommendation as approved future standalone housekeeping, not executed now. **F17 (`/how-it-works` stages) remains BLOCKED.** One explicitly authorised narrow homepage/`/services` copy correction was applied, described above. **Before substantive Gate 9B work begins, the documentation-directory hygiene reconciliation must be performed as a standalone change.**
+
+### Recorded, not resolved
+`docs/11-schema/` already existed when `docs/11-creative/` was created as instructed, so two directories now share the `11-` prefix; `docs/08-design/` also exists as an empty placeholder overlapping this directory's purpose. **Nothing outside the permitted file set was renamed, moved or modified.** Resolution is an orchestrator decision.
+
+---
+
 ## Next Intended Phase
 
-**Quality Gates 5, 6, 7, 8 and 9 are PASSED (2026-09-01; `DEC-010`, `DEC-011`, `DEC-012`, `DEC-013`, `DEC-014`). The next substantive phase is CREATIVE / ART DIRECTION (Gate 9A) — it has not started.** **No visual design or production implementation has started.**
+**Quality Gates 5, 6, 7, 8, 9 and 9A are PASSED (2026-09-01; `DEC-010`, `DEC-011`, `DEC-012`, `DEC-013`, `DEC-014`, `DEC-015`). The next substantive phase is Gate 9B — UX, which has not started.** **Before substantive Gate 9B work begins, the approved documentation-directory hygiene reconciliation (retire/pointer `docs/08-design/`; move `docs/11-schema/` → `docs/15-schema/`) must be performed as a standalone governance change — it has not been performed.** **No visual design, no UX and no production implementation has started.**
 
-**SESSION 11 — PAGE COPY PRODUCTION IS COMPLETE AND APPROVED (Gate 9 PASSED, `DEC-014`).** The orchestrator's independent review approved the homepage H1 as actual copy — *"Judge us on the enquiries, not the traffic."* — and the revised homepage supporting direction, approved substantive copy for `/services`, `/seo`, `/ai-seo`, `/social-media-ads`, `/lead-generation`, `/conversion-optimization` and `/problems/traffic-but-no-enquiries`, and applied the twenty-item Message Quality Gate. **Gate passage is not publication readiness.** The homepage remains PARTIALLY BLOCKED; every other documented PARTIALLY BLOCKED, BLOCKED and CONDITIONAL status is unchanged, the removed ~0.28% AI-referral statistic stays removed, and Google's generative-AI/SEO claim stays `[VALIDATION REQUIRED]`. The next step is Session 12 — Creative / Art Direction, not yet begun.
+**SESSION 11 — PAGE COPY PRODUCTION IS COMPLETE AND APPROVED (Gate 9 PASSED, `DEC-014`).** The orchestrator's independent review approved the homepage H1 as actual copy — *"Judge us on the enquiries, not the traffic."* — and the revised homepage supporting direction, approved substantive copy for `/services`, `/seo`, `/ai-seo`, `/social-media-ads`, `/lead-generation`, `/conversion-optimization` and `/problems/traffic-but-no-enquiries`, and applied the twenty-item Message Quality Gate. **Gate passage is not publication readiness.** The homepage remains PARTIALLY BLOCKED; every other documented PARTIALLY BLOCKED, BLOCKED and CONDITIONAL status is unchanged, the removed ~0.28% AI-referral statistic stays removed, and Google's generative-AI/SEO claim stays `[VALIDATION REQUIRED]`. **One narrow correction was later applied at Gate 9A closure (`DEC-015`)** to an unsupported quantity claim in the homepage and `/services` hero support copy — see the Session 12 section for the exact wording.
+
+**SESSION 12 — CREATIVE / ART DIRECTION IS COMPLETE AND APPROVED (Gate 9A PASSED, `DEC-015`).** **The next substantive phase is Gate 9B — UX. It has NOT begun.** Before substantive Gate 9B work begins, the approved documentation-directory hygiene reconciliation (retire/pointer `docs/08-design/`; move `docs/11-schema/` → `docs/15-schema/`; leave `docs/11-creative/` in place) must be performed as a standalone governance/hygiene change — **it has not been performed**. **No wireframe, mockup, style frame or design implementation has been produced.**
 
 **The technical prerequisites remain the parallel priority** — a backend endpoint, durable enquiry storage, transactional email, analytics and the consent mechanism. They gate the own-site research entry, the worked example used on three pages, and every outcome claim.
 
@@ -809,7 +889,8 @@ Carried forward, plus the Session 08 specification:
 - **Gate 7 — PASSED** (2026-09-01). See `DEC-012`.
 - **Gate 8 — Messaging Architecture — PASSED** (2026-09-01, Session 10, including its correction pass). See `DEC-013`.
 - **Gate 9 — Page Copy Production — PASSED** (2026-09-01, Session 11, including its correction pass). See `DEC-014`. **Approval is not publication readiness** — PARTIALLY BLOCKED, BLOCKED and CONDITIONAL routes are preserved unchanged.
-- **Gate 9A (Creative Direction) and Gate 9B (UX) onwards** — untouched, unapproached and not implied. See `QUALITY_GATES.md` for the numbering reconciliation.
+- **Gate 9A — Creative Direction — PASSED** (2026-09-01, Session 12, including its stress-test/correction pass). See `DEC-015`. **Approval does not authorise Gate 9B (UX) work to begin** until the documentation-directory hygiene reconciliation is performed as a standalone change.
+- **Gate 9B (UX) and Gate 10 onwards** — untouched, unapproached and not implied. See `QUALITY_GATES.md` for the numbering reconciliation.
 
 ## Status of the Two Session 01B Owner Confirmations
 Both were addressed by the owner-supplied facts recorded above on 2026-08-31, within the limits of what the owner actually stated:
@@ -828,13 +909,17 @@ Recorded so they are not lost, and judged safe to address during implementation 
 ## Not Yet Approved
 Approved and closed by Session 06: the fundamental business direction (`DEC-005`), the frozen business documents (`DEC-006`), the strategic rule on unsupported claims (`DEC-007`), and the page-targets-query rule (`DEC-008`).
 
-**Approved 2026-09-01:** Quality Gate 5 (information architecture — the IA, page inventory, URL migration map, navigation, search architecture and funnel architecture), Quality Gate 6 (CRO architecture — the qualified-enquiry definition, form/booking spec, CTA system, page-type rules, attribution model, event taxonomy, CRM data contract, lifecycle and follow-up architecture), Quality Gate 7 (content architecture — the content strategy, launch content inventory, cluster architecture, editorial strategy, research strategy, AI citation principles, claims governance, content quality gate, and all 24 page, editorial and research briefs), Quality Gate 8 (messaging architecture — the corrected internal positioning, the hero strategic territory, engagement-model safeguards, default buyer-facing terminology, AI-search umbrella terminology, the prohibited/restricted language system, the claims ladder, and the twenty-item Message Quality Gate), and Quality Gate 9 (page copy production — the page-copy system, copy standards, approved substantive copy for `/services`, `/seo`, `/ai-seo`, `/social-media-ads`, `/lead-generation`, `/conversion-optimization`, `/problems/traffic-but-no-enquiries`, and the homepage H1 *"Judge us on the enquiries, not the traffic."* with its supporting direction). Recorded as `DEC-010`, `DEC-011`, `DEC-012`, `DEC-013`, `DEC-014`. **Gate 9 approval is explicitly not publication readiness** — see the preserved route statuses below.
+**Approved 2026-09-01:** Quality Gate 5 (information architecture — the IA, page inventory, URL migration map, navigation, search architecture and funnel architecture), Quality Gate 6 (CRO architecture — the qualified-enquiry definition, form/booking spec, CTA system, page-type rules, attribution model, event taxonomy, CRM data contract, lifecycle and follow-up architecture), Quality Gate 7 (content architecture — the content strategy, launch content inventory, cluster architecture, editorial strategy, research strategy, AI citation principles, claims governance, content quality gate, and all 24 page, editorial and research briefs), Quality Gate 8 (messaging architecture — the corrected internal positioning, the hero strategic territory, engagement-model safeguards, default buyer-facing terminology, AI-search umbrella terminology, the prohibited/restricted language system, the claims ladder, and the twenty-item Message Quality Gate), and Quality Gate 9 (page copy production — the page-copy system, copy standards, approved substantive copy for `/services`, `/seo`, `/ai-seo`, `/social-media-ads`, `/lead-generation`, `/conversion-optimization`, `/problems/traffic-but-no-enquiries`, and the homepage H1 *"Judge us on the enquiries, not the traffic."* with its supporting direction), and Quality Gate 9A (creative direction — the territory "The Record" with its "a working record, not an archive" qualifier, the refined thesis, the argument/apparatus hierarchy, Tier 1 figure prioritisation, India-first refinements R1–R10, the refined design anti-pattern framework, the responder-portrait decision, and the component-kit classification). Recorded as `DEC-010`, `DEC-011`, `DEC-012`, `DEC-013`, `DEC-014`, `DEC-015`. **Gate 9 approval is explicitly not publication readiness** — see the preserved route statuses below. **Gate 9A approval does not authorise Gate 9B (UX) to begin** until the documentation-directory hygiene reconciliation is performed as a standalone change.
 
 Still **not** approved:
 - Quality Gate 1 (existing site audit) — artifacts delivered, orchestrator review pending;
 - Quality Gate 3 (search demand / SERP / commercial opportunity) — artifacts delivered, orchestrator review pending;
 - Quality Gate 4 (AI visibility, citation & discovery baseline) — artifacts delivered, orchestrator review pending;
-- Quality Gates 9A (Creative Direction), 9B (UX) and 10 onwards — not started;
+- Quality Gates 9B (UX) and 10 onwards — not started;
+- **the approved documentation-directory hygiene reconciliation** (retire/pointer `docs/08-design/`; move `docs/11-schema/` → `docs/15-schema/`) — approved as future housekeeping only, not yet executed, and required before substantive Gate 9B work begins;
+- **F17 (`/how-it-works` process-stage figure)** — remains BLOCKED, no sketch or placeholder;
+- **implementation of a responder portrait or named human presence on `/contact` / `/schedule-call`** — approved in principle only, blocked until owner-supplied people/response-ownership information exists;
+- **any component-kit change (retirement, repurposing or redesign of `HeroDashboard`, `SocialProofStrip`, `BeforeAfterMetric`, `TestimonialCard`, `StatCard`, `CaseStudyCard`)** — classification is approved future guidance only; no code was changed and the `DEC-007` remediation decision remains the owner's;
 - **manufacturing as an exclusive or company-level specialisation** — it is candidate beachhead #1 only, gated on volume verification, a healthcare comparison, and one publishable industrial result;
 - final offer names, packaging and the free/paid/hybrid entry model;
 - final pricing;

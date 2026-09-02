@@ -251,3 +251,24 @@ Use this file only for meaningful project decisions.
 - **Impacted files:** `QUALITY_GATES.md`, `CURRENT_STATE.md`, plus the narrow copy corrections listed in item 9.
 - **Supersedes:** the "PROPOSED — NOT APPROVED. Gate 9A remains NOT PASSED" status recorded at the end of Session 12; the "most of them never reach you" / "most never reach you" wording in the files listed in item 9.
 - **Approved by:** Project orchestrator, 2026-09-01.
+
+### DEC-016
+- **Date:** 2026-09-02
+- **Status:** **Approved — gate approval.**
+- **Decision:** **Quality Gate 9B — UX Architecture — PASSED.** The following are approved:
+  1. **Low-fidelity structural wireframes** for all six master page types, six variants and five interaction/content states (`docs/16-ux/31`–`47`, shared legend `30`).
+  2. **Responsive NARROW / MEDIUM / WIDE behaviour**, demonstrated for all six master types plus the seven mobile structural slots (`48`). Numeric breakpoint values remain a deliberately deferred Gate 10 output.
+  3. **The 16-entry UX pattern inventory** — 14 patterns + 2 sitewide regions (`49`).
+  4. **Commercial-page differentiation** — no two of the six commercial pages share a UX sequence; every difference names its driver in words.
+  5. **F1 (the run) usage taxonomy compliance** — six unconditional routes carry F1, three at FULL, `/social-media-ads` correctly at NONE.
+  6. **Conversion-surface architecture** — one outcome, two mechanism-independent surfaces, CTA repetition bounded, `/thank-you` a real post-conversion state.
+  7. **Evidence, form, navigation and blocked-content states** — the evidence disclosure pattern (including the no-JavaScript state), the form lifecycle (including focus state and the analytics/privacy contract), the navigation states (including the parent-link/disclosure fix), and the blocked-content states (`43`, `44`, `45`, `46`, `47`).
+  8. **The cross-page consistency check** (`50`) and the **final assessment against all 51 gate criteria and the durable gate definition** (`51`), recomputed after a final narrow closure pass applying six orchestrator rulings: **48 PASS · 0 PARTIAL · 0 FAIL · 3 NOT ASSESSABLE** across the 51 criteria; **6 PASS · 0 PARTIAL · 0 FAIL · 1 NOT ASSESSABLE** across the durable criteria.
+  9. **`/pricing`'s commercial facts (prices, bands, inclusions, minimums, factor values) remain owner-blocked** (B6, NOT ASSESSABLE). No price, package or engagement value was invented anywhere in the approved artefacts.
+  10. **Perceptual hierarchy, first-fixation (F2) and the visual-weight portion of proportion (F3) move to Gate 10** as mandatory re-tests on rendered screens — they require a visual hierarchy this low-fidelity phase is prohibited from producing, and could not be honestly assessed here.
+  11. **This approval does NOT approve high-fidelity visual design.** No layout, grid, type, colour, spacing, component, style frame, mockup or prototype exists or is approved by this decision. **F17 (`/how-it-works` stage figure) remains BLOCKED.**
+- **Reason / basis:** Session 13 delivered the UX architecture and the Gate 9B wireframe/inventory/audit deliverables. A cold second-reader audit found documentation and assessment defects; a targeted remediation and re-assessment pass corrected them and individually assessed all 51 criteria, carrying 4 PARTIAL and 1 NOT ASSESSABLE item. A final narrow closure pass applied six orchestrator rulings resolving each: DEFERRED apparatus scheduling is not a fourth evidence-disclosure state (A3); the homepage's approved first screen is not required to expose a first-screen check action (A5); pricing self-placement is owner-blocked rather than a UX defect (B6); visual proportion and first-fixation are perceptual tests that cannot be honestly assessed pre-render and defer to Gate 10 (F3, F2); and Gate 9B validates responsive behaviour through structural width classes rather than numeric breakpoints (the durable "usable at target breakpoints" criterion). The orchestrator reviewed the recomputed assessment and approved it.
+- **Evidence:** `docs/16-ux/20_GATE_9B_QUALITY_GATE.md`; `docs/16-ux/30`–`51` (wireframes, pattern inventory, cross-page audit, final assessment); `handoffs/SESSION_13_UX_ARCHITECTURE.md` and its formal-approval annotation.
+- **Impacted files:** `QUALITY_GATES.md`, `CURRENT_STATE.md`.
+- **Supersedes:** the "NOT PASSED — READY FOR ORCHESTRATOR APPROVAL" status recorded for Gate 9B at the end of Session 13's narrow closure pass.
+- **Approved by:** Project orchestrator, 2026-09-02.

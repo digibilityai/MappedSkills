@@ -16,10 +16,10 @@ No phase should advance merely because an artifact exists.
 | **Gate 8 — Messaging Architecture** | **PASSED — 2026-09-01** |
 | **Gate 9 — Page Copy Production** | **PASSED — 2026-09-01.** Approval is not publication readiness for every route — see the gate's "Why this gate passes" note |
 | **Gate 9A — Creative Direction** | **PASSED — 2026-09-01** |
-| **Gate 9B — UX** | NOT STARTED, NOT APPROACHED, NOT PASSED. **The documentation-directory hygiene reconciliation that was required before substantive UX work begins is now COMPLETE (2026-09-01, see Gate 9A note below); this does not itself start Gate 9B** |
+| **Gate 9B — UX** | **PASSED — 2026-09-02.** See `DEC-016` in `DECISION_LOG.md` |
 | **Gates 10–22** | **NOT STARTED, NOT APPROACHED, NOT PASSED** |
 
-**Session 06 marked Gate 2 only.** Gates 5, 6 and 7 were approved by the orchestrator on 2026-09-01, recorded in `DECISION_LOG.md` as `DEC-010`, `DEC-011` and `DEC-012`. **Gate 8 (Messaging Architecture) was approved by the orchestrator on 2026-09-01, recorded as `DEC-013`.** **Gate 9 (Page Copy Production) was approved by the orchestrator on 2026-09-01, recorded as `DEC-014`** — see the numbering reconciliation note under Gate 9 below, which repurposes the former "UX" placeholder for Page Copy Production and preserves the displaced Creative Direction and UX criteria as Gates 9A and 9B. **Gate 9A (Creative Direction) was approved by the orchestrator on 2026-09-01, recorded as `DEC-015`.** No gate from 9B/10 onwards is passed, approached or implied by any of these approvals.
+**Session 06 marked Gate 2 only.** Gates 5, 6 and 7 were approved by the orchestrator on 2026-09-01, recorded in `DECISION_LOG.md` as `DEC-010`, `DEC-011` and `DEC-012`. **Gate 8 (Messaging Architecture) was approved by the orchestrator on 2026-09-01, recorded as `DEC-013`.** **Gate 9 (Page Copy Production) was approved by the orchestrator on 2026-09-01, recorded as `DEC-014`** — see the numbering reconciliation note under Gate 9 below, which repurposes the former "UX" placeholder for Page Copy Production and preserves the displaced Creative Direction and UX criteria as Gates 9A and 9B. **Gate 9A (Creative Direction) was approved by the orchestrator on 2026-09-01, recorded as `DEC-015`.** **Gate 9B (UX) was approved by the orchestrator on 2026-09-02, recorded as `DEC-016`.** No gate from 10 onwards is passed, approached or implied by any of these approvals.
 
 ## Gate 1 — Existing Site Audit
 **Status: artifacts delivered; orchestrator review pending. NOT marked passed.**
@@ -126,8 +126,22 @@ Session 12 delivered the creative direction, including a stress-test / correctio
 **The documentation-directory hygiene reconciliation required before substantive Gate 9B (UX) work begins was completed 2026-09-01, as a standalone governance change**: `docs/08-design/` was retired (removed); `docs/11-schema/` was moved to `docs/15-schema/`, contents unchanged; `docs/11-creative/` was left in place. It was not performed in the Gate 9A pass itself. **This reconciliation does not start Gate 9B.**
 
 ## Gate 9B — UX
+**Status: PASSED — 2026-09-02.** See `DEC-016` in `DECISION_LOG.md`.
+
 **Required:** wireframes/page templates, responsive behaviours, component inventory.
 **Acceptance:** clear hierarchy, usable at target breakpoints, aligned to CRO. **Binding input:** the refined `14_DESIGN_ANTI_PATTERNS.md` (approved, Gate 9A, `DEC-015`).
+
+### Why this gate passes
+Session 13 delivered the UX architecture and, in a Gate 9B completion pass, the required low-fidelity structural wireframes (`docs/16-ux/31`–`48`, with the shared legend at `30`), the 16-entry UX pattern inventory (`49`), and a cross-page consistency check (`50`). A cold second-reader audit found documentation and assessment defects; a targeted remediation and re-assessment pass corrected them and individually assessed all 51 criteria in `docs/16-ux/20_GATE_9B_QUALITY_GATE.md`, producing 4 PARTIAL and 1 NOT ASSESSABLE item. **A final narrow closure pass applied six orchestrator rulings to those items, recomputing the assessment to 48 PASS · 0 PARTIAL · 0 FAIL · 3 NOT ASSESSABLE across the 51 criteria, and 6 PASS · 0 PARTIAL · 0 FAIL · 1 NOT ASSESSABLE across the durable criteria above.** The orchestrator reviewed this final state and approved it.
+
+**The three NOT ASSESSABLE criteria are explicitly non-blocking, by orchestrator ruling:**
+- **B6 (pricing self-placement)** — **owner-blocked.** `/pricing`'s prices, bands, inclusions and factor values do not exist as owner-approved facts; the programme's non-fabrication rule forbids inventing them. Structurally the page is arranged correctly; the gap is a missing fact, not a UX defect.
+- **F2 (first-fixation)** and the perceptual portion of **F3 (proportion)** — **deferred to Gate 10.** Both require a rendered visual hierarchy (type scale, weight, contrast) that this low-fidelity phase is explicitly prohibited from producing. The structural/reading-order portions of both tests were assessed now and pass. **Gate 10 carries a mandatory re-test of both.**
+
+The durable "usable at target breakpoints" criterion PASSES on the orchestrator's ruling that Gate 9B validates responsive behaviour through structural width classes — NARROW, MEDIUM, WIDE — verified across all six master wireframe types in `48`, with exact numeric breakpoint values remaining a deliberately deferred Gate 10 output. The durable "clear hierarchy" criterion's structural portion (order, grouping, relative emphasis) passes; its visual-hierarchy portion carries the same Gate 10 deferral as F2/F3 and does not block this gate.
+
+### Explicitly NOT passed by this gate
+**Visual design of any kind** — layout, grid, type, colour, spacing, components, the design system, style frames, mockups or prototypes, none of which exist. **Publication readiness for any route** — every PARTIALLY BLOCKED, BLOCKED and CONDITIONAL status is unchanged. **No owner blocker is resolved**, including `/pricing`'s facts. **F17 remains BLOCKED.** **Gate 10's perceptual re-tests (F2, F3 visual weight)** are not performed by this gate and are carried forward as mandatory.
 
 ## Gate 10 — UI / Design System
 **Required:** typography, colors, spacing, grids, controls, states, charts, forms, accessibility patterns.

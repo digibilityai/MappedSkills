@@ -2,7 +2,7 @@
 
 No phase should advance merely because an artifact exists.
 
-## Gate Status Summary (as at 2026-09-01)
+## Gate Status Summary (as at 2026-09-03)
 
 | Gate | Status |
 |---|---|
@@ -17,9 +17,10 @@ No phase should advance merely because an artifact exists.
 | **Gate 9 — Page Copy Production** | **PASSED — 2026-09-01.** Approval is not publication readiness for every route — see the gate's "Why this gate passes" note |
 | **Gate 9A — Creative Direction** | **PASSED — 2026-09-01** |
 | **Gate 9B — UX** | **PASSED — 2026-09-02.** See `DEC-016` in `DECISION_LOG.md` |
-| **Gates 10–22** | **NOT STARTED, NOT APPROACHED, NOT PASSED** |
+| **Gate 10 — UI / Design System** | **NOT PASSED. IN PROGRESS.** The **visual direction** is owner-approved (**THE ARRIVAL**, `DEC-017`, 2026-09-03); the design system itself is **PROPOSED, not approved** — `docs/22-design-system/`. The Gate 9B-deferred perceptual re-tests (**F2 first fixation**, **F3 visual weight**) remain **mandatory and not yet re-run against this direction** |
+| **Gates 11–22** | **NOT STARTED, NOT APPROACHED, NOT PASSED** |
 
-**Session 06 marked Gate 2 only.** Gates 5, 6 and 7 were approved by the orchestrator on 2026-09-01, recorded in `DECISION_LOG.md` as `DEC-010`, `DEC-011` and `DEC-012`. **Gate 8 (Messaging Architecture) was approved by the orchestrator on 2026-09-01, recorded as `DEC-013`.** **Gate 9 (Page Copy Production) was approved by the orchestrator on 2026-09-01, recorded as `DEC-014`** — see the numbering reconciliation note under Gate 9 below, which repurposes the former "UX" placeholder for Page Copy Production and preserves the displaced Creative Direction and UX criteria as Gates 9A and 9B. **Gate 9A (Creative Direction) was approved by the orchestrator on 2026-09-01, recorded as `DEC-015`.** **Gate 9B (UX) was approved by the orchestrator on 2026-09-02, recorded as `DEC-016`.** No gate from 10 onwards is passed, approached or implied by any of these approvals.
+**Session 06 marked Gate 2 only.** Gates 5, 6 and 7 were approved by the orchestrator on 2026-09-01, recorded in `DECISION_LOG.md` as `DEC-010`, `DEC-011` and `DEC-012`. **Gate 8 (Messaging Architecture) was approved by the orchestrator on 2026-09-01, recorded as `DEC-013`.** **Gate 9 (Page Copy Production) was approved by the orchestrator on 2026-09-01, recorded as `DEC-014`** — see the numbering reconciliation note under Gate 9 below, which repurposes the former "UX" placeholder for Page Copy Production and preserves the displaced Creative Direction and UX criteria as Gates 9A and 9B. **Gate 9A (Creative Direction) was approved by the orchestrator on 2026-09-01, recorded as `DEC-015`.** **Gate 9B (UX) was approved by the orchestrator on 2026-09-02, recorded as `DEC-016`.** No gate from 10 onwards is passed, approached or implied by any of these approvals. **Gate 10 is now in progress:** the owner approved **THE ARRIVAL** as the visual direction on 2026-09-03, recorded as `DEC-017`. **That approval is of the direction only.** It does not pass Gate 10, does not approve the Session 16 design system, and does not approve any page. **Claude has no authority to pass a gate**, and no gate is marked passed here.
 
 ## Gate 1 — Existing Site Audit
 **Status: artifacts delivered; orchestrator review pending. NOT marked passed.**
@@ -146,6 +147,22 @@ The durable "usable at target breakpoints" criterion PASSES on the orchestrator'
 ## Gate 10 — UI / Design System
 **Required:** typography, colors, spacing, grids, controls, states, charts, forms, accessibility patterns.
 **Acceptance:** reusable, implementation-ready, responsive.
+
+**Status — NOT PASSED, IN PROGRESS (2026-09-03).**
+
+**Approved input:** the **visual direction** — **THE ARRIVAL** — was approved by the owner on 2026-09-03 after a live four-way comparison, recorded as `DEC-017`. **The direction is approved; nothing else is.**
+
+**Proposed deliverable:** `docs/22-design-system/` (Session 16) — the frozen creative direction with its binding/flexible split, colour, typography, layout and surfaces, signal semantics, motion system and binding budgets, visual primitives, the pattern inventory mapped to the approved Gate 9B patterns, navigation and actions, forms, evidence, figures, the responsive system, accessibility and performance, the anti-pattern register, and a homepage-readiness assessment. **All of it is PROPOSED and awaits orchestrator review.**
+
+**Carried into this gate and still outstanding:**
+- **F2 (first fixation)** and **F3 (visual weight)** — deferred here by Gate 9B and **mandatory**. They have **not** been re-run against THE ARRIVAL, because no complete page exists in it yet.
+- **Performance validation.** The prototype's signal budget is evidence, not a production limit; profiling on real hardware is required before implementation (`docs/22-design-system/14_ACCESSIBILITY_AND_PERFORMANCE.md` §6).
+- **Accessibility validation.** No screen reader, real device, other browser, print or 200% text-resize test has been run.
+- **MEDIUM width** has not been rendered for this direction.
+- **`F17` remains BLOCKED** and undrawn.
+
+### Explicitly NOT passed by this status
+The design system · the complete homepage, which does not exist · any other route · any production code · any owner blocker · any performance or accessibility claim beyond what was measured on one prototype at two emulated widths.
 
 ## Gate 11 — Homepage
 **Required:** approved final homepage design/prototype.

@@ -1,0 +1,506 @@
+/* ============================================================================
+   THE RECORD — PROVISIONAL visual language, Session 14 bounded visual validation
+   Direction 2 — "THE WORKING SHEET"
+
+   THIS IS NOT A DESIGN SYSTEM AND IS NOT PRODUCTION CSS.
+   It exists only to render the four validation slices in
+   docs/17-visual-validation/. It is deliberately incomplete: it defines only
+   what the four slices need. No component API, no full token set, no
+   breakpoint numbers beyond the two container widths the proof requires,
+   no dark mode (a Gate 10 concern, deliberately not designed here).
+
+   Governed by (approved, DEC-015 / DEC-016):
+     docs/11-creative/07_VISUAL_GRAMMAR.md
+     docs/11-creative/08_EVIDENCE_DESIGN_LANGUAGE.md
+     docs/11-creative/14_DESIGN_ANTI_PATTERNS.md
+     docs/11-creative/16_COMMERCIAL_ENERGY_SYSTEM.md
+     docs/11-creative/17_ARGUMENT_APPARATUS_HIERARCHY.md
+     docs/16-ux/22_F1_USAGE_TAXONOMY.md
+     docs/16-ux/30–32, 45, 48
+   ========================================================================= */
+
+/* ---------------------------------------------------------------- tokens -- */
+:root {
+  color-scheme: light;
+
+  /* GROUND — warm, not pure white (07 §4 rule 1). One continuous ground. */
+  --ground:       oklch(0.982 0.006 85);
+  /* Deliberate ground change. AT MOST TWO PER PAGE (A23 as amended). */
+  --ground-set:   oklch(0.950 0.010 82);
+
+  /* INK — warm neutrals, chosen not defaulted (07 §4 rule 2).
+     Verified contrast on --ground: ink 15.86:1 · ink-2 8.77:1 · mark 6.58:1 */
+  --ink:          oklch(0.235 0.012 62);   /* argument register            */
+  --ink-2:        oklch(0.400 0.012 62);   /* apparatus register — AAA     */
+  --ink-recess:   oklch(0.560 0.012 62);   /* FIGURE STROKE ONLY. NEVER text (4.43:1) */
+
+  /* RULES */
+  --rule:         oklch(0.855 0.008 78);   /* hairline                     */
+  --rule-strong:  oklch(0.420 0.012 62);   /* set-piece opener, max 2/page */
+
+  /* THE MARK — one accent, and it means "mark" (07 §4 rule 3).
+     Annotation ties · focus ring · links · active element in a figure.
+     It is an ink colour, not a brand wash. It NEVER encodes a judgement. */
+  --mark:         oklch(0.460 0.078 218);
+
+  /* Type */
+  --arg:  "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --app:  "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Space — few steps, large jumps */
+  --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px; --s5: 24px;
+  --s6: 32px; --s7: 48px; --s8: 64px; --s9: 96px; --s10: 128px;
+
+  /* Measure — the reading column is protected at every width (13 §2.2) */
+  --measure: 66ch;
+}
+
+/* -------------------------------------------------------------- baseline -- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--arg);
+  font-size: 1.125rem;            /* 18px body */
+  line-height: 1.62;
+  font-variant-numeric: tabular-nums lining-nums;  /* 07 §3.6 — HARD RULE */
+  -webkit-font-smoothing: antialiased;
+}
+
+p { margin: 0 0 var(--s5); max-width: var(--measure); }
+h1, h2, h3 { margin: 0; font-weight: 600; text-wrap: balance; }
+strong { font-weight: 600; }
+em { font-style: normal; font-weight: 600; }   /* VOICE_AND_TONE §13: no italic emphasis */
+
+/* Links — distinguishable without colour (13 §2.4) */
+a {
+  color: var(--mark);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+a:hover { text-decoration-thickness: 2px; }
+
+/* FOCUS — the annotation tie doubles as the focus indicator (07 §6.1).
+   Part of the identity, not a compliance layer. */
+:focus-visible {
+  outline: 3px solid var(--mark);
+  outline-offset: 3px;
+}
+
+/* ------------------------------------------------------------ THE SPINE -- */
+/* Left-anchored and asymmetric. A consistent left edge the length of the
+   site, the way a kept record has a margin (07 §1). */
+.sheet {
+  container-type: inline-size;
+  container-name: sheet;
+  background: var(--ground);
+  --pad: var(--s5);
+  padding: 0 var(--pad);
+}
+.spine { max-width: 1180px; margin: 0; padding: 0; }   /* NOT centred */
+
+/* ------------------------------------------------------- register labels -- */
+/* The scan layer (16 failure mode 6), bought with no card, icon or colour.
+   Lowercase, apparatus register, 16px — never below the body minimum. */
+.reg {
+  font-family: var(--app);
+  font-size: 1rem;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: var(--ink-2);
+  display: block;
+  margin-bottom: var(--s3);
+}
+
+/* ----------------------------------------------------------------- rules -- */
+/* Rationed. Four kinds, one meaning each. A rule is never decorative. */
+.rule-hair   { border: 0; border-top: 1px solid var(--rule);        margin: 0 0 var(--s4); }
+.rule-strong { border: 0; border-top: 2px solid var(--rule-strong); margin: 0 0 var(--s4); }
+
+/* A DASHED LINE ALWAYS MEANS AN EPISTEMIC GAP (B23). It is never a divider,
+   never a border, never a style. There is no decorative dashed rule here. */
+
+/* --------------------------------------------------------------- section -- */
+.section { padding: var(--s8) 0; }
+.section--set {                 /* deliberate ground change — count them */
+  background: var(--ground-set);
+  padding: var(--s8) var(--pad);
+  margin: 0 calc(var(--pad) * -1);
+}
+.section__head { margin-bottom: var(--s5); }
+.h-section {
+  font-size: clamp(1.375rem, 3.4cqi, 1.875rem);
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  max-width: 24ch;
+}
+
+/* --------------------------------------------------- consequence emphasis -- */
+/* 16 §4 A3: where the copy names what the buyer's problem costs, that
+   statement carries the page's heaviest emphasis — heavier than any figure,
+   number or apparatus. This is the direct fix for failure modes 2, 4 and 5. */
+.consequence {
+  font-size: clamp(1.5rem, 4.6cqi, 2.375rem);
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+  max-width: 30ch;
+  margin: 0 0 var(--s5);
+}
+
+/* ========================================================== THE APPARATUS ==
+   Never smaller-grey-italic. Never a footnote. Never a disclaimer treatment.
+   Set at 16px — the body minimum — in a different REGISTER, not a smaller
+   size. Subordination comes from register, measure and position (17 §2).
+   Verified contrast 8.77:1 (AAA). ========================================= */
+.app {
+  font-family: var(--app);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+  max-width: 56ch;
+}
+
+/* THE ANNOTATION TIE — the primary motif (07 §6.1).
+   The visible act of citing: a mark binding a statement to its provenance. */
+.tie {
+  border-left: 2px solid var(--mark);
+  padding-left: var(--s4);
+}
+
+/* Provenance line — what · when · where · how many · by whom */
+.prov { margin: 0; }
+.prov + .prov { margin-top: var(--s2); }
+
+/* ------------------------------------------------- EXPANDABLE disclosure -- */
+/* Native <details>. Works with no JavaScript (45 STATE 4). Opens in place,
+   downward only, no layout shift above the reader's line. */
+.evd { border: 0; }
+.evd > summary {
+  font-family: var(--app);
+  font-size: 1rem;
+  color: var(--mark);
+  cursor: pointer;
+  list-style: none;
+  display: inline-flex;
+  gap: var(--s2);
+  align-items: baseline;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  padding: var(--s1) 0;
+}
+.evd > summary::-webkit-details-marker { display: none; }
+.evd > summary::before { content: "\25B8"; }        /* ▸ */
+.evd[open] > summary::before { content: "\25BE"; }  /* ▾ */
+.evd__body { margin-top: var(--s3); }
+
+/* --------------------------------------------------------- STATUS MARKS -- */
+/* Shape + label ALWAYS. Colour is at most a third channel and is not used
+   here at all: the distinction is SHAPE and WORD, so it survives greyscale,
+   print and a colour-blind reader (08 §4 rule 1). NEVER a traffic light. */
+.st {
+  font-family: var(--app);
+  font-size: 1rem;
+  color: var(--ink-2);
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--s2);
+  white-space: nowrap;
+}
+.st__g { font-size: 0.9em; color: var(--ink); }   /* the shape channel */
+
+/* --------------------------------------------------------------- LIMITS -- */
+/* ADJACENT-SECONDARY. Always open. NEVER collapsible at any width (B29).
+   Set in the ARGUMENT register at body size — same type quality as the
+   claims it qualifies (08 §8 rule 1, B5). It is not a disclosure and it is
+   never inside one, so no script failure can hide it. */
+.lim { max-width: var(--measure); }
+.lim p:last-child { margin-bottom: 0; }
+
+/* ------------------------------------------------------------------ CTA -- */
+/* Definite, not loud. Energy from contrast against restraint, never from
+   size, saturation or a coloured band (16 §4D). */
+.acts {
+  display: flex; flex-wrap: wrap; gap: var(--s3);
+  align-items: stretch; margin: var(--s6) 0 0;
+}
+.act {
+  font-family: var(--arg);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.2;
+  padding: var(--s4) var(--s5);
+  border: 2px solid var(--ink);
+  border-radius: 2px;                 /* effectively square; no pill, no card */
+  text-decoration: none;
+  display: inline-flex; align-items: center;
+}
+.act--primary { background: var(--ink); color: var(--ground); }
+.act--primary:hover { background: var(--mark); border-color: var(--mark); }
+.act--peer    { background: transparent; color: var(--ink); }
+.act--peer:hover { border-color: var(--mark); color: var(--mark); }
+
+/* The isolation whitespace before an action region is what makes it read as
+   intentional rather than pushy (16 §4D3). */
+.act-region { padding-top: var(--s10); }
+
+/* ------------------------------------------------------------- HEADER/NAV -- */
+/* NON-STICKY by default (H3). No form, no booking in navigation. */
+.hdr {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--s5); padding: var(--s5) 0 var(--s5);
+  border-bottom: 1px solid var(--rule);
+}
+.hdr__mark { font-family: var(--arg); font-weight: 600; font-size: 1.125rem; letter-spacing: -0.01em; }
+.hdr__nav { display: flex; flex-wrap: wrap; gap: var(--s5); align-items: baseline; }
+.hdr__nav a { color: var(--ink); text-decoration: none; font-size: 1rem; }
+.hdr__nav a:hover { color: var(--mark); text-decoration: underline; text-underline-offset: 0.18em; }
+.hdr__cta {
+  font-weight: 600; font-size: 1rem; color: var(--ink);
+  border-bottom: 2px solid var(--mark); text-decoration: none; padding-bottom: 2px;
+}
+
+/* ------------------------------------------------------------------ HERO -- */
+/* Four elements, no fifth. ZERO apparatus above the fold. Nothing animates.
+   Readable at first paint. */
+.hero { padding: var(--s8) 0 var(--s7); }
+.h1 {
+  font-size: clamp(2.25rem, 9cqi, 4.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.028em;
+  max-width: 30ch;          /* two lines at WIDE; wraps naturally at NARROW */
+  margin: 0 0 var(--s6);
+}
+.hero__support { font-size: 1.25rem; line-height: 1.55; max-width: 60ch; }
+.hero__support p:last-of-type { margin-bottom: 0; }
+
+/* ------------------------------------------------------- APPARATUS MARGIN -- */
+/* WIDE only: the one place a margin form of the apparatus is correct
+   (48 §1, 12 §14). At MEDIUM and NARROW it re-parents INLINE beneath the
+   claim, in DOM order — which is already the DOM order here, so nothing
+   moves in the accessibility tree. It never becomes a footer. */
+.claim-set { display: block; }
+.claim-set__claim { max-width: var(--measure); }
+.claim-set__margin { margin-top: var(--s4); }
+
+@container sheet (min-width: 1000px) {
+  .claim-set {
+    display: grid;
+    grid-template-columns: minmax(0, var(--measure)) minmax(240px, 22rem);
+    gap: var(--s7);
+    align-items: start;
+  }
+  .claim-set__margin { margin-top: 0; }
+}
+
+/* ---------------------------------------------------------------- FIGURE -- */
+/* Figures are full-width events and the visual peak of their section.
+   At most ONE figure of that weight per page (07 §1). */
+.fig { margin: var(--s6) 0 0; }
+.fig__frame { overflow-x: auto; max-width: 100%; }  /* scrolls INSIDE its container only */
+/* Figures are NOT scaled down to fit. Scaling an SVG scales its labels, and
+   figure labels may not fall below the body minimum (13 §2.2). Below the
+   width the figure needs, it scrolls inside its own container — the page body
+   never scrolls horizontally — and at NARROW it is replaced by its genuine
+   vertical form, which is a different drawing, not a smaller one. */
+.fig svg { display: block; height: auto; max-width: none; }
+.frame--narrow .fig svg { max-width: 100%; }
+.fig figcaption { margin-top: var(--s4); }
+
+/* Figure text is REAL TEXT, never baked into an image (13 §4.1). */
+.fig text { font-family: var(--app); font-size: 16px; fill: var(--ink-2); }
+.fig text.lab { font-family: var(--arg); font-size: 17px; fill: var(--ink); font-weight: 600; }
+.fig text.recess { fill: var(--ink-2); }
+
+.stroke      { stroke: var(--ink);        stroke-width: 2;   fill: none; }
+.stroke-mark { stroke: var(--mark);       stroke-width: 2;   fill: none; }
+.stroke-rec  { stroke: var(--ink-recess); stroke-width: 1.5; fill: none; }
+/* DASHED = NOT MEASURED / NOT KNOWN. Nothing else, ever. */
+.stroke-gap  { stroke: var(--ink); stroke-width: 2; fill: none; stroke-dasharray: 5 5; }
+.stroke-gap-rec { stroke: var(--ink-recess); stroke-width: 1.5; fill: none; stroke-dasharray: 5 5; }
+.node        { fill: var(--ink); }
+.node-rec    { fill: var(--ink-recess); }
+.mark-int    { fill: var(--mark); }
+
+/* NO TAPER. Constant stroke width, constant node size, constant spacing.
+   The distance between "the run" and "a funnel" is one decision about
+   tapering (B2), and this file does not offer a way to make one. */
+
+/* --------------------------------------------------- text equivalent ----- */
+/* Every figure carries a text/tabular equivalent conveying the same
+   relationships — not a decorative alt string (13 §2.8). */
+.fig__text { margin-top: var(--s5); }
+/* A figure's tabular equivalent is EXPANDABLE, not always-on: it duplicates a
+   figure that already carries every label as real text, and 19 sec 6 requires a
+   figure to REPLACE structure-carrying prose rather than sit beside it. It stays
+   in the DOM (crawlable, retrievable), keyboard-reachable, and open in print. */
+details.fig__text > table { margin-top: var(--s3); }
+.fig__text table { border-collapse: collapse; font-size: 1rem; }
+.fig__text th, .fig__text td {
+  font-family: var(--app); text-align: left; vertical-align: top;
+  padding: var(--s2) var(--s5) var(--s2) 0; border-bottom: 1px solid var(--rule);
+  color: var(--ink-2);
+}
+.fig__text th { color: var(--ink); font-weight: 600; }
+
+/* ------------------------------------------------------------ EVIDENCE ---- */
+.spec { border-top: 1px solid var(--rule); padding-top: var(--s5); margin-top: var(--s7); }
+.grid-states { display: grid; gap: var(--s4) var(--s6); grid-template-columns: 1fr; margin: 0; }
+@container sheet (min-width: 700px) {
+  .grid-states { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.grid-states dt { grid-column: 1; }
+.grid-states dd { margin: 0; }
+
+.sysrow {
+  display: grid; grid-template-columns: 1fr; gap: var(--s1);
+  padding: var(--s4) 0; border-bottom: 1px solid var(--rule);
+}
+@container sheet (min-width: 700px) {
+  .sysrow { grid-template-columns: 14rem 1fr; gap: var(--s5); align-items: baseline; }
+}
+.sysrow__name { font-family: var(--arg); font-weight: 600; }
+.sysrow__val  { font-family: var(--app); font-size: 1rem; color: var(--ink-2); }
+
+/* ------------------------------------------------------------- artboards -- */
+/* Presentation chrome for the validation document ONLY. Not part of the
+   visual language and not proposed for any page. */
+.board { margin: 0 0 var(--s10); }
+.board__meta {
+  font-family: var(--app); font-size: 0.9375rem; color: var(--ink-2);
+  padding: var(--s3) var(--s4); border: 1px solid var(--ink-recess);
+  margin-bottom: var(--s4); max-width: 70ch;
+}
+.board__meta b { color: var(--ink); font-weight: 600; }
+.board__pair { display: grid; gap: var(--s9); grid-template-columns: minmax(0, 1fr); align-items: start; }
+.board__pair > * { min-width: 0; }
+.frame { border: 1px solid var(--rule); background: var(--ground); max-width: 100%; overflow: hidden; }
+.frame__cap {
+  font-family: var(--app); font-size: 0.9375rem; color: var(--ink-2);
+  padding: var(--s2) var(--s4); border-bottom: 1px solid var(--rule);
+  max-width: none; margin: 0;
+}
+.frame--narrow { width: 390px; max-width: 100%; }
+.frame--narrow .sheet { --pad: var(--s4); }
+.frame--narrow .hero { padding: var(--s6) 0 var(--s5); }
+.frame--narrow .section { padding: var(--s6) 0; }
+.frame--narrow .act-region { padding-top: var(--s8); }
+
+/* Document chrome only. Deliberately SOLID, not dashed: on this site a
+   dashed line always means an epistemic gap (B23), and diluting it even in
+   validation chrome would weaken the honest device. */
+.fold {
+  border: 0; border-top: 1px solid var(--mark); margin: 0;
+}
+.fold__lab { font-family: var(--app); font-size: 0.9375rem; color: var(--mark); padding-top: var(--s1); max-width: none; margin: 0 0 var(--s6); }
+
+/* skip link */
+.skip {
+  position: absolute; left: -9999px;
+  background: var(--ink); color: var(--ground); padding: var(--s3) var(--s4);
+}
+.skip:focus { left: var(--s4); top: var(--s4); z-index: 10; }
+
+/* ---------------------------------------------------------- reduced motion */
+/* There is no motion in this prototype other than the native disclosure.
+   The static state is the primary state (11 §2 Q3). */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* --------------------------------------------------------------- print ---- */
+/* All disclosures forced open; no collapsed state exists in print output
+   (45 STATE 3). Print and screenshot fidelity is a requirement (13 §4.7). */
+@media print {
+  .evd > summary { display: none; }
+  .evd { display: block; }
+  .evd::details-content { content-visibility: visible !important; block-size: auto !important; }
+  .evd > .evd__body { display: block !important; margin-top: var(--s2); }
+  .board__meta, .frame__cap, .fold, .fold__lab { display: none; }
+  .frame { border: 0; }
+  body { background: #fff; }
+}
+
+/* ===================== SESSION 14A ADDITIONS ==============================
+   Added for the complete /seo page. Nothing here changes Direction 2; these
+   are the elements a complete page needs that a section pair did not.
+   ========================================================================= */
+
+/* An emphasised statement INSIDE a section. Below its heading, above body.
+   Distinct from .consequence, which is the page's single heaviest statement
+   (16 sec 4 A3 names one statement per page, not several). */
+.statement {
+  font-size: clamp(1.25rem, 3.2cqi, 1.625rem);
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  max-width: 34ch;
+  margin: 0 0 var(--s5);
+}
+
+/* Breadcrumb - one source with the emitted BreadcrumbList (46 sec 3).
+   A segment that is not a real page is not a link. */
+.crumb {
+  font-family: var(--app); font-size: 1rem; color: var(--ink-2);
+  max-width: none; margin: 0; padding: var(--s4) 0 0;
+}
+.crumb a { color: var(--ink-2); }
+.crumb [aria-current] { color: var(--ink); }
+
+/* Scope and objection lists. NOT cards, NOT a grid, NOT icon+title+two lines.
+   A bold lead-in inline, separated by space. A13, B14, A1. */
+.runs { margin: 0; padding: 0; list-style: none; max-width: var(--measure); }
+.runs > li { margin: 0 0 var(--s5); }
+.runs > li:last-child { margin-bottom: 0; }
+
+/* Footer region R2. Entity block is Case A (owner-blocked NAP) and is NOT
+   drawn - no container, no placeholder, no partial address. */
+.foot { border-top: 1px solid var(--rule); padding: var(--s7) 0 var(--s8); margin-top: var(--s8); }
+.foot__cols { display: grid; gap: var(--s6); grid-template-columns: 1fr; }
+@container sheet (min-width: 700px) {
+  .foot__cols { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s5); }
+}
+.foot h2 { font-family: var(--app); font-size: 1rem; font-weight: 500; color: var(--ink-2); margin: 0 0 var(--s3); }
+.foot ul { list-style: none; margin: 0; padding: 0; }
+.foot li { margin-bottom: var(--s2); }
+.foot a { color: var(--ink); text-decoration: underline; text-underline-offset: 0.18em; }
+
+/* Figure form swap. A figure is never scaled down and never left to scroll
+   sideways at narrow widths: below the width its horizontal form needs, it is
+   REPLACED by its genuine vertical drawing (13 sec 3.5; 22 sec 6; Session 14
+   finding F-R1). The threshold is derived from the horizontal figure's own
+   required width, not chosen as a breakpoint - numeric breakpoints remain a
+   Gate 10 output. */
+.fig__v { display: block; }
+.fig__h { display: none; }
+@container sheet (min-width: 1180px) {
+  .fig__h { display: block; }
+  .fig__v { display: none; }
+}
+
+/* Header at NARROW: a native disclosure panel, not a wrapped link list.
+   A wrapped list consumed half the first screen and pushed both actions
+   below the fold - a defect found by rendering, not by description.
+   46 STATE 3. No script: the panel is a native <details>. */
+.hdr { flex-wrap: wrap; }
+.hdr__nav--wide { display: none; }
+.hdr__narrow { display: flex; align-items: center; gap: var(--s5); }
+.hdr__menu > summary {
+  font-family: var(--app); font-size: 1rem; color: var(--ink);
+  cursor: pointer; list-style: none; padding: var(--s1) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.hdr__menu > summary::-webkit-details-marker { display: none; }
+.hdr__panel { display: flex; flex-direction: column; gap: var(--s3); padding: var(--s4) 0 0; }
+.hdr__panel a { color: var(--ink); text-decoration: none; font-size: 1.0625rem; }
+.hdr__panel a:hover { color: var(--mark); text-decoration: underline; }
+
+@container sheet (min-width: 700px) {
+  .hdr__nav--wide { display: flex; }
+  .hdr__narrow { display: none; }
+}

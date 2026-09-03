@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Session 15B — three digital creative directions</title>
+<style>
+ :root{color-scheme:light}
+ body{margin:0;padding:clamp(20px,4vw,48px);background:#101014;color:#F2F2F4;
+   font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+ h1{font-size:clamp(1.4rem,3vw,2rem);margin:0 0 8px;letter-spacing:-0.03em}
+ .sub{color:#A6A6B0;max-width:80ch;margin:0 0 6px}
+ .warn{color:#FFD8A8;max-width:80ch;margin:14px 0 0;font-size:.92rem}
+ a{color:#8FE9C8}
+ .grid{display:grid;gap:20px;grid-template-columns:1fr;margin-top:30px}
+ @media(min-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
+ .card{border:1px solid #2A2A33;border-radius:10px;overflow:hidden;background:#16161C;
+   display:flex;flex-direction:column}
+ .card h2{font-size:1.08rem;margin:0;padding:16px 18px 4px;letter-spacing:-0.02em}
+ .card .idea{padding:0 18px;color:#A6A6B0;font-size:.9rem;margin:0 0 12px;min-height:4.4em}
+ .card .shot{border-top:1px solid #2A2A33;border-bottom:1px solid #2A2A33;height:300px;overflow:hidden;background:#000}
+ .card iframe{width:1400px;height:1200px;border:0;transform:scale(.268);transform-origin:0 0}
+ .card .go{display:flex;gap:10px;padding:14px 18px 18px;flex-wrap:wrap}
+ .btn{display:inline-block;padding:11px 15px;border-radius:6px;text-decoration:none;
+   background:#F2F2F4;color:#101014;font-weight:700;font-size:.88rem}
+ .btn.alt{background:transparent;color:#F2F2F4;border:1px solid #3A3A46}
+ ol{max-width:80ch;color:#A6A6B0}
+ code{background:#22222A;padding:2px 6px;border-radius:4px;font-size:.9em}
+</style>
+</head>
+<body>
+<h1>Session 15B — three digital creative directions</h1>
+<p class="sub">MappedSkills. Creative-direction prototypes, not homepages, not a design system.
+Each one preserves the approved H1, the approved copy meaning, the UX architecture, the CTA
+architecture and the evidence discipline. None of them is approved.</p>
+
+<div class="grid">
+  <div class="card">
+    <h2>A — The Signal Field</h2>
+    <p class="idea">Demand is a live field of signals. The site is the instrument that catches,
+    routes and tags them — and you can close a gate and watch the enquiries stop.</p>
+    <div class="shot"><iframe src="a-signal.html" title="Direction A preview" loading="lazy"></iframe></div>
+    <div class="go"><a class="btn" href="a-signal.html">Open A</a>
+      <a class="btn alt" href="a-signal.html" target="_blank" rel="noopener">New tab</a></div>
+  </div>
+
+  <div class="card">
+    <h2>B — The Switch</h2>
+    <p class="idea">The page has two states — the traffic view and the enquiries view — and the
+    whole surface switches between them. The H1 becomes the mechanic of the site.</p>
+    <div class="shot"><iframe src="b-switch.html" title="Direction B preview" loading="lazy"></iframe></div>
+    <div class="go"><a class="btn" href="b-switch.html">Open B</a>
+      <a class="btn alt" href="b-switch.html" target="_blank" rel="noopener">New tab</a></div>
+  </div>
+
+  <div class="card">
+    <h2>C — The Trace</h2>
+    <p class="idea">The site instruments this visit and shows you the record it kept — including,
+    explicitly, what it could not see. The product is demonstrated on you.</p>
+    <div class="shot"><iframe src="c-trace.html" title="Direction C preview" loading="lazy"></iframe></div>
+    <div class="go"><a class="btn" href="c-trace.html">Open C</a>
+      <a class="btn alt" href="c-trace.html" target="_blank" rel="noopener">New tab</a></div>
+  </div>
+</div>
+
+<p class="warn"><b>Judge them full size, not here.</b> The tiles above are scaled to 27% and the
+motion is the point &mdash; open each one, scroll it, and resize the window to see NARROW.</p>
+
+<ol>
+  <li><b>A</b> — scroll into the field, then <b>close a gate</b> and watch the recorded count stop rising.</li>
+  <li><b>B</b> — the hero demonstrates its own switch once, then use the <b>Traffic / Enquiries</b> control. Scroll for the three acts.</li>
+  <li><b>C</b> — watch the record fill as you read, then reach <em>“Here is the record of your visit.”</em> Nothing leaves your browser; the network tab stays empty.</li>
+</ol>
+
+<p class="sub">For comparison, the rejected Session 15 homepage is at
+<code>../../18-design-system/prototype/homepage.html</code> and is deliberately unchanged.</p>
+</body>
+</html>

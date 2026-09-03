@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>B + A energy — THE RESOLVE — MappedSkills convergence prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!--
+  SESSION 15C — CONVERGENCE PROTOTYPE — "THE RESOLVE"
+  Direction B (THE SWITCH) is the foundation. Selected ENERGY PRINCIPLES from
+  Direction A are introduced as BEHAVIOUR, not as a second visual system.
+
+  THE ONE MOVE: traffic is a field of identical, anonymous marks; enquiries are
+  a few distinct, named objects. The site's single gesture is RESOLUTION — the
+  same population, resolved. It is applied to the hero, to capture/convert/
+  measure, to the commercial argument, to the evidence and to the CTA.
+
+  ISOLATED. Not production. Not a complete homepage. Not a design system.
+  Approved H1 verbatim. No invented metric, client result, logo, testimonial or
+  photograph. NO QUANTITY IS DRAWN: the marks are kinds, not counts, and every
+  mark field says so.
+-->
+<style>
+:root{
+  /* B's palette, carried unchanged. Monochrome base + ONE accent. */
+  --ink:#141219; --ivory:#F7F3EC; --paper:#FFFDF9;
+  --tang:#FF5B04;            /* the mark — fills, and text on the dark ground  */
+  --tang-ink:#D94400;        /* the same mark, darkened for DISPLAY text on light */
+  --tang-sm:#A83400;         /* and darkened again for SMALL text, to clear 4.5:1 */
+  --dim:#5C5665;             /* traffic register: anonymous, undifferentiated  */
+  --gapc:#8E8798;            /* not measured / unattributed                    */
+  --line:#DED6C8;
+
+  --disp:"Bricolage Grotesque", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --body:"Manrope", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* MOTION SYSTEM — four behaviours, four timings. Nothing else animates. */
+  --e-state:cubic-bezier(.65,0,.35,1);   /* a state changes            */
+  --e-arrive:cubic-bezier(.2,.85,.25,1); /* something arrives          */
+  --t-micro:180ms;
+  --t-state:620ms;
+  --t-resolve:900ms;
+
+  --pad:clamp(18px,3.4vw,48px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--body);background:var(--ivory);color:var(--ink);
+  font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{margin:0;font-family:var(--disp);font-weight:800;letter-spacing:-0.035em;line-height:.94}
+p{margin:0 0 1.05em;max-width:58ch}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:2px}
+.wrap{width:min(1400px,100%);margin:0 auto;padding:0 var(--pad)}
+.skip{position:absolute;left:-9999px;background:var(--ink);color:var(--ivory);padding:12px 16px}
+.skip:focus{left:16px;top:16px;z-index:99}
+.lab{font:600 .82rem/1.4 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+
+/* ================================================== THE TWO-STATE SURFACE ==
+   Carried from B unchanged: a region declares both palettes, so a state
+   change is a token change rather than a rebuild. */
+.sw{--g:var(--ivory);--t:var(--ink);--muted:#5C5665;--ln:var(--line);
+  background:var(--g);color:var(--t);position:relative;overflow:hidden;
+  transition:background-color var(--t-state) var(--e-state),color var(--t-state) var(--e-state)}
+.sw[data-state="traffic"]{--g:var(--ink);--t:var(--ivory);--muted:#A29BAC;--ln:#332F3C}
+
+/* ------------------------------------------------------------------ chrome */
+.hdr{display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:22px 0;position:relative;z-index:9}
+.logo{font-family:var(--disp);font-weight:800;font-size:1.2rem;letter-spacing:-0.045em}
+.nav{display:flex;gap:24px}
+.nav a{color:inherit;opacity:.72;text-decoration:none;font-size:.95rem;font-weight:500}
+.nav a:hover{opacity:1}
+@media(max-width:1000px){.nav{display:none}}
+.cta{display:inline-flex;align-items:center;justify-content:center;font:700 1rem/1 var(--body);
+  padding:17px 26px;min-height:52px;border-radius:100px;text-decoration:none;white-space:nowrap;
+  background:var(--tang);color:#141219;border:2px solid var(--tang);
+  transition:transform var(--t-micro) var(--e-arrive),box-shadow var(--t-micro) var(--e-arrive),
+             background-color var(--t-micro) var(--e-state),color var(--t-micro) var(--e-state)}
+.cta:hover{transform:translateY(-3px)}
+.cta:active{transform:translateY(-1px)}
+.cta--o{background:transparent;color:inherit;border-color:currentColor}
+.cta--o:hover{background:currentColor;color:var(--g)}
+.cta--sm{padding:12px 18px;font-size:.9rem;min-height:44px}
+
+/* ------------------------------------------------------------------- hero */
+.hero{padding-bottom:clamp(26px,4vw,54px)}
+.h1{font-size:clamp(2.6rem,7.2vw,6.2rem);max-width:15ch;margin:clamp(14px,2.2vw,30px) 0 0;
+  text-wrap:balance}
+/* KINETIC HIERARCHY (energy principle from A): the emphasis is not a colour
+   fade — a mark WIPES across the word that currently governs. */
+.kw{position:relative;display:inline-block;white-space:nowrap}
+.nb{white-space:nowrap}
+.kw::after{content:"";position:absolute;left:-.03em;right:-.03em;bottom:.06em;height:.1em;
+  background:currentColor;transform:scaleX(0);transform-origin:left;
+  transition:transform var(--t-state) var(--e-state)}
+.kw.on::after{transform:scaleX(1)}
+.kw--e{color:var(--tang-ink)}
+.kw--t{color:var(--muted)}
+.sw[data-state="traffic"] .kw--e{color:var(--muted)}
+.sw[data-state="traffic"] .kw--t{color:var(--tang)}
+
+.heroRow{display:grid;gap:clamp(24px,3vw,56px);grid-template-columns:1fr;align-items:start;
+  margin-top:clamp(22px,2.6vw,38px)}
+@media(min-width:1060px){.heroRow{grid-template-columns:0.95fr 1.05fr}}
+.lede{font-size:clamp(1.05rem,1.4vw,1.26rem);max-width:44ch;color:var(--muted)}
+.lede b{color:var(--t);font-weight:700}
+.acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+
+/* ============================================================= THE FIELD ==
+   The one visual object of this direction. In TRAFFIC it is an undifferentiated
+   lattice: every mark identical, anonymous, the same size. In ENQUIRIES the
+   same population has resolved into a few distinct, named objects.
+   Implemented as DOM squares moved with transform + opacity only. */
+.stage{position:relative;border-top:2px solid var(--ln);padding-top:16px;
+  transition:border-color var(--t-state) var(--e-state)}
+.stage__head{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:baseline;justify-content:space-between;
+  margin-bottom:16px}
+.stage__lab{transition:color var(--t-state) var(--e-state)}
+.fieldbox{position:relative;height:clamp(220px,25vw,300px)}
+
+.field{position:absolute;inset:0;display:grid;gap:5px;
+  grid-template-columns:repeat(var(--cols,22),1fr);align-content:space-between}
+.field i{display:block;width:100%;height:9px;background:var(--dim);opacity:.5;
+  transform:translate3d(0,0,0) scale(1);
+  transition:transform var(--t-resolve) var(--e-arrive),opacity var(--t-resolve) var(--e-state),
+             background-color var(--t-state) var(--e-state)}
+.sw[data-state="traffic"] .field i{background:#BDB6CC;opacity:.9}
+/* the resolve: every mark travels toward the object it becomes, then goes */
+.sw[data-state="enquiries"] .field i{transform:translate3d(var(--tx,0),var(--ty,0),0) scale(.55);opacity:0}
+/* one brief ripple when the traffic state arrives — activity, then stillness */
+.sw[data-state="traffic"] .field.pulse i{animation:ripple 620ms var(--e-arrive) both}
+@keyframes ripple{0%{transform:scale(1)}42%{transform:scale(1.5)}100%{transform:scale(1)}}
+
+.rows{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;
+  pointer-events:none}
+.row{display:flex;align-items:center;gap:14px;opacity:0;transform:translateX(-14px);
+  transition:opacity 420ms var(--e-arrive),transform 420ms var(--e-arrive)}
+.sw[data-state="enquiries"] .row{opacity:1;transform:none}
+.row__m{width:15px;height:15px;flex:none;background:var(--tang)}
+.row__m.open{background:transparent;border:2px dashed var(--gapc)}
+.row__b{height:11px;background:var(--tang);border-radius:2px;flex:none;
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 560ms var(--e-arrive)}
+.sw[data-state="enquiries"] .row__b{transform:scaleX(1)}
+.row__b.open{background:repeating-linear-gradient(90deg,var(--gapc) 0 5px,transparent 5px 10px);height:6px}
+.row__t{font:600 .88rem/1.25 var(--body);color:var(--muted)}
+.note{font:500 .82rem/1.5 var(--body);color:var(--muted);margin:14px 0 0;max-width:none}
+
+.control{display:inline-flex;border:2px solid currentColor;border-radius:100px;padding:3px;gap:3px}
+.control button{font:600 .88rem/1 var(--body);border:0;border-radius:100px;padding:11px 17px;
+  min-height:42px;cursor:pointer;background:transparent;color:inherit;
+  transition:background-color var(--t-micro) var(--e-state),color var(--t-micro) var(--e-state)}
+.control button[aria-pressed="true"]{background:var(--tang);color:#141219}
+.sw[data-state="traffic"] .control button[aria-pressed="true"]{background:var(--ivory);color:var(--ink)}
+
+/* ============================================== HERO → NEXT HANDOFF ======= */
+.handoff{background:var(--ink);color:var(--ivory);padding:clamp(26px,3.4vw,44px) 0;position:relative;
+  overflow:hidden}
+.handoff::before{content:"";position:absolute;left:0;top:0;bottom:0;width:100%;background:var(--tang);
+  transform:scaleX(0);transform-origin:left}
+.handoff.on::before{animation:pass 1100ms var(--e-state) 160ms both}
+@keyframes pass{
+  0%{transform:scaleX(0);transform-origin:left}
+  46%{transform:scaleX(1);transform-origin:left}
+  54%{transform:scaleX(1);transform-origin:right}
+  100%{transform:scaleX(0);transform-origin:right}}
+.handoff .wrap{position:relative;z-index:2}
+.handoff h2{font-size:clamp(1.35rem,3.1vw,2.5rem);max-width:24ch;
+  opacity:0;transform:translateY(16px);transition:opacity 520ms var(--e-arrive) 880ms,transform 520ms var(--e-arrive) 880ms}
+.handoff.on h2{opacity:1;transform:none}
+.handoff em{font-style:normal;color:var(--tang)}
+
+/* ==================================================== CAPTURE/CONVERT/MEASURE */
+.act{padding:clamp(56px,8vw,120px) 0;border-top:1px solid var(--line)}
+.act__grid{display:grid;gap:clamp(26px,4vw,64px);grid-template-columns:1fr;align-items:center}
+@media(min-width:1000px){.act__grid{grid-template-columns:.9fr 1.1fr}}
+.act__n{font:700 .82rem/1 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--tang-sm)}
+.act h2{font-size:clamp(1.9rem,4.4vw,3.6rem);max-width:15ch;margin:16px 0 18px}
+.act p{color:var(--dim);max-width:42ch;margin:0}
+.act p b{color:var(--ink);font-weight:700}
+
+/* THE RUN: the same mark vocabulary, moving through a state change.
+   The marks are KINDS, not counts. No quantity, proportion or rate is drawn. */
+.run{position:relative;display:flex;flex-direction:column;gap:clamp(9px,1.3vw,15px)}
+.mk{display:flex;align-items:center;gap:13px}
+.mk span{flex:1;min-width:0}
+.mk i{width:14px;height:14px;flex:none;background:var(--dim);opacity:.45;
+  transition:background-color 520ms var(--e-state) var(--d,0s),opacity 520ms var(--e-state) var(--d,0s),
+             transform 620ms var(--e-arrive) var(--d,0s),border-color 520ms var(--e-state) var(--d,0s)}
+.mk b{height:10px;border-radius:2px;background:var(--dim);opacity:.35;flex:none;width:var(--w,60%);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 620ms var(--e-arrive) var(--d,0s),background-color 520ms var(--e-state) var(--d,0s),
+             opacity 520ms var(--e-state) var(--d,0s)}
+.mk span{font:600 .86rem/1.3 var(--body);color:var(--dim);opacity:0;transform:translateX(-8px);
+  transition:opacity 420ms var(--e-arrive) calc(var(--d,0s) + 260ms),transform 420ms var(--e-arrive) calc(var(--d,0s) + 260ms)}
+.act.on .mk span{opacity:1;transform:none}
+.act.on .mk b{transform:scaleX(1)}
+/* live: this mark survived and is the subject */
+.act.on .mk[data-k="live"] i{background:var(--tang);opacity:1;transform:scale(1.12)}
+.act.on .mk[data-k="live"] b{background:var(--tang);opacity:1}
+.act.on .mk[data-k="live"] span{color:var(--ink)}
+/* lost: it did not, and it is still drawn — it does not vanish from the record */
+.act.on .mk[data-k="lost"] i{background:transparent;border:2px solid var(--gapc);opacity:.9;transform:scale(.86)}
+.act.on .mk[data-k="lost"] b{background:repeating-linear-gradient(90deg,var(--gapc) 0 5px,transparent 5px 10px);
+  opacity:.85;height:6px;transform:scaleX(var(--stall,1))}
+/* gap: present, and honestly not measured */
+.act.on .mk[data-k="gap"] i{background:transparent;border:2px dashed var(--gapc);opacity:1}
+.act.on .mk[data-k="gap"] b{background:repeating-linear-gradient(90deg,var(--gapc) 0 5px,transparent 5px 10px);
+  opacity:.9;height:6px}
+.thresh{position:absolute;top:-10px;bottom:-10px;border-left:2px solid var(--ink);opacity:0;
+  transition:opacity 420ms var(--e-state) 260ms}
+.act.on .thresh{opacity:1}
+.thresh span{position:absolute;top:-24px;left:8px;font:600 .76rem/1 var(--body);
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+
+.spine{height:10px;border-radius:100px;background:var(--line);overflow:hidden;margin-top:clamp(30px,4vw,56px)}
+.spine i{display:block;height:100%;background:var(--tang);width:0;transition:width 1s var(--e-state)}
+.act.on .spine i{width:var(--p,33%)}
+
+/* ===================================================== COMMERCIAL SECTION == */
+.bound{padding:clamp(64px,9vw,140px) 0;border-top:1px solid var(--line)}
+.bound h2{font-size:clamp(2rem,5vw,4.2rem);max-width:14ch}
+.promise{display:grid;gap:clamp(26px,4vw,60px);grid-template-columns:1fr;margin-top:clamp(28px,4vw,52px)}
+@media(min-width:1000px){.promise{grid-template-columns:1fr 1fr;align-items:start}}
+.plist{list-style:none;margin:0;padding:0}
+.plist li{position:relative;display:flex;align-items:baseline;gap:14px;padding:13px 0;
+  border-bottom:1px solid var(--line);
+  font:600 clamp(1.05rem,2vw,1.45rem)/1.25 var(--body);color:var(--dim);
+  transform:none;
+  transition:transform 520ms var(--e-arrive) var(--d,0s),font-weight 520ms var(--e-state) var(--d,0s)}
+.plist li i{font:600 .8rem/1 var(--body);color:var(--dim);flex:none;font-style:normal}
+/* THE FALL: a rule is DRAWN through each promise in turn — a shape channel,
+   not a colour or an opacity fade, so every word stays fully readable. */
+.plist li::after{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:var(--tang-ink);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 520ms var(--e-state) var(--d,0s)}
+.bound.on .plist li::after{transform:scaleX(1)}
+.bound.on .plist li{transform:translateY(-4px)}
+.owned{border-left:4px solid var(--tang);padding-left:22px;
+  opacity:0;transform:translateY(20px) scale(.985);
+  transition:opacity 620ms var(--e-arrive) 620ms,transform 620ms var(--e-arrive) 620ms}
+.bound.on .owned{opacity:1;transform:none}
+.owned h3{font-size:clamp(1.5rem,3.2vw,2.6rem);margin:0 0 14px;line-height:1.02;max-width:16ch}
+.owned h3 em{font-style:normal;color:var(--tang-ink)}
+.owned p{color:var(--dim);max-width:46ch}
+.owned p:last-child{margin-bottom:0}
+.detail{margin-top:clamp(24px,3vw,44px);columns:2;column-gap:clamp(28px,4vw,56px);max-width:none}
+.detail p{max-width:none;break-inside:avoid;color:var(--dim);font-size:1rem}
+@media(max-width:860px){.detail{columns:1}}
+
+/* ================================================================ EVIDENCE */
+.evwrap{padding:clamp(64px,9vw,140px) 0;border-top:1px solid var(--line)}
+.ev{position:relative;border-radius:20px;overflow:hidden;background:var(--ink);color:var(--ivory)}
+.ev__top{position:relative;z-index:2;background:var(--ink);padding:clamp(26px,4vw,56px);
+  transition:transform var(--t-state) var(--e-state)}
+.ev[data-open] .ev__top{transform:translateY(-10px)}
+.ev__claim{font-family:var(--disp);font-weight:800;font-size:clamp(1.55rem,4vw,3.3rem);
+  letter-spacing:-0.035em;line-height:1.03;margin:0 0 14px;max-width:18ch}
+.ev__claim em{font-style:normal;color:var(--tang)}
+.ev__sub{color:#C0B9CA;max-width:52ch;margin:0 0 22px}
+.ev__btn{font:700 .95rem/1 var(--body);background:var(--tang);color:#141219;border:0;border-radius:100px;
+  padding:15px 24px;min-height:48px;cursor:pointer;
+  transition:transform var(--t-micro) var(--e-arrive)}
+.ev__btn:hover{transform:translateY(-2px)}
+.ev__under{background:#0F0D14;border-top:1px solid #2C2833;
+  display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--t-state) var(--e-state);
+  padding:0 clamp(26px,4vw,56px)}
+.ev[data-open] .ev__under{grid-template-rows:1fr;padding-top:clamp(20px,2.6vw,34px);
+  padding-bottom:clamp(26px,3.4vw,46px)}
+.ev__under > div{overflow:hidden;min-height:0}
+.prov{display:grid;margin:0}
+.prov > div{display:grid;grid-template-columns:8.6rem 1fr;gap:16px;padding:11px 0;
+  border-top:1px solid #2C2833;font-size:1rem;
+  opacity:0;transform:translateY(10px)}
+.ev[data-open] .prov > div{opacity:1;transform:none;
+  transition:opacity 420ms var(--e-arrive) var(--d,0s),transform 420ms var(--e-arrive) var(--d,0s)}
+.prov dt{color:#C0B9CA;font-weight:600}
+.prov dd{margin:0;color:var(--ivory)}
+.prov dd b{color:var(--tang);font-weight:700}
+.marks{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:20px;font-size:.98rem;color:#DAD4E1}
+.marks span{display:inline-flex;align-items:center;gap:10px}
+.sq{width:14px;height:14px;flex:none;border:1.6px solid #DAD4E1}
+.sq--f{background:#DAD4E1}
+.sq--h{background:repeating-linear-gradient(45deg,#DAD4E1 0 1.6px,transparent 1.6px 4.6px)}
+
+/* ===================================================================== CTA */
+.close{background:var(--tang);color:#141219;padding:clamp(64px,10vw,150px) 0;position:relative;overflow:hidden}
+.close h2{font-size:clamp(2.3rem,6.4vw,5.6rem);max-width:11ch}
+.close p{margin-top:20px;font-size:clamp(1.05rem,1.4vw,1.24rem);max-width:42ch;font-weight:500}
+.close .cta{background:#141219;color:var(--tang);border-color:#141219}
+.close .cta--o{background:transparent;color:#141219;border-color:#141219}
+.arrive{display:flex;gap:11px;margin-bottom:30px}
+.arrive i{width:22px;height:22px;background:#141219;opacity:0;transform:translateY(18px);
+  transition:opacity 420ms var(--e-arrive) var(--d,0s),transform 520ms var(--e-arrive) var(--d,0s)}
+.arrive i.open{background:transparent;border:2px dashed #141219}
+.close.on .arrive i{opacity:1;transform:none}
+.foot{background:var(--ink);color:#9C95A8;font-size:.88rem;padding:26px 0 62px}
+
+/* --------------------------------------------------------- reveal on view */
+.rv{opacity:0;transform:translateY(24px)}
+.rv.on{opacity:1;transform:none;transition:opacity 700ms var(--e-arrive),transform 700ms var(--e-arrive)}
+
+/* ============================ PROGRESSIVE ENHANCEMENT — no JavaScript ===== */
+html:not(.js) .rv{opacity:1;transform:none}
+html:not(.js) .field{display:none}
+html:not(.js) .row{opacity:1;transform:none}
+html:not(.js) .row__b{transform:scaleX(1)}
+html:not(.js) .mk span{opacity:1;transform:none}
+html:not(.js) .mk b{transform:scaleX(1)}
+html:not(.js) .thresh{opacity:1}
+html:not(.js) .spine i{width:100%}
+html:not(.js) .owned{opacity:1;transform:none}
+html:not(.js) .handoff h2{opacity:1;transform:none}
+html:not(.js) .arrive i{opacity:1;transform:none}
+html:not(.js) .ev__under{grid-template-rows:1fr;padding-top:28px;padding-bottom:34px}
+html:not(.js) .prov > div{opacity:1;transform:none}
+
+/* ==================================================== REDUCED MOTION ======
+   Nothing disappears. Every transformation resolves immediately, the field is
+   replaced by its resolved state, and both diagrams read complete. */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:1ms!important;transition-delay:0ms!important}
+  .rv{opacity:1;transform:none}
+  .field{display:none}
+  .row{opacity:1;transform:none}.row__b{transform:scaleX(1)}
+  .mk span{opacity:1;transform:none}.mk b{transform:scaleX(1)}
+  .thresh{opacity:1}
+  .owned{opacity:1;transform:none}
+  .handoff h2{opacity:1;transform:none}
+  .handoff::before{display:none}
+  .arrive i{opacity:1;transform:none}
+  .plist li{opacity:.6;transform:none}
+}
+
+/* =============================================================== NARROW === */
+@media(max-width:760px){
+  /* the rows define the box; the lattice overlays exactly that area, so when
+     the field resolves it leaves no empty space behind it */
+  .fieldbox{height:auto}
+  .rows{position:relative;inset:auto;gap:16px}
+  .stage__head{gap:10px}
+  .cta--sm{font-size:.8rem;padding:10px 12px}
+  .hdr{padding:14px 0;gap:10px}
+  .act__grid{gap:28px}
+  .detail{columns:1}
+  .arrive i{width:16px;height:16px}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ==================================================================== HERO -->
+<main id="main">
+<section class="sw" id="hero" data-state="enquiries">
+  <div class="wrap">
+    <header class="hdr">
+      <span class="logo">MappedSkills</span>
+      <nav class="nav" aria-label="Primary">
+        <a href="#">What we do</a><a href="#">How it works</a><a href="#">Evidence</a>
+        <a href="#">Pricing</a><a href="#">About</a>
+      </nav>
+      <a class="cta cta--sm" href="#cta">Tell us what you&rsquo;re trying to fix</a>
+    </header>
+
+    <div class="hero">
+      <h1 class="h1">Judge us on the <span class="nb"><span class="kw kw--e on" id="kwE">enquiries</span>,</span>
+        not the <span class="nb"><span class="kw kw--t" id="kwT">traffic</span>.</span></h1>
+
+      <div class="heroRow">
+        <div>
+          <p class="lede"><b>There is buyer demand for what you sell, and some of it never reaches
+          you.</b> We work on the whole route to an enquiry &mdash; being found, the page they
+          arrive on, and the measurement that shows where each enquiry came from.</p>
+          <div class="acts">
+            <a class="cta" href="#cta">Tell us what you&rsquo;re trying to fix</a>
+            <a class="cta cta--o" href="#cta">Book a call</a>
+          </div>
+        </div>
+
+        <div class="stage">
+          <div class="stage__head">
+            <span class="lab stage__lab" id="stageLab">what we report</span>
+            <div class="control" role="group" aria-label="Show the same demand as traffic or as enquiries">
+              <button type="button" data-set="traffic" aria-pressed="false">Traffic</button>
+              <button type="button" data-set="enquiries" aria-pressed="true">Enquiries</button>
+            </div>
+          </div>
+
+          <div class="fieldbox">
+            <!-- THE SAME POPULATION. In traffic it is an undifferentiated lattice;
+                 in enquiries it has resolved into a few distinct, named objects. -->
+            <div class="field" id="field" aria-hidden="true"></div>
+            <div class="rows" id="rows">
+              <div class="row"><i class="row__m"></i><i class="row__b" style="width:34%"></i><span class="row__t">organic search</span></div>
+              <div class="row"><i class="row__m"></i><i class="row__b" style="width:26%"></i><span class="row__t">paid search</span></div>
+              <div class="row"><i class="row__m"></i><i class="row__b" style="width:30%"></i><span class="row__t">a page that answered the visit</span></div>
+              <div class="row"><i class="row__m open"></i><i class="row__b open" style="width:22%"></i><span class="row__t">arrived with no usable trail &mdash; unattributed</span></div>
+            </div>
+          </div>
+
+          <p class="note" id="stageNote">Illustrative. The marks are <b>kinds, not counts</b> &mdash;
+          no quantity, proportion or rate is drawn or claimed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== HERO → NEXT HANDOFF -->
+<section class="handoff" id="handoff">
+  <div class="wrap">
+    <h2>The same demand, followed all the way down. <em>Here is where it goes.</em></h2>
+  </div>
+</section>
+
+<!-- ============================================== CAPTURE / CONVERT / MEASURE -->
+<section class="act" data-act data-p="33">
+  <div class="wrap">
+    <div class="act__grid">
+      <div>
+        <span class="act__n">01 &mdash; capture</span>
+        <h2>Most demand never reaches you.</h2>
+        <p>Buyers who need what you sell are searching, and finding somebody else.
+        <b>More visits on a path that does not work produce nothing.</b></p>
+      </div>
+      <div class="run" aria-hidden="true">
+        <div class="mk" data-k="live" style="--d:0ms;--w:34%"><i></i><b></b><span>demand we can reach</span></div>
+        <div class="mk" data-k="live" style="--d:90ms;--w:26%"><i></i><b></b><span>demand we can reach</span></div>
+        <div class="mk" data-k="gap"  style="--d:180ms;--w:40%"><i></i><b></b><span>demand we cannot see &mdash; not measured</span></div>
+        <div class="mk" data-k="gap"  style="--d:270ms;--w:30%"><i></i><b></b><span>demand we cannot see &mdash; not measured</span></div>
+        <div class="mk" data-k="gap"  style="--d:360ms;--w:36%"><i></i><b></b><span>demand we cannot see &mdash; not measured</span></div>
+      </div>
+    </div>
+    <div class="spine"><i></i></div>
+  </div>
+</section>
+
+<section class="act" data-act data-p="66">
+  <div class="wrap">
+    <div class="act__grid">
+      <div>
+        <span class="act__n">02 &mdash; convert</span>
+        <h2>Arriving is not the same as enquiring.</h2>
+        <p>Or the visits arrive and the enquiries do not. <b>A path that works, fed the wrong
+        visits, produces nothing worth quoting.</b></p>
+      </div>
+      <div class="run" aria-hidden="true">
+        <span class="thresh" style="left:calc(27px + 44%)"><span>the enquiry completes</span></span>
+        <div class="mk" data-k="live" style="--d:0ms;--w:44%"><i></i><b></b><span>completed and arrived</span></div>
+        <div class="mk" data-k="live" style="--d:100ms;--w:24%"><i></i><b></b><span>completed and arrived</span></div>
+        <div class="mk" data-k="lost" style="--d:200ms;--w:44%;--stall:.52"><i></i><b></b><span>stopped before it completed</span></div>
+        <div class="mk" data-k="lost" style="--d:300ms;--w:44%;--stall:.34"><i></i><b></b><span>stopped before it completed</span></div>
+      </div>
+    </div>
+    <div class="spine"><i></i></div>
+  </div>
+</section>
+
+<section class="act" data-act data-p="100">
+  <div class="wrap">
+    <div class="act__grid">
+      <div>
+        <span class="act__n">03 &mdash; measure</span>
+        <h2>Each one records where it came from.</h2>
+        <p>Or enquiries do arrive, and nobody can say which came from where &mdash; so nobody can
+        say what to do more of. <b>A gap in the measurement never takes an enquiry out of the
+        count.</b></p>
+      </div>
+      <div class="run" aria-hidden="true">
+        <div class="mk" data-k="live" style="--d:0ms;--w:32%"><i></i><b></b><span>organic search</span></div>
+        <div class="mk" data-k="live" style="--d:100ms;--w:24%"><i></i><b></b><span>paid search</span></div>
+        <div class="mk" data-k="live" style="--d:200ms;--w:28%"><i></i><b></b><span>a page that answered the visit</span></div>
+        <div class="mk" data-k="gap"  style="--d:300ms;--w:22%"><i></i><b></b><span>unattributed &mdash; and never assigned to a channel</span></div>
+      </div>
+    </div>
+    <div class="spine"><i></i></div>
+  </div>
+</section>
+
+<!-- ========================================== CONTENT-HEAVY COMMERCIAL SECTION -->
+<section class="bound" id="bound">
+  <div class="wrap">
+    <span class="lab rv">what we answer for</span>
+    <h2 class="rv" style="margin-top:16px">Five things fall away. One does not.</h2>
+    <div class="promise">
+      <ul class="plist">
+        <li style="--d:0ms"><i>01</i> rankings</li>
+        <li style="--d:110ms"><i>02</i> a position in AI answers</li>
+        <li style="--d:220ms"><i>03</i> a number of enquiries</li>
+        <li style="--d:330ms"><i>04</i> revenue</li>
+        <li style="--d:440ms"><i>05</i> a return on spend</li>
+      </ul>
+      <div class="owned">
+        <h3>We are accountable for <em>the qualified enquiry.</em></h3>
+        <p>Real, reachable, from a business context, with a stated need. What counts as one is
+        published, and it is the number we report against a starting point we capture before
+        anything changes.</p>
+      </div>
+    </div>
+
+    <div class="detail rv">
+      <p>Where you give us your close data, we report through to the deals and the revenue your own
+      system recorded. Those are your numbers, from your system, and we state what we did and did
+      not control alongside them.</p>
+      <p>Some enquiries arrive with no usable trail at all. Someone types your name into a browser,
+      or calls, or was told about you by a customer. We record those as unattributed rather than
+      assigning them to a channel &mdash; and a gap in the measurement never takes an enquiry out of
+      the count.</p>
+      <p>We do not promise rankings, a position in AI answers, a number of enquiries, revenue, or a
+      return on spend. None of that is ours to control, and a guarantee would be a claim about a
+      business we do not run.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================= EVIDENCE -->
+<section class="evwrap">
+  <div class="wrap">
+    <span class="lab rv">what you can check before you commit</span>
+    <div class="ev rv" id="ev" style="margin-top:20px">
+      <div class="ev__top">
+        <p class="ev__claim">We ran the test on ourselves, and <em>we were named in none of them.</em></p>
+        <p class="ev__sub">We asked four AI assistants for agencies like us, 28 times, on one day,
+        from Pune, in English, signed out.</p>
+        <button class="ev__btn" type="button" id="evBtn" aria-expanded="false" aria-controls="evU">
+          Lift this claim &mdash; see what it stands on
+        </button>
+      </div>
+      <div class="ev__under" id="evU"><div>
+        <dl class="prov">
+          <div style="--d:40ms"><dt>what</dt><dd>unbranded prompts asking for agencies like us, six prompt classes</dd></div>
+          <div style="--d:100ms"><dt>when</dt><dd>2026&#8209;08&#8209;31 &mdash; every run on one day</dd></div>
+          <div style="--d:160ms"><dt>where</dt><dd>India / Pune lens, English, all systems signed out</dd></div>
+          <div style="--d:220ms"><dt>how many</dt><dd>28 unbranded runs, four assistants, five surfaces</dd></div>
+          <div style="--d:280ms"><dt>by whom</dt><dd>MappedSkills, first&#8209;party, on our own site</dd></div>
+          <div style="--d:340ms"><dt>limits</dt><dd>28 runs on one day, one location, signed out. Counts, not rates.
+            <b>No confidence interval is claimed and none is available.</b></dd></div>
+        </dl>
+        <div class="marks">
+          <span><i class="sq sq--f"></i> measured &mdash; ChatGPT, Perplexity, Gemini, Google (AI Mode and AI Overviews)</span>
+          <span><i class="sq sq--h"></i> not testable &mdash; Claude and Grok. Not tested, and not characterised</span>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== CTA -->
+<section class="close" id="cta">
+  <div class="wrap">
+    <div class="arrive" aria-hidden="true">
+      <i style="--d:0ms"></i><i style="--d:70ms"></i><i style="--d:140ms"></i>
+      <i class="open" style="--d:210ms"></i><i style="--d:280ms"></i>
+    </div>
+    <h2 class="rv">This is where they land.</h2>
+    <p class="rv">Write to us, or book a time to talk. Both reach the same place, and neither is a
+    form for a salesperson to chase.</p>
+    <div class="acts rv">
+      <a class="cta" href="#">Tell us what you&rsquo;re trying to fix</a>
+      <a class="cta cta--o" href="#">Book a call</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="foot"><div class="wrap">session 15c convergence prototype &mdash; b foundation + a energy &mdash; &ldquo;the resolve&rdquo; &nbsp;·&nbsp; not production</div></footer>
+
+<script>
+(function(){
+"use strict";
+document.documentElement.classList.add('js');
+var RM=matchMedia('(prefers-reduced-motion: reduce)');
+
+/* ======================================================== THE FIELD =======
+   The population. Built once, positioned by CSS grid, resolved with
+   transform + opacity only — no canvas, no per-frame work, nothing ambient. */
+var field=document.getElementById('field'), rowsEl=document.getElementById('rows');
+var N=0;
+function buildField(){
+  var w=field.clientWidth||600;
+  var cols=Math.max(12,Math.min(30,Math.round(w/17)));
+  var rowsN=Math.max(8,Math.min(20,Math.round((field.clientHeight||220)/14)));
+  N=Math.min(440,cols*rowsN);   /* capped: the lattice is a budgeted one-off transition, not a field */
+  field.style.setProperty('--cols',cols);
+  field.innerHTML='';
+  var f=document.createDocumentFragment();
+  for(var i=0;i<N;i++){ f.appendChild(document.createElement('i')); }
+  field.appendChild(f);
+  aim();
+}
+/* Each mark is told which resolved object it travels toward. Computed from
+   real geometry, so it works at any width. */
+function aim(){
+  var marks=field.querySelectorAll('i');
+  var targets=[].map.call(rowsEl.querySelectorAll('.row__m'),function(m){
+    var r=m.getBoundingClientRect(), f=field.getBoundingClientRect();
+    return {x:r.left-f.left+r.width/2, y:r.top-f.top+r.height/2};
+  });
+  if(!targets.length) return;
+  for(var i=0;i<marks.length;i++){
+    var m=marks[i], r=m.getBoundingClientRect(), f=field.getBoundingClientRect();
+    var t=targets[i%targets.length];
+    m.style.setProperty('--tx',Math.round(t.x-(r.left-f.left)-r.width/2)+'px');
+    m.style.setProperty('--ty',Math.round(t.y-(r.top-f.top)-r.height/2)+'px');
+    m.style.transitionDelay=(RM.matches?0:(i%17)*11)+'ms';
+  }
+}
+buildField();
+var rt; addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(buildField,180); },{passive:true});
+
+/* ------------------------------------------------------------- the switch */
+var hero=document.getElementById('hero'), lab=document.getElementById('stageLab');
+var kwE=document.getElementById('kwE'), kwT=document.getElementById('kwT');
+function setState(s){
+  if(hero.dataset.state===s) return;
+  hero.dataset.state=s;
+  lab.textContent = s==='traffic' ? 'what an agency usually shows you' : 'what we report';
+  kwE.classList.toggle('on', s==='enquiries');
+  kwT.classList.toggle('on', s==='traffic');
+  document.querySelectorAll('.control button').forEach(function(b){
+    b.setAttribute('aria-pressed',String(b.dataset.set===s));
+  });
+  if(s==='traffic' && !RM.matches){
+    field.classList.remove('pulse'); void field.offsetWidth; field.classList.add('pulse');
+  }
+}
+document.querySelectorAll('.control button').forEach(function(b){
+  b.addEventListener('click',function(){ setState(b.dataset.set); });
+});
+
+/* THE MEMORABLE MOMENT, and it is the point of the direction:
+   the page opens on TRAFFIC — an undifferentiated lattice — and then the same
+   population RESOLVES into a few named objects. It happens once, unprompted,
+   and then the surface is still. Under reduced motion the page simply starts
+   resolved and the reader can still drive the control. */
+if(!RM.matches){
+  hero.dataset.state='traffic';
+  kwE.classList.remove('on'); kwT.classList.add('on');
+  lab.textContent='what an agency usually shows you';
+  document.querySelectorAll('.control button').forEach(function(b){
+    b.setAttribute('aria-pressed',String(b.dataset.set==='traffic'));
+  });
+  if(innerWidth>=900){
+    setTimeout(function(){ field.classList.add('pulse'); },420);
+    setTimeout(function(){ setState('enquiries'); },1450);
+  } else {
+    /* NARROW: the stage sits below the fold, so the moment is triggered when
+       the reader actually reaches it rather than played to an empty screen. */
+    var sio=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return;
+        sio.unobserve(e.target);
+        field.classList.add('pulse');
+        setTimeout(function(){ setState('enquiries'); },900);
+      });
+    },{threshold:.45});
+    sio.observe(document.querySelector('.fieldbox'));
+  }
+}
+
+/* -------------------------------------------- scroll-linked hero departure
+   The resolved marks drift up and out as the reader leaves the hero, so the
+   handoff feels like the same demand moving on rather than a new section. */
+var stage=document.querySelector('.stage');
+var ticking=false;
+addEventListener('scroll',function(){
+  if(RM.matches||ticking) return; ticking=true;
+  requestAnimationFrame(function(){
+    var r=hero.getBoundingClientRect();
+    var p=Math.min(1,Math.max(0,-r.top/Math.max(1,r.height)));
+    stage.style.transform='translate3d(0,'+(-p*46).toFixed(1)+'px,0)';
+    stage.style.opacity=(1-p*0.85).toFixed(3);
+    ticking=false;
+  });
+},{passive:true});
+
+/* ------------------------------------------------------- on-view behaviour */
+function onView(sel,fn,th){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ fn(e.target); io.unobserve(e.target); } });
+  },{threshold:th||.35});
+  document.querySelectorAll(sel).forEach(function(el){ io.observe(el); });
+}
+onView('.rv',function(el){ el.classList.add('on'); },.15);
+onView('#handoff',function(el){ el.classList.add('on'); },.5);
+onView('[data-act]',function(el){
+  el.classList.add('on');
+  el.querySelector('.spine i').style.setProperty('--p',el.dataset.p+'%');
+},.4);
+onView('#bound',function(el){ el.classList.add('on'); },.35);
+onView('#cta',function(el){ el.classList.add('on'); },.3);
+
+/* ------------------------------------------------- evidence: lift the claim */
+var ev=document.getElementById('ev'), evb=document.getElementById('evBtn');
+evb.addEventListener('click',function(){
+  var open=ev.hasAttribute('data-open');
+  if(open){ ev.removeAttribute('data-open'); } else { ev.setAttribute('data-open',''); }
+  evb.setAttribute('aria-expanded',String(!open));
+  evb.textContent = open ? 'Lift this claim — see what it stands on' : 'Set the claim back down';
+});
+
+window.__X={setState:setState,aim:aim,build:buildField};
+})();
+</script>
+</body>
+</html>

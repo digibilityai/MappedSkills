@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>MappedSkills — homepage design specimen — THE RECORD / Direction 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="foundation.css">
+</head>
+<!--
+  SESSION 15 DESIGN SPECIMEN — the COMPLETE approved homepage.
+
+  ISOLATED PROTOTYPE. Not production. Not imported by app/ or styles/.
+
+  Carries NO validation chrome, no artboard frames, no annotation boxes, so
+  that viewport-height bands measured against 09_VISUAL_WEIGHT_RUBRIC.md are
+  the bands a real reader experiences.
+
+  Structure: docs/16-ux/31_WIREFRAME_MASTER_HOMEPAGE.md, blocks 1-8 in order.
+  Copy:      docs/09-content-pages/copy/homepage.md, verbatim. Nothing is
+             rewritten, reordered, added or invented.
+
+  BUDGETS ON THIS PAGE
+    ground changes   2 of 2   block 4 (the boundary) · block 8 (the action region)
+    set-piece rules  2 of 2   block 4 · block 6
+    register labels  2 of 2   block 4 · block 6   (both on set-pieces with headings, RL-1/RL-4)
+    full-weight figures 1     block 3. Block 4 is a STATE on the SAME object, not a second figure
+    PRIMARY objects  2 of 2   block 1 · block 8
+
+  NOT DRAWN, AND NO PLACEHOLDER DRAWN FOR THEM (approved blocked-content rule)
+    · first screen, the dated checkable item      case A — unlocks with the own-site diagnostic
+    · block 6, the people element                 case A — owner team/people input
+    · block 6, the own-site diagnostic + sentence  case A — technical prerequisite
+    · block 8, the "what happens next" sentence   case B — enquiry-response owner
+    · block 8, the phone / WhatsApp DIRECT peer   case B — published phone number
+      (and, with it, the copy sentence that depends on that number)
+    · footer entity block / NAP                   case A — complete NAP owner-blocked
+-->
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="sheet"><div class="spine">
+
+  <!-- ============================================ R1 — HEADER ============
+       NON-STICKY. One PRIMARY control, identical sitewide. No form and no
+       booking inside navigation. No sticky sales CTA on this or any page. -->
+  <header class="hdr">
+    <span class="hdr__mark"><a href="#" aria-current="page">MappedSkills</a></span>
+
+    <!-- WIDE -->
+    <nav class="hdr__nav hdr__wide" aria-label="Primary">
+      <!-- THE TWO-CONTROL RULE. The parent is a real link; the disclosure is a
+           separate control with its own accessible name and aria-expanded.
+           Collapsing these into one element reintroduces the defect where
+           /services is unreachable from the navigation. -->
+      <span class="nav__parent">
+        <a href="#">What we do</a>
+        <button class="nav__disc" type="button" aria-expanded="false" aria-controls="np" id="nd">
+          <span aria-hidden="true">&#9662;</span>
+          <span class="skip">Show what we do</span>
+        </button>
+        <span class="nav__panel" id="np" role="group" aria-labelledby="nd">
+          <a href="#">Overview</a>
+          <a href="#">Organic search</a>
+          <a href="#">AI search</a>
+          <a href="#">Google Ads</a>
+          <a href="#">Paid social</a>
+          <a href="#">Where enquiries get lost</a>
+        </span>
+      </span>
+      <a href="#">How it works</a>
+      <a href="#">Evidence</a>
+      <a href="#">Pricing</a>
+      <a href="#">Insights</a>
+      <a href="#">About</a>
+      <a class="hdr__cta" href="#">Tell us what you&rsquo;re trying to fix</a>
+    </nav>
+
+    <!-- NARROW: a disclosure panel, not a wrapped link list. Every one of the
+         six items is present — mobile removes nothing. Found by rendering at
+         390px: the header CTA and the menu control cannot share one row at
+         this width without clipping the menu, so the bar becomes two rows —
+         identity and menu, then the one PRIMARY control across the full
+         width. The CTA is not shortened and the menu is not hidden. -->
+    <details class="hdr__menu" id="hm">
+      <summary>Menu</summary>
+      <nav class="hdr__panel" aria-label="Primary (narrow)">
+        <a href="#">What we do</a>
+        <a class="sub" href="#">Organic search</a>
+        <a class="sub" href="#">AI search</a>
+        <a class="sub" href="#">Google Ads</a>
+        <a class="sub" href="#">Paid social</a>
+        <a class="sub" href="#">Where enquiries get lost</a>
+        <a href="#">How it works</a>
+        <a href="#">Evidence</a>
+        <a href="#">Pricing</a>
+        <a href="#">Insights</a>
+        <a href="#">About</a>
+        <a href="#">Tell us what you&rsquo;re trying to fix</a>
+      </nav>
+    </details>
+    <a class="hdr__cta hdr__cta--narrow" href="#">Tell us what you&rsquo;re trying to fix</a>
+  </header>
+
+  <!-- No breadcrumb on the homepage: it is the root of the hierarchy the
+       breadcrumb describes. Emitting one here would assert a level above it. -->
+
+  <main id="main">
+
+  <!-- ======================================= BLOCK 1 — HERO ==============
+       FOUR ELEMENTS, NO FIFTH. ZERO apparatus above the fold: no proof
+       strip, no stat, no logo, no figure, no badge, no evidence label, no
+       client quote, no inline form, no diagnostic, no third CTA.
+       Nothing animates. The H1 is readable at first paint. -->
+  <section class="hero">
+    <h1 class="h1">Judge us on the enquiries, not the traffic.</h1>
+
+    <div class="hero__support lede">
+      <p>There is buyer demand for what you sell, and some of it never reaches you. We work on the
+      whole route to an enquiry &mdash; being found when someone searches, paid demand where it
+      earns its place, the page they arrive on, and the measurement that shows where each enquiry
+      came from.</p>
+      <p>Traffic is where that route starts. The enquiries are the part we answer for.</p>
+    </div>
+
+    <div class="acts">
+      <a class="act act--primary" href="#">Tell us what you&rsquo;re trying to fix</a>
+      <a class="act act--peer" href="#">Book a call</a>
+    </div>
+  </section>
+
+  <!-- ======================================= BLOCK 2 — RECOGNITION =======
+       Fast. [EVD: ABSENT] — no statistic exists and none may be implied.
+       The consequence statement is the page's single heaviest object. It is
+       a TYPOGRAPHIC SPLIT of the approved paragraph: the first two sentences
+       are set at consequence weight and the remainder continues as body.
+       No word is changed, added, removed or reordered. -->
+  <section class="section">
+    <hr class="rule-hair">
+    <h2 class="h-section">What this usually looks like from the inside</h2>
+
+    <p>Buyers who need what you sell are searching, and finding somebody else. Or the visits arrive
+    and the enquiries do not. Or enquiries do arrive, and nobody can say which came from where
+    &mdash; so nobody can say what to do more of.</p>
+
+    <p class="consequence">That reads like three problems. It behaves like one.</p>
+
+    <p>More visits on a path that does not work produce nothing. A path that works, fed the wrong
+    visits, produces nothing worth quoting. And with no measurement in place, all three failures
+    look identical from the outside.</p>
+
+    <!-- The symptom list, in the buyer's own words, for self-identification.
+         Not cards, not icons, not a feature grid. -->
+    <ul class="symptoms">
+      <li>sessions up and enquiries flat</li>
+      <li>enquiries stopped after a site change</li>
+      <li>enquiries only ever from one channel</li>
+      <li>the enquiries that do arrive are not worth quoting</li>
+      <li>no idea whether anything arrives at all</li>
+    </ul>
+
+    <p><a href="#">If that is the shape of it, this page is about exactly that</a></p>
+  </section>
+
+  <!-- ======================================= BLOCK 3 — MECHANISM =========
+       SLOW. The first place the reader is asked to look rather than scan.
+       F1 class A — FULL RUN. The page's ONE figure of full weight.
+       [EVD: EXPANDABLE] at the mid-page claim. -->
+  <section class="section">
+    <hr class="rule-hair">
+    <h2 class="h-section">How the work produces an enquiry</h2>
+
+    <div class="claim-set">
+      <div class="claim-set__claim">
+        <p>Three connected parts. Reach the buyers already looking &mdash; organic search first, and
+        paid where it is the right source for you. Make the route from that first visit to a sent
+        enquiry work. Instrument the whole chain, so an enquiry records where it came from at the
+        moment it is made.</p>
+
+        <p>They are different skills, which is why they are described separately. What decides the
+        result is usually the joins between them: between the search work and the page it lands on,
+        between the page and the form, between the form and wherever the enquiry is supposed to
+        arrive, and between all of it and the measurement. Where responsibility is split across
+        suppliers, those joins can end up belonging to nobody. Here they belong to us.</p>
+
+        <p>What any engagement covers is decided with you. The measurement is the part that is not
+        optional, because nothing we report about the outcome means anything until it works.</p>
+      </div>
+
+      <!-- Apparatus in the margin at WIDE; inline beneath its claim below that.
+           DOM order is claim-then-apparatus at every width. -->
+      <aside class="claim-set__margin">
+        <details class="evd">
+          <summary>What &ldquo;instrumented&rdquo; means here</summary>
+          <div class="evd__body app tie">
+            <p class="prov"><b>scope</b> &middot; the chain from discovery to the qualified enquiry.
+            Beyond that point the numbers are the client&rsquo;s own</p>
+            <p class="prov"><b>what is recorded</b> &middot; source, landing page, interaction, the
+            enquiry, and whether the trail was usable</p>
+            <p class="prov"><b>where it is set out</b> &middot; the published method, including what
+            cannot be attributed &mdash; <a href="#">/how&#8209;it&#8209;works</a></p>
+            <p class="prov"><b>not covered</b> &middot; no engagement is assumed to buy all three
+            parts. What any engagement covers is decided with the client</p>
+          </div>
+        </details>
+      </aside>
+    </div>
+
+    <figure class="fig">
+      <!-- WIDE: the horizontal form. Constant stroke, constant node size,
+           equal spacing — there is no taper and no way to make one.
+           No per-stage colour. Every label is real text. -->
+      <div class="fig__frame fig__h">
+        <svg viewBox="0 0 1120 348" width="1120" role="img" aria-labelledby="f1t f1d">
+          <title id="f1t">The enquiry chain, complete</title>
+          <desc id="f1d">One continuous object. Buyer demand we cannot see enters as an unmeasured,
+          dashed stretch, then discovery and source, landing, interaction, the enquiry, and the
+          qualified enquiry are drawn as measured segments with intervention marks where we act.
+          After the qualified enquiry the accountability boundary is drawn, and the final stretch to
+          opportunity and revenue is drawn as a doubled line because those figures come from the
+          client's own system. One arrival reaches the enquiry with no upstream segment and is
+          recorded as unattributed. The same information is given as a table below.</desc>
+
+          <!-- unmeasured lead-in -->
+          <line x1="20" y1="160" x2="110" y2="160" class="stroke-gap"/>
+          <text x="20" y="98">demand we cannot see</text>
+          <text x="20" y="120">&mdash; not measured</text>
+
+          <!-- the measured chain: five equal segments, one stroke width -->
+          <line x1="110" y1="160" x2="830" y2="160" class="stroke"/>
+          <g class="node">
+            <rect x="104" y="154" width="12" height="12"/>
+            <rect x="284" y="154" width="12" height="12"/>
+            <rect x="464" y="154" width="12" height="12"/>
+            <rect x="644" y="154" width="12" height="12"/>
+            <rect x="824" y="154" width="12" height="12"/>
+          </g>
+
+          <!-- intervention marks: where we act on the chain -->
+          <g>
+            <line x1="200" y1="160" x2="200" y2="134" class="stroke-mark"/>
+            <rect x="195" y="122" width="10" height="10" class="mark-int"/>
+            <line x1="380" y1="160" x2="380" y2="134" class="stroke-mark"/>
+            <rect x="375" y="122" width="10" height="10" class="mark-int"/>
+            <line x1="560" y1="160" x2="560" y2="134" class="stroke-mark"/>
+            <rect x="555" y="122" width="10" height="10" class="mark-int"/>
+          </g>
+          <text x="228" y="112" class="onmark">where the work happens</text>
+
+          <!-- point labels -->
+          <text class="lab" x="104" y="198">discovery</text>
+          <text class="lab" x="104" y="218">and source</text>
+          <text class="lab" x="284" y="198">landing</text>
+          <text class="lab" x="464" y="198">interaction</text>
+          <text class="lab" x="644" y="198">the enquiry</text>
+          <text class="lab" x="824" y="198">the qualified</text>
+          <text class="lab" x="824" y="218">enquiry</text>
+
+          <!-- the accountability boundary -->
+          <line x1="920" y1="104" x2="920" y2="236" class="stroke-mark"/>
+          <text x="910" y="96" text-anchor="end" class="onmark">we answer up to here</text>
+
+          <!-- the client-data stretch: doubled, and it is the client's -->
+          <line x1="830" y1="157" x2="1010" y2="157" class="stroke-rec"/>
+          <line x1="830" y1="163" x2="1010" y2="163" class="stroke-rec"/>
+          <rect x="1004" y="154" width="12" height="12" class="node-rec"/>
+          <text class="lab" x="1114" y="198" text-anchor="end">opportunity</text>
+          <text class="lab" x="1114" y="218" text-anchor="end">and revenue</text>
+          <text x="1114" y="248" text-anchor="end" class="recess">&mdash; from your system</text>
+
+          <!-- one arrival with no upstream segment -->
+          <line x1="560" y1="306" x2="646" y2="174" class="stroke-gap"/>
+          <text x="380" y="326">one arrival with no upstream segment &mdash; recorded as unattributed</text>
+        </svg>
+      </div>
+
+      <!-- NARROW: the genuine vertical drawing. A different drawing, not the
+           horizontal one scaled down — scaling would push labels below 16px. -->
+      <div class="fig__v">
+        <svg viewBox="0 0 342 552" width="342" role="img" aria-labelledby="f1vt f1vd" style="max-width:100%">
+          <title id="f1vt">The enquiry chain, complete, vertical form</title>
+          <desc id="f1vd">The same chain drawn top to bottom: an unmeasured dashed lead-in, then
+          discovery and source, landing, interaction, the enquiry and the qualified enquiry as
+          measured segments with intervention marks, then the accountability boundary drawn across
+          the chain, then a doubled stretch to opportunity and revenue which come from the client's
+          own system. One arrival enters the enquiry from the left with no upstream segment and is
+          recorded as unattributed.</desc>
+
+          <line x1="66" y1="14" x2="66" y2="70" class="stroke-gap"/>
+          <text x="96" y="26">demand we cannot</text>
+          <text x="96" y="46">see &mdash; not measured</text>
+
+          <line x1="66" y1="70" x2="66" y2="390" class="stroke"/>
+          <g class="node">
+            <rect x="60" y="64" width="12" height="12"/>
+            <rect x="60" y="144" width="12" height="12"/>
+            <rect x="60" y="224" width="12" height="12"/>
+            <rect x="60" y="304" width="12" height="12"/>
+            <rect x="60" y="384" width="12" height="12"/>
+          </g>
+          <g>
+            <line x1="66" y1="110" x2="44" y2="110" class="stroke-mark"/>
+            <rect x="30" y="105" width="10" height="10" class="mark-int"/>
+            <line x1="66" y1="190" x2="44" y2="190" class="stroke-mark"/>
+            <rect x="30" y="185" width="10" height="10" class="mark-int"/>
+            <line x1="66" y1="270" x2="44" y2="270" class="stroke-mark"/>
+            <rect x="30" y="265" width="10" height="10" class="mark-int"/>
+          </g>
+
+          <text class="lab" x="96" y="78">discovery and source</text>
+          <text class="lab" x="96" y="158">landing</text>
+          <text class="lab" x="96" y="238">interaction</text>
+          <text class="lab" x="96" y="318">the enquiry</text>
+          <text class="lab" x="96" y="398">the qualified enquiry</text>
+
+          <line x1="12" y1="360" x2="56" y2="322" class="stroke-gap"/>
+          <text x="96" y="346">arrives with no trail</text>
+          <text x="96" y="366">&mdash; unattributed</text>
+
+          <line x1="8" y1="430" x2="334" y2="430" class="stroke-mark"/>
+          <text x="96" y="458" class="onmark">we answer up to here</text>
+
+          <line x1="62" y1="430" x2="62" y2="500" class="stroke-rec"/>
+          <line x1="70" y1="430" x2="70" y2="500" class="stroke-rec"/>
+          <rect x="60" y="494" width="12" height="12" class="node-rec"/>
+          <text class="lab" x="96" y="494">opportunity and</text>
+          <text class="lab" x="96" y="514">revenue</text>
+          <text x="96" y="540" class="recess">&mdash; from your system</text>
+        </svg>
+      </div>
+
+      <figcaption class="app tie">The chain as one object. What is measured is drawn solid, what is
+      not is drawn dashed, and the point where our accountability ends is drawn on the same line as
+      everything else.</figcaption>
+
+      <details class="evd fig__text">
+        <summary>Read this figure as a table</summary>
+        <table class="evd__body">
+          <tr><th scope="row">Drawn solid</th><td>discovery and source &rarr; landing &rarr; interaction &rarr; the enquiry &rarr; the qualified enquiry</td></tr>
+          <tr><th scope="row">Drawn dashed</th><td>buyer demand we cannot see, upstream of discovery; and one arrival reaching the enquiry with no upstream segment</td></tr>
+          <tr><th scope="row">Drawn doubled</th><td>the qualified enquiry &rarr; opportunity and revenue. These are the client&rsquo;s figures, from the client&rsquo;s own system</td></tr>
+          <tr><th scope="row">The boundary</th><td>drawn after the qualified enquiry. It is where what we answer for ends</td></tr>
+          <tr><th scope="row">Intervention marks</th><td>three, on the joins &mdash; the places the work is actually done</td></tr>
+          <tr><th scope="row">Quantity</th><td>none is drawn. No proportion, no volume, no rate, and no narrowing of any kind</td></tr>
+        </table>
+      </details>
+    </figure>
+
+    <p class="act-row"><a class="act-text" href="#">Read the method</a></p>
+  </section>
+
+  <!-- ======================================= BLOCK 4 — THE BOUNDARY ======
+       SLOWEST. High on the page, immediately after the mechanism it limits.
+       ADJACENT-SECONDARY, at full type quality, ALWAYS OPEN, never
+       collapsible at any width, never inside a disclosure, never below a CTA.
+       GROUND CHANGE 1 of 2 · SET-PIECE RULE 1 of 2 · REGISTER LABEL 1 of 2.
+       F1 class C — a STATE on the SAME object, not a second figure. -->
+  <section class="section section--set">
+    <hr class="rule-strong">
+    <span class="reg">what we answer for</span>
+    <h2 class="h-section">What we are accountable for, and where that stops</h2>
+
+    <div class="lim">
+      <p>We are accountable for the qualified enquiry &mdash; one that is real, reachable, from a
+      business context, with a stated need. What counts as one is published, and it is the number we
+      report against a starting point we capture before anything changes.</p>
+
+      <p>Where you give us your close data, we report through to the deals and the revenue your own
+      system recorded. Those are your numbers, from your system, and we state what we did and did
+      not control alongside them.</p>
+
+      <p>Some enquiries arrive with no usable trail at all. Someone types your name into a browser,
+      or calls, or was told about you by a customer. We record those as unattributed rather than
+      assigning them to a channel &mdash; and a gap in the measurement never takes an enquiry out of
+      the count.</p>
+
+      <p>We do not promise rankings, a position in AI answers, a number of enquiries, revenue, or a
+      return on spend. None of that is ours to control, and a guarantee would be a claim about a
+      business we do not run.</p>
+    </div>
+
+    <!-- THE SAME OBJECT, IN A CHANGED CONDITION. Not a second figure: the
+         same chain, the same spacing, the same node size, drawn once more
+         with only the three states the paragraphs above describe marked on
+         it. Deliberately reduced — a state view, not a second full figure. -->
+    <figure class="fig">
+      <div class="fig__frame fig__h">
+        <svg viewBox="0 0 1120 200" width="1120" role="img" aria-labelledby="f2t f2d">
+          <title id="f2t">The same chain, showing the three states this section describes</title>
+          <desc id="f2d">The same chain, reduced. The stretch up to the qualified enquiry is
+          bracketed as the stretch we answer for. The boundary is drawn after it. The stretch beyond
+          is drawn doubled and marked as the client's own figures. One arrival reaches the enquiry
+          with no upstream segment and is marked unattributed.</desc>
+
+          <line x1="20" y1="90" x2="110" y2="90" class="stroke-gap"/>
+          <line x1="110" y1="90" x2="830" y2="90" class="stroke"/>
+          <g class="node">
+            <rect x="104" y="84" width="12" height="12"/><rect x="284" y="84" width="12" height="12"/>
+            <rect x="464" y="84" width="12" height="12"/><rect x="644" y="84" width="12" height="12"/>
+            <rect x="824" y="84" width="12" height="12"/>
+          </g>
+          <line x1="830" y1="87" x2="1010" y2="87" class="stroke-rec"/>
+          <line x1="830" y1="93" x2="1010" y2="93" class="stroke-rec"/>
+          <rect x="1004" y="84" width="12" height="12" class="node-rec"/>
+
+          <line x1="920" y1="54" x2="920" y2="126" class="stroke-mark"/>
+          <text x="1114" y="46" text-anchor="end" class="onmark">accountability ends here</text>
+
+          <line x1="110" y1="64" x2="110" y2="78" class="stroke-mark"/>
+          <line x1="110" y1="64" x2="830" y2="64" class="stroke-mark"/>
+          <line x1="830" y1="64" x2="830" y2="78" class="stroke-mark"/>
+          <text x="110" y="46" class="onmark">state 1 &mdash; the stretch we answer for</text>
+
+          <text x="1114" y="126" text-anchor="end" class="recess">state 2 &mdash; your figures, from your system</text>
+
+          <line x1="560" y1="166" x2="646" y2="98" class="stroke-gap"/>
+          <text x="110" y="192">state 3 &mdash; arrives with no trail, counted as unattributed</text>
+        </svg>
+      </div>
+
+      <div class="fig__v">
+        <svg viewBox="0 0 342 320" width="342" role="img" aria-labelledby="f2vt f2vd" style="max-width:100%">
+          <title id="f2vt">The same chain, three states, vertical form</title>
+          <desc id="f2vd">The chain drawn top to bottom, reduced. The stretch we answer for is
+          bracketed, the boundary is drawn across it, the stretch beyond is doubled and belongs to
+          the client's system, and one arrival enters with no upstream segment.</desc>
+
+          <line x1="40" y1="14" x2="40" y2="40" class="stroke-gap"/>
+          <line x1="40" y1="40" x2="40" y2="196" class="stroke"/>
+          <g class="node">
+            <rect x="34" y="34" width="12" height="12"/><rect x="34" y="72" width="12" height="12"/>
+            <rect x="34" y="110" width="12" height="12"/><rect x="34" y="148" width="12" height="12"/>
+            <rect x="34" y="190" width="12" height="12"/>
+          </g>
+
+          <line x1="20" y1="40" x2="20" y2="196" class="stroke-mark"/>
+          <line x1="20" y1="40" x2="32" y2="40" class="stroke-mark"/>
+          <line x1="20" y1="196" x2="32" y2="196" class="stroke-mark"/>
+          <text x="76" y="46" class="onmark">state 1 &mdash; the stretch</text>
+          <text x="76" y="66" class="onmark">we answer for</text>
+
+          <line x1="104" y1="192" x2="54" y2="158" class="stroke-gap"/>
+          <text x="76" y="140">state 3 &mdash; arrives</text>
+          <text x="76" y="160">with no trail</text>
+
+          <line x1="8" y1="244" x2="334" y2="244" class="stroke-mark"/>
+          <text x="8" y="228" class="onmark">accountability ends here</text>
+
+          <line x1="36" y1="244" x2="36" y2="300" class="stroke-rec"/>
+          <line x1="44" y1="244" x2="44" y2="300" class="stroke-rec"/>
+          <rect x="34" y="294" width="12" height="12" class="node-rec"/>
+          <text x="76" y="274" class="recess">state 2 &mdash; your figures,</text>
+          <text x="76" y="294" class="recess">from your system</text>
+        </svg>
+      </div>
+    </figure>
+
+    <p class="act-row"><a class="act-text" href="#">See what can and cannot be attributed</a></p>
+  </section>
+
+  <!-- ======================================= BLOCK 5 — CAPABILITIES ======
+       FAST. This block ROUTES. It does not persuade. [EVD: ABSENT].
+       Grouped by contribution — three groups, not six equal items.
+       NOT a card grid, no "Our services" heading, no per-capability feature
+       list, one line each, one line only for AI search. -->
+  <section class="section">
+    <hr class="rule-hair">
+    <h2 class="h-section">Where each discipline comes in</h2>
+    <p>The disciplines this involves, grouped by the job each one does. None of them is what the
+    firm is.</p>
+
+    <div class="groups">
+      <div>
+        <h3 class="h-sub">Reaching buyers who are already looking</h3>
+        <ul class="route">
+          <li><span class="r__name">Organic search (SEO)</span> <span class="r__note">&mdash; the
+            route that compounds, and the slowest.</span>
+            <a class="r__go" href="#">How we work on organic search</a></li>
+          <li><span class="r__name">Google Ads</span> <span class="r__note">&mdash; demand that is
+            active now, where it is the right source for you.</span>
+            <a class="r__go" href="#">Paid search as a demand source</a></li>
+          <li><span class="r__name">Paid social</span> <span class="r__note">&mdash; sometimes the
+            right additional source, often not.</span>
+            <a class="r__go" href="#">When paid social fits, and when it does not</a></li>
+          <li><span class="r__name">AI search</span> <span class="r__note">&mdash; whether you show
+            up when a buyer asks an assistant for a supplier like you.</span>
+            <a class="r__go" href="#">What we can and cannot do about AI answers</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="h-sub">Turning those visits into enquiries</h3>
+        <ul class="route">
+          <li><span class="r__note">Whether the page answers the visit, and whether the enquiry can
+            actually complete and arrive.</span>
+            <a class="r__go" href="#">Where enquiries get lost</a></li>
+          <li><span class="r__note">What separates an enquiry worth quoting from one that is
+            not.</span>
+            <a class="r__go" href="#">What counts as an enquiry here</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="h-sub">Knowing what happened</h3>
+        <ul class="route">
+          <li><span class="r__note">Measurement, instrumented as part of the work rather than sold
+            as reporting.</span>
+            <a class="r__go" href="#">How we measure it</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================= BLOCK 6 — WHAT CAN BE CHECKED
+       MEDIUM. The ONE place the machinery is allowed to be the point.
+       [EVD: IMMEDIATE]. Opens on the admission, set plainly and at full
+       weight — not shrunk, not softened, not tucked beneath the items.
+       SET-PIECE RULE 2 of 2 · REGISTER LABEL 2 of 2. No ground change here:
+       the ground-change budget is spent on block 4 and block 8.
+       This block is SPARSE and the design does not compensate for it:
+       no filler links, no generic sources, no tags, no "coming soon",
+       and no proof container without proof in it. -->
+  <section class="section">
+    <hr class="rule-strong">
+    <span class="reg">what is published and checkable</span>
+    <h2 class="h-section">What you can check before you commit</h2>
+
+    <p class="statement">We have no case studies to show you.</p>
+    <p>That is the honest position, and writing around it would be the first thing you should not
+    trust us on.</p>
+    <p>What we do have is published, dated and checkable.</p>
+
+    <ul class="checks">
+      <li>
+        <div class="check__claim">
+          <h3 class="h-sub">The method, in full</h3>
+          <p>How the work is done, what gets measured, and &mdash; set out as its own section rather
+          than a footnote &mdash; what cannot be attributed.</p>
+          <p><a href="#">/how&#8209;it&#8209;works</a></p>
+        </div>
+      </li>
+
+      <li>
+        <div class="check__claim">
+          <h3 class="h-sub">A measurement of our own visibility, published in full</h3>
+          <p>We asked four AI assistants for agencies like us, 28 times, on one day, from Pune, in
+          English, signed out. <strong>We were named in none of them.</strong> The prompts, the run
+          counts and the two systems we could not test at all are published alongside it.</p>
+          <p><a href="#">/research/ai&#8209;visibility&#8209;baseline</a></p>
+        </div>
+
+        <!-- The apparatus. Provenance at 16px in the apparatus register —
+             never smaller, never grey-italic, never a disclaimer treatment.
+             A measured result of zero takes the ORDINARY measured mark: it is
+             a measurement, not a failure, and nothing here grades it. -->
+        <div class="app tie">
+          <p class="prov"><b>what</b> &middot; unbranded prompts asking for agencies like us, six
+          prompt classes</p>
+          <p class="prov"><b>when</b> &middot; 2026&#8209;08&#8209;31, all runs on one day</p>
+          <p class="prov"><b>where</b> &middot; India / Pune lens, English, all systems signed out</p>
+          <p class="prov"><b>how many</b> &middot; 28 unbranded runs, four assistants, five
+          surfaces</p>
+          <p class="prov"><b>by whom</b> &middot; MappedSkills, first&#8209;party, on our own site</p>
+          <p class="prov" style="margin-top:12px">
+            <span class="st">
+              <svg width="13" height="13" viewBox="0 0 13 13" aria-hidden="true"><rect class="st__f" x="1" y="1" width="11" height="11"/></svg>
+              measured
+            </span>
+            &nbsp;&mdash;&nbsp; ChatGPT, Perplexity, Gemini and Google &mdash; AI Mode and AI
+            Overviews. Named in none of the 28.
+          </p>
+          <p class="prov">
+            <span class="st">
+              <svg width="13" height="13" viewBox="0 0 13 13" aria-hidden="true">
+                <defs><pattern id="hx" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                  <line x1="0" y1="0" x2="0" y2="4" stroke="currentColor" stroke-width="1.4"/></pattern></defs>
+                <rect class="st__s" x="1" y="1" width="11" height="11"/>
+                <rect x="1" y="1" width="11" height="11" fill="url(#hx)"/>
+              </svg>
+              not testable
+            </span>
+            &nbsp;&mdash;&nbsp; Claude and Grok. Not tested, and not characterised.
+          </p>
+          <p class="prov" style="margin-top:12px">28 runs on one day, one location, signed out.
+          Counts, not rates. No confidence interval is claimed and none is available.</p>
+        </div>
+      </li>
+    </ul>
+
+    <!-- NOT DRAWN, and no container, heading or placeholder stands in for it:
+         · "Our own site, diagnosed and fixed in public" and its link
+           — TECHNICAL PREREQUISITE, the own-site fixes are not shipped
+         · "The people doing the work" and the /about link
+           — OWNER INPUT REQUIRED, team members, roles and expertise
+         The block is visibly not full. That is correct and is not compensated
+         for anywhere on this page. -->
+  </section>
+
+  <!-- ======================================= BLOCK 7 — FIT ===============
+       MEDIUM. Let the wrong buyer leave. [EVD: ABSENT]. No revenue, turnover
+       or headcount threshold — inventing one would be a strategy decision
+       made in a layout. No disparagement. Deliberately the quietest section
+       on the page: no rule variation, no ground change, no apparatus, no
+       figure, no list device. It is differentiated by density, not by a
+       new device. -->
+  <section class="section">
+    <hr class="rule-hair">
+    <h2 class="h-section">Who this is built for</h2>
+
+    <p>This works for businesses where a customer takes time to decide and one good enquiry is worth
+    real money &mdash; where buyers for what you sell already exist, or can reasonably be reached. It
+    works where you can act on the enquiries when they arrive, and where you are willing to let us
+    measure the path properly. That last one is not negotiable: without it, nothing we tell you
+    afterwards can be checked.</p>
+
+    <p>It is a poor fit if the demand has to be created from nothing, if what you sell is bought on
+    impulse or on price alone, or if you need somebody to guarantee the outcome. Those are legitimate
+    requirements. They are not what this is.</p>
+
+    <p class="act-row">
+      <a class="act-text" href="#">What this costs, and what moves the number</a>
+      <a class="act-text" href="#">The whole system, end to end</a>
+    </p>
+  </section>
+
+  <!-- ======================================= BLOCK 8 — ACTION ============
+       FAST. Its own region, with MORE SPACE around it than anything preceding
+       — the pause is what makes it read as intentional rather than pushy.
+       GROUND CHANGE 2 of 2. [EVD: ABSENT — no exceptions]: no provenance,
+       no date, no sample, no scope note, no limit, no register label.
+       No sticky control. No response-time number. No urgency. No second goal.
+       NOT DRAWN: the "what happens next" sentence (case B, enquiry-response
+       owner) and the DIRECT phone / WhatsApp peer with the sentence that
+       depends on the published number (case B). -->
+  <section class="act-region">
+    <div class="section--set">
+      <h2 class="h-section">Two ways to start</h2>
+      <p>Write to us, or book a time to talk. Both reach the same place, and neither is a form for a
+      salesperson to chase.</p>
+      <div class="acts">
+        <a class="act act--primary" href="#">Tell us what you&rsquo;re trying to fix</a>
+        <a class="act act--peer" href="#">Book a call</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ============================================ R2 — FOOTER ============
+       Navigational only. Four columns. The entity block (legal name, complete
+       postal address, phone, email, verified profiles) is CASE A and is NOT
+       DRAWN: no container, no heading, no partial address, no placeholder.
+       /work, /thank-you and /launch-checklist never appear.
+       Footer links are underlined — the affordance does not rely on colour. -->
+  <footer class="foot">
+    <div class="foot__cols">
+      <div>
+        <h2>what we do</h2>
+        <ul>
+          <li><a href="#">Everything this connects to</a></li>
+          <li><a href="#">Organic search</a></li>
+          <li><a href="#">AI search</a></li>
+          <li><a href="#">Google Ads</a></li>
+          <li><a href="#">Paid social</a></li>
+          <li><a href="#">Where enquiries get lost</a></li>
+          <li><a href="#">What counts as an enquiry here</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>how we work</h2>
+        <ul>
+          <li><a href="#">The method</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>what you can check</h2>
+        <ul>
+          <li><a href="#">Evidence</a></li>
+          <li><a href="#">Insights</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>get in touch</h2>
+        <ul>
+          <li><a href="#">Tell us what you&rsquo;re trying to fix</a></li>
+          <li><a href="#">Book a call</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+</div></div>
+
+<script>
+/* The ONLY script on this page. It adds the approved keyboard and dismissal
+   behaviour to the navigation disclosure. Nothing depends on it:
+   with JavaScript off, "What we do" is still a real link to /services, every
+   child is still reachable from that page, and the narrow menu is a native
+   <details>. No content, no evidence and no limit is script-dependent. */
+(function () {
+  var d = document.getElementById('nd'), p = document.getElementById('np');
+  function set(open) {
+    d.setAttribute('aria-expanded', String(open));
+    if (open) { p.setAttribute('data-open', ''); } else { p.removeAttribute('data-open'); }
+  }
+  d.addEventListener('click', function () { set(d.getAttribute('aria-expanded') !== 'true'); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (d.getAttribute('aria-expanded') === 'true') { set(false); d.focus(); }
+    var hm = document.getElementById('hm');
+    if (hm && hm.open) { hm.open = false; hm.querySelector('summary').focus(); }
+  });
+  document.addEventListener('click', function (e) {
+    if (!d.contains(e.target) && !p.contains(e.target)) set(false);
+  });
+})();
+</script>
+</body>
+</html>

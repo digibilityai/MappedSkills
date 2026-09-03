@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Session 15 — homepage design specimen — contact sheet</title>
+<style>
+  :root { color-scheme: light; }
+  body { margin: 0; padding: 24px; background: #efece6; color: #221d18;
+         font: 16px/1.55 ui-monospace, "SF Mono", Menlo, monospace; }
+  h1 { font-size: 19px; margin: 0 0 6px; }
+  p  { max-width: 78ch; margin: 0 0 10px; }
+  a  { color: #106275; }
+  .pair { display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap; margin-top: 24px; }
+  .cell { background: #fbf9f5; border: 1px solid #d2cfca; }
+  .cap  { padding: 6px 12px; border-bottom: 1px solid #d2cfca; font-size: 14px; color: #4d4641; }
+  /* WIDE is rendered at its true 1400x900 and scaled down for this contact
+     sheet ONLY. Judge type, spacing and hierarchy in the full-size page. */
+  .wide  { width: 700px; height: 620px; overflow: hidden; }
+  .wide iframe { width: 1400px; height: 1240px; border: 0;
+                 transform: scale(0.5); transform-origin: 0 0; }
+  .narrow { width: 390px; height: 620px; }
+  .narrow iframe { width: 390px; height: 620px; border: 0; }
+</style>
+</head>
+<body>
+
+<h1>Session 15 — complete homepage — design specimen</h1>
+<p>THE RECORD · Direction 2, THE WORKING SHEET. Isolated visual prototype, not production.</p>
+<p><b>Open the page itself:</b> <a href="homepage.html">homepage.html</a> — resize the window to
+see WIDE, MEDIUM and NARROW. The frames below are a contact sheet only; the WIDE frame is scaled
+to 50% to fit, so judge type size in the full-size page rather than here.</p>
+
+<div class="pair">
+  <div class="cell wide">
+    <div class="cap">WIDE — rendered at 1400 &times; 900, shown at 50%</div>
+    <iframe src="homepage.html" title="Homepage at wide width"></iframe>
+  </div>
+  <div class="cell narrow">
+    <div class="cap">NARROW — 390 &times; 844</div>
+    <iframe src="homepage.html" title="Homepage at narrow width"></iframe>
+  </div>
+</div>
+
+</body>
+</html>

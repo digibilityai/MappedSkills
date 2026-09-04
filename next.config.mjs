@@ -37,11 +37,37 @@ const nextConfig = {
       },
     ],
   },
+  // CACHE POLICY — corrected in Session 23 (Phase A).
+  //
+  // Session 22 OBSERVED that the previous configuration served
+  // `Cache-Control: public, max-age=31536000, immutable` on every HTML
+  // document, because its intended exemption (`/:path*.(html|xml)`) matches a
+  // file extension and App Router document routes have none. `immutable`
+  // suppresses revalidation, so a redeploy would not have reached returning
+  // visitors for up to a year.
+  //
+  // The policy now is: STOP OVERRIDING WHAT NEXT.JS ALREADY GETS RIGHT.
+  //   - Documents carry NO application-level Cache-Control. Next.js sets the
+  //     correct per-route policy itself, which is also what preserves the
+  //     `no-store` behaviour already OBSERVED on 404s. Overriding it is what
+  //     caused this defect; the fix is to stop overriding it.
+  //   - `/_next/static/*` is NOT listed here either, for the same reason.
+  //     Next.js already serves content-hashed assets as
+  //     `public, max-age=31536000, immutable` in production, and as
+  //     `no-cache, must-revalidate` under `next dev` — and it applies neither
+  //     if something else has already set the header
+  //     (node_modules/next/dist/server/lib/router-server.js, the
+  //     `matchedOutput.type === 'nextStaticFolder'` branch). An explicit rule
+  //     here is therefore redundant in production and actively wrong in
+  //     development, where it would pin dev chunks as immutable. `next build`
+  //     warns about exactly this.
+  //   - `.xml` surfaces (the sitemap) keep the short revalidating policy that
+  //     was already working live, because Next.js does not set one for them.
   headers: async () => [
     {
+      // Security headers on every response. No caching policy here.
       source: '/:path*',
       headers: [
-        // Security Headers
         {
           key: 'X-Content-Type-Options',
           value: 'nosniff',
@@ -62,16 +88,11 @@ const nextConfig = {
           key: 'Permissions-Policy',
           value: 'camera=(), microphone=(), geolocation=()',
         },
-        // Performance Headers
-        {
-          key: 'Cache-Control',
-          value: 'public, max-age=31536000, immutable',
-        },
       ],
     },
-    // Override cache for HTML pages (more frequent updates)
     {
-      source: '/:path*.(html|xml)',
+      // Sitemap and any other XML surface.
+      source: '/:path*.xml',
       headers: [
         {
           key: 'Cache-Control',

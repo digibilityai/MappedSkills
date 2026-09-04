@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Montserrat, Inter } from 'next/font/google'
+import { Bricolage_Grotesque, Manrope } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
@@ -9,15 +9,18 @@ import { generateOrganizationSchema, generateLocalBusinessSchema } from '@/lib/s
 import { siteMetadata } from '@/lib/metadata'
 import './globals.css'
 
-const montserrat = Montserrat({ 
-  subsets: ["latin"],
+// THE RESOLVE — display + body. Self-hosted and preloaded by next/font, so
+// there is no runtime request to Google Fonts. Both are variable fonts; weight
+// is set in CSS rather than by shipping extra static cuts.
+const bricolage = Bricolage_Grotesque({
+  subsets: ['latin'],
   display: 'swap',
-  variable: '--font-montserrat'
+  variable: '--font-bricolage',
 });
-const inter = Inter({ 
-  subsets: ["latin"],
+const manrope = Manrope({
+  subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter'
+  variable: '--font-manrope',
 });
 
 export const metadata: Metadata = {
@@ -39,7 +42,7 @@ export default function RootLayout({
   const localBusinessSchema = generateLocalBusinessSchema();
 
   return (
-    <html lang="en" className={`dark scroll-smooth ${montserrat.variable} ${inter.variable}`}>
+    <html lang="en" className={`${bricolage.variable} ${manrope.variable}`}>
       <head>
         {/* Global Schema Markup */}
         <script
@@ -55,11 +58,12 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${montserrat.variable} ${inter.variable} font-sans antialiased bg-background text-foreground`}>
+      <body className={`${bricolage.variable} ${manrope.variable} font-sans antialiased bg-background text-foreground`}>
+        <a href="#main" className="skip-link">Skip to main content</a>
         <GoogleTagManager />
         <MetaPixel />
         <Header />
-        <main>
+        <main id="main" tabIndex={-1}>
           {children}
         </main>
         <Footer />

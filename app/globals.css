@@ -1,98 +1,151 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+/* THE RESOLVE IS LIGHT-FIRST (DEC-018 §4.1). This custom variant is retained
+   DELIBERATELY: it scopes every `dark:` utility to a `.dark` ancestor. No such
+   ancestor exists any more, so the 41 `dark:` classes inside components/ui/*
+   compile and stay inert. REMOVING THIS LINE would hand `dark:` back to
+   Tailwind's default `prefers-color-scheme` behaviour and let a visitor's OS
+   dark mode re-activate the superseded dark theme. */
 @custom-variant dark (&:is(.dark *));
 
-/* MappedSkills Brand Design System */
+/* =============================================================================
+   THE RESOLVE — canonical design tokens.
+   Source of truth: docs/26-resolve-homepage/prototype/index.html (Gate 10,
+   DEC-019) and docs/24-resolve-governance/00_ACTIVE_DIRECTION.md §4.
+   This file is the ONLY design-token source in the application.
+   ========================================================================== */
 :root {
-  /* Brand Colors */
-  --ms-red: #C41E3A;
-  --ms-dark: #2C2C2C;
-  --ms-light: #F5F5F5;
-  --ms-white: #FFFFFF;
-  --ms-navy: #1A2A3A;
-  --ms-gray: #666666;
-  --ms-success: #2D8C5F;
-  --ms-alert: #E67E22;
+  /* ---- Ground and ink ---------------------------------------------------- */
+  --resolve-ground: #F7F3EC;      /* the body ground — light-first            */
+  --resolve-paper: #FFFDF9;       /* raised light surface                     */
+  --resolve-ink: #141219;         /* type and structure                       */
+  --resolve-ink-deep: #0F0D14;    /* substrate beneath a dark surface         */
+  --resolve-line: #DED6C8;        /* rules on light                           */
+  --resolve-rule: #2C2833;        /* rules on dark                            */
 
-  /* Light mode - sophisticated light theme */
-  --background: #f8f8f8;
-  --foreground: #1a1a1a;
-  --card: #ffffff;
-  --card-foreground: #1a1a1a;
-  --popover: #ffffff;
-  --popover-foreground: #1a1a1a;
-  --primary: #1a1a1a;
-  --primary-foreground: #ffffff;
-  --secondary: #e0e0e0;
-  --secondary-foreground: #1a1a1a;
-  --muted: #e0e0e0;
-  --muted-foreground: #666666;
-  --accent: #C41E3A;
-  --accent-foreground: #ffffff;
-  --destructive: #dc2626;
-  --destructive-foreground: #ffffff;
-  --border: #e0e0e0;
-  --input: #f0f0f0;
-  --ring: #C41E3A;
-  --chart-1: #C41E3A;
-  --chart-2: #2D8C5F;
-  --chart-3: #ffaa00;
-  --chart-4: #ff6600;
-  --chart-5: #cc00ff;
+  /* ---- The accent ramp — ONE mark at three sizes -------------------------
+     The ramp exists because of MEASURED CONTRAST, not taste: the same mark
+     darkens as the type gets smaller so small text clears 4.5:1 on ground.
+     Do not add a fourth step and do not introduce a second accent.          */
+  --resolve-accent: #FF5B04;      /* fills, marks, and text on a DARK ground  */
+  --resolve-accent-deep: #D94400; /* graphical objects + display text on light*/
+  --resolve-accent-dark: #A83400; /* small text on light — clears 4.5:1       */
+
+  /* ---- State registers --------------------------------------------------- */
+  --resolve-dim: #5C5665;         /* the traffic register — anonymous         */
+  --resolve-gap: #8E8798;         /* not measured / unattributed              */
+
+  /* ---- Motion — two easings, four timings. Nothing else. ------------------ */
+  --resolve-ease-state: cubic-bezier(0.65, 0, 0.35, 1);
+  --resolve-ease-arrive: cubic-bezier(0.2, 0.85, 0.25, 1);
+  --resolve-t-micro: 180ms;
+  --resolve-t-state: 620ms;
+  --resolve-t-resolve: 900ms;
+
+  /* ---- Layout ------------------------------------------------------------ */
+  --resolve-pad: clamp(18px, 3.4vw, 56px);
+  --resolve-wrap: 1400px;
+  --resolve-measure: 58ch;
+  --resolve-target: 40px;         /* interaction floor, 40x40 CSS px          */
+
+  /* ===========================================================================
+     SEMANTIC LAYER — the shadcn/ui token names, re-pointed at THE RESOLVE.
+     These names are consumed by 57 components/ui primitives and several
+     hundred call sites. They are mapped rather than replaced so the palette
+     changes without a page-by-page rewrite.
+     ======================================================================== */
+  --background: var(--resolve-ground);
+  --foreground: var(--resolve-ink);
+  --card: var(--resolve-paper);
+  --card-foreground: var(--resolve-ink);
+  --popover: var(--resolve-paper);
+  --popover-foreground: var(--resolve-ink);
+  --primary: var(--resolve-ink);
+  --primary-foreground: var(--resolve-ground);
+  --secondary: #EFE9DE;
+  --secondary-foreground: var(--resolve-ink);
+  --muted: #EFE9DE;
+  --muted-foreground: var(--resolve-dim);
+
+  /* `--accent` is used as TEXT 329 times and as a FILL 245 times in this
+     codebase, so it is mapped to the ramp step that is legible in BOTH roles:
+     #A83400 gives 6.02:1 as text on the ground and 6.65:1 behind white.
+     The bright mark (#FF5B04) is 2.81:1 as text on the ground and is exposed
+     as `--resolve-accent` / `text-resolve-accent` for the Resolve surfaces
+     built in Phase B/C, where its context is controlled. */
+  --accent: var(--resolve-accent-dark);
+  --accent-foreground: #FFFFFF;
+
+  --destructive: #B3261E;
+  --destructive-foreground: #FFFFFF;
+  --border: var(--resolve-line);
+  --input: var(--resolve-paper);
+  --ring: var(--resolve-ink);
+
   --radius: 0.75rem;
-  --sidebar: #ffffff;
-  --sidebar-foreground: #1a1a1a;
-  --sidebar-primary: #1a1a1a;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #C41E3A;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #e0e0e0;
-  --sidebar-ring: #C41E3A;
-}
 
-.dark {
-  /* Dark mode - primary experience - sophisticated dark aesthetic */
-  --background: #0F0F0F;
-  --foreground: #f5f5f5;
-  --card: #1a1a1a;
-  --card-foreground: #f5f5f5;
-  --popover: #1a1a1a;
-  --popover-foreground: #f5f5f5;
-  --primary: #ffffff;
-  --primary-foreground: #0F0F0F;
-  --secondary: #2a2a2a;
-  --secondary-foreground: #f5f5f5;
-  --muted: #3a3a3a;
-  /* Lighter than brand gray for readable secondary copy on dark bg */
-  --muted-foreground: #b8b8b8;
-  --accent: #C41E3A;
-  --accent-foreground: #ffffff;
-  --destructive: #ff4444;
-  --destructive-foreground: #0F0F0F;
-  --border: #2a2a2a;
-  --input: #1a1a1a;
-  --ring: #C41E3A;
-  --chart-1: #FF5566;
-  --chart-2: #2D8C5F;
-  --chart-3: #ffaa00;
-  --chart-4: #ff6600;
-  --chart-5: #cc00ff;
-  --sidebar: #1a1a1a;
-  --sidebar-foreground: #f5f5f5;
-  --sidebar-primary: #ffffff;
-  --sidebar-primary-foreground: #0F0F0F;
-  --sidebar-accent: #C41E3A;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #2a2a2a;
-  --sidebar-ring: #C41E3A;
+  /* Legacy brand aliases. Exactly ONE call site still uses one of them —
+     Footer's dark strip, `bg-ms-dark` — but all eight are re-pointed at
+     Resolve values so nothing can render in the superseded crimson/charcoal
+     palette if another surfaces. Verified by grepping app/ and components/
+     for `(bg|text|border|from|to|via)-ms-*` utilities. */
+  --ms-red: var(--resolve-accent-dark);
+  --ms-dark: var(--resolve-ink);
+  --ms-light: var(--resolve-ground);
+  --ms-white: var(--resolve-paper);
+  --ms-navy: var(--resolve-ink-deep);
+  --ms-gray: var(--resolve-dim);
+  --ms-success: #2D6A4F;
+  --ms-alert: var(--resolve-accent-deep);
+
+  /* Retained only because components/ui/chart.tsx reads them. Not part of
+     THE RESOLVE and not for use on any Resolve surface. */
+  --chart-1: var(--resolve-accent-deep);
+  --chart-2: #2D6A4F;
+  --chart-3: #8E7B2F;
+  --chart-4: var(--resolve-dim);
+  --chart-5: var(--resolve-gap);
+
+  --sidebar: var(--resolve-paper);
+  --sidebar-foreground: var(--resolve-ink);
+  --sidebar-primary: var(--resolve-ink);
+  --sidebar-primary-foreground: var(--resolve-ground);
+  --sidebar-accent: var(--resolve-accent-dark);
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: var(--resolve-line);
+  --sidebar-ring: var(--resolve-ink);
 }
 
 @theme inline {
-  --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
-  --font-heading: var(--font-montserrat), 'Montserrat', sans-serif;
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
-  /* Brand palette — use as text-ms-dark, bg-ms-dark, etc. */
+  /* ---- Typography -------------------------------------------------------- */
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-bricolage), ui-sans-serif, system-ui, 'Segoe UI', sans-serif;
+  /* No monospace is part of THE RESOLVE's visual language. This token remains
+     only so `<code>`/`<pre>` semantics render sensibly; it resolves to the
+     reader's own system mono and is never a brand face. */
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* ---- Resolve primitives, exposed as Tailwind colours for Phase B/C ------ */
+  --color-resolve-ground: var(--resolve-ground);
+  --color-resolve-paper: var(--resolve-paper);
+  --color-resolve-ink: var(--resolve-ink);
+  --color-resolve-ink-deep: var(--resolve-ink-deep);
+  --color-resolve-accent: var(--resolve-accent);
+  --color-resolve-accent-deep: var(--resolve-accent-deep);
+  --color-resolve-accent-dark: var(--resolve-accent-dark);
+  --color-resolve-dim: var(--resolve-dim);
+  --color-resolve-gap: var(--resolve-gap);
+  --color-resolve-line: var(--resolve-line);
+  --color-resolve-rule: var(--resolve-rule);
+
+  /* ---- Validated Resolve width tiers (18C / 19B) --------------------------
+     NARROW is the base (<=760). These ADD to Tailwind's default screens; no
+     default is overridden, so legacy pages are untouched. */
+  --breakpoint-ms-med: 761px;   /* MEDIUM and up */
+  --breakpoint-ms-wide: 1081px; /* WIDE          */
+
+  /* ---- Legacy brand palette ---------------------------------------------- */
   --color-ms-red: var(--ms-red);
   --color-ms-dark: var(--ms-dark);
   --color-ms-light: var(--ms-light);
@@ -101,6 +154,8 @@
   --color-ms-gray: var(--ms-gray);
   --color-ms-success: var(--ms-success);
   --color-ms-alert: var(--ms-alert);
+
+  /* ---- Semantic bridge --------------------------------------------------- */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -139,89 +194,34 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/*
- * Light surfaces under forced dark mode: keep backgrounds, switch text
- * tokens to brand dark/gray so text-foreground/muted remain readable.
- */
-.bg-white,
-.bg-ms-light,
-.bg-ms-white,
-.bg-red-50,
-.bg-orange-50,
-.bg-amber-50,
-.bg-yellow-50,
-.bg-green-50,
-.bg-blue-50,
-.bg-indigo-50,
-.bg-purple-50,
-.bg-red-50\/50,
-.bg-orange-50\/50,
-.bg-amber-50\/50,
-.bg-yellow-50\/50,
-.bg-green-50\/50,
-.bg-blue-50\/50,
-.bg-indigo-50\/50,
-.bg-purple-50\/50,
-.from-red-50 {
-  --foreground: #1a1a1a;
-  --card-foreground: #1a1a1a;
-  --popover-foreground: #1a1a1a;
-  --primary: #1a1a1a;
-  --secondary-foreground: #1a1a1a;
-  --muted-foreground: #666666;
-  --border: #e0e0e0;
-  color: #1a1a1a;
-}
-
-/* Dark-mode callouts that keep dark tinted backgrounds (text stays light) */
-html.dark .dark\:bg-green-950\/20,
-html.dark .dark\:bg-amber-950\/20,
-html.dark .dark\:bg-blue-950\/20,
-html.dark .dark\:bg-purple-950\/20,
-html.dark .dark\:bg-indigo-950\/20,
-html.dark .dark\:bg-yellow-950 {
-  --foreground: #f5f5f5;
-  --card-foreground: #f5f5f5;
-  --popover-foreground: #f5f5f5;
-  --primary: #ffffff;
-  --secondary-foreground: #f5f5f5;
-  --muted-foreground: #b8b8b8;
-  color: #f5f5f5;
-}
-
-/* Typography Hierarchy */
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  
+
+  /* Declared explicitly so a browser in forced or automatic dark mode does not
+     invert the direction. The dark hero stage and the dark footer strip are
+     COUNTED INVERSIONS inside a light page and carry meaning; the page itself
+     is never dark. */
   html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
     @apply scroll-smooth;
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold leading-tight;
+    @apply font-heading font-extrabold leading-tight;
+    letter-spacing: -0.035em;
   }
 
-  h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
-  }
-
-  h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
-  }
-
-  h3 {
-    @apply text-2xl md:text-3xl lg:text-4xl;
-  }
-
-  h4 {
-    @apply text-xl md:text-2xl lg:text-3xl;
-  }
+  h1 { @apply text-4xl md:text-5xl lg:text-6xl; }
+  h2 { @apply text-3xl md:text-4xl lg:text-5xl; }
+  h3 { @apply text-2xl md:text-3xl lg:text-4xl; }
+  h4 { @apply text-xl md:text-2xl lg:text-3xl; }
 
   p, li, label {
     @apply font-sans text-base leading-relaxed;
@@ -231,100 +231,172 @@ html.dark .dark\:bg-yellow-950 {
     @apply text-sm font-normal leading-relaxed;
   }
 
-  /* Text Hierarchy - High Contrast (brand: dark #1a1a1a / gray #666) */
-  .text-primary-body {
-    @apply text-foreground;
+  /* ---- Focus -------------------------------------------------------------
+     A single visible treatment. Ink reads against the ground (#F7F3EC, 16.80:1),
+     against paper, and against both accent fills. Never suppressed. */
+  :focus-visible {
+    outline: 3px solid var(--resolve-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 
-  .text-secondary-body {
-    @apply text-muted-foreground;
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 3px solid var(--resolve-ink);
+    outline-offset: 2px;
   }
 
-  .text-tertiary-body {
-    @apply text-muted-foreground;
-  }
-
-  /* Improve Description Text Contrast */
-  .description {
-    @apply text-lg leading-relaxed text-foreground;
-  }
-
-  /* Improve Subtitle Contrast */
-  .subtitle {
-    @apply text-lg md:text-xl leading-relaxed text-muted-foreground;
-  }
-
-  /* Section Subheadings */
-  .section-subtitle {
-    @apply text-lg md:text-xl leading-relaxed text-muted-foreground mb-8;
-  }
-
-  /* Input Focus States */
-  input:focus,
-  textarea:focus,
-  select:focus {
-    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-background;
-  }
-
-  /* Link Styling */
-  a {
-    @apply text-accent hover:text-accent/80 transition-colors;
-  }
-
-  /* Button Reset */
-  button {
-    @apply cursor-pointer;
-  }
-
-  /* Card Hover Effects */
-  .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
-  }
-
-  /* Badge Styling */
-  .badge {
-    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-accent/10 text-accent;
-  }
-
-  /* Section Spacing */
-  section {
-    @apply py-16;
-  }
-
-  /* Enhanced Readability - Section Content */
-  .section-content {
-    @apply space-y-6 md:space-y-8;
-  }
-
-  /* Card Content Spacing */
-  .card-content {
-    @apply space-y-4;
-  }
-
-  /* Improved spacing between heading and description */
-  h1 + p,
-  h2 + p,
-  h3 + p {
-    @apply mt-4 md:mt-6;
-  }
-
-  /* Better spacing for lists */
-  ul, ol {
-    @apply space-y-3 pl-6;
-  }
-
-  /* Link styling with better visibility */
   a {
     @apply text-accent hover:text-accent/80 transition-colors underline-offset-4 hover:underline;
   }
 
-  /* Improved button text */
   button {
     @apply cursor-pointer font-medium;
   }
 
-  /* Better contrast for labels */
   label {
     @apply font-medium text-foreground;
+  }
+
+  /* ---- Reduced motion — a global floor ------------------------------------
+     Durations collapse rather than being cancelled, so a transition-driven
+     open/close state still lands in its end state instead of sticking. */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ---- Dark surfaces — a state change is a token change --------------------
+     THE RESOLVE's accent ramp is contrast-driven, not decorative: #A83400 is
+     the step that clears 4.5:1 as small text on the LIGHT ground, and #FF5B04
+     is the step that carries the mark on a DARK one (DEC-018 §4.2).
+     A dark region therefore RE-POINTS the token, exactly as the prototype's
+     two-state surface does, rather than overriding colour per element.
+
+     Measured on the rendered footer: #A83400 on #141219 = 2.79:1 (FAIL);
+     #FF5B04 on #141219 = 5.97:1 (PASS). The superseded palette was worse
+     still at 2.39:1, so this closes a pre-existing failure rather than one
+     introduced here. */
+  .bg-ms-dark,
+  .bg-ms-navy,
+  .bg-resolve-ink,
+  .bg-resolve-ink-deep,
+  .bg-foreground {
+    --accent: var(--resolve-accent);
+    --accent-foreground: var(--resolve-ink);
+    --border: var(--resolve-rule);
+    --muted-foreground: #A29BAC;
+    --ring: var(--resolve-ground);
+  }
+
+  /* Focus must stay visible on a dark surface, where ink would vanish. */
+  .bg-ms-dark :focus-visible,
+  .bg-ms-navy :focus-visible,
+  .bg-resolve-ink :focus-visible,
+  .bg-resolve-ink-deep :focus-visible,
+  .bg-foreground :focus-visible {
+    outline-color: var(--resolve-ground);
+  }
+
+  /* ---- Legacy composition rules -------------------------------------------
+     Retained UNCHANGED in Phase A. These govern the spacing and link colour of
+     every existing page; replacing them is page-composition work and belongs
+     to Phase B/C, not to the foundation. */
+  section { @apply py-16; }
+  ul, ol { @apply space-y-3 pl-6; }
+  h1 + p, h2 + p, h3 + p { @apply mt-4 md:mt-6; }
+
+  .text-primary-body { @apply text-foreground; }
+  .text-secondary-body { @apply text-muted-foreground; }
+  .text-tertiary-body { @apply text-muted-foreground; }
+  .description { @apply text-lg leading-relaxed text-foreground; }
+  .subtitle { @apply text-lg md:text-xl leading-relaxed text-muted-foreground; }
+  .section-subtitle { @apply text-lg md:text-xl leading-relaxed text-muted-foreground mb-8; }
+  .card-hover { @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1; }
+  .badge { @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-accent/10 text-accent; }
+  .section-content { @apply space-y-6 md:space-y-8; }
+  .card-content { @apply space-y-4; }
+}
+
+@layer components {
+  /* ---- Skip link ----------------------------------------------------------
+     The first focusable element in the document. Removed from flow when
+     unfocused so it cannot affect layout, and given a real 40px target. */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 200;
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--resolve-target);
+    padding: 12px 16px;
+    background: var(--resolve-ink);
+    color: var(--resolve-ground);
+    font-family: var(--font-sans);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .skip-link:focus {
+    left: 16px;
+    top: 16px;
+  }
+
+  .skip-link:focus-visible {
+    outline: 3px solid var(--resolve-accent);
+    outline-offset: 3px;
+  }
+
+  /* ---- Interaction floor --------------------------------------------------
+     Opt-in helper for CONTROLS and NAVIGATION only. It must never be applied
+     to an inline text link inside a paragraph: forcing a 40px box around
+     running text breaks the line box. Adjacent extenders must not overlap, or
+     one control steals its neighbour's tap. */
+  .resolve-target {
+    position: relative;
+  }
+
+  .resolve-target::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    min-width: var(--resolve-target);
+    min-height: var(--resolve-target);
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@layer utilities {
+  /* ---- Accent fills on a dark surface -------------------------------------
+     The bright mark carries INK type, never white. This is the prototype's own
+     pairing — `background:var(--tang);color:#141219` at
+     docs/26-resolve-homepage/prototype/index.html lines 97, 243, 516 and 562.
+
+     MEASURED on the rendered footer: #FFFFFF on #FF5B04 = 3.11:1 (FAIL);
+     #141219 on #FF5B04 = 5.97:1 (PASS), and 5.04:1 against the `/90` hover
+     step. Nine call sites hard-code `text-white` beside `bg-accent`; that
+     predates THE RESOLVE, and on a LIGHT ground it is still correct (#FFFFFF
+     on #A83400 = 6.65:1), so the pages are left alone and only the dark case
+     is re-pointed here.
+
+     THIS BLOCK MUST STAY IN `utilities`. Cascade layers outrank specificity:
+     the same rule in `@layer base` loses to `.text-white` no matter how
+     specific it is, because `utilities` is declared later. Verified — the
+     base-layer version compiled correctly and still measured 3.11:1. */
+  .bg-ms-dark .bg-accent,
+  .bg-ms-navy .bg-accent,
+  .bg-resolve-ink .bg-accent,
+  .bg-resolve-ink-deep .bg-accent,
+  .bg-foreground .bg-accent {
+    color: var(--resolve-ink);
   }
 }

@@ -26,7 +26,7 @@ export function Footer() {
               className="bg-accent hover:bg-accent/90 text-white"
               asChild
             >
-              <Link href="/schedule-call">Schedule Free Strategy Call</Link>
+              <Link href="/contact">Contact Us</Link>
             </Button>
             <Button
               size="lg"
@@ -34,7 +34,7 @@ export function Footer() {
               className="border-white/30 text-white hover:bg-white/10"
               asChild
             >
-              <Link href="/contact">Contact Us</Link>
+              <Link href="/schedule-call">Schedule Free Strategy Call</Link>
             </Button>
           </div>
         </div>
@@ -236,12 +236,12 @@ export function Footer() {
               </div>
 
               {/* Social Links */}
-              <div className="flex gap-4 pt-4 sm:pt-0 sm:pl-6 sm:border-l sm:border-white/10">
+              <div className="flex items-center gap-1 pt-4 sm:pt-0 sm:pl-6 sm:border-l sm:border-white/10">
                 <a
                   href="https://linkedin.com/company/mappedskills"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/80 hover:text-accent transition-colors"
+                  className="flex h-10 w-10 items-center justify-center text-white/80 hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#141219] rounded"
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="h-5 w-5" />
@@ -250,7 +250,7 @@ export function Footer() {
                   href="https://facebook.com/mappedskills"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/80 hover:text-accent transition-colors"
+                  className="flex h-10 w-10 items-center justify-center text-white/80 hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#141219] rounded"
                   aria-label="Facebook"
                 >
                   <Facebook className="h-5 w-5" />
@@ -259,14 +259,14 @@ export function Footer() {
                   href="https://instagram.com/mappedskills"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/80 hover:text-accent transition-colors"
+                  className="flex h-10 w-10 items-center justify-center text-white/80 hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#141219] rounded"
                   aria-label="Instagram"
                 >
                   <Instagram className="h-5 w-5" />
                 </a>
                 <a
                   href={`mailto:${siteMetadata.email}`}
-                  className="text-white/80 hover:text-accent transition-colors"
+                  className="flex h-10 w-10 items-center justify-center text-white/80 hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#141219] rounded"
                   aria-label="Email"
                 >
                   <Mail className="h-5 w-5" />

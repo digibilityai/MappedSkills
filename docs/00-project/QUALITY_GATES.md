@@ -17,10 +17,10 @@ No phase should advance merely because an artifact exists.
 | **Gate 9 — Page Copy Production** | **PASSED — 2026-09-01.** Approval is not publication readiness for every route — see the gate's "Why this gate passes" note |
 | **Gate 9A — Creative Direction** | **PASSED — 2026-09-01** |
 | **Gate 9B — UX** | **PASSED — 2026-09-02.** See `DEC-016` in `DECISION_LOG.md` |
-| **Gate 10 — UI / Design System** | **NOT PASSED. IN PROGRESS.** The **visual direction** is owner-approved — **THE RESOLVE (Session 15C)**, `DEC-018`, 2026-09-03, prototype `docs/20-creative-convergence/prototype/convergence.html`. **`DEC-017` / THE ARRIVAL is SUPERSEDED as the active direction** after an owner prototype-label clarification, and is retained as historical record. **No Resolve design system exists**; `docs/22-design-system/` was built for THE ARRIVAL and is historical / partially reusable only, subject to `docs/24-resolve-governance/01_SESSION16_AUDIT.md`. **F1 must be revalidated against THE RESOLVE**, and the Gate 9B-deferred re-tests (**F2 first fixation**, **F3 visual weight**) remain **mandatory and not yet re-run against this direction** |
+| **Gate 10 — UI / Design System** | **PASSED — 2026-09-04.** See `DEC-019`. **THE RESOLVE** is validated as the production visual and experience direction, and the approved baseline is the **Session 19B homepage prototype**, `docs/26-resolve-homepage/prototype/index.html`. The Gate 9B-deferred re-tests were run and passed at both widths: **F2 PASS (WIDE + NARROW)**, **F3 PASS (WIDE + NARROW)**. **`DEC-017` / THE ARRIVAL remains SUPERSEDED** and retained as historical record. **Passing this gate approves no production implementation and resolves no owner blocker** |
 | **Gates 11–22** | **NOT STARTED, NOT APPROACHED, NOT PASSED** |
 
-**Session 06 marked Gate 2 only.** Gates 5, 6 and 7 were approved by the orchestrator on 2026-09-01, recorded in `DECISION_LOG.md` as `DEC-010`, `DEC-011` and `DEC-012`. **Gate 8 (Messaging Architecture) was approved by the orchestrator on 2026-09-01, recorded as `DEC-013`.** **Gate 9 (Page Copy Production) was approved by the orchestrator on 2026-09-01, recorded as `DEC-014`** — see the numbering reconciliation note under Gate 9 below, which repurposes the former "UX" placeholder for Page Copy Production and preserves the displaced Creative Direction and UX criteria as Gates 9A and 9B. **Gate 9A (Creative Direction) was approved by the orchestrator on 2026-09-01, recorded as `DEC-015`.** **Gate 9B (UX) was approved by the orchestrator on 2026-09-02, recorded as `DEC-016`.** No gate from 10 onwards is passed, approached or implied by any of these approvals. **Gate 10 is now in progress:** the owner approved a visual direction on 2026-09-03. That approval was first recorded as **THE ARRIVAL** (`DEC-017`) and was then **corrected on the same day** — the owner reopened the live prototypes and clarified that the earlier *"15D"* reference was a **mistaken prototype label**. **The active direction is THE RESOLVE (Session 15C), recorded as `DEC-018`**, which supersedes `DEC-017` for active creative direction; **`DEC-017` is retained unchanged as historical record.** **That approval is of the direction only.** It does not pass Gate 10, does not approve any design system — the Session 16 one was built for THE ARRIVAL and is historical / partially reusable only — and does not approve any page. **Claude has no authority to pass a gate**, and no gate is marked passed here.
+**Session 06 marked Gate 2 only.** Gates 5, 6 and 7 were approved by the orchestrator on 2026-09-01, recorded in `DECISION_LOG.md` as `DEC-010`, `DEC-011` and `DEC-012`. **Gate 8 (Messaging Architecture) was approved by the orchestrator on 2026-09-01, recorded as `DEC-013`.** **Gate 9 (Page Copy Production) was approved by the orchestrator on 2026-09-01, recorded as `DEC-014`** — see the numbering reconciliation note under Gate 9 below, which repurposes the former "UX" placeholder for Page Copy Production and preserves the displaced Creative Direction and UX criteria as Gates 9A and 9B. **Gate 9A (Creative Direction) was approved by the orchestrator on 2026-09-01, recorded as `DEC-015`.** **Gate 9B (UX) was approved by the orchestrator on 2026-09-02, recorded as `DEC-016`.** **Gate 10 (UI / Design System) was approved by the orchestrator on 2026-09-04, recorded as `DEC-019`** — see the Gate 10 section below. **No gate from 11 onwards is passed, approached or implied by any of these approvals.** The paragraph that follows is the original Gate-10-in-progress record, retained as the decision trail: **Gate 10 was in progress from 2026-09-03:** the owner approved a visual direction on 2026-09-03. That approval was first recorded as **THE ARRIVAL** (`DEC-017`) and was then **corrected on the same day** — the owner reopened the live prototypes and clarified that the earlier *"15D"* reference was a **mistaken prototype label**. **The active direction is THE RESOLVE (Session 15C), recorded as `DEC-018`**, which supersedes `DEC-017` for active creative direction; **`DEC-017` is retained unchanged as historical record.** **That approval is of the direction only.** It does not pass Gate 10, does not approve any design system — the Session 16 one was built for THE ARRIVAL and is historical / partially reusable only — and does not approve any page. **Claude has no authority to pass a gate**, and no gate is marked passed here.
 
 ## Gate 1 — Existing Site Audit
 **Status: artifacts delivered; orchestrator review pending. NOT marked passed.**
@@ -148,7 +148,34 @@ The durable "usable at target breakpoints" criterion PASSES on the orchestrator'
 **Required:** typography, colors, spacing, grids, controls, states, charts, forms, accessibility patterns.
 **Acceptance:** reusable, implementation-ready, responsive.
 
-**Status — NOT PASSED, IN PROGRESS (2026-09-03).**
+**Status — PASSED, 2026-09-04. Recorded as `DEC-019`.**
+
+**Approved baseline:** `docs/26-resolve-homepage/prototype/index.html` — the Session 19B state of the complete homepage. **Active direction: THE RESOLVE.** **Authoritative creative reference: `docs/20-creative-convergence/prototype/convergence.html`**, verified byte-identical (`c6d29fd34cf7c5e481d8244773f7d357`) throughout Sessions 17B–19B and never modified.
+
+**Validation chain:** Session 18 complete homepage → 18A refinement → 18B compression → 18C mobile refinement → 19 closure audit → 19A narrow corrections → 19B accessibility closure. Owner validation at each step, most recently on mobile: *"the mobile now feels right."*
+
+**Evidence, all rendered and measured rather than argued:**
+
+| Test | Result |
+|---|---|
+| **F2 — first fixation** *(deferred here by Gate 9B)* | **PASS** — WIDE 5.05× dominance, NARROW 2.05×, no apparatus on the first screen |
+| **F3 — visual proportion / weight** *(deferred here by Gate 9B)* | **PASS** — WIDE and NARROW |
+| **Quantity safety** | **PASS** — every comparable set non-comparative; zero inline size styles |
+| **Evidence / proof safety** | **PASS** — no fabricated proof of any kind |
+| **Accessibility / responsive** | **PASS** — 0 contrast failures, 0 heading jumps, **0 targets under 40×40 at eight widths**, 0 overflow, 0 fixed/sticky, 0 looping animation |
+| **No-JS / reduced motion** | **PASS** — both compose the complete page; motion never carries meaning |
+| **Marketing-company blur · Digital/PDF · Static quality** | **PASS · PASS · PASS** |
+| **Reader-driven controls** | **ACCEPTED** — two, doing distinct informational jobs |
+
+**Motion budget reconciled:** homepage **T3 3 → 4**, a validated **ceiling** rather than headroom — `docs/24-resolve-governance/02_RESOLVE_MOTION_BUDGET.md` §5.0. Ambient 0, pinned 0, anti-tic rules M1–M7 unchanged.
+
+**Two defects found during closure and corrected, recorded because both survived several sessions:** a boundary transition documented as live in Sessions 18–18C that **had never rendered** (removed in 19A, closing a no-JS inconsistency and a reduced-motion contrast failure of 2.66:1 against a 3:1 floor); and **seven capability links nested inside `<button role="tab">`**, giving each tab a 126-character accessible name (corrected in 19B to a valid tab/tabpanel structure with 7-character names).
+
+---
+
+**The record below is the original in-progress status, retained unchanged as the decision trail.**
+
+**Status — NOT PASSED, IN PROGRESS (2026-09-03) — SUPERSEDED by the PASSED status above.**
 
 **Approved input — the VISUAL DIRECTION only, and it is THE RESOLVE (Session 15C).** Recorded as **`DEC-018`**, 2026-09-03, after the owner **reopened the live prototypes** and clarified that the earlier *"15D"* reference was a **mistaken prototype label**. The approved reference is a **file path, not a session label**: `docs/20-creative-convergence/prototype/convergence.html`. **The direction is approved; nothing else is.**
 
@@ -171,6 +198,11 @@ The durable "usable at target breakpoints" criterion PASSES on the orchestrator'
 
 ### Explicitly NOT passed by this status
 The design system · the complete homepage, which does not exist · any other route · any production code · any owner blocker · any performance or accessibility claim beyond what was measured on one prototype at two emulated widths.
+
+### Closure note (2026-09-04) — which of the above closed, and which did not
+**Closed by Gate 10 passage:** F1 revalidated against THE RESOLVE and then validated *inside* the complete homepage · **F2 and F3 re-run and passed at both widths** · a complete homepage now exists in THE RESOLVE · **MEDIUM width rendered and validated**, along with 360, 390, 430, 760, 761, 860, 1080 and 1425.
+
+**NOT closed, and carried forward to production translation:** **performance profiling on real hardware** and Core Web Vitals · **screen-reader, real-device, other-browser, print and 200% text-resize testing** · **any user testing**, which this programme has still never performed · a separate Resolve **design system** as a standalone deliverable · **`F17` remains BLOCKED and undrawn** · and **every owner blocker remains open — `/pricing` facts, the F17 `/how-it-works` real process, and the conditional manufacturing route.** **Passing Gate 10 approves no production implementation, deployment or push.**
 
 ## Gate 11 — Homepage
 **Required:** approved final homepage design/prototype.

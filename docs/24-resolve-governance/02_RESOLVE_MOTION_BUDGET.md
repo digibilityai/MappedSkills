@@ -1,7 +1,9 @@
 # THE RESOLVE — Motion and Repetition Budget
 
 **Session:** 17A · **Date:** 2026-09-03 · **Branch:** `test_branch`
-**Status:** **PROPOSED, and binding on the design-system phase once approved.**
+**Status:** **APPROVED and BINDING — 2026-09-04, on Gate 10 closure (`DEC-019`).**
+**One number was reconciled against the validated homepage: the homepage T3 maximum, 3 → 4.
+See §5.0. Everything else in this document is unchanged.**
 **Supersedes:** the Session 16 motion budget (`docs/22-design-system/06_MOTION.md`) for THE
 RESOLVE — see `01_SESSION16_AUDIT.md` §2.
 
@@ -71,13 +73,53 @@ per-component easing zoo.
 |---|:--:|:--:|:--:|
 | **T1 — MAJOR RESOLVE** | **1** | **0** | **0** |
 | **T2 — SECTIONAL RESOLUTION** | **3** | **1** | **0** |
-| **T3 — TRANSITION** | **3** | **2** | **1** |
+| **T3 — TRANSITION** | **4** — *reconciled from 3, see §5.0* | **2** | **1** |
 | **T4 — MICRO** | unbounded, but **only the two defined behaviours** | same | same |
 | **Signature interaction** (the Traffic / Enquiries control) | **1** | **0** | **0** |
 | **Ambient regions** | **0** | **0** | **0** |
 | **Pinned / scroll-scrubbed sequences** | **0** | **0** | **0** |
 | **Full-bleed accent regions** | **1** | **1** | **0 or 1** |
 | **Surface inversions** | **2** — the hero stage, and the closing accent region | **1** | **0** |
+
+### 5.0 The homepage T3 reconciliation — 3 → 4 (2026-09-04, `DEC-019`)
+
+**This is evidence-based reconciliation against a validated page, not an increase in motion
+allowance.** The figure of 3 was derived in Session 17A **before any homepage existed**, and §9 of
+this document already stated that the reconciliation would happen when the complete homepage was
+composed and that **the homepage, not the prototype, is what this budget is measured against.**
+
+The homepage was then built (Session 18), refined (18A), compressed (18B), refined for mobile
+(18C) and audited (19, 19A, 19B). Gate 10 validation measured **four live T3 transitions**, each
+verified by its trigger and by its rendered state on the page:
+
+| # | Transition | What it does | Standard it meets |
+|---|---|---|---|
+| 1 | **Hero departure** | the resolved population drifts out as the reader leaves | joins two chapters |
+| 2 | **Departure carrier** | one mark and the transitional line arrive | joins two chapters |
+| 3 | **Chain descent and draw** | the page approaches the structure | **changes the reader's distance from an object** |
+| 4 | **Close arrival** | the marks land and stop | changes what the object means |
+
+**The boundary chapter is intentionally still**, and a fifth transition specified for it in Session
+18 was found never to have rendered and was removed in Session 19A rather than repaired.
+
+> ### **4 is the validated CEILING for the approved homepage. It is not headroom.**
+> Adding a fifth transition is a budget breach exactly as a fourth was before this reconciliation.
+> A transition still has to **join two chapters, change the reader's distance from an object, or
+> change what an object means**; one that merely makes a section appear is composition and is not
+> counted, and is not licensed by this change.
+
+**Nothing else moves.** Secondary-page and editorial budgets are unchanged at 2 and 1. T1, T2, T4,
+full-bleed regions and surface inversions are unchanged. **Ambient regions remain 0, pinned and
+scroll-scrubbed sequences remain 0, and looping decorative motion remains prohibited.** The
+anti-tic rules **M1–M7 are unchanged and remain binding.**
+
+**Recorded about the signature-interaction line:** the validated homepage carries the one signature
+interaction the table permits — the Traffic / Enquiries control — **plus one progressive-disclosure
+control**, the Capture / Convert / Measure tablist. Gate 10 accepted both on the basis that they do
+**distinct informational jobs**: the signature changes *what a population is* and inverts the
+surface; the tablist changes *which part of a structure is under examination* and changes no ground
+and no population. **The tablist is not a second signature and does not raise the signature limit,
+which stays at 1.**
 
 ### 5.1 Why one major resolve on the homepage
 
@@ -144,6 +186,10 @@ elements, resolving **once**, on a staggered `transform` + `opacity` transition.
   evidence, not a production limit.
 
 ## 9. The known delta — stated, not hidden
+> **CLOSED 2026-09-04.** The reconciliation this section anticipated was performed at Gate 10
+> closure: the homepage was measured and the homepage T3 maximum moved 3 → 4 (§5.0). The
+> paragraphs below are retained as the original statement of the gap.
+
 
 **The Session 15C prototype exceeds this budget.** By its own count the resolve appears **seven
 times**; §5 permits one T1 plus three T2.

@@ -1,5 +1,32 @@
 # THE ARRIVAL — Design System — Overview
 
+> # ⚠ SUPERSEDED — DO NOT APPLY THIS TO CURRENT DESIGN WORK
+>
+> **This design system was produced for THE ARRIVAL (Session 15D).**
+> **THE ARRIVAL is no longer the active visual direction.**
+>
+> The owner reopened the live prototypes and clarified that the earlier *"15D"* reference was a
+> **mistaken prototype label**. The active direction is **SESSION 15C — THE RESOLVE**, recorded as
+> **`DEC-018`**, with the approved prototype at
+> `docs/20-creative-convergence/prototype/convergence.html`.
+>
+> **`DEC-018` and `docs/24-resolve-governance/` are authoritative.**
+>
+> **Arrival-specific rules in this directory must not be applied to current design work** — most
+> dangerously **`B1 — Dark-first`**, since **THE RESOLVE is light-first**. Also superseded: the
+> espresso ground, amber as the accent, the eight signal states, the capture line / horizon /
+> ledger / streak / band primitives, the canvas field, ambient regions, pinned sequences, the
+> Arrival typefaces, and the Arrival colour, surface and motion-budget systems.
+>
+> Some rules here **are** direction-independent and survive — the accessibility floor, the
+> document-drift and fabricated-quantity registers, and several others. **Which ones is settled
+> rule by rule in `docs/24-resolve-governance/01_SESSION16_AUDIT.md`. Read that before using
+> anything in this directory.**
+>
+> **This directory is retained, unchanged, as historical design exploration and decision trail.**
+> `DEC-017` is likewise retained unchanged as historical record.
+
+
 **Session:** 16 · **Date:** 2026-09-03 · **Branch:** `test_branch`
 **Visual direction:** **APPROVED by the owner** — see `DEC-017` in `docs/00-project/DECISION_LOG.md`.
 **This design system:** **PROPOSED. Not approved.** It is the Gate 10 deliverable and Gate 10 is

@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en-IN" class="nojs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>F1 — THE RUN — in THE RESOLVE — MappedSkills compatibility prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!--
+  SESSION 17B — F1 "THE RUN" COMPATIBILITY PROTOTYPE, IN THE RESOLVE.
+
+  Active direction: SESSION 15C — THE RESOLVE (DEC-018).
+  Reference:        docs/20-creative-convergence/prototype/convergence.html
+
+  THE COMPATIBILITY PROBLEM THIS ANSWERS
+  THE RESOLVE's signature gesture is a POPULATION changing STATE: many
+  anonymous marks become a few named objects. If F1 repeats that, the page
+  becomes repetitive and the gesture becomes a tic (02_RESOLVE_MOTION_BUDGET).
+
+  THE ANSWER: F1 takes a different visual ROLE inside the same visual FAMILY.
+    · the signature is about STATE   — what a thing IS
+    · F1 is about STRUCTURE          — how things CONNECT
+  So F1 contains NO state change at all. One continuous object, drawn once,
+  read along. Nothing resolves. Nothing changes appearance.
+
+  BUDGET: 0 major resolve moments. 1 sectional explanatory event (the line
+  draws once, left to right, on view). Nothing loops. Nothing is ambient.
+
+  NOT A HOMEPAGE. No navigation, no footer, no forms, no other figures, no
+  CAPTURE/CONVERT/MEASURE sequence. Approved copy verbatim. No invented
+  quantity, metric, client result, logo, testimonial or photograph.
+  F17 is BLOCKED and appears nowhere.
+-->
+<style>
+:root{
+  /* THE RESOLVE palette, carried unchanged from the 15C prototype. */
+  --ink:#141219; --ivory:#F7F3EC; --paper:#FFFDF9;
+  --tang:#FF5B04;            /* the mark                                       */
+  --tang-ink:#D94400;        /* darkened for DISPLAY text on light             */
+  --tang-sm:#A83400;         /* darkened again for SMALL text, to clear 4.5:1  */
+  --dim:#5C5665;             /* anonymous / secondary register                 */
+  --gapc:#8E8798;            /* not measured / unattributed                    */
+  --line:#DED6C8;
+
+  --disp:"Bricolage Grotesque", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --body:"Manrope", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --e-state:cubic-bezier(.65,0,.35,1);
+  --e-arrive:cubic-bezier(.2,.85,.25,1);
+  --t-micro:180ms;
+  --t-state:620ms;
+
+  --pad:clamp(18px,3.4vw,48px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--body);background:var(--ivory);color:var(--ink);
+  font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{margin:0;font-family:var(--disp);font-weight:800;letter-spacing:-0.035em;line-height:.94}
+p{margin:0 0 1.05em;max-width:58ch}
+a{color:var(--tang-sm)}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:2px}
+.wrap{width:min(1400px,100%);margin:0 auto;padding:0 var(--pad)}
+.skip{position:absolute;left:-9999px;background:var(--ink);color:var(--ivory);padding:12px 16px}
+.skip:focus{left:16px;top:16px;z-index:99}
+.lab{font:600 .82rem/1.4 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+
+/* ============================================ CONTEXT BEFORE THE FIGURE == */
+.pre{padding:clamp(56px,8vw,120px) 0 clamp(28px,3.4vw,44px)}
+.pre h2{font-size:clamp(2rem,5vw,4.2rem);max-width:14ch;margin:18px 0 22px}
+.pre p{color:var(--dim);max-width:52ch}
+.pre p b{color:var(--ink);font-weight:700}
+
+/* ================================================================== F1 === */
+/* THE FIGURE IS CALM BY CONSTRUCTION.
+   It sits on the ordinary ivory ground — not on the hero's dark stage, not in
+   a card, not in a panel. Its silhouette is WIDE AND LOW; the signature
+   gesture's is TALL AND DENSE. That contrast is the primary differentiator
+   and it survives with every animation switched off. */
+.f1{padding:0 0 clamp(40px,5vw,72px)}
+.f1__fig{margin:0}
+.f1__stage{width:min(1120px,100%)}
+
+.f1 svg{width:100%;height:auto}   /* NO display here: it would out-rank the
+     band rules below and render all three drawings at once. */
+/* Only ONE of the three drawings is in the accessibility tree at a time. */
+.d-wide,.d-med,.d-narrow{display:none}
+@media (min-width:1100px){ .d-wide{display:block} }
+@media (min-width:700px) and (max-width:1099px){ .d-med{display:block} }
+@media (max-width:699px){ .d-narrow{display:block} }
+
+/* Figure ink. No per-stage colour anywhere: the chain is one ink weight. */
+.ln{stroke:var(--ink);stroke-width:2;fill:none}
+.ln-gap{stroke:var(--gapc);stroke-width:2;fill:none;stroke-dasharray:5 5}
+.ln-yours{stroke:var(--dim);stroke-width:1.5;fill:none}
+.nd{fill:var(--ink)}
+.nd-own{fill:var(--tang-ink)}      /* the qualified enquiry — what we answer for.
+     --tang-ink, not --tang: on the ivory ground --tang measures 2.81:1, under
+     the 3:1 non-text floor. Same mark, darkened for light — 15C's own ramp. */
+.nd-open{fill:none;stroke:var(--gapc);stroke-width:2}
+.wk{stroke:var(--tang-ink);stroke-width:3}   /* work happens at this join — a tick ACROSS
+     the line, so it can never be read as another point */
+.bd{stroke:var(--ink);stroke-width:2}
+.t-node{font:600 16px/1.2 var(--body);fill:var(--dim)}
+.t-bd{font:700 15px/1 var(--body);fill:var(--ink);letter-spacing:.12em;text-transform:uppercase}
+
+/* ============================ THE SECTIONAL EXPLANATORY SEQUENCE ==========
+   SESSION 17C — motion refinement. Owner: "F1 works but feels too static."
+   The figure is NOT redesigned; only its motion is.
+
+   THE CHANGE THAT MATTERS: in 17B the chain drew while the annotations faded
+   in on fixed delays, unrelated to where the drawing had reached. Everything
+   happened at once and nothing appeared to be caused by anything else.
+   Now EVERY event is keyed to the position of the drawing front, so the
+   section reads as one thing progressing through a system and things
+   happening as it arrives.
+
+   Three coordinated events, and no more:
+     1  PROGRESSION   the chain draws; each point registers as the front
+                      reaches it
+     2  INTERVENTION  each tick is STRUCK as the front passes that join —
+                      "something can be changed here"
+     3  BOUNDARY      the rule grows outward from the chain, then the
+                      client's own segment draws beyond it
+
+   Total ~2.0s, then STILLNESS. Nothing loops. Nothing is ambient. Nothing
+   replays. There is no travelling dot, orb, comet or particle: what moves is
+   the DRAWING of the structure itself.
+
+   Because node spacing is constant in all three compositions, one delay set
+   drives all three drawings. The fractions along the path are identical. */
+
+.draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);
+  transition:stroke-dashoffset var(--dur,900ms) var(--e-state) var(--d,0s)}
+.f1.on .draw{stroke-dashoffset:0}
+
+/* A point REGISTERS on the chain. Slight scale-up, no overshoot easing —
+   a point being recorded, never a bouncing node. */
+.pt{opacity:0;transform:scale(.5);transform-box:fill-box;transform-origin:center;
+  transition:opacity 180ms var(--e-state) var(--d,0s),
+             transform 240ms var(--e-arrive) var(--d,0s)}
+.f1.on .pt{opacity:1;transform:none}
+
+/* A mark is STRUCK across the chain. It grows from the line outward, so it
+   reads as a mark being made rather than something arriving or lighting up. */
+.tick{transition:transform 200ms var(--e-state) var(--d,0s);
+  transform-box:fill-box;transform-origin:center}
+.gv{transform:scaleY(0)} .gh{transform:scaleX(0)}
+.f1.on .tick{transform:none}
+
+/* The boundary ASSERTS itself — grows outward from the chain in both
+   directions. Slower than a tick, because it is a condition, not a mark. */
+.bdr{transition:transform 320ms var(--e-state) var(--d,0s);
+  transform-box:fill-box;transform-origin:center}
+.f1.on .bdr{transform:none}
+
+/* NEVER put .draw on a dashed line: .draw sets stroke-dasharray, which
+   overwrites the 5-5 pattern that carries "not measured" and
+   "unattributed". Dashed elements FADE. */
+.fade{opacity:0;transition:opacity 260ms var(--e-arrive) var(--d,0s)}
+.f1.on .fade{opacity:1}
+
+/* No script, or reduced motion: the complete final composition, immediately.
+   The figure never depends on the sequence to be understood. */
+.nojs .draw{stroke-dashoffset:0}
+.nojs .pt,.nojs .fade{opacity:1;transform:none}
+.nojs .tick,.nojs .bdr{transform:none}
+
+/* Legend — the 15C evidence-card mark row, reused verbatim in idiom.
+   It consolidates what would otherwise be four scattered annotations into ONE
+   compositional object, which is the main guard against document drift. */
+.marks{display:flex;flex-wrap:wrap;gap:12px 30px;margin:22px 0 0;
+  font-size:.98rem;color:var(--dim)}
+.marks span{display:inline-flex;align-items:center;gap:10px}
+.sq{width:14px;height:14px;flex:none;border:2px solid var(--ink)}
+.sq--work{width:3px;height:16px;background:var(--tang-ink);border:0}
+.sq--gap{border:2px dashed var(--gapc)}
+.sq--open{border:2px solid var(--gapc)}
+.sq--yours{width:16px;height:8px;border:0;
+  border-top:1.5px solid var(--dim);border-bottom:1.5px solid var(--dim)}
+.note{margin:16px 0 0;font-size:.95rem;color:var(--dim);max-width:64ch}
+
+/* Text equivalent — native disclosure. Works with no script, open in print. */
+.eq{margin-top:26px;max-width:none}
+.eq>summary{font:600 .95rem/1 var(--body);color:var(--tang-sm);cursor:pointer;
+  list-style:none;padding:10px 0;display:inline-flex;gap:9px;align-items:baseline;
+  text-decoration:underline;text-underline-offset:3px;min-height:44px;align-items:center}
+.eq>summary::-webkit-details-marker{display:none}
+.eq>summary::before{content:"\25B8"}
+.eq[open]>summary::before{content:"\25BE"}
+.eq table{border-collapse:collapse;margin-top:6px;font-size:1rem}
+.eq th,.eq td{text-align:left;vertical-align:top;padding:10px 26px 10px 0;
+  border-top:1px solid var(--line);color:var(--dim)}
+.eq th{color:var(--ink);font-weight:600;white-space:nowrap}
+
+/* ============================================= CONTINUATION AFTER F1 ==== */
+.post{padding:clamp(44px,6vw,88px) 0 clamp(64px,9vw,130px);border-top:1px solid var(--line)}
+.post h3{font-size:clamp(1.5rem,3.2vw,2.5rem);max-width:16ch;margin:16px 0 18px}
+.post h3 em{font-style:normal;color:var(--tang-ink)}
+.post p{color:var(--dim);max-width:50ch}
+.proof{display:inline-flex;align-items:center;min-height:44px;font-weight:600}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:1ms!important;transition-delay:0ms!important}
+}
+@media print{
+  .eq>summary{display:none}
+  .eq::details-content{content-visibility:visible!important;block-size:auto!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#f1">Skip to the figure</a>
+
+<main>
+
+<!-- ============================================================ CONTEXT === -->
+<!-- Approved homepage Block 3 copy, verbatim. Deliberately short: the figure
+     replaces the prose that carried the structure (19 §0 rule 2), so the
+     "joins" paragraph is carried by the drawing rather than repeated here. -->
+<section class="pre">
+  <div class="wrap">
+    <p class="lab">The mechanism</p>
+    <h2>How the work produces an enquiry</h2>
+    <p>Three connected parts. Reach the buyers already looking &mdash; organic search first, and
+    paid where it is the right source for you. Make the route from that first visit to a sent
+    enquiry work. Instrument the whole chain, so an enquiry records where it came from at the
+    moment it is made.</p>
+    <p><b>What decides the result is usually the joins between them.</b> Where responsibility is
+    split across suppliers, those joins can end up belonging to nobody. Here they belong to us.</p>
+  </div>
+</section>
+
+<!-- ================================================================= F1 === -->
+<section class="f1" id="f1">
+  <div class="wrap">
+    <figure class="f1__fig">
+      <div class="f1__stage">
+
+        <!-- WIDE — one continuous horizontal object. Authored at a viewBox
+             narrower than the smallest container in its band, so it never
+             scales DOWN and its 16px labels never fall under the floor. -->
+        <svg class="d-wide" viewBox="0 0 1000 210" role="img"
+             aria-labelledby="w-t w-d">
+          <title id="w-t">The enquiry chain, as one continuous object</title>
+          <desc id="w-d">A single unbroken line runs left to right through six points: discovery
+          and source, landing, interaction, the enquiry, the qualified enquiry, and opportunity
+          and revenue. Buyer demand before the first point is drawn dashed because it is not
+          measured. Three small marks sit on the joins between the first four points, where the
+          work is done. An enquiry arrives at the fourth point from above with no upstream
+          segment attached. A boundary crosses the line after the qualified enquiry:
+          accountability ends there, and the segment beyond it is drawn as a double line because
+          it is reported from the client's own system. The same information is given as a table
+          below.</desc>
+
+          <!-- demand we cannot see — not measured -->
+          <line class="ln-gap fade" style="--d:0ms" x1="12" y1="128" x2="70" y2="128"/>
+
+          <!-- 1 PROGRESSION: the chain draws. One object, one ink weight,
+               constant spacing, no taper. -->
+          <path class="ln draw" style="--len:800;--d:180ms;--dur:1200ms" d="M70 128 H862"/>
+          <!-- 3b beyond the boundary: the client's own system draws last -->
+          <path class="ln-yours draw" style="--len:90;--d:1560ms;--dur:400ms" d="M862 124 H950"/>
+          <path class="ln-yours draw" style="--len:90;--d:1560ms;--dur:400ms" d="M862 132 H950"/>
+
+          <!-- an arrival with no upstream segment, drawn as the front reaches
+               the enquiry: an enquiry arriving from nowhere -->
+          <rect class="nd-open fade" style="--d:1040ms" x="591" y="50" width="14" height="14"/>
+          <line class="ln-gap fade" style="--d:1040ms" x1="598" y1="66" x2="598" y2="122"/>
+
+          <!-- 3a the boundary asserts itself -->
+          <line class="bd bdr gv" style="--d:1420ms" x1="862" y1="74" x2="862" y2="182"/>
+          <text class="t-bd fade" style="--d:1560ms" x="862" y="58" text-anchor="middle">we answer for this much</text>
+
+          <!-- 2 INTERVENTION: each tick is struck as the front passes its join -->
+          <g class="wk">
+            <line class="tick gv" style="--d:310ms" x1="158" y1="119" x2="158" y2="137"/>
+            <line class="tick gv" style="--d:580ms" x1="334" y1="119" x2="334" y2="137"/>
+            <line class="tick gv" style="--d:850ms" x1="510" y1="119" x2="510" y2="137"/>
+          </g>
+
+          <!-- the six points — identical size, equal spacing, each registering
+               as the front reaches it -->
+          <g class="nd">
+            <rect class="pt" style="--d:180ms" x="63" y="121" width="14" height="14"/>
+            <rect class="pt" style="--d:450ms" x="239" y="121" width="14" height="14"/>
+            <rect class="pt" style="--d:710ms" x="415" y="121" width="14" height="14"/>
+            <rect class="pt" style="--d:980ms" x="591" y="121" width="14" height="14"/>
+            <rect class="pt" style="--d:1900ms" x="943" y="121" width="14" height="14"/>
+          </g>
+          <rect class="nd-own pt" style="--d:1250ms" x="767" y="121" width="14" height="14"/>
+
+          <text class="t-node" x="70"  y="160" text-anchor="start">discovery</text>
+          <text class="t-node" x="70"  y="180" text-anchor="start">and source</text>
+          <text class="t-node" x="246" y="160" text-anchor="middle">landing</text>
+          <text class="t-node" x="422" y="160" text-anchor="middle">interaction</text>
+          <text class="t-node" x="598" y="160" text-anchor="middle">the enquiry</text>
+          <text class="t-node" x="774" y="160" text-anchor="middle">the qualified</text>
+          <text class="t-node" x="774" y="180" text-anchor="middle">enquiry</text>
+          <text class="t-node" x="1000" y="160" text-anchor="end">opportunity</text>
+          <text class="t-node" x="1000" y="180" text-anchor="end">and revenue</text>
+        </svg>
+
+        <!-- MEDIUM — deliberately composed for the width, not a squeezed WIDE.
+             The chain turns vertical and the annotations take the second
+             column that a tablet actually has, so the band stays dense rather
+             than tall and sparse. -->
+        <!-- MEDIUM — rebuilt. The first attempt put annotations in a far
+             second column, which orphaned them from the marks they name, left a
+             void between the two columns and clipped the unattributed mark at the
+             container edge. Annotations now sit directly beneath the point they
+             belong to, and the tablet's width is spent on the boundary rule
+             running the full measure — which is what makes this a composition for
+             the width rather than a stretched narrow one. -->
+        <svg class="d-med" viewBox="0 0 640 450" role="img" aria-labelledby="m-t m-d">
+          <title id="m-t">The enquiry chain, as one continuous object</title>
+          <desc id="m-d">The same six-point chain drawn vertically for a tablet width. Demand
+          before the first point is dashed because it is not measured. Three ticks cross the
+          chain at the joins between the first four points, where the work is done. An enquiry
+          arrives at the fourth point with no upstream segment. A boundary runs the full width
+          after the qualified enquiry: accountability ends there, and the segment beyond is
+          drawn as a double line because it is reported from the client's own system. The same
+          information is given as a table below.</desc>
+
+          <line class="ln-gap fade" style="--d:0ms" x1="64" y1="16" x2="64" y2="56"/>
+          <text class="t-node" x="98" y="30">demand we cannot see</text>
+
+          <path class="ln draw" style="--len:310;--d:180ms;--dur:1200ms" d="M64 56 V362"/>
+          <path class="ln-yours draw" style="--len:40;--d:1560ms;--dur:400ms" d="M60 362 V396"/>
+          <path class="ln-yours draw" style="--len:40;--d:1560ms;--dur:400ms" d="M68 362 V396"/>
+
+          <rect class="nd-open fade" style="--d:1040ms" x="8" y="288" width="14" height="14"/>
+          <line class="ln-gap fade" style="--d:1040ms" x1="24" y1="292" x2="56" y2="268"/>
+
+          <line class="bd bdr gh" style="--d:1420ms" x1="16" y1="362" x2="624" y2="362"/>
+          <text class="t-bd fade" style="--d:1560ms" x="624" y="352" text-anchor="end">we answer for this much</text>
+
+          <g class="wk">
+            <line class="tick gh" style="--d:310ms" x1="55" y1="90" x2="73" y2="90"/>
+            <line class="tick gh" style="--d:580ms" x1="55" y1="158" x2="73" y2="158"/>
+            <line class="tick gh" style="--d:850ms" x1="55" y1="226" x2="73" y2="226"/>
+          </g>
+
+          <g class="nd">
+            <rect class="pt" style="--d:180ms" x="57" y="49" width="14" height="14"/>
+            <rect class="pt" style="--d:450ms" x="57" y="117" width="14" height="14"/>
+            <rect class="pt" style="--d:710ms" x="57" y="185" width="14" height="14"/>
+            <rect class="pt" style="--d:980ms" x="57" y="253" width="14" height="14"/>
+            <rect class="pt" style="--d:1900ms" x="57" y="389" width="14" height="14"/>
+          </g>
+          <rect class="nd-own pt" style="--d:1250ms" x="57" y="321" width="14" height="14"/>
+
+          <text class="t-node" x="98" y="62">discovery and source</text>
+          <text class="t-node" x="98" y="130">landing</text>
+          <text class="t-node" x="98" y="198">interaction</text>
+          <text class="t-node" x="98" y="266">the enquiry</text>
+          <text class="t-node" x="98" y="288">&mdash; one arrived unattributed</text>
+          <text class="t-node" x="98" y="334">the qualified enquiry</text>
+          <text class="t-node" x="98" y="402">opportunity and revenue</text>
+          <text class="t-node" x="98" y="424">&mdash; from your system</text>
+        </svg>
+
+        <!-- NARROW — recomposed, not scaled. One column, chain at the left,
+             labels beside it, annotations inline beneath the point they
+             belong to. No horizontal scroll, no shrunken desktop diagram. -->
+        <!-- NARROW — recomposed, not scaled. One column; each annotation sits
+             directly beneath the point it belongs to. Node spacing is CONSTANT
+             (80 units throughout, boundary at the midpoint of the last gap) —
+             the first draft left the final gap at 124 against 76 elsewhere,
+             which is an unequal interval a reader could read as a quantity. -->
+        <svg class="d-narrow" viewBox="0 0 320 520" role="img" aria-labelledby="n-t n-d">
+          <title id="n-t">The enquiry chain, as one continuous object</title>
+          <desc id="n-d">The same six-point chain drawn vertically for a narrow screen, with each
+          annotation placed beside the point it belongs to. Demand before the first point is
+          dashed because it is not measured. Ticks cross the chain at the joins where the work is
+          done. An enquiry arrives at the fourth point with no upstream segment. A boundary
+          crosses the chain after the qualified enquiry, and the segment beyond it is a double
+          line reported from the client's own system. The same information is given as a table
+          below.</desc>
+
+          <line class="ln-gap fade" style="--d:0ms" x1="46" y1="20" x2="46" y2="60"/>
+          <text class="t-node" x="76" y="34">demand we</text>
+          <text class="t-node" x="76" y="52">cannot see</text>
+
+          <path class="ln draw" style="--len:368;--d:180ms;--dur:1200ms" d="M46 72 V432"/>
+          <path class="ln-yours draw" style="--len:44;--d:1560ms;--dur:400ms" d="M42 432 V472"/>
+          <path class="ln-yours draw" style="--len:44;--d:1560ms;--dur:400ms" d="M50 432 V472"/>
+
+          <rect class="nd-open fade" style="--d:1040ms" x="4" y="340" width="14" height="14"/>
+          <line class="ln-gap fade" style="--d:1040ms" x1="14" y1="344" x2="38" y2="322"/>
+
+          <line class="bd bdr gh" style="--d:1420ms" x1="8" y1="432" x2="312" y2="432"/>
+          <text class="t-bd fade" style="--d:1560ms" x="312" y="422" text-anchor="end">we answer for this much</text>
+
+          <g class="wk">
+            <line class="tick gh" style="--d:310ms" x1="37" y1="112" x2="55" y2="112"/>
+            <line class="tick gh" style="--d:580ms" x1="37" y1="192" x2="55" y2="192"/>
+            <line class="tick gh" style="--d:850ms" x1="37" y1="272" x2="55" y2="272"/>
+          </g>
+
+          <g class="nd">
+            <rect class="pt" style="--d:180ms" x="39" y="65" width="14" height="14"/>
+            <rect class="pt" style="--d:450ms" x="39" y="145" width="14" height="14"/>
+            <rect class="pt" style="--d:710ms" x="39" y="225" width="14" height="14"/>
+            <rect class="pt" style="--d:980ms" x="39" y="305" width="14" height="14"/>
+            <rect class="pt" style="--d:1900ms" x="39" y="465" width="14" height="14"/>
+          </g>
+          <rect class="nd-own pt" style="--d:1250ms" x="39" y="385" width="14" height="14"/>
+
+          <text class="t-node" x="76" y="77">discovery and source</text>
+          <text class="t-node" x="76" y="157">landing</text>
+          <text class="t-node" x="76" y="237">interaction</text>
+          <text class="t-node" x="76" y="317">the enquiry</text>
+          <text class="t-node" x="76" y="335">&mdash; one arrived</text>
+          <text class="t-node" x="76" y="353">unattributed</text>
+          <text class="t-node" x="76" y="397">the qualified enquiry</text>
+          <text class="t-node" x="76" y="477">opportunity and revenue</text>
+          <text class="t-node" x="76" y="495">&mdash; from your system</text>
+        </svg>
+
+      </div>
+
+      <figcaption>
+        <!-- One consolidated legend object, not scattered annotations. -->
+        <p class="marks">
+          <span><i class="sq sq--work"></i> where we do the work</span>
+          <span><i class="sq sq--gap"></i> not measured</span>
+          <span><i class="sq sq--open"></i> arrived unattributed</span>
+          <span><i class="sq sq--yours"></i> reported from your system</span>
+        </p>
+        <p class="note">Illustrative. The chain shows <b>order and responsibility</b> &mdash; no
+        quantity, proportion or rate is drawn or claimed.</p>
+
+        <details class="eq">
+          <summary>Read this figure as a table</summary>
+          <table>
+            <tr><th scope="row">The chain</th><td>discovery and source &rarr; landing &rarr; interaction &rarr; the enquiry &rarr; the qualified enquiry &rarr; opportunity and revenue &mdash; one continuous object, not six steps</td></tr>
+            <tr><th scope="row">Before it</th><td>buyer demand we cannot see &mdash; drawn dashed, because it is not measured</td></tr>
+            <tr><th scope="row">The joins</th><td>work is done at the joins between the first four points. The joins are what decide the result</td></tr>
+            <tr><th scope="row">Unattributed</th><td>an enquiry arrives at &ldquo;the enquiry&rdquo; with no upstream segment attached. It is counted; it is never assigned to a channel</td></tr>
+            <tr><th scope="row">The boundary</th><td>our accountability ends at the qualified enquiry</td></tr>
+            <tr><th scope="row">Beyond it</th><td>opportunity and revenue are reported from your own system, and are drawn as a double line to mark them as yours</td></tr>
+            <tr><th scope="row">Quantity</th><td>none is drawn. Every point is the same size and every gap is the same length</td></tr>
+          </table>
+        </details>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ======================================================== CONTINUATION === -->
+<section class="post">
+  <div class="wrap">
+    <p class="lab">What we are accountable for</p>
+    <h3>We answer for the <em>qualified enquiry</em>.</h3>
+    <p>Where you give us your close data, we report through to the deals and the revenue your own
+    system recorded. Those are your numbers, from your system, and we state what we did and did
+    not control alongside them.</p>
+    <p><a class="proof" href="#">Read the method, including what cannot be attributed &rarr;</a></p>
+  </div>
+</section>
+
+</main>
+
+<script>
+document.documentElement.classList.remove('nojs');
+(function(){
+  var f = document.getElementById('f1');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  if (reduce.matches || !('IntersectionObserver' in window)) { f.classList.add('on'); return; }
+  var stage = f.querySelector('.f1__stage');
+  // Trigger once, when the figure is genuinely in a reading position — not
+  // when one pixel appears. The bottom inset holds it back until the drawing
+  // is properly on screen; 0.4 of the stage is reachable at every width
+  // (the stage is always shorter than the inset viewport), so the threshold
+  // can never become unreachable. Unobserved after firing: it never replays
+  // during scrolling, and leaving and returning finds it complete.
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (e.isIntersecting) { f.classList.add('on'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.4, rootMargin:'0px 0px -12% 0px'});
+  io.observe(stage);
+})();
+</script>
+</body>
+</html>

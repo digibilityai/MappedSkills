@@ -1,5 +1,13 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+/* SESSION 26 — PHASE D. Homepage motion + interaction, kept in its own file so
+   the motion layer can be reviewed, and reverted, independently of the design
+   tokens. Imported last and UNLAYERED deliberately: a start state written by a
+   client leaf must outrank the Tailwind utility that composes the settled
+   state, and unlayered CSS outranks every cascade layer regardless of
+   specificity. Every selector in it is `.rsv-*`-scoped, so nothing outside the
+   homepage motion layer can be reached. */
+@import './resolve-motion.css';
 
 /* THE RESOLVE IS LIGHT-FIRST (DEC-018 §4.1). This custom variant is retained
    DELIBERATELY: it scopes every `dark:` utility to a `.dark` ancestor. No such

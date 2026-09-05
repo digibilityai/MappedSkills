@@ -22,6 +22,15 @@ import { Container } from '@/components/layout/Container';
  * and the owned statement carries the solid tangerine mark, exactly as in the
  * hero, the friction routes, the chain and fit. Without them the boundary was
  * carried by type alone.
+ *
+ * SESSION 26 — PHASE D. This chapter is INTENTIONALLY STILL. The only thing
+ * added is the page's composition-level reveal (`.rsv-rv`), which is not a
+ * budgeted tier: it makes a section appear and carries no meaning. The strike
+ * through each promise that Sessions 18–18C documented was REMOVED in 19A
+ * because it had never rendered, and it is deliberately NOT reintroduced. The
+ * evidence claim is left permanently open rather than being put behind the
+ * prototype's "lift this claim" disclosure — Phase C's composed-open state
+ * shows more, hides nothing, and is the state the reader validated.
  */
 const NOT_PROMISED = ['rankings', 'a position in AI answers', 'a number of enquiries', 'revenue', 'a return on spend'];
 
@@ -30,11 +39,11 @@ export function HomepageAccountability() {
     <section className="border-t border-resolve-line bg-resolve-ground pb-[clamp(66px,9vw,152px)] pt-[clamp(40px,5vw,72px)] text-resolve-ink">
       <Container className="max-w-[1400px] px-[var(--resolve-pad)]">
         {/* ---- the boundary ---- */}
-        <h2 className="m-0 block text-[.82rem] font-semibold uppercase leading-[1.4] tracking-[0.16em] text-resolve-dim">
+        <h2 className="rsv-rv m-0 block text-[.82rem] font-semibold uppercase leading-[1.4] tracking-[0.16em] text-resolve-dim">
           What we are accountable for, and where that stops
         </h2>
 
-        <div className="mt-[clamp(28px,3.6vw,52px)] grid grid-cols-1 items-start gap-[clamp(28px,4vw,68px)] min-[1000px]:grid-cols-2">
+        <div className="rsv-rv mt-[clamp(28px,3.6vw,52px)] grid grid-cols-1 items-start gap-[clamp(28px,4vw,68px)] min-[1000px]:grid-cols-2">
           <div>
             <span className="mb-3.5 block text-[.82rem] font-semibold uppercase leading-[1.4] tracking-[0.16em] text-resolve-dim">
               we do not promise
@@ -83,7 +92,7 @@ export function HomepageAccountability() {
 
         <a
           href="/how-it-works"
-          className="mt-5 inline-flex min-h-[44px] items-center border-b-2 border-current pb-1 text-[.98rem] font-semibold no-underline"
+          className="rsv-rv mt-5 inline-flex min-h-[44px] items-center border-b-2 border-current pb-1 text-[.98rem] font-semibold no-underline"
           style={{ color: 'var(--resolve-accent-dark)' }}
         >
           See what can and cannot be attributed
@@ -91,19 +100,19 @@ export function HomepageAccountability() {
 
         {/* ---- evidence ---- */}
         <div className="mt-[clamp(66px,9vw,152px)] border-t border-resolve-line pt-[clamp(66px,9vw,152px)]">
-          <h2 className="m-0 block text-[.82rem] font-semibold uppercase leading-[1.4] tracking-[0.16em] text-resolve-dim">
+          <h2 className="rsv-rv m-0 block text-[.82rem] font-semibold uppercase leading-[1.4] tracking-[0.16em] text-resolve-dim">
             What you can check before you commit
           </h2>
 
-          <p className="mt-[clamp(24px,3vw,44px)] max-w-[14ch] font-heading text-[clamp(2.5rem,6.4vw,5.4rem)] font-extrabold leading-[0.96] tracking-[-0.04em] max-[761px]:text-[clamp(2.7rem,9vw,5.4rem)]">
+          <p className="rsv-rv mt-[clamp(24px,3vw,44px)] max-w-[14ch] font-heading text-[clamp(2.5rem,6.4vw,5.4rem)] font-extrabold leading-[0.96] tracking-[-0.04em] max-[761px]:text-[clamp(2.7rem,9vw,5.4rem)]">
             We have no case studies to show you.
           </p>
-          <p className="mt-[clamp(26px,3vw,44px)] max-w-[46ch] text-[clamp(1.06rem,1.3vw,1.26rem)] text-resolve-dim">
+          <p className="rsv-rv mt-[clamp(26px,3vw,44px)] max-w-[46ch] text-[clamp(1.06rem,1.3vw,1.26rem)] text-resolve-dim">
             Writing around that would be the first thing you should not trust us on. What we do have
             is published, dated and checkable.
           </p>
 
-          <div className="mt-[clamp(32px,4vw,56px)] overflow-hidden rounded-[20px] bg-resolve-ink text-resolve-ground">
+          <div className="rsv-rv mt-[clamp(32px,4vw,56px)] overflow-hidden rounded-[20px] bg-resolve-ink text-resolve-ground">
             <div className="p-[clamp(26px,4vw,58px)]">
               <p className="m-0 mb-4 max-w-[18ch] font-heading text-[clamp(1.55rem,4vw,3.2rem)] font-extrabold leading-[1.03] tracking-[-0.035em]">
                 We ran the test on ourselves, and{' '}
@@ -135,7 +144,7 @@ export function HomepageAccountability() {
             </div>
           </div>
 
-          <ul className="mt-[clamp(30px,3.6vw,50px)] list-none border-t-2 border-resolve-ink p-0">
+          <ul className="rsv-rv mt-[clamp(30px,3.6vw,50px)] list-none border-t-2 border-resolve-ink p-0">
             <li className="border-b border-resolve-line">
               <a
                 href="/how-it-works"
@@ -159,11 +168,11 @@ export function HomepageAccountability() {
 
         {/* ---- fit ---- */}
         <div className="mt-[clamp(66px,9vw,152px)] border-t border-resolve-line pt-[clamp(66px,9vw,152px)]">
-          <h2 className="m-0 block text-[.82rem] font-semibold uppercase leading-[1.4] tracking-[0.16em] text-resolve-dim">
+          <h2 className="rsv-rv m-0 block text-[.82rem] font-semibold uppercase leading-[1.4] tracking-[0.16em] text-resolve-dim">
             Who this is built for
           </h2>
 
-          <div className="mt-[clamp(28px,3.6vw,52px)] grid grid-cols-1 gap-[clamp(26px,3.4vw,60px)] min-[900px]:grid-cols-2">
+          <div className="rsv-rv mt-[clamp(28px,3.6vw,52px)] grid grid-cols-1 gap-[clamp(26px,3.4vw,60px)] min-[900px]:grid-cols-2">
             <div className="border-t-2 border-resolve-ink pt-5">
               <h3 className="flex items-center gap-3 text-[.84rem] font-bold uppercase leading-[1.3] tracking-[0.16em]">
                 <span aria-hidden="true" className="h-3.5 w-3.5 flex-none" style={{ background: 'var(--resolve-accent-deep)' }} />
@@ -193,7 +202,7 @@ export function HomepageAccountability() {
 
           <a
             href="/pricing"
-            className="mt-5 inline-flex min-h-[44px] items-center border-b-2 border-current pb-1 text-[.98rem] font-semibold no-underline"
+            className="rsv-rv mt-5 inline-flex min-h-[44px] items-center border-b-2 border-current pb-1 text-[.98rem] font-semibold no-underline"
             style={{ color: 'var(--resolve-accent-dark)' }}
           >
             What this costs, and what moves the number

@@ -4,6 +4,7 @@ import { HomepageFriction } from '@/components/homepage/HomepageFriction';
 import { HomepageIntervention } from '@/components/homepage/HomepageIntervention';
 import { HomepageAccountability } from '@/components/homepage/HomepageAccountability';
 import { HomepageFinalCTA } from '@/components/homepage/HomepageFinalCTA';
+import { HomepageMotion } from '@/components/homepage/HomepageMotion';
 import { createMetadata } from '@/lib/metadata';
 
 // Must be a literal — Next.js cannot follow imported identifiers for route segment config
@@ -17,11 +18,19 @@ export const metadata = createMetadata(
 
 /**
  * SESSION 25 — PHASE C — HOMEPAGE STATIC TRANSLATION.
+ * SESSION 26 — PHASE D — MOTION + INTERACTION, as progressive enhancement.
  *
  * Translates the approved Resolve homepage (docs/26-resolve-homepage/prototype/index.html,
- * Gate 10, DEC-019) into static production Next.js. No motion, no scroll
- * choreography, no IntersectionObserver reveal, no forms, no analytics — all
- * deferred to Phase D or later, per docs/27-production-translation/13_PHASE_C_HOMEPAGE_STATIC.md.
+ * Gate 10, DEC-019) into production Next.js. Phase C built the static page;
+ * Phase D adds the approved Resolve motion ON TOP of it without changing it —
+ * see docs/27-production-translation/14_PHASE_D_HOMEPAGE_MOTION.md. Forms,
+ * analytics, SEO surfaces and every other route remain out of scope.
+ *
+ * The page below is entirely Server Components. Motion is confined to three
+ * client leaves — the hero's two-state surface, the system view's tablist, and
+ * `HomepageMotion`, which renders nothing and only adds classes to
+ * server-rendered nodes. With no JavaScript, a failed hydration or
+ * `prefers-reduced-motion: reduce`, this file renders exactly the Phase C page.
  *
  * The chapter sequence below preserves the approved journey — ACTIVITY →
  * ATTENTION → FRICTION → INTERVENTION → RESOLUTION → ACCOUNTABILITY → ACTION
@@ -39,6 +48,7 @@ export default function Home() {
       <HomepageIntervention />
       <HomepageAccountability />
       <HomepageFinalCTA />
+      <HomepageMotion />
     </>
   );
 }

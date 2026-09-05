@@ -1,670 +1,356 @@
-﻿import Link from 'next/link';
-import Image from 'next/image';
-import { Hero } from '@/components/Hero';
-import { Section } from '@/components/Section';
-import { Container } from '@/components/Container';
-import { StatCard } from '@/components/StatCard';
-import { ServiceCard } from '@/components/ServiceCard';
-import { IndustryCard } from '@/components/IndustryCard';
-import { FAQSection } from '@/components/FAQSection';
-import { CTASection } from '@/components/CTASection';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import Link from 'next/link';
 import { createMetadata } from '@/lib/metadata';
-import {
-  Zap,
-  TrendingUp,
-  Target,
-  Search,
-  BarChart3,
-} from 'lucide-react';
+import { CommercialHero } from '@/components/commercial/CommercialHero';
+import { CommercialSection, ChapterLabel, Display, Body, Note, ProofLink, Mark } from '@/components/commercial/primitives';
+import { BoundaryBlock } from '@/components/commercial/BoundaryBlock';
+import { ScopeList } from '@/components/commercial/ScopeList';
+import { CommercialClose } from '@/components/commercial/CommercialClose';
+import { ChainFull } from '@/components/commercial/ChainFigure';
 
+/**
+ * SESSION 28 — PHASE F — `/services`, the proposition hub.
+ *
+ * ARCHETYPE 2 — proposition hub (03_PAGE_ARCHETYPES.md §1). This route does NOT
+ * run the nine commercial moves: it has its own approved nine-block sequence
+ * (docs/16-ux/42_WIREFRAME_VARIANT_SERVICES.md), and the blocks below map to it
+ * one for one, in order, with none added, dropped or reordered.
+ *
+ * COPY: docs/09-content-pages/copy/services.md — COPY APPROVED, Gate 9,
+ * DEC-014, with the Gate 9A DEC-015 correction to the hero already applied in
+ * that file. Used verbatim; the only changes are the production-format ones
+ * §7 of the session brief permits — headings, line breaks and link labels.
+ *
+ * F1: A — FULL, WITH THE JOINS MARKED. The joins are the page's argument, so a
+ * figure of three tidy stages with no seams would state the opposite of the
+ * page (22 §3).
+ *
+ * NOT A SERVICES GRID. There is no card grid, no icon per capability and no
+ * equal-weight tile anywhere below: block 4 routes by CONTRIBUTION, in the
+ * order the chain runs, as hairline rows. A service menu is the named failure
+ * mode for this page.
+ *
+ * WHAT THIS REPLACED: a 671-line page carrying "300%+ ROI", "₹100Cr+",
+ * fabricated ROAS multiples and a 65% figure, none of which is supported by
+ * anything in this repository. None of it migrates.
+ *
+ * SEQUENCE DEPENDENCY, recorded not resolved: this page's PROOF link is
+ * `/how-it-works`, whose §2 stage content is OWNER-BLOCKED. Phase F ships the
+ * weaker onward route the plan explicitly permits (03_PAGE_ARCHETYPES.md §4.1)
+ * rather than inventing the method.
+ */
 export const metadata = createMetadata(
-  'Performance Marketing Services | Google Ads, Meta Ads, SEO & Lead Generation | MappedSkills',
-  'Performance marketing services for Google Ads management, Meta Ads campaigns, lead generation, SEO, and conversion optimization. Measurable results, transparent pricing.',
+  'What We Do: One Outcome, Three Connected Parts | MappedSkills',
+  'Capture the demand, turn it into enquiries, and measure the whole chain. Three connected parts, the joins between them owned by one supplier, and a qualified enquiry as the unit.',
   '/services'
 );
 
-// JSON-LD Schemas
-const BreadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    {
-      '@type': 'ListItem',
-      position: 1,
-      name: 'Home',
-      item: 'https://mappedskills.com',
-    },
-    {
-      '@type': 'ListItem',
-      position: 2,
-      name: 'Services',
-      item: 'https://mappedskills.com/services',
-    },
-  ],
-};
-
-const ServiceSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  name: 'Performance Marketing Services',
-  description: 'Comprehensive performance marketing services including Google Ads, Meta Ads, lead generation, SEO, and conversion optimization.',
-  serviceType: 'Digital Marketing',
-  provider: {
-    '@type': 'Organization',
-    name: 'MappedSkills',
-    url: 'https://mappedskills.com',
-  },
-  areaServed: {
-    '@type': 'Country',
-    name: 'IN',
-  },
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Performance Marketing Services',
-    itemListElement: [
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Google Ads Management',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Meta Ads Management',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Lead Generation',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'SEO Services',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Conversion Optimization',
-        },
-      },
-    ],
-  },
-};
-
-const FAQSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'Which services do you offer?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'MappedSkills offers Google Ads management, Meta Ads management, lead generation, SEO, and conversion optimization services.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Can I choose individual services?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes. You can choose individual services or combine them for a comprehensive full-funnel performance marketing approach.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'How do you decide which services are right for my business?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'We audit your current marketing, industry, target audience, and business goals. Then we recommend the right mix of services to achieve your objectives.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What results can I expect?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Results vary by service and business model, but typically include improved lead quality, higher ROAS, increased search visibility, and better conversion rates within 60-90 days.',
-      },
-    },
-  ],
-};
-
-// GA4 Tracking Configuration
-// Event names to implement:
-// - 'service_card_click': Clicking on individual service cards
-// - 'learn_more_service': "Learn More" CTA on service cards
-// - 'schedule_call_from_services': Hero and final CTA
-// - 'view_pricing': Pricing page link
-// - 'view_case_studies': Results/case studies link
-// - 'contact_sales': Contact form CTA
-
-
-const SERVICES = [
+/* Block 2 — the three connected parts. The joins between them are the argument,
+   which is why they are named again beneath the figure rather than left to it. */
+const PARTS = [
   {
-    title: 'Google Ads Management',
-    problem: 'People are searching for your service, but competitors are capturing the demand.',
-    solution: 'We build Google Ads campaigns that target high-intent keywords, improve tracking, reduce wasted spend, and focus on leads or revenue.',
-    bestFor: [
-      'Service businesses',
-      'Real estate',
-      'E-commerce',
-      'B2B companies',
-      'Education and courses',
-    ],
-    keyOutcomes: [
-      'More high-intent enquiries',
-      'Better cost per lead',
-      'Improved ROAS',
-      'Stronger search visibility',
-    ],
-    ctaText: 'Explore Google Ads',
-    ctaHref: '/google-ads',
+    lead: 'Capture the demand.',
+    body: (
+      <>
+        Reach buyers who are already looking for what you sell. Organic search is the primary route because it
+        compounds and because the intent is already there. Paid search buys access to the same demand
+        immediately. Paid social reaches demand that search cannot yet reach, when the channel genuinely fits
+        &mdash; and often it does not.
+      </>
+    ),
   },
   {
-    title: 'Social Media Ads Management',
-    problem: 'You are reaching people, but not enough of them are converting into leads or customers.',
-    solution: 'We build Facebook and Instagram ad campaigns around audience strategy, creative testing, retargeting, funnel structure, and lead quality.',
-    bestFor: [
-      'Real estate',
-      'E-commerce',
-      'Online education',
-      'Coaches and consultants',
-      'Local service businesses',
-    ],
-    keyOutcomes: [
-      'Better lead quality',
-      'Stronger creative performance',
-      'Retargeting growth',
-      'Improved ROAS',
-    ],
-    ctaText: 'Explore Social Media Ads',
-    ctaHref: '/social-media-ads',
+    lead: 'Turn it into enquiries.',
+    body: (
+      <>
+        A visit becomes an enquiry only if the page answers the question the visitor arrived with, the enquiry
+        path completes on the device they are holding, and the enquiry actually arrives somewhere a person
+        reads. Each of those is a separate failure point, and each has a different fix.
+      </>
+    ),
   },
   {
-    title: 'Lead Generation Services',
-    problem: 'Your sales team needs serious prospects, not random enquiries.',
-    solution: 'We build lead generation systems using ads, landing pages, forms, WhatsApp flows, qualification questions, and reporting.',
-    bestFor: [
-      'B2B services',
-      'Real estate',
-      'Professional services',
-      'SaaS and tech',
-      'Education businesses',
-    ],
-    keyOutcomes: [
-      'Qualified leads',
-      'Better lead tracking',
-      'Lower wasted sales effort',
-      'Predictable enquiry pipeline',
-    ],
-    ctaText: 'Explore Lead Generation',
-    ctaHref: '/lead-generation',
-  },
-  {
-    title: 'SEO Services',
-    problem: 'Your business is invisible when customers search organically.',
-    solution: 'We improve technical SEO, keyword strategy, content structure, local visibility, internal linking, and organic conversion paths.',
-    bestFor: [
-      'Service businesses',
-      'B2B companies',
-      'E-commerce',
-      'Local businesses',
-      'Education and courses',
-    ],
-    keyOutcomes: [
-      'Better keyword rankings',
-      'More organic traffic',
-      'Stronger search visibility',
-      'Organic lead generation',
-    ],
-    ctaText: 'Explore SEO',
-    ctaHref: '/seo',
-  },
-  {
-    title: 'Conversion Optimization',
-    problem: 'You are getting traffic, but not enough visitors are becoming leads, customers, or booked calls.',
-    solution: 'We improve landing pages, forms, CTAs, page messaging, trust signals, tracking, and funnel friction.',
-    bestFor: [
-      'Businesses running paid ads',
-      'Websites with traffic but low enquiries',
-      'E-commerce brands',
-      'SaaS companies',
-      'Lead generation websites',
-    ],
-    keyOutcomes: [
-      'Higher conversion rate',
-      'More leads from same traffic',
-      'Lower cost per lead',
-      'Better funnel performance',
-    ],
-    ctaText: 'Explore Conversion Optimization',
-    ctaHref: '/conversion-optimization',
+    lead: 'Measure the whole chain.',
+    body: (
+      <>
+        Where an enquiry came from, what it landed on, what it was about, whether it counts &mdash; recorded at
+        the moment it is made, not reconstructed afterwards.
+      </>
+    ),
   },
 ];
 
-const INDUSTRIES = [
+/* Block 4 — capability routing, by contribution, in the order the chain runs.
+   AI search gets ONE paragraph: no section, no score, no dedicated block. */
+const CAPTURE = [
   {
-    title: 'Real Estate',
-    description: 'Google Ads, Meta Ads, lead generation, retargeting, and landing page optimization for qualified property enquiries.',
+    href: '/seo',
+    name: 'Organic search (SEO)',
+    body: 'the primary acquisition capability, and the slowest. Technical foundations, structure, and content aimed at commercial and problem-led searches. A 12-month-plus horizon, stated before you commit rather than after.',
   },
   {
-    title: 'E-commerce',
-    description: 'Meta Ads, Google Ads, SEO, CRO, and retargeting for revenue growth and better ROAS.',
+    href: '/google-ads',
+    name: 'Google Ads',
+    body: 'access to demand that is active now, chosen on merit for your business, on the same measurement layer as everything else. Spend and fee are separate things.',
   },
   {
-    title: 'Education & Courses',
-    description: 'Lead generation, Google Ads, Meta Ads, and nurturing flows for enquiries, webinar registrations, and enrollments.',
+    href: '/social-media-ads',
+    name: 'Paid social',
+    body: 'an optional additional source, judged on qualified enquiries like every other. For a considered purchase it is frequently the wrong channel.',
   },
   {
-    title: 'B2B Services',
-    description: 'SEO, Google Ads, lead generation, and LinkedIn-style authority funnels for decision-maker visibility.',
-  },
-  {
-    title: 'Local Businesses',
-    description: 'Local SEO, Google Ads, Meta Ads, and conversion-focused landing pages for enquiries and calls.',
-  },
-];
-
-const PROOF_STATS = [
-  { stat: '300%+', label: 'Average ROI' },
-  { stat: '₹100Cr+', label: 'Revenue Influenced' },
-  { stat: '50+', label: 'Clients Served' },
-  { stat: '65%+', label: 'Client Retention' },
-];
-
-const CASE_STUDIES = [
-  {
-    title: 'Real Estate',
-    metric: '15 to 50 qualified leads/month',
-  },
-  {
-    title: 'E-commerce',
-    metric: '₹20L to ₹100L revenue growth',
-  },
-  {
-    title: 'Online Education',
-    metric: '100 to 500 course enrollments',
+    href: '/ai-seo',
+    name: 'AI search',
+    body: 'whether your business appears when a buyer asks an assistant for a supplier like you. On the evidence we have, that is mostly a question of which sources those answers are assembled from, much of which sits off your own site. Measured per system, with the run counts published, and guaranteed by nobody.',
   },
 ];
 
-const FAQ_ITEMS = [
+const CONVERT = [
   {
-    question: 'Which service should I start with?',
-    answer: 'It depends on your current challenge. If you need leads quickly, Google Ads or Social Media Ads may be the starting point. If traffic is coming but not converting, CRO may be better. Book a free strategy call to get personalized recommendations.',
+    href: '/conversion-optimization',
+    name: 'The enquiry path',
+    body: 'the route from arrival to a received enquiry: the page, the form, the booking, the delivery. Diagnosed before it is optimised, because in at least two of the four places demand gets lost, page-level conversion work is the wrong fix.',
   },
   {
-    question: 'Do I need all services together?',
-    answer: 'No. You can start with one service. Multi-channel work becomes useful when your budget, funnel, and tracking are ready.',
-  },
-  {
-    question: 'Do you offer regular social media posting?',
-    answer: 'MappedSkills focuses primarily on performance marketing services. Content creation or social media management can be scoped separately if required.',
-  },
-  {
-    question: 'Can you manage both Google Ads and Meta Ads?',
-    answer: 'Yes. We can manage both when the business needs high-intent search demand and audience-based paid social campaigns.',
-  },
-  {
-    question: 'Do you help with landing pages?',
-    answer: 'Yes. We provide landing page and conversion recommendations because campaigns perform better when the page experience is strong.',
-  },
-  {
-    question: 'Do you provide reporting?',
-    answer: 'Yes. Reporting includes performance metrics, lead quality, conversions, cost per lead, ROAS, and recommended next actions.',
+    href: '/lead-generation',
+    name: 'Enquiry generation',
+    body: 'the outcome named: more of the right enquiries, with a published definition of what "right" means.',
   },
 ];
+
+const MEASURE = [
+  {
+    href: '/how-it-works',
+    name: 'Measurement',
+    body: 'analytics, event instrumentation, enquiry-source capture and attribution. It has no page and it is not sold separately, because it is the precondition for everything above being checkable.',
+  },
+];
+
+function RoutingGroup({
+  title,
+  items,
+}: {
+  title: string;
+  items: { href: string; name: string; body: string }[];
+}) {
+  return (
+    <div className="mt-[clamp(28px,3.4vw,48px)]">
+      <h3 className="m-0 flex items-center gap-3 text-[.84rem] font-bold uppercase leading-[1.3] tracking-[0.16em]">
+        <Mark state="owned" size={13} />
+        {title}
+      </h3>
+      <ul className="m-0 mt-4 list-none border-t-2 border-resolve-ink p-0">
+        {items.map((item) => (
+          <li key={item.href} className="border-b border-resolve-line">
+            <Link
+              href={item.href}
+              className="grid grid-cols-1 gap-x-[clamp(20px,3vw,52px)] gap-y-2 py-[clamp(16px,2vw,24px)] text-resolve-ink no-underline min-[900px]:grid-cols-[minmax(0,24ch)_1fr]"
+            >
+              <span className="font-heading text-[clamp(1.08rem,1.7vw,1.4rem)] font-bold leading-[1.15] tracking-[-0.03em]">
+                {item.name}
+                <span aria-hidden="true" style={{ color: 'var(--resolve-accent-dark)' }}>
+                  {' '}
+                  &rarr;
+                </span>
+              </span>
+              <span className="max-w-[58ch] text-[1rem] leading-relaxed text-resolve-dim">{item.body}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export default function ServicesPage() {
   return (
     <>
-      {/* JSON-LD Schemas */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(BreadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ServiceSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQSchema) }}
-      />
-
-      {/* Breadcrumb Navigation */}
-      <Section className="border-b border-border py-3 sm:py-4">
-        <Container>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-foreground">Home</Link>
-            <span>/</span>
-            <span className="text-foreground">Services</span>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 1. Hero Section */}
-      <Hero
-        title="Performance Marketing Services Built for Measurable Growth"
-        subheadline="Our Services"
-        description="MappedSkills helps businesses generate qualified leads, improve ROAS, increase organic visibility, and convert more visitors through focused performance marketing services."
-        cta={{
-          text: 'Schedule Free Strategy Call',
-          href: '/schedule-call',
-        }}
-        secondaryCta={{
-          text: 'Get Free Marketing Audit',
-          href: '/contact',
-        }}
+      {/* ---- BLOCK 1 — the outcome, as the page's subject ---------------- */}
+      <CommercialHero
+        eyebrow="What we do"
+        title="One outcome: enquiries you can act on."
+        lede="There is buyer demand for what you sell, and some of it never reaches you. Getting them in front of you, getting the enquiry to actually complete, and being able to see which part worked are three different skills, usually bought from three different suppliers."
+        action="Tell us what you’re trying to fix"
       >
-        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-6">
-          <StatCard stat="5" label="Core Growth Services" />
-          <StatCard stat="300%+" label="Average ROI" />
-          <StatCard stat="50+" label="Clients Served" />
-          <StatCard stat="₹100Cr+" label="Revenue Influenced" />
+        <p>Here they are connected, the joins between them are ours, and the enquiry at the end is what we answer for.</p>
+      </CommercialHero>
+
+      <CommercialSection>
+        <ChapterLabel>What the whole system is for</ChapterLabel>
+        <Display>
+          The unit is a{' '}
+          <span style={{ color: 'var(--resolve-accent-deep)' }}>qualified enquiry.</span>
+        </Display>
+        <Body>
+          Real, reachable, from a business with a stated need, and not a duplicate.{' '}
+          <Link href="/lead-generation" className="font-semibold text-resolve-ink underline decoration-2 underline-offset-4">
+            What counts as one
+          </Link>{' '}
+          is published rather than decided case by case.
+        </Body>
+        <Body>
+          Everything below exists to produce more of those. Rankings, sessions, impressions and click-through
+          rates are how the work is diagnosed, not what it is for.
+        </Body>
+      </CommercialSection>
+
+      {/* ---- BLOCK 2 — three connected parts, the joins as the subject ---- */}
+      <CommercialSection tone="paper">
+        <ChapterLabel>Three parts, and the joins between them</ChapterLabel>
+        <Display className="max-w-[20ch]">
+          They are different skills.{' '}
+          <span style={{ color: 'var(--resolve-accent-deep)' }}>The joins decide the result.</span>
+        </Display>
+
+        <ScopeList items={PARTS} />
+
+        <Body className="mt-[clamp(24px,3vw,40px)]">
+          They are described separately because they are different skills. What decides the outcome is
+          frequently the joins between them: between the search work and the page it feeds, between the page and
+          the form, between the form and wherever the enquiry is supposed to land, and between all of that and
+          the measurement.{' '}
+          <b className="font-bold">Split across suppliers, those joins can belong to nobody.</b>
+        </Body>
+
+        <ChainFull />
+
+        <Note>
+          Parts can be scoped. If you want the search work alone, say so and we will tell you honestly whether it
+          is likely to change the number you care about &mdash; because fixing one part while another is broken
+          usually does not.
+        </Note>
+      </CommercialSection>
+
+      {/* ---- BLOCK 3 — the accountability boundary ------------------------ */}
+      <CommercialSection>
+        <BoundaryBlock
+          label="What we are accountable for, and where that stops"
+          heading={
+            <>
+              We are accountable up to{' '}
+              <em className="not-italic" style={{ color: 'var(--resolve-accent-deep)' }}>
+                the qualified enquiry.
+              </em>
+            </>
+          }
+          intro={<p className="m-0">That is the number we work to and the number we report.</p>}
+          notPromised={[
+            'rankings',
+            'positions in AI answers',
+            'enquiry volumes',
+            'revenue',
+            'a return on spend',
+          ]}
+          closing="None of that is ours to control."
+        >
+          <p>
+            Where you supply your close data, we report through to the opportunities and revenue your own system
+            recorded &mdash; as your numbers, with what we controlled and what we did not stated beside them. We
+            do not control your price, your product, your capacity, how quickly you follow up, or whether you win
+            the work.
+          </p>
+          <p>
+            Some enquiries arrive with no usable trail: direct visits, phone calls, a recommendation from a
+            customer. We record those as unattributed rather than assigning them to a channel, and an enquiry we
+            could not trace still counts as an enquiry.
+          </p>
+        </BoundaryBlock>
+        <ProofLink href="/how-it-works">See what can and cannot be attributed</ProofLink>
+      </CommercialSection>
+
+      {/* ---- BLOCK 4 — where each capability enters the chain -------------- */}
+      <CommercialSection tone="paper">
+        <ChapterLabel>Where each discipline comes in</ChapterLabel>
+        <Body className="mt-[18px]">Named by what each contributes, in the order the chain runs.</Body>
+        <RoutingGroup title="Capture" items={CAPTURE} />
+        <RoutingGroup title="Convert" items={CONVERT} />
+        <RoutingGroup title="Measure" items={MEASURE} />
+      </CommercialSection>
+
+      {/* ---- BLOCK 5 — selective expansion, and BLOCK 6 — what we do not do */}
+      <CommercialSection>
+        <ChapterLabel>What can be added later</ChapterLabel>
+        <Body className="mt-[18px]">
+          When the enquiries are arriving and the constraint moves downstream, there is a limited amount we will
+          take on after the enquiry exists: routing it to the right person, acknowledging it, and reminding both
+          sides about a booked call.
+        </Body>
+        <Body>
+          <b className="font-bold">That is the boundary.</b> We do not implement CRMs, build lifecycle programmes
+          or run sales operations.
+        </Body>
+
+        <div className="mt-[clamp(38px,4.6vw,72px)] border-t border-resolve-line pt-[clamp(38px,4.6vw,72px)]">
+          <ChapterLabel>What we do not do</ChapterLabel>
+          <Body className="mt-[18px]">
+            CRM implementation and migration. Revenue operations and sales-operations consulting. Lifecycle and
+            nurture programmes. Standalone web development. Ecommerce merchandising and ecommerce conversion.
+            Social media management, brand building and PR.
+          </Body>
+          <Body>
+            Some of those are good work. They are not this, and taking them on would make us worse at the thing
+            we are accountable for.
+          </Body>
         </div>
+      </CommercialSection>
 
-        <div className="mt-12 relative h-64 sm:h-80 rounded-lg overflow-hidden bg-secondary/5 border border-border">
-          <Image
-            src="/images/services-ecosystem.png"
-            alt="Service ecosystem showing 5 core services connected to business outcomes"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-      </Hero>
+      {/* ---- BLOCK 7 — scope honesty on testing ---------------------------- */}
+      <CommercialSection tone="paper">
+        <ChapterLabel>What we can and cannot test</ChapterLabel>
+        <Display className="max-w-[22ch]">
+          Below a real threshold of traffic and enquiries, a test cannot reach significance.
+        </Display>
+        <Body>
+          That is most businesses in this market. Anyone promising you A/B testing at that volume is promising a
+          result the arithmetic cannot produce.
+        </Body>
+        <Body>
+          Below the threshold, the work is research, diagnosis and design: we find what is wrong, we change it,
+          and we observe what happens afterwards, saying plainly that observation is what it is. Above the
+          threshold, we test properly and report the significance.
+        </Body>
+      </CommercialSection>
 
-      {/* 2. Service Focus Section */}
-      <Section className="border-y border-border bg-secondary/5">
-        <Container>
-          <div className="max-w-3xl mx-auto mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              We Don't Do Everything. We Focus on What Drives Growth.
-            </h2>
-            <p className="text-lg text-foreground leading-relaxed">
-              MappedSkills focuses on 5 core performance marketing services. Each service is designed to solve a specific business growth problem — more qualified traffic, better leads, improved visibility, stronger conversions, or scalable revenue.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
-            {[
-              { title: 'Google Ads', subtitle: 'For high-intent demand', icon: <Zap /> },
-              { title: 'Social Media Ads', subtitle: 'For audience targeting and retargeting', icon: <TrendingUp /> },
-              { title: 'Lead Generation', subtitle: 'For predictable enquiry pipelines', icon: <Target /> },
-              { title: 'SEO', subtitle: 'For long-term organic visibility', icon: <Search /> },
-              { title: 'Conversion Optimization', subtitle: 'For improving results from existing traffic', icon: <BarChart3 /> },
-            ].map((service, idx) => (
-              <Card key={idx} className="p-6 sm:p-8 text-center">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 mx-auto">
-                  <div className="text-accent">{service.icon}</div>
-                </div>
-                <h3 className="mb-2 font-semibold text-lg">{service.title}</h3>
-                <p className="text-sm text-muted-foreground">{service.subtitle}</p>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* 3. Main Services Section */}
-      <Section>
-        <Container>
-          <div className="mb-12 text-center">
-            <Badge className="mb-6 bg-accent/10 text-accent border-0 text-xs font-bold uppercase tracking-wider inline-block">
-              Our Services
-            </Badge>
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Choose the Service That Matches Your Growth Problem
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 gap-8 sm:gap-10">
-            {SERVICES.map((service, idx) => (
-              <ServiceCard
-                key={idx}
-                title={service.title}
-                problem={service.problem}
-                solution={service.solution}
-                bestFor={service.bestFor}
-                keyOutcomes={service.keyOutcomes}
-                ctaText={service.ctaText}
-                ctaHref={service.ctaHref}
-              />
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* 4. How Services Work Together Section */}
-      <Section className="border-y border-border bg-secondary/5">
-        <Container>
-          <div className="max-w-3xl mx-auto mb-12 text-center">
-            <Badge className="mb-6 bg-accent/10 text-accent border-0 text-xs font-bold uppercase tracking-wider inline-block">
-              The Full Funnel
-            </Badge>
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Performance Marketing Works Best When Services Connect
-            </h2>
-            <p className="text-lg text-foreground leading-relaxed">
-              One service can solve one problem. But real growth happens when traffic, landing pages, tracking, reporting, and optimization work together.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 sm:gap-8">
-            {[
-              { title: 'Traffic', items: ['Google Ads', 'Social Media Ads', 'SEO'] },
-              { title: 'Lead Capture', items: ['Landing Pages', 'Forms', 'WhatsApp', 'CTAs'] },
-              { title: 'Conversion', items: ['CRO', 'Trust Blocks', 'Funnel Optimization'] },
-              { title: 'Tracking', items: ['GA4', 'GTM', 'Conversion Events', 'Reporting'] },
-              { title: 'Scaling', items: ['Optimization', 'Retargeting', 'Budget Decisions'] },
-            ].map((stage, idx) => (
-              <Card key={idx} className="p-6 sm:p-8">
-                <h3 className="mb-4 font-semibold text-accent text-lg">{stage.title}</h3>
-                <ul className="space-y-2">
-                  {stage.items.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0 mt-1.5" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* 5. Which Service Do You Need Section */}
-      <Section>
-        <Container>
-          <div className="max-w-3xl mx-auto">
-            <h2 className="mb-12 text-3xl sm:text-4xl font-bold tracking-tight text-center">
-              Not Sure Where to Start?
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12">
-              {[
-                { problem: 'If you need leads fast:', solution: 'Start with Google Ads or Social Media Ads.' },
-                { problem: 'If your leads are poor quality:', solution: 'Start with Lead Generation and funnel qualification.' },
-                { problem: 'If your website traffic is low:', solution: 'Start with SEO or paid traffic.' },
-                { problem: 'If your traffic is good but enquiries are low:', solution: 'Start with Conversion Optimization.' },
-              ].map((scenario, idx) => (
-                <Card key={idx} className="p-6 sm:p-8">
-                  <p className="mb-2 font-semibold text-foreground">{scenario.problem}</p>
-                  <p className="text-muted-foreground">{scenario.solution}</p>
-                </Card>
-              ))}
-            </div>
-
-            <Card className="p-8 bg-secondary/5 border-accent/20 text-center mb-8">
-              <p className="mb-4 text-foreground leading-relaxed">
-                If you are confused about the right channel, let&apos;s have a conversation. We&apos;ll recommend the right starting point based on your business.
-              </p>
-              <Button size="lg" asChild>
-                <Link href="/schedule-call">Help Me Choose the Right Service</Link>
-              </Button>
-            </Card>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 6. Industry Use Cases Section */}
-      <Section className="border-y border-border bg-secondary/5">
-        <Container>
-          <div className="mb-12 text-center">
-            <Badge className="mb-6 bg-accent/10 text-accent border-0 text-xs font-bold uppercase tracking-wider inline-block">
-              Our Expertise
-            </Badge>
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Services Built for Different Business Models
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
-            {INDUSTRIES.map((industry, idx) => (
-              <IndustryCard
-                key={idx}
-                title={industry.title}
-                description={industry.description}
-              />
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* 7. Proof Section */}
-      <Section>
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Growth Services Should Be Judged by Results
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-12">
-            {PROOF_STATS.map((stat, idx) => (
-              <StatCard key={idx} stat={stat.stat} label={stat.label} />
-            ))}
-          </div>
-
-          <div className="mb-8">
-            <h3 className="mb-6 text-center text-2xl font-bold tracking-tight">
-              Real Results From Real Clients
+      {/* ---- BLOCK 8 — fit -------------------------------------------------- */}
+      <CommercialSection>
+        <ChapterLabel>Who this is for</ChapterLabel>
+        <div className="mt-[clamp(24px,3vw,44px)] grid grid-cols-1 gap-[clamp(26px,3.4vw,60px)] min-[900px]:grid-cols-2">
+          <div className="border-t-2 border-resolve-ink pt-5">
+            <h3 className="m-0 flex items-center gap-3 text-[.84rem] font-bold uppercase leading-[1.3] tracking-[0.16em]">
+              <Mark state="owned" size={14} />
+              This works where
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-              {CASE_STUDIES.map((study, idx) => (
-                <Card key={idx} className="p-8 text-center">
-                  <p className="mb-2 font-semibold text-accent">{study.title}</p>
-                  <p className="text-2xl font-bold">{study.metric}</p>
-                </Card>
-              ))}
-            </div>
+            <p className="mt-4 max-w-[46ch] text-[clamp(1.02rem,1.2vw,1.16rem)] leading-relaxed">
+              The customer takes time to decide and one good enquiry is worth real money. Demand for what you
+              sell already exists or can reasonably be reached. You can act on enquiries when they arrive, and
+              you are willing to grant the measurement access that makes the result checkable.
+            </p>
           </div>
-
-          <div className="text-center">
-            <Button size="lg" variant="outline" asChild>
-              <Link href="/work">View Full Case Studies</Link>
-            </Button>
+          <div className="border-t-2 pt-5" style={{ borderColor: 'var(--resolve-gap)' }}>
+            <h3 className="m-0 flex items-center gap-3 text-[.84rem] font-bold uppercase leading-[1.3] tracking-[0.16em] text-resolve-dim">
+              <Mark state="open" size={14} />
+              It is a poor fit where
+            </h3>
+            <p className="mt-4 max-w-[46ch] text-[clamp(1.02rem,1.2vw,1.16rem)] leading-relaxed text-resolve-dim">
+              Demand has to be created from nothing, the purchase is impulse or price-only, or a guaranteed
+              outcome is a requirement.
+            </p>
           </div>
-        </Container>
-      </Section>
+        </div>
+        <ProofLink href="/pricing">What this costs, and what moves the number</ProofLink>
+      </CommercialSection>
 
-      {/* 8. Engagement Models Section */}
-      <Section className="border-y border-border bg-secondary/5">
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Flexible Engagements Based on Your Growth Stage
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10">
-            {[
-              { title: 'Starter', desc: 'Best for businesses starting with one focused channel.' },
-              { title: 'Growth', desc: 'Best for businesses ready to run 2-3 channels with stronger optimization.' },
-              { title: 'Enterprise', desc: 'Best for multi-channel, multi-location, or aggressive growth campaigns.' },
-            ].map((model, idx) => (
-              <Card key={idx} className="p-8 sm:p-10 flex flex-col text-center">
-                <h3 className="mb-3 text-xl font-bold text-accent">{model.title}</h3>
-                <p className="mb-6 text-muted-foreground flex-grow">{model.desc}</p>
-                <Button variant="outline" asChild>
-                  <Link href="/pricing">View Pricing</Link>
-                </Button>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* 9. Why MappedSkills Section */}
-      <Section>
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Why Businesses Choose MappedSkills
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            {[
-              { title: 'Focused Services', desc: 'We only focus on services that directly support measurable growth.' },
-              { title: 'Tracking-First Approach', desc: 'We track important actions before making scaling decisions.' },
-              { title: 'Business-Language Reporting', desc: 'We explain performance in simple, useful terms.' },
-              { title: 'Strategy + Execution', desc: 'We connect planning, campaigns, landing pages, tracking, and optimization.' },
-            ].map((reason, idx) => (
-              <Card key={idx} className="p-8">
-                <h3 className="mb-3 font-semibold text-accent text-lg">{reason.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{reason.desc}</p>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* 10. FAQ Section */}
-      <Section className="border-y border-border bg-secondary/5">
-        <Container>
-          <div className="mb-12 text-center">
-            <Badge className="mb-6 bg-accent/10 text-accent border-0 text-xs font-bold uppercase tracking-wider inline-block">
-              Frequently Asked
-            </Badge>
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Performance Marketing Services FAQs
-            </h2>
-          </div>
-
-          <div className="mx-auto max-w-3xl">
-            <FAQSection items={FAQ_ITEMS} />
-          </div>
-        </Container>
-      </Section>
-
-      {/* 11. Final CTA Section */}
-      <CTASection
-        title="Need Help Choosing the Right Growth Service?"
-        description="Book a free strategy call and we'll identify which service should be your first priority based on your business goal, budget, and current marketing setup."
-        primaryCta={{
-          text: 'Schedule Free Strategy Call',
-          href: '/schedule-call',
-        }}
-        secondaryCta={{
-          text: 'View Pricing',
-          href: '/pricing',
-        }}
+      {/* ---- BLOCK 9 — action ----------------------------------------------- */}
+      <CommercialClose
+        label="Start with the situation, not the service"
+        heading="Tell us what is actually happening."
+        body={
+          <>
+            The enquiries you are getting, the ones you are not, and what you can currently see. That is a more
+            useful first message than a list of services, and it is what the first conversation will be about
+            anyway.
+          </>
+        }
+        action="Tell us what you’re trying to fix"
       />
     </>
   );

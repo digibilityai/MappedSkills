@@ -51,6 +51,10 @@ export function SystemStages({ stages, chain }: { stages: Stage[]; chain: React.
   const [stage, setStage] = useState(1);
   const [chainPhase, setChainPhase] = useState<'armed' | 'on' | null>(null);
 
+  /* PHASE E — the descent is armed only if motion was available at mount. See
+     HomepageMotion for the reasoning; F1 is the largest object on the page and
+     re-arming it under a reader's eyes is the most visible version of the bug. */
+  const armingAllowed = useRef<boolean | null>(null);
   const listRef = useRef<HTMLUListElement | null>(null);
   const chainRef = useRef<HTMLDivElement | null>(null);
   const sectionRef = useRef<HTMLDivElement | null>(null);
@@ -59,7 +63,12 @@ export function SystemStages({ stages, chain }: { stages: Stage[]; chain: React.
   // Reduced motion resolves rather than freezing: without the auto-advance the
   // reader would never be shown stages 01 and 02, so all three are composed
   // open and nothing is `inert`.
-  const allOpen = !mounted || reduced;
+  //
+  // PHASE E: `armingAllowed.current === false` means motion was unavailable on
+  // the reader's first paint, so all three readings were composed open for
+  // them. If they later turn reduced motion off, those panels stay open — the
+  // page does not take back content it has already shown.
+  const allOpen = !mounted || reduced || armingAllowed.current === false;
 
   const select = useCallback((next: number, fromUser: boolean) => {
     if (fromUser) autoStage.current = false;
@@ -68,20 +77,49 @@ export function SystemStages({ stages, chain }: { stages: Stage[]; chain: React.
 
   useEffect(() => {
     if (!mounted) return;
+    if (armingAllowed.current === null) armingAllowed.current = enabled;
 
     const registry = createResolveViewRegistry();
     const timers: ReturnType<typeof setTimeout>[] = [];
 
-    if (!enabled) {
+    if (!enabled || !armingAllowed.current) {
       // composed: stage 3 is the reading the page rests on, every panel open
       setStage(3);
       return () => registry.destroy();
     }
 
-    setChainPhase('armed');
+    /* PHASE E — THE LAST RESORT. If the registration pass below fails for any
+       reason, the chain is composed and the sequence rests on its final
+       reading. An uncaught error here would tear down the React root and leave
+       the chain armed — shrunk and faded — until the ~4s fallback. */
+    const composeSystem = () => {
+      setChainPhase('on');
+      if (autoStage.current) setStage(3);
+    };
+
+    try {
+
+    // PHASE E — NEVER RE-ARM A CHAIN THAT HAS ALREADY ARRIVED. This effect
+    // re-runs when the reduced-motion preference changes; a reader who turns
+    // reduced motion OFF while looking at F1 must not watch it shrink to 46%
+    // and fade out before growing back.
+    const chainOnScreen = (() => {
+      const el = chainRef.current;
+      if (!el) return false;
+      const r = el.getBoundingClientRect();
+      return r.bottom > 0 && r.top < window.innerHeight;
+    })();
+    let descended = chainOnScreen;
+    setChainPhase((phase) => {
+      if (phase === 'on' || chainOnScreen) {
+        descended = true;
+        return 'on';
+      }
+      return 'armed';
+    });
 
     // the descent — the page gets closer to the object, once
-    registry.onView(chainRef.current, () => setChainPhase('on'), 0.2);
+    if (!descended) registry.onView(chainRef.current, () => setChainPhase('on'), 0.2);
 
     // the three readings play once, on entering view, and never replay
     registry.onView(
@@ -114,6 +152,13 @@ export function SystemStages({ stages, chain }: { stages: Stage[]; chain: React.
       registry.destroy();
       document.removeEventListener('visibilitychange', onVisibility);
     };
+
+    } catch {
+      timers.forEach(clearTimeout);
+      registry.destroy();
+      composeSystem();
+      return;
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mounted, enabled]);
 

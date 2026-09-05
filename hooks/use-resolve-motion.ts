@@ -66,8 +66,22 @@ export function useResolveMotion(): ResolveMotionState {
       setState({ mounted: true, reduced: mq.matches, enabled: !mq.matches });
     apply();
     // A reader who turns reduced motion ON mid-page gets the resolved state.
-    mq.addEventListener('change', apply);
-    return () => mq.removeEventListener('change', apply);
+    // PHASE E: an older engine without `addEventListener` on a MediaQueryList
+    // must not throw out of this effect. An uncaught error here would tear the
+    // React root down, and the page would lose the hydrated tree it is standing
+    // on. Losing the live preference listener is a far smaller loss.
+    try {
+      mq.addEventListener('change', apply);
+    } catch {
+      return;
+    }
+    return () => {
+      try {
+        mq.removeEventListener('change', apply);
+      } catch {
+        /* nothing to clean up */
+      }
+    };
   }, []);
 
   return state;
@@ -98,7 +112,13 @@ export function createResolveViewRegistry(
 
   const forceAll = () => {
     // copy first: each runner removes itself from `pending`
-    Array.from(pending).forEach((run) => run());
+    Array.from(pending).forEach((run) => {
+      try {
+        run();
+      } catch {
+        /* one callback failing must not strand the others */
+      }
+    });
   };
 
   const registry: ResolveViewRegistry = {
@@ -123,19 +143,34 @@ export function createResolveViewRegistry(
       pending.add(run);
       runners.set(el, run);
 
-      let io = observers.get(threshold);
-      if (!io) {
-        io = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) runners.get(entry.target)?.();
-            });
-          },
-          { threshold }
-        );
-        observers.set(threshold, io);
+      // PHASE E — THE OBSERVER MAY NOT THROW OUT OF THIS FUNCTION.
+      // A constructor or `observe()` that throws (a policy-blocked API, a
+      // hardened or instrumented engine, an extension that replaces the global)
+      // would otherwise propagate out of the caller's effect and tear down the
+      // React root. Measured before this guard existed: the page lost its
+      // hydrated tree, `data-state` disappeared from the hero, and the pre-paint
+      // dark stage re-applied for up to four seconds with the named rows hidden.
+      // If the observer cannot be had, the reader simply gets the composed end
+      // state immediately — which is the same contract as having no
+      // IntersectionObserver at all.
+      try {
+        let io = observers.get(threshold);
+        if (!io) {
+          io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) runners.get(entry.target)?.();
+              });
+            },
+            { threshold }
+          );
+          observers.set(threshold, io);
+        }
+        io.observe(el);
+      } catch {
+        run();
+        return;
       }
-      io.observe(el);
 
       if (timer === undefined) timer = setTimeout(forceAll, forceAfterMs);
     },
@@ -144,7 +179,13 @@ export function createResolveViewRegistry(
 
     destroy() {
       destroyed = true;
-      observers.forEach((io) => io.disconnect());
+      observers.forEach((io) => {
+        try {
+          io.disconnect();
+        } catch {
+          /* already gone */
+        }
+      });
       observers.clear();
       pending.clear();
       if (timer !== undefined) clearTimeout(timer);

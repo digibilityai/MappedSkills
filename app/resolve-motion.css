@@ -79,6 +79,38 @@ html[data-rsv-hero='traffic'] .rsv-sw:not([data-state]) {
 .rsv-proof:hover { color: var(--rsv-strong); }
 .rsv-cta-o { border-color: currentColor; color: inherit; }
 
+/* PHASE E — P1. THE TOKEN-DRIVEN TEXT CROSSFADES *WITH* THE SURFACE.
+   The H1 inherits `color` from `.rsv-sw`, so it has always crossfaded with the
+   ground. Everything that reads a token instead — the supporting line, the
+   method link, the state label, the row labels, the stage rule, the two
+   governing words — had no transition of its own, so its colour SNAPPED to the
+   destination value while the ground behind it was still 620ms away from
+   arriving. That left the dimmed register sitting at its light-ground colour on
+   an almost-black surface.
+
+   Measured on the rendered page, sampled every frame through the inversion:
+
+     before   dimmed register below 3:1 for 343ms (minimum 1.02)
+     after    dimmed register below 3:1 for 116ms (minimum 1.08)
+
+   This is not a new behaviour and not a new design state: it makes the rest of
+   the surface do what the H1 already did, which is the approved gesture — the
+   surface inverts as one thing. Both end states are unchanged.
+
+   The H1's own symmetric crossing (measured: 67ms below 3:1) is inherent to any
+   continuous inversion — two colours travelling toward each other must cross —
+   and is unchanged and accepted. See 15_PHASE_E_RESPONSIVE_FALLBACK.md §P1. */
+.rsv-muted,
+.rsv-strong,
+.rsv-proof,
+.rsv-cta-o,
+.rsv-kw--e,
+.rsv-kw--t,
+.rsv-rule-t {
+  transition: color var(--resolve-t-state) var(--resolve-ease-state),
+              border-color var(--resolve-t-state) var(--resolve-ease-state);
+}
+
 /* KINETIC HIERARCHY. The emphasis is a mark WIPING across the governing word,
    not a colour fade, so BOTH words stay fully readable in both states and the
    active state is never carried by colour alone.
@@ -372,6 +404,13 @@ html[data-rsv-hero='traffic'] .rsv-sw:not([data-state]) .rsv-control button[aria
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   .rsv-sw,
+  .rsv-muted,
+  .rsv-strong,
+  .rsv-proof,
+  .rsv-cta-o,
+  .rsv-kw--e,
+  .rsv-kw--t,
+  .rsv-rule-t,
   .rsv-kw::after,
   .rsv-field i,
   .rsv-row,
@@ -402,4 +441,118 @@ html[data-rsv-hero='traffic'] .rsv-sw:not([data-state]) .rsv-control button[aria
   .rsv-chain .rsv-fade { opacity: 1 !important; }
   .rsv-arrive .rsv-mark { opacity: 1 !important; transform: none !important; }
   .rsv-rv { opacity: 1 !important; transform: none !important; }
+}
+
+/* ==================================================== FORCED COLOURS ======
+   SESSION 27 — PHASE E. A hardening pass, not a redesign.
+
+   In forced-colours mode the reader's own palette replaces ours. Almost
+   everything survives that correctly: all copy, every link, both calls to
+   action, the tab titles, the open/dashed marks (a border is preserved) and the
+   whole F1 chain. THE RESOLVE is not re-optimised for this mode and no
+   `forced-color-adjust: none` appears below.
+
+   ONE REAL USABILITY FAILURE was measured and is fixed here: the signature
+   control's pressed state is carried by a background fill, and a background
+   fill is exactly what forced colours discards — so `Traffic` and `Enquiries`
+   rendered identically and a sighted reader could not see which state they were
+   looking at. `aria-pressed` still carried it to assistive technology, but that
+   is not a substitute.
+
+   `Highlight` / `HighlightText` is the reader's own "this one is chosen" pair,
+   and `forced-color-adjust: none` is required WITH it rather than instead of
+   it: without opting this one control out, the engine draws a text backplate in
+   `Canvas` behind the label and the word disappears into a black box on the
+   highlight fill. Measured — that is exactly what happened on the first
+   attempt. The scope is three declarations on one pressed button; nothing else
+   on the page opts out, and no Resolve colour is asserted here.
+
+   NOT fixed, and recorded instead: the solid population marks lose their fill,
+   so the figure's solid/dashed channel flattens. Every row is named in text
+   beside its mark and the caption still says what the marks are, so the meaning
+   survives in words. Giving those marks a forced-colours-only border would be
+   redesigning the figure for one rendering mode. */
+@media (forced-colors: active) {
+  .rsv-control button[aria-pressed='true'] {
+    forced-color-adjust: none;
+    background: Highlight;
+    color: HighlightText;
+  }
+}
+
+/* ========================================================= PRINT =========
+   SESSION 27 — PHASE E. Defensive only. This is NOT a print design.
+
+   MEASURED BEFORE THIS BLOCK EXISTED, printing the homepage produced: all 21
+   composition reveals at `opacity: 0` (the friction and system headings, the
+   whole accountability chapter and the entire close printed BLANK), F1 printed
+   at 46% scale and 42% opacity, the carrier and all five arrival marks
+   invisible, and — because browsers do not print background colours by default
+   — ivory type on the dark departure band and the dark evidence card printed
+   white-on-white.
+
+   Two rules follow, and nothing else:
+     1. COMPOSE EVERYTHING. Paper has no viewport, so no observer will ever fire
+        for the parts of the page that are not on screen when printing starts.
+     2. PUT INK BACK ON THE SURFACES THAT ASSUME A DARK GROUND, so their text
+        survives a printer that drops backgrounds.
+   ========================================================================== */
+@media print {
+  /* 1. every motion start state is composed, whatever the reader's scroll
+        position was when they pressed print */
+  .rsv-rv,
+  .rsv-carrier,
+  .rsv-dep-t,
+  .rsv-fail-run .rsv-mark,
+  .rsv-fail-rule,
+  .rsv-fail-rule-t,
+  .rsv-arrive .rsv-mark,
+  .rsv-chain,
+  .rsv-chain .rsv-fade {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .rsv-chain .rsv-draw {
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+  .rsv-fail-run .rsv-stop { transform: none !important; }
+  /* the stage list is a tablist on screen; on paper every reading is present */
+  .rsv-stg-b { grid-template-rows: 1fr !important; padding-top: 10px !important; }
+
+  /* the hero prints RESOLVED — the lattice is a transient, not content.
+     The state TOKENS have to come back too: printing while the surface happened
+     to be on the dark stage otherwise left the dimmed register at its
+     dark-ground value (#A29BAC) on white paper. */
+  .rsv-sw,
+  .rsv-sw[data-state='traffic'] {
+    background: var(--resolve-ground) !important;
+    color: var(--resolve-ink) !important;
+    --rsv-muted: var(--resolve-dim);
+    --rsv-strong: var(--resolve-ink);
+    --rsv-line: var(--resolve-line);
+    --rsv-kw-e: var(--resolve-accent-deep);
+    --rsv-kw-t: var(--resolve-dim);
+  }
+  .rsv-kw::after { display: none !important; }
+  .rsv-field { display: none !important; }
+  .rsv-row { opacity: 1 !important; transform: none !important; }
+  .rsv-row-b { transform: scaleX(1) !important; }
+  /* the control drives a state that cannot be driven on paper */
+  .rsv-control { display: none !important; }
+
+  /* 2. the two homepage surfaces that assume a dark ground keep their text
+        legible when the printer drops background colours */
+  .rsv-dep { background: var(--resolve-ground) !important; color: var(--resolve-ink) !important; }
+  .rsv-dep .rsv-dep-t em, .rsv-dep [style*='resolve-accent'] { color: var(--resolve-accent-dark) !important; }
+  .rsv-close { background: var(--resolve-ground) !important; color: var(--resolve-ink) !important; }
+  /* the evidence card is a bounded dark card, not a full-bleed band, so it keeps
+     its shape — but its type must survive a printer that drops backgrounds */
+  .rsv-ink-card, .rsv-ink-card * { background: transparent !important; color: var(--resolve-ink) !important; }
+  .rsv-ink-card { border: 1px solid var(--resolve-line) !important; }
+  .rsv-ink-card a { color: var(--resolve-accent-dark) !important; }
+
+  /* keep a chapter and its figure on one sheet where the paper allows it */
+  .rsv-chain, .rsv-fail, .rsv-arrive { break-inside: avoid; }
 }

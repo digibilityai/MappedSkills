@@ -65,6 +65,7 @@ export function PopulationToggle() {
   const [pulsing, setPulsing] = useState(false);
 
   const fieldRef = useRef<HTMLDivElement | null>(null);
+  const aimedRef = useRef(false);
   const rowsRef = useRef<HTMLDivElement | null>(null);
   const boxRef = useRef<HTMLDivElement | null>(null);
 
@@ -105,6 +106,7 @@ export function PopulationToggle() {
       mark.style.transitionDelay = `${(visible % 17) * 11}ms`;
       visible += 1;
     }
+    aimedRef.current = visible > 0;
   }, []);
 
   /* ------------------------------------------------------------------ T1 -- */
@@ -130,14 +132,22 @@ export function PopulationToggle() {
       return;
     }
 
-    // Measured BEFORE the surface inverts, while the rows are composed.
-    aim();
-    setState('traffic');
-
     const timers: ReturnType<typeof setTimeout>[] = [];
     const registry = createResolveViewRegistry();
 
     const resolve = () => setState('enquiries');
+
+    /* PHASE E — THE LAST RESORT. The hero is the one behaviour with a
+       PRE-PAINT start state, so it is the one place where a failure would be
+       seen rather than merely missed: an uncaught error here would tear down
+       the React root, `data-state` would disappear, and the pre-paint dark
+       stage would re-apply — with the named rows hidden — until its own ~4s
+       failsafe. Resolving immediately is always safe. */
+    try {
+
+    // Measured BEFORE the surface inverts, while the rows are composed.
+    aim();
+    setState('traffic');
 
     if (window.innerWidth >= TIMED_SEQUENCE_MIN_WIDTH) {
       timers.push(setTimeout(() => setPulsing(true), PULSE_AT_MS));
@@ -183,13 +193,37 @@ export function PopulationToggle() {
       document.removeEventListener('visibilitychange', onVisibility);
       window.removeEventListener('resize', onResize);
     };
+
+    } catch {
+      timers.forEach(clearTimeout);
+      registry.destroy();
+      resolve();
+      return;
+    }
     // `setState` and `aim` are stable; the sequence must run once per motion mode.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mounted, reduced, enabled]);
 
+  /* PHASE E — RELEASE THE PRE-PAINT ATTRIBUTE AS SOON AS REACT OWNS THE STATE.
+     `html[data-rsv-hero="traffic"]` only styles `.rsv-sw:not([data-state])`, so
+     while this component is alive the attribute is already inert. Removing it
+     in a *later* effect — after the render that applied `data-state` has been
+     committed, so there is no frame where neither rule applies — closes the
+     window in which a torn-down React tree would drop back onto the dark stage
+     and wait out the script's own 4s failsafe with the named rows hidden. */
+  useEffect(() => {
+    if (state) document.documentElement.removeAttribute('data-rsv-hero');
+  }, [state]);
+
   /* -------------------------------------------------------- the signature -- */
   const select = (next: 'traffic' | 'enquiries') => {
     if (next === (state ?? 'enquiries')) return;
+    // PHASE E: the T1 aims the marks on its way past. It does not run on a
+    // client-side navigation back to `/`, so a reader who drives the control
+    // first would otherwise send the marks nowhere — they would collapse on
+    // their own centres instead of travelling into the named rows. Measure once,
+    // on the reader's own action, while the rows are still composed.
+    if (!aimedRef.current && next === 'traffic') aim();
     setState(next);
     if (next !== 'traffic' || !enabled) {
       setPulsing(false);

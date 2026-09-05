@@ -112,7 +112,7 @@ export function HomepageAccountability() {
             is published, dated and checkable.
           </p>
 
-          <div className="rsv-rv mt-[clamp(32px,4vw,56px)] overflow-hidden rounded-[20px] bg-resolve-ink text-resolve-ground">
+          <div className="rsv-rv rsv-ink-card mt-[clamp(32px,4vw,56px)] overflow-hidden rounded-[20px] bg-resolve-ink text-resolve-ground">
             <div className="p-[clamp(26px,4vw,58px)]">
               <p className="m-0 mb-4 max-w-[18ch] font-heading text-[clamp(1.55rem,4vw,3.2rem)] font-extrabold leading-[1.03] tracking-[-0.035em]">
                 We ran the test on ourselves, and{' '}

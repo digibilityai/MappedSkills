@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { createResolveViewRegistry, useResolveMotion } from '@/hooks/use-resolve-motion';
 
 /**
@@ -40,32 +40,82 @@ const RUN_GAP = 7;
 export function HomepageMotion() {
   const { mounted, enabled } = useResolveMotion();
 
+  /* PHASE E — ARMING IS DECIDED ONCE, AT MOUNT.
+     If motion was not available on the reader's FIRST paint, the page has
+     already been composed for them and it stays composed. Turning reduced
+     motion off half-way down the page therefore adds nothing and, crucially,
+     takes nothing away: without this, the section the reader was looking at
+     vanished and faded back in. Measured before this guard existed: flipping
+     the preference off re-armed 17 of the 21 reveals and re-armed the chain,
+     which dropped to 46% scale and 0.42 opacity. */
+  const armingAllowed = useRef<boolean | null>(null);
+
   useEffect(() => {
-    if (!mounted || !enabled) return;
+    if (!mounted) return;
+    if (armingAllowed.current === null) armingAllowed.current = enabled;
+    if (!enabled || !armingAllowed.current) return;
 
     const registry = createResolveViewRegistry();
     const timers: ReturnType<typeof setTimeout>[] = [];
-    const arm = (el: Element | null) => el?.setAttribute('data-rsv', 'armed');
     const settle = (el: Element | null) => el?.setAttribute('data-rsv', 'on');
 
-    /* ------------------------------------------- composition-only reveals -- */
+    // PHASE E — NEVER RE-ARM WHAT IS ALREADY SETTLED.
+    // This effect re-runs whenever the reduced-motion preference changes. A
+    // reader who turns reduced motion OFF part-way down the page must not watch
+    // the section they are reading disappear and fade back in. Measured before
+    // this guard existed: switching the preference off re-armed 17 of the 21
+    // reveals and re-armed the chain, which shrank to 46% and faded.
+    // The same principle applies within a single page view: a restored scroll
+    // position (the reader pressing Back) can put a section on screen before
+    // this leaf mounts. Nothing already on screen is armed — it is simply left
+    // composed. On a first load every `.rsv-rv` sits below the fold at every
+    // validated width, so this costs nothing there.
+    const onScreen = (el: Element) => {
+      const r = el.getBoundingClientRect();
+      return r.bottom > 0 && r.top < window.innerHeight;
+    };
+    const arm = (el: Element | null) => {
+      if (!el || el.getAttribute('data-rsv') === 'on') return false;
+      if (onScreen(el)) {
+        settle(el);
+        return false;
+      }
+      el.setAttribute('data-rsv', 'armed');
+      return true;
+    };
+
     const reveals = Array.from(document.querySelectorAll<HTMLElement>('.rsv-rv'));
+    const departure = document.getElementById('rsv-dep');
+    const friction = document.getElementById('rsv-fail');
+    const close = document.getElementById('rsv-close');
+
+    /* PHASE E — THE LAST RESORT. If anything at all in the registration pass
+       below fails, every element this leaf touches is composed and the page is
+       simply the Phase C page. An uncaught error here would instead propagate
+       out of the effect and tear down the React root, and any element already
+       armed would stay hidden until the ~4s fallback. */
+    const settleEverything = () => {
+      reveals.forEach(settle);
+      settle(departure);
+      settle(friction);
+      settle(close);
+    };
+
+    try {
+
+    /* ------------------------------------------- composition-only reveals -- */
     reveals.forEach((el) => {
-      arm(el);
+      if (!arm(el)) return;
       registry.onView(el, () => settle(el), T_REVEAL);
     });
 
     /* --------------------------------- the departure carrier and statement -- */
-    const departure = document.getElementById('rsv-dep');
-    if (departure) {
-      arm(departure);
+    if (departure && arm(departure)) {
       registry.onView(departure, () => settle(departure), T_DEPARTURE);
     }
 
     /* ------------------------------------------- the friction alignment -- */
-    const friction = document.getElementById('rsv-fail');
-    if (friction) {
-      arm(friction);
+    if (friction && arm(friction)) {
       registry.onView(
         friction,
         () => {
@@ -98,9 +148,7 @@ export function HomepageMotion() {
     }
 
     /* ----------------------------------------------- the close's arrival -- */
-    const close = document.getElementById('rsv-close');
-    if (close) {
-      arm(close);
+    if (close && arm(close)) {
       registry.onView(close, () => settle(close), T_CLOSE);
     }
 
@@ -121,11 +169,15 @@ export function HomepageMotion() {
       registry.destroy();
       document.removeEventListener('visibilitychange', onVisibility);
       // Unmounting must never leave the page holding a start state.
-      reveals.forEach(settle);
-      settle(departure);
-      settle(friction);
-      settle(close);
+      settleEverything();
     };
+
+    } catch {
+      timers.forEach(clearTimeout);
+      registry.destroy();
+      settleEverything();
+      return;
+    }
   }, [mounted, enabled]);
 
   return null;

@@ -60,17 +60,27 @@ export function HeroSurface({
     const section = sectionRef.current;
     const stage = section?.querySelector<HTMLElement>('[data-rsv-stage]');
     if (!section || !stage) return;
+    if (typeof requestAnimationFrame !== 'function') return;
 
     let ticking = false;
+    // PHASE E: a frame callback that throws would be reported every frame and,
+    // on the first commit, could tear the React root down. The departure is the
+    // least important thing on the page; the copy under it is the most.
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
         ticking = false;
-        const r = section.getBoundingClientRect();
-        const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height)));
-        stage.style.transform = `translate3d(0,${(-p * 48).toFixed(1)}px,0)`;
-        stage.style.opacity = (1 - p * 0.85).toFixed(3);
+        try {
+          const r = section.getBoundingClientRect();
+          const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height)));
+          stage.style.transform = `translate3d(0,${(-p * 48).toFixed(1)}px,0)`;
+          stage.style.opacity = (1 - p * 0.85).toFixed(3);
+        } catch {
+          // never leave the stage displaced or faded behind a failure
+          stage.style.transform = '';
+          stage.style.opacity = '';
+        }
       });
     };
 

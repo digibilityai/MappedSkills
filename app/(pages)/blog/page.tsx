@@ -1,408 +1,125 @@
-﻿import Link from 'next/link';
-import Image from 'next/image';
-import { Hero } from '@/components/Hero';
-import { Section } from '@/components/Section';
-import { Container } from '@/components/Container';
-import { BlogCard } from '@/components/BlogCard';
-import { CTASection } from '@/components/CTASection';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import Link from 'next/link';
 import { createMetadata } from '@/lib/metadata';
-import { ArrowRight } from 'lucide-react';
+import { CommercialSection, ChapterLabel, Display, Body, Note } from '@/components/commercial/primitives';
+import { RouteHero, EntryList } from '@/components/routes/primitives';
 import { getBlogListPosts } from '@/lib/contentful/posts';
 
 // Must be a literal — Next.js cannot follow imported identifiers for route segment config
 export const revalidate = 60;
 
+/**
+ * SESSION 29 — PHASE G — `/blog`. ARCHETYPE 9 — index.
+ *
+ * THIS ROUTE IS CONDITIONAL AND ITS CONDITION IS NOT SATISFIED.
+ * `PAGE_COPY_INDEX.md` §4 classifies `/blog` as CONDITIONAL; `copy/blog-index.md`
+ * §2 states the condition in terms: "This page does not publish until at least
+ * three exist; fewer than three reads as abandoned." The three approved launch
+ * articles were never written — `PAGE_COPY_INDEX.md` §1 rows 16, 17 and 18
+ * record all three as NOT DRAFTED, out of Session 11 scope — and Phase G does
+ * not write them, because writing three articles is editorial production, not
+ * route translation.
+ *
+ * SO THE INDEX COPY DOES NOT PUBLISH, AND NOTHING PRETENDS IT HAS. The two
+ * approved cluster descriptions and the approved hero line ("a deliberately
+ * small set of pieces on two subjects") describe articles that do not exist, so
+ * they render only when articles do. There is no article card, no stub, no
+ * placeholder, no skeleton, no invented date, no invented author, no invented
+ * category and no "coming soon" entry. `EntryList` has no empty-slot rendering
+ * path, so it cannot produce one.
+ *
+ * WHY THE ROUTE IS TRANSLATED RATHER THAN LEFT ALONE. It already returns HTTP
+ * 200 and is already in the navigation, so "defer" does not mean "absent" here
+ * — it means the legacy page stays live. That page carried five invented topic
+ * clusters promising "improve ROI", "ROAS improvement" and "ranking
+ * improvement", plus `FAQPage` markup for questions about a body of content
+ * that does not exist. Retaining the route while removing the fabrication is
+ * the "retain partially" treatment, and it is strictly more honest than leaving
+ * it.
+ *
+ * THE LISTING ARCHITECTURE IS REAL AND DATA-DRIVEN. Where the CMS returns
+ * posts, they render as hairline rows with their real date and cluster —
+ * archetype 9's "hairline rows, not card grids" — and the standing statement
+ * gives way to them. Nothing here has to be rewritten when the articles land.
+ *
+ * DEFERRED, NOT DONE HERE: `/blog/[slug]` is untouched. There is no article to
+ * render through it, its bylines are owner-blocked, and pagination before the
+ * CMS's 100-item ceiling is a Phase I item. The route's presence in
+ * `app/sitemap.ts` is likewise not changed — sitemap work is out of Phase G
+ * scope — and an indexable index with nothing on it is recorded for Phase I.
+ *
+ * F1: D — NONE. No figure on this route.
+ */
 export const metadata = createMetadata(
-  'Performance Marketing Blog | Google Ads, Meta Ads, SEO & CRO Insights | MappedSkills',
-  'Performance marketing blog with practical insights on Google Ads ROI, Meta Ads optimization, lead generation, SEO strategy, conversion rate optimization, and measurable growth for businesses.',
+  'Writing | MappedSkills',
+  'Pieces on why websites receive visits and not enquiries, and on how buyers find suppliers through AI-assisted search.',
   '/blog'
 );
 
-const TOPIC_CLUSTERS = [
-  {
-    title: 'Google Ads Growth',
-    description: 'Learn how to improve ROI, reduce wasted spend, structure campaigns, and track conversions.',
-    link: '/blog?category=google-ads',
-  },
-  {
-    title: 'Meta Ads & Social Campaigns',
-    description: 'Explore audience targeting, creative testing, retargeting, lead generation, and ROAS improvement.',
-    link: '/blog?category=social-media-ads',
-  },
-  {
-    title: 'Lead Generation',
-    description: 'Learn how to generate, qualify, score, and track better leads for your sales team.',
-    link: '/blog?category=lead-generation',
-  },
-  {
-    title: 'SEO & Organic Growth',
-    description: 'Understand keyword strategy, technical SEO, content planning, local SEO, and ranking improvement.',
-    link: '/blog?category=seo',
-  },
-  {
-    title: 'Conversion Optimization',
-    description: 'Improve landing pages, forms, CTAs, tracking, and user journeys to increase conversions.',
-    link: '/blog?category=conversion-optimization',
-  },
-];
-
-const FAQSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'What topics does this blog cover?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'The blog covers performance marketing topics including Google Ads ROI, Meta Ads optimization, lead generation, SEO strategy, conversion optimization, and measurable growth for businesses.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'How frequently is the blog updated?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'The blog is updated monthly with practical marketing insights, strategies, and breakdowns.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Can I subscribe to new articles?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes, you can subscribe to receive practical marketing insights on ads, SEO, leads, ROAS, and conversion growth via email.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Are the guides applicable to all business types?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'The guides are built for business owners and marketers. Most insights apply to B2B, B2C, SaaS, e-commerce, and service businesses.',
-      },
-    },
-  ],
-};
-
-type BlogPageProps = {
-  searchParams: Promise<{ category?: string }>;
-};
-
-export default async function BlogPage({ searchParams }: BlogPageProps) {
-  const { category } = await searchParams;
-  const allPosts = await getBlogListPosts();
-
-  const normalizedCategory = category?.toLowerCase().replace(/\s+/g, '-');
-  const filteredPosts =
-    !normalizedCategory || normalizedCategory === 'all'
-      ? allPosts
-      : allPosts.filter((post) => {
-          const slug = post.category.toLowerCase().replace(/\s+/g, '-');
-          return slug === normalizedCategory || slug.includes(normalizedCategory);
-        });
-
-  const featuredPost = filteredPosts[0] || allPosts[0];
-  const gridPosts = filteredPosts;
-  const popularGuides = allPosts.slice(0, 4).map((post) => ({
-    title: post.title,
-    href: post.href,
-  }));
-
-  const BreadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: 'https://mappedskills.com',
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Blog',
-        item: 'https://mappedskills.com/blog',
-      },
-    ],
-  };
-
-  const BlogCollectionSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: 'Performance Marketing Blog',
-    description:
-      'Performance marketing insights, strategies, and guides for Google Ads, Meta Ads, lead generation, SEO, and conversion optimization.',
-    url: 'https://mappedskills.com/blog',
-    mainEntity: {
-      '@type': 'ItemList',
-      itemListElement: allPosts.slice(0, 3).map((post, index) => ({
-        '@type': 'BlogPosting',
-        position: index + 1,
-        headline: post.title,
-        description: post.excerpt,
-        url: `https://mappedskills.com${post.href}`,
-      })),
-    },
-  };
-
-  const categories = [
-    'All',
-    ...Array.from(new Set(allPosts.map((post) => post.category))),
-  ];
+export default async function BlogPage() {
+  const posts = await getBlogListPosts();
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(BreadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(BlogCollectionSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQSchema) }}
-      />
-
-      <Section className="border-b border-border py-3 sm:py-4">
-        <Container>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-foreground">
-              Home
-            </Link>
-            <span>/</span>
-            <span className="text-foreground">Blog</span>
-          </div>
-        </Container>
-      </Section>
-
-      <Hero
-        title="Performance Marketing Insights for Smarter Growth"
-        subheadline="Practical guides, strategies, and breakdowns to help businesses."
-        cta={{ text: 'Get Free Marketing Audit', href: '/schedule-call' }}
-        secondaryCta={{ text: 'Explore Blog Topics', href: '#topics' }}
-      >
-        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-6">
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-xs sm:text-sm text-muted-foreground">High-Intent Growth Guides</p>
-          </Card>
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-xs sm:text-sm text-muted-foreground">Google Ads, Meta Ads, & SEO</p>
-          </Card>
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-xs sm:text-sm text-muted-foreground">Built for Business Owners</p>
-          </Card>
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-xs sm:text-sm text-muted-foreground">Updated Monthly</p>
-          </Card>
-        </div>
-
-        <div className="mt-12 relative h-64 sm:h-80 rounded-lg overflow-hidden bg-secondary/5 border border-border">
-          <Image
-            src="/images/blog-dashboard.png"
-            alt="Blog content dashboard showing categories, keywords, and growth insights"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-      </Hero>
-
-      {featuredPost && (
-        <Section className="border-b border-border bg-secondary/5">
-          <Container>
-            <div className="mb-8">
-              <Badge className="mb-4 bg-accent/10 text-accent border-0 text-xs font-bold uppercase tracking-wider inline-block">
-                Featured Guide
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Latest Growth Insights</h2>
-            </div>
-            <BlogCard
-              title={featuredPost.title}
-              excerpt={featuredPost.excerpt}
-              category={featuredPost.category}
-              readingTime={featuredPost.readingTime}
-              publishDate={featuredPost.publishedDate}
-              href={featuredPost.href}
-              featured={true}
-            />
-          </Container>
-        </Section>
-      )}
-
-      <Section className="border-b border-border">
-        <Container>
-          <div className="mb-6">
-            <Badge className="mb-4 bg-accent/10 text-accent border-0 text-xs font-bold uppercase tracking-wider inline-block">
-              Filter by Topic
-            </Badge>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Browse by Category</h2>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            {categories.map((cat) => (
-              <Button key={cat} variant="outline" size="sm" asChild>
-                <Link href={cat === 'All' ? '/blog' : `/blog?category=${cat.toLowerCase().replace(/\s+/g, '-')}`}>
-                  {cat}
-                </Link>
-              </Button>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      <Section>
-        <Container>
-          <div className="mb-12">
-            <Badge className="mb-4 bg-accent/10 text-accent border-0 text-xs font-bold uppercase tracking-wider inline-block">
-              All Articles
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Latest Articles</h2>
-          </div>
-          {gridPosts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12">
-              {gridPosts.map((post) => (
-                <BlogCard
-                  key={post.href}
-                  title={post.title}
-                  excerpt={post.excerpt}
-                  category={post.category}
-                  readingTime={post.readingTime}
-                  publishDate={post.publishedDate}
-                  href={post.href}
-                />
-              ))}
-            </div>
+      <RouteHero
+        eyebrow="Writing"
+        title={<>Writing</>}
+        lede={
+          posts.length > 0 ? (
+            <>
+              A deliberately small set of pieces on two subjects: why websites receive visits and not
+              enquiries, and how buyers are finding suppliers through AI-assisted search.
+            </>
           ) : (
-            <p className="text-muted-foreground mb-12">No articles found for this category yet.</p>
-          )}
-        </Container>
-      </Section>
+            <>Nothing is published here yet.</>
+          )
+        }
+      >
+        {posts.length > 0 ? (
+          <p>
+            Where something rests on a measurement we ran, it links to the measurement rather than restating
+            it.
+          </p>
+        ) : null}
+      </RouteHero>
 
-      <Section id="topics" className="border-y border-border bg-secondary/5">
-        <Container>
-          <div className="mb-12">
-            <Badge className="mb-4 bg-accent/10 text-accent border-0 text-xs font-bold uppercase tracking-wider inline-block">
-              Browse Topics
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Explore by Growth Topic</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
-            {TOPIC_CLUSTERS.map((cluster, idx) => (
-              <Link key={idx} href={cluster.link}>
-                <Card className="p-6 sm:p-8 flex flex-col hover:shadow-lg transition-shadow h-full">
-                  <h3 className="mb-3 font-semibold text-accent text-lg">{cluster.title}</h3>
-                  <p className="mb-3 mt-3 text-muted-foreground text-sm flex-grow leading-relaxed">
-                    {cluster.description}
-                  </p>
-                  <div className="inline-flex items-center gap-2 text-accent font-medium text-sm w-fit">
-                    Explore
-                    <ArrowRight className="h-4 w-4" />
-                  </div>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      <Section>
-        <Container>
-          <div className="max-w-2xl mx-auto text-center">
-            <Badge className="mb-4 bg-accent/10 text-accent border-0 text-xs font-bold uppercase tracking-wider inline-block">
-              Stay Updated
-            </Badge>
-            <h2 className="mb-2 text-2xl sm:text-3xl font-bold">
-              Want Practical Growth Insights in Your Inbox?
-            </h2>
-            <p className="mb-6 text-muted-foreground">
-              Get simple, useful marketing tips on ads, SEO, leads, ROAS, and conversion growth.
-            </p>
-            <form className="flex flex-col sm:flex-row gap-3 mb-4">
-              <input
-                type="email"
-                placeholder="Your email address"
-                className="flex-1 px-4 py-3 rounded-md border border-border bg-background"
-              />
-              <Button type="submit">Subscribe for Insights</Button>
-            </form>
-            <p className="text-xs text-muted-foreground">
-              No spam. Only practical marketing insights. Or{' '}
-              <Link href="/schedule-call" className="text-accent hover:underline">
-                prefer a direct audit?
-              </Link>
-            </p>
-          </div>
-        </Container>
-      </Section>
-
-      {popularGuides.length > 0 && (
-        <Section className="border-y border-border bg-secondary/5">
-          <Container>
-            <div className="mb-12">
-              <Badge className="mb-4 bg-accent/10 text-accent border-0 text-xs font-bold uppercase tracking-wider inline-block">
-                Most Popular
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Top Marketing Guides</h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-              {popularGuides.map((guide, idx) => (
-                <Link key={idx} href={guide.href}>
-                  <Card className="p-6 sm:p-8 hover:shadow-lg transition-shadow h-full flex items-center justify-between">
-                    <h3 className="font-semibold">{guide.title}</h3>
-                    <ArrowRight className="h-5 w-5 text-accent flex-shrink-0 ml-4" />
-                  </Card>
-                </Link>
-              ))}
-            </div>
-          </Container>
-        </Section>
+      {posts.length > 0 ? (
+        <CommercialSection tone="paper">
+          <ChapterLabel>Articles</ChapterLabel>
+          <EntryList
+            entries={posts.map((post) => ({
+              href: post.href,
+              title: post.title,
+              meta: [post.category, post.publishedDate].filter(Boolean).join(' · '),
+              summary: post.excerpt,
+            }))}
+          />
+        </CommercialSection>
+      ) : (
+        <CommercialSection tone="paper">
+          <ChapterLabel>What will be here</ChapterLabel>
+          <Display>Two subjects, and no archive.</Display>
+          <Body>
+            Why websites receive visits and not enquiries, and how buyers are finding suppliers through
+            AI-assisted search. Two clusters, because that is what this firm has genuinely done work on
+            &mdash; not a category taxonomy larger than the content it organises.
+          </Body>
+          <Note>
+            No article card, stub or placeholder appears above, and no publishing cadence is promised. Both
+            subjects already have pages that stand on their own:{' '}
+            <Link
+              href="/problems/traffic-but-no-enquiries"
+              className="font-semibold text-resolve-ink underline decoration-2 underline-offset-4"
+            >
+              the five checks for traffic that does not become enquiries
+            </Link>{' '}
+            and{' '}
+            <Link href="/ai-seo" className="font-semibold text-resolve-ink underline decoration-2 underline-offset-4">
+              what determines whether a business appears in AI answers
+            </Link>
+            .
+          </Note>
+        </CommercialSection>
       )}
-
-      <Section>
-        <Container>
-          <div className="mb-12 text-center">
-            <Badge className="mb-4 bg-accent/10 text-accent border-0 text-xs font-bold uppercase tracking-wider inline-block">
-              Need Help?
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              Need Help Applying These Ideas?
-            </h2>
-            <p className="text-lg text-foreground max-w-2xl mx-auto">
-              Reading is useful. But if your campaigns are leaking budget, leads, or conversions, you may
-              need a proper audit.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
-            {[
-              { title: 'Google Ads Audit', href: '/google-ads' },
-              { title: 'Social Ads Audit', href: '/social-media-ads' },
-              { title: 'Lead Generation Audit', href: '/lead-generation' },
-              { title: 'SEO Audit', href: '/seo' },
-              { title: 'Conversion Audit', href: '/conversion-optimization' },
-            ].map((service, idx) => (
-              <Card key={idx} className="p-6 sm:p-8 text-center hover:shadow-lg transition-shadow">
-                <h3 className="mb-4 font-semibold text-accent">{service.title}</h3>
-                <Button variant="outline" size="sm" asChild>
-                  <Link href={service.href}>Learn More</Link>
-                </Button>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      <CTASection
-        title="Ready to Turn Marketing Insights Into Measurable Growth?"
-        description="Book a free strategy call and get clear recommendations based on your current marketing setup."
-        primaryCta={{ text: 'Schedule Free Strategy Call', href: '/schedule-call' }}
-        secondaryCta={{ text: 'Explore Services', href: '/services' }}
-      />
     </>
   );
 }

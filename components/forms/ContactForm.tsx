@@ -11,7 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Card } from '@/components/ui/card';
 import { CheckCircle } from 'lucide-react';
 
 interface FormData {
@@ -170,8 +169,18 @@ export function ContactForm({ onSuccess }: ContactFormProps) {
       <div className="rounded-lg border border-accent/20 bg-accent/5 p-8 text-center">
         <CheckCircle className="mx-auto h-12 w-12 text-accent mb-4" />
         <h3 className="mb-2 text-lg font-semibold">Thank You!</h3>
+        {/* SESSION 29 — PHASE G, CONTENT-INTEGRITY REMOVAL ONLY.
+            This previously read "Our team will review your details and get back
+            to you within 24 hours." No response-time distribution has ever been
+            measured, so that number had no provenance, and it is the one number
+            a visitor at this moment most wants. Removed rather than restated.
+            THE SUCCESS STATE ITSELF IS STILL FALSE — it is reached on a
+            client-side timer with no transmission — and PHASE H1 owns fixing
+            that, per docs/27-production-translation/06_IMPLEMENTATION_SEQUENCE.md.
+            Phase G does not build the backend and does not pretend the path
+            works; it removes the unsupported claims it can remove. */}
         <p className="text-muted-foreground mb-6">
-          We&apos;ve received your enquiry. Our team will review your details and get back to you within 24 hours.
+          Nothing else is needed from you.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Button asChild variant="outline">
@@ -353,15 +362,17 @@ export function ContactForm({ onSuccess }: ContactFormProps) {
         className="w-full"
         disabled={isSubmitting}
       >
-        {isSubmitting ? 'Submitting...' : 'Submit — We\'ll Call You'}
+        {/* "Submit — We'll Call You" promised a call nobody had committed to.
+            "Send this" is the approved submit label (copy/contact.md §1). */}
+        {isSubmitting ? 'Sending...' : 'Send this'}
       </Button>
 
-      {/* Trust & Security Badges */}
-      <Card className="p-4 bg-secondary/30 border-secondary text-center">
-        <p className="text-xs text-muted-foreground">
-          ✓ We respond within 24 hours  |  ✓ No pushy sales calls  |  ✓ Your info is secure
-        </p>
-      </Card>
+      {/* SESSION 29 — PHASE G: a "trust" strip reading "We respond within 24
+          hours | No pushy sales calls | Your info is secure" was removed here.
+          Three claims, none of them supported: no response time has been
+          measured, no follow-up behaviour has been committed to, and the form
+          transmits nothing so no security property of the transmission can be
+          asserted. Nothing replaces it. */}
     </form>
   );
 }

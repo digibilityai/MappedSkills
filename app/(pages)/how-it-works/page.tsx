@@ -1,732 +1,413 @@
-﻿import Link from 'next/link';
-import { Hero } from '@/components/Hero';
-import { Section } from '@/components/Section';
-import { Container } from '@/components/Container';
-import { CTASection } from '@/components/CTASection';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
 import { createMetadata } from '@/lib/metadata';
-import { ArrowRight, CheckCircle, AlertCircle, BarChart3, Lock, TrendingUp } from 'lucide-react';
+import { CommercialSection, ChapterLabel, Display, Body, Note } from '@/components/commercial/primitives';
+import { RouteHero, StatedList, FindingList } from '@/components/routes/primitives';
+import { BoundaryBlock } from '@/components/commercial/BoundaryBlock';
+import { CommercialClose } from '@/components/commercial/CommercialClose';
+import { MethodChain, MethodChainState } from '@/components/routes/MethodChain';
 
-// Tracking Configuration for GA4
-// Event names to implement:
-// - 'strategy_audit_cta_click': Hero primary CTA + final CTA
-// - 'results_cta_click': Hero secondary CTA
-// - 'schedule_call_click': Final CTA primary
-// - 'contact_click': Final CTA secondary
-// Add data-tracking-event attributes to Button components for GTM integration
-
+/**
+ * SESSION 29 — PHASE G — `/how-it-works`. ARCHETYPE 5 — methodology / proof.
+ *
+ * THE BLOCKED SECTION, STATED FIRST BECAUSE IT GOVERNS THE PAGE.
+ *
+ * §2 — "How an engagement actually runs", the real delivery stages — is
+ * OWNER-BLOCKED and UNDRAWN, and `06_IMPLEMENTATION_SEQUENCE.md` Phase G names
+ * this route in its scope line with the parenthetical "(§2 RENDERS NOTHING)".
+ * IT RENDERS NOTHING BELOW: no heading, no container, no placeholder, no
+ * silhouette, no "coming soon", no numbered outline.
+ *
+ * The approved copy records the reason and it is not a formality:
+ * `copy/how-it-works.md` §2 carries a six-word stage outline — diagnose,
+ * instrument, capture demand, convert demand, measure and report, extend — and
+ * states in terms that "THAT OUTLINE IS THE ARCHITECTURE, NOT A DESCRIPTION OF
+ * WHAT HAPPENS. It is not copy, and it must not be published as though it
+ * were." A Step 1 / Step 2 / Step 3 built from it would be fabricated proof on
+ * the one page that exists to disprove fabricated proof — the exact failure the
+ * page argues against, committed by the page itself.
+ *
+ * §9 — "What happens when you enquire" — is blocked on the same class of owner
+ * input (who owns enquiry response, the sequence, the hours) plus an EVIDENCE
+ * REQUIRED item: no response-time distribution has ever been measured. IT ALSO
+ * RENDERS NOTHING. Publishing an unmeasured response promise would demonstrate
+ * the exact failure this business sells the fix for.
+ *
+ * WHAT REMAINS IS NOT A REMNANT. Sections 1, 3, 4, 5, 6, 7, 8, 10 and 11 are
+ * drafted, judgeable and unblocked, and `03_PAGE_ARCHETYPES.md` §4.3 records
+ * that they "carry its proof value". The page's argument — here is what is
+ * measured, here is what cannot be, and here is where a person decides — stands
+ * without the stages. A shorter truthful page beats a complete fictional one.
+ *
+ * F1: A — FULL (§3) + C — STATE as F4 (§5), on the same object
+ * (`22_F1_USAGE_TAXONOMY.md` §3). This is one of only three routes on the site
+ * carrying the full figure.
+ *
+ * MOTION: none. No sticky CTA anywhere on this page — the approved copy says so
+ * explicitly, and the Resolve budget is 0 sticky site-wide in any case.
+ *
+ * WHAT THIS REPLACED: a 733-line page carrying "300%+", "₹100Cr+", ROAS in six
+ * places, ₹50,000/₹500,000 figures and three guarantee statements. None of it
+ * migrates.
+ */
 export const metadata = createMetadata(
-  'Performance Marketing Process | Audit → Strategy → Launch → Optimize | MappedSkills',
-  'Learn the MappedSkills performance marketing process: transparent audits, data-driven strategy, systematic optimization, and measurable results every month.',
+  'How We Work, What We Measure, and What We Cannot Tell You | MappedSkills',
+  'The published method: what is measured at each point on the chain, what cannot be attributed and why, and where a person decides rather than a process. Written to be checked.',
   '/how-it-works'
 );
 
-// JSON-LD Schemas
-const BreadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    {
-      '@type': 'ListItem',
-      position: 1,
-      name: 'Home',
-      item: 'https://mappedskills.com',
-    },
-    {
-      '@type': 'ListItem',
-      position: 2,
-      name: 'How It Works',
-      item: 'https://mappedskills.com/how-it-works',
-    },
-  ],
-};
+/* §3 — the six measured points, in the approved order, as prose beside the
+   figure. The figure replaces the structure; the list carries what each point
+   actually is, which the figure deliberately does not attempt to fit. */
+const MEASURED = [
+  {
+    term: <>Discovery and source</>,
+    body: <>How someone first found the business, where that is knowable.</>,
+  },
+  { term: <>Landing</>, body: <>What they arrived on, and from what.</> },
+  {
+    term: <>Interaction</>,
+    body: <>What they did before enquiring, at the level of pages and actions rather than surveillance.</>,
+  },
+  {
+    term: <>The enquiry</>,
+    body: <>Recorded at the moment it is made, carrying its own source, rather than reconstructed later.</>,
+  },
+  {
+    term: <>The qualified enquiry</>,
+    body: (
+      <>
+        Whether it is real, reachable, from a business context, with a stated need, and not a duplicate. This
+        is the accountable number.
+      </>
+    ),
+  },
+  {
+    term: <>Opportunity and revenue</>,
+    body: (
+      <>
+        Only where the client supplies their own close data, reported as the client&rsquo;s numbers from the
+        client&rsquo;s system.
+      </>
+    ),
+  },
+];
 
-const FAQSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'How long does it take to see results?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Results depend on your market, competition, and starting point. Most clients see early signals within 30 days and meaningful growth within 60-90 days. We track progress weekly so you can see improvements as they happen.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'How much does the process cost?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Costs vary based on scope, channels, competition, and goals. We offer custom pricing after understanding your business. Most businesses start between ₹50,000 to ₹500,000 per month depending on scale and complexity.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Do you work with all business types?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'We work with B2B, B2C, SaaS, e-commerce, agencies, and service businesses. We specialize in businesses that need qualified leads, improved ROAS, or measurable growth from marketing.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What if campaigns are already running?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Great! We audit existing campaigns, improve targeting, messaging, landing pages, tracking, and funnel optimization. Many clients see immediate improvements by fixing what is already running.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Do you provide detailed reporting?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes. Reporting includes campaign performance, leads, cost per lead, conversion rate, quality signals, and recommended next actions.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Do you work only on ads?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'No. We connect ads, SEO, landing pages, lead capture, tracking, reporting, and conversion optimization depending on the business goal.',
-      },
-    },
-  ],
-};
+/* §6 — five places a person decides. Named rather than hidden behind process
+   language, which is the section's whole point. */
+const JUDGEMENT = [
+  <>
+    <strong className="font-bold text-resolve-ink">Which demand is worth capturing.</strong> Much of what looks
+    like demand in this market is students, job-seekers and competitors.
+  </>,
+  <>
+    <strong className="font-bold text-resolve-ink">Which of four failures a symptom indicates</strong>, when the
+    evidence is partial.
+  </>,
+  <>
+    <strong className="font-bold text-resolve-ink">Whether an enquiry is a real fit.</strong> The website can
+    check that an enquiry is real, reachable and in context. It cannot judge what an opportunity is worth to
+    you, and no form can. That is a conversation.
+  </>,
+  <>
+    <strong className="font-bold text-resolve-ink">What a partial measurement means</strong>, and what it does
+    not license us to say.
+  </>,
+  <>
+    <strong className="font-bold text-resolve-ink">When to tell a client a channel is wrong</strong> for their
+    business, including when we would be paid to run it.
+  </>,
+];
+
+/* §8 — stated as a requirement rather than a request, because the work does not
+   function without it. */
+const CLIENT_PROVIDES = [
+  <>
+    <strong className="font-bold text-resolve-ink">Access.</strong> Analytics, search console, ad accounts, the
+    site itself, and the systems where enquiries land.
+  </>,
+  <>
+    <strong className="font-bold text-resolve-ink">Decisions, at a reasonable pace.</strong> Work that waits
+    three weeks for an approval loses more than it looks like it does.
+  </>,
+  <>
+    <strong className="font-bold text-resolve-ink">Product knowledge.</strong> What you sell, who buys it, what
+    they ask before they buy, and what a good customer looks like. Nobody outside your business has that.
+  </>,
+  <>
+    <strong className="font-bold text-resolve-ink">Capacity to follow up.</strong> An enquiry that is not
+    answered is not a result, and it is the one part of the chain we do not control.
+  </>,
+];
 
 export default function HowItWorksPage() {
   return (
     <>
-      {/* JSON-LD Schemas */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(BreadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQSchema) }}
-      />
-
-      {/* Breadcrumb Navigation */}
-      <Section className="border-b border-border py-3 sm:py-4">
-        <Container>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-foreground">Home</Link>
-            <span>/</span>
-            <span className="text-foreground">How It Works</span>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 1. Hero Section */}
-      <Hero
-        title="How We Deliver Measurable Marketing Results"
-        subheadline="Our performance marketing process is built around clarity, tracking, optimization, and business outcomes — not guesswork."
-        description=""
-        cta={{
-          text: 'Start Your Free Strategy Audit',
-          href: '/schedule-call',
-        }}
-        secondaryCta={{
-          text: 'See Our Results',
-          href: '/work',
-        }}
+      {/* Top-level route: no breadcrumb (P12 applies to capability routes). */}
+      <RouteHero
+        eyebrow="The published method"
+        title={<>How we work, what we measure, and what we cannot tell you.</>}
+        lede={
+          <>
+            This page exists to be checked. It sets out how the work is done, what is measured at each point,
+            what a measurement can and cannot support, and where the judgement calls are.
+          </>
+        }
       >
-        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-6">
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-2xl sm:text-3xl font-bold text-accent mb-2">6-Step</p>
-            <p className="text-xs sm:text-sm text-muted-foreground">Growth Process</p>
-          </Card>
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-2xl sm:text-3xl font-bold text-accent mb-2">300%+</p>
-            <p className="text-xs sm:text-sm text-muted-foreground">Average ROI</p>
-          </Card>
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-2xl sm:text-3xl font-bold text-accent mb-2">50+</p>
-            <p className="text-xs sm:text-sm text-muted-foreground">Clients Served</p>
-          </Card>
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-2xl sm:text-3xl font-bold text-accent mb-2">Monthly</p>
-            <p className="text-xs sm:text-sm text-muted-foreground">Transparent Reporting</p>
-          </Card>
+        <p>
+          The section on what cannot be attributed is not a disclaimer at the bottom &mdash; it is a third of
+          the reason this page is here.
+        </p>
+      </RouteHero>
+
+      {/* ------------------------------------------------------------- §1 */}
+      <CommercialSection tone="paper">
+        <ChapterLabel>Why these disciplines are one chain</ChapterLabel>
+        <Display>Two observations sit underneath everything below.</Display>
+        <Body>
+          The first: when a business is absent from AI answers, the reason is usually that those answers are
+          assembled from directories, listings and third-party pages the business is not on. We measured that
+          on ourselves &mdash; across 28 unbranded runs on four systems in one day, we appeared zero times,
+          while directory sources appeared in 15 of them. The fix is mostly not on the website.
+        </Body>
+        <Body>
+          The second: traffic that does not become enquiries is one of four failures &mdash; the demand, the
+          page, the enquiry path, or the measurement &mdash; and the same symptom appears in all four.
+          Measurement is what tells you which one you have.
+        </Body>
+        <Body>
+          Both point the same way. The work at the top of the chain and the work at the bottom of it are
+          connected, and the joins between them are where a result quietly disappears. That is an argument for
+          the joins belonging to somebody.
+        </Body>
+        <Note>
+          It is not an argument that every engagement contains all of them. What a given piece of work covers
+          is decided per client.
+        </Note>
+      </CommercialSection>
+
+      {/*
+        §2 — THE STAGES — OWNER-BLOCKED, AND IT RENDERS NOTHING.
+
+        There is deliberately no element here. Not an empty section, not a
+        heading with nothing under it, not a bordered container, not a
+        placeholder, not "coming soon", and not the six-word stage outline from
+        the brief, which the approved copy states is architecture and must not
+        be published as though it were a description of what happens.
+
+        Supplying the owner input later is a CONTENT change at this position,
+        not a redesign (26_OWNER_BLOCKED_STRUCTURE_RULE.md §5) — §1 above and §3
+        below already read as consecutive chapters, and there is no gap, marker
+        or seam where this section would sit.
+      */}
+
+      {/* ------------------------------------------------------------- §3 */}
+      <CommercialSection>
+        <ChapterLabel>What we measure</ChapterLabel>
+        <Display>Six points on one chain.</Display>
+
+        <MethodChain />
+
+        <FindingList items={MEASURED} />
+
+        <Note>
+          Every one of those is reported against a starting point captured before the work begins. Where no
+          starting point was captured, there is no before, and we say so rather than manufacturing one.
+        </Note>
+      </CommercialSection>
+
+      {/* ------------------------------------------------------------- §4 */}
+      <CommercialSection tone="paper">
+        <BoundaryBlock
+          label="What we do not measure, and cannot"
+          heading={<>Six things this method does not produce.</>}
+          notPromised={[
+            'revenue we do not control',
+            'a rank in any AI system',
+            'anything about systems we cannot test',
+            'significance below a real traffic threshold',
+            'a source for an enquiry that carries none',
+            'a before-and-after with no baseline behind it',
+          ]}
+        >
+          <p>
+            <strong className="font-bold text-resolve-ink">Revenue we do not control.</strong> We do not set the
+            price, build the product, staff the sales team, follow up the enquiry or close the deal. Revenue is
+            reported from client data; it is never promised.
+          </p>
+          <p>
+            <strong className="font-bold text-resolve-ink">A rank in any AI system.</strong> There is no such
+            number. Order changed in every repeated prompt we measured, so a position would be a reading of
+            noise.
+          </p>
+          <p>
+            <strong className="font-bold text-resolve-ink">Anything about systems we cannot test.</strong>{' '}
+            Claude and Grok returned no testable result in our measurement. We hold no baseline for either and
+            make no claim about either.
+          </p>
+          <p>
+            <strong className="font-bold text-resolve-ink">
+              Statistical significance below a real traffic threshold.
+            </strong>{' '}
+            Below it, the work is research, diagnosis and design, and we describe it that way rather than
+            calling an observation a test.
+          </p>
+          <p>
+            <strong className="font-bold text-resolve-ink">Enquiries with no usable acquisition context.</strong>{' '}
+            Direct entry, missing referrer, consent declined, and manually received enquiries &mdash; a phone
+            call or an email &mdash; carry no first-touch attribution at all.
+          </p>
+          <p>
+            <strong className="font-bold text-resolve-ink">
+              A before-and-after where no baseline was captured first.
+            </strong>{' '}
+            This applies to our own site as much as to a client&rsquo;s.
+          </p>
+        </BoundaryBlock>
+      </CommercialSection>
+
+      {/* ------------------------------------------------------------- §5
+          The highest-value section on the site, and the one Session 11 judged
+          "most improved by being visual". */}
+      <CommercialSection>
+        <ChapterLabel>What we cannot tell you about where an enquiry came from</ChapterLabel>
+        <Display>Attribution is useful, incomplete, and unevenly incomplete.</Display>
+        <Body>
+          Attribution means connecting an enquiry back to how the person first found the business and what they
+          were looking at when they enquired.
+        </Body>
+
+        <MethodChainState />
+
+        <div className="mt-[clamp(26px,3.2vw,44px)] max-w-[62ch] text-[1.02rem] leading-relaxed [&>p+p]:mt-4">
+          <p className="m-0">
+            A person who researches on their phone and enquires from a laptop appears as two different people.
+            We cannot join them.
+          </p>
+          <p>
+            A visitor who declines tracking consent is not tracked. That is correct, and it means their enquiry
+            arrives with no source.
+          </p>
+          <p>
+            A link shared in WhatsApp, an email or a private message arrives with no referrer and is recorded
+            as direct. In this market that is a large category, not an edge case.
+          </p>
+          <p>
+            Someone who was recommended by a customer, saw the business somewhere offline, or simply typed the
+            domain in, arrives with nothing to attribute.
+          </p>
+          <p>
+            Phone calls and emails carry no first-touch attribution at all. They are entered by a person, with
+            the source recorded as unknown, and they are never quietly assigned to a channel.
+          </p>
+          <p>
+            Revenue attribution depends entirely on data the client supplies from their own system. Where it is
+            not supplied, that part of the chain is empty and shown as empty.
+          </p>
         </div>
-      </Hero>
 
-      {/* 2. Why Process Matters Section */}
-      <Section className="border-y border-border bg-secondary/5">
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Marketing Fails When There Is No Clear Process
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-foreground">
-              Most campaigns fail because businesses jump directly into execution without auditing the funnel, fixing tracking, defining goals, or understanding what success should look like.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            <Card className="p-6 sm:p-8">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-destructive/10">
-                <AlertCircle className="h-6 w-6 text-destructive" />
-              </div>
-              <h3 className="mb-2 text-lg font-semibold">No Proper Audit</h3>
-              <p className="text-muted-foreground">
-                Campaigns are launched before understanding what is broken.
-              </p>
-            </Card>
-            <Card className="p-6 sm:p-8">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-destructive/10">
-                <AlertCircle className="h-6 w-6 text-destructive" />
-              </div>
-              <h3 className="mb-2 text-lg font-semibold">No Clear Strategy</h3>
-              <p className="text-muted-foreground">
-                Budgets, channels, audiences, and offers are selected without enough clarity.
-              </p>
-            </Card>
-            <Card className="p-6 sm:p-8">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-destructive/10">
-                <AlertCircle className="h-6 w-6 text-destructive" />
-              </div>
-              <h3 className="mb-2 text-lg font-semibold">No Reliable Tracking</h3>
-              <p className="text-muted-foreground">
-                Leads, calls, purchases, and booked meetings are not tracked properly.
-              </p>
-            </Card>
-            <Card className="p-6 sm:p-8">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-destructive/10">
-                <AlertCircle className="h-6 w-6 text-destructive" />
-              </div>
-              <h3 className="mb-2 text-lg font-semibold">No Optimization Rhythm</h3>
-              <p className="text-muted-foreground">
-                Reports are shared, but no clear action is taken to improve performance.
-              </p>
-            </Card>
-          </div>
-        </Container>
-      </Section>
+        <p
+          className="mt-[clamp(28px,3.4vw,48px)] max-w-[58ch] border-l-4 pl-[clamp(18px,2.2vw,30px)] text-[clamp(1.1rem,1.8vw,1.42rem)] font-semibold leading-[1.35]"
+          style={{ borderColor: 'var(--resolve-accent-deep)' }}
+        >
+          A measurement gap never disqualifies a legitimate enquiry. Whether an enquiry counts and whether we
+          can tell where it came from are two separate questions. An enquiry we could not trace is still a real
+          enquiry, it stays in the count, and the gap is reported as a gap &mdash; because moving it out would
+          make the measurement look tidier and the business smaller.
+        </p>
+      </CommercialSection>
 
-      {/* 3. Our 6-Step Process Section */}
-      <Section>
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              The MappedSkills 6-Step Growth Process
-            </h2>
-          </div>
-          <div className="space-y-8 sm:space-y-12">
-            {[
-              {
-                step: '01',
-                title: 'Discovery & Audit',
-                description: 'We review your current marketing activity, website, landing pages, ad accounts, SEO performance, analytics, tracking setup, lead quality, and growth gaps.',
-                what_we_analyze: [
-                  'Current marketing channels',
-                  'Website and landing pages',
-                  'Ad account structure',
-                  'SEO visibility',
-                  'Tracking and analytics',
-                  'Lead quality',
-                  'Conversion gaps',
-                ],
-                deliverable: 'Full audit report + findings discussion',
-              },
-              {
-                step: '02',
-                title: 'Strategy Development',
-                description: 'We create a custom growth strategy based on your business model, target audience, budget, offer, competition, and conversion goals.',
-                what_we_analyze: [
-                  'Target audience',
-                  'Channel mix',
-                  'Campaign goals',
-                  'Keyword strategy',
-                  'Budget allocation',
-                  'Offer positioning',
-                  'Conversion path',
-                ],
-                deliverable: 'Custom strategy document + approval before execution',
-              },
-              {
-                step: '03',
-                title: 'Campaign Setup & Launch',
-                description: 'Once the strategy is approved, we build campaigns, creatives, copy, landing page recommendations, tracking events, and reporting structure.',
-                what_we_analyze: [
-                  'Google Ads campaigns',
-                  'Meta Ads campaigns',
-                  'SEO page priorities',
-                  'Lead generation funnels',
-                  'Conversion tracking',
-                  'Reporting dashboard',
-                  'CTA and form tracking',
-                ],
-                deliverable: 'Campaigns live with tracking and reporting in place',
-              },
-              {
-                step: '04',
-                title: 'Daily Optimization',
-                description: 'We monitor campaigns and performance signals regularly so budget is not wasted and weak areas are improved quickly.',
-                what_we_analyze: [
-                  'Search terms',
-                  'Audiences',
-                  'Bids and budgets',
-                  'Ad copy',
-                  'Creatives',
-                  'Landing pages',
-                  'Lead quality',
-                  'Cost per lead',
-                  'Conversion rate',
-                ],
-                deliverable: 'Weekly optimization notes and performance improvements',
-              },
-              {
-                step: '05',
-                title: 'Scaling',
-                description: 'Once a campaign, channel, keyword, or audience starts producing profitable results, we scale it carefully without breaking performance.',
-                what_we_analyze: [
-                  'Winning campaigns',
-                  'High-quality audiences',
-                  'Profitable keywords',
-                  'Retargeting funnels',
-                  'Best-performing offers',
-                  'Strong landing pages',
-                  'New locations or segments',
-                ],
-                deliverable: 'Monthly scaling roadmap',
-              },
-              {
-                step: '06',
-                title: 'Reporting & Strategy Calls',
-                description: 'We report what happened, why it happened, what worked, what failed, and what needs to change next.',
-                what_we_analyze: [
-                  'Spend',
-                  'Leads',
-                  'Cost per lead',
-                  'Lead quality',
-                  'Conversion rate',
-                  'ROAS',
-                  'Revenue impact',
-                  'Keyword rankings',
-                  'Traffic sources',
-                  'Next actions',
-                ],
-                deliverable: 'Monthly dashboard + KPI tracking + strategy call',
-              },
-            ].map((process, idx) => (
-              <div key={idx} className="grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8 pb-8 sm:pb-12 border-b border-border last:border-b-0 last:pb-0">
-                <div className="md:col-span-1">
-                  <p className="text-5xl sm:text-6xl font-bold text-accent mb-4">{process.step}</p>
-                  <h3 className="text-xl sm:text-2xl font-bold">{process.title}</h3>
-                </div>
-                <div className="md:col-span-3">
-                  <p className="text-lg text-foreground mb-6">{process.description}</p>
-                  <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6">
-                    {process.what_we_analyze.map((item, i) => (
-                      <div key={i} className="flex items-start gap-2">
-                        <CheckCircle className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-                        <span className="text-sm text-muted-foreground">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="rounded-lg border border-border bg-secondary/50 p-4">
-                    <p className="text-sm font-medium text-foreground">
-                      <span className="text-accent">Deliverable:</span> {process.deliverable}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </Section>
+      {/* ------------------------------------------------------------- §6 */}
+      <CommercialSection tone="paper">
+        <ChapterLabel>Where a person decides, not a process</ChapterLabel>
+        <Display>Five places, named rather than hidden behind process language.</Display>
+        <StatedList items={JUDGEMENT} />
+      </CommercialSection>
 
-      {/* 4. Timeline Section */}
-      <Section className="border-y border-border bg-secondary/5">
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              What the First 30 Days Usually Look Like
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
-            {[
-              {
-                week: 'Week 1',
-                title: 'Discovery & Audit',
-                description: 'We understand your business, review current marketing assets, inspect tracking, and identify major leaks.',
-              },
-              {
-                week: 'Week 2',
-                title: 'Strategy Approval',
-                description: 'We share the strategy, campaign direction, budget plan, tracking requirements, and implementation roadmap.',
-              },
-              {
-                week: 'Week 3',
-                title: 'Campaign Setup & Launch',
-                description: 'We build and launch campaigns, set up tracking, test forms, and confirm reporting.',
-              },
-              {
-                week: 'Week 4',
-                title: 'First Optimization Cycle',
-                description: 'We review early signals, remove waste, improve targeting, adjust messaging, and share first insights.',
-              },
-              {
-                week: 'Week 4+',
-                title: 'Ongoing Optimization',
-                description: 'We continue improving campaigns based on data, lead quality, sales feedback, and business goals.',
-              },
-            ].map((phase, idx) => (
-              <Card key={idx} className="p-6">
-                <p className="text-sm font-semibold text-accent mb-2">{phase.week}</p>
-                <h4 className="mb-3 font-bold text-lg">{phase.title}</h4>
-                <p className="text-sm text-muted-foreground">{phase.description}</p>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
+      {/* ------------------------------------------------------------- §7 */}
+      <CommercialSection>
+        <ChapterLabel>Where the other capabilities sit in this</ChapterLabel>
+        <Display>Three subordinate roles, stated at their real size.</Display>
+        <div className="mt-[clamp(20px,2.4vw,32px)] max-w-[62ch] text-[1.02rem] leading-relaxed [&>p+p]:mt-4">
+          <p className="m-0">
+            <strong className="font-bold text-resolve-ink">Paid media</strong> is a demand source chosen on
+            merit for a particular business, on the same measurement layer as everything else. It is not part
+            of every engagement and it is not a positioning claim.
+          </p>
+          <p>
+            <strong className="font-bold text-resolve-ink">AI search</strong> occupies five subordinate roles: a
+            delivery capability, part of the method, a diagnostic that explains absence, a reason to publish
+            properly, and &mdash; because we measured ourselves and published the result &mdash; a piece of
+            evidence. It is a supporting capability and not what the firm is.
+          </p>
+          <p>
+            <strong className="font-bold text-resolve-ink">Automation, after the enquiry exists</strong>, is
+            limited to routing it to the right person, acknowledging it, and reminders around a booked call. It
+            gets this sentence and no more, because that is genuinely all of it. We do not implement CRMs,
+            build lifecycle programmes or run sales operations.
+          </p>
+        </div>
+      </CommercialSection>
 
-      {/* 5. What Makes Our Process Different Section */}
-      <Section>
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Why Our Process Works Better Than Random Marketing Activity
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            {[
-              {
-                title: 'Tracking Before Scaling',
-                description: 'We do not scale campaigns until the important actions are tracked properly.',
-                icon: Lock,
-              },
-              {
-                title: 'Strategy Before Execution',
-                description: 'We do not start with ads. We start with business goals, funnel clarity, and conversion path.',
-                icon: TrendingUp,
-              },
-              {
-                title: 'Lead Quality Feedback',
-                description: 'We use sales feedback to understand whether campaigns are producing real opportunities.',
-                icon: BarChart3,
-              },
-              {
-                title: 'Clear Business Reporting',
-                description: 'You get simple reporting that explains what is working, what is not, and what needs to change.',
-                icon: CheckCircle,
-              },
-            ].map((reason, idx) => {
-              const IconComponent = reason.icon;
-              return (
-                <Card key={idx} className="p-6 sm:p-8">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10">
-                    <IconComponent className="h-6 w-6 text-accent" />
-                  </div>
-                  <h3 className="mb-2 text-lg font-semibold">{reason.title}</h3>
-                  <p className="text-muted-foreground">{reason.description}</p>
-                </Card>
-              );
-            })}
-          </div>
-        </Container>
-      </Section>
+      {/* ------------------------------------------------------------- §8 */}
+      <CommercialSection tone="paper">
+        <ChapterLabel>What we need from you</ChapterLabel>
+        <Display>Four requirements, not four requests.</Display>
+        <Body>The work does not function without them, which is why they are stated this way.</Body>
+        <StatedList items={CLIENT_PROVIDES} />
+      </CommercialSection>
 
-      {/* 6. Tools We Use Section */}
-      <Section className="border-y border-border bg-secondary/5">
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Tools We Use to Track and Improve Performance
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {[
-              {
-                title: 'Google Analytics 4',
-                description: 'To track traffic, conversions, user behavior, and performance by landing page.',
-              },
-              {
-                title: 'Google Tag Manager',
-                description: 'To track forms, CTA clicks, WhatsApp clicks, calls, downloads, and booked meetings.',
-              },
-              {
-                title: 'Google Search Console',
-                description: 'To track organic visibility, indexing, search queries, impressions, and click-through rates.',
-              },
-              {
-                title: 'Ad Platform Dashboards',
-                description: 'To monitor Google Ads, Meta Ads, campaign spend, cost per result, ROAS, and optimization signals.',
-              },
-              {
-                title: 'Custom Dashboards',
-                description: 'To simplify reporting and show the business metrics that matter.',
-              },
-              {
-                title: 'Heatmaps & Session Recordings',
-                description: 'To understand user behavior and identify conversion friction when needed.',
-              },
-            ].map((tool, idx) => (
-              <Card key={idx} className="p-6 sm:p-8">
-                <h3 className="mb-2 font-semibold text-lg">{tool.title}</h3>
-                <p className="text-muted-foreground text-sm">{tool.description}</p>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
+      {/*
+        §9 — WHAT HAPPENS WHEN YOU ENQUIRE — OWNER-BLOCKED AND EVIDENCE-BLOCKED,
+        AND IT RENDERS NOTHING.
 
-      {/* 7. Reporting Section */}
-      <Section>
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Our Reports Are Built for Business Decisions
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-foreground">
-              We do not send confusing reports filled with vanity metrics. We show what happened and what should happen next.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-12">
-            {[
-              'Total spend',
-              'Leads generated',
-              'Cost per lead',
-              'Qualified leads',
-              'Conversion rate',
-              'ROAS',
-              'Top campaigns',
-              'Underperforming campaigns',
-              'Best landing pages',
-              'Lead quality notes',
-            ].map((metric, idx) => (
-              <Card key={idx} className="p-4 text-center">
-                <BarChart3 className="h-6 w-6 text-accent mx-auto mb-2" />
-                <p className="text-sm font-medium text-foreground">{metric}</p>
-              </Card>
-            ))}
-          </div>
-          <div className="rounded-lg border border-border bg-secondary/50 p-8">
-            <h3 className="mb-4 text-xl font-bold">Every Report Answers Three Questions:</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div>
-                <p className="font-semibold text-accent mb-2">1. What worked?</p>
-                <p className="text-muted-foreground">Which campaigns, keywords, audiences, and creatives performed best and should continue or scale.</p>
-              </div>
-              <div>
-                <p className="font-semibold text-accent mb-2">2. What did not work?</p>
-                <p className="text-muted-foreground">Which channels, campaigns, or offers underperformed and should be paused or adjusted.</p>
-              </div>
-              <div>
-                <p className="font-semibold text-accent mb-2">3. What are we changing next?</p>
-                <p className="text-muted-foreground">Concrete action items for the next optimization cycle based on data and feedback.</p>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </Section>
+        Two separate blockers sit on this section: who owns enquiry response and
+        what the sequence actually is (owner input), and a measured response-time
+        distribution (evidence, which has never been produced). Nothing is
+        written here, and in particular no response time appears anywhere on this
+        page — not in hours, not in days, not as "shortly" or "as quickly as we
+        can". The same input blocks /contact §2 and /thank-you §2, and all three
+        render nothing so that when it arrives all three can say the same thing.
+      */}
 
-      {/* 8. Client Commitment Section */}
-      <Section className="border-y border-border bg-secondary/5">
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              What We Need From You to Get Better Results
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
-            {[
-              {
-                title: 'Clear Business Goals',
-                description: 'We need clarity on what you want — leads, sales, calls, bookings, revenue, or visibility.',
-              },
-              {
-                title: 'Fast Feedback',
-                description: 'Campaigns improve faster when you share lead quality and sales feedback quickly.',
-              },
-              {
-                title: 'Access to Data',
-                description: 'We need access to ad accounts, analytics, website, landing pages, and other relevant tools.',
-              },
-              {
-                title: 'Offer Clarity',
-                description: 'Strong marketing needs a clear offer, strong reason to enquire, and a defined target customer.',
-              },
-              {
-                title: 'Patience for Optimization',
-                description: 'Performance marketing improves with data. The first few weeks are for learning, fixing, and optimizing.',
-              },
-            ].map((commitment, idx) => (
-              <Card key={idx} className="p-6 sm:p-8">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10">
-                  <CheckCircle className="h-6 w-6 text-accent" />
-                </div>
-                <h3 className="mb-2 font-semibold">{commitment.title}</h3>
-                <p className="text-sm text-muted-foreground">{commitment.description}</p>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
+      {/* ------------------------------------------------------------ §10 */}
+      <CommercialSection>
+        <ChapterLabel>What we do not know</ChapterLabel>
+        <Display>Visible, rather than a footnote.</Display>
+        <div className="mt-[clamp(20px,2.4vw,32px)] max-w-[62ch] text-[1.02rem] leading-relaxed [&>p+p]:mt-4">
+          <p className="m-0">
+            <strong className="font-bold text-resolve-ink">Absolute search volume is unknown to us.</strong> No
+            keyword tool has been available in this programme, so we quote no volume, no difficulty and no
+            cost-per-click figure anywhere on this site. Where a figure would normally go, we write unknown.
+          </p>
+          <p>
+            <strong className="font-bold text-resolve-ink">We have no analytics baseline of our own yet.</strong>{' '}
+            Which means we cannot show you a before-and-after of our own site, and we do not.
+          </p>
+          <p>
+            <strong className="font-bold text-resolve-ink">Organic search is a 12-month-plus horizon.</strong>{' '}
+            That is our position from three independent lines of evidence. It is a horizon, not a schedule.
+          </p>
+          <p>
+            <strong className="font-bold text-resolve-ink">Our AI measurement is one round.</strong> One day,
+            one location, English, signed out, four systems, two others untestable. One measurement is not a
+            trend, and we will not describe a change until there is a second.
+          </p>
+        </div>
+      </CommercialSection>
 
-      {/* 9. MappedSkills Commitment Section */}
-      <Section>
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              What You Can Expect From MappedSkills
-            </h2>
-          </div>
-          <div className="max-w-3xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              {[
-                'Transparent communication',
-                'Clear strategy before execution',
-                'Proper tracking setup',
-                'Weekly performance review',
-                'Monthly reporting',
-                'Practical recommendations',
-                'No fake guarantees',
-                'No vanity reporting',
-                'Data-backed optimization',
-                'Focus on business outcomes',
-              ].map((commitment, idx) => (
-                <div key={idx} className="flex gap-3">
-                  <CheckCircle className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-                  <p className="text-foreground">{commitment}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 10. Example Growth Flow Section */}
-      <Section className="border-y border-border bg-secondary/5">
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Example: How We Improve a Campaign
-            </h2>
-          </div>
-          <div className="max-w-4xl mx-auto space-y-6">
-            {[
-              {
-                stage: 'Current Situation',
-                content: 'A business spends ₹50,000/month on ads but receives poor-quality leads.',
-                color: 'bg-red-50 border-red-200',
-                icon: AlertCircle,
-              },
-              {
-                stage: 'Audit Finding',
-                content: 'Campaigns are broad, forms are weak, and tracking only shows total leads, not qualified leads.',
-                color: 'bg-yellow-50 border-yellow-200',
-                icon: AlertCircle,
-              },
-              {
-                stage: 'Strategy',
-                content: 'Improve targeting, add qualification questions, rebuild landing page CTA, and track lead source.',
-                color: 'bg-blue-50 border-blue-200',
-                icon: TrendingUp,
-              },
-              {
-                stage: 'Optimization',
-                content: 'Pause weak audiences, improve ad copy, add retargeting, and review lead quality weekly.',
-                color: 'bg-purple-50 border-purple-200',
-                icon: BarChart3,
-              },
-              {
-                stage: 'Result Goal',
-                content: 'Lower wasted spend, improve lead quality, and make campaign decisions based on business value.',
-                color: 'bg-green-50 border-green-200',
-                icon: CheckCircle,
-              },
-            ].map((example, idx) => {
-              const IconComponent = example.icon;
-              return (
-                <Card key={idx} className={`border-2 p-6 sm:p-8 ${example.color}`}>
-                  <div className="flex gap-4 items-start">
-                    <IconComponent className="h-6 w-6 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="font-bold text-lg mb-2">{example.stage}</h4>
-                      <p className="text-foreground">{example.content}</p>
-                    </div>
-                  </div>
-                </Card>
-              );
-            })}
-          </div>
-        </Container>
-      </Section>
-
-      {/* 11. FAQ Section */}
-      <Section>
-        <Container>
-          <div className="mx-auto max-w-3xl">
-            <div className="mb-12 text-center">
-              <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-                How It Works FAQs
-              </h2>
-            </div>
-            <Accordion type="single" collapsible className="w-full">
-              {[
-                {
-                  question: 'What happens after I book a strategy call?',
-                  answer: 'We first understand your business, current marketing activity, goals, challenges, and available data. Then we recommend the next practical step.',
-                },
-                {
-                  question: 'Do you audit existing campaigns?',
-                  answer: 'Yes. We review existing ad accounts, SEO performance, tracking, landing pages, and lead quality before recommending changes.',
-                },
-                {
-                  question: 'How soon can campaigns go live?',
-                  answer: 'Timelines depend on access, strategy approval, creative readiness, landing pages, and tracking setup. The usual flow is audit, strategy, setup, launch, and then optimization.',
-                },
-                {
-                  question: 'Will I get reports?',
-                  answer: 'Yes. Reporting includes campaign performance, leads, cost per lead, conversion rate, quality signals, and recommended next actions.',
-                },
-                {
-                  question: 'Do you work only on ads?',
-                  answer: 'No. We connect ads, SEO, landing pages, lead capture, tracking, reporting, and conversion optimization depending on the business goal.',
-                },
-                {
-                  question: 'Do you guarantee results?',
-                  answer: 'We do not give fake guarantees. We follow a structured process to reduce waste, improve tracking, optimize campaigns, and scale what works.',
-                },
-              ].map((faq, idx) => (
-                <AccordionItem key={idx} value={`faq-${idx}`}>
-                  <AccordionTrigger className="text-base font-semibold">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-foreground">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 12. Final CTA Section */}
-      <CTASection
-        title="Ready to See What Is Blocking Your Growth?"
-        description="Book a free strategy audit and get a clear view of what is working, what is wasting money, and what needs to improve."
-        primaryCta={{
-          text: 'Start Your Free Strategy Audit',
-          href: '/schedule-call',
-        }}
-        secondaryCta={{
-          text: 'Contact Us',
-          href: '/contact',
-        }}
+      {/* ------------------------------------------------------------ §11
+          PRIMARY at the end only. The approved secondary here is a RESEARCH
+          link to both /research entries; neither route exists, so no link
+          renders rather than a link to a 404. Recorded as a Phase G deferral. */}
+      <CommercialClose
+        label="If you want this run on your business"
+        heading={<>The method is the same whether or not you hire us.</>}
+        body={
+          <>
+            It is written so you can check it. If you want it applied to your situation, either route reaches
+            the same place.
+          </>
+        }
+        action="Tell us what you're trying to fix"
       />
     </>
   );

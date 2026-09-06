@@ -1,297 +1,386 @@
-﻿import Link from 'next/link';
-import type { Metadata } from 'next';
-import { Hero } from '@/components/Hero';
-import { Section } from '@/components/Section';
-import { Container } from '@/components/Container';
-import { FAQSection } from '@/components/FAQSection';
-import { CTASection } from '@/components/CTASection';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import type { ReactNode } from 'react';
+import Link from 'next/link';
 import { createMetadata } from '@/lib/metadata';
-import { ArrowRight } from 'lucide-react';
+import { CommercialSection, ChapterLabel, Display, Body } from '@/components/commercial/primitives';
+import { RouteHero } from '@/components/routes/primitives';
+import { CommercialClose } from '@/components/commercial/CommercialClose';
 
-export const metadata: Metadata = createMetadata(
-  'Performance Marketing FAQs | Digital Marketing Agency FAQs | MappedSkills',
-  'Get answers to common questions about performance marketing, Google Ads, SEO, lead generation, pricing, timelines, guarantees, reporting, and working with MappedSkills.',
+/**
+ * SESSION 29 — PHASE G — `/faq`. ARCHETYPE 11 — support / entity.
+ *
+ * THE PAGE'S GOVERNING RULE IS A CORRECTNESS RULE, NOT A STYLE ONE. Systems
+ * reading this site have already been observed reporting contradictory service
+ * descriptions from it, and every answer here is written to be accurate WHEN
+ * READ ALONE, because that is how they will be extracted. No answer below may
+ * contradict `/how-it-works` or `/pricing`, and each was checked against them.
+ *
+ * BLOCKED ANSWERS.
+ *
+ *  - Q2, "Is ad spend separate from your fee?" — the ENTIRE answer is the
+ *    owner-blocked fee/spend arrangement. The approved copy says the answer
+ *    "will be one sentence, and it must match /pricing and /google-ads
+ *    exactly". IT RENDERS NOTHING. The question does not appear as an
+ *    unanswered heading, and no "it depends" stands in for it. `/google-ads`
+ *    handles the same blocker the same way and Phase F recorded it.
+ *  - Q1 and Q3 each carry a blocked half — the confirmed price bands and the
+ *    minimum engagement length. THOSE HALVES RENDER NOTHING. What remains of
+ *    each answer is unblocked, substantive and true on its own, so the question
+ *    renders with the part that can be answered and no invented figure. A
+ *    reader still gets no price and no minimum from this page, which is the
+ *    honest state.
+ *  - Q12's opening rests on a quotation of Google's published position that
+ *    `copy/faq.md` flags `[VALIDATION REQUIRED — re-verify the quotation, its
+ *    source and its date at publication]`. THE QUOTATION AND THE ATTRIBUTION
+ *    RENDER NOTHING. The firm's own position on the question is unblocked and
+ *    renders in full. `/ai-seo` handled the same flagged claim the same way in
+ *    Phase F.
+ *
+ * THE HEADING SAYS "QUESTIONS WE GET ASKED", NOT "THE TWELVE QUESTIONS". With
+ * one question blocked out, stating a count would state a number that does not
+ * match what is on the page. Phase F made the same adjustment on `/ai-seo` for
+ * the same reason; it is a heading-format change, which production translation
+ * permits, and it is not a rewrite of approved copy.
+ *
+ * SCHEMA. `FAQPage` is emitted, and it is GENERATED FROM THE SAME ARRAY that
+ * renders the visible questions, so the markup cannot describe a question the
+ * page does not show or omit one it does. The page that shipped before this one
+ * emitted markup for ONE question against a larger on-page set. Rich-result
+ * eligibility must still be re-verified against current official guidance
+ * before launch — recorded, not claimed.
+ *
+ * INTERACTION: NONE. The answers are expanded, static content, not an
+ * accordion. An answer a sceptical reader has to open is an answer the page has
+ * decided to hide, several of these answers cost the firm work by design, and
+ * the emitted schema, the printed page and the visible page are then guaranteed
+ * to be the same thing.
+ *
+ * F1: D — NONE. No figure on this route.
+ */
+export const metadata = createMetadata(
+  'Questions We Get Asked, Answered Plainly | MappedSkills',
+  'Including the ones with answers that lose us work: what we are accountable for, why we will not guarantee results, what we cannot tell you about where an enquiry came from, and what counts as a qualified enquiry.',
   '/faq'
 );
 
-const FAQ_ITEMS = [
+type Qa = { group: string; q: string; a: ReactNode; plain: string };
+
+/* Every answer's `plain` string is the same answer as prose, and it is what the
+   emitted FAQPage carries. Keeping both on one object is what makes drift
+   impossible. */
+const QAS: Qa[] = [
   {
-    question: 'How long until I see results?',
-    answer: 'Timelines depend on the service, industry, budget, competition, website quality, and tracking setup. For paid ads, early performance signals can usually appear within the first few weeks. Stable optimization takes more time because campaigns need data, testing, and lead quality feedback. For SEO, meaningful ranking signals usually take 90+ days, and stronger growth often builds between 3-6 months. We do not promise overnight results. We focus on building a measurable growth system that can improve over time.',
+    group: 'Commercial',
+    q: 'What does this cost, and what changes that number?',
+    a: (
+      <>
+        What moves the number is scope, how many demand sources are involved, how complex the site is, whether
+        measurement already works, how much content is needed, and how competitive your specific searches are.
+        Two businesses of the same size get different quotes for that reason.{' '}
+        <Link href="/pricing" className="font-semibold text-resolve-ink underline decoration-2 underline-offset-4">
+          Which way each factor pushes
+        </Link>
+        .
+      </>
+    ),
+    plain:
+      'What moves the number is scope, how many demand sources are involved, how complex the site is, whether measurement already works, how much content is needed, and how competitive your specific searches are. Two businesses of the same size get different quotes for that reason.',
   },
   {
-    question: 'What\'s included in your service?',
-    answer: 'MappedSkills focuses on performance marketing services that directly support business growth. Core services include: Google Ads management, Facebook and Instagram ads management, lead generation, SEO, conversion rate optimization, tracking and reporting, and landing page and funnel recommendations. The exact scope depends on your selected plan, business goal, and current marketing setup.',
+    group: 'Commercial',
+    q: 'What is the minimum commitment?',
+    a: (
+      <>
+        Organic search is a 12-month-plus engine, and a three-month organic engagement is not a short version
+        of the work &mdash; it is the part before anything happens. If you need results faster than that, paid
+        search is the honest route and we would say so before taking the money.
+      </>
+    ),
+    plain:
+      'Organic search is a 12-month-plus engine, and a three-month organic engagement is not a short version of the work — it is the part before anything happens. If you need results faster than that, paid search is the honest route and we would say so before taking the money.',
   },
   {
-    question: 'How do you charge for services?',
-    answer: 'Our pricing depends on the number of channels, campaign complexity, monthly ad budget, tracking requirements, reporting needs, and growth goals. Plans usually start from ₹50K/month, excluding platform ad spend. Ad spend is paid directly to platforms like Google, Meta, or LinkedIn. Management fees cover strategy, execution, optimization, and reporting. In some cases, performance-linked pricing may be discussed if tracking and attribution are clear.',
+    group: 'Outcome',
+    q: 'What are you accountable for, and what will you not promise?',
+    a: (
+      <>
+        <p className="m-0">
+          We are accountable up to the qualified enquiry: real, reachable, from a business with a stated need,
+          not a duplicate. That is the number we work to and the number we report, against a starting point we
+          capture before anything changes.
+        </p>
+        <p className="mt-3">
+          Where you supply your close data, we report through to the revenue your own system recorded, as your
+          numbers, with what we did not control stated alongside.
+        </p>
+        <p className="mt-3">
+          We do not promise rankings, positions in AI answers, a number of enquiries, revenue, or a return on
+          spend.
+        </p>
+      </>
+    ),
+    plain:
+      'We are accountable up to the qualified enquiry: real, reachable, from a business with a stated need, not a duplicate. That is the number we work to and the number we report, against a starting point we capture before anything changes. Where you supply your close data, we report through to the revenue your own system recorded, as your numbers, with what we did not control stated alongside. We do not promise rankings, positions in AI answers, a number of enquiries, revenue, or a return on spend.',
   },
   {
-    question: 'Do you guarantee results?',
-    answer: 'No. We do not give fake guarantees. Performance marketing depends on many factors, including your offer, budget, competition, landing page, sales process, tracking setup, and market demand. What we do guarantee is a structured process: proper audit, clear strategy, tracking-first setup, transparent reporting, regular optimization, practical recommendations, and honest communication. We focus on reducing waste, improving performance, and scaling what works.',
+    group: 'Outcome',
+    q: "Why won't you guarantee results?",
+    a: (
+      <>
+        <p className="m-0">
+          Because we do not control the ranking systems, your competitors, your price, your product, your
+          capacity, or how quickly you answer an enquiry. A guarantee covering things somebody else controls is
+          either meaningless or it is written so narrowly that meeting it changes nothing in your business.
+        </p>
+        <p className="mt-3">
+          What replaces the guarantee is that the result is checkable: a starting point captured first, the
+          enquiries counted, the sources reported, and the gaps in the measurement shown rather than smoothed
+          over.
+        </p>
+      </>
+    ),
+    plain:
+      'Because we do not control the ranking systems, your competitors, your price, your product, your capacity, or how quickly you answer an enquiry. A guarantee covering things somebody else controls is either meaningless or it is written so narrowly that meeting it changes nothing in your business. What replaces the guarantee is that the result is checkable: a starting point captured first, the enquiries counted, the sources reported, and the gaps in the measurement shown rather than smoothed over.',
   },
   {
-    question: 'What platforms do you manage?',
-    answer: 'MappedSkills primarily manages growth-focused platforms such as: Google Ads, Meta Ads (Facebook and Instagram), SEO and organic search, Google Analytics 4, Google Tag Manager, Google Search Console, landing page and conversion tracking tools, and reporting dashboards. Depending on the project, we may also support LinkedIn Ads, remarketing, WhatsApp lead flows, CRM handoff, and other growth tools.',
+    group: 'Outcome',
+    q: 'How long before anything changes?',
+    a: (
+      <>
+        <p className="m-0">Organic search: 12 months and beyond. That is our position and we state it before you commit.</p>
+        <p className="mt-3">Paid search: weeks, where the demand is already there.</p>
+        <p className="mt-3">
+          A broken enquiry path: days. If that is what is wrong, it is the cheapest result you will get from
+          us, and it is more common than people expect.
+        </p>
+      </>
+    ),
+    plain:
+      'Organic search: 12 months and beyond. That is our position and we state it before you commit. Paid search: weeks, where the demand is already there. A broken enquiry path: days. If that is what is wrong, it is the cheapest result you will get from us, and it is more common than people expect.',
   },
   {
-    question: 'Can I scale up or down anytime?',
-    answer: 'Yes, the engagement can be scaled based on performance, budget, business needs, and agreed scope. Many businesses start with one focused channel, such as Google Ads or Lead Generation, and later expand into SEO, Meta Ads, CRO, or multi-channel growth. Scaling should be based on data, not excitement. We recommend increasing budget or scope only when tracking, lead quality, and conversion performance support the decision.',
+    group: 'Measurement',
+    q: "How do you know an enquiry came from your work, and what can't you tell?",
+    a: (
+      <>
+        <p className="m-0">
+          Each enquiry records its own source at the moment it is made &mdash; where the person first arrived
+          from, and what they were on when they enquired &mdash; rather than being reconstructed afterwards.
+        </p>
+        <p className="mt-3">
+          What we cannot tell you: anyone who researched on a phone and enquired on a laptop looks like two
+          people. Anyone who declines tracking consent has no recorded source, correctly. And phone calls and
+          emails carry no source at all.
+        </p>
+        <p className="mt-3">
+          Those enquiries are shown as unattributed. They are never assigned to a channel to make a report look
+          complete.{' '}
+          <Link
+            href="/how-it-works"
+            className="font-semibold text-resolve-ink underline decoration-2 underline-offset-4"
+          >
+            The full list of what breaks, and why
+          </Link>
+          .
+        </p>
+      </>
+    ),
+    plain:
+      'Each enquiry records its own source at the moment it is made — where the person first arrived from, and what they were on when they enquired — rather than being reconstructed afterwards. What we cannot tell you: anyone who researched on a phone and enquired on a laptop looks like two people. Anyone who declines tracking consent has no recorded source, correctly. And phone calls and emails carry no source at all. Those enquiries are shown as unattributed. They are never assigned to a channel to make a report look complete.',
+  },
+  {
+    group: 'Measurement',
+    q: 'What counts as a qualified enquiry here, and who decides?',
+    a: (
+      <>
+        <p className="m-0">
+          The system decides, automatically, at the moment the enquiry arrives, against five checks: it passes
+          abuse screening, there is a reachable name and email, there is a business context (a company, a
+          website or a work email domain &mdash; any one), there is a stated need, and it is not a duplicate.
+        </p>
+        <p className="mt-3">
+          It deliberately does not judge whether you should want the work. Fit and value per opportunity cannot
+          be established by a form, and a budget dropdown produces an unverified number that makes reports look
+          precise and nothing more. That is a conversation.
+        </p>
+        <p className="mt-3">
+          Job applications, course enquiries, vendor pitches, student requests and requests for work we do not
+          do are not counted. They are stored and readable, and reported separately.{' '}
+          <Link
+            href="/lead-generation"
+            className="font-semibold text-resolve-ink underline decoration-2 underline-offset-4"
+          >
+            The published definition
+          </Link>
+          .
+        </p>
+      </>
+    ),
+    plain:
+      'The system decides, automatically, at the moment the enquiry arrives, against five checks: it passes abuse screening, there is a reachable name and email, there is a business context (a company, a website or a work email domain — any one), there is a stated need, and it is not a duplicate. It deliberately does not judge whether you should want the work. Fit and value per opportunity cannot be established by a form, and a budget dropdown produces an unverified number that makes reports look precise and nothing more. That is a conversation. Job applications, course enquiries, vendor pitches, student requests and requests for work we do not do are not counted. They are stored and readable, and reported separately.',
+  },
+  {
+    group: 'Measurement',
+    q: 'What access do you need, and what do we keep?',
+    a: (
+      <>
+        <p className="m-0">
+          Analytics, search console, ad accounts, the site, and visibility of where enquiries land. Measurement
+          access is not negotiable &mdash; without it nothing we report afterwards can be checked, and you
+          would be taking our word for it.
+        </p>
+        <p className="mt-3">
+          The measurement layer is yours. The accounts are in your name, the data is yours, and if we stop
+          working together it stays with you rather than leaving with us.
+        </p>
+      </>
+    ),
+    plain:
+      'Analytics, search console, ad accounts, the site, and visibility of where enquiries land. Measurement access is not negotiable — without it nothing we report afterwards can be checked, and you would be taking our word for it. The measurement layer is yours. The accounts are in your name, the data is yours, and if we stop working together it stays with you rather than leaving with us.',
+  },
+  {
+    group: 'Fit',
+    q: 'Who is this for, and who is it not for?',
+    a: (
+      <>
+        <p className="m-0">
+          It works for businesses where a customer takes time to decide, one good enquiry is worth real money,
+          and demand for what you sell already exists or can reasonably be reached.
+        </p>
+        <p className="mt-3">
+          It is a poor fit where demand would have to be created from nothing, where the purchase is impulse or
+          price-only, where enquiries cannot be answered when they arrive, or where a guaranteed outcome is a
+          requirement.
+        </p>
+        <p className="mt-3">
+          We do not set a revenue or headcount threshold. What one customer is worth matters; how big you are
+          does not.
+        </p>
+      </>
+    ),
+    plain:
+      'It works for businesses where a customer takes time to decide, one good enquiry is worth real money, and demand for what you sell already exists or can reasonably be reached. It is a poor fit where demand would have to be created from nothing, where the purchase is impulse or price-only, where enquiries cannot be answered when they arrive, or where a guaranteed outcome is a requirement. We do not set a revenue or headcount threshold. What one customer is worth matters; how big you are does not.',
+  },
+  {
+    group: 'AI search',
+    q: 'Can you get our business into ChatGPT and AI answers?',
+    a: (
+      <>
+        <p className="m-0">No, and nobody can promise that.</p>
+        <p className="mt-3">
+          What we can do is work on the things those answers are actually assembled from. When we measured this
+          ourselves &mdash; 28 unbranded runs across four systems on one day, from Pune, in English, signed out
+          &mdash; we appeared zero times, and directory and listing sources appeared in 15 of those runs. In
+          one of them, ChatGPT stated plainly that it had picked the brands it named by reading two
+          directories.
+        </p>
+        <p className="mt-3">
+          So the work is entity accuracy, the sources those answers draw on, and pages precise enough to be
+          quoted &mdash; much of which sits off your own website. We measure it per system, with the run counts
+          published. We do not produce a score, and there is no ranking in these systems to be had: the order
+          changed in every repeated prompt we ran.{' '}
+          <Link href="/ai-seo" className="font-semibold text-resolve-ink underline decoration-2 underline-offset-4">
+            What that work involves
+          </Link>
+          .
+        </p>
+      </>
+    ),
+    plain:
+      'No, and nobody can promise that. What we can do is work on the things those answers are actually assembled from. When we measured this ourselves — 28 unbranded runs across four systems on one day, from Pune, in English, signed out — we appeared zero times, and directory and listing sources appeared in 15 of those runs. In one of them, ChatGPT stated plainly that it had picked the brands it named by reading two directories. So the work is entity accuracy, the sources those answers draw on, and pages precise enough to be quoted — much of which sits off your own website. We measure it per system, with the run counts published. We do not produce a score, and there is no ranking in these systems to be had: the order changed in every repeated prompt we ran.',
+  },
+  {
+    group: 'AI search',
+    q: 'Is GEO or AEO a separate discipline from SEO?',
+    a: (
+      <>
+        <p className="m-0">
+          Mostly not. Where non-Google systems genuinely differ is in which third-party sources they lean on
+          when assembling an answer, which changes where the work goes rather than making it a new discipline.
+        </p>
+        <p className="mt-3">The acronyms are mostly a way of selling the same work twice.</p>
+      </>
+    ),
+    plain:
+      'Mostly not. Where non-Google systems genuinely differ is in which third-party sources they lean on when assembling an answer, which changes where the work goes rather than making it a new discipline. The acronyms are mostly a way of selling the same work twice.',
   },
 ];
 
-const QUICK_QUESTION_CARDS = [
-  {
-    title: 'Need leads quickly?',
-    description: 'Start with Google Ads or Social Media Ads.',
-    links: [
-      { text: 'Google Ads', href: '/google-ads' },
-      { text: 'Social Media Ads', href: '/social-media-ads' },
-    ],
-  },
-  {
-    title: 'Getting leads but poor quality?',
-    description: 'Start with Lead Generation and qualification review.',
-    links: [
-      { text: 'Lead Generation', href: '/lead-generation' },
-    ],
-  },
-  {
-    title: 'Getting traffic but few enquiries?',
-    description: 'Start with Conversion Optimization.',
-    links: [
-      { text: 'Conversion Optimization', href: '/conversion-optimization' },
-    ],
-  },
-  {
-    title: 'Want long-term organic growth?',
-    description: 'Start with SEO.',
-    links: [
-      { text: 'SEO', href: '/seo' },
-    ],
-  },
-];
+const GROUPS = ['Commercial', 'Outcome', 'Measurement', 'Fit', 'AI search'] as const;
 
-const TRUST_PRINCIPLES = [
-  {
-    title: 'No Vanity Reporting',
-    description: 'We focus on leads, ROAS, conversion rate, revenue impact, and qualified enquiries.',
-  },
-  {
-    title: 'No Random Campaigns',
-    description: 'Every campaign starts with business goals, funnel clarity, tracking, and strategy.',
-  },
-  {
-    title: 'No Hidden Ad Spend',
-    description: 'Platform ad spend is separate and paid directly by you.',
-  },
-  {
-    title: 'No Overpromising',
-    description: 'We explain what is possible, what is risky, and what needs to improve.',
-  },
-];
-
-export default function FAQPage() {
+export default function FaqPage() {
   return (
     <>
-      {/* BreadcrumbList Schema */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'BreadcrumbList',
-            'itemListElement': [
-              {
-                '@type': 'ListItem',
-                'position': 1,
-                'name': 'Home',
-                'item': 'https://mappedskills.com'
-              },
-              {
-                '@type': 'ListItem',
-                'position': 2,
-                'name': 'FAQ',
-                'item': 'https://mappedskills.com/faq'
-              }
-            ]
-          })
-        }}
-      />
-
-      {/* FAQPage Schema */}
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'FAQPage',
-            mainEntity: FAQ_ITEMS.map(item => ({
+            mainEntity: QAS.map((qa) => ({
               '@type': 'Question',
-              name: item.question,
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: item.answer,
-              },
+              name: qa.q,
+              acceptedAnswer: { '@type': 'Answer', text: qa.plain },
             })),
           }),
         }}
       />
 
-      {/* Breadcrumb Navigation */}
-      <Section className="border-b border-border py-3 sm:py-4">
-        <Container>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
-            <span>/</span>
-            <span className="text-foreground">FAQ</span>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 1. Hero Section */}
-      <Hero
-        title="Performance Marketing FAQs"
-        subheadline="Frequently Asked Questions"
-        description="Clear answers to common questions about working with MappedSkills, our process, pricing, timelines, platforms, reporting, and results."
-        cta={{
-          text: 'Schedule Free Strategy Call',
-          href: '/schedule-call',
-        }}
-        secondaryCta={{
-          text: 'Contact Us',
-          href: '/contact',
-        }}
+      <RouteHero
+        eyebrow="Questions"
+        title={<>Questions we get asked, answered plainly.</>}
+        lede={<>Including the ones with answers that lose us work.</>}
       >
-        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-6">
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-sm text-accent font-semibold mb-1">Free</p>
-            <p className="text-xs sm:text-sm text-muted-foreground">Initial Audit</p>
-          </Card>
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-sm text-accent font-semibold mb-1">Transparent</p>
-            <p className="text-xs sm:text-sm text-muted-foreground">Reporting</p>
-          </Card>
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-sm text-accent font-semibold mb-1">No Fake</p>
-            <p className="text-xs sm:text-sm text-muted-foreground">Guarantees</p>
-          </Card>
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-sm text-accent font-semibold mb-1">Clear</p>
-            <p className="text-xs sm:text-sm text-muted-foreground">Growth Recommendations</p>
-          </Card>
-        </div>
-      </Hero>
+        <p>
+          An honest answer that costs an enquiry is the right answer &mdash; the alternative is finding out in
+          month three.
+        </p>
+      </RouteHero>
 
-      {/* 2. FAQ Intro Section */}
-      <Section className="border-b border-border bg-secondary/5">
-        <Container>
-          <div className="max-w-3xl mx-auto">
-            <h2 className="mb-6 text-3xl sm:text-4xl font-bold tracking-tight text-center">
-              Before You Work With a Marketing Agency, Ask Better Questions
-            </h2>
-            <div className="space-y-4 text-lg leading-relaxed text-foreground text-center">
-              <p>
-                Choosing a performance marketing partner should not be confusing. You should know what is included, how pricing works, what results to expect, and how performance will be measured.
-              </p>
-              <p>
-                This page answers the most common questions businesses ask before working with MappedSkills.
-              </p>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 3. Main FAQ Section */}
-      <Section>
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Common Questions About Working With MappedSkills
-            </h2>
-          </div>
-          <div className="max-w-3xl mx-auto">
-            {/* Tracking: faq_open */}
-            <FAQSection items={FAQ_ITEMS} />
-          </div>
-        </Container>
-      </Section>
-
-      {/* 4. Quick Question Blocks Section */}
-      <Section className="border-y border-border bg-secondary/5">
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Still Comparing Your Options?
-            </h2>
-            <p className="text-lg text-foreground max-w-2xl mx-auto">
-              Find the right starting point for your marketing growth
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            {QUICK_QUESTION_CARDS.map((card, idx) => (
-              <Card key={idx} className="p-6 sm:p-8 h-full">
-                <h3 className="mb-2 text-lg font-bold">
-                  {card.title}
-                </h3>
-                <p className="text-muted-foreground mb-4">{card.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {card.links.map((link, linkIdx) => (
-                    <Button
-                      key={linkIdx}
-                      size="sm"
-                      variant="outline"
-                      asChild
-                    >
-                      <Link href={link.href} className="inline-flex items-center gap-2">
-                        {link.text}
-                        {/* Tracking: service_cta_click */}
-                        <ArrowRight className="h-3 w-3" />
-                      </Link>
-                    </Button>
-                  ))}
+      {GROUPS.map((group, gi) => {
+        const items = QAS.filter((qa) => qa.group === group);
+        if (items.length === 0) return null;
+        return (
+          <CommercialSection key={group} tone={gi % 2 === 0 ? 'paper' : 'ground'}>
+            <ChapterLabel>{group}</ChapterLabel>
+            <dl className="m-0 mt-[clamp(24px,3vw,40px)] border-t-2 border-resolve-ink p-0">
+              {items.map((qa) => (
+                <div key={qa.q} className="border-b border-resolve-line py-[clamp(20px,2.4vw,30px)]">
+                  <dt className="m-0 max-w-[44ch] font-heading text-[clamp(1.14rem,2vw,1.5rem)] font-bold leading-[1.18] tracking-[-0.03em]">
+                    {qa.q}
+                  </dt>
+                  <dd className="m-0 mt-3 max-w-[62ch] text-[1.02rem] leading-relaxed text-resolve-dim">
+                    {qa.a}
+                  </dd>
                 </div>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
+              ))}
+            </dl>
+          </CommercialSection>
+        );
+      })}
 
-      {/* 5. Trust Section */}
-      <Section>
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Our Answers Are Simple Because Our Work Is Measurable
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            {TRUST_PRINCIPLES.map((principle, idx) => (
-              <Card key={idx} className="p-6 sm:p-8">
-                <h3 className="mb-3 text-lg font-bold text-accent">{principle.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{principle.description}</p>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
+      {/* The action section. LOW-COMMITMENT routes first, then the PRIMARY. */}
+      <CommercialSection>
+        <ChapterLabel>Something not answered here</ChapterLabel>
+        <Display>Then it is worth asking directly.</Display>
+        <Body>
+          The answer will be the same one we would give on a call. If it is the method or the cost you are
+          after,{' '}
+          <Link href="/how-it-works" className="font-semibold text-resolve-ink underline decoration-2 underline-offset-4">
+            the method is published in full
+          </Link>{' '}
+          and{' '}
+          <Link href="/pricing" className="font-semibold text-resolve-ink underline decoration-2 underline-offset-4">
+            what moves the number is set out here
+          </Link>
+          .
+        </Body>
+      </CommercialSection>
 
-      {/* 6. Final CTA Section */}
-      <CTASection
-        title="Still Have Questions About Your Marketing?"
-        description="Book a free strategy call and get clear recommendations based on your current ads, SEO, leads, website, or conversion funnel. No fake guarantees. No pressure. Just practical clarity about your growth options."
-        primaryCta={{
-          text: 'Schedule Free Strategy Call',
-          href: '/schedule-call',
-        }}
-        secondaryCta={{
-          text: 'Contact Us',
-          href: '/contact',
-        }}
+      <CommercialClose
+        label="Ask the one that matters to you"
+        heading={<>The awkward ones get the same answer either way.</>}
+        body={<>Tell us what is actually happening and we will tell you where we think the problem sits.</>}
+        action="Tell us what you're trying to fix"
       />
     </>
   );

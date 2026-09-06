@@ -1,370 +1,163 @@
-﻿import Link from 'next/link';
-import { Hero } from '@/components/Hero';
-import { Section } from '@/components/Section';
-import { Container } from '@/components/Container';
-import { CaseStudyCard } from '@/components/CaseStudyCard';
-import { CTASection } from '@/components/CTASection';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { createMetadata, siteMetadata } from '@/lib/metadata';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { createMetadata } from '@/lib/metadata';
+import { CommercialSection, ChapterLabel, Display, Body, Note, ProofLink } from '@/components/commercial/primitives';
+import { RouteHero, EntryList } from '@/components/routes/primitives';
 import { getCaseStudyListCards } from '@/lib/contentful/case-studies';
-import { BarChart3, TrendingUp, CheckCircle, ArrowRight, Target, Zap } from 'lucide-react';
 
 export const revalidate = 60;
 
-export const metadata = createMetadata(
-  'Performance Marketing Case Studies | Real Results from Real Clients | MappedSkills',
-  'Explore real performance marketing case studies and growth results. See how MappedSkills improved leads, ROAS, revenue, and conversions for Google Ads, Meta Ads, SEO, and lead generation campaigns.',
-  '/work'
-);
-
-const BreadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    {
-      '@type': 'ListItem',
-      position: 1,
-      name: 'Home',
-      item: 'https://mappedskills.com',
-    },
-    {
-      '@type': 'ListItem',
-      position: 2,
-      name: 'Case Studies',
-      item: 'https://mappedskills.com/work',
-    },
-  ],
-};
-
-const OrganizationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'MappedSkills',
-  url: 'https://mappedskills.com',
-  image: `${siteMetadata.baseUrl}${siteMetadata.logoPath}`,
-  description:
-    'Performance marketing services: Google Ads, Meta Ads, lead generation, SEO, and conversion optimization.',
-  contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'Customer Support',
-    email: 'contact@mappedskills.com',
-  },
+/**
+ * SESSION 29 — PHASE G — `/work`. ARCHETYPE 9 — index.
+ *
+ * ZERO CASE STUDIES EXIST AND NONE MAY BE INVENTED. `03_PAGE_ARCHETYPES.md`
+ * §4.3 lists case studies under BLOCKED: "Zero published and NONE MAY BE
+ * INVENTED." `PAGE_COPY_INDEX.md` §3 gives the route's launch content
+ * requirement as "No content. No 'coming soon' placeholder."
+ *
+ * WHAT IS ABSENT, and was present on the 370-line page this replaces: fabricated
+ * result cards carrying "300%+", "₹100Cr+", ROI, a 65% figure and ROAS; a
+ * testimonials block, for which no permissioned testimonial exists; client
+ * logos; industry filters over an empty set; and an Organization schema block
+ * describing the firm as a performance marketing agency. There is no
+ * "Client A", no anonymised result, no illustrative case, no placeholder card,
+ * no skeleton row and no "coming soon".
+ *
+ * WHAT RENDERS INSTEAD IS NOT A PLACEHOLDER. It is the same move `/about` §8
+ * and `/pricing` §7 make in approved copy: state where the firm actually is,
+ * with the reason, and point at what genuinely can be checked. "There are no
+ * published case studies, because we do not have permission to publish client
+ * results" is a fact about today, not a promise about tomorrow — it names no
+ * future date, implies no pipeline of unpublished wins and does not suggest
+ * results exist and are merely being withheld from display.
+ *
+ * THE LIST IS DATA-DRIVEN AND STAYS THAT WAY. If a permissioned study is ever
+ * published to the CMS, `EntryList` renders it and the standing statement gives
+ * way to it. `EntryList` has no empty-slot rendering path at all, so it cannot
+ * produce a placeholder row even if called with nothing.
+ *
+ * `noindex, nofollow` IS ADDED HERE, and this is the one route-metadata
+ * correction Phase G makes. `06_IMPLEMENTATION_SEQUENCE.md` states the Phase G
+ * scope for this route as "`/work` (**`noindex`, out of sitemap**)" and the
+ * archetype record binds it "until ≥1 permissioned case study exists". The
+ * route was indexable before this change.
+ *
+ * THE SITEMAP IS NOT TOUCHED. `/work` is still listed in `app/sitemap.ts` and
+ * removing it is sitemap work, which is out of Phase G scope and is recorded as
+ * a deferral rather than fixed. The route is `noindex` regardless of what the
+ * sitemap says.
+ *
+ * F1: D — NONE. No figure on this route.
+ */
+export const metadata: Metadata = {
+  ...createMetadata(
+    'Work | MappedSkills',
+    'What can be checked about this firm today, and why there are no published case studies.',
+    '/work'
+  ),
+  robots: 'noindex, nofollow',
 };
 
 export default async function WorkPage() {
   const caseStudies = await getCaseStudyListCards();
-  const featured = caseStudies.slice(0, 3);
-  const rest = caseStudies.slice(3);
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(BreadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(OrganizationSchema) }}
+      <RouteHero
+        eyebrow="Work"
+        title={<>What we can show you, and what we cannot.</>}
+        lede={
+          <>
+            There are no published case studies here, because we do not have permission to publish client
+            results.
+          </>
+        }
       />
 
-      <Section className="border-b border-border py-3 sm:py-4">
-        <Container>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-foreground">
-              Home
-            </Link>
-            <span>/</span>
-            <span className="text-foreground">Case Studies</span>
+      {caseStudies.length > 0 ? (
+        <CommercialSection tone="paper">
+          <ChapterLabel>Published</ChapterLabel>
+          <Display>Work published with the client&rsquo;s permission.</Display>
+          <EntryList
+            entries={caseStudies.map((study) => ({
+              href: study.href,
+              title: study.title,
+              meta: study.industry,
+              summary: study.summary,
+            }))}
+          />
+        </CommercialSection>
+      ) : (
+        <CommercialSection tone="paper">
+          <ChapterLabel>Where this stands today</ChapterLabel>
+          <Display>Permission, not results, is what is missing.</Display>
+          <Body>
+            A case study needs a client&rsquo;s written permission to publish their numbers, and we hold none.
+            Writing around that &mdash; an anonymised client, an illustrative example, a result with the name
+            removed &mdash; would be the first thing you should not trust us on, and it is what most of this
+            category does with the same gap.
+          </Body>
+          <Note>
+            This page carries no logo wall, no &ldquo;trusted by&rdquo; strip, no rating, no review count and
+            no client count. None of those exists.
+          </Note>
+        </CommercialSection>
+      )}
+
+      {/* What CAN be checked. Two of the three items are the same first-party
+          measurements /about lists, and they are stated with their full scope
+          rather than linked, because neither research entry has been produced —
+          `PAGE_COPY_INDEX.md` §1 rows 13 and 14 record both as NOT DRAFTED, and
+          one of them is additionally blocked on a technical prerequisite. No
+          link renders to a route that does not exist. */}
+      <CommercialSection>
+        <ChapterLabel>What can be checked instead</ChapterLabel>
+        <Display>Three things, and one of them found our own failures.</Display>
+        <div className="mt-[clamp(24px,3vw,40px)] border-t-2 border-resolve-ink">
+          <div className="border-b border-resolve-line py-[clamp(18px,2.2vw,28px)]">
+            <h2 className="m-0 max-w-[44ch] font-heading text-[clamp(1.12rem,1.9vw,1.42rem)] font-bold leading-[1.2] tracking-[-0.03em]">
+              The method, published in full
+            </h2>
+            <p className="mt-3 max-w-[62ch] text-[1.02rem] leading-relaxed text-resolve-dim">
+              What is measured at each point, what cannot be attributed and why, and what will not be promised.
+              It is written so a stranger can check the claims.
+            </p>
+            <ProofLink href="/how-it-works">Read the method</ProofLink>
           </div>
-        </Container>
-      </Section>
 
-      <Hero
-        title="Real Results From Real Performance Marketing Campaigns"
-        subheadline="Explore how MappedSkills helps businesses improve leads, revenue, ROAS, traffic, and conversions through Google Ads, Meta Ads, SEO, lead generation, and CRO."
-        description=""
-        cta={{
-          text: 'Schedule Free Strategy Call',
-          href: '/schedule-call',
-        }}
-        secondaryCta={{
-          text: 'Contact Us',
-          href: '/contact',
-        }}
-      >
-        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-6">
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-2xl sm:text-3xl font-bold text-accent mb-2">50+</p>
-            <p className="text-xs sm:text-sm text-muted-foreground">Clients Served</p>
-          </Card>
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-2xl sm:text-3xl font-bold text-accent mb-2">₹100Cr+</p>
-            <p className="text-xs sm:text-sm text-muted-foreground">Revenue Influenced</p>
-          </Card>
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-2xl sm:text-3xl font-bold text-accent mb-2">300%+</p>
-            <p className="text-xs sm:text-sm text-muted-foreground">Average ROI</p>
-          </Card>
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-2xl sm:text-3xl font-bold text-accent mb-2">65%+</p>
-            <p className="text-xs sm:text-sm text-muted-foreground">Client Retention</p>
-          </Card>
+          <div className="border-b border-resolve-line py-[clamp(18px,2.2vw,28px)]">
+            <h2 className="m-0 max-w-[44ch] font-heading text-[clamp(1.12rem,1.9vw,1.42rem)] font-bold leading-[1.2] tracking-[-0.03em]">
+              Our own visibility in AI answers, measured and published
+            </h2>
+            <p className="mt-3 max-w-[62ch] text-[1.02rem] leading-relaxed text-resolve-dim">
+              Four AI assistants, asked for agencies like this one, 28 times, on one day, from Pune, in
+              English, signed out. This business was named in none of them. Directory and listing sources
+              appeared in 15 of those 28 runs, and two further systems returned no testable result at all.
+            </p>
+            <p className="mt-3 max-w-[62ch] text-[.94rem] leading-[1.55] text-resolve-gap">
+              One round, one day, one language, one location. A count, not a rate.
+            </p>
+          </div>
+
+          <div className="border-b border-resolve-line py-[clamp(18px,2.2vw,28px)]">
+            <h2 className="m-0 max-w-[44ch] font-heading text-[clamp(1.12rem,1.9vw,1.42rem)] font-bold leading-[1.2] tracking-[-0.03em]">
+              Our own enquiry path, diagnosed in public
+            </h2>
+            <p className="mt-3 max-w-[62ch] text-[1.02rem] leading-relaxed text-resolve-dim">
+              We ran the five checks we publish on our own site before offering them to anyone. Four of the
+              five failed. The contact form showed a success message and transmitted nothing, so every enquiry
+              it received was lost while the visitor was told it had worked.{' '}
+              <Link
+                href="/problems/traffic-but-no-enquiries"
+                className="font-semibold text-resolve-ink underline decoration-2 underline-offset-4"
+              >
+                The checks themselves
+              </Link>
+              .
+            </p>
+          </div>
         </div>
-      </Hero>
-
-      <Section>
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Featured Growth Stories
-            </h2>
-          </div>
-          {featured.length > 0 ? (
-            <>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-8">
-                {featured.map((study) => (
-                  <CaseStudyCard
-                    key={study.slug}
-                    title={study.title}
-                    industry={study.industry}
-                    service={study.service}
-                    summary={study.summary}
-                    href={study.href}
-                    featured={true}
-                  />
-                ))}
-              </div>
-              {rest.length > 0 ? (
-                <div className="text-center">
-                  <Button size="lg" variant="outline" asChild>
-                    <Link href="#results-grid">
-                      View All Results <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </div>
-              ) : null}
-            </>
-          ) : (
-            <p className="text-center text-muted-foreground">
-              Case studies will appear here once published in Contentful.
-            </p>
-          )}
-        </Container>
-      </Section>
-
-      {rest.length > 0 ? (
-        <Section className="border-y border-border bg-secondary/5" id="results-grid">
-          <Container>
-            <div className="mb-12 text-center">
-              <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-                More Campaign Results
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {rest.map((study) => (
-                <CaseStudyCard
-                  key={study.slug}
-                  title={study.title}
-                  industry={study.industry}
-                  service={study.service}
-                  summary={study.summary}
-                  href={study.href}
-                />
-              ))}
-            </div>
-          </Container>
-        </Section>
-      ) : null}
-
-      <Section>
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Performance Marketing Measured by Business Outcomes
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8">
-            <Card className="p-8 text-center">
-              <p className="text-4xl font-bold text-accent mb-2">50+</p>
-              <p className="text-muted-foreground font-medium">Clients Served</p>
-            </Card>
-            <Card className="p-8 text-center">
-              <p className="text-4xl font-bold text-accent mb-2">₹100Cr+</p>
-              <p className="text-muted-foreground font-medium">Revenue Influenced</p>
-            </Card>
-            <Card className="p-8 text-center">
-              <p className="text-4xl font-bold text-accent mb-2">300%+</p>
-              <p className="text-muted-foreground font-medium">Average ROI</p>
-            </Card>
-            <Card className="p-8 text-center">
-              <p className="text-4xl font-bold text-accent mb-2">65%+</p>
-              <p className="text-muted-foreground font-medium">Client Retention</p>
-            </Card>
-          </div>
-          <div className="rounded-lg border border-border bg-secondary/50 p-6 sm:p-8">
-            <p className="text-center text-foreground">
-              Every result depends on industry, budget, offer, funnel, competition, and execution
-              speed. We focus on building systems that improve measurable performance, not vanity
-              metrics.
-            </p>
-          </div>
-        </Container>
-      </Section>
-
-      <Section className="border-y border-border bg-secondary/5">
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              What We Measure in Every Campaign
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {[
-              {
-                title: 'Lead Volume',
-                description: 'How many enquiries or leads were generated.',
-                icon: TrendingUp,
-              },
-              {
-                title: 'Lead Quality',
-                description: 'How many leads were relevant, serious, and sales-worthy.',
-                icon: Target,
-              },
-              {
-                title: 'Cost Per Lead',
-                description: 'How much each lead cost and whether the cost was sustainable.',
-                icon: BarChart3,
-              },
-              {
-                title: 'Conversion Rate',
-                description: 'How many visitors, clicks, or leads turned into the desired action.',
-                icon: CheckCircle,
-              },
-              {
-                title: 'ROAS / Revenue Impact',
-                description: 'How much revenue or return was influenced by the campaign.',
-                icon: Zap,
-              },
-              {
-                title: 'Next Action',
-                description: 'What should be optimized, scaled, paused, or tested next.',
-                icon: ArrowRight,
-              },
-            ].map((metric, idx) => {
-              const IconComponent = metric.icon;
-              return (
-                <Card key={idx} className="p-6 sm:p-8">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10">
-                    <IconComponent className="h-6 w-6 text-accent" />
-                  </div>
-                  <h3 className="mb-2 font-semibold text-lg">{metric.title}</h3>
-                  <p className="text-muted-foreground text-sm">{metric.description}</p>
-                </Card>
-              );
-            })}
-          </div>
-        </Container>
-      </Section>
-
-      <Section>
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              We Believe Proof Should Be Specific
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-foreground">
-              A good marketing result should not say &quot;campaign performed well.&quot; It should show what
-              improved, by how much, in what time period, and what business impact it created.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            {[
-              {
-                principle: 'Before → After',
-                description: 'Show the starting point and improvement clearly.',
-              },
-              {
-                principle: 'Service Context',
-                description: 'Explain which channel or strategy created the result.',
-              },
-              {
-                principle: 'Business Impact',
-                description: 'Connect metrics to leads, sales, revenue, or pipeline.',
-              },
-              {
-                principle: 'Next Step',
-                description: 'Show how the result can be optimized or scaled further.',
-              },
-            ].map((principle, idx) => (
-              <Card key={idx} className="p-6 sm:p-8">
-                <h3 className="mb-2 text-lg font-bold text-accent">{principle.principle}</h3>
-                <p className="text-muted-foreground text-sm">{principle.description}</p>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      <Section className="border-y border-border bg-secondary/5">
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              What Clients Say About Working With MappedSkills
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            {[
-              {
-                quote:
-                  'MappedSkills helped us understand our campaigns in simple business terms. We could clearly see what was working and where leads were coming from.',
-                author: 'Client Name',
-                industry: 'Real Estate',
-              },
-              {
-                quote:
-                  'The team focused on lead quality, not just lead numbers. That made a big difference to our sales conversations.',
-                author: 'Client Name',
-                industry: 'Services',
-              },
-              {
-                quote:
-                  'We finally had reporting that connected marketing activity with business outcomes.',
-                author: 'Client Name',
-                industry: 'E-commerce',
-              },
-            ].map((testimonial, idx) => (
-              <Card key={idx} className="p-8">
-                <div className="mb-6 flex gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-accent text-lg">
-                      ★
-                    </span>
-                  ))}
-                </div>
-                <p className="mb-6 text-foreground leading-relaxed">&quot;{testimonial.quote}&quot;</p>
-                <div className="border-t border-border pt-4">
-                  <p className="font-semibold text-foreground">{testimonial.author}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.industry}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      <CTASection
-        title="Ready to Create Your Own Growth Story?"
-        description="Book a free strategy call and discover what is blocking your leads, revenue, ROAS, or conversion growth."
-        primaryCta={{
-          text: 'Schedule Free Strategy Call',
-          href: '/schedule-call',
-        }}
-        secondaryCta={{
-          text: 'Contact Us',
-          href: '/contact',
-        }}
-      />
+      </CommercialSection>
     </>
   );
 }

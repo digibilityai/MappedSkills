@@ -1,192 +1,126 @@
-﻿import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Hero } from '@/components/Hero';
-import { Section } from '@/components/Section';
-import { Container } from '@/components/Container';
-import { CTASection } from '@/components/CTASection';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import { createMetadata } from '@/lib/metadata';
-import { AlertCircle, ArrowRight, Search } from 'lucide-react';
+import { CommercialSection, ChapterLabel, Display, Body } from '@/components/commercial/primitives';
+import { RouteHero, EntryList } from '@/components/routes/primitives';
 
+/**
+ * SESSION 29 — PHASE G — `not-found`. ARCHETYPE 12 — legal / system.
+ *
+ * THE DEFECT THIS FIXES, which is the reason the route is in Phase G scope at
+ * all: `03_PAGE_ARCHETYPES.md` §1 archetype 12 records that "/404 currently
+ * hard-codes three blog slugs that all 404 — links must be generated from live
+ * routes", and `PAGE_COPY_INDEX.md` §3 repeats it: the page "must stop
+ * hard-coding three blog slugs that currently return 404". A recovery page
+ * whose recovery links are themselves broken is the one page on a site where
+ * that failure is unambiguously a bug.
+ *
+ * The three slugs — `how-to-calculate-google-ads-roi`,
+ * `facebook-ads-not-working` and `seo-vs-ppc` — are removed and nothing
+ * replaces them. `/blog` currently has no articles at all, so there is no
+ * article to link to and none is invented.
+ *
+ * EVERY LINK BELOW IS A ROUTE THAT EXISTS IN THIS REPOSITORY, and the list is
+ * built from one array so a route added or removed later is a one-line change
+ * in one place rather than three lists to reconcile. `/work` and `/blog` are
+ * deliberately absent: both are `noindex` or empty of content today, and
+ * sending someone recovering from a broken URL to a page with nothing on it is
+ * the same failure in a different place.
+ *
+ * ALSO REMOVED, and not replaced: "Schedule Free Strategy Call" in two places.
+ * "Free" is blocked on the entry-offer decision — no candidate may say free
+ * until it is recorded — and the booking surface does not work. The gradient
+ * washes, the blurred accent orbs, the hover-lift card grid, the shadow
+ * transitions and the six lucide icons are gone with them; none of that is in
+ * the Resolve system.
+ *
+ * `noindex, nofollow` is preserved. F1: D — NONE.
+ */
 export const metadata: Metadata = {
   ...createMetadata(
-    '404 - Page Not Found | MappedSkills',
-    'The page you are looking for may have moved. Explore our services or schedule a free strategy call.',
+    'Page Not Found | MappedSkills',
+    'The page you were looking for is not here. These are the pages that are.',
     '/404'
   ),
   robots: 'noindex, nofollow',
-  canonical: 'https://mappedskills.com/404',
 };
 
-// Data constants
-const HELPFUL_LINKS = [
-  { title: 'Google Ads Management', href: '/google-ads' },
-  { title: 'Social Media Ads Management', href: '/social-media-ads' },
-  { title: 'Lead Generation Services', href: '/lead-generation' },
-  { title: 'SEO Services', href: '/seo' },
-  { title: 'Conversion Optimization', href: '/conversion-optimization' },
-  { title: 'Pricing', href: '/pricing' },
+/* Live routes only. Each one is a directory under `app/` in this repository. */
+const RECOVERY = [
+  {
+    href: '/services',
+    title: 'What we do',
+    meta: 'Proposition',
+    summary: 'The whole chain from demand to a recorded enquiry, and where the joins are.',
+  },
+  {
+    href: '/how-it-works',
+    title: 'How we work, what we measure, and what we cannot tell you',
+    meta: 'Method',
+    summary: 'The published method, written so a stranger can check the claims.',
+  },
+  {
+    href: '/problems/traffic-but-no-enquiries',
+    title: 'Traffic but no enquiries: which of four things is happening',
+    meta: 'Diagnostic',
+    summary: 'Five checks you can run yourself today, with no sign-up and no tool.',
+  },
+  {
+    href: '/pricing',
+    title: 'What this costs, and what changes the number',
+    meta: 'Cost',
+    summary: 'The six factors that move it, and which way each one pushes.',
+  },
+  {
+    href: '/faq',
+    title: 'Questions we get asked, answered plainly',
+    meta: 'Questions',
+    summary: 'Including the ones with answers that lose us work.',
+  },
+  {
+    href: '/about',
+    title: 'Who we are, and what we can actually show you',
+    meta: 'The firm',
+    summary: 'An honest account of where the firm is today, and it is a short one.',
+  },
 ];
 
-const POPULAR_PAGES = [
-  { label: 'Services', href: '/services' },
-  { label: 'How It Works', href: '/how-it-works' },
-  { label: 'Case Studies', href: '/work' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'Schedule Call', href: '/schedule-call' },
-];
-
-const BLOG_ARTICLES = [
-  { title: 'How to Calculate Google Ads ROI', href: '/blog/how-to-calculate-google-ads-roi' },
-  { title: '5 Reasons Your Facebook Ads Are Not Working', href: '/blog/facebook-ads-not-working' },
-  { title: 'SEO vs PPC: Which Should Your Business Choose?', href: '/blog/seo-vs-ppc' },
+const CAPABILITIES = [
+  { href: '/seo', title: 'Search', meta: 'Capability', summary: 'Being found by buyers already looking.' },
+  { href: '/ai-seo', title: 'AI search', meta: 'Capability', summary: 'What those answers are actually assembled from.' },
+  { href: '/google-ads', title: 'Google Ads', meta: 'Capability', summary: 'Paid search as a demand source, on the same measurement layer.' },
+  { href: '/social-media-ads', title: 'Social ads', meta: 'Capability', summary: 'Where the channel fits, and where it does not.' },
+  { href: '/lead-generation', title: 'Lead generation', meta: 'Capability', summary: 'What counts as a qualified enquiry, published.' },
+  { href: '/conversion-optimization', title: 'Conversion work', meta: 'Capability', summary: 'Diagnosis first, because two of the four causes are not the page.' },
 ];
 
 export default function NotFound() {
   return (
     <>
-      {/* Tracking: page_404_view */}
-      {/* 1. Hero / Error Section */}
-      <Hero
-        title="Page Not Found"
-        subtitle="404 Error"
-        subheadline="The page you are looking for may have moved, but we can still help you find the right growth path."
-        cta={{
-          text: 'Explore Services',
-          href: '/services',
-        }}
-        secondaryCta={{
-          text: 'Schedule Free Strategy Call',
-          href: '/schedule-call',
-        }}
-      >
-        {/* 404 Visual */}
-        <div className="flex items-center justify-center mt-8 sm:mt-12">
-          <div className="relative w-full max-w-md">
-            <Card className="p-8 sm:p-12 bg-gradient-to-br from-red-50 to-white border-2 border-accent/20">
-              <div className="text-center">
-                <AlertCircle className="h-16 w-16 text-accent mx-auto mb-4 opacity-60" />
-                <p className="text-5xl sm:text-6xl font-bold text-accent mb-2">404</p>
-                <p className="text-muted-foreground text-sm">This page seems to have wandered off.</p>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </Hero>
-
-      {/* 2. Helpful Links Section */}
-      <Section>
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              Looking for Something Specific?
-            </h2>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {HELPFUL_LINKS.map((link, idx) => (
-              <Link
-                key={idx}
-                href={link.href}
-                className="group"
-              >
-                <Card className="p-6 h-full hover:border-accent/50 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer">
-                  <div className="flex items-start justify-between">
-                    <h3 className="font-semibold text-foreground group-hover:text-accent transition-colors">
-                      {link.title}
-                    </h3>
-                    <ArrowRight className="h-5 w-5 text-accent opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
-                  </div>
-                  {/* Tracking: service_cta_click or pricing_cta_click */}
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* 3. Popular Pages Section */}
-      <Section className="bg-secondary/5">
-        <Container>
-          <div className="mb-8 text-center">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">
-              Popular Pages
-            </h2>
-            <p className="text-muted-foreground">Quick links to navigate the site</p>
-          </div>
-          
-          <div className="max-w-2xl mx-auto">
-            <div className="flex flex-wrap gap-3 justify-center">
-              {POPULAR_PAGES.map((page, idx) => (
-                <Link key={idx} href={page.href}>
-                  <Button variant="outline" size="sm" className="h-10">
-                    {page.label}
-                  </Button>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 4. Blog Suggestion Section */}
-      <Section>
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              Want to Learn Before You Decide?
-            </h2>
-            <p className="text-lg text-muted-foreground mt-4 max-w-2xl mx-auto">
-              Check out practical guides on performance marketing, ads, and growth strategies
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            {BLOG_ARTICLES.map((article, idx) => (
-              <Card key={idx} className="p-6 sm:p-8 flex flex-col h-full hover:shadow-lg transition-shadow">
-                <Search className="h-8 w-8 text-accent mb-4" />
-                <h3 className="text-lg font-bold mb-4 text-balance">{article.title}</h3>
-                {/* Tracking: related_article_click */}
-                <Link
-                  href={article.href}
-                  className="inline-flex items-center gap-2 text-accent font-semibold text-sm mt-auto hover:gap-3 transition-all"
-                >
-                  Read Article
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* 5. Final CTA Section */}
-      <CTASection
-        title="Still Not Sure Where to Go?"
-        description="Book a free strategy call and we'll help you identify what is working, what is leaking, and what should be fixed first."
-        primaryCta={{
-          text: 'Schedule Free Strategy Call',
-          href: '/schedule-call',
-        }}
-        secondaryCta={{
-          text: 'Contact Us',
-          href: '/contact',
-        }}
+      <RouteHero
+        eyebrow="404"
+        title={<>That page is not here.</>}
+        lede={<>It may have moved, or the address may be wrong. These are the pages that do exist.</>}
+        size="quiet"
       />
 
-      {/* Tracking placeholders for GA4 events */}
-      {/* 
-        Tracking events on this page:
-        1. page_404_view - Page loaded
-        2. service_cta_click - Service link clicked (helpful links section)
-        3. schedule_call_click - Schedule call CTA clicked (hero, final CTA)
-        4. home_cta_click - Go home or explore navigation (popular pages)
-        5. pricing_cta_click - Pricing link clicked (helpful links)
-        6. related_article_click - Blog article link clicked (blog section)
-        7. contact_click - Contact CTA clicked (final CTA)
-      */}
+      <CommercialSection tone="paper">
+        <ChapterLabel>Where you probably meant to go</ChapterLabel>
+        <EntryList entries={RECOVERY} />
+      </CommercialSection>
+
+      <CommercialSection>
+        <ChapterLabel>The capabilities</ChapterLabel>
+        <EntryList entries={CAPABILITIES} />
+      </CommercialSection>
+
+      <CommercialSection tone="paper">
+        <ChapterLabel>Or tell us what you were looking for</ChapterLabel>
+        <Display>A broken link is worth knowing about.</Display>
+        <Body>
+          If you followed a link here from somewhere else, saying so is genuinely useful &mdash; it is the
+          fastest way for us to find what is broken.
+        </Body>
+      </CommercialSection>
     </>
   );
 }

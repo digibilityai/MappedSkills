@@ -1,521 +1,219 @@
-﻿import Link from 'next/link';
-import Image from 'next/image';
-import { Hero } from '@/components/Hero';
-import { Section } from '@/components/Section';
-import { Container } from '@/components/Container';
-import { FAQSection } from '@/components/FAQSection';
-import { CTASection } from '@/components/CTASection';
-import { CalendlyEmbed } from '@/components/CalendlyEmbed';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import Link from 'next/link';
 import { createMetadata } from '@/lib/metadata';
-import type { Metadata } from 'next';
-import {
-  CheckCircle,
-  X,
-  Clock,
-  TrendingUp,
-  Eye,
-  Zap,
-} from 'lucide-react';
+import { Container } from '@/components/layout/Container';
+import { CommercialSection, ChapterLabel, Display, Body } from '@/components/commercial/primitives';
+import { RouteHero, StatedList } from '@/components/routes/primitives';
 
-export const metadata: Metadata = createMetadata(
-  'Schedule Marketing Consultation | Free Strategy Call | MappedSkills',
-  'Book your free 20-minute performance marketing consultation call. Get custom recommendations for Google Ads, SEO, leads, ROAS, and conversions. No pushy sales pitch. Response within 24 hours.',
+/**
+ * SESSION 29 — PHASE G — `/schedule-call`. ARCHETYPE 7 — conversion surface.
+ *
+ * SCOPE: PRESENTATION ONLY. `06_IMPLEMENTATION_SEQUENCE.md` gives Phase G the
+ * presentation of this route and gives PHASE H1 "booking vendor selection and
+ * integration". SAME VENDOR, SAME URL, SAME ENVIRONMENT VARIABLE: nothing about
+ * the booking integration is selected, configured, repaired or replaced here.
+ *
+ * WHY `CalendlyEmbed` IS NOT RENDERED ON THIS ROUTE ANY MORE. It was, in the
+ * first pass of this session, and measuring the server-rendered HTML is what
+ * caught it: the component's initial client state is "no URL", so THE ONLY
+ * THING IT EVER PUTS IN THE SERVER-RENDERED DOCUMENT IS ITS FALLBACK — and that
+ * fallback publishes a hard-coded phone number and email address. Both are
+ * OWNER-BLOCKED entity facts. Every other surface in this phase renders nothing
+ * rather than a partial or unconfirmed fact set, and a translated route that
+ * published them through a component would have defeated that everywhere at
+ * once. It also read, to a visitor with JavaScript disabled, as an internal
+ * configuration error message.
+ *
+ * The component file itself is UNMODIFIED and stays in the repository. This
+ * route now links to the booking page directly instead, which is a presentation
+ * change with three properties worth stating: it uses the same
+ * `NEXT_PUBLIC_CALENDLY_URL` and the same default, it works with JavaScript
+ * disabled, and it makes no claim about availability.
+ *
+ * WHAT PHASE H1 MUST STILL RESOLVE, recorded rather than patched over. All of
+ * this is pre-existing and none of it is hidden by this translation:
+ *   1. The embedded booking surface does not work. The production container
+ *      renders empty with zero iframes on the page — VERIFIED in the approved
+ *      copy record. The component mounts Calendly's INLINE widget container and
+ *      then calls `Calendly.initBadgeWidget`, which is the FLOATING BADGE API,
+ *      so the inline container is never populated by anything.
+ *   2. `initBadgeWidget` injects a floating persistent element. The Resolve
+ *      budget is 0 fixed and 0 sticky elements site-wide and the CTA
+ *      architecture prohibits a floating persistent CTA, so H1's integration
+ *      must not use the badge.
+ *   3. Its no-URL fallback hard-codes the owner-blocked phone number and email.
+ *      That path must go before the component is used anywhere again.
+ *   4. There is an open question, recorded in the approved copy, about whether
+ *      the chosen tool can accept runtime custom fields and expose the
+ *      completed booking server-side. If it cannot, channel measurement is
+ *      lost — but a booking meeting the five qualification conditions is still
+ *      a qualified enquiry.
+ * NO FAKE BOOKING CONFIRMATION, NO FABRICATED AVAILABILITY AND NO SECOND
+ * BOOKING PROVIDER is introduced here. The page does not claim a slot can be
+ * booked, and it does not say when one is free.
+ *
+ * BLOCKED CONTENT, AND WHAT RENDERS NOTHING.
+ *  - Who takes the calls, by name and role — OWNER-BLOCKED. Nothing renders.
+ *    The approved copy's own reason is worth keeping in view: "naming the
+ *    person is the point — 'a member of our team' is what a call centre says",
+ *    which is exactly why an unnamed substitute is worse than an omission.
+ *  - The actual call length — OWNER-BLOCKED. No duration appears anywhere on
+ *    this page.
+ *  - Real availability and business hours — OWNER-BLOCKED. No availability
+ *    claim, no hours, no "usually within", no scarcity of any kind.
+ *  - The published phone number — OWNER-BLOCKED. The direct-contact line
+ *    renders nothing rather than carrying the production default.
+ *  - The entry-offer model is a DECISION REQUIRED. Until it is recorded this
+ *    page states what the call covers and DOES NOT describe it as free, as an
+ *    audit or as a strategy session. "Free", "complimentary", "free audit" and
+ *    "free strategy session" appear nowhere below.
+ *
+ * MANDATORY STILLNESS (M6): zero figures, zero proof elements, zero motion.
+ * F1: D — NONE, and `22` §3 puts this route at zero figures of any kind.
+ *
+ * `/contact` REMAINS THE PRIMARY COMMERCIAL PATH. This page carries one neutral
+ * cross-link back to it and does not present the two as a comparison.
+ */
+export const metadata = createMetadata(
+  'Book a Time to Talk | MappedSkills',
+  'A conversation about what is actually happening with your enquiries — what you are getting, what you are not, and where the loss most likely sits. You will leave with a view either way.',
   '/schedule-call'
 );
 
 const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/mappedskills';
 
-const DISCUSSION_TOPICS = [
-  {
-    title: 'Your Current Marketing Setup',
-    description: 'We\'ll understand your current ads, SEO, website, lead generation, reporting, and conversion flow.',
-  },
-  {
-    title: 'Your Growth Goal',
-    description: 'We\'ll clarify whether you need more qualified leads, better ROAS, SEO visibility, lower cost per lead, or better conversions.',
-  },
-  {
-    title: 'Your Biggest Marketing Leak',
-    description: 'We\'ll identify whether the main issue is traffic, targeting, landing page, tracking, lead quality, or follow-up.',
-  },
-  {
-    title: 'The Right Starting Point',
-    description: 'We\'ll recommend whether you should begin with Google Ads, Meta Ads, SEO, Lead Generation, CRO, or a combined approach.',
-  },
-  {
-    title: 'Practical Next Steps',
-    description: 'You\'ll leave with clear recommendations on what should be fixed, avoided, or scaled.',
-  },
+const COVERS = [
+  <>What you sell, and what one customer is worth.</>,
+  <>What is happening now with enquiries.</>,
+  <>What you can currently measure.</>,
+  <>Where, on the evidence available in a conversation, the loss is most likely to be.</>,
 ];
 
-const OUTCOMES = [
-  {
-    title: 'Clear Growth Diagnosis',
-    description: 'Understand what may be blocking your marketing performance.',
-  },
-  {
-    title: 'Channel Recommendation',
-    description: 'Know which service should be your first priority.',
-  },
-  {
-    title: 'Tracking Clarity',
-    description: 'Understand which metrics and events should be tracked properly.',
-  },
-  {
-    title: 'Budget Direction',
-    description: 'Get a practical view of what kind of investment may be required.',
-  },
-  {
-    title: 'Next-Step Roadmap',
-    description: 'Know whether you need an audit, proposal, campaign rebuild, SEO plan, or CRO review.',
-  },
-];
-
-const FOR_THIS_CALL = [
-  'You are spending on ads but not seeing clear returns',
-  'You are getting leads but quality is poor',
-  'Your website traffic is not converting',
-  'You want to improve Google Ads or Meta Ads performance',
-  'You want SEO but do not know where to start',
-  'You need more qualified enquiries',
-  'You want transparent marketing reporting',
-  'You are ready to invest seriously in growth',
-];
-
-const NOT_FOR_THIS_CALL = [
-  'You are looking for guaranteed leads overnight',
-  'You want the cheapest marketing vendor',
-  'You are not ready to track performance properly',
-  'You do not want to share campaign or business context',
-  'You want random activity without strategy',
-  'You expect results without budget, patience, or implementation',
-];
-
-const PREPARE_FOR_CALL = [
-  'Website Link - So we can understand your current digital presence.',
-  'Current Marketing Channels - Google Ads, Meta Ads, SEO, WhatsApp, referrals, or any other active channel.',
-  'Current Monthly Budget - Approximate monthly marketing or ad spend.',
-  'Main Growth Challenge - What you want to improve first — leads, sales, SEO, ROAS, conversion, or reporting.',
-  'Any Reports or Screenshots - Optional, but useful if you want a sharper discussion.',
-];
-
-const TRUST_POINTS = [
-  {
-    title: 'No Pushy Sales Pitch',
-    description: 'The call is focused on clarity, not pressure.',
-  },
-  {
-    title: 'Business-First Thinking',
-    description: 'We talk about leads, revenue, ROAS, conversion, and growth — not jargon.',
-  },
-  {
-    title: 'Practical Recommendations',
-    description: 'You get realistic next steps based on your current situation.',
-  },
-  {
-    title: 'Clear Fit Check',
-    description: 'If MappedSkills is not the right fit, we\'ll say it honestly.',
-  },
-];
-
-const FAQ_ITEMS = [
-  {
-    question: 'Is the strategy call free?',
-    answer: 'Yes. The initial 20-minute strategy consultation is free.',
-  },
-  {
-    question: 'How long is the consultation?',
-    answer: 'The call is planned for 20 minutes. If deeper analysis is required, we can suggest the next step separately.',
-  },
-  {
-    question: 'Is this a sales call?',
-    answer: 'No. The call is meant to understand your business, identify growth leaks, and suggest practical next steps. If there is a fit, we can discuss working together.',
-  },
-  {
-    question: 'Do you offer remote meetings?',
-    answer: 'Yes. Calls can be done online, so businesses from Pune, Mumbai, or anywhere in India can book a consultation.',
-  },
-  {
-    question: 'What will I get after the call?',
-    answer: 'You will get clarity on what may be blocking your growth and what should be fixed, improved, or scaled next.',
-  },
-  {
-    question: 'Can I book if I am not sure which service I need?',
-    answer: 'Yes. That is exactly what the call is for. We\'ll help you understand whether Google Ads, Meta Ads, SEO, lead generation, or CRO is the right starting point.',
-  },
+const BRING = [
+  <>How many enquiries you get in a typical month, roughly.</>,
+  <>Roughly how many of those are worth quoting for.</>,
+  <>Whether you can see where any of them came from.</>,
 ];
 
 export default function ScheduleCallPage() {
   return (
     <>
-      {/* JSON-LD Schemas */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'BreadcrumbList',
-            'itemListElement': [
-              {
-                '@type': 'ListItem',
-                'position': 1,
-                'name': 'Home',
-                'item': 'https://mappedskills.com'
-              },
-              {
-                '@type': 'ListItem',
-                'position': 2,
-                'name': 'Schedule Call',
-                'item': 'https://mappedskills.com/schedule-call'
-              }
-            ]
-          })
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'FAQPage',
-            'mainEntity': FAQ_ITEMS.map(item => ({
-              '@type': 'Question',
-              'name': item.question,
-              'acceptedAnswer': {
-                '@type': 'Answer',
-                'text': item.answer
-              }
-            }))
-          })
-        }}
-      />
-
-      {/* Tracking Notes:
-        * schedule_call_click - Primary CTA button clicks
-        * calendly_view - Calendly section is visible/loaded
-        * calendly_click - User interacts with Calendly embed
-        * calendly_booking_started - Calendly form initiated
-        * calendly_booking_completed - Booking confirmed (if supported)
-        * contact_click - Contact page links clicked
-        * phone_click - Phone number clicked
-        * email_click - Email address clicked
-        * faq_open - FAQ accordion items opened
-      */}
-      {/* Breadcrumb Navigation */}
-      <Section className="border-b border-border py-3 sm:py-4">
-        <Container>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-foreground">Home</Link>
-            <span>/</span>
-            <span className="text-foreground">Schedule Call</span>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 1. Hero Section */}
-      <Hero
-        title="Book Your Free Strategy Consultation"
-        subheadline="Free Marketing Consultation"
-        description="Get a practical review of your current marketing setup and clear recommendations on what is working, what is leaking, and what should be fixed first."
-        cta={{
-          text: 'Book My Free Call',
-          href: '#booking-section',
-        }}
-        secondaryCta={{
-          text: 'Contact Us Instead',
-          href: '/contact',
-        }}
+      <RouteHero
+        eyebrow="Booking"
+        title={<>Book a time to talk.</>}
+        lede={
+          <>
+            A conversation about what is actually happening &mdash; what you are getting, what you are not, and
+            what would have to be true for that to change.
+          </>
+        }
+        size="quiet"
       >
-        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-6">
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-2xl sm:text-3xl font-bold text-accent mb-1">20</p>
-            <p className="text-xs sm:text-sm text-muted-foreground">Minute Strategy Call</p>
-          </Card>
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-xs sm:text-sm text-muted-foreground">Free Initial Review</p>
-          </Card>
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-xs sm:text-sm text-muted-foreground">No Pushy Sales Pitch</p>
-          </Card>
-          <Card className="p-4 sm:p-6 text-center">
-            <p className="text-xs sm:text-sm text-muted-foreground">Clear Growth Recommendations</p>
-          </Card>
-        </div>
+        <p>
+          You will leave with a view on where the problem probably sits, whether or not you go any further with
+          us.
+        </p>
+      </RouteHero>
 
-        <div className="mt-12 relative h-64 sm:h-80 rounded-lg overflow-hidden bg-secondary/5 border border-border">
-          <Image
-            src="/images/schedule-call-hero.png"
-            alt="Business professional booking a strategy consultation call to discuss marketing optimization and growth"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-      </Hero>
-
-      {/* 2. Calendly Booking Section */}
-      <Section id="booking-section" className="bg-secondary/5 border-y border-border">
-        <Container>
-          <div className="text-center mb-12">
-            <h2 className="mb-2 text-3xl sm:text-4xl font-bold tracking-tight">
-              Choose a Time That Works for You
-            </h2>
-            <p className="text-lg text-foreground">
-              Pick a convenient time for a short strategy discussion. We'll use the call to understand your business and recommend the right next step.
-            </p>
-          </div>
-
-          {/* Tracking: calendly_view, calendly_click */}
-          <CalendlyEmbed url={CALENDLY_URL} />
-
-          <p className="text-center mt-8 text-sm text-muted-foreground">
-            You will receive an automatic confirmation email after booking.
-          </p>
-        </Container>
-      </Section>
-
-      {/* 3. What We'll Discuss Section */}
-      <Section>
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              What We'll Discuss on the Call
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {DISCUSSION_TOPICS.map((topic, idx) => (
-              <Card key={idx} className="p-6 sm:p-8">
-                <div className="flex items-start gap-4">
-                  <Eye className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
-                  <div className="flex-1">
-                    <h3 className="mb-2 font-semibold text-lg">{topic.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{topic.description}</p>
-                  </div>
-                </div>
-              </Card>
-            ))}
+      {/* The booking surface: the same vendor and the same configured URL, as a
+          plain outbound link. No availability is stated, no slot count, no
+          duration, no scarcity, and no confirmation of any kind — this control
+          opens the booking page and nothing more. PHASE H1 owns the integration
+          itself. */}
+      <section className="border-t border-resolve-line bg-resolve-paper py-[clamp(40px,5vw,88px)] text-resolve-ink">
+        <Container className="max-w-[1400px] px-[var(--resolve-pad)]">
+          <div className="max-w-[62ch]">
+            <ChapterLabel>The booking page</ChapterLabel>
+            <Body>
+              Times are shown on the booking page itself, so it is the only place that can tell you what is
+              actually open. Nothing on this page claims a slot for you.
+            </Body>
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-[26px] inline-flex min-h-[52px] items-center justify-center rounded-full border-2 px-[26px] text-base font-bold no-underline max-[520px]:w-full"
+              style={{
+                background: 'var(--resolve-accent-dark)',
+                borderColor: 'var(--resolve-accent-dark)',
+                color: '#FFFFFF',
+              }}
+            >
+              Open the booking page
+            </a>
           </div>
         </Container>
-      </Section>
+      </section>
 
-      {/* 4. What You'll Get Section */}
-      <Section className="border-y border-border bg-secondary/5">
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              What You'll Get From This Strategy Call
-            </h2>
-          </div>
+      {/*
+        §1 — WHAT THE CALL IS — who takes it, how long it runs and when it is
+        available are ALL OWNER-BLOCKED, AND ALL RENDER NOTHING. What the call
+        covers is unblocked and renders below under its own heading, which does
+        not promise a name, a length or a time.
+      */}
+      <CommercialSection>
+        <ChapterLabel>What the call covers</ChapterLabel>
+        <Display>Four things, and none of them is a pitch.</Display>
+        <StatedList items={COVERS} />
+      </CommercialSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            {OUTCOMES.map((outcome, idx) => (
-              <Card key={idx} className="p-6 sm:p-8">
-                <div className="flex items-start gap-4">
-                  <Zap className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
-                  <div className="flex-1">
-                    <h3 className="mb-2 font-semibold text-lg">{outcome.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{outcome.description}</p>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
+      {/* ------------------------------------------------------------- §2 */}
+      <CommercialSection tone="paper">
+        <ChapterLabel>What you get from it either way</ChapterLabel>
+        <Display>A view on which of four things is most likely losing you enquiries.</Display>
+        <Body>
+          The demand, the page, the enquiry path, or the measurement &mdash; and what you would check next to
+          confirm it. That is useful whether you work with us or hand it to somebody else.
+        </Body>
+        <Body>
+          If you would rather work through it yourself first,{' '}
+          <Link
+            href="/problems/traffic-but-no-enquiries"
+            className="font-semibold text-resolve-ink underline decoration-2 underline-offset-4"
+          >
+            the five checks are published in full
+          </Link>{' '}
+          and you do not need us to run them.
+        </Body>
+      </CommercialSection>
 
-      {/* 5. Who This Call Is For Section */}
-      <Section>
-        <Container>
-          <div className="max-w-3xl mx-auto">
-            <h2 className="mb-8 text-3xl sm:text-4xl font-bold tracking-tight">
-              This Call Is Best For You If…
-            </h2>
+      {/* ------------------------------------------------------------- §3 */}
+      <CommercialSection>
+        <ChapterLabel>What it is not</ChapterLabel>
+        <Display>Three things it will not be.</Display>
+        <Body>
+          It is not a pitch deck. It is not a full audit &mdash; that is a piece of work with a scope and a
+          price, and a conversation is not it. And it is not a qualification interview: if what you need is
+          something we do not do, the useful outcome is finding that out quickly.
+        </Body>
+      </CommercialSection>
 
-            <ul className="space-y-4 mb-12">
-              {FOR_THIS_CALL.map((item, idx) => (
-                <li key={idx} className="flex items-start gap-3 p-4 rounded-lg hover:bg-secondary/5">
-                  <CheckCircle className="h-6 w-6 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-foreground">{item}</span>
-                </li>
-              ))}
-            </ul>
+      {/* ------------------------------------------------------------- §4 */}
+      <CommercialSection tone="paper">
+        <ChapterLabel>What to have to hand</ChapterLabel>
+        <Display>Rough numbers are enough.</Display>
+        <StatedList items={BRING} />
+        <Body>
+          Access to your analytics is useful and not required &mdash; if there is none, that is itself worth
+          knowing before we talk.
+        </Body>
+      </CommercialSection>
 
-            <div className="text-center">
-              <Button size="lg" asChild>
-                <a href="#booking-section">Book Your Free Call</a>
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 6. Who This Call Is Not For Section */}
-      <Section className="border-y border-border bg-secondary/5">
-        <Container>
-          <div className="max-w-3xl mx-auto">
-            <h2 className="mb-8 text-3xl sm:text-4xl font-bold tracking-tight">
-              This Call May Not Be Right If…
-            </h2>
-
-            <ul className="space-y-4 mb-12">
-              {NOT_FOR_THIS_CALL.map((item, idx) => (
-                <li key={idx} className="flex items-start gap-3 p-4 rounded-lg hover:bg-background/50">
-                  <X className="h-6 w-6 text-muted-foreground flex-shrink-0 mt-0.5" />
-                  <span className="text-muted-foreground">{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            <p className="text-muted-foreground text-center">
-              We appreciate transparency. If any of the above describes your situation, we want to be upfront about it.
-            </p>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 7. Before the Call Section */}
-      <Section>
-        <Container>
-          <div className="max-w-3xl mx-auto">
-            <h2 className="mb-8 text-3xl sm:text-4xl font-bold tracking-tight">
-              Before the Call, Keep These Ready
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              {PREPARE_FOR_CALL.map((item, idx) => {
-                const [title, ...descParts] = item.split(' - ');
-                const description = descParts.join(' - ');
-                return (
-                  <Card key={idx} className="p-6 flex items-start gap-4">
-                    <CheckCircle className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-semibold text-foreground mb-1">{title}</p>
-                      {description && <p className="text-sm text-muted-foreground">{description}</p>}
-                    </div>
-                  </Card>
-                );
-              })}
-            </div>
-
-            <div className="bg-secondary/50 border border-border rounded-lg p-6 sm:p-8">
-              <p className="text-foreground">
-                <span className="font-semibold">No formal presentation needed.</span> A simple understanding of your current situation is enough. Come as you are.
-              </p>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 8. Trust Section */}
-      <Section className="border-y border-border bg-secondary/5">
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Why Businesses Book This Call
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            {TRUST_POINTS.map((point, idx) => (
-              <Card key={idx} className="p-6 sm:p-8">
-                <TrendingUp className="h-8 w-8 text-accent mb-4" />
-                <h3 className="mb-2 font-semibold text-lg">{point.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{point.description}</p>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* 9. Testimonial / Proof Section */}
-      <Section>
-        <Container>
-          <div className="max-w-3xl mx-auto">
-            <h2 className="mb-12 text-3xl sm:text-4xl font-bold tracking-tight text-center">
-              What Clients Value About MappedSkills
-            </h2>
-
-            <Card className="p-8 sm:p-12 text-center border-accent/20 bg-secondary/5">
-              <p className="text-lg sm:text-xl text-foreground italic mb-6 leading-relaxed">
-                "MappedSkills explained our marketing problem in simple business terms and helped us understand what needed to be fixed first."
-              </p>
-              <p className="font-semibold mb-1">Client Name</p>
-              <p className="text-sm text-muted-foreground">Service Business</p>
-              <p className="text-xs text-muted-foreground mt-4">[Placeholder testimonial — replace with verified client feedback]</p>
-            </Card>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 10. Quick FAQ Section */}
-      <Section className="border-y border-border bg-secondary/5">
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              Strategy Call FAQs
-            </h2>
-          </div>
-
-          <div className="mx-auto max-w-3xl">
-            {/* Tracking: faq_open */}
-            <FAQSection items={FAQ_ITEMS} />
-          </div>
-        </Container>
-      </Section>
-
-      {/* 11. Alternative Contact Section */}
-      <Section>
-        <Container>
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="mb-2 text-3xl sm:text-4xl font-bold tracking-tight">
-              Prefer to Contact Us Directly?
-            </h2>
-            <p className="mb-8 text-lg text-foreground">
-              You can also reach us by phone or email.
-            </p>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              <Card className="p-6 flex flex-col items-center">
-                <p className="text-muted-foreground mb-2">Phone</p>
-                {/* Tracking: phone_click */}
-                <Button variant="outline" asChild>
-                  <a href="tel:+919873232662">+91 9873232662</a>
-                </Button>
-              </Card>
-              <Card className="p-6 flex flex-col items-center">
-                <p className="text-muted-foreground mb-2">Email</p>
-                {/* Tracking: email_click */}
-                <Button variant="outline" asChild>
-                  <a href="mailto:info@mappedskills.com">info@mappedskills.com</a>
-                </Button>
-              </Card>
-            </div>
-
-            <p className="text-muted-foreground mb-4">Or visit our contact page:</p>
-            {/* Tracking: contact_click */}
-            <Button size="lg" variant="outline" asChild>
-              <Link href="/contact">Go to Contact Page</Link>
-            </Button>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 12. Final CTA Section */}
-      <CTASection
-        title="Ready to Get Clear About Your Marketing?"
-        description="Book your free strategy consultation and find out what is working, what is leaking, and what should be fixed first."
-        primaryCta={{
-          text: 'Book My Free Strategy Call',
-          href: '#booking-section',
-        }}
-        secondaryCta={{
-          text: 'Contact Us',
-          href: '/contact',
-        }}
-      />
+      {/*
+        §5's DIRECT CONTACT LINE — the published phone number is OWNER-BLOCKED
+        and renders nothing. The cross-link to /contact below is unblocked and
+        is the one route away from this page.
+      */}
+      <CommercialSection>
+        <ChapterLabel>Or write instead</ChapterLabel>
+        <Display>The form reaches the same place.</Display>
+        <Body>
+          If you would rather set it out in writing, neither route is a lesser one.{' '}
+          <Link href="/contact" className="font-semibold text-resolve-ink underline decoration-2 underline-offset-4">
+            Tell us what you&rsquo;re trying to fix
+          </Link>
+          .
+        </Body>
+      </CommercialSection>
     </>
   );
 }

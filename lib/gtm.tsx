@@ -2,75 +2,86 @@
 
 import Script from 'next/script';
 
+import { useConsent } from '@/components/analytics/ConsentProvider';
+
 /**
- * SESSION 32 — PHASE H2 — the Google Tag Manager container script.
+ * SESSION 33 — PHASE H2 — the Google Tag Manager container script,
+ * CONSENT-GATED.
  *
- * WHAT THIS FILE IS NOW: the container loader, and NOTHING ELSE.
+ * WHAT THIS FILE IS: the container loader, and NOTHING ELSE. It emits no event,
+ * exports no helper and defines no global. `lib/analytics.ts` is the single
+ * event boundary and `lib/consent.ts` is the single consent boundary.
  *
- * WHAT IT WAS: the loader plus seven `dataLayer` helper functions, five of which
- * had no caller and two of which were live PII leaks —
- * `trackPhoneClick(phoneNumber)` and `trackEmailClick(email)` pushed a phone
- * number and a RAW EMAIL ADDRESS into `dataLayer`, and `trackFormSubmit`
- * accepted an arbitrary `formData` object that would have been spread into the
- * payload whole. `EVENT_TAXONOMY.md` §7 prohibits every one of those values
- * outright, and `05_FORMS_ANALYTICS.md` §2.1 required them to be REMOVED, NOT
- * RENAMED. They are removed, along with `lib/tracking.ts`, which wrapped them.
+ * ---------------------------------------------------------------------------
+ * TWO GATES, AND BOTH MUST OPEN.
  *
- * NOTHING EMITS AN EVENT FROM THIS FILE ANY MORE. `lib/analytics.ts` is the
- * single event boundary, its parameters go through a hard sanitiser that drops
- * any value that is not a string, number or boolean, and there is no exported
- * function here that a component could reach for by accident.
+ *   1. `NEXT_PUBLIC_GTM_ID` must be set. Unset, this renders `null` — no script
+ *      element, no request to Google, and an application that works exactly as
+ *      it does today. `.env.example` leaves it empty and NO CONTAINER ID IS
+ *      WRITTEN ANYWHERE IN THIS REPOSITORY; the production value is host
+ *      configuration.
+ *   2. The visitor must have explicitly accepted analytics. `state === 'granted'`
+ *      is the only value that loads anything. `unset` and `denied` are treated
+ *      identically here: NO THIRD-PARTY SCRIPT IS REQUESTED AT ALL.
  *
- * ENVIRONMENT GATED, AND THAT GATE IS LOAD-BEARING. With `NEXT_PUBLIC_GTM_ID`
- * unset this component renders `null`: no script element, no `noscript` iframe,
- * no request to Google. `.env.example` leaves it empty and no container id
- * appears anywhere in this repository — Session 01B verified in a real browser
- * that `dataLayer`, `gtag` and `fbq` were all undefined in production, so no
- * analytics has ever run on this site and there is no historical container
- * configuration to protect.
+ * WHY THE CONTAINER ITSELF IS GATED, AND NOT ONLY THE TAGS INSIDE IT. Consent
+ * Mode v2 alone — load the container always, let denied defaults restrain the
+ * tags — is a valid Google implementation, and it is the weaker of the two for
+ * a visitor who has said no or has not been asked. It still fetches a
+ * third-party script from `googletagmanager.com` and still lets Google's tags
+ * transmit cookieless pings. Gating the loader means a REFUSAL IS A REFUSAL:
+ * nothing is fetched, nothing is transmitted, and there is no state in which
+ * Google is contacted on behalf of somebody who declined. The consent defaults
+ * are pushed regardless, from the document head, so the belt and the braces are
+ * both present: even if this gate were ever removed, the container could not
+ * read a granted state the visitor did not give.
  *
- * CONSENT — UNRESOLVED, AND THIS IS THE FILE IT BLOCKS. There is no consent
- * mechanism on this site. The moment `NEXT_PUBLIC_GTM_ID` is set, this loads a
- * third-party script unconditionally on every page. THAT VARIABLE MUST NOT BE
- * SET IN PRODUCTION UNTIL THE CONSENT DECISION EXISTS. This session does not
- * invent a banner, invent consent copy, or state a legal position — all three
- * are owner and legal input, recorded as such.
+ * ORDERING IS A PROPERTY OF THE DOCUMENT, NOT OF THIS COMPONENT. By the time
+ * anything here can render, the inline bootstrap in `<head>` has already put
+ * `consent default` (all four DENIED) at the front of `dataLayer`, followed by
+ * the replayed `consent update` for a returning accepted visitor. The container
+ * reads the queue from the beginning when it finishes loading, so it sees the
+ * consent commands before it sees a single event — including any `page_view` or
+ * `lead_form_submitted` that `lib/analytics.ts` queued while it was loading.
+ * That queue is what keeps a conversion completed on a slow connection from
+ * being lost.
  *
- * `strategy="afterInteractive"` is retained deliberately: measurement must never
- * compete with the page for the main thread, and the container reads whatever
- * `lib/analytics.ts` has already queued in `dataLayer` when it finishes loading,
- * so an event emitted before the script executes is not lost.
+ * `strategy="afterInteractive"` is retained: measurement must never compete
+ * with the page for the main thread, and nothing is lost by loading late
+ * because the queue is read from the start.
+ *
+ * THE `<noscript>` IFRAME WAS REMOVED, and its removal is the point. It loaded
+ * `googletagmanager.com/ns.html` unconditionally for every visitor with
+ * JavaScript disabled — visitors who by definition cannot be shown a consent
+ * banner, cannot make a choice and cannot have one read back. There is no
+ * honest way to gate it, so it does not ship. Without JavaScript this site now
+ * contacts no analytics provider at all, which is the correct behaviour and is
+ * recorded as such rather than treated as a regression.
+ *
+ * DOUBLE INJECTION IS GUARDED TWICE. `next/script` will not re-inject an id it
+ * has already run, and the snippet itself returns early if the flag it sets is
+ * already present — so a remount, a fast re-render or a second copy of this
+ * component cannot produce two containers and two of every tag.
  */
 export function GoogleTagManager() {
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
+  const { state } = useConsent();
 
-  if (!gtmId) {
-    return null;
-  }
+  if (!gtmId) return null;
+  if (state !== 'granted') return null;
 
   return (
-    <>
-      {/* Google Tag Manager */}
-      <Script
-        id="gtm-script"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <Script
+      id="gtm-script"
+      strategy="afterInteractive"
+      dangerouslySetInnerHTML={{
+        __html: `(function(w,d,s,l,i){if(w.__msGtmLoaded)return;w.__msGtmLoaded=true;
+w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','${gtmId}');`,
-        }}
-      />
-      {/* Google Tag Manager (noscript) */}
-      <noscript>
-        <iframe
-          src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
-          height="0"
-          width="0"
-          style={{ display: 'none', visibility: 'hidden' }}
-        />
-      </noscript>
-    </>
+      }}
+    />
   );
 }

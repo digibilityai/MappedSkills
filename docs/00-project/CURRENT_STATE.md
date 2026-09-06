@@ -38,6 +38,28 @@
 > **Passing Gate 10 approves NO production implementation and resolves NO owner blocker.**
 
 ## Current Phase
+
+> **⚠ THIS SECTION HAS NOT BEEN MAINTAINED SINCE SESSION 20 (2026-09-04), AND THE STATEMENT BELOW
+> THAT "NO PRODUCTION IMPLEMENTATION HAS BEGUN" IS NO LONGER TRUE.**
+>
+> **PRODUCTION TRANSLATION HAS BEEN RUNNING SINCE SESSION 21 and is recorded, phase by phase, in
+> `docs/27-production-translation/`** (files `10`–`20`: Phase A0 live baseline → A foundation →
+> B shared chrome → C/D homepage → E responsive fallback → F commercial routes → G remaining
+> routes → H1 forms and booking → H2 analytics and conversion → H2A consent and GTM). Sessions
+> 21–32 did not update this section; **that gap is recorded here rather than back-filled, because
+> this worker did not verify those sessions' outcomes and will not restate them.**
+>
+> **Current production-translation state, as of Session 33 (2026-09-06):**
+> **PHASE H2 — ANALYTICS AND CONVERSION — BLOCKED.** Consent Mode v2 and consent-gated GTM
+> delivery are implemented and verified (`DEC-020`), but **the published `GTM-K8ZQPMXP` container
+> fires advertising tags that the approved consent decision does not permit**, and Preview,
+> GA4 configuration, container publication, production `NEXT_PUBLIC_GTM_ID`, migration 002 and one
+> real production measurement all remain outstanding owner actions. **Booking remains
+> owner-blocked.** See `docs/27-production-translation/20_PHASE_H2A_CONSENT_AND_GTM.md` §14.
+>
+> **The Gate 10 record below remains accurate as a record of the creative direction**, and THE
+> RESOLVE remains the approved visual and experience direction.
+
 **SESSION 20 — GATE 10 FORMAL CLOSURE — COMPLETE (2026-09-04). RESULT: GATE 10 PASSED (`DEC-019`). THE RESOLVE VALIDATED AS THE PRODUCTION VISUAL AND EXPERIENCE DIRECTION.**
 
 **The approved homepage baseline is `docs/26-resolve-homepage/prototype/index.html`** — the Session 19B state. The authoritative creative reference remains `docs/20-creative-convergence/prototype/convergence.html`, **verified byte-identical (`c6d29fd34cf7c5e481d8244773f7d357`) across every session from 17B to 19B and never modified.**

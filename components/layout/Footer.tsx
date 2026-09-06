@@ -3,6 +3,7 @@ import { Mail, Linkedin, Facebook, Instagram } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/Logo';
 import { offices, siteMetadata } from '@/lib/metadata';
+import { ConsentPreferencesLink } from '@/components/analytics/ConsentPreferencesLink';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -233,6 +234,13 @@ export function Footer() {
                 >
                   Terms
                 </Link>
+                {/*
+                  SESSION 33 — PHASE H2. Withdrawal must be as easy as consent,
+                  so the banner is reachable again from every page. A button,
+                  not a link, because it goes nowhere; styled to match this row
+                  and given the same 40px target as the controls beside it.
+                */}
+                <ConsentPreferencesLink className="inline-flex min-h-[40px] items-center text-sm text-white/80 hover:text-white transition-colors" />
               </div>
 
               {/* Social Links */}

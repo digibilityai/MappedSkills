@@ -6,6 +6,14 @@
 **Contact measurement architecture: implemented, tested and trustworthy. Zero analytics providers
 are configured, so nothing this phase emits can reach any platform until the owner acts.**
 
+> **⚠ CONTINUED IN SESSION 33 — `20_PHASE_H2A_CONSENT_AND_GTM.md`.**
+> The consent decision recorded below as *unresolved* has since been made and implemented: Google
+> Consent Mode v2 with all four signals denied by default, and GTM delivery gated on explicit
+> analytics acceptance. **H2 IS STILL BLOCKED.** Live validation against the real
+> `GTM-K8ZQPMXP` container found that it fires a **Meta Pixel and an X/Twitter ads tag** while
+> advertising consent is denied — a new blocker that must be resolved in GTM before the container
+> is published. Read the Session 33 document for the current state of every item below.
+
 ---
 
 ## 0. The finding, stated first

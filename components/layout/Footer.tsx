@@ -59,6 +59,43 @@ export function Footer() {
         page via the header and each page's own close.
       */}
 
+      {/*
+        SESSION 34 — PHASE I CLOSURE — FOOTER TOUCH TARGETS RAISED TO THE
+        PROGRAMME FLOOR.
+
+        THE DEFECT SESSION 33 RECORDED AND DID NOT FIX: all 17 footer links —
+        14 navigation links, the email address and both phone numbers —
+        rendered as 19px-tall boxes. The programme's own floor is ~40px
+        ("touch targets comfortably above minimum, with real spacing between
+        adjacent targets", `docs/16-ux/07_NAVIGATION_ARCHITECTURE.md` and
+        `12_RESPONSIVE_UX.md`), and THE RESOLVE homepage was signed off at
+        "0 targets under 40px" (`docs/26-resolve-homepage/03_RESPONSIVE.md`
+        §5). WCAG 2.2 SC 2.5.8 passing on the 24px spacing exception does NOT
+        waive the programme standard, so the standard is met rather than
+        waived.
+
+        THE GEOMETRY, AND WHY IT IS NOT A REDESIGN. This is the technique the
+        approved Resolve prototype already uses on its own footer
+        (`docs/26-resolve-homepage/prototype/index.html`:
+        `.foot a{display:inline-block;padding:12px 0}` with
+        `.foot li{margin-bottom:0}`) — the list's dead gap is converted into
+        the link's own hit box instead of being added on top of it:
+
+          - every footer link becomes `inline-flex items-center min-h-[40px]`,
+            so the BOX is 40px while the TEXT, its size, weight, colour and
+            hover treatment are all unchanged;
+          - the two navigation lists drop from `space-y-2.5` (10px) to
+            `space-y-1` (4px), because 6px of that gap is now inside the
+            targets above and below it.
+
+        NET EFFECT: measured pitch goes 36px -> 44px, so each link costs 8px,
+        not 21px. Targets are 40px with a REAL 4px gap between adjacent ones —
+        they do not touch and cannot collide. Nothing is stacked, no spacer is
+        added, no column is re-laid-out, and the four-column / two-column /
+        one-column composition, the heading hierarchy and the link order are
+        all exactly as Session 33 left them.
+      */}
+
       {/* Footer Columns */}
       <div className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <div className="mx-auto max-w-7xl">
@@ -96,11 +133,11 @@ export function Footer() {
                 in `app/globals.css`; the rendered appearance is unchanged.
               */}
               <h2 className="!text-sm !font-bold !leading-tight font-heading uppercase tracking-wider text-white/90 mb-4">Services</h2>
-              <ul className="space-y-2.5">
+              <ul className="space-y-1">
                 <li>
                   <Link
                     href="/google-ads"
-                    className="text-sm text-white/85 hover:text-accent transition-colors"
+                    className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
                   >
                     Google Ads
                   </Link>
@@ -108,7 +145,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/social-media-ads"
-                    className="text-sm text-white/85 hover:text-accent transition-colors"
+                    className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
                   >
                     Social Media Ads
                   </Link>
@@ -116,7 +153,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/lead-generation"
-                    className="text-sm text-white/85 hover:text-accent transition-colors"
+                    className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
                   >
                     Lead Generation
                   </Link>
@@ -124,7 +161,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/seo"
-                    className="text-sm text-white/85 hover:text-accent transition-colors"
+                    className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
                   >
                     SEO
                   </Link>
@@ -132,7 +169,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/conversion-optimization"
-                    className="text-sm text-white/85 hover:text-accent transition-colors"
+                    className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
                   >
                     Conversion Optimization
                   </Link>
@@ -143,11 +180,11 @@ export function Footer() {
             {/* Column 3: Company */}
             <div>
               <h2 className="!text-sm !font-bold !leading-tight font-heading uppercase tracking-wider text-white/90 mb-4">Company</h2>
-              <ul className="space-y-2.5">
+              <ul className="space-y-1">
                 <li>
                   <Link
                     href="/services"
-                    className="text-sm text-white/85 hover:text-accent transition-colors"
+                    className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
                   >
                     Services
                   </Link>
@@ -155,7 +192,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/how-it-works"
-                    className="text-sm text-white/85 hover:text-accent transition-colors"
+                    className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
                   >
                     How It Works
                   </Link>
@@ -172,7 +209,7 @@ export function Footer() {
                   */}
                   <Link
                     href="/work"
-                    className="text-sm text-white/85 hover:text-accent transition-colors"
+                    className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
                   >
                     Work
                   </Link>
@@ -180,7 +217,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/pricing"
-                    className="text-sm text-white/85 hover:text-accent transition-colors"
+                    className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
                   >
                     Pricing
                   </Link>
@@ -188,7 +225,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/about"
-                    className="text-sm text-white/85 hover:text-accent transition-colors"
+                    className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
                   >
                     About
                   </Link>
@@ -196,7 +233,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/blog"
-                    className="text-sm text-white/85 hover:text-accent transition-colors"
+                    className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
                   >
                     Blog
                   </Link>
@@ -204,7 +241,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/faq"
-                    className="text-sm text-white/85 hover:text-accent transition-colors"
+                    className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
                   >
                     FAQ
                   </Link>
@@ -221,7 +258,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/contact"
-                    className="text-sm text-white/85 hover:text-accent transition-colors"
+                    className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
                   >
                     Contact
                   </Link>
@@ -229,7 +266,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/schedule-call"
-                    className="text-sm text-white/85 hover:text-accent transition-colors"
+                    className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
                   >
                     Book a call
                   </Link>
@@ -245,7 +282,7 @@ export function Footer() {
                   <p className="text-xs text-white/80 uppercase tracking-wider mb-1">Email</p>
                   <a
                     href={`mailto:${siteMetadata.email}`}
-                    className="text-sm text-white/85 hover:text-accent transition-colors break-all"
+                    className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors break-all"
                   >
                     {siteMetadata.email}
                   </a>
@@ -255,7 +292,7 @@ export function Footer() {
                     <p className="text-xs text-white/80 uppercase tracking-wider mb-1">{office.city}</p>
                     <a
                       href={`tel:${office.phone}`}
-                      className="text-sm text-white/85 hover:text-accent transition-colors"
+                      className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
                     >
                       {/* SESSION 33 — PHASE I. Was `office.phone`, the raw
                           `tel:` value, so the footer printed "+919873232662"
@@ -291,13 +328,13 @@ export function Footer() {
               <div className="flex gap-6">
                 <Link
                   href="/privacy-policy"
-                  className="text-sm text-white/80 hover:text-white transition-colors"
+                  className="inline-flex min-h-[40px] items-center text-sm text-white/80 hover:text-white transition-colors"
                 >
                   Privacy Policy
                 </Link>
                 <Link
                   href="/terms"
-                  className="text-sm text-white/80 hover:text-white transition-colors"
+                  className="inline-flex min-h-[40px] items-center text-sm text-white/80 hover:text-white transition-colors"
                 >
                   Terms
                 </Link>
@@ -306,6 +343,14 @@ export function Footer() {
                   so the banner is reachable again from every page. A button,
                   not a link, because it goes nowhere; styled to match this row
                   and given the same 40px target as the controls beside it.
+
+                  SESSION 34 — PHASE I CLOSURE. "Privacy Policy" and "Terms"
+                  above now carry that same `inline-flex min-h-[40px]
+                  items-center`. They already measured over 40px, but only
+                  because this button stretched the flex row around them — so
+                  their text sat on a different baseline from this one, which
+                  is visible at 390px. Giving all three the same box aligns
+                  them and adds NO height: the row was already this tall.
                 */}
                 <ConsentPreferencesLink className="inline-flex min-h-[40px] items-center text-sm text-white/80 hover:text-white transition-colors" />
               </div>

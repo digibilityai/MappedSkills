@@ -663,3 +663,519 @@ working.
 **Email notification remains absent.** Durable persistence is authoritative and independent of it.
 
 **Nothing was pushed. No credential was read or printed. No content was fabricated.**
+
+---
+---
+
+# SESSION 34 — PHASE I LAUNCH CLOSURE
+
+**Session:** 34 · **Date:** 2026-09-06 · **Branch:** `test_branch`
+**Starting HEAD:** `4795490` — *feat: harden site for production launch*
+**Scope:** four narrowly defined launch-hardening questions, closed independently.
+**Phase I was NOT reopened generally. No deployment was started. Analytics remains dormant.**
+
+**Result: PASS — READY FOR CONTROLLED PRODUCTION DEPLOYMENT**, with one **UNKNOWN**
+carried explicitly into the runbook rather than resolved by assumption (§C4.5).
+
+---
+
+## C0. Starting state — VERIFIED FACT
+
+| Item | Observed |
+|---|---|
+| Working directory | `/Users/amitguptaamit/gitrepo/mappedskills` |
+| Branch | `test_branch` |
+| HEAD | `4795490` — matches the brief exactly |
+| Working tree | Clean apart from untracked `README.md` and `mappedskills-cpanel-20260906-101820.zip` |
+| `README.md` | **Untouched, unmodified, unstaged — and still so at session end** |
+| Pushed | **Nothing** |
+
+---
+
+## C1. ISSUE ONE — ORGANIZATION STRUCTURED DATA
+
+### C1.1 The provenance question, answered against the governing records
+
+Session 33 removed the malformed `postalCode: 'India'` and the non-street
+`streetAddress: 'Pune, Maharashtra, India'`, then **rebuilt** a full `PostalAddress` from
+`offices[0]` in `lib/metadata.ts` — street `Tower C3, #503, Nyati Esteban I, Near Country Club,
+Undri`, locality `Pune`, region `Maharashtra`, postcode `411060`, country `IN`. Its stated
+reasoning was that the legacy site already published these lines, and that deriving them from the
+array the footer renders would stop the markup and the visible address drifting apart.
+
+**Both halves of that reasoning fail.**
+
+**FIRST — the source is explicitly disqualified.** `docs/05-content/OWNER_INPUT_REGISTER.md`
+item **2, "Verified company facts"**, is **BLOCKING** and **unanswered**. It requires *from the
+owner* "the complete registered postal address **including a real postal code**", names
+**"all `Organization`/`LocalBusiness` schema"** among what it blocks, and states in terms:
+
+> "Nothing here may be inferred from the existing site, because the existing site is part of the
+> problem."
+
+and, as **rule 1** of that register:
+
+> "No item here is answered by inference, **by reading the existing site**, or by a plausible
+> default."
+
+`docs/08-messaging/COPY_PLACEHOLDER_STANDARD.md` classifies the same item as **BLOCKS COPY** for
+the NAP and entity blocks, naming the footer and all Organization schema.
+`docs/16-ux/26_OWNER_BLOCKED_STRUCTURE_RULE.md` places `/contact` in **case 0** on
+"complete NAP *(owner)*". No entry in `DECISION_LOG.md` approves any address, postcode, locality
+or legal entity name. **`git log -S "Nyati Esteban"` places the `offices` array unchanged at
+`14767db`** — the third-party push that predates this programme. It is legacy data that has never
+been verified, approved or recorded. Deriving `411060` from a legacy string is still inference
+from the existing site; the mechanism is neater than retyping it, the provenance is identical.
+
+**SECOND — the drift argument was factually wrong, and this session verified it.**
+`grep -rn "addressLines" app components lib` returns **only the two definitions in
+`lib/metadata.ts` and no renderer anywhere.** The footer's Contact column renders `office.city` and
+`office.phoneDisplay` — never `addressLines`. Fetching all 20 routes from the built server for
+`Nyati|Undri|Esteban|Tower C3|411060|Casa Urbano|421 204` returns **zero matches on every route,
+before and after this change**. The site was therefore **asserting to machines a postal address it
+has never once shown to a human being.** There was no visible address for the markup to stay in
+step with.
+
+**DETERMINATION: NOT EXPLICITLY APPROVED. The postal/address fields are removed.**
+
+### C1.2 Exact fields retained and removed
+
+| Field | Session 33 | Session 34 | Basis |
+|---|---|---|---|
+| `address` → `streetAddress` | `Tower C3, #503, Nyati Esteban I, Near Country Club, Undri` | **REMOVED** | Owner-blocked, register item 2 |
+| `address` → `addressLocality` | `Pune` | **REMOVED** | An entity fact on the same footing; register rule 1 |
+| `address` → `addressRegion` | `Maharashtra` | **REMOVED** | Same |
+| `address` → `postalCode` | `411060` | **REMOVED** | Named in the register as owner-supplied |
+| `address` → `addressCountry` | `IN` | **REMOVED** | A `PostalAddress` reduced to a bare country asserts an address while stating none |
+| The `PostalAddress` node itself | present | **REMOVED** | Incomplete but truthful is preferred to complete-looking and unsupported |
+| `name` | `MappedSkills` | **RETAINED** | The brand this site publishes under. **No `legalName` is emitted** — no legal identity is asserted |
+| `url` · `@id` · `logo` | present | **RETAINED** | Properties of this website; self-evidencing |
+| `email` · `telephone` · `contactPoint` | present | **RETAINED** | Contact **routes**, not location claims — live channels the site already publishes. Recorded as an owner item in §C6, not as an address |
+| `description` | homepage meta description | **RETAINED** | Approved copy, verbatim |
+| `sameAs` | `[]` | **RETAINED** | Still filtered while the social env vars are unset |
+| `LocalBusiness` · `priceRange` · `areaServed` | removed by S33 | **NOT REINSTATED** | S33's reasoning stands and was not reopened |
+
+### C1.3 Emitted JSON-LD, re-tested from the built production server
+
+```json
+{ "@context":"https://schema.org", "@type":"Organization",
+  "@id":"https://mappedskills.com/#organization", "name":"MappedSkills",
+  "url":"https://mappedskills.com", "logo":"https://mappedskills.com/ms_Logo.webp",
+  "email":"info@mappedskills.com", "telephone":"+91 9873232662",
+  "description":"We help businesses get found by the buyers already looking for what they sell,
+                 turn more of those visits into real enquiries, and measure the whole path so they
+                 can see what worked.",
+  "contactPoint":{ "@type":"ContactPoint","contactType":"customer service",
+                   "email":"info@mappedskills.com","telephone":"+91 9873232662",
+                   "availableLanguage":["en"] },
+  "sameAs":[] }
+```
+
+**Parsed as JSON on every route — valid, one entity, one `@id`.** All 20 routes scanned for
+`411060`, `postalCode`, `streetAddress`, `addressLocality`, `LocalBusiness`, `priceRange`:
+**zero hits.**
+
+**UNSUPPORTED ENTITY FACTS REMAINING IN STRUCTURED DATA: NONE.**
+
+**The visible footer is not touched by this change.** It shows city names, phone numbers, an email
+and a "Service Area" line — no postal address — and its disposition belongs to the owner-input
+register, not to structured data. **To restore the address:** answer register item 2, record it in
+`DECISION_LOG.md`, put the approved address in `lib/metadata.ts`, and add the `address` node back
+in `lib/schema.ts` citing that decision id. The instruction is written into the file.
+
+---
+
+## C2. ISSUE TWO — FOOTER TOUCH TARGETS
+
+### C2.1 The standard is met, not waived
+
+Session 33 recorded 17 footer links at **19px** against a **~40px** programme floor, and waived it
+on the ground that **WCAG 2.2 SC 2.5.8** passes via the 24px spacing exception at a 36px pitch.
+**That waiver is not accepted.** The programme floor is its own standard:
+`docs/16-ux/07_NAVIGATION_ARCHITECTURE.md` and `12_RESPONSIVE_UX.md` require "touch targets
+comfortably above minimum, with real spacing between adjacent targets";
+`docs/26-resolve-homepage/03_RESPONSIVE.md` §5 signed THE RESOLVE off at
+**"0 targets under 40px"** after fixing 23, footer links among them;
+`09_CORRECTIONS_19A.md` re-verified **0 under 40×40 across 8 widths**.
+
+### C2.2 The geometry — the approved prototype's own technique, not a redesign
+
+The approved Resolve prototype already solves this on its own footer
+(`docs/26-resolve-homepage/prototype/index.html`):
+
+```css
+.foot a{display:inline-block;padding:12px 0}
+.foot li{margin-bottom:0}
+```
+
+The list's dead gap is **converted into** the link's hit box rather than added on top of it. The
+production equivalent applied here:
+
+- every footer link becomes `inline-flex items-center min-h-[40px]` — the **box** is 40px, the
+  **text**, its size, weight, colour and hover treatment are untouched;
+- the two navigation lists go `space-y-2.5` (10px) → `space-y-1` (4px), because 6px of that gap now
+  sits inside the targets above and below it;
+- `Privacy Policy` and `Terms` in the legal row take the same class. They already measured 45.5px,
+  but only because the consent button stretched the flex row around them, so their text sat on a
+  different baseline — visible at 390px. **This adds no height: the row was already that tall.**
+
+**Cost: 8px per link, not 21px.** No column re-laid out, no spacer stacked, no CTA restored,
+composition, heading hierarchy and link order exactly as Session 33 left them.
+
+### C2.3 Measurements — hit boxes via `getBoundingClientRect()`, not glyph height
+
+Measured on the built production server. The "before" column is the pre-change build, reproduced
+exactly in the live DOM (`display:inline; min-height:0` on the 17 links, `margin-top:0.625rem`
+restored) and cross-checked against a direct measurement of the pre-change build at 390px
+(footer 1414px, 17 targets at 19px, pitch 36px — reproduced identically).
+
+| Width | Min target BEFORE | Min target AFTER | Pitch before → after | Targets <40px before → after | Footer height before → after (Δ) | Adjacent overlaps | Horizontal overflow |
+|---:|---:|---:|---|---|---|:--:|:--:|
+| **320** *(beyond the matrix)* | 19px | **40px** | 36 → 44 | 17 → **0** | 1465 → 1631 (**+166**) | **0** | **0** |
+| **360** | 19px | **40px** | 36 → 44 | 17 → **0** | 1437 → 1603 (**+166**) | **0** | **0** |
+| **390** | 19px | **40px** | 36 → 44 | 17 → **0** | 1414 → 1580 (**+166**) | **0** | **0** |
+| **430** | 19px | **40px** | 36 → 44 | 17 → **0** | 1391 → 1557 (**+166**) | **0** | **0** |
+| **760** | 19px | **40px** | 36 → 44 | 17 → **0** | 1337 → 1503 (**+166**) | **0** | **0** |
+| **761** | 19px | **40px** | 36 → 44 | 17 → **0** | 1337 → 1503 (**+166**) | **0** | **0** |
+| **860** | 19px | **40px** | 36 → 44 | 17 → **0** | 854 → 978 (**+124**) | **0** | **0** |
+| **1080** | 19px | **40px** | 36 → 44 | 17 → **0** | 597 → 675 (**+78**) | **0** | **0** |
+| **1081** | 19px | **40px** | 36 → 44 | 17 → **0** | 597 → 675 (**+78**) | **0** | **0** |
+| **1425** | 19px | **40px** | 36 → 44 | 17 → **0** | 597 → 675 (**+78**) | **0** | **0** |
+
+**All 25 footer interactive elements are ≥40px at every width. Zero adjacent-target collisions:
+the pitch is 44px around a 40px box, leaving a real 4px gap — the targets do not touch.**
+**Added height: +78px at desktop, +166px at mobile.** The brief's stated ceiling was ~360px;
+Session 33 estimated ~360px for the naive fix. The prototype's geometry costs less than half of it
+at mobile and under a quarter at desktop.
+
+Re-verified identically on **`/contact`** (360 · 390 · 761 · 1081 · 1425) and **`/thank-you`**
+(390 · 430 · 760 · 860 · 1080 · 1425): **0 under 40px, pitch 44px, 0 overlaps, 0 overflow, one
+`<h1>` on each.**
+
+### C2.4 Perceptual inspection — 390, 860, 1425
+
+| Width | Observed |
+|---|---|
+| **390** | Single column. Brand blurb, SERVICES / COMPANY / CONTACT headings, links evenly spaced with a natural reading rhythm — not stretched, not crowded. Contact column, legal row and social icons all intact; **Privacy Policy · Terms · Analytics preferences now share one baseline** |
+| **860** | Two columns. Headings and link groups aligned, comfortable spacing, no crowding, no overlap |
+| **1425** | Four columns. Full footer, legal row aligned left with socials right. Composition unchanged from Session 33 |
+
+**Resolve visual character preserved at all three:** dark ground, uppercase tracked column headings,
+`text-white/85` links, accent hover, no background on the enlarged boxes, no animation added.
+
+**RESULT: PASS — the programme's 40px floor is met at every tested width.**
+
+---
+
+## C3. ISSUE THREE — DEAD FABRICATED CLAIMS
+
+### C3.1 Files audited, and what was found
+
+| Module | Referenced by | Content | Action |
+|---|---|---|---|
+| `lib/constants.ts` (1,263 lines) | **Nothing.** `grep -rn "lib/constants" app components lib hooks` returns one historical code comment and one entry in `scripts/verify-server-files.cjs` | `STATS` (`300%+` "Average ROI", `₹100Cr+` "Revenue Influenced"), `RESULTS_STATS` (`₹10Cr+`, `300%+`, `45%`), `TESTIMONIALS`, `CASE_STUDIES`, `FEATURED_CASE_STUDIES` (`₹20L → ₹100L monthly revenue`, "5x revenue growth"), `PRICING_PLANS`, and per-service pricing tiers | **DELETED** |
+| `components/sections/SocialProofStrip.tsx` | Only the barrel shim below | `300%+` Average ROI · `₹100Cr+` Revenue Influenced · `50+` Clients Served · `9+` Years Experience | **DELETED** |
+| `components/SocialProofStrip.tsx` | **Nothing** | one-line re-export | **DELETED** |
+| `components/sections/HeroDashboard.tsx` | Only the barrel shim below | `1,247` Total Leads · `300%+` Average ROI · `42` Active Campaigns · `₹100Cr+` Revenue Influenced, "+32% this month" | **DELETED** |
+| `components/HeroDashboard.tsx` | **Nothing** | one-line re-export | **DELETED** |
+
+All five were verified unreferenced across `app/`, `components/`, `lib/`, `hooks/`, `db/`,
+`scripts/`, `server.cjs`, `app.js` and `next.config.mjs` before removal. **Session 33's
+observation that they are dead was correct; its decision to leave them was not.** Dead code
+carrying `DEC-007`-prohibited claims is one careless import away from publication, and it is the
+only remaining copy of those figures in the repository outside governance history.
+
+### C3.2 One claim was NOT dead
+
+**`app/(pages)/blog/[slug]/page.tsx` — `SERVICE_MAP['Case Study Insights']`** is live production
+code, reached by `SERVICE_MAP[post.category]` and rendered by `<RelatedServices>` and the sidebar.
+It read:
+
+> "See how we helped businesses achieve 300%+ ROI." · "Discover lead generation success stories." ·
+> "Learn from our organic growth case studies."
+
+`300%+ ROI` is one of the three figures `DEC-007` prohibits by name and `OWNER_INPUT_REGISTER.md`
+item 4 lists as **BLOCKING**. The other two promise success stories and case studies that do not
+exist — `/work` is `noindex` for exactly that reason and opens by saying so, and Session 33 removed
+"Explore Other Case Studies" from `/portfolio/[slug]` on the same grounds. **All three were fixed
+together**; leaving two proof promises beside a corrected third would be incoherent.
+
+**NO REPLACEMENT COPY WAS WRITTEN AND NO STATISTIC WAS SUBSTITUTED.** Each description is the one
+this same map already gives that same service in its `'Marketing Strategy'` group — "Strategic paid
+search campaigns aligned with your goals", "Multi-channel lead generation strategy", "Long-term
+organic growth strategy". Every other group in this map describes the service; this group now does
+too.
+
+**It renders on zero routes today** (Contentful returns no posts) **and it was fixed anyway** —
+unrendered is not removed, and it would have published with the first article.
+
+### C3.3 Repository-wide production-code claim search
+
+Run over `app/ components/ lib/ hooks/ db/ scripts/ public/ server.cjs app.js next.config.mjs`.
+**Governance and prototype documentation under `docs/` is excluded, as instructed.**
+
+| Pattern | Production hits |
+|---|---|
+| `300%` | 11 |
+| `300%+` | 11 |
+| `₹100Cr` | 9 |
+| `100Cr` | 9 |
+| `₹10Cr` | 1 |
+| `10Cr` | 1 |
+
+**Every remaining hit, itemised, and why it is legitimate:**
+
+| File | Line | Text | Why it is legitimate |
+|---|---|---|---|
+| `app/(pages)/google-ads/page.tsx` | 43, 48 | `* "300%+ ROI". It is gone and it does not migrate…` / `* WHAT THIS REPLACED: a 593-line page carrying "300%+ ROI", "₹100Cr+", "3x",` | **JSDoc comment.** A Phase F record of what was removed from this route |
+| `app/(pages)/services/page.tsx` | 32 | `* WHAT THIS REPLACED: a 671-line page carrying "300%+ ROI", "₹100Cr+",` | Same |
+| `app/(pages)/about/page.tsx` | 50 | `* …a 716-line page carrying "300%+", "₹100Cr+", ROI,` | Same |
+| `app/(pages)/how-it-works/page.tsx` | 47 | `* …a 733-line page carrying "300%+", "₹100Cr+", ROAS in six` | Same |
+| `app/(pages)/lead-generation/page.tsx` | 47 | `* …a 634-line page carrying "300%+", "₹100Cr+", a 40/20/8%` | Same |
+| `app/(pages)/social-media-ads/page.tsx` | 37 | `* …a 647-line page carrying "₹100Cr+", "6x ROAS", a "25%"` | Same |
+| `app/(pages)/pricing/page.tsx` | 25 | `* …alongside "300%+", "₹100Cr+" and ROAS claims.` | Same |
+| `app/(pages)/work/page.tsx` | 19 | `* result cards carrying "300%+", "₹100Cr+", ROI, a 65% figure and ROAS;` | Same |
+| `app/(pages)/blog/[slug]/page.tsx` | 287, 291 | The Session 34 comment quoting the line it removed | **Comment.** The removal record for §C3.2 |
+| `scripts/verify-server-files.cjs` | 22, 23 | The Session 34 comment explaining why `lib/constants.ts` left the required-files list | **Comment.** The removal record for §C3.1 |
+
+**Zero hits are in rendered output.** Independently confirmed by fetching all 20 routes from the
+built production server and grepping the served HTML for `300%`, `100Cr`, `10Cr`: **zero matches
+on every route.** JSDoc and `/* */` comments are stripped by the compiler and reach no bundle.
+
+**UNSUPPORTED CLAIMS REMAINING IN PRODUCTION: NONE.**
+
+### C3.4 One consequential edit to keep the deploy check honest
+
+`scripts/verify-server-files.cjs` listed `lib/constants.ts` in its `required` array — a canary
+proving `lib/` reached the server, and a `prebuild` hook on **every** build including
+`build:cpanel`. Deleting the file without this change would have failed every build. The entry is
+**repointed to `lib/metadata.ts`**, which is imported by every route, rather than dropped — the
+upload check keeps its coverage. Verified: `node scripts/verify-server-files.cjs` →
+`OK: required source files are present.`
+
+**Not audited or removed, and recorded rather than swept in:** `components/Hero.tsx`,
+`components/StatCard.tsx`, `components/TeamCard.tsx` and `components/sections/Hero.tsx` are also in
+that required list and may likewise be dead. **They carry no `DEC-007` claim**, they are outside
+this brief's scope, and they are listed in §C6 as post-launch cleanup.
+
+**RESULT: PASS.**
+
+---
+
+## C4. ISSUE FOUR — 512 MB DEPLOYMENT MEMORY
+
+### C4.1 What "512 MB" is, traced to its only source
+
+**It is `NODE_OPTIONS='--max-old-space-size=512'`, a self-imposed Node flag inside the
+`build:cpanel` script in `package.json`.** That is its only definition in the repository. Every
+other mention — `08_RISK_REGISTER.md` R17, `10_PHASE_A0` §9, `CURRENT_CODEBASE_AUDIT.md` §9,
+`07_VALIDATION_GATES.md` P14, and the per-phase "the 512 MB ceiling was not raised" lines — quotes
+that flag. **None of them cites a hosting document, a plan specification or a CloudLinux LVE
+setting.**
+
+**ANSWER: A — V8 heap target only.** More precisely still: **`--max-old-space-size` governs the V8
+OLD SPACE, not the whole heap and not the process.** Measured directly via
+`v8.getHeapStatistics()` inside the build process, the flag produces a
+**`heap_size_limit` of 704 MB**, not 512 — old space plus the young generation and code space.
+Treating "512 MB" as a process ceiling is wrong twice over.
+
+**NOT B.** No CloudLinux/process/account RSS ceiling of 512 MB — or of any value — is documented
+anywhere in this repository. A full-tree search for `memory limit`, `LVE`, `PMEM`,
+`physical memory`, `nproc` and `RAM limit` returns nothing outside dependency lock files.
+
+**The one host constraint that IS documented is not a memory limit.** `doc/cpanel-deploy.md`:
+*"Shared hosting on hosting.com often cannot finish `next build` (process/thread limits:
+`pthread_create: Resource temporarily unavailable`)"* — an **LVE NPROC / thread** limit. That is
+also what `next.config.mjs` is defending against: *"Shared hosts (CloudLinux) kill Next worker
+processes during static generation"* → `workerThreads: false, cpus: 1`, `RAYON_NUM_THREADS=1`,
+`UV_THREADPOOL_SIZE=1`. The memory flag was added alongside those, but the recorded failure is
+threads.
+
+### C4.2 Measurements — reported separately, as required
+
+Measured on the final Session 34 code, macOS local, `/usr/bin/time -l` plus a 100 ms
+`ps`-based process-tree poller plus an in-process `process.memoryUsage()` / `v8.getHeapStatistics()`
+probe injected with `--require`.
+
+| Quantity | `npm run build:cpanel` (capped) | Control: identical build, **cap removed** |
+|---|---:|---:|
+| `--max-old-space-size` | **512** | *(none)* |
+| V8 `heap_size_limit` reported by the process | **704 MB** | 4,288 MB |
+| **Peak V8 heap USED** | **385.8 MB** | 680.3 MB |
+| **Peak V8 heap COMMITTED** (`heapTotal`) | **475.8 MB** | 774.0 MB |
+| Peak `external` (native buffers) | 100.4 MB | 91.5 MB |
+| **Peak RSS, main build process** | **752.5 MB** | 990.3 MB |
+| Peak RSS, whole process tree (summed, 5 procs) | 977 MB | — |
+| `/usr/bin/time -l` maximum resident set size | 848 MB | — |
+| Exit | **0** | 0 |
+
+**The cap is doing real work and is not cosmetic:** removing it lets V8 grow the heap to 774 MB and
+RSS to 990 MB. Keeping it holds RSS ~238 MB lower. **It is retained unchanged.**
+
+**Why RSS is ~750 MB while the heap cap is 512 MB, and why that is not a contradiction:**
+RSS ≈ committed heap (476) + external native buffers (100) + the resident portion of the Node
+binary, the SWC/lightningcss native Rust modules, JIT code and mapped files (~176). **`--max-old-space-size`
+constrains one of those four terms.** The Session 33 figure of "745 MB" and the brief's "~649 MB"
+are both RSS readings of the same build at different moments; RSS varied across five runs this
+session from 643 MB to 868 MB depending on GC timing. **RSS is not heap, and neither number is
+comparable to 512.**
+
+### C4.3 Where the build actually happens
+
+| Source | Procedure | Status |
+|---|---|---|
+| `doc/cpanel-deploy.md` — **"Recommended"** | Build **on the developer's machine**, `npm run pack:cpanel`, upload the zip, `npm install` on the server, restart. *"**do not** run `npm run build`"* | **The documented primary path** |
+| `scripts/verify-server-files.cjs`, failure message | *"Do NOT run npm run build on this host — restart Node with server.cjs"* | Same doctrine, enforced in the tooling |
+| `21_PHASE_I` §21 runbook, steps 7–8 | *"Build: `npm run build:cpanel`"* then *"Deploy files and restart — Upload, then Restart"* | **Build first, then upload** — same path |
+| `doc/cpanel-deploy.md` — "If you still build on the server" | `npm run build`; `build:cpanel` only *"if RAM is low and limits allow"* | Documented **fallback**, explicitly conditional |
+| **`.github/workflows/deploy.yml`** | On push to **`main`**: rsync, then **`npm run build:cpanel` ON THE SERVER**, then `touch tmp/restart.txt` | ⚠ **CONTRADICTS the documented procedure.** See §C4.5 |
+
+**Under the documented and runbooked path, the ~750 MB build peak is never incurred on the host at
+all.** It is a developer-machine number.
+
+### C4.4 Runtime — what actually runs on the host
+
+The production process is `node server.cjs` (`next({dev:false})` behind a plain `http` server, or
+`app.js` re-exporting it under Passenger). Measured against the Session 34 `build:cpanel` artifact:
+
+| State | RSS | Child processes |
+|---|---:|:--:|
+| Idle, immediately after `prepare()` | **106 MB** | 0 |
+| After 66 requests across all 22 surfaces | **138 MB** | 0 |
+| After 116 requests | **144 MB** | 0 |
+
+**Single process, no workers, no `--max-old-space-size` applied at runtime** (`npm start` sets no
+`NODE_OPTIONS`). All 25 routes are `○ Static` / `● SSG`, so serving is largely file reads —
+consistent with the flat profile. **The required production operation on the host is ~106–144 MB.**
+
+### C4.5 Reconciliation, and the honest UNKNOWN
+
+- **Is the ~649 / 745 / 752 MB figure compatible with the real hosting limit?**
+  **UNKNOWN — and it is recorded as UNKNOWN rather than assumed either way.** No hosting memory
+  limit has ever been documented in this repository. It cannot be derived from the code, and this
+  session did not have host access to read it.
+- **Is that a launch blocker?** **No, under the documented deployment path.** The build peak is a
+  developer-machine cost; the host runs a **106–144 MB** single process. The premise the brief
+  tested for — *"the required production operation reaches ~649 MB"* — **does not hold**: the
+  required production operation is serving, at ~144 MB.
+- **It becomes a blocker only if a build is run on the host**, which the documented procedure, the
+  Phase I runbook and the tooling's own error message all forbid.
+- **`.github/workflows/deploy.yml` does exactly the forbidden thing** and is the one live risk here.
+  It is **not triggered by this session** — it fires only on push to `main`, this work is on
+  `test_branch`, and nothing was pushed. **It must not be used for the controlled deployment until
+  the host's LVE limits are read.** Recorded in §C6.
+
+**Nothing is hidden behind a successful local build. The build result, the heap figures, the RSS
+figures, the runtime figures and the missing host limit are all stated separately above.**
+
+**RESULT: NOT BLOCKED — but the host memory and NPROC limits are UNKNOWN and are added to the
+runbook as a pre-deployment read.**
+
+### C4.6 Runbook additions
+
+Insert before §21 step 7:
+
+| # | Step | Command | Expected |
+|---|---|---|---|
+| 6a | **Read the host's real LVE limits** | `lveinfo --user "$USER"` or cPanel → **Resource Usage**; note `PMEM`/`VMEM`/`NPROC`/`EP` | Record the actual figures. **Do not assume 512 MB** |
+| 6b | **Confirm the build is NOT run on the host** | Build locally, upload the artifact per `doc/cpanel-deploy.md` | `.next/BUILD_ID` present on the server; `npm run build` never invoked there |
+| 6c | **Confirm the GitHub Actions path is not in use** | `.github/workflows/deploy.yml` runs `npm run build:cpanel` **on the server** on push to `main` | Deploy manually, or amend the workflow to build in the runner and rsync `.next` |
+| 9a | **Read runtime RSS after restart** | `ps -o rss=,command= -u "$USER" \| grep server.cjs` | ~110–160 MB expected. Investigate if materially higher |
+
+---
+
+## C5. REGRESSION
+
+### C5.1 Builds
+
+| Build | Command | Result | Routes | Warnings |
+|---|---|---|---|---|
+| Standard | `npm run build` | **EXIT 0** | **26 route entries** — `○ Static` / `● SSG` / one `ƒ` (`/api/enquiry`), unchanged | One pre-existing `outputFileTracingRoot` workspace-root warning (two lockfiles present). **No new warning** |
+| cPanel | `npm run build:cpanel` | **EXIT 0**, "Compiled successfully in 4.6s" | Identical | Same one |
+
+**No route added, removed or changed rendering mode. No type error, no compile error.**
+
+### C5.2 Routes and headings — 21 surfaces, read from the built server
+
+**All 20 content routes return 200; `/nope` returns 404.**
+
+| Check | Result |
+|---|---|
+| Exactly one `<h1>` | **21 / 21 routes** |
+| Heading jumps | **0 across all 21 routes** |
+| `/contact` `<h1>` | `Tell us what you're trying to fix.` — **byte-identical to `4795490`; the file is untouched** |
+| Horizontal overflow | **0** on `/`, `/contact`, `/thank-you` at every tested width |
+| Footer target geometry | **0 under 40px** at 320 · 360 · 390 · 430 · 760 · 761 · 860 · 1080 · 1081 · 1425 |
+| Footer composition | 1 column ≤760 · 2 columns at 860 · 4 columns ≥1080 — **unchanged from Session 33** |
+
+### C5.3 Nothing outside the four issues moved
+
+| Item | State |
+|---|---|
+| GTM / GA4 / Meta activation | **Untouched.** `NEXT_PUBLIC_GTM_ID`, `_GA4_ID`, `_META_PIXEL_ID` all empty |
+| Third-party scripts in served HTML | **ZERO** on `/`, `/contact`, `/thank-you`. Zero `googletagmanager` / `google-analytics` / `fbevents` references |
+| Consent architecture | **Untouched** — `lib/consent.ts`, `lib/gtm.tsx`, the consent components. The `ConsentPreferencesLink` markup is unchanged; only the two links beside it gained the same class it already had |
+| Booking provider · webhook · transactional email | **Untouched** |
+| `app/sitemap.ts` | **Untouched — 16 `<loc>` entries**, re-counted from the server |
+| `app/robots.ts` | **Untouched.** Served output re-read: no GPTBot, no CCBot, bad-bot blocks and Bing crawl-delay intact |
+| www architecture · redirects · CSP · headers | **Untouched** — `next.config.mjs` not modified this session |
+| Commercial route copy · homepage layout | **Untouched** |
+| `README.md` | **Untouched, unstaged** |
+| `next-env.d.ts` | A build side-effect rewrote it; **reverted with `git checkout`.** Not part of the commit |
+
+**RESULT: PASS — no regression found.**
+
+---
+
+## C6. Items carried forward
+
+| Item | Classification | Blocks launch? | Exact next action |
+|---|---|---|---|
+| **Host LVE memory / NPROC limits are UNKNOWN** | **DEPLOYMENT VERIFICATION** | **No** — runtime is 106–144 MB | Runbook step 6a: read `lveinfo` / cPanel Resource Usage before deploying |
+| **`.github/workflows/deploy.yml` builds on the server** | **DEPLOYMENT RISK — contradicts `doc/cpanel-deploy.md`** | **No** — fires only on push to `main`; nothing pushed | Deploy manually for the controlled launch, or move the build into the runner and rsync `.next`. Do not push to `main` until decided |
+| **Organization schema carries no address** | **OWNER INPUT — register item 2** | **No** — the schema is truthful as it stands | Supply the verified legal entity name and complete registered address, record it in `DECISION_LOG.md`, then restore the `address` node per the instruction in `lib/schema.ts` |
+| Published phone and email not owner-confirmed | OWNER INPUT — register item 2 | No | Confirm the two numbers and the address published in the footer and emitted in `Organization` |
+| `components/Hero.tsx`, `StatCard.tsx`, `TeamCard.tsx`, `sections/Hero.tsx` possibly dead | POST-LAUNCH CLEANUP | No | Audit and remove with their entries in `scripts/verify-server-files.cjs`. **No `DEC-007` claim in any of them** |
+| Everything in §23 above | unchanged | unchanged | unchanged |
+
+**§23's rows for "Footer link touch targets (19px vs 40px floor)" and "Dead code with fabricated
+claims" are CLOSED by §C2 and §C3 of this section and are superseded there.**
+
+---
+
+## C7. Files changed — Session 34
+
+| File | Action | Reason |
+|---|---|---|
+| `lib/schema.ts` | Modified | `PostalAddress` node removed from `Organization` — no approved provenance (§C1) |
+| `components/layout/Footer.tsx` | Modified | 17 nav/contact links + 2 legal links raised to a 40px hit box; nav list gap 10px → 4px (§C2) |
+| `app/(pages)/blog/[slug]/page.tsx` | Modified | `"300%+ ROI"` and two proof promises removed from `SERVICE_MAP['Case Study Insights']` (§C3.2) |
+| **`lib/constants.ts`** | **Deleted** | Dead legacy claims store: `300%+`, `₹100Cr+`, `₹10Cr+`, testimonials, case studies, prices |
+| **`components/sections/SocialProofStrip.tsx`** | **Deleted** | Dead; `300%+` / `₹100Cr+` |
+| **`components/SocialProofStrip.tsx`** | **Deleted** | Dead one-line barrel shim |
+| **`components/sections/HeroDashboard.tsx`** | **Deleted** | Dead; `300%+` / `₹100Cr+` / invented dashboard metrics |
+| **`components/HeroDashboard.tsx`** | **Deleted** | Dead one-line barrel shim |
+| `scripts/verify-server-files.cjs` | Modified | Upload canary repointed `lib/constants.ts` → `lib/metadata.ts` so `prebuild` still guards `lib/` (§C3.4) |
+| `docs/27-production-translation/21_PHASE_I_LAUNCH_HARDENING.md` | Modified | This closure section |
+
+**Not touched:** `next.config.mjs`, `app/robots.ts`, `app/sitemap.ts`, `app/layout.tsx`,
+`lib/metadata.ts`, `lib/analytics.ts`, `lib/consent.ts`, `lib/gtm.tsx`, the consent components,
+`lib/enquiries.ts`, `app/api/enquiry/route.ts`, `db/`, `server.cjs`, every commercial route,
+every governance document, and the untracked root `README.md`.
+
+---
+
+## C8. Closure verdict
+
+| Issue | Result |
+|---|---|
+| **1 — Organization structured data** | **CLOSED.** Address provenance found to be owner-blocked legacy data; all five postal fields removed; emitted JSON-LD re-tested and valid; zero unsupported entity facts remain |
+| **2 — Footer touch targets** | **CLOSED.** 19px → 40px across all 17 links plus 2 legal links, at ten widths, using the approved prototype's own geometry. +78px desktop / +166px mobile. No redesign, no overlap, no crowding |
+| **3 — Dead fabricated claims** | **CLOSED.** Five dead modules deleted; one live `300%+ ROI` claim found and fixed; production search reports 22 remaining hits, **all of them removal-record comments**, itemised |
+| **4 — 512 MB deployment memory** | **CLOSED WITH AN EXPLICIT UNKNOWN.** "512 MB" is a V8 old-space flag, not a host ceiling; heap 386 MB used / 476 MB committed against a 704 MB V8 limit; build RSS ~752 MB on a developer machine; **runtime RSS 106–144 MB on the host**; no host memory limit is documented anywhere and it is carried into the runbook as a read, not resolved by assumption |
+
+**PHASE I LAUNCH CLOSURE: PASS — READY FOR CONTROLLED PRODUCTION DEPLOYMENT.**
+
+**Deployment was not started. Analytics activation remains deferred. Booking and email status are
+unchanged. `README.md` is untouched. Nothing was pushed. No credential was read or printed. No
+content was fabricated, and no statistic was invented to replace one that was removed.**

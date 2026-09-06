@@ -280,20 +280,47 @@ const SERVICE_MAP: Record<
       link: '/lead-generation',
     },
   ],
+  /*
+    SESSION 34 — PHASE I CLOSURE. THE ONLY FABRICATED STATISTIC LEFT IN LIVE
+    PRODUCTION CODE WAS HERE.
+
+    This group read: "See how we helped businesses achieve 300%+ ROI." /
+    "Discover lead generation success stories." / "Learn from our organic
+    growth case studies."
+
+    "300%+ ROI" is one of the three claims `DEC-007` prohibits by name and
+    `OWNER_INPUT_REGISTER.md` item 4 lists as BLOCKING and unresolved. The
+    other two lines promise success stories and case studies that do not
+    exist — `/work` is `noindex` for precisely that reason and opens by saying
+    so, and Session 33 removed "Explore Other Case Studies" from
+    `/portfolio/[slug]` on the same grounds. All three were fixed together
+    because leaving two proof promises beside a corrected third would be
+    incoherent.
+
+    NO REPLACEMENT COPY WAS WRITTEN. Each description is the one this same map
+    already gives that same service in another group — `/google-ads` from
+    'Marketing Strategy', `/lead-generation` from 'Marketing Strategy',
+    `/seo` from 'Marketing Strategy'. Every other group in this map describes
+    the service; this group now does too.
+
+    This renders on zero routes today (Contentful returns no posts), and it is
+    fixed anyway: unrendered is not the same as removed, and it would publish
+    with the first article.
+  */
   'Case Study Insights': [
     {
       title: 'Google Ads',
-      description: 'See how we helped businesses achieve 300%+ ROI.',
+      description: 'Strategic paid search campaigns aligned with your goals.',
       link: '/google-ads',
     },
     {
       title: 'Lead Generation',
-      description: 'Discover lead generation success stories.',
+      description: 'Multi-channel lead generation strategy.',
       link: '/lead-generation',
     },
     {
       title: 'SEO',
-      description: 'Learn from our organic growth case studies.',
+      description: 'Long-term organic growth strategy.',
       link: '/seo',
     },
   ],

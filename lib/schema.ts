@@ -1,49 +1,76 @@
 import { offices, siteMetadata, socialLinks } from './metadata';
 
 /**
- * SESSION 33 — PHASE I — ONE ORGANISATION ENTITY, AND ONLY SUPPORTED FACTS.
+ * SESSION 34 — PHASE I CLOSURE — THE ORGANIZATION ENTITY CARRIES NO POSTAL
+ * ADDRESS, BECAUSE NO POSTAL ADDRESS HAS APPROVED PROVENANCE.
  *
- * WHAT THIS REPLACED, AND WHY BOTH HAD TO GO.
+ * WHAT SESSION 33 DID, AND WHY IT IS REVERSED HERE.
  *
- * `app/layout.tsx` emitted TWO entities on EVERY page — an `Organization` and a
- * `LocalBusiness` — describing the same company, with no `@id` linking them and
- * with the same fields duplicated in both. Two unlinked entities for one company
- * is not extra signal; it is an ambiguity a consumer has to resolve. They are
- * merged into ONE `Organization` carrying a stable `@id`.
+ * Session 33 correctly removed `postalCode: 'India'` and the non-street
+ * `streetAddress: 'Pune, Maharashtra, India'`. It then REBUILT the address
+ * from `offices[0]` in `lib/metadata.ts` — "Tower C3, #503 / Nyati Esteban I /
+ * Near Country Club, Undri / Pune, Maharashtra 411060" — on the reasoning that
+ * the legacy site already published it, so the markup and the visible footer
+ * could not drift apart.
  *
- * FOUR UNSUPPORTED OR MALFORMED FACTS ARE REMOVED RATHER THAN CARRIED FORWARD:
+ * THAT REASONING IS EXPLICITLY FORBIDDEN BY THE GOVERNING RECORD.
+ * `docs/05-content/OWNER_INPUT_REGISTER.md` item 2 ("Verified company facts")
+ * is **BLOCKING** and unanswered. It requires from the OWNER "the complete
+ * registered postal address INCLUDING A REAL POSTAL CODE", names "all
+ * Organization/LocalBusiness schema" among what it blocks, and states in terms:
  *
- *   1. `postalCode: 'India'` — a country in the postcode field, in BOTH
- *      entities. This is the defect Phase I was told to fix by name. It is now
- *      the real postcode of the published Pune office.
- *   2. `streetAddress: 'Pune, Maharashtra, India'` — not a street address; it
- *      repeated the locality, region and country and stated no street at all.
- *   3. `priceRange: '₹₹'` — A PRICING CLAIM. Pricing is owner-blocked, no price
- *      band has ever been approved, and `/pricing` deliberately publishes what
- *      moves the number rather than a number. Removed outright.
- *   4. `LocalBusiness` itself — the type asserts a place of business a customer
- *      visits, and the programme has approved no opening hours, no geo
- *      coordinates and no verified business profile to support it. Claiming the
- *      type without them is the "false schema" the phase brief says to prefer no
- *      schema over. Whether to publish `LocalBusiness` is an OWNER DECISION and
- *      is recorded as one.
+ *     "Nothing here may be inferred from the existing site, because the
+ *      existing site is part of the problem."
  *
- * THE ADDRESS IS DERIVED FROM `offices[0]`, NOT RETYPED. That is the same array
- * the footer renders, so the address in the markup and the address a visitor
- * reads cannot drift apart, and neither can be changed without the other.
+ * and, as rule 1 of that register:
  *
- * NOTHING HERE IS INVENTED. Every value is either derived from `lib/metadata.ts`
- * — which is what the site already publishes — or is approved page copy. The
- * description is the homepage's own approved meta description, verbatim, rather
- * than the legacy "performance marketing agency specializing in…" line, which
- * asserted a positioning the programme has superseded.
+ *     "No item here is answered by inference, BY READING THE EXISTING SITE, or
+ *      by a plausible default."
+ *
+ * `docs/08-messaging/COPY_PLACEHOLDER_STANDARD.md` classifies the same item as
+ * **BLOCKS COPY** for the NAP and entity blocks, naming the footer and all
+ * Organization schema. `docs/16-ux/26_OWNER_BLOCKED_STRUCTURE_RULE.md` puts
+ * `/contact` in case 0 on "complete NAP (owner)".
+ *
+ * `offices[0]` is legacy data: it is present unchanged at commit `14767db`,
+ * the third-party push that predates this programme. It has never been
+ * verified, approved or recorded as a programme decision. Deriving the
+ * postcode from a legacy string is still inference from the existing site —
+ * the mechanism is neater than typing "411060", the provenance is identical.
+ *
+ * WHAT IS REMOVED: the whole `PostalAddress` node — `streetAddress`,
+ * `addressLocality`, `addressRegion`, `postalCode`, `addressCountry`. An
+ * unverified locality and region are entity facts on exactly the same footing
+ * as the postcode, and a `PostalAddress` reduced to a bare country asserts an
+ * address while stating none. AN INCOMPLETE BUT TRUTHFUL ORGANIZATION IS
+ * PREFERRED OVER A COMPLETE-LOOKING ONE BUILT ON UNSUPPORTED FACTS.
+ *
+ * WHAT IS RETAINED, AND ON WHAT BASIS:
+ *   - `name` — the brand this site publishes under. NOT `legalName`: no legal
+ *     entity name is asserted, because none is approved.
+ *   - `url`, `@id`, `logo` — properties of this website, self-evidencing.
+ *   - `email`, `telephone`, `contactPoint` — contact ROUTES, not entity
+ *     location claims: each is a live channel a reader can use and the site
+ *     already publishes them in the footer on every page. They remain listed
+ *     as an owner item (register item 2 also asks the owner to confirm the
+ *     published phone and email), but they assert no address.
+ *   - `description` — the homepage's own approved meta description, verbatim.
+ *   - `sameAs` — still filtered to `[]` while the social env vars are unset.
+ *
+ * NOT REINSTATED: `LocalBusiness`, `priceRange`, `areaServed`. Session 33's
+ * reasoning for removing those stands and is not reopened.
+ *
+ * THE VISIBLE FOOTER ADDRESS IS NOT TOUCHED BY THIS CHANGE. It is published
+ * page content whose disposition belongs to the owner-input register, not to
+ * structured data; this file's scope is what the site ASSERTS TO MACHINES as a
+ * verified entity fact.
+ *
+ * TO RESTORE THE ADDRESS: when register item 2 is answered and recorded in
+ * `DECISION_LOG.md`, put the approved address in `lib/metadata.ts` and add the
+ * `address` node back here, citing that decision id.
  */
 export function generateOrganizationSchema() {
   const pune = offices[0];
-  const [street, building, area, cityLine] = pune.addressLines;
-  // "Pune, Maharashtra 411060" -> "411060". Read from the published line so the
-  // postcode cannot drift from the address a visitor actually sees.
-  const postalCode = cityLine.trim().split(/\s+/).pop() ?? '';
 
   return {
     '@context': 'https://schema.org',
@@ -56,14 +83,6 @@ export function generateOrganizationSchema() {
     telephone: pune.phoneDisplay,
     description:
       'We help businesses get found by the buyers already looking for what they sell, turn more of those visits into real enquiries, and measure the whole path so they can see what worked.',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: [street, building, area].join(', '),
-      addressLocality: pune.city,
-      addressRegion: 'Maharashtra',
-      postalCode,
-      addressCountry: 'IN',
-    },
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer service',

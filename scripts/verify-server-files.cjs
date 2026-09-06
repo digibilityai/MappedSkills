@@ -18,7 +18,12 @@ const required = [
   "components/StatCard.tsx",
   "components/TeamCard.tsx",
   "components/sections/Hero.tsx",
-  "lib/constants.ts",
+  // SESSION 34 — PHASE I CLOSURE. Was "lib/constants.ts". That file is
+  // deleted: it was dead legacy code carrying "300%+ ROI", "₹100Cr+" and
+  // "₹10Cr+", the three claims DEC-007 prohibits. This entry exists only as
+  // a canary that lib/ reached the server, so it is repointed at a file that
+  // is actually imported by every route rather than deleted outright.
+  "lib/metadata.ts",
 ];
 
 const missing = required.filter((rel) => !fs.existsSync(path.join(root, rel)));

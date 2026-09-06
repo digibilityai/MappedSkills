@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { EVENTS, pageTypeOf, safePagePath, track, trackOnce } from '@/lib/analytics';
+import { attributionForAnalytics, attributionForSubmission } from '@/lib/attribution';
 
 /**
  * SESSION 31 — PHASE H1 — the enquiry form.
@@ -43,14 +45,47 @@ import { Textarea } from '@/components/ui/textarea';
  *   - REQUIRED PHONE. §1.2 makes phone optional on the form and required on the
  *     booking surface. Requiring it costs completions and invites junk numbers.
  *
- * NO ANALYTICS. The three `window.gtag(...)` calls that were here — including a
- * `contact_form_submit` fired on a submission that never happened — are gone.
- * They were the false-success path's only observable effect. H2 owns the
- * replacement, and both conversion events are server-side by definition
- * (`06_IMPLEMENTATION_SEQUENCE.md`), so this component deliberately leaves a
- * clean boundary rather than a client-side event for H2 to unpick. There is no
- * `dataLayer`, no `gtag` and no `fbq` in this file, and no form value is passed
- * to anything but the enquiry endpoint.
+ * SESSION 32 — PHASE H2 — ANALYTICS, AND WHERE ITS AUTHORITY COMES FROM.
+ *
+ * The three `window.gtag(...)` calls that used to be here are gone and are not
+ * coming back. One of them fired `contact_form_submit` on a submission that
+ * never happened, which is the defect in miniature: an event that describes an
+ * outcome the system never achieved. Their replacement is one event, and it is
+ * derived from ONE FACT ONLY —
+ *
+ *     `POST /api/enquiry` RETURNED 2xx,
+ *
+ * which `app/api/enquiry/route.ts` does exclusively after MariaDB has
+ * acknowledged a durable row. Read the submit handler below and there is exactly
+ * one place `lead_form_submitted` can be emitted from: inside `if
+ * (response.ok)`. It is unreachable from a click, from a submit attempt, from a
+ * passing client validation, from a fetch that started, from a 4xx, from a 503,
+ * from a network failure, and from a view of `/thank-you` — which is a separate
+ * document this component has no code on.
+ *
+ * DELIVERY IS CLIENT-SIDE; AUTHORITY IS NOT. `05_FORMS_ANALYTICS.md` §2.2 asks
+ * for this conversion to be DELIVERED by a server. It cannot be, today: server
+ * delivery needs a configured provider endpoint and credential — a GA4
+ * Measurement Protocol secret, a server-side container, a Meta CAPI token — and
+ * NONE EXISTS. Inventing one is prohibited outright. So the server AUTHORS the
+ * conversion and the browser only carries it, and the limitation that separation
+ * leaves is stated rather than hidden: AN AD-BLOCKED OR OFFLINE VISITOR'S
+ * CONVERSION IS NEVER DELIVERED TO ANY PLATFORM. It is not lost — the row is in
+ * MariaDB either way, and the enquiries table, not an analytics property, is the
+ * system of record for how many enquiries exist. Analytics is for channel and
+ * behaviour, and it is known to undercount.
+ *
+ * NO PII, AND STRUCTURALLY SO. No event below is passed a form value. The
+ * payloads carry a path, a page category, a field NAME, an error CATEGORY and
+ * channel labels. Not the name, the email, the phone number, the company, the
+ * website or one character of the message. The idempotency key is used as a
+ * local de-duplication token inside `trackOnce` and is never put in a payload:
+ * it is stored against the row, so it would be a database identifier resolvable
+ * to a person.
+ *
+ * ANALYTICS CANNOT BREAK THIS FORM. `track` and `trackOnce` swallow their own
+ * errors and return `void`, nothing is awaited, and the conversion call sits
+ * before `router.push` in the same block rather than inside the request path.
  *
  * NO PROMISES. No response time, in hours, days, or as "shortly" or "soon". No
  * claim about what happens next, who reads it, or how secure the transmission
@@ -203,6 +238,19 @@ export function ContactForm() {
    */
   const idempotencyKeyRef = useRef<string | null>(null);
 
+  /**
+   * SESSION 32 — H2. `lead_form_started` fires ONCE per mounted form, on the
+   * first real edit of a real field. A ref rather than state because the guard
+   * has to hold within the same tick as the keystroke that trips it, and because
+   * re-rendering the whole form to record that it has been touched would be a
+   * measurable cost paid for nothing.
+   *
+   * NOT ON EVERY KEYSTROKE, and not on focus. The session brief is explicit that
+   * per-keystroke instrumentation is out of proportion, and a focus event fires
+   * when someone tabs past a field without intending to fill it in.
+   */
+  const startedRef = useRef(false);
+
   useEffect(() => {
     mountedAtRef.current = Date.now();
   }, []);
@@ -214,7 +262,24 @@ export function ContactForm() {
     }
   });
 
+  /**
+   * The page context every event on this form carries. Path only — the query
+   * string is stripped by `safePagePath`, per `EVENT_TAXONOMY.md` §7, because it
+   * is the part of a location that carries identifiers.
+   */
+  function pageContext() {
+    const path = safePagePath(pathname ?? '/contact');
+    return { page_path: path, page_type: pageTypeOf(path), form_id: 'contact_enquiry' };
+  }
+
   function setValue<K extends keyof FormValues>(field: K, value: FormValues[K]) {
+    // `lead_form_started` — first meaningful interaction, once. The honeypot is
+    // excluded deliberately: it is invisible to people, so a fill there is a
+    // machine and must not be reported as a human starting the form.
+    if (!startedRef.current && field !== 'contactReference') {
+      startedRef.current = true;
+      track(EVENTS.LEAD_FORM_STARTED, pageContext());
+    }
     setValues((previous) => ({ ...previous, [field]: value }));
     // Clear a field's error as soon as it is edited, but only after a submit
     // has been attempted — re-validating on every keystroke before that would
@@ -246,6 +311,33 @@ export function ContactForm() {
     return errors;
   }
 
+  /**
+   * `lead_form_validation_error` — `EVENT_TAXONOMY.md` §2 row 3, whose
+   * `error_type` enum (`required` · `format` · `server` · `rate_limited`) covers
+   * both the client's own checks and a rejection that came back from the server.
+   *
+   * FIELD NAME ONLY, NEVER FIELD VALUE. §7 states that rule in exactly those
+   * words, and it is enforced by this function's signature: it takes a
+   * `FieldName`, so there is no parameter a value could be passed through.
+   *
+   * ONE EVENT PER FAILING FIELD PER SUBMIT ATTEMPT — not per keystroke, and not
+   * one aggregate event that hides which field people are actually failing.
+   */
+  function reportValidationErrors(
+    errors: Partial<Record<FieldName, string>>,
+    classify: (field: FieldName) => 'required' | 'format' | 'server'
+  ) {
+    for (const field of Object.keys(errors) as FieldName[]) {
+      if (!errors[field]) continue;
+      track(EVENTS.LEAD_FORM_VALIDATION_ERROR, {
+        ...pageContext(),
+        field_name: field,
+        error_type: classify(field),
+        error_scope: 'field',
+      });
+    }
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (inFlightRef.current) return;
@@ -257,6 +349,11 @@ export function ContactForm() {
     if (Object.keys(localErrors).length > 0) {
       setFieldErrors(localErrors);
       shouldFocusSummaryRef.current = true;
+      // A DIAGNOSTIC, AND EMPHATICALLY NOT A CONVERSION. Nothing was sent and
+      // nothing was stored; this records only that the visitor was stopped here.
+      reportValidationErrors(localErrors, (field) =>
+        values[field].trim() === '' ? 'required' : 'format'
+      );
       return;
     }
 
@@ -275,13 +372,25 @@ export function ContactForm() {
               .slice(2, 14)
               .padEnd(12, '0')}`;
     }
+    /** Narrowed once, so nothing below has to re-assert it is set. */
+    const idempotencyKey = idempotencyKeyRef.current;
+
+    // SESSION 32 — H2. Read ONCE, before the request, and passed through
+    // untouched. It is captured from `sessionStorage` by `lib/attribution.ts`
+    // and it CANNOT fail this submission: `attributionForSubmission` never
+    // throws and returns `EMPTY_ATTRIBUTION` — every field null,
+    // `status: 'unavailable'` — whenever storage is unavailable or nothing was
+    // recorded. The server re-validates all of it and can also reduce it to
+    // nothing without rejecting the enquiry. `ATTRIBUTION_MODEL.md` §1:
+    // measurement is reported, never enforced.
+    const attribution = attributionForSubmission();
 
     try {
       const response = await fetch('/api/enquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          idempotencyKey: idempotencyKeyRef.current,
+          idempotencyKey,
           name: values.name,
           email: values.email,
           company: values.company,
@@ -292,6 +401,7 @@ export function ContactForm() {
           contactReference: values.contactReference,
           elapsedMs: mountedAtRef.current ? Date.now() - mountedAtRef.current : null,
           sourcePage: pathname,
+          attribution,
         }),
       });
 
@@ -301,13 +411,53 @@ export function ContactForm() {
       // demonstrably exists. No timer, no optimistic state, no assumption.
       if (response.ok) {
         // No id, no email, no company, no message — nothing in the URL, nothing
-        // in storage, nothing handed to a third party. The destination page is
-        // a confirmation, not a record.
+        // handed to a third party beyond the event below. The destination page
+        // is a confirmation, not a record.
         // The guard STAYS CLOSED. `finally` runs even on this early return, so
         // it must be told not to reopen it: the navigation is still in flight
         // and this form is about to unmount, so a click landing in between has
         // to be ignored rather than sent as a second request.
         navigatedRef.current = true;
+
+        /*
+         * ★ THE PRIMARY CONTACT CONVERSION — SESSION 32 / PHASE H2.
+         *
+         * THE ONLY PLACE IN THIS APPLICATION THAT EMITS IT. Reaching this line
+         * required a 2xx from `POST /api/enquiry`, and that handler returns 2xx
+         * on exactly one path: after `insertEnquiry` resolved, which happens only
+         * once MariaDB has acknowledged a durable row. Every other outcome —
+         * 400, 413, 415, 429, 503, a thrown fetch — leaves this block unentered.
+         * The event therefore cannot be produced by a click, a submit attempt, a
+         * passing client validation, a started request, a failed persistence, or
+         * a visit to `/thank-you`.
+         *
+         * `trackOnce`, KEYED ON THE IDEMPOTENCY KEY — the same key the database's
+         * unique index uses. One enquiry produces one row and one event, and the
+         * two agree by construction. A double-click is stopped earlier by
+         * `inFlightRef`; a retry after a network failure re-sends the SAME key,
+         * so the server's duplicate path returns 2xx a second time and this guard
+         * suppresses the second event. The key is a de-duplication token here and
+         * NOTHING ELSE: it is stored against the row, so it is resolvable to a
+         * person, and it never enters a payload.
+         *
+         * `qualification_status: 'not_evaluated'` IS THE HONEST VALUE AND IS SENT
+         * DELIBERATELY. `EVENT_TAXONOMY.md` §4 makes this event a BUSINESS
+         * CONVERSION ONLY WHEN `qualification_status = 'qualified'`. Nothing in
+         * this system can currently establish that: WQE condition 5 needs a
+         * deduplication window `QUALIFIED_ENQUIRY_DEFINITION.md` §10 leaves
+         * unset, and no column, workflow or reviewer exists to resolve it. Sending
+         * `qualified` would fabricate a verdict; omitting the parameter would let
+         * a container default it. An explicit out-of-enum value is visible, cannot
+         * be mistaken for a verdict, and makes any report that counts these as
+         * qualified enquiries fail loudly instead of quietly.
+         */
+        trackOnce(EVENTS.LEAD_FORM_SUBMITTED, idempotencyKey, {
+          ...pageContext(),
+          conversion_surface: 'form',
+          qualification_status: 'not_evaluated',
+          ...attributionForAnalytics(attribution),
+        });
+
         router.push('/thank-you');
         return;
       }
@@ -322,8 +472,28 @@ export function ContactForm() {
       if (payload.fieldErrors && Object.keys(payload.fieldErrors).length > 0) {
         setFieldErrors(payload.fieldErrors);
         setFormError(null);
+        reportValidationErrors(payload.fieldErrors, () => 'server');
       } else {
         setFormError(FORM_ERRORS[payload.error ?? 'unknown'] ?? FORM_ERRORS.unknown);
+        /*
+         * A WHOLE-FORM FAILURE. NO ROW EXISTS AND NO CONVERSION IS EMITTED — the
+         * conversion block above was not entered, and this is a sibling branch of
+         * it, so there is no ordering or timing by which both could run.
+         *
+         * CATEGORIES ONLY. `error_type` is the server's own machine-readable
+         * code, which `app/api/enquiry/route.ts` defines as a closed set
+         * containing no SQL, no driver message, no table name and no connection
+         * detail. The visitor-facing sentence is not sent, and neither is
+         * anything they typed. An unrecognised code is reported as `unexpected`
+         * rather than passed through, so a future code cannot leak by default.
+         */
+        const code = payload.error ?? 'unexpected';
+        track(EVENTS.LEAD_FORM_VALIDATION_ERROR, {
+          ...pageContext(),
+          error_type: code === 'rate_limited' ? 'rate_limited' : 'server',
+          error_scope: 'form',
+          failure_reason: code in FORM_ERRORS || code === 'validation' ? code : 'unexpected',
+        });
       }
       shouldFocusSummaryRef.current = true;
     } catch {
@@ -331,6 +501,15 @@ export function ContactForm() {
       // Nothing reached the server, so nothing was saved, and that is what the
       // visitor is told. Every value they typed is still in state.
       setFormError(FORM_ERRORS.network);
+      // Nothing reached the server, so nothing was saved and NO CONVERSION IS
+      // EMITTED. This is the branch an offline visitor and a dropped connection
+      // land in, and it is a diagnostic.
+      track(EVENTS.LEAD_FORM_VALIDATION_ERROR, {
+        ...pageContext(),
+        error_type: 'server',
+        error_scope: 'form',
+        failure_reason: 'network',
+      });
       shouldFocusSummaryRef.current = true;
     } finally {
       if (!navigatedRef.current) {

@@ -20,7 +20,16 @@
  *   - NO IP ADDRESS, NO USER AGENT, NO FINGERPRINT. Rate limiting needs an
  *     address signal only for the life of a request, so it stays in memory and
  *     is never written here.
- *   - NO SCORING, NO CRM MIRROR, NO ANALYTICS, NO REVENUE FIELDS.
+ *   - NO SCORING, NO CRM MIRROR, NO ANALYTICS TABLE, NO REVENUE FIELDS.
+ *
+ * SESSION 32 — PHASE H2 ADDED ACQUISITION ATTRIBUTION (migration 002), and what
+ * it deliberately did NOT add matters as much as what it did. There is no click
+ * identifier — no `gclid`, `fbclid` or `msclkid` value — no full referrer URL,
+ * no IP address, no user agent, no device fingerprint and no visitor id. The
+ * columns are channel labels and a referrer host, EVERY ONE NULLABLE, because
+ * `ATTRIBUTION_MODEL.md` §1 forbids attribution completeness from affecting
+ * whether an enquiry counts. A direct visitor with no referrer writes a complete,
+ * qualified-eligible row whose `attribution_status` is honestly `unavailable`.
  *
  * `screening` is honest about its own strength. `suspect` means one cheap
  * provider-independent layer fired (honeypot or implausible timing) — it is a
@@ -35,6 +44,7 @@
  * implying a delivery that cannot happen. Nothing reads it yet.
  */
 import { getPool } from '@/lib/db';
+import type { ValidatedAttribution } from '@/lib/enquiry-validation';
 
 export const ENQUIRIES_TABLE = 'enquiries';
 
@@ -66,6 +76,12 @@ export interface EnquiryRecord {
   marketingConsent: boolean;
   marketingConsentText: string | null;
   screening: 'clean' | 'suspect';
+  /**
+   * SESSION 32 — PHASE H2. Acquisition context, added by migration 002. Never
+   * absent as a field: when nothing was captured this is `UNATTRIBUTED`, whose
+   * every value is `null` and whose status is the honest `unavailable`.
+   */
+  attribution: ValidatedAttribution;
 }
 
 export type InsertOutcome =
@@ -101,8 +117,14 @@ export async function insertEnquiry(record: EnquiryRecord): Promise<InsertOutcom
       (\`idempotency_key\`, \`name\`, \`email\`, \`company\`, \`message\`,
        \`phone\`, \`website\`, \`source_page\`,
        \`marketing_consent\`, \`marketing_consent_text\`, \`marketing_consent_at\`,
-       \`screening\`)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+       \`screening\`,
+       \`first_landing_page\`, \`first_referrer_host\`,
+       \`first_source\`, \`first_medium\`, \`first_campaign\`,
+       \`first_content\`, \`first_term\`, \`first_touch_at\`, \`first_source_derived\`,
+       \`latest_source\`, \`latest_medium\`, \`latest_campaign\`, \`latest_referrer_host\`,
+       \`attribution_status\`)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
   const params = [
@@ -118,6 +140,29 @@ export async function insertEnquiry(record: EnquiryRecord): Promise<InsertOutcom
     record.marketingConsent ? record.marketingConsentText : null,
     record.marketingConsent ? new Date() : null,
     record.screening,
+    // SESSION 32 — H2. Every one of these is NULLable and may legitimately be
+    // null: `ATTRIBUTION_MODEL.md` §1 forbids attribution from gating a
+    // conversion, so a direct visitor with no referrer and a visitor whose
+    // storage was unavailable both write a complete, qualified-eligible row with
+    // an honest `attribution_status = 'unavailable'`.
+    record.attribution.firstLandingPage,
+    record.attribution.firstReferrerHost,
+    record.attribution.firstSource,
+    record.attribution.firstMedium,
+    record.attribution.firstCampaign,
+    record.attribution.firstContent,
+    record.attribution.firstTerm,
+    record.attribution.firstTouchAt,
+    record.attribution.firstSourceDerived === null
+      ? null
+      : record.attribution.firstSourceDerived
+        ? 1
+        : 0,
+    record.attribution.latestSource,
+    record.attribution.latestMedium,
+    record.attribution.latestCampaign,
+    record.attribution.latestReferrerHost,
+    record.attribution.status,
   ];
 
   try {

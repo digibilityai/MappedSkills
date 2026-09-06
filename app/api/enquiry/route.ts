@@ -132,6 +132,13 @@ export async function POST(request: Request): Promise<Response> {
       // A flagged submission is stored and answered like any other. The flag is
       // for a human; it never changes what the visitor sees.
       screening: enquiry.suspect ? 'suspect' : 'clean',
+      // SESSION 32 — PHASE H2. Acquisition context, re-validated server-side in
+      // `parseAttribution` and never trusted as sent. It CANNOT affect whether
+      // this insert happens: `parseAttribution` has no failure return, so a
+      // missing, malformed or hostile attribution object yields `UNATTRIBUTED`
+      // and the enquiry is stored exactly as any other.
+      // `ATTRIBUTION_MODEL.md` §1 — measurement is reported, never enforced.
+      attribution: enquiry.attribution,
     });
 
     // `created` and `duplicate` are BOTH success, and for the same reason: a
@@ -160,10 +167,18 @@ export async function POST(request: Request): Promise<Response> {
 
   // Reached only after the database acknowledged the write.
   //
-  // The body carries no record id and no submitted value. Nothing here, and
-  // nothing on the destination page, is derived from PII — the id stays
-  // server-side because the visitor has no use for it, and an opaque public
-  // reference is H2's to introduce alongside the analytics that would need one.
+  // THIS 201 IS THE CONVERSION AUTHORITY — SESSION 32 / PHASE H2. It is the one
+  // fact in the system that means "a durable enquiry row exists", and it is the
+  // only thing the browser is permitted to derive `lead_form_submitted` from.
+  // Every earlier point in this handler returns a non-2xx, so a click, a submit
+  // attempt, a client validation pass, a rate limit, a malformed body and a
+  // database failure are all structurally incapable of producing a conversion.
+  //
+  // THE BODY STILL CARRIES NO RECORD ID AND NO SUBMITTED VALUE. The approved
+  // taxonomy's opaque `enquiry_id` join key is NOT introduced here: it would be
+  // an identifier resolvable to a person, there is no CRM for it to join to, and
+  // a key to nothing is a privacy cost with no analytical return. Recorded as
+  // deferred, with the CRM decision it depends on.
   return NextResponse.json(
     { ok: true },
     { status: 201, headers: { 'Cache-Control': 'no-store' } }

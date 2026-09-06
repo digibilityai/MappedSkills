@@ -3,6 +3,7 @@ import { createMetadata } from '@/lib/metadata';
 import { Container } from '@/components/layout/Container';
 import { CommercialSection, ChapterLabel, Display, Body } from '@/components/commercial/primitives';
 import { RouteHero, StatedList } from '@/components/routes/primitives';
+import { BookingLink } from '@/components/analytics/BookingLink';
 
 /**
  * SESSION 29 — PHASE G — `/schedule-call`. ARCHETYPE 7 — conversion surface.
@@ -118,7 +119,21 @@ export default function ScheduleCallPage() {
           plain outbound link. No availability is stated, no slot count, no
           duration, no scarcity, and no confirmation of any kind — this control
           opens the booking page and nothing more. PHASE H1 owns the integration
-          itself. */}
+          itself.
+
+          SESSION 32 — PHASE H2. The `<a>` became `<BookingLink>`: the same
+          element, the same href, the same target, the same rel, the same classes
+          and the same inline style, with ONE added click handler that emits the
+          approved DIAGNOSTIC event `meeting_started` ("Booking surface opened",
+          `EVENT_TAXONOMY.md` §2 row 6). Nothing else on this route changed — no
+          copy, no layout, no vendor, no URL, no environment variable.
+
+          IT IS NOT A BOOKING CONVERSION AND MUST NEVER BE REPORTED AS ONE.
+          §4 of the taxonomy lists `meeting_started` among the events that are
+          NOT a business conversion. The booking page is a third-party origin, so
+          a click is the last thing observable from here; `meeting_booked`
+          requires a webhook from a vendor that has never been recorded as
+          selected. BOOKING REMAINS OWNER-BLOCKED. */}
       <section className="border-t border-resolve-line bg-resolve-paper py-[clamp(40px,5vw,88px)] text-resolve-ink">
         <Container className="max-w-[1400px] px-[var(--resolve-pad)]">
           <div className="max-w-[62ch]">
@@ -127,10 +142,8 @@ export default function ScheduleCallPage() {
               Times are shown on the booking page itself, so it is the only place that can tell you what is
               actually open. Nothing on this page claims a slot for you.
             </Body>
-            <a
+            <BookingLink
               href={CALENDLY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
               className="mt-[26px] inline-flex min-h-[52px] items-center justify-center rounded-full border-2 px-[26px] text-base font-bold no-underline max-[520px]:w-full"
               style={{
                 background: 'var(--resolve-accent-dark)',
@@ -139,7 +152,7 @@ export default function ScheduleCallPage() {
               }}
             >
               Open the booking page
-            </a>
+            </BookingLink>
           </div>
         </Container>
       </section>

@@ -34,6 +34,9 @@ export const FIELD_LIMITS = {
   phone: 40,
   website: 512,
   sourcePage: 255,
+  /** SESSION 32 — H2. Matches the VARCHAR widths in migration 002. */
+  attributionValue: 100,
+  attributionPath: 255,
 } as const;
 
 /**
@@ -51,6 +54,56 @@ export const MIN_PLAUSIBLE_ELAPSED_MS = 2000;
 
 export type FieldName = 'name' | 'email' | 'company' | 'message' | 'phone' | 'website';
 
+/**
+ * SESSION 32 — PHASE H2 — the acquisition context stored on the enquiry row.
+ *
+ * RE-VALIDATED HERE, NOT TRUSTED. `lib/attribution.ts` sanitises in the browser
+ * so that what is sent is already small and clean; that is a convenience and it
+ * is not evidence. Every value below is parsed, filtered and capped again from
+ * the raw request body, exactly as the visitor-facing fields are, because the
+ * request is an untrusted input regardless of which of our own files composed it.
+ *
+ * MISSING OR MALFORMED ATTRIBUTION NEVER FAILS A SUBMISSION. There is no field
+ * error, no form error and no rejection path in this section. A bad value is
+ * DROPPED to `null` and the enquiry proceeds. `ATTRIBUTION_MODEL.md` §1 and
+ * `QUALIFIED_ENQUIRY_DEFINITION.md` §2A make attribution completeness and
+ * qualification independent: measurement is reported, never enforced.
+ */
+export interface ValidatedAttribution {
+  firstLandingPage: string | null;
+  firstReferrerHost: string | null;
+  firstSource: string | null;
+  firstMedium: string | null;
+  firstCampaign: string | null;
+  firstContent: string | null;
+  firstTerm: string | null;
+  firstTouchAt: Date | null;
+  firstSourceDerived: boolean | null;
+  latestSource: string | null;
+  latestMedium: string | null;
+  latestCampaign: string | null;
+  latestReferrerHost: string | null;
+  status: 'complete' | 'partial' | 'unavailable';
+}
+
+/** What is stored when nothing usable arrived. Honest, not empty-by-accident. */
+export const UNATTRIBUTED: ValidatedAttribution = {
+  firstLandingPage: null,
+  firstReferrerHost: null,
+  firstSource: null,
+  firstMedium: null,
+  firstCampaign: null,
+  firstContent: null,
+  firstTerm: null,
+  firstTouchAt: null,
+  firstSourceDerived: null,
+  latestSource: null,
+  latestMedium: null,
+  latestCampaign: null,
+  latestReferrerHost: null,
+  status: 'unavailable',
+};
+
 export interface ValidatedEnquiry {
   idempotencyKey: string;
   name: string;
@@ -63,6 +116,8 @@ export interface ValidatedEnquiry {
   marketingConsent: boolean;
   /** True when a cheap abuse layer fired. A flag for a human, not a verdict. */
   suspect: boolean;
+  /** SESSION 32 — H2. Never null: `UNATTRIBUTED` when nothing was captured. */
+  attribution: ValidatedAttribution;
 }
 
 export type ValidationResult =
@@ -123,6 +178,111 @@ function normaliseWebsite(raw: string): string | null {
   } catch {
     return null;
   }
+}
+
+/**
+ * SESSION 32 — PHASE H2 — one attribution value, re-cleaned server-side.
+ *
+ * The same conservative allow-list `lib/attribution.ts` applies in the browser,
+ * applied again here because the browser's copy is a convenience and this one is
+ * the authority. `@` is excluded specifically so an email address cannot survive
+ * intact inside a campaign value — the realistic route by which PII enters
+ * campaign data — and `<` / `>` are excluded so a stored value can never be
+ * interpolated into markup as an element wherever it is later displayed.
+ */
+function attributionValue(raw: unknown): string | null {
+  if (typeof raw !== 'string') return null;
+  const cleaned = raw
+    .toLowerCase()
+    .replace(CONTROL_CHARS, '')
+    .replace(/[^a-z0-9 ._\-|+/:]/g, '')
+    .trim()
+    .slice(0, FIELD_LIMITS.attributionValue);
+  return cleaned === '' ? null : cleaned;
+}
+
+/**
+ * A same-origin PATH, on the same terms as `sourcePage`: no scheme, no host, no
+ * query string, no fragment. Anything else is dropped rather than corrected,
+ * because a landing page that cannot be trusted is worth less than nothing.
+ */
+function attributionPath(raw: unknown): string | null {
+  if (typeof raw !== 'string') return null;
+  const value = raw.trim();
+  if (
+    !value.startsWith('/') ||
+    value.startsWith('//') ||
+    value.includes('?') ||
+    value.includes('#') ||
+    value.length > FIELD_LIMITS.attributionPath
+  ) {
+    return null;
+  }
+  return cleanLine(value);
+}
+
+/**
+ * Parses the attribution object off a submission.
+ *
+ * IT CANNOT FAIL A SUBMISSION. There is no error return. Absent, null, an array,
+ * a string, a number or an object full of rubbish all produce `UNATTRIBUTED`,
+ * and the enquiry is stored and treated exactly as any other. That is the direct
+ * expression of `ATTRIBUTION_MODEL.md` §1: this model's job is to capture what is
+ * reliably available and to make what is missing visible, "never to gate the
+ * conversion".
+ *
+ * `status` IS RECOMPUTED, NOT ACCEPTED. A client-supplied `complete` is ignored;
+ * the flag is derived from what actually survived validation here, so it can
+ * never claim more context than is stored beside it.
+ */
+function parseAttribution(raw: unknown): ValidatedAttribution {
+  if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) return UNATTRIBUTED;
+  const input = raw as Record<string, unknown>;
+
+  const firstSource = attributionValue(input.firstSource);
+  const derivedRaw = input.firstSourceDerived;
+  const firstSourceDerived = typeof derivedRaw === 'boolean' ? derivedRaw : null;
+
+  let firstTouchAt: Date | null = null;
+  if (typeof input.firstTouchAt === 'string') {
+    const parsed = new Date(input.firstTouchAt);
+    // A timestamp the server cannot parse, or one from the future or the distant
+    // past, is discarded rather than stored as a fact about when someone arrived.
+    const now = Date.now();
+    if (
+      !Number.isNaN(parsed.getTime()) &&
+      parsed.getTime() <= now + 60_000 &&
+      parsed.getTime() > now - 365 * 24 * 60 * 60 * 1000
+    ) {
+      firstTouchAt = parsed;
+    }
+  }
+
+  // Derived from what is actually held, never from what was claimed:
+  //   complete    — a source was DECLARED in a UTM (not derived)
+  //   partial     — a source was DERIVED from a referrer or a click identifier
+  //   unavailable — no source, or only the honest `direct` residual
+  let status: ValidatedAttribution['status'] = 'unavailable';
+  if (firstSource && firstSource !== 'direct') {
+    status = firstSourceDerived === false ? 'complete' : 'partial';
+  }
+
+  return {
+    firstLandingPage: attributionPath(input.firstLandingPage),
+    firstReferrerHost: attributionValue(input.firstReferrerHost),
+    firstSource,
+    firstMedium: attributionValue(input.firstMedium),
+    firstCampaign: attributionValue(input.firstCampaign),
+    firstContent: attributionValue(input.firstContent),
+    firstTerm: attributionValue(input.firstTerm),
+    firstTouchAt,
+    firstSourceDerived,
+    latestSource: attributionValue(input.latestSource),
+    latestMedium: attributionValue(input.latestMedium),
+    latestCampaign: attributionValue(input.latestCampaign),
+    latestReferrerHost: attributionValue(input.latestReferrerHost),
+    status,
+  };
 }
 
 export function validateEnquiry(input: unknown): ValidationResult {
@@ -269,6 +429,7 @@ export function validateEnquiry(input: unknown): ValidationResult {
       sourcePage,
       marketingConsent,
       suspect: honeypotTripped || impossiblyFast,
+      attribution: parseAttribution(body.attribution),
     },
   };
 }

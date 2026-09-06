@@ -1,5 +1,39 @@
 'use client';
 
+/**
+ * SESSION 34 — PHASE H2A — the direct `window.gtag` emitters are REMOVED.
+ *
+ * WHAT WAS HERE. Two `window.gtag('event','share_click', …)` calls, each behind
+ * a `typeof window.gtag` guard, sending `event_category`, `event_label` and
+ * `page_title`. They were the last pre-H2 analytics API left in a component
+ * that is actually rendered — `app/(pages)/blog/[slug]/page.tsx` line 382.
+ *
+ * WHY THEY ARE GONE RATHER THAN CONVERTED.
+ *
+ *   1. `share_click` IS NOT IN THE APPROVED H2 TAXONOMY. The five approved
+ *      events are `page_view`, `lead_form_started`,
+ *      `lead_form_validation_error`, `lead_form_submitted` and
+ *      `meeting_started`. Converting this to `track(...)` would have meant
+ *      inventing a sixth event, which is prohibited. Sharing is not a funnel
+ *      step this programme has defined, so the honest action is to stop
+ *      emitting rather than to rename.
+ *   2. `dataLayer` MUST BE THE SOLE ANALYTICS API. `lib/analytics.ts` is the
+ *      one boundary; a `gtag` command bypasses it entirely, skipping the
+ *      parameter sanitiser and reaching GA4 directly, where no GTM tag
+ *      configuration can filter or block it.
+ *   3. THEY WERE A LATENT, NOT A THEORETICAL, RISK. Session 34 loaded the real
+ *      `GTM-K8ZQPMXP` container and measured `typeof window.gtag` as
+ *      `"undefined"`, so nothing was firing. But that is a property of how that
+ *      container happens to be configured today, not a guarantee: a Google tag
+ *      or a Google Ads tag that defines the global would have turned these into
+ *      live, unapproved GA4 events with no code change and no warning.
+ *
+ * NOTHING A VISITOR SEES OR DOES HAS CHANGED. The copy-link behaviour, the
+ * two-second "copied" state, every share destination, every icon, every label
+ * and every class are exactly as they were. No share is measured any more, and
+ * no share was being measured before.
+ */
+
 import { Button } from '@/components/ui/button';
 import { Linkedin, Facebook, Twitter, Share2 } from 'lucide-react';
 import { useState } from 'react';
@@ -16,24 +50,6 @@ export function SocialShare({ title, url }: SocialShareProps) {
     navigator.clipboard.writeText(url);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-    
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'share_click', {
-        event_category: 'engagement',
-        event_label: 'copy_link',
-        page_title: title,
-      });
-    }
-  };
-
-  const trackShare = (platform: string) => {
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'share_click', {
-        event_category: 'engagement',
-        event_label: platform,
-        page_title: title,
-      });
-    }
   };
 
   const shareText = `${title} - MappedSkills Marketing`;
@@ -43,19 +59,16 @@ export function SocialShare({ title, url }: SocialShareProps) {
       name: 'LinkedIn',
       icon: Linkedin,
       url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
-      onClick: () => trackShare('linkedin'),
     },
     {
       name: 'Facebook',
       icon: Facebook,
       url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-      onClick: () => trackShare('facebook'),
     },
     {
       name: 'Twitter',
       icon: Twitter,
       url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(url)}`,
-      onClick: () => trackShare('twitter'),
     },
   ];
 
@@ -71,7 +84,6 @@ export function SocialShare({ title, url }: SocialShareProps) {
               variant="outline"
               size="sm"
               asChild
-              onClick={link.onClick}
             >
               <a href={link.url} target="_blank" rel="noopener noreferrer">
                 <Icon className="h-4 w-4 mr-2" />

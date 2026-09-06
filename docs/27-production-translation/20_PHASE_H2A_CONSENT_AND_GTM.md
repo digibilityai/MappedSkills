@@ -6,10 +6,21 @@
 implement Google Consent Mode v2. Continuation of `19_PHASE_H2_ANALYTICS_CONVERSION.md`.
 
 **Result: H2 REMAINS BLOCKED.**
-The application side is implemented and verified. **A new, previously unrecorded blocker was found
-during live validation: the published `GTM-K8ZQPMXP` container fires advertising tags — a Meta
-Pixel and an X/Twitter ads tag — that this phase's binding consent decision does not permit.**
-See §12. **The container must not be enabled in production until the owner resolves that.**
+The application side is implemented and verified. **A new blocker was found during live validation:
+the published `GTM-K8ZQPMXP` container fires advertising tags — a Meta Pixel and an X/Twitter ads
+tag — that this phase's binding consent decision does not permit.** See §12. **The container must
+not be enabled in production until the owner resolves that.**
+
+> ### ⚠ SESSION 34 UPDATE — SEE §18–§21
+> A second real-container validation run was performed on 2026-09-06 **after** the owner's GTM
+> workspace cleanup and the GA4 Enhanced Measurement change. **The blocker is NOT resolved, and the
+> reason is important: a browser loads the PUBLISHED container, never the workspace.** The owner's
+> pauses and the five new H2 tags are unpublished and therefore had **no effect on what was
+> measured**. Worse, the Meta Pixel that fires is served by a **community GTM template**
+> (`a=tmSimo-GTM-WebTemplate`), so it is **not one of the 15 `FB - …` tags that were paused** — it
+> is a further tag the audit had not identified. **Meta fired a PageView on every one of eight route
+> changes and re-created `_fbp`.** Full evidence in §19. The three dormant `window.gtag` call sites
+> were removed in Session 34 — §21.
 
 ---
 
@@ -659,3 +670,361 @@ The published container's legacy tags, assessed against the new H2 measurement s
 
 **Nothing was pushed. No GTM container was published. No Google, Meta or X account configuration
 was read or modified.**
+
+---
+---
+
+# Session 34 — Real-container re-validation after the owner's GTM cleanup
+
+**Session:** 34 · **Date:** 2026-09-06 · **Branch:** `test_branch`
+**Starting HEAD:** `e956d2d` — *feat: add consent-gated GTM delivery*
+**Result: H2 REMAINS BLOCKED. GTM IS NOT YET SAFE TO PUBLISH.**
+
+---
+
+## 18. The finding that governs everything below
+
+**A browser loads the PUBLISHED container. It never loads a workspace.**
+
+The owner completed a substantial GTM cleanup before this session — 15 `FB - …` tags paused, 8
+`Twitter - …` tags paused, `LinkedIn - Lead` paused, 7 legacy GA4 page-visit tags paused, 6 further
+legacy GA4 event tags paused, and a fifth H2 tag created
+(`CE - lead_form_validation_error` → `GA4 - H2 - lead_form_validation_error`). **None of it was
+published, and none of it was therefore visible to this test.** What loaded from
+`googletagmanager.com/gtm.js?id=GTM-K8ZQPMXP` was the same published container as in Session 33.
+
+**This is not a fault in the owner's work. It is the reason a separate Preview session is required,
+and this environment cannot open one:** GTM Preview / Tag Assistant authenticates against the
+owner's Google account, and **this worker must not and did not enter any credential.** Environment
+tokens (`gtm_auth` / `gtm_preview`) would also have to be issued from the GTM UI by the owner.
+
+**What this session CAN state, with evidence, is exactly what the container does TODAY** — which is
+precisely what would happen if `NEXT_PUBLIC_GTM_ID` were set in production before publishing. That
+is the question that actually gates deployment, and it is answered below.
+
+**Method, stated plainly because Tag Assistant's UI was not used.** Delivery was measured at the
+network and browser level, which is stronger evidence than a tag-name list: every request the page
+made (`performance.getEntriesByType('resource')`, plus wrappers on `fetch`, `sendBeacon` and
+`XMLHttpRequest` installed *before* consent), every cookie, every vendor global, and the full
+`dataLayer`. A GA4 tag firing is a request to `google-analytics.com/g/collect` carrying `en=<event>`;
+a Meta tag firing is a request to `facebook.com/tr` carrying `ev=<event>`. Nothing was inferred.
+
+---
+
+## 19. TEST A — REJECT ANALYTICS · **PASS, without qualification**
+
+Fresh `localStorage`, `sessionStorage` and cookies. Container id `GTM-K8ZQPMXP` configured.
+
+| Step | Observed |
+|---|---|
+| Fresh load, undecided | `consent default` — `analytics_storage`, `ad_storage`, `ad_user_data`, `ad_personalization` **all denied** — first entry in `dataLayer`. Banner shown. **Zero third-party requests. Zero cookies.** |
+| Chose **Reject analytics** | `consent update` — **all four denied**. `ms.consent.v1 = "denied"`. Banner gone |
+| Navigated `/` → `/services` → `/seo` → `/about` → `/contact` | 5 `page_view` entries queued in `dataLayer` |
+| Contact form: first keystroke | `lead_form_started` ×1 |
+| Submitted with required fields empty | `lead_form_validation_error` ×3 — field names only (`email`, `company`, `message`) |
+| Submitted complete form → **real 503** from the real handler | `lead_form_validation_error` ×1 (`error_scope: form`, `failure_reason: unavailable`). **`lead_form_submitted` ×0** |
+| Booking link | `meeting_started` ×1 · **`meeting_booked` ×0** |
+
+### 19.1 Required results — every one met
+
+| Required | Observed | |
+|---|---|---|
+| No Meta Pixel fires | **`connect.facebook.net` — 0 requests. `fbq` undefined** | ✅ |
+| No Twitter/X tag fires | **`static.ads-twitter.com` — 0 requests. `twq` undefined** | ✅ |
+| No LinkedIn advertising tag fires | **`licdn` / `linkedin` ads — 0 requests. `lintrk` undefined** | ✅ |
+| No `_fbp` or equivalent advertising cookie | **`document.cookie` contained no `_fbp`, no `_ga`, no `_gcl_*`, no advertising cookie of any kind** | ✅ |
+| GA4 events not delivered while denied | **`google-analytics.com/g/collect` — 0 requests.** `googletagmanager.com` — 0 requests. `google_tag_manager` undefined | ✅ |
+| Business functionality unaffected | All 6 navigations, form entry, validation, the real 503 and the booking link behaved identically | ✅ |
+
+**Total third-party requests across the entire rejected journey: ZERO.** The only cookie present at
+any point was `__next_hmr_refresh_hash__`, which is the Next.js dev-server hot-reload cookie and does
+not exist in a production build.
+
+**Under refusal, this site contacts no analytics or advertising provider at all.**
+
+---
+
+## 20. TEST B — ACCEPT ANALYTICS · **GA4 CONSENT SIGNALS CORRECT · ADVERTISING STILL FIRES**
+
+Fresh state again, network recorder installed **before** the accept click.
+
+### 20.1 Exact request tally for the whole accepted journey
+
+| Request | Count | What it is |
+|---|---|---|
+| `www.googletagmanager.com/gtm.js` | **1** | The container. Double-injection guard held |
+| `www.googletagmanager.com/gtag/js` | **1** | The Google tag, loaded by the container's GA4 configuration |
+| `www.google-analytics.com/g/collect  en=page_view` | **1** | **The only GA4 hit in the entire session** |
+| `pagead2.googlesyndication.com/ccm/collect  en=page_view` | **1** | Google Ads / cross-domain measurement ping from the Google tag. `npa=1`, `gcs=G101` |
+| `connect.facebook.net/en_US/fbevents.js` | **1** | **Meta Pixel library** |
+| `connect.facebook.net/signals/config/983625902710561` | **1** | **Meta Pixel `983625902710561` configuration** |
+| `www.facebook.com/tr/  ev=PageView` | **8** | **Meta PageView — one per app route change** |
+| `static.ads-twitter.com/uwt.js` | **1** | **X / Twitter universal website tag** |
+| LinkedIn (`licdn`, `px.ads.linkedin.com`) | **0** | Not present — `lintrk` undefined |
+
+**Cookies created: `_ga`, `_ga_6H7WFH2BHQ`, `_fbp`.** The two GA4 cookies are correct under granted
+analytics consent. **`_fbp` is an advertising cookie and must not exist under this phase's decision.**
+
+### 20.2 App events vs what was actually delivered — the gap
+
+| App `dataLayer` event | Emitted | Delivered to GA4 | Tag responsible |
+|---|---|---|---|
+| `page_view` | **8** | **1** | The published `GA4 - Configuration`'s own initial page view. **`GA4 - H2 - page_view` did not fire — it is unpublished** |
+| `lead_form_started` | **1** | **0** | `GA4 - H2 - lead_form_started` — unpublished |
+| `lead_form_validation_error` | **4** | **0** | `GA4 - H2 - lead_form_validation_error` — unpublished |
+| `lead_form_submitted` | **1** | **0** | `GA4 - H2 - lead_form_submitted` — unpublished |
+| `meeting_started` | **1** | **0** | `GA4 - H2 - meeting_started` — unpublished |
+| `meeting_booked` | **0** | **0** | Not implemented, and correctly absent |
+
+**The single GA4 hit is consistent with the published `GA4 - Configuration` still having
+`send_page_view = true`** — the change to `false` is unpublished. It fired once on container load and
+never again, which is exactly the single-page-application defect the app's own `page_view` exists to
+fix. **None of the five H2 events reached GA4, because none of their tags is published.**
+
+### 20.3 Consent signals on the GA4 hit — CORRECT
+
+| Parameter | Value | Meaning |
+|---|---|---|
+| `tid` | `G-6H7WFH2BHQ` | The expected property |
+| `en` | `page_view` | |
+| **`gcs`** | **`G101`** | **`ad_storage` DENIED · `analytics_storage` GRANTED** — exactly the decision |
+| `gcd` | `13q3r3q3q5l1` | Consent-mode detail string; consistent with denied defaults plus one granted analytics update |
+| `npa` | `1` | Non-personalised ads — correct under `ad_personalization: denied` |
+
+**The consent plumbing works.** Google's own tag received, and reported back, precisely the state the
+banner recorded.
+
+### 20.4 Event-count verification (app layer)
+
+| Check | Required | Observed |
+|---|---|---|
+| Exactly one `page_view` on initial load | 1 | **1** |
+| Exactly one per App Router navigation | 1 each | **1 each** (`/services`, `/about`, `/contact`, `/schedule-call`, `/thank-you`) |
+| Exactly one on **back** | 1 | **1** |
+| Exactly one on **forward** | 1 | **1** |
+| `lead_form_started` once per form start | 1 | **1** — across many keystrokes |
+| `lead_form_validation_error` on the intended condition | ≥1 | **4** — 3 field-scoped, 1 form-scoped from the real 503 |
+| Failed / non-persisted submission → zero conversions | 0 | **0** — real 503 |
+| Successful persisted enquiry → exactly one conversion | 1 | **1** — from **three** submits fired in immediate succession |
+| `meeting_started` diagnostic only | yes | **1**, no conversion semantics |
+| `meeting_booked` | 0 | **0** |
+
+**Success-path limitation, restated.** No database exists in this environment, so the 2xx was
+supplied by a stub at the `fetch` boundary. The **failure** path was real. This proves everything on
+the client side of a 2xx; it does not re-prove that the server returns 2xx only after MariaDB
+acknowledges a row, which was verified in Session 32 against a real database with an unchanged route
+handler.
+
+### 20.5 ⚠ THE BLOCKER IS NOT RESOLVED — and the paused tags were the wrong ones
+
+The Meta hits carry **`a=tmSimo-GTM-WebTemplate`**. That is a **community GTM template** for the
+Facebook/Meta pixel — **not** a custom-HTML `FB - …` tag. **The 15 `FB - …` tags the owner paused are
+therefore not the tags that are firing.** At least one further Meta tag exists in the container under
+a different name, and `static.ads-twitter.com/uwt.js` shows the same is true for X.
+
+**Consequences, stated exactly:**
+
+- **Meta fired `PageView` 8 times — once per route change** — while `ad_storage`, `ad_user_data` and
+  `ad_personalization` were all denied. Meta does not honour Google Consent Mode.
+- **`_fbp` was created again**, which the phase's decision does not permit.
+- **The consent gate still fully protects an undecided or refusing visitor** — Test A proves that.
+  **It cannot protect an accepting visitor** from tags the container chooses to fire. Accepting
+  *analytics* on the live site today would start Meta and X tracking.
+
+**PII check on the advertising hits.** The Meta requests contained **no** advanced-matching
+parameters (`aems=0;0` — automatic advanced matching is off) and **no** form values, name, email,
+phone, company or message. They do send the **page title and meta description** (`pmd[title]`,
+`pmd[description]`) and scraped on-page text in `ss=`. That is Meta's normal behaviour and carries no
+visitor PII from this site — but it is data leaving the browser for an advertising vendor under
+denied advertising consent.
+
+### 20.6 PII re-audit under the real container — **PASS**
+
+Full `dataLayer` after the complete accepted journey. **19 distinct keys, all approved:**
+`event`, `environment`, `page_path`, `page_type`, `form_id`, `field_name`, `error_type`,
+`error_scope`, `failure_reason`, `conversion_surface`, `qualification_status`, `attribution_status`,
+`first_source`, `first_medium`, `latest_source`, `latest_medium`, `cta_location`, `cta_role`, plus
+GTM's own `gtm.uniqueEventId`.
+
+| Needle | In app `dataLayer` | In the GA4 hit | In the Meta hits |
+|---|---|---|---|
+| Name, email local part, company, phone, message text, website | **none** | **none** | **none** |
+| **`@` — any at-sign** | **none** | **none** | **none** |
+| Advanced-matching params (`ud[`, `em=`, `ph=`, `fn=`, `ln=`) | n/a | n/a | **none** |
+
+**One observation, recorded because it is new.** Once the container loads, **GTM itself pushes
+`gtm.js`, `gtm.dom`, `gtm.load` and `gtm.linkClick` into `dataLayer`, and the `gtm.linkClick` entries
+carry live DOM element references** (`gtm.element`). That is GTM's Auto-Event Listener, not this
+application, and it is what the container's legacy social-click tags consume. It stays in the tab
+unless a tag reads it. **It is not something the application can prevent, and it is not a PII leak by
+this application** — but the owner should know that pausing the social-click tags removes the
+consumer, not the listener.
+
+---
+
+## 21. The three dormant `window.gtag` call sites — REMOVED
+
+### 21.1 Reassessment
+
+| Component | Rendered? | Verdict |
+|---|---|---|
+| `components/blog/SocialShare.tsx` | **YES** — `app/(pages)/blog/[slug]/page.tsx:382` | **Live component holding a live, unapproved analytics API** |
+| `components/filters/CategoryFilter.tsx` | **No** — `components/CategoryFilter.tsx` re-exports it; nothing imports either | Dead code holding a live analytics API |
+| `components/forms/CalendlyButton.tsx` | **No** — same re-export-only pattern | Dead code holding a live analytics API |
+
+**Measured again with the real published container loaded: `typeof window.gtag === "undefined"`.**
+So nothing was firing. **But that is a property of how the container happens to be configured today,
+not a guarantee** — the container already loads `gtag/js`, and a Google tag or Google Ads tag
+configured to expose the global would have turned all five call sites into live, unapproved GA4
+events with no code change, no deploy and no warning. A `gtag` command also bypasses
+`lib/analytics.ts` entirely: past the parameter sanitiser, and past any GTM tag configuration that
+could filter it.
+
+### 21.2 Disposition — removed, with no event invented
+
+| Removed emitter | Replacement | Why |
+|---|---|---|
+| `share_click` ×2 (`SocialShare`) | **None** | Not in the approved five-event taxonomy. Converting it would have meant inventing a sixth event |
+| `blog_filter_click` (`CategoryFilter`) | **None** | Same |
+| `schedule_call_click` (`CalendlyButton`) | **None** | It *is* semantically `meeting_started`, which IS in the taxonomy — but **the component is not rendered anywhere**, and adding a conversion-adjacent emitter to unreachable code would create a second, untested source of it. `components/analytics/BookingLink.tsx` already does this job correctly and is the one actually rendered |
+
+**THE FIVE-EVENT TAXONOMY IS UNCHANGED.** Nothing was added, renamed or removed.
+**`window.dataLayer` via `lib/analytics.ts` is now the sole analytics API in this application** —
+**zero `window.gtag(` call sites remain in `app/`, `components/` and `lib/`.**
+
+### 21.3 User-facing behaviour — unchanged, and verified in a browser
+
+`SocialShare` was rendered through a temporary throwaway route (created, tested, **deleted before
+commit**), because `/blog/[slug]` cannot render locally without Contentful credentials.
+
+| Check | Result |
+|---|---|
+| All four controls render | **LinkedIn · Facebook · Twitter · Copy Link** |
+| Share destinations | All three URLs correct and correctly encoded |
+| `target` / `rel` | `_blank` / `noopener noreferrer` on every one |
+| Copy-link behaviour | Label became **"Copied!"**, reverted to **"Copy Link"** after 2s |
+| `dataLayer` events produced by sharing | **0** |
+| Errors thrown | **0** |
+
+**Recorded as pre-existing debt, not introduced and not fixed here:** `SocialShare` does not await
+`navigator.clipboard.writeText`, so it shows "Copied!" even when the clipboard write rejects (it
+rejected in the automated browser, which is not focused). And `CalendlyButton` is a dead duplicate of
+`BookingLink`; deleting a component is outside the scope of an analytics-surface change.
+
+### 21.4 Side effect worth recording
+
+**TypeScript errors under `tsc --noEmit` fell from 11 to 2.** The eight
+`Property 'gtag' does not exist on type 'Window'` errors are gone with the call sites. The two that
+remain are pre-existing and unrelated: a `size="md"` prop mismatch in `CalendlyButton` and
+`canonical` in `lib/metadata.ts`.
+
+---
+
+## 22. `Conversion Linker` — recommendation: **PAUSE**
+
+**What it does.** Conversion Linker reads a Google Ads click identifier (`gclid`, `wbraid`,
+`gbraid`) from a landing URL and writes it into first-party `_gcl_*` cookies so that a **Google Ads
+conversion tag** on a later page can attribute the conversion. It is a *storage* helper for
+advertising, and it is gated on `ad_storage`.
+
+**Why it has no purpose in the current architecture — VERIFIED FACT:**
+
+1. **There is no consumer.** No Google Ads conversion tag, no remarketing tag and no Floodlight tag
+   is part of the intended H2 surface. The five H2 tags are GA4 event tags; none reads `_gcl_*`.
+2. **GA4 does not need it.** The Google tag reads `gclid` from the URL for GA4's own attribution
+   without Conversion Linker.
+3. **`ad_storage` is denied in this phase**, so it writes nothing today. **No `_gcl_*` cookie
+   appeared in either test** — verified in both the rejected and the accepted runs.
+
+**Recommendation: PAUSE it.** This is surface-minimisation and tidiness, not a privacy fix — it is
+already inert under denied advertising consent, so pausing changes no observed behaviour.
+
+**Condition for restoring it, stated so it is not lost:** **re-enable Conversion Linker before any
+Google Ads conversion tracking is introduced**, and enable it together with the advertising consent
+signals that would then have to be granted. Without it, Google Ads conversion attribution degrades.
+
+**One honest limit.** The `pagead2.googlesyndication.com/ccm/collect` request observed in Test B
+comes from the **Google tag** (`gtag/js`), which sends it when the GA4 property has Google Ads
+linking or ads-data features enabled. **This session could not attribute that request to a specific
+tag without Preview**, and it is *not* evidence that Conversion Linker fired. It is listed under
+owner actions as its own question.
+
+---
+
+## 23. Files changed in Session 34
+
+| File | Change |
+|---|---|
+| `components/blog/SocialShare.tsx` | Two `window.gtag('event','share_click',…)` emitters and the `trackShare` helper removed, with the three now-dangling `onClick` wirings. **Presentation, destinations, copy behaviour untouched** |
+| `components/filters/CategoryFilter.tsx` | `window.gtag('event','blog_filter_click',…)` removed. Filter behaviour untouched |
+| `components/forms/CalendlyButton.tsx` | `window.gtag('event','schedule_call_click',…)` removed. `window.open` behaviour untouched |
+| `docs/27-production-translation/20_PHASE_H2A_CONSENT_AND_GTM.md` | This section |
+
+**No change was made to `lib/analytics.ts`, `lib/consent.ts`, `lib/gtm.tsx`, the consent components,
+`app/layout.tsx`, the contact form, the enquiry route, or the untracked root `README.md`.**
+
+### 23.1 Build validation
+
+| Build | Result |
+|---|---|
+| `npm run build` | **Compiled successfully.** 25 routes, unchanged, all still `○ Static` / `● SSG` |
+| `npm run build:cpanel` | **Compiled successfully** |
+| New warnings or errors | **None.** The only warning is the pre-existing dual-lockfile workspace-root notice |
+
+---
+
+## 24. Owner actions after Session 34
+
+| # | Action | Status |
+|---|---|---|
+| 1 | **Find and pause the Meta Pixel tag that actually fires.** It is a **community-template** tag (`tmSimo-GTM-WebTemplate`), **not** one of the 15 `FB - …` tags already paused. Filter the container's tag list by the template, or by pixel id `983625902710561` | **NOT DONE — BLOCKING** |
+| 2 | **Find and pause the X/Twitter tag that actually fires** (`static.ads-twitter.com/uwt.js`) — likewise not one of the 8 `Twitter - …` tags already paused | **NOT DONE — BLOCKING** |
+| 3 | Re-verify in **Preview** that **zero** advertising requests occur after accepting analytics | **NOT DONE — BLOCKING** |
+| 4 | **Pause `Conversion Linker`** (§22), and note the restore condition | **NOT DONE** |
+| 5 | Determine what causes `pagead2.googlesyndication.com/ccm/collect` — GA4↔Google Ads linking or an ads-data feature on the Google tag — and switch it off if Google Ads is not in use | **NOT DONE** |
+| 6 | Run **GTM Preview** and confirm all five H2 tags fire, one per event, per §13. **This session could not do it: Preview requires the owner's Google authentication** | **NOT DONE** |
+| 7 | Confirm in Preview that `GA4 - Configuration` sends **no** page view | **NOT DONE** |
+| 8 | **Publish the container — only after 1–7** | **NOT DONE** |
+| 9 | Confirm no published container configuration exposes a `window.gtag` global. **Lower risk now that the five call sites are removed, but still worth confirming** | **NOT DONE** |
+| 10 | Register the GA4 custom dimensions in §8, including `environment` | **NOT DONE** |
+| 11 | Set production `NEXT_PUBLIC_GTM_ID=GTM-K8ZQPMXP`. **Leave `NEXT_PUBLIC_META_PIXEL_ID` empty** | **NOT DONE** |
+| 12 | Apply DB migration 002 on the production database, before or with the code | **NOT DONE — UNVERIFIED** |
+| 13 | One real production measurement verification: a genuine enquiry → one row → one `lead_form_submitted` in GA4 | **NOT DONE** |
+| 14 | Legal review of the banner wording; `/privacy-policy` still says a consent mechanism *"should be added before launch"* | **NOT DONE** |
+| 15 | Exclude this session's localhost hits in GA4 (`hostname = localhost`) | **NOT DONE** |
+
+**Confirmed complete by the owner and not re-verifiable from here** (they live in an unpublished
+workspace): the 15 `FB - …` pauses, the 8 `Twitter - …` pauses, `LinkedIn - Lead`, the 7 legacy GA4
+page-visit pauses, the 6 further legacy GA4 event pauses, `GA4 - Lead Form Submit`,
+`send_page_view = false`, and the five `CE - …` triggers with their five `GA4 - H2 - …` tags.
+**GA4 Enhanced Measurement "Page changes based on browser history events" is reported unchecked and
+saved; it could not be observed from here because no GA4 SPA page-view hit was sent either way.**
+
+---
+
+## 25. Verdict after Session 34
+
+**IS GTM SAFE TO PUBLISH? NO.**
+Publishing today would publish a container whose Meta and X advertising tags still fire on analytics
+acceptance. Actions 1–3 in §24 must be completed and verified in Preview first.
+
+**IS H2 A PASS? NO — STILL BLOCKED.**
+
+| Area | State |
+|---|---|
+| Consent Mode v2 — defaults, ordering, storage, update, withdrawal | **VERIFIED against the real Google tag** (`gcs=G101`, `npa=1`) |
+| Rejected-consent behaviour | **PASS — zero third-party requests, zero advertising cookies** |
+| Consent-gated GTM delivery | **VERIFIED with the real container** |
+| App event taxonomy — five events | **VERIFIED unchanged** |
+| Page-view authority | **VERIFIED — exactly one per load, navigation, back and forward** |
+| Conversion integrity | **VERIFIED — 0 on failure, exactly 1 on success from three submits** |
+| PII | **VERIFIED clean — app `dataLayer`, GA4 hit and Meta hits** |
+| Sole analytics API | **ACHIEVED — zero `window.gtag` call sites remain** |
+| Builds | **Both pass** |
+| **Advertising tags in the published container** | **BLOCKING — the paused tags were not the ones firing** |
+| H2 GA4 tags delivering | **UNVERIFIED — unpublished; needs owner Preview** |
+| Container published · production env var · migration 002 · real production measurement | **All outstanding** |
+| Booking conversion | **Still owner-blocked** — unchanged |
+
+**Nothing was published. Nothing was pushed. No Google, Meta or X account configuration was read or
+modified.**

@@ -1,6 +1,5 @@
 ﻿import Link from 'next/link';
 import { Mail, Linkedin, Facebook, Instagram } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/Logo';
 import { offices, siteMetadata } from '@/lib/metadata';
 import { ConsentPreferencesLink } from '@/components/analytics/ConsentPreferencesLink';
@@ -10,36 +9,55 @@ export function Footer() {
 
   return (
     <footer className="bg-ms-dark text-white">
-      {/* CTA Strip */}
-      <div className="border-b border-white/10 px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl sm:text-4xl font-bold font-heading mb-3">
-              Ready to Make Your Marketing Measurable?
-            </h2>
-            <p className="text-base sm:text-lg text-white/85 max-w-2xl mx-auto">
-              Book a free strategy call and discover what is working, what is leaking, and what can be improved.
-            </p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button
-              size="lg"
-              className="bg-accent hover:bg-accent/90 text-white"
-              asChild
-            >
-              <Link href="/contact">Contact Us</Link>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white/30 text-white hover:bg-white/10"
-              asChild
-            >
-              <Link href="/schedule-call">Schedule Free Strategy Call</Link>
-            </Button>
-          </div>
-        </div>
-      </div>
+      {/*
+        SESSION 33 — PHASE I — THE FOOTER'S COMMERCIAL CTA STRIP IS REMOVED.
+
+        WHAT WAS HERE: an `<h2>` reading "Ready to Make Your Marketing
+        Measurable?", a line beginning "Book a free strategy call…", and two
+        large buttons — "Contact Us" and "Schedule Free Strategy Call" — on
+        EVERY page of the site.
+
+        IT RESOLVED FIVE RECORDED DEFECTS AT ONCE, WHICH IS WHY THE STRIP GOES
+        RATHER THAN ITS WORDING:
+
+        1. F10 — THE SYSTEMIC DOUBLE-CLOSE. Every commercial and route page
+           already ends in its own close (`CommercialClose`), and that
+           component's own comment records the problem: "the homepage's final
+           CTA is immediately followed by the footer's own commercial CTA
+           strip… the shared Footer is NOT modified here". Phase F composed its
+           close as the deliberately quieter half of a pair it could not fix.
+           Phase I owns the other half. With the strip gone, each page closes
+           once.
+
+        2. "FREE". `app/not-found.tsx` records the approved treatment in its own
+           words: "'Free' is blocked on the entry-offer decision — no candidate
+           may say free until it is recorded". Phase G removed the identical CTA
+           from `not-found` and `/schedule-call` and REPLACED IT WITH NOTHING.
+           The same treatment is applied here rather than inventing a new line.
+
+        3. THE 2 → 4 HEADING JUMP. The strip's `<h2>` sat above the columns'
+           `<h4>` headings on every page. The `<h2>` is gone and the column
+           headings are now `<h2>`, so the outline is h1 → h2 with no jump on
+           any route.
+
+        4. THE SECOND ASK ON `/thank-you`. That route's architecture is "NO
+           SECOND ASK. The conversion has happened." — no CTA, no form, no
+           booking prompt. The shared footer was contradicting it on the one
+           page where it matters most. This is the smallest architectural fix:
+           removing one shared element, rather than adding a per-route footer
+           variant or a conditional the routes would have to opt into.
+
+        5. THE THIRD ASK. A separate "Schedule Call →" block sat in the contact
+           column as well, so the footer carried three commercial asks. It is
+           removed with the strip; `/schedule-call` stays reachable as an
+           ordinary navigation link below.
+
+        WHAT REPLACES IT: NOTHING. The footer is now navigation, contact
+        details and legal — chrome, not a close. **Contact remains the primary
+        commercial action** and **booking remains secondary**: both are listed
+        in the Company column, and both are still one click away from every
+        page via the header and each page's own close.
+      */}
 
       {/* Footer Columns */}
       <div className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
@@ -48,17 +66,36 @@ export function Footer() {
             {/* Column 1: Brand */}
             <div>
               <Logo href="/" className="h-8 mb-4" />
-              <p className="text-sm text-white/85 leading-relaxed mb-4">
-                Performance marketing agency helping businesses generate qualified leads, improve ROI, and scale revenue through Google Ads, Meta Ads, SEO, lead generation, and conversion optimization.
-              </p>
-              <p className="text-xs text-white/80 font-medium">
-                Performance Marketing | Lead Generation | SEO | CRO
+              {/*
+                SESSION 33 — PHASE I. The previous blurb claimed the firm helps
+                businesses "generate qualified leads, improve ROI, and scale
+                revenue" — three unsupported outcome claims, on every page — and
+                named "Meta Ads", which is not a route this site has. The line
+                below is the HOMEPAGE'S OWN APPROVED META DESCRIPTION, used
+                verbatim: approved copy reused, not new marketing copy written.
+
+                The strapline "Performance Marketing | Lead Generation | SEO |
+                CRO" is removed and not replaced. It restated a positioning the
+                programme has superseded, and it asserted nothing the four
+                navigation columns beneath it do not already show.
+              */}
+              <p className="text-sm text-white/85 leading-relaxed">
+                We help businesses get found by the buyers already looking for what they sell, turn more of
+                those visits into real enquiries, and measure the whole path so they can see what worked.
               </p>
             </div>
 
             {/* Column 2: Services */}
             <div>
-              <h4 className="text-sm font-bold font-heading uppercase tracking-wider text-white/90 mb-4">Services</h4>
+              {/*
+                SESSION 33 — PHASE I. These were `<h4>` under the removed CTA
+                strip's `<h2>`, which produced a 2 → 4 jump in the outline of
+                EVERY page. They are `<h2>` now — always valid after a page's
+                single `<h1>`, and no jump on any route. The `!` prefixes hold
+                the size and weight against the global display scale for `h2`
+                in `app/globals.css`; the rendered appearance is unchanged.
+              */}
+              <h2 className="!text-sm !font-bold !leading-tight font-heading uppercase tracking-wider text-white/90 mb-4">Services</h2>
               <ul className="space-y-2.5">
                 <li>
                   <Link
@@ -105,7 +142,7 @@ export function Footer() {
 
             {/* Column 3: Company */}
             <div>
-              <h4 className="text-sm font-bold font-heading uppercase tracking-wider text-white/90 mb-4">Company</h4>
+              <h2 className="!text-sm !font-bold !leading-tight font-heading uppercase tracking-wider text-white/90 mb-4">Company</h2>
               <ul className="space-y-2.5">
                 <li>
                   <Link
@@ -124,11 +161,20 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
+                  {/*
+                    SESSION 33 — PHASE I. Relabelled from "Case Studies". The
+                    route is `noindex` precisely because there are no published
+                    case studies and no permission to publish client results,
+                    and its own heading is "What we can show you, and what we
+                    cannot." A footer link promising case studies to a page that
+                    opens by saying it has none is the small dishonesty this
+                    programme exists to remove.
+                  */}
                   <Link
                     href="/work"
                     className="text-sm text-white/85 hover:text-accent transition-colors"
                   >
-                    Case Studies
+                    Work
                   </Link>
                 </li>
                 <li>
@@ -163,12 +209,37 @@ export function Footer() {
                     FAQ
                   </Link>
                 </li>
+                {/*
+                  SESSION 33 — PHASE I. The removed CTA strip was the ONLY
+                  footer link to `/contact`, and the removed "Schedule Call →"
+                  block the only one to `/schedule-call`. Both are restored here
+                  as ordinary navigation, which keeps contact the primary
+                  commercial action and booking the secondary one without
+                  restoring a second close. Labels name the destination and
+                  claim nothing about it.
+                */}
+                <li>
+                  <Link
+                    href="/contact"
+                    className="text-sm text-white/85 hover:text-accent transition-colors"
+                  >
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/schedule-call"
+                    className="text-sm text-white/85 hover:text-accent transition-colors"
+                  >
+                    Book a call
+                  </Link>
+                </li>
               </ul>
             </div>
 
             {/* Column 4: Contact */}
             <div>
-              <h4 className="text-sm font-bold font-heading uppercase tracking-wider text-white/90 mb-4">Contact</h4>
+              <h2 className="!text-sm !font-bold !leading-tight font-heading uppercase tracking-wider text-white/90 mb-4">Contact</h2>
               <ul className="space-y-4 mb-6">
                 <li>
                   <p className="text-xs text-white/80 uppercase tracking-wider mb-1">Email</p>
@@ -186,7 +257,11 @@ export function Footer() {
                       href={`tel:${office.phone}`}
                       className="text-sm text-white/85 hover:text-accent transition-colors"
                     >
-                      {office.phone}
+                      {/* SESSION 33 — PHASE I. Was `office.phone`, the raw
+                          `tel:` value, so the footer printed "+919873232662"
+                          with no spacing. `phoneDisplay` is the published
+                          formatting; the `href` keeps the raw value. */}
+                      {office.phoneDisplay}
                     </a>
                   </li>
                 ))}
@@ -195,14 +270,6 @@ export function Footer() {
                   <p className="text-sm text-white/85">Pune, Mumbai, and India-wide consulting</p>
                 </li>
               </ul>
-              <div className="pt-4 border-t border-white/10">
-                <Link
-                  href="/schedule-call"
-                  className="text-sm font-medium text-accent hover:text-accent/80 transition-colors"
-                >
-                  Schedule Call →
-                </Link>
-              </div>
             </div>
           </div>
         </div>

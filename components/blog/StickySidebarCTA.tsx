@@ -19,11 +19,19 @@ export function StickySidebarCTA({ ctaHeadline, ctaLink, relatedService }: Stick
       {/* Main CTA */}
       <Card className="p-6 sm:p-8 bg-accent/5 border-accent/20">
         <h3 className="font-semibold text-lg mb-3">{ctaHeadline}</h3>
+        {/*
+          SESSION 33 — PHASE I. Was "Book a free strategy call…" with a
+          "Schedule Free Call" button. "Free" is blocked on the entry-offer
+          decision and no free call has been approved; "clear recommendations"
+          promised a deliverable that has not been defined either. "Book a call"
+          is the approved secondary label already used by `ActionPair` on every
+          commercial route. Renders on zero routes today — see `CTABlock.tsx`.
+        */}
         <p className="text-sm text-foreground mb-6">
-          Book a free strategy call and get clear recommendations based on your current marketing setup.
+          Tell us what is actually happening, and what you can currently see.
         </p>
         <Button asChild className="w-full">
-          <Link href={ctaLink}>Schedule Free Call</Link>
+          <Link href={ctaLink}>Book a call</Link>
         </Button>
       </Card>
 

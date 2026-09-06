@@ -49,13 +49,28 @@
 > 21–32 did not update this section; **that gap is recorded here rather than back-filled, because
 > this worker did not verify those sessions' outcomes and will not restate them.**
 >
-> **Current production-translation state, as of Session 33 (2026-09-06):**
-> **PHASE H2 — ANALYTICS AND CONVERSION — BLOCKED.** Consent Mode v2 and consent-gated GTM
-> delivery are implemented and verified (`DEC-020`), but **the published `GTM-K8ZQPMXP` container
-> fires advertising tags that the approved consent decision does not permit**, and Preview,
-> GA4 configuration, container publication, production `NEXT_PUBLIC_GTM_ID`, migration 002 and one
-> real production measurement all remain outstanding owner actions. **Booking remains
-> owner-blocked.** See `docs/27-production-translation/20_PHASE_H2A_CONSENT_AND_GTM.md` §14.
+> **Current production-translation state, as of Session 33 — Phase I (2026-09-06):**
+>
+> **PHASE I — FUNCTIONAL AND LAUNCH HARDENING — PASS. READY FOR CONTROLLED PRODUCTION
+> DEPLOYMENT.** Structured data, robots, sitemap, indexability, host canonicalisation, redirects,
+> internal links, shared-footer launch debt, cache, security headers and the deployment runbook are
+> closed and verified against a production build. **One live defect was found and fixed: three links
+> to `/research/ai-visibility-baseline`, a route that has never existed.** Full record:
+> `docs/27-production-translation/21_PHASE_I_LAUNCH_HARDENING.md`.
+>
+> **Deployment prerequisite: `npm run db:migrate` must apply migration 002 before or with the
+> application deploy** — the enquiry INSERT references its columns.
+>
+> **PHASE H2 — ANALYTICS ACTIVATION — DEFERRED BY EXPLICIT OWNER DECISION** ("pause the GTM stuff;
+> pick it up once the website is fully functional"), and **not counted as a Phase I failure.** The
+> implementation is committed and dormant: no provider id is set and the container is requested only
+> with an id **and** explicit consent. When it is reopened, the outstanding blocker is that the
+> published `GTM-K8ZQPMXP` container fires advertising tags the approved consent decision
+> (`DEC-020`) does not permit — see `20_PHASE_H2A_CONSENT_AND_GTM.md` §24.
+>
+> **Booking remains owner-blocked for MEASUREMENT only**; contact is the functional primary enquiry
+> path and the booking destination was verified to resolve. **The GPTBot/CCBot crawler policy (R20)
+> remains an open owner decision**, with the status quo preserved.
 >
 > **The Gate 10 record below remains accurate as a record of the creative direction**, and THE
 > RESOLVE remains the approved visual and experience direction.

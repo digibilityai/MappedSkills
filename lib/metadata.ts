@@ -15,7 +15,11 @@ export function createMetadata(
   return {
     title,
     description,
-    canonical: url,
+    // SESSION 33 — PHASE I. A stray top-level `canonical` key was here. It is
+    // not part of Next's `Metadata` type, emitted nothing, and was the source of
+    // a standing TypeScript error. The canonical link is produced by
+    // `alternates.canonical` below, which is the supported field and was already
+    // present — so no route's canonical output changes.
     robots: {
       index: true,
       follow: true,

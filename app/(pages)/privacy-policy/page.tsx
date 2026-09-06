@@ -438,13 +438,29 @@ export default function PrivacyPolicyPage() {
               Contact MappedSkills and we&apos;ll help you understand the right next step for your marketing goals.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              {/* Tracking: contact_click */}
+              {/*
+                SESSION 33 — PHASE I. "Schedule Free Strategy Call" became "Book
+                a call", and the two stale `Tracking:` comments naming
+                `contact_click` and `schedule_call_click` are removed with it.
+
+                "Free" is blocked on the entry-offer decision — `app/not-found.tsx`
+                records the rule in those words — and no free audit, free call or
+                free strategy session has been approved. "Book a call" is the
+                approved secondary label already used by `ActionPair` on every
+                commercial route, so this reuses approved language rather than
+                writing new copy.
+
+                Neither event name has existed since Phase H2: the approved
+                taxonomy is five events emitted through `lib/analytics.ts`, and
+                `schedule_call_click` in particular was one of the direct
+                `window.gtag` emitters removed from the codebase. The comments
+                were describing instrumentation that is not here.
+              */}
               <Button size="lg" asChild>
                 <Link href="/contact">Contact Us</Link>
               </Button>
-              {/* Tracking: schedule_call_click */}
               <Button size="lg" variant="outline" asChild>
-                <Link href="/schedule-call">Schedule Free Strategy Call</Link>
+                <Link href="/schedule-call">Book a call</Link>
               </Button>
             </div>
           </div>

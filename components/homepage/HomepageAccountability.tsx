@@ -134,13 +134,15 @@ export function HomepageAccountability() {
                 <b className="font-bold text-resolve-ground">No confidence interval is claimed and none is available.</b>{' '}
                 Two systems could not be tested at all — they are named as untested, and not characterised.
               </p>
-              <a
-                href="/research/ai-visibility-baseline"
-                className="inline-flex min-h-[44px] items-center border-b-2 border-current pb-1 text-[.96rem] font-bold no-underline"
-                style={{ color: 'var(--resolve-accent)' }}
-              >
-                The prompts, the run counts and the full method →
-              </a>
+              {/*
+                SESSION 33 — PHASE I. A link to `/research/ai-visibility-baseline`
+                was here. THE ROUTE HAS NEVER EXISTED — a crawl of the built site
+                returned 404 — and the research entry is recorded as NOT DRAFTED.
+                Sending a reader who has just been told a number to a 404 is the
+                worst place on this site to break a link, because the link is the
+                evidence offer. The measurement, its scope and its stated limits
+                are all in the paragraph above and are unchanged.
+              */}
             </div>
           </div>
 
@@ -154,15 +156,11 @@ export function HomepageAccountability() {
                 <span style={{ color: 'var(--resolve-accent-dark)' }}> →</span>
               </a>
             </li>
-            <li className="border-b border-resolve-line">
-              <a
-                href="/research/ai-visibility-baseline"
-                className="block py-[clamp(15px,1.8vw,21px)] font-heading text-[clamp(1.1rem,2vw,1.5rem)] font-bold leading-[1.12] tracking-[-0.03em] text-resolve-ink no-underline"
-              >
-                Our own visibility, measured and published
-                <span style={{ color: 'var(--resolve-accent-dark)' }}> →</span>
-              </a>
-            </li>
+            {/*
+              SESSION 33 — PHASE I. Second link to the same non-existent
+              `/research/ai-visibility-baseline` route, removed for the same
+              reason. The list keeps the entry that does resolve.
+            */}
           </ul>
         </div>
 

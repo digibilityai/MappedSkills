@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { createMetadata } from '@/lib/metadata';
-import { Breadcrumb, CommercialSection, ChapterLabel, Display, Body, Note, ProofLink } from '@/components/commercial/primitives';
+import { Breadcrumb, CommercialSection, ChapterLabel, Display, Body, Note } from '@/components/commercial/primitives';
 import { CommercialHero } from '@/components/commercial/CommercialHero';
 import { ScopeList } from '@/components/commercial/ScopeList';
 import { BoundaryBlock } from '@/components/commercial/BoundaryBlock';
@@ -212,9 +212,22 @@ export default function AiSeoPage() {
 
         <AiLayers />
 
-        <ProofLink href="/research/ai-visibility-baseline">
-          The full method, the prompts and the run counts
-        </ProofLink>
+        {/*
+          SESSION 33 — PHASE I. A `ProofLink` to `/research/ai-visibility-baseline`
+          was here. THAT ROUTE HAS NEVER EXISTED — verified by crawling the built
+          site, where it returned 404 — and `PAGE_COPY_INDEX.md` records both
+          research entries as NOT DRAFTED. `/how-it-works` already reached the
+          same conclusion in its own words: "link to both /research entries;
+          neither route exists, so no link".
+
+          THE MEASUREMENT ABOVE IS UNCHANGED, and it stands on its own: the run
+          count, the date, the location, the signed-out condition and the
+          explicit absence of a confidence interval are all stated inline. What
+          is removed is a promise of a document that does not exist, not a claim.
+
+          OWNER ACTION: when the research page is written and published, restore
+          this link and the two on the homepage together.
+        */}
       </CommercialSection>
 
       {/* ---- MOVE 5 — the boundary, at full strength, AFTER the evidence --- */}

@@ -149,15 +149,24 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         </Section>
       ) : null}
 
+      {/*
+        SESSION 33 — PHASE I. Three blocked claims removed from one block:
+        "Want Similar Results for Your Business?" implies published results this
+        firm does not have; "Book a free strategy call" and "Schedule Free
+        Strategy Call" offer a free entry offer that has not been approved; and
+        "let us audit your campaigns" promises an undefined deliverable.
+        "Explore Other Case Studies" is also wrong — `/work` states in its own
+        first line that there are none.
+      */}
       <CTASection
-        title="Want Similar Results for Your Business?"
-        description="Book a free strategy call and let us audit your campaigns and identify growth opportunities."
+        title="Tell us what you are trying to fix."
+        description="The enquiries you are getting, the ones you are not, and what you can currently see."
         primaryCta={{
-          text: 'Schedule Free Strategy Call',
-          href: '/schedule-call',
+          text: 'Tell us what you\u2019re trying to fix',
+          href: '/contact',
         }}
         secondaryCta={{
-          text: 'Explore Other Case Studies',
+          text: 'What we can and cannot show you',
           href: '/work',
         }}
       />

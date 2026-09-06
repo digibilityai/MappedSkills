@@ -422,12 +422,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </Container>
       </Section>
 
+      {/*
+        SESSION 33 — PHASE I. "Book a free strategy call…" and "Schedule Free
+        Strategy Call" removed: "free" is blocked on the entry-offer decision.
+        The primary action is now `/contact` with the approved label used by
+        every commercial route's close, and booking is not offered here at all
+        while it remains owner-blocked.
+      */}
       <CTASection
         title="Ready to Turn This Insight Into Action?"
-        description="Book a free strategy call and get clear recommendations based on your current ads, SEO, leads, or conversion funnel."
+        description="Tell us what is actually happening — the enquiries you are getting, the ones you are not, and what you can currently see."
         primaryCta={{
-          text: 'Schedule Free Strategy Call',
-          href: '/schedule-call',
+          text: 'Tell us what you\u2019re trying to fix',
+          href: '/contact',
         }}
         secondaryCta={{
           text: 'Explore Services',

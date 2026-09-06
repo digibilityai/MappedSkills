@@ -7,7 +7,7 @@ import { ConsentProvider } from '@/components/analytics/ConsentProvider'
 import { ConsentBanner } from '@/components/analytics/ConsentBanner'
 import { GoogleTagManager } from '@/lib/gtm'
 import { MetaPixel } from '@/lib/meta-pixel'
-import { generateOrganizationSchema, generateLocalBusinessSchema } from '@/lib/schema'
+import { generateOrganizationSchema } from '@/lib/schema'
 import { siteMetadata } from '@/lib/metadata'
 import { CONSENT_BOOTSTRAP_SCRIPT } from '@/lib/consent'
 import './globals.css'
@@ -26,10 +26,21 @@ const manrope = Manrope({
   variable: '--font-manrope',
 });
 
+/*
+  SESSION 33 — PHASE I. THIS IS A FALLBACK AND NOTHING MORE: every route in this
+  application exports its own `metadata`, so nothing a visitor or a crawler sees
+  comes from here. It carried "Performance Marketing for SaaS" and "Accelerate
+  your SaaS growth" — a positioning the programme has superseded, and a segment
+  claim ("SaaS") that appears nowhere else on the site. Both are replaced with
+  the homepage's own approved title and description rather than a new line.
+
+  `generator: 'v0.app'` is removed. It named the tool the original site was
+  scaffolded with, is inaccurate for this codebase, and is published in the
+  document head.
+*/
 export const metadata: Metadata = {
-  title: 'MappedSkills - Performance Marketing for SaaS',
-  description: 'Accelerate your SaaS growth with data-driven performance marketing. Google Ads, social media, lead generation, and conversion optimization.',
-  generator: 'v0.app',
+  title: 'MappedSkills | Judge Us on the Enquiries, Not the Traffic',
+  description: 'We help businesses get found by the buyers already looking for what they sell, turn more of those visits into real enquiries, and measure the whole path so they can see what worked.',
   icons: {
     icon: siteMetadata.faviconPath,
     apple: siteMetadata.faviconPath,
@@ -42,7 +53,6 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   const organizationSchema = generateOrganizationSchema();
-  const localBusinessSchema = generateLocalBusinessSchema();
 
   return (
     <html lang="en" className={`${bricolage.variable} ${manrope.variable}`}>
@@ -67,17 +77,25 @@ export default function RootLayout({
           it is a literal from `lib/consent.ts`; nothing is interpolated.
         */}
         <script dangerouslySetInnerHTML={{ __html: CONSENT_BOOTSTRAP_SCRIPT }} />
-        {/* Global Schema Markup */}
+        {/*
+          SESSION 33 — PHASE I — ONE global entity, not two.
+
+          This emitted an `Organization` AND a `LocalBusiness` on every page,
+          unlinked, describing the same company with the same fields duplicated
+          — and both carried `postalCode: "India"`, a fake `streetAddress`, and
+          a `priceRange` pricing claim that is owner-blocked. They are merged
+          into one `Organization` with a stable `@id`, built from the same
+          `offices` array the footer renders. See `lib/schema.ts`.
+
+          Page-level `BreadcrumbList` (Phase F/G primitives) and the `/faq`
+          `FAQPage` are unchanged: both are generated from the visible content
+          on their own page, so neither can assert something a reader cannot
+          see.
+        */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(organizationSchema),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(localBusinessSchema),
           }}
         />
       </head>

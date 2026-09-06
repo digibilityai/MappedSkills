@@ -8,32 +8,37 @@ import { ContactForm } from '@/components/forms/ContactForm';
 /**
  * SESSION 29 — PHASE G — `/contact`. ARCHETYPE 7 — conversion surface.
  *
- * SCOPE: PRESENTATION ONLY. `06_IMPLEMENTATION_SEQUENCE.md` assigns "/contact,
- * /schedule-call, /thank-you PRESENTATION" to Phase G and "the new 4+3 field
- * form", the API route, durable persistence, transactional email, the honeypot,
- * rate limiting, idempotency and `/thank-you` as the wired destination to PHASE
- * H1. This file therefore translates the route's shell and DOES NOT TOUCH
- * `components/forms/ContactForm.tsx` — not its fields, not its validation, not
- * its submit behaviour, not its tracking.
+ * PRESENTATION IS PHASE G'S AND IS UNCHANGED. SESSION 31 (Phase H1) did not
+ * alter one line of layout, copy or structure on this route. It changed only
+ * `components/forms/ContactForm.tsx` and added the endpoint behind it. This
+ * comment block is updated because it previously described defects that no
+ * longer exist, and a stale warning is worse than none.
  *
- * WHAT PHASE H1 MUST REPLACE, recorded here rather than quietly tolerated. The
- * existing form is VERIFIED defective and every item below is pre-existing:
- *   1. It has no submission target. It waits on a client-side timer and then
- *      shows a success screen. Every enquiry it has ever received was lost
- *      while the visitor was told it had worked. NO SUCCESS COPY IS WRITTEN ON
- *      THIS PAGE as though that path worked, and Phase G adds nothing that
- *      makes the failure less visible.
- *   2. It asks for a monthly budget range. `34_WIREFRAME_MASTER_CONTACT.md`
- *      prohibits a budget field outright and Phase H1's acceptance is "no
- *      budget field exists": it cannot be verified, it is the highest-friction
- *      control on the page, and it produces an unverified number that makes
- *      reports look precise.
- *   3. It requires a phone number and a service selection, against the frozen
- *      4 required + 3 optional architecture.
- *   4. It pushes form values into `dataLayer` from the client.
- * Removing the form here would leave the route with no enquiry path at all and
- * would be building the replacement, which is H1's work. Its functionality is
- * neither expanded nor cosmetically improved.
+ * WHAT PHASE H1 RESOLVED, item by item against what this block used to list:
+ *   1. THE FORM NOW HAS A SUBMISSION TARGET. It POSTs to `/api/enquiry`, which
+ *      writes to MariaDB and returns success ONLY after the database has
+ *      acknowledged a durable row. The `setTimeout` that faked success — and
+ *      lost every enquiry it ever received — is deleted.
+ *   2. THE BUDGET FIELD IS GONE, per `FORM_AND_BOOKING_SPEC.md` §1.4. Nothing
+ *      replaced it.
+ *   3. PHONE IS OPTIONAL AND THE SERVICE SELECT IS GONE. The frozen contract is
+ *      four required (name, work email, company, what you're trying to fix) and
+ *      three optional (phone/WhatsApp, website, marketing consent). Service
+ *      interest is derived from the converting page, per §1.3.
+ *   4. NO FORM VALUE REACHES `dataLayer`. All three `window.gtag` calls are
+ *      removed; H2 owns the replacement, server-side.
+ *
+ * ON SUCCESS THE VISITOR GOES TO `/thank-you`, which H1 wires as the
+ * destination — after confirmed persistence and never before. On failure they
+ * stay here with every value preserved and an accessible explanation that
+ * NOTHING WAS SAVED.
+ *
+ * STILL OWNER-BLOCKED, AND STILL RENDERING NOTHING:
+ *   - No transactional email is configured, so no acknowledgement and no
+ *     internal notification is sent. Persistence does not depend on it
+ *     (`POST_SUBMISSION_AND_FOLLOWUP.md` §0, step 4 is asynchronous).
+ *   - No fallback contact route is offered when persistence fails, because the
+ *     published phone number and email remain owner-blocked.
  *
  * TWO BLOCKED SECTIONS, AND BOTH RENDER NOTHING.
  *

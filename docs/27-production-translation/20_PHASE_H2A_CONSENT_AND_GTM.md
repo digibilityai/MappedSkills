@@ -1028,3 +1028,63 @@ acceptance. Actions 1–3 in §24 must be completed and verified in Preview firs
 
 **Nothing was published. Nothing was pushed. No Google, Meta or X account configuration was read or
 modified.**
+
+---
+
+# Session 35 — ACTIVATED. This document's blocker is closed.
+
+**Session:** 35 · **Date:** 2026-09-06 · **Branch:** `test_branch` · **HEAD:** `c4f9259`
+**Full record: `23_PHASE_H2_ANALYTICS_ACTIVATION_ACCEPTANCE.md`.**
+
+## 26. §20.5 was wrong, and the correction matters
+
+**§20.5 concluded that "the paused tags were the wrong ones."** It is not true, and it should not be
+carried forward.
+
+Session 34 reasoned that the Meta hits carrying `a=tmSimo-GTM-WebTemplate` could not be coming from
+the fifteen `FB - …` tags, because those were assumed to be custom-HTML tags. **With container
+access, those tags are of type `Facebook Pixel` from the `facebookarchive` gallery — that IS the
+community template**, and `FB - Lead` carries pixel id `983625902710561`, the exact id observed on
+the wire. **The owner had paused the correct tags all along.**
+
+The real cause is the one Session 34 stated correctly in its own §18 and then did not apply to its
+own conclusion: **a browser loads the published container, never a workspace.** The pauses were
+staged and unpublished, so they could not affect what loaded. Publishing them resolved it.
+
+The X tag was also identified: **`Twitter Base Pixel`** — Session 34 was right that it is not one of
+the eight `Twitter - …` tags; it is a ninth without that prefix, and it too was already paused in the
+workspace.
+
+**§20.5 is retained above, unaltered, as the record of what that session concluded from what it could
+see. This section supersedes its diagnosis.**
+
+## 27. Owner-action list from §24 — final status
+
+| # | Action | Status |
+|---|---|---|
+| 1 | Find and pause the Meta tag that actually fires | **DONE** — it was `FB - Page View` (All Pages) plus the other 14 `FB - …` tags, already paused by the owner; **published** in Session 35 |
+| 2 | Find and pause the X tag that actually fires | **DONE** — `Twitter Base Pixel`, already paused by the owner; **published** |
+| 3 | Re-verify zero advertising requests after accepting analytics | **DONE — verified in GTM Preview and again on the live site.** Zero Meta, X and LinkedIn requests; no `_fbp`, no `_gcl_*` |
+| 4 | Pause `Conversion Linker` | **DONE** — was already paused by the owner; published |
+| 5 | Determine the cause of `pagead2.googlesyndication.com/ccm/collect` | **NO LONGER OBSERVED** in either Preview or the live accepted journey. Not reproduced, so not diagnosed further |
+| 6 | Run GTM Preview and confirm all five H2 tags fire | **DONE** — all five fired, 39 tags did not |
+| 7 | Confirm `GA4 - Configuration` sends no page view | **DONE** — `send_page_view = false`, and GA4 Enhanced Measurement's *Page changes based on browser history events* is confirmed **unchecked** |
+| 8 | Publish the container | **DONE — Version 4, "H2 measurement activation"** |
+| 9 | Confirm no published configuration exposes `window.gtag` | **DONE** — `gtag` is `undefined` on the live site in every consent state |
+| 10 | Register the §8 custom dimensions | **DONE — 13 registered**, before production data began arriving |
+| 11 | Set production `NEXT_PUBLIC_GTM_ID`, leave Meta empty | **DONE — as a BUILD-TIME input.** A host environment variable alone does nothing; this was proven, and a rebuild and redeploy were required |
+| 12 | Apply migration 002 | **ALREADY APPLIED** — ledger unchanged, not re-run |
+| 13 | One real production measurement verification | **DONE** — one synthetic enquiry → one durable row → one `lead_form_submitted` → GA4 Realtime. Row deleted afterwards |
+| 14 | Legal review of the banner wording | **NOT DONE — still open** |
+| 15 | Exclude localhost hits in GA4 | **NOT DONE — still open.** Note `environment` is not a reliable filter; use hostname |
+
+**§8's parameter mapping had never been implemented — the five tags were sending the event name
+only. It is implemented now**, with one improvement on the plan: `page_path` is mapped by Google's
+own tag to the native `dp` field, so it needs no custom dimension.
+
+## 28. Verdict after Session 35
+
+**IS GTM SAFE TO PUBLISH? YES — and it is published.**
+**IS H2 A PASS? YES — measurement is active in production and accepted**, with one time-bound
+provider item: GA4 will not offer `lead_form_submitted` for key-event flagging until it has
+processed the event (≤24h). See `23_PHASE_H2_ANALYTICS_ACTIVATION_ACCEPTANCE.md` §18.

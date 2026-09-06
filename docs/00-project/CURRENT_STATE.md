@@ -61,12 +61,32 @@
 > **Deployment prerequisite: `npm run db:migrate` must apply migration 002 before or with the
 > application deploy** — the enquiry INSERT references its columns.
 >
-> **PHASE H2 — ANALYTICS ACTIVATION — DEFERRED BY EXPLICIT OWNER DECISION** ("pause the GTM stuff;
-> pick it up once the website is fully functional"), and **not counted as a Phase I failure.** The
-> implementation is committed and dormant: no provider id is set and the container is requested only
-> with an id **and** explicit consent. When it is reopened, the outstanding blocker is that the
-> published `GTM-K8ZQPMXP` container fires advertising tags the approved consent decision
-> (`DEC-020`) does not permit — see `20_PHASE_H2A_CONSENT_AND_GTM.md` §24.
+> **PHASE H2 — ANALYTICS ACTIVATION — PASSED AND ACTIVE IN PRODUCTION (Session 35, 2026-09-06).**
+> The owner reopened the deferred provider-activation work and it is now complete. **The GTM
+> container is published (Version 4) and GA4 is receiving.** Consent behaviour was verified live in a
+> clean browser: undecided and rejected visitors trigger **zero third-party requests and zero
+> cookies**; accepting analytics contacts **Google only** — no Meta, X or LinkedIn tag fires and no
+> `_fbp` or `_gcl_*` cookie is created, which **closes the blocker recorded against `DEC-020`**. All
+> 39 legacy advertising and legacy-GA4 tags are paused and published as paused.
+>
+> **`lead_form_submitted` fires only after server-confirmed durable persistence** — verified live
+> with one synthetic enquiry: three rapid clicks produced one POST, one database row, one event and
+> one GA4 receipt, with campaign attribution intact and **zero PII**. Every negative case produced
+> zero conversions, and a deliberate sabotage of `dataLayer` and storage on the live site could not
+> prevent the enquiry from persisting. **The synthetic rows were deleted and the baseline restored
+> exactly.**
+>
+> **Two corrections of record.** Session 34's conclusion that "the paused tags were the wrong ones"
+> was **wrong** — they were the right tags, merely unpublished. And **`NEXT_PUBLIC_GTM_ID` is a
+> BUILD-TIME input**: setting it on the host cannot activate analytics, so a rebuild and controlled
+> redeploy were required and performed.
+>
+> **One item remains, and it is provider latency rather than an implementation gap:** GA4 will not
+> offer `lead_form_submitted` for **key-event** flagging until it has processed the event (up to 24
+> hours). Full record and the exact remaining actions:
+> `docs/27-production-translation/23_PHASE_H2_ANALYTICS_ACTIVATION_ACCEPTANCE.md`.
+>
+> **Meta Pixel remains NOT ACTIVATED — optional and owner-deferred.**
 >
 > **Booking remains owner-blocked for MEASUREMENT only**; contact is the functional primary enquiry
 > path and the booking destination was verified to resolve. **The GPTBot/CCBot crawler policy (R20)

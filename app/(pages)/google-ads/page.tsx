@@ -120,8 +120,7 @@ export default function GoogleAdsPage() {
         eyebrow="Paid search"
         title="Google Ads, measured on the enquiries rather than the clicks."
         lede="We run paid search: account structure, keywords, negatives, ad copy, bidding and budget. We also take responsibility for what happens after the click — the page it lands on, whether the enquiry completes, and whether you can see where it came from."
-        action="Tell us what you’re trying to fix"
-      >
+        action="Tell us what you’re trying to fix" mode="split">
         <p>
           Paid is a way to reach demand that is active now. It is chosen because it fits your business, not
           because every client gets one.
@@ -237,8 +236,7 @@ export default function GoogleAdsPage() {
             sense at all.
           </>
         }
-        action="Tell us what you’re trying to fix"
-      />
+        action="Tell us what you’re trying to fix" mode="split" />
     </>
   );
 }

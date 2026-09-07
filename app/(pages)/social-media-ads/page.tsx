@@ -56,8 +56,7 @@ export default function SocialMediaAdsPage() {
         eyebrow="Paid social"
         title="Paid social, judged on the enquiries it produces."
         lede="We run paid social advertising, and we will tell you when it is the wrong channel for your business. For something a buyer takes weeks to decide on, it frequently is: search reaches people who have already decided they want it, and social interrupts people who have not."
-        action="Tell us what you’re trying to fix"
-      >
+        action="Tell us what you’re trying to fix" mode="split">
         <p>
           Where it genuinely fits, it is one demand source inside the same outcome as everything else here, and
           we are accountable for the enquiries it produces rather than for reach, clicks or engagement.
@@ -141,8 +140,7 @@ export default function SocialMediaAdsPage() {
             tell, that is the finding worth starting from.
           </>
         }
-        action="Tell us what you’re trying to fix"
-      />
+        action="Tell us what you’re trying to fix" mode="split" />
     </>
   );
 }

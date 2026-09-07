@@ -72,8 +72,7 @@ export default async function BlogPage() {
           ) : (
             <>Nothing is published here yet.</>
           )
-        }
-      >
+        } mode="offset">
         {posts.length > 0 ? (
           <p>
             Where something rests on a measurement we ran, it links to the measurement rather than restating

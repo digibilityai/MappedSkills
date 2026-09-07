@@ -169,8 +169,7 @@ export default function ServicesPage() {
         eyebrow="What we do"
         title="One outcome: enquiries you can act on."
         lede="There is buyer demand for what you sell, and some of it never reaches you. Getting them in front of you, getting the enquiry to actually complete, and being able to see which part worked are three different skills, usually bought from three different suppliers."
-        action="Tell us what you’re trying to fix"
-      >
+        action="Tell us what you’re trying to fix" mode="centred">
         <p>Here they are connected, the joins between them are ours, and the enquiry at the end is what we answer for.</p>
       </CommercialHero>
 
@@ -350,8 +349,7 @@ export default function ServicesPage() {
             anyway.
           </>
         }
-        action="Tell us what you’re trying to fix"
-      />
+        action="Tell us what you’re trying to fix" mode="split" />
     </>
   );
 }

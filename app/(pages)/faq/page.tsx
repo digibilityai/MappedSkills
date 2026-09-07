@@ -48,11 +48,37 @@ import { CommercialClose } from '@/components/commercial/CommercialClose';
  * eligibility must still be re-verified against current official guidance
  * before launch — recorded, not claimed.
  *
- * INTERACTION: NONE. The answers are expanded, static content, not an
- * accordion. An answer a sceptical reader has to open is an answer the page has
- * decided to hide, several of these answers cost the firm work by design, and
- * the emitted schema, the printed page and the visible page are then guaranteed
- * to be the same thing.
+ * INTERACTION — CHANGED IN PHASE J STAGE 3, and the change is toward the
+ * approved architecture rather than away from it.
+ *
+ * Session 29 shipped this page with every answer expanded and no accordion,
+ * reasoning that "an answer a sceptical reader has to open is an answer the
+ * page has decided to hide". That instinct is right for limits, method and
+ * attribution — and the approved UX architecture already says so, and already
+ * carves out this one page:
+ *
+ *   "`/faq` is the ONE page type where a collapsed-on-load accordion is
+ *    permitted (A20 CONDITIONAL), because each item is a genuine discrete
+ *    question the reader chooses between. It is NOT permitted for limits,
+ *    method, attribution, or anything a reader needs in order to evaluate a
+ *    claim."   — 03_PAGE_TYPE_ARCHITECTURE.md §14
+ *
+ * The same permission is recorded in 13_ACCESSIBILITY_REQUIREMENTS.md,
+ * 15_SEARCH_DISCOVERY_UX.md §34 ("Yes, collapsed on load"),
+ * 16_PAGE_STRUCTURE_MATRIX.md row 22 ("EXPANDABLE") and 18_UX_ANTI_PATTERNS.md.
+ * Session 29 was therefore MORE conservative than the architecture allows, not
+ * differently governed. Stage 3 takes the permission.
+ *
+ * WHAT IS PRESERVED, because the original reasoning still binds where it
+ * applies:
+ *   · Every question and every answer is in the server HTML, in full, in order.
+ *   · `<details>` needs NO JAVASCRIPT to open. A reader with scripting off can
+ *     read every answer. There is no client component on this route.
+ *   · The emitted `FAQPage` schema is still generated FROM THE SAME ARRAY, so
+ *     the markup and the visible page cannot describe different question sets.
+ *   · The answers that cost the firm work are not demoted, reordered, greyed or
+ *     collapsed differently from any other — every row is identical.
+ *   · No accordion is applied anywhere else on the site.
  *
  * F1: D — NONE. No figure on this route.
  */
@@ -328,8 +354,7 @@ export default function FaqPage() {
       <RouteHero
         eyebrow="Questions"
         title={<>Questions we get asked, answered plainly.</>}
-        lede={<>Including the ones with answers that lose us work.</>}
-      >
+        lede={<>Including the ones with answers that lose us work.</>} mode="offset">
         <p>
           An honest answer that costs an enquiry is the right answer &mdash; the alternative is finding out in
           month three.
@@ -342,18 +367,37 @@ export default function FaqPage() {
         return (
           <CommercialSection key={group} tone={gi % 2 === 0 ? 'paper' : 'ground'} mode="split">
             <ChapterLabel>{group}</ChapterLabel>
-            <dl className="m-0 mt-[clamp(24px,3vw,40px)] border-t-2 border-resolve-ink p-0">
+            <ul className="m-0 mt-[clamp(24px,3vw,40px)] list-none border-t-2 border-resolve-ink p-0">
               {items.map((qa) => (
-                <div key={qa.q} className="border-b border-resolve-line py-[clamp(20px,2.4vw,30px)]">
-                  <dt className="m-0 max-w-[44ch] font-heading text-[clamp(1.14rem,2vw,1.5rem)] font-bold leading-[1.18] tracking-[-0.03em]">
-                    {qa.q}
-                  </dt>
-                  <dd className="m-0 mt-3 max-w-[62ch] text-[1.02rem] leading-relaxed text-resolve-dim">
-                    {qa.a}
-                  </dd>
-                </div>
+                <li key={qa.q} className="m-0 border-b border-resolve-line">
+                  {/* Collapsed on load, from the SERVER — not by script. There
+                      is no hydration step here and no layout shift, and a
+                      reader with no JavaScript can still open every answer,
+                      because `<details>` is a native control. */}
+                  <details className="group">
+                    <summary className="flex cursor-pointer list-none items-start justify-between gap-5 py-[clamp(20px,2.4vw,30px)] [&::-webkit-details-marker]:hidden">
+                      <span className="m-0 max-w-[44ch] font-heading text-[clamp(1.14rem,2vw,1.5rem)] font-bold leading-[1.18] tracking-[-0.03em]">
+                        {qa.q}
+                      </span>
+                      {/* Two hairlines making a plus; the upright is dropped
+                          when the row is open. `aria-hidden` because `<summary>`
+                          already exposes its own expanded state natively. */}
+                      <span
+                        aria-hidden="true"
+                        className="relative mt-[.55em] block h-[2px] w-[15px] flex-none bg-resolve-dim
+                                   before:absolute before:left-[6.5px] before:top-[-6.5px] before:block before:h-[15px]
+                                   before:w-[2px] before:bg-resolve-dim before:transition-transform
+                                   before:duration-[180ms] before:ease-[cubic-bezier(0.65,0,0.35,1)]
+                                   before:content-[''] group-open:before:scale-y-0"
+                      />
+                    </summary>
+                    <div className="max-w-[62ch] pb-[clamp(20px,2.4vw,30px)] text-[1.02rem] leading-relaxed text-resolve-dim">
+                      {qa.a}
+                    </div>
+                  </details>
+                </li>
               ))}
-            </dl>
+            </ul>
           </CommercialSection>
         );
       })}
@@ -380,8 +424,7 @@ export default function FaqPage() {
         label="Ask the one that matters to you"
         heading={<>The awkward ones get the same answer either way.</>}
         body={<>Tell us what is actually happening and we will tell you where we think the problem sits.</>}
-        action="Tell us what you're trying to fix"
-      />
+        action="Tell us what you're trying to fix" mode="centred" />
     </>
   );
 }

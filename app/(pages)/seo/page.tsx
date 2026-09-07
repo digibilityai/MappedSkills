@@ -135,8 +135,7 @@ export default function SEOPage() {
         eyebrow="Organic search"
         title="SEO that is judged on the enquiries it produces."
         lede="We do the organic search work: technical foundations, site structure, indexation, internal linking, and content built for the searches that actually indicate someone wants to buy."
-        action="Tell us what you’re trying to fix"
-      >
+        action="Tell us what you’re trying to fix" mode="split">
         <p>
           Then we keep going &mdash; through the page they land on, the enquiry they send, and the measurement
           that tells you it happened. Search is how we reach demand that already exists. It is not the whole job.
@@ -267,8 +266,7 @@ export default function SEOPage() {
             does not turn into an enquiry. If you do not know, that is itself a finding and worth saying.
           </>
         }
-        action="Tell us what you’re trying to fix"
-      />
+        action="Tell us what you’re trying to fix" mode="split" />
     </>
   );
 }

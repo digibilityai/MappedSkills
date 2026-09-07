@@ -1,6 +1,6 @@
 import { createMetadata } from '@/lib/metadata';
 import { CommercialSection, ChapterLabel, Display, Body, Note, ProofLink } from '@/components/commercial/primitives';
-import { RouteHero, StatedList } from '@/components/routes/primitives';
+import { RouteHero, StateComparison } from '@/components/routes/primitives';
 import { CommercialClose } from '@/components/commercial/CommercialClose';
 
 /**
@@ -79,8 +79,7 @@ export default function AboutPage() {
             A small firm in Pune working on one thing: helping businesses capture the demand that already
             exists for what they sell and turn it into enquiries they can act on.
           </>
-        }
-      >
+        } mode="centred">
         <p>This page has an honest account of where the firm is today, and it is a short one.</p>
       </RouteHero>
 
@@ -202,11 +201,27 @@ export default function AboutPage() {
       */}
 
       {/* ------------------------------------------------------------- §7 */}
-      <CommercialSection tone="paper" mode="reverse">
+      <CommercialSection tone="paper" mode="wide">
         <ChapterLabel>Who we work with</ChapterLabel>
         <Display>And who we do not.</Display>
-        <StatedList items={FOR_WHOM} />
-        <StatedList items={NOT_FOR_WHOM} className="mt-[clamp(18px,2vw,26px)]" />
+        {/* PHASE J STAGE 3 — Prototype C, as approved at the design gate.
+            THE TWO ARRAYS ARE UNCHANGED — six sentences in, six sentences out.
+            The two column labels are the ones the approved prototype carried
+            ("Where this works" / "Where it does not"), and they are the ONLY
+            words this change adds to the page: six of them, both structural,
+            neither a claim.
+
+            An earlier draft reused the chapter label and the display line above
+            as the column labels, on the reasoning that it added no copy at all.
+            It rendered "WHO WE WORK WITH" twice within about eighty pixels,
+            which reads as a mistake rather than as a structure. Six structural
+            words is the better trade and it is the version already reviewed. */}
+        <StateComparison
+          aLabel="Where this works"
+          aItems={FOR_WHOM}
+          bLabel="Where it does not"
+          bItems={NOT_FOR_WHOM}
+        />
         <Note>
           We are based in Pune and work with businesses across India. No international or export claim is made
           here, because no evidence supporting one exists.
@@ -239,8 +254,7 @@ export default function AboutPage() {
             see.
           </>
         }
-        action="Tell us what you're trying to fix"
-      />
+        action="Tell us what you're trying to fix" mode="centred" />
     </>
   );
 }

@@ -71,8 +71,7 @@ export default async function WorkPage() {
             There are no published case studies here, because we do not have permission to publish client
             results.
           </>
-        }
-      />
+        } mode="offset" />
 
       {caseStudies.length > 0 ? (
         <CommercialSection tone="paper" mode="reverse">

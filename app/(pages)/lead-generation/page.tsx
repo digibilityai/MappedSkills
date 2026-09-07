@@ -127,8 +127,7 @@ export default function LeadGenerationPage() {
         eyebrow="Enquiry generation"
         title="Lead generation, where the unit is an enquiry you can actually act on."
         lede="This is what most businesses mean when they say they want more leads: enquiries from real businesses, with a real need, that are worth picking up the phone about."
-        action="Tell us what you’re trying to fix"
-      >
+        action="Tell us what you’re trying to fix" mode="split">
         <p>
           They are not something we buy in and forward to you. They come out of connected work &mdash; reaching
           the right buyers, making sure the enquiry can complete and arrive, and measuring where each one came
@@ -283,8 +282,7 @@ export default function LeadGenerationPage() {
             and it is where the work usually starts.
           </>
         }
-        action="Tell us what you’re trying to fix"
-      />
+        action="Tell us what you’re trying to fix" mode="split" />
     </>
   );
 }

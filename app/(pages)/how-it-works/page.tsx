@@ -150,8 +150,7 @@ export default function HowItWorksPage() {
             This page exists to be checked. It sets out how the work is done, what is measured at each point,
             what a measurement can and cannot support, and where the judgement calls are.
           </>
-        }
-      >
+        } mode="offset">
         <p>
           The section on what cannot be attributed is not a disclaimer at the bottom &mdash; it is a third of
           the reason this page is here.
@@ -407,8 +406,7 @@ export default function HowItWorksPage() {
             the same place.
           </>
         }
-        action="Tell us what you're trying to fix"
-      />
+        action="Tell us what you're trying to fix" mode="centred" />
     </>
   );
 }

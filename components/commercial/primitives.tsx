@@ -280,6 +280,64 @@ export function CommercialSection({
   );
 }
 
+/* ------------------------------------------------------- opener compositions --
+   PHASE J — STAGE 3. Shared composition classes for the two hero components
+   (`CommercialHero` and `routes/primitives.RouteHero`) and for
+   `CommercialClose`. They live here so the two openers cannot drift apart, and
+   so there is exactly one place where the WIDE breakpoint for an opener is
+   written down.
+
+   ---------------------------------------------------------------------------
+   WHY THESE MODES CARRY NO FIGURE, NO PREVIEW AND NO LATERAL SUPPORT.
+
+   **I2 / B27 — zero apparatus above the fold — is binding and has no width
+   exception** (`docs/16-ux/05_COMMERCIAL_PAGE_UX.md` I2, `03_PAGE_TYPE_ARCHITECTURE.md`
+   §"First screen", `32_WIREFRAME_MASTER_COMMERCIAL.md`). No figure, no proof
+   module, no evidence badge, no metric and no system preview may render in a
+   commercial first screen. Both hero components were deliberately built with
+   **no figure slot at all** so a route author could not violate that by
+   oversight, and Stage 3 does not add one.
+
+   These modes are therefore **pure typographic composition**: they move the
+   eyebrow, the H1, the lede and the action pair relative to one another. They
+   add nothing to the page and remove nothing from it.
+
+   §9 — NO EMPTY COLUMNS. Every two-column opener mode puts real content in both
+   columns by construction: `split` pairs (eyebrow + H1) against (lede +
+   action), and `offset` pairs the eyebrow rail against (H1 + lede + action).
+   Neither can render a column with nothing in it, because every hero has an
+   eyebrow and an H1 and every commercial hero has a lede.
+
+   RESPONSIVE. Every mode is a single column below 1081px, in DOM order. Narrow
+   and medium therefore render exactly what they rendered before Stage 3.
+   ========================================================================== */
+
+export type OpenerMode = 'editorial' | 'split' | 'offset' | 'centred';
+
+/** The grid that a two-column opener mode applies at WIDE. */
+export const OPENER_GRID: Record<OpenerMode, string> = {
+  editorial: '',
+  split: 'min-[1081px]:grid min-[1081px]:grid-cols-[minmax(0,26ch)_minmax(0,1fr)] min-[1081px]:gap-x-[clamp(36px,4.6vw,90px)] min-[1081px]:items-start',
+  offset: 'min-[1081px]:grid min-[1081px]:grid-cols-[minmax(0,18ch)_minmax(0,1fr)] min-[1081px]:gap-x-[clamp(32px,4.2vw,80px)] min-[1081px]:items-start',
+  centred: '',
+};
+
+/** Applied to the block that holds everything after the rail. */
+export const OPENER_MAIN: Record<OpenerMode, string> = {
+  editorial: '',
+  split: 'min-[1081px]:col-start-2 min-[1081px]:row-start-1',
+  offset: 'min-[1081px]:col-start-2 min-[1081px]:row-start-1',
+  centred: 'min-[1081px]:mx-auto min-[1081px]:max-w-[74ch] min-[1081px]:text-center',
+};
+
+/** Applied to the rail block (the eyebrow, and in `split` the H1 as well). */
+export const OPENER_RAIL: Record<OpenerMode, string> = {
+  editorial: '',
+  split: 'min-[1081px]:col-start-1 min-[1081px]:row-start-1',
+  offset: 'min-[1081px]:col-start-1 min-[1081px]:row-start-1',
+  centred: 'min-[1081px]:text-center',
+};
+
 /* ------------------------------------------------------------ chapter label --
    The `.lab` treatment: a small uppercase label that IS the section's real
    heading element, so heading-only navigation delivers the argument. The large

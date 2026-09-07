@@ -261,8 +261,7 @@ export default function TrafficButNoEnquiriesPage() {
             different failures you have &mdash; because they need different fixes, and three of the four are
             not solved by redesigning the page.
           </>
-        }
-      >
+        } mode="offset">
         <p>
           This page has the checks in it. You can run all of them yourself, today, without talking to anyone.
         </p>

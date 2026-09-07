@@ -118,8 +118,7 @@ export default function PricingPage() {
           </>
         }
         action="Get an actual number"
-        secondaryLabel="Book a time to talk"
-      />
+        secondaryLabel="Book a time to talk" mode="offset" />
 
       {/* ------------------------------------------------------------- §1 */}
       <CommercialSection tone="paper" mode="split">
@@ -257,8 +256,7 @@ export default function PricingPage() {
             time is usually faster than writing it out.
           </>
         }
-        action="Tell us what you're trying to fix"
-      />
+        action="Tell us what you're trying to fix" mode="centred" />
     </>
   );
 }

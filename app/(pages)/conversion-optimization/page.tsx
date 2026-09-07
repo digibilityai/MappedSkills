@@ -105,8 +105,7 @@ export default function ConversionOptimizationPage() {
         eyebrow="The enquiry path"
         title="Turning visits into enquiries — after finding out where they are actually being lost."
         lede="Yes, this is the work you came looking for: finding why visits are not becoming enquiries, and fixing it. The reason the page starts with diagnosis rather than a list of tactics is that in at least two of the four places demand gets lost, changing the page is the wrong intervention — and doing it anyway is how a quarter gets spent with nothing to show."
-        action="Tell us what you’re trying to fix"
-      >
+        action="Tell us what you’re trying to fix" mode="split">
         <p>
           It is not a separate service here. It is the second half of one outcome, and the number we answer for
           is enquiries you can act on, not a conversion rate.
@@ -240,8 +239,7 @@ export default function ConversionOptimizationPage() {
             starting point and the fastest thing to establish.
           </>
         }
-        action="Tell us what you’re trying to fix"
-      />
+        action="Tell us what you’re trying to fix" mode="split" />
     </>
   );
 }

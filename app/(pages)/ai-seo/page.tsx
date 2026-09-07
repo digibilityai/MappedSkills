@@ -148,8 +148,7 @@ export default function AiSeoPage() {
         eyebrow="AI search"
         title="AI search: why your business is not in the answer, and what actually moves it."
         lede="Yes, we work on whether a business shows up when someone asks an AI assistant for a supplier like you. It is a real question with a mostly unglamorous answer: those answers are assembled largely from sources that sit outside your website, and being readable by the systems is not the same as being chosen by them."
-        action="Tell us what you’re trying to fix"
-      >
+        action="Tell us what you’re trying to fix" mode="split">
         <p>We measure it per system, we publish the run counts, and we do not sell a score.</p>
       </CommercialHero>
 
@@ -326,8 +325,7 @@ export default function AiSeoPage() {
             say so.
           </>
         }
-        action="Tell us what you’re trying to fix"
-      />
+        action="Tell us what you’re trying to fix" mode="split" />
     </>
   );
 }

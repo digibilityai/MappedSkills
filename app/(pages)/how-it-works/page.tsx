@@ -159,7 +159,7 @@ export default function HowItWorksPage() {
       </RouteHero>
 
       {/* ------------------------------------------------------------- §1 */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="split">
         <ChapterLabel>Why these disciplines are one chain</ChapterLabel>
         <Display>Two observations sit underneath everything below.</Display>
         <Body>
@@ -200,7 +200,7 @@ export default function HowItWorksPage() {
       */}
 
       {/* ------------------------------------------------------------- §3 */}
-      <CommercialSection>
+      <CommercialSection mode="wide">
         <ChapterLabel>What we measure</ChapterLabel>
         <Display>Six points on one chain.</Display>
 
@@ -267,7 +267,7 @@ export default function HowItWorksPage() {
       {/* ------------------------------------------------------------- §5
           The highest-value section on the site, and the one Session 11 judged
           "most improved by being visual". */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>What we cannot tell you about where an enquiry came from</ChapterLabel>
         <Display>Attribution is useful, incomplete, and unevenly incomplete.</Display>
         <Body>
@@ -316,14 +316,14 @@ export default function HowItWorksPage() {
       </CommercialSection>
 
       {/* ------------------------------------------------------------- §6 */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="reverse">
         <ChapterLabel>Where a person decides, not a process</ChapterLabel>
         <Display>Five places, named rather than hidden behind process language.</Display>
         <StatedList items={JUDGEMENT} />
       </CommercialSection>
 
       {/* ------------------------------------------------------------- §7 */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>Where the other capabilities sit in this</ChapterLabel>
         <Display>Three subordinate roles, stated at their real size.</Display>
         <div className="mt-[clamp(20px,2.4vw,32px)] max-w-[62ch] text-[1.02rem] leading-relaxed [&>p+p]:mt-4">
@@ -348,7 +348,7 @@ export default function HowItWorksPage() {
       </CommercialSection>
 
       {/* ------------------------------------------------------------- §8 */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="reverse">
         <ChapterLabel>What we need from you</ChapterLabel>
         <Display>Four requirements, not four requests.</Display>
         <Body>The work does not function without them, which is why they are stated this way.</Body>
@@ -369,7 +369,7 @@ export default function HowItWorksPage() {
       */}
 
       {/* ------------------------------------------------------------ §10 */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>What we do not know</ChapterLabel>
         <Display>Visible, rather than a footnote.</Display>
         <div className="mt-[clamp(20px,2.4vw,32px)] max-w-[62ch] text-[1.02rem] leading-relaxed [&>p+p]:mt-4">

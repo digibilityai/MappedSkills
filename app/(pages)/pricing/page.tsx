@@ -122,7 +122,7 @@ export default function PricingPage() {
       />
 
       {/* ------------------------------------------------------------- §1 */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="split">
         <ChapterLabel>What you are buying</ChapterLabel>
         <Display>One piece of work with an outcome attached.</Display>
         <Body>
@@ -143,7 +143,7 @@ export default function PricingPage() {
       </CommercialSection>
 
       {/* ------------------------------------------------------------- §2 */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>How long before anything changes</ChapterLabel>
         <Display>Organic search is a 12-month-plus engine.</Display>
         <Body>
@@ -172,7 +172,7 @@ export default function PricingPage() {
       */}
 
       {/* ------------------------------------------------------------- §4 */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="wide">
         <ChapterLabel>What moves the number</ChapterLabel>
         <Display>This is the part a quote will not tell you.</Display>
         <Body>
@@ -190,7 +190,7 @@ export default function PricingPage() {
       </CommercialSection>
 
       {/* ------------------------------------------------------------- §5 */}
-      <CommercialSection>
+      <CommercialSection mode="statement">
         <ChapterLabel>What this needs from you</ChapterLabel>
         <Display>Four things, and the work stops without them.</Display>
         <Body>
@@ -201,7 +201,7 @@ export default function PricingPage() {
       </CommercialSection>
 
       {/* ------------------------------------------------------------- §6 */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="reverse">
         <ChapterLabel>Who this is not for</ChapterLabel>
         <Display>Five reasons to not buy this.</Display>
         <StatedList items={NOT_FOR} />
@@ -217,7 +217,7 @@ export default function PricingPage() {
           smaller entry engagement exists, and what it costs, is undecided and
           MUST NOT BE IMPLIED. That sentence renders nothing. The objection is
           answered in full without it. */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>A premium price with no case studies</ChapterLabel>
         <Display>It is a fair objection and the one we get most.</Display>
         <div className="mt-[clamp(20px,2.4vw,32px)] max-w-[62ch] text-[1.02rem] leading-relaxed [&>p+p]:mt-4">

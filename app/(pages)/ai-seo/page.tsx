@@ -154,7 +154,7 @@ export default function AiSeoPage() {
       </CommercialHero>
 
       {/* ---- MOVE 3 — the buyer's problem, and the misinformation named ---- */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>The situation this is usually bought to fix</ChapterLabel>
         <Body className="mt-[18px]">
           Someone typed the company name into ChatGPT and found nothing useful. Or asked it to recommend a
@@ -177,7 +177,7 @@ export default function AiSeoPage() {
       </CommercialSection>
 
       {/* ---- MOVE 4 — what the work involves, at full weight --------------- */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="wide">
         <ChapterLabel>What the work involves</ChapterLabel>
         <ScopeList items={WORK} />
         <CrawlerTable />
@@ -186,7 +186,7 @@ export default function AiSeoPage() {
       {/* ---- MOVE 7 — EVIDENCE, AS A NAMED SECTION, BEFORE THE BOUNDARY ----
              Ruling A: 05 §4.2 controls this order. The figure is early because
              the ARGUMENT needs it; the credibility effect is a by-product. */}
-      <CommercialSection>
+      <CommercialSection mode="wide">
         <ChapterLabel>We measured ourselves first, and published the result</ChapterLabel>
         <Display className="max-w-[18ch]">
           Across 28 unbranded runs,{' '}
@@ -273,7 +273,7 @@ export default function AiSeoPage() {
       </CommercialSection>
 
       {/* ---- MOVE 6 — measurement, with its limits adjacent and open ------- */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>What we measure, and what we report</ChapterLabel>
         <Body className="mt-[18px]">
           A set of prompts a real buyer would use, run repeatedly, per system, on a stated date, from a stated
@@ -299,7 +299,7 @@ export default function AiSeoPage() {
       {/* ---- MOVE 8 — objections, as a named section ------------------------
              One of the approved objections renders nothing — see the file
              header. Nothing stands in its place. */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="reverse">
         <ChapterLabel>The questions we get asked here</ChapterLabel>
         <QuestionList items={QUESTIONS} />
         <p className="mt-6 text-[.94rem] text-resolve-dim">

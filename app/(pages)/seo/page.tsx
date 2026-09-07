@@ -144,7 +144,7 @@ export default function SEOPage() {
       </CommercialHero>
 
       {/* ---- MOVE 3 — the buyer's actual problem --------------------------- */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>The situation this is usually bought to fix</ChapterLabel>
         <Display className="max-w-[22ch]">
           Being found is only useful if the visit turns into{' '}
@@ -165,7 +165,7 @@ export default function SEOPage() {
       </CommercialSection>
 
       {/* ---- MOVE 4 — what the work involves ------------------------------- */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="wide">
         <ChapterLabel>What the work involves, month to month</ChapterLabel>
         <ScopeList items={WORK} />
       </CommercialSection>
@@ -208,7 +208,7 @@ export default function SEOPage() {
 
       {/* ---- MOVE 6 — measurement, with F1 PARTIAL, limits adjacent and open,
              and MOVE 7's evidence compressed beside the claim it supports ---- */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="wide">
         <ChapterLabel>How you will know whether it worked</ChapterLabel>
         <Body className="mt-[18px]">
           Before the work starts, we capture a starting point: what is arriving now, from where, and what happens
@@ -244,7 +244,7 @@ export default function SEOPage() {
       </CommercialSection>
 
       {/* ---- MOVE 8 — objections, a compact section ------------------------ */}
-      <CommercialSection>
+      <CommercialSection mode="reverse">
         <ChapterLabel>The three questions we get asked here</ChapterLabel>
         <QuestionList items={QUESTIONS} />
         <ProofLink href="/problems/traffic-but-no-enquiries">Which of the four it is, and how to check</ProofLink>

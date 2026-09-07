@@ -83,7 +83,7 @@ export default async function BlogPage() {
       </RouteHero>
 
       {posts.length > 0 ? (
-        <CommercialSection tone="paper">
+        <CommercialSection tone="paper" mode="reverse">
           <ChapterLabel>Articles</ChapterLabel>
           <EntryList
             entries={posts.map((post) => ({
@@ -95,7 +95,7 @@ export default async function BlogPage() {
           />
         </CommercialSection>
       ) : (
-        <CommercialSection tone="paper">
+        <CommercialSection tone="paper" mode="split">
           <ChapterLabel>What will be here</ChapterLabel>
           <Display>Two subjects, and no archive.</Display>
           <Body>

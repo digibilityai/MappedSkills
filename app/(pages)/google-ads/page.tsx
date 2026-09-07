@@ -128,7 +128,7 @@ export default function GoogleAdsPage() {
         </p>
       </CommercialHero>
 
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>Where paid search sits in the work</ChapterLabel>
         <Body className="mt-[18px]">
           Paid search is one of several ways we reach buyers, and it earns its place for a particular business or
@@ -182,13 +182,13 @@ export default function GoogleAdsPage() {
       </CommercialSection>
 
       {/* ---- MOVE 4 — what is in scope ------------------------------------- */}
-      <CommercialSection>
+      <CommercialSection mode="wide">
         <ChapterLabel>What is in scope</ChapterLabel>
         <ScopeList items={SCOPE} />
       </CommercialSection>
 
       {/* ---- MOVE 6 — measurement, with its limit adjacent and open -------- */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="split">
         <ChapterLabel>What you will actually see</ChapterLabel>
         <Display className="max-w-[24ch]">
           Qualified enquiries, separated from{' '}

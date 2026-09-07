@@ -76,7 +76,7 @@ correctly reading-first.)*
 | Routes with **zero** interactive sections | **16 of 18 (89%)** |
 | Routes with **zero** visual *and* **zero** interactive sections | **8** — `/google-ads`, `/social-media-ads`, `/about`, `/faq`, `/schedule-call`, `/thank-you`, `/work`, `/blog` |
 | Mean longest text-only run | **4.2 sections** |
-| Routes breaching the §31 rhythm rule (run > 2) | **12 of 18 (67%)** |
+| Routes breaching the §31 rhythm rule (run > 2) | **14 of 18 (78%)** *(⚠ originally published as 12; recounted from this table's own per-route figures — corrected 2026-09-07, see `08_STAGE1_2_MEASURED_RESULTS.md` §1)* |
 
 ### The left-edge measurement
 
@@ -130,7 +130,7 @@ shared components, not by twenty bespoke pages.**
 | Shared shape | Routes it renders on | Sections it produces |
 |---|:--:|:--:|
 | `CommercialSection` + `ChapterLabel` + `Display` + `Body` | **18** | ~104 |
-| `ScopeList` ("what the work involves") | **6** — `/seo`, `/ai-seo`, `/google-ads`, `/social-media-ads`, `/lead-generation`, `/conversion-optimization` | 6 |
+| `ScopeList` ("what the work involves") | **6** — `/seo`, `/ai-seo`, `/google-ads`, `/services`, `/lead-generation`, `/conversion-optimization` | 6 |
 | `BoundaryBlock` | 8 | 8 |
 | `CommercialClose` | 11 | 11 |
 | `CommercialHero` | 7 | 7 |
@@ -150,3 +150,12 @@ shared components, not by twenty bespoke pages.**
 - No comparison to any competitor site was made.
 - No reader-comprehension study was run. Every comprehension statement in these documents is
   reasoning about structure, labelled as such — never a measured result.
+
+
+---
+
+> **⚠ CORRECTION, 2026-09-07.** Where this document lists the six routes that render
+> `ScopeList`, `/social-media-ads` was named in error — it contains no `ScopeList`. The sixth
+> route is **`/services`**. Verified against source during Stage 2; see
+> `07_STAGE2_SCOPELIST.md` §1. The count of six was correct, and the owner's `/social-media-ads`
+> ruling (keep **D — NONE**) is unaffected — nothing was added to that route.

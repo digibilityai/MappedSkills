@@ -138,7 +138,7 @@ export default function LeadGenerationPage() {
       </CommercialHero>
 
       {/* ---- MOVE 3 — the buyer's actual problem --------------------------- */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>The situation this is usually bought to fix</ChapterLabel>
         <Display className="max-w-[22ch]">
           Two versions, and{' '}
@@ -161,7 +161,7 @@ export default function LeadGenerationPage() {
 
       {/* ---- MOVE 6 — THE DEFINITION. This is the page, and it comes BEFORE
              the boundary. F1 STATE sits here, at the chain's terminus. -------- */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="wide">
         <ChapterLabel>What counts as a qualified enquiry here</ChapterLabel>
         <Display className="max-w-[22ch]">
           Checked automatically{' '}
@@ -249,7 +249,7 @@ export default function LeadGenerationPage() {
       </CommercialSection>
 
       {/* ---- MOVE 8 — objections -------------------------------------------- */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="reverse">
         <ChapterLabel>The questions this page gets asked</ChapterLabel>
         <QuestionList items={QUESTIONS} />
         <Note>

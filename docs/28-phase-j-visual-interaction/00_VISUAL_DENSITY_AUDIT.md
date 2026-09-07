@@ -96,7 +96,7 @@ would attack the wrong thing.
 ### 4.1 The site has one left edge — this is the single largest finding
 
 **110 of 112 commercial sections (98.2%) begin at exactly the same left x-coordinate.**
-At 1425 px that coordinate is `56 px`; at 390 px it is `16 px`. The two exceptions are one
+At 1425 px that coordinate is **`40 px`** *(⚠ this line originally read "56 px" — corrected 2026-09-07; see `06_STAGE1_COMPOSITION.md` §1. The count and the percentage were always right)*; at 390 px it is `16 px`. The two exceptions are one
 `/problems/…` section at 56 px→ and one homepage departure block.
 
 This is not a subjective impression. It is a direct consequence of every route composing through

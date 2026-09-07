@@ -75,7 +75,7 @@ export default async function WorkPage() {
       />
 
       {caseStudies.length > 0 ? (
-        <CommercialSection tone="paper">
+        <CommercialSection tone="paper" mode="reverse">
           <ChapterLabel>Published</ChapterLabel>
           <Display>Work published with the client&rsquo;s permission.</Display>
           <EntryList
@@ -88,7 +88,7 @@ export default async function WorkPage() {
           />
         </CommercialSection>
       ) : (
-        <CommercialSection tone="paper">
+        <CommercialSection tone="paper" mode="split">
           <ChapterLabel>Where this stands today</ChapterLabel>
           <Display>Permission, not results, is what is missing.</Display>
           <Body>
@@ -110,7 +110,7 @@ export default async function WorkPage() {
           `PAGE_COPY_INDEX.md` §1 rows 13 and 14 record both as NOT DRAFTED, and
           one of them is additionally blocked on a technical prerequisite. No
           link renders to a route that does not exist. */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>What can be checked instead</ChapterLabel>
         <Display>Three things, and one of them found our own failures.</Display>
         <div className="mt-[clamp(24px,3vw,40px)] border-t-2 border-resolve-ink">

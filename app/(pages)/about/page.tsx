@@ -87,7 +87,7 @@ export default function AboutPage() {
       {/* ------------------------------------------------------------- §1
           NOT A FOUNDING MYTH. No origin story, no "we saw a gap in the market",
           no invented frustration narrative — the approved copy names all three. */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="split">
         <ChapterLabel>Why we work this way</ChapterLabel>
         <Display>The enquiry sits at the end of everybody else&rsquo;s report.</Display>
         <Body>
@@ -104,7 +104,7 @@ export default function AboutPage() {
       </CommercialSection>
 
       {/* ------------------------------------------------------------- §2 */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>What we hold ourselves to</ChapterLabel>
         <Display>Accountable up to the qualified enquiry.</Display>
         <Body>
@@ -120,7 +120,7 @@ export default function AboutPage() {
       </CommercialSection>
 
       {/* ------------------------------------------------------------- §3 */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="statement">
         <ChapterLabel>How we work</ChapterLabel>
         <Display>Short, because it is written out properly elsewhere.</Display>
         <Body>
@@ -154,7 +154,7 @@ export default function AboutPage() {
           verified, so it still renders — with its full scope attached, which is
           what makes it checkable in the only sense that matters here: somebody
           else can run it again from what is stated. */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>What you can check</ChapterLabel>
         <Display>Three things, and one of them does not flatter us.</Display>
 
@@ -202,7 +202,7 @@ export default function AboutPage() {
       */}
 
       {/* ------------------------------------------------------------- §7 */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="reverse">
         <ChapterLabel>Who we work with</ChapterLabel>
         <Display>And who we do not.</Display>
         <StatedList items={FOR_WHOM} />
@@ -215,7 +215,7 @@ export default function AboutPage() {
 
       {/* ------------------------------------------------------------- §8
           The distinctive move: the page says where the firm actually is. */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>Where we are today</ChapterLabel>
         <Display>We are building the evidence base in public, and it is thin.</Display>
         <Body>

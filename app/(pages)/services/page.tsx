@@ -174,7 +174,7 @@ export default function ServicesPage() {
         <p>Here they are connected, the joins between them are ours, and the enquiry at the end is what we answer for.</p>
       </CommercialHero>
 
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>What the whole system is for</ChapterLabel>
         <Display>
           The unit is a{' '}
@@ -194,7 +194,7 @@ export default function ServicesPage() {
       </CommercialSection>
 
       {/* ---- BLOCK 2 — three connected parts, the joins as the subject ---- */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="wide">
         <ChapterLabel>Three parts, and the joins between them</ChapterLabel>
         <Display className="max-w-[20ch]">
           They are different skills.{' '}
@@ -258,7 +258,7 @@ export default function ServicesPage() {
       </CommercialSection>
 
       {/* ---- BLOCK 4 — where each capability enters the chain -------------- */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="statement">
         <ChapterLabel>Where each discipline comes in</ChapterLabel>
         <Body className="mt-[18px]">Named by what each contributes, in the order the chain runs.</Body>
         <RoutingGroup title="Capture" items={CAPTURE} />
@@ -267,7 +267,7 @@ export default function ServicesPage() {
       </CommercialSection>
 
       {/* ---- BLOCK 5 — selective expansion, and BLOCK 6 — what we do not do */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>What can be added later</ChapterLabel>
         <Body className="mt-[18px]">
           When the enquiries are arriving and the constraint moves downstream, there is a limited amount we will
@@ -294,7 +294,7 @@ export default function ServicesPage() {
       </CommercialSection>
 
       {/* ---- BLOCK 7 — scope honesty on testing ---------------------------- */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="split">
         <ChapterLabel>What we can and cannot test</ChapterLabel>
         <Display className="max-w-[22ch]">
           Below a real threshold of traffic and enquiries, a test cannot reach significance.
@@ -311,7 +311,7 @@ export default function ServicesPage() {
       </CommercialSection>
 
       {/* ---- BLOCK 8 — fit -------------------------------------------------- */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>Who this is for</ChapterLabel>
         <div className="mt-[clamp(24px,3vw,44px)] grid grid-cols-1 gap-[clamp(26px,3.4vw,60px)] min-[900px]:grid-cols-2">
           <div className="border-t-2 border-resolve-ink pt-5">

@@ -269,7 +269,7 @@ export default function TrafficButNoEnquiriesPage() {
       </RouteHero>
 
       {/* ---------------------------------------------------------- move 1 */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="split">
         <ChapterLabel>What this looks like</ChapterLabel>
         <Display>Five ways the same problem shows up.</Display>
         <Body>
@@ -283,7 +283,7 @@ export default function TrafficButNoEnquiriesPage() {
       {/* ---------------------------------------------------------- move 2
           The page's distinctive move, and the one place a figure genuinely
           replaces the prose rather than illustrating it. */}
-      <CommercialSection>
+      <CommercialSection mode="wide">
         <ChapterLabel>It is one of four things, and they are not interchangeable</ChapterLabel>
         <Display>The usual response is to change the website.</Display>
         <Body>
@@ -335,7 +335,7 @@ export default function TrafficButNoEnquiriesPage() {
 
       {/* ---------------------------------------------------------- move 5
           The instrument. NO CTA and NO prompt of any kind inside this section. */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="wide">
         <ChapterLabel>Five checks you can run today</ChapterLabel>
         <Display>No tool, no sign-up, no download, no email.</Display>
         <Note>
@@ -347,7 +347,7 @@ export default function TrafficButNoEnquiriesPage() {
       </CommercialSection>
 
       {/* ---------------------------------------------------------- move 6 */}
-      <CommercialSection>
+      <CommercialSection mode="reverse">
         <ChapterLabel>What each finding means, and what to do about it</ChapterLabel>
         <Display>Two of these point away from us.</Display>
         <Body>
@@ -364,7 +364,7 @@ export default function TrafficButNoEnquiriesPage() {
           a technical prerequisite (the fixes shipping so the entry can
           publish). The finding stands either way and the paragraph closes up
           around the absent link — no placeholder, no "coming soon". */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="split">
         <ChapterLabel>What we found when we ran this on ourselves</ChapterLabel>
         <Display>Four of the five checks failed.</Display>
         <Body>

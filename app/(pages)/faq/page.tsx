@@ -340,7 +340,7 @@ export default function FaqPage() {
         const items = QAS.filter((qa) => qa.group === group);
         if (items.length === 0) return null;
         return (
-          <CommercialSection key={group} tone={gi % 2 === 0 ? 'paper' : 'ground'}>
+          <CommercialSection key={group} tone={gi % 2 === 0 ? 'paper' : 'ground'} mode="split">
             <ChapterLabel>{group}</ChapterLabel>
             <dl className="m-0 mt-[clamp(24px,3vw,40px)] border-t-2 border-resolve-ink p-0">
               {items.map((qa) => (
@@ -359,7 +359,7 @@ export default function FaqPage() {
       })}
 
       {/* The action section. LOW-COMMITMENT routes first, then the PRIMARY. */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>Something not answered here</ChapterLabel>
         <Display>Then it is worth asking directly.</Display>
         <Body>

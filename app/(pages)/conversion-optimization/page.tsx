@@ -116,7 +116,7 @@ export default function ConversionOptimizationPage() {
       {/* ---- MOVE 2 — ROUTES DOWN, PROMINENTLY -----------------------------
              The honest destination for most of this page's traffic, and it is
              given genuine prominence rather than demoted to a footnote. */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>What this work is usually brought in to do</ChapterLabel>
         <Body className="mt-[18px]">
           A site receives visits and produces few enquiries, and somebody has been asked to improve the
@@ -147,7 +147,7 @@ export default function ConversionOptimizationPage() {
       </CommercialSection>
 
       {/* ---- MOVE 3 — THE FIGURE, AS THE SECOND MOVE ------------------------ */}
-      <CommercialSection tone="paper">
+      <CommercialSection tone="paper" mode="wide">
         <ChapterLabel>The four places demand gets lost</ChapterLabel>
         <Display className="max-w-[24ch]">
           Two of the four are{' '}
@@ -157,7 +157,7 @@ export default function ConversionOptimizationPage() {
       </CommercialSection>
 
       {/* ---- MOVE 4 — the work, compressed --------------------------------- */}
-      <CommercialSection>
+      <CommercialSection mode="wide">
         <ChapterLabel>What the work involves</ChapterLabel>
         <ScopeList items={WORK} />
       </CommercialSection>
@@ -202,7 +202,7 @@ export default function ConversionOptimizationPage() {
       {/* ---- MOVE 7 — evidence, beside the claim it supports ----------------
              The own-diagnostic link is blocked on a technical prerequisite and
              renders nothing. The finding stands without it. */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>We ran this on ourselves first</ChapterLabel>
         <Display className="max-w-[24ch]">
           Our own contact form transmitted nothing, while{' '}

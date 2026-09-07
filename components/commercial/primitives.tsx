@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from 'react';
+import { Children, isValidElement, type CSSProperties, type ReactNode } from 'react';
 import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
 import { cn } from '@/lib/utils';
@@ -118,31 +118,164 @@ export function Breadcrumb({ label, path }: { label: string; path: string }) {
 
 /* ----------------------------------------------------------------- section --
    Rhythm, not decoration. `tone` never changes meaning; it separates a chapter
-   from its neighbour where the argument turns. */
+   from its neighbour where the argument turns.
+
+   ---------------------------------------------------------------------------
+   PHASE J — STAGE 1 — J9 COMPOSITION MODES.
+
+   THE MEASURED PROBLEM (docs/28-phase-j-visual-interaction/01_QUANTITATIVE_BASELINE.md):
+   **110 of 112 commercial sections — 98.2% — began at exactly the same left
+   x-coordinate**, because every route composes through this one component and
+   this component had exactly one composition. The site read as a single column
+   no matter how well any individual section was written.
+
+   WHAT A MODE MAY AND MAY NOT DO. A mode changes grid, width, placement and
+   white space. It NEVER changes copy, DOM order, heading level or the reading
+   measure. `editorial` is the default and its output is unchanged, so every
+   call site that does not opt in renders exactly what it rendered before —
+   which is what keeps /contact, /thank-you, /schedule-call and 404 untouched.
+
+   HOW A MODE IS APPLIED — one token per call site. The children are partitioned
+   HERE, by component identity, into the chapter label and everything else. A
+   page therefore opts in by writing `mode="split"` and nothing else: no JSX is
+   restructured, no wrapper is introduced at the call site, and there is no
+   fragile CSS child-position selector that a later edit could silently break.
+
+   §9 — NO EMPTY COLUMNS, GUARANTEED STRUCTURALLY. A two-column mode needs a
+   ChapterLabel to fill its rail. If a section has none, the mode DEGRADES TO
+   `editorial` rather than rendering a column with nothing in it. A split with
+   an empty side is not an improvement, and this component cannot produce one.
+
+   RESPONSIVE. Every two-column mode is single-column below 1081 (WIDE). Narrow
+   and medium keep today's vertical reading flow exactly, in DOM order, so the
+   validated mobile composition is not disturbed to solve a desktop problem.
+
+   THE HOMEPAGE IS STRUCTURALLY OUT OF REACH: app/page.tsx and components/homepage/*
+   import neither this module nor anything in it. Verified by grep, not assumed.
+   ========================================================================== */
+
+export type SectionMode =
+  /** today's single reading column — the default, and unchanged */
+  | 'editorial'
+  /** chapter label in a left rail, the reading in the wide column beside it */
+  | 'split'
+  /** the reading leads and the chapter label annotates from the right margin */
+  | 'reverse'
+  /** one narrow centred column — for a chapter that is a single statement */
+  | 'statement'
+  /** label above, content released from the reading measure — figures, systems */
+  | 'wide';
+
 export function CommercialSection({
   id,
   children,
   tone = 'ground',
   rule = true,
+  mode = 'editorial',
   className,
 }: {
   id?: string;
   children: ReactNode;
   tone?: 'ground' | 'paper';
   rule?: boolean;
+  mode?: SectionMode;
   className?: string;
 }) {
+  const shell = cn(
+    'py-[clamp(46px,6vw,104px)] text-resolve-ink',
+    tone === 'paper' ? 'bg-resolve-paper' : 'bg-resolve-ground',
+    rule && 'border-t border-resolve-line',
+    className
+  );
+  const wrap = 'max-w-[1400px] px-[var(--resolve-pad)]';
+
+  /* Partition by component identity. `k.type === ChapterLabel` is a reference
+     comparison against the very function exported below, so it cannot match a
+     look-alike and cannot drift when a class name changes. A label nested
+     inside a wrapper element is not a direct child and is correctly NOT
+     matched — the section then degrades to `editorial`, which is safe. */
+  const kids = Children.toArray(children);
+  const railKids = kids.filter((k) => isValidElement(k) && k.type === ChapterLabel);
+  const mainKids = kids.filter((k) => !(isValidElement(k) && k.type === ChapterLabel));
+
+  const twoColumn = mode === 'split' || mode === 'reverse';
+  const effective: SectionMode = twoColumn && railKids.length === 0 ? 'editorial' : mode;
+
+  if (effective === 'editorial') {
+    return (
+      <section id={id} className={shell}>
+        <Container className={wrap}>{children}</Container>
+      </section>
+    );
+  }
+
+  if (effective === 'statement') {
+    /* A centred reading column. The measure is NOT widened — the column is
+       moved, not stretched — so line length stays inside the validated range. */
+    return (
+      <section id={id} className={shell}>
+        <Container className={wrap}>
+          <div className="mx-auto max-w-[68ch] min-[1081px]:text-center [&_p]:mx-auto">{children}</div>
+        </Container>
+      </section>
+    );
+  }
+
+  if (effective === 'wide') {
+    /* The label keeps the reading measure; the content below it is released
+       from it, so a figure or a system can use the full 1400 without the
+       running text ever being set at a width nobody can read. */
+    return (
+      <section id={id} className={shell}>
+        <Container className={wrap}>
+          {railKids}
+          {/* The wrapper supplies the gap after the label, so the first child's
+              own top margin is zeroed — otherwise Display's `mt-[18px]` and this
+              margin both apply and the chapter opens with a double gap. */}
+          <div className="mt-[clamp(20px,2.4vw,34px)] [&>*:first-child]:mt-0">{mainKids}</div>
+        </Container>
+      </section>
+    );
+  }
+
+  /* split / reverse. DOM ORDER IS ALWAYS LABEL-FIRST in both, so the heading
+     precedes the content it heads for a screen reader and for a reader with no
+     CSS. `reverse` moves the label to the right rail by explicit grid column
+     placement rather than by reordering the markup. */
+  const grid =
+    effective === 'split'
+      ? 'min-[1081px]:grid-cols-[minmax(0,20ch)_minmax(0,1fr)]'
+      : 'min-[1081px]:grid-cols-[minmax(0,1fr)_minmax(0,20ch)]';
+
   return (
-    <section
-      id={id}
-      className={cn(
-        'py-[clamp(46px,6vw,104px)] text-resolve-ink',
-        tone === 'paper' ? 'bg-resolve-paper' : 'bg-resolve-ground',
-        rule && 'border-t border-resolve-line',
-        className
-      )}
-    >
-      <Container className="max-w-[1400px] px-[var(--resolve-pad)]">{children}</Container>
+    <section id={id} className={shell}>
+      <Container className={wrap}>
+        <div className={cn('min-[1081px]:grid min-[1081px]:gap-x-[clamp(32px,4.4vw,84px)]', grid)}>
+          <div
+            className={cn(
+              'min-[1081px]:row-start-1',
+              effective === 'split' ? 'min-[1081px]:col-start-1' : 'min-[1081px]:col-start-2'
+            )}
+          >
+            {railKids}
+          </div>
+          <div
+            className={cn(
+              'min-[1081px]:row-start-1',
+              effective === 'split' ? 'min-[1081px]:col-start-2' : 'min-[1081px]:col-start-1',
+              /* The reading column's own wrapper carries the gap after the
+                 label in the stacked layout; at WIDE the two columns are
+                 aligned at the top and need none. The first child's own top
+                 margin is zeroed at EVERY width — applying the reset only at
+                 WIDE left the stacked layout with Display's `mt-[18px]` on top
+                 of this wrapper's margin, i.e. a double gap on mobile. */
+              'max-[1080px]:mt-[18px] [&>*:first-child]:mt-0'
+            )}
+          >
+            {mainKids}
+          </div>
+        </div>
+      </Container>
     </section>
   );
 }

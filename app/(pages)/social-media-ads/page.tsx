@@ -65,7 +65,7 @@ export default function SocialMediaAdsPage() {
       </CommercialHero>
 
       {/* ---- MOVE 4 — scope, minimal --------------------------------------- */}
-      <CommercialSection>
+      <CommercialSection mode="split">
         <ChapterLabel>What is in scope</ChapterLabel>
         <Body className="mt-[18px]">
           Audience definition, creative and message testing within the volume available, campaign structure,

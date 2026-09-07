@@ -51,8 +51,13 @@
 >
 > **Current production-translation state, as of Phase J closure (2026-09-07):**
 >
-> **PHASE J — SITE-WIDE VISUAL REDESIGN — PASSED.** Formally accepted after the release-readiness
-> audit: **"PHASE J PASSED — SITE-WIDE VISUAL REDESIGN ACCEPTED."** Recorded as `DEC-022`.
+> **PHASE J — SITE-WIDE VISUAL REDESIGN — PASSED, AND LIVE IN PRODUCTION.**
+> Formally accepted after the release-readiness audit — **"PHASE J PASSED — SITE-WIDE VISUAL
+> REDESIGN ACCEPTED"** (`DEC-022`) — then **deployed to production on 2026-09-07 and accepted live**
+> (`DEC-023`).
+>
+> **THE RESOLVE IS ACTIVE IN PRODUCTION. PRODUCTION `BUILD_ID` IS `wARHOSqcsryOWtyx73wCC`**, built
+> off-host from source `d88b725`, replacing `uECyJCAevQKC9-wGdaodE`.
 >
 > - **The active design language is THE RESOLVE** (`DEC-018`), unchanged. Phase J composed **within**
 >   it and reopened neither the direction nor the Gate 10 record.
@@ -67,11 +72,40 @@
 > - **The homepage remains protected and accepted** as the Gate 10 baseline (`DEC-019`).
 >   `app/page.tsx`, `components/homepage/` and `components/layout/` **are not in the Phase J diff at
 >   all**, and no Phase J stage modified them.
-> - **PHASE J IS NOT PUSHED AND NOT DEPLOYED.** The accepted work exists only as local commits on
->   `test_branch`. Push and deployment remain an owner decision and have not been taken.
+> - **PHASE J IS PUSHED AND DEPLOYED.** `test_branch` is at `d88b725` and pushed to
+>   `origin/test_branch` (ahead 0 / behind 0). Production was deployed **2026-09-07** by the accepted
+>   **manual off-host artifact method** — off-host build → checksum-verified artifact → staged
+>   release directory → **controlled two-rename release-directory swap** → CloudLinux restart → live
+>   verification. **No GitHub Actions run, no push or merge to `main`, no build on the production
+>   host, no `npm install` on the host.**
+> - **Verified live at deployment:** local and server artifact SHA-256 identical · staged-release
+>   verification passed · release swap and restart passed · **12/12 production routes 200** ·
+>   **every static asset referenced by the homepage returned 200, zero hashed-CSS 400s** · the
+>   previous release's page CSS now 404s, proving the new release is serving · responsive checks at
+>   **390 · 860 · 1425** with zero horizontal overflow · the Phase J components and interactions
+>   confirmed live (`StageSystem` on `/how-it-works`, `StateComparison` on `/about`, one-at-a-time
+>   `ScopeList` disclosure on `/seo` and `/google-ads`, native `/faq` disclosure with 11 summaries
+>   matching 11 `FAQPage` questions) · `/contact`, `/schedule-call` and `/thank-you` intact ·
+>   **no production enquiry was created for testing** · zero browser console errors and no server
+>   exception or restart loop.
+> - **Consent and measurement unchanged and verified live:** pre-consent, all four Consent Mode v2
+>   signals `denied` with zero third-party requests and zero cookies; after accepting analytics,
+>   **`GTM-K8ZQPMXP` loads and GA4 `G-6H7WFH2BHQ` is active, contacting Google only** — **Meta, X,
+>   LinkedIn and Google Ads remain off**, with no `_fbp` and no `_gcl_*` cookie. **No GTM or GA4
+>   configuration was changed.**
+> - **Nothing else changed:** no database change, no migration, no environment-variable change, no
+>   dependency change, no `server.cjs`/`app.js` change, no analytics-semantic change.
+> - **Rollback preserved and not cleaned up:**
+>   `/home/mappeds1/mappedskills.com.prev-20260907-052958` (the `uECyJCAevQKC9-wGdaodE` release),
+>   plus the earlier `mappedskills.com.prev-h2-20260906-141122`. **Application-file rollback only —
+>   no database rollback is involved, because no migration was run.**
+>
+> **STILL OPEN, AND SEPARATE FROM THIS DEPLOYMENT:** the Phase H2 administrative item —
+> **`lead_form_submitted` has not been confirmed as a GA4 Key Event.** **The H2 measurement
+> programme is NOT closed** and must not be recorded as closed until the owner confirms it.
 >
 > Full record: `docs/28-phase-j-visual-interaction/` (`00`–`15`), closing with
-> `14_STAGE5_CLOSURE.md` and `15_PHASE_J_FINAL_AUDIT.md`.
+> `14_STAGE5_CLOSURE.md` and `15_PHASE_J_FINAL_AUDIT.md`; deployment recorded as `DEC-023`.
 >
 > **Prior production-translation state, as of Session 33 — Phase I (2026-09-06):**
 >

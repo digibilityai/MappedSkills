@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { createMetadata } from '@/lib/metadata';
 import { CommercialSection, ChapterLabel, Display, Body, Note, ProofLink, ActionPair } from '@/components/commercial/primitives';
-import { RouteBreadcrumb, RouteHero, FindingList, StatedList } from '@/components/routes/primitives';
+import { RouteBreadcrumb, RouteHero, FindingList } from '@/components/routes/primitives';
 import { CauseZones } from '@/components/routes/CauseZones';
 import { CheckSequence } from '@/components/routes/CheckSequence';
 
@@ -271,30 +271,11 @@ export default function TrafficButNoEnquiriesPage() {
       <CommercialSection tone="paper" mode="split">
         <ChapterLabel>What this looks like</ChapterLabel>
         <Display>Five ways the same problem shows up.</Display>
-        {/* PHASE J STAGE 4. The display line says FIVE, and until now the five
-            were a single run-on paragraph joined by "Or" — the reader had to
-            count them out of prose to see that the claim above was literal.
-
-            EVERY WORD IS THE APPROVED WORD. The only text removed is the four
-            connecting "Or"s, whose job — signalling that these are alternatives
-            rather than a sequence — is now done by the list itself. The lead
-            word of the four affected clauses is sentence-cased where the "Or"
-            was dropped.
-
-            The mark is `anonymous`, the site's undifferentiated register, and
-            it is load-bearing rather than decorative: it is the visual form of
-            the sentence directly beneath, which is this section's whole point —
-            these five look the same and are not the same. */}
-        <StatedList
-          mark="anonymous"
-          items={[
-            <>Sessions are up and enquiries are flat.</>,
-            <>Enquiries stopped after a site change and nobody is sure whether the two are connected.</>,
-            <>They only ever come from one channel.</>,
-            <>They arrive and none of them are worth quoting for.</>,
-            <>Nobody is certain whether an enquiry has arrived at all.</>,
-          ]}
-        />
+        <Body>
+          Sessions are up and enquiries are flat. Or enquiries stopped after a site change and nobody is sure
+          whether the two are connected. Or they only ever come from one channel. Or they arrive and none of
+          them are worth quoting for. Or nobody is certain whether an enquiry has arrived at all.
+        </Body>
         <Body>All of those produce the same feeling, and they do not have the same cause.</Body>
       </CommercialSection>
 

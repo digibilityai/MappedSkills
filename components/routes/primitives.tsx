@@ -236,36 +236,12 @@ export function FindingList({ items }: { items: Finding[] }) {
    (B14/A13). `mark` renders the open dashed mark where the list is a set of
    limits; the meaning is always also in the words, so the mark carries nothing
    alone and is hidden from assistive technology. */
-export function StatedList({
-  items,
-  className,
-  mark,
-}: {
-  items: ReactNode[];
-  className?: string;
-  /* PHASE J STAGE 4 — optional, and OFF BY DEFAULT so every existing call site
-     renders exactly what it rendered before. It exists so a list whose items
-     all share ONE of the site's four mark states can say so in the site's own
-     vocabulary instead of only in prose: `anonymous` for a set of
-     undifferentiated symptoms, `open` for a set of conditions not met.
-
-     It is not applied to a list that has no single shared state. A mark that
-     means nothing is decoration, and decoration is what the Phase J grammar
-     exists to keep out. */
-  mark?: 'named' | 'anonymous' | 'open' | 'owned';
-}) {
+export function StatedList({ items, className }: { items: ReactNode[]; className?: string }) {
   return (
     <ul className={cn('m-0 mt-[clamp(20px,2.4vw,32px)] list-none border-t border-resolve-line p-0', className)}>
       {items.map((item, i) => (
-        <li
-          key={i}
-          className={cn(
-            'border-b border-resolve-line py-[clamp(12px,1.6vw,18px)] text-[1.02rem] leading-relaxed',
-            mark ? 'grid max-w-[66ch] grid-cols-[14px_1fr] items-start gap-x-[14px]' : 'max-w-[64ch]'
-          )}
-        >
-          {mark && <Mark state={mark} size={14} className="mt-[7px]" />}
-          {mark ? <span>{item}</span> : item}
+        <li key={i} className="max-w-[64ch] border-b border-resolve-line py-[clamp(12px,1.6vw,18px)] text-[1.02rem] leading-relaxed">
+          {item}
         </li>
       ))}
     </ul>

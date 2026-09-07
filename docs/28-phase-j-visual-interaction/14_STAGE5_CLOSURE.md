@@ -3,7 +3,15 @@
 **Date:** 2026-09-07 · **Branch:** `test_branch` · **Starting HEAD:** `cc2c143`
 **Ruling implemented:** Stage 4 ACCEPTED · site-wide composition SOLVED · two Stage 4 additions
 reverted · `/services` assessed · no further rollout.
-**Status:** **IMPLEMENTED — AWAITING FINAL OWNER / ChatGPT ACCEPTANCE.**
+**Status:** **IMPLEMENTED — ACCEPTED.** **PHASE J PASSED — SITE-WIDE VISUAL REDESIGN
+ACCEPTED** (2026-09-07, `DEC-022`), on the implementation at HEAD `15bc4ed`.
+
+> **Sequence of record.** This document was written *before* acceptance, and its original
+> status line — *"IMPLEMENTED — AWAITING FINAL OWNER / ChatGPT ACCEPTANCE"* — was correct at
+> the time of writing. **Formal owner / ChatGPT acceptance occurred after this closure pass
+> and after the final audit**, and is recorded in `docs/00-project/DECISION_LOG.md` as
+> `DEC-022`. **Everything below is the original Stage 5 record and is unchanged** — only this
+> status header has been reconciled to the accepted state.
 
 ---
 

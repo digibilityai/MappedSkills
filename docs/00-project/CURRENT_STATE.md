@@ -49,7 +49,31 @@
 > 21–32 did not update this section; **that gap is recorded here rather than back-filled, because
 > this worker did not verify those sessions' outcomes and will not restate them.**
 >
-> **Current production-translation state, as of Session 33 — Phase I (2026-09-06):**
+> **Current production-translation state, as of Phase J closure (2026-09-07):**
+>
+> **PHASE J — SITE-WIDE VISUAL REDESIGN — PASSED.** Formally accepted after the release-readiness
+> audit: **"PHASE J PASSED — SITE-WIDE VISUAL REDESIGN ACCEPTED."** Recorded as `DEC-022`.
+>
+> - **The active design language is THE RESOLVE** (`DEC-018`), unchanged. Phase J composed **within**
+>   it and reopened neither the direction nor the Gate 10 record.
+> - **The accepted Phase J implementation is commit `15bc4ed`** on `test_branch` — the head of the
+>   five Phase J commits `f9af9ed` → `791ed6e` → `01cf53f` → `cc2c143` → `15bc4ed`, of which
+>   `f9af9ed` carries the prototypes and documentation and leaves application source identical to
+>   the pre-Phase-J commit `66dff0e`.
+> - **Zero material unresolved Phase J routes.** Every route carrying a remaining text-only run is
+>   class **B** (deliberately text-led, with governance reasons on the record), **C** (protected
+>   conversion surface) or **D** (proof-constrained). **No route is unresolved for want of design
+>   work.** Evidence: `docs/28-phase-j-visual-interaction/15_PHASE_J_FINAL_AUDIT.md` §2.
+> - **The homepage remains protected and accepted** as the Gate 10 baseline (`DEC-019`).
+>   `app/page.tsx`, `components/homepage/` and `components/layout/` **are not in the Phase J diff at
+>   all**, and no Phase J stage modified them.
+> - **PHASE J IS NOT PUSHED AND NOT DEPLOYED.** The accepted work exists only as local commits on
+>   `test_branch`. Push and deployment remain an owner decision and have not been taken.
+>
+> Full record: `docs/28-phase-j-visual-interaction/` (`00`–`15`), closing with
+> `14_STAGE5_CLOSURE.md` and `15_PHASE_J_FINAL_AUDIT.md`.
+>
+> **Prior production-translation state, as of Session 33 — Phase I (2026-09-06):**
 >
 > **PHASE I — FUNCTIONAL AND LAUNCH HARDENING — PASS. READY FOR CONTROLLED PRODUCTION
 > DEPLOYMENT.** Structured data, robots, sitemap, indexability, host canonicalisation, redirects,

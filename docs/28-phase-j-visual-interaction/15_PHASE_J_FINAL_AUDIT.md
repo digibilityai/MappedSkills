@@ -1,6 +1,16 @@
 # PHASE J — FINAL AUDIT AND ACTIVE DESIGN SYSTEM
 
-**Date:** 2026-09-07 · **Status:** **AWAITING FINAL OWNER / ChatGPT ACCEPTANCE — not PASS.**
+**Date:** 2026-09-07 · **Status:** **PHASE J PASSED — SITE-WIDE VISUAL REDESIGN ACCEPTED**
+(2026-09-07, `DEC-022`), on the implementation at HEAD `15bc4ed`.
+
+> **Sequence of record.** This audit was performed and written *before* acceptance, and its
+> original status line — *"AWAITING FINAL OWNER / ChatGPT ACCEPTANCE — not PASS"* — was
+> correct at the time of writing, because the auditor has no authority to pass a phase.
+> **Formal owner / ChatGPT acceptance occurred after this audit**, on its recommendation, and
+> is recorded in `docs/00-project/DECISION_LOG.md` as `DEC-022`. **All measurements, findings,
+> classifications and stated limits below are the original audit evidence and are
+> unchanged** — only this status header and the recommendation heading in §7 have been
+> reconciled to the accepted state.
 
 Measured with the Stage 3/4 methodology, unchanged: sandboxed same-origin iframe, scripts enabled,
 exact viewport widths, two git worktrees on separate dev servers. Pre-Phase-J is commit `f9af9ed`,
@@ -207,7 +217,8 @@ pre-existing:** the workspace-root notice caused by two lockfiles, both of which
 
 ## 7. Recommendation
 
-### **A — READY FOR FINAL OWNER / ChatGPT ACCEPTANCE**
+### **A — READY FOR FINAL OWNER / ChatGPT ACCEPTANCE** — *recommendation as made; **ACCEPTED
+2026-09-07 (`DEC-022`)***
 
 - The primary metric moved **83.9% → 30.4%**, and Stage 4's near-zero contribution demonstrated the
   floor; Stage 5 confirmed it by finding **no justified change on `/services`**.

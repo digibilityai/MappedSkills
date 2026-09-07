@@ -1,0 +1,146 @@
+/* =============================================================================
+   PHASE J PROTOTYPE STYLESHEET — ISOLATED. NOT PRODUCTION CSS.
+
+   Token values are TRANSCRIBED from app/globals.css (the application's single
+   design-token source) so the prototypes render in THE RESOLVE rather than an
+   approximation of it. They are transcribed and not imported deliberately:
+   these files must open from the filesystem, with no build step and no server,
+   and nothing here may be able to reach production.
+
+   Governance honoured throughout:
+     · DEC-018 §4 — light-first, one accent, no monospace, no shadows,
+       no canvas, no fixed/sticky, no looping animation.
+     · 02_RESOLVE_MOTION_BUDGET.md — two easings, four timings, nothing loops,
+       nothing is ambient, every T1/T2 fires once per load and never replays,
+       off-screen is still.
+   ========================================================================== */
+
+:root {
+  --ground: #F7F3EC;
+  --paper: #FFFDF9;
+  --ink: #141219;
+  --ink-deep: #0F0D14;
+  --line: #DED6C8;
+  --rule: #2C2833;
+
+  /* the one accent, at its three measured contrast steps */
+  --accent: #FF5B04;       /* fills, and text on a DARK ground */
+  --accent-deep: #D94400;  /* graphical objects + display text on light */
+  --accent-dark: #A83400;  /* small text on light — clears 4.5:1 */
+
+  --dim: #5C5665;          /* the traffic register — anonymous */
+  --gap: #8E8798;          /* not measured / unattributed */
+
+  --e-state: cubic-bezier(0.65, 0, 0.35, 1);
+  --e-arrive: cubic-bezier(0.2, 0.85, 0.25, 1);
+  --t-micro: 180ms;
+  --t-state: 620ms;
+  --t-resolve: 900ms;
+
+  --pad: clamp(18px, 3.4vw, 56px);
+  --wrap: 1400px;
+  --target: 40px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .display {
+  font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+
+/* ------------------------------------------------------------- harness ----
+   Review chrome only. It is NOT part of any proposal and ships nowhere. */
+.harness {
+  background: var(--ink);
+  color: var(--ground);
+  padding: 14px var(--pad);
+  font-size: .82rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.harness a { color: var(--accent); }
+.stamp {
+  display: block;
+  padding: 10px var(--pad);
+  background: var(--ink-deep);
+  color: #A29BAC;
+  font-size: .74rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.stamp b { color: var(--accent); }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad); }
+
+section.chapter {
+  padding: clamp(46px, 6vw, 104px) 0;
+  border-top: 1px solid var(--line);
+}
+section.chapter.paper { background: var(--paper); }
+
+/* the shared Resolve type ranks, transcribed from commercial/primitives.tsx */
+.lab {
+  margin: 0;
+  font-size: .82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  line-height: 1.4;
+  color: var(--dim);
+}
+.display {
+  margin: 18px 0 0;
+  max-width: 24ch;
+  font-size: clamp(1.6rem, 3.4vw, 2.7rem);
+}
+.body {
+  margin: 16px 0 0;
+  max-width: 58ch;
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+.note {
+  margin: 16px 0 0;
+  max-width: 52ch;
+  font-size: .94rem;
+  line-height: 1.55;
+  color: var(--dim);
+}
+.em { color: var(--accent-deep); font-style: normal; }
+
+/* the four mark states, one meaning each, site-wide */
+.mk { display: inline-block; flex: none; width: 13px; height: 13px; }
+.mk.named { background: var(--ink); }
+.mk.anon  { background: var(--dim); opacity: .42; }
+.mk.open  { background: transparent; border: 2px dashed var(--gap); }
+.mk.owned { background: var(--accent-deep); }
+
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---- reduced motion — RESOLVES, it does not freeze -----------------------
+   Durations collapse; every settled state is shown immediately. No meaning
+   is carried by an animation that a reduced-motion reader never sees. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

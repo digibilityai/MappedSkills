@@ -203,7 +203,12 @@ export default function PricingPage() {
       <CommercialSection tone="paper" mode="reverse">
         <ChapterLabel>Who this is not for</ChapterLabel>
         <Display>Five reasons to not buy this.</Display>
-        <StatedList items={NOT_FOR} />
+        {/* PHASE J STAGE 4. Copy unchanged. The `open` mark is the site's
+            existing "condition not met" state — the same one `/about`'s fit
+            comparison uses on its exclusion half — so a set of five exclusions
+            now reads as exclusions in the site's own vocabulary rather than
+            only in the word "not". */}
+        <StatedList items={NOT_FOR} mark="open" />
         <Note>
           There is no revenue or headcount threshold here, deliberately. Size is not the test; what one
           customer is worth is.

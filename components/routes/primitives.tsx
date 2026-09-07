@@ -236,12 +236,36 @@ export function FindingList({ items }: { items: Finding[] }) {
    (B14/A13). `mark` renders the open dashed mark where the list is a set of
    limits; the meaning is always also in the words, so the mark carries nothing
    alone and is hidden from assistive technology. */
-export function StatedList({ items, className }: { items: ReactNode[]; className?: string }) {
+export function StatedList({
+  items,
+  className,
+  mark,
+}: {
+  items: ReactNode[];
+  className?: string;
+  /* PHASE J STAGE 4 — optional, and OFF BY DEFAULT so every existing call site
+     renders exactly what it rendered before. It exists so a list whose items
+     all share ONE of the site's four mark states can say so in the site's own
+     vocabulary instead of only in prose: `anonymous` for a set of
+     undifferentiated symptoms, `open` for a set of conditions not met.
+
+     It is not applied to a list that has no single shared state. A mark that
+     means nothing is decoration, and decoration is what the Phase J grammar
+     exists to keep out. */
+  mark?: 'named' | 'anonymous' | 'open' | 'owned';
+}) {
   return (
     <ul className={cn('m-0 mt-[clamp(20px,2.4vw,32px)] list-none border-t border-resolve-line p-0', className)}>
       {items.map((item, i) => (
-        <li key={i} className="max-w-[64ch] border-b border-resolve-line py-[clamp(12px,1.6vw,18px)] text-[1.02rem] leading-relaxed">
-          {item}
+        <li
+          key={i}
+          className={cn(
+            'border-b border-resolve-line py-[clamp(12px,1.6vw,18px)] text-[1.02rem] leading-relaxed',
+            mark ? 'grid max-w-[66ch] grid-cols-[14px_1fr] items-start gap-x-[14px]' : 'max-w-[64ch]'
+          )}
+        >
+          {mark && <Mark state={mark} size={14} className="mt-[7px]" />}
+          {mark ? <span>{item}</span> : item}
         </li>
       ))}
     </ul>
@@ -255,6 +279,97 @@ export function StatedList({ items, className }: { items: ReactNode[]; className
    all, so it cannot produce a placeholder card, a skeleton or a "coming soon"
    entry even if a caller passed an empty array. */
 export type Entry = { href: string; title: string; meta?: string; summary?: string };
+
+/* ------------------------------------------------------------ stage system --
+   PHASE J — STAGE 4 — the static CAPTURE → CONVERT → MEASURE system for
+   `/how-it-works`, unblocked by the Stage 3 ruling.
+
+   WHERE ITS CONTENT COMES FROM — this is the whole proof argument, and it is
+   why nothing here is invented.
+
+   · The THREE STAGE NAMES are the site's published commercial model. They
+     already render on the homepage (`components/homepage/SystemStages`) and on
+     `/services` (its three approved PARTS). Nothing new is named.
+   · The POINTS inside each stage are the six points `MethodChain` already
+     draws on this very page, in the same words, and the same six that
+     `FindingList` describes below it. Nothing new is enumerated.
+   · The GROUPING of those six under the three stages is the grouping the
+     APPROVED `/services` figure already states in its own description:
+     "Capture covers the discovery point; convert covers landing through the
+     enquiry; measure covers the qualified enquiry and the boundary"
+     (`components/commercial/ChainFigure.tsx`, FULL_DESC). Nothing new is
+     mapped.
+
+   WHAT IT IS NOT. `/how-it-works` §2 — the operational stage descriptions — is
+   OWNER-BLOCKED and still renders nothing. This component does not describe
+   what happens inside a stage, how long one takes, what is delivered in it, or
+   in what order work is done. It states only WHICH MEASURED POINTS FALL UNDER
+   WHICH STAGE, which is a structural fact the page already carries twice.
+
+   QUANTITY SAFETY. The three stages are rendered at EQUAL WIDTH at every
+   viewport and in identical type, weight and colour. Nothing tapers. No stage
+   is wider, heavier, earlier-coloured or numbered as a proportion. A stage
+   holding three points is not drawn larger than a stage holding one, because
+   the number of measured points in a stage is not a quantity of anything —
+   it is not effort, duration, cost, volume, loss or a rate.
+
+   STATIC. No JavaScript, no client component, no motion, no interaction, no
+   observer. Semantic HTML and CSS only; every word is crawlable text, not SVG
+   text. Reading order is stage, then that stage's points, in document order. */
+export type Stage = {
+  name: string;
+  points: ReactNode[];
+  /** index after which the accountability rule falls, if it falls in this stage */
+  boundaryAfter?: number;
+  /** the qualifier the chain figure already carries on a point beyond the rule */
+  beyondNote?: string;
+};
+
+export function StageSystem({ stages, caption }: { stages: Stage[]; caption: ReactNode }) {
+  return (
+    <figure className="m-0 mt-[clamp(26px,3.2vw,44px)]">
+      {/* One continuous hairline across all three, with a mark where each
+          stage begins: the site's existing "points and joins" language, which
+          reads as sequence without implying that any span is a magnitude. */}
+      <ol className="m-0 grid list-none grid-cols-1 gap-x-[clamp(24px,3vw,52px)] gap-y-[18px] p-0 min-[761px]:gap-y-[clamp(26px,3vw,40px)] min-[761px]:grid-cols-3">
+        {stages.map((stage) => (
+          <li key={stage.name} className="m-0 border-t-2 border-resolve-ink pt-[12px] min-[761px]:pt-[clamp(14px,1.8vw,20px)]">
+            <div className="flex items-center gap-3">
+              <Mark state="named" size={13} />
+              <h3 className="m-0 text-[.82rem] font-bold uppercase leading-[1.3] tracking-[0.16em] text-resolve-ink">
+                {stage.name}
+              </h3>
+            </div>
+            <ul className="m-0 mt-[10px] list-none p-0 min-[761px]:mt-[clamp(12px,1.5vw,18px)]">
+              {stage.points.map((point, i) => (
+                <li key={i} className="m-0">
+                  <p className="m-0 max-w-[30ch] py-[5px] text-[1.02rem] leading-[1.4] text-resolve-dim">
+                    {point}
+                  </p>
+                  {stage.boundaryAfter === i && (
+                    /* The accountability rule, drawn where it actually falls.
+                       Its label is the one the chain figure already uses. */
+                    <p className="m-0 mt-2 mb-1 border-t-2 border-resolve-ink pt-2 text-[.76rem] font-bold uppercase leading-[1.3] tracking-[0.14em] text-resolve-ink">
+                      Accountable up to here
+                    </p>
+                  )}
+                </li>
+              ))}
+            </ul>
+            {stage.beyondNote && (
+              <p className="m-0 mt-1 max-w-[30ch] text-[.86rem] leading-[1.45] text-resolve-gap">
+                {stage.beyondNote}
+              </p>
+            )}
+          </li>
+        ))}
+      </ol>
+      <figcaption className="mt-[clamp(18px,2.2vw,26px)] max-w-[66ch] text-[.9rem] leading-[1.55] text-resolve-dim">
+        {caption}
+      </figcaption>
+    </figure>
+  );
+}
 
 /* ------------------------------------------------------- state comparison --
    PHASE J — STAGE 3 — Prototype C, translated to production.

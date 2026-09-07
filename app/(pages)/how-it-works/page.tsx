@@ -1,6 +1,6 @@
 import { createMetadata } from '@/lib/metadata';
 import { CommercialSection, ChapterLabel, Display, Body, Note } from '@/components/commercial/primitives';
-import { RouteHero, StatedList, FindingList } from '@/components/routes/primitives';
+import { RouteHero, StageSystem, StatedList, FindingList } from '@/components/routes/primitives';
 import { BoundaryBlock } from '@/components/commercial/BoundaryBlock';
 import { CommercialClose } from '@/components/commercial/CommercialClose';
 import { MethodChain, MethodChainState } from '@/components/routes/MethodChain';
@@ -57,6 +57,25 @@ export const metadata = createMetadata(
 /* §3 — the six measured points, in the approved order, as prose beside the
    figure. The figure replaces the structure; the list carries what each point
    actually is, which the figure deliberately does not attempt to fit. */
+/* PHASE J STAGE 4 — the three-stage grouping of the six points this page
+   already measures. Every string below is either one of the site's three
+   published stage names or one of `MethodChain`'s own point labels; the
+   grouping is the one the approved /services figure already states. Nothing
+   here describes what happens inside a stage — §2 remains owner-blocked. */
+const STAGES = [
+  { name: 'Capture', points: [<>Discovery and source</>] },
+  {
+    name: 'Convert',
+    points: [<>Landing</>, <>Interaction</>, <>The enquiry</>],
+  },
+  {
+    name: 'Measure',
+    points: [<>The qualified enquiry</>, <>Opportunity and revenue</>],
+    boundaryAfter: 0,
+    beyondNote: 'Your numbers, from your system.',
+  },
+];
+
 const MEASURED = [
   {
     term: <>Discovery and source</>,
@@ -202,6 +221,23 @@ export default function HowItWorksPage() {
       <CommercialSection mode="wide">
         <ChapterLabel>What we measure</ChapterLabel>
         <Display>Six points on one chain.</Display>
+
+        {/* PHASE J STAGE 4. The same six points, grouped under the three stages
+            the site already publishes, so the shape of the method is readable
+            before the detailed chain is read. Static, no JavaScript, and the
+            three stages are drawn at equal width because the number of measured
+            points in a stage is not a quantity of anything. */}
+        <StageSystem
+          stages={STAGES}
+          caption={
+            <>
+              The same six points, grouped.{' '}
+              <b className="font-bold text-resolve-ink">
+                No stage is drawn larger than another, and nothing here is a count, a duration or a rate.
+              </b>
+            </>
+          }
+        />
 
         <MethodChain />
 

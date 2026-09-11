@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PHASE J — Visual Interaction Prototypes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="resolve-proto.css">
+<style>
+  .cards { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line);
+           margin: clamp(28px,3.4vw,48px) 0 0; }
+  @media (min-width: 861px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+  .card { background: var(--paper); padding: clamp(22px,2.6vw,34px); }
+  .card h2 { margin: 0; font-size: clamp(1.3rem,2vw,1.6rem); }
+  .card .kind { margin: 0 0 12px; font-size: .78rem; font-weight: 700; letter-spacing: .16em;
+                text-transform: uppercase; color: var(--accent-dark); }
+  .card p { font-size: .96rem; line-height: 1.55; color: var(--dim); }
+  .card a.go { display: inline-flex; align-items: center; min-height: 48px; margin-top: 14px;
+               padding: 0 22px; border-radius: 999px; background: var(--accent-dark);
+               color: #fff; font-weight: 700; text-decoration: none; }
+  table { border-collapse: collapse; width: 100%; margin-top: 20px; font-size: .92rem; }
+  th, td { text-align: left; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+  code { font-size: .92em; }
+</style>
+</head>
+<body>
+<div class="harness">PHASE J — SITE-WIDE VISUAL INTERACTION — PROTOTYPES</div>
+<div class="stamp">Status: <b>PROPOSED — AWAITING OWNER / CHATGPT VISUAL APPROVAL.</b> Nothing here is in the production application.</div>
+
+<section class="chapter" style="border-top:0">
+  <div class="wrap">
+    <p class="lab">Phase J · design gate</p>
+    <h1 class="display" style="max-width:20ch">Three prototypes, and the measured problem they answer.</h1>
+    <p class="body">
+      Measured on the running application at 1425&nbsp;px: <b>110 of 112 commercial sections (98%) begin at
+      exactly the same left x-coordinate</b>, 95 of 112 are text-only, and 16 of 18 substantive routes contain
+      no interactive section at all. Each prototype below takes one real section, keeps its approved copy word
+      for word, and changes what the reader has to do to understand it.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <p class="kind">A · J4 + J8</p>
+        <h2>Scope Anatomy</h2>
+        <p><b>Target:</b> <code>/seo §2</code> — drawn by the shared <code>ScopeList</code> primitive, which
+          renders the identical shape on six capability routes.</p>
+        <p>Six pieces of work become six positions on the chain. Progressive disclosure, keyboard tablist,
+          all copy server-rendered.</p>
+        <a class="go" href="prototype-a-scope-anatomy.html">Open prototype A</a>
+      </div>
+      <div class="card">
+        <p class="kind">B · J2 + J5</p>
+        <h2>Where Everybody Else's Report Stops</h2>
+        <p><b>Target:</b> <code>/about §1</code> — on the worst-scoring page in the audit: 8 sections, 8
+          text-only, zero figures.</p>
+        <p>A prose claim about three suppliers and a gap, drawn as three brackets that do not reach the
+          enquiry. One T2, once.</p>
+        <a class="go" href="prototype-b-supplier-reports.html">Open prototype B</a>
+      </div>
+      <div class="card">
+        <p class="kind">C · J7</p>
+        <h2>The Fit Boundary</h2>
+        <p><b>Target:</b> <code>/about §5</code> — six stacked sentences whose two halves are signalled only
+          by the word "Not".</p>
+        <p>The boundary becomes structural. One T2 — a limit being drawn, the content class the motion budget
+          names explicitly.</p>
+        <a class="go" href="prototype-c-fit-boundary.html">Open prototype C</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter paper">
+  <div class="wrap">
+    <p class="lab">How to review</p>
+    <p class="display" style="max-width:22ch">Each file opens BEFORE above AFTER.</p>
+    <table>
+      <tr><th>Check</th><th>How</th></tr>
+      <tr><td>Composition</td><td>Widen past 761&nbsp;px. The AFTER section's figure and reading should no longer start at the section's left edge.</td></tr>
+      <tr><td>Narrow behaviour</td><td>Below 761&nbsp;px each prototype swaps to a genuinely different drawing or stack — not the wide one scaled.</td></tr>
+      <tr><td>Reduced motion</td><td>Turn on the OS setting and reload. Every state should already be resolved; nothing should animate and nothing should be missing.</td></tr>
+      <tr><td>No JavaScript</td><td>Disable JS and reload. All copy, both list halves, and every drawing should still be present and complete.</td></tr>
+      <tr><td>Keyboard</td><td>Prototype A: Tab to the rail, then Arrow / Home / End.</td></tr>
+      <tr><td>Motion budget</td><td>Scroll past each figure and back. Nothing should replay.</td></tr>
+    </table>
+    <p class="note" style="max-width:64ch">
+      Prototypes are isolated static HTML. They import no framework, no animation library and no production
+      code, and no production file was changed to make them run. Design tokens are transcribed from
+      <code>app/globals.css</code> so they render in THE RESOLVE rather than an approximation of it.
+    </p>
+  </div>
+</section>
+</body>
+</html>

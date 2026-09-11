@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PHASE J — Prototype A — Scope Anatomy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="resolve-proto.css">
+<style>
+/* ===========================================================================
+   PROTOTYPE A — SCOPE ANATOMY
+   Target section: /seo  §2  "WHAT THE WORK INVOLVES, MONTH TO MONTH"
+   Shared primitive: components/commercial/ScopeList.tsx — which renders the
+   SAME shape on /seo, /ai-seo, /google-ads, /social-media-ads,
+   /lead-generation and /conversion-optimization. One primitive, six routes.
+
+   PRIMITIVE CLASSES DEMONSTRATED: J4 SYSTEM ANATOMY + J8 PROGRESSIVE DISCLOSURE
+   MOTION: one T2, fired once on entering view, never replayed. Selection is T4.
+   ======================================================================== */
+
+.pa-grid { display: block; }
+
+/* the six-item rail */
+.pa-rail { margin: clamp(24px,3vw,40px) 0 0; padding: 0; list-style: none; border-top: 2px solid var(--ink); }
+.pa-rail li { margin: 0; border-bottom: 1px solid var(--line); }
+
+.pa-tab {
+  display: grid;
+  grid-template-columns: 34px 18px 1fr;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 4px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: clamp(1.0rem, 1.4vw, 1.14rem);
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: left;
+  cursor: pointer;
+  transition: color var(--t-micro) var(--e-state);
+}
+.pa-tab i { font-style: normal; font-size: .78rem; font-weight: 600; color: var(--dim); }
+.pa-tab[aria-selected="true"] { color: var(--accent-dark); }
+.pa-tab[aria-selected="true"] i { color: var(--accent-dark); }
+
+/* the attachment mark. Its RESOLVED state is the default, so a reader with no
+   JavaScript, a failed hydration or reduced motion sees the finished mark. */
+.pa-mk { width: 13px; height: 13px; background: var(--dim); opacity: .42;
+         transition: background-color var(--t-state) var(--e-state),
+                     opacity var(--t-state) var(--e-state),
+                     transform var(--t-state) var(--e-arrive); }
+.pa-tab[aria-selected="true"] .pa-mk { background: var(--accent-deep); opacity: 1; }
+
+/* T2 — the six marks resolve ONCE, in sequence, on entering view.
+   The start state exists ONLY when the script has written data-j="armed",
+   so nothing here can hide content from a reader whose JavaScript never ran. */
+.pa-rail[data-j="armed"] .pa-mk { opacity: 0; transform: translateY(6px); }
+.pa-rail[data-j="on"] .pa-mk { opacity: .42; transform: none; }
+.pa-rail[data-j="on"] .pa-tab[aria-selected="true"] .pa-mk { opacity: 1; }
+.pa-rail[data-j="on"] li:nth-child(1) .pa-mk { transition-delay: 0ms; }
+.pa-rail[data-j="on"] li:nth-child(2) .pa-mk { transition-delay: 95ms; }
+.pa-rail[data-j="on"] li:nth-child(3) .pa-mk { transition-delay: 190ms; }
+.pa-rail[data-j="on"] li:nth-child(4) .pa-mk { transition-delay: 285ms; }
+.pa-rail[data-j="on"] li:nth-child(5) .pa-mk { transition-delay: 380ms; }
+.pa-rail[data-j="on"] li:nth-child(6) .pa-mk { transition-delay: 475ms; }
+
+.pa-panel { padding: 0 0 20px 64px; }
+.pa-panel p { margin: 0; max-width: 58ch; font-size: 1.0rem; line-height: 1.65; color: var(--dim); }
+.pa-panel .where { margin: 12px 0 0; font-size: .82rem; font-weight: 700; letter-spacing: .14em;
+                   text-transform: uppercase; color: var(--accent-dark); }
+
+.pa-figure { margin: 0; }
+.pa-figure svg { display: block; width: 100%; height: auto; }
+.pa-cap { margin: clamp(14px,1.8vw,20px) 0 0; max-width: 64ch; font-size: .9rem; line-height: 1.55; color: var(--dim); }
+
+/* the highlighted span moves between segments — transform/opacity only */
+#pa-span, #pa-spanV { transition: opacity var(--t-micro) var(--e-state); }
+
+.pa-vert { display: block; }
+.pa-horz { display: none; }
+
+/* ---- MEDIUM and up: the figure and the reading move OFF the left edge -----
+   This is the composition half of the proposal. At WIDE the rail holds the
+   left 30ch and every figure, panel and caption begins at ~470px, so the
+   section no longer starts where all 110 audited sections start. */
+@media (min-width: 761px) {
+  .pa-vert { display: none; }
+  .pa-horz { display: block; }
+  .pa-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 30ch) minmax(0, 1fr);
+    gap: clamp(28px, 4vw, 68px);
+    align-items: start;
+    margin-top: clamp(24px, 3vw, 40px);
+  }
+  .pa-rail { margin-top: 0; }
+  .pa-panel { padding: 0; }
+  .pa-panel .where { margin-top: 18px; }
+  .pa-right { position: static; }
+  .pa-readout { margin-top: clamp(22px, 2.6vw, 34px); padding-top: clamp(18px,2vw,26px); border-top: 1px solid var(--line); }
+  .pa-readout h3 { margin: 0 0 10px; font-size: clamp(1.2rem,1.8vw,1.5rem); }
+}
+</style>
+</head>
+<body>
+
+<div class="harness">PHASE J — PROTOTYPE A — SCOPE ANATOMY &nbsp;·&nbsp; <a href="index.html">back to index</a></div>
+<div class="stamp">Target: <b>/seo §2</b> — rendered by the shared <b>ScopeList</b> primitive, which draws the identical shape on six capability routes. Copy below is the approved production copy, <b>unchanged and complete</b>.</div>
+
+<!-- ======================================================================
+     BEFORE — an exact transcription of what the production section renders
+     today. 180 words, 12 paragraphs, six identical hairline rows, every one
+     of them beginning at the section's single left edge.
+     =================================================================== -->
+<section class="chapter" style="border-top:0">
+  <div class="wrap">
+    <p class="lab" style="color:var(--gap)">BEFORE — PRODUCTION TODAY</p>
+    <h2 class="lab" style="margin-top:26px">What the work involves, month to month</h2>
+    <ul style="margin:clamp(24px,3vw,40px) 0 0;padding:0;list-style:none;border-top:2px solid var(--ink)">
+      <li style="border-bottom:1px solid var(--line);padding:clamp(16px,2vw,24px) 0;display:grid;grid-template-columns:minmax(0,26ch) 1fr;gap:0 clamp(20px,3vw,52px)">
+        <p style="margin:0;font-size:clamp(1.02rem,1.5vw,1.24rem);font-weight:700;line-height:1.25">Finding the demand worth capturing.</p>
+        <p style="margin:0;max-width:58ch;line-height:1.65;color:var(--dim)">Which searches indicate somebody wants what you sell, and which ones only look commercial &mdash; the ones that mostly return jobs, courses, definitions or competitors. Ranking for those produces sessions and no enquiries, and it is easy to do by accident.</p>
+      </li>
+      <li style="border-bottom:1px solid var(--line);padding:clamp(16px,2vw,24px) 0;display:grid;grid-template-columns:minmax(0,26ch) 1fr;gap:0 clamp(20px,3vw,52px)">
+        <p style="margin:0;font-size:clamp(1.02rem,1.5vw,1.24rem);font-weight:700;line-height:1.25">Technical foundations.</p>
+        <p style="margin:0;max-width:58ch;line-height:1.65;color:var(--dim)">Crawlability, indexation, canonicalisation, site structure, internal linking, page speed, structured data, and a sitemap that reflects what actually exists. Unglamorous, and the reason a lot of good content never gets read by anything.</p>
+      </li>
+      <li style="border-bottom:1px solid var(--line);padding:clamp(16px,2vw,24px) 0;display:grid;grid-template-columns:minmax(0,26ch) 1fr;gap:0 clamp(20px,3vw,52px)">
+        <p style="margin:0;font-size:clamp(1.02rem,1.5vw,1.24rem);font-weight:700;line-height:1.25">Content aimed at commercial and problem-led searches.</p>
+        <p style="margin:0;max-width:58ch;line-height:1.65;color:var(--dim)">Pages that answer the question the searcher arrived with &mdash; including the ones phrased as a problem rather than as a product.</p>
+      </li>
+      <li style="border-bottom:1px solid var(--line);padding:clamp(16px,2vw,24px) 0;display:grid;grid-template-columns:minmax(0,26ch) 1fr;gap:0 clamp(20px,3vw,52px)">
+        <p style="margin:0;font-size:clamp(1.02rem,1.5vw,1.24rem);font-weight:700;line-height:1.25">The landing experience and the enquiry path.</p>
+        <p style="margin:0;max-width:58ch;line-height:1.65;color:var(--dim)">What happens after the click is inside the scope, not somebody else&rsquo;s department.</p>
+      </li>
+      <li style="border-bottom:1px solid var(--line);padding:clamp(16px,2vw,24px) 0;display:grid;grid-template-columns:minmax(0,26ch) 1fr;gap:0 clamp(20px,3vw,52px)">
+        <p style="margin:0;font-size:clamp(1.02rem,1.5vw,1.24rem);font-weight:700;line-height:1.25">Migration and equity protection.</p>
+        <p style="margin:0;max-width:58ch;line-height:1.65;color:var(--dim)">Where a site is being rebuilt or restructured, protecting existing rankings and redirect chains is part of the discipline, not an afterthought.</p>
+      </li>
+      <li style="border-bottom:1px solid var(--line);padding:clamp(16px,2vw,24px) 0;display:grid;grid-template-columns:minmax(0,26ch) 1fr;gap:0 clamp(20px,3vw,52px)">
+        <p style="margin:0;font-size:clamp(1.02rem,1.5vw,1.24rem);font-weight:700;line-height:1.25">Measurement.</p>
+        <p style="margin:0;max-width:58ch;line-height:1.65;color:var(--dim)">Instrumented before anything is claimed, so the reporting has a starting point to be measured against.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ======================================================================
+     AFTER — SCOPE ANATOMY.
+     The six items are unchanged. What is added is the ONE fact the list
+     cannot state: WHERE IN THE CHAIN each piece of work acts. The reader
+     stops reading six unranked rows and starts reading a system.
+     =================================================================== -->
+<section class="chapter paper">
+  <div class="wrap">
+    <p class="lab" style="color:var(--accent-dark)">AFTER — PHASE J · J4 SYSTEM ANATOMY + J8 PROGRESSIVE DISCLOSURE</p>
+    <h2 class="lab" style="margin-top:26px">What the work involves, month to month</h2>
+    <p class="display">Six pieces of work, and the part of the chain each one acts on.</p>
+
+    <div class="pa-grid">
+      <!-- ------------------------------------------------------------- rail
+           SERVER SHAPE (what you see before the script runs, with JS off, or
+           after a failed hydration): a plain list, every heading followed by
+           its own paragraph, in document order. Identical reading order and
+           identical words to the BEFORE section. The script upgrades it to a
+           tablist; it never creates the content. -->
+      <ul class="pa-rail" id="pa-rail">
+        <li>
+          <button class="pa-tab" type="button" id="pa-t0" data-seg="0"><i>01</i><span class="pa-mk"></span><span>Finding the demand worth capturing.</span></button>
+          <div class="pa-panel" id="pa-p0" data-panel="0">
+            <p>Which searches indicate somebody wants what you sell, and which ones only look commercial &mdash; the ones that mostly return jobs, courses, definitions or competitors. Ranking for those produces sessions and no enquiries, and it is easy to do by accident.</p>
+            <p class="where">Acts on: buyer demand &rarr; discovery</p>
+          </div>
+        </li>
+        <li>
+          <button class="pa-tab" type="button" id="pa-t1" data-seg="1"><i>02</i><span class="pa-mk"></span><span>Technical foundations.</span></button>
+          <div class="pa-panel" id="pa-p1" data-panel="1">
+            <p>Crawlability, indexation, canonicalisation, site structure, internal linking, page speed, structured data, and a sitemap that reflects what actually exists. Unglamorous, and the reason a lot of good content never gets read by anything.</p>
+            <p class="where">Acts on: discovery</p>
+          </div>
+        </li>
+        <li>
+          <button class="pa-tab" type="button" id="pa-t2" data-seg="2"><i>03</i><span class="pa-mk"></span><span>Content aimed at commercial and problem-led searches.</span></button>
+          <div class="pa-panel" id="pa-p2" data-panel="2">
+            <p>Pages that answer the question the searcher arrived with &mdash; including the ones phrased as a problem rather than as a product.</p>
+            <p class="where">Acts on: discovery &rarr; landing</p>
+          </div>
+        </li>
+        <li>
+          <button class="pa-tab" type="button" id="pa-t3" data-seg="3"><i>04</i><span class="pa-mk"></span><span>The landing experience and the enquiry path.</span></button>
+          <div class="pa-panel" id="pa-p3" data-panel="3">
+            <p>What happens after the click is inside the scope, not somebody else&rsquo;s department.</p>
+            <p class="where">Acts on: landing &rarr; the enquiry</p>
+          </div>
+        </li>
+        <li>
+          <button class="pa-tab" type="button" id="pa-t4" data-seg="4"><i>05</i><span class="pa-mk"></span><span>Migration and equity protection.</span></button>
+          <div class="pa-panel" id="pa-p4" data-panel="4">
+            <p>Where a site is being rebuilt or restructured, protecting existing rankings and redirect chains is part of the discipline, not an afterthought.</p>
+            <p class="where">Acts on: buyer demand &rarr; landing</p>
+          </div>
+        </li>
+        <li>
+          <button class="pa-tab" type="button" id="pa-t5" data-seg="5"><i>06</i><span class="pa-mk"></span><span>Measurement.</span></button>
+          <div class="pa-panel" id="pa-p5" data-panel="5">
+            <p>Instrumented before anything is claimed, so the reporting has a starting point to be measured against.</p>
+            <p class="where">Acts on: the enquiry &rarr; the qualified enquiry</p>
+          </div>
+        </li>
+      </ul>
+
+      <!-- ------------------------------------------------------------ figure
+           TWO GENUINE DRAWINGS, one per width band, following the convention
+           already shipped in components/commercial/ChainFigure.tsx: a vertical
+           form below 761 and a horizontal form above it. Never one drawing
+           scaled. Exactly one is ever displayed.
+
+           QUANTITY SAFETY: points and joins only. Nothing tapers, no segment
+           length encodes volume, loss or a rate, and there is no number
+           anywhere in either drawing. A point cannot express a percentage. -->
+      <div class="pa-right">
+        <figure class="pa-figure">
+          <!-- horizontal, MEDIUM and up -->
+          <div class="pa-horz">
+            <svg viewBox="0 0 940 200" role="img" aria-labelledby="paTitle paDesc">
+              <title id="paTitle">The chain from buyer demand to a recorded qualified enquiry, with the segment the selected piece of work acts on marked</title>
+              <desc id="paDesc">Five points in order along one line: buyer demand, drawn as an open dashed mark because it is not measured; discovery; landing; the enquiry; and the qualified enquiry, past an accountability rule. The segment that the currently selected piece of work acts on is marked in tangerine. No length, width or area on this drawing encodes a quantity, a volume or a rate.</desc>
+
+              <!-- the highlighted span. Geometry and opacity are written by the
+                   script; with no script it stays hidden and the drawing is a
+                   complete, readable chain on its own. -->
+              <rect id="pa-span" x="60" y="106" width="170" height="8" fill="var(--accent)" opacity="0"></rect>
+
+              <!-- the run -->
+              <line x1="60" y1="110" x2="230" y2="110" stroke="var(--gap)" stroke-width="2" stroke-dasharray="5 5"></line>
+              <line x1="230" y1="110" x2="762" y2="110" stroke="var(--ink)" stroke-width="2"></line>
+
+              <!-- the accountability rule, after the qualified enquiry -->
+              <line x1="800" y1="66" x2="800" y2="154" stroke="var(--ink)" stroke-width="2"></line>
+
+              <!-- stations -->
+              <rect x="53" y="103" width="14" height="14" fill="none" stroke="var(--gap)" stroke-width="2" stroke-dasharray="4 4"></rect>
+              <rect x="223" y="103" width="14" height="14" fill="var(--ink)"></rect>
+              <rect x="393" y="103" width="14" height="14" fill="var(--ink)"></rect>
+              <rect x="563" y="103" width="14" height="14" fill="var(--ink)"></rect>
+              <rect x="733" y="103" width="14" height="14" fill="var(--accent-deep)"></rect>
+
+              <g font-family="Manrope, sans-serif" font-size="12.5" font-weight="600">
+                <text x="53" y="140" fill="var(--gap)">buyer demand</text>
+                <text x="53" y="157" fill="var(--gap)">not measured</text>
+                <text x="223" y="140" fill="var(--dim)">discovery</text>
+                <text x="393" y="140" fill="var(--dim)">landing</text>
+                <text x="563" y="140" fill="var(--dim)">the enquiry</text>
+                <text x="672" y="176" fill="var(--accent-dark)" font-weight="700">the qualified enquiry</text>
+              </g>
+              <line x1="740" y1="124" x2="740" y2="164" stroke="var(--accent-deep)" stroke-width="1.5"></line>
+              <g font-family="Manrope, sans-serif" font-size="11.5" font-weight="700" letter-spacing="1.3">
+                <text x="812" y="90" fill="var(--dim)">YOUR OWN</text>
+                <text x="812" y="106" fill="var(--dim)">SYSTEM</text>
+              </g>
+              <!-- the label of the currently selected span -->
+              <text id="pa-spanLabel" x="60" y="84" font-family="Manrope, sans-serif" font-size="12.5" font-weight="700" letter-spacing="1.2" fill="var(--accent-dark)" opacity="0"></text>
+            </svg>
+          </div>
+
+          <!-- vertical, NARROW. A genuinely different drawing, not the above rotated. -->
+          <div class="pa-vert" style="max-width:340px">
+            <svg viewBox="0 0 300 560" role="img" aria-labelledby="paTitleV paDescV">
+              <title id="paTitleV">The chain from buyer demand to a recorded qualified enquiry, drawn vertically, with the segment the selected piece of work acts on marked</title>
+              <desc id="paDescV">The same five points in order, read downwards: buyer demand, drawn as an open dashed mark because it is not measured; discovery; landing; the enquiry; and the qualified enquiry, past an accountability rule. Nothing on this drawing encodes a quantity.</desc>
+              <rect id="pa-spanV" x="42" y="46" width="8" height="132" fill="var(--accent)" opacity="0"></rect>
+              <line x1="46" y1="46" x2="46" y2="178" stroke="var(--gap)" stroke-width="2" stroke-dasharray="5 5"></line>
+              <line x1="46" y1="178" x2="46" y2="508" stroke="var(--ink)" stroke-width="2"></line>
+              <line x1="16" y1="530" x2="196" y2="530" stroke="var(--ink)" stroke-width="2"></line>
+              <rect x="39" y="39" width="14" height="14" fill="none" stroke="var(--gap)" stroke-width="2" stroke-dasharray="4 4"></rect>
+              <rect x="39" y="171" width="14" height="14" fill="var(--ink)"></rect>
+              <rect x="39" y="281" width="14" height="14" fill="var(--ink)"></rect>
+              <rect x="39" y="391" width="14" height="14" fill="var(--ink)"></rect>
+              <rect x="39" y="501" width="14" height="14" fill="var(--accent-deep)"></rect>
+              <g font-family="Manrope, sans-serif" font-size="13" font-weight="600">
+                <text x="72" y="44" fill="var(--gap)">buyer demand</text>
+                <text x="72" y="61" fill="var(--gap)">not measured</text>
+                <text x="72" y="182" fill="var(--dim)">discovery</text>
+                <text x="72" y="292" fill="var(--dim)">landing</text>
+                <text x="72" y="402" fill="var(--dim)">the enquiry</text>
+                <text x="72" y="512" fill="var(--accent-dark)" font-weight="700">the qualified enquiry</text>
+                <text x="16" y="550" fill="var(--dim)" font-size="11.5" font-weight="700" letter-spacing="1.2">YOUR OWN SYSTEM</text>
+              </g>
+            </svg>
+          </div>
+
+          <figcaption class="pa-cap">
+            Six pieces of work, placed on the part of the chain each one acts on. Buyer demand before discovery
+            is dashed because it is not measured. The rule after the qualified enquiry is the limit of what we
+            are accountable for; beyond it is your own system.
+            <b style="color:var(--ink)">Nothing here is a funnel, nothing tapers, and no length on the drawing
+            is a quantity.</b>
+          </figcaption>
+        </figure>
+
+        <div class="pa-readout" id="pa-readout" hidden>
+          <h3 id="pa-readLead"></h3>
+          <div id="pa-readBody"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stamp">
+  Reduced motion: the six marks are composed resolved on first paint and the tablist still works &mdash; states swap without transition.
+  JavaScript off: the list renders as six headings each followed by its own paragraph, in order, with the chain drawn complete.
+  <b>No word of approved copy is removed in either mode.</b>
+</div>
+
+<script>
+/* ===========================================================================
+   PROTOTYPE A — the client leaf.
+
+   CONTRACT, transcribed from the shipped homepage leaves:
+     · The script only ever UPGRADES server markup. It never creates copy.
+     · Every start state is written by this script and removed by it, so a
+       reader whose JavaScript never runs is never left with hidden content.
+     · The T2 fires ONCE per load, on entering view, and never replays.
+     · Under reduced motion the section resolves immediately — no panel is
+       collapsed and no mark is animated.
+     · No scroll handler, no rAF loop, no timer after resolution.
+   ======================================================================== */
+(function () {
+  var rail = document.getElementById('pa-rail');
+  if (!rail) return;
+
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var tabs = [].slice.call(rail.querySelectorAll('.pa-tab'));
+  var panels = [].slice.call(rail.querySelectorAll('.pa-panel'));
+
+  /* Segment geometry per scope item — [x, width] horizontal, [y, height]
+     vertical, plus the label. These are POSITIONS ON A CHAIN, not values. */
+  var SEG = [
+    { h: [60, 170],  v: [46, 132],  label: 'BUYER DEMAND \u2192 DISCOVERY' },
+    { h: [230, 0],   v: [178, 0],   label: 'DISCOVERY' },
+    { h: [230, 170], v: [178, 110], label: 'DISCOVERY \u2192 LANDING' },
+    { h: [400, 170], v: [288, 110], label: 'LANDING \u2192 THE ENQUIRY' },
+    { h: [60, 340],  v: [46, 242],  label: 'BUYER DEMAND \u2192 LANDING' },
+    { h: [570, 170], v: [398, 110], label: 'THE ENQUIRY \u2192 QUALIFIED' }
+  ];
+
+  var span = document.getElementById('pa-span');
+  var spanV = document.getElementById('pa-spanV');
+  var spanLabel = document.getElementById('pa-spanLabel');
+  var readout = document.getElementById('pa-readout');
+  var readLead = document.getElementById('pa-readLead');
+  var readBody = document.getElementById('pa-readBody');
+  var wide = window.matchMedia('(min-width: 761px)');
+
+  /* --- upgrade the list into a tablist ---------------------------------- */
+  rail.setAttribute('role', 'tablist');
+  rail.setAttribute('aria-label', 'What the work involves');
+  [].slice.call(rail.children).forEach(function (li) { li.setAttribute('role', 'presentation'); });
+
+  tabs.forEach(function (t, i) {
+    t.setAttribute('role', 'tab');
+    t.setAttribute('aria-controls', 'pa-p' + i);
+    panels[i].setAttribute('role', 'tabpanel');
+    panels[i].setAttribute('aria-labelledby', 'pa-t' + i);
+    panels[i].setAttribute('tabindex', '0');
+  });
+
+  /* every panel's server-rendered parent, so placement is reversible */
+  var homes = panels.map(function (p) { return p.parentNode; });
+
+  var current = -1;
+
+  function paint(i) {
+    var s = SEG[i];
+    // A station (zero-width segment) is drawn as a short mark, not a line of
+    // zero length that would disappear.
+    var hx = s.h[0], hw = s.h[1] || 14, vy = s.v[0], vh = s.v[1] || 14;
+    if (s.h[1] === 0) { hx = s.h[0] - 7; }
+    if (s.v[1] === 0) { vy = s.v[0] - 7; }
+    span.setAttribute('x', hx); span.setAttribute('width', hw); span.setAttribute('opacity', '1');
+    spanV.setAttribute('y', vy); spanV.setAttribute('height', vh); spanV.setAttribute('opacity', '1');
+    spanLabel.setAttribute('x', Math.min(hx, 560));
+    spanLabel.textContent = s.label;
+    spanLabel.setAttribute('opacity', '1');
+  }
+
+  function select(i, moveFocus) {
+    if (i === current) return;
+    current = i;
+    tabs.forEach(function (t, k) {
+      var on = k === i;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.setAttribute('tabindex', on ? '0' : '-1');
+    });
+    panels.forEach(function (p, k) {
+      var on = k === i;
+      p.hidden = !on;
+      if (on) { p.removeAttribute('inert'); } else { p.setAttribute('inert', ''); }
+    });
+    /* At MEDIUM and up the reading sits beside the figure rather than inside
+       the rail, so the rail stays a scannable index of six. The panel content
+       is MOVED, never duplicated — one copy of every sentence in the DOM. */
+    place();
+    paint(i);
+    if (moveFocus) tabs[i].focus();
+  }
+
+  /* PLACEMENT — where the selected reading is shown.
+
+     At MEDIUM and up it sits beside the figure, so the rail stays a scannable
+     index of six and the reading begins well clear of the section's left edge.
+     Below that it sits inside the rail, directly under the item it belongs to,
+     which is the correct narrow behaviour and also the server shape.
+
+     The panel is MOVED, never duplicated: there is exactly one copy of every
+     sentence in the DOM at all times, in both placements. This runs on every
+     selection AND on every crossing of the width boundary, so a resize, a
+     device-orientation change or a desktop window drag re-places the reading
+     instead of stranding it in a container the layout no longer shows. */
+  function place() {
+    if (current < 0) return;
+
+    /* EVERY panel that is not the current one is returned to its own server
+       parent first. The earlier version emptied the readout with
+       `innerHTML = ''`, which DESTROYED the previously shown panel instead of
+       putting it back: cycling the six tabs left four panels in the document
+       and permanently deleted two paragraphs of approved copy. Panels are
+       moved, never cleared and never rebuilt, so the six sentences that the
+       server sent are the six that exist for the life of the page. */
+    panels.forEach(function (p, k) {
+      if (k === current) return;
+      if (p.parentNode !== homes[k]) homes[k].appendChild(p);
+    });
+
+    var panel = panels[current];
+    if (wide.matches) {
+      readout.hidden = false;
+      readLead.textContent = tabs[current].lastElementChild.textContent;
+      if (panel.parentNode !== readBody) readBody.appendChild(panel);
+    } else {
+      readout.hidden = true;
+      if (panel.parentNode !== homes[current]) homes[current].appendChild(panel);
+    }
+    panel.hidden = false;
+    panel.removeAttribute('inert');
+  }
+
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { select(i, false); });
+    t.addEventListener('keydown', function (e) {
+      var k = e.key, n = null;
+      if (k === 'ArrowRight' || k === 'ArrowDown') n = (i + 1) % tabs.length;
+      else if (k === 'ArrowLeft' || k === 'ArrowUp') n = (i - 1 + tabs.length) % tabs.length;
+      else if (k === 'Home') n = 0;
+      else if (k === 'End') n = tabs.length - 1;
+      if (n !== null) { e.preventDefault(); select(n, true); }
+    });
+  });
+
+  select(0, false);
+
+  /* The width boundary is watched rather than assumed. `change` on a media
+     query list fires only when the boundary is actually crossed, so this is
+     not a resize handler and does no work while the reader resizes within a
+     band. Both spellings are registered because Safari carried the legacy
+     `addListener` for a long time. */
+  if (wide.addEventListener) wide.addEventListener('change', place);
+  else if (wide.addListener) wide.addListener(place);
+
+  /* --- the ONE T2 ------------------------------------------------------- */
+  if (reduced || !('IntersectionObserver' in window)) return;   // resolves immediately
+
+  rail.setAttribute('data-j', 'armed');
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      rail.setAttribute('data-j', 'on');
+      io.disconnect();                    // fires once. Never replays.
+    });
+  }, { threshold: 0.25 });
+  io.observe(rail);
+
+  /* Force-completion floor: if the observer never fires (an old engine, a
+     hidden tab that is never revealed), the resolved state is written anyway
+     so no mark can be left in its start state. */
+  setTimeout(function () {
+    if (rail.getAttribute('data-j') !== 'on') { rail.setAttribute('data-j', 'on'); io.disconnect(); }
+  }, 4000);
+})();
+</script>
+</body>
+</html>

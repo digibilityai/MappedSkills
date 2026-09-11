@@ -1,0 +1,1645 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<title>MappedSkills — complete homepage prototype — THE RESOLVE (Session 18)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!--
+  SESSION 18 — COMPLETE HOMEPAGE PROTOTYPE — "THE RESOLVE"
+  Active direction: SESSION 15C, DEC-018. Reference: docs/20-creative-convergence/prototype/convergence.html
+
+  THE EXPERIENCE IDEA — ONE POPULATION, FOLLOWED DOWN, AT CHANGING ALTITUDE.
+  The page is not a stack of sections. It is one commercial story told at four
+  distances from the same object:
+
+    FAR      the hero — a population, anonymous, resolving into named objects
+    NEARER   recognition — three routes that fail differently and look identical
+    CLOSER   the mechanism — the same population re-read three times
+    INSIDE   the run — the camera descends and STRUCTURE appears
+    ACROSS   accountability — a rule crosses the structure you are standing in
+    OUT      the close — full-bleed, and they land
+
+  The atom is the same in every chapter: a small square. It is a lattice mark,
+  then a named object, then a failed route, then a re-sorted kind, then a point
+  on the chain, then an arrival. NOTHING is a new illustration.
+
+  PROTOTYPE ONLY. Not production. Not integrated. Gate 10 NOT PASSED.
+  Approved H1 and approved block copy used as written. No invented metric,
+  client result, logo, testimonial, photograph, quantity, proportion or rate.
+  Owner-blocked items (phone, WhatsApp, people, hours, own-site diagnostic)
+  RENDER NOTHING — see the prototype note in the footer.
+-->
+<style>
+/* ==========================================================================
+   TOKENS — carried from THE RESOLVE. Semantic roles and contrast floors are
+   binding; the hexes are the prototype's own measured ramp.
+   ========================================================================== */
+:root{
+  --ink:#141219; --ivory:#F7F3EC; --paper:#FFFDF9;
+  --tang:#FF5B04;      /* the mark — fills, and text on the DARK ground only   */
+  --tang-ink:#D94400;  /* graphical objects + display text on light — 3.97:1   */
+  --tang-sm:#A83400;   /* small text on light — clears 4.5:1                   */
+  --dim:#5C5665;       /* the traffic register: anonymous, undifferentiated    */
+  --gapc:#8E8798;      /* not measured / unattributed                          */
+  --line:#DED6C8;
+  --ink-2:#0F0D14;     /* the substrate beneath a dark surface                 */
+  --rule:#2C2833;
+
+  --disp:"Bricolage Grotesque", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --body:"Manrope", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* MOTION — two easings, four timings. Nothing else. */
+  --e-state:cubic-bezier(.65,0,.35,1);
+  --e-arrive:cubic-bezier(.2,.85,.25,1);
+  --t-micro:180ms; --t-state:620ms; --t-resolve:900ms;
+
+  --pad:clamp(18px,3.4vw,56px);
+  --measure:58ch;
+}
+*,*::before,*::after{box-sizing:border-box}
+/* THE RESOLVE IS LIGHT-FIRST BY DECISION (DEC-018 §4.1). Declared explicitly so a
+   browser in forced/auto dark mode does not invert the direction: the dark hero
+   stage is a COUNTED INVERSION inside a light page and carries meaning. */
+html{-webkit-text-size-adjust:100%;color-scheme:light}
+body{margin:0;font-family:var(--body);background:var(--ivory);color:var(--ink);
+  font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{margin:0;font-family:var(--disp);font-weight:800;letter-spacing:-0.035em;line-height:.95}
+p{margin:0 0 1.05em;max-width:var(--measure)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:2px}
+.dk :focus-visible,.close :focus-visible{outline-color:currentColor}
+.wrap{width:min(1400px,100%);margin:0 auto;padding:0 var(--pad)}
+.skip{position:absolute;left:-9999px;background:var(--ink);color:var(--ivory);padding:12px 16px;
+  z-index:200;text-decoration:none;font-weight:700}
+.skip:focus{left:16px;top:16px}
+/* The approved block heading. It is the section's REAL heading element, so
+   heading-only navigation delivers the argument; the large display line
+   beneath it is approved body copy set at scale, not a second heading. */
+.lab{font:600 .82rem/1.4 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
+  display:block;margin:0}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ========================================================= THE TWO-STATE SURFACE
+   A region declares both palettes, so a state change is a token change. */
+.sw{--g:var(--ivory);--t:var(--ink);--muted:#5C5665;--ln:var(--line);
+  background:var(--g);color:var(--t);position:relative;overflow:hidden;
+  transition:background-color var(--t-state) var(--e-state),color var(--t-state) var(--e-state)}
+.sw[data-state="traffic"]{--g:var(--ink);--t:var(--ivory);--muted:#A29BAC;--ln:#332F3C}
+
+/* ============================================================= CTA OBJECTS == */
+.cta{display:inline-flex;align-items:center;justify-content:center;font:700 1rem/1.15 var(--body);
+  padding:17px 26px;min-height:52px;border-radius:100px;text-decoration:none;text-align:center;
+  background:var(--tang);color:#141219;border:2px solid var(--tang);
+  transition:transform var(--t-micro) var(--e-arrive),background-color var(--t-micro) var(--e-state),
+             color var(--t-micro) var(--e-state)}
+.cta:hover{transform:translateY(-3px)}
+.cta:active{transform:translateY(-1px)}
+.cta--o{background:transparent;color:inherit;border-color:currentColor}
+.cta--o:hover{background:currentColor;color:var(--g,var(--ivory))}
+.cta--sm{padding:12px 18px;font-size:.9rem;min-height:44px;white-space:nowrap}
+.acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+/* PROOF secondary — an offer, never a gate, and never styled as a third button */
+.proof{display:inline-flex;align-items:center;gap:10px;margin-top:20px;font:600 .98rem/1.4 var(--body);
+  color:var(--muted,var(--dim));text-decoration:none;border-bottom:2px solid currentColor;
+  padding-bottom:3px}
+.proof:hover{color:var(--t,var(--ink))}
+
+/* ==================================================================== HEADER
+   NON-STICKY on every page (H3). The parent is a link; the disclosure is a
+   separate control (the Session 01 structural defect this must fix). */
+.hdr{position:relative;z-index:60;border-bottom:1px solid var(--ln)}
+.hdr__in{display:flex;align-items:center;gap:clamp(14px,2vw,34px);padding:20px 0}
+.logo{font-family:var(--disp);font-weight:800;font-size:1.24rem;letter-spacing:-0.045em;
+  text-decoration:none;flex:none}
+.nav{display:flex;align-items:center;gap:clamp(12px,1.6vw,26px);margin-left:auto}
+.nav>li{list-style:none}
+.nav ul{list-style:none}
+.navlist{display:flex;align-items:center;gap:clamp(12px,1.6vw,26px);margin:0;padding:0}
+.navlink{color:inherit;opacity:.74;text-decoration:none;font:500 .96rem/1 var(--body);
+  padding:8px 0;display:inline-block;border-bottom:2px solid transparent}
+.navlink:hover{opacity:1}
+.navlink[aria-current="page"]{opacity:1;font-weight:700;border-bottom-color:currentColor}
+.parent{display:flex;align-items:center;gap:2px}
+.disc{background:none;border:0;color:inherit;cursor:pointer;padding:8px 6px;opacity:.74;
+  line-height:1;display:inline-flex;align-items:center;min-height:44px}
+.disc:hover{opacity:1}
+.disc svg{transition:transform var(--t-micro) var(--e-state)}
+.disc[aria-expanded="true"] svg{transform:rotate(180deg)}
+.menu{position:absolute;top:100%;margin-top:-1px;background:var(--paper);color:var(--ink);
+  border:1px solid var(--line);border-radius:14px;padding:10px;min-width:300px;
+  box-shadow:0 18px 44px rgba(20,18,25,.13)}
+.menu[hidden]{display:none}
+.menu a{display:block;padding:11px 14px;text-decoration:none;font:500 .96rem/1.35 var(--body);
+  border-radius:9px}
+.menu a:hover{background:var(--ivory)}
+.menu a b{font-weight:700}
+.util{display:flex;align-items:center;gap:16px;margin-left:clamp(10px,1.4vw,22px)}
+.util a{font:500 .92rem/1 var(--body);opacity:.74;text-decoration:none;padding:8px 0}
+.util a:hover{opacity:1}
+.burger{display:none;background:none;border:2px solid currentColor;border-radius:100px;color:inherit;
+  font:700 .9rem/1 var(--body);padding:12px 16px;min-height:44px;cursor:pointer;margin-left:auto;
+  align-items:center;gap:9px}
+.burger i{display:block;width:16px;height:2px;background:currentColor;position:relative}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0;width:16px;height:2px;
+  background:currentColor}
+.burger i::before{top:-5px}.burger i::after{top:5px}
+.panel{display:none}
+@media(max-width:1080px){
+  .nav,.util{display:none}
+  .burger{display:inline-flex}
+  .hdr__in .cta--sm{display:none}
+  /* The panel opens IN PLACE. Not a modal, and always escapable. */
+  .panel{display:block;border-top:1px solid var(--ln);padding:8px 0 26px;
+    max-height:calc(100vh - 84px);overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .panel[hidden]{display:none}
+  .panel ul{list-style:none;margin:0;padding:0}
+  .panel .navlink,.panel .plink{display:block;padding:14px 0;font-size:1.06rem;opacity:1;
+    border-bottom:1px solid var(--ln);text-decoration:none;font-weight:600}
+  .panel .sub a{padding-left:20px;font-weight:500;font-size:.98rem;opacity:.82}
+  .panel .parent{justify-content:space-between;border-bottom:1px solid var(--ln)}
+  .panel .parent .navlink{border-bottom:0;flex:1}
+  .panel .cta{width:100%;margin-top:20px}
+  .panel .putil{display:flex;flex-wrap:wrap;gap:8px 24px;padding-top:16px}
+  .panel .putil a{font-weight:600;padding:8px 0}
+}
+
+/* =============================================================== CHAPTER 1
+   HERO — FAR. The population, anonymous, resolving into named objects.
+   This is the page's ONE T1. Nothing else on the page outranks the proposition.
+   ========================================================================== */
+.hero{padding:clamp(30px,4.6vw,66px) 0 clamp(34px,5vw,78px)}
+.h1{font-size:clamp(2.55rem,7vw,6.4rem);max-width:15ch;margin:0;text-wrap:balance}
+/* KINETIC HIERARCHY: the emphasis is a mark WIPING across the governing word —
+   not a colour fade, so both words stay fully readable in both states. */
+.kw{position:relative;display:inline-block;white-space:nowrap}
+.nb{white-space:nowrap}
+.kw::after{content:"";position:absolute;left:-.03em;right:-.03em;bottom:.06em;height:.09em;
+  background:currentColor;transform:scaleX(0);transform-origin:left;
+  transition:transform var(--t-state) var(--e-state)}
+.kw.on::after{transform:scaleX(1)}
+.kw--e{color:var(--tang-ink)}
+.kw--t{color:var(--muted)}
+.sw[data-state="traffic"] .kw--e{color:var(--muted)}
+.sw[data-state="traffic"] .kw--t{color:var(--tang)}
+
+.heroRow{display:grid;gap:clamp(26px,3.2vw,60px);grid-template-columns:1fr;align-items:start;
+  margin-top:clamp(24px,2.8vw,44px)}
+@media(min-width:1060px){.heroRow{grid-template-columns:0.92fr 1.08fr}}
+.lede{font-size:clamp(1.06rem,1.35vw,1.28rem);max-width:46ch;color:var(--muted)}
+.lede b{color:var(--t);font-weight:700}
+
+/* ------------------------------------------------------------- THE FIELD --
+   In TRAFFIC an undifferentiated lattice: every mark identical, anonymous,
+   the same size. In ENQUIRIES the same population has resolved into a few
+   distinct, named objects. DOM squares, transform + opacity only. */
+.stage{position:relative;border-top:2px solid var(--ln);padding-top:16px;
+  transition:border-color var(--t-state) var(--e-state)}
+.stage__head{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:baseline;
+  justify-content:space-between;margin-bottom:18px}
+.stage__lab{transition:color var(--t-state) var(--e-state)}
+.fieldbox{position:relative;height:clamp(224px,25vw,306px)}
+.field{position:absolute;inset:0;display:grid;gap:5px;
+  grid-template-columns:repeat(var(--cols,22),1fr);align-content:space-between}
+.field i{display:block;width:100%;height:9px;background:var(--dim);opacity:.5;
+  transform:translate3d(0,0,0) scale(1);
+  transition:transform var(--t-resolve) var(--e-arrive),opacity var(--t-resolve) var(--e-state),
+             background-color var(--t-state) var(--e-state)}
+.sw[data-state="traffic"] .field i{background:#BDB6CC;opacity:.9}
+.sw[data-state="enquiries"] .field i{transform:translate3d(var(--tx,0),var(--ty,0),0) scale(.55);opacity:0}
+.sw[data-state="traffic"] .field.pulse i{animation:ripple 620ms var(--e-arrive) both}
+@keyframes ripple{0%{transform:scale(1)}42%{transform:scale(1.5)}100%{transform:scale(1)}}
+
+.rows{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;
+  pointer-events:none}
+.row{display:flex;align-items:center;gap:14px;opacity:0;transform:translateX(-14px);
+  transition:opacity 420ms var(--e-arrive),transform 420ms var(--e-arrive)}
+.sw[data-state="enquiries"] .row{opacity:1;transform:none}
+.row__m{width:15px;height:15px;flex:none;background:var(--tang)}
+.row__m.open{background:transparent;border:2px dashed var(--gapc)}
+/* QUANTITY SAFETY (19A). These were four unequal channel-associated lengths
+   (34/26/30/22%), which could be read as mix, volume or effectiveness. They
+   are now ONE EQUAL LENGTH for every row: the bar carries STATE ONLY —
+   solid tangerine = a named, attributed object; dashed grey = arrived with no
+   usable trail. Nothing here is comparative, so nothing can be inferred. */
+.row__b{height:11px;width:26%;background:var(--tang);border-radius:2px;flex:none;
+  transform:scaleX(0);transform-origin:left;transition:transform 560ms var(--e-arrive)}
+.sw[data-state="enquiries"] .row__b{transform:scaleX(1)}
+.row__b.open{background:repeating-linear-gradient(90deg,var(--gapc) 0 5px,transparent 5px 10px);height:6px}
+.row__t{font:600 .88rem/1.25 var(--body);color:var(--muted)}
+.note{font:500 .82rem/1.5 var(--body);color:var(--muted);margin:16px 0 0;max-width:none}
+.note b{font-weight:700}
+
+/* The one signature interaction on the site. The reader can put the report an
+   agency usually shows them next to the one we report. */
+.control{display:inline-flex;border:2px solid currentColor;border-radius:100px;padding:3px;gap:3px}
+.control button{font:600 .88rem/1 var(--body);border:0;border-radius:100px;padding:11px 17px;
+  min-height:42px;cursor:pointer;background:transparent;color:inherit;
+  transition:background-color var(--t-micro) var(--e-state),color var(--t-micro) var(--e-state)}
+.control button[aria-pressed="true"]{background:var(--tang);color:#141219}
+.sw[data-state="traffic"] .control button[aria-pressed="true"]{background:var(--ivory);color:var(--ink)}
+
+/* =============================================================== CHAPTER 2
+   THE DEPARTURE — the hero's resolved marks leave, and ONE carries on. The
+   page changes altitude for the first time. A transition, not a resolve.
+   ========================================================================== */
+.dep{background:var(--ink);color:var(--ivory);padding:clamp(48px,7vw,104px) 0;position:relative;
+  overflow:hidden}
+/* The tangerine wipe that used to cross this band was CUT in Session 18A:
+   audited as DECORATIVE. The carrier square carries the meaning; the wipe was
+   there because the band looked inert without it, which is not a reason. */
+.dep .wrap{position:relative;z-index:2}
+.dep__line{display:flex;align-items:center;gap:clamp(16px,2.4vw,34px)}
+/* the surviving mark — the atom of every chapter that follows */
+.carrier{width:clamp(20px,2.4vw,30px);height:clamp(20px,2.4vw,30px);flex:none;background:var(--tang);
+  opacity:0;transform:translateY(26px) scale(.5);
+  transition:opacity 520ms var(--e-arrive) 900ms,transform 620ms var(--e-arrive) 900ms}
+.dep.on .carrier{opacity:1;transform:none}
+.dep__t{font-family:var(--disp);font-weight:800;letter-spacing:-0.035em;line-height:.95;
+  font-size:clamp(1.5rem,3.6vw,3rem);max-width:22ch;margin:0;
+  opacity:0;transform:translateY(16px);
+  transition:opacity 520ms var(--e-arrive) 1000ms,transform 520ms var(--e-arrive) 1000ms}
+.dep.on .dep__t{opacity:1;transform:none}
+.dep em{font-style:normal;color:var(--tang)}
+
+/* ================================================================ SECTIONS */
+.sec{padding:clamp(66px,9vw,152px) 0;border-top:1px solid var(--line)}
+.sec--tight{padding-top:clamp(40px,5vw,72px)}
+.sec--flush{border-top:0;padding-top:0}
+.h2{font-family:var(--disp);font-weight:800;letter-spacing:-0.035em;line-height:.95;
+  font-size:clamp(2rem,5vw,4.3rem);max-width:16ch;margin:0}
+.h2--wide{max-width:20ch}
+.sub{color:var(--dim);max-width:52ch;margin-top:20px;font-size:clamp(1.02rem,1.2vw,1.16rem)}
+.sub b{color:var(--ink);font-weight:700}
+.split{display:grid;gap:clamp(28px,4vw,72px);grid-template-columns:1fr;align-items:start}
+@media(min-width:1000px){.split{grid-template-columns:.92fr 1.08fr}}
+@media(min-width:1000px){.split--even{grid-template-columns:1fr 1fr}}
+
+/* =============================================================== CHAPTER 3
+   RECOGNITION — FRICTION. Three routes fail for three different reasons and
+   produce one identical outcome. The event IS the approved sentence:
+   "with no measurement in place, all three failures look identical."
+   ========================================================================== */
+.fail{position:relative;margin-top:clamp(26px,3.4vw,44px)}
+.fail__r{display:grid;grid-template-columns:1fr auto;align-items:center;gap:14px 20px;
+  padding:clamp(14px,1.8vw,22px) 0;border-bottom:1px solid var(--line)}
+.fail__r:first-child{border-top:1px solid var(--line)}
+.fail__t{font:600 clamp(1rem,1.7vw,1.32rem)/1.3 var(--body);color:var(--ink);grid-column:1;
+  max-width:34ch}
+.fail__t em{font-style:normal;color:var(--tang-sm);font-weight:700}
+/* the route: marks that get part of the way, then stop */
+.fail__run{grid-column:1/-1;display:flex;align-items:center;gap:7px;min-height:22px}
+@media(min-width:900px){
+  .fail__r{grid-template-columns:minmax(0,26ch) 1fr}
+  .fail__t{grid-column:1}
+  .fail__run{grid-column:2;justify-content:flex-start}
+}
+/* THE COMPOSED STATE IS THE DEFAULT. The runs are drawn, the stops are open
+   and the rule is present with no script and no motion. JavaScript OPTS IN to
+   the animation by writing the start state inline and then releasing it, so
+   nothing here depends on a cascade override firing — and a reader who never
+   receives the observer callback still gets the finished composition. */
+.fail__run i{width:13px;height:13px;flex:none;background:var(--dim);opacity:.42;
+  transition:opacity 300ms var(--e-arrive) var(--d,0s),transform 380ms var(--e-arrive) var(--d,0s),
+             background-color 380ms var(--e-state) var(--d,0s)}
+/* the stop: the route's last mark is an OPEN square — nothing arrived. Its
+   SIZE is constant so the alignment offsets can be measured reliably; only
+   its POSITION changes. */
+.fail__run i.stop{opacity:1;width:15px;height:15px;background:transparent;
+  border:2px dashed var(--gapc);margin-left:auto}
+.fail__rule{position:absolute;right:0;top:6px;bottom:6px;width:2px;background:var(--ink);
+  opacity:1;transition:opacity 420ms var(--e-state)}
+.fail__ruleT{position:absolute;right:0;top:-30px;font:700 .78rem/1.3 var(--body);
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-align:right;max-width:20ch;
+  opacity:1;transition:opacity 420ms var(--e-state) 180ms}
+/* NARROW: the same event, recomposed. The three outcomes still travel to one
+   column — there is free space in every row at 390px — but a single tall rule
+   would cross the copy, so the rule becomes a TICK at the right of each run.
+   Stacked, the three ticks read as one broken vertical, and the label follows
+   the block as a caption instead of floating beside it. */
+@media(max-width:899px){
+  .fail__rule{display:none}
+  .fail__run{position:relative;padding-right:2px}
+  .fail__run::after{content:"";position:absolute;right:0;top:-6px;bottom:-6px;width:2px;
+    background:var(--ink);opacity:1;transition:opacity 420ms var(--e-state)}
+  /* composed by default; JS opts in to the motion by holding it back */
+  .fail.pre-align .fail__run::after{opacity:0}
+  .fail__ruleT{position:static;display:block;text-align:right;max-width:none;
+    margin-top:14px;opacity:1}
+}
+.symp{list-style:none;margin:clamp(26px,3.4vw,44px) 0 0;padding:0;
+  display:grid;gap:0;grid-template-columns:1fr}
+@media(min-width:820px){.symp{grid-template-columns:1fr 1fr;column-gap:clamp(28px,4vw,64px)}}
+.symp li{padding:12px 0;border-bottom:1px solid var(--line);font:500 1.02rem/1.4 var(--body);
+  color:var(--dim)}
+
+/* =============================================================== CHAPTER 3
+   THE SYSTEM — the page's compression device, and the one large experience.
+
+   Session 18B merged three chapters into this one. The re-read, F1 and the
+   whole capabilities chapter were 3,518px and 454 words explaining ONE system
+   three times over. They are now one view of it.
+
+   THE CHAIN IS DRAWN ONCE, COMPLETE AND STATIC — six points, the unmeasured
+   lead-in dashed, the joins ticked, the unattached arrival, the accountability
+   boundary, the client-data double line. F1's entry state is satisfied at first
+   paint and nothing here is revealed only by interaction.
+
+   Choosing a stage changes WHICH DISCRETE MARKS are the subject, shows ONE
+   short line, and surfaces the capabilities that intervene there.
+
+   QUANTITY SAFETY (18B, §25): the marks are POINTS AND JOINS. There is no
+   continuous active bar anywhere — a point cannot express a percentage.
+   ========================================================================== */
+/* STACKED AT EVERY WIDTH, deliberately. The chain was authored at a fixed
+   viewBox, so putting it in a column shrinks its own labels below legibility
+   (10px at 1440). Full width keeps them at ~17px and gives the page the ONE
+   large visual experience it should have, instead of a squeezed diagram. */
+.sys{display:grid;gap:clamp(26px,3.4vw,52px);grid-template-columns:1fr;align-items:start;
+  margin-top:clamp(26px,3vw,46px)}
+.stages{max-width:52ch}
+
+/* the three stages — the reader can drive them, and they drive themselves once */
+.stages{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+/* 19B — the stage panel is a SIBLING of the tab button, never a descendant.
+   The row's padding therefore lives on the <li>, so the composition is
+   unchanged: the button occupies the title row and the panel the row beneath,
+   offset to the title's column by the numeral track + gap. */
+.stages li{border-bottom:1px solid var(--line);padding:clamp(14px,1.8vw,20px) 0}
+.stg{position:relative;display:block;width:100%;text-align:left;background:none;border:0;
+  cursor:pointer;padding:0;color:inherit;font-family:inherit;
+  display:grid;grid-template-columns:var(--numw,20px) 1fr;gap:0 16px;align-items:baseline}
+/* The tab now holds only its title, so at smaller display sizes its box drops
+   below the 40px interaction floor. Same invisible extender as 19A: hit area
+   only, centred in the row's own padding, so no layout or paint changes and
+   adjacent tabs cannot overlap. */
+.stg::after{content:"";position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);
+  height:40px}
+.stg__n{font:700 .82rem/1 var(--body);letter-spacing:.18em;color:var(--dim);
+  transition:color var(--t-state) var(--e-state)}
+.stg__t{font-family:var(--disp);font-weight:800;letter-spacing:-0.03em;
+  font-size:clamp(1.5rem,3.2vw,2.5rem);line-height:1.02;color:var(--dim);
+  transition:color var(--t-state) var(--e-state)}
+.stg__b{font:500 1rem/1.45 var(--body);color:var(--dim);max-width:40ch;
+  margin:4px 0 0 calc(var(--numw,20px) + 16px);display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows var(--t-state) var(--e-state)}
+.stg__b>span{overflow:hidden;min-height:0}
+/* A collapsed panel is clipped to zero height, so its links must also leave
+   the tab order: a focus ring on an invisible control fails WCAG 2.4.7. This
+   is done with `inert` from script (below), which removes descendants from the
+   tab order and the accessibility tree WITHOUT affecting layout or the
+   collapse transition. With no script, and under reduced motion, every panel
+   is open and every link is correctly focusable. */
+.stg[aria-selected="true"] .stg__n{color:var(--tang-sm)}
+.stg[aria-selected="true"] .stg__t{color:var(--ink)}
+.stg[aria-selected="true"]+.stg__b{grid-template-rows:1fr;padding-top:10px}
+/* REDUCED MOTION RESOLVES, IT DOES NOT FREEZE. Without the auto-advance the
+   reader would never be shown stages 01 and 02, so all three are composed open
+   and none of the deeper-page routes sits behind an interaction. */
+.stages.all .stg__b{grid-template-rows:1fr;padding-top:10px}
+.stages.all .stg__n{color:var(--tang-sm)}
+.stages.all .stg__t{color:var(--ink)}
+/* the capabilities that intervene at this stage — compact, and they leave */
+.caps__l{display:flex;flex-wrap:wrap;gap:8px 10px;margin-top:12px}
+.caps__l a{font:600 .88rem/1 var(--body);text-decoration:none;color:var(--ink);
+  border:1.5px solid var(--line);border-radius:100px;padding:11px 15px;min-height:40px;
+  display:inline-flex;align-items:center;
+  transition:border-color var(--t-micro) var(--e-state),background-color var(--t-micro) var(--e-state)}
+.caps__l a:hover{border-color:var(--ink);background:var(--paper)}
+
+/* ------------------------------------------------------------- the chain -- */
+.chain{position:relative}
+.chain svg{width:100%;height:auto;overflow:visible}
+.d-wide,.d-med,.d-narrow{display:none}
+@media(min-width:1100px){.d-wide{display:block}}
+@media(min-width:700px) and (max-width:1099px){.d-med{display:block}}
+@media(max-width:699px){.d-narrow{display:block}}
+.ln{fill:none;stroke:var(--ink);stroke-width:2.5}
+.ln-gap{fill:none;stroke:var(--gapc);stroke-width:2;stroke-dasharray:5 5}
+.ln-yours{fill:none;stroke:var(--ink);stroke-width:1.6}
+.pt{fill:var(--ink)}
+.nd-open{fill:none;stroke:var(--gapc);stroke-width:2;stroke-dasharray:4 4}
+.tick{stroke:var(--gapc);stroke-width:2.5}
+.bd{stroke:var(--ink);stroke-width:2}
+.t-node{font:600 13px/1.2 var(--body);fill:var(--dim)}
+.t-bd{font:700 12px/1.2 var(--body);fill:var(--ink);letter-spacing:.09em;text-transform:uppercase}
+/* the stage marks — DISCRETE. A point or a join, never a length. */
+.pt,.tick,.nd-open,.bd{transition:fill var(--t-state) var(--e-state),
+  stroke var(--t-state) var(--e-state),stroke-width var(--t-state) var(--e-state)}
+.chain[data-stage="1"] [data-s~="1"],
+.chain[data-stage="2"] [data-s~="2"],
+.chain[data-stage="3"] [data-s~="3"]{fill:var(--tang-ink)}
+.chain[data-stage="1"] line[data-s~="1"],
+.chain[data-stage="2"] line[data-s~="2"],
+.chain[data-stage="3"] line[data-s~="3"]{stroke:var(--tang-ink);fill:none}
+.chain[data-stage="3"] .nd-open[data-s~="3"]{fill:none;stroke:var(--tang-ink)}
+.chain[data-stage="3"] .bd{stroke-width:3.4}
+/* the descent — the page gets closer to the object, once */
+.chain{transform:scale(.46) translateY(20px);transform-origin:50% 34%;opacity:.42;
+  transition:transform var(--t-resolve) var(--e-arrive),opacity var(--t-resolve) var(--e-state)}
+.chain.on{transform:none;opacity:1}
+.draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
+.chain.on .draw{transition:stroke-dashoffset var(--dur,1100ms) var(--e-state) var(--d,0ms);
+  stroke-dashoffset:0}
+.fade{opacity:0}
+.chain.on .fade{opacity:1;transition:opacity 420ms var(--e-arrive) var(--d,0ms)}
+.legend{display:flex;flex-wrap:wrap;gap:8px clamp(16px,2.2vw,30px);margin-top:20px;
+  font:500 .84rem/1.4 var(--body);color:var(--dim)}
+.legend span{display:inline-flex;align-items:center;gap:9px}
+.lg{width:13px;height:13px;flex:none;border:2px solid var(--gapc)}
+.lg--pt{background:var(--ink);border-color:var(--ink)}
+.lg--open{border-style:dashed}
+
+/* =============================================================== CHAPTER 5
+   THE BOUNDARY — the page's deepest stillness. One line is drawn, and nothing
+   else on this screen moves. Quiet precision, immediately after the descent.
+   ========================================================================== */
+.bound__grid{display:grid;gap:clamp(28px,4vw,68px);grid-template-columns:1fr;align-items:start;
+  margin-top:clamp(28px,3.6vw,52px)}
+@media(min-width:1000px){.bound__grid{grid-template-columns:1fr 1fr}}
+.plist{list-style:none;margin:0;padding:0}
+.plist li{display:flex;align-items:baseline;gap:16px;padding:14px 0;
+  border-bottom:1px solid var(--line);
+  font:600 clamp(1.05rem,2.1vw,1.5rem)/1.25 var(--body);color:var(--dim)}
+.plist li i{font:600 .8rem/1 var(--body);color:var(--dim);flex:none;font-style:normal;
+  display:inline-flex;align-items:center;gap:12px}
+/* the same two states the page has used since the hero: not ours, and ours */
+.plist li i::after{content:"";width:13px;height:13px;flex:none;background:transparent;
+  border:2px dashed var(--gapc)}
+.owned h3::before{content:"";display:inline-block;width:16px;height:16px;background:var(--tang-ink);
+  margin-right:14px;transform:translateY(1px)}
+/* REMOVED IN 19A — "THE FALL". A rule drawn through each promise was
+   specified in Session 18 and documented as live through 18C, but its selector
+   was `.bound.on` while the element has only ever carried `class="sec
+   sec--tight"`, and since 18B no script applied `.on`. IT NEVER RENDERED in
+   the JS path, so it was never part of the experience the owner reviewed.
+   It is removed rather than repaired, per the Session 19A ruling: the
+   boundary chapter is INTENTIONALLY STILL. Its two fallback rules went with
+   it — a no-JS rule that DID draw the strike (making no-JS disagree with the
+   reviewed page) and a reduced-motion `opacity:.6` that dropped the five
+   promises to 2.66:1, under the 3:1 floor for 24px text. */
+.owned{border-left:4px solid var(--tang-ink);padding-left:clamp(20px,2.4vw,30px)}
+.owned h3{font-family:var(--disp);font-weight:800;letter-spacing:-0.035em;
+  font-size:clamp(1.5rem,3.2vw,2.7rem);margin:0 0 16px;line-height:1.02;max-width:16ch}
+.owned h3 em{font-style:normal;color:var(--tang-ink)}
+.owned p{color:var(--dim);max-width:46ch}
+.owned p:last-child{margin-bottom:0}
+.detail{margin-top:clamp(26px,3.4vw,50px);columns:2;column-gap:clamp(30px,4vw,64px);max-width:none}
+.detail p{max-width:none;break-inside:avoid;color:var(--dim);font-size:1rem}
+@media(max-width:860px){.detail{columns:1}}
+
+/* =============================================================== CHAPTER 7
+   EVIDENCE — the admission at full weight, then what genuinely exists.
+   The claim is LIFTED by the reader. Nothing is asserted that is not first
+   party, dated and checkable, and the machinery never becomes the point.
+   ========================================================================== */
+/* The most commercially distinctive sentence on the page, and the second
+   half's typographic event. It is set larger than anything except the H1 and
+   the close, alone, with air — no motion, because the scale is the event. */
+.adm{margin:0;font-family:var(--disp);font-weight:800;letter-spacing:-0.04em;
+  font-size:clamp(2.5rem,6.4vw,5.4rem);line-height:.96;max-width:14ch}
+.adm+p{margin-top:clamp(26px,3vw,44px);color:var(--dim);max-width:46ch;
+  font-size:clamp(1.06rem,1.3vw,1.26rem)}
+.ev{position:relative;border-radius:20px;overflow:hidden;background:var(--ink);color:var(--ivory);
+  margin-top:clamp(32px,4vw,56px)}
+.ev__top{position:relative;z-index:2;background:var(--ink);padding:clamp(26px,4vw,58px);
+  transition:transform var(--t-state) var(--e-state)}
+.ev[data-open] .ev__top{transform:translateY(-10px)}
+.ev__claim{font-family:var(--disp);font-weight:800;font-size:clamp(1.55rem,4vw,3.2rem);
+  letter-spacing:-0.035em;line-height:1.03;margin:0 0 16px;max-width:18ch}
+.ev__claim em{font-style:normal;color:var(--tang)}
+.ev__sub{color:#C0B9CA;max-width:54ch;margin:0 0 24px}
+.ev__btn{font:700 .95rem/1 var(--body);background:var(--tang);color:#141219;border:0;
+  border-radius:100px;padding:15px 24px;min-height:48px;cursor:pointer;
+  transition:transform var(--t-micro) var(--e-arrive)}
+.ev__btn:hover{transform:translateY(-2px)}
+.ev__under{background:var(--ink-2);border-top:1px solid var(--rule);
+  display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--t-state) var(--e-state);
+  padding:0 clamp(26px,4vw,58px)}
+.ev[data-open] .ev__under{grid-template-rows:1fr;padding-top:clamp(20px,2.6vw,34px);
+  padding-bottom:clamp(26px,3.4vw,48px)}
+.ev__under>div{overflow:hidden;min-height:0}
+.ev__lim{color:#C0B9CA;max-width:56ch;margin:0 0 18px;font-size:.98rem}
+.ev__lim b{color:var(--ivory);font-weight:700}
+.ev__go{color:var(--tang);font-weight:700;text-decoration:none;border-bottom:2px solid currentColor;
+  font-size:.96rem;display:inline-block;padding-bottom:3px}
+/* the checkable items — built to hold more than it holds, and left not-full */
+.check{list-style:none;margin:clamp(30px,3.6vw,50px) 0 0;padding:0;border-top:2px solid var(--ink)}
+.check li{border-bottom:1px solid var(--line)}
+.check a{display:block;padding:clamp(15px,1.8vw,21px) 0;text-decoration:none;
+  font-family:var(--disp);font-weight:700;letter-spacing:-0.03em;
+  font-size:clamp(1.1rem,2vw,1.5rem);line-height:1.12;
+  transition:padding-left var(--t-micro) var(--e-arrive)}
+.check a:hover{padding-left:12px}
+.check a::after{content:" \2192";color:var(--tang-sm)}
+
+/* =============================================================== CHAPTER 8
+   FIT — still. Two positions, side by side, at equal type quality. The wrong
+   buyer is allowed to leave without being disparaged.
+   ========================================================================== */
+.fit{display:grid;gap:clamp(26px,3.4vw,60px);grid-template-columns:1fr;
+  margin-top:clamp(28px,3.6vw,52px)}
+@media(min-width:900px){.fit{grid-template-columns:1fr 1fr}}
+.fit>div{border-top:2px solid var(--ink);padding-top:20px}
+.fit>div:last-child{border-top-color:var(--gapc)}
+.fit h3{font:700 .84rem/1.3 var(--body);letter-spacing:.16em;text-transform:uppercase;
+  font-family:var(--body);color:var(--ink);display:flex;align-items:center;gap:12px}
+.fit>div:last-child h3{color:var(--dim)}
+/* the same two states the whole page has used: ours and working, or not */
+.fit h3::before{content:"";width:14px;height:14px;flex:none;background:var(--tang-ink)}
+.fit>div:last-child h3::before{background:transparent;border:2px dashed var(--gapc)}
+.fit p{margin-top:16px;font-size:clamp(1.04rem,1.25vw,1.2rem);max-width:44ch}
+.fit>div:last-child p{color:var(--dim)}
+
+/* =============================================================== CHAPTER 9
+   THE CLOSE — full-bleed tangerine. The second and last surface inversion.
+   The marks arrive one final time, including the one that has no trail.
+   ========================================================================== */
+.close{background:var(--tang);color:#141219;padding:clamp(70px,10vw,168px) 0;
+  position:relative;overflow:hidden}
+.close h2{font-size:clamp(2.4rem,6.6vw,5.8rem);max-width:11ch}
+.close p{margin-top:22px;font-size:clamp(1.06rem,1.4vw,1.26rem);max-width:44ch;font-weight:500}
+.close .cta{background:#141219;color:var(--tang);border-color:#141219}
+.close .cta--o{background:transparent;color:#141219;border-color:#141219}
+.close .cta--o:hover{background:#141219;color:var(--tang)}
+/* They arrive from ABOVE and land. The page has spent nine chapters following
+   this population down; the close is where it stops, so the last movement on
+   the page is downward and it ends. */
+.arrive{display:flex;gap:12px;margin-bottom:clamp(28px,3.4vw,44px)}
+.arrive i{width:24px;height:24px;background:#141219;opacity:0;transform:translateY(-54px);
+  transition:opacity 340ms var(--e-arrive) var(--d,0s),transform 680ms var(--e-arrive) var(--d,0s)}
+.arrive i.open{background:transparent;border:2px dashed #141219}
+.close.on .arrive i{opacity:1;transform:none}
+.close__note{margin-top:26px;font-size:.95rem;font-weight:600;max-width:46ch}
+
+/* ==================================================================== FOOTER
+   Four columns plus the entity block. The entity block is content, not
+   decoration, and its facts are one source with /about, /contact and schema.
+   ========================================================================== */
+.foot{background:var(--ink);color:#9C95A8;padding:clamp(50px,6vw,86px) 0 40px;font-size:.94rem}
+.foot h3{font:700 .8rem/1.3 var(--body);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ivory);font-family:var(--body);margin:0 0 14px}
+.foot__cols{display:grid;gap:clamp(26px,3vw,44px);grid-template-columns:1fr}
+@media(min-width:640px){.foot__cols{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.foot__cols{grid-template-columns:repeat(4,1fr)}}
+.foot ul{list-style:none;margin:0;padding:0}
+.foot li{margin-bottom:9px}
+/* footer links are distinguishable WITHOUT relying on colour */
+.foot a{color:#DAD4E1;text-decoration:underline;text-underline-offset:3px;
+  text-decoration-thickness:1px;text-decoration-color:#6A6377}
+.foot a:hover{text-decoration-color:var(--tang);color:var(--ivory)}
+.entity{margin-top:clamp(34px,4vw,60px);padding-top:clamp(26px,3vw,40px);
+  border-top:1px solid var(--rule);display:grid;gap:22px;grid-template-columns:1fr}
+@media(min-width:900px){.entity{grid-template-columns:1.1fr .9fr}}
+.entity address{font-style:normal;color:#DAD4E1;line-height:1.7}
+.entity b{color:var(--ivory);font-weight:700}
+.protonote{margin-top:32px;padding-top:20px;border-top:1px solid var(--rule);font-size:.85rem;
+  color:#9C95A8;max-width:none}
+.protonote b{color:#BDB6CC}
+
+/* ======================================= PROGRAMME INTERACTION FLOOR (19A) ==
+   Every interactive control carries a hit area of at least 40x40 CSS px at
+   every width. Session 19 found inline-text controls at 21-33px between the
+   mobile breakpoint and desktop.
+
+   TWO MECHANISMS, chosen per element so that NO type is inflated and NO
+   vertical rhythm moves:
+
+   1. An invisible, centred ::after extender for controls that stand alone or
+      sit in generously spaced chrome. It adds hit area only — zero layout,
+      zero paint. Used ONLY where neighbours are far enough away that hit
+      areas cannot overlap and steal each other's taps.
+   2. Real padding for the footer link columns, whose 30px pitch is too tight
+      for extenders: overlapping invisible targets would cause mis-taps, which
+      is worse than the undersized target it fixes.                          */
+.logo,.navlink,.util a,.proof,.ev__go{position:relative}
+.logo::after,.navlink::after,.util a::after,.proof::after,.ev__go::after{
+  content:"";position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);
+  height:40px}
+/* the disclosure is 44px tall but only 24px wide */
+.disc{min-width:40px;justify-content:center}
+/* footer columns: real spacing, and the row pitch absorbs the added padding */
+.foot li{margin-bottom:0}
+.foot a{display:inline-block;padding:10px 0}
+
+/* ------------------------------------------------------ reveal on entering view
+   T3. Composition only — never the carrier of meaning. */
+.rv{opacity:0;transform:translateY(24px)}
+.rv.on{opacity:1;transform:none;transition:opacity 700ms var(--e-arrive),transform 700ms var(--e-arrive)}
+
+/* ============================ PROGRESSIVE ENHANCEMENT — NO JAVASCRIPT =====
+   Every resolved state is shown, every disclosure is open, all navigation and
+   all copy are present. Motion is an amplifier, never the carrier. */
+html:not(.js) .rv{opacity:1;transform:none}
+html:not(.js) .field{display:none}
+html:not(.js) .row{opacity:1;transform:none}
+html:not(.js) .row__b{transform:scaleX(1)}
+html:not(.js) .control{display:none}
+html:not(.js) .carrier,html:not(.js) .dep__t{opacity:1;transform:none}
+/* every stage is open, so all three readings of the system are present */
+html:not(.js) .stg__b{grid-template-rows:1fr;padding-top:10px}
+html:not(.js) .stg__n{color:var(--tang-sm)}
+html:not(.js) .stg__t{color:var(--ink)}
+html:not(.js) .chain{transform:none;opacity:1}
+html:not(.js) .draw,html:not(.js) .bdraw{stroke-dashoffset:0}
+html:not(.js) .fade{opacity:1}
+html:not(.js) .ev__under{grid-template-rows:1fr;padding-top:28px;padding-bottom:36px}
+html:not(.js) .ev__btn{display:none}
+html:not(.js) .arrive i{opacity:1;transform:none}
+html:not(.js) .panel{display:block!important}
+html:not(.js) .burger{display:none}
+html:not(.js) .menu{position:static;display:block;box-shadow:none;border:0;padding:4px 0 0 14px;
+  min-width:0;background:transparent}
+html:not(.js) .menu[hidden]{display:block}
+html:not(.js) .disc{display:none}
+html:not(.js) .panel .sub[hidden]{display:block}
+
+/* ==================================================== REDUCED MOTION ======
+   Reduced motion does not freeze — it RESOLVES. Every transformed state is
+   composed directly, the lattice is removed, the descent is already arrived,
+   the re-read rests on its final reading with all three readings present as
+   text, and the signature control still works. No meaning is lost.
+   ========================================================================== */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:1ms!important;
+    transition-delay:0ms!important;scroll-behavior:auto!important}
+  .rv{opacity:1;transform:none}
+  .field{display:none}
+  .row{opacity:1;transform:none}.row__b{transform:scaleX(1)}
+  .carrier,.dep__t{opacity:1;transform:none}
+  .chain{transform:none;opacity:1}
+  .draw,.bdraw{stroke-dashoffset:0}
+  .fade{opacity:1}
+  .arrive i{opacity:1;transform:none}
+}
+
+/* =============================================================== NARROW ===
+   The journey survives recomposition. It is not the desktop page shrunk, and
+   it is never replaced by a column of text: the population, the friction, the
+   re-read, the descent and the arrival all have narrow-native forms.
+   ========================================================================== */
+/* ============================================ SESSION 18C — MOBILE ========
+   The owner reported the mobile view as CLUTTERED. A screenful-by-screenful
+   audit at 390x844 found the cause was not spacing: it was the NUMBER OF
+   SIMULTANEOUS OBJECTS competing at equal weight. The worst viewport carried
+   17 text elements, 12 links and 15 bordered objects at once.
+
+   The rules below establish ONE PRIMARY THING TO LOOK AT per screen. They are
+   narrow-only; the desktop composition the owner just approved is untouched.
+   ========================================================================== */
+@media(max-width:760px){
+  /* ---- the system view: one stage is the subject, the others are an index */
+  .stages li{border-bottom:0}
+  .stages li+li{border-top:1px solid var(--line)}
+  .stages li{padding:11px 0}
+  .stg{padding:0}
+  .stg__t{font-size:1.15rem;transition:font-size var(--t-state) var(--e-state),
+    color var(--t-state) var(--e-state)}
+  .stg[aria-selected="true"] .stg__t{font-size:1.5rem}
+  /* the chapter statement must stay the screen's primary object */
+  .sys{margin-top:clamp(56px,16vw,84px)}
+  /* seven outlined pills were seven competing rectangles. They become text. */
+  .caps__l{gap:0 20px;margin-top:8px}
+  .caps__l a{border:0;border-radius:0;border-bottom:2px solid var(--line);
+    padding:11px 0;min-height:40px}
+  .caps__l a:hover{background:transparent;border-bottom-color:var(--ink)}
+  /* the figure's own labels already name the two honest states, so only the
+     mark they do NOT name keeps a legend entry */
+  .legend span:not(.lg-keep){display:none}
+  .legend{margin-top:16px}
+  /* the stage numerals repeat what the stage titles already say */
+  .stg__n{display:none}
+  .stg{grid-template-columns:1fr}
+  .stg__b{margin-left:0}
+  /* the deeper-page link must not join the capability cluster */
+  .sys .proof{margin-top:26px}
+  /* ---- the hero gets room. The whole hero previously fitted in one screen,
+     so nothing dominated it. The statement now owns the first viewport and the
+     population is TEASED at the fold — discovered on scroll, not competed with */
+  .heroRow{gap:clamp(84px,26vw,112px)}
+  .hero{padding-bottom:clamp(34px,7vw,60px)}
+  /* ---- the close needs a clean ending before the footer begins, and the
+     four footer blocks read as two pairs rather than one dense field */
+  .foot{padding-top:clamp(88px,26vw,124px)}
+  .foot__cols{grid-template-columns:1fr 1fr;gap:52px 18px}
+  .foot li{margin-bottom:0}
+  .fieldbox{height:auto}
+  .rows{position:relative;inset:auto;gap:16px}
+  .stage__head{gap:10px}
+  .hdr__in{padding:14px 0}
+  .detail{columns:1}
+  .arrive i{width:17px;height:17px}
+  .arrive{gap:9px}
+  .adm{font-size:clamp(2.7rem,9vw,5.4rem)}
+  .acts .cta{flex:1 1 100%}
+  /* touch targets comfortably above minimum, with real spacing between
+     adjacent ones — the mobile buyer is the likelier one here */
+  .proof{min-height:44px;align-items:center;padding-bottom:8px}
+  .foot a{display:inline-block;padding:12px 0}
+  .foot li{margin-bottom:0}
+  .logo{display:inline-block;padding:7px 0}
+  .entity address a{padding:12px 0}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- =========================================================== HEADER
+     NON-STICKY. Six primary items, no mega-menu, no second level.
+     "What we do" is a REAL LINK to /services; the disclosure is a separate
+     control — the Session 01 defect this architecture exists to fix. -->
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <div class="hdr__in">
+      <a class="logo" href="/" aria-current="page">MappedSkills</a>
+
+      <nav class="nav" aria-label="Primary">
+        <ul class="navlist">
+          <li class="parent" id="parent">
+            <a class="navlink" href="/services">What we do</a>
+            <button class="disc" type="button" id="disc" aria-expanded="false" aria-controls="menu">
+              <span class="vh">Show what we do menu</span>
+              <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+            <div class="menu" id="menu" hidden>
+              <a href="/services"><b>Overview</b> — the whole system, end to end</a>
+              <a href="/seo">Organic search</a>
+              <a href="/google-ads">Google Ads</a>
+              <a href="/social-media-ads">Paid social</a>
+              <a href="/ai-seo">AI search</a>
+              <a href="/conversion-optimization">Conversion optimisation</a>
+              <a href="/lead-generation">Lead generation</a>
+            </div>
+          </li>
+          <li><a class="navlink" href="/how-it-works">How it works</a></li>
+          <li><a class="navlink" href="/research">Evidence</a></li>
+          <li><a class="navlink" href="/pricing">Pricing</a></li>
+          <li><a class="navlink" href="/blog">Insights</a></li>
+          <li><a class="navlink" href="/about">About</a></li>
+        </ul>
+      </nav>
+
+      <div class="util"><a href="/contact">Contact</a></div>
+      <a class="cta cta--sm" href="/contact">Tell us what you&rsquo;re trying to fix</a>
+
+      <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="panel">
+        <i aria-hidden="true"></i><span id="burgerT">Menu</span>
+      </button>
+    </div>
+
+    <!-- Mobile: the SAME navigation, semantically. Opens in place, not a modal. -->
+    <div class="panel" id="panel" hidden>
+      <ul>
+        <li>
+          <div class="parent">
+            <a class="navlink" href="/services">What we do</a>
+            <button class="disc" type="button" id="pdisc" aria-expanded="false" aria-controls="psub">
+              <span class="vh">Show what we do menu</span>
+              <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+          </div>
+          <ul class="sub" id="psub" hidden>
+            <li><a class="plink" href="/services">Overview</a></li>
+            <li><a class="plink" href="/seo">Organic search</a></li>
+            <li><a class="plink" href="/google-ads">Google Ads</a></li>
+            <li><a class="plink" href="/social-media-ads">Paid social</a></li>
+            <li><a class="plink" href="/ai-seo">AI search</a></li>
+            <li><a class="plink" href="/conversion-optimization">Conversion optimisation</a></li>
+            <li><a class="plink" href="/lead-generation">Lead generation</a></li>
+          </ul>
+        </li>
+        <li><a class="navlink" href="/how-it-works">How it works</a></li>
+        <li><a class="navlink" href="/research">Evidence</a></li>
+        <li><a class="navlink" href="/pricing">Pricing</a></li>
+        <li><a class="navlink" href="/blog">Insights</a></li>
+        <li><a class="navlink" href="/about">About</a></li>
+      </ul>
+      <div class="putil"><a href="/contact">Contact</a></div>
+      <a class="cta" href="/contact">Tell us what you&rsquo;re trying to fix</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================================================ CHAPTER 1
+     HERO — FAR. Four first-screen elements and no fifth: the H1, the
+     supporting line, the two primary actions, and the PROOF offer. The
+     Gate 9A apparatus exception is preserved and UNSPENT — no dated item
+     renders at launch. -->
+<section class="sw" id="hero" data-state="enquiries">
+  <div class="wrap">
+    <div class="hero">
+      <h1 class="h1">Judge us on the <span class="nb"><span class="kw kw--e on" id="kwE">enquiries</span>,</span>
+        not the <span class="nb"><span class="kw kw--t" id="kwT">traffic</span>.</span></h1>
+
+      <div class="heroRow">
+        <div>
+          <p class="lede"><b>There is buyer demand for what you sell, and some of it never reaches
+          you.</b> We work on the whole route to an enquiry.</p>
+          <div class="acts">
+            <a class="cta" href="/contact">Tell us what you&rsquo;re trying to fix</a>
+            <a class="cta cta--o" href="/schedule-call">Book a call</a>
+          </div>
+          <a class="proof" href="/how-it-works">See the method, including what we can&rsquo;t attribute</a>
+        </div>
+
+        <div class="stage">
+          <div class="stage__head">
+            <span class="lab stage__lab" id="stageLab">what we report</span>
+            <div class="control" role="group" aria-label="Show the same demand as traffic or as enquiries">
+              <button type="button" data-set="traffic" aria-pressed="false">Traffic</button>
+              <button type="button" data-set="enquiries" aria-pressed="true">Enquiries</button>
+            </div>
+          </div>
+
+          <div class="fieldbox">
+            <!-- THE SAME POPULATION. In traffic an undifferentiated lattice; in
+                 enquiries it has resolved into a few distinct, named objects. -->
+            <div class="field" id="field" aria-hidden="true"></div>
+            <div class="rows" id="rows">
+              <div class="row"><i class="row__m"></i><i class="row__b"></i><span class="row__t">organic search</span></div>
+              <div class="row"><i class="row__m"></i><i class="row__b"></i><span class="row__t">paid search</span></div>
+              <div class="row"><i class="row__m"></i><i class="row__b"></i><span class="row__t">a page that answered the visit</span></div>
+              <div class="row"><i class="row__m open"></i><i class="row__b open"></i><span class="row__t">arrived with no usable trail &mdash; unattributed</span></div>
+            </div>
+          </div>
+
+          <p class="note">Illustrative. The marks are <b>kinds, not counts</b> &mdash; no quantity,
+          proportion or rate is drawn or claimed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CHAPTER 2
+     THE DEPARTURE. The resolved population leaves, and one mark carries on.
+     Everything after this is that mark, at a different distance. -->
+<section class="dep" id="dep">
+  <div class="wrap">
+    <div class="dep__line">
+      <span class="carrier" aria-hidden="true"></span>
+      <p class="dep__t">The same demand, followed all the way down. <em>Here is where it goes.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CHAPTER 2
+     THE PROBLEM — almost entirely visual. Three routes fail for three
+     different reasons and their outcomes ALIGN into one indistinguishable
+     column. Session 18B cut the five-symptom list to /problems and two of the
+     three explanatory paragraphs: the drawing already makes the argument, so
+     only the clause it cannot draw survives. -->
+<section class="sec" id="recog">
+  <div class="wrap">
+    <h2 class="lab rv">What this usually looks like from the inside</h2>
+    <p class="h2 rv" style="margin-top:18px">That reads like three problems.
+      <span style="color:var(--tang-ink)">It behaves like one.</span></p>
+
+    <div class="fail" id="fail">
+      <span class="fail__rule" aria-hidden="true"></span>
+
+      <div class="fail__r">
+        <p class="fail__t" style="margin:0">They are searching, and
+          <em>finding somebody else.</em></p>
+        <span class="fail__run" aria-hidden="true">
+          <i style="--d:0ms"></i><i style="--d:60ms"></i><i style="--d:120ms"></i>
+          <i class="stop" style="--d:200ms"></i>
+        </span>
+      </div>
+
+      <div class="fail__r">
+        <p class="fail__t" style="margin:0">The visits arrive and
+          <em>the enquiries do not.</em></p>
+        <span class="fail__run" aria-hidden="true">
+          <i style="--d:120ms"></i><i style="--d:180ms"></i><i style="--d:240ms"></i>
+          <i style="--d:300ms"></i><i style="--d:360ms"></i><i style="--d:420ms"></i>
+          <i class="stop" style="--d:500ms"></i>
+        </span>
+      </div>
+
+      <div class="fail__r">
+        <p class="fail__t" style="margin:0">Enquiries arrive, and <em>nobody can say
+          which came from where.</em></p>
+        <span class="fail__run" aria-hidden="true">
+          <i style="--d:240ms"></i><i style="--d:290ms"></i><i style="--d:340ms"></i>
+          <i style="--d:390ms"></i><i style="--d:440ms"></i><i style="--d:490ms"></i>
+          <i style="--d:540ms"></i><i style="--d:590ms"></i><i style="--d:640ms"></i>
+          <i class="stop" style="--d:720ms"></i>
+        </span>
+      </div>
+
+      <span class="fail__ruleT">from the outside,<br>all three look identical</span>
+    </div>
+
+    <p class="sub rv" style="max-width:46ch">With no measurement in place,
+      <b>all three failures look identical from the outside.</b></p>
+    <a class="proof rv" href="/problems/traffic-but-no-enquiries" style="color:var(--tang-sm)">If that
+      is the shape of it, this page is about exactly that</a>
+  </div>
+</section>
+
+<!-- ============================================================ CHAPTER 3
+     THE SYSTEM — one view, three stages. This chapter absorbed the re-read,
+     F1 and the entire capabilities chapter: 3,518px and 454 words that
+     explained one system three times.
+
+     The chain is drawn ONCE, complete and static — F1's entry state is
+     satisfied at first paint and nothing is revealed only by interaction.
+     Choosing a stage changes which DISCRETE marks are the subject, shows one
+     short line, and surfaces the capabilities that intervene there.
+
+     QUANTITY SAFETY: points and joins only. No continuous active bar exists
+     anywhere on this page — a point cannot express a percentage. -->
+<section class="sec" id="system">
+  <div class="wrap">
+    <h2 class="lab rv">How the work produces an enquiry</h2>
+    <p class="h2 rv" style="margin-top:18px;max-width:20ch">They are different skills.
+      <span style="color:var(--tang-ink)">The joins decide the result.</span></p>
+
+    <div class="sys rv">
+      <div>
+      <ul class="stages" id="stages" role="tablist" aria-label="The three stages of the work">
+        <li><button class="stg" type="button" role="tab" id="stg1" aria-selected="true"
+              aria-controls="panel-capture chain" data-stage="1">
+          <span class="stg__n" aria-hidden="true">01</span><span class="stg__t">Capture</span>
+        </button>
+          <div class="stg__b" id="panel-capture" role="tabpanel" aria-labelledby="stg1"><span>
+            Reach the buyers already looking. Some demand never reaches you at all.
+            <span class="caps__l">
+              <a href="/seo">Organic search</a><a href="/google-ads">Google Ads</a><a href="/social-media-ads">Paid social</a><a href="/ai-seo">AI search</a>
+            </span>
+          </span></div>
+        </li>
+        <li><button class="stg" type="button" role="tab" id="stg2" aria-selected="false"
+              aria-controls="panel-convert chain" data-stage="2">
+          <span class="stg__n" aria-hidden="true">02</span><span class="stg__t">Convert</span>
+        </button>
+          <div class="stg__b" id="panel-convert" role="tabpanel" aria-labelledby="stg2"><span>
+            Make the route from that first visit to a sent enquiry work.
+            <span class="caps__l">
+              <a href="/conversion-optimization">Conversion optimisation</a><a href="/lead-generation">Lead generation</a>
+            </span>
+          </span></div>
+        </li>
+        <li><button class="stg" type="button" role="tab" id="stg3" aria-selected="false"
+              aria-controls="panel-measure chain" data-stage="3">
+          <span class="stg__n" aria-hidden="true">03</span><span class="stg__t">Measure</span>
+        </button>
+          <div class="stg__b" id="panel-measure" role="tabpanel" aria-labelledby="stg3"><span>
+            Each enquiry records where it came from. What arrives with no usable trail is
+            marked unattributed, never assigned.
+            <span class="caps__l">
+              <a href="/how-it-works">How we measure it</a>
+            </span>
+          </span></div>
+        </li>
+      </ul>
+      <a class="proof" href="/services" style="color:var(--tang-sm)">The whole system, end to end</a>
+      </div>
+
+      <div>
+        <div class="chain" id="chain" data-stage="1">
+          <!-- WIDE — one continuous horizontal object -->
+          <svg class="d-wide" viewBox="0 0 1000 216" role="img" aria-labelledby="w-t w-d">
+            <title id="w-t">The chain from demand to a recorded enquiry, and where our accountability stops</title>
+            <desc id="w-d">One continuous chain with six points in order: discovery and source,
+              landing, interaction, the enquiry, the qualified enquiry, and opportunity and revenue.
+              Buyer demand before discovery is dashed because it is not measured. Ticks cross the
+              chain at the joins, where the work is done. One enquiry arrives from an open, dashed
+              mark with no upstream segment — it is unattributed. A rule crosses the chain after the
+              qualified enquiry: everything to the left is what we are accountable for. The segment
+              to the right is a double line because it is your own data, from your own system.
+              Capture marks the discovery point, convert marks landing through the enquiry, and
+              measure marks the qualified enquiry, the unattributed arrival and the boundary.</desc>
+            <line class="ln-gap fade" style="--d:0ms" x1="12" y1="128" x2="70" y2="128"/>
+            <text class="t-node fade" style="--d:0ms" x="12" y="112">demand we cannot see</text>
+            <path class="ln draw" style="--len:800;--d:160ms;--dur:1150ms" d="M70 128 H862"/>
+            <line class="tick fade" data-s="1 2" style="--d:300ms" x1="158" y1="118" x2="158" y2="138"/>
+            <line class="tick fade" data-s="2" style="--d:560ms" x1="334" y1="118" x2="334" y2="138"/>
+            <line class="tick fade" data-s="2" style="--d:820ms" x1="510" y1="118" x2="510" y2="138"/>
+            <rect class="pt fade" data-s="1" style="--d:180ms" x="63" y="121" width="14" height="14"/>
+            <rect class="pt fade" data-s="2" style="--d:440ms" x="239" y="121" width="14" height="14"/>
+            <rect class="pt fade" data-s="2" style="--d:700ms" x="415" y="121" width="14" height="14"/>
+            <rect class="pt fade" data-s="2" style="--d:960ms" x="591" y="121" width="14" height="14"/>
+            <rect class="nd-open fade" data-s="3" style="--d:1020ms" x="591" y="50" width="14" height="14"/>
+            <line class="ln-gap fade" style="--d:1020ms" x1="598" y1="66" x2="598" y2="121"/>
+            <text class="t-node fade" style="--d:1020ms" x="616" y="61">arrived with no usable trail</text>
+            <rect class="pt fade" data-s="3" style="--d:1220ms" x="767" y="121" width="14" height="14"/>
+            <line class="bd draw" style="--len:110;--d:1400ms;--dur:520ms" x1="862" y1="72" x2="862" y2="182"/>
+            <text class="t-bd fade" style="--d:1560ms" x="862" y="58" text-anchor="middle">we answer for this much</text>
+            <path class="ln-yours draw" style="--len:90;--d:1560ms;--dur:420ms" d="M862 124 H950"/>
+            <path class="ln-yours draw" style="--len:90;--d:1560ms;--dur:420ms" d="M862 132 H950"/>
+            <rect class="pt fade" style="--d:1860ms" x="943" y="121" width="14" height="14"/>
+            <text class="t-node fade" style="--d:180ms" x="63" y="162">discovery</text>
+            <text class="t-node fade" style="--d:180ms" x="63" y="180">and source</text>
+            <text class="t-node fade" style="--d:440ms" x="246" y="162" text-anchor="middle">landing</text>
+            <text class="t-node fade" style="--d:700ms" x="422" y="162" text-anchor="middle">interaction</text>
+            <text class="t-node fade" style="--d:960ms" x="598" y="162" text-anchor="middle">the enquiry</text>
+            <text class="t-node fade" style="--d:1220ms" x="774" y="162" text-anchor="middle">the qualified</text>
+            <text class="t-node fade" style="--d:1220ms" x="774" y="180" text-anchor="middle">enquiry</text>
+            <text class="t-node fade" style="--d:1860ms" x="1000" y="162" text-anchor="end">opportunity</text>
+            <text class="t-node fade" style="--d:1860ms" x="1000" y="180" text-anchor="end">and revenue</text>
+            <text class="t-node fade" style="--d:1860ms" x="1000" y="200" text-anchor="end">&mdash; your numbers, from your system</text>
+          </svg>
+
+          <!-- MEDIUM — a genuine vertical form, not the wide drawing shrunk -->
+          <svg class="d-med" viewBox="0 0 640 458" role="img" aria-labelledby="m-t m-d">
+            <title id="m-t">The chain from demand to a recorded enquiry, and where our accountability stops</title>
+            <desc id="m-d">The same chain, read top to bottom.</desc>
+            <line class="ln-gap fade" style="--d:0ms" x1="64" y1="14" x2="64" y2="54"/>
+            <text class="t-node fade" style="--d:0ms" x="98" y="28">demand we cannot see</text>
+            <path class="ln draw" style="--len:310;--d:160ms;--dur:1150ms" d="M64 54 V360"/>
+            <line class="tick fade" data-s="1 2" style="--d:300ms" x1="54" y1="90" x2="74" y2="90"/>
+            <line class="tick fade" data-s="2" style="--d:560ms" x1="54" y1="158" x2="74" y2="158"/>
+            <line class="tick fade" data-s="2" style="--d:820ms" x1="54" y1="226" x2="74" y2="226"/>
+            <rect class="pt fade" data-s="1" style="--d:180ms" x="57" y="47" width="14" height="14"/>
+            <rect class="pt fade" data-s="2" style="--d:440ms" x="57" y="115" width="14" height="14"/>
+            <rect class="pt fade" data-s="2" style="--d:700ms" x="57" y="183" width="14" height="14"/>
+            <rect class="pt fade" data-s="2" style="--d:960ms" x="57" y="251" width="14" height="14"/>
+            <rect class="nd-open fade" data-s="3" style="--d:1020ms" x="8" y="286" width="14" height="14"/>
+            <line class="ln-gap fade" style="--d:1020ms" x1="24" y1="290" x2="55" y2="266"/>
+            <rect class="pt fade" data-s="3" style="--d:1220ms" x="57" y="319" width="14" height="14"/>
+            <line class="bd draw" style="--len:610;--d:1400ms;--dur:520ms" x1="14" y1="360" x2="624" y2="360"/>
+            <text class="t-bd fade" style="--d:1560ms" x="624" y="350" text-anchor="end">we answer for this much</text>
+            <path class="ln-yours draw" style="--len:40;--d:1560ms;--dur:420ms" d="M60 360 V394"/>
+            <path class="ln-yours draw" style="--len:40;--d:1560ms;--dur:420ms" d="M68 360 V394"/>
+            <rect class="pt fade" style="--d:1860ms" x="57" y="387" width="14" height="14"/>
+            <text class="t-node fade" style="--d:180ms" x="98" y="60">discovery and source</text>
+            <text class="t-node fade" style="--d:440ms" x="98" y="128">landing</text>
+            <text class="t-node fade" style="--d:700ms" x="98" y="196">interaction</text>
+            <text class="t-node fade" style="--d:960ms" x="98" y="264">the enquiry</text>
+            <text class="t-node fade" style="--d:1020ms" x="98" y="286">&mdash; one arrived with no usable trail</text>
+            <text class="t-node fade" style="--d:1220ms" x="98" y="332">the qualified enquiry</text>
+            <text class="t-node fade" style="--d:1860ms" x="98" y="400">opportunity and revenue</text>
+            <text class="t-node fade" style="--d:1860ms" x="98" y="422">&mdash; your numbers, from your system</text>
+          </svg>
+
+          <!-- NARROW — the same vertical object at a constant node interval -->
+          <svg class="d-narrow" viewBox="0 0 330 500" role="img" aria-labelledby="n-t n-d">
+            <title id="n-t">The chain from demand to a recorded enquiry, and where our accountability stops</title>
+            <desc id="n-d">The same chain, read top to bottom.</desc>
+            <line class="ln-gap fade" style="--d:0ms" x1="46" y1="14" x2="46" y2="54"/>
+            <text class="t-node fade" style="--d:0ms" x="76" y="28">demand we cannot see</text>
+            <path class="ln draw" style="--len:326;--d:160ms;--dur:1150ms" d="M46 54 V380"/>
+            <line class="tick fade" data-s="1 2" style="--d:300ms" x1="36" y1="92" x2="56" y2="92"/>
+            <line class="tick fade" data-s="2" style="--d:560ms" x1="36" y1="168" x2="56" y2="168"/>
+            <line class="tick fade" data-s="2" style="--d:820ms" x1="36" y1="244" x2="56" y2="244"/>
+            <rect class="pt fade" data-s="1" style="--d:180ms" x="39" y="47" width="14" height="14"/>
+            <rect class="pt fade" data-s="2" style="--d:440ms" x="39" y="123" width="14" height="14"/>
+            <rect class="pt fade" data-s="2" style="--d:700ms" x="39" y="199" width="14" height="14"/>
+            <rect class="pt fade" data-s="2" style="--d:960ms" x="39" y="275" width="14" height="14"/>
+            <rect class="nd-open fade" data-s="3" style="--d:1020ms" x="4" y="306" width="14" height="14"/>
+            <line class="ln-gap fade" style="--d:1020ms" x1="20" y1="310" x2="37" y2="290"/>
+            <rect class="pt fade" data-s="3" style="--d:1220ms" x="39" y="343" width="14" height="14"/>
+            <line class="bd draw" style="--len:320;--d:1400ms;--dur:520ms" x1="6" y1="380" x2="326" y2="380"/>
+            <text class="t-bd fade" style="--d:1560ms" x="6" y="370">we answer for this much</text>
+            <path class="ln-yours draw" style="--len:40;--d:1560ms;--dur:420ms" d="M42 380 V414"/>
+            <path class="ln-yours draw" style="--len:40;--d:1560ms;--dur:420ms" d="M50 380 V414"/>
+            <rect class="pt fade" style="--d:1860ms" x="39" y="407" width="14" height="14"/>
+            <text class="t-node fade" style="--d:180ms" x="76" y="60">discovery and source</text>
+            <text class="t-node fade" style="--d:440ms" x="76" y="136">landing</text>
+            <text class="t-node fade" style="--d:700ms" x="76" y="212">interaction</text>
+            <text class="t-node fade" style="--d:960ms" x="76" y="288">the enquiry</text>
+            <text class="t-node fade" style="--d:1020ms" x="76" y="310">&mdash; one with no usable trail</text>
+            <text class="t-node fade" style="--d:1220ms" x="76" y="356">the qualified enquiry</text>
+            <text class="t-node fade" style="--d:1860ms" x="76" y="420">opportunity and revenue</text>
+            <text class="t-node fade" style="--d:1860ms" x="76" y="442">&mdash; your numbers, from your system</text>
+          </svg>
+        </div>
+        <div class="legend">
+          <span><i class="lg lg--pt" aria-hidden="true"></i> a point on the chain</span>
+          <span><i class="lg lg--open" aria-hidden="true"></i> arrived with no usable trail</span>
+          <span class="lg-keep" style="color:var(--tang-sm)"><b>|</b>&nbsp;a join, where the work is done</span>
+        </div>
+        <p class="note">Structure only. <b>No quantity, proportion, rate or duration is drawn</b>,
+        and the spacing between points carries no meaning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CHAPTER 5
+     BLOCK 4 — THE ACCOUNTABILITY BOUNDARY. The page's deepest stillness, and
+     it arrives immediately after the descent, ON the object the reader has
+     just learned. ADJACENT-SECONDARY, at equal type quality to the claims,
+     never collapsible at any width, not below a CTA and not inside one.
+     Register: no contractions in this block. -->
+<section class="sec sec--tight" id="bound">
+  <div class="wrap">
+    <h2 class="lab rv">What we are accountable for, and where that stops</h2>
+
+    <div class="bound__grid">
+      <div>
+        <span class="lab" style="color:var(--dim);margin-bottom:14px">we do not promise</span>
+        <ul class="plist">
+          <li><i>01</i> rankings</li>
+          <li><i>02</i> a position in AI answers</li>
+          <li><i>03</i> a number of enquiries</li>
+          <li><i>04</i> revenue</li>
+          <li><i>05</i> a return on spend</li>
+        </ul>
+        <p class="note" style="max-width:40ch">None of that is ours to control.</p>
+      </div>
+
+      <div class="owned">
+        <h3>We are accountable for <em>the qualified enquiry.</em></h3>
+        <p>Real, reachable, from a business context, with a stated need. What counts as one is
+        published, and it is measured against a starting point we capture first.</p>
+      </div>
+    </div>
+
+    <a class="proof rv" href="/how-it-works" style="color:var(--tang-sm)">See what can and cannot be
+      attributed</a>
+  </div>
+</section>
+
+<!-- ============================================================ CHAPTER 7
+     BLOCK 6 — WHAT CAN BE CHECKED. Opens on the admission, at full weight.
+     The one place the machinery is allowed to be the point. It is built to
+     hold more than it holds and is left visibly not-full. -->
+<section class="sec" id="evidence">
+  <div class="wrap">
+    <h2 class="lab rv">What you can check before you commit</h2>
+    <div class="rv" style="margin-top:clamp(24px,3vw,44px);padding-bottom:clamp(20px,3vw,48px)">
+      <p class="adm">We have no case studies to show you.</p>
+      <p>Writing around that would be the first thing you should not trust us on. What we do have
+      is published, dated and checkable.</p>
+    </div>
+
+    <div class="ev rv" id="ev">
+      <div class="ev__top">
+        <p class="ev__claim">We ran the test on ourselves, and <em>we were named in none of
+          them.</em></p>
+        <p class="ev__sub">We asked four AI assistants for agencies like us, 28 times, on one day,
+          from Pune, in English, signed out.</p>
+        <button class="ev__btn" type="button" id="evBtn" aria-expanded="false" aria-controls="evU">
+          Lift this claim &mdash; see what it stands on
+        </button>
+      </div>
+      <div class="ev__under" id="evU"><div>
+        <p class="ev__lim">28 runs on one day, one location, signed out. Counts, not rates.
+        <b>No confidence interval is claimed and none is available.</b> Two systems could not be
+        tested at all &mdash; they are named as untested, and not characterised.</p>
+        <a class="ev__go" href="/research/ai-visibility-baseline">The prompts, the run counts and the
+        full method &rarr;</a>
+      </div></div>
+    </div>
+
+    <ul class="check rv">
+      <li><a href="/how-it-works">The method, in full &mdash; including what cannot be attributed</a></li>
+      <li><a href="/research/ai-visibility-baseline">Our own visibility, measured and published</a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================ CHAPTER 8
+     BLOCK 7 — FIT. Still. Two positions at equal type quality. The wrong
+     buyer leaves without being disparaged, and no revenue, turnover or
+     headcount threshold is invented. -->
+<section class="sec" id="fit" style="padding-bottom:clamp(44px,5vw,84px)">
+  <div class="wrap">
+    <h2 class="lab rv">Who this is built for</h2>
+    <div class="fit rv">
+      <div>
+        <h3>This works where</h3>
+        <p>A customer takes time to decide, one good enquiry is worth real money, and you are
+        willing to let us measure the path properly. <b>That last one is not negotiable.</b></p>
+      </div>
+      <div>
+        <h3>It is a poor fit where</h3>
+        <p>Demand has to be created from nothing, what you sell is bought on impulse or price
+        alone, or you need the outcome guaranteed.</p>
+      </div>
+    </div>
+    <a class="proof rv" href="/pricing" style="color:var(--tang-sm)">What this costs, and what moves
+      the number</a>
+  </div>
+</section>
+
+<!-- ============================================================ CHAPTER 9
+     BLOCK 8 — ACTION. The page finishes fast, in its own region, with more
+     space around it than anything preceding. Full-bleed tangerine: the second
+     and last surface inversion. The marks arrive one final time — including
+     the one that has no trail, because that one still counts. -->
+<section class="close" id="cta">
+  <div class="wrap">
+    <div class="arrive" aria-hidden="true">
+      <i style="--d:0ms"></i><i style="--d:110ms"></i><i style="--d:220ms"></i>
+      <i class="open" style="--d:330ms"></i><i style="--d:440ms"></i>
+    </div>
+    <h2 class="rv">Two ways to start.</h2>
+    <p class="rv">Write to us, or book a time to talk. Both reach the same place, and neither is a
+      form for a salesperson to chase.</p>
+    <div class="acts rv">
+      <a class="cta" href="/contact">Tell us what you&rsquo;re trying to fix</a>
+      <a class="cta cta--o" href="/schedule-call">Book a call</a>
+    </div>
+    <p class="close__note rv">The page states what happens next, not when.</p>
+  </div>
+</section>
+</main>
+
+<!-- ==================================================================== FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__cols">
+      <div>
+        <h3>What we do</h3>
+        <ul>
+          <li><a href="/services">Overview</a></li>
+          <li><a href="/seo">Organic search</a></li>
+          <li><a href="/google-ads">Google Ads</a></li>
+          <li><a href="/social-media-ads">Paid social</a></li>
+          <li><a href="/ai-seo">AI search</a></li>
+          <li><a href="/conversion-optimization">Conversion optimisation</a></li>
+          <li><a href="/lead-generation">Lead generation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>How we work</h3>
+        <ul>
+          <li><a href="/how-it-works">How it works</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/problems/traffic-but-no-enquiries">Traffic but no enquiries</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Evidence</h3>
+        <ul>
+          <li><a href="/research">Research</a></li>
+          <li><a href="/research/ai-visibility-baseline">AI visibility baseline</a></li>
+          <li><a href="/blog">Insights</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/schedule-call">Book a call</a></li>
+          <li><a href="/privacy-policy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entity">
+      <address>
+        <b>MappedSkills</b><br>
+        <span data-blocked="legal name, complete postal address, phone and email are one source with
+        /about, /contact and the structured data &mdash; and are OWNER-BLOCKED, so nothing is
+        printed here rather than invented.</span>
+      </address>
+      <div>
+        <p style="margin:0;color:#7E7789">&copy; MappedSkills. Judge us on the enquiries, not the
+        traffic.</p>
+      </div>
+    </div>
+
+    <p class="protonote"><b>PROTOTYPE NOTE — not part of the page.</b> Session 18 complete homepage,
+    THE RESOLVE (<code>DEC-018</code>). Not production, not integrated, Gate 10 NOT PASSED.
+    <b>Rendering nothing, deliberately:</b> the published phone number and WhatsApp action, the
+    people element in Block 6, the enquiry-response owner and business hours in Block 8, and the
+    own-site diagnostic entry &mdash; all owner-blocked or technically prerequisite. Per B15 a
+    reserved position renders nothing; no placeholder, silhouette or substitute appears.
+    <b>The Gate 9A above-the-fold apparatus exception is preserved and unspent.</b> No client
+    result, logo, testimonial, photograph, rating, award, case study, quantity, proportion or rate
+    appears anywhere on this page.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+document.documentElement.classList.add('js');
+var RM = matchMedia('(prefers-reduced-motion: reduce)');
+var reduced = function(){ return RM.matches; };
+
+/* ---------------------------------------------------------------- helpers */
+function $(s,c){ return (c||document).querySelector(s); }
+function $$(s,c){ return [].slice.call((c||document).querySelectorAll(s)); }
+/* Every on-view behaviour is registered here so it can also be FORCED.
+   An IntersectionObserver does not run while a tab is hidden or throttled, and
+   nothing on this page may depend on it: a reader who never receives the
+   callback must still get the composed end state. The fallback below is the
+   floor, not the mechanism. */
+var pending = [];
+function onView(target,fn,th){
+  var els = typeof target === 'string' ? $$(target) : [target];
+  els = els.filter(Boolean);
+  if(!els.length) return;
+  var run = function(el){
+    if(el.__seen) return; el.__seen = true; fn(el);
+  };
+  els.forEach(function(e){ pending.push(function(){ run(e); }); });
+  if(!('IntersectionObserver' in window)){ els.forEach(run); return; }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ io.unobserve(e.target); run(e.target); } });
+  },{threshold:th||0.3});
+  els.forEach(function(e){ io.observe(e); });
+}
+/* the floor: if the observers have not run by then, compose everything */
+addEventListener('load', function(){
+  setTimeout(function(){ pending.forEach(function(f){ f(); }); }, 4000);
+});
+
+/* ======================================================= NAVIGATION =======
+   The parent is a link and the disclosure is a separate control. Escape
+   closes and returns focus. Nothing is reachable only by hover. */
+(function nav(){
+  var disc = $('#disc'), menu = $('#menu'), parent = $('#parent');
+  if(disc && menu){
+    var closeMenu = function(back){
+      menu.hidden = true; disc.setAttribute('aria-expanded','false');
+      if(back) disc.focus();
+    };
+    disc.addEventListener('click',function(){
+      var open = disc.getAttribute('aria-expanded') === 'true';
+      menu.hidden = open; disc.setAttribute('aria-expanded', String(!open));
+    });
+    /* hover is an ENHANCEMENT on pointer devices, never the only way */
+    var t;
+    if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+      parent.addEventListener('mouseenter',function(){
+        clearTimeout(t); t = setTimeout(function(){
+          menu.hidden = false; disc.setAttribute('aria-expanded','true');
+        },110);
+      });
+      parent.addEventListener('mouseleave',function(){ clearTimeout(t); closeMenu(false); });
+    }
+    document.addEventListener('keydown',function(e){
+      if(e.key === 'Escape' && !menu.hidden) closeMenu(true);
+    });
+    document.addEventListener('click',function(e){
+      if(!menu.hidden && !parent.contains(e.target)) closeMenu(false);
+    });
+  }
+
+  var burger = $('#burger'), panel = $('#panel'), burgerT = $('#burgerT');
+  if(burger && panel){
+    var closePanel = function(back){
+      panel.hidden = true; burger.setAttribute('aria-expanded','false');
+      burgerT.textContent = 'Menu'; document.body.style.overflow = '';
+      if(back) burger.focus();
+    };
+    burger.addEventListener('click',function(){
+      var open = burger.getAttribute('aria-expanded') === 'true';
+      if(open){ closePanel(false); return; }
+      panel.hidden = false; burger.setAttribute('aria-expanded','true');
+      burgerT.textContent = 'Close'; document.body.style.overflow = 'hidden';
+      var first = panel.querySelector('a,button');
+      if(first) first.focus();
+    });
+    /* the one permitted focus containment on the site — and it is escapable */
+    panel.addEventListener('keydown',function(e){
+      if(e.key === 'Escape'){ closePanel(true); return; }
+      if(e.key !== 'Tab') return;
+      var f = $$('a[href],button:not([disabled])',panel).filter(function(el){
+        return el.offsetParent !== null; });
+      if(!f.length) return;
+      var first = f[0], last = f[f.length-1];
+      if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    });
+    burger.addEventListener('keydown',function(e){
+      if(e.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true') closePanel(true);
+    });
+  }
+
+  var pdisc = $('#pdisc'), psub = $('#psub');
+  if(pdisc && psub){
+    pdisc.addEventListener('click',function(){
+      var open = pdisc.getAttribute('aria-expanded') === 'true';
+      psub.hidden = open; pdisc.setAttribute('aria-expanded', String(!open));
+    });
+  }
+})();
+
+/* ============================================ CHAPTER 1 — THE FIELD (T1) ==
+   The population. Built once, positioned by CSS grid, resolved with transform
+   + opacity only. No canvas, no per-frame work, nothing ambient, and it never
+   replays. Skipped entirely under reduced motion. */
+var hero = $('#hero'), field = $('#field'), rowsEl = $('#rows'), stage = $('.stage');
+var kwE = $('#kwE'), kwT = $('#kwT'), stageLab = $('#stageLab');
+
+function buildField(){
+  if(!field || reduced()) return;
+  var w = field.clientWidth || 600;
+  var cols = Math.max(12, Math.min(30, Math.round(w/17)));
+  var rowsN = Math.max(8, Math.min(20, Math.round((field.clientHeight||224)/14)));
+  var N = Math.min(440, cols*rowsN);   /* capped: a budgeted one-off transition */
+  field.style.setProperty('--cols', cols);
+  field.innerHTML = '';
+  var f = document.createDocumentFragment();
+  for(var i=0;i<N;i++) f.appendChild(document.createElement('i'));
+  field.appendChild(f);
+  aim();
+}
+/* Each mark is told which resolved object it travels toward, from real
+   geometry, so it works at any width. */
+function aim(){
+  if(!field || reduced()) return;
+  var marks = field.querySelectorAll('i');
+  var fr = field.getBoundingClientRect();
+  var targets = $$('.row__m', rowsEl).map(function(m){
+    var r = m.getBoundingClientRect();
+    return {x:r.left-fr.left+r.width/2, y:r.top-fr.top+r.height/2};
+  });
+  if(!targets.length) return;
+  for(var i=0;i<marks.length;i++){
+    var m = marks[i], r = m.getBoundingClientRect(), t = targets[i%targets.length];
+    m.style.setProperty('--tx', Math.round(t.x-(r.left-fr.left)-r.width/2)+'px');
+    m.style.setProperty('--ty', Math.round(t.y-(r.top-fr.top)-r.height/2)+'px');
+    m.style.transitionDelay = ((i%17)*11)+'ms';
+  }
+}
+
+function setState(s){
+  if(!hero || hero.dataset.state === s) return;
+  hero.dataset.state = s;
+  stageLab.textContent = s === 'traffic' ? 'what an agency usually shows you' : 'what we report';
+  kwE.classList.toggle('on', s === 'enquiries');
+  kwT.classList.toggle('on', s === 'traffic');
+  $$('.control button').forEach(function(b){
+    b.setAttribute('aria-pressed', String(b.dataset.set === s));
+  });
+  if(s === 'traffic' && !reduced() && field){
+    field.classList.remove('pulse'); void field.offsetWidth; field.classList.add('pulse');
+  }
+}
+$$('.control button').forEach(function(b){
+  b.addEventListener('click', function(){ setState(b.dataset.set); });
+});
+
+/* THE PAGE'S ONE T1. It opens on TRAFFIC — an undifferentiated lattice — and
+   the same population resolves into named objects. Once, unprompted, then the
+   surface is still. Under reduced motion the page simply starts resolved and
+   the reader can still drive the control. */
+if(!reduced()){
+  buildField();
+  hero.dataset.state = 'traffic';
+  kwE.classList.remove('on'); kwT.classList.add('on');
+  stageLab.textContent = 'what an agency usually shows you';
+  $$('.control button').forEach(function(b){
+    b.setAttribute('aria-pressed', String(b.dataset.set === 'traffic'));
+  });
+  if(innerWidth >= 900){
+    setTimeout(function(){ field.classList.add('pulse'); }, 420);
+    setTimeout(function(){ setState('enquiries'); }, 1450);
+  } else {
+    /* NARROW: the stage sits below the fold, so the moment fires when the
+       reader reaches it rather than playing to an empty screen. */
+    onView($('.fieldbox'), function(){
+      field.classList.add('pulse');
+      setTimeout(function(){ setState('enquiries'); }, 900);
+    }, 0.45);
+  }
+  var rt;
+  addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(buildField,180); },
+    {passive:true});
+}
+
+/* ------------------------------------------- the hero departure (T3)
+   The resolved marks drift up and out as the reader leaves, so the next
+   chapter reads as the same demand moving on rather than a new section.
+   One rAF-throttled handler, writing two properties. */
+if(stage && !reduced()){
+  var ticking = false;
+  addEventListener('scroll', function(){
+    if(ticking) return; ticking = true;
+    requestAnimationFrame(function(){
+      var r = hero.getBoundingClientRect();
+      var p = Math.min(1, Math.max(0, -r.top/Math.max(1, r.height)));
+      stage.style.transform = 'translate3d(0,'+(-p*48).toFixed(1)+'px,0)';
+      stage.style.opacity = (1-p*0.85).toFixed(3);
+      ticking = false;
+    });
+  }, {passive:true});
+}
+
+/* ================================== CHAPTER 3 — THE FRICTION ALIGNMENT ====
+   Three routes get different distances, and their outcomes then travel into
+   one column. Three causes, one indistinguishable result. */
+var failEl = $('#fail');
+if(failEl && !reduced()){
+  /* opt in to the motion: write the START state inline, then release it */
+  $$('.fail__run i', failEl).forEach(function(m){ m.style.opacity='0'; m.style.transform='scale(.4)'; });
+  failEl.classList.add('pre-align');
+  var fr = failEl.querySelector('.fail__rule'), ft = failEl.querySelector('.fail__ruleT');
+  if(fr) fr.style.opacity='0'; if(ft) ft.style.opacity='0';
+}
+onView(failEl, function(el){
+  $$('.fail__run i', el).forEach(function(m){ m.style.opacity = ''; m.style.transform = ''; });
+  var stops = $$('.fail__run i.stop', el);
+  /* If the document is not being rendered, transitions do not advance, so the
+     displacement is never applied at all — the composed alignment stands. */
+  if(reduced() || document.hidden){ releaseRule(el); return; }
+  /* Hold each stop at the natural end of its own run, then RELEASE it to the
+     shared column the stylesheet already puts it in. The aligned state is the
+     default, so nothing has to win a cascade for the honest end state to show. */
+  stops.forEach(function(s){
+    var prev = s.previousElementSibling; if(!prev) return;
+    var back = Math.round(s.getBoundingClientRect().left - (prev.getBoundingClientRect().right + 7));
+    if(back > 0){ s.style.transition = 'none'; s.style.transform = 'translateX(-'+back+'px)'; }
+  });
+  /* released on a timer, never on rAF: a frame callback does not run while
+     the tab is hidden, and a displaced mark must never be left displaced. */
+  var release = function(instant){
+    stops.forEach(function(s){
+      s.style.transition = instant ? 'none' : 'transform 640ms cubic-bezier(.65,0,.35,1)';
+      s.style.transform = 'translateX(0)';
+    });
+    releaseRule(el);
+  };
+  setTimeout(release, 1100);
+  /* a tab hidden mid-gesture resumes composed, never displaced */
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden) release(true);
+  });
+}, 0.35);
+function releaseRule(el){
+  el.classList.remove('pre-align');
+  var fr = el.querySelector('.fail__rule'), ft = el.querySelector('.fail__ruleT');
+  if(fr) fr.style.opacity = ''; if(ft) ft.style.opacity = '';
+}
+
+/* ======================================= CHAPTER 3 — THE SYSTEM VIEW ======
+   The chain is complete and static from first paint. Choosing a stage changes
+   which DISCRETE marks are the subject — never a length, so nothing here can
+   be read as a proportion. It plays through the three stages once on entering
+   view, then rests; the stage buttons let the reader re-select at any time.
+   The core proposition never requires interaction: every stage's copy and
+   links are in the DOM, and with no script all three are shown open. */
+var chain = $('#chain'), stageBtns = $$('.stg'), stagesEl = $('#stages');
+function panelOf(btn){ return document.getElementById(btn.getAttribute('aria-controls').split(' ')[0]); }
+function setStage(n, fromUser){
+  if(!chain) return;
+  chain.dataset.stage = String(n);
+  stageBtns.forEach(function(b){
+    var sel = b.dataset.stage === String(n);
+    b.setAttribute('aria-selected', String(sel));
+    b.tabIndex = sel ? 0 : -1;          /* one tab stop for the tablist */
+    var p = panelOf(b);
+    /* a clipped panel leaves the tab order and the a11y tree; when every
+       panel is composed open (reduced motion) none of them is inert */
+    if(p && !stagesEl.classList.contains('all')) p.inert = !sel;
+  });
+  if(fromUser) autoStage = false;
+}
+var autoStage = true;
+stageBtns.forEach(function(b){
+  b.addEventListener('click', function(){ setStage(b.dataset.stage, true); });
+  /* a tablist is arrow-navigable */
+  b.addEventListener('keydown', function(e){
+    var i = stageBtns.indexOf(b), j = null;
+    if(e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i+1) % stageBtns.length;
+    if(e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   j = (i-1+stageBtns.length) % stageBtns.length;
+    if(e.key === 'Home') j = 0;
+    if(e.key === 'End')  j = stageBtns.length - 1;
+    if(j === null) return;
+    e.preventDefault(); stageBtns[j].focus(); setStage(stageBtns[j].dataset.stage, true);
+  });
+});
+
+/* the descent — the page gets closer to the object, once */
+onView(chain, function(el){ el.classList.add('on'); }, 0.2);
+
+/* the three stages play once, on entering view, and never replay */
+onView($('#system'), function(){
+  if(reduced()){
+    setStage(3);
+    var sl = $('#stages'); if(sl) sl.classList.add('all');
+    stageBtns.forEach(function(b){ var p = panelOf(b); if(p) p.inert = false; });
+    return;
+  }
+  setStage(1);
+  setTimeout(function(){ if(autoStage) setStage(2); }, 2100);
+  setTimeout(function(){ if(autoStage) setStage(3); }, 4200);
+}, 0.25);
+
+/* ------------------------------------------------------- composition only */
+onView('.rv', function(el){ el.classList.add('on'); }, 0.12);
+onView($('#dep'), function(el){ el.classList.add('on'); }, 0.45);
+onView($('#cta'), function(el){ el.classList.add('on'); }, 0.28);
+
+/* ------------------------------------------------ CHAPTER 7 — lift the claim */
+var ev = $('#ev'), evb = $('#evBtn');
+if(ev && evb){
+  evb.addEventListener('click', function(){
+    var open = ev.hasAttribute('data-open');
+    if(open) ev.removeAttribute('data-open'); else ev.setAttribute('data-open','');
+    evb.setAttribute('aria-expanded', String(!open));
+    evb.textContent = open ? 'Lift this claim — see what it stands on' : 'Set the claim back down';
+  });
+}
+})();
+</script>
+</body>
+</html>

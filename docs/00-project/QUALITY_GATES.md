@@ -1,0 +1,258 @@
+# Quality Gates
+
+No phase should advance merely because an artifact exists.
+
+## Gate Status Summary (as at 2026-09-03)
+
+| Gate | Status |
+|---|---|
+| **Gate 1 — Existing Site Audit** | Artifacts delivered (Sessions 01/01B). **Orchestrator review pending.** Not marked passed |
+| **Gate 2 — Business / Market Validation** | **PASSED — 2026-08-31** |
+| **Gate 3 — Search Opportunity Validation** | Artifacts delivered (Session 03). Conclusions consumed by the approved strategy. **Orchestrator review pending.** Not marked passed |
+| **Gate 4 — AI Visibility Strategy** | Artifacts delivered (Session 04). Conclusions consumed by the approved strategy. **Orchestrator review pending.** Not marked passed |
+| **Gate 5 — Information Architecture** | **PASSED — 2026-09-01** |
+| **Gate 6 — CRO Architecture** | **PASSED — 2026-09-01** |
+| **Gate 7 — Content Architecture** | **PASSED — 2026-09-01** |
+| **Gate 8 — Messaging Architecture** | **PASSED — 2026-09-01** |
+| **Gate 9 — Page Copy Production** | **PASSED — 2026-09-01.** Approval is not publication readiness for every route — see the gate's "Why this gate passes" note |
+| **Gate 9A — Creative Direction** | **PASSED — 2026-09-01** |
+| **Gate 9B — UX** | **PASSED — 2026-09-02.** See `DEC-016` in `DECISION_LOG.md` |
+| **Gate 10 — UI / Design System** | **PASSED — 2026-09-04.** See `DEC-019`. **THE RESOLVE** is validated as the production visual and experience direction, and the approved baseline is the **Session 19B homepage prototype**, `docs/26-resolve-homepage/prototype/index.html`. The Gate 9B-deferred re-tests were run and passed at both widths: **F2 PASS (WIDE + NARROW)**, **F3 PASS (WIDE + NARROW)**. **`DEC-017` / THE ARRIVAL remains SUPERSEDED** and retained as historical record. **Passing this gate approves no production implementation and resolves no owner blocker** |
+| **Gates 11–22** | **NOT STARTED, NOT APPROACHED, NOT PASSED** |
+
+**Session 06 marked Gate 2 only.** Gates 5, 6 and 7 were approved by the orchestrator on 2026-09-01, recorded in `DECISION_LOG.md` as `DEC-010`, `DEC-011` and `DEC-012`. **Gate 8 (Messaging Architecture) was approved by the orchestrator on 2026-09-01, recorded as `DEC-013`.** **Gate 9 (Page Copy Production) was approved by the orchestrator on 2026-09-01, recorded as `DEC-014`** — see the numbering reconciliation note under Gate 9 below, which repurposes the former "UX" placeholder for Page Copy Production and preserves the displaced Creative Direction and UX criteria as Gates 9A and 9B. **Gate 9A (Creative Direction) was approved by the orchestrator on 2026-09-01, recorded as `DEC-015`.** **Gate 9B (UX) was approved by the orchestrator on 2026-09-02, recorded as `DEC-016`.** **Gate 10 (UI / Design System) was approved by the orchestrator on 2026-09-04, recorded as `DEC-019`** — see the Gate 10 section below. **No gate from 11 onwards is passed, approached or implied by any of these approvals.** The paragraph that follows is the original Gate-10-in-progress record, retained as the decision trail: **Gate 10 was in progress from 2026-09-03:** the owner approved a visual direction on 2026-09-03. That approval was first recorded as **THE ARRIVAL** (`DEC-017`) and was then **corrected on the same day** — the owner reopened the live prototypes and clarified that the earlier *"15D"* reference was a **mistaken prototype label**. **The active direction is THE RESOLVE (Session 15C), recorded as `DEC-018`**, which supersedes `DEC-017` for active creative direction; **`DEC-017` is retained unchanged as historical record.** **That approval is of the direction only.** It does not pass Gate 10, does not approve any design system — the Session 16 one was built for THE ARRIVAL and is historical / partially reusable only — and does not approve any page. **Claude has no authority to pass a gate**, and no gate is marked passed here.
+
+## Gate 1 — Existing Site Audit
+**Status: artifacts delivered; orchestrator review pending. NOT marked passed.**
+**Required:** codebase/site audit, route inventory, SEO inventory, integrations, analytics, performance risks.
+**Acceptance:** evidence-backed, read-only, identifies unknowns and migration risks.
+**Do not proceed to:** structural redesign decisions before audit review.
+
+## Gate 2 — Business / Market Validation
+**Status: PASSED — 2026-08-31 (Session 06).**
+
+**Required:** market, competitor, buyer, category, commercial opportunity research.
+**Acceptance:** clear evidence, alternatives compared, hypotheses challenged.
+**Do not proceed to:** final positioning before owner approval.
+
+### Why this gate passes
+| Acceptance criterion | Evidence |
+|---|---|
+| Clear evidence gathered | `docs/02-research/MARKET_RESEARCH.md`, `COMPETITOR_RESEARCH.md`, `SOURCE_REGISTER.md`, plus corroborating search (Session 03) and AI-answer (Session 04) evidence bases |
+| Alternatives compared | Three complete strategic models compared in `docs/01-business/FINAL_STRATEGY_SYNTHESIS.md` §3–§5, with a stated comparison matrix and stated trade-offs |
+| Hypotheses challenged | Session 02 was explicitly instructed to look for evidence the hypothesis was wrong, and returned **MODIFY**. Sessions 03 and 04 independently corroborated from different evidence bases. `DEC-004` was closed as **not adopted** |
+| Owner approval obtained | **APPROVED DECISION `DEC-005`, 2026-08-31:** *MappedSkills exists to help businesses capture buyer demand and turn it into measurable qualified enquiries*, with its full set of approved strategic principles |
+| Repository reflects the approved strategy consistently | `BUSINESS_STRATEGY.md`, `POSITIONING.md`, `ICP.md`, `SERVICE_ARCHITECTURE.md` and `OFFER_ARCHITECTURE.md` rewritten together in one pass (`DEC-006`); `DECISION_LOG.md`, `CURRENT_STATE.md` and `ASSUMPTIONS_AND_OPEN_QUESTIONS.md` updated; the documentation contradiction live since Session 02 is closed |
+| Evidence integrity preserved | No research artifact was modified. `FINAL_STRATEGY_SYNTHESIS.md` is preserved as the pre-approval record. History was not rewritten to make the approved strategy look inevitable |
+
+### Explicitly NOT passed by this gate
+Final messaging and homepage copy · taglines · information architecture and sitemap · URL architecture · keyword map · content plan · offer names, packaging and pricing · the free/paid/hybrid entry model · design direction · the technical migration plan · **manufacturing as an exclusive or company-level specialisation** (candidate beachhead #1 only, gated on three tests) · any international strategy.
+
+### Conditions carried forward, not resolved by the gate
+1. **No publishable client proof exists.** The last remaining owner blocker; gates all premium positioning.
+2. **Analytics, enquiry capture and a working conversion path are absent in production** and are a hard precondition of any outcome-based claim, including on MappedSkills' own site.
+3. **"300%+ ROI", "₹100Cr+", "₹10Cr+"** must not be used as reasons-to-believe (`DEC-007`); production remediation remains an open owner decision.
+4. **Manufacturing beachhead volume is UNKNOWN** — no keyword tool has ever been available in this programme.
+
+## Gate 3 — Search Opportunity Validation
+**Status: artifacts delivered; conclusions consumed by the approved strategy (`DEC-005`); orchestrator review pending. NOT marked passed.**
+**Required:** keyword universe, SERP analysis, intent classification, difficulty/feasibility methodology, topic clusters.
+**Acceptance:** traceable data and prioritized opportunity matrix.
+**Do not proceed to:** final site architecture based on unresearched keywords.
+
+## Gate 4 — AI Visibility Strategy
+**Status: artifacts delivered; conclusions consumed by the approved strategy (`DEC-005`); orchestrator review pending. NOT marked passed.**
+**Required:** baseline, prompt universe, crawler policy, entity/citation strategy, measurement method.
+**Acceptance:** platform-specific evidence; no unsupported ranking guarantees.
+
+## Gate 5 — Information Architecture
+**Status: PASSED — 2026-09-01.** See `DEC-010` in `DECISION_LOG.md`.
+**Required:** sitemap, URL architecture, navigation, page inventory, internal linking logic.
+**Acceptance:** every page has audience, intent, funnel role, target topic, CTA.
+
+### Why this gate passes
+Session 07 delivered the required artifacts; an orchestrator correction pass made manufacturing launch-conditional, removed the mandatory proof detour, made qualified-enquiry creation mechanism-independent, and resolved the duplicate IA directory. Launch counts were reconciled. Session 09 later refined the topic occupying one existing editorial slot (`DEC-009`) — that refinement changed no route, no count, no navigation entry and no commercial intent, and did not reopen this gate. The orchestrator approved the corrected architecture.
+
+## Gate 6 — CRO Architecture
+**Status: PASSED — 2026-09-01.** See `DEC-011` in `DECISION_LOG.md`.
+**Required:** visitor journeys, CTA hierarchy, form strategy, trust architecture, funnel architecture.
+**Acceptance:** page journeys mapped by intent and conversion goal.
+
+### Why this gate passes
+Session 08 was reviewed and corrected so that Website Qualified and Sales Qualified remain distinct; attribution completeness is independent of commercial qualification; both a form and a meeting booking can create a qualified enquiry, with booking never automatically qualified merely by existing; the four required form fields stand with budget removed and phone optional; email/MX verification fails open; spam handling is controlled; attribution is first-touch + conversion-touch; the CRM lifecycle stays simple; analytics carries no unnecessary PII; a legitimate enquiry cannot be silently lost to a secondary-integration failure; and the production analytics wording was reconciled with Session 01B live verification. The orchestrator approved the corrected specification.
+
+## Gate 7 — Content Architecture
+**Status: PASSED — 2026-09-01.** See `DEC-012` in `DECISION_LOG.md`.
+**Required:** content pillars, clusters, launch content roadmap, editorial standards, evidence standards.
+**Acceptance:** supports commercial pages, topical authority, AI citation potential, and user usefulness.
+
+### Why this gate passes
+Session 09 was reviewed through its original strategy, an editorial correction pass, and a cross-gate reconciliation pass. The final approved unconditional editorial launch set is: (1) AI-assisted discovery / appearing in ChatGPT, (2) search → qualified enquiry / measurement, (3) the website enquiry-loss diagnostic — plus one conditional industrial/B2B article paired with the conditional manufacturing page. AI Search remains a supporting capability, not the company category. The AI Visibility Baseline remains the canonical research home for the Session 04 dataset. Article 2's search target remains **UNVALIDATED** — no search demand may be claimed for it until targeted validation supports it. `how to get cited by ai` is unbuilt at launch, reconsiderable only in PHASE 2 if it can support a distinct, non-duplicating asset. The own-site diagnostic remains research, not a case study. `/research` may launch with one genuine entry if the second research asset is not ready. No fabricated evidence was accepted, and claims/evidence governance is binding. The orchestrator approved the corrected content strategy.
+
+## Gate 8 — Messaging Architecture
+**Status: PASSED — 2026-09-01.** See `DEC-013` in `DECISION_LOG.md`.
+
+**Note on this gate's numbering:** this file's original Gate 8 was titled "Creative Direction." That placeholder gate had no session assigned to it, no artifacts delivered against it, and was never started or approached — it was renumbered to accommodate Session 10 — Messaging Architecture, which the orchestrator designated Gate 8 in the programme's actual execution order. **Creative Direction's criteria were not dropped — see the Session 11 numbering reconciliation note under Gate 9 below for where they now live.**
+
+**Required:** internal positioning statement; hero/strategic messaging territory; engagement-model safeguards (prohibited absolutes); default buyer-facing terminology for enquiries/qualified enquiries; AI search umbrella terminology with GEO/AEO/LLMO usage rules; prohibited/restricted language system; claims ladder; message quality gate.
+**Acceptance:** consistent with the frozen business strategy (`DEC-005`–`DEC-008`), the approved IA (`DEC-010`), CRO specification (`DEC-011`) and content architecture (`DEC-012`); no unsupported claim; no reintroduced prohibited absolute; binding on Session 11 page-copy production.
+
+### Why this gate passes
+Session 10 delivered the messaging architecture, including a narrow orchestrator correction pass. The orchestrator reviewed the corrected artifacts and approved: the corrected internal positioning; the homepage strategic hero territory *"Judged on the enquiries."* — approved **as a strategic territory, not final homepage copy**, with Session 11 required to determine the actual homepage headline/copy within that territory; the engagement-model safeguards and five prohibited absolutes; "enquiries" as the default buyer-facing noun with "qualified enquiries" where qualification can be explained; "AI search" as umbrella terminology with GEO/AEO/LLMO usage constrained as documented; the prohibited/restricted language system; the claims ladder; and the twenty-item Message Quality Gate, which is now binding on Session 11.
+
+## Gate 9 — Page Copy Production
+**Status: PASSED — 2026-09-01.** See `DEC-014` in `DECISION_LOG.md`.
+
+**Numbering reconciliation (2026-09-01, recorded transparently rather than silently overwritten):** this file's original Gate 9 was titled "UX." Like the original Gate 8, it had no session assigned, no artifacts delivered, and was never started or approached. It is repurposed here for Session 11 — Page Copy Production, which the orchestrator has designated the next gate in the programme's actual execution order after Messaging Architecture. **Both displaced placeholder gates are preserved, not lost, immediately below as lettered insertions that keep every later gate's number (10 onward) unchanged:**
+- **Gate 9A — Creative Direction** (criteria carried over verbatim from the original Gate 8).
+- **Gate 9B — UX** (criteria carried over verbatim from the original Gate 9).
+
+Neither has a session assigned yet. Gate 10 onward are untouched by this reconciliation.
+
+**Required:** approved substantive page copy against the approved page briefs and the twenty-item Message Quality Gate; the copy index and copy audit reconciled to actual publication status (approved / partially blocked / blocked / conditional); evidence and claims carried at their governed confidence level; no owner blocker silently resolved.
+**Acceptance:** copy is consistent with the approved messaging architecture (`DEC-013`) and does not upgrade a page's publication readiness merely because the copy for it exists; **gate approval is not publication approval** for any page carrying an unresolved owner blocker or an unvalidated claim.
+
+### Why this gate passes
+Session 11 produced substantive copy for `/services`, `/seo`, `/ai-seo`, `/social-media-ads`, `/lead-generation`, `/conversion-optimization`, `/problems/traffic-but-no-enquiries`, and the homepage H1 and revised supporting direction. The orchestrator's independent review approved this copy and the homepage H1 **"Judge us on the enquiries, not the traffic."**, while confirming the homepage remains **PARTIALLY BLOCKED** on unresolved owner inputs elsewhere on the page. The review confirmed that all documented page statuses — partially blocked, blocked, and conditional routes — remain unchanged by this gate passing, that the removed ~0.28% AI-referral statistic stays removed, and that Google's published position on generative-AI optimisation and SEO remains **[VALIDATION REQUIRED]** and not publication-ready evidence. See `DEC-014`.
+
+## Gate 9A — Creative Direction
+**Status: PASSED — 2026-09-01.** See `DEC-015` in `DECISION_LOG.md`.
+
+**Required:** visual principles, references, data-visualization language, imagery policy, motion philosophy.
+**Acceptance:** distinctive, coherent, avoids generic agency/AI clichés.
+
+### Why this gate passes
+Session 12 delivered the creative direction, including a stress-test / correction pass. The orchestrator approved: the creative territory **The Record**, with the binding qualifier *"a working record, not an archive"*; the refined thesis that MappedSkills should look like the working record of a firm that finds what is broken, fixes it, and records what changed, with commercial meaning leading every screen and evidence never competing with the commercial argument for first attention; the argument/apparatus visual hierarchy and its "emphasis is commercial, presence is evidential" rule; the Tier 1 figure prioritisation (the run, the four causes, the four AI layers separated per system, what cannot be attributed) with its evidence constraints preserved; the India-first refinements R1–R10; the refined `14_DESIGN_ANTI_PATTERNS.md`, now binding on Gate 9B; the responder-portrait decision (approved in principle for `/contact` and `/schedule-call`, implementation blocked on owner-supplied people/response-ownership information); the component-kit classification as future implementation guidance with no code changed; and the directory-reconciliation recommendation as approved future standalone housekeeping — executed 2026-09-01, see the note below. **F17 (`/how-it-works` stages) remains BLOCKED — no sketch, placeholder or speculative process diagram.** One explicitly authorised narrow correction to previously approved Session 11 copy — an unsupported quantity claim ("most of them never reach you") — was applied without reopening homepage messaging architecture or the approved H1. See `DEC-015`.
+
+**The documentation-directory hygiene reconciliation required before substantive Gate 9B (UX) work begins was completed 2026-09-01, as a standalone governance change**: `docs/08-design/` was retired (removed); `docs/11-schema/` was moved to `docs/15-schema/`, contents unchanged; `docs/11-creative/` was left in place. It was not performed in the Gate 9A pass itself. **This reconciliation does not start Gate 9B.**
+
+## Gate 9B — UX
+**Status: PASSED — 2026-09-02.** See `DEC-016` in `DECISION_LOG.md`.
+
+**Required:** wireframes/page templates, responsive behaviours, component inventory.
+**Acceptance:** clear hierarchy, usable at target breakpoints, aligned to CRO. **Binding input:** the refined `14_DESIGN_ANTI_PATTERNS.md` (approved, Gate 9A, `DEC-015`).
+
+### Why this gate passes
+Session 13 delivered the UX architecture and, in a Gate 9B completion pass, the required low-fidelity structural wireframes (`docs/16-ux/31`–`48`, with the shared legend at `30`), the 16-entry UX pattern inventory (`49`), and a cross-page consistency check (`50`). A cold second-reader audit found documentation and assessment defects; a targeted remediation and re-assessment pass corrected them and individually assessed all 51 criteria in `docs/16-ux/20_GATE_9B_QUALITY_GATE.md`, producing 4 PARTIAL and 1 NOT ASSESSABLE item. **A final narrow closure pass applied six orchestrator rulings to those items, recomputing the assessment to 48 PASS · 0 PARTIAL · 0 FAIL · 3 NOT ASSESSABLE across the 51 criteria, and 6 PASS · 0 PARTIAL · 0 FAIL · 1 NOT ASSESSABLE across the durable criteria above.** The orchestrator reviewed this final state and approved it.
+
+**The three NOT ASSESSABLE criteria are explicitly non-blocking, by orchestrator ruling:**
+- **B6 (pricing self-placement)** — **owner-blocked.** `/pricing`'s prices, bands, inclusions and factor values do not exist as owner-approved facts; the programme's non-fabrication rule forbids inventing them. Structurally the page is arranged correctly; the gap is a missing fact, not a UX defect.
+- **F2 (first-fixation)** and the perceptual portion of **F3 (proportion)** — **deferred to Gate 10.** Both require a rendered visual hierarchy (type scale, weight, contrast) that this low-fidelity phase is explicitly prohibited from producing. The structural/reading-order portions of both tests were assessed now and pass. **Gate 10 carries a mandatory re-test of both.**
+
+The durable "usable at target breakpoints" criterion PASSES on the orchestrator's ruling that Gate 9B validates responsive behaviour through structural width classes — NARROW, MEDIUM, WIDE — verified across all six master wireframe types in `48`, with exact numeric breakpoint values remaining a deliberately deferred Gate 10 output. The durable "clear hierarchy" criterion's structural portion (order, grouping, relative emphasis) passes; its visual-hierarchy portion carries the same Gate 10 deferral as F2/F3 and does not block this gate.
+
+### Explicitly NOT passed by this gate
+**Visual design of any kind** — layout, grid, type, colour, spacing, components, the design system, style frames, mockups or prototypes, none of which exist. **Publication readiness for any route** — every PARTIALLY BLOCKED, BLOCKED and CONDITIONAL status is unchanged. **No owner blocker is resolved**, including `/pricing`'s facts. **F17 remains BLOCKED.** **Gate 10's perceptual re-tests (F2, F3 visual weight)** are not performed by this gate and are carried forward as mandatory.
+
+## Gate 10 — UI / Design System
+**Required:** typography, colors, spacing, grids, controls, states, charts, forms, accessibility patterns.
+**Acceptance:** reusable, implementation-ready, responsive.
+
+**Status — PASSED, 2026-09-04. Recorded as `DEC-019`.**
+
+**Approved baseline:** `docs/26-resolve-homepage/prototype/index.html` — the Session 19B state of the complete homepage. **Active direction: THE RESOLVE.** **Authoritative creative reference: `docs/20-creative-convergence/prototype/convergence.html`**, verified byte-identical (`c6d29fd34cf7c5e481d8244773f7d357`) throughout Sessions 17B–19B and never modified.
+
+**Validation chain:** Session 18 complete homepage → 18A refinement → 18B compression → 18C mobile refinement → 19 closure audit → 19A narrow corrections → 19B accessibility closure. Owner validation at each step, most recently on mobile: *"the mobile now feels right."*
+
+**Evidence, all rendered and measured rather than argued:**
+
+| Test | Result |
+|---|---|
+| **F2 — first fixation** *(deferred here by Gate 9B)* | **PASS** — WIDE 5.05× dominance, NARROW 2.05×, no apparatus on the first screen |
+| **F3 — visual proportion / weight** *(deferred here by Gate 9B)* | **PASS** — WIDE and NARROW |
+| **Quantity safety** | **PASS** — every comparable set non-comparative; zero inline size styles |
+| **Evidence / proof safety** | **PASS** — no fabricated proof of any kind |
+| **Accessibility / responsive** | **PASS** — 0 contrast failures, 0 heading jumps, **0 targets under 40×40 at eight widths**, 0 overflow, 0 fixed/sticky, 0 looping animation |
+| **No-JS / reduced motion** | **PASS** — both compose the complete page; motion never carries meaning |
+| **Marketing-company blur · Digital/PDF · Static quality** | **PASS · PASS · PASS** |
+| **Reader-driven controls** | **ACCEPTED** — two, doing distinct informational jobs |
+
+**Motion budget reconciled:** homepage **T3 3 → 4**, a validated **ceiling** rather than headroom — `docs/24-resolve-governance/02_RESOLVE_MOTION_BUDGET.md` §5.0. Ambient 0, pinned 0, anti-tic rules M1–M7 unchanged.
+
+**Two defects found during closure and corrected, recorded because both survived several sessions:** a boundary transition documented as live in Sessions 18–18C that **had never rendered** (removed in 19A, closing a no-JS inconsistency and a reduced-motion contrast failure of 2.66:1 against a 3:1 floor); and **seven capability links nested inside `<button role="tab">`**, giving each tab a 126-character accessible name (corrected in 19B to a valid tab/tabpanel structure with 7-character names).
+
+---
+
+**The record below is the original in-progress status, retained unchanged as the decision trail.**
+
+**Status — NOT PASSED, IN PROGRESS (2026-09-03) — SUPERSEDED by the PASSED status above.**
+
+**Approved input — the VISUAL DIRECTION only, and it is THE RESOLVE (Session 15C).** Recorded as **`DEC-018`**, 2026-09-03, after the owner **reopened the live prototypes** and clarified that the earlier *"15D"* reference was a **mistaken prototype label**. The approved reference is a **file path, not a session label**: `docs/20-creative-convergence/prototype/convergence.html`. **The direction is approved; nothing else is.**
+
+> **CORRECTION — read before using any Gate 10 material.** This gate previously recorded **THE ARRIVAL** as the approved input, on `DEC-017`. **That is superseded.** `DEC-017` is retained unchanged as historical record, and Session 15D remains retained exploration. **THE RESOLVE is LIGHT-FIRST**; anything applying Session 16's *dark-first* rule to it has broken the direction.
+
+**Proposed deliverable — status changed.** `docs/22-design-system/` (Session 16) was built for **THE ARRIVAL** and is **no longer the Gate 10 deliverable**. It is retained as history and is **partially reusable only**: its Arrival-specific rules (dark-first, the espresso world, amber, the eight signal states, the capture line / horizon / ledger / streak / band primitives, canvas, ambient regions, pinned sequences, and the Arrival colour, surface, type and motion-budget systems) are **SUPERSEDED**; its direction-independent governance may survive **subject to the audit** at `docs/24-resolve-governance/01_SESSION16_AUDIT.md`. **No Resolve design system exists yet.**
+
+**Governance now in force for this gate:** `docs/24-resolve-governance/` — the active direction (`00`), the Session 16 audit (`01`), the Resolve motion and repetition budget (`02`) and the validation order (`03`).
+
+**Carried into this gate and still outstanding:**
+- **F1 (the run) has never been drawn in THE RESOLVE's materials.** The Session 17 F1 work tested F1 against THE ARRIVAL and was **removed rather than committed**, because it is no longer a valid test. **F1 revalidation against THE RESOLVE is the first task.**
+- **F2 (first fixation)** and **F3 (visual weight)** — deferred here by Gate 9B and **mandatory**. They have **not** been re-run against THE RESOLVE, because no complete page exists in it. F3 must use `docs/17-visual-validation/09_VISUAL_WEIGHT_RUBRIC.md` **unchanged**.
+- **No complete homepage exists in THE RESOLVE.** The Session 15C prototype is a creative-direction prototype, not a homepage.
+- **The "retain, restated" rules** from the Session 16 audit are classified but **not rewritten**.
+- **MEDIUM width** has never been rendered, in any direction.
+- **Performance validation.** Resolve's one budgeted item is a one-off 190–440-element lattice transition, not a running canvas; profiling on real hardware is still required before implementation.
+- **Accessibility validation.** No screen reader, real device, other browser, print or 200% text-resize test has been run.
+- **No user testing** has ever been performed in this programme.
+- **`F17` remains BLOCKED** and undrawn.
+
+### Explicitly NOT passed by this status
+The design system · the complete homepage, which does not exist · any other route · any production code · any owner blocker · any performance or accessibility claim beyond what was measured on one prototype at two emulated widths.
+
+### Closure note (2026-09-04) — which of the above closed, and which did not
+**Closed by Gate 10 passage:** F1 revalidated against THE RESOLVE and then validated *inside* the complete homepage · **F2 and F3 re-run and passed at both widths** · a complete homepage now exists in THE RESOLVE · **MEDIUM width rendered and validated**, along with 360, 390, 430, 760, 761, 860, 1080 and 1425.
+
+**NOT closed, and carried forward to production translation:** **performance profiling on real hardware** and Core Web Vitals · **screen-reader, real-device, other-browser, print and 200% text-resize testing** · **any user testing**, which this programme has still never performed · a separate Resolve **design system** as a standalone deliverable · **`F17` remains BLOCKED and undrawn** · and **every owner blocker remains open — `/pricing` facts, the F17 `/how-it-works` real process, and the conditional manufacturing route.** **Passing Gate 10 approves no production implementation, deployment or push.**
+
+## Gate 11 — Homepage
+**Required:** approved final homepage design/prototype.
+**Acceptance:** world-class visual quality, understandable positioning, excellent conversion flow.
+
+## Gate 12 — Service Landing Pages
+**Required:** final designs/content for each approved core service.
+**Acceptance:** search intent aligned, high-conversion structure, sufficient proof/evidence.
+
+## Gate 13 — Development Architecture
+**Required:** current-to-target mapping, component plan, migration plan, performance budget.
+**Acceptance:** preserves critical functionality and SEO equity.
+
+## Gate 14 — Technical Implementation
+**Required:** implemented approved pages/components.
+**Acceptance:** visual fidelity, tests run, no regression.
+
+## Gate 15 — Analytics / Automation
+**Required:** event taxonomy, GTM/GA4 plan, CRM flow, attribution fields.
+**Acceptance:** critical funnel actions measurable.
+
+## Gate 16 — SEO / Schema
+**Required:** metadata, canonicalization, schema, sitemap, robots, redirects, internal links.
+**Acceptance:** crawl and validation checks pass.
+
+## Gate 17 — Performance
+**Required:** lab testing + real-world plan.
+**Acceptance:** agreed performance budgets met or documented exceptions approved.
+
+## Gate 18 — Accessibility
+**Required:** keyboard, semantics, contrast, forms, reduced motion, screen-reader checks.
+**Acceptance:** WCAG 2.2 AA target substantially met.
+
+## Gate 19 — Browser / Device QA
+**Required:** agreed device/browser matrix.
+**Acceptance:** no critical layout/function issues.
+
+## Gate 20 — Staging
+**Required:** full crawl, forms, tracking, redirects, noindex/index controls, legal/privacy checks.
+**Acceptance:** release checklist passed.
+
+## Gate 21 — Launch
+**Required:** approved production release plan.
+**Acceptance:** monitoring, rollback, search-console/indexing checks ready.
+
+## Gate 22 — Post-Launch Validation
+**Required:** indexing, crawl, performance, analytics, AI visibility, conversion monitoring.
+**Acceptance:** no critical regression and baseline metrics captured.
+
+---
+
+## Rule on Gate Advancement
+A gate is passed only when an owner or orchestrator approves it and the approval is recorded in `DECISION_LOG.md`. **Claude has no authority to approve a gate on its own judgement**, and no gate may be marked passed because the phase after it looks ready to start.

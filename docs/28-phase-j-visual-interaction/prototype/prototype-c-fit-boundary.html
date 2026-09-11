@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PHASE J — Prototype C — The Fit Boundary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="resolve-proto.css">
+<style>
+/* ===========================================================================
+   PROTOTYPE C — THE FIT BOUNDARY
+   Target section: /about §5  "WHO WE WORK WITH — And who we do not."
+
+   THE PROBLEM THIS SOLVES. Six sentences stack at one left edge. Three of them
+   are inclusions and three are exclusions, and NOTHING IN THE COMPOSITION SAYS
+   SO — the reader discovers it by noticing that the last three begin with the
+   word "Not". The single most important fact about the section (that it has
+   two halves and a line between them) is carried by a word, not by the layout.
+
+   PRIMITIVE CLASS DEMONSTRATED: J7 STATE COMPARISON
+   MOTION: one T2 — the boundary rule draws and the three exclusions settle
+   into the open/unmet register. This is the one content class the motion
+   budget names explicitly: "a limit or boundary being drawn"
+   (02_RESOLVE_MOTION_BUDGET.md §5.3, item 3). Fires once. Never replays.
+   ======================================================================== */
+
+.pc-cols { display: block; }
+
+.pc-col h3 {
+  margin: 0 0 4px;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.pc-col.yes h3 { color: var(--accent-dark); }
+.pc-col.no  h3 { color: var(--gap); }
+
+.pc-list { margin: 0; padding: 0; list-style: none; }
+.pc-list li {
+  display: grid;
+  grid-template-columns: 15px 1fr;
+  gap: 14px;
+  align-items: start;
+  margin: 0;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: clamp(1.0rem, 1.35vw, 1.1rem);
+  line-height: 1.45;
+}
+.pc-list li:last-child { border-bottom: 0; }
+.pc-col.no .pc-list li { color: var(--dim); }
+
+.pc-mk { width: 15px; height: 15px; margin-top: 4px; }
+.pc-col.yes .pc-mk { background: var(--accent-deep); }
+/* The exclusion mark's SETTLED state is the open/dashed register — the same
+   mark this site uses everywhere for "not met / not measured". It is the
+   default, so it is what a reader with no JavaScript sees. */
+.pc-col.no .pc-mk { background: transparent; border: 2px dashed var(--gap); }
+
+/* the boundary rule between the two halves */
+.pc-rule { display: none; }
+
+/* ---- T2 — the boundary is DRAWN --------------------------------------- */
+.pc-cols[data-j="armed"] .pc-rule i { transform: scaleY(0); }
+.pc-cols[data-j="on"] .pc-rule i {
+  transform: scaleY(1);
+  transition: transform var(--t-state) var(--e-state);
+}
+/* the exclusions settle into the unmet register after the rule lands */
+.pc-cols[data-j="armed"] .pc-col.no .pc-mk { border-color: var(--dim); opacity: .5; }
+.pc-cols[data-j="on"] .pc-col.no .pc-mk {
+  border-color: var(--gap); opacity: 1;
+  transition: border-color var(--t-state) var(--e-state) 380ms,
+              opacity var(--t-state) var(--e-state) 380ms;
+}
+
+@media (min-width: 761px) {
+  /* CENTRED STATEMENT + SYMMETRIC SPLIT. Prototype A is left-index/right-figure
+     and B is left-figure/right-reading; this one is a centred two-column
+     comparison with the rule on the axis. Three sections built from one
+     grammar, three different silhouettes — which is the §30 composition
+     requirement, tested. */
+  .pc-cols {
+    display: grid;
+    grid-template-columns: minmax(0,1fr) 1px minmax(0,1fr);
+    gap: clamp(28px, 4vw, 64px);
+    align-items: start;
+    margin-top: clamp(28px, 3.4vw, 48px);
+  }
+  .pc-rule { display: block; align-self: stretch; }
+  .pc-rule i { display: block; width: 1px; height: 100%; background: var(--ink);
+               transform-origin: top center; }
+}
+
+/* NARROW: the two halves stack and the rule becomes horizontal, because a
+   1px vertical hairline between stacked blocks says nothing. */
+@media (max-width: 760px) {
+  .pc-col.no { margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--ink); }
+}
+</style>
+</head>
+<body>
+
+<div class="harness">PHASE J — PROTOTYPE C — THE FIT BOUNDARY &nbsp;·&nbsp; <a href="index.html">back to index</a></div>
+<div class="stamp">Target: <b>/about §5</b> — six stacked sentences at one left edge. Copy below is the approved production copy, <b>word for word, with nothing removed</b>.</div>
+
+<!-- ======================================================================
+     BEFORE — exact transcription. Two StatedList blocks, one after the other,
+     visually identical, distinguished only by the word "Not".
+     =================================================================== -->
+<section class="chapter" style="border-top:0">
+  <div class="wrap">
+    <p class="lab" style="color:var(--gap)">BEFORE — PRODUCTION TODAY</p>
+    <h2 class="lab" style="margin-top:26px">Who we work with</h2>
+    <p class="display">And who we do not.</p>
+    <ul style="margin:clamp(24px,3vw,40px) 0 0;padding:0;list-style:none">
+      <li style="padding:14px 0;border-bottom:1px solid var(--line);max-width:58ch">Businesses where a customer takes time to decide and one good enquiry is worth real money.</li>
+      <li style="padding:14px 0;border-bottom:1px solid var(--line);max-width:58ch">Businesses where demand already exists or can reasonably be reached.</li>
+      <li style="padding:14px 0;border-bottom:1px solid var(--line);max-width:58ch">Businesses where measurement access is not a problem.</li>
+    </ul>
+    <ul style="margin:clamp(18px,2vw,26px) 0 0;padding:0;list-style:none">
+      <li style="padding:14px 0;border-bottom:1px solid var(--line);max-width:58ch">Not businesses that need demand created from nothing.</li>
+      <li style="padding:14px 0;border-bottom:1px solid var(--line);max-width:58ch">Not impulse or price-only purchases.</li>
+      <li style="padding:14px 0;border-bottom:1px solid var(--line);max-width:58ch">Not anyone who needs the outcome guaranteed.</li>
+    </ul>
+    <p class="note">We are based in Pune and work with businesses across India. No international or export claim is made here, because no evidence supporting one exists.</p>
+  </div>
+</section>
+
+<!-- ======================================================================
+     AFTER — the same six sentences, with the boundary made structural.
+     =================================================================== -->
+<section class="chapter paper">
+  <div class="wrap">
+    <p class="lab" style="color:var(--accent-dark)">AFTER — PHASE J · J7 STATE COMPARISON</p>
+    <h2 class="lab" style="margin-top:26px">Who we work with</h2>
+    <p class="display">And who we do not.</p>
+
+    <div class="pc-cols" id="pc-cols">
+      <div class="pc-col yes">
+        <h3>Where this works</h3>
+        <ul class="pc-list">
+          <li><span class="pc-mk" aria-hidden="true"></span><span>Businesses where a customer takes time to decide and one good enquiry is worth real money.</span></li>
+          <li><span class="pc-mk" aria-hidden="true"></span><span>Businesses where demand already exists or can reasonably be reached.</span></li>
+          <li><span class="pc-mk" aria-hidden="true"></span><span>Businesses where measurement access is not a problem.</span></li>
+        </ul>
+      </div>
+
+      <!-- the boundary. Decorative: both halves are already named in text by
+           their own headings, so nothing is carried by the rule alone. -->
+      <div class="pc-rule" aria-hidden="true"><i></i></div>
+
+      <div class="pc-col no">
+        <h3>Where it does not</h3>
+        <ul class="pc-list">
+          <li><span class="pc-mk" aria-hidden="true"></span><span>Not businesses that need demand created from nothing.</span></li>
+          <li><span class="pc-mk" aria-hidden="true"></span><span>Not impulse or price-only purchases.</span></li>
+          <li><span class="pc-mk" aria-hidden="true"></span><span>Not anyone who needs the outcome guaranteed.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="note" style="max-width:62ch">We are based in Pune and work with businesses across India. No international or export claim is made here, because no evidence supporting one exists.</p>
+  </div>
+</section>
+
+<div class="stamp">
+  Reduced motion: both halves, both headings and the rule are composed complete on first paint.
+  JavaScript off: identical &mdash; the two headings are server markup, so <b>the two halves are named in text whether or not anything runs</b>.
+  <b>Six sentences in, six sentences out.</b>
+</div>
+
+<script>
+/* ===========================================================================
+   PROTOTYPE C — the client leaf. One T2: a limit being drawn, which is the
+   third of the three content classes the motion budget permits a resolution
+   for (02_RESOLVE_MOTION_BUDGET.md §5.3).
+   ======================================================================== */
+(function () {
+  var el = document.getElementById('pc-cols');
+  if (!el) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
+
+  el.setAttribute('data-j', 'armed');
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      el.setAttribute('data-j', 'on');
+      io.disconnect();
+    });
+  }, { threshold: 0.35 });
+  io.observe(el);
+
+  setTimeout(function () {
+    if (el.getAttribute('data-j') !== 'on') { el.setAttribute('data-j', 'on'); io.disconnect(); }
+  }, 4000);
+})();
+</script>
+</body>
+</html>

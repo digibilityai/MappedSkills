@@ -1,0 +1,20 @@
+# MappedSkills — Apache / LiteSpeed cache headers for static files.
+#
+# THIS FILE IS A FRAGMENT TO MERGE INTO ~/public_html/.htaccess.
+# The live host keeps Passenger / Node.js Selector directives THERE
+# (PassengerAppRoot, PassengerStartupFile, PassengerNodejs, SetEnv).
+# Replacing that file wholesale would drop the proxy to server.cjs —
+# the same class of outage as a leftover WordPress rewrite/proxy block.
+#
+# Merge rules:
+#   1. Keep every Passenger* / SetEnv / PassengerEnabled line unchanged.
+#   2. Do not restore WordPress RewriteRule / index.php proxy blocks.
+#   3. Append the block below if it is not already present.
+#
+# HTML documents have no file extension, so they are not matched.
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(webp|png|jpe?g|gif|svg|ico|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>

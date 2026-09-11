@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PHASE J — Prototype B — Where Everybody Else's Report Stops</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="resolve-proto.css">
+<style>
+/* ===========================================================================
+   PROTOTYPE B — WHERE EVERYBODY ELSE'S REPORT STOPS
+   Target section: /about §1  "WHY WE WORK THIS WAY"
+
+   THE PROBLEM THIS SOLVES. The approved copy states a SPATIAL fact in prose:
+   three suppliers each measure their own segment, every report can be accurate,
+   and the enquiry sits past all of them. A reader has to hold three spans and
+   an endpoint in their head to see it. That is exactly the kind of sentence a
+   drawing states in one look.
+
+   PRIMITIVE CLASSES DEMONSTRATED: J2 SIGNAL MAP + J5 KINETIC STATEMENT
+   MOTION: one T2 — three spans draw in sequence, then the gap and the enquiry
+   arrive. Fires once on entering view. Never replays. Nothing loops.
+   ======================================================================== */
+
+.pb-split { display: block; }
+.pb-figure { margin: clamp(26px,3.2vw,44px) 0 0; }
+.pb-figure svg { display: block; width: 100%; height: auto; }
+.pb-cap { margin: clamp(14px,1.8vw,20px) 0 0; max-width: 62ch; font-size: .9rem; line-height: 1.55; color: var(--dim); }
+
+/* The legend is REAL TEXT, not a key to a colour. Every span in the drawing is
+   named here in the same words the approved copy uses, so the meaning survives
+   with images off, in a screen reader, and in a crawler's text extraction. */
+.pb-legend { margin: clamp(20px,2.4vw,30px) 0 0; padding: 0; list-style: none; }
+.pb-legend li { display: grid; grid-template-columns: 15px 1fr; gap: 12px; align-items: start;
+                margin: 0; padding: 11px 0; border-bottom: 1px solid var(--line); }
+.pb-legend b { font-weight: 700; }
+.pb-legend span { color: var(--dim); font-size: .96rem; line-height: 1.5; }
+.pb-legend .swatch { width: 15px; height: 15px; margin-top: 3px; }
+.pb-legend .s-rep { background: var(--dim); opacity: .42; }
+.pb-legend .s-gap { background: transparent; border: 2px dashed var(--gap); }
+.pb-legend .s-enq { background: var(--accent-deep); }
+/* Order only, never a quantity or a rank — the same rule ScopeList already
+   applies to its own numbering. Present at every width so the wide reading and
+   the narrow drawing use one numbering, not two. */
+.pb-legend .n { font-style: normal; font-weight: 700; font-size: .78rem; color: var(--gap);
+                margin-right: 9px; letter-spacing: .06em; }
+
+/* ---- T2 — the one budgeted state change ---------------------------------
+   Start states exist ONLY under [data-j="armed"], which only a running script
+   can write. With no script, a failed load or reduced motion, the drawing is
+   composed complete on first paint. */
+#pb-fig [data-part] { transition: opacity var(--t-state) var(--e-arrive),
+                                  transform var(--t-state) var(--e-arrive); }
+#pb-fig[data-j="armed"] [data-part] { opacity: 0; transform: translateY(-8px); }
+#pb-fig[data-j="on"] [data-part] { opacity: 1; transform: none; }
+#pb-fig[data-j="on"] [data-part="r1"] { transition-delay: 0ms; }
+#pb-fig[data-j="on"] [data-part="r2"] { transition-delay: 150ms; }
+#pb-fig[data-j="on"] [data-part="r3"] { transition-delay: 300ms; }
+/* the gap and the enquiry arrive AFTER the three reports, which is the whole
+   point of the sentence: they are what the three do not reach. */
+#pb-fig[data-j="armed"] [data-part="gap"],
+#pb-fig[data-j="armed"] [data-part="enq"] { opacity: 0; transform: none; }
+#pb-fig[data-j="on"] [data-part="gap"] { transition-delay: 520ms; }
+#pb-fig[data-j="on"] [data-part="enq"] { transition-delay: 700ms; }
+
+.pb-vert { display: block; }
+.pb-horz { display: none; }
+
+@media (min-width: 761px) {
+  .pb-vert { display: none; }
+  .pb-horz { display: block; }
+  /* REVERSED SPLIT: the drawing takes the left and the reading takes the
+     right. Prototype A puts the index left and the figure right; this one is
+     the mirror. Two sections built from the same grammar therefore do not
+     produce the same silhouette. */
+  .pb-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: clamp(30px, 4.2vw, 76px);
+    align-items: start;
+    margin-top: clamp(26px, 3.2vw, 44px);
+  }
+  .pb-figure { margin-top: 0; }
+  .pb-read { padding-top: 6px; }
+  .pb-legend { margin-top: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="harness">PHASE J — PROTOTYPE B — WHERE EVERYBODY ELSE'S REPORT STOPS &nbsp;·&nbsp; <a href="index.html">back to index</a></div>
+<div class="stamp">Target: <b>/about §1</b> — the worst-scoring page in the audit: <b>8 sections, 8 of them text-only, zero figures of any kind</b>. Copy below is the approved production copy.</div>
+
+<!-- ======================================================================
+     BEFORE — exact transcription of the production section.
+     Two paragraphs, 123 words, one left edge, no visual support.
+     =================================================================== -->
+<section class="chapter" style="border-top:0">
+  <div class="wrap">
+    <p class="lab" style="color:var(--gap)">BEFORE — PRODUCTION TODAY</p>
+    <h2 class="lab" style="margin-top:26px">Why we work this way</h2>
+    <p class="display">The enquiry sits at the end of everybody else&rsquo;s report.</p>
+    <p class="body">Most marketing suppliers are measured on their own part going up. The search agency reports rankings. The ads agency reports clicks and cost per click. The web developer reports a finished site. Every one of those reports can be accurate while the business receives no more enquiries than before &mdash; because the enquiry sits at the end of all of them, and where the work is split it can easily be nobody&rsquo;s job.</p>
+    <p class="body">That is the belief the firm is built on: the enquiry is the unit that matters, and someone has to be accountable for it across the whole path rather than for one segment of it.</p>
+  </div>
+</section>
+
+<!-- ======================================================================
+     AFTER — the same claim, drawn.
+     =================================================================== -->
+<section class="chapter paper">
+  <div class="wrap">
+    <p class="lab" style="color:var(--accent-dark)">AFTER — PHASE J · J2 SIGNAL MAP + J5 KINETIC STATEMENT</p>
+    <h2 class="lab" style="margin-top:26px">Why we work this way</h2>
+    <p class="display">The enquiry sits at the end of everybody else&rsquo;s report.</p>
+
+    <div class="pb-split">
+      <figure class="pb-figure" id="pb-fig">
+        <!-- horizontal, MEDIUM and up -->
+        <div class="pb-horz">
+          <svg viewBox="0 0 820 300" role="img" aria-labelledby="pbTitle pbDesc">
+            <title id="pbTitle">Three supplier reports, each covering only its own segment of the path, and the enquiry sitting past all three</title>
+            <desc id="pbDesc">One path runs left to right with four points: search, advertising, the site, and the enquiry. Three brackets sit above it. The first covers only search and is labelled the search agency reports rankings. The second covers only advertising and is labelled the ads agency reports clicks and cost per click. The third covers only the site and is labelled the web developer reports a finished site. None of the three brackets reaches the enquiry. The stretch between the last bracket and the enquiry is drawn as an open dashed span and labelled nobody's report reaches here. The enquiry itself is the only mark drawn in tangerine. No bracket length, gap width or position on this drawing represents a quantity, a budget, a result or a rate.</desc>
+
+            <!-- the path -->
+            <line x1="60" y1="212" x2="760" y2="212" stroke="var(--ink)" stroke-width="2"></line>
+            <rect x="53" y="205" width="14" height="14" fill="var(--ink)"></rect>
+            <rect x="243" y="205" width="14" height="14" fill="var(--ink)"></rect>
+            <rect x="433" y="205" width="14" height="14" fill="var(--ink)"></rect>
+
+            <g font-family="Manrope, sans-serif" font-size="12.5" font-weight="600" fill="var(--dim)">
+              <text x="53" y="242">search</text>
+              <text x="243" y="242">advertising</text>
+              <text x="433" y="242">the site</text>
+            </g>
+
+            <!-- three supplier reports, each covering its own segment only -->
+            <g data-part="r1">
+              <path d="M60 168 L60 150 L170 150 L170 168" fill="none" stroke="var(--dim)" stroke-width="2" opacity=".55"></path>
+              <text x="60" y="138" font-family="Manrope, sans-serif" font-size="12.5" font-weight="700" fill="var(--dim)">the search agency reports rankings</text>
+            </g>
+            <g data-part="r2">
+              <path d="M250 168 L250 106 L360 106 L360 168" fill="none" stroke="var(--dim)" stroke-width="2" opacity=".55"></path>
+              <text x="250" y="94" font-family="Manrope, sans-serif" font-size="12.5" font-weight="700" fill="var(--dim)">the ads agency reports clicks and cost per click</text>
+            </g>
+            <g data-part="r3">
+              <path d="M440 168 L440 62 L550 62 L550 168" fill="none" stroke="var(--dim)" stroke-width="2" opacity=".55"></path>
+              <text x="440" y="50" font-family="Manrope, sans-serif" font-size="12.5" font-weight="700" fill="var(--dim)">the web developer reports a finished site</text>
+            </g>
+
+            <!-- the stretch none of them reaches -->
+            <g data-part="gap">
+              <line x1="550" y1="212" x2="700" y2="212" stroke="var(--gap)" stroke-width="6" stroke-dasharray="5 5"></line>
+              <text x="550" y="272" font-family="Manrope, sans-serif" font-size="12.5" font-weight="700" fill="var(--gap)">nobody&rsquo;s report reaches here</text>
+            </g>
+
+            <!-- the enquiry: the only tangerine object on the drawing -->
+            <g data-part="enq">
+              <rect x="700" y="203" width="18" height="18" fill="var(--accent-deep)"></rect>
+              <text x="694" y="188" font-family="Manrope, sans-serif" font-size="13.5" font-weight="800" fill="var(--accent-dark)">the enquiry</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- vertical, NARROW — a genuinely different drawing, not the above
+             rotated or scaled. The three reports become left-hand brackets and
+             the path reads downwards, which is the natural narrow reading. -->
+        <div class="pb-vert" style="max-width:300px">
+          <svg viewBox="0 0 300 330" role="img" aria-labelledby="pbTitleV pbDescV">
+            <title id="pbTitleV">Three supplier reports, each covering only its own segment of the path, and the enquiry sitting past all three, drawn vertically</title>
+            <desc id="pbDescV">The same path read downwards with four points: search, advertising, the site, and the enquiry. Three numbered brackets on the left each cover one segment only, and none of them reaches the enquiry. The stretch before the enquiry is an open dashed span labelled nobody&apos;s report reaches here. The three brackets are numbered one, two and three to match the three named rows beside this drawing; the numbers are order only and are not quantities. Nothing on this drawing represents a quantity.</desc>
+
+            <line x1="150" y1="30" x2="150" y2="290" stroke="var(--ink)" stroke-width="2"></line>
+            <rect x="143" y="23" width="14" height="14" fill="var(--ink)"></rect>
+            <rect x="143" y="93" width="14" height="14" fill="var(--ink)"></rect>
+            <rect x="143" y="163" width="14" height="14" fill="var(--ink)"></rect>
+
+            <g font-family="Manrope, sans-serif" font-size="13" font-weight="600" fill="var(--dim)">
+              <text x="170" y="34">search</text>
+              <text x="170" y="104">advertising</text>
+              <text x="170" y="174">the site</text>
+            </g>
+
+            <!-- The three brackets carry NUMBERS, not labels: every supplier is
+                 named in the HTML rows beside this drawing, so no name is
+                 locked inside graphics text. The numbers are ORDER ONLY and
+                 match the numbered rows one for one. -->
+            <g data-part="r1">
+              <path d="M132 30 L114 30 L114 64 L132 64" fill="none" stroke="var(--dim)" stroke-width="2" opacity=".55"></path>
+              <text x="92" y="52" font-family="Manrope, sans-serif" font-size="12" font-weight="700" fill="var(--dim)">01</text>
+            </g>
+            <g data-part="r2">
+              <path d="M132 100 L114 100 L114 134 L132 134" fill="none" stroke="var(--dim)" stroke-width="2" opacity=".55"></path>
+              <text x="92" y="122" font-family="Manrope, sans-serif" font-size="12" font-weight="700" fill="var(--dim)">02</text>
+            </g>
+            <g data-part="r3">
+              <path d="M132 170 L114 170 L114 204 L132 204" fill="none" stroke="var(--dim)" stroke-width="2" opacity=".55"></path>
+              <text x="92" y="192" font-family="Manrope, sans-serif" font-size="12" font-weight="700" fill="var(--dim)">03</text>
+            </g>
+
+            <g data-part="gap">
+              <line x1="150" y1="214" x2="150" y2="290" stroke="var(--gap)" stroke-width="6" stroke-dasharray="5 5"></line>
+              <text x="170" y="246" font-family="Manrope, sans-serif" font-size="12" font-weight="700" fill="var(--gap)">nobody&rsquo;s report</text>
+              <text x="170" y="261" font-family="Manrope, sans-serif" font-size="12" font-weight="700" fill="var(--gap)">reaches here</text>
+            </g>
+            <g data-part="enq">
+              <rect x="141" y="290" width="18" height="18" fill="var(--accent-deep)"></rect>
+              <text x="170" y="304" font-family="Manrope, sans-serif" font-size="13" font-weight="800" fill="var(--accent-dark)">the enquiry</text>
+            </g>
+          </svg>
+        </div>
+
+        <figcaption class="pb-cap">
+          Each bracket shows how far one supplier&rsquo;s report reaches.
+          <b style="color:var(--ink)">No bracket, gap or position is a quantity, a budget or a rate.</b>
+        </figcaption>
+      </figure>
+
+      <div class="pb-read">
+        <!-- The three supplier sentences move from the paragraph into named
+             rows. They are NOT deleted, and they are NOT moved into the SVG
+             where a crawler would have to read graphics text to find them. -->
+        <ul class="pb-legend">
+          <li><span class="swatch s-rep"></span><span><i class="n">01</i><b>The search agency</b> reports rankings.</span></li>
+          <li><span class="swatch s-rep"></span><span><i class="n">02</i><b>The ads agency</b> reports clicks and cost per click.</span></li>
+          <li><span class="swatch s-rep"></span><span><i class="n">03</i><b>The web developer</b> reports a finished site.</span></li>
+          <li><span class="swatch s-gap"></span><span>Every one of those reports can be accurate while the business receives no more enquiries than before &mdash; and where the work is split, the stretch none of them covers can easily be <b>nobody&rsquo;s job</b>.</span></li>
+          <li style="border-bottom:0"><span class="swatch s-enq"></span><span><b>The enquiry</b> is the unit that matters, and someone has to be accountable for it across the whole path rather than for one segment of it.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stamp">
+  Reduced motion: the drawing is composed complete on first paint &mdash; the three reports, the gap and the enquiry are all present, and nothing animates.
+  JavaScript off: identical. <b>The drawing carries no meaning that the caption and the five named rows do not also carry in text.</b>
+</div>
+
+<script>
+/* ===========================================================================
+   PROTOTYPE B — the client leaf. One T2, fired once, then the observer is
+   disconnected and no timer, listener or frame loop remains.
+   ======================================================================== */
+(function () {
+  var fig = document.getElementById('pb-fig');
+  if (!fig) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;   // composed state is the default
+
+  fig.setAttribute('data-j', 'armed');
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      fig.setAttribute('data-j', 'on');
+      io.disconnect();                 // once per load. Scrolling back does not replay.
+    });
+  }, { threshold: 0.3 });
+  io.observe(fig);
+
+  /* Force-completion floor — a drawing must never be left in its start state. */
+  setTimeout(function () {
+    if (fig.getAttribute('data-j') !== 'on') { fig.setAttribute('data-j', 'on'); io.disconnect(); }
+  }, 4000);
+})();
+</script>
+</body>
+</html>

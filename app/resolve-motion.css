@@ -1,0 +1,558 @@
+/* =============================================================================
+   SESSION 26 — PHASE D — HOMEPAGE MOTION + INTERACTION.
+
+   Source of truth for behaviour: docs/26-resolve-homepage/prototype/index.html
+   (Gate 10, DEC-019) and docs/27-production-translation/04_MOTION_IMPLEMENTATION.md.
+   Source of truth for structure: the Phase C production homepage, which is
+   FROZEN. Nothing in this file changes the composed/settled appearance of the
+   Phase C page — every rule below is either (a) a start state that only exists
+   once JavaScript has written `data-rsv` / `data-state`, or (b) a transition on
+   a property whose settled value is unchanged.
+
+   THE FAILURE CONTRACT, RESTATED AS A CSS RULE:
+   No selector in this file hides, displaces or fades meaningful content in the
+   absence of a `data-rsv` / `data-state` attribute. Those attributes are only
+   ever written by a hydrated client leaf that also owns a ~4s force-completion
+   fallback. With no JavaScript, a failed hydration, no IntersectionObserver, or
+   `prefers-reduced-motion: reduce`, every rule below is simply inert and the
+   reader gets the Phase C static page.
+
+   PERFORMANCE: `transform`, `opacity`, colour tokens and one `stroke-dashoffset`
+   draw. No layout property is animated anywhere. No `filter`, no `box-shadow`,
+   no ambient loop, no infinite animation, no pinned sequence.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- easings --
+   The Resolve system has two easings and four timings and nothing else. They
+   are the tokens already declared in app/globals.css. */
+
+/* =============================================================== CHAPTER 1
+   THE HERO — the page's ONE T1, and its one signature interaction.
+
+   `.rsv-sw` is the two-state surface. It carries no `data-state` on the server,
+   which IS the approved resolved/light composition. A hydrated `HeroSurface`
+   sets `data-state="traffic"` and then `data-state="enquiries"`; a small
+   pre-paint script sets `data-rsv-hero="traffic"` on <html> so the dark stage
+   is the FIRST PAINT rather than a post-hydration inversion (a light -> dark ->
+   light cycle would be exactly the strobe the brief forbids). That script also
+   removes its own attribute after ~4s, so a page whose JavaScript never
+   hydrates returns to the resolved light state instead of sitting dark.
+   ========================================================================== */
+.rsv-sw {
+  --rsv-muted: var(--resolve-dim);
+  --rsv-strong: var(--resolve-ink);
+  --rsv-line: var(--resolve-line);
+  --rsv-kw-e: var(--resolve-accent-deep);
+  --rsv-kw-t: var(--resolve-dim);
+  position: relative;
+  overflow: hidden;
+  background: var(--resolve-ground);
+  color: var(--resolve-ink);
+  transition: background-color var(--resolve-t-state) var(--resolve-ease-state),
+              color var(--resolve-t-state) var(--resolve-ease-state);
+}
+
+/* THE INVERSION. A state change is a TOKEN change, never a per-element
+   override — the same rule the shipped globals.css already applies to the dark
+   footer strip. Measured on this pairing:
+     #F7F3EC on #141219 = 16.15:1   (body/display type)
+     #A29BAC on #141219 =  6.95:1   (the dimmed register)
+     #FF5B04 on #141219 =  5.97:1   (the mark, as text)
+     #141219 on #F7F3EC = 16.80:1   (the control's pressed state)
+   No intermediate state pairs white with tangerine, and no text token is left
+   on a ground it does not clear. */
+.rsv-sw[data-state='traffic'],
+html[data-rsv-hero='traffic'] .rsv-sw:not([data-state]) {
+  --rsv-muted: #a29bac;
+  --rsv-strong: var(--resolve-ground);
+  --rsv-line: #332f3c;
+  --rsv-kw-e: #a29bac;
+  --rsv-kw-t: var(--resolve-accent);
+  background: var(--resolve-ink);
+  color: var(--resolve-ground);
+}
+
+.rsv-muted { color: var(--rsv-muted); }
+.rsv-strong { color: var(--rsv-strong); }
+.rsv-rule-t { border-color: var(--rsv-line); }
+.rsv-proof { color: var(--rsv-muted); }
+.rsv-proof:hover { color: var(--rsv-strong); }
+.rsv-cta-o { border-color: currentColor; color: inherit; }
+
+/* PHASE E — P1. THE TOKEN-DRIVEN TEXT CROSSFADES *WITH* THE SURFACE.
+   The H1 inherits `color` from `.rsv-sw`, so it has always crossfaded with the
+   ground. Everything that reads a token instead — the supporting line, the
+   method link, the state label, the row labels, the stage rule, the two
+   governing words — had no transition of its own, so its colour SNAPPED to the
+   destination value while the ground behind it was still 620ms away from
+   arriving. That left the dimmed register sitting at its light-ground colour on
+   an almost-black surface.
+
+   Measured on the rendered page, sampled every frame through the inversion:
+
+     before   dimmed register below 3:1 for 343ms (minimum 1.02)
+     after    dimmed register below 3:1 for 116ms (minimum 1.08)
+
+   This is not a new behaviour and not a new design state: it makes the rest of
+   the surface do what the H1 already did, which is the approved gesture — the
+   surface inverts as one thing. Both end states are unchanged.
+
+   The H1's own symmetric crossing (measured: 67ms below 3:1) is inherent to any
+   continuous inversion — two colours travelling toward each other must cross —
+   and is unchanged and accepted. See 15_PHASE_E_RESPONSIVE_FALLBACK.md §P1. */
+.rsv-muted,
+.rsv-strong,
+.rsv-proof,
+.rsv-cta-o,
+.rsv-kw--e,
+.rsv-kw--t,
+.rsv-rule-t {
+  transition: color var(--resolve-t-state) var(--resolve-ease-state),
+              border-color var(--resolve-t-state) var(--resolve-ease-state);
+}
+
+/* KINETIC HIERARCHY. The emphasis is a mark WIPING across the governing word,
+   not a colour fade, so BOTH words stay fully readable in both states and the
+   active state is never carried by colour alone.
+
+   The mark only exists once a state is being driven (`[data-state]`), so the
+   no-JS page is byte-for-byte the Phase C composition it was validated as. */
+.rsv-kw { position: relative; display: inline-block; white-space: nowrap; }
+.rsv-kw--e { color: var(--rsv-kw-e); }
+.rsv-kw--t { color: var(--rsv-kw-t); }
+
+.rsv-sw[data-state] .rsv-kw::after {
+  content: '';
+  position: absolute;
+  left: -0.03em;
+  right: -0.03em;
+  bottom: 0.06em;
+  height: 0.09em;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--resolve-t-state) var(--resolve-ease-state);
+}
+.rsv-sw[data-state='enquiries'] .rsv-kw--e::after,
+.rsv-sw[data-state='traffic'] .rsv-kw--t::after { transform: scaleX(1); }
+
+/* ------------------------------------------------------------- THE FIELD --
+   The same population. In TRAFFIC an undifferentiated lattice; in ENQUIRIES it
+   has resolved into a few distinct, NAMED objects.
+
+   QUANTITY SAFETY: the marks are identical and anonymous, they do not change in
+   number, none of them is removed, and none of them lands anywhere but on one
+   of the four named rows. Nothing counts up, nothing counts down, and no mark
+   is ever compared to another. Every mark is present in both states; only its
+   position and opacity change.
+
+   The lattice is SERVER-RENDERED so the dark first paint is never an empty box,
+   and JavaScript only writes each mark's `--rsv-tx` / `--rsv-ty` from the REAL
+   measured geometry of the resolved rows. If those variables are never written
+   the marks simply resolve to nothing, which is the settled state. */
+.rsv-fieldbox { position: relative; height: clamp(224px, 25vw, 306px); }
+
+.rsv-field {
+  --rsv-cols: 30;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(var(--rsv-cols), 1fr);
+  align-content: space-between;
+  pointer-events: none;
+}
+.rsv-field i {
+  display: block;
+  width: 100%;
+  height: 9px;
+  background: var(--resolve-dim);
+  /* the settled/resolved state: gone into the named rows */
+  transform: translate3d(var(--rsv-tx, 0), var(--rsv-ty, 0), 0) scale(0.55);
+  opacity: 0;
+  transition: transform var(--resolve-t-resolve) var(--resolve-ease-arrive),
+              opacity var(--resolve-t-resolve) var(--resolve-ease-state),
+              background-color var(--resolve-t-state) var(--resolve-ease-state);
+}
+.rsv-sw[data-state='traffic'] .rsv-field i,
+html[data-rsv-hero='traffic'] .rsv-sw:not([data-state]) .rsv-field i {
+  transform: none;
+  opacity: 0.9;
+  background: #bdb6cc;
+}
+
+/* The onset. Scoped to the traffic state EXACTLY as the prototype scopes it, so
+   that leaving traffic drops the animation and hands the marks back to the
+   transition — an `animation` would otherwise outrank the travel transform. */
+.rsv-sw[data-state='traffic'] .rsv-field.rsv-pulse i {
+  animation: rsv-ripple 620ms var(--resolve-ease-arrive) both;
+}
+@keyframes rsv-ripple {
+  0% { transform: scale(1); }
+  42% { transform: scale(1.5); }
+  100% { transform: scale(1); }
+}
+
+/* the resolved objects — present and composed unless a state is being driven */
+.rsv-rows { position: absolute; inset: 0; }
+.rsv-row { transition: opacity 420ms var(--resolve-ease-arrive),
+                       transform 420ms var(--resolve-ease-arrive); }
+.rsv-row-b { transform-origin: left; transition: transform 560ms var(--resolve-ease-arrive); }
+.rsv-sw[data-state='traffic'] .rsv-row,
+html[data-rsv-hero='traffic'] .rsv-sw:not([data-state]) .rsv-row {
+  opacity: 0;
+  transform: translateX(-14px);
+}
+.rsv-sw[data-state='traffic'] .rsv-row-b,
+html[data-rsv-hero='traffic'] .rsv-sw:not([data-state]) .rsv-row-b {
+  transform: scaleX(0);
+}
+
+/* the signature control */
+.rsv-control button {
+  transition: background-color var(--resolve-t-micro) var(--resolve-ease-state),
+              color var(--resolve-t-micro) var(--resolve-ease-state);
+}
+.rsv-control button[aria-pressed='true'] {
+  background: var(--resolve-accent-deep);
+  color: #ffffff;
+}
+.rsv-sw[data-state='traffic'] .rsv-control button[aria-pressed='true'],
+html[data-rsv-hero='traffic'] .rsv-sw:not([data-state]) .rsv-control button[aria-pressed='true'] {
+  background: var(--resolve-ground);
+  color: var(--resolve-ink);
+}
+
+/* NARROW: the population is teased at the fold and read on arrival, so the
+   figure is not a fixed-height stage and the lattice is proportionally
+   shorter. 189 = 9 rows x 21 columns, the geometry the approved prototype
+   computes for itself at this width. */
+@media (max-width: 760px) {
+  .rsv-fieldbox { height: auto; }
+  .rsv-rows { position: relative; inset: auto; }
+  .rsv-field { --rsv-cols: 21; }
+  .rsv-field i:nth-child(n + 190) { display: none; }
+}
+
+/* =============================================================== CHAPTER 2
+   THE DEPARTURE — the resolved population leaves and ONE mark carries on.
+   A transition between chapters, not a resolve. T3.
+   ========================================================================== */
+.rsv-carrier {
+  transition: opacity 520ms var(--resolve-ease-arrive) 900ms,
+              transform 620ms var(--resolve-ease-arrive) 900ms;
+}
+.rsv-dep-t {
+  transition: opacity 520ms var(--resolve-ease-arrive) 1000ms,
+              transform 520ms var(--resolve-ease-arrive) 1000ms;
+}
+.rsv-dep[data-rsv='armed'] .rsv-carrier { opacity: 0; transform: translateY(26px) scale(0.5); }
+.rsv-dep[data-rsv='armed'] .rsv-dep-t { opacity: 0; transform: translateY(16px); }
+
+/* =============================================================== CHAPTER 3
+   RECOGNITION / FRICTION — three routes fail for three different reasons and
+   their outcomes travel into ONE indistinguishable column. T2.
+
+   QUANTITY SAFETY: the runs are NOT comparable lengths and nothing is removed
+   from them. Every mark that starts a run finishes it; the stop mark is the
+   same open, dashed mark in every route; the rule is what makes the three
+   outcomes identical. Nothing shrinks, nothing is deleted, nothing is counted.
+
+   THE ALIGNED STATE IS THE CSS DEFAULT. JavaScript opts IN to the gesture by
+   writing `data-rsv`, and every `data-rsv` value ends at the same composition
+   the Phase C page already renders.
+   ========================================================================== */
+.rsv-fail-run .rsv-mark {
+  transition: opacity 300ms var(--resolve-ease-arrive) var(--rsv-d, 0ms),
+              transform 380ms var(--resolve-ease-arrive) var(--rsv-d, 0ms);
+}
+.rsv-fail[data-rsv='armed'] .rsv-fail-run .rsv-mark { opacity: 0; transform: scale(0.4); }
+.rsv-fail[data-rsv='armed'] .rsv-fail-run .rsv-stop {
+  transform: translateX(calc(0px - var(--rsv-back, 0px))) scale(0.4);
+}
+/* held at the natural end of its own run, then RELEASED to the shared column
+   the stylesheet already puts it in */
+.rsv-fail[data-rsv='hold'] .rsv-fail-run .rsv-stop {
+  transform: translateX(calc(0px - var(--rsv-back, 0px)));
+}
+.rsv-fail[data-rsv='on'] .rsv-fail-run .rsv-stop {
+  transform: none;
+  transition: transform 640ms var(--resolve-ease-state);
+}
+.rsv-fail-rule { transition: opacity 420ms var(--resolve-ease-state); }
+.rsv-fail-rule-t { transition: opacity 420ms var(--resolve-ease-state) 180ms; }
+.rsv-fail[data-rsv='armed'] .rsv-fail-rule,
+.rsv-fail[data-rsv='hold'] .rsv-fail-rule,
+.rsv-fail[data-rsv='armed'] .rsv-fail-rule-t,
+.rsv-fail[data-rsv='hold'] .rsv-fail-rule-t { opacity: 0; }
+
+/* =============================================================== CHAPTER 4
+   THE SYSTEM — the three stages, and the descent onto F1. T2 + T3 + tablist.
+   ========================================================================== */
+
+/* the tablist. A collapsed panel is clipped to zero height and is made `inert`
+   from script, so a focus ring can never land on an invisible control. With no
+   script, and under reduced motion, EVERY panel is open and every link is
+   focusable. */
+.rsv-stg-b {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--resolve-t-state) var(--resolve-ease-state);
+}
+.rsv-stg-b > span { overflow: hidden; min-height: 0; }
+.rsv-stg-b[data-rsv-open='true'] { grid-template-rows: 1fr; padding-top: 10px; }
+/* the invisible 40px hit-area extender, centred in the row's own padding so
+   adjacent tabs cannot overlap and no layout or paint changes */
+.rsv-stg { position: relative; }
+.rsv-stg::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 40px;
+}
+.rsv-stg-n, .rsv-stg-t {
+  transition: color var(--resolve-t-state) var(--resolve-ease-state);
+}
+
+/* the descent — the page gets closer to the object, ONCE */
+.rsv-chain { position: relative; }
+.rsv-chain[data-rsv='armed'] {
+  transform: scale(0.46) translateY(20px);
+  transform-origin: 50% 34%;
+  opacity: 0.42;
+}
+.rsv-chain[data-rsv='on'] {
+  transform: none;
+  opacity: 1;
+  transition: transform var(--resolve-t-resolve) var(--resolve-ease-arrive),
+              opacity var(--resolve-t-resolve) var(--resolve-ease-state);
+}
+/* the draw. Paint-only, one-off, and the settled state (`stroke-dashoffset:0`
+   with a dasharray equal to the path length) is visually identical to the
+   undashed Phase C figure. */
+.rsv-chain[data-rsv] .rsv-draw { stroke-dasharray: var(--rsv-len); }
+.rsv-chain[data-rsv='armed'] .rsv-draw { stroke-dashoffset: var(--rsv-len); }
+.rsv-chain[data-rsv='on'] .rsv-draw {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset var(--rsv-dur, 1100ms) var(--resolve-ease-state) var(--rsv-d, 0ms);
+}
+.rsv-chain[data-rsv='armed'] .rsv-fade { opacity: 0; }
+.rsv-chain[data-rsv='on'] .rsv-fade {
+  opacity: 1;
+  transition: opacity 420ms var(--resolve-ease-arrive) var(--rsv-d, 0ms);
+}
+
+/* THE STAGE MARKS — DISCRETE. Choosing a stage changes WHICH POINTS AND JOINS
+   are the subject. It never changes a length, a fill or a proportion, so
+   nothing in this interaction can be read as a rate or a quantity. */
+.rsv-chain .rsv-pt,
+.rsv-chain .rsv-tick,
+.rsv-chain .rsv-nd-open,
+.rsv-chain .rsv-bd {
+  transition: fill var(--resolve-t-state) var(--resolve-ease-state),
+              stroke var(--resolve-t-state) var(--resolve-ease-state),
+              stroke-width var(--resolve-t-state) var(--resolve-ease-state);
+}
+.rsv-chain[data-stage='1'] rect[data-s~='1'],
+.rsv-chain[data-stage='2'] rect[data-s~='2'],
+.rsv-chain[data-stage='3'] rect[data-s~='3'] { fill: var(--resolve-accent-deep); }
+.rsv-chain[data-stage='1'] line[data-s~='1'],
+.rsv-chain[data-stage='2'] line[data-s~='2'],
+.rsv-chain[data-stage='3'] line[data-s~='3'] { stroke: var(--resolve-accent-deep); fill: none; }
+.rsv-chain[data-stage='3'] .rsv-nd-open[data-s~='3'] { fill: none; stroke: var(--resolve-accent-deep); }
+.rsv-chain[data-stage='3'] .rsv-bd { stroke-width: 3.4; }
+
+/* =============================================================== CHAPTER 9
+   THE CLOSE — the marks arrive from ABOVE and land, including the one that has
+   no trail, because that one still counts. The last movement on the page is
+   downward and it ends. T3.
+   ========================================================================== */
+.rsv-arrive .rsv-mark {
+  transition: opacity 340ms var(--resolve-ease-arrive) var(--rsv-d, 0ms),
+              transform 680ms var(--resolve-ease-arrive) var(--rsv-d, 0ms);
+}
+.rsv-close[data-rsv='armed'] .rsv-arrive .rsv-mark { opacity: 0; transform: translateY(-54px); }
+
+/* ------------------------------------------------- composition-only reveals
+   NOT a T3. `02_RESOLVE_MOTION_BUDGET.md` §5.0: a transition that merely makes
+   a section appear is composition, and carries no meaning. Every `.rsv-rv`
+   element is below the fold at every validated width, so the start state is
+   only ever written after hydration and is never visible as a disappearance. */
+.rsv-rv[data-rsv='armed'] { opacity: 0; transform: translateY(24px); }
+.rsv-rv[data-rsv='on'] {
+  opacity: 1;
+  transform: none;
+  transition: opacity 700ms var(--resolve-ease-arrive),
+              transform 700ms var(--resolve-ease-arrive);
+}
+
+/* ==================================================== REDUCED MOTION ======
+   Reduced motion does not freeze — it RESOLVES.
+
+   The client leaves never write a start state at all when reduce is set, so
+   almost nothing below is load-bearing; it exists so that a preference changed
+   MID-SEQUENCE also lands on the composed state rather than freezing halfway.
+   Note this block cancels DELAY as well as duration: globals.css collapses
+   duration only, which would still leave a 900ms wait before a mark appeared.
+
+   These are removals, not shortenings: the lattice is not built, the travel and
+   the descent do not happen, the sweep across the band does not happen, and
+   every resolved state is simply present.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .rsv-sw,
+  .rsv-muted,
+  .rsv-strong,
+  .rsv-proof,
+  .rsv-cta-o,
+  .rsv-kw--e,
+  .rsv-kw--t,
+  .rsv-rule-t,
+  .rsv-kw::after,
+  .rsv-field i,
+  .rsv-row,
+  .rsv-row-b,
+  .rsv-carrier,
+  .rsv-dep-t,
+  .rsv-fail-run .rsv-mark,
+  .rsv-fail-rule,
+  .rsv-fail-rule-t,
+  .rsv-chain,
+  .rsv-chain .rsv-draw,
+  .rsv-chain .rsv-fade,
+  .rsv-arrive .rsv-mark,
+  .rsv-rv,
+  .rsv-stg-b {
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+    animation: none !important;
+  }
+  .rsv-field { display: none !important; }
+  .rsv-row { opacity: 1 !important; transform: none !important; }
+  .rsv-row-b { transform: scaleX(1) !important; }
+  .rsv-carrier, .rsv-dep-t { opacity: 1 !important; transform: none !important; }
+  .rsv-fail-run .rsv-mark { opacity: 1 !important; transform: none !important; }
+  .rsv-fail-rule, .rsv-fail-rule-t { opacity: 1 !important; }
+  .rsv-chain { transform: none !important; opacity: 1 !important; }
+  .rsv-chain .rsv-draw { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; }
+  .rsv-chain .rsv-fade { opacity: 1 !important; }
+  .rsv-arrive .rsv-mark { opacity: 1 !important; transform: none !important; }
+  .rsv-rv { opacity: 1 !important; transform: none !important; }
+}
+
+/* ==================================================== FORCED COLOURS ======
+   SESSION 27 — PHASE E. A hardening pass, not a redesign.
+
+   In forced-colours mode the reader's own palette replaces ours. Almost
+   everything survives that correctly: all copy, every link, both calls to
+   action, the tab titles, the open/dashed marks (a border is preserved) and the
+   whole F1 chain. THE RESOLVE is not re-optimised for this mode and no
+   `forced-color-adjust: none` appears below.
+
+   ONE REAL USABILITY FAILURE was measured and is fixed here: the signature
+   control's pressed state is carried by a background fill, and a background
+   fill is exactly what forced colours discards — so `Traffic` and `Enquiries`
+   rendered identically and a sighted reader could not see which state they were
+   looking at. `aria-pressed` still carried it to assistive technology, but that
+   is not a substitute.
+
+   `Highlight` / `HighlightText` is the reader's own "this one is chosen" pair,
+   and `forced-color-adjust: none` is required WITH it rather than instead of
+   it: without opting this one control out, the engine draws a text backplate in
+   `Canvas` behind the label and the word disappears into a black box on the
+   highlight fill. Measured — that is exactly what happened on the first
+   attempt. The scope is three declarations on one pressed button; nothing else
+   on the page opts out, and no Resolve colour is asserted here.
+
+   NOT fixed, and recorded instead: the solid population marks lose their fill,
+   so the figure's solid/dashed channel flattens. Every row is named in text
+   beside its mark and the caption still says what the marks are, so the meaning
+   survives in words. Giving those marks a forced-colours-only border would be
+   redesigning the figure for one rendering mode. */
+@media (forced-colors: active) {
+  .rsv-control button[aria-pressed='true'] {
+    forced-color-adjust: none;
+    background: Highlight;
+    color: HighlightText;
+  }
+}
+
+/* ========================================================= PRINT =========
+   SESSION 27 — PHASE E. Defensive only. This is NOT a print design.
+
+   MEASURED BEFORE THIS BLOCK EXISTED, printing the homepage produced: all 21
+   composition reveals at `opacity: 0` (the friction and system headings, the
+   whole accountability chapter and the entire close printed BLANK), F1 printed
+   at 46% scale and 42% opacity, the carrier and all five arrival marks
+   invisible, and — because browsers do not print background colours by default
+   — ivory type on the dark departure band and the dark evidence card printed
+   white-on-white.
+
+   Two rules follow, and nothing else:
+     1. COMPOSE EVERYTHING. Paper has no viewport, so no observer will ever fire
+        for the parts of the page that are not on screen when printing starts.
+     2. PUT INK BACK ON THE SURFACES THAT ASSUME A DARK GROUND, so their text
+        survives a printer that drops backgrounds.
+   ========================================================================== */
+@media print {
+  /* 1. every motion start state is composed, whatever the reader's scroll
+        position was when they pressed print */
+  .rsv-rv,
+  .rsv-carrier,
+  .rsv-dep-t,
+  .rsv-fail-run .rsv-mark,
+  .rsv-fail-rule,
+  .rsv-fail-rule-t,
+  .rsv-arrive .rsv-mark,
+  .rsv-chain,
+  .rsv-chain .rsv-fade {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .rsv-chain .rsv-draw {
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+  .rsv-fail-run .rsv-stop { transform: none !important; }
+  /* the stage list is a tablist on screen; on paper every reading is present */
+  .rsv-stg-b { grid-template-rows: 1fr !important; padding-top: 10px !important; }
+
+  /* the hero prints RESOLVED — the lattice is a transient, not content.
+     The state TOKENS have to come back too: printing while the surface happened
+     to be on the dark stage otherwise left the dimmed register at its
+     dark-ground value (#A29BAC) on white paper. */
+  .rsv-sw,
+  .rsv-sw[data-state='traffic'] {
+    background: var(--resolve-ground) !important;
+    color: var(--resolve-ink) !important;
+    --rsv-muted: var(--resolve-dim);
+    --rsv-strong: var(--resolve-ink);
+    --rsv-line: var(--resolve-line);
+    --rsv-kw-e: var(--resolve-accent-deep);
+    --rsv-kw-t: var(--resolve-dim);
+  }
+  .rsv-kw::after { display: none !important; }
+  .rsv-field { display: none !important; }
+  .rsv-row { opacity: 1 !important; transform: none !important; }
+  .rsv-row-b { transform: scaleX(1) !important; }
+  /* the control drives a state that cannot be driven on paper */
+  .rsv-control { display: none !important; }
+
+  /* 2. the two homepage surfaces that assume a dark ground keep their text
+        legible when the printer drops background colours */
+  .rsv-dep { background: var(--resolve-ground) !important; color: var(--resolve-ink) !important; }
+  .rsv-dep .rsv-dep-t em, .rsv-dep [style*='resolve-accent'] { color: var(--resolve-accent-dark) !important; }
+  .rsv-close { background: var(--resolve-ground) !important; color: var(--resolve-ink) !important; }
+  /* the evidence card is a bounded dark card, not a full-bleed band, so it keeps
+     its shape — but its type must survive a printer that drops backgrounds */
+  .rsv-ink-card, .rsv-ink-card * { background: transparent !important; color: var(--resolve-ink) !important; }
+  .rsv-ink-card { border: 1px solid var(--resolve-line) !important; }
+  .rsv-ink-card a { color: var(--resolve-accent-dark) !important; }
+
+  /* keep a chapter and its figure on one sheet where the paper allows it */
+  .rsv-chain, .rsv-fail, .rsv-arrive { break-inside: avoid; }
+}

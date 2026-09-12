@@ -56,6 +56,8 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_PORT: ${{ secrets.SSH_PORT }}
+          CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
+          CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
         run: |
           set -e
           ssh \
@@ -66,5 +68,5 @@ jobs:
             "source /home/$SSH_USER/nodevenv/mappedskills.com/22/bin/activate && \
              cd /home/$SSH_USER/mappedskills.com && \
              npm install && \
-             npm run build:cpanel && \
+             CONTENTFUL_SPACE_ID=\"${{ secrets.CONTENTFUL_SPACE_ID }}\" CONTENTFUL_ACCESS_TOKEN=\"${{ secrets.CONTENTFUL_ACCESS_TOKEN }}\" npm run build:cpanel && \
              mkdir -p tmp && touch tmp/restart.txt"

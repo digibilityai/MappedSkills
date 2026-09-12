@@ -7,7 +7,7 @@
     "prebuild": "node scripts/verify-server-files.cjs",
     "dev": "next dev --webpack",
     "build": "next build --webpack",
-    "build:cpanel": "node scripts/verify-server-files.cjs && RAYON_NUM_THREADS=1 UV_THREADPOOL_SIZE=1 CPANEL_BUILD=1 NODE_OPTIONS='--max-old-space-size=512' next build --webpack",
+    "build:cpanel": "node scripts/verify-server-files.cjs && RAYON_NUM_THREADS=1 UV_THREADPOOL_SIZE=1 CPANEL_BUILD=1 NODE_OPTIONS='--max-old-space-size=2048' next build --webpack",
     "pack:cpanel": "powershell -ExecutionPolicy Bypass -File ./scripts/pack-cpanel.ps1",
     "verify:cpanel": "node scripts/verify-server-files.cjs",
     "db:verify": "node scripts/db-migrate.cjs --verify",

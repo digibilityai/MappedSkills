@@ -18,7 +18,7 @@ const nextConfig = {
   experimental: {
     // Critters inlines above-the-fold CSS and defers the rest (PageSpeed
     // render-blocking CSS). Build-time only; not required on the Passenger host.
-    optimizeCss: true,
+    optimizeCss: !isCpanelBuild,
     // Tree-shake lucide (and similar barrel packages) so Header/Footer icons
     // do not pull the whole icon set into every page chunk.
     optimizePackageImports: ['lucide-react'],

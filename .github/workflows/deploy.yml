@@ -14,6 +14,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js application
+        env:
+          CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
+          CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+        run: npm run build
+
       - name: Setup SSH
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -27,7 +42,7 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
 
-      - name: Deploy files
+      - name: Deploy pre-built application files to cPanel
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
@@ -44,20 +59,17 @@ jobs:
           rsync -avz --delete \
             --exclude='.git/' \
             --exclude='node_modules/' \
-            --exclude='.next/' \
             --exclude='tmp/' \
             --exclude='.env' \
             --exclude='.env.*' \
             -e "ssh -i ~/.ssh/deploy_key -p $SSH_PORT -o IdentitiesOnly=yes" \
             ./ "$SSH_USER@$SSH_HOST:/home/$SSH_USER/mappedskills.com/"
 
-      - name: Restart, build, and redeploy app
+      - name: Install production dependencies & restart app
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_PORT: ${{ secrets.SSH_PORT }}
-          CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
-          CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
         run: |
           set -e
           ssh \
@@ -67,6 +79,5 @@ jobs:
             "$SSH_USER@$SSH_HOST" \
             "source /home/$SSH_USER/nodevenv/mappedskills.com/22/bin/activate && \
              cd /home/$SSH_USER/mappedskills.com && \
-             npm install && \
-             CONTENTFUL_SPACE_ID=\"${{ secrets.CONTENTFUL_SPACE_ID }}\" CONTENTFUL_ACCESS_TOKEN=\"${{ secrets.CONTENTFUL_ACCESS_TOKEN }}\" npm run build:cpanel && \
+             npm install --omit=dev && \
              mkdir -p tmp && touch tmp/restart.txt"

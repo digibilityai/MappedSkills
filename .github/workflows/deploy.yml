@@ -70,11 +70,13 @@ jobs:
             -e "ssh -i ~/.ssh/deploy_key -p $SSH_PORT -o IdentitiesOnly=yes -o ServerAliveInterval=15 -o ServerAliveCountMax=10 -o ConnectTimeout=30" \
             ./ "$SSH_USER@$SSH_HOST:/home/$SSH_USER/mappedskills.com/"
 
-      - name: Install production dependencies & restart app
+      - name: Configure runtime environment & restart app
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_PORT: ${{ secrets.SSH_PORT }}
+          CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
+          CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
         run: |
           set -e
           ssh \
@@ -87,5 +89,7 @@ jobs:
             "$SSH_USER@$SSH_HOST" \
             "source /home/$SSH_USER/nodevenv/mappedskills.com/22/bin/activate && \
              cd /home/$SSH_USER/mappedskills.com && \
+             printf 'CONTENTFUL_SPACE_ID=%s\nCONTENTFUL_ACCESS_TOKEN=%s\n' '${{ secrets.CONTENTFUL_SPACE_ID }}' '${{ secrets.CONTENTFUL_ACCESS_TOKEN }}' > .env && \
              npm install --omit=dev && \
-             mkdir -p tmp && touch tmp/restart.txt"
+             mkdir -p tmp && touch tmp/restart.txt && \
+             pkill -u \"$SSH_USER\" -f node || true"

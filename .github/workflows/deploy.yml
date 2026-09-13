@@ -53,16 +53,21 @@ jobs:
             -i ~/.ssh/deploy_key \
             -p "$SSH_PORT" \
             -o IdentitiesOnly=yes \
+            -o ServerAliveInterval=15 \
+            -o ServerAliveCountMax=10 \
+            -o ConnectTimeout=30 \
             "$SSH_USER@$SSH_HOST" \
             "mkdir -p /home/$SSH_USER/mappedskills.com && echo 'Target directory ready'"
 
           rsync -avz --delete \
             --exclude='.git/' \
             --exclude='node_modules/' \
+            --exclude='.next/cache/' \
+            --exclude='.next/diagnostics/' \
             --exclude='tmp/' \
             --exclude='.env' \
             --exclude='.env.*' \
-            -e "ssh -i ~/.ssh/deploy_key -p $SSH_PORT -o IdentitiesOnly=yes" \
+            -e "ssh -i ~/.ssh/deploy_key -p $SSH_PORT -o IdentitiesOnly=yes -o ServerAliveInterval=15 -o ServerAliveCountMax=10 -o ConnectTimeout=30" \
             ./ "$SSH_USER@$SSH_HOST:/home/$SSH_USER/mappedskills.com/"
 
       - name: Install production dependencies & restart app
@@ -76,6 +81,9 @@ jobs:
             -i ~/.ssh/deploy_key \
             -p "$SSH_PORT" \
             -o IdentitiesOnly=yes \
+            -o ServerAliveInterval=15 \
+            -o ServerAliveCountMax=10 \
+            -o ConnectTimeout=30 \
             "$SSH_USER@$SSH_HOST" \
             "source /home/$SSH_USER/nodevenv/mappedskills.com/22/bin/activate && \
              cd /home/$SSH_USER/mappedskills.com && \

@@ -1,4 +1,4 @@
-﻿import { Card } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 
 interface BlogIntroductionProps {
   hook: string;
@@ -8,17 +8,21 @@ interface BlogIntroductionProps {
 
 export function BlogIntroduction({ hook, problem, promise }: BlogIntroductionProps) {
   return (
-    <div className="py-12 border-b border-border mb-12">
-      <div className="max-w-3xl mx-auto">
-        <p className="text-lg text-foreground/90 mb-4 leading-relaxed">
-          <strong>{hook}</strong>
+    <div className="py-8 border-b border-resolve-line mb-10">
+      <div className="max-w-none">
+        {/* Hook: Lede - Wide 22px - Medium 21px - Narrow 20px - Line-height 1.45-1.55 */}
+        <p className="text-[clamp(20px,1.4vw,22px)] leading-[1.50] text-resolve-ink font-semibold mb-4">
+          {hook}
         </p>
-        <p className="text-base text-foreground mb-4 leading-relaxed">
+
+        {/* Problem: Body large/Intro/support - Wide 18px - Medium 18px - Narrow 17px - Line-height 1.55-1.65 */}
+        <p className="text-[clamp(17px,1.15vw,18px)] leading-[1.60] text-resolve-dim mb-6">
           {problem}
         </p>
-        <Card className="p-6 bg-accent/5 border-accent/20">
-          <p className="text-foreground/90 font-semibold">What you&apos;ll learn:</p>
-          <p className="text-foreground mt-2">{promise}</p>
+
+        <Card className="p-6 bg-resolve-accent-deep/5 border-resolve-accent-deep/20 rounded-lg">
+          <p className="text-[16px] leading-[1.60] font-semibold text-resolve-ink">What you&apos;ll learn:</p>
+          <p className="text-[16px] leading-[1.60] text-resolve-dim mt-2">{promise}</p>
         </Card>
       </div>
     </div>

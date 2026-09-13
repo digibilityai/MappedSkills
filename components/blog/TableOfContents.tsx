@@ -19,14 +19,18 @@ export function TableOfContents({ items }: TableOfContentsProps) {
   );
 
   return (
-    <div className="bg-secondary/5 border border-border rounded-lg p-6 sm:p-8">
-      <h3 className="font-semibold text-lg mb-4">Table of Contents</h3>
-      <nav className="space-y-2">
+    <div className="bg-resolve-ground border border-resolve-line rounded-lg p-6 sm:p-8">
+      {/* H4: Wide 22px - Medium 21px - Narrow 20px - Line-height 1.25-1.30 */}
+      <h4 className="text-[clamp(20px,1.4vw,22px)] leading-[1.28] font-heading font-bold mb-4 text-resolve-ink">
+        Table of Contents
+      </h4>
+      <nav className="space-y-1">
         {normalized.map((item, idx) => (
           <div key={item.id}>
+            {/* Small/note: Wide 14px - Medium 14px - Narrow 14px - Line-height 1.45-1.55 */}
             <Link
               href={`#${item.id}`}
-              className="text-accent hover:underline text-sm block py-1"
+              className="text-[14px] leading-[1.50] text-resolve-accent-dark font-medium hover:underline block py-1"
             >
               {idx + 1}. {item.text}
             </Link>

@@ -1,4 +1,4 @@
-﻿import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Link from 'next/link';
 
@@ -77,10 +77,12 @@ const CTA_CONFIG = {
 
 export function CTABlock({ headline, copy, buttonText, buttonLink, variant = 'default' }: CTABlockProps) {
   return (
-    <Card className={`p-6 sm:p-8 my-8 ${variant === 'accent' ? 'bg-accent/5 border-accent/20' : ''}`}>
-      <h3 className="text-lg font-semibold mb-3">{headline}</h3>
-      <p className="text-foreground mb-6">{copy}</p>
-      <Button asChild>
+    <Card className={`p-6 sm:p-8 my-8 rounded-lg ${variant === 'accent' ? 'bg-resolve-accent-deep/5 border-resolve-accent-deep/20' : 'bg-resolve-ground border-resolve-line'}`}>
+      {/* H3: Wide 28px - Medium 26px - Narrow 24px - Line-height 1.18-1.25 */}
+      <h3 className="text-[clamp(24px,1.8vw,28px)] leading-[1.20] font-heading font-bold mb-3 text-resolve-ink">{headline}</h3>
+      {/* Body/Primary reading: Wide 16px - Medium 16px - Narrow 16px - Line-height 1.55-1.65 */}
+      <p className="text-[16px] leading-[1.60] text-resolve-dim mb-6">{copy}</p>
+      <Button asChild className="bg-resolve-ink text-resolve-ground hover:bg-resolve-ink/90 font-semibold px-6 py-2.5">
         <Link href={buttonLink}>{buttonText}</Link>
       </Button>
     </Card>

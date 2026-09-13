@@ -432,8 +432,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
               {post.faqs && post.faqs.length > 0 && <FAQSection faqs={post.faqs} />}
 
-              <div className="border-t border-border pt-12 mb-12">
-                <h2 className="text-3xl font-bold tracking-tight mb-8">Get More Growth Insights</h2>
+              <div className="border-t border-resolve-line pt-12 mb-12">
+                {/* H2: Wide 40px - Medium 34px - Narrow 30px - Line-height 1.10-1.18 */}
+                <h2 className="text-[clamp(30px,2.6vw,40px)] leading-[1.14] font-heading font-bold tracking-[-0.03em] mb-8 text-resolve-ink">
+                  Get More Growth Insights
+                </h2>
                 <BlogNewsletterForm />
               </div>
             </div>

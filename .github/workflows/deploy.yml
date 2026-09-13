@@ -91,5 +91,4 @@ jobs:
              cd /home/$SSH_USER/mappedskills.com && \
              printf 'CONTENTFUL_SPACE_ID=%s\nCONTENTFUL_ACCESS_TOKEN=%s\n' '${{ secrets.CONTENTFUL_SPACE_ID }}' '${{ secrets.CONTENTFUL_ACCESS_TOKEN }}' > .env && \
              npm install --omit=dev && \
-             mkdir -p tmp && touch tmp/restart.txt && \
-             pkill -u \"$SSH_USER\" -f node || true"
+             mkdir -p tmp && touch tmp/restart.txt"

@@ -287,10 +287,11 @@ html[data-rsv-hero='traffic'] .rsv-sw:not([data-state]) .rsv-control button[aria
 .rsv-fail[data-rsv='hold'] .rsv-fail-rule-t { opacity: 0; }
 
 /* =============================================================== CHAPTER 4
-   THE SYSTEM — the three stages, and the descent onto F1. T2 + T3 + tablist.
+   THE SYSTEM — the three stages, and the descent onto F1. T2 + T3 + the
+   reader's own selection.
    ========================================================================== */
 
-/* the tablist. A collapsed panel is clipped to zero height and is made `inert`
+/* the stage list. A collapsed panel is clipped to zero height and is made `inert`
    from script, so a focus ring can never land on an invisible control. With no
    script, and under reduced motion, EVERY panel is open and every link is
    focusable. */
@@ -518,7 +519,7 @@ html[data-rsv-hero='traffic'] .rsv-sw:not([data-state]) .rsv-control button[aria
     stroke-dashoffset: 0 !important;
   }
   .rsv-fail-run .rsv-stop { transform: none !important; }
-  /* the stage list is a tablist on screen; on paper every reading is present */
+  /* one stage is open on screen; on paper every reading is present */
   .rsv-stg-b { grid-template-rows: 1fr !important; padding-top: 10px !important; }
 
   /* the hero prints RESOLVED — the lattice is a transient, not content.

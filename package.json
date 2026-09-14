@@ -10,6 +10,7 @@
     "build:cpanel": "node scripts/verify-server-files.cjs && RAYON_NUM_THREADS=1 UV_THREADPOOL_SIZE=1 CPANEL_BUILD=1 NODE_OPTIONS='--max-old-space-size=2048' next build --webpack",
     "pack:cpanel": "powershell -ExecutionPolicy Bypass -File ./scripts/pack-cpanel.ps1",
     "verify:cpanel": "node scripts/verify-server-files.cjs",
+    "check:a11y": "node scripts/check-a11y-contracts.cjs",
     "db:verify": "node scripts/db-migrate.cjs --verify",
     "db:status": "node scripts/db-migrate.cjs --status",
     "db:migrate": "node scripts/db-migrate.cjs",

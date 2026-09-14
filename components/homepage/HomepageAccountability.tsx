@@ -113,7 +113,14 @@ export function HomepageAccountability() {
           </p>
 
           <h2 className="rsv-rv mt-[clamp(24px,3vw,44px)] max-w-[20ch] font-heading text-[clamp(2.1rem,5.4vw,4.4rem)] font-extrabold leading-[1.02] tracking-[-0.04em]">
-            We would rather show evidence than manufacture <span style={{ color: 'var(--resolve-accent)' }}>a success story. </span>
+            {/* This display line sits on the LIGHT ground, so it takes the
+                on-light display token. `--resolve-accent` is the on-dark token
+                and measured 2.81:1 here, under the 3:1 large-text minimum;
+                `--resolve-accent-deep` is the documented on-light display
+                value and measures 3.97:1. The on-dark uses of
+                `--resolve-accent` further down this file are on `bg-resolve-ink`
+                and are correct as they stand. */}
+            We would rather show evidence than manufacture <span style={{ color: 'var(--resolve-accent-deep)' }}>a success story. </span>
           </h2>
           <p className="rsv-rv mt-[clamp(26px,3vw,44px)] max-w-[80ch] text-resolve-dim">
             We are building our published case-study library. Until then, we show what we can

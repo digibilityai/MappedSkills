@@ -11,7 +11,7 @@ import { createResolveViewRegistry, useResolveMotion } from '@/hooks/use-resolve
  *
  *   T2  the re-read     — Capture -> Convert -> Measure resolves once, on view.
  *   T3  the descent     — F1 scales up from a distance while the chain draws.
- *   tablist             — the reader can take the sequence over at any time.
+ *   disclosure          — the reader can take the sequence over at any time.
  *
  * WHAT THE SEQUENCE MEANS. Choosing a stage changes WHICH DISCRETE POINTS AND
  * JOINS on the chain are the subject. It never changes a length, never fills a
@@ -21,17 +21,30 @@ import { createResolveViewRegistry, useResolveMotion } from '@/hooks/use-resolve
  *
  * READER-DRIVEN CONTROL. The three stages play through ONCE on entering view
  * and then rest — they never loop and never replay. The moment the reader
- * selects a stage, the auto-advance is cancelled for good. Selection is a
- * genuine tablist: roving `tabindex`, Left/Right/Up/Down, Home and End,
- * `aria-selected`, and `inert` on a collapsed panel so a focus ring can never
- * land on a control the reader cannot see. Focus is never moved for the reader
+ * selects a stage, the auto-advance is cancelled for good.
+ *
+ * WHY THIS IS A DISCLOSURE SET AND NOT A TABLIST. It was authored as a
+ * tablist, and that was the wrong pattern twice over. Structurally, a
+ * `tablist` may own nothing but `tab` children, yet this design requires each
+ * panel to sit INSIDE its own stage row, directly beneath the heading it
+ * belongs to; a conformant tablist cannot hold its own panels, which is why
+ * the markup failed `aria-required-children`, `aria-required-parent` and
+ * `listitem` at once. Behaviourally, tabs are mutually exclusive by
+ * definition, but the composed state below opens ALL THREE panels together,
+ * which no tablist can express. So each stage heading is now a button carrying
+ * `aria-expanded` over its own `region`, which states exactly what is true in
+ * both states. Every heading is in the page tab sequence, Left/Right/Up/Down,
+ * Home and End still move between the headings and still take the sequence
+ * over, and `inert` on a collapsed panel still means a focus ring can never
+ * land on a control the reader cannot see. The list is a real list again.
+ * Focus is never moved for the reader
  * — only in response to their own arrow key.
  *
  * THE FALLBACK IS THE PHASE C PAGE. Until this component has hydrated it
  * renders exactly what Phase C shipped: an ordered list of three headed stages
  * with every panel open and all seven links present and tabbable. That is what
  * the server sends, what a reader with no JavaScript keeps, and what a failed
- * hydration leaves behind. Under reduced motion the tablist is present but
+ * hydration leaves behind. Under reduced motion the headings are present but
  * every panel stays open, so the reader is never shown one reading of the
  * system in place of three.
  */
@@ -162,7 +175,7 @@ export function SystemStages({ stages, chain }: { stages: Stage[]; chain: React.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mounted, enabled]);
 
-  const onTabKey = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+  const onStageKey = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
     let next: number | null = null;
     if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (index + 1) % stages.length;
     if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = (index - 1 + stages.length) % stages.length;
@@ -171,7 +184,7 @@ export function SystemStages({ stages, chain }: { stages: Stage[]; chain: React.
     if (next === null) return;
     event.preventDefault();
     select(next + 1, true);
-    listRef.current?.querySelectorAll<HTMLButtonElement>('[role="tab"]')[next]?.focus();
+    listRef.current?.querySelectorAll<HTMLButtonElement>('button[data-rsv-stg]')[next]?.focus();
   };
 
   return (
@@ -182,7 +195,6 @@ export function SystemStages({ stages, chain }: { stages: Stage[]; chain: React.
       {mounted ? (
         <ul
           ref={listRef}
-          role="tablist"
           aria-label="The three stages of the work"
           className="m-0 max-w-[104ch] list-none border-t-2 border-resolve-ink p-0"
         >
@@ -191,38 +203,43 @@ export function SystemStages({ stages, chain }: { stages: Stage[]; chain: React.
             const open = allOpen || selected;
             return (
               <li key={s.n} className="border-b border-resolve-line py-[clamp(14px,1.8vw,20px)]">
-                <button
-                  type="button"
-                  role="tab"
-                  id={`rsv-stg-${s.n}`}
-                  aria-selected={selected}
-                  aria-controls={`rsv-panel-${s.n} rsv-chain`}
-                  tabIndex={selected ? 0 : -1}
-                  onClick={() => select(i + 1, true)}
-                  onKeyDown={(event) => onTabKey(event, i)}
-                  className="rsv-stg grid w-full grid-cols-[20px_1fr] items-baseline gap-x-4 gap-y-0 bg-transparent p-0 text-left max-[761px]:grid-cols-1"
-                >
-                  <span
-                    aria-hidden="true"
-                    className={`rsv-stg-n text-[.82rem] font-bold tracking-[0.18em] max-[761px]:hidden ${
-                      open ? 'text-resolve-accent-dark' : 'text-resolve-dim'
-                    }`}
+                {/* The heading matches the static composition below, so the
+                    document outline is the same before and after hydration.
+                    `aria-expanded` tracks `open`, not `selected`: in the
+                    composed state all three panels really are open. */}
+                <h3 className="m-0">
+                  <button
+                    type="button"
+                    data-rsv-stg={s.n}
+                    id={`rsv-stg-${s.n}`}
+                    aria-expanded={open}
+                    aria-controls={`rsv-panel-${s.n} rsv-chain`}
+                    onClick={() => select(i + 1, true)}
+                    onKeyDown={(event) => onStageKey(event, i)}
+                    className="rsv-stg grid w-full grid-cols-[20px_1fr] items-baseline gap-x-4 gap-y-0 bg-transparent p-0 text-left max-[761px]:grid-cols-1"
                   >
-                    {s.n}
-                  </span>
-                  <span
-                    className={`rsv-stg-t font-heading text-[clamp(1.5rem,3.2vw,2.5rem)] font-extrabold leading-[1.02] tracking-[-0.03em] ${
-                      open ? 'text-resolve-ink' : 'text-resolve-dim'
-                    } ${i === 0 || selected ? 'max-[761px]:text-[1.5rem]' : 'max-[761px]:text-[1.15rem]'}`}
-                  >
-                    {s.title}
-                  </span>
-                </button>
+                    <span
+                      aria-hidden="true"
+                      className={`rsv-stg-n text-[.82rem] font-bold tracking-[0.18em] max-[761px]:hidden ${
+                        open ? 'text-resolve-accent-dark' : 'text-resolve-dim'
+                      }`}
+                    >
+                      {s.n}
+                    </span>
+                    <span
+                      className={`rsv-stg-t font-heading text-[clamp(1.5rem,3.2vw,2.5rem)] font-extrabold leading-[1.02] tracking-[-0.03em] ${
+                        open ? 'text-resolve-ink' : 'text-resolve-dim'
+                      } ${i === 0 || selected ? 'max-[761px]:text-[1.5rem]' : 'max-[761px]:text-[1.15rem]'}`}
+                    >
+                      {s.title}
+                    </span>
+                  </button>
+                </h3>
 
                 <div
                   className="rsv-stg-b ml-9 mt-1 max-w-[80ch] max-[761px]:ml-0"
                   id={`rsv-panel-${s.n}`}
-                  role="tabpanel"
+                  role="region"
                   aria-labelledby={`rsv-stg-${s.n}`}
                   data-rsv-open={open ? 'true' : 'false'}
                   inert={!open}

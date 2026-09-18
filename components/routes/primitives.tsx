@@ -9,6 +9,7 @@ import {
   OPENER_RAIL,
   type OpenerMode,
 } from '@/components/commercial/primitives';
+import { hasContent } from '@/lib/has-content';
 import { cn } from '@/lib/utils';
 
 /**
@@ -137,7 +138,7 @@ export function RouteHero({
      optional on it. Such a hero DEGRADES TO `editorial` rather than rendering
      the empty half. `offset` and `centred` cannot hit this: the H1 is always in
      the reading column and the eyebrow is always in the rail. */
-  const hasReading = Boolean(lede || children || action);
+  const hasReading = hasContent(lede) || hasContent(children) || Boolean(action);
   const effective: OpenerMode = mode === 'split' && !hasReading ? 'editorial' : mode;
 
   return (
@@ -148,7 +149,7 @@ export function RouteHero({
             <p className="m-0 block text-[.82rem] font-semibold uppercase leading-[1.4] tracking-[0.16em] text-resolve-dim">
               {eyebrow}
             </p>
-            {effective === 'split' && (
+            {effective === 'split' && hasContent(title) && (
               <h1
                 className={cn(
                   'm-0 mt-[clamp(14px,1.8vw,22px)] font-heading font-extrabold leading-[1.0] tracking-[-0.038em]',
@@ -163,7 +164,7 @@ export function RouteHero({
           </div>
 
           <div className={OPENER_MAIN[effective]}>
-            {effective !== 'split' && (
+            {effective !== 'split' && hasContent(title) && (
               <h1
                 className={cn(
                   'm-0 mt-[clamp(14px,1.8vw,22px)] font-heading font-extrabold leading-[0.99] tracking-[-0.038em]',
@@ -177,7 +178,7 @@ export function RouteHero({
                 {title}
               </h1>
             )}
-            {(lede || children) && (
+            {(hasContent(lede) || hasContent(children)) && (
               <div
                 className={cn(
                   'mt-[clamp(20px,2.4vw,30px)] max-w-[58ch] text-[clamp(1.04rem,1.25vw,1.2rem)] leading-relaxed text-resolve-dim [&>p+p]:mt-4',
@@ -185,7 +186,7 @@ export function RouteHero({
                   effective === 'split' && 'min-[1081px]:mt-0'
                 )}
               >
-                {lede && <p className="m-0">{lede}</p>}
+                {hasContent(lede) && <p className="m-0">{lede}</p>}
                 {children}
               </div>
             )}

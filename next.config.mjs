@@ -7,9 +7,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const isCpanelBuild = process.env.CPANEL_BUILD === '1'
 
 const nextConfig = {
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  // `typescript.ignoreBuildErrors: true` WAS HERE and is deliberately removed
+  // (repository reconciliation, 2026-09-18). It let a genuine type error ship
+  // unnoticed in `components/forms/CalendlyButton.tsx`. The codebase is now
+  // type-clean (`npx tsc --noEmit` exits 0), so a future type error fails the
+  // build instead of reaching production.
   // Shared hosts (CloudLinux) kill Next worker processes during static generation.
   // Force a single worker when CPANEL_BUILD=1.
   ...(isCpanelBuild

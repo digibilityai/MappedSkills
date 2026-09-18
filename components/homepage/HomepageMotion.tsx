@@ -124,14 +124,23 @@ export function HomepageMotion() {
           // corrupt the measurement), then release it to the shared column the
           // stylesheet already puts it in. The aligned state is the default, so
           // nothing has to win a cascade for the honest end state to show.
+          // Every offset is READ first and every custom property WRITTEN after.
+          // Interleaving them made each write invalidate style before the next
+          // stop's read, forcing a synchronous reflow per stop. Same values,
+          // same end state — ported from `main` (`de16f5c` lineage) during the
+          // repository reconciliation.
+          const pending: { stop: HTMLElement; back: number }[] = [];
           friction.querySelectorAll<HTMLElement>('.rsv-stop').forEach((stop) => {
             const previous = stop.previousElementSibling as HTMLElement | null;
             if (!previous) return;
             const back = Math.round(
               stop.offsetLeft - (previous.offsetLeft + previous.offsetWidth + RUN_GAP)
             );
-            if (back > 0) stop.style.setProperty('--rsv-back', `${back}px`);
+            pending.push({ stop, back });
           });
+          for (const { stop, back } of pending) {
+            if (back > 0) stop.style.setProperty('--rsv-back', `${back}px`);
+          }
 
           // If the document is not being rendered, transitions do not advance,
           // so the displacement would never resolve — the composed alignment

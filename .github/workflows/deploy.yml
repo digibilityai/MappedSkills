@@ -1,70 +1,295 @@
-name: Deploy MappedSkills
+# =============================================================================
+# MappedSkills — production release. PROPOSED (repository reconciliation,
+# 2026-09-18). Not active until the owner approves, merges and configures it.
+#
+# WHAT CHANGED FROM THE WORKFLOW THAT DEPLOYED `main` IN SEPTEMBER 2026, AND WHY
+#
+#   * A push NO LONGER TOUCHES PRODUCTION. Push and pull request run the full
+#     verification build only. Deployment happens only from a manual
+#     `workflow_dispatch` on `main`, which must name the exact commit being
+#     released, AND it runs in the `production` GitHub environment, which must
+#     be configured with required reviewers.
+#   * `NEXT_PUBLIC_GTM_ID` IS A REQUIRED BUILD INPUT. It is inlined at build
+#     time; the previous workflow never supplied it, so production shipped with
+#     analytics permanently dead. The build now fails without it, and the
+#     output is checked to prove the container ID was compiled in.
+#   * An EXPLICIT, CHECKSUMMED ARTIFACT is built, verified and uploaded.
+#     Nothing is rsync'd from a checkout.
+#   * The release uses the accepted swap model (`scripts/deploy/release.sh`):
+#     fresh staging directory → staged verification → two-rename swap →
+#     restart → smoke test → automatic rollback on failure. The previous
+#     release is kept, so rollback never needs a rebuild.
+#   * The host `.env` is NEVER written. No `npm install` runs on the host.
+#   * The SSH host key is PINNED from a secret instead of trusted on first use.
+#
+# REQUIRED REPOSITORY CONFIGURATION (owner actions; values never in this file)
+#   variables: NEXT_PUBLIC_GTM_ID                   (public container ID)
+#   secrets:   CONTENTFUL_SPACE_ID, CONTENTFUL_ACCESS_TOKEN  (build-time data)
+#              SSH_HOST, SSH_PORT, SSH_USER, SSH_PRIVATE_KEY, SSH_KNOWN_HOSTS
+#   environment `production` with required reviewers and a `main`-only
+#   deployment-branch rule.
+# =============================================================================
+name: Production release
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
+    inputs:
+      action:
+        description: 'deploy = release the commit below; rollback = restore the previous release'
+        type: choice
+        options: [deploy, rollback]
+        default: deploy
+      confirm:
+        description: 'deploy: the first 7 characters of the commit SHA being released. rollback: ROLLBACK'
+        required: true
+        type: string
+
+# One release at a time; never cancel one half-way through.
+concurrency:
+  group: production-release
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: '22'          # matches the host nodevenv (~/nodevenv/mappedskills.com/22)
+  SITE_URL: https://mappedskills.com
+  NEXT_TELEMETRY_DISABLED: '1'
 
 jobs:
-  deploy:
+  # ---------------------------------------------------------------------------
+  verify:
+    name: Verify and build artifact
+    if: github.event_name != 'workflow_dispatch' || inputs.action == 'deploy'
     runs-on: ubuntu-latest
-
+    outputs:
+      artifact: ${{ steps.pack.outputs.artifact }}
+      sha256: ${{ steps.pack.outputs.sha256 }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup SSH
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install (lockfile-exact)
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      # Reported, not yet blocking: the lint backlog that predates this
+      # workflow is recorded in docs/00-project/CURRENT_STATE.md. Make this
+      # step blocking once that backlog is cleared.
+      - name: Lint (non-blocking until the recorded backlog is cleared)
+        continue-on-error: true
+        run: npm run lint
+
+      - name: Require public build-time configuration
+        env:
+          NEXT_PUBLIC_GTM_ID: ${{ vars.NEXT_PUBLIC_GTM_ID }}
+        run: |
+          if ! printf '%s' "$NEXT_PUBLIC_GTM_ID" | grep -Eq '^GTM-[A-Z0-9]{4,12}$'; then
+            echo "::error::Repository variable NEXT_PUBLIC_GTM_ID is missing or malformed. It is a BUILD-TIME input; a build without it ships with analytics permanently disabled."
+            exit 1
+          fi
+
+      - name: Build
+        env:
+          NEXT_PUBLIC_GTM_ID: ${{ vars.NEXT_PUBLIC_GTM_ID }}
+          CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
+          CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+        run: npm run build
+
+      - name: Verify build output (one H1 per page, assets, GTM compiled in)
+        env:
+          NEXT_PUBLIC_GTM_ID: ${{ vars.NEXT_PUBLIC_GTM_ID }}
+        run: npm run verify:build:production
+
+      - name: Package artifact
+        id: pack
+        run: |
+          name="mappedskills-${GITHUB_SHA::7}.tar.gz"
+          bash scripts/deploy/package-release.sh "$name"
+          echo "artifact=$name" >> "$GITHUB_OUTPUT"
+          echo "sha256=$(cat "$name.sha256")" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ github.sha }}
+          path: |
+            mappedskills-*.tar.gz
+            mappedskills-*.tar.gz.sha256
+            scripts/deploy/release.sh
+          retention-days: 30
+          if-no-files-found: error
+
+  # ---------------------------------------------------------------------------
+  deploy:
+    name: Release to production
+    needs: verify
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      inputs.action == 'deploy' &&
+      github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://mappedskills.com
+    steps:
+      # FAIL CLOSED. GitHub auto-creates an environment named in a job the
+      # first time it is used, WITH NO PROTECTION RULES. Without this check a
+      # dispatch before the owner configures `production` would deploy with no
+      # reviewer approval at all. This step only READS the environment.
+      - name: Require an approval-protected production environment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          rules=$(gh api "repos/${GITHUB_REPOSITORY}/environments/production" \
+            --jq '[.protection_rules[]?.type] | join(",")' 2>/dev/null || true)
+          case ",${rules}," in
+            *,required_reviewers,*) echo "production environment requires reviewer approval" ;;
+            *) echo "::error::The 'production' environment has no required-reviewers rule. Configure it before any release. Nothing was deployed."; exit 1 ;;
+          esac
+
+      # Inputs reach the shell through the environment, never by `${{ }}`
+      # interpolation into the script body (Actions script-injection rule).
+      - name: Confirm the commit being released
+        env:
+          CONFIRM: ${{ inputs.confirm }}
+        run: |
+          if [ "$CONFIRM" != "${GITHUB_SHA::7}" ]; then
+            echo "::error::Confirmation does not match ${GITHUB_SHA::7}. Nothing was deployed."
+            exit 1
+          fi
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: release-${{ github.sha }}
+
+      - name: Verify artifact checksum
+        run: |
+          test "$(sha256sum '${{ needs.verify.outputs.artifact }}' | awk '{print $1}')" = '${{ needs.verify.outputs.sha256 }}'
+
+      - name: Configure SSH (pinned host key)
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         run: |
           set -e
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
+          test -n "$SSH_KNOWN_HOSTS" || { echo "::error::SSH_KNOWN_HOSTS secret is required (no trust-on-first-use)."; exit 1; }
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key && chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts && chmod 644 ~/.ssh/known_hosts
 
-      - name: Deploy files
+      - name: Upload and stage (live release untouched)
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
           SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
         run: |
           set -e
-          ssh \
-            -i ~/.ssh/deploy_key \
-            -p "$SSH_PORT" \
-            -o IdentitiesOnly=yes \
-            "$SSH_USER@$SSH_HOST" \
-            "mkdir -p /home/$SSH_USER/mappedskills.com && echo 'Target directory ready'"
+          SSH="ssh -i ~/.ssh/deploy_key -p $SSH_PORT -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o ServerAliveInterval=15 -o ServerAliveCountMax=10"
+          $SSH "$SSH_USER@$SSH_HOST" 'mkdir -p ~/deploy_staging'
+          scp -i ~/.ssh/deploy_key -P "$SSH_PORT" -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes \
+            '${{ needs.verify.outputs.artifact }}' scripts/deploy/release.sh "$SSH_USER@$SSH_HOST:deploy_staging/"
+          $SSH "$SSH_USER@$SSH_HOST" \
+            "bash ~/deploy_staging/release.sh stage ~/deploy_staging/${{ needs.verify.outputs.artifact }} ${{ needs.verify.outputs.sha256 }}"
 
-          rsync -avz --delete \
-            --exclude='.git/' \
-            --exclude='node_modules/' \
-            --exclude='.next/' \
-            --exclude='tmp/' \
-            --exclude='.env' \
-            --exclude='.env.*' \
-            -e "ssh -i ~/.ssh/deploy_key -p $SSH_PORT -o IdentitiesOnly=yes" \
-            ./ "$SSH_USER@$SSH_HOST:/home/$SSH_USER/mappedskills.com/"
-
-      - name: Restart, build, and redeploy app
+      - name: Activate (two-rename swap + restart)
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
           SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -p "$SSH_PORT" -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes \
+            "$SSH_USER@$SSH_HOST" 'bash ~/deploy_staging/release.sh activate'
+
+      - name: Smoke test the live site
+        id: smoke
+        env:
+          NEXT_PUBLIC_GTM_ID: ${{ vars.NEXT_PUBLIC_GTM_ID }}
         run: |
           set -e
-          ssh \
-            -i ~/.ssh/deploy_key \
-            -p "$SSH_PORT" \
-            -o IdentitiesOnly=yes \
-            "$SSH_USER@$SSH_HOST" \
-            "source /home/$SSH_USER/nodevenv/mappedskills.com/22/bin/activate && \
-             cd /home/$SSH_USER/mappedskills.com && \
-             npm install && \
-             npm run build:cpanel && \
-             mkdir -p tmp && touch tmp/restart.txt"
+          sleep 10
+          for path in / /services /seo /contact /schedule-call /thank-you /robots.txt /sitemap.xml; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 "$SITE_URL$path")
+            echo "$path -> $code"; test "$code" = 200
+          done
+          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 "$SITE_URL/definitely-not-a-page")
+          test "$code" = 404
+          # The live homepage must be served BY THIS BUILD: its layout chunk
+          # must be one the artifact contains, and must carry the container ID.
+          chunk=$(curl -s --max-time 30 "$SITE_URL/" | grep -oE '/_next/static/chunks/app/layout-[a-z0-9]+\.js' | head -1)
+          test -n "$chunk"
+          tar -tzf '${{ needs.verify.outputs.artifact }}' | grep -q ".next/static/chunks/app/$(basename "$chunk")"
+          curl -s --max-time 30 "$SITE_URL$chunk" | grep -q "$NEXT_PUBLIC_GTM_ID"
+          echo "live site is serving this build, with $NEXT_PUBLIC_GTM_ID compiled in"
+
+      - name: Roll back on a failed smoke test
+        if: failure() && steps.smoke.conclusion == 'failure'
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -p "$SSH_PORT" -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes \
+            "$SSH_USER@$SSH_HOST" 'bash ~/deploy_staging/release.sh rollback'
+          echo "::error::Smoke test failed; the previous release was restored."
+
+  # ---------------------------------------------------------------------------
+  rollback:
+    name: Roll back to the previous release
+    if: github.event_name == 'workflow_dispatch' && inputs.action == 'rollback' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://mappedskills.com
+    steps:
+      # FAIL CLOSED. GitHub auto-creates an environment named in a job the
+      # first time it is used, WITH NO PROTECTION RULES. Without this check a
+      # dispatch before the owner configures `production` would deploy with no
+      # reviewer approval at all. This step only READS the environment.
+      - name: Require an approval-protected production environment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          rules=$(gh api "repos/${GITHUB_REPOSITORY}/environments/production" \
+            --jq '[.protection_rules[]?.type] | join(",")' 2>/dev/null || true)
+          case ",${rules}," in
+            *,required_reviewers,*) echo "production environment requires reviewer approval" ;;
+            *) echo "::error::The 'production' environment has no required-reviewers rule. Configure it before any release. Nothing was deployed."; exit 1 ;;
+          esac
+
+      - uses: actions/checkout@v4
+      - name: Confirm
+        env:
+          CONFIRM: ${{ inputs.confirm }}
+        run: test "$CONFIRM" = ROLLBACK || { echo "::error::Type ROLLBACK to confirm."; exit 1; }
+      - name: Configure SSH (pinned host key)
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -e
+          test -n "$SSH_KNOWN_HOSTS" || { echo "::error::SSH_KNOWN_HOSTS secret is required."; exit 1; }
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key && chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts && chmod 644 ~/.ssh/known_hosts
+      - name: Swap back to the previous release
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          set -e
+          SSH="ssh -i ~/.ssh/deploy_key -p $SSH_PORT -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes"
+          scp -i ~/.ssh/deploy_key -P "$SSH_PORT" -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes \
+            scripts/deploy/release.sh "$SSH_USER@$SSH_HOST:deploy_staging/"
+          $SSH "$SSH_USER@$SSH_HOST" 'bash ~/deploy_staging/release.sh rollback && bash ~/deploy_staging/release.sh status'

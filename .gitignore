@@ -7,7 +7,27 @@ __v0_jsx-dev-runtime.ts
 .vercel/
 
 # Environment variables
-.env*.local
+# `.env*.local` alone did NOT cover a plain `.env`, `.env.production` or any
+# other non-`.local` variant. A `.env.local` carrying a live Contentful token
+# has already reached this repository once, inside the committed `public.zip`,
+# so every env file is ignored here and the template is re-included explicitly.
+.env
+.env.*
+!.env.example
+
+# Deployment / archive artefacts
+# A 4.1 MB `public.zip` (a zipped copy of the project, `.env.local` included)
+# was committed at the repository root and carried a live credential until it
+# was rotated. `scripts/pack-cpanel.ps1` also writes
+# `mappedskills-cpanel-<stamp>.zip` to the root. Root-level archives are
+# ignored; nested archives are not affected. `__MACOSX/` is the resource-fork
+# residue a macOS archive leaves behind when it is extracted into a tree.
+/*.zip
+__MACOSX/
+
+# Generated TypeScript build state. `tsc --incremental` rewrites it on every
+# run; it has no source-control purpose and churned every diff it touched.
+*.tsbuildinfo
 
 # Common ignores
 node_modules

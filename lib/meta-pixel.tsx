@@ -2,11 +2,32 @@
 
 import { useEffect } from 'react';
 
+import { useConsent } from '@/components/analytics/ConsentProvider';
+
+/**
+ * TWO GATES, BOTH REQUIRED — the same contract `lib/gtm.tsx` already holds.
+ *
+ * This component previously had only ONE gate: `NEXT_PUBLIC_META_PIXEL_ID`.
+ * Setting that single variable would have loaded `fbevents.js` and fired
+ * `PageView` for EVERY visitor regardless of what they chose, because nothing
+ * here read the consent state. The layout carried a "⚠ MUST NOT BE SET"
+ * warning in place of the gate, which makes a documented comment the only
+ * thing standing between the site and loading a third-party tracker before
+ * consent.
+ *
+ * The consent check below closes that. It changes NOTHING today — the pixel is
+ * unconfigured, so both the old code and this render nothing — and it does NOT
+ * pre-empt the open owner decision on whether Meta Pixel is retained at all
+ * (`EVENT_TAXONOMY.md` §9 decision 4). It only makes "retained" safe.
+ */
 export function MetaPixel() {
+  const { state } = useConsent();
+
   useEffect(() => {
-    // Only initialize if pixel ID is configured
+    // Only initialize if pixel ID is configured AND analytics consent is granted
     const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
     if (!pixelId) return;
+    if (state !== 'granted') return;
 
     // Lazy load Meta Pixel script to prevent CLS
     const script = document.createElement('script');
@@ -35,12 +56,14 @@ export function MetaPixel() {
     document.head.appendChild(noscript);
 
     return () => {
-      document.head.removeChild(script);
+      if (script.parentElement) {
+        document.head.removeChild(script);
+      }
       if (noscript.parentElement) {
         document.head.removeChild(noscript);
       }
     };
-  }, []);
+  }, [state]);
 
   return null;
 }

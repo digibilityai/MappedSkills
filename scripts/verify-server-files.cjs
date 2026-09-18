@@ -6,24 +6,33 @@ const fs = require("fs");
 const path = require("path");
 
 const root = process.cwd();
+// REPOSITORY RECONCILIATION (2026-09-18). This list used to name
+// `components/Hero.tsx`, `StatCard.tsx`, `TeamCard.tsx`, `Section.tsx` and
+// `Container.tsx` — one-line re-export shims that NOTHING imports. A canary
+// built on dead files proves nothing about whether the tree can run, and it
+// kept those dead files alive, because deleting them failed `prebuild`.
+// Every entry below is load-bearing: an entrypoint, the build configuration,
+// the root layout and homepage, the enquiry API and its persistence layer,
+// and the shared chrome every route renders.
 const required = [
   "package.json",
+  "package-lock.json",
   "server.cjs",
+  "app.js",
   "tsconfig.json",
   "next.config.mjs",
+  "app/layout.tsx",
   "app/page.tsx",
-  "components/Hero.tsx",
-  "components/Section.tsx",
-  "components/Container.tsx",
-  "components/StatCard.tsx",
-  "components/TeamCard.tsx",
-  "components/sections/Hero.tsx",
-  // SESSION 34 — PHASE I CLOSURE. Was "lib/constants.ts". That file is
-  // deleted: it was dead legacy code carrying "300%+ ROI", "₹100Cr+" and
-  // "₹10Cr+", the three claims DEC-007 prohibits. This entry exists only as
-  // a canary that lib/ reached the server, so it is repointed at a file that
-  // is actually imported by every route rather than deleted outright.
+  "app/api/enquiry/route.ts",
+  "lib/db.ts",
+  "lib/enquiries.ts",
+  "lib/enquiry-validation.ts",
+  // SESSION 34 — PHASE I CLOSURE. Was "lib/constants.ts" (deleted dead code
+  // carrying claims DEC-007 prohibits); repointed at a file every route imports.
   "lib/metadata.ts",
+  "components/layout/Header.tsx",
+  "components/layout/Footer.tsx",
+  "components/layout/Container.tsx",
 ];
 
 const missing = required.filter((rel) => !fs.existsSync(path.join(root, rel)));

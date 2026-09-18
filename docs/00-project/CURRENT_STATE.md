@@ -39,6 +39,95 @@
 
 ## Current Phase
 
+> **⚠ SUPERSEDING CURRENT-STATE CORRECTION — REPOSITORY AUDIT + SECURITY CLEANUP, 2026-09-18.**
+>
+> The Phase J block further down states that production was deployed by the accepted manual
+> off-host artifact method with **"no GitHub Actions run, no push or merge to `main`"**. That
+> remains a true record **of the 2026-09-07 Phase J release**. It is **no longer a description of
+> what production is serving today.** Every item below is VERIFIED FACT unless labelled otherwise,
+> each with the check that produced it. Nothing in the historical record below has been altered.
+>
+> 1. **`test_branch` is at `4e37fc1`, not `d88b725`.** `d88b725` is its parent. Local and
+>    `origin/test_branch` are identical (ahead 0 / behind 0).
+>
+> 2. **`main` AND `test_branch` SHARE NO HISTORY.** `origin/main` (`64ecf03` at the time of
+>    writing) descends from a **parentless root commit, `de16f5c` (2026-09-11)**. There is no merge
+>    base. The August `main` commits that deployed production (`82ecf27`, `ee6fe18`, `16ab33b` …)
+>    are ancestors of `test_branch` and are **not reachable from `main`**: `main` was replaced by a
+>    force-push. `de16f5c` was imported from an extracted macOS archive — it carries 524
+>    `__MACOSX/` resource-fork files — and already contains uncommitted layout-system work from the
+>    local working tree (`components/layout/Container.tsx`, `Footer.tsx`, `Section.tsx` and two
+>    others are identical to it), followed by further edits on `main`.
+>    Evidence: `git log --max-parents=0 origin/main`, `git merge-base HEAD origin/main` (empty),
+>    GitHub compare API `82ecf27...64ecf03` → "No common ancestor".
+>
+> 3. **PRODUCTION IS SERVING `main`, DEPLOYED BY GITHUB ACTIONS.** The `Deploy MappedSkills`
+>    workflow on `main` builds on a GitHub runner, `rsync --delete`s the tree into
+>    `~/mappedskills.com`, runs `npm install --omit=dev` on the host, overwrites the host `.env` and
+>    touches `tmp/restart.txt`. Successful runs from `main`: `919d38c` (2026-09-12), `3f44219` and
+>    `c04ec3a` (2026-09-13), **`86406fa` and `64ecf03` (2026-09-18)**. The live site serves
+>    `/mappedskills-logo-light-bg.webp`, which exists only on `main`. **This bypasses the accepted
+>    release process recorded for Phase J.**
+>
+> 4. **ANALYTICS IS NOT LOADING IN PRODUCTION.** `NEXT_PUBLIC_GTM_ID` is a build-time input and the
+>    workflow supplies only the Contentful variables to `npm run build`. The live bundle compiles
+>    the container loader to `let e=o.env.NEXT_PUBLIC_GTM_ID … return e&&"granted"===t ? … : null`
+>    against a runtime polyfill in which the value is `undefined`; no `GTM-` or `G-` identifier
+>    exists anywhere in the 633 KB of JavaScript the homepage loads. No consent choice can make the
+>    container, and therefore GA4, load. No GitHub secret for the container ID exists.
+>
+> 5. **SEVEN LIVE COMMERCIAL ROUTES RENDER TWO `<h1>` ELEMENTS, ONE EMPTY.** On `main`, `/services`,
+>    `/seo`, `/ai-seo`, `/google-ads`, `/social-media-ads`, `/conversion-optimization` and
+>    `/lead-generation` pass `title=""` and `lede=""` to `CommercialHero` and place a hand-written
+>    `<h1>` in its children. `test_branch` renders exactly one H1 on each.
+>
+> 6. **CONTENTFUL CREDENTIAL — ROTATED BY THE OWNER ON 2026-09-18.** The tracked `public.zip` at the
+>    repository root contained a `.env.local` with the old token; the repository is **PUBLIC**. The
+>    token has been rotated. On `test_branch`, `public.zip` is removed from the working tree and index
+>    (staged, not committed) and root-level archives are now ignored. **The revoked token remains in
+>    history**: one blob, present in 55 commits across `test_branch`, the preserved stash and `main`'s
+>    root commit `de16f5c`. History rewriting is a separate, optional owner decision. The GitHub
+>    secret `CONTENTFUL_ACCESS_TOKEN` was last updated 2026-09-18T05:35:46Z, three minutes before the
+>    `64ecf03` deploy (WORKING HYPOTHESIS: the rotated token reached production through that run; its
+>    value was not and cannot be inspected).
+>
+> **REPOSITORY RECONCILIATION — PROPOSED CANONICAL STATE, 2026-09-18. UNCOMMITTED, UNDEPLOYED.**
+>
+> Recorded plainly so it cannot be misread later: **`main` was recreated with an unrelated history
+> (root `de16f5c`); five automatic GitHub Actions deployments from it went live between 2026-09-12
+> and 2026-09-18; production therefore diverged from the accepted control state; none of that was an
+> approved release.** The owner froze `main` at `64ecf03` on 2026-09-18 and a reconciliation was
+> prepared on `test_branch` as the control base. **Production has NOT been changed by it** and must
+> not be described as corrected until a separately authorised deployment has run and been verified.
+>
+> What the proposed canonical tree does (full inventory and evidence in the session report):
+> - **Nothing from `main` was merged.** `main` was treated as a source of candidate changes. Two
+>   functional fixes were ported file-by-file: batched layout reads in `HomepageMotion`, and Contentful
+>   table renderers that stop tables overflowing on mobile (live posts and every live case study contain
+>   tables). `main`'s design/copy changes are **not** imported and remain owner-review candidates.
+> - **Duplicate/empty `<h1>` made structurally impossible** in both hero components (`lib/has-content.ts`),
+>   and checked at build time by `scripts/verify-build-output.cjs`.
+> - **Analytics can no longer ship dead.** `npm run verify:build:production` fails unless
+>   `NEXT_PUBLIC_GTM_ID` is supplied at build time AND proven compiled into the client bundle. Consent
+>   gating is unchanged; Meta Pixel is consent-gated (audit fix).
+> - **A proposed release workflow** (`.github/workflows/deploy.yml`, `scripts/deploy/`): push builds and
+>   verifies only; deployment requires a manual dispatch naming the exact commit plus the `production`
+>   environment approval; checksummed allowlist artifact; the accepted two-rename swap with the previous
+>   release kept; automatic rollback on a failed smoke test; host `.env` never written; no host install;
+>   pinned SSH host key. **Not active** — it has not been pushed or run.
+> - **Tooling:** `typescript.ignoreBuildErrors` removed (tree is type-clean); `npm run lint` now runs
+>   ESLint 9 with the Next.js 16 presets. **Recorded lint backlog: 21 errors, 7 warnings, all
+>   pre-existing** (React-Compiler-era hooks rules, unescaped apostrophes in legal copy, `any` in the
+>   Calendly/Meta helpers, two `<a>` page links in `BlogHero`). Lint is non-blocking in CI until cleared.
+> - **Dependencies:** `next` 16.2.6 → 16.2.12 (same patch line; 11 advisories → 2, both needing 16.3.x
+>   and neither reachable here: Windows-only RCE, and the image optimizer is disabled).
+> - **Hygiene:** `public.zip` removed; root archives, `__MACOSX/` and `*.tsbuildinfo` ignored;
+>   `tsconfig.tsbuildinfo` untracked; stale `pnpm-lock.yaml` removed (npm is authoritative);
+>   `verify-server-files` repointed at load-bearing files; 15 unreferenced re-export shims removed;
+>   `.env.example` rewritten as an accurate, value-free contract.
+> - **Revoked Contentful token:** REVOKED CREDENTIAL — HISTORICAL ONLY. Absent from the active tree;
+>   still present in history (one blob, 55 commits). History sanitisation is a separate decision.
+>
 > **⚠ THIS SECTION HAS NOT BEEN MAINTAINED SINCE SESSION 20 (2026-09-04), AND THE STATEMENT BELOW
 > THAT "NO PRODUCTION IMPLEMENTATION HAS BEGUN" IS NO LONGER TRUE.**
 >

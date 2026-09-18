@@ -32,6 +32,30 @@ const proseOptions: Options = {
         {children}
       </blockquote>
     ),
+    /* Contentful tables — every live case study contains one. The table
+       scrolls inside its own container rather than overflowing the viewport.
+       RECONCILIATION PORT (from `main` 86406fa / 64ecf03, shadow dropped);
+       recorded separately from this file's pre-existing layout changes. */
+    [BLOCKS.TABLE]: (_node, children) => (
+      <div className="my-6 w-full max-w-full overflow-x-auto rounded-lg border border-border">
+        <table className="w-full min-w-[500px] border-collapse text-left">
+          <tbody>{children}</tbody>
+        </table>
+      </div>
+    ),
+    [BLOCKS.TABLE_ROW]: (_node, children) => (
+      <tr className="border-b border-border last:border-b-0">{children}</tr>
+    ),
+    [BLOCKS.TABLE_HEADER_CELL]: (_node, children) => (
+      <th className="border-r border-border bg-secondary/50 px-4 py-3 align-top font-heading text-sm font-semibold text-foreground last:border-r-0 [&_p:last-child]:mb-0 [&_p:not(:last-child)]:mb-2">
+        {children}
+      </th>
+    ),
+    [BLOCKS.TABLE_CELL]: (_node, children) => (
+      <td className="border-r border-border px-4 py-3 align-top text-sm text-muted-foreground last:border-r-0 [&_p:last-child]:mb-0 [&_p:not(:last-child)]:mb-2">
+        {children}
+      </td>
+    ),
     [INLINES.HYPERLINK]: (node, children) => {
       const href = node.data?.uri as string | undefined;
       return (

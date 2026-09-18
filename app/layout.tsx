@@ -127,19 +127,19 @@ export default function RootLayout({
           script and no vendor SDK is loaded from application code, and no
           `window.gtag` global is defined by this application.
 
-          `MetaPixel` — LEFT EXACTLY AS FOUND, UNCONFIGURED, AND STILL WITHOUT A
-          CONSENT GATE. Whether Meta Pixel is retained at all is an open OWNER
-          decision (`EVENT_TAXONOMY.md` §9 decision 4) and this phase does not
-          enable advertising, so this session neither removes it nor wires it to
-          the consent state. It renders nothing while
-          `NEXT_PUBLIC_META_PIXEL_ID` is empty.
+          `MetaPixel` — UNCONFIGURED, and now behind the SAME TWO GATES as the
+          container: `NEXT_PUBLIC_META_PIXEL_ID` must be set AND the visitor
+          must have accepted analytics. Whether Meta Pixel is retained at all
+          remains an open OWNER decision (`EVENT_TAXONOMY.md` §9 decision 4);
+          the gate does not pre-empt it, it only makes "retained" safe. It
+          renders nothing while `NEXT_PUBLIC_META_PIXEL_ID` is empty.
 
-          ⚠ `NEXT_PUBLIC_META_PIXEL_ID` MUST NOT BE SET. The consent work in this
-          session covers GOOGLE ONLY. Setting that variable would load
-          `fbevents.js` and fire `PageView` for every visitor regardless of what
-          they chose, because this component never reads the consent state. Its
-          two other recorded defects also stand: it fires once per DOCUMENT and
-          so misses every App Router client navigation.
+          The repository-audit session added that consent gate. Until then this
+          component read no consent state, so setting that one variable would
+          have loaded `fbevents.js` and fired `PageView` for every visitor
+          regardless of what they chose — a ⚠ comment was the only thing
+          preventing it. Its other recorded defect still stands: it fires once
+          per DOCUMENT and so misses every App Router client navigation.
 
           `@vercel/analytics` WAS REMOVED HERE in Session 32. It posts to
           `/_vercel/insights/event`, an endpoint that exists only on Vercel's

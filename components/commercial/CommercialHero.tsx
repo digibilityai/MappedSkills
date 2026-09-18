@@ -7,6 +7,7 @@ import {
   OPENER_RAIL,
   type OpenerMode,
 } from '@/components/commercial/primitives';
+import { hasContent } from '@/lib/has-content';
 import { cn } from '@/lib/utils';
 
 /**
@@ -61,7 +62,7 @@ export function CommercialHero({
             <p className="m-0 block text-[.82rem] font-semibold uppercase leading-[1.4] tracking-[0.16em] text-resolve-dim">
               {eyebrow}
             </p>
-            {mode === 'split' && (
+            {mode === 'split' && hasContent(title) && (
               <h1 className="m-0 mt-[clamp(14px,1.8vw,22px)] max-w-[19ch] font-heading text-[clamp(2rem,3.4vw,3.1rem)] font-extrabold leading-[1.0] tracking-[-0.038em]">
                 {title}
               </h1>
@@ -69,7 +70,7 @@ export function CommercialHero({
           </div>
 
           <div className={cn(OPENER_MAIN[mode], mode === 'offset' && 'max-[1080px]:mt-0')}>
-            {mode !== 'split' && (
+            {mode !== 'split' && hasContent(title) && (
               <h1
                 className={cn(
                   'm-0 mt-[clamp(14px,1.8vw,22px)] font-heading text-[clamp(2rem,4.6vw,3.9rem)] font-extrabold leading-[0.98] tracking-[-0.038em]',
@@ -90,7 +91,7 @@ export function CommercialHero({
                 mode === 'split' && 'min-[1081px]:mt-0'
               )}
             >
-              <p className="m-0">{lede}</p>
+              {hasContent(lede) && <p className="m-0">{lede}</p>}
               {children}
             </div>
             <div className={cn(mode === 'centred' && 'min-[1081px]:[&>div]:justify-center')}>

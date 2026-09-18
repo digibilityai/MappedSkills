@@ -29,11 +29,19 @@
 
 import { Button } from '@/components/ui/button';
 
+/*
+ * `variant` and `size` are derived from `Button`'s OWN prop types rather than
+ * restated. The restated union declared `size?: 'sm' | 'md' | 'lg'`, but the
+ * button has no `'md'` size — its middle step is `'default'` — so this file
+ * raised the repository's only TypeScript error. Deriving the types means the
+ * two cannot drift apart again. No call site passed `'md'`: there is no call
+ * site at all (see the note above), so nothing rendered changes.
+ */
 interface CalendlyButtonProps {
   href: string;
   children: React.ReactNode;
-  variant?: 'default' | 'outline' | 'ghost' | 'secondary';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: React.ComponentProps<typeof Button>['variant'];
+  size?: React.ComponentProps<typeof Button>['size'];
   className?: string;
 }
 

@@ -115,6 +115,24 @@
 >   environment approval; checksummed allowlist artifact; the accepted two-rename swap with the previous
 >   release kept; automatic rollback on a failed smoke test; host `.env` never written; no host install;
 >   pinned SSH host key. **Not active** — it has not been pushed or run.
+> - **Production preflight (read-only, 2026-09-18) — VERIFIED FACT.** cPanel starts
+>   **`server.cjs`**, not `app.js` (`PassengerStartupFile`, `node-selector.json` and the running
+>   worker all agree), so the repository's `"type": "module"` declaration does not affect the
+>   production entry point. The cPanel application environment supplies **only** `DB_HOST`,
+>   `DB_USER`, `DB_PASSWORD`, `DB_NAME` and `NODE_ENV`; **`CONTENTFUL_SPACE_ID` and
+>   `CONTENTFUL_ACCESS_TOKEN` exist only in the application `.env`**, which is therefore
+>   load-bearing until the owner migrates them into the cPanel app configuration. Live
+>   dependencies are **next 16.2.6** in the shared cPanel nodevenv tree, reached by a symlink that
+>   every release directory shares; canonical is **next 16.2.12**, and the two lockfiles differ.
+>   Contentful runtime access is working: a live ISR revalidation completed (`STALE` then `HIT`)
+>   and the app log is empty. No token value was read or compared.
+> - **Releases are dependency-aware.** A dependency set is keyed by its lockfile SHA-256. An
+>   unchanged lockfile carries the live `node_modules` symlink; a changed one **requires**
+>   `~/deps/<first-12-of-sha>/node_modules`, prepared beforehand in a separate approved step, and
+>   links only the new release to it. The release script never runs `npm install`/`npm ci`, never
+>   touches the live tree, and fails closed with the exact path to prepare. Because each release
+>   owns its symlink, the two-rename swap and rollback move **application and dependency tree
+>   together**. The workflow reports the lockfile hash and that path in its job summary.
 > - **Tooling:** `typescript.ignoreBuildErrors` removed (tree is type-clean); `npm run lint` now runs
 >   ESLint 9 with the Next.js 16 presets. **Recorded lint backlog: 21 errors, 7 warnings, all
 >   pre-existing** (React-Compiler-era hooks rules, unescaped apostrophes in legal copy, `any` in the

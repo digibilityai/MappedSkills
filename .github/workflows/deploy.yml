@@ -70,6 +70,7 @@ jobs:
     outputs:
       artifact: ${{ steps.pack.outputs.artifact }}
       sha256: ${{ steps.pack.outputs.sha256 }}
+      lock_sha12: ${{ steps.pack.outputs.lock_sha12 }}
     steps:
       - uses: actions/checkout@v4
 
@@ -119,6 +120,52 @@ jobs:
           bash scripts/deploy/package-release.sh "$name"
           echo "artifact=$name" >> "$GITHUB_OUTPUT"
           echo "sha256=$(cat "$name.sha256")" >> "$GITHUB_OUTPUT"
+          lock=$(sha256sum package-lock.json | awk '{print $1}')
+          echo "lock_sha256=$lock" >> "$GITHUB_OUTPUT"
+          echo "lock_sha12=${lock:0:12}" >> "$GITHUB_OUTPUT"
+
+      # The operator must be able to see, without opening a shell, whether this
+      # release changes the dependency set — and if so, exactly which isolated
+      # tree has to exist on the host first. The release script fails closed if
+      # it does not; nothing is installed from here.
+      - name: Job summary
+        env:
+          LOCK: ${{ steps.pack.outputs.lock_sha256 }}
+          LOCK12: ${{ steps.pack.outputs.lock_sha12 }}
+          ART: ${{ steps.pack.outputs.artifact }}
+          ART_SHA: ${{ steps.pack.outputs.sha256 }}
+        run: |
+          {
+            echo "### Release candidate \`${GITHUB_SHA::7}\`"
+            echo
+            echo "| item | value |"
+            echo "| --- | --- |"
+            echo "| BUILD_ID | \`$(cat .next/BUILD_ID)\` |"
+            echo "| artifact | \`$ART\` |"
+            echo "| artifact sha256 | \`$ART_SHA\` |"
+            echo "| **package-lock.json sha256** | \`$LOCK\` |"
+            echo "| **dependency key** | \`$LOCK12\` |"
+            echo
+            echo "**Dependencies.** If the live release on the host was built from this same"
+            echo "lockfile, the release carries the existing \`node_modules\` symlink and there is"
+            echo "nothing to do. If it was NOT, the release requires this isolated tree to exist"
+            echo "on the host BEFORE staging:"
+            echo
+            echo '```'
+            echo "~/deps/$LOCK12/node_modules"
+            echo '```'
+            echo
+            echo "Prepare it once, as a separate approved step (it never touches the live tree):"
+            echo
+            echo '```bash'
+            echo "mkdir -p ~/deps/$LOCK12"
+            echo "# copy this release's package.json and package-lock.json into that directory, then:"
+            echo "source ~/nodevenv/mappedskills.com/22/bin/activate"
+            echo "cd ~/deps/$LOCK12 && npm ci --omit=dev"
+            echo '```'
+            echo
+            echo "_This workflow never installs dependencies on the host and never writes \`.env\`._"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - uses: actions/upload-artifact@v4
         with:
@@ -187,6 +234,12 @@ jobs:
           install -d -m 700 ~/.ssh
           printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key && chmod 600 ~/.ssh/deploy_key
           printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts && chmod 644 ~/.ssh/known_hosts
+
+      - name: Dependency expectation for this release
+        run: |
+          echo "If the host's live lockfile differs from this release, staging requires:"
+          echo "    ~/deps/${{ needs.verify.outputs.lock_sha12 }}/node_modules"
+          echo "release.sh fails closed with preparation instructions if it is absent."
 
       - name: Upload and stage (live release untouched)
         env:

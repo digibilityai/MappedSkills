@@ -102,7 +102,7 @@ export function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
             {/* Column 1: Brand */}
             <div>
-              <Logo href="/" className="h-8 mb-4" />
+              <Logo href="/" onDark className="h-8 mb-4" />
               {/*
                 SESSION 33 — PHASE I. The previous blurb claimed the firm helps
                 businesses "generate qualified leads, improve ROI, and scale

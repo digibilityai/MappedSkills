@@ -54,7 +54,15 @@ export const siteMetadata = {
   siteName,
   author,
   baseUrl,
-  logoPath: '/ms_Logo.webp',
+  // The MappedSkills lockup (M mark + "apped" in ink + "Skill" in tangerine),
+  // supplied as TWO CONTRAST VARIANTS because the mark is raster and cannot be
+  // recoloured in CSS. `logoPath` carries ink text for LIGHT surfaces — THE
+  // RESOLVE's ivory ground, which the header uses; `logoPathOnDark` carries
+  // white text for DARK surfaces, which is the footer. This is the lockup
+  // production has been serving; the legacy `/ms_Logo.webp` mark it replaces
+  // is white-text only and was therefore illegible on the light header.
+  logoPath: '/mappedskills-logo-light-bg.webp',
+  logoPathOnDark: '/mappedskills-logo-dark-bg.webp',
   faviconPath: '/ms_icon.png',
   email: process.env.NEXT_PUBLIC_BUSINESS_EMAIL || 'info@mappedskills.com',
   phone: process.env.NEXT_PUBLIC_BUSINESS_PHONE || '+91 9873232662',

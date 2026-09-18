@@ -123,12 +123,33 @@ select_dependency_tree() {
       "" \
       "      $deps_dir/node_modules" \
       "" \
-      "  Prepare it ONCE, as a separate approved step (it never touches the live tree):" \
+      "  Prepare it ONCE, as a separate approved step (it never touches the live tree)." \
       "" \
-      "      mkdir -p $deps_dir" \
-      "      cp $NEW_DIR/package.json $NEW_DIR/package-lock.json $deps_dir/" \
-      "      source \$HOME/nodevenv/\$(basename \"$APP_DIR\")/22/bin/activate" \
-      "      cd $deps_dir && npm ci --omit=dev" \
+      "  DO NOT 'source ~/nodevenv/.../bin/activate' to do this, and DO NOT use the" \
+      "  npm on that venv's PATH. It is CloudLinux's npm_wrapper, and for the" \
+      "  commands 'install', 'i', 'add', 'list', 'la' and 'll' — whatever directory" \
+      "  you are in — it DELETES the LIVE application's node_modules symlink," \
+      "  relinks it to the SHARED nodevenv tree, points that tree's package.json at" \
+      "  the LIVE app, and installs into it. That mutates the running release and" \
+      "  every retained rollback target at once. ('npm ci' itself passes straight" \
+      "  through to real npm; the danger is standing in that environment at all," \
+      "  where 'npm install' after a failure — or even a diagnostic 'npm list' —" \
+      "  is destructive.) Use the host's Node 22 binaries directly instead:" \
+      "" \
+      "      B=/opt/alt/alt-nodejs22/root/usr/bin   # the binary Passenger runs" \
+      "      W=\$(mktemp -d $DEPS_ROOT/.prep-$sha12-XXXXXX)   # same filesystem as $DEPS_ROOT" \
+      "      cp $NEW_DIR/package.json $NEW_DIR/package-lock.json \$W/" \
+      "      cd \$W && env -i HOME=\$HOME PATH=\$B:/usr/bin:/bin \$B/npm ci --omit=dev" \
+      "" \
+      "  Verify BEFORE promoting — package.json and package-lock.json unchanged by" \
+      "  the install, node_modules/next/package.json reporting the version this" \
+      "  release pins, and react, react-dom and mysql2 all present. Then promote it" \
+      "  in ONE atomic rename (never install into a live path, never into $deps_dir):" \
+      "" \
+      "      [ ! -e $deps_dir ] && mv -T \$W $deps_dir" \
+      "" \
+      "  Treat $deps_dir as immutable afterwards: a different lockfile means a" \
+      "  different dependency key and a different tree." \
       "" \
       "  Then re-run: release.sh stage <artifact> <sha256>" \
       "" >&2

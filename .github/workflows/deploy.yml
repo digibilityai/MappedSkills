@@ -155,14 +155,31 @@ jobs:
             echo "~/deps/$LOCK12/node_modules"
             echo '```'
             echo
-            echo "Prepare it once, as a separate approved step (it never touches the live tree):"
+            echo "Prepare it once, as a separate approved step (it never touches the live tree)."
+            echo
+            echo "**Do not \`source ~/nodevenv/.../bin/activate\`, and do not use the npm on that"
+            echo "venv's PATH.** It is CloudLinux's \`npm_wrapper\`: for \`install\`, \`i\`, \`add\`,"
+            echo "\`list\`, \`la\` and \`ll\` — from any directory — it deletes the LIVE app's"
+            echo "\`node_modules\` symlink, relinks it to the SHARED nodevenv tree, points that"
+            echo "tree's \`package.json\` at the live app and installs into it, mutating the"
+            echo "running release and every rollback target. (\`npm ci\` passes through to real"
+            echo "npm; the risk is being in that environment at all, where a follow-up"
+            echo "\`npm install\` — or a diagnostic \`npm list\` — is destructive.)"
+            echo
+            echo "Use the host's Node 22 binaries directly, prepare in a private temporary"
+            echo "directory on the same filesystem, verify, then promote in one atomic rename:"
             echo
             echo '```bash'
-            echo "mkdir -p ~/deps/$LOCK12"
-            echo "# copy this release's package.json and package-lock.json into that directory, then:"
-            echo "source ~/nodevenv/mappedskills.com/22/bin/activate"
-            echo "cd ~/deps/$LOCK12 && npm ci --omit=dev"
+            echo 'B=/opt/alt/alt-nodejs22/root/usr/bin   # the binary Passenger runs'
+            echo "W=\$(mktemp -d ~/deps/.prep-$LOCK12-XXXXXX)"
+            echo "# copy this release's package.json and package-lock.json into \$W, then:"
+            echo 'cd $W && env -i HOME=$HOME PATH=$B:/usr/bin:/bin $B/npm ci --omit=dev'
+            echo "# verify: package.json/package-lock.json unchanged by the install, and next,"
+            echo "# react, react-dom and mysql2 present with next at this release's pinned version."
+            echo "[ ! -e ~/deps/$LOCK12 ] && mv -T \$W ~/deps/$LOCK12"
             echo '```'
+            echo
+            echo "Treat that directory as immutable: a different lockfile means a different key."
             echo
             echo "_This workflow never installs dependencies on the host and never writes \`.env\`._"
           } >> "$GITHUB_STEP_SUMMARY"

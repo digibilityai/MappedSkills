@@ -79,6 +79,28 @@ export function RichTextContent({ document, links }: RichTextContentProps) {
         </blockquote>
       ),
       [BLOCKS.HR]: () => <hr className="my-10 border-resolve-line" />,
+      [BLOCKS.TABLE]: (_node, children) => (
+        <div className="my-8 w-full max-w-full overflow-x-auto rounded-lg border border-resolve-line shadow-sm">
+          <table className="w-full text-left border-collapse min-w-[500px]">
+            {children}
+          </table>
+        </div>
+      ),
+      [BLOCKS.TABLE_ROW]: (_node, children) => (
+        <tr className="border-b border-resolve-line last:border-b-0 hover:bg-resolve-ground/40 transition-colors">
+          {children}
+        </tr>
+      ),
+      [BLOCKS.TABLE_HEADER_CELL]: (_node, children) => (
+        <th className="px-4 py-3 bg-resolve-ground text-resolve-ink font-heading font-semibold text-[14px] leading-[1.4] border-r border-resolve-line last:border-r-0 align-top [&_p:not(:last-child)]:mb-2 [&_p:last-child]:mb-0">
+          {children}
+        </th>
+      ),
+      [BLOCKS.TABLE_CELL]: (_node, children) => (
+        <td className="px-4 py-3 text-resolve-dim text-[14px] leading-[1.5] border-r border-resolve-line last:border-r-0 align-top [&_p:not(:last-child)]:mb-2 [&_p:last-child]:mb-0">
+          {children}
+        </td>
+      ),
       [BLOCKS.EMBEDDED_ASSET]: (node) => {
         const id = node.data?.target?.sys?.id as string | undefined;
         const asset = id ? assetMap.get(id) : undefined;

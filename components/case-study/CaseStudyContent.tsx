@@ -32,6 +32,28 @@ const proseOptions: Options = {
         {children}
       </blockquote>
     ),
+    [BLOCKS.TABLE]: (_node, children) => (
+      <div className="my-6 w-full max-w-full overflow-x-auto rounded-lg border border-border shadow-sm">
+        <table className="w-full text-left border-collapse min-w-[500px]">
+          {children}
+        </table>
+      </div>
+    ),
+    [BLOCKS.TABLE_ROW]: (_node, children) => (
+      <tr className="border-b border-border last:border-b-0 hover:bg-secondary/30 transition-colors">
+        {children}
+      </tr>
+    ),
+    [BLOCKS.TABLE_HEADER_CELL]: (_node, children) => (
+      <th className="px-4 py-3 bg-secondary/50 text-foreground font-heading font-semibold text-sm border-r border-border last:border-r-0 align-top [&_p:not(:last-child)]:mb-2 [&_p:last-child]:mb-0">
+        {children}
+      </th>
+    ),
+    [BLOCKS.TABLE_CELL]: (_node, children) => (
+      <td className="px-4 py-3 text-muted-foreground text-sm border-r border-border last:border-r-0 align-top [&_p:not(:last-child)]:mb-2 [&_p:last-child]:mb-0">
+        {children}
+      </td>
+    ),
     [INLINES.HYPERLINK]: (node, children) => {
       const href = node.data?.uri as string | undefined;
       return (

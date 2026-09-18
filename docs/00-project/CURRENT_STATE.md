@@ -39,7 +39,103 @@
 
 ## Current Phase
 
+> ## ✅ CANONICAL RECONCILIATION AND PRODUCTION RECOVERY — COMPLETE, 2026-09-18
+>
+> **This block describes what is live and authoritative TODAY. Every block below it is retained
+> unaltered as chronology, including the repository-audit correction immediately following, which
+> was accurate when written and is now HISTORICAL: the divergence it documents has been resolved
+> by the transition and deployment recorded here.**
+>
+> ### What is live
+>
+> | Item | Value |
+> |---|---|
+> | Canonical commit deployed | `ef346572a1de1974b106900da583ed4e412f27a2` |
+> | `main` | `ef346572` (documentation closure commit sits on top; see below) |
+> | `test_branch` | `ef346572` — level with the deployed source |
+> | Recovery branch | `backup/main-pre-canonical-64ecf03` = `64ecf0340ca19d1b46b193ecabefbb5acb974661` |
+> | Production `BUILD_ID` | **`Q0DukKVy3o8Idhld4POyk`** (replaced `29BmkWTP3aquUcUXu2KrR`) |
+> | Live Next | **16.2.12** (was 16.2.6) |
+> | Workflow run / deployment record | `35376858153` / `6529950216` — success, rollback job skipped |
+>
+> ### The main transition (VERIFIED FACT)
+>
+> `main` and `test_branch` **shared no history** — there was no merge base, so no merge or
+> fast-forward was possible. `main` was therefore **replaced**, under a lease pinned to the exact
+> audited old SHA (`--force-with-lease=refs/heads/main:64ecf03…`), only after
+> `backup/main-pre-canonical-64ecf03` was created and independently read back. **The old lineage's
+> 12 commits remain reachable through that branch, which must not be deleted without a separate
+> owner decision.** `APPROVED DECISION` — `DEC-024`.
+>
+> ### The deployment (VERIFIED FACT)
+>
+> Released by the canonical workflow: manual `workflow_dispatch` on `main` naming the exact commit,
+> held at the `production` environment's required-reviewer gate until the owner approved, then
+> checksummed artifact → staged → verified → two-rename swap → restart → smoke test. A push to
+> `main` **verifies only and cannot deploy** (`DEC-026`). The destructive `rsync --delete` +
+> host-`npm install` + `.env`-overwrite workflow that had been deploying `main` is gone with the
+> replaced lineage.
+>
+> **Dependencies are isolated per lock identity** (`DEC-025`): the release detected the changed
+> dependency set (live `b7dfb3c117d7` → staged `b36d87e127cf`) and linked **only the new release**
+> to `~/deps/b36d87e127cf/node_modules` (canonical lock
+> `b36d87e127cf3a3b42f919e3acfa697cf46304f9c8876ab4f737e5cdc534ba3d`). The shared cPanel nodevenv
+> tree was **not modified** and still holds Next 16.2.6. No `npm install`/`npm ci` ran on the host.
+>
+> ### Rollback readiness
+>
+> `~/mappedskills.com.prev` holds `BUILD_ID 29BmkWTP3aquUcUXu2KrR` with Next 16.2.6 and **its own**
+> symlink to the shared nodevenv tree, plus its `.env` and `app.js`. Application and dependency
+> tree move together, so rollback is coherent. **Rollback was not executed and needs no rebuild.**
+>
+> ### Runtime authority — CORRECTS THE RECORD BELOW
+>
+> **`DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `CONTENTFUL_SPACE_ID` and
+> `CONTENTFUL_ACCESS_TOKEN` are all supplied by the cPanel/LiteSpeed process environment** and were
+> confirmed present on the request-serving worker, along with `NODE_ENV=production`. **`.env` is a
+> retained, unchanged fallback — it is NO LONGER the sole source of Contentful credentials**, which
+> the 2026-09-18 audit block and the Session 34 acceptance record below both state as true of their
+> date. `.env` was carried across byte-for-byte by the release and its hash is unchanged
+> (`DEC-027`). Values were never read or printed.
+>
+> ### Canonical fixes verified live (2026-09-18, after deployment)
+>
+> - **H1** — `/services`, `/seo`, `/ai-seo`, `/google-ads`, `/social-media-ads`,
+>   `/conversion-optimization` and `/lead-generation` now each render **exactly one non-empty
+>   `<h1>`**. They previously rendered two, one empty.
+> - **Branding** — the header serves `/mappedskills-logo-light-bg.webp` and the footer
+>   `/mappedskills-logo-dark-bg.webp`; the verified homepage no longer references the legacy
+>   `/ms_Logo.webp` mark, which was white-text only and illegible on THE RESOLVE's light header.
+> - **Measurement** — **analytics loads in production for the first time.** `GTM-K8ZQPMXP` is
+>   compiled into the client bundle and, after consent, loads GA4 `G-6H7WFH2BHQ`. Before consent no
+>   third-party script or request is made at all. Consent Mode defaults deny all four signals; the
+>   acceptance path grants `analytics_storage` **only** — `ad_storage`, `ad_user_data` and
+>   `ad_personalization` stay denied. **Meta Pixel remains inert/off.** No enquiry was submitted and
+>   no conversion or database row was created during verification.
+> - **Health** — the 21 required routes plus `/robots.txt` and `/sitemap.xml` all return 200, an
+>   unknown path returns 404, Contentful-backed blog and portfolio routes are healthy, and a
+>   deployment smoke at 390 / 860 / 1425 px found no overflow, collision or console error.
+>
+> ### What this does NOT change
+>
+> - **Phase J remains accepted and is not reopened** (`DEC-022`, `DEC-023`). THE RESOLVE
+>   (`DEC-018`) is unchanged as the active direction.
+> - **Both UI stashes remain unapproved, separate and intact** — `c1acf87`
+>   (UI-PAGE-REVIEW-2026-09-18) and `b36b243` (UI-REMEDIATION-2026-09-07). They are **owner-review
+>   candidates, NOT deployment blockers**, and must not be applied, dropped or combined.
+> - **`main`'s design/copy changes were never imported.** Only two functional fixes were ported
+>   file-by-file, plus the two brand logo assets needed to preserve the deployed identity.
+>
+> ### Remaining non-blocking items
+>
+> **No material deployment blocker remains.** Open: the recorded lint backlog (21 errors, 7
+> warnings, all pre-existing) which CI reports without blocking; and the owner decision on whether
+> to sanitise the revoked Contentful token from history (it is absent from the active tree).
+>
+> ---
+>
 > **⚠ SUPERSEDING CURRENT-STATE CORRECTION — REPOSITORY AUDIT + SECURITY CLEANUP, 2026-09-18.**
+> **RETAINED AS HISTORY — superseded by the closure block above.**
 >
 > The Phase J block further down states that production was deployed by the accepted manual
 > off-host artifact method with **"no GitHub Actions run, no push or merge to `main`"**. That

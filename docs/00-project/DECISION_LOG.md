@@ -419,3 +419,62 @@ Use this file only for meaningful project decisions.
   - It makes no Core Web Vitals, LCP, CLS, INP, screen-reader, real-device, cross-browser or user-testing claim. **None was measured, and no figure for any of them appears in these records.**
   - It does not approve deleting the preserved previous releases or the staged artifact.
 - **Approved by:** Project owner / orchestrator, 2026-09-07, on review of the deployment preflight. Executed and verified by the repository worker, which has no authority to authorise a production deployment.
+
+### DEC-024
+- **Date:** 2026-09-18
+- **Status:** **Approved — EXECUTED.** Owner authorisation per step; the guarded replacement itself was run by the owner.
+- **Decision:** **`main` is replaced by the canonical lineage, and the lineage it replaced is preserved on a durable remote branch.** `origin/main` now equals `ef346572a1de1974b106900da583ed4e412f27a2`; `backup/main-pre-canonical-64ecf03` permanently anchors the old `64ecf0340ca19d1b46b193ecabefbb5acb974661`.
+- **Reason / basis:** `main` and `test_branch` **shared no history** — `git merge-base` was empty, `main` descending from a parentless root (`de16f5c`, imported from a macOS archive carrying 524 `__MACOSX/` files). No merge or fast-forward existed. Five unreviewed GitHub Actions deployments from that lineage had been serving production since 2026-09-12, bypassing the accepted release process. Replacement was the only mechanism available, so the loss of reachability it implies was made recoverable first rather than accepted.
+- **Evidence:** empty `git merge-base HEAD origin/main`; `git log --max-parents=0 origin/main` → `de16f5c`; recovery branch created and read back by raw `ls-remote` **and** the GitHub API before `main` was touched; the replacement used `--force-with-lease=refs/heads/main:64ecf0340ca19d1b46b193ecabefbb5acb974661` — never an unconditional `--force` — and the lease held, proving `main` had not drifted from the audited SHA.
+- **Impacted files:** none in the working tree; repository refs only.
+- **Supersedes:** the state recorded in the 2026-09-18 repository-audit block of `CURRENT_STATE.md`, which is retained as history.
+- **What this decision explicitly does NOT do:** it does not authorise deleting `backup/main-pre-canonical-64ecf03`, which requires a separate owner decision after production has stabilised; and it imports **none** of the replaced lineage's design or copy work.
+- **Approved by:** Project owner / orchestrator, 2026-09-18, after a twelve-gate read-only readiness audit and a focused recheck. Recorded by the repository worker, which has no authority to approve a transition.
+
+### DEC-025
+- **Date:** 2026-09-18
+- **Status:** **Approved — IN FORCE, exercised by the first canonical release.**
+- **Decision:** **A dependency set is keyed by the SHA-256 of the lockfile that produced it.** An unchanged lockfile carries the live `node_modules` symlink; a changed one **requires** `~/deps/<first-12-of-sha>/node_modules`, prepared beforehand as a separate approved step, and links **only the new release** to it. The release script never runs `npm install` or `npm ci`.
+- **Reason / basis:** every release directory reached `node_modules` through a symlink into **one shared cPanel nodevenv tree**. Installing into it would mutate the running release and break every retained rollback target simultaneously. Keying trees by lock identity lets application and dependencies move together through the two-rename swap and the rollback.
+- **Evidence:** first exercise of the model, 2026-09-18 — `[release] dependency set CHANGED (live b7dfb3c117d7 -> staged b36d87e127cf)`, `[release] linked staged release to the isolated dependency tree ~/deps/b36d87e127cf/node_modules`, `[release] the live dependency tree was NOT modified`. Verified after activation: live symlink → `~/deps/b36d87e127cf/node_modules` at Next 16.2.12, `~/mappedskills.com.prev` → shared nodevenv at Next 16.2.6, shared tree still 16.2.6.
+- **Impacted files:** `scripts/deploy/release.sh`, `.github/workflows/deploy.yml`.
+- **Operational note (host, VERIFIED FACT):** the npm on the CloudLinux nodevenv PATH is `npm_wrapper`, which for `install`, `i`, `add`, `list`, `la` and `ll` — from **any** directory — deletes the live application's `node_modules` symlink, relinks it to the shared tree and installs into it. `npm ci` passes through to real npm and is not itself destructive; the risk is standing in that environment at all. Dependency trees are therefore prepared with `/opt/alt/alt-nodejs22/root/usr/bin` directly under a clean `env -i`, verified, then promoted by one atomic rename. Both instruction sites say so.
+- **Supersedes:** the previous assumption that every release shares one dependency tree.
+- **Approved by:** Project owner / orchestrator, 2026-09-18.
+
+### DEC-026
+- **Date:** 2026-09-18
+- **Status:** **Approved — IN FORCE.**
+- **Decision:** **Production deploys only by explicit, manual `workflow_dispatch` from `refs/heads/main`, naming the exact commit, and only through the `production` GitHub environment with its required-reviewer approval.** A push to `main` runs verification and build only and **cannot** deploy.
+- **Reason / basis:** the replaced lineage's workflow deployed **on every push**, by `rsync --delete` into the live directory, with a host `npm install`, an overwritten `.env` and trust-on-first-use SSH. That is how production diverged from the control state without an approved release. Deployment is now a deliberate act with a named commit, a human approver and fail-closed checks.
+- **Evidence:** at `ef346572`, `deploy` and `rollback` both require `github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'`; the job fails closed if the `production` environment lacks a required-reviewers rule, and again if the typed 7-character confirmation does not match `GITHUB_SHA`; the SSH host key is pinned from `SSH_KNOWN_HOSTS`; `NEXT_PUBLIC_GTM_ID` is a required build input, proven compiled into the bundle. Demonstrated twice on 2026-09-18: the transition push (run `35375561145`) ran verify only with deploy and rollback **skipped**; the release (run `35376858153`) required the owner's environment approval before it proceeded.
+- **Impacted files:** `.github/workflows/deploy.yml`, `scripts/deploy/release.sh`.
+- **Supersedes:** the deploy-on-push workflow carried by the replaced `main` lineage.
+- **Approved by:** Project owner / orchestrator, 2026-09-18.
+
+### DEC-027
+- **Date:** 2026-09-18
+- **Status:** **Approved — VERIFIED IN PRODUCTION.**
+- **Decision:** **The cPanel/LiteSpeed process environment is authoritative for every runtime value** — `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `CONTENTFUL_SPACE_ID` and `CONTENTFUL_ACCESS_TOKEN`. **`.env` is retained as an unchanged fallback and is no longer the sole source of the Contentful credentials.**
+- **Reason / basis:** the Phase J-era record (`docs/27-production-translation/22_PRODUCTION_DEPLOYMENT_ACCEPTANCE.md` §4) correctly recorded that Contentful existed **only** in `.env`, which made that file load-bearing. The owner has since migrated those names into the cPanel application environment, so a release can no longer silently break Contentful by mishandling one file.
+- **Evidence:** all six names present in the host `SetEnv` configuration and on the request-serving worker's environment, with `NODE_ENV=production`; read by NAME only, **no value was read, printed or recorded**. The release carried `.env` across byte-for-byte and its hash is unchanged before and after deployment.
+- **Impacted files:** none in the repository; host configuration and `docs/00-project/CURRENT_STATE.md`.
+- **Supersedes:** the "`.env` is load-bearing / sole Contentful authority" statement, **as a description of the present**. The Session 34 record remains true of its own date and is unaltered.
+- **Approved by:** Project owner / orchestrator, 2026-09-18.
+
+### DEC-028
+- **Date:** 2026-09-18
+- **Status:** **Approved — PRODUCTION DEPLOYMENT ACCEPTED. This is the current production baseline.**
+- **Decision:** **The canonical commit `ef346572a1de1974b106900da583ed4e412f27a2` is DEPLOYED TO PRODUCTION and ACCEPTED LIVE.** Production `BUILD_ID` is **`Q0DukKVy3o8Idhld4POyk`**, replacing `29BmkWTP3aquUcUXu2KrR`; live Next is **16.2.12**.
+- **Reason / basis:** the final pre-deployment gate passed on repository state, GitHub configuration, the prepared dependency tree and rollback coherence; the owner then dispatched the release and approved the `production` environment gate.
+- **Evidence:** workflow run `35376858153` (`workflow_dispatch`, `main`, `GITHUB_SHA ef346572…`, `action=deploy`, `confirm=ef34657`) — verify **success**, release **success**, rollback **skipped**; deployment record `6529950216` → success; `[release] swapped: live=Q0DukKVy3o8Idhld4POyk  previous=29BmkWTP3aquUcUXu2KrR`; the workflow's own smoke test reported the live site serving this build with `GTM-K8ZQPMXP` compiled in. Post-deployment verification: seven commercial routes at exactly one non-empty `<h1>`; the two-variant brand lockup live and the legacy mark unreferenced; GTM loading GA4 `G-6H7WFH2BHQ` only after consent, with the three advertising signals still denied and Meta inert; 21 routes plus `robots.txt` and `sitemap.xml` at 200; a 390/860/1425 smoke with no overflow, collision or console error.
+- **Impacted files:** `docs/00-project/CURRENT_STATE.md`, `docs/00-project/DECISION_LOG.md`, `docs/00-project/handoffs/CANONICAL_PRODUCTION_CLOSURE_2026-09-18.md`. **No application source changed in this closure.**
+- **Supersedes:** `DEC-023` **as the description of the current production baseline only**. `DEC-023` is retained unchanged as the record of the 2026-09-07 Phase J release.
+- **What this decision explicitly does NOT do:**
+  - It does not reopen or extend **Phase J**, which remains accepted (`DEC-022`, `DEC-023`), nor THE RESOLVE (`DEC-018`).
+  - It does not approve either UI stash. `c1acf87` and `b36b243` remain **unapproved owner-review candidates, not deployment blockers**, and must not be applied, dropped or combined.
+  - It does not clear the recorded **lint backlog** (21 errors, 7 warnings, pre-existing), which CI reports without blocking.
+  - It makes no Core Web Vitals, accessibility, real-device or cross-browser claim — **none was measured**.
+  - It does not authorise deleting `backup/main-pre-canonical-64ecf03`, `~/mappedskills.com.prev` or `~/deps/b36d87e127cf`.
+  - It does not resolve any owner content blocker (`/pricing` facts, the `/how-it-works` real process, the conditional manufacturing route).
+- **Approved by:** Project owner / orchestrator, 2026-09-18 — dispatched and environment-approved by the owner in GitHub. Verified and recorded by the repository worker, which has no authority to accept a deployment.

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { createMetadata, siteMetadata } from '@/lib/metadata';
+import { siteMetadata } from '@/lib/metadata';
 import {
   getBlogDetailPost,
   getBlogStaticParams,
@@ -41,7 +41,22 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const post = await getBlogDetailPost(slug);
 
   if (!post) {
-    return createMetadata('Blog Post Not Found', 'The blog post you are looking for does not exist.', '/blog');
+    /**
+     * SEO-006 EXTENSION (owner decision, 2026-09-21): the same defect the
+     * portfolio route had. This branch is a GENUINE NOT-FOUND — `notFound()`
+     * is called below and the response is HTTP 404 — but it returned
+     * `createMetadata(...)`, which sets `index: true` for every caller, so the
+     * 404 published `index, follow` with a canonical pointing at `/blog`.
+     *
+     * A genuine not-found response must not invite indexing merely because it
+     * passed through a dynamic route's metadata branch. Published posts are
+     * untouched and remain indexable.
+     */
+    return {
+      title: 'Blog Post Not Found',
+      description: 'The blog post you are looking for does not exist.',
+      robots: 'noindex, nofollow',
+    };
   }
 
   const title = post.metaTitle || post.title;

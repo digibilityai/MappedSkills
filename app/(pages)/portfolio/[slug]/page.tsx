@@ -7,6 +7,7 @@ import { CTASection } from '@/components/CTASection';
 import { Card } from '@/components/ui/card';
 import { CaseStudyContent } from '@/components/case-study/CaseStudyContent';
 import { createMetadata } from '@/lib/metadata';
+import { isCaseStudyProofWithheld } from '@/lib/case-study-proof';
 import {
   getCaseStudyDetail,
   getCaseStudyStaticParams,
@@ -27,7 +28,28 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
   const caseStudy = await getCaseStudyDetail(slug);
 
   if (!caseStudy) {
-    return createMetadata('Case Study Not Found', 'Case study not found', `/portfolio/${slug}`);
+    /**
+     * SEO-006 (owner decision, 2026-09-20; extended to both dynamic route
+     * families 2026-09-21). This branch is a GENUINE NOT-FOUND: the route
+     * calls `notFound()` immediately below, so the response is HTTP 404 and
+     * the visitor sees the recovery page.
+     *
+     * It previously returned `createMetadata(...)`, and `createMetadata` sets
+     * `index: true` for every caller — so a 404 under `/portfolio/*` published
+     * `index, follow` together with a canonical pointing at the missing URL,
+     * inviting indexation of a page that does not exist. Both are wrong here,
+     * so this branch no longer goes through `createMetadata`: it returns
+     * `noindex` and asserts NO canonical.
+     *
+     * This decides nothing about the removal status of any particular URL —
+     * that stays `URL TREATMENT — DECIDE DURING IMPLEMENTATION`. Published
+     * case studies are untouched and remain indexable.
+     */
+    return {
+      title: 'Case Study Not Found',
+      description: 'Case study not found',
+      robots: 'noindex, nofollow',
+    };
   }
 
   return createMetadata(caseStudy.metaTitle, caseStudy.metaDescription, caseStudy.href);
@@ -40,6 +62,13 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   if (!caseStudy) {
     notFound();
   }
+
+  /**
+   * GATE R1 — proof withholding for the three permissioned case studies whose
+   * published proof does not meet `DEC-012`. See `lib/case-study-proof.ts`.
+   * Any case study not on that list renders exactly as before.
+   */
+  const proofWithheld = isCaseStudyProofWithheld(caseStudy.slug);
 
   const metaItems = [
     caseStudy.clientName ? { label: 'Client', value: caseStudy.clientName } : null,
@@ -83,7 +112,10 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               {caseStudy.title}
             </h1>
 
-            {caseStudy.highlightResult ? (
+            {/* The headline figure is DERIVED from the first "Results &
+                Metrics" entry or the first "Before & After" row, so it carries
+                the same unevidenced numbers and is withheld with them. */}
+            {caseStudy.highlightResult && !proofWithheld ? (
               <p className="text-xl sm:text-2xl font-bold text-accent mb-8">
                 {caseStudy.highlightResult}
               </p>
@@ -115,9 +147,25 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       <CaseStudyContent
         sections={caseStudy.sections}
         conclusionJson={caseStudy.conclusionJson}
+        withholdProof={proofWithheld}
       />
 
-      {caseStudy.review ? (
+      {/*
+        WORK-013 / WORK-018 / WORK-022 and WORK-026. The testimonial block is
+        withheld entirely for the three case studies above: client-level
+        publication permission is not permission to publish a named
+        individual's verbatim quote, and no written approval is evidenced.
+        Nothing is left behind — no quote, no attribution and no empty
+        testimonial framing.
+
+        WORK-026 also applies to the stars below, which were rendered from
+        `[...Array(5)]` whenever a review existed: there is no rating field, no
+        rating source and no Review schema, so five stars asserted a rating
+        nobody gave. They stay only for a case study that is NOT withholding
+        proof, and they must not be reinstated for a withheld one without an
+        attributable rating source.
+      */}
+      {caseStudy.review && !proofWithheld ? (
         <Section className="border-y border-border bg-secondary/5">
           <Container>
             <div className="max-w-2xl mx-auto text-center">

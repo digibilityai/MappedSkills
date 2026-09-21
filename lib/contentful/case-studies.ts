@@ -4,6 +4,7 @@ import {
   GET_CASE_STUDY_BY_SLUG_QUERY,
   GET_CASE_STUDY_SLUGS_QUERY,
 } from '@/lib/contentful/queries';
+import { isCaseStudyProofWithheld } from '@/lib/case-study-proof';
 import {
   caseStudySlugCandidates,
   mapContentfulCaseStudyToCms,
@@ -73,7 +74,14 @@ export async function getCaseStudyListCards(): Promise<CmsCaseStudyCard[]> {
     title: study.title,
     industry: study.industry,
     service: study.serviceLabel,
-    result: study.highlightResult,
+    /**
+     * GATE R1. `highlightResult` is derived from the first "Results & Metrics"
+     * entry or the first "Before & After" row, so the `/work` card would
+     * otherwise republish the very figure the case-study page withholds. For a
+     * listed case study the card shows no result line; nothing replaces it.
+     * See `lib/case-study-proof.ts`.
+     */
+    result: isCaseStudyProofWithheld(study.slug) ? '' : study.highlightResult,
     summary: study.summary,
     href: study.href,
   }));

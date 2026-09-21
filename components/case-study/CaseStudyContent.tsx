@@ -98,9 +98,23 @@ const TOOL_ICONS = [Wrench, Gauge, Layers, Zap];
 type CaseStudyContentProps = {
   sections: CaseStudyParsedSections;
   conclusionJson?: Document | null;
+  /**
+   * GATE R1. When true, the blocks that carry unevidenced client results are
+   * not rendered: "Results & Metrics", "Before & After Comparisons" and the
+   * "Conclusion" (which restates the same figures and outcome claims in
+   * prose). Everything else — problem statement, business goals, challenges,
+   * strategy, services, tools — renders unchanged, and nothing is substituted
+   * for the withheld blocks. Defaults to false, so a case study that is not
+   * explicitly listed renders exactly as before.
+   */
+  withholdProof?: boolean;
 };
 
-export function CaseStudyContent({ sections, conclusionJson }: CaseStudyContentProps) {
+export function CaseStudyContent({
+  sections,
+  conclusionJson,
+  withholdProof = false,
+}: CaseStudyContentProps) {
   const {
     problemStatement,
     businessGoals,
@@ -244,7 +258,7 @@ export function CaseStudyContent({ sections, conclusionJson }: CaseStudyContentP
         </Section>
       ) : null}
 
-      {resultsMetrics && resultsMetrics.length > 0 ? (
+      {resultsMetrics && resultsMetrics.length > 0 && !withholdProof ? (
         <Section className="border-y border-border bg-secondary/5">
           <Container>
             <div className="max-w-7xl">
@@ -270,7 +284,7 @@ export function CaseStudyContent({ sections, conclusionJson }: CaseStudyContentP
         </Section>
       ) : null}
 
-      {beforeAfter && beforeAfter.rows.length > 0 ? (
+      {beforeAfter && beforeAfter.rows.length > 0 && !withholdProof ? (
         <Section>
           <Container>
             <div className="max-w-7xl">
@@ -335,7 +349,7 @@ export function CaseStudyContent({ sections, conclusionJson }: CaseStudyContentP
         ) : null
       )}
 
-      {conclusionJson && hasDocumentContent(conclusionJson) ? (
+      {conclusionJson && hasDocumentContent(conclusionJson) && !withholdProof ? (
         <Section className="border-y border-border bg-secondary/5">
           <Container>
             <div className="max-w-7xl">

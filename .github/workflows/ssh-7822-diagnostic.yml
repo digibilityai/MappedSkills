@@ -1,0 +1,99 @@
+# =============================================================================
+# ONE-TIME CONNECTIVITY DIAGNOSTIC. Requested by Hosting.com support, which
+# asked for the GitHub runner's public IP and a UTC timestamp for a failed
+# connection to port 7822.
+#
+# THIS WORKFLOW DEPLOYS NOTHING. It uses NO repository secrets, holds no
+# credentials, and never authenticates. It opens a TCP connection, reads at
+# most one banner, and closes. The host and port below are literals that are
+# already public (the IP is published in DNS for mappedskills.com).
+#
+# It runs only on pushes to the `diag/ssh-7822` branch, so it cannot fire from
+# `main` and cannot interact with the production release workflow.
+#
+# DELETE THIS BRANCH once support has the answer.
+# =============================================================================
+name: SSH 7822 connectivity diagnostic
+
+on:
+  push:
+    branches: [diag/ssh-7822]
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    name: Probe 68.66.216.9 from a GitHub-hosted runner
+    runs-on: ubuntu-latest
+    steps:
+      - name: Identify runner public IP and UTC timestamp
+        id: ident
+        run: |
+          set -u
+          TS="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          IP=""
+          for u in https://api.ipify.org https://checkip.amazonaws.com https://ifconfig.me/ip; do
+            IP="$(curl -s --max-time 15 "$u" | tr -d '[:space:]' || true)"
+            [ -n "$IP" ] && break
+          done
+          [ -n "$IP" ] || IP="(could not determine)"
+          echo "ip=$IP"   >> "$GITHUB_OUTPUT"
+          echo "utc=$TS"  >> "$GITHUB_OUTPUT"
+          echo "RUNNER_PUBLIC_IP = $IP"
+          echo "UTC_TIMESTAMP    = $TS"
+
+      # No authentication. Connect, optionally read one banner, close.
+      - name: TCP probe 68.66.216.9 on 7822 (target) and 22 (control)
+        id: probe
+        env:
+          RUNNER_IP: ${{ steps.ident.outputs.ip }}
+        run: |
+          python3 - <<'PY' | tee probe.txt
+          import socket, time, datetime
+
+          IP = '68.66.216.9'
+
+          def probe(port, label):
+              started = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+              s = socket.socket(); s.settimeout(30); t0 = time.time()
+              try:
+                  s.connect((IP, port))
+                  elapsed = time.time() - t0
+                  try:
+                      s.settimeout(8)
+                      banner = s.recv(256).decode('utf-8', 'replace').strip()
+                  except socket.timeout:
+                      banner = '(connected, no banner within 8s)'
+                  print(f'{label}|port={port}|start_utc={started}|result=CONNECTED|elapsed={elapsed:.2f}s|banner={banner[:80]}')
+              except socket.timeout:
+                  print(f'{label}|port={port}|start_utc={started}|result=TIMED_OUT|elapsed={time.time()-t0:.2f}s|banner=(none)')
+              except ConnectionRefusedError:
+                  print(f'{label}|port={port}|start_utc={started}|result=REFUSED|elapsed={time.time()-t0:.2f}s|banner=(none)')
+              except Exception as e:
+                  print(f'{label}|port={port}|start_utc={started}|result=ERROR:{type(e).__name__}|elapsed={time.time()-t0:.2f}s|banner=(none)')
+              finally:
+                  s.close()
+
+          probe(7822, 'TARGET')
+          probe(22,   'CONTROL')
+          PY
+
+      - name: Job summary for Hosting.com
+        env:
+          RUNNER_IP: ${{ steps.ident.outputs.ip }}
+          UTC_TS: ${{ steps.ident.outputs.utc }}
+        run: |
+          {
+            echo "## GitHub runner connectivity to 68.66.216.9"
+            echo
+            echo "| field | value |"
+            echo "| --- | --- |"
+            echo "| runner public IP | \`$RUNNER_IP\` |"
+            echo "| UTC timestamp | \`$UTC_TS\` |"
+            echo "| GitHub run ID | \`$GITHUB_RUN_ID\` |"
+            echo
+            echo '```'
+            cat probe.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

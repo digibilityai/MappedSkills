@@ -14,6 +14,7 @@ import { Card } from '@/components/ui/card';
 import { Section } from '@/components/Section';
 import { Container } from '@/components/Container';
 import type { CaseStudyParsedSections } from '@/lib/contentful/types';
+import { linkTargetProps } from '@/lib/internal-links';
 
 const proseOptions: Options = {
   renderNode: {
@@ -59,11 +60,12 @@ const proseOptions: Options = {
     [INLINES.HYPERLINK]: (node, children) => {
       const href = node.data?.uri as string | undefined;
       return (
+        /* WORK-005 — same tab for internal links, including absolute
+           mappedskills.com URLs. See `lib/internal-links.ts`. */
         <a
           href={href}
           className="text-accent hover:underline underline-offset-4"
-          target={href?.startsWith('http') ? '_blank' : undefined}
-          rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+          {...linkTargetProps(href)}
         >
           {children}
         </a>

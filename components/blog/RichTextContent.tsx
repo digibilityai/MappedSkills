@@ -1,6 +1,7 @@
 import { documentToReactComponents, type Options } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, INLINES, type Document } from '@contentful/rich-text-types';
 import type { ContentfulAsset, ContentfulRichText } from '@/lib/contentful/types';
+import { linkTargetProps } from '@/lib/internal-links';
 
 type RichTextContentProps = {
   document: Document;
@@ -111,11 +112,13 @@ export function RichTextContent({ document, links }: RichTextContentProps) {
       [INLINES.HYPERLINK]: (node, children) => {
         const href = node.data?.uri as string | undefined;
         return (
+          /* BLOG-012 — internal links (including absolute mappedskills.com
+             URLs written by Contentful authors) open in the SAME tab. See
+             `lib/internal-links.ts`. */
           <a
             href={href}
             className="text-accent hover:underline underline-offset-4"
-            target={href?.startsWith('http') ? '_blank' : undefined}
-            rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+            {...linkTargetProps(href)}
           >
             {children}
           </a>

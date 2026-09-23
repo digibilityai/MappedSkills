@@ -16,6 +16,7 @@ import { StickySidebarCTA } from '@/components/blog/StickySidebarCTA';
 import { RelatedPosts } from '@/components/blog/RelatedPosts';
 import { RelatedServices } from '@/components/blog/RelatedServices';
 import { AuthorBio } from '@/components/blog/AuthorBio';
+import { getRelatedServices } from '@/lib/blog-services';
 import { FAQSection } from '@/components/blog/FAQSection';
 import { SocialShare } from '@/components/blog/SocialShare';
 import { BlogNewsletterForm } from '@/components/BlogNewsletterForm';
@@ -172,174 +173,18 @@ function generateBreadcrumbSchema(post: CmsBlogPost) {
   };
 }
 
-const SERVICE_MAP: Record<
-  string,
-  Array<{ title: string; description: string; link: string }>
-> = {
-  'Google Ads': [
-    {
-      title: 'Google Ads Management',
-      description: 'Expert campaign setup and optimization for maximum ROI.',
-      link: '/google-ads',
-    },
-    {
-      title: 'Conversion Optimization',
-      description: 'Improve landing pages and forms to convert more visitors.',
-      link: '/conversion-optimization',
-    },
-    {
-      title: 'Lead Generation',
-      description: 'Generate quality leads through high-intent Google campaigns.',
-      link: '/lead-generation',
-    },
-  ],
-  'Social Media Ads': [
-    {
-      title: 'Social Media Ads',
-      description: 'Expert Meta, LinkedIn, and TikTok campaign management.',
-      link: '/social-media-ads',
-    },
-    {
-      title: 'Lead Generation',
-      description: 'Generate quality leads from social media campaigns.',
-      link: '/lead-generation',
-    },
-    {
-      title: 'Conversion Optimization',
-      description: 'Improve conversion rates from paid social traffic.',
-      link: '/conversion-optimization',
-    },
-  ],
-  'Lead Generation': [
-    {
-      title: 'Lead Generation',
-      description: 'Generate and qualify high-quality leads for your sales team.',
-      link: '/lead-generation',
-    },
-    {
-      title: 'Google Ads',
-      description: 'High-intent keyword targeting for lead generation.',
-      link: '/google-ads',
-    },
-    {
-      title: 'SEO',
-      description: 'Organic lead generation through search engine rankings.',
-      link: '/seo',
-    },
-  ],
-  SEO: [
-    {
-      title: 'SEO Services',
-      description: 'Keyword strategy, technical SEO, and content optimization.',
-      link: '/seo',
-    },
-    {
-      title: 'Lead Generation',
-      description: 'Convert organic traffic into qualified leads.',
-      link: '/lead-generation',
-    },
-    {
-      title: 'Conversion Optimization',
-      description: 'Improve conversion rates from organic traffic.',
-      link: '/conversion-optimization',
-    },
-  ],
-  'Conversion Optimization': [
-    {
-      title: 'Conversion Optimization',
-      description: 'Audit and improve conversion funnels for maximum revenue.',
-      link: '/conversion-optimization',
-    },
-    {
-      title: 'Google Ads',
-      description: 'High-intent keyword targeting and landing page optimization.',
-      link: '/google-ads',
-    },
-    {
-      title: 'Lead Generation',
-      description: 'Improve lead quality and qualification rates.',
-      link: '/lead-generation',
-    },
-  ],
-  'Marketing Strategy': [
-    {
-      title: 'Google Ads',
-      description: 'Strategic paid search campaigns aligned with your goals.',
-      link: '/google-ads',
-    },
-    {
-      title: 'SEO',
-      description: 'Long-term organic growth strategy.',
-      link: '/seo',
-    },
-    {
-      title: 'Lead Generation',
-      description: 'Multi-channel lead generation strategy.',
-      link: '/lead-generation',
-    },
-  ],
-  'Local SEO': [
-    {
-      title: 'SEO Services',
-      description: 'Local SEO, Google Business Profile optimization.',
-      link: '/seo',
-    },
-    {
-      title: 'Google Ads',
-      description: 'Local service ads and location-based targeting.',
-      link: '/google-ads',
-    },
-    {
-      title: 'Lead Generation',
-      description: 'Local lead generation and service area targeting.',
-      link: '/lead-generation',
-    },
-  ],
-  /*
-    SESSION 34 — PHASE I CLOSURE. THE ONLY FABRICATED STATISTIC LEFT IN LIVE
-    PRODUCTION CODE WAS HERE.
-
-    This group read: "See how we helped businesses achieve 300%+ ROI." /
-    "Discover lead generation success stories." / "Learn from our organic
-    growth case studies."
-
-    "300%+ ROI" is one of the three claims `DEC-007` prohibits by name and
-    `OWNER_INPUT_REGISTER.md` item 4 lists as BLOCKING and unresolved. The
-    other two lines promise success stories and case studies that do not
-    exist — `/work` is `noindex` for precisely that reason and opens by saying
-    so, and Session 33 removed "Explore Other Case Studies" from
-    `/portfolio/[slug]` on the same grounds. All three were fixed together
-    because leaving two proof promises beside a corrected third would be
-    incoherent.
-
-    NO REPLACEMENT COPY WAS WRITTEN. Each description is the one this same map
-    already gives that same service in another group — `/google-ads` from
-    'Marketing Strategy', `/lead-generation` from 'Marketing Strategy',
-    `/seo` from 'Marketing Strategy'. Every other group in this map describes
-    the service; this group now does too.
-
-    This renders on zero routes today (Contentful returns no posts), and it is
-    fixed anyway: unrendered is not the same as removed, and it would publish
-    with the first article.
-  */
-  'Case Study Insights': [
-    {
-      title: 'Google Ads',
-      description: 'Strategic paid search campaigns aligned with your goals.',
-      link: '/google-ads',
-    },
-    {
-      title: 'Lead Generation',
-      description: 'Multi-channel lead generation strategy.',
-      link: '/lead-generation',
-    },
-    {
-      title: 'SEO',
-      description: 'Long-term organic growth strategy.',
-      link: '/seo',
-    },
-  ],
-};
+/*
+ * BLOG-007 / BLOG-008 (owner-approved mapping, §15.2; implemented under GATE
+ * R2). The category-keyed `SERVICE_MAP` and its blanket
+ * `|| SERVICE_MAP['Marketing Strategy']` fallback were removed from here. No
+ * Contentful category ever matched a key, so every article rendered the same
+ * three cards and the same sidebar service regardless of subject.
+ *
+ * The approved per-slug selection now lives in `lib/blog-services.ts`, which
+ * returns an empty selection for an article with no approved services. The
+ * block and the sidebar service then render nothing, and nothing is
+ * substituted.
+ */
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
@@ -349,7 +194,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const relatedServices = SERVICE_MAP[post.category] || SERVICE_MAP['Marketing Strategy'];
+  // BLOG-007/008 — keyed on the article slug, not the Contentful category.
+  const relatedServices = getRelatedServices(post.slug);
   const relatedPosts = await getRelatedBlogCards(post);
   const faqSchema = generateFAQSchema(post);
   const canonicalUrl = post.canonicalUrl;
@@ -437,11 +283,23 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
               <RelatedServices services={relatedServices} />
 
+              {/*
+                BLOG-009B (owner, 2026-09-23) — the author LinkedIn link is
+                REMOVED, not repointed. `https://linkedin.com/in/amit-gupta`
+                could not be verified: it serves LinkedIn's sign-up wall, and
+                it is not the profile the verified MappedSkills Marketing
+                company page associates with its founder. The approved fallback
+                for an unverifiable destination is remove/hide.
+
+                `linkedinUrl` is optional and `AuthorBio` already guards on it,
+                so omitting the prop renders no button and leaves no empty
+                framing. A different profile is NOT substituted here — that
+                would be a new owner decision, not this one.
+              */}
               <AuthorBio
                 name={post.author.name}
                 role="Performance Marketing Strategist"
                 bio={authorBio}
-                linkedinUrl="https://linkedin.com/in/amit-gupta"
                 avatarUrl={post.author.profileUrl}
               />
 
@@ -454,6 +312,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
 
             <div className="lg:col-span-1">
+              {/* BLOG-008 — `relatedServices[0]` is the first approved service,
+                  or `undefined` when the article has none. `StickySidebarCTA`
+                  guards on the prop, so the sidebar service block then renders
+                  nothing and no substitute is shown. */}
               <StickySidebarCTA
                 ctaHeadline="Want Us to Review This for Your Business?"
                 ctaLink="/schedule-call"

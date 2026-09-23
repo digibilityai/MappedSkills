@@ -107,7 +107,12 @@ export default function PricingPage() {
           things that actually move them" — that sentence rests on §3, which is
           blocked, so it does not render. What renders is the half of it that is
           true and load-bearing: the number depends far more on the situation
-          than on a package name. Nothing is invented to replace the other half. */}
+          than on a package name. Nothing is invented to replace the other half.
+
+          PAGE-033 (owner, 2026-09-19): the hero `action` label reads "Get a
+          scoped estimate", not "Get an actual number". Label only — the
+          destination `/contact` is unchanged. The closing eyebrow at the foot
+          of this page is a label, not a link, and is out of scope. */}
       <RouteHero
         eyebrow="Cost"
         title={<>What this costs, and what changes the number.</>}
@@ -117,7 +122,7 @@ export default function PricingPage() {
             factor pushes will tell you more than a quote will.
           </>
         }
-        action="Get an actual number"
+        action="Get a scoped estimate"
         secondaryLabel="Book a time to talk" mode="offset" />
 
       {/* ------------------------------------------------------------- §1 */}

@@ -66,7 +66,12 @@ export function SocialShare({ title, url }: SocialShareProps) {
       url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
     },
     {
-      name: 'Twitter',
+      /**
+       * BLOG-006 (owner, 2026-09-19) — label only. The destination is
+       * deliberately unchanged: `twitter.com/intent/tweet` still redirects to
+       * the current host, and re-pointing it is not part of this decision.
+       */
+      name: 'X',
       icon: Twitter,
       url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(url)}`,
     },

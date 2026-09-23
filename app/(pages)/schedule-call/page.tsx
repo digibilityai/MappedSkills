@@ -80,7 +80,24 @@ export const metadata = createMetadata(
   '/schedule-call'
 );
 
-const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/mappedskills';
+/**
+ * PAGE-058 (owner, 2026-09-23). The fallback is now the CANONICAL booking
+ * event, verified live on 2026-09-23: host "MappedSkills Marketing", event
+ * "Client Discovery Call", 30 minutes — the positioning approved in
+ * BLOG-095/BLOG-093.
+ *
+ * This matters because the fallback is what production actually serves.
+ * `NEXT_PUBLIC_CALENDLY_URL` is not a repository variable, is not a secret and
+ * is not passed by the release workflow's build step, so it has never been
+ * defined in a production build and every build falls through to this default.
+ * The previous value `https://calendly.com/mappedskills` is the bare profile
+ * page, not a bookable event.
+ *
+ * Adding the variable to CI is deliberately NOT part of R2 (owner decision).
+ * The env lookup is retained so a future configured value still wins.
+ */
+const CALENDLY_URL =
+  process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/mappedskills/client-discovery';
 
 const COVERS = [
   <>What you sell, and what one customer is worth.</>,

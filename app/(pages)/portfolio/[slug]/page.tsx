@@ -8,6 +8,7 @@ import { Card } from '@/components/ui/card';
 import { CaseStudyContent } from '@/components/case-study/CaseStudyContent';
 import { createMetadata } from '@/lib/metadata';
 import { isCaseStudyProofWithheld } from '@/lib/case-study-proof';
+import { getCaseStudyService } from '@/lib/case-study-services';
 import {
   getCaseStudyDetail,
   getCaseStudyStaticParams,
@@ -69,6 +70,13 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
    * Any case study not on that list renders exactly as before.
    */
   const proofWithheld = isCaseStudyProofWithheld(caseStudy.slug);
+
+  /**
+   * WORK-027 — the one approved related service for this study, or `null`.
+   * Independent of `proofWithheld` above: this is a service relationship, not
+   * evidence, so it neither depends on nor can reintroduce withheld proof.
+   */
+  const relatedService = getCaseStudyService(caseStudy.slug);
 
   const metaItems = [
     caseStudy.clientName ? { label: 'Client', value: caseStudy.clientName } : null,
@@ -149,6 +157,38 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         conclusionJson={caseStudy.conclusionJson}
         withholdProof={proofWithheld}
       />
+
+      {/*
+        WORK-027 (owner, 2026-09-19) — ONE contextual related-service link,
+        from the three-entry approved list in `lib/case-study-services.ts`.
+        Same tab (WORK-005), because it is an internal route.
+
+        This is a link, not proof: it states the service the engagement was,
+        and renders no figure, result or claim about the outcome. It is
+        therefore independent of the GATE R1 withholding above — a study whose
+        proof is withheld still has an approved service relationship.
+
+        A case study with no approved service renders nothing here; no filler
+        service is substituted.
+      */}
+      {relatedService ? (
+        <Section>
+          <Container>
+            <div className="max-w-7xl">
+              <p className="text-base text-muted-foreground">
+                This case study is part of our{' '}
+                <Link
+                  href={relatedService.link}
+                  className="text-accent font-semibold underline decoration-2 underline-offset-4 hover:no-underline"
+                >
+                  {relatedService.title}
+                </Link>{' '}
+                work.
+              </p>
+            </div>
+          </Container>
+        </Section>
+      ) : null}
 
       {/*
         WORK-013 / WORK-018 / WORK-022 and WORK-026. The testimonial block is

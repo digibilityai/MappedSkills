@@ -28,17 +28,38 @@ const services = [
     href: '/seo',
   },
   {
+    /**
+     * NAV-016 (owner, 2026-09-19). `/ai-seo` is live and presented as a
+     * capability on `/`, `/services`, `/faq`, `/seo` and the 404 page, but was
+     * absent from every shared navigation. The description reuses the wording
+     * already published for this route on `app/not-found.tsx`; final AI Search
+     * copy belongs to the content phase (§12.7), not to routing.
+     */
+    name: 'AI Search',
+    description: 'What AI answers are assembled from.',
+    href: '/ai-seo',
+  },
+  {
     name: 'Conversion Optimization',
     description: 'Turn more visitors into leads and customers.',
     href: '/conversion-optimization',
   },
 ];
 
+/**
+ * NAV-017 (owner, 2026-09-19) adds About. `/about` was reachable only from the
+ * footer and the 404 page. This one array renders both the desktop nav and the
+ * mobile menu, so a single entry covers both surfaces.
+ *
+ * NAV-011: "Case Studies" → `/work` is already the approved label and is
+ * unchanged here. The corresponding footer relabel is NAV-026.
+ */
 const navLinks = [
   { name: 'How It Works', href: '/how-it-works' },
   { name: 'Case Studies', href: '/work' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'Blog', href: '/blog' },
+  { name: 'About', href: '/about' },
 ];
 
 export function Header() {

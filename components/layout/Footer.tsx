@@ -167,6 +167,17 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
+                  {/* NAV-041 (owner, 2026-09-19) — `/ai-seo` was missing from
+                      the footer Services column. Same label as the header
+                      (NAV-016). */}
+                  <Link
+                    href="/ai-seo"
+                    className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
+                  >
+                    AI Search
+                  </Link>
+                </li>
+                <li>
                   <Link
                     href="/conversion-optimization"
                     className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
@@ -199,19 +210,23 @@ export function Footer() {
                 </li>
                 <li>
                   {/*
-                    SESSION 33 — PHASE I. Relabelled from "Case Studies". The
-                    route is `noindex` precisely because there are no published
-                    case studies and no permission to publish client results,
-                    and its own heading is "What we can show you, and what we
-                    cannot." A footer link promising case studies to a page that
-                    opens by saying it has none is the small dishonesty this
-                    programme exists to remove.
+                    NAV-026 (owner, 2026-09-19). Relabelled back to "Case
+                    Studies", standardising the footer with the header
+                    (NAV-011). This supersedes the Session 33 — Phase I
+                    rationale that changed it to "Work" on the grounds that
+                    `/work` had no publishable case studies: `/work` now lists
+                    the three studies whose clients gave written publication
+                    permission, so the label is accurate again.
+
+                    The route's own index state is unchanged and remains out of
+                    scope here — SEO-001 (`/work` indexable + in sitemap) is
+                    R4, not R2.
                   */}
                   <Link
                     href="/work"
                     className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
                   >
-                    Work
+                    Case Studies
                   </Link>
                 </li>
                 <li>

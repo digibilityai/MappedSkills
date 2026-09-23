@@ -14,6 +14,14 @@ interface RelatedServicesProps {
 }
 
 export function RelatedServices({ services }: RelatedServicesProps) {
+  /**
+   * BLOG-007/008 — render NOTHING when an article has no approved related
+   * service. Without this the heading "Need Help With This?" would still
+   * appear above an empty grid on the three articles approved to omit the
+   * block. No placeholder and no substitute service is shown.
+   */
+  if (services.length === 0) return null;
+
   return (
     <div className="border-t border-border pt-12">
       <h2 className="text-3xl font-bold tracking-tight mb-8">Need Help With This?</h2>

@@ -18,6 +18,12 @@ import { getCaseStudyListCards } from '@/lib/contentful/case-studies';
  *     PROOF-POLICY decision, not an oversight. It is removed from the sitemap
  *     rather than the `noindex` being removed from the route.
  *
+ *     **SUPERSEDED BY SEO-001 (GATE R4).** The proof policy has since changed:
+ *     three permissioned case studies are published and the four unpermissioned
+ *     ones were unpublished under GATE R1. `/work` is now indexable and is
+ *     listed below. The contradiction this bullet describes is resolved in the
+ *     other direction — both the route and the sitemap now say "index this".
+ *
  *   · **Four live, indexable routes were missing** — `/ai-seo`,
  *     `/problems/traffic-but-no-enquiries`, `/privacy-policy` and `/terms`.
  *     The first two are launch content. The second two are `noindex` and so
@@ -45,7 +51,6 @@ import { getCaseStudyListCards } from '@/lib/contentful/case-studies';
  *
  * EXCLUDED, AND WHY:
  *   `/thank-you`        `noindex, nofollow` — post-conversion, reachable by typing
- *   `/work`             `noindex, nofollow` — proof policy, no published case studies
  *   `/privacy-policy`   `noindex, nofollow`
  *   `/terms`            `noindex, nofollow`
  *   `/launch-checklist` `index: false` — internal
@@ -59,12 +64,14 @@ import { getCaseStudyListCards } from '@/lib/contentful/case-studies';
  * broken URLs. **At launch both are empty**, which is why no blog post or case
  * study URL is hard-coded here and none is invented.
  *
- * ⚠ OWNER NOTE, recorded because this file cannot resolve it: `/work` is
- * `noindex` while `/portfolio/[slug]` is indexable. That is harmless today —
- * with no case studies, `generateStaticParams` yields nothing and no page
- * exists — but **the first published case study makes an indexable page whose
- * only hub is `noindex`.** At that point the proof policy has changed by
- * definition, and `/work`'s `noindex` must be revisited in the same change.
+ * ✅ THE OWNER NOTE THIS FILE CARRIED IS NOW RESOLVED. It read: `/work` is
+ * `noindex` while `/portfolio/[slug]` is indexable — harmless while no case
+ * study exists, but **the first published case study makes an indexable page
+ * whose only hub is `noindex`**, and at that point `/work`'s `noindex` must be
+ * revisited in the same change. That is exactly what happened: three
+ * permissioned studies are live and indexed, so SEO-001 (GATE R4) removed the
+ * `noindex` from `app/(pages)/work/page.tsx` and added `/work` here, in one
+ * commit, as the note required.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://mappedskills.com';
@@ -89,6 +96,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/faq',
     '/contact',
     '/schedule-call',
+    // Case-study hub. SEO-001 (GATE R4): indexable now that the three
+    // permissioned studies are published and the four unpermissioned ones are
+    // unpublished. It is the only hub for the indexable `/portfolio/[slug]`
+    // pages listed below.
+    '/work',
     // Editorial index. Kept even while empty: it is indexable, it renders an
     // honest empty state rather than a broken shell, and it is linked from the
     // footer.

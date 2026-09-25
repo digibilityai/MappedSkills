@@ -36,16 +36,26 @@ export const revalidate = 60;
  * way to it. `EntryList` has no empty-slot rendering path at all, so it cannot
  * produce a placeholder row even if called with nothing.
  *
- * `noindex, nofollow` IS ADDED HERE, and this is the one route-metadata
- * correction Phase G makes. `06_IMPLEMENTATION_SEQUENCE.md` states the Phase G
- * scope for this route as "`/work` (**`noindex`, out of sitemap**)" and the
- * archetype record binds it "until ≥1 permissioned case study exists". The
- * route was indexable before this change.
+ * `noindex, nofollow` IS REMOVED HERE — SEO-001, implemented under GATE R4.
+ * Phase G added it, scoping this route as "`/work` (**`noindex`, out of
+ * sitemap**)", and the archetype record bound it "until ≥1 permissioned case
+ * study exists". THAT CONDITION IS NOW MET: the three case studies whose
+ * clients gave written publication permission are live, and the four without
+ * permission were unpublished under GATE R1. The route therefore takes the
+ * indexable directive `createMetadata` already returns, and no metadata is
+ * redefined here.
  *
- * THE SITEMAP IS NOT TOUCHED. `/work` is still listed in `app/sitemap.ts` and
- * removing it is sitemap work, which is out of Phase G scope and is recorded as
- * a deferral rather than fixed. The route is `noindex` regardless of what the
- * sitemap says.
+ * THE WITHHOLDING IS UNAFFECTED. `lib/case-study-proof.ts` still suppresses the
+ * three retained studies' unevidenced figures, testimonials and star ratings,
+ * and `getCaseStudyListCards` still blanks their `highlightResult`. Indexing the
+ * hub publishes no proof that was withheld from it.
+ *
+ * THE SITEMAP CHANGES IN THE SAME COMMIT. `/work` is added to `indexablePaths`
+ * in `app/sitemap.ts` — the other half of SEO-001, and what that file's own
+ * owner note required to move together with this line. (An earlier version of
+ * this comment said `/work` was "still listed" there. It was not: Session 33 —
+ * Phase I had removed it, so until R4 the route was both `noindex` and absent
+ * from the sitemap.)
  *
  * F1: D — NONE. No figure on this route.
  */
@@ -55,7 +65,6 @@ export const metadata: Metadata = {
     'What can be checked about this firm today, and why there are no published case studies.',
     '/work'
   ),
-  robots: 'noindex, nofollow',
 };
 
 export default async function WorkPage() {

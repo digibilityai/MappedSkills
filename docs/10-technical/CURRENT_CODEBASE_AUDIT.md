@@ -659,7 +659,7 @@ Elements that must be inventoried and protected before any redesign. **No claim 
 7. **Existing metadata.** Titles and descriptions on all 22 routes represent prior optimisation work — inventory before replacing.
 8. **Existing structured data** on the 11 routes that emit it.
 9. **The GTM container.** It is an external asset not visible in this repository. Its tags, triggers, and variables are keyed to current URLs and DOM structure; changing either can silently break measurement.
-10. **`public/` assets** — `ms_Logo.webp`, `ms_icon.png`, and the four `/images/*.png` files may be externally hot-linked or indexed in image search.
+10. **`public/` assets** — `ms_Logo.webp`, `ms_icon.webp`, and the four `/images/*.png` files may be externally hot-linked or indexed in image search.
 11. **The 404 page's hard-coded blog URLs** and `lib/constants.ts` `BLOG_ARTICLES` — verify these slugs exist before relying on them.
 
 **Specific migration hazards identified:**

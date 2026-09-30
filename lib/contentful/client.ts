@@ -55,7 +55,6 @@ export async function contentfulGraphql<T>(
 
   if (json.errors?.length) {
     console.error('[contentful] GraphQL errors:', json.errors.map((e) => e.message).join('; '));
-    return null;
   }
 
   return json.data ?? null;

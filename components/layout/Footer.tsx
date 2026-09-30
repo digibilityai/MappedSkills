@@ -255,6 +255,22 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
+                    href="/research"
+                    className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
+                  >
+                    Research
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/press"
+                    className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
+                  >
+                    Press
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/faq"
                     className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
                   >

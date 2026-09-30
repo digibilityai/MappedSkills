@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next';
 import { getBlogListPosts } from '@/lib/contentful/posts';
 import { getCaseStudyListCards } from '@/lib/contentful/case-studies';
+import { getResearchCategories, getResearchListCards } from '@/lib/contentful/research';
+import { getPressListCards } from '@/lib/contentful/press';
 
 /**
  * SESSION 33 — PHASE I — the sitemap, rebuilt from the routes that are actually
@@ -105,16 +107,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // honest empty state rather than a broken shell, and it is linked from the
     // footer.
     '/blog',
+    '/research',
+    '/press',
   ];
 
-  const [blogPosts, caseStudies] = await Promise.all([
+  const [blogPosts, caseStudies, researchReports, researchCategories, pressReleases] = await Promise.all([
     getBlogListPosts(),
     getCaseStudyListCards(),
+    getResearchListCards(),
+    getResearchCategories(),
+    getPressListCards(),
   ]);
 
   return [
     ...indexablePaths.map((path) => ({ url: `${baseUrl}${path}` })),
     ...blogPosts.map((post) => ({ url: `${baseUrl}/blog/${post.slug}` })),
     ...caseStudies.map((study) => ({ url: `${baseUrl}${study.href}` })),
+    ...researchReports.map((report) => ({ url: `${baseUrl}${report.href}` })),
+    ...researchCategories.map((category) => ({ url: `${baseUrl}${category.href}` })),
+    ...pressReleases.map((release) => ({ url: `${baseUrl}${release.href}` })),
   ];
 }

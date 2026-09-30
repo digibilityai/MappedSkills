@@ -63,7 +63,7 @@ export const siteMetadata = {
   // is white-text only and was therefore illegible on the light header.
   logoPath: '/mappedskills-logo-light-bg.webp',
   logoPathOnDark: '/mappedskills-logo-dark-bg.webp',
-  faviconPath: '/ms_icon.png',
+  faviconPath: '/ms_icon.webp',
   email: process.env.NEXT_PUBLIC_BUSINESS_EMAIL || 'info@mappedskills.com',
   phone: process.env.NEXT_PUBLIC_BUSINESS_PHONE || '+91 9873232662',
   address: process.env.NEXT_PUBLIC_BUSINESS_ADDRESS || 'Pune, Maharashtra, India',

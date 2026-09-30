@@ -7,6 +7,8 @@ export type ContentfulAsset = {
   description?: string | null;
   width?: number | null;
   height?: number | null;
+  contentType?: string | null;
+  fileName?: string | null;
 };
 
 export type ContentfulAuthor = {
@@ -20,11 +22,28 @@ export type ContentfulCategory = {
   slug?: string | null;
 };
 
+export type ContentfulEmbeddedEntry = {
+  sys?: { id: string };
+  __typename?: string | null;
+  internalName?: string | null;
+  statistic?: string | null;
+  findingHeadline?: string | null;
+  description?: string | null;
+  explanation?: ContentfulRichText | null;
+  chartImage?: ContentfulAsset | null;
+  chartAltText?: string | null;
+  baseSample?: string | null;
+  sourceNote?: string | null;
+};
+
 export type ContentfulRichText = {
   json?: Document | null;
   links?: {
     assets?: {
       block?: ContentfulAsset[] | null;
+    } | null;
+    entries?: {
+      block?: ContentfulEmbeddedEntry[] | null;
     } | null;
   } | null;
 };
@@ -218,4 +237,185 @@ export type CmsCaseStudyCard = {
   result: string;
   summary: string;
   href: string;
+};
+
+export type ContentfulResearchCategory = {
+  sys?: { id: string };
+  researchCategoryName?: string | null;
+  slug?: string | null;
+  description?: string | null;
+  seoTitle?: string | null;
+  metaDescription?: string | null;
+  featuredImage?: ContentfulAsset | null;
+};
+
+export type ContentfulResearchFinding = {
+  sys?: { id: string };
+  internalName?: string | null;
+  statistic?: string | null;
+  findingHeadline?: string | null;
+  description?: string | null;
+  explanation?: ContentfulRichText | null;
+  chartImage?: ContentfulAsset | null;
+  chartAltText?: string | null;
+  baseSample?: string | null;
+  sourceNote?: string | null;
+};
+
+export type ContentfulResearchReport = {
+  sys: {
+    id: string;
+    firstPublishedAt?: string | null;
+    publishedAt?: string | null;
+  };
+  title?: string | null;
+  researchId?: string | null;
+  seoTitle?: string | null;
+  metaDescription?: string | null;
+  slug?: string | null;
+  researchCategory?: ContentfulResearchCategory | null;
+  author?: ContentfulAuthor | null;
+  excerpt?: string | null;
+  featuredImage?: ContentfulAsset | null;
+  researchPeriod?: string | null;
+  geography?: string | null;
+  sampleSize?: number | null;
+  executiveSummary?: ContentfulRichText | null;
+  keyFindingsCollection?: { items?: Array<ContentfulResearchFinding | null> | null } | null;
+  content?: ContentfulRichText | null;
+  methodology?: ContentfulRichText | null;
+  limitations?: ContentfulRichText | null;
+  reportPdf?: ContentfulAsset | null;
+  dataFile?: ContentfulAsset | null;
+  mediaAssetsCollection?: { items?: Array<ContentfulAsset | null> | null } | null;
+  relatedResearchCollection?: { items?: Array<ContentfulResearchReport | null> | null } | null;
+  featured?: boolean | null;
+};
+
+export type ContentfulPressRelease = {
+  sys: {
+    id: string;
+    firstPublishedAt?: string | null;
+    publishedAt?: string | null;
+  };
+  headline?: string | null;
+  seoTitle?: string | null;
+  metaDescription?: string | null;
+  slug?: string | null;
+  excerpt?: string | null;
+  featuredImage?: ContentfulAsset | null;
+  content?: ContentfulRichText | null;
+  relatedResearch?: {
+    title?: string | null;
+    slug?: string | null;
+    excerpt?: string | null;
+  } | null;
+  author?: ContentfulAuthor | null;
+  mediaAssetsCollection?: { items?: Array<ContentfulAsset | null> | null } | null;
+};
+
+export type CmsFileAsset = {
+  url: string;
+  title: string;
+  description?: string;
+  fileName?: string;
+  contentType?: string;
+  isImage: boolean;
+  width?: number;
+  height?: number;
+};
+
+export type CmsResearchFinding = {
+  id: string;
+  statistic?: string;
+  headline: string;
+  description?: string;
+  explanationJson: Document | null;
+  explanationLinks?: ContentfulRichText['links'];
+  chart?: CmsFileAsset;
+  baseSample?: string;
+  sourceNote?: string;
+};
+
+export type CmsResearchCategory = {
+  name: string;
+  slug: string;
+  description?: string;
+  seoTitle: string;
+  metaDescription: string;
+  featuredImage?: CmsFileAsset;
+  href: string;
+  canonicalUrl: string;
+};
+
+export type CmsResearchCard = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  categoryName?: string;
+  categorySlug?: string;
+  publishedDate: string;
+  href: string;
+  featured?: boolean;
+};
+
+export type CmsResearchReport = {
+  slug: string;
+  title: string;
+  researchId?: string;
+  excerpt: string;
+  categoryName?: string;
+  categorySlug?: string;
+  author: CmsAuthor;
+  publishedDate: string;
+  publishedAtISO: string;
+  updatedAtISO: string;
+  researchPeriod?: string;
+  geography?: string;
+  sampleSize?: number;
+  featuredImage?: CmsFileAsset;
+  executiveSummaryJson: Document | null;
+  executiveSummaryLinks?: ContentfulRichText['links'];
+  keyFindings: CmsResearchFinding[];
+  contentJson: Document | null;
+  contentLinks?: ContentfulRichText['links'];
+  methodologyJson: Document | null;
+  methodologyLinks?: ContentfulRichText['links'];
+  limitationsJson: Document | null;
+  limitationsLinks?: ContentfulRichText['links'];
+  reportPdf?: CmsFileAsset;
+  dataFile?: CmsFileAsset;
+  mediaAssets: CmsFileAsset[];
+  relatedResearch: CmsResearchCard[];
+  featured: boolean;
+  metaTitle: string;
+  metaDescription: string;
+  canonicalUrl: string;
+  citation: string;
+};
+
+export type CmsPressCard = {
+  slug: string;
+  headline: string;
+  excerpt: string;
+  publishedDate: string;
+  href: string;
+};
+
+export type CmsPressRelease = {
+  slug: string;
+  headline: string;
+  excerpt: string;
+  publishedDate: string;
+  publishedAtISO: string;
+  updatedAtISO: string;
+  featuredImage?: CmsFileAsset;
+  contentJson: Document | null;
+  contentLinks?: ContentfulRichText['links'];
+  relatedResearch?: CmsResearchCard;
+  author?: CmsAuthor;
+  mediaAssets: CmsFileAsset[];
+  metaTitle: string;
+  metaDescription: string;
+  canonicalUrl: string;
 };

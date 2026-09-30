@@ -124,7 +124,7 @@ Resolve surface, so the "no monospace" rule is cheap to honour.
   `next/font` self-hosts and preloads; **this mechanism is correct and should be kept**, with the
   two families swapped for Bricolage Grotesque + Manrope.
 - **Images:** `next.config.mjs` sets **`images.unoptimized: true`**, with a `remotePatterns` entry
-  for `images.ctfassets.net`. `public/` holds 4 PNGs, `ms_Logo.webp`, `ms_icon.png` and 5
+  for `images.ctfassets.net`. `public/` holds 4 PNGs, `ms_Logo.webp`, `ms_icon.webp` and 5
   placeholder assets. There is also a **4.1 MB `public.zip`** committed at the repository root.
 
 > The approved homepage renders **zero `<img>`**, so image optimisation is **not** a homepage

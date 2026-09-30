@@ -5,8 +5,21 @@ import type {
   CmsBlogPost,
   CmsCaseStudy,
   CmsCaseStudyCard,
+  CmsFileAsset,
+  CmsPressCard,
+  CmsPressRelease,
+  CmsResearchCard,
+  CmsResearchCategory,
+  CmsResearchFinding,
+  CmsResearchReport,
+  ContentfulAsset,
   ContentfulCaseStudy,
+  ContentfulEmbeddedEntry,
   ContentfulPost,
+  ContentfulPressRelease,
+  ContentfulResearchCategory,
+  ContentfulResearchFinding,
+  ContentfulResearchReport,
   CTAType,
   TocItem,
 } from '@/lib/contentful/types';
@@ -213,5 +226,240 @@ export function mapContentfulCaseStudyToCard(entry: ContentfulCaseStudy): CmsCas
     result: mapped.highlightResult,
     summary: mapped.summary,
     href: mapped.href,
+  };
+}
+
+function isImageAsset(asset: Pick<ContentfulAsset, 'url' | 'contentType'>): boolean {
+  if (asset.contentType?.startsWith('image/')) return true;
+  const url = asset.url || '';
+  return /\.(png|jpe?g|gif|webp|svg|avif)(\?|$)/i.test(url);
+}
+
+export function mapContentfulAssetToFile(asset?: ContentfulAsset | null): CmsFileAsset | undefined {
+  if (!asset?.url) return undefined;
+  return {
+    url: asset.url,
+    title: asset.title?.trim() || asset.fileName?.trim() || 'Download',
+    description: asset.description?.trim() || undefined,
+    fileName: asset.fileName || undefined,
+    contentType: asset.contentType || undefined,
+    isImage: isImageAsset(asset),
+    width: asset.width || undefined,
+    height: asset.height || undefined,
+  };
+}
+
+export function isDocumentPopulated(document?: Document | null): boolean {
+  if (!document) return false;
+  return collectText(document).trim().length > 0;
+}
+
+export function mapContentfulFindingToCms(
+  finding?: ContentfulResearchFinding | ContentfulEmbeddedEntry | null
+): CmsResearchFinding | null {
+  if (!finding) return null;
+  const headline =
+    finding.findingHeadline?.trim() ||
+    finding.internalName?.trim() ||
+    finding.statistic?.trim() ||
+    '';
+  if (!headline) return null;
+
+  const chart = mapContentfulAssetToFile(finding.chartImage);
+  if (chart && finding.chartAltText?.trim()) {
+    chart.description = finding.chartAltText.trim();
+  }
+
+  return {
+    id: finding.sys?.id || headline,
+    statistic: finding.statistic?.trim() || undefined,
+    headline,
+    description: finding.description?.trim() || undefined,
+    explanationJson: finding.explanation?.json ?? null,
+    explanationLinks: finding.explanation?.links,
+    chart,
+    baseSample: finding.baseSample?.trim() || undefined,
+    sourceNote: finding.sourceNote?.trim() || undefined,
+  };
+}
+
+export function mapContentfulCategoryToCms(
+  category?: ContentfulResearchCategory | null
+): CmsResearchCategory | null {
+  if (!category) return null;
+  const name = category.researchCategoryName?.trim();
+  const slug = category.slug?.trim();
+  if (!name || !slug) return null;
+
+  const description = category.description?.trim() || undefined;
+  return {
+    name,
+    slug,
+    description,
+    seoTitle: category.seoTitle?.trim() || `${name} | MappedSkills Research`,
+    metaDescription: category.metaDescription?.trim() || description || `${name} research from MappedSkills.`,
+    featuredImage: mapContentfulAssetToFile(category.featuredImage),
+    href: `/research/${slug}`,
+    canonicalUrl: `${SITE_URL}/research/${slug}`,
+  };
+}
+
+export function mapContentfulReportToCard(
+  report?: ContentfulResearchReport | { title?: string | null; slug?: string | null; excerpt?: string | null; researchCategory?: ContentfulResearchCategory | null; sys?: { firstPublishedAt?: string | null } } | null
+): CmsResearchCard | null {
+  if (!report) return null;
+  const slug = report.slug?.trim();
+  const title = report.title?.trim();
+  if (!slug || !title) return null;
+
+  const firstPublished = 'sys' in report ? report.sys?.firstPublishedAt || '' : '';
+
+  return {
+    slug,
+    title,
+    excerpt: report.excerpt?.trim() || '',
+    categoryName: report.researchCategory?.researchCategoryName?.trim() || undefined,
+    categorySlug: report.researchCategory?.slug?.trim() || undefined,
+    publishedDate: formatContentfulDate(firstPublished),
+    href: `/research/${slug}`,
+    featured: 'featured' in report ? Boolean((report as ContentfulResearchReport).featured) : undefined,
+  };
+}
+
+function buildResearchCitation(input: {
+  authorName: string;
+  title: string;
+  year?: string;
+  url: string;
+}): string {
+  const yearPart = input.year ? ` (${input.year})` : '';
+  return `${input.authorName}${yearPart}. ${input.title}. MappedSkills Research. ${input.url}`;
+}
+
+export function mapContentfulReportToCms(report: ContentfulResearchReport): CmsResearchReport | null {
+  if (!report.slug || !report.title) return null;
+
+  const firstPublished = report.sys.firstPublishedAt || report.sys.publishedAt || '';
+  const lastPublished = report.sys.publishedAt || report.sys.firstPublishedAt || '';
+  const authorName = report.author?.name?.trim() || 'MappedSkills';
+  const canonicalUrl = `${SITE_URL}/research/${report.slug}`;
+  const year = firstPublished ? String(new Date(firstPublished).getUTCFullYear()) : undefined;
+  const excerpt = report.excerpt?.trim() || '';
+  const metaDescription = report.metaDescription?.trim() || excerpt;
+
+  const keyFindings = (report.keyFindingsCollection?.items || [])
+    .map(mapContentfulFindingToCms)
+    .filter((item): item is CmsResearchFinding => Boolean(item));
+
+  const relatedResearch = (report.relatedResearchCollection?.items || [])
+    .map(mapContentfulReportToCard)
+    .filter((item): item is CmsResearchCard => Boolean(item));
+
+  const mediaAssets = (report.mediaAssetsCollection?.items || [])
+    .map(mapContentfulAssetToFile)
+    .filter((item): item is CmsFileAsset => Boolean(item));
+
+  return {
+    slug: report.slug,
+    title: report.title,
+    researchId: report.researchId?.trim() || undefined,
+    excerpt,
+    categoryName: report.researchCategory?.researchCategoryName?.trim() || undefined,
+    categorySlug: report.researchCategory?.slug?.trim() || undefined,
+    author: {
+      name: authorName,
+      description: report.author?.description || undefined,
+      profileUrl: report.author?.profile?.url || undefined,
+    },
+    publishedDate: formatContentfulDate(firstPublished),
+    publishedAtISO: firstPublished,
+    updatedAtISO: lastPublished,
+    researchPeriod: report.researchPeriod?.trim() || undefined,
+    geography: report.geography?.trim() || undefined,
+    sampleSize: typeof report.sampleSize === 'number' ? report.sampleSize : undefined,
+    featuredImage: mapContentfulAssetToFile(report.featuredImage),
+    executiveSummaryJson: report.executiveSummary?.json ?? null,
+    executiveSummaryLinks: report.executiveSummary?.links,
+    keyFindings,
+    contentJson: report.content?.json ?? null,
+    contentLinks: report.content?.links,
+    methodologyJson: report.methodology?.json ?? null,
+    methodologyLinks: report.methodology?.links,
+    limitationsJson: report.limitations?.json ?? null,
+    limitationsLinks: report.limitations?.links,
+    reportPdf: mapContentfulAssetToFile(report.reportPdf),
+    dataFile: mapContentfulAssetToFile(report.dataFile),
+    mediaAssets,
+    relatedResearch,
+    featured: Boolean(report.featured),
+    metaTitle: report.seoTitle?.trim() || report.title,
+    metaDescription,
+    canonicalUrl,
+    citation: buildResearchCitation({
+      authorName,
+      title: report.title,
+      year,
+      url: canonicalUrl,
+    }),
+  };
+}
+
+export function mapContentfulPressToCard(entry: ContentfulPressRelease): CmsPressCard | null {
+  const slug = entry.slug?.trim();
+  const headline = entry.headline?.trim();
+  if (!slug || !headline) return null;
+  const firstPublished = entry.sys.firstPublishedAt || entry.sys.publishedAt || '';
+  return {
+    slug,
+    headline,
+    excerpt: entry.excerpt?.trim() || '',
+    publishedDate: formatContentfulDate(firstPublished),
+    href: `/press/${slug}`,
+  };
+}
+
+export function mapContentfulPressToCms(entry: ContentfulPressRelease): CmsPressRelease | null {
+  if (!entry.slug || !entry.headline) return null;
+  const firstPublished = entry.sys.firstPublishedAt || entry.sys.publishedAt || '';
+  const lastPublished = entry.sys.publishedAt || entry.sys.firstPublishedAt || '';
+  const excerpt = entry.excerpt?.trim() || '';
+  const related = entry.relatedResearch?.slug && entry.relatedResearch.title
+    ? {
+        slug: entry.relatedResearch.slug,
+        title: entry.relatedResearch.title,
+        excerpt: entry.relatedResearch.excerpt?.trim() || '',
+        publishedDate: '',
+        href: `/research/${entry.relatedResearch.slug}`,
+      }
+    : undefined;
+
+  const mediaAssets = (entry.mediaAssetsCollection?.items || [])
+    .map(mapContentfulAssetToFile)
+    .filter((item): item is CmsFileAsset => Boolean(item));
+
+  const authorName = entry.author?.name?.trim();
+
+  return {
+    slug: entry.slug,
+    headline: entry.headline,
+    excerpt,
+    publishedDate: formatContentfulDate(firstPublished),
+    publishedAtISO: firstPublished,
+    updatedAtISO: lastPublished,
+    featuredImage: mapContentfulAssetToFile(entry.featuredImage),
+    contentJson: entry.content?.json ?? null,
+    contentLinks: entry.content?.links,
+    relatedResearch: related,
+    author: authorName
+      ? {
+          name: authorName,
+          description: entry.author?.description || undefined,
+          profileUrl: entry.author?.profile?.url || undefined,
+        }
+      : undefined,
+    mediaAssets,
+    metaTitle: entry.seoTitle?.trim() || entry.headline,
+    metaDescription: entry.metaDescription?.trim() || excerpt,
+    canonicalUrl: `${SITE_URL}/press/${entry.slug}`,
   };
 }

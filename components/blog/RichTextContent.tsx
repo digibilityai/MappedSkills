@@ -1,7 +1,13 @@
 import { documentToReactComponents, type Options } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, INLINES, type Document } from '@contentful/rich-text-types';
-import type { ContentfulAsset, ContentfulRichText } from '@/lib/contentful/types';
+import type {
+  ContentfulAsset,
+  ContentfulEmbeddedEntry,
+  ContentfulRichText,
+} from '@/lib/contentful/types';
 import { linkTargetProps } from '@/lib/internal-links';
+import { mapContentfulFindingToCms } from '@/lib/contentful/mappers';
+import { ResearchFindingEmbed } from '@/components/research/ResearchFindingEmbed';
 
 type RichTextContentProps = {
   document: Document;
@@ -18,8 +24,24 @@ function getAssetMap(links?: ContentfulRichText['links']) {
   return map;
 }
 
+function getEntryMap(links?: ContentfulRichText['links']) {
+  const map = new Map<string, ContentfulEmbeddedEntry>();
+  for (const entry of links?.entries?.block || []) {
+    if (entry?.sys?.id) {
+      map.set(entry.sys.id, entry);
+    }
+  }
+  return map;
+}
+
+function isImageAsset(asset: ContentfulAsset) {
+  if (asset.contentType?.startsWith('image/')) return true;
+  return /\.(png|jpe?g|gif|webp|svg|avif)(\?|$)/i.test(asset.url || '');
+}
+
 export function RichTextContent({ document, links }: RichTextContentProps) {
   const assetMap = getAssetMap(links);
+  const entryMap = getEntryMap(links);
   let headingIndex = 0;
 
   const options: Options = {
@@ -90,6 +112,19 @@ export function RichTextContent({ document, links }: RichTextContentProps) {
         if (!asset?.url) return null;
 
         const alt = asset.description || asset.title || '';
+        if (!isImageAsset(asset)) {
+          return (
+            <p className="my-6">
+              <a
+                href={asset.url}
+                className="text-resolve-accent-dark hover:underline underline-offset-4 font-semibold"
+              >
+                {asset.title || asset.fileName || 'Download file'}
+              </a>
+            </p>
+          );
+        }
+
         return (
           <figure className="my-8">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -108,6 +143,19 @@ export function RichTextContent({ document, links }: RichTextContentProps) {
             ) : null}
           </figure>
         );
+      },
+      [BLOCKS.EMBEDDED_ENTRY]: (node) => {
+        const id = node.data?.target?.sys?.id as string | undefined;
+        const entry = id ? entryMap.get(id) : undefined;
+        if (!entry) return null;
+
+        const typename = entry.__typename || '';
+        if (typename === 'ResearchFinding' || entry.findingHeadline || entry.statistic) {
+          const finding = mapContentfulFindingToCms(entry);
+          return finding ? <ResearchFindingEmbed finding={finding} /> : null;
+        }
+
+        return null;
       },
       [INLINES.HYPERLINK]: (node, children) => {
         const href = node.data?.uri as string | undefined;

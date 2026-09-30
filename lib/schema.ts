@@ -209,6 +209,75 @@ export function generatePersonSchema(name: string, bio: string, image: string) {
     name,
     description: bio,
     image,
-    url: siteMetadata.baseUrl,
+    url: `${siteMetadata.baseUrl}/about`,
+  };
+}
+
+export function generateResearchReportSchema(input: {
+  title: string;
+  description: string;
+  url: string;
+  image?: string;
+  datePublished?: string;
+  dateModified?: string;
+  authorName: string;
+  identifier?: string;
+  about?: string;
+  spatialCoverage?: string;
+  temporalCoverage?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Report',
+    headline: input.title,
+    name: input.title,
+    description: input.description,
+    url: input.url,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': input.url },
+    ...(input.image ? { image: input.image } : {}),
+    ...(input.datePublished ? { datePublished: input.datePublished } : {}),
+    ...(input.dateModified ? { dateModified: input.dateModified } : {}),
+    ...(input.identifier ? { identifier: input.identifier } : {}),
+    ...(input.about ? { about: input.about } : {}),
+    ...(input.spatialCoverage ? { spatialCoverage: input.spatialCoverage } : {}),
+    ...(input.temporalCoverage ? { temporalCoverage: input.temporalCoverage } : {}),
+    author: {
+      '@type': 'Person',
+      name: input.authorName,
+      url: `${siteMetadata.baseUrl}/about`,
+      affiliation: { '@id': `${siteMetadata.baseUrl}/#organization` },
+    },
+    publisher: { '@id': `${siteMetadata.baseUrl}/#organization` },
+    sourceOrganization: { '@id': `${siteMetadata.baseUrl}/#organization` },
+  };
+}
+
+export function generateNewsArticleSchema(input: {
+  headline: string;
+  description: string;
+  url: string;
+  image?: string;
+  datePublished?: string;
+  dateModified?: string;
+  authorName?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    headline: input.headline,
+    description: input.description,
+    url: input.url,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': input.url },
+    ...(input.image ? { image: input.image } : {}),
+    ...(input.datePublished ? { datePublished: input.datePublished } : {}),
+    ...(input.dateModified ? { dateModified: input.dateModified } : {}),
+    author: input.authorName
+      ? {
+          '@type': 'Person',
+          name: input.authorName,
+          url: `${siteMetadata.baseUrl}/about`,
+        }
+      : { '@id': `${siteMetadata.baseUrl}/#organization` },
+    publisher: { '@id': `${siteMetadata.baseUrl}/#organization` },
   };
 }

@@ -306,7 +306,7 @@ Composition:
 
 **VERIFIED FACT:** Blog featured images have alt text from Contentful (`featuredImageAlt` in `mappers.ts`) and explicit 1200×630 OG dimensions.
 
-**VERIFIED FACT:** `public/` contains 13 files, four of which are unused `placeholder.*` assets. There is no `favicon.ico`; `app/layout.tsx` points both `icon` and `apple` at `/ms_icon.png`. An unreferenced `public/icon.svg` also exists.
+**VERIFIED FACT:** `public/` contains 13 files, four of which are unused `placeholder.*` assets. There is no `favicon.ico`; `app/layout.tsx` points both `icon` and `apple` at `/ms_icon.webp`. An unreferenced `public/icon.svg` also exists.
 
 ---
 

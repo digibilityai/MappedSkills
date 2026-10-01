@@ -82,11 +82,13 @@ export interface EnquiryRecord {
    * every value is `null` and whose status is the honest `unavailable`.
    */
   attribution: ValidatedAttribution;
+  /** Exact CRM request body (lib/crm-delivery.cjs), stored so retries resend identical bytes. */
+  crmPayload: string;
 }
 
 export type InsertOutcome =
   /** A new row exists as a result of this call. */
-  | { status: 'created' }
+  | { status: 'created'; id: number }
   /** This exact idempotency key was already stored. One enquiry, not two. */
   | { status: 'duplicate' };
 
@@ -122,9 +124,9 @@ export async function insertEnquiry(record: EnquiryRecord): Promise<InsertOutcom
        \`first_source\`, \`first_medium\`, \`first_campaign\`,
        \`first_content\`, \`first_term\`, \`first_touch_at\`, \`first_source_derived\`,
        \`latest_source\`, \`latest_medium\`, \`latest_campaign\`, \`latest_referrer_host\`,
-       \`attribution_status\`)
+       \`attribution_status\`, \`crm_payload\`)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
   const params = [
@@ -163,11 +165,12 @@ export async function insertEnquiry(record: EnquiryRecord): Promise<InsertOutcom
     record.attribution.latestCampaign,
     record.attribution.latestReferrerHost,
     record.attribution.status,
+    record.crmPayload,
   ];
 
   try {
-    await getPool().execute(sql, params);
-    return { status: 'created' };
+    const [result] = await getPool().execute(sql, params);
+    return { status: 'created', id: (result as { insertId: number }).insertId };
   } catch (error) {
     if ((error as { code?: string })?.code === ER_DUP_ENTRY) {
       return { status: 'duplicate' };

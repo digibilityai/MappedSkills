@@ -284,8 +284,31 @@ verify_dependency_compatibility() {
   log "dependency compatibility verified: next $have_next, tree $target (lock $sha12)"
 }
 
+# --- Schema coherence, checked BEFORE the swap -------------------------------
+# Nothing else in this pipeline applies database migrations, and the workflow
+# runs stage and activate back to back. A release whose code needs a column the
+# live database does not have would otherwise go live and fail every request
+# that touches it (migration 003 makes /api/enquiry write `crm_payload`).
+# Read-only: `--status` never changes the schema. Fails closed: if the status
+# cannot be read, or any migration is pending, nothing is swapped. Migrations
+# are additive, so applying them first is safe for the still-live release.
+# Runs under the app's own Node (the shell default is older) and reads DB_* the
+# way the app does (scripts/load-host-env.cjs).
+verify_migrations_applied() {
+  local out node_bin
+  node_bin="$(ls "$HOME"/nodevenv/"$APP_ROOT_REL"/*/bin/node 2>/dev/null | sort -V | tail -1)" || true
+  [[ -x "$node_bin" ]] || node_bin=node
+  out="$(cd "$NEW_DIR" && "$node_bin" scripts/db-migrate.cjs --status 2>&1)" \
+    || die "staged: could not read migration status (database configuration or connection). Nothing was swapped."
+  if grep -E 'PENDING|FILE MODIFIED' <<<"$out"; then
+    die "staged: database migrations are not applied. Run 'cd $NEW_DIR && $node_bin scripts/db-migrate.cjs', then activate again. Nothing was swapped."
+  fi
+  log "database schema is up to date for this release"
+}
+
 cmd_activate() {
   cmd_verify_staged
+  verify_migrations_applied
   [[ -d "$APP_DIR" ]] || die "live release directory not found: $APP_DIR"
 
   # Keep TWO previous releases: .prev (rollback target) and .prev2.

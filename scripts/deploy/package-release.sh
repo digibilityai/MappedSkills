@@ -28,6 +28,8 @@ INCLUDE=(
   scripts/verify-server-files.cjs
   scripts/verify-build-output.cjs
   scripts/db-migrate.cjs
+  scripts/crm-retry.cjs
+  scripts/load-host-env.cjs
   server.cjs app.js
   package.json package-lock.json
   next.config.mjs tsconfig.json postcss.config.mjs

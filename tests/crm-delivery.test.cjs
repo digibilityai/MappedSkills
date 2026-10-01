@@ -175,3 +175,18 @@ test('logs never contain the body, email or secret', async () => {
   assert.ok(logged.length > 0);
   assert.ok(logged.every((l) => !l.includes('asha@example.com') && !l.includes(SECRET) && !l.includes('v1=')));
 });
+
+test('interrupted after the CRM accepted: row stays pending and the retry resends the same bytes', async () => {
+  const db = fakeDb([row()]);
+  const realExecute = db.execute.bind(db);
+  let dropped = false;
+  db.execute = async (sql, p) => {
+    if (!dropped && sql.startsWith('UPDATE enquiries SET crm_delivered_at')) { dropped = true; throw new Error('connection lost'); }
+    return realExecute(sql, p);
+  };
+  const { calls, fetchImpl } = crm(200, 200);
+  assert.equal(await deliverEnquiry({ db, id: 1, fetchImpl, env: ENV, now: T0 }), 'failed');
+  assert.equal(db.rows[0].crm_delivered_at, null);
+  assert.deepEqual(await retryPending({ db, fetchImpl, env: ENV, now: new Date(T0.getTime() + 5 * MIN) }), { delivered: 1 });
+  assert.equal(calls[0].body, calls[1].body); // CRM binds event_id to the body hash: replay = 200 duplicate
+});

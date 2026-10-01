@@ -27,7 +27,8 @@
  */
 import { NextResponse } from 'next/server';
 
-import { DbConfigError } from '@/lib/db';
+import { buildCrmPayload, deliverEnquiry } from '@/lib/crm-delivery.cjs';
+import { DbConfigError, getPool } from '@/lib/db';
 import { insertEnquiry } from '@/lib/enquiries';
 import {
   MARKETING_CONSENT_TEXT_V1,
@@ -116,6 +117,13 @@ export async function POST(request: Request): Promise<Response> {
     return fail('rate_limited', 429);
   }
 
+  // The CRM body is fixed here, once, and stored with the row (see below).
+  const crmPayload = buildCrmPayload({
+    enquiry,
+    consentText: MARKETING_CONSENT_TEXT_V1,
+    submittedAt: new Date(),
+  });
+
   // --- Persist. The only step allowed to block the response ----------------
   try {
     const outcome = await insertEnquiry({
@@ -139,14 +147,22 @@ export async function POST(request: Request): Promise<Response> {
       // and the enquiry is stored exactly as any other.
       // `ATTRIBUTION_MODEL.md` §1 — measurement is reported, never enforced.
       attribution: enquiry.attribution,
+      crmPayload,
     });
+
+    // CRM delivery is step 4: after the durable write, never awaited, and unable
+    // to change the visitor's result. A failure leaves the row pending and the
+    // cron (scripts/crm-retry.cjs) resends the stored bytes. A `duplicate` is
+    // not sent here: the first submission already owns delivery.
+    if (outcome.status === 'created') {
+      void deliverEnquiry({ db: getPool(), id: outcome.id }).catch(() => undefined);
+    }
 
     // `created` and `duplicate` are BOTH success, and for the same reason: a
     // row bearing this idempotency key is durably in the database either way.
     // `duplicate` is the double-click, the browser retry and the network retry
     // — the enquiry arrived once and was stored once, so telling the visitor it
     // failed would be false.
-    void outcome;
   } catch (error) {
     // Categories only. The driver's message can carry the database user and
     // host, and submitted values can appear in a constraint error, so neither

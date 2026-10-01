@@ -4,19 +4,21 @@
  *
  *   * /5 * * * *  cd <app dir> && <node> scripts/crm-retry.cjs
  *
- * Needs DB_HOST/DB_USER/DB_PASSWORD/DB_NAME and MAPPEDSKILLS_CRM_LEAD_URL in the
- * environment, or in the app's `.env` (loaded here without overriding anything
- * already set). The webhook secret is read from ~/.mappedskills-lead-webhook-secret.
+ * Needs MAPPEDSKILLS_CRM_LEAD_URL (from the app's `.env`) and DB_* (from the
+ * cPanel app config, via load-host-env.cjs); anything already set wins. The webhook secret is read from ~/.mappedskills-lead-webhook-secret.
  * Prints counts only.
  */
 const fs = require('node:fs');
 const path = require('node:path');
 const mysql = require('mysql2/promise');
 const { retryPending } = require('../lib/crm-delivery.cjs');
+const { loadHostEnv } = require('./load-host-env.cjs');
 
 async function main() {
   const envFile = path.join(__dirname, '..', '.env');
   if (fs.existsSync(envFile) && typeof process.loadEnvFile === 'function') process.loadEnvFile(envFile);
+
+  loadHostEnv();
 
   const required = ['DB_HOST', 'DB_USER', 'DB_PASSWORD', 'DB_NAME', 'MAPPEDSKILLS_CRM_LEAD_URL'];
   const missing = required.filter((n) => !(process.env[n] || '').trim());

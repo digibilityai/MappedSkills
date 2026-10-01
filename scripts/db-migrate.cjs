@@ -35,6 +35,8 @@ const crypto = require('node:crypto');
 
 const mysql = require('mysql2/promise');
 
+require('./load-host-env.cjs').loadHostEnv();
+
 const MIGRATIONS_DIR = path.join(__dirname, '..', 'db', 'migrations');
 const LEDGER_TABLE = 'schema_migrations';
 const REQUIRED_ENV = ['DB_HOST', 'DB_USER', 'DB_PASSWORD', 'DB_NAME'];

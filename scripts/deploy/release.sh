@@ -292,14 +292,16 @@ verify_dependency_compatibility() {
 # Read-only: `--status` never changes the schema. Fails closed: if the status
 # cannot be read, or any migration is pending, nothing is swapped. Migrations
 # are additive, so applying them first is safe for the still-live release.
-# DB_* must be in the environment or in the staged `.env` (the same place the
-# crm-retry cron reads them).
+# Runs under the app's own Node (the shell default is older) and reads DB_* the
+# way the app does (scripts/load-host-env.cjs).
 verify_migrations_applied() {
-  local out
-  out="$(cd "$NEW_DIR" && if [[ -f .env ]]; then node --env-file=.env scripts/db-migrate.cjs --status; else node scripts/db-migrate.cjs --status; fi 2>&1)" \
-    || die "staged: could not read migration status (DB_HOST/DB_USER/DB_PASSWORD/DB_NAME must be in the environment or .env). Nothing was swapped."
+  local out node_bin
+  node_bin="$(ls "$HOME"/nodevenv/"$APP_ROOT_REL"/*/bin/node 2>/dev/null | sort -V | tail -1)" || true
+  [[ -x "$node_bin" ]] || node_bin=node
+  out="$(cd "$NEW_DIR" && "$node_bin" scripts/db-migrate.cjs --status 2>&1)" \
+    || die "staged: could not read migration status (database configuration or connection). Nothing was swapped."
   if grep -E 'PENDING|FILE MODIFIED' <<<"$out"; then
-    die "staged: database migrations are not applied. Run 'cd $NEW_DIR && node --env-file=.env scripts/db-migrate.cjs', then activate again. Nothing was swapped."
+    die "staged: database migrations are not applied. Run 'cd $NEW_DIR && $node_bin scripts/db-migrate.cjs', then activate again. Nothing was swapped."
   fi
   log "database schema is up to date for this release"
 }

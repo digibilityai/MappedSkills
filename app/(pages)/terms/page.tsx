@@ -1,4 +1,4 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { Section } from '@/components/Section';
 import { Container } from '@/components/Container';
@@ -82,21 +82,21 @@ export default function TermsPage() {
       </Section>
 
       {/* Hero Section */}
-      <Section>
-        <Container>
-          <div className="max-w-3xl">
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+      <section className="bg-resolve-ground pb-[65px] pt-[70px] text-resolve-ink">
+        <Container className="max-w-[1400px] px-[var(--resolve-pad)]">
+          <div className="max-w-full text-left min-[1081px]:max-w-[60vw]">
+            <h1 className="m-0 font-heading text-[clamp(2rem,4.6vw,3.9rem)] font-extrabold leading-[0.98] tracking-[-0.038em]">
               Terms and Conditions
             </h1>
-            <p className="text-lg text-muted-foreground mb-6">
+            <p className="mt-4 text-sm text-resolve-dim font-medium">
               Last Updated: May 2026
             </p>
-            <p className="text-base text-foreground leading-relaxed">
+            <p className="mt-4 leading-relaxed text-resolve-dim">
               These Terms and Conditions explain the rules for using the MappedSkills Marketing website and engaging with our services, content, forms, proposals, and communication.
             </p>
           </div>
         </Container>
-      </Section>
+      </section>
 
       {/* Table of Contents */}
       <Section className="bg-secondary/5">

@@ -36,7 +36,7 @@ export function HomepageFinalCTA() {
   return (
     <section
       id="rsv-close"
-      className="rsv-close relative overflow-hidden py-[clamp(70px,10vw,168px)]"
+      className="rsv-close relative overflow-hidden py-[50px]"
       style={{ background: 'var(--resolve-accent)', color: '#141219' }}
     >
       <Container className="max-w-[1400px] px-[var(--resolve-pad)]">

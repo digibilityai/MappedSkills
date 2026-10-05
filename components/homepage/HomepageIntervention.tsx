@@ -64,7 +64,7 @@ const STAGES: Stage[] = [
 
 export function HomepageIntervention() {
   return (
-    <section className="border-t border-resolve-line bg-resolve-ground py-[clamp(66px,9vw,152px)] text-resolve-ink">
+    <section className="border-t border-resolve-line bg-resolve-ground py-[50px] text-resolve-ink">
       <Container className="max-w-[1400px] px-[var(--resolve-pad)]">
         <h2 className="rsv-rv m-0 block text-[.82rem] font-semibold uppercase leading-[1.4] tracking-[0.16em] text-resolve-dim">
           How the work produces an enquiry

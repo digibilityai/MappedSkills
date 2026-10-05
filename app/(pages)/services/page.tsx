@@ -222,6 +222,7 @@ export default function ServicesPage() {
       {/* ---- BLOCK 3 — the accountability boundary ------------------------ */}
       <CommercialSection>
         <BoundaryBlock
+          proseClassName="max-w-none"
           label="What we are accountable for, and where that stops"
           heading={
             <>
@@ -259,7 +260,10 @@ export default function ServicesPage() {
       {/* ---- BLOCK 4 — where each capability enters the chain -------------- */}
       <CommercialSection tone="paper" mode="statement">
         <ChapterLabel>Where each discipline comes in</ChapterLabel>
-        <Body className="mt-[18px]">Named by what each contributes, in the order the chain runs.</Body>
+        <p className="m-0 mt-[18px] max-w-[34ch] text-left font-heading text-[clamp(1.35rem,2.1vw,1.75rem)] font-extrabold leading-[1.15] tracking-[-0.03em] text-resolve-ink min-[1081px]:max-w-[32ch]">
+          Named by what each contributes,<br className="hidden min-[1081px]:block" />{' '}
+          <span style={{ color: 'var(--resolve-accent-deep)' }}>in the order the chain runs.</span>
+        </p>
         <RoutingGroup title="Capture" items={CAPTURE} />
         <RoutingGroup title="Convert" items={CONVERT} />
         <RoutingGroup title="Measure" items={MEASURE} />
@@ -280,7 +284,7 @@ export default function ServicesPage() {
 
         <div className="mt-[clamp(38px,4.6vw,72px)] border-t border-resolve-line pt-[clamp(38px,4.6vw,72px)]">
           <ChapterLabel>What we do not do</ChapterLabel>
-          <Body className="mt-[18px]">
+          <Body className="mt-[18px] max-w-none">
             CRM implementation and migration. Revenue operations and sales-operations consulting. Lifecycle and
             nurture programmes. Standalone web development. Ecommerce merchandising and ecommerce conversion.
             Social media management, brand building and PR.
@@ -293,9 +297,9 @@ export default function ServicesPage() {
       </CommercialSection>
 
       {/* ---- BLOCK 7 — scope honesty on testing ---------------------------- */}
-      <CommercialSection tone="paper" mode="split">
+      <CommercialSection tone="paper" mode="split" frameClassName="min-[1081px]:max-w-[63%]">
         <ChapterLabel>What we can and cannot test</ChapterLabel>
-        <Display className="max-w-[22ch]">
+        <Display className="max-w-none">
           Below a real threshold of traffic and enquiries, a test cannot reach significance.
         </Display>
         <Body>
@@ -318,7 +322,7 @@ export default function ServicesPage() {
               <Mark state="owned" size={14} />
               This works where
             </h3>
-            <p className="mt-4 max-w-[46ch] text-[clamp(1.02rem,1.2vw,1.16rem)] leading-relaxed">
+            <p className="mt-4 max-w-[46ch] leading-relaxed">
               The customer takes time to decide and one good enquiry is worth real money. Demand for what you
               sell already exists or can reasonably be reached. You can act on enquiries when they arrive, and
               you are willing to grant the measurement access that makes the result checkable.
@@ -329,7 +333,7 @@ export default function ServicesPage() {
               <Mark state="open" size={14} />
               It is a poor fit where
             </h3>
-            <p className="mt-4 max-w-[46ch] text-[clamp(1.02rem,1.2vw,1.16rem)] leading-relaxed text-resolve-dim">
+            <p className="mt-4 max-w-[46ch] leading-relaxed text-resolve-dim">
               Demand has to be created from nothing, the purchase is impulse or price-only, or a guaranteed
               outcome is a requirement.
             </p>
@@ -341,7 +345,11 @@ export default function ServicesPage() {
       {/* ---- BLOCK 9 — action ----------------------------------------------- */}
       <CommercialClose
         label="Start with the situation, not the service"
-        heading="Tell us what is actually happening."
+        heading={
+          <>
+            Tell us where the enquiry path is <span style={{ color: 'var(--resolve-accent-deep)' }}>breaking.</span>
+          </>
+        }
         body={
           <>
             The enquiries you are getting, the ones you are not, and what you can currently see. That is a more
@@ -349,7 +357,9 @@ export default function ServicesPage() {
             anyway.
           </>
         }
-        action="Tell us what you’re trying to fix" mode="split" />
+        action="Tell us what you’re trying to fix"
+        mode="centred"
+      />
     </>
   );
 }

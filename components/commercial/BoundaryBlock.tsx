@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { ChapterLabel, Mark } from '@/components/commercial/primitives';
+import { cn } from '@/lib/utils';
 
 /**
  * SESSION 28 — PHASE F.
@@ -25,6 +26,7 @@ export function BoundaryBlock({
   notPromised,
   children,
   closing,
+  proseClassName,
 }: {
   label: string;
   heading: ReactNode;
@@ -33,6 +35,8 @@ export function BoundaryBlock({
   notPromised?: string[];
   children?: ReactNode;
   closing?: ReactNode;
+  /** extra classes for the running paragraphs — used to release a measure */
+  proseClassName?: string;
 }) {
   return (
     <>
@@ -41,10 +45,16 @@ export function BoundaryBlock({
         <p className="m-0 max-w-[24ch] font-heading text-[clamp(1.5rem,3vw,2.4rem)] font-extrabold leading-[1.02] tracking-[-0.035em]">
           {heading}
         </p>
-        {intro && <div className="mt-4 max-w-[58ch] text-[1.04rem] leading-relaxed [&>p+p]:mt-4">{intro}</div>}
+        {intro && (
+          <div className={cn('mt-4 max-w-[58ch] leading-relaxed text-resolve-dim [&>p+p]:mt-4', proseClassName)}>{intro}</div>
+        )}
       </div>
 
-      {children && <div className="mt-[clamp(22px,2.8vw,38px)] max-w-[60ch] text-[1.02rem] leading-relaxed [&>p+p]:mt-4">{children}</div>}
+      {children && (
+        <div className={cn('mt-[clamp(22px,2.8vw,38px)] max-w-[60ch] leading-relaxed text-resolve-dim [&>p+p]:mt-4', proseClassName)}>
+          {children}
+        </div>
+      )}
 
       {notPromised && notPromised.length > 0 && (
         <div className="mt-[clamp(26px,3.2vw,44px)]">
@@ -65,7 +75,7 @@ export function BoundaryBlock({
         </div>
       )}
 
-      {closing && <p className="mt-4 max-w-[52ch] text-[.94rem] font-medium leading-[1.55] text-resolve-dim">{closing}</p>}
+      {closing && <p className={cn('mt-4 max-w-[52ch] leading-relaxed text-resolve-dim', proseClassName)}>{closing}</p>}
     </>
   );
 }

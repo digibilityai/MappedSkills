@@ -19,7 +19,7 @@ export function ResearchAuthor({ author }: { author: CmsAuthor }) {
           <span aria-hidden="true">{initials}</span>
         )}
       </div>
-      <div className="max-w-[58ch]">
+      <div className="min-w-0 min-[1081px]:w-[72%]">
         <p className="m-0 text-[clamp(17px,1.15vw,18px)] font-semibold leading-[1.60] text-resolve-ink">
           <Link href="/about" className="underline decoration-2 underline-offset-4">
             {author.name}

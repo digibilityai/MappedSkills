@@ -24,7 +24,7 @@ export function HomepageActivity() {
   return (
     <section
       id="rsv-dep"
-      className="rsv-dep bg-resolve-ink py-[clamp(48px,7vw,104px)] text-resolve-ground"
+      className="rsv-dep bg-resolve-ink py-[50px] text-resolve-ground"
     >
       <Container className="max-w-[1400px] px-[var(--resolve-pad)]">
         <div className="flex items-center gap-6">

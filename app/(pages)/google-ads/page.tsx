@@ -187,9 +187,9 @@ export default function GoogleAdsPage() {
       </CommercialSection>
 
       {/* ---- MOVE 6 — measurement, with its limit adjacent and open -------- */}
-      <CommercialSection tone="paper" mode="split">
+      <CommercialSection tone="paper" mode="split" frameClassName="min-[1081px]:max-w-[68%]">
         <ChapterLabel>What you will actually see</ChapterLabel>
-        <Display className="max-w-[24ch]">
+        <Display className="max-w-none">
           Qualified enquiries, separated from{' '}
           <span style={{ color: 'var(--resolve-accent-deep)' }}>total enquiries.</span>
         </Display>
@@ -199,7 +199,7 @@ export default function GoogleAdsPage() {
           interesting part.
         </Body>
         <div className="mt-[clamp(20px,2.4vw,32px)] border-l-4 pl-[clamp(18px,2.2vw,30px)]" style={{ borderColor: 'var(--resolve-gap)' }}>
-          <p className="m-0 max-w-[58ch] text-[1.02rem] leading-relaxed">
+          <p className="m-0 max-w-[58ch] leading-relaxed text-resolve-dim">
             Where an enquiry arrives by phone after someone saw an ad, we will usually not be able to attribute
             it, and we will show it as <b className="font-bold">unattributed</b> rather than assigning it to paid
             to make the campaign look better.
@@ -236,7 +236,7 @@ export default function GoogleAdsPage() {
             sense at all.
           </>
         }
-        action="Tell us what you’re trying to fix" mode="split" />
+        action="Tell us what you’re trying to fix" mode="centred" />
     </>
   );
 }

@@ -1,14 +1,7 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
-import {
-  ActionPair,
-  Mark,
-  OPENER_GRID,
-  OPENER_MAIN,
-  OPENER_RAIL,
-  type OpenerMode,
-} from '@/components/commercial/primitives';
+import { ActionPair, Mark, type OpenerMode } from '@/components/commercial/primitives';
 import { hasContent } from '@/lib/has-content';
 import { cn } from '@/lib/utils';
 
@@ -117,7 +110,6 @@ export function RouteHero({
   action,
   secondaryLabel,
   size = 'full',
-  mode = 'editorial',
   children,
 }: {
   eyebrow: string;
@@ -131,71 +123,30 @@ export function RouteHero({
   mode?: OpenerMode;
   children?: ReactNode;
 }) {
-  /* §9 — NO EMPTY COLUMNS. `split` puts the eyebrow and the H1 in the rail and
-     everything else in the reading column, so a hero with no lede, no children
-     and no action would render a column with nothing in it. `RouteHero` is the
-     one opener where that is possible, because `lede` and `action` are both
-     optional on it. Such a hero DEGRADES TO `editorial` rather than rendering
-     the empty half. `offset` and `centred` cannot hit this: the H1 is always in
-     the reading column and the eyebrow is always in the rail. */
-  const hasReading = hasContent(lede) || hasContent(children) || Boolean(action);
-  const effective: OpenerMode = mode === 'split' && !hasReading ? 'editorial' : mode;
-
   return (
-    <section className="bg-resolve-ground pb-[clamp(40px,5.4vw,88px)] pt-[clamp(32px,4.4vw,72px)] text-resolve-ink">
+    <section className="bg-resolve-ground pb-[65px] pt-[70px] text-resolve-ink">
       <Container className="max-w-[1400px] px-[var(--resolve-pad)]">
-        <div className={OPENER_GRID[effective]}>
-          <div className={OPENER_RAIL[effective]}>
-            <p className="m-0 block text-[.82rem] font-semibold uppercase leading-[1.4] tracking-[0.16em] text-resolve-dim">
-              {eyebrow}
-            </p>
-            {effective === 'split' && hasContent(title) && (
-              <h1
-                className={cn(
-                  'm-0 mt-[clamp(14px,1.8vw,22px)] font-heading font-extrabold leading-[1.0] tracking-[-0.038em]',
-                  size === 'full'
-                    ? 'max-w-[19ch] text-[clamp(2rem,3.4vw,3.1rem)]'
-                    : 'max-w-[17ch] text-[clamp(1.85rem,3vw,2.6rem)]'
-                )}
-              >
-                {title}
-              </h1>
-            )}
-          </div>
-
-          <div className={OPENER_MAIN[effective]}>
-            {effective !== 'split' && hasContent(title) && (
-              <h1
-                className={cn(
-                  'm-0 mt-[clamp(14px,1.8vw,22px)] font-heading font-extrabold leading-[0.99] tracking-[-0.038em]',
-                  size === 'full'
-                    ? 'max-w-[19ch] text-[clamp(2rem,4.6vw,3.9rem)]'
-                    : 'max-w-[17ch] text-[clamp(1.85rem,3.7vw,3.1rem)]',
-                  effective === 'centred' && 'min-[1081px]:mx-auto',
-                  effective === 'offset' && 'min-[1081px]:mt-0'
-                )}
-              >
-                {title}
-              </h1>
-            )}
-            {(hasContent(lede) || hasContent(children)) && (
-              <div
-                className={cn(
-                  'mt-[clamp(20px,2.4vw,30px)] max-w-[58ch] text-[clamp(1.04rem,1.25vw,1.2rem)] leading-relaxed text-resolve-dim [&>p+p]:mt-4',
-                  effective === 'centred' && 'min-[1081px]:mx-auto',
-                  effective === 'split' && 'min-[1081px]:mt-0'
-                )}
-              >
-                {hasContent(lede) && <p className="m-0">{lede}</p>}
-                {children}
-              </div>
-            )}
-            {action && (
-              <div className={cn(effective === 'centred' && 'min-[1081px]:[&>div]:justify-center')}>
-                <ActionPair primaryLabel={action} secondaryLabel={secondaryLabel} />
-              </div>
-            )}
-          </div>
+        <div className="max-w-full text-left min-[1081px]:max-w-[60vw]">
+          <p className="m-0 block text-[.82rem] font-semibold uppercase leading-[1.4] tracking-[0.16em] text-resolve-dim">
+            {eyebrow}
+          </p>
+          {hasContent(title) && (
+            <h1
+              className={cn(
+                'm-0 mt-[clamp(14px,1.8vw,22px)] font-heading font-extrabold leading-[0.99] tracking-[-0.038em]',
+                size === 'full' ? 'text-[clamp(2rem,4.6vw,3.9rem)]' : 'text-[clamp(1.85rem,3.7vw,3.1rem)]'
+              )}
+            >
+              {title}
+            </h1>
+          )}
+          {(hasContent(lede) || hasContent(children)) && (
+            <div className="mt-[clamp(20px,2.4vw,30px)] leading-relaxed text-resolve-dim [&>p+p]:mt-4">
+              {hasContent(lede) && <p className="m-0">{lede}</p>}
+              {children}
+            </div>
+          )}
+          {action && <ActionPair primaryLabel={action} secondaryLabel={secondaryLabel} />}
         </div>
       </Container>
     </section>
@@ -241,7 +192,7 @@ export function StatedList({ items, className }: { items: ReactNode[]; className
   return (
     <ul className={cn('m-0 mt-[clamp(20px,2.4vw,32px)] list-none border-t border-resolve-line p-0', className)}>
       {items.map((item, i) => (
-        <li key={i} className="max-w-[64ch] border-b border-resolve-line py-[clamp(12px,1.6vw,18px)] text-[1.02rem] leading-relaxed">
+        <li key={i} className="max-w-[64ch] border-b border-resolve-line py-[clamp(12px,1.6vw,18px)] leading-relaxed text-resolve-dim">
           {item}
         </li>
       ))}

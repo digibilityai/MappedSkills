@@ -393,7 +393,7 @@ export default function TrafficButNoEnquiriesPage() {
           second button with an invented label. The approved PRIMARY — "Tell us
           what you're trying to fix" — is unblocked and is the page's last
           element, exactly as the copy specifies. */}
-      <section className="border-t-2 border-resolve-ink bg-resolve-ground py-[clamp(48px,6.4vw,110px)] text-resolve-ink">
+      <section className="border-t-2 border-resolve-ink bg-resolve-ground py-[50px] text-resolve-ink">
         <div className="mx-auto w-full max-w-[1400px] px-[var(--resolve-pad)]">
           <ChapterLabel>If you would rather we ran it</ChapterLabel>
           <p className="m-0 mt-[18px] max-w-[22ch] font-heading text-[clamp(1.8rem,3.8vw,3rem)] font-extrabold leading-[0.99] tracking-[-0.038em]">

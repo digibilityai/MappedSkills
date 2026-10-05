@@ -151,7 +151,7 @@ export default function ScheduleCallPage() {
           a click is the last thing observable from here; `meeting_booked`
           requires a webhook from a vendor that has never been recorded as
           selected. BOOKING REMAINS OWNER-BLOCKED. */}
-      <section className="border-t border-resolve-line bg-resolve-paper py-[clamp(40px,5vw,88px)] text-resolve-ink">
+      <section className="border-t border-resolve-line bg-resolve-paper py-[50px] text-resolve-ink">
         <Container className="max-w-[1400px] px-[var(--resolve-pad)]">
           <div className="max-w-[62ch]">
             <ChapterLabel>The booking page</ChapterLabel>
@@ -188,13 +188,14 @@ export default function ScheduleCallPage() {
 
       {/* ------------------------------------------------------------- §2 */}
       <CommercialSection tone="paper">
+        <div className="min-[1081px]:max-w-[65%]">
         <ChapterLabel>What you get from it either way</ChapterLabel>
-        <Display>A view on which of four things is most likely losing you enquiries.</Display>
-        <Body>
+        <Display className="max-w-none">A view on which of four things is most likely losing you enquiries.</Display>
+        <Body className="max-w-none">
           The demand, the page, the enquiry path, or the measurement &mdash; and what you would check next to
           confirm it. That is useful whether you work with us or hand it to somebody else.
         </Body>
-        <Body>
+        <Body className="max-w-none">
           If you would rather work through it yourself first,{' '}
           <Link
             href="/problems/traffic-but-no-enquiries"
@@ -204,17 +205,20 @@ export default function ScheduleCallPage() {
           </Link>{' '}
           and you do not need us to run them.
         </Body>
+        </div>
       </CommercialSection>
 
       {/* ------------------------------------------------------------- §3 */}
       <CommercialSection>
+        <div className="min-[1081px]:max-w-[65%]">
         <ChapterLabel>What it is not</ChapterLabel>
-        <Display>Three things it will not be.</Display>
-        <Body>
+        <Display className="max-w-none">Three things it will not be.</Display>
+        <Body className="max-w-none">
           It is not a pitch deck. It is not a full audit &mdash; that is a piece of work with a scope and a
           price, and a conversation is not it. And it is not a qualification interview: if what you need is
           something we do not do, the useful outcome is finding that out quickly.
         </Body>
+        </div>
       </CommercialSection>
 
       {/* ------------------------------------------------------------- §4 */}

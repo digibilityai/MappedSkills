@@ -315,7 +315,7 @@
      Retained UNCHANGED in Phase A. These govern the spacing and link colour of
      every existing page; replacing them is page-composition work and belongs
      to Phase B/C, not to the foundation. */
-  section { @apply py-16; }
+  section { @apply py-[50px]; }
   ul, ol { @apply space-y-3 pl-6; }
   h1 + p, h2 + p, h3 + p { @apply mt-4 md:mt-6; }
 

@@ -173,6 +173,7 @@ export function CommercialSection({
   rule = true,
   mode = 'editorial',
   className,
+  frameClassName,
 }: {
   id?: string;
   children: ReactNode;
@@ -180,9 +181,11 @@ export function CommercialSection({
   rule?: boolean;
   mode?: SectionMode;
   className?: string;
+  /** caps the reading frame, without changing the section's full-bleed ground */
+  frameClassName?: string;
 }) {
   const shell = cn(
-    'py-[clamp(46px,6vw,104px)] text-resolve-ink',
+    'py-[50px] text-resolve-ink',
     tone === 'paper' ? 'bg-resolve-paper' : 'bg-resolve-ground',
     rule && 'border-t border-resolve-line',
     className
@@ -204,7 +207,9 @@ export function CommercialSection({
   if (effective === 'editorial') {
     return (
       <section id={id} className={shell}>
-        <Container className={wrap}>{children}</Container>
+        <Container className={wrap}>
+          <div className={frameClassName}>{children}</div>
+        </Container>
       </section>
     );
   }
@@ -215,7 +220,7 @@ export function CommercialSection({
     return (
       <section id={id} className={shell}>
         <Container className={wrap}>
-          <div className="mx-auto max-w-[68ch] min-[1081px]:text-center [&_p]:mx-auto">{children}</div>
+          <div className={cn('mx-auto max-w-[68ch] min-[1081px]:text-center [&_p]:mx-auto', frameClassName)}>{children}</div>
         </Container>
       </section>
     );
@@ -232,7 +237,7 @@ export function CommercialSection({
           {/* The wrapper supplies the gap after the label, so the first child's
               own top margin is zeroed — otherwise Display's `mt-[18px]` and this
               margin both apply and the chapter opens with a double gap. */}
-          <div className="mt-[clamp(20px,2.4vw,34px)] [&>*:first-child]:mt-0">{mainKids}</div>
+          <div className={cn('mt-[clamp(20px,2.4vw,34px)] [&>*:first-child]:mt-0', frameClassName)}>{mainKids}</div>
         </Container>
       </section>
     );
@@ -250,7 +255,7 @@ export function CommercialSection({
   return (
     <section id={id} className={shell}>
       <Container className={wrap}>
-        <div className={cn('min-[1081px]:grid min-[1081px]:gap-x-[clamp(32px,4.4vw,84px)]', grid)}>
+        <div className={cn('min-[1081px]:grid min-[1081px]:gap-x-[clamp(32px,4.4vw,84px)]', grid, frameClassName)}>
           <div
             className={cn(
               'min-[1081px]:row-start-1',
@@ -375,12 +380,12 @@ export function Lede({ children, className }: { children: ReactNode; className?:
 }
 
 export function Body({ children, className }: { children: ReactNode; className?: string }) {
-  return <p className={cn('mt-4 max-w-[58ch] text-[1.02rem] leading-relaxed', className)}>{children}</p>;
+  return <p className={cn('mt-4 max-w-[58ch] leading-relaxed text-resolve-dim', className)}>{children}</p>;
 }
 
 export function Note({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <p className={cn('mt-4 max-w-[52ch] text-[.94rem] leading-[1.55] text-resolve-dim', className)}>{children}</p>
+    <p className={cn('mt-4 max-w-[52ch] leading-relaxed text-resolve-dim', className)}>{children}</p>
   );
 }
 

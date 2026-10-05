@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { cn } from '@/lib/utils';
 
 /**
  * SESSION 28 — PHASE F — F1, "the run", in its three non-homepage classes.
@@ -60,6 +61,7 @@ function Figure({
   verticalMax = 360,
   horizontalMax = 780,
   caption,
+  captionClassName,
 }: {
   vertical: ReactNode;
   horizontal: ReactNode;
@@ -67,6 +69,7 @@ function Figure({
   verticalMax?: number;
   horizontalMax?: number;
   caption: ReactNode;
+  captionClassName?: string;
 }) {
   /* ONE media query governs BOTH drawings, and the two conditions are exact
      complements: the vertical form is the DEFAULT and is hidden only at the
@@ -89,7 +92,7 @@ function Figure({
       <div className={showAbove} style={{ maxWidth: horizontalMax }}>
         {horizontal}
       </div>
-      <figcaption className="mt-[clamp(16px,2vw,24px)] max-w-[64ch] text-[.9rem] leading-[1.55] text-resolve-dim">
+      <figcaption className={cn('mt-[clamp(16px,2vw,24px)] max-w-[64ch] text-[.9rem] leading-[1.55] text-resolve-dim', captionClassName)}>
         {caption}
       </figcaption>
     </figure>
@@ -256,6 +259,7 @@ export function ChainFull() {
       horizontalMax={1000}
       vertical={vertical}
       horizontal={horizontal}
+      captionClassName="max-w-none text-base leading-relaxed"
       caption={
         <>
           The four numbered seams are the joins the copy above names, in order: search work to the page it feeds,

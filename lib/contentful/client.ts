@@ -57,7 +57,13 @@ export async function contentfulGraphql<T>(
     console.error('[contentful] GraphQL errors:', json.errors.map((e) => e.message).join('; '));
   }
 
-  return json.data ?? null;
+  // Contentful may return HTTP 200 with errors[] and usable data (e.g. UNRESOLVABLE_LINK).
+  // Keep logging those errors, but return the payload when data is present.
+  if (json.data == null) {
+    return null;
+  }
+
+  return json.data;
 }
 
 export const CONTENTFUL_REVALIDATE_SECONDS = DEFAULT_REVALIDATE_SECONDS;

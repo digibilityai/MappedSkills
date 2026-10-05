@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { createMetadata, siteMetadata } from '@/lib/metadata';
 import { generateResearchReportSchema } from '@/lib/schema';
 import {
@@ -11,7 +10,7 @@ import {
   ProofLink,
 } from '@/components/commercial/primitives';
 import { RouteBreadcrumb, RouteHero, EntryList } from '@/components/routes/primitives';
-import { RichTextContent } from '@/components/blog/RichTextContent';
+import { ResearchRichText } from '@/components/research/ResearchRichText';
 import { ResearchFindingEmbed } from '@/components/research/ResearchFindingEmbed';
 import { ResearchDownloads } from '@/components/research/ResearchDownloads';
 import { CopyActions } from '@/components/research/CopyActions';
@@ -127,102 +126,103 @@ function ReportPage({ report }: { report: CmsResearchReport }) {
 
       <RouteBreadcrumb trail={trail} />
 
-      <CommercialSection tone="ground" rule={false}>
-        {report.categoryName && report.categorySlug ? (
-          <ChapterLabel>
-            <Link href={`/research/${report.categorySlug}`} className="text-inherit no-underline">
-              {report.categoryName}
-            </Link>
-          </ChapterLabel>
-        ) : (
-          <ChapterLabel>Research</ChapterLabel>
-        )}
-        <h1 className="mt-[18px] max-w-[24ch] font-heading text-[clamp(1.6rem,3.4vw,2.7rem)] font-extrabold leading-[1.0] tracking-[-0.035em]">
-          {report.title}
-        </h1>
-        {report.excerpt ? (
-          <p className="mt-[22px] max-w-none text-[clamp(1.06rem,1.35vw,1.28rem)] leading-relaxed text-resolve-dim">
-            {report.excerpt}
-          </p>
-        ) : null}
+      <RouteHero
+        eyebrow={report.categoryName || 'Research'}
+        title={<>{report.title}</>}
+        lede={report.excerpt || undefined}
+        mode="editorial"
+      />
 
+      <CommercialSection tone="paper">
+        <ChapterLabel>Study</ChapterLabel>
         {facts.length > 0 ? (
-          <dl className="mt-[clamp(24px,3vw,40px)] grid grid-cols-1 gap-x-8 gap-y-4 border-t border-resolve-line pt-6 min-[700px]:grid-cols-2">
+          <dl className="mt-[clamp(24px,3vw,40px)] grid grid-cols-1 gap-x-[clamp(20px,3vw,40px)] gap-y-5 border-t-2 border-resolve-ink min-[700px]:grid-cols-2 min-[1081px]:grid-cols-5">
             {facts.map((fact) => (
-              <div key={fact.label}>
+              <div key={fact.label} className="border-b border-resolve-line py-[clamp(12px,1.6vw,18px)]">
                 <dt className="m-0 text-[.82rem] font-semibold uppercase tracking-[0.14em] text-resolve-dim">
                   {fact.label}
                 </dt>
-                <dd className="m-0 mt-1 text-[1.02rem] text-resolve-ink">{fact.value}</dd>
+                <dd className="m-0 mt-2 text-[1.02rem] leading-snug text-resolve-ink">{fact.value}</dd>
               </div>
             ))}
           </dl>
         ) : null}
 
         {report.featuredImage?.url ? (
-          <figure className="mt-[clamp(24px,3vw,40px)]">
+          <figure className="mt-[clamp(24px,3vw,40px)] overflow-hidden border border-resolve-line bg-resolve-paper">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={report.featuredImage.url}
               alt={featuredAlt}
               width={report.featuredImage.width}
               height={report.featuredImage.height}
-              className="h-auto w-full rounded-lg border border-resolve-line"
+              className="mx-auto h-auto w-auto max-w-full object-contain"
             />
+            {report.featuredImage.description ? (
+              <figcaption className="border-t border-resolve-line px-[clamp(14px,1.8vw,20px)] py-3 text-[.9rem] leading-[1.55] text-resolve-dim">
+                {report.featuredImage.description}
+              </figcaption>
+            ) : null}
           </figure>
         ) : null}
       </CommercialSection>
 
       {report.keyFindings.length > 0 ? (
-        <CommercialSection tone="paper">
+        <CommercialSection tone="ground">
           <ChapterLabel>Key findings</ChapterLabel>
           <Display>What the research found.</Display>
-          <div className="mt-4">
+          <div className="mt-[clamp(24px,3vw,40px)] grid grid-cols-1 gap-[clamp(12px,1.6vw,20px)] min-[760px]:grid-cols-2 min-[1180px]:grid-cols-3">
             {report.keyFindings.map((finding) => (
-              <ResearchFindingEmbed key={finding.id} finding={finding} />
+              <ResearchFindingEmbed key={finding.id} finding={finding} inList />
             ))}
           </div>
         </CommercialSection>
       ) : null}
 
       {isDocumentPopulated(report.executiveSummaryJson) && report.executiveSummaryJson ? (
-        <CommercialSection tone="ground">
+        <CommercialSection tone="paper">
           <ChapterLabel>Executive summary</ChapterLabel>
-          <article className="mt-6 max-w-none">
-            <RichTextContent document={report.executiveSummaryJson} links={report.executiveSummaryLinks} />
-          </article>
+          <ResearchRichText
+            className="mt-3"
+            idPrefix="summary"
+            document={report.executiveSummaryJson}
+            links={report.executiveSummaryLinks}
+          />
         </CommercialSection>
       ) : null}
 
       {isDocumentPopulated(report.contentJson) && report.contentJson ? (
-        <CommercialSection tone="paper">
-          <ChapterLabel>Research</ChapterLabel>
-          <article className="mt-6 max-w-none">
-            <RichTextContent document={report.contentJson} links={report.contentLinks} />
-          </article>
+        <CommercialSection tone="ground">
+          <ResearchRichText idPrefix="body" document={report.contentJson} links={report.contentLinks} />
         </CommercialSection>
       ) : null}
 
       {isDocumentPopulated(report.methodologyJson) && report.methodologyJson ? (
-        <CommercialSection tone="ground">
+        <CommercialSection tone="paper">
           <ChapterLabel>Methodology</ChapterLabel>
-          <article className="mt-6 max-w-none">
-            <RichTextContent document={report.methodologyJson} links={report.methodologyLinks} />
-          </article>
+          <ResearchRichText
+            className="mt-3"
+            idPrefix="method"
+            document={report.methodologyJson}
+            links={report.methodologyLinks}
+          />
         </CommercialSection>
       ) : null}
 
       {hasLimitations && report.limitationsJson ? (
-        <CommercialSection tone="paper">
+        <CommercialSection tone="ground">
           <ChapterLabel>Limitations</ChapterLabel>
-          <article className="mt-6 max-w-none">
-            <RichTextContent document={report.limitationsJson} links={report.limitationsLinks} />
-          </article>
+          <ResearchRichText
+            className="mt-3"
+            idPrefix="limits"
+            document={report.limitationsJson}
+            links={report.limitationsLinks}
+          />
         </CommercialSection>
       ) : null}
 
       {hasDownloads ? (
-        <CommercialSection tone="ground">
+        <CommercialSection tone="paper">
           <ChapterLabel>Downloads</ChapterLabel>
           <Display>Files published with this report.</Display>
           <ResearchDownloads
@@ -233,10 +233,10 @@ function ReportPage({ report }: { report: CmsResearchReport }) {
         </CommercialSection>
       ) : null}
 
-      <CommercialSection tone="paper">
+      <CommercialSection tone="ground">
         <ChapterLabel>Cite this research</ChapterLabel>
         <Display>How to reference this report.</Display>
-        <blockquote className="mt-6 max-w-[64ch] border-l-2 border-resolve-ink pl-4 text-[1.02rem] leading-relaxed text-resolve-dim">
+        <blockquote className="mt-6 w-full border-l-2 border-resolve-ink pl-4 text-[1.02rem] leading-relaxed text-resolve-dim min-[1081px]:w-[72%]">
           {report.citation}
         </blockquote>
         <p className="mt-4 text-[.94rem] leading-[1.55] text-resolve-dim">
@@ -248,12 +248,12 @@ function ReportPage({ report }: { report: CmsResearchReport }) {
         <CopyActions citation={report.citation} url={report.canonicalUrl} />
       </CommercialSection>
 
-      <CommercialSection tone="ground">
+      <CommercialSection tone="paper">
         <ChapterLabel>About the author</ChapterLabel>
         <ResearchAuthor author={report.author} />
       </CommercialSection>
 
-      <CommercialSection tone="paper">
+      <CommercialSection tone="ground">
         <ChapterLabel>For journalists</ChapterLabel>
         <Display>Media enquiries.</Display>
         <div className="mt-6">
@@ -262,7 +262,7 @@ function ReportPage({ report }: { report: CmsResearchReport }) {
       </CommercialSection>
 
       {report.relatedResearch.length > 0 ? (
-        <CommercialSection tone="ground">
+        <CommercialSection tone="paper">
           <ChapterLabel>Related research</ChapterLabel>
           <EntryList
             entries={report.relatedResearch.map((item) => ({
@@ -275,9 +275,9 @@ function ReportPage({ report }: { report: CmsResearchReport }) {
         </CommercialSection>
       ) : null}
 
-      <CommercialSection tone="paper">
+      <CommercialSection tone="ground">
         <ChapterLabel>Next</ChapterLabel>
-        <p className="mt-4 max-w-[58ch] text-[1.02rem] leading-relaxed text-resolve-dim">
+        <p className="mt-4 w-full text-[1.02rem] leading-relaxed text-resolve-dim min-[1081px]:w-[72%]">
           If you want to compare how your own marketing is measured against what this research describes,
           start with how conversion work is run.
         </p>

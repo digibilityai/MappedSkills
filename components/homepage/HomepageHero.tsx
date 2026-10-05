@@ -47,7 +47,7 @@ export function HomepageHero() {
     <HeroSurface className="rsv-sw py-0">
       <script dangerouslySetInnerHTML={{ __html: HERO_FIRST_PAINT }} />
       <Container className="max-w-[1400px] px-[var(--resolve-pad)]">
-        <div className="pb-[clamp(34px,5vw,78px)] pt-[clamp(30px,4.6vw,66px)]">
+        <div className="pb-[65px] pt-[70px]">
           <h1 className="max-w-[15ch] text-[clamp(2.55rem,7vw,6.4rem)] font-extrabold leading-[0.95] tracking-[-0.035em] text-balance">
             Judge us on the{' '}
             <span className="whitespace-nowrap">

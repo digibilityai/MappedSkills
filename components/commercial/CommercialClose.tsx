@@ -61,7 +61,7 @@ export function CommercialClose({
   mode?: OpenerMode;
 }) {
   return (
-    <section className="border-t-2 border-resolve-ink bg-resolve-ground py-[clamp(48px,6.4vw,110px)] text-resolve-ink">
+    <section className="border-t-2 border-resolve-ink bg-resolve-ground py-[50px] text-resolve-ink">
       <Container className="max-w-[1400px] px-[var(--resolve-pad)]">
         <div className={OPENER_GRID[mode]}>
           {/* The rail: the chapter label, and in `split` the closing heading
@@ -81,8 +81,8 @@ export function CommercialClose({
             {mode !== 'split' && (
               <p
                 className={cn(
-                  'm-0 mt-[18px] max-w-[20ch] font-heading text-[clamp(1.8rem,3.8vw,3rem)] font-extrabold leading-[0.99] tracking-[-0.038em]',
-                  mode === 'centred' && 'min-[1081px]:mx-auto',
+                  'm-0 mt-[18px] font-heading text-[clamp(1.8rem,3.8vw,3rem)] font-extrabold leading-[0.99] tracking-[-0.038em]',
+                  mode === 'centred' ? 'max-w-[26ch] min-[1081px]:mx-auto' : 'max-w-[20ch]',
                   mode === 'offset' && 'min-[1081px]:mt-0'
                 )}
               >
@@ -91,8 +91,8 @@ export function CommercialClose({
             )}
             <p
               className={cn(
-                'mt-[20px] max-w-[52ch] text-[clamp(1.02rem,1.2vw,1.16rem)] leading-relaxed text-resolve-dim',
-                mode === 'centred' && 'min-[1081px]:mx-auto',
+                'mt-[20px] leading-relaxed text-resolve-dim',
+                mode === 'centred' ? 'max-w-[60ch] min-[1081px]:mx-auto' : 'max-w-[52ch]',
                 mode === 'split' && 'min-[1081px]:mt-0'
               )}
             >

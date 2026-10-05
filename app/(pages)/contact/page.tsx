@@ -98,7 +98,7 @@ export default function ContactPage() {
       />
 
       {/* ------------------------------------------------------------- §1 */}
-      <section className="border-t border-resolve-line bg-resolve-paper py-[clamp(40px,5vw,88px)] text-resolve-ink">
+      <section className="border-t border-resolve-line bg-resolve-paper py-[50px] text-resolve-ink">
         <Container className="max-w-[1400px] px-[var(--resolve-pad)]">
           <div className="max-w-[62ch]">
             <ChapterLabel>Send us your situation</ChapterLabel>

@@ -1,4 +1,4 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { Section } from '@/components/Section';
 import { Container } from '@/components/Container';
@@ -78,21 +78,21 @@ export default function PrivacyPolicyPage() {
       </Section>
 
       {/* Hero Section */}
-      <Section>
-        <Container>
-          <div className="max-w-3xl">
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+      <section className="bg-resolve-ground pb-[65px] pt-[70px] text-resolve-ink">
+        <Container className="max-w-[1400px] px-[var(--resolve-pad)]">
+          <div className="max-w-full text-left min-[1081px]:max-w-[60vw]">
+            <h1 className="m-0 font-heading text-[clamp(2rem,4.6vw,3.9rem)] font-extrabold leading-[0.98] tracking-[-0.038em]">
               Privacy Policy
             </h1>
-            <p className="text-lg text-muted-foreground mb-6">
+            <p className="mt-4 text-sm text-resolve-dim font-medium">
               Last Updated: May 2026
             </p>
-            <p className="text-base text-foreground leading-relaxed">
+            <p className="mt-4 leading-relaxed text-resolve-dim">
               This Privacy Policy explains how MappedSkills Marketing collects, uses, stores, and protects information when you visit our website, contact us, submit a form, book a strategy call, or interact with our marketing content.
             </p>
           </div>
         </Container>
-      </Section>
+      </section>
 
       {/* Table of Contents */}
       <Section className="bg-secondary/5">

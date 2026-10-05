@@ -1,12 +1,6 @@
 import type { ReactNode } from 'react';
 import { Container } from '@/components/layout/Container';
-import {
-  ActionPair,
-  OPENER_GRID,
-  OPENER_MAIN,
-  OPENER_RAIL,
-  type OpenerMode,
-} from '@/components/commercial/primitives';
+import { ActionPair, type OpenerMode } from '@/components/commercial/primitives';
 import { hasContent } from '@/lib/has-content';
 import { cn } from '@/lib/utils';
 
@@ -51,53 +45,25 @@ export function CommercialHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="bg-resolve-ground pb-[clamp(44px,6vw,96px)] pt-[clamp(32px,4.4vw,72px)] text-resolve-ink">
+    <section className="bg-resolve-ground pb-[65px] pt-[70px] text-resolve-ink">
       <Container className="max-w-[1400px] px-[var(--resolve-pad)]">
-        <div className={OPENER_GRID[mode]}>
-          {/* THE RAIL. `split` carries the eyebrow and the H1 — the move-1
-              "confirm the searched capability" half. `offset` carries the
-              eyebrow alone and the H1 joins the reading column. Both always
-              have content, so neither can render an empty column. */}
-          <div className={OPENER_RAIL[mode]}>
-            <p className="m-0 block text-[.82rem] font-semibold uppercase leading-[1.4] tracking-[0.16em] text-resolve-dim">
-              {eyebrow}
-            </p>
-            {mode === 'split' && hasContent(title) && (
-              <h1 className="m-0 mt-[clamp(14px,1.8vw,22px)] max-w-[19ch] font-heading text-[clamp(2rem,3.4vw,3.1rem)] font-extrabold leading-[1.0] tracking-[-0.038em]">
-                {title}
-              </h1>
-            )}
+        {/* One left column at ~60% of the viewport. `mode` stays on the API so
+            existing routes do not change props; it no longer centres or splits
+            the opener. */}
+        <div className={cn('max-w-full text-left min-[1081px]:max-w-[60vw]', mode === 'editorial' && 'text-left')}>
+          <p className="m-0 block text-[.82rem] font-semibold uppercase leading-[1.4] tracking-[0.16em] text-resolve-dim">
+            {eyebrow}
+          </p>
+          {hasContent(title) && (
+            <h1 className="m-0 mt-[clamp(14px,1.8vw,22px)] font-heading text-[clamp(2rem,4.6vw,3.9rem)] font-extrabold leading-[0.98] tracking-[-0.038em]">
+              {title}
+            </h1>
+          )}
+          <div className="mt-[clamp(20px,2.4vw,30px)] leading-relaxed text-resolve-dim [&>p+p]:mt-4">
+            {hasContent(lede) && <p className="m-0">{lede}</p>}
+            {children}
           </div>
-
-          <div className={cn(OPENER_MAIN[mode], mode === 'offset' && 'max-[1080px]:mt-0')}>
-            {mode !== 'split' && hasContent(title) && (
-              <h1
-                className={cn(
-                  'm-0 mt-[clamp(14px,1.8vw,22px)] font-heading text-[clamp(2rem,4.6vw,3.9rem)] font-extrabold leading-[0.98] tracking-[-0.038em]',
-                  mode === 'centred' ? 'max-w-[19ch] min-[1081px]:mx-auto' : 'max-w-[19ch]',
-                  /* At WIDE the rail already supplies the gap under the eyebrow,
-                     so the H1 must not add a second one on top of it. */
-                  mode === 'offset' && 'min-[1081px]:mt-0'
-                )}
-              >
-                {title}
-              </h1>
-            )}
-            <div
-              className={cn(
-                'mt-[clamp(20px,2.4vw,30px)] max-w-[58ch] text-[clamp(1.04rem,1.25vw,1.2rem)] leading-relaxed text-resolve-dim [&>p+p]:mt-4',
-                mode === 'centred' && 'min-[1081px]:mx-auto',
-                /* In `split` the reading column starts level with the rail. */
-                mode === 'split' && 'min-[1081px]:mt-0'
-              )}
-            >
-              {hasContent(lede) && <p className="m-0">{lede}</p>}
-              {children}
-            </div>
-            <div className={cn(mode === 'centred' && 'min-[1081px]:[&>div]:justify-center')}>
-              <ActionPair primaryLabel={action} />
-            </div>
-          </div>
+          <ActionPair primaryLabel={action} />
         </div>
       </Container>
     </section>

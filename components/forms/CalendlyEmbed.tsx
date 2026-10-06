@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useState } from 'react';
 import { Card } from '@/components/ui/card';
@@ -9,6 +9,14 @@ interface CalendlyEmbedProps {
   url?: string;
 }
 
+declare global {
+  interface Window {
+    Calendly?: {
+      initBadgeWidget: (options: { url: string; text: string; color: string }) => void;
+    };
+  }
+}
+
 export function CalendlyEmbed({ url }: CalendlyEmbedProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasCalendlyUrl, setHasCalendlyUrl] = useState(false);
@@ -16,6 +24,7 @@ export function CalendlyEmbed({ url }: CalendlyEmbedProps) {
   useEffect(() => {
     // Check if Calendly URL is configured
     if (!url) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsLoading(false);
       setHasCalendlyUrl(false);
       return;
@@ -30,8 +39,8 @@ export function CalendlyEmbed({ url }: CalendlyEmbedProps) {
     script.onload = () => {
       setIsLoading(false);
       // Re-initialize Calendly after script loads
-      if (typeof window !== 'undefined' && (window as any).Calendly) {
-        (window as any).Calendly.initBadgeWidget({
+      if (typeof window !== 'undefined' && window.Calendly) {
+        window.Calendly.initBadgeWidget({
           url,
           text: 'Schedule Time With Me',
           color: '#C41E3A',

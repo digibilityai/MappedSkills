@@ -371,7 +371,7 @@ export default function PrivacyPolicyPage() {
 
             {/* Section 11: Children's Privacy */}
             <div id="childrens-privacy">
-              <h2 className="text-2xl font-bold mb-4">Children's Privacy</h2>
+              <h2 className="text-2xl font-bold mb-4">Children&apos;s Privacy</h2>
               <p className="text-foreground leading-relaxed">
                 MappedSkills Marketing does not knowingly collect personal information from children. The website and services are intended for business owners, professionals, and organizations.
               </p>
@@ -389,7 +389,7 @@ export default function PrivacyPolicyPage() {
             <div id="policy-updates">
               <h2 className="text-2xl font-bold mb-4">Policy Updates</h2>
               <p className="text-foreground leading-relaxed">
-                We may update this Privacy Policy from time to time. Updates will be reflected by changing the "Last Updated" date on this page.
+                We may update this Privacy Policy from time to time. Updates will be reflected by changing the &quot;Last Updated&quot; date on this page.
               </p>
             </div>
 

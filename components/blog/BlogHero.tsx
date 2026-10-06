@@ -1,4 +1,5 @@
-﻿import { Badge } from '@/components/ui/badge';
+import Link from 'next/link';
+import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, User } from 'lucide-react';
 
 interface BlogHeroProps {
@@ -25,9 +26,9 @@ export function BlogHero({
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
-          <a href="/" className="hover:text-foreground">Home</a>
+          <Link href="/" className="hover:text-foreground">Home</Link>
           <span>/</span>
-          <a href="/blog" className="hover:text-foreground">Blog</a>
+          <Link href="/blog" className="hover:text-foreground">Blog</Link>
           <span>/</span>
           <span className="text-foreground">{title}</span>
         </div>

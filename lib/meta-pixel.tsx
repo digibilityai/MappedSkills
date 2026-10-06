@@ -68,9 +68,15 @@ export function MetaPixel() {
   return null;
 }
 
+declare global {
+  interface Window {
+    fbq?: (command: string, eventName: string, data?: Record<string, unknown>) => void;
+  }
+}
+
 // Helper function to track custom events
-export function trackMetaPixelEvent(eventName: string, data?: Record<string, any>) {
-  if (typeof window !== 'undefined' && (window as any).fbq) {
-    (window as any).fbq('track', eventName, data);
+export function trackMetaPixelEvent(eventName: string, data?: Record<string, unknown>) {
+  if (typeof window !== 'undefined' && window.fbq) {
+    window.fbq('track', eventName, data);
   }
 }

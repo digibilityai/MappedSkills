@@ -60,6 +60,7 @@ export function ConsentProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const stored = readStoredConsent();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setState(stored);
     setHydrated(true);
     // Asked only when there is no decision on record. A stored refusal silences

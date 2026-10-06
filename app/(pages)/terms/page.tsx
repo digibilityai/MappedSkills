@@ -392,7 +392,7 @@ export default function TermsPage() {
             <div id="changes-terms">
               <h2 className="text-2xl font-bold mb-4">Changes to Terms</h2>
               <p className="text-foreground leading-relaxed">
-                MappedSkills may update these Terms from time to time. Updates will be reflected by changing the "Last Updated" date on this page.
+                MappedSkills may update these Terms from time to time. Updates will be reflected by changing the &quot;Last Updated&quot; date on this page.
               </p>
             </div>
 

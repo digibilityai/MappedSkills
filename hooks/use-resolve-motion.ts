@@ -58,6 +58,7 @@ export function useResolveMotion(): ResolveMotionState {
 
   useEffect(() => {
     if (typeof window.matchMedia !== 'function') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setState({ mounted: true, reduced: false, enabled: true });
       return;
     }

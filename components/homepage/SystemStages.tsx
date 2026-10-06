@@ -55,6 +55,7 @@ export function SystemStages({ stages, chain }: { stages: Stage[]; chain: React.
      HomepageMotion for the reasoning; F1 is the largest object on the page and
      re-arming it under a reader's eyes is the most visible version of the bug. */
   const armingAllowed = useRef<boolean | null>(null);
+  const [armingAllowedState, setArmingAllowedState] = useState<boolean | null>(null);
   const listRef = useRef<HTMLUListElement | null>(null);
   const chainRef = useRef<HTMLDivElement | null>(null);
   const sectionRef = useRef<HTMLDivElement | null>(null);
@@ -64,11 +65,11 @@ export function SystemStages({ stages, chain }: { stages: Stage[]; chain: React.
   // reader would never be shown stages 01 and 02, so all three are composed
   // open and nothing is `inert`.
   //
-  // PHASE E: `armingAllowed.current === false` means motion was unavailable on
+  // PHASE E: `armingAllowedState === false` means motion was unavailable on
   // the reader's first paint, so all three readings were composed open for
   // them. If they later turn reduced motion off, those panels stay open — the
   // page does not take back content it has already shown.
-  const allOpen = !mounted || reduced || armingAllowed.current === false;
+  const allOpen = !mounted || reduced || armingAllowedState === false;
 
   const select = useCallback((next: number, fromUser: boolean) => {
     if (fromUser) autoStage.current = false;
@@ -77,7 +78,10 @@ export function SystemStages({ stages, chain }: { stages: Stage[]; chain: React.
 
   useEffect(() => {
     if (!mounted) return;
-    if (armingAllowed.current === null) armingAllowed.current = enabled;
+    if (armingAllowed.current === null) {
+      armingAllowed.current = enabled;
+      setArmingAllowedState(enabled);
+    }
 
     const registry = createResolveViewRegistry();
     const timers: ReturnType<typeof setTimeout>[] = [];
@@ -159,7 +163,6 @@ export function SystemStages({ stages, chain }: { stages: Stage[]; chain: React.
       composeSystem();
       return;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mounted, enabled]);
 
   const onTabKey = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {

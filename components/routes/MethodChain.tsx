@@ -38,7 +38,6 @@ import type { ReactNode } from 'react';
 const INK = 'var(--resolve-ink)';
 const GAP = 'var(--resolve-gap)';
 const DIM = 'var(--resolve-dim)';
-const OWN = 'var(--resolve-accent-deep)';
 
 const nodeText = { fontSize: 12, fontWeight: 600, fill: DIM } as const;
 const smallText = { fontSize: 11, fontWeight: 600, fill: GAP } as const;

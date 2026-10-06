@@ -1,3 +1,4 @@
+import React from 'react';
 import { documentToReactComponents, type Options } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, INLINES, type Document } from '@contentful/rich-text-types';
 import type {
@@ -39,16 +40,37 @@ function isImageAsset(asset: ContentfulAsset) {
   return /\.(png|jpe?g|gif|webp|svg|avif)(\?|$)/i.test(asset.url || '');
 }
 
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function getNodeText(node: React.ReactNode): string {
+  if (typeof node === 'string' || typeof node === 'number') {
+    return String(node);
+  }
+  if (Array.isArray(node)) {
+    return node.map(getNodeText).join('');
+  }
+  if (React.isValidElement<{ children?: React.ReactNode }>(node) && node.props && node.props.children) {
+    return getNodeText(node.props.children);
+  }
+  return '';
+}
+
 export function RichTextContent({ document, links }: RichTextContentProps) {
   const assetMap = getAssetMap(links);
   const entryMap = getEntryMap(links);
-  let headingIndex = 0;
 
   const options: Options = {
     renderNode: {
       [BLOCKS.HEADING_2]: (_node, children) => {
-        const id = `section-${headingIndex}`;
-        headingIndex += 1;
+        const text = getNodeText(children);
+        const id = slugify(text) || 'heading-2';
         return (
           <h2 id={id} className="scroll-mt-28 text-2xl sm:text-3xl font-bold font-heading tracking-tight mt-10 mb-4">
             {children}
@@ -56,8 +78,8 @@ export function RichTextContent({ document, links }: RichTextContentProps) {
         );
       },
       [BLOCKS.HEADING_3]: (_node, children) => {
-        const id = `section-${headingIndex}`;
-        headingIndex += 1;
+        const text = getNodeText(children);
+        const id = slugify(text) || 'heading-3';
         return (
           <h3 id={id} className="scroll-mt-28 text-xl sm:text-2xl font-bold font-heading tracking-tight mt-8 mb-3">
             {children}

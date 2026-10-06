@@ -21,6 +21,7 @@ export function TeamCard({
     <Card className="p-6 sm:p-8 text-center hover:shadow-lg transition-shadow flex flex-col">
       <div className="mb-4 flex justify-center">
         {imageUrl ? (
+          /* eslint-disable-next-line @next/next/no-img-element */
           <img 
             src={imageUrl} 
             alt={name}

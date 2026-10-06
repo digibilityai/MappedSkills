@@ -198,26 +198,30 @@ function ReportPage({ report }: { report: CmsResearchReport }) {
       ) : null}
 
       {isDocumentPopulated(report.methodologyJson) && report.methodologyJson ? (
-        <CommercialSection tone="paper">
+        <CommercialSection tone="paper" id="methodology">
           <ChapterLabel>Methodology</ChapterLabel>
-          <ResearchRichText
-            className="mt-3"
-            idPrefix="method"
-            document={report.methodologyJson}
-            links={report.methodologyLinks}
-          />
+          <Display>Research framework and data collection.</Display>
+          <div className="mt-6 rounded-xl border border-resolve-line bg-resolve-ground p-[clamp(20px,3vw,36px)] border-l-4 border-l-resolve-ink min-[1081px]:max-w-[85%]">
+            <ResearchRichText
+              idPrefix="method"
+              document={report.methodologyJson}
+              links={report.methodologyLinks}
+            />
+          </div>
         </CommercialSection>
       ) : null}
 
       {hasLimitations && report.limitationsJson ? (
-        <CommercialSection tone="ground">
+        <CommercialSection tone="ground" id="limitations">
           <ChapterLabel>Limitations</ChapterLabel>
-          <ResearchRichText
-            className="mt-3"
-            idPrefix="limits"
-            document={report.limitationsJson}
-            links={report.limitationsLinks}
-          />
+          <Display>Where the observation &amp; data stops.</Display>
+          <div className="mt-6 rounded-xl border border-resolve-line bg-resolve-paper p-[clamp(20px,3vw,36px)] border-l-4 border-l-[var(--resolve-accent-deep)] min-[1081px]:max-w-[85%]">
+            <ResearchRichText
+              idPrefix="limits"
+              document={report.limitationsJson}
+              links={report.limitationsLinks}
+            />
+          </div>
         </CommercialSection>
       ) : null}
 

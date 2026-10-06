@@ -180,14 +180,16 @@ function ReportPage({ report }: { report: CmsResearchReport }) {
       ) : null}
 
       {isDocumentPopulated(report.executiveSummaryJson) && report.executiveSummaryJson ? (
-        <CommercialSection tone="paper">
-          <ChapterLabel>Executive summary</ChapterLabel>
-          <ResearchRichText
-            className="mt-3"
-            idPrefix="summary"
-            document={report.executiveSummaryJson}
-            links={report.executiveSummaryLinks}
-          />
+        <CommercialSection tone="paper" id="executive-summary">
+          <ChapterLabel>Overview</ChapterLabel>
+          <Display className="max-w-none">Executive Summary</Display>
+          <div className="mt-6">
+            <ResearchRichText
+              idPrefix="summary"
+              document={report.executiveSummaryJson}
+              links={report.executiveSummaryLinks}
+            />
+          </div>
         </CommercialSection>
       ) : null}
 

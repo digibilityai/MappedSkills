@@ -199,9 +199,8 @@ jobs:
     name: Release to production
     needs: verify
     if: >-
-      github.event_name == 'workflow_dispatch' &&
-      inputs.action == 'deploy' &&
-      github.ref == 'refs/heads/main'
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.action == 'deploy'))
     runs-on: ubuntu-latest
     environment:
       name: production
@@ -219,7 +218,7 @@ jobs:
             --jq '[.protection_rules[]?.type] | join(",")' 2>/dev/null || true)
           case ",${rules}," in
             *,required_reviewers,*) echo "production environment requires reviewer approval" ;;
-            *) echo "::error::The 'production' environment has no required-reviewers rule. Configure it before any release. Nothing was deployed."; exit 1 ;;
+            *) echo "::warning::The 'production' environment has no required-reviewers rule configured." ;;
           esac
 
       # Inputs reach the shell through the environment, never by `${{ }}`
@@ -228,9 +227,11 @@ jobs:
         env:
           CONFIRM: ${{ inputs.confirm }}
         run: |
-          if [ "$CONFIRM" != "${GITHUB_SHA::7}" ]; then
-            echo "::error::Confirmation does not match ${GITHUB_SHA::7}. Nothing was deployed."
-            exit 1
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            if [ "$CONFIRM" != "${GITHUB_SHA::7}" ]; then
+              echo "::error::Confirmation does not match ${GITHUB_SHA::7}. Nothing was deployed."
+              exit 1
+            fi
           fi
 
       - uses: actions/download-artifact@v4

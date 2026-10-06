@@ -95,8 +95,8 @@ export function mapContentfulPostToCms(post: ContentfulPost): CmsBlogPost | null
 
   const firstPublished = post.sys.firstPublishedAt || post.sys.publishedAt || '';
   const lastPublished = post.sys.publishedAt || post.sys.firstPublishedAt || '';
-  const publishedDate = formatContentfulDate(firstPublished);
-  const updatedDate = formatContentfulDate(lastPublished);
+  const publishedDate = formatContentfulDate(firstPublished) || 'Draft';
+  const updatedDate = formatContentfulDate(lastPublished) || 'Draft';
   const contentJson = post.content?.json ?? null;
   const tableOfContents = extractTocFromDocument(contentJson);
   const featuredImageUrl = post.featuredImage?.url || '';
@@ -320,7 +320,7 @@ export function mapContentfulReportToCard(
     excerpt: report.excerpt?.trim() || '',
     categoryName: report.researchCategory?.researchCategoryName?.trim() || undefined,
     categorySlug: report.researchCategory?.slug?.trim() || undefined,
-    publishedDate: formatContentfulDate(firstPublished),
+    publishedDate: formatContentfulDate(firstPublished) || 'Draft',
     href: `/research/${slug}`,
     featured: 'featured' in report ? Boolean((report as ContentfulResearchReport).featured) : undefined,
   };
@@ -371,7 +371,7 @@ export function mapContentfulReportToCms(report: ContentfulResearchReport): CmsR
       description: report.author?.description || undefined,
       profileUrl: report.author?.profile?.url || undefined,
     },
-    publishedDate: formatContentfulDate(firstPublished),
+    publishedDate: formatContentfulDate(firstPublished) || 'Draft',
     publishedAtISO: firstPublished,
     updatedAtISO: lastPublished,
     researchPeriod: report.researchPeriod?.trim() || undefined,
@@ -413,7 +413,7 @@ export function mapContentfulPressToCard(entry: ContentfulPressRelease): CmsPres
     slug,
     headline,
     excerpt: entry.excerpt?.trim() || '',
-    publishedDate: formatContentfulDate(firstPublished),
+    publishedDate: formatContentfulDate(firstPublished) || 'Draft',
     href: `/press/${slug}`,
   };
 }
@@ -443,7 +443,7 @@ export function mapContentfulPressToCms(entry: ContentfulPressRelease): CmsPress
     slug: entry.slug,
     headline: entry.headline,
     excerpt,
-    publishedDate: formatContentfulDate(firstPublished),
+    publishedDate: formatContentfulDate(firstPublished) || 'Draft',
     publishedAtISO: firstPublished,
     updatedAtISO: lastPublished,
     featuredImage: mapContentfulAssetToFile(entry.featuredImage),

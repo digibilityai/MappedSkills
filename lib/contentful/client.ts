@@ -2,14 +2,18 @@ const DEFAULT_REVALIDATE_SECONDS = 60;
 
 export function getContentfulConfig() {
   const spaceId = process.env.CONTENTFUL_SPACE_ID;
-  const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
+  const previewToken = process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN;
+  const deliveryToken = process.env.CONTENTFUL_ACCESS_TOKEN;
   const environment = process.env.CONTENTFUL_ENVIRONMENT || 'master';
+
+  const isPreview = Boolean(previewToken && previewToken.trim().length > 0);
+  const accessToken = isPreview ? previewToken : deliveryToken;
 
   if (!spaceId || !accessToken) {
     return null;
   }
 
-  return { spaceId, accessToken, environment };
+  return { spaceId, accessToken, environment, isPreview };
 }
 
 export function getContentfulGraphqlEndpoint() {
@@ -32,9 +36,16 @@ export async function contentfulGraphql<T>(
   const endpoint = getContentfulGraphqlEndpoint();
 
   if (!config || !endpoint) {
-    console.warn('[contentful] Missing CONTENTFUL_SPACE_ID or CONTENTFUL_ACCESS_TOKEN');
+    console.warn('[contentful] Missing CONTENTFUL_SPACE_ID or CONTENTFUL_ACCESS_TOKEN / CONTENTFUL_PREVIEW_ACCESS_TOKEN');
     return null;
   }
+
+  const queryVariables = {
+    preview: config.isPreview,
+    ...variables,
+  };
+
+  const fetchRevalidate = config.isPreview ? 0 : revalidate;
 
   const response = await fetch(endpoint, {
     method: 'POST',
@@ -42,8 +53,10 @@ export async function contentfulGraphql<T>(
       Authorization: `Bearer ${config.accessToken}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ query, variables }),
-    next: { revalidate },
+    body: JSON.stringify({ query, variables: queryVariables }),
+    ...(fetchRevalidate === 0
+      ? { cache: 'no-store' as const }
+      : { next: { revalidate: fetchRevalidate } }),
   });
 
   if (!response.ok) {

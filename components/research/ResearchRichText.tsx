@@ -216,7 +216,7 @@ export function ResearchRichText({ document, links, idPrefix = 'research', class
               loading="lazy"
             />
             {(asset.description || asset.title) && (
-              <figcaption className="border-t border-resolve-line px-0 py-3 w-full text-[.9rem] leading-[1.55] text-resolve-dim">
+              <figcaption className="border-t border-resolve-line px-[clamp(14px,1.8vw,20px)] py-3 w-full text-[.9rem] leading-[1.55] text-resolve-dim">
                 {asset.description || asset.title}
               </figcaption>
             )}

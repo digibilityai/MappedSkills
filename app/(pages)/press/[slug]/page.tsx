@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { siteMetadata } from '@/lib/metadata';
+import { resolveOgImageUrl, siteMetadata } from '@/lib/metadata';
 import { generateNewsArticleSchema } from '@/lib/schema';
 import {
   CommercialSection,
@@ -33,8 +33,10 @@ export async function generateMetadata({ params }: PressReleasePageProps): Promi
   const title = release.metaTitle;
   const description = release.metaDescription;
   const ogImage = release.featuredImage?.url;
+  const resolvedOgImage = resolveOgImageUrl(ogImage);
 
   return {
+    metadataBase: new URL(siteMetadata.baseUrl),
     title,
     description,
     alternates: { canonical: release.canonicalUrl },
@@ -46,15 +48,18 @@ export async function generateMetadata({ params }: PressReleasePageProps): Promi
       publishedTime: release.publishedAtISO || undefined,
       modifiedTime: release.updatedAtISO || undefined,
       siteName: siteMetadata.siteName,
-      images: ogImage
-        ? [{ url: ogImage, alt: release.featuredImage?.description || release.headline }]
-        : undefined,
+      images: [
+        {
+          url: resolvedOgImage,
+          alt: release.featuredImage?.description || release.headline,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: ogImage ? [ogImage] : undefined,
+      images: [resolvedOgImage],
     },
     authors: release.author ? [{ name: release.author.name, url: `${siteMetadata.baseUrl}/about` }] : undefined,
     publisher: siteMetadata.siteName,

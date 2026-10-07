@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { createMetadata, siteMetadata } from '@/lib/metadata';
+import { createMetadata, resolveOgImageUrl, siteMetadata } from '@/lib/metadata';
 import { generateResearchReportSchema } from '@/lib/schema';
 import {
   CommercialSection,
@@ -49,8 +49,10 @@ export async function generateMetadata({ params }: ResearchSlugPageProps): Promi
   const title = resolved.report.metaTitle;
   const description = resolved.report.metaDescription;
   const ogImage = resolved.report.featuredImage?.url;
+  const resolvedOgImage = resolveOgImageUrl(ogImage);
 
   return {
+    metadataBase: new URL(siteMetadata.baseUrl),
     title,
     description,
     alternates: { canonical: resolved.report.canonicalUrl },
@@ -62,13 +64,18 @@ export async function generateMetadata({ params }: ResearchSlugPageProps): Promi
       publishedTime: resolved.report.publishedAtISO || undefined,
       modifiedTime: resolved.report.updatedAtISO || undefined,
       siteName: siteMetadata.siteName,
-      images: ogImage ? [{ url: ogImage, alt: resolved.report.featuredImage?.description || resolved.report.title }] : undefined,
+      images: [
+        {
+          url: resolvedOgImage,
+          alt: resolved.report.featuredImage?.description || resolved.report.title,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: ogImage ? [ogImage] : undefined,
+      images: [resolvedOgImage],
     },
     authors: [{ name: resolved.report.author.name, url: `${siteMetadata.baseUrl}/about` }],
     publisher: siteMetadata.siteName,

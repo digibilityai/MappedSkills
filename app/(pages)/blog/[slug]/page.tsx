@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { siteMetadata } from '@/lib/metadata';
+import { resolveOgImageUrl, siteMetadata } from '@/lib/metadata';
 import {
   getBlogDetailPost,
   getBlogStaticParams,
@@ -63,8 +63,10 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const title = post.metaTitle || post.title;
   const description = post.metaDescription || post.excerpt;
   const ogImage = post.openGraphImage || post.featuredImageUrl;
+  const resolvedOgImage = resolveOgImageUrl(ogImage);
 
   return {
+    metadataBase: new URL(siteMetadata.baseUrl),
     title,
     description,
     keywords: post.focusKeyword ? [post.focusKeyword] : undefined,
@@ -78,26 +80,24 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       type: 'article',
       publishedTime: post.publishedAtISO,
       modifiedTime: post.updatedAtISO,
-      siteName: 'MappedSkills',
-      images: ogImage
-        ? [
-            {
-              url: ogImage,
-              width: 1200,
-              height: 630,
-              alt: post.featuredImageAlt,
-            },
-          ]
-        : undefined,
+      siteName: siteMetadata.siteName,
+      images: [
+        {
+          url: resolvedOgImage,
+          width: 1200,
+          height: 630,
+          alt: post.featuredImageAlt || title,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: ogImage ? [ogImage] : undefined,
+      images: [resolvedOgImage],
     },
     authors: [{ name: post.author.name }],
-    publisher: 'MappedSkills',
+    publisher: siteMetadata.siteName,
   };
 }
 

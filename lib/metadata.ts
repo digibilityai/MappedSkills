@@ -4,15 +4,38 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://mappedskills.com';
 const siteName = 'MappedSkills';
 const author = 'MappedSkills';
 
+export function resolveOgImageUrl(image?: string | null): string {
+  const fallback = siteMetadata.faviconPath;
+  const rawImage = image || fallback;
+
+  if (!rawImage) {
+    return `${baseUrl}/ms_icon.webp`;
+  }
+
+  if (rawImage.startsWith('//')) {
+    return `https:${rawImage}`;
+  }
+
+  if (rawImage.startsWith('http://') || rawImage.startsWith('https://')) {
+    return rawImage;
+  }
+
+  const cleanPath = rawImage.startsWith('/') ? rawImage : `/${rawImage}`;
+  return `${baseUrl}${cleanPath}`;
+}
+
 export function createMetadata(
   title: string,
   description: string,
-  path: string = '/'
+  path: string = '/',
+  image?: string | null
 ): Metadata {
   const url = `${baseUrl}${path}`;
   const fullTitle = `${title}`;
+  const ogImageUrl = resolveOgImageUrl(image);
 
   return {
+    metadataBase: new URL(baseUrl),
     title,
     description,
     // SESSION 33 — PHASE I. A stray top-level `canonical` key was here. It is
@@ -38,11 +61,18 @@ export function createMetadata(
       siteName,
       type: 'website',
       locale: 'en_US',
+      images: [
+        {
+          url: ogImageUrl,
+          alt: title,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: fullTitle,
       description,
+      images: [ogImageUrl],
     },
     alternates: {
       canonical: url,

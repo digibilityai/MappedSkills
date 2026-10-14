@@ -36,26 +36,28 @@ import { cn } from '@/lib/utils';
    address — rather than being silently dropped from the emitted trail. */
 export type Crumb = { name: string; href: string | null };
 
-export function RouteBreadcrumb({ trail }: { trail: Crumb[] }) {
+/* UI Revamp Gate 4 B4: the trail's `BreadcrumbList` is exported so the
+   Direction C crumb (components/direction-c/primitives.tsx `Crumb` with a
+   `trail`) emits the SAME structured data from the same code. This
+   component's output is unchanged. */
+export function routeTrailJsonLd(trail: Crumb[]) {
   const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://mappedskills.com';
+  return JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: trail.map((crumb, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: crumb.name,
+      ...(crumb.href ? { item: `${base}${crumb.href === '/' ? '' : crumb.href}` } : {}),
+    })),
+  });
+}
 
+export function RouteBreadcrumb({ trail }: { trail: Crumb[] }) {
   return (
     <nav aria-label="Breadcrumb" className="border-b border-resolve-line bg-resolve-ground">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'BreadcrumbList',
-            itemListElement: trail.map((crumb, i) => ({
-              '@type': 'ListItem',
-              position: i + 1,
-              name: crumb.name,
-              ...(crumb.href ? { item: `${base}${crumb.href === '/' ? '' : crumb.href}` } : {}),
-            })),
-          }),
-        }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: routeTrailJsonLd(trail) }} />
       <Container className="max-w-[1400px] px-[var(--resolve-pad)]">
         {/* 40px minimum height on every crumb: Phase B's floor is "0 targets
             under 40x40" and a 26px-tall breadcrumb link fails it. */}

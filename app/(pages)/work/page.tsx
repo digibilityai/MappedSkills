@@ -152,14 +152,14 @@ export default async function WorkPage() {
               Our own enquiry path, diagnosed in public
             </h2>
             <p className="mt-3 max-w-[62ch] text-[1.02rem] leading-relaxed text-resolve-dim">
-              We ran the five checks we publish on our own site before offering them to anyone. Four of the
-              five failed. The contact form showed a success message and transmitted nothing, so every enquiry
+              We ran five checks on our own site before offering them to anyone. Four of the five
+              failed. The contact form showed a success message and transmitted nothing, so every enquiry
               it received was lost while the visitor was told it had worked.{' '}
               <Link
                 href="/problems/traffic-but-no-enquiries"
                 className="font-semibold text-resolve-ink underline decoration-2 underline-offset-4"
               >
-                The checks themselves
+                Quick checks you can run yourself
               </Link>
               .
             </p>

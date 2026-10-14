@@ -1,11 +1,6 @@
-import { HomepageHero } from '@/components/homepage/HomepageHero';
-import { HomepageActivity } from '@/components/homepage/HomepageActivity';
-import { HomepageFriction } from '@/components/homepage/HomepageFriction';
-import { HomepageIntervention } from '@/components/homepage/HomepageIntervention';
-import { HomepageAccountability } from '@/components/homepage/HomepageAccountability';
-import { HomepageFinalCTA } from '@/components/homepage/HomepageFinalCTA';
-import { HomepageMotion } from '@/components/homepage/HomepageMotion';
 import { createMetadata } from '@/lib/metadata';
+import { CplusPage } from '@/components/cplus/CplusPage';
+import { HomeBody } from '@/components/cplus/home/HomeBody';
 
 // Must be a literal — Next.js cannot follow imported identifiers for route segment config
 export const revalidate = 60;
@@ -17,38 +12,15 @@ export const metadata = createMetadata(
 );
 
 /**
- * SESSION 25 — PHASE C — HOMEPAGE STATIC TRANSLATION.
- * SESSION 26 — PHASE D — MOTION + INTERACTION, as progressive enhancement.
- *
- * Translates the approved Resolve homepage (docs/26-resolve-homepage/prototype/index.html,
- * Gate 10, DEC-019) into production Next.js. Phase C built the static page;
- * Phase D adds the approved Resolve motion ON TOP of it without changing it —
- * see docs/27-production-translation/14_PHASE_D_HOMEPAGE_MOTION.md. Forms,
- * analytics, SEO surfaces and every other route remain out of scope.
- *
- * The page below is entirely Server Components. Motion is confined to three
- * client leaves — the hero's two-state surface, the system view's tablist, and
- * `HomepageMotion`, which renders nothing and only adds classes to
- * server-rendered nodes. With no JavaScript, a failed hydration or
- * `prefers-reduced-motion: reduce`, this file renders exactly the Phase C page.
- *
- * The chapter sequence below preserves the approved journey — ACTIVITY →
- * ATTENTION → FRICTION → INTERVENTION → RESOLUTION → ACCOUNTABILITY → ACTION
- * — in the compressed form Session 18B validated and Gate 10 approved: the
- * hero carries ACTIVITY/ATTENTION (the population figure), the system view
- * carries INTERVENTION/RESOLUTION together (Session 18B's own merge), and
- * ACCOUNTABILITY carries the boundary, evidence and fit chapters together.
+ * `/` — the approved C+ homepage (proto/direction-c-plus 0a8b611) in production. The URL, metadata (title,
+ * description, canonical, Open Graph/Twitter), `revalidate` and the global structured data (root layout) are unchanged.
+ * The Direction C header and footer come from the root layout. The previous Direction C homepage components
+ * (components/direction-c/home/*) are no longer rendered but are left in the repository.
  */
 export default function Home() {
   return (
-    <>
-      <HomepageHero />
-      <HomepageActivity />
-      <HomepageFriction />
-      <HomepageIntervention />
-      <HomepageAccountability />
-      <HomepageFinalCTA />
-      <HomepageMotion />
-    </>
+    <CplusPage>
+      <HomeBody />
+    </CplusPage>
   );
 }

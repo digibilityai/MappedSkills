@@ -133,9 +133,14 @@ type ConsentCommand = (...args: unknown[]) => void;
  * enough — but restating the three advertising signals means that no ordering
  * of commands, and no future edit that adds another update site, can leave an
  * advertising signal granted by omission.
+ *
+ * THE DENIED DEFAULT IS GUARANTEED FIRST (E6-A1 R1, DEC-038). On a page whose
+ * bootstrap never executed — see `CONSENT_GUARD_SCRIPT` — a banner decision
+ * would otherwise be the first consent command in `dataLayer`.
  */
 export function pushConsentUpdate(choice: ConsentChoice): void {
   if (typeof window === 'undefined') return;
+  ensureConsentDefault();
   try {
     const target = window as unknown as { dataLayer?: unknown[] };
     if (!Array.isArray(target.dataLayer)) target.dataLayer = [];
@@ -200,3 +205,82 @@ gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_pers
 var c=null;try{c=w.localStorage.getItem('${CONSENT_STORAGE_KEY}');}catch(e){}
 if(c==='granted'){gtag('consent','update',{'analytics_storage':'granted','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied'});}
 })(window);`;
+
+/** A `consent default` command as the bootstrap pushes it: an `arguments` object. */
+function isConsentCommand(entry: unknown, kind: 'default' | 'update'): boolean {
+  if (typeof entry !== 'object' || entry === null) return false;
+  const command = entry as { 0?: unknown; 1?: unknown };
+  return command[0] === 'consent' && command[1] === kind;
+}
+
+/**
+ * E6-A1 R1 (DEC-038) — the denied default, guaranteed where the bootstrap did
+ * not run.
+ *
+ * WHY THIS EXISTS. A `notFound()` thrown inside a route segment (an unknown
+ * `/blog`, `/portfolio`, `/research` or `/press` slug; `/launch-checklist`) is
+ * served as Next's client-rendered error shell, `<html id="__next_error__">`.
+ * That document has no layout `<head>`. React inserts the bootstrap `<script>`
+ * on the client, and a script inserted that way is never executed. Without
+ * this guard, a returning visitor who had accepted reached the container with
+ * no consent command at all (`GATE_4_E6_GTM_CONSENT_AUDIT.md` §4).
+ *
+ * THE GUARD IS PART OF THE CONTAINER LOADER. `lib/gtm.tsx` runs it at the top
+ * of the one inline script that injects `gtm.js`, so the container cannot be
+ * requested before it has run. It does exactly what the bootstrap would have
+ * done, with the same literals, and nothing else:
+ *   - a `consent default` already in `dataLayer` (every page that served the
+ *     layout) — it returns at once. No duplicate command is ever written;
+ *   - otherwise it PREPENDS `consent default` (all four denied) and, ONLY for a
+ *     stored `'granted'` with no `consent update` already queued, the
+ *     `consent update` the bootstrap would have replayed. Prepending puts them
+ *     where the bootstrap puts them: ahead of any `page_view` already queued,
+ *     which no container has read yet, because no container exists yet.
+ * If a container were somehow already running it appends instead, because a
+ * running container no longer reads index 0. That branch is unreachable while
+ * this loader is the only one.
+ *
+ * It grants nothing the visitor did not choose: the three advertising signals
+ * are literal `'denied'`. It cannot throw. It sets no cookie and sends nothing.
+ * Nothing is interpolated except the storage key constant above.
+ */
+export const CONSENT_GUARD_SCRIPT = `(function(w){try{
+var l=w.dataLayer;if(!Array.isArray(l)){l=w.dataLayer=[];}
+var u=false;for(var i=0;i<l.length;i++){var x=l[i];if(x&&typeof x==='object'&&x[0]==='consent'){if(x[1]==='default')return;if(x[1]==='update')u=true;}}
+function a(){return arguments;}
+var q=[a('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied'})];
+var c=null;try{c=w.localStorage.getItem('${CONSENT_STORAGE_KEY}');}catch(e){}
+if(c==='granted'&&!u){q.push(a('consent','update',{'analytics_storage':'granted','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied'}));}
+if(w.__msGtmLoaded){for(var j=0;j<q.length;j++){l.push(q[j]);}}else{l.unshift.apply(l,q);}
+}catch(e){}})(window);`;
+
+/**
+ * The same guarantee for a banner decision, without the replay: the decision
+ * being pushed IS the visitor's choice. If no `consent default` is in
+ * `dataLayer`, the denied default is prepended, so the update that follows can
+ * never be the first consent command. A no-op on every page that served the
+ * layout. Same literals as the bootstrap; cannot throw.
+ */
+export function ensureConsentDefault(): void {
+  if (typeof window === 'undefined') return;
+  try {
+    const target = window as unknown as { dataLayer?: unknown[]; __msGtmLoaded?: boolean };
+    if (!Array.isArray(target.dataLayer)) target.dataLayer = [];
+    const layer = target.dataLayer;
+    if (layer.some((entry) => isConsentCommand(entry, 'default'))) return;
+    // As in `pushConsentUpdate`: no declared parameters, so `arguments` is the
+    // real arguments object, the shape Google's tag reads as a command.
+    const command = function () {
+      // eslint-disable-next-line prefer-rest-params
+      return arguments;
+    } as (...args: unknown[]) => IArguments;
+    const denied = command('consent', 'default', {
+      ...ADVERTISING_DENIED,
+      analytics_storage: 'denied',
+    });
+    if (target.__msGtmLoaded) layer.push(denied);
+    else layer.unshift(denied);
+  } catch {
+    /* Measurement never breaks the page. */
+  }
+}

@@ -1,0 +1,13 @@
+2026-10-12T07:59:29.105Z
+plain=http://127.0.0.1:4391 fixture=http://127.0.0.1:4392 engines=chromium,webkit,firefox
+
+OK   inventory (10s)   proof sentinels portfolio-slug~fixture-withheld: withheld found [] · open found []
+OK   chrome-consistency (0s) SUMMARY: 0 failures
+OK   layout-chromium (49s) layout [chromium]: 34 targets × 7 widths · 1757 checks clean · 501 findings {"target-size":455,"overflow":8,"pinned":14,"headings":14,"text-spacing":8,"zoom400":2}
+OK   a11y-chromium (53s) a11y [chromium]: 34 targets · 601 checks clean · 23 findings {"forced-colours-focus":17,"axe":6}
+OK   analytics-forms (47s) form network-abort: requests=1 → /contact; events lead_form_started, lead_form_validation_error:server
+OK   pixel-main-hashes (27s) pixel-main hashes: 68 captures written to ../../../../private/tmp/claude-501/-Users-amitguptaamit-gitrepo-MappedSkills/47c9af84-bfab-4b8b-92b0-2c10b69a44b7/scratchpad/base34/run/pixel-main-hashes.json
+OK   layout-webkit (65s) layout [webkit]: 34 targets × 7 widths · 1757 checks clean · 501 findings {"target-size":455,"overflow":8,"pinned":14,"headings":14,"text-spacing":8,"zoom400":2}
+OK   a11y-webkit (51s) a11y [webkit]: 34 targets · 538 checks clean · 6 findings {"axe":6}
+OK   layout-firefox (114s) layout [firefox]: 34 targets × 7 widths · 1757 checks clean · 501 findings {"target-size":455,"overflow":8,"pinned":14,"headings":14,"text-spacing":8,"zoom400":2}
+OK   a11y-firefox (64s) a11y [firefox]: 34 targets · 538 checks clean · 6 findings {"axe":6}

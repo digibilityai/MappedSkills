@@ -48,10 +48,41 @@ const GAP = 'var(--resolve-gap)';
 const DIM = 'var(--resolve-dim)';
 const OWN = 'var(--resolve-accent-deep)';
 
+/* GATE 4 · A1 (KD-09 / KD-10). TEXT AND MARKS TAKE DIFFERENT COLOURS.
+   `GAP` (#8E8798) and `OWN` (#D94400) are graphical-object colours: 3.13–3.41:1
+   and 3.97–4.33:1 clear the 3:1 non-text floor (WCAG 1.4.11) and stay on every
+   line, dash and mark. As TEXT they failed 4.5:1, so text in the not-measured
+   register takes the system's text-grade token for it (`--dc-gap-text`, 4.90:1
+   on ground, 5.34:1 on paper) and owned-colour text takes the small-text accent
+   role (`--resolve-accent-dark`, 6.02:1 / 6.55:1). Same registers, same order of
+   emphasis; only the text grade changes.
+
+   SIZE. Rendered size is font-size × the drawing's scale, and each vertical
+   drawing is 330 (or 300) units shown in a 284–288px column at a 320px
+   viewport. Its type is set so that the smallest text still renders at 12px
+   there (`*V` styles, 14 units → 12.2px); the horizontal drawings are shown at
+   a scale of 1 or more and keep their sizes.
+
+   TEXT SPACING (KD-05). SVG text cannot reflow, so every line of a vertical
+   drawing is set short enough to hold the WCAG 1.4.12 spacing overrides
+   (letter 0.12em, word 0.16em ≈ 10 units a character at 14 units) inside the
+   drawing: about 25 characters from x=72, 32 from the left edge. Longer
+   strings break at a word boundary onto further lines — never shortened or
+   reworded. */
+const GAP_TEXT = 'var(--dc-gap-text)';
+const OWN_TEXT = 'var(--resolve-accent-dark)';
+
 const nodeText = { fontSize: 13, fontWeight: 600, fill: DIM } as const;
-const smallText = { fontSize: 12, fontWeight: 600, fill: GAP } as const;
+const smallText = { fontSize: 12, fontWeight: 600, fill: GAP_TEXT } as const;
 const bdText = { fontSize: 12, fontWeight: 700, fill: INK, letterSpacing: '0.09em' } as const;
-const ownText = { fontSize: 12, fontWeight: 700, fill: OWN, letterSpacing: '0.09em' } as const;
+const ownText = { fontSize: 12, fontWeight: 700, fill: OWN_TEXT, letterSpacing: '0.09em' } as const;
+const ownLabel = { fontSize: 12, fontWeight: 700, fill: OWN_TEXT } as const;
+
+const nodeTextV = { fontSize: 15, fontWeight: 600, fill: DIM } as const;
+const smallTextV = { fontSize: 14, fontWeight: 600, fill: GAP_TEXT } as const;
+const bdTextV = { fontSize: 14, fontWeight: 700, fill: INK, letterSpacing: '0.09em' } as const;
+const ownTextV = { fontSize: 14, fontWeight: 700, fill: OWN_TEXT, letterSpacing: '0.09em' } as const;
+const ownLabelV = { fontSize: 14, fontWeight: 700, fill: OWN_TEXT } as const;
 
 /** wrapper: one accessible figure, two width-native drawings, one ever shown */
 function Figure({
@@ -131,7 +162,7 @@ function JoinH({ x, n }: { x: number; n: string }) {
   return (
     <>
       <line x1={x} y1={112} x2={x} y2={148} stroke={OWN} strokeWidth={3} />
-      <text x={x} y={164} textAnchor="middle" fontSize={11} fontWeight={700} fill={OWN}>
+      <text x={x} y={164} textAnchor="middle" fontSize={12} fontWeight={700} fill={OWN_TEXT}>
         {n}
       </text>
     </>
@@ -142,7 +173,7 @@ function JoinV({ y, n }: { y: number; n: string }) {
   return (
     <>
       <line x1={30} y1={y} x2={66} y2={y} stroke={OWN} strokeWidth={3} />
-      <text x={22} y={y + 4} textAnchor="end" fontSize={11} fontWeight={700} fill={OWN}>
+      <text x={22} y={y + 5} textAnchor="end" fontSize={14} fontWeight={700} fill={OWN_TEXT}>
         {n}
       </text>
     </>
@@ -151,13 +182,13 @@ function JoinV({ y, n }: { y: number; n: string }) {
 
 export function ChainFull() {
   const vertical = (
-    <svg viewBox="0 0 330 636" role="img" aria-labelledby="f-full-v-t f-full-v-d" className="block h-auto w-full">
+    <svg viewBox="0 0 330 674" role="img" aria-labelledby="f-full-v-t f-full-v-d" className="block h-auto w-full">
       <title id="f-full-v-t">{FULL_TITLE}</title>
       <desc id="f-full-v-d">{FULL_DESC}</desc>
 
       {/* unmeasured buyer demand */}
       <line x1="48" y1="14" x2="48" y2="54" stroke={GAP} strokeWidth={2} strokeDasharray="5 5" />
-      <text x="78" y="28" {...nodeText}>buyer demand we cannot see</text>
+      <text x="78" y="30" {...nodeTextV} fontSize={14}>buyer demand we cannot see</text>
 
       {/* the chain */}
       <path d="M48 54 V500" fill="none" stroke={INK} strokeWidth={2.5} />
@@ -170,36 +201,40 @@ export function ChainFull() {
 
       {/* the points */}
       <rect x="41" y="47" width="14" height="14" fill={INK} />
-      <text x="78" y="60" {...nodeText}>discovery and source</text>
+      <text x="78" y="60" {...nodeTextV}>discovery and source</text>
       <rect x="41" y="135" width="14" height="14" fill={INK} />
-      <text x="78" y="148" {...nodeText}>landing</text>
+      <text x="78" y="148" {...nodeTextV}>landing</text>
       <rect x="41" y="223" width="14" height="14" fill={INK} />
-      <text x="78" y="236" {...nodeText}>interaction</text>
+      <text x="78" y="236" {...nodeTextV}>interaction</text>
       <rect x="41" y="311" width="14" height="14" fill={INK} />
-      <text x="78" y="324" {...nodeText}>the enquiry</text>
+      <text x="78" y="324" {...nodeTextV}>the enquiry</text>
 
       {/* the unattributed arrival — no upstream segment, and it still counts */}
       <rect x="6" y="392" width="14" height="14" fill="none" stroke={GAP} strokeWidth={2} strokeDasharray="4 4" />
       <line x1="22" y1="396" x2="39" y2="378" stroke={GAP} strokeWidth={2} strokeDasharray="5 5" />
-      <text x="78" y="396" {...smallText}>&mdash; one arrived with no usable trail</text>
+      <text x="78" y="398" {...smallTextV}>&mdash; one arrived with</text>
+      <text x="78" y="418" {...smallTextV}>no usable trail</text>
 
       <rect x="41" y="435" width="14" height="14" fill={INK} />
-      <text x="78" y="448" {...nodeText}>the qualified enquiry</text>
+      <text x="78" y="448" {...nodeTextV}>the qualified enquiry</text>
 
-      {/* the accountability boundary */}
+      {/* the accountability boundary. Its label sits right of the chain: at x=6
+          it crossed the spine (A1 collision probe) */}
       <line x1="6" y1="500" x2="324" y2="500" stroke={INK} strokeWidth={2} />
-      <text x="6" y="490" {...bdText}>WE ANSWER FOR THIS MUCH</text>
+      <text x="78" y="488" {...bdTextV}>WE ANSWER FOR THIS MUCH</text>
 
       {/* your own data, beyond the boundary */}
       <path d="M44 500 V536" fill="none" stroke={INK} strokeWidth={1.6} />
       <path d="M52 500 V536" fill="none" stroke={INK} strokeWidth={1.6} />
       <rect x="41" y="529" width="14" height="14" fill={INK} />
-      <text x="78" y="542" {...nodeText}>opportunity and revenue</text>
-      <text x="78" y="562" {...smallText}>&mdash; your numbers, from your system</text>
+      <text x="78" y="542" {...nodeTextV}>opportunity and revenue</text>
+      <text x="78" y="564" {...smallTextV}>&mdash; your numbers,</text>
+      <text x="78" y="584" {...smallTextV}>from your system</text>
 
       {/* the three parts, named against the segments they cover */}
-      <text x="6" y="600" {...ownText}>01–04 THE JOINS ARE OURS</text>
-      <text x="6" y="622" {...smallText}>capture · convert · measure, as one path</text>
+      <text x="6" y="620" {...ownTextV}>01–04 THE JOINS ARE OURS</text>
+      <text x="6" y="644" {...smallTextV}>capture · convert · measure,</text>
+      <text x="6" y="664" {...smallTextV}>as one path</text>
     </svg>
   );
 
@@ -209,7 +244,8 @@ export function ChainFull() {
       <desc id="f-full-h-d">{FULL_DESC}</desc>
 
       <line x1="12" y1="130" x2="70" y2="130" stroke={GAP} strokeWidth={2} strokeDasharray="5 5" />
-      <text x="12" y="114" {...smallText}>buyer demand we cannot see</text>
+      {/* raised clear of join 01's tick (A1 collision probe) */}
+      <text x="12" y="104" {...smallText}>buyer demand we cannot see</text>
 
       <path d="M70 130 H862" fill="none" stroke={INK} strokeWidth={2.5} />
 
@@ -289,35 +325,39 @@ const DISC_DESC =
 
 export function ChainDiscovery() {
   const vertical = (
-    <svg viewBox="0 0 300 400" role="img" aria-labelledby="f-disc-v-t f-disc-v-d" className="block h-auto w-full">
+    <svg viewBox="0 0 300 440" role="img" aria-labelledby="f-disc-v-t f-disc-v-d" className="block h-auto w-full">
       <title id="f-disc-v-t">{DISC_TITLE}</title>
       <desc id="f-disc-v-d">{DISC_DESC}</desc>
 
-      <line x1="44" y1="12" x2="44" y2="52" stroke={GAP} strokeWidth={2} strokeDasharray="5 5" />
-      <text x="72" y="26" {...smallText}>buyer demand we cannot see</text>
+      <line x1="44" y1="12" x2="44" y2="68" stroke={GAP} strokeWidth={2} strokeDasharray="5 5" />
+      <text x="72" y="24" {...smallTextV}>buyer demand</text>
+      <text x="72" y="44" {...smallTextV}>we cannot see</text>
 
       {/* the emphasised segment */}
-      <path d="M44 52 V160" fill="none" stroke={INK} strokeWidth={3} />
-      <rect x="37" y="45" width="14" height="14" fill={INK} />
-      <text x="72" y="58" {...nodeText}>discovery and source</text>
-      <line x1="28" y1="120" x2="60" y2="120" stroke={OWN} strokeWidth={3} />
-      <text x="72" y="124" fontSize={12} fontWeight={700} fill={OWN}>the join into the page</text>
+      <path d="M44 68 V188" fill="none" stroke={INK} strokeWidth={3} />
+      <rect x="37" y="61" width="14" height="14" fill={INK} />
+      <text x="72" y="74" {...nodeTextV}>discovery and source</text>
+      <line x1="28" y1="148" x2="60" y2="148" stroke={OWN} strokeWidth={3} />
+      <text x="72" y="153" {...ownLabelV}>the join into the page</text>
 
-      {/* the segment bracket */}
-      <path d="M14 52 H6 V160 H14" fill="none" stroke={INK} strokeWidth={1.6} />
-      <text x="6" y="42" {...bdText}>THIS PAGE</text>
+      {/* the segment bracket. Its label sits inside the span it names: above
+          the bracket it crossed the dashed demand line and met the discovery
+          label (A1 collision probe) */}
+      <path d="M14 68 H6 V188 H14" fill="none" stroke={INK} strokeWidth={1.6} />
+      <text x="72" y="113" {...bdTextV}>THIS PAGE</text>
 
       {/* recessive remainder */}
-      <path d="M44 160 V344" fill="none" stroke={GAP} strokeWidth={1.5} />
-      <rect x="39" y="196" width="10" height="10" fill={GAP} />
-      <rect x="39" y="246" width="10" height="10" fill={GAP} />
-      <rect x="39" y="296" width="10" height="10" fill={GAP} />
-      <text x="72" y="205" {...smallText}>landing</text>
-      <text x="72" y="255" {...smallText}>interaction</text>
-      <text x="72" y="305" {...smallText}>the enquiry</text>
-      <rect x="37" y="337" width="14" height="14" fill={INK} />
-      <text x="72" y="350" {...nodeText}>the qualified enquiry</text>
-      <text x="72" y="370" {...smallText}>&mdash; still the number this is judged on</text>
+      <path d="M44 188 V380" fill="none" stroke={GAP} strokeWidth={1.5} />
+      <rect x="39" y="226" width="10" height="10" fill={GAP} />
+      <rect x="39" y="278" width="10" height="10" fill={GAP} />
+      <rect x="39" y="330" width="10" height="10" fill={GAP} />
+      <text x="72" y="236" {...smallTextV}>landing</text>
+      <text x="72" y="288" {...smallTextV}>interaction</text>
+      <text x="72" y="340" {...smallTextV}>the enquiry</text>
+      <rect x="37" y="373" width="14" height="14" fill={INK} />
+      <text x="72" y="386" {...nodeTextV}>the qualified enquiry</text>
+      <text x="72" y="410" {...smallTextV}>&mdash; still the number this</text>
+      <text x="72" y="430" {...smallTextV}>is judged on</text>
     </svg>
   );
 
@@ -327,7 +367,8 @@ export function ChainDiscovery() {
       <desc id="f-disc-h-d">{DISC_DESC}</desc>
 
       <line x1="10" y1="104" x2="58" y2="104" stroke={GAP} strokeWidth={2} strokeDasharray="5 5" />
-      <text x="10" y="88" {...smallText}>buyer demand we cannot see</text>
+      {/* raised clear of the join's tick (A1 collision probe) */}
+      <text x="10" y="78" {...smallText}>buyer demand we cannot see</text>
 
       <path d="M58 104 H212" fill="none" stroke={INK} strokeWidth={3} />
       <rect x="51" y="97" width="14" height="14" fill={INK} />
@@ -336,7 +377,7 @@ export function ChainDiscovery() {
       {/* the join label sits BELOW the chain: above it, it collided with the
           "buyer demand we cannot see" label — MEASURED at 1425, 44x8 units */}
       <line x1="150" y1="88" x2="150" y2="120" stroke={OWN} strokeWidth={3} />
-      <text x="150" y="132" textAnchor="middle" fontSize={12} fontWeight={700} fill={OWN}>the join</text>
+      <text x="150" y="137" textAnchor="middle" {...ownLabel}>the join</text>
 
       <path d="M58 60 V52 H212 V60" fill="none" stroke={INK} strokeWidth={1.6} />
       <text x="58" y="42" {...bdText}>THIS PAGE</text>
@@ -388,47 +429,50 @@ const ZONE_DESC =
 
 export function ChainLossZones() {
   const vertical = (
-    <svg viewBox="0 0 330 430" role="img" aria-labelledby="f-zone-v-t f-zone-v-d" className="block h-auto w-full">
+    <svg viewBox="0 0 330 522" role="img" aria-labelledby="f-zone-v-t f-zone-v-d" className="block h-auto w-full">
       <title id="f-zone-v-t">{ZONE_TITLE}</title>
       <desc id="f-zone-v-d">{ZONE_DESC}</desc>
 
       {/* 01 — the demand, upstream and unmeasured */}
-      <line x1="44" y1="14" x2="44" y2="62" stroke={GAP} strokeWidth={2} strokeDasharray="5 5" />
+      <line x1="44" y1="14" x2="44" y2="65" stroke={GAP} strokeWidth={2} strokeDasharray="5 5" />
       <rect x="22" y="24" width="13" height="13" fill="none" stroke={GAP} strokeWidth={2} strokeDasharray="4 4" />
-      <text x="72" y="26" fontSize={12} fontWeight={700} fill={OWN}>01 the demand</text>
-      <text x="72" y="44" {...smallText}>it was never the right visit</text>
+      <text x="72" y="30" {...ownLabelV}>01 the demand</text>
+      <text x="72" y="50" {...smallTextV}>it was never the right visit</text>
 
-      <rect x="37" y="55" width="14" height="14" fill={INK} />
-      <text x="72" y="68" {...nodeText}>landing</text>
+      <rect x="37" y="65" width="14" height="14" fill={INK} />
+      <text x="72" y="78" {...nodeTextV}>landing</text>
 
       {/* 02 — the page */}
-      <path d="M44 69 V160" fill="none" stroke={INK} strokeWidth={3} />
-      <rect x="22" y="106" width="13" height="13" fill="none" stroke={GAP} strokeWidth={2} strokeDasharray="4 4" />
-      <text x="72" y="112" fontSize={12} fontWeight={700} fill={OWN}>02 the page</text>
-      <text x="72" y="130" {...smallText}>it did not answer the visit</text>
+      <path d="M44 79 V173" fill="none" stroke={INK} strokeWidth={3} />
+      <rect x="22" y="110" width="13" height="13" fill="none" stroke={GAP} strokeWidth={2} strokeDasharray="4 4" />
+      <text x="72" y="116" {...ownLabelV}>02 the page</text>
+      <text x="72" y="136" {...smallTextV}>it did not answer the visit</text>
 
-      <rect x="37" y="153" width="14" height="14" fill={INK} />
-      <text x="72" y="166" {...nodeText}>interaction</text>
+      <rect x="37" y="166" width="14" height="14" fill={INK} />
+      <text x="72" y="179" {...nodeTextV}>interaction</text>
 
       {/* 03 — the path */}
-      <path d="M44 167 V258" fill="none" stroke={INK} strokeWidth={3} />
-      <rect x="22" y="204" width="13" height="13" fill="none" stroke={GAP} strokeWidth={2} strokeDasharray="4 4" />
-      <text x="72" y="210" fontSize={12} fontWeight={700} fill={OWN}>03 the path</text>
-      <text x="72" y="228" {...smallText}>it could not complete, or never arrived</text>
+      <path d="M44 180 V294" fill="none" stroke={INK} strokeWidth={3} />
+      <rect x="22" y="211" width="13" height="13" fill="none" stroke={GAP} strokeWidth={2} strokeDasharray="4 4" />
+      <text x="72" y="217" {...ownLabelV}>03 the path</text>
+      <text x="72" y="237" {...smallTextV}>it could not complete,</text>
+      <text x="72" y="257" {...smallTextV}>or never arrived</text>
 
-      <rect x="37" y="251" width="14" height="14" fill={INK} />
-      <text x="72" y="264" {...nodeText}>the enquiry</text>
+      <rect x="37" y="287" width="14" height="14" fill={INK} />
+      <text x="72" y="300" {...nodeTextV}>the enquiry</text>
 
       {/* 04 — the measurement, drawn unmeasured */}
-      <path d="M44 265 V356" fill="none" stroke={GAP} strokeWidth={2.5} strokeDasharray="6 6" />
-      <rect x="22" y="302" width="13" height="13" fill="none" stroke={GAP} strokeWidth={2} strokeDasharray="4 4" />
-      <text x="72" y="308" fontSize={12} fontWeight={700} fill={OWN}>04 the measurement</text>
-      <text x="72" y="326" {...smallText}>nothing recorded it, so the loss is invisible</text>
+      <path d="M44 301 V414" fill="none" stroke={GAP} strokeWidth={2.5} strokeDasharray="6 6" />
+      <rect x="22" y="332" width="13" height="13" fill="none" stroke={GAP} strokeWidth={2} strokeDasharray="4 4" />
+      <text x="72" y="338" {...ownLabelV}>04 the measurement</text>
+      <text x="72" y="358" {...smallTextV}>nothing recorded it,</text>
+      <text x="72" y="378" {...smallTextV}>so the loss is invisible</text>
 
-      <rect x="37" y="349" width="14" height="14" fill={INK} />
-      <text x="72" y="362" {...nodeText}>a recorded enquiry</text>
-      <text x="6" y="400" {...bdText}>TWO OF THE FOUR ARE NOT THE PAGE</text>
-      <text x="6" y="420" {...smallText}>and one of them cannot be seen at all</text>
+      <rect x="37" y="407" width="14" height="14" fill={INK} />
+      <text x="72" y="420" {...nodeTextV}>a recorded enquiry</text>
+      <text x="6" y="466" {...bdTextV}>TWO OF THE FOUR ARE NOT THE PAGE</text>
+      <text x="6" y="490" {...smallTextV}>and one of them</text>
+      <text x="6" y="510" {...smallTextV}>cannot be seen at all</text>
     </svg>
   );
 
@@ -464,10 +508,10 @@ export function ChainLossZones() {
           own x. Centre-anchoring them collided the first two explanations —
           MEASURED at 1425, 25x16 units. Start-anchored, each label runs into the
           empty span to its right and the four sit clear of one another. */}
-      <text x="10" y="78" fontSize={12} fontWeight={700} fill={OWN}>01 the demand</text>
-      <text x="143" y="78" fontSize={12} fontWeight={700} fill={OWN}>02 the page</text>
-      <text x="299" y="78" fontSize={12} fontWeight={700} fill={OWN}>03 the path</text>
-      <text x="455" y="78" fontSize={12} fontWeight={700} fill={OWN}>04 the measurement</text>
+      <text x="10" y="78" {...ownLabel}>01 the demand</text>
+      <text x="143" y="78" {...ownLabel}>02 the page</text>
+      <text x="299" y="78" {...ownLabel}>03 the path</text>
+      <text x="455" y="78" {...ownLabel}>04 the measurement</text>
 
       <text x="10" y="56" {...smallText}>never the right visit</text>
       <text x="143" y="56" {...smallText}>did not answer it</text>
@@ -514,46 +558,56 @@ const TERM_DESC =
 
 export function ChainTerminus() {
   const vertical = (
-    <svg viewBox="0 0 330 420" role="img" aria-labelledby="f-term-v-t f-term-v-d" className="block h-auto w-full">
+    <svg viewBox="0 0 330 522" role="img" aria-labelledby="f-term-v-t f-term-v-d" className="block h-auto w-full">
       <title id="f-term-v-t">{TERM_TITLE}</title>
       <desc id="f-term-v-d">{TERM_DESC}</desc>
 
-      <path d="M96 12 V64" fill="none" stroke={GAP} strokeWidth={1.5} />
-      <text x="124" y="30" {...smallText}>everything upstream</text>
+      {/* The chain runs at x=60 (was 96) so its labels, at x=88, keep room for
+          the text-spacing overrides (KD-05). Geometry and order are unchanged. */}
+      <path d="M60 12 V64" fill="none" stroke={GAP} strokeWidth={1.5} />
+      <text x="88" y="32" {...smallTextV}>everything upstream</text>
 
-      <path d="M96 64 V150" fill="none" stroke={INK} strokeWidth={3} />
-      <rect x="89" y="57" width="14" height="14" fill={INK} />
-      <text x="124" y="70" {...nodeText}>the enquiry</text>
+      <path d="M60 64 V172" fill="none" stroke={INK} strokeWidth={3} />
+      <rect x="53" y="57" width="14" height="14" fill={INK} />
+      <text x="88" y="70" {...nodeTextV}>the enquiry</text>
 
-      {/* the unattributed arrival */}
-      <rect x="20" y="96" width="14" height="14" fill="none" stroke={GAP} strokeWidth={2} strokeDasharray="4 4" />
-      <line x1="36" y1="103" x2="88" y2="103" stroke={GAP} strokeWidth={2} strokeDasharray="5 5" />
-      <text x="20" y="88" {...smallText}>no usable trail &mdash; it still counts</text>
+      {/* the unattributed arrival. Its label sits right of the chain, beside
+          where the arrival joins it: left of it, it ran across the spine (OBS-14) */}
+      <rect x="8" y="96" width="14" height="14" fill="none" stroke={GAP} strokeWidth={2} strokeDasharray="4 4" />
+      <line x1="24" y1="103" x2="52" y2="103" stroke={GAP} strokeWidth={2} strokeDasharray="5 5" />
+      <text x="88" y="100" {...smallTextV}>no usable trail</text>
+      <text x="88" y="120" {...smallTextV}>&mdash; it still counts</text>
 
-      {/* the state change */}
-      <line x1="14" y1="150" x2="286" y2="150" stroke={INK} strokeWidth={2} />
-      <text x="14" y="142" {...bdText}>CHECKED WHEN IT ARRIVES</text>
+      {/* the state change. The rule's label, on two lines right of the chain:
+          left of it, it crossed the spine (A1 collision probe) */}
+      <line x1="8" y1="172" x2="286" y2="172" stroke={INK} strokeWidth={2} />
+      <text x="88" y="144" {...bdTextV}>CHECKED WHEN</text>
+      <text x="88" y="164" {...bdTextV}>IT ARRIVES</text>
 
       {/* qualified */}
-      <path d="M96 150 V240" fill="none" stroke={OWN} strokeWidth={3} />
-      <rect x="89" y="233" width="14" height="14" fill={OWN} />
-      <text x="124" y="246" fontSize={13} fontWeight={700} fill={OWN}>the qualified enquiry</text>
+      <path d="M60 172 V262" fill="none" stroke={OWN} strokeWidth={3} />
+      <rect x="53" y="255" width="14" height="14" fill={OWN} />
+      <text x="88" y="268" fontSize={15} fontWeight={700} fill={OWN_TEXT}>the qualified enquiry</text>
 
-      {/* recorded, reported separately */}
-      <path d="M96 176 H210 V240" fill="none" stroke={GAP} strokeWidth={1.5} strokeDasharray="4 4" />
-      <rect x="204" y="246" width="12" height="12" fill={GAP} />
-      <text x="124" y="286" {...smallText}>the rest is stored and reported</text>
-      <text x="124" y="304" {...smallText}>separately &mdash; never deleted</text>
+      {/* recorded, reported separately. The branch runs out past the qualified
+          label: its mark sat under that label (A1 collision probe) */}
+      <path d="M60 196 H300 V262" fill="none" stroke={GAP} strokeWidth={1.5} strokeDasharray="4 4" />
+      <rect x="294" y="262" width="12" height="12" fill={GAP} />
+      <text x="88" y="300" {...smallTextV}>the rest is stored</text>
+      <text x="88" y="320" {...smallTextV}>and reported separately</text>
+      <text x="88" y="340" {...smallTextV}>&mdash; never deleted</text>
 
       {/* your own data */}
-      <path d="M92 240 V332" fill="none" stroke={INK} strokeWidth={1.6} />
-      <path d="M100 240 V332" fill="none" stroke={INK} strokeWidth={1.6} />
-      <rect x="89" y="325" width="14" height="14" fill={INK} />
-      <text x="124" y="338" {...nodeText}>opportunity and revenue</text>
-      <text x="124" y="356" {...smallText}>&mdash; your numbers, from your system</text>
+      <path d="M56 262 V378" fill="none" stroke={INK} strokeWidth={1.6} />
+      <path d="M64 262 V378" fill="none" stroke={INK} strokeWidth={1.6} />
+      <rect x="53" y="371" width="14" height="14" fill={INK} />
+      <text x="88" y="384" {...nodeTextV}>opportunity and revenue</text>
+      <text x="88" y="406" {...smallTextV}>&mdash; your numbers,</text>
+      <text x="88" y="426" {...smallTextV}>from your system</text>
 
-      <text x="14" y="396" {...bdText}>WE ANSWER UP TO THE RULE</text>
-      <text x="14" y="414" {...smallText}>no count and no rate appears on this drawing</text>
+      <text x="8" y="466" {...bdTextV}>WE ANSWER UP TO THE RULE</text>
+      <text x="8" y="490" {...smallTextV}>no count and no rate appears</text>
+      <text x="8" y="510" {...smallTextV}>on this drawing</text>
     </svg>
   );
 
@@ -563,11 +617,13 @@ export function ChainTerminus() {
       <desc id="f-term-h-d">{TERM_DESC}</desc>
 
       <path d="M10 130 H72" fill="none" stroke={GAP} strokeWidth={1.5} />
-      <text x="10" y="114" {...smallText}>everything upstream</text>
+      {/* below the upstream segment: above it, the arrival's drop line ran
+          through it (A1 collision probe) */}
+      <text x="10" y="150" {...smallText}>everything upstream</text>
 
       <path d="M72 130 H236" fill="none" stroke={INK} strokeWidth={3} />
       <rect x="65" y="123" width="14" height="14" fill={INK} />
-      <text x="72" y="168" {...nodeText}>the enquiry</text>
+      <text x="72" y="174" {...nodeText}>the enquiry</text>
 
       {/* The unattributed arrival, moved left and set on two lines so it clears
           both the rule and the rule's label — MEASURED collision at 1425:
@@ -583,7 +639,7 @@ export function ChainTerminus() {
 
       <path d="M236 130 H400" fill="none" stroke={OWN} strokeWidth={3} />
       <rect x="393" y="123" width="14" height="14" fill={OWN} />
-      <text x="400" y="168" textAnchor="middle" fontSize={13} fontWeight={700} fill={OWN}>the qualified enquiry</text>
+      <text x="400" y="168" textAnchor="middle" fontSize={13} fontWeight={700} fill={OWN_TEXT}>the qualified enquiry</text>
 
       <path d="M236 130 V186 H400" fill="none" stroke={GAP} strokeWidth={1.5} strokeDasharray="4 4" />
       <rect x="394" y="180" width="12" height="12" fill={GAP} />
@@ -594,7 +650,7 @@ export function ChainTerminus() {
       <path d="M400 126 H520" fill="none" stroke={INK} strokeWidth={1.6} />
       <path d="M400 134 H520" fill="none" stroke={INK} strokeWidth={1.6} />
       <rect x="513" y="123" width="14" height="14" fill={INK} />
-      <text x="620" y="150" textAnchor="end" {...nodeText}>opportunity and revenue</text>
+      <text x="620" y="158" textAnchor="end" {...nodeText}>opportunity and revenue</text>
       {/* dropped clear of the branch label below the chain — MEASURED collision
           at 1425: 195x12 units */}
       <text x="620" y="236" textAnchor="end" {...smallText}>&mdash; your numbers, from your system</text>

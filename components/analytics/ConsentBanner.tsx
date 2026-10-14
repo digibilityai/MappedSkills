@@ -67,8 +67,11 @@ export function ConsentBanner() {
       className="fixed inset-x-0 bottom-0 z-[150] border-t border-resolve-line bg-resolve-paper"
       style={{ maxHeight: '80vh', overflowY: 'auto' }}
     >
-      <div className="mx-auto flex max-w-[var(--resolve-wrap)] flex-col gap-4 px-4 py-4 sm:px-6 md:flex-row md:items-center md:justify-between md:gap-8 lg:px-8">
-        <div className="min-w-0">
+      <div className="mx-auto flex max-w-[var(--resolve-wrap)] flex-col gap-4 px-4 py-4 sm:px-6 md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-8 lg:px-8">
+        {/* `md:basis-[20rem]` + wrap: when text is enlarged without the breakpoints moving (Firefox "Zoom Text Only",
+            Android text scaling), the buttons move below the message instead of squeezing it to one word per line.
+            At normal size the row still fits on one line, so the layout is unchanged. */}
+        <div className="min-w-0 md:flex-1 md:basis-[20rem]">
           {/* A real heading, so the region has a programmatic name and shows up
               in a screen reader's heading list. Sized down deliberately: the
               global `h2` scale is display type and would shout here. */}

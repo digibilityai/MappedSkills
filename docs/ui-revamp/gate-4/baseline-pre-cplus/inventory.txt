@@ -1,0 +1,7 @@
+inventory: 34 targets; status as expected: 34; unexpected: none
+  proof sentinels blog~fixture: withheld found [] · open found []
+  proof sentinels blog-slug~fixture-full: withheld found [] · open found []
+  proof sentinels blog-slug~fixture-minimal: withheld found [] · open found []
+  proof sentinels work~fixture: withheld found [] · open found []
+  proof sentinels portfolio-slug~fixture-open: withheld found [] · open found [FIXTURE-OPEN-METRIC-41,FIXTURE-OPEN-TESTIMONIAL]
+  proof sentinels portfolio-slug~fixture-withheld: withheld found [] · open found []

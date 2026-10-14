@@ -1,0 +1,25 @@
+# Findings classification (gate-4/qa/layout.cjs, engine webkit)
+baseline:  docs/ui-revamp/gate-4/post-b4/evidence/run/layout-webkit.json
+candidate: /private/tmp/claude-501/-Users-amitguptaamit-gitrepo-MappedSkills/47c9af84-bfab-4b8b-92b0-2c10b69a44b7/scratchpad/base34/run/layout-webkit.json
+
+## NEW (0)
+## EXPECTED (0)
+## RESOLVED (15)
+- text-spacing|seo|320|contained:text [KD-05] — with 1.4.12 spacing: wider than the viewport inside its own scroll container: text
+- text-spacing|seo|390|contained:text [KD-05] — with 1.4.12 spacing: wider than the viewport inside its own scroll container: text
+- text-spacing|seo|360|contained:text [KD-05] — with 1.4.12 spacing: wider than the viewport inside its own scroll container: text
+- text-spacing|lead-generation|390|contained:text [KD-05] — with 1.4.12 spacing: wider than the viewport inside its own scroll container: text
+- text-spacing|lead-generation|360|contained:text [KD-05] — with 1.4.12 spacing: wider than the viewport inside its own scroll container: text
+- text-spacing|lead-generation|320|contained:text [KD-05] — with 1.4.12 spacing: wider than the viewport inside its own scroll container: text
+- text-spacing|conversion-optimization|320|contained:text [KD-05] — with 1.4.12 spacing: wider than the viewport inside its own scroll container: text
+- text-spacing|conversion-optimization|360|contained:text [KD-05] — with 1.4.12 spacing: wider than the viewport inside its own scroll container: text
+- text-spacing|conversion-optimization|390|contained:text [KD-05] — with 1.4.12 spacing: wider than the viewport inside its own scroll container: text
+- text-spacing|problems|320|contained:text [KD-05] — with 1.4.12 spacing: wider than the viewport inside its own scroll container: text
+- text-spacing|problems|360|contained:text [KD-05] — with 1.4.12 spacing: wider than the viewport inside its own scroll container: text
+- text-spacing|problems|390|contained:text [KD-05] — with 1.4.12 spacing: wider than the viewport inside its own scroll container: text
+- text-spacing|how-it-works|320|contained:g [KD-05] — with 1.4.12 spacing: wider than the viewport inside its own scroll container: g
+- text-spacing|how-it-works|360|contained:g [KD-05] — with 1.4.12 spacing: wider than the viewport inside its own scroll container: g
+- text-spacing|how-it-works|390|contained:g [KD-05] — with 1.4.12 spacing: wider than the viewport inside its own scroll container: g
+## KNOWN (501) by register ID: {"KD-08":455,"KD-04":16,"KD-01":14,"KD-07":14,"KD-06":2}
+
+SUMMARY: NEW 0 · EXPECTED 0 · RESOLVED 15 · KNOWN 501

@@ -109,7 +109,7 @@ export default async function BlogPage() {
               href="/problems/traffic-but-no-enquiries"
               className="font-semibold text-resolve-ink underline decoration-2 underline-offset-4"
             >
-              the five checks for traffic that does not become enquiries
+              the three quick checks for traffic that does not become enquiries
             </Link>{' '}
             and{' '}
             <Link href="/ai-seo" className="font-semibold text-resolve-ink underline decoration-2 underline-offset-4">

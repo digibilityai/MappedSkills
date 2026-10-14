@@ -1,0 +1,482 @@
+{
+ "meta": {
+  "tool": "gate-4/qa/a11y.cjs",
+  "engine": "chromium",
+  "plain": "http://127.0.0.1:4391",
+  "fixture": "http://127.0.0.1:4392",
+  "at": "2026-10-12T07:52:28.483Z",
+  "summary": {
+   "404": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 43,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 50
+   },
+   "home": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 49,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 56
+   },
+   "services": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 45,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 52
+   },
+   "seo": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 48,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 55
+   },
+   "google-ads": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 47,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 54
+   },
+   "social-media-ads": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 40,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 47
+   },
+   "ai-seo": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 44,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 51
+   },
+   "lead-generation": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 47,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 54
+   },
+   "conversion-optimization": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 44,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 51
+   },
+   "problems": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 37,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 44
+   },
+   "pricing": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 37,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 44
+   },
+   "how-it-works": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 33,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 40
+   },
+   "about": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 35,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 42
+   },
+   "faq": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 46,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 53
+   },
+   "contact": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 41,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 48
+   },
+   "schedule-call": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 34,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 41
+   },
+   "thank-you": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 32,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 39
+   },
+   "blog": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 33,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 40
+   },
+   "blog~fixture": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 33,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 40
+   },
+   "research": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 33,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 40
+   },
+   "research-slug~not-found": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 43,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 50
+   },
+   "press": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 33,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 40
+   },
+   "press-slug~not-found": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 43,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 50
+   },
+   "blog-slug~fixture-full": {
+    "axe390": [
+     "scrollable-region-focusable×1"
+    ],
+    "rm390": 0,
+    "tab390": 48,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 54
+   },
+   "blog-slug~fixture-minimal": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 42,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 49
+   },
+   "blog-slug~not-found": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 43,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 50
+   },
+   "work": {
+    "axe390": [
+     "color-contrast×1"
+    ],
+    "rm390": 0,
+    "tab390": 33,
+    "axe1440": [
+     "color-contrast×1"
+    ],
+    "rm1440": 0,
+    "tab1440": 40
+   },
+   "work~fixture": {
+    "axe390": [
+     "color-contrast×1"
+    ],
+    "rm390": 0,
+    "tab390": 35,
+    "axe1440": [
+     "color-contrast×1"
+    ],
+    "rm1440": 0,
+    "tab1440": 42
+   },
+   "portfolio-slug~fixture-open": {
+    "axe390": [
+     "scrollable-region-focusable×1"
+    ],
+    "rm390": 0,
+    "tab390": 36,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 42
+   },
+   "portfolio-slug~fixture-withheld": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 36,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 43
+   },
+   "portfolio-slug~not-found": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 43,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 50
+   },
+   "privacy-policy": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 52,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 59
+   },
+   "terms": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 54,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 61
+   },
+   "launch-checklist~gated": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 43,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 50
+   }
+  }
+ },
+ "passes": 601,
+ "findings": [
+  {
+   "fp": "forced-colours-focus|contact|390|main:input::name",
+   "check": "forced-colours-focus",
+   "target": "contact",
+   "width": 390,
+   "key": "main:input::name",
+   "detail": "focus indicator lost in forced colours: main:input::name"
+  },
+  {
+   "fp": "forced-colours-focus|contact|390|main:input::email",
+   "check": "forced-colours-focus",
+   "target": "contact",
+   "width": 390,
+   "key": "main:input::email",
+   "detail": "focus indicator lost in forced colours: main:input::email"
+  },
+  {
+   "fp": "forced-colours-focus|contact|390|main:input::company",
+   "check": "forced-colours-focus",
+   "target": "contact",
+   "width": 390,
+   "key": "main:input::company",
+   "detail": "focus indicator lost in forced colours: main:input::company"
+  },
+  {
+   "fp": "forced-colours-focus|contact|390|main:textarea::message",
+   "check": "forced-colours-focus",
+   "target": "contact",
+   "width": 390,
+   "key": "main:textarea::message",
+   "detail": "focus indicator lost in forced colours: main:textarea::message"
+  },
+  {
+   "fp": "forced-colours-focus|contact|390|main:input::phone",
+   "check": "forced-colours-focus",
+   "target": "contact",
+   "width": 390,
+   "key": "main:input::phone",
+   "detail": "focus indicator lost in forced colours: main:input::phone"
+  },
+  {
+   "fp": "forced-colours-focus|contact|390|main:input::website",
+   "check": "forced-colours-focus",
+   "target": "contact",
+   "width": 390,
+   "key": "main:input::website",
+   "detail": "focus indicator lost in forced colours: main:input::website"
+  },
+  {
+   "fp": "forced-colours-focus|contact|390|main:button::Send this",
+   "check": "forced-colours-focus",
+   "target": "contact",
+   "width": 390,
+   "key": "main:button::Send this",
+   "detail": "focus indicator lost in forced colours: main:button::Send this"
+  },
+  {
+   "fp": "forced-colours-focus|contact|1440|main:input::name",
+   "check": "forced-colours-focus",
+   "target": "contact",
+   "width": 1440,
+   "key": "main:input::name",
+   "detail": "focus indicator lost in forced colours: main:input::name"
+  },
+  {
+   "fp": "axe|blog-slug~fixture-full|390|scrollable-region-focusable",
+   "check": "axe",
+   "target": "blog-slug~fixture-full",
+   "width": 390,
+   "key": "scrollable-region-focusable",
+   "detail": "scrollable-region-focusable [serious] ×1: .max-w-full"
+  },
+  {
+   "fp": "forced-colours-focus|blog-slug~fixture-minimal|390|main:a:/seo:How search work is run",
+   "check": "forced-colours-focus",
+   "target": "blog-slug~fixture-minimal",
+   "width": 390,
+   "key": "main:a:/seo:How search work is run",
+   "detail": "focus indicator lost in forced colours: main:a:/seo:How search work is run"
+  },
+  {
+   "fp": "forced-colours-focus|blog-slug~fixture-minimal|390|main:a:https://www.linkedin.com/sharing/share-offsite/?url=http%3A%2F%2Flocalhost%3A3000%2Fblog%2Ffixture-article-minimal:LinkedIn",
+   "check": "forced-colours-focus",
+   "target": "blog-slug~fixture-minimal",
+   "width": 390,
+   "key": "main:a:https://www.linkedin.com/sharing/share-offsite/?url=http%3A%2F%2Flocalhost%3A3000%2Fblog%2Ffixture-article-minimal:LinkedIn",
+   "detail": "focus indicator lost in forced colours: main:a:https://www.linkedin.com/sharing/share-offsite/?url=http%3A%2F%2Flocalhost%3A3000%2Fblog%2Ffixture-article-minimal:LinkedIn"
+  },
+  {
+   "fp": "forced-colours-focus|blog-slug~fixture-minimal|390|main:a:https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3000%2Fblog%2Ffixture-article-minimal:Facebook",
+   "check": "forced-colours-focus",
+   "target": "blog-slug~fixture-minimal",
+   "width": 390,
+   "key": "main:a:https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3000%2Fblog%2Ffixture-article-minimal:Facebook",
+   "detail": "focus indicator lost in forced colours: main:a:https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3000%2Fblog%2Ffixture-article-minimal:Facebook"
+  },
+  {
+   "fp": "forced-colours-focus|blog-slug~fixture-minimal|390|main:a:https://twitter.com/intent/tweet?text=FIXTURE%20%E2%80%94%20Minimal%20article%20(fallback%20paths)%20-%20MappedSkills%20Marketing&url=http%3A%2F%2Flocalhost%3A3000%2Fblog%2Ffixture-article-minimal:X",
+   "check": "forced-colours-focus",
+   "target": "blog-slug~fixture-minimal",
+   "width": 390,
+   "key": "main:a:https://twitter.com/intent/tweet?text=FIXTURE%20%E2%80%94%20Minimal%20article%20(fallback%20paths)%20-%20MappedSkills%20Marketing&url=http%3A%2F%2Flocalhost%3A3000%2Fblog%2Ffixture-article-minimal:X",
+   "detail": "focus indicator lost in forced colours: main:a:https://twitter.com/intent/tweet?text=FIXTURE%20%E2%80%94%20Minimal%20article%20(fallback%20paths)%20-%20MappedSkills%20Marketing&url=http%3A%2F%2Flocalhost%3A3000%2Fblog%2Ffixture-article-minimal:X"
+  },
+  {
+   "fp": "forced-colours-focus|blog-slug~fixture-minimal|390|main:button::Copy Link",
+   "check": "forced-colours-focus",
+   "target": "blog-slug~fixture-minimal",
+   "width": 390,
+   "key": "main:button::Copy Link",
+   "detail": "focus indicator lost in forced colours: main:button::Copy Link"
+  },
+  {
+   "fp": "axe|work|390|color-contrast",
+   "check": "axe",
+   "target": "work",
+   "width": 390,
+   "key": "color-contrast",
+   "detail": "color-contrast [serious] ×1: .text-\\[\\.94rem\\]"
+  },
+  {
+   "fp": "axe|work~fixture|390|color-contrast",
+   "check": "axe",
+   "target": "work~fixture",
+   "width": 390,
+   "key": "color-contrast",
+   "detail": "color-contrast [serious] ×1: .text-\\[\\.94rem\\]"
+  },
+  {
+   "fp": "axe|portfolio-slug~fixture-open|390|scrollable-region-focusable",
+   "check": "axe",
+   "target": "portfolio-slug~fixture-open",
+   "width": 390,
+   "key": "scrollable-region-focusable",
+   "detail": "scrollable-region-focusable [serious] ×1: .overflow-x-auto"
+  },
+  {
+   "fp": "forced-colours-focus|portfolio-slug~fixture-open|390|main:a:/contact:Tell us what you’re trying to ",
+   "check": "forced-colours-focus",
+   "target": "portfolio-slug~fixture-open",
+   "width": 390,
+   "key": "main:a:/contact:Tell us what you’re trying to ",
+   "detail": "focus indicator lost in forced colours: main:a:/contact:Tell us what you’re trying to "
+  },
+  {
+   "fp": "forced-colours-focus|portfolio-slug~fixture-open|390|main:a:/work:What we can and cannot show yo",
+   "check": "forced-colours-focus",
+   "target": "portfolio-slug~fixture-open",
+   "width": 390,
+   "key": "main:a:/work:What we can and cannot show yo",
+   "detail": "focus indicator lost in forced colours: main:a:/work:What we can and cannot show yo"
+  },
+  {
+   "fp": "axe|work|1440|color-contrast",
+   "check": "axe",
+   "target": "work",
+   "width": 1440,
+   "key": "color-contrast",
+   "detail": "color-contrast [serious] ×1: .text-\\[\\.94rem\\]"
+  },
+  {
+   "fp": "axe|work~fixture|1440|color-contrast",
+   "check": "axe",
+   "target": "work~fixture",
+   "width": 1440,
+   "key": "color-contrast",
+   "detail": "color-contrast [serious] ×1: .text-\\[\\.94rem\\]"
+  },
+  {
+   "fp": "forced-colours-focus|portfolio-slug~fixture-withheld|390|main:a:/contact:Tell us what you’re trying to ",
+   "check": "forced-colours-focus",
+   "target": "portfolio-slug~fixture-withheld",
+   "width": 390,
+   "key": "main:a:/contact:Tell us what you’re trying to ",
+   "detail": "focus indicator lost in forced colours: main:a:/contact:Tell us what you’re trying to "
+  },
+  {
+   "fp": "forced-colours-focus|portfolio-slug~fixture-withheld|390|main:a:/work:What we can and cannot show yo",
+   "check": "forced-colours-focus",
+   "target": "portfolio-slug~fixture-withheld",
+   "width": 390,
+   "key": "main:a:/work:What we can and cannot show yo",
+   "detail": "focus indicator lost in forced colours: main:a:/work:What we can and cannot show yo"
+  }
+ ]
+}

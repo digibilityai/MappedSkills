@@ -202,6 +202,25 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* OBS-19 (DEC-047) — the calibrated Manrope fallback, one face per weight
+   group, named by `--font-manrope` (app/layout.tsx: next/font's automatic,
+   single-size, synthesised-bold fallback is off). size-adjust is Manrope's
+   advance on this site's own copy ÷ Arial's, swept for the fewest line-count
+   changes per weight on every route at 320–1440
+   (docs/ui-revamp/gate-4/obs19-remediation/evidence/o19r-sweep.cjs); ascent and
+   descent reproduce Manrope's 1.066 / 0.300 em at that size-adjust; line gap 0.
+   Liberation Sans is metric-compatible with Arial (Linux). Re-sweep when the
+   body copy, a Manrope weight or this face changes. */
+@font-face { font-family: "Manrope Fallback"; src: local("Arial"), local("ArialMT"), local("Liberation Sans"), local("LiberationSans"); font-weight: 100 500; size-adjust: 103.25%; ascent-override: 103.24%; descent-override: 29.06%; line-gap-override: 0%; }
+@font-face { font-family: "Manrope Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"), local("LiberationSans-Bold"); font-weight: 600 900; size-adjust: 99%; ascent-override: 107.68%; descent-override: 30.3%; line-gap-override: 0%; }
+/* Firefox loads these faces only when text names them FIRST, so the root
+   layout renders one hidden, zero-height element per face at the start of
+   <body>. The glyph is generated content: no text node, nothing in the DOM. */
+.site-font-prime { display: block; height: 0; overflow: hidden; visibility: hidden; font-family: "Manrope Fallback"; }
+.site-font-prime::before { content: "a"; }
+.site-font-prime--regular { font-weight: 400; }
+.site-font-prime--bold { font-weight: 700; }
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

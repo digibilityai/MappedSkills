@@ -3,6 +3,31 @@
 import Script from 'next/script';
 
 import { useConsent } from '@/components/analytics/ConsentProvider';
+import { CONSENT_GUARD_SCRIPT } from '@/lib/consent';
+
+/**
+ * THE LOADER BODY, AND ITS ORDER IS THE CONTRACT (E6-A1 R1, DEC-038).
+ *
+ * `CONSENT_GUARD_SCRIPT` runs FIRST, in the same synchronous script that
+ * creates the `gtm.js` element. Nothing else in this application requests the
+ * container, so the container's first read of `dataLayer` always finds the
+ * denied `consent default` at index 0. That holds even on a client-rendered
+ * error page where the bootstrap in `<head>` never executed. On every other
+ * page the guard finds the bootstrap's default and does nothing.
+ *
+ * Exported as a pure function so the order can be unit-tested
+ * (`tests/consent-guard.test.cjs`). `gtmId` is host configuration, inlined at
+ * build time, exactly as before.
+ */
+export function gtmLoaderScript(gtmId: string): string {
+  return `${CONSENT_GUARD_SCRIPT}
+(function(w,d,s,l,i){if(w.__msGtmLoaded)return;w.__msGtmLoaded=true;
+w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${gtmId}');`;
+}
 
 /**
  * SESSION 33 — PHASE H2 — the Google Tag Manager container script,
@@ -74,14 +99,7 @@ export function GoogleTagManager() {
     <Script
       id="gtm-script"
       strategy="afterInteractive"
-      dangerouslySetInnerHTML={{
-        __html: `(function(w,d,s,l,i){if(w.__msGtmLoaded)return;w.__msGtmLoaded=true;
-w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','${gtmId}');`,
-      }}
+      dangerouslySetInnerHTML={{ __html: gtmLoaderScript(gtmId) }}
     />
   );
 }

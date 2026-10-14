@@ -1,0 +1,6507 @@
+{
+ "meta": {
+  "tool": "gate-4/qa/layout.cjs",
+  "engine": "chromium",
+  "plain": "http://127.0.0.1:4391",
+  "fixture": "http://127.0.0.1:4392",
+  "widths": [
+   320,
+   360,
+   390,
+   430,
+   768,
+   1024,
+   1440
+  ],
+  "at": "2026-10-12T07:51:39.518Z",
+  "metrics": {
+   "404": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 4344,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 4120,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 4028,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 3930,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 44,
+     "height": 3338,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 44,
+     "height": 3134,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 50,
+     "height": 3183,
+     "pinned": []
+    }
+   },
+   "home": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 49,
+     "height": 8659,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 49,
+     "height": 8285,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 49,
+     "height": 7951,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 49,
+     "height": 7805,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 50,
+     "height": 7049,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 50,
+     "height": 6428,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 56,
+     "height": 6702,
+     "pinned": []
+    }
+   },
+   "services": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 45,
+     "height": 11785,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 45,
+     "height": 11046,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 45,
+     "height": 10664,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 45,
+     "height": 10337,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 46,
+     "height": 8966,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 46,
+     "height": 8399,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 52,
+     "height": 8061,
+     "pinned": []
+    }
+   },
+   "seo": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 48,
+     "height": 8399,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 48,
+     "height": 7822,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 48,
+     "height": 7503,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 48,
+     "height": 7294,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 49,
+     "height": 5833,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 49,
+     "height": 5999,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 55,
+     "height": 6007,
+     "pinned": []
+    }
+   },
+   "google-ads": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 2,
+     "controls": 47,
+     "height": 6434,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 47,
+     "height": 5956,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 47,
+     "height": 5773,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 3,
+     "controls": 47,
+     "height": 5548,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 3,
+     "controls": 48,
+     "height": 4745,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 3,
+     "controls": 48,
+     "height": 4669,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 3,
+     "controls": 54,
+     "height": 4878,
+     "pinned": []
+    }
+   },
+   "social-media-ads": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 40,
+     "height": 4816,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 40,
+     "height": 4497,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 2,
+     "controls": 40,
+     "height": 4308,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 40,
+     "height": 4233,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 2,
+     "controls": 41,
+     "height": 3427,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 2,
+     "controls": 41,
+     "height": 3408,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 2,
+     "controls": 47,
+     "height": 3462,
+     "pinned": []
+    }
+   },
+   "ai-seo": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 44,
+     "height": 11449,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 44,
+     "height": 10562,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 2,
+     "controls": 44,
+     "height": 10028,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 2,
+     "controls": 44,
+     "height": 9805,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 45,
+     "height": 7975,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 45,
+     "height": 7530,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 51,
+     "height": 7894,
+     "pinned": []
+    }
+   },
+   "lead-generation": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 3,
+     "controls": 47,
+     "height": 8606,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 2,
+     "controls": 47,
+     "height": 8035,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 2,
+     "controls": 47,
+     "height": 7798,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 3,
+     "controls": 47,
+     "height": 7524,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 3,
+     "controls": 48,
+     "height": 6275,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 3,
+     "controls": 48,
+     "height": 5902,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 3,
+     "controls": 54,
+     "height": 6255,
+     "pinned": []
+    }
+   },
+   "conversion-optimization": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 44,
+     "height": 7421,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 44,
+     "height": 6846,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 44,
+     "height": 6777,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 44,
+     "height": 6550,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 45,
+     "height": 5273,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 45,
+     "height": 5813,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 51,
+     "height": 6103,
+     "pinned": []
+    }
+   },
+   "problems": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 37,
+     "height": 12910,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 37,
+     "height": 11820,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 37,
+     "height": 11372,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 37,
+     "height": 10852,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 38,
+     "height": 8493,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 38,
+     "height": 8767,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 44,
+     "height": 9204,
+     "pinned": []
+    }
+   },
+   "pricing": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 37,
+     "height": 9595,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 37,
+     "height": 8827,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 37,
+     "height": 8525,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 37,
+     "height": 8244,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 38,
+     "height": 6534,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 38,
+     "height": 6866,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 44,
+     "height": 7282,
+     "pinned": []
+    }
+   },
+   "how-it-works": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 33,
+     "height": 14899,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 33,
+     "height": 13908,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 33,
+     "height": 13621,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 33,
+     "height": 13202,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 34,
+     "height": 11247,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 34,
+     "height": 11471,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 40,
+     "height": 11399,
+     "pinned": []
+    }
+   },
+   "about": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 35,
+     "height": 7539,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 35,
+     "height": 6994,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 35,
+     "height": 6693,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 35,
+     "height": 6524,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 36,
+     "height": 5679,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 36,
+     "height": 6054,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 42,
+     "height": 6564,
+     "pinned": []
+    }
+   },
+   "faq": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 50,
+     "height": 4971,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 50,
+     "height": 4727,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 3,
+     "controls": 50,
+     "height": 4641,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 2,
+     "controls": 50,
+     "height": 4607,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 3,
+     "controls": 51,
+     "height": 4164,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 5,
+     "controls": 51,
+     "height": 4341,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 3,
+     "controls": 57,
+     "height": 4820,
+     "pinned": []
+    }
+   },
+   "contact": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 2,
+     "controls": 42,
+     "height": 3476,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 1,
+     "controls": 42,
+     "height": 3321,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 2,
+     "controls": 42,
+     "height": 3246,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 2,
+     "controls": 42,
+     "height": 3215,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 1,
+     "controls": 43,
+     "height": 2782,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 1,
+     "controls": 43,
+     "height": 2770,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 1,
+     "controls": 49,
+     "height": 2634,
+     "pinned": []
+    }
+   },
+   "schedule-call": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 34,
+     "height": 4435,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 34,
+     "height": 4222,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 34,
+     "height": 4145,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 34,
+     "height": 3959,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 35,
+     "height": 3338,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 35,
+     "height": 3351,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 41,
+     "height": 3338,
+     "pinned": []
+    }
+   },
+   "thank-you": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 32,
+     "height": 2115,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 32,
+     "height": 1947,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 32,
+     "height": 1884,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 32,
+     "height": 1880,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 33,
+     "height": 1538,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 33,
+     "height": 1510,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 39,
+     "height": 1357,
+     "pinned": []
+    }
+   },
+   "blog": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 33,
+     "height": 2305,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 33,
+     "height": 2189,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 33,
+     "height": 2111,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 33,
+     "height": 2081,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 34,
+     "height": 1717,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 34,
+     "height": 1693,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 40,
+     "height": 1508,
+     "pinned": []
+    }
+   },
+   "blog~fixture": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 33,
+     "height": 2370,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 33,
+     "height": 2227,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 33,
+     "height": 2206,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 33,
+     "height": 2176,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 34,
+     "height": 1790,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 34,
+     "height": 1699,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 40,
+     "height": 1535,
+     "pinned": []
+    }
+   },
+   "research": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 33,
+     "height": 2962,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 33,
+     "height": 2819,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 33,
+     "height": 2701,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 33,
+     "height": 2618,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 34,
+     "height": 2176,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 34,
+     "height": 2170,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 40,
+     "height": 2038,
+     "pinned": []
+    }
+   },
+   "research-slug~not-found": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 4344,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 4120,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 4028,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 3930,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 44,
+     "height": 3338,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 44,
+     "height": 3134,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 50,
+     "height": 3183,
+     "pinned": []
+    }
+   },
+   "press": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 33,
+     "height": 2360,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 33,
+     "height": 2270,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 33,
+     "height": 2218,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 33,
+     "height": 2187,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 34,
+     "height": 1823,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 34,
+     "height": 1808,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 40,
+     "height": 1668,
+     "pinned": []
+    }
+   },
+   "press-slug~not-found": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 4344,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 4120,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 4028,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 3930,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 44,
+     "height": 3338,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 44,
+     "height": 3134,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 50,
+     "height": 3183,
+     "pinned": []
+    }
+   },
+   "blog-slug~fixture-full": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 1,
+     "smallBlock": 11,
+     "smallInline": 2,
+     "controls": 47,
+     "height": 6167,
+     "pinned": [
+      "div.sticky.top-8:sticky"
+     ]
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 1,
+     "smallBlock": 11,
+     "smallInline": 2,
+     "controls": 47,
+     "height": 5953,
+     "pinned": [
+      "div.sticky.top-8:sticky"
+     ]
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 1,
+     "smallBlock": 11,
+     "smallInline": 2,
+     "controls": 47,
+     "height": 5901,
+     "pinned": [
+      "div.sticky.top-8:sticky"
+     ]
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 1,
+     "smallBlock": 11,
+     "smallInline": 2,
+     "controls": 47,
+     "height": 5789,
+     "pinned": [
+      "div.sticky.top-8:sticky"
+     ]
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 1,
+     "smallBlock": 11,
+     "smallInline": 2,
+     "controls": 48,
+     "height": 5638,
+     "pinned": [
+      "div.sticky.top-8:sticky"
+     ]
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 1,
+     "smallBlock": 11,
+     "smallInline": 2,
+     "controls": 48,
+     "height": 5274,
+     "pinned": [
+      "div.sticky.top-8:sticky"
+     ]
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 1,
+     "smallBlock": 11,
+     "smallInline": 2,
+     "controls": 54,
+     "height": 5121,
+     "pinned": [
+      "div.sticky.top-8:sticky"
+     ]
+    }
+   },
+   "blog-slug~fixture-minimal": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 1,
+     "smallBlock": 8,
+     "smallInline": 0,
+     "controls": 42,
+     "height": 4722,
+     "pinned": [
+      "div.sticky.top-8:sticky"
+     ]
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 1,
+     "smallBlock": 8,
+     "smallInline": 0,
+     "controls": 42,
+     "height": 4513,
+     "pinned": [
+      "div.sticky.top-8:sticky"
+     ]
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 1,
+     "smallBlock": 8,
+     "smallInline": 0,
+     "controls": 42,
+     "height": 4461,
+     "pinned": [
+      "div.sticky.top-8:sticky"
+     ]
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 1,
+     "smallBlock": 8,
+     "smallInline": 0,
+     "controls": 42,
+     "height": 4241,
+     "pinned": [
+      "div.sticky.top-8:sticky"
+     ]
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 1,
+     "smallBlock": 8,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 3819,
+     "pinned": [
+      "div.sticky.top-8:sticky"
+     ]
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 1,
+     "smallBlock": 8,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 3485,
+     "pinned": [
+      "div.sticky.top-8:sticky"
+     ]
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 1,
+     "smallBlock": 8,
+     "smallInline": 0,
+     "controls": 49,
+     "height": 3251,
+     "pinned": [
+      "div.sticky.top-8:sticky"
+     ]
+    }
+   },
+   "blog-slug~not-found": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 4344,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 4120,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 4028,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 3930,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 44,
+     "height": 3338,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 44,
+     "height": 3134,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 50,
+     "height": 3183,
+     "pinned": []
+    }
+   },
+   "work": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 33,
+     "height": 3532,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 33,
+     "height": 3337,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 33,
+     "height": 3224,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 33,
+     "height": 3088,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 34,
+     "height": 2553,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 34,
+     "height": 2583,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 40,
+     "height": 2460,
+     "pinned": []
+    }
+   },
+   "work~fixture": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 35,
+     "height": 3500,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 35,
+     "height": 3331,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 35,
+     "height": 3223,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 35,
+     "height": 3113,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 36,
+     "height": 2608,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 36,
+     "height": 2612,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 1,
+     "controls": 42,
+     "height": 2528,
+     "pinned": []
+    }
+   },
+   "portfolio-slug~fixture-open": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 0,
+     "controls": 35,
+     "height": 5684,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 0,
+     "controls": 35,
+     "height": 5492,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 0,
+     "controls": 35,
+     "height": 5463,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 0,
+     "controls": 35,
+     "height": 5347,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 0,
+     "controls": 36,
+     "height": 4941,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 0,
+     "controls": 36,
+     "height": 4825,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 0,
+     "controls": 42,
+     "height": 4640,
+     "pinned": []
+    }
+   },
+   "portfolio-slug~fixture-withheld": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 0,
+     "controls": 36,
+     "height": 4393,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 1,
+     "controls": 36,
+     "height": 4239,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 1,
+     "controls": 36,
+     "height": 4158,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 1,
+     "controls": 36,
+     "height": 4108,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 1,
+     "controls": 37,
+     "height": 3752,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 1,
+     "controls": 37,
+     "height": 3719,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 2,
+     "smallInline": 1,
+     "controls": 43,
+     "height": 3511,
+     "pinned": []
+    }
+   },
+   "portfolio-slug~not-found": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 4344,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 4120,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 4028,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 3930,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 44,
+     "height": 3338,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 44,
+     "height": 3134,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 50,
+     "height": 3183,
+     "pinned": []
+    }
+   },
+   "privacy-policy": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 19,
+     "smallInline": 0,
+     "controls": 52,
+     "height": 11041,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 19,
+     "smallInline": 0,
+     "controls": 52,
+     "height": 10493,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 19,
+     "smallInline": 0,
+     "controls": 52,
+     "height": 10104,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 19,
+     "smallInline": 0,
+     "controls": 52,
+     "height": 9846,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 19,
+     "smallInline": 0,
+     "controls": 53,
+     "height": 8400,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 19,
+     "smallInline": 0,
+     "controls": 53,
+     "height": 8367,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 19,
+     "smallInline": 0,
+     "controls": 59,
+     "height": 8197,
+     "pinned": []
+    }
+   },
+   "terms": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 21,
+     "smallInline": 0,
+     "controls": 54,
+     "height": 11451,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 21,
+     "smallInline": 0,
+     "controls": 54,
+     "height": 10845,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 21,
+     "smallInline": 0,
+     "controls": 54,
+     "height": 10477,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 21,
+     "smallInline": 0,
+     "controls": 54,
+     "height": 10238,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 21,
+     "smallInline": 0,
+     "controls": 55,
+     "height": 8639,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 21,
+     "smallInline": 0,
+     "controls": 55,
+     "height": 8498,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 21,
+     "smallInline": 0,
+     "controls": 61,
+     "height": 8327,
+     "pinned": []
+    }
+   },
+   "launch-checklist~gated": {
+    "320": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 4344,
+     "pinned": []
+    },
+    "360": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 4120,
+     "pinned": []
+    },
+    "390": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 4028,
+     "pinned": []
+    },
+    "430": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 43,
+     "height": 3930,
+     "pinned": []
+    },
+    "768": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 44,
+     "height": 3338,
+     "pinned": []
+    },
+    "1024": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 44,
+     "height": 3134,
+     "pinned": []
+    },
+    "1440": {
+     "overflow": 0,
+     "h1": 1,
+     "jumps": 0,
+     "smallBlock": 0,
+     "smallInline": 0,
+     "controls": 50,
+     "height": 3183,
+     "pinned": []
+    }
+   }
+  }
+ },
+ "passes": 1757,
+ "findings": [
+  {
+   "fp": "target-size|contact|360|main:contactReference",
+   "check": "target-size",
+   "target": "contact",
+   "width": 360,
+   "key": "main:contactReference",
+   "detail": "main:contactReference(178x24)"
+  },
+  {
+   "fp": "target-size|contact|360|main:marketingConsent",
+   "check": "target-size",
+   "target": "contact",
+   "width": 360,
+   "key": "main:marketingConsent",
+   "detail": "main:marketingConsent(20x20)"
+  },
+  {
+   "fp": "target-size|contact|320|main:contactReference",
+   "check": "target-size",
+   "target": "contact",
+   "width": 320,
+   "key": "main:contactReference",
+   "detail": "main:contactReference(178x24)"
+  },
+  {
+   "fp": "target-size|contact|320|main:marketingConsent",
+   "check": "target-size",
+   "target": "contact",
+   "width": 320,
+   "key": "main:marketingConsent",
+   "detail": "main:marketingConsent(20x20)"
+  },
+  {
+   "fp": "target-size|contact|390|main:contactReference",
+   "check": "target-size",
+   "target": "contact",
+   "width": 390,
+   "key": "main:contactReference",
+   "detail": "main:contactReference(178x24)"
+  },
+  {
+   "fp": "target-size|contact|390|main:marketingConsent",
+   "check": "target-size",
+   "target": "contact",
+   "width": 390,
+   "key": "main:marketingConsent",
+   "detail": "main:marketingConsent(20x20)"
+  },
+  {
+   "fp": "target-size|contact|430|main:contactReference",
+   "check": "target-size",
+   "target": "contact",
+   "width": 430,
+   "key": "main:contactReference",
+   "detail": "main:contactReference(178x24)"
+  },
+  {
+   "fp": "target-size|contact|430|main:marketingConsent",
+   "check": "target-size",
+   "target": "contact",
+   "width": 430,
+   "key": "main:marketingConsent",
+   "detail": "main:marketingConsent(20x20)"
+  },
+  {
+   "fp": "target-size|contact|768|main:contactReference",
+   "check": "target-size",
+   "target": "contact",
+   "width": 768,
+   "key": "main:contactReference",
+   "detail": "main:contactReference(178x24)"
+  },
+  {
+   "fp": "target-size|contact|768|main:marketingConsent",
+   "check": "target-size",
+   "target": "contact",
+   "width": 768,
+   "key": "main:marketingConsent",
+   "detail": "main:marketingConsent(20x20)"
+  },
+  {
+   "fp": "target-size|contact|1024|main:contactReference",
+   "check": "target-size",
+   "target": "contact",
+   "width": 1024,
+   "key": "main:contactReference",
+   "detail": "main:contactReference(178x24)"
+  },
+  {
+   "fp": "target-size|contact|1024|main:marketingConsent",
+   "check": "target-size",
+   "target": "contact",
+   "width": 1024,
+   "key": "main:marketingConsent",
+   "detail": "main:marketingConsent(20x20)"
+  },
+  {
+   "fp": "target-size|contact|1440|main:contactReference",
+   "check": "target-size",
+   "target": "contact",
+   "width": 1440,
+   "key": "main:contactReference",
+   "detail": "main:contactReference(178x24)"
+  },
+  {
+   "fp": "target-size|contact|1440|main:marketingConsent",
+   "check": "target-size",
+   "target": "contact",
+   "width": 1440,
+   "key": "main:marketingConsent",
+   "detail": "main:marketingConsent(20x20)"
+  },
+  {
+   "fp": "overflow|blog-slug~fixture-full|320|contained:table.w-full.min-w-[500px]",
+   "check": "overflow",
+   "target": "blog-slug~fixture-full",
+   "width": 320,
+   "key": "contained:table.w-full.min-w-[500px]",
+   "detail": "wider than the viewport inside its own scroll container: table.w-full.min-w-[500px]"
+  },
+  {
+   "fp": "pinned|blog-slug~fixture-full|320|div.sticky.top-8:sticky",
+   "check": "pinned",
+   "target": "blog-slug~fixture-full",
+   "width": 320,
+   "key": "div.sticky.top-8:sticky",
+   "detail": "sticky/fixed element visible"
+  },
+  {
+   "fp": "headings|blog-slug~fixture-full|320|level-jump",
+   "check": "headings",
+   "target": "blog-slug~fixture-full",
+   "width": 320,
+   "key": "level-jump",
+   "detail": "1 heading-level jumps"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|320|main:Home",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 320,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|320|main:Blog",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 320,
+   "key": "main:Blog",
+   "detail": "main:Blog(28x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|320|main:1. FIXTURE section one",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 320,
+   "key": "main:1. FIXTURE section one",
+   "detail": "main:1. FIXTURE section one(238x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|320|main:2. FIXTURE subsection",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 320,
+   "key": "main:2. FIXTURE subsection",
+   "detail": "main:2. FIXTURE subsection(238x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|320|main:3. FIXTURE section two",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 320,
+   "key": "main:3. FIXTURE section two",
+   "detail": "main:3. FIXTURE section two(238x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|320|main:How search work is run",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 320,
+   "key": "main:How search work is run",
+   "detail": "main:How search work is run(238x40)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|320|main:LinkedIn",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 320,
+   "key": "main:LinkedIn",
+   "detail": "main:LinkedIn(102x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|320|main:Facebook",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 320,
+   "key": "main:Facebook",
+   "detail": "main:Facebook(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|320|main:X",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 320,
+   "key": "main:X",
+   "detail": "main:X(62x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|320|main:Copy Link",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 320,
+   "key": "main:Copy Link",
+   "detail": "main:Copy Link(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|320|main:Book a call",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 320,
+   "key": "main:Book a call",
+   "detail": "main:Book a call(238x40)"
+  },
+  {
+   "fp": "text-spacing|blog-slug~fixture-full|320|contained:table.w-full.min-w-[500px]",
+   "check": "text-spacing",
+   "target": "blog-slug~fixture-full",
+   "width": 320,
+   "key": "contained:table.w-full.min-w-[500px]",
+   "detail": "with 1.4.12 spacing: wider than the viewport inside its own scroll container: table.w-full.min-w-[500px]"
+  },
+  {
+   "fp": "overflow|blog-slug~fixture-full|360|contained:table.w-full.min-w-[500px]",
+   "check": "overflow",
+   "target": "blog-slug~fixture-full",
+   "width": 360,
+   "key": "contained:table.w-full.min-w-[500px]",
+   "detail": "wider than the viewport inside its own scroll container: table.w-full.min-w-[500px]"
+  },
+  {
+   "fp": "pinned|blog-slug~fixture-full|360|div.sticky.top-8:sticky",
+   "check": "pinned",
+   "target": "blog-slug~fixture-full",
+   "width": 360,
+   "key": "div.sticky.top-8:sticky",
+   "detail": "sticky/fixed element visible"
+  },
+  {
+   "fp": "headings|blog-slug~fixture-full|360|level-jump",
+   "check": "headings",
+   "target": "blog-slug~fixture-full",
+   "width": 360,
+   "key": "level-jump",
+   "detail": "1 heading-level jumps"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|360|main:Home",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 360,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|360|main:Blog",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 360,
+   "key": "main:Blog",
+   "detail": "main:Blog(28x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|360|main:1. FIXTURE section one",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 360,
+   "key": "main:1. FIXTURE section one",
+   "detail": "main:1. FIXTURE section one(278x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|360|main:2. FIXTURE subsection",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 360,
+   "key": "main:2. FIXTURE subsection",
+   "detail": "main:2. FIXTURE subsection(278x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|360|main:3. FIXTURE section two",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 360,
+   "key": "main:3. FIXTURE section two",
+   "detail": "main:3. FIXTURE section two(278x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|360|main:How search work is run",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 360,
+   "key": "main:How search work is run",
+   "detail": "main:How search work is run(278x40)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|360|main:LinkedIn",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 360,
+   "key": "main:LinkedIn",
+   "detail": "main:LinkedIn(102x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|360|main:Facebook",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 360,
+   "key": "main:Facebook",
+   "detail": "main:Facebook(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|360|main:X",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 360,
+   "key": "main:X",
+   "detail": "main:X(62x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|360|main:Copy Link",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 360,
+   "key": "main:Copy Link",
+   "detail": "main:Copy Link(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|360|main:Book a call",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 360,
+   "key": "main:Book a call",
+   "detail": "main:Book a call(278x40)"
+  },
+  {
+   "fp": "overflow|blog-slug~fixture-full|390|contained:table.w-full.min-w-[500px]",
+   "check": "overflow",
+   "target": "blog-slug~fixture-full",
+   "width": 390,
+   "key": "contained:table.w-full.min-w-[500px]",
+   "detail": "wider than the viewport inside its own scroll container: table.w-full.min-w-[500px]"
+  },
+  {
+   "fp": "pinned|blog-slug~fixture-full|390|div.sticky.top-8:sticky",
+   "check": "pinned",
+   "target": "blog-slug~fixture-full",
+   "width": 390,
+   "key": "div.sticky.top-8:sticky",
+   "detail": "sticky/fixed element visible"
+  },
+  {
+   "fp": "headings|blog-slug~fixture-full|390|level-jump",
+   "check": "headings",
+   "target": "blog-slug~fixture-full",
+   "width": 390,
+   "key": "level-jump",
+   "detail": "1 heading-level jumps"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|390|main:Home",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 390,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|390|main:Blog",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 390,
+   "key": "main:Blog",
+   "detail": "main:Blog(28x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|390|main:1. FIXTURE section one",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 390,
+   "key": "main:1. FIXTURE section one",
+   "detail": "main:1. FIXTURE section one(308x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|390|main:2. FIXTURE subsection",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 390,
+   "key": "main:2. FIXTURE subsection",
+   "detail": "main:2. FIXTURE subsection(308x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|390|main:3. FIXTURE section two",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 390,
+   "key": "main:3. FIXTURE section two",
+   "detail": "main:3. FIXTURE section two(308x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|390|main:How search work is run",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 390,
+   "key": "main:How search work is run",
+   "detail": "main:How search work is run(308x40)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|390|main:LinkedIn",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 390,
+   "key": "main:LinkedIn",
+   "detail": "main:LinkedIn(102x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|390|main:Facebook",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 390,
+   "key": "main:Facebook",
+   "detail": "main:Facebook(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|390|main:X",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 390,
+   "key": "main:X",
+   "detail": "main:X(62x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|390|main:Copy Link",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 390,
+   "key": "main:Copy Link",
+   "detail": "main:Copy Link(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|390|main:Book a call",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 390,
+   "key": "main:Book a call",
+   "detail": "main:Book a call(308x40)"
+  },
+  {
+   "fp": "overflow|blog-slug~fixture-full|430|contained:table.w-full.min-w-[500px]",
+   "check": "overflow",
+   "target": "blog-slug~fixture-full",
+   "width": 430,
+   "key": "contained:table.w-full.min-w-[500px]",
+   "detail": "wider than the viewport inside its own scroll container: table.w-full.min-w-[500px]"
+  },
+  {
+   "fp": "pinned|blog-slug~fixture-full|430|div.sticky.top-8:sticky",
+   "check": "pinned",
+   "target": "blog-slug~fixture-full",
+   "width": 430,
+   "key": "div.sticky.top-8:sticky",
+   "detail": "sticky/fixed element visible"
+  },
+  {
+   "fp": "headings|blog-slug~fixture-full|430|level-jump",
+   "check": "headings",
+   "target": "blog-slug~fixture-full",
+   "width": 430,
+   "key": "level-jump",
+   "detail": "1 heading-level jumps"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|430|main:Home",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 430,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|430|main:Blog",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 430,
+   "key": "main:Blog",
+   "detail": "main:Blog(28x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|430|main:1. FIXTURE section one",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 430,
+   "key": "main:1. FIXTURE section one",
+   "detail": "main:1. FIXTURE section one(348x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|430|main:2. FIXTURE subsection",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 430,
+   "key": "main:2. FIXTURE subsection",
+   "detail": "main:2. FIXTURE subsection(348x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|430|main:3. FIXTURE section two",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 430,
+   "key": "main:3. FIXTURE section two",
+   "detail": "main:3. FIXTURE section two(348x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|430|main:How search work is run",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 430,
+   "key": "main:How search work is run",
+   "detail": "main:How search work is run(348x40)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|430|main:LinkedIn",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 430,
+   "key": "main:LinkedIn",
+   "detail": "main:LinkedIn(102x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|430|main:Facebook",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 430,
+   "key": "main:Facebook",
+   "detail": "main:Facebook(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|430|main:X",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 430,
+   "key": "main:X",
+   "detail": "main:X(62x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|430|main:Copy Link",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 430,
+   "key": "main:Copy Link",
+   "detail": "main:Copy Link(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|430|main:Book a call",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 430,
+   "key": "main:Book a call",
+   "detail": "main:Book a call(348x40)"
+  },
+  {
+   "fp": "pinned|blog-slug~fixture-full|768|div.sticky.top-8:sticky",
+   "check": "pinned",
+   "target": "blog-slug~fixture-full",
+   "width": 768,
+   "key": "div.sticky.top-8:sticky",
+   "detail": "sticky/fixed element visible"
+  },
+  {
+   "fp": "headings|blog-slug~fixture-full|768|level-jump",
+   "check": "headings",
+   "target": "blog-slug~fixture-full",
+   "width": 768,
+   "key": "level-jump",
+   "detail": "1 heading-level jumps"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|768|main:Home",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 768,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|768|main:Blog",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 768,
+   "key": "main:Blog",
+   "detail": "main:Blog(28x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|768|main:1. FIXTURE section one",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 768,
+   "key": "main:1. FIXTURE section one",
+   "detail": "main:1. FIXTURE section one(654x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|768|main:2. FIXTURE subsection",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 768,
+   "key": "main:2. FIXTURE subsection",
+   "detail": "main:2. FIXTURE subsection(654x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|768|main:3. FIXTURE section two",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 768,
+   "key": "main:3. FIXTURE section two",
+   "detail": "main:3. FIXTURE section two(654x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|768|main:How search work is run",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 768,
+   "key": "main:How search work is run",
+   "detail": "main:How search work is run(654x40)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|768|main:LinkedIn",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 768,
+   "key": "main:LinkedIn",
+   "detail": "main:LinkedIn(102x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|768|main:Facebook",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 768,
+   "key": "main:Facebook",
+   "detail": "main:Facebook(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|768|main:X",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 768,
+   "key": "main:X",
+   "detail": "main:X(62x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|768|main:Copy Link",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 768,
+   "key": "main:Copy Link",
+   "detail": "main:Copy Link(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|768|main:Book a call",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 768,
+   "key": "main:Book a call",
+   "detail": "main:Book a call(654x40)"
+  },
+  {
+   "fp": "text-spacing|blog-slug~fixture-full|360|contained:table.w-full.min-w-[500px]",
+   "check": "text-spacing",
+   "target": "blog-slug~fixture-full",
+   "width": 360,
+   "key": "contained:table.w-full.min-w-[500px]",
+   "detail": "with 1.4.12 spacing: wider than the viewport inside its own scroll container: table.w-full.min-w-[500px]"
+  },
+  {
+   "fp": "text-spacing|blog-slug~fixture-full|390|contained:table.w-full.min-w-[500px]",
+   "check": "text-spacing",
+   "target": "blog-slug~fixture-full",
+   "width": 390,
+   "key": "contained:table.w-full.min-w-[500px]",
+   "detail": "with 1.4.12 spacing: wider than the viewport inside its own scroll container: table.w-full.min-w-[500px]"
+  },
+  {
+   "fp": "pinned|blog-slug~fixture-full|1024|div.sticky.top-8:sticky",
+   "check": "pinned",
+   "target": "blog-slug~fixture-full",
+   "width": 1024,
+   "key": "div.sticky.top-8:sticky",
+   "detail": "sticky/fixed element visible"
+  },
+  {
+   "fp": "headings|blog-slug~fixture-full|1024|level-jump",
+   "check": "headings",
+   "target": "blog-slug~fixture-full",
+   "width": 1024,
+   "key": "level-jump",
+   "detail": "1 heading-level jumps"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1024|main:Home",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1024,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1024|main:Blog",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1024,
+   "key": "main:Blog",
+   "detail": "main:Blog(28x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1024|main:1. FIXTURE section one",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1024,
+   "key": "main:1. FIXTURE section one",
+   "detail": "main:1. FIXTURE section one(558x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1024|main:2. FIXTURE subsection",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1024,
+   "key": "main:2. FIXTURE subsection",
+   "detail": "main:2. FIXTURE subsection(558x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1024|main:3. FIXTURE section two",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1024,
+   "key": "main:3. FIXTURE section two",
+   "detail": "main:3. FIXTURE section two(558x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1024|main:How search work is run",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1024,
+   "key": "main:How search work is run",
+   "detail": "main:How search work is run(558x40)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1024|main:LinkedIn",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1024,
+   "key": "main:LinkedIn",
+   "detail": "main:LinkedIn(102x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1024|main:Facebook",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1024,
+   "key": "main:Facebook",
+   "detail": "main:Facebook(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1024|main:X",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1024,
+   "key": "main:X",
+   "detail": "main:X(62x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1024|main:Copy Link",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1024,
+   "key": "main:Copy Link",
+   "detail": "main:Copy Link(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1024|main:Book a call",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1024,
+   "key": "main:Book a call",
+   "detail": "main:Book a call(222x40)"
+  },
+  {
+   "fp": "pinned|blog-slug~fixture-minimal|320|div.sticky.top-8:sticky",
+   "check": "pinned",
+   "target": "blog-slug~fixture-minimal",
+   "width": 320,
+   "key": "div.sticky.top-8:sticky",
+   "detail": "sticky/fixed element visible"
+  },
+  {
+   "fp": "headings|blog-slug~fixture-minimal|320|level-jump",
+   "check": "headings",
+   "target": "blog-slug~fixture-minimal",
+   "width": 320,
+   "key": "level-jump",
+   "detail": "1 heading-level jumps"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|320|main:Home",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 320,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|320|main:Blog",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 320,
+   "key": "main:Blog",
+   "detail": "main:Blog(28x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|320|main:How search work is run",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 320,
+   "key": "main:How search work is run",
+   "detail": "main:How search work is run(238x40)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|320|main:LinkedIn",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 320,
+   "key": "main:LinkedIn",
+   "detail": "main:LinkedIn(102x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|320|main:Facebook",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 320,
+   "key": "main:Facebook",
+   "detail": "main:Facebook(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|320|main:X",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 320,
+   "key": "main:X",
+   "detail": "main:X(62x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|320|main:Copy Link",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 320,
+   "key": "main:Copy Link",
+   "detail": "main:Copy Link(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|320|main:Book a call",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 320,
+   "key": "main:Book a call",
+   "detail": "main:Book a call(238x40)"
+  },
+  {
+   "fp": "pinned|blog-slug~fixture-minimal|360|div.sticky.top-8:sticky",
+   "check": "pinned",
+   "target": "blog-slug~fixture-minimal",
+   "width": 360,
+   "key": "div.sticky.top-8:sticky",
+   "detail": "sticky/fixed element visible"
+  },
+  {
+   "fp": "headings|blog-slug~fixture-minimal|360|level-jump",
+   "check": "headings",
+   "target": "blog-slug~fixture-minimal",
+   "width": 360,
+   "key": "level-jump",
+   "detail": "1 heading-level jumps"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|360|main:Home",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 360,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|360|main:Blog",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 360,
+   "key": "main:Blog",
+   "detail": "main:Blog(28x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|360|main:How search work is run",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 360,
+   "key": "main:How search work is run",
+   "detail": "main:How search work is run(278x40)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|360|main:LinkedIn",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 360,
+   "key": "main:LinkedIn",
+   "detail": "main:LinkedIn(102x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|360|main:Facebook",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 360,
+   "key": "main:Facebook",
+   "detail": "main:Facebook(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|360|main:X",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 360,
+   "key": "main:X",
+   "detail": "main:X(62x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|360|main:Copy Link",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 360,
+   "key": "main:Copy Link",
+   "detail": "main:Copy Link(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|360|main:Book a call",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 360,
+   "key": "main:Book a call",
+   "detail": "main:Book a call(278x40)"
+  },
+  {
+   "fp": "pinned|blog-slug~fixture-minimal|390|div.sticky.top-8:sticky",
+   "check": "pinned",
+   "target": "blog-slug~fixture-minimal",
+   "width": 390,
+   "key": "div.sticky.top-8:sticky",
+   "detail": "sticky/fixed element visible"
+  },
+  {
+   "fp": "headings|blog-slug~fixture-minimal|390|level-jump",
+   "check": "headings",
+   "target": "blog-slug~fixture-minimal",
+   "width": 390,
+   "key": "level-jump",
+   "detail": "1 heading-level jumps"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|390|main:Home",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 390,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|390|main:Blog",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 390,
+   "key": "main:Blog",
+   "detail": "main:Blog(28x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|390|main:How search work is run",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 390,
+   "key": "main:How search work is run",
+   "detail": "main:How search work is run(308x40)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|390|main:LinkedIn",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 390,
+   "key": "main:LinkedIn",
+   "detail": "main:LinkedIn(102x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|390|main:Facebook",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 390,
+   "key": "main:Facebook",
+   "detail": "main:Facebook(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|390|main:X",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 390,
+   "key": "main:X",
+   "detail": "main:X(62x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|390|main:Copy Link",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 390,
+   "key": "main:Copy Link",
+   "detail": "main:Copy Link(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|390|main:Book a call",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 390,
+   "key": "main:Book a call",
+   "detail": "main:Book a call(308x40)"
+  },
+  {
+   "fp": "pinned|blog-slug~fixture-full|1440|div.sticky.top-8:sticky",
+   "check": "pinned",
+   "target": "blog-slug~fixture-full",
+   "width": 1440,
+   "key": "div.sticky.top-8:sticky",
+   "detail": "sticky/fixed element visible"
+  },
+  {
+   "fp": "headings|blog-slug~fixture-full|1440|level-jump",
+   "check": "headings",
+   "target": "blog-slug~fixture-full",
+   "width": 1440,
+   "key": "level-jump",
+   "detail": "1 heading-level jumps"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1440|main:Home",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1440,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1440|main:Blog",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1440,
+   "key": "main:Blog",
+   "detail": "main:Blog(28x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1440|main:1. FIXTURE section one",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1440,
+   "key": "main:1. FIXTURE section one",
+   "detail": "main:1. FIXTURE section one(729x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1440|main:2. FIXTURE subsection",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1440,
+   "key": "main:2. FIXTURE subsection",
+   "detail": "main:2. FIXTURE subsection(729x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1440|main:3. FIXTURE section two",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1440,
+   "key": "main:3. FIXTURE section two",
+   "detail": "main:3. FIXTURE section two(729x31)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1440|main:How search work is run",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1440,
+   "key": "main:How search work is run",
+   "detail": "main:How search work is run(729x40)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1440|main:LinkedIn",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1440,
+   "key": "main:LinkedIn",
+   "detail": "main:LinkedIn(102x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1440|main:Facebook",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1440,
+   "key": "main:Facebook",
+   "detail": "main:Facebook(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1440|main:X",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1440,
+   "key": "main:X",
+   "detail": "main:X(62x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1440|main:Copy Link",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1440,
+   "key": "main:Copy Link",
+   "detail": "main:Copy Link(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-full|1440|main:Book a call",
+   "check": "target-size",
+   "target": "blog-slug~fixture-full",
+   "width": 1440,
+   "key": "main:Book a call",
+   "detail": "main:Book a call(307x40)"
+  },
+  {
+   "fp": "pinned|blog-slug~fixture-minimal|430|div.sticky.top-8:sticky",
+   "check": "pinned",
+   "target": "blog-slug~fixture-minimal",
+   "width": 430,
+   "key": "div.sticky.top-8:sticky",
+   "detail": "sticky/fixed element visible"
+  },
+  {
+   "fp": "headings|blog-slug~fixture-minimal|430|level-jump",
+   "check": "headings",
+   "target": "blog-slug~fixture-minimal",
+   "width": 430,
+   "key": "level-jump",
+   "detail": "1 heading-level jumps"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|430|main:Home",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 430,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|430|main:Blog",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 430,
+   "key": "main:Blog",
+   "detail": "main:Blog(28x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|430|main:How search work is run",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 430,
+   "key": "main:How search work is run",
+   "detail": "main:How search work is run(348x40)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|430|main:LinkedIn",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 430,
+   "key": "main:LinkedIn",
+   "detail": "main:LinkedIn(102x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|430|main:Facebook",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 430,
+   "key": "main:Facebook",
+   "detail": "main:Facebook(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|430|main:X",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 430,
+   "key": "main:X",
+   "detail": "main:X(62x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|430|main:Copy Link",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 430,
+   "key": "main:Copy Link",
+   "detail": "main:Copy Link(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|430|main:Book a call",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 430,
+   "key": "main:Book a call",
+   "detail": "main:Book a call(348x40)"
+  },
+  {
+   "fp": "pinned|blog-slug~fixture-minimal|768|div.sticky.top-8:sticky",
+   "check": "pinned",
+   "target": "blog-slug~fixture-minimal",
+   "width": 768,
+   "key": "div.sticky.top-8:sticky",
+   "detail": "sticky/fixed element visible"
+  },
+  {
+   "fp": "headings|blog-slug~fixture-minimal|768|level-jump",
+   "check": "headings",
+   "target": "blog-slug~fixture-minimal",
+   "width": 768,
+   "key": "level-jump",
+   "detail": "1 heading-level jumps"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|768|main:Home",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 768,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|768|main:Blog",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 768,
+   "key": "main:Blog",
+   "detail": "main:Blog(28x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|768|main:How search work is run",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 768,
+   "key": "main:How search work is run",
+   "detail": "main:How search work is run(654x40)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|768|main:LinkedIn",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 768,
+   "key": "main:LinkedIn",
+   "detail": "main:LinkedIn(102x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|768|main:Facebook",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 768,
+   "key": "main:Facebook",
+   "detail": "main:Facebook(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|768|main:X",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 768,
+   "key": "main:X",
+   "detail": "main:X(62x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|768|main:Copy Link",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 768,
+   "key": "main:Copy Link",
+   "detail": "main:Copy Link(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|768|main:Book a call",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 768,
+   "key": "main:Book a call",
+   "detail": "main:Book a call(654x40)"
+  },
+  {
+   "fp": "pinned|blog-slug~fixture-minimal|1024|div.sticky.top-8:sticky",
+   "check": "pinned",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1024,
+   "key": "div.sticky.top-8:sticky",
+   "detail": "sticky/fixed element visible"
+  },
+  {
+   "fp": "headings|blog-slug~fixture-minimal|1024|level-jump",
+   "check": "headings",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1024,
+   "key": "level-jump",
+   "detail": "1 heading-level jumps"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|1024|main:Home",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1024,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|1024|main:Blog",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1024,
+   "key": "main:Blog",
+   "detail": "main:Blog(28x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|1024|main:How search work is run",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1024,
+   "key": "main:How search work is run",
+   "detail": "main:How search work is run(558x40)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|1024|main:LinkedIn",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1024,
+   "key": "main:LinkedIn",
+   "detail": "main:LinkedIn(102x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|1024|main:Facebook",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1024,
+   "key": "main:Facebook",
+   "detail": "main:Facebook(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|1024|main:X",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1024,
+   "key": "main:X",
+   "detail": "main:X(62x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|1024|main:Copy Link",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1024,
+   "key": "main:Copy Link",
+   "detail": "main:Copy Link(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|1024|main:Book a call",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1024,
+   "key": "main:Book a call",
+   "detail": "main:Book a call(222x40)"
+  },
+  {
+   "fp": "pinned|blog-slug~fixture-minimal|1440|div.sticky.top-8:sticky",
+   "check": "pinned",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1440,
+   "key": "div.sticky.top-8:sticky",
+   "detail": "sticky/fixed element visible"
+  },
+  {
+   "fp": "headings|blog-slug~fixture-minimal|1440|level-jump",
+   "check": "headings",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1440,
+   "key": "level-jump",
+   "detail": "1 heading-level jumps"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|1440|main:Home",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1440,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|1440|main:Blog",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1440,
+   "key": "main:Blog",
+   "detail": "main:Blog(28x23)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|1440|main:How search work is run",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1440,
+   "key": "main:How search work is run",
+   "detail": "main:How search work is run(729x40)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|1440|main:LinkedIn",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1440,
+   "key": "main:LinkedIn",
+   "detail": "main:LinkedIn(102x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|1440|main:Facebook",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1440,
+   "key": "main:Facebook",
+   "detail": "main:Facebook(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|1440|main:X",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1440,
+   "key": "main:X",
+   "detail": "main:X(62x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|1440|main:Copy Link",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1440,
+   "key": "main:Copy Link",
+   "detail": "main:Copy Link(109x36)"
+  },
+  {
+   "fp": "target-size|blog-slug~fixture-minimal|1440|main:Book a call",
+   "check": "target-size",
+   "target": "blog-slug~fixture-minimal",
+   "width": 1440,
+   "key": "main:Book a call",
+   "detail": "main:Book a call(307x40)"
+  },
+  {
+   "fp": "overflow|portfolio-slug~fixture-open|320|contained:table.w-full.min-w-[560px]",
+   "check": "overflow",
+   "target": "portfolio-slug~fixture-open",
+   "width": 320,
+   "key": "contained:table.w-full.min-w-[560px]",
+   "detail": "wider than the viewport inside its own scroll container: table.w-full.min-w-[560px]"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-open|320|main:Home",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-open",
+   "width": 320,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-open|320|main:Case Studies",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-open",
+   "width": 320,
+   "key": "main:Case Studies",
+   "detail": "main:Case Studies(86x23)"
+  },
+  {
+   "fp": "overflow|portfolio-slug~fixture-open|360|contained:table.w-full.min-w-[560px]",
+   "check": "overflow",
+   "target": "portfolio-slug~fixture-open",
+   "width": 360,
+   "key": "contained:table.w-full.min-w-[560px]",
+   "detail": "wider than the viewport inside its own scroll container: table.w-full.min-w-[560px]"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-open|360|main:Home",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-open",
+   "width": 360,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-open|360|main:Case Studies",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-open",
+   "width": 360,
+   "key": "main:Case Studies",
+   "detail": "main:Case Studies(86x23)"
+  },
+  {
+   "fp": "text-spacing|portfolio-slug~fixture-open|320|page-scroll",
+   "check": "text-spacing",
+   "target": "portfolio-slug~fixture-open",
+   "width": 320,
+   "key": "page-scroll",
+   "detail": "with 1.4.12 spacing: page scrolls horizontally by 8px"
+  },
+  {
+   "fp": "text-spacing|portfolio-slug~fixture-open|320|contained:table.w-full.min-w-[560px]",
+   "check": "text-spacing",
+   "target": "portfolio-slug~fixture-open",
+   "width": 320,
+   "key": "contained:table.w-full.min-w-[560px]",
+   "detail": "with 1.4.12 spacing: wider than the viewport inside its own scroll container: table.w-full.min-w-[560px]"
+  },
+  {
+   "fp": "text-spacing|portfolio-slug~fixture-open|360|contained:table.w-full.min-w-[560px]",
+   "check": "text-spacing",
+   "target": "portfolio-slug~fixture-open",
+   "width": 360,
+   "key": "contained:table.w-full.min-w-[560px]",
+   "detail": "with 1.4.12 spacing: wider than the viewport inside its own scroll container: table.w-full.min-w-[560px]"
+  },
+  {
+   "fp": "overflow|portfolio-slug~fixture-open|390|contained:table.w-full.min-w-[560px]",
+   "check": "overflow",
+   "target": "portfolio-slug~fixture-open",
+   "width": 390,
+   "key": "contained:table.w-full.min-w-[560px]",
+   "detail": "wider than the viewport inside its own scroll container: table.w-full.min-w-[560px]"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-open|390|main:Home",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-open",
+   "width": 390,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-open|390|main:Case Studies",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-open",
+   "width": 390,
+   "key": "main:Case Studies",
+   "detail": "main:Case Studies(86x23)"
+  },
+  {
+   "fp": "text-spacing|portfolio-slug~fixture-open|390|contained:table.w-full.min-w-[560px]",
+   "check": "text-spacing",
+   "target": "portfolio-slug~fixture-open",
+   "width": 390,
+   "key": "contained:table.w-full.min-w-[560px]",
+   "detail": "with 1.4.12 spacing: wider than the viewport inside its own scroll container: table.w-full.min-w-[560px]"
+  },
+  {
+   "fp": "overflow|portfolio-slug~fixture-open|430|contained:table.w-full.min-w-[560px]",
+   "check": "overflow",
+   "target": "portfolio-slug~fixture-open",
+   "width": 430,
+   "key": "contained:table.w-full.min-w-[560px]",
+   "detail": "wider than the viewport inside its own scroll container: table.w-full.min-w-[560px]"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-open|430|main:Home",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-open",
+   "width": 430,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-open|430|main:Case Studies",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-open",
+   "width": 430,
+   "key": "main:Case Studies",
+   "detail": "main:Case Studies(86x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-open|768|main:Home",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-open",
+   "width": 768,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-open|768|main:Case Studies",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-open",
+   "width": 768,
+   "key": "main:Case Studies",
+   "detail": "main:Case Studies(86x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-open|1024|main:Home",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-open",
+   "width": 1024,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-open|1024|main:Case Studies",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-open",
+   "width": 1024,
+   "key": "main:Case Studies",
+   "detail": "main:Case Studies(86x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-open|1440|main:Home",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-open",
+   "width": 1440,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-open|1440|main:Case Studies",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-open",
+   "width": 1440,
+   "key": "main:Case Studies",
+   "detail": "main:Case Studies(86x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-withheld|320|main:Home",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-withheld",
+   "width": 320,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-withheld|320|main:Case Studies",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-withheld",
+   "width": 320,
+   "key": "main:Case Studies",
+   "detail": "main:Case Studies(86x23)"
+  },
+  {
+   "fp": "text-spacing|portfolio-slug~fixture-withheld|320|page-scroll",
+   "check": "text-spacing",
+   "target": "portfolio-slug~fixture-withheld",
+   "width": 320,
+   "key": "page-scroll",
+   "detail": "with 1.4.12 spacing: page scrolls horizontally by 8px"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-withheld|360|main:Home",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-withheld",
+   "width": 360,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-withheld|360|main:Case Studies",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-withheld",
+   "width": 360,
+   "key": "main:Case Studies",
+   "detail": "main:Case Studies(86x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-withheld|390|main:Home",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-withheld",
+   "width": 390,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-withheld|390|main:Case Studies",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-withheld",
+   "width": 390,
+   "key": "main:Case Studies",
+   "detail": "main:Case Studies(86x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-withheld|430|main:Home",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-withheld",
+   "width": 430,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-withheld|430|main:Case Studies",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-withheld",
+   "width": 430,
+   "key": "main:Case Studies",
+   "detail": "main:Case Studies(86x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-withheld|768|main:Home",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-withheld",
+   "width": 768,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-withheld|768|main:Case Studies",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-withheld",
+   "width": 768,
+   "key": "main:Case Studies",
+   "detail": "main:Case Studies(86x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-withheld|1024|main:Home",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-withheld",
+   "width": 1024,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-withheld|1024|main:Case Studies",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-withheld",
+   "width": 1024,
+   "key": "main:Case Studies",
+   "detail": "main:Case Studies(86x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-withheld|1440|main:Home",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-withheld",
+   "width": 1440,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|portfolio-slug~fixture-withheld|1440|main:Case Studies",
+   "check": "target-size",
+   "target": "portfolio-slug~fixture-withheld",
+   "width": 1440,
+   "key": "main:Case Studies",
+   "detail": "main:Case Studies(86x23)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:Home",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:→ Information We Collect",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:→ Information We Collect",
+   "detail": "main:→ Information We Collect(288x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:→ How We Use Your Informatio",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:→ How We Use Your Informatio",
+   "detail": "main:→ How We Use Your Informatio(288x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:→ Lead Forms and Contact For",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:→ Lead Forms and Contact For",
+   "detail": "main:→ Lead Forms and Contact For(288x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:→ Analytics and Tracking",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:→ Analytics and Tracking",
+   "detail": "main:→ Analytics and Tracking(288x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:→ Cookies and Similar Techno",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:→ Cookies and Similar Techno",
+   "detail": "main:→ Cookies and Similar Techno(288x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:→ Third-Party Tools",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:→ Third-Party Tools",
+   "detail": "main:→ Third-Party Tools(288x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:→ Data Sharing",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:→ Data Sharing",
+   "detail": "main:→ Data Sharing(288x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:→ Data Retention",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:→ Data Retention",
+   "detail": "main:→ Data Retention(288x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:→ Data Security",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:→ Data Security",
+   "detail": "main:→ Data Security(288x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:→ Your Rights",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:→ Your Rights",
+   "detail": "main:→ Your Rights(288x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:→ Children's Privacy",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:→ Children's Privacy",
+   "detail": "main:→ Children's Privacy(288x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:→ External Links",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:→ External Links",
+   "detail": "main:→ External Links(288x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:→ Policy Updates",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:→ Policy Updates",
+   "detail": "main:→ Policy Updates(288x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:→ Contact Us",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:→ Contact Us",
+   "detail": "main:→ Contact Us(288x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(178x22)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(236x24)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:+91 9873232662",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:+91 9873232662",
+   "detail": "main:+91 9873232662(236x24)"
+  },
+  {
+   "fp": "target-size|privacy-policy|320|main:Contact Us",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 320,
+   "key": "main:Contact Us",
+   "detail": "main:Contact Us(115x40)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:Home",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:→ Information We Collect",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:→ Information We Collect",
+   "detail": "main:→ Information We Collect(328x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:→ How We Use Your Informatio",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:→ How We Use Your Informatio",
+   "detail": "main:→ How We Use Your Informatio(328x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:→ Lead Forms and Contact For",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:→ Lead Forms and Contact For",
+   "detail": "main:→ Lead Forms and Contact For(328x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:→ Analytics and Tracking",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:→ Analytics and Tracking",
+   "detail": "main:→ Analytics and Tracking(328x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:→ Cookies and Similar Techno",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:→ Cookies and Similar Techno",
+   "detail": "main:→ Cookies and Similar Techno(328x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:→ Third-Party Tools",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:→ Third-Party Tools",
+   "detail": "main:→ Third-Party Tools(328x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:→ Data Sharing",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:→ Data Sharing",
+   "detail": "main:→ Data Sharing(328x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:→ Data Retention",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:→ Data Retention",
+   "detail": "main:→ Data Retention(328x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:→ Data Security",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:→ Data Security",
+   "detail": "main:→ Data Security(328x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:→ Your Rights",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:→ Your Rights",
+   "detail": "main:→ Your Rights(328x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:→ Children's Privacy",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:→ Children's Privacy",
+   "detail": "main:→ Children's Privacy(328x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:→ External Links",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:→ External Links",
+   "detail": "main:→ External Links(328x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:→ Policy Updates",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:→ Policy Updates",
+   "detail": "main:→ Policy Updates(328x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:→ Contact Us",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:→ Contact Us",
+   "detail": "main:→ Contact Us(328x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(178x22)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(276x24)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:+91 9873232662",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:+91 9873232662",
+   "detail": "main:+91 9873232662(276x24)"
+  },
+  {
+   "fp": "target-size|privacy-policy|360|main:Contact Us",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 360,
+   "key": "main:Contact Us",
+   "detail": "main:Contact Us(115x40)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:Home",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:→ Information We Collect",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:→ Information We Collect",
+   "detail": "main:→ Information We Collect(358x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:→ How We Use Your Informatio",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:→ How We Use Your Informatio",
+   "detail": "main:→ How We Use Your Informatio(358x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:→ Lead Forms and Contact For",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:→ Lead Forms and Contact For",
+   "detail": "main:→ Lead Forms and Contact For(358x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:→ Analytics and Tracking",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:→ Analytics and Tracking",
+   "detail": "main:→ Analytics and Tracking(358x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:→ Cookies and Similar Techno",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:→ Cookies and Similar Techno",
+   "detail": "main:→ Cookies and Similar Techno(358x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:→ Third-Party Tools",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:→ Third-Party Tools",
+   "detail": "main:→ Third-Party Tools(358x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:→ Data Sharing",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:→ Data Sharing",
+   "detail": "main:→ Data Sharing(358x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:→ Data Retention",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:→ Data Retention",
+   "detail": "main:→ Data Retention(358x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:→ Data Security",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:→ Data Security",
+   "detail": "main:→ Data Security(358x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:→ Your Rights",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:→ Your Rights",
+   "detail": "main:→ Your Rights(358x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:→ Children's Privacy",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:→ Children's Privacy",
+   "detail": "main:→ Children's Privacy(358x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:→ External Links",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:→ External Links",
+   "detail": "main:→ External Links(358x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:→ Policy Updates",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:→ Policy Updates",
+   "detail": "main:→ Policy Updates(358x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:→ Contact Us",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:→ Contact Us",
+   "detail": "main:→ Contact Us(358x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(178x22)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(306x24)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:+91 9873232662",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:+91 9873232662",
+   "detail": "main:+91 9873232662(306x24)"
+  },
+  {
+   "fp": "target-size|privacy-policy|390|main:Contact Us",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 390,
+   "key": "main:Contact Us",
+   "detail": "main:Contact Us(115x40)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:Home",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:→ Information We Collect",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:→ Information We Collect",
+   "detail": "main:→ Information We Collect(398x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:→ How We Use Your Informatio",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:→ How We Use Your Informatio",
+   "detail": "main:→ How We Use Your Informatio(398x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:→ Lead Forms and Contact For",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:→ Lead Forms and Contact For",
+   "detail": "main:→ Lead Forms and Contact For(398x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:→ Analytics and Tracking",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:→ Analytics and Tracking",
+   "detail": "main:→ Analytics and Tracking(398x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:→ Cookies and Similar Techno",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:→ Cookies and Similar Techno",
+   "detail": "main:→ Cookies and Similar Techno(398x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:→ Third-Party Tools",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:→ Third-Party Tools",
+   "detail": "main:→ Third-Party Tools(398x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:→ Data Sharing",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:→ Data Sharing",
+   "detail": "main:→ Data Sharing(398x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:→ Data Retention",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:→ Data Retention",
+   "detail": "main:→ Data Retention(398x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:→ Data Security",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:→ Data Security",
+   "detail": "main:→ Data Security(398x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:→ Your Rights",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:→ Your Rights",
+   "detail": "main:→ Your Rights(398x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:→ Children's Privacy",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:→ Children's Privacy",
+   "detail": "main:→ Children's Privacy(398x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:→ External Links",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:→ External Links",
+   "detail": "main:→ External Links(398x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:→ Policy Updates",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:→ Policy Updates",
+   "detail": "main:→ Policy Updates(398x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:→ Contact Us",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:→ Contact Us",
+   "detail": "main:→ Contact Us(398x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(178x22)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(346x24)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:+91 9873232662",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:+91 9873232662",
+   "detail": "main:+91 9873232662(346x24)"
+  },
+  {
+   "fp": "target-size|privacy-policy|430|main:Contact Us",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 430,
+   "key": "main:Contact Us",
+   "detail": "main:Contact Us(115x40)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:Home",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:→ Information We Collect",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:→ Information We Collect",
+   "detail": "main:→ Information We Collect(354x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:→ How We Use Your Informatio",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:→ How We Use Your Informatio",
+   "detail": "main:→ How We Use Your Informatio(354x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:→ Lead Forms and Contact For",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:→ Lead Forms and Contact For",
+   "detail": "main:→ Lead Forms and Contact For(354x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:→ Analytics and Tracking",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:→ Analytics and Tracking",
+   "detail": "main:→ Analytics and Tracking(354x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:→ Cookies and Similar Techno",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:→ Cookies and Similar Techno",
+   "detail": "main:→ Cookies and Similar Techno(354x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:→ Third-Party Tools",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:→ Third-Party Tools",
+   "detail": "main:→ Third-Party Tools(354x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:→ Data Sharing",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:→ Data Sharing",
+   "detail": "main:→ Data Sharing(354x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:→ Data Retention",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:→ Data Retention",
+   "detail": "main:→ Data Retention(354x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:→ Data Security",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:→ Data Security",
+   "detail": "main:→ Data Security(354x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:→ Your Rights",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:→ Your Rights",
+   "detail": "main:→ Your Rights(354x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:→ Children's Privacy",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:→ Children's Privacy",
+   "detail": "main:→ Children's Privacy(354x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:→ External Links",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:→ External Links",
+   "detail": "main:→ External Links(354x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:→ Policy Updates",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:→ Policy Updates",
+   "detail": "main:→ Policy Updates(354x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:→ Contact Us",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:→ Contact Us",
+   "detail": "main:→ Contact Us(354x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(178x22)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(206x24)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:+91 9873232662",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:+91 9873232662",
+   "detail": "main:+91 9873232662(150x24)"
+  },
+  {
+   "fp": "target-size|privacy-policy|768|main:Contact Us",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 768,
+   "key": "main:Contact Us",
+   "detail": "main:Contact Us(115x40)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:Home",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:→ Information We Collect",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:→ Information We Collect",
+   "detail": "main:→ Information We Collect(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:→ How We Use Your Informatio",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:→ How We Use Your Informatio",
+   "detail": "main:→ How We Use Your Informatio(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:→ Lead Forms and Contact For",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:→ Lead Forms and Contact For",
+   "detail": "main:→ Lead Forms and Contact For(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:→ Analytics and Tracking",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:→ Analytics and Tracking",
+   "detail": "main:→ Analytics and Tracking(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:→ Cookies and Similar Techno",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:→ Cookies and Similar Techno",
+   "detail": "main:→ Cookies and Similar Techno(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:→ Third-Party Tools",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:→ Third-Party Tools",
+   "detail": "main:→ Third-Party Tools(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:→ Data Sharing",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:→ Data Sharing",
+   "detail": "main:→ Data Sharing(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:→ Data Retention",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:→ Data Retention",
+   "detail": "main:→ Data Retention(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:→ Data Security",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:→ Data Security",
+   "detail": "main:→ Data Security(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:→ Your Rights",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:→ Your Rights",
+   "detail": "main:→ Your Rights(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:→ Children's Privacy",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:→ Children's Privacy",
+   "detail": "main:→ Children's Privacy(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:→ External Links",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:→ External Links",
+   "detail": "main:→ External Links(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:→ Policy Updates",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:→ Policy Updates",
+   "detail": "main:→ Policy Updates(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:→ Contact Us",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:→ Contact Us",
+   "detail": "main:→ Contact Us(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(178x22)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(206x24)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:+91 9873232662",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:+91 9873232662",
+   "detail": "main:+91 9873232662(150x24)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1024|main:Contact Us",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1024,
+   "key": "main:Contact Us",
+   "detail": "main:Contact Us(115x40)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:Home",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:→ Information We Collect",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:→ Information We Collect",
+   "detail": "main:→ Information We Collect(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:→ How We Use Your Informatio",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:→ How We Use Your Informatio",
+   "detail": "main:→ How We Use Your Informatio(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:→ Lead Forms and Contact For",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:→ Lead Forms and Contact For",
+   "detail": "main:→ Lead Forms and Contact For(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:→ Analytics and Tracking",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:→ Analytics and Tracking",
+   "detail": "main:→ Analytics and Tracking(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:→ Cookies and Similar Techno",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:→ Cookies and Similar Techno",
+   "detail": "main:→ Cookies and Similar Techno(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:→ Third-Party Tools",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:→ Third-Party Tools",
+   "detail": "main:→ Third-Party Tools(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:→ Data Sharing",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:→ Data Sharing",
+   "detail": "main:→ Data Sharing(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:→ Data Retention",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:→ Data Retention",
+   "detail": "main:→ Data Retention(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:→ Data Security",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:→ Data Security",
+   "detail": "main:→ Data Security(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:→ Your Rights",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:→ Your Rights",
+   "detail": "main:→ Your Rights(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:→ Children's Privacy",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:→ Children's Privacy",
+   "detail": "main:→ Children's Privacy(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:→ External Links",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:→ External Links",
+   "detail": "main:→ External Links(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:→ Policy Updates",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:→ Policy Updates",
+   "detail": "main:→ Policy Updates(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:→ Contact Us",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:→ Contact Us",
+   "detail": "main:→ Contact Us(378x39)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(178x22)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(206x24)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:+91 9873232662",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:+91 9873232662",
+   "detail": "main:+91 9873232662(150x24)"
+  },
+  {
+   "fp": "target-size|privacy-policy|1440|main:Contact Us",
+   "check": "target-size",
+   "target": "privacy-policy",
+   "width": 1440,
+   "key": "main:Contact Us",
+   "detail": "main:Contact Us(115x40)"
+  },
+  {
+   "fp": "target-size|terms|320|main:Home",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|terms|320|main:→ Use of Website",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:→ Use of Website",
+   "detail": "main:→ Use of Website(288x39)"
+  },
+  {
+   "fp": "target-size|terms|320|main:→ Services Information",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:→ Services Information",
+   "detail": "main:→ Services Information(288x39)"
+  },
+  {
+   "fp": "target-size|terms|320|main:→ No Guarantee of Results",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:→ No Guarantee of Results",
+   "detail": "main:→ No Guarantee of Results(288x39)"
+  },
+  {
+   "fp": "target-size|terms|320|main:→ Enquiries and Strategy Cal",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:→ Enquiries and Strategy Cal",
+   "detail": "main:→ Enquiries and Strategy Cal(288x39)"
+  },
+  {
+   "fp": "target-size|terms|320|main:→ Proposals and Engagements",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:→ Proposals and Engagements",
+   "detail": "main:→ Proposals and Engagements(288x39)"
+  },
+  {
+   "fp": "target-size|terms|320|main:→ Client Responsibilities",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:→ Client Responsibilities",
+   "detail": "main:→ Client Responsibilities(288x39)"
+  },
+  {
+   "fp": "target-size|terms|320|main:→ Fees and Payments",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:→ Fees and Payments",
+   "detail": "main:→ Fees and Payments(288x39)"
+  },
+  {
+   "fp": "target-size|terms|320|main:→ Ad Spend and Third-Party C",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:→ Ad Spend and Third-Party C",
+   "detail": "main:→ Ad Spend and Third-Party C(288x39)"
+  },
+  {
+   "fp": "target-size|terms|320|main:→ Intellectual Property",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:→ Intellectual Property",
+   "detail": "main:→ Intellectual Property(288x39)"
+  },
+  {
+   "fp": "target-size|terms|320|main:→ Content and Website Accura",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:→ Content and Website Accura",
+   "detail": "main:→ Content and Website Accura(288x39)"
+  },
+  {
+   "fp": "target-size|terms|320|main:→ Confidentiality",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:→ Confidentiality",
+   "detail": "main:→ Confidentiality(288x39)"
+  },
+  {
+   "fp": "target-size|terms|320|main:→ Third-Party Platforms",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:→ Third-Party Platforms",
+   "detail": "main:→ Third-Party Platforms(288x39)"
+  },
+  {
+   "fp": "target-size|terms|320|main:→ Limitation of Liability",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:→ Limitation of Liability",
+   "detail": "main:→ Limitation of Liability(288x39)"
+  },
+  {
+   "fp": "target-size|terms|320|main:→ Termination",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:→ Termination",
+   "detail": "main:→ Termination(288x39)"
+  },
+  {
+   "fp": "target-size|terms|320|main:→ Governing Law",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:→ Governing Law",
+   "detail": "main:→ Governing Law(288x39)"
+  },
+  {
+   "fp": "target-size|terms|320|main:→ Changes to Terms",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:→ Changes to Terms",
+   "detail": "main:→ Changes to Terms(288x39)"
+  },
+  {
+   "fp": "target-size|terms|320|main:→ Contact Us",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:→ Contact Us",
+   "detail": "main:→ Contact Us(288x39)"
+  },
+  {
+   "fp": "target-size|terms|320|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(236x24)"
+  },
+  {
+   "fp": "target-size|terms|320|main:+91 9873232662",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:+91 9873232662",
+   "detail": "main:+91 9873232662(236x24)"
+  },
+  {
+   "fp": "target-size|terms|320|main:Contact Us",
+   "check": "target-size",
+   "target": "terms",
+   "width": 320,
+   "key": "main:Contact Us",
+   "detail": "main:Contact Us(115x40)"
+  },
+  {
+   "fp": "target-size|terms|360|main:Home",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|terms|360|main:→ Use of Website",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:→ Use of Website",
+   "detail": "main:→ Use of Website(328x39)"
+  },
+  {
+   "fp": "target-size|terms|360|main:→ Services Information",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:→ Services Information",
+   "detail": "main:→ Services Information(328x39)"
+  },
+  {
+   "fp": "target-size|terms|360|main:→ No Guarantee of Results",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:→ No Guarantee of Results",
+   "detail": "main:→ No Guarantee of Results(328x39)"
+  },
+  {
+   "fp": "target-size|terms|360|main:→ Enquiries and Strategy Cal",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:→ Enquiries and Strategy Cal",
+   "detail": "main:→ Enquiries and Strategy Cal(328x39)"
+  },
+  {
+   "fp": "target-size|terms|360|main:→ Proposals and Engagements",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:→ Proposals and Engagements",
+   "detail": "main:→ Proposals and Engagements(328x39)"
+  },
+  {
+   "fp": "target-size|terms|360|main:→ Client Responsibilities",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:→ Client Responsibilities",
+   "detail": "main:→ Client Responsibilities(328x39)"
+  },
+  {
+   "fp": "target-size|terms|360|main:→ Fees and Payments",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:→ Fees and Payments",
+   "detail": "main:→ Fees and Payments(328x39)"
+  },
+  {
+   "fp": "target-size|terms|360|main:→ Ad Spend and Third-Party C",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:→ Ad Spend and Third-Party C",
+   "detail": "main:→ Ad Spend and Third-Party C(328x39)"
+  },
+  {
+   "fp": "target-size|terms|360|main:→ Intellectual Property",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:→ Intellectual Property",
+   "detail": "main:→ Intellectual Property(328x39)"
+  },
+  {
+   "fp": "target-size|terms|360|main:→ Content and Website Accura",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:→ Content and Website Accura",
+   "detail": "main:→ Content and Website Accura(328x39)"
+  },
+  {
+   "fp": "target-size|terms|360|main:→ Confidentiality",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:→ Confidentiality",
+   "detail": "main:→ Confidentiality(328x39)"
+  },
+  {
+   "fp": "target-size|terms|360|main:→ Third-Party Platforms",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:→ Third-Party Platforms",
+   "detail": "main:→ Third-Party Platforms(328x39)"
+  },
+  {
+   "fp": "target-size|terms|360|main:→ Limitation of Liability",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:→ Limitation of Liability",
+   "detail": "main:→ Limitation of Liability(328x39)"
+  },
+  {
+   "fp": "target-size|terms|360|main:→ Termination",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:→ Termination",
+   "detail": "main:→ Termination(328x39)"
+  },
+  {
+   "fp": "target-size|terms|360|main:→ Governing Law",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:→ Governing Law",
+   "detail": "main:→ Governing Law(328x39)"
+  },
+  {
+   "fp": "target-size|terms|360|main:→ Changes to Terms",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:→ Changes to Terms",
+   "detail": "main:→ Changes to Terms(328x39)"
+  },
+  {
+   "fp": "target-size|terms|360|main:→ Contact Us",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:→ Contact Us",
+   "detail": "main:→ Contact Us(328x39)"
+  },
+  {
+   "fp": "target-size|terms|360|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(276x24)"
+  },
+  {
+   "fp": "target-size|terms|360|main:+91 9873232662",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:+91 9873232662",
+   "detail": "main:+91 9873232662(276x24)"
+  },
+  {
+   "fp": "target-size|terms|360|main:Contact Us",
+   "check": "target-size",
+   "target": "terms",
+   "width": 360,
+   "key": "main:Contact Us",
+   "detail": "main:Contact Us(115x40)"
+  },
+  {
+   "fp": "target-size|terms|390|main:Home",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|terms|390|main:→ Use of Website",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:→ Use of Website",
+   "detail": "main:→ Use of Website(358x39)"
+  },
+  {
+   "fp": "target-size|terms|390|main:→ Services Information",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:→ Services Information",
+   "detail": "main:→ Services Information(358x39)"
+  },
+  {
+   "fp": "target-size|terms|390|main:→ No Guarantee of Results",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:→ No Guarantee of Results",
+   "detail": "main:→ No Guarantee of Results(358x39)"
+  },
+  {
+   "fp": "target-size|terms|390|main:→ Enquiries and Strategy Cal",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:→ Enquiries and Strategy Cal",
+   "detail": "main:→ Enquiries and Strategy Cal(358x39)"
+  },
+  {
+   "fp": "target-size|terms|390|main:→ Proposals and Engagements",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:→ Proposals and Engagements",
+   "detail": "main:→ Proposals and Engagements(358x39)"
+  },
+  {
+   "fp": "target-size|terms|390|main:→ Client Responsibilities",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:→ Client Responsibilities",
+   "detail": "main:→ Client Responsibilities(358x39)"
+  },
+  {
+   "fp": "target-size|terms|390|main:→ Fees and Payments",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:→ Fees and Payments",
+   "detail": "main:→ Fees and Payments(358x39)"
+  },
+  {
+   "fp": "target-size|terms|390|main:→ Ad Spend and Third-Party C",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:→ Ad Spend and Third-Party C",
+   "detail": "main:→ Ad Spend and Third-Party C(358x39)"
+  },
+  {
+   "fp": "target-size|terms|390|main:→ Intellectual Property",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:→ Intellectual Property",
+   "detail": "main:→ Intellectual Property(358x39)"
+  },
+  {
+   "fp": "target-size|terms|390|main:→ Content and Website Accura",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:→ Content and Website Accura",
+   "detail": "main:→ Content and Website Accura(358x39)"
+  },
+  {
+   "fp": "target-size|terms|390|main:→ Confidentiality",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:→ Confidentiality",
+   "detail": "main:→ Confidentiality(358x39)"
+  },
+  {
+   "fp": "target-size|terms|390|main:→ Third-Party Platforms",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:→ Third-Party Platforms",
+   "detail": "main:→ Third-Party Platforms(358x39)"
+  },
+  {
+   "fp": "target-size|terms|390|main:→ Limitation of Liability",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:→ Limitation of Liability",
+   "detail": "main:→ Limitation of Liability(358x39)"
+  },
+  {
+   "fp": "target-size|terms|390|main:→ Termination",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:→ Termination",
+   "detail": "main:→ Termination(358x39)"
+  },
+  {
+   "fp": "target-size|terms|390|main:→ Governing Law",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:→ Governing Law",
+   "detail": "main:→ Governing Law(358x39)"
+  },
+  {
+   "fp": "target-size|terms|390|main:→ Changes to Terms",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:→ Changes to Terms",
+   "detail": "main:→ Changes to Terms(358x39)"
+  },
+  {
+   "fp": "target-size|terms|390|main:→ Contact Us",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:→ Contact Us",
+   "detail": "main:→ Contact Us(358x39)"
+  },
+  {
+   "fp": "target-size|terms|390|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(306x24)"
+  },
+  {
+   "fp": "target-size|terms|390|main:+91 9873232662",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:+91 9873232662",
+   "detail": "main:+91 9873232662(306x24)"
+  },
+  {
+   "fp": "target-size|terms|390|main:Contact Us",
+   "check": "target-size",
+   "target": "terms",
+   "width": 390,
+   "key": "main:Contact Us",
+   "detail": "main:Contact Us(115x40)"
+  },
+  {
+   "fp": "target-size|terms|430|main:Home",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|terms|430|main:→ Use of Website",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:→ Use of Website",
+   "detail": "main:→ Use of Website(398x39)"
+  },
+  {
+   "fp": "target-size|terms|430|main:→ Services Information",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:→ Services Information",
+   "detail": "main:→ Services Information(398x39)"
+  },
+  {
+   "fp": "target-size|terms|430|main:→ No Guarantee of Results",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:→ No Guarantee of Results",
+   "detail": "main:→ No Guarantee of Results(398x39)"
+  },
+  {
+   "fp": "target-size|terms|430|main:→ Enquiries and Strategy Cal",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:→ Enquiries and Strategy Cal",
+   "detail": "main:→ Enquiries and Strategy Cal(398x39)"
+  },
+  {
+   "fp": "target-size|terms|430|main:→ Proposals and Engagements",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:→ Proposals and Engagements",
+   "detail": "main:→ Proposals and Engagements(398x39)"
+  },
+  {
+   "fp": "target-size|terms|430|main:→ Client Responsibilities",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:→ Client Responsibilities",
+   "detail": "main:→ Client Responsibilities(398x39)"
+  },
+  {
+   "fp": "target-size|terms|430|main:→ Fees and Payments",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:→ Fees and Payments",
+   "detail": "main:→ Fees and Payments(398x39)"
+  },
+  {
+   "fp": "target-size|terms|430|main:→ Ad Spend and Third-Party C",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:→ Ad Spend and Third-Party C",
+   "detail": "main:→ Ad Spend and Third-Party C(398x39)"
+  },
+  {
+   "fp": "target-size|terms|430|main:→ Intellectual Property",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:→ Intellectual Property",
+   "detail": "main:→ Intellectual Property(398x39)"
+  },
+  {
+   "fp": "target-size|terms|430|main:→ Content and Website Accura",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:→ Content and Website Accura",
+   "detail": "main:→ Content and Website Accura(398x39)"
+  },
+  {
+   "fp": "target-size|terms|430|main:→ Confidentiality",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:→ Confidentiality",
+   "detail": "main:→ Confidentiality(398x39)"
+  },
+  {
+   "fp": "target-size|terms|430|main:→ Third-Party Platforms",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:→ Third-Party Platforms",
+   "detail": "main:→ Third-Party Platforms(398x39)"
+  },
+  {
+   "fp": "target-size|terms|430|main:→ Limitation of Liability",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:→ Limitation of Liability",
+   "detail": "main:→ Limitation of Liability(398x39)"
+  },
+  {
+   "fp": "target-size|terms|430|main:→ Termination",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:→ Termination",
+   "detail": "main:→ Termination(398x39)"
+  },
+  {
+   "fp": "target-size|terms|430|main:→ Governing Law",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:→ Governing Law",
+   "detail": "main:→ Governing Law(398x39)"
+  },
+  {
+   "fp": "target-size|terms|430|main:→ Changes to Terms",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:→ Changes to Terms",
+   "detail": "main:→ Changes to Terms(398x39)"
+  },
+  {
+   "fp": "target-size|terms|430|main:→ Contact Us",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:→ Contact Us",
+   "detail": "main:→ Contact Us(398x39)"
+  },
+  {
+   "fp": "target-size|terms|430|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(346x24)"
+  },
+  {
+   "fp": "target-size|terms|430|main:+91 9873232662",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:+91 9873232662",
+   "detail": "main:+91 9873232662(346x24)"
+  },
+  {
+   "fp": "target-size|terms|430|main:Contact Us",
+   "check": "target-size",
+   "target": "terms",
+   "width": 430,
+   "key": "main:Contact Us",
+   "detail": "main:Contact Us(115x40)"
+  },
+  {
+   "fp": "target-size|terms|768|main:Home",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|terms|768|main:→ Use of Website",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:→ Use of Website",
+   "detail": "main:→ Use of Website(354x39)"
+  },
+  {
+   "fp": "target-size|terms|768|main:→ Services Information",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:→ Services Information",
+   "detail": "main:→ Services Information(354x39)"
+  },
+  {
+   "fp": "target-size|terms|768|main:→ No Guarantee of Results",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:→ No Guarantee of Results",
+   "detail": "main:→ No Guarantee of Results(354x39)"
+  },
+  {
+   "fp": "target-size|terms|768|main:→ Enquiries and Strategy Cal",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:→ Enquiries and Strategy Cal",
+   "detail": "main:→ Enquiries and Strategy Cal(354x39)"
+  },
+  {
+   "fp": "target-size|terms|768|main:→ Proposals and Engagements",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:→ Proposals and Engagements",
+   "detail": "main:→ Proposals and Engagements(354x39)"
+  },
+  {
+   "fp": "target-size|terms|768|main:→ Client Responsibilities",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:→ Client Responsibilities",
+   "detail": "main:→ Client Responsibilities(354x39)"
+  },
+  {
+   "fp": "target-size|terms|768|main:→ Fees and Payments",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:→ Fees and Payments",
+   "detail": "main:→ Fees and Payments(354x39)"
+  },
+  {
+   "fp": "target-size|terms|768|main:→ Ad Spend and Third-Party C",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:→ Ad Spend and Third-Party C",
+   "detail": "main:→ Ad Spend and Third-Party C(354x39)"
+  },
+  {
+   "fp": "target-size|terms|768|main:→ Intellectual Property",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:→ Intellectual Property",
+   "detail": "main:→ Intellectual Property(354x39)"
+  },
+  {
+   "fp": "target-size|terms|768|main:→ Content and Website Accura",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:→ Content and Website Accura",
+   "detail": "main:→ Content and Website Accura(354x39)"
+  },
+  {
+   "fp": "target-size|terms|768|main:→ Confidentiality",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:→ Confidentiality",
+   "detail": "main:→ Confidentiality(354x39)"
+  },
+  {
+   "fp": "target-size|terms|768|main:→ Third-Party Platforms",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:→ Third-Party Platforms",
+   "detail": "main:→ Third-Party Platforms(354x39)"
+  },
+  {
+   "fp": "target-size|terms|768|main:→ Limitation of Liability",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:→ Limitation of Liability",
+   "detail": "main:→ Limitation of Liability(354x39)"
+  },
+  {
+   "fp": "target-size|terms|768|main:→ Termination",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:→ Termination",
+   "detail": "main:→ Termination(354x39)"
+  },
+  {
+   "fp": "target-size|terms|768|main:→ Governing Law",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:→ Governing Law",
+   "detail": "main:→ Governing Law(354x39)"
+  },
+  {
+   "fp": "target-size|terms|768|main:→ Changes to Terms",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:→ Changes to Terms",
+   "detail": "main:→ Changes to Terms(354x39)"
+  },
+  {
+   "fp": "target-size|terms|768|main:→ Contact Us",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:→ Contact Us",
+   "detail": "main:→ Contact Us(354x39)"
+  },
+  {
+   "fp": "target-size|terms|768|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(206x24)"
+  },
+  {
+   "fp": "target-size|terms|768|main:+91 9873232662",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:+91 9873232662",
+   "detail": "main:+91 9873232662(150x24)"
+  },
+  {
+   "fp": "target-size|terms|768|main:Contact Us",
+   "check": "target-size",
+   "target": "terms",
+   "width": 768,
+   "key": "main:Contact Us",
+   "detail": "main:Contact Us(115x40)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:Home",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:→ Use of Website",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:→ Use of Website",
+   "detail": "main:→ Use of Website(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:→ Services Information",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:→ Services Information",
+   "detail": "main:→ Services Information(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:→ No Guarantee of Results",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:→ No Guarantee of Results",
+   "detail": "main:→ No Guarantee of Results(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:→ Enquiries and Strategy Cal",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:→ Enquiries and Strategy Cal",
+   "detail": "main:→ Enquiries and Strategy Cal(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:→ Proposals and Engagements",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:→ Proposals and Engagements",
+   "detail": "main:→ Proposals and Engagements(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:→ Client Responsibilities",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:→ Client Responsibilities",
+   "detail": "main:→ Client Responsibilities(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:→ Fees and Payments",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:→ Fees and Payments",
+   "detail": "main:→ Fees and Payments(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:→ Ad Spend and Third-Party C",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:→ Ad Spend and Third-Party C",
+   "detail": "main:→ Ad Spend and Third-Party C(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:→ Intellectual Property",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:→ Intellectual Property",
+   "detail": "main:→ Intellectual Property(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:→ Content and Website Accura",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:→ Content and Website Accura",
+   "detail": "main:→ Content and Website Accura(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:→ Confidentiality",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:→ Confidentiality",
+   "detail": "main:→ Confidentiality(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:→ Third-Party Platforms",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:→ Third-Party Platforms",
+   "detail": "main:→ Third-Party Platforms(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:→ Limitation of Liability",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:→ Limitation of Liability",
+   "detail": "main:→ Limitation of Liability(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:→ Termination",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:→ Termination",
+   "detail": "main:→ Termination(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:→ Governing Law",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:→ Governing Law",
+   "detail": "main:→ Governing Law(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:→ Changes to Terms",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:→ Changes to Terms",
+   "detail": "main:→ Changes to Terms(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:→ Contact Us",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:→ Contact Us",
+   "detail": "main:→ Contact Us(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(206x24)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:+91 9873232662",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:+91 9873232662",
+   "detail": "main:+91 9873232662(150x24)"
+  },
+  {
+   "fp": "target-size|terms|1024|main:Contact Us",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1024,
+   "key": "main:Contact Us",
+   "detail": "main:Contact Us(115x40)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:Home",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:Home",
+   "detail": "main:Home(38x23)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:→ Use of Website",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:→ Use of Website",
+   "detail": "main:→ Use of Website(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:→ Services Information",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:→ Services Information",
+   "detail": "main:→ Services Information(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:→ No Guarantee of Results",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:→ No Guarantee of Results",
+   "detail": "main:→ No Guarantee of Results(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:→ Enquiries and Strategy Cal",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:→ Enquiries and Strategy Cal",
+   "detail": "main:→ Enquiries and Strategy Cal(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:→ Proposals and Engagements",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:→ Proposals and Engagements",
+   "detail": "main:→ Proposals and Engagements(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:→ Client Responsibilities",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:→ Client Responsibilities",
+   "detail": "main:→ Client Responsibilities(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:→ Fees and Payments",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:→ Fees and Payments",
+   "detail": "main:→ Fees and Payments(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:→ Ad Spend and Third-Party C",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:→ Ad Spend and Third-Party C",
+   "detail": "main:→ Ad Spend and Third-Party C(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:→ Intellectual Property",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:→ Intellectual Property",
+   "detail": "main:→ Intellectual Property(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:→ Content and Website Accura",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:→ Content and Website Accura",
+   "detail": "main:→ Content and Website Accura(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:→ Confidentiality",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:→ Confidentiality",
+   "detail": "main:→ Confidentiality(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:→ Third-Party Platforms",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:→ Third-Party Platforms",
+   "detail": "main:→ Third-Party Platforms(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:→ Limitation of Liability",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:→ Limitation of Liability",
+   "detail": "main:→ Limitation of Liability(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:→ Termination",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:→ Termination",
+   "detail": "main:→ Termination(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:→ Governing Law",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:→ Governing Law",
+   "detail": "main:→ Governing Law(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:→ Changes to Terms",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:→ Changes to Terms",
+   "detail": "main:→ Changes to Terms(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:→ Contact Us",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:→ Contact Us",
+   "detail": "main:→ Contact Us(378x39)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:info@mappedskills.com",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:info@mappedskills.com",
+   "detail": "main:info@mappedskills.com(206x24)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:+91 9873232662",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:+91 9873232662",
+   "detail": "main:+91 9873232662(150x24)"
+  },
+  {
+   "fp": "target-size|terms|1440|main:Contact Us",
+   "check": "target-size",
+   "target": "terms",
+   "width": 1440,
+   "key": "main:Contact Us",
+   "detail": "main:Contact Us(115x40)"
+  },
+  {
+   "fp": "zoom400|blog-slug~fixture-full|320|contained:table.w-full.min-w-[500px]",
+   "check": "zoom400",
+   "target": "blog-slug~fixture-full",
+   "width": 320,
+   "key": "contained:table.w-full.min-w-[500px]",
+   "detail": "reflow at zoom400: wider than the viewport inside its own scroll container: table.w-full.min-w-[500px]"
+  },
+  {
+   "fp": "zoom400|portfolio-slug~fixture-open|320|contained:table.w-full.min-w-[560px]",
+   "check": "zoom400",
+   "target": "portfolio-slug~fixture-open",
+   "width": 320,
+   "key": "contained:table.w-full.min-w-[560px]",
+   "detail": "reflow at zoom400: wider than the viewport inside its own scroll container: table.w-full.min-w-[560px]"
+  }
+ ]
+}

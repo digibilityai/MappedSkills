@@ -60,9 +60,9 @@ const RECOVERY = [
   },
   {
     href: '/problems/traffic-but-no-enquiries',
-    title: 'Traffic but no enquiries: which of four things is happening',
+    title: 'Traffic but no enquiries: where people may drop off',
     meta: 'Diagnostic',
-    summary: 'Five checks you can run yourself today, with no sign-up and no tool.',
+    summary: 'Three quick checks you can run yourself today, with no sign-up and no tool.',
   },
   {
     href: '/pricing',

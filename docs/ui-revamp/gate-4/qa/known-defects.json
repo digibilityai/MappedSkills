@@ -1,0 +1,154 @@
+{
+  "about": "Gate 4 B0 known-defects register (machine-readable). classify.cjs tags baseline findings with these IDs. A pattern is check|target|width|key; '*' matches any part; a trailing '*' is a prefix match. Human-readable register: docs/ui-revamp/gate-4/b0/GATE_4_B0_KNOWN_DEFECTS.md. Nothing listed here is fixed by B0.",
+  "baseline": "ui-revamp @ 352bb25 (application 23c937d); plain build Njk8Lb5t9GSJ5FzVFuAJQ; fixture build ROOt5ByVDiOWDhQY7WFeT",
+  "defects": [
+    {
+      "id": "LIVE-1",
+      "title": "Legacy sticky header: mobile-menu Contact / Book a call unreachable on short viewports",
+      "status": "OPEN (DEC-033)",
+      "patterns": [
+        "menu-cta|*|*|*"
+      ]
+    },
+    {
+      "id": "DEC-030-STICKY",
+      "title": "Legacy header is sticky (1557f74 regression; cause of LIVE-1)",
+      "status": "OPEN (DEC-030; owned by 4D)",
+      "patterns": [
+        "pinned|*|*|header.sticky.top-0*"
+      ]
+    },
+    {
+      "id": "KD-01",
+      "title": "Blog article sidebar uses sticky top-8 (StickySidebarCTA wrapper)",
+      "status": "Pre-existing; B8 REVIEW item",
+      "patterns": [
+        "pinned|blog-slug*|*|div.sticky.top-8*"
+      ]
+    },
+    {
+      "id": "KD-02",
+      "title": "Legacy focus ring is box-shadow + outline-none: focus indicator disappears in forced colours (legacy chrome, ContactForm controls, blog/portfolio links)",
+      "status": "Pre-existing; resolved for chrome by B1 if approved, for bodies by their batch",
+      "patterns": [
+        "forced-colours-focus|*|*|*"
+      ]
+    },
+    {
+      "id": "KD-03",
+      "title": "Small text in --resolve-gap (3.13:1) fails colour contrast (Gate 0 \u00a714)",
+      "status": "Pre-existing; 4B via migration",
+      "patterns": [
+        "axe|*|*|color-contrast"
+      ]
+    },
+    {
+      "id": "KD-04",
+      "title": "Wide tables in overflow-x containers: container not keyboard-focusable; table wider than viewport (contained, no page scroll)",
+      "status": "Pre-existing; DataTable in B3/B4/B8/B9",
+      "patterns": [
+        "axe|*|*|scrollable-region-focusable",
+        "overflow|*|*|contained:table*",
+        "zoom400|*|*|contained:table*",
+        "text-spacing|*|*|contained:table*"
+      ]
+    },
+    {
+      "id": "KD-05",
+      "title": "SVG figure text clipped by its SVG box under WCAG 1.4.12 text spacing (Gate 3 A3 class; includes the approved /seo figure)",
+      "status": "Known P3 (Gate 3 A3); 4G / Figure rule",
+      "patterns": [
+        "text-spacing|*|*|contained:text",
+        "text-spacing|*|*|contained:g"
+      ]
+    },
+    {
+      "id": "KD-06",
+      "title": "Legacy case-study page scrolls horizontally at 320px with WCAG 1.4.12 text spacing",
+      "status": "Pre-existing; B9",
+      "patterns": [
+        "text-spacing|portfolio-slug*|*|page-scroll"
+      ]
+    },
+    {
+      "id": "KD-07",
+      "title": "Legacy blog article skips heading levels",
+      "status": "Pre-existing; B8 (heading semantics change needs SEO review)",
+      "patterns": [
+        "headings|blog-slug*|*|level-jump"
+      ]
+    },
+    {
+      "id": "KD-08",
+      "title": "Legacy controls under 44px (header nav ~31px, menu/services toggles, footer icons 40px, legal contents anchors, breadcrumbs, share links, form checkbox)",
+      "status": "Pre-existing (Gate 0 \u00a714); resolved by migration",
+      "patterns": [
+        "target-size|*|*|*"
+      ]
+    }
+  ],
+  "observations_not_fingerprinted": [
+    {
+      "id": "OBS-1",
+      "title": "Consent bootstrap not executed on dynamically rendered not-found responses (unknown /blog, /portfolio, /research, /press slugs; /launch-checklist when gated): 'consent default' never reaches dataLayer (B1: the Organization JSON-LD and stylesheet links are likewise only in the RSC payload on those responses)",
+      "evidence": "inventory.json consentBootstrap.present=false on those targets; B0 dataLayer probe",
+      "status": "Pre-existing; analytics/consent LOCKED \u2014 owner decision; relevant to E6"
+    },
+    {
+      "id": "OBS-2",
+      "title": "Gate 0 R2 (legacy header overflow at 1024) not reproduced: headless engines use overlay scrollbars, so 1024 CSS px is fully available",
+      "status": "Not reproducible in automation; needs a classic-scrollbar browser (E1)"
+    },
+    {
+      "id": "OBS-6",
+      "title": "Dynamic not-found pages: live-DOM title/robots/canonical depend on server timing (not-found boundary metadata vs the route's generateMetadata); served HTML is stable",
+      "evidence": "gate-4/b1/evidence/run/notfound-metadata-variance.txt, inventory-diff-run1.txt, served-head-*.txt",
+      "status": "Pre-existing (B0 fixture build shows the variant deterministically); both variants noindex; SEO note for staging"
+    },
+    {
+      "id": "KD-09",
+      "title": "Inherited SVG figure text below the 12px R-3 floor (CauseZones 9.60px @320, 10.93 @360, 11.93 @390, 10.23 @768; B3 chain figures 10.47px @320; /seo 11.52px @320)",
+      "evidence": "gate-4/b4/closure/evidence/figure-svg-text.txt",
+      "status": "Pre-existing; deferred to one figure-remediation batch (DEC-042); DEC-043: dedicated remediation batch required before production approval. No automated fingerprint (axe does not read SVG text size)"
+    },
+    {
+      "id": "KD-10",
+      "title": "Inherited SVG figure text below WCAG AA contrast: --resolve-gap text 3.41:1 (CauseZones, chain figures) and 3.13:1 (/seo); CauseZones zone titles 4.33:1",
+      "evidence": "gate-4/b4/closure/evidence/figure-svg-text.txt",
+      "status": "Pre-existing; deferred with KD-09 (DEC-042); DEC-043: dedicated remediation batch required before production approval. Not detectable by axe-core (SVG <text> is not evaluated)"
+    },
+    {
+      "id": "OBS-17",
+      "title": "WebKit (real Safari 26.2 and Playwright WebKit) ignores font-variation-settings opsz 96/72 on the Direction C display roles under font-optical-sizing:auto; the face renders ~9% wider than designed and the metric fallback no longer matches, so H1s can gain a line at the font swap",
+      "evidence": "gate-4/b4/closure/evidence/webkit/; gate-4/post-b4/evidence/; GATE_4_OBS18_FIREFOX_DIAGNOSTIC.md section I",
+      "status": "Systemic, pre-existing (Gate 3 R2 fallbacks). CORRECTED ON THE BRANCH (DEC-043): font-optical-sizing:none on .dc-display and .dc-statement. Real Safari 26.2 (macOS): H1 final/fallback re-wraps 16 -> 0 of 70 views (10 DC routes x 7 widths), final H1 lines = Chromium 70/70; Playwright WebKit delayed swap: views above 0.01 8 -> 0, max shift 61 -> 1px; Chromium and Firefox renders identical pre/post. Closure recommended (GATE_4_POST_B4_REMEDIATION.md); iOS Safari not tested (E1). DEC-044: CLOSED for the verified scope (real Safari 26.2 macOS + Playwright WebKit; 10 DC routes; 320-1440px). Not verified on iOS Safari / iPhone / iPad (E1). Does not close OBS-18"
+    },
+    {
+      "id": "OBS-18",
+      "title": "Playwright Firefox paints the Direction C display roles in Arial Narrow while the display face is still loading: the calibrated local() fallback faces stay 'unloaded', so a late face re-wraps H1s (delayed-face sweep: 27 of 70 views shift, 19 above an approximate 0.01, max approx 0.041; CTA moves up to 157px). With the face blocked for good, the calibrated fallback is used and matches (0 re-wraps)",
+      "evidence": "gate-4/post-b4/evidence/obs17-swap-*-firefox.txt, firefox-swap-probe.txt; gate-4/obs18/evidence/ (obs18-diagnostic.cjs, runs/, gecko-font-matching-source.txt); gate-4/obs18-real-firefox/evidence/ (rf-harness.cjs, runs/real-*.json, captures/); gate-4/obs18-impl/evidence/ (impl-harness.cjs, runs/accept-*.json, runs/accept-summary.txt, captures/, safari/, run/)",
+      "status": "Pre-existing, identical before and after DEC-043; Firefox engine proxy only (no real Firefox in this environment): RESEARCH REQUIRED in a real Firefox release. Not fixed (fallback strategy is outside DEC-043); owner decision. DEC-044 diagnostic: classification D. UNVERIFIED (no real Firefox available). Cause identified in Gecko source: a later @font-face (the local() calibrated fallback) is not loaded while an earlier one (dcDisplay) is loading, so the stack falls to Arial Narrow; present in Firefox 115/128 ESR and the release revision behind Playwright's build; Playwright patches no font code; unchanged without request interception. Playwright Firefox: late face deterministic (27/70 views, 19 > approx 0.01, max approx 0.041); normal loopback loads paint Arial Narrow for 12-53 ms in about half of runs; runtime-only priming of the calibrated faces removes every re-wrap (0/70). Not fixed; next step real-Firefox verification (owner decision). DEC-045: CONFIRMED in official Firefox 157.0.1 (release); recommended classification A (confirmed real-Firefox defect). Late face deterministic: 24/63 views on all DC routes change H1 lines, max approx 0.041 (geometric, not native CLS), visible CTA moves up to 78px; normal cold loopback loads paint the pending face in 16/61 (about 16 ms), H1 re-wraps in 6 views. Playwright Firefox representative; Chromium unaffected. Correction to DEC-044: out-of-flow priming is unreliable; in-flow hidden priming spans remove every H1 re-wrap (0) with identical accessibility tree/Tab order and no JavaScript. Not fixed; correction needs a separate owner decision DEC-046: CORRECTED ON THE BRANCH (3b333c4): DcPage renders four hidden, zero-height, aria-hidden, in-flow span.dc-font-prime (one per calibrated display fallback; glyph from ::before). Official Firefox 157.0.1, 10 DC routes x 7 widths x 0/300/2500 ms: H1 line changes 10/25/25 views -> 0/0/0 (672 runs); calibrated face painted while pending; Playwright Firefox the same; Chromium, WebKit, real Safari 26.2 unchanged; a11y tree/Tab order/text identical; 0 hydration errors; works without JavaScript. CLOSURE RECOMMENDED, NOT RECORDED (owner decision). DEC-047 (2026-10-10): CLOSED for the verified scope (official Firefox 157.0.1 and Playwright Firefox 153 on macOS; the 10 Direction C routes; 320-1440 px; loopback, cold cache) after re-verification of the 3b333c4 evidence; still fixed on the OBS-19 build 46785af (official Firefox, display face held 2.5 s: 0 H1 line changes, 0 display-caused moves)."
+    },
+    {
+      "id": "OBS-19",
+      "title": "Site fonts (next/font Manrope, site Bricolage) move text when they arrive: (1) Firefox lays Manrope text out in system-ui while Manrope loads (skips \"Manrope Fallback\", the OBS-18 Gecko rule); (2) in every engine the automatic next/font fallback metrics do not hold line breaks when Manrope arrives late (consent banner, buttons, paragraphs)",
+      "evidence": "gate-4/obs18-real-firefox/evidence/runs/mover-probe.txt (Playwright Firefox: lede/CTA +29..+54px on Manrope arrival; Chromium none); runs/real-*.json (real Firefox: non-H1 moves in the same views, up to approx 0.018); gate-4/obs19/evidence/ (obs19-harness.cjs, runs/o19-*.json, runs/o19-summary.txt, runs/arrow-probe.txt, runs/candidate-checks.txt); gate-4/obs19-remediation/evidence/ (o19r-sweep.cjs, runs/static-*, runs/w400-residual.txt, runs/accept-*.txt, runs/paired-summary.txt, captures/, regression/); gate-4/obs19-final/evidence/ (o19f-load.cjs, o19f-analyse.cjs, runs/, arrow/, captures/, regression/)",
+      "status": "OPEN. DEC-046 diagnostic: classification A recommended (confirmed defect requiring remediation); not fixed. Site-wide. Real Firefox 157.0.1: late Manrope paragraph/CTA moves up to 56/54 px; normal cold first visits pending state painted in ~20% of loads, moves <= 32 px. Chromium: native layout-shift up to 0.10-0.12 when Manrope is late (consent banner +23 px at 430), none on normal first visits. Runtime-only in-flow priming of \"Manrope Fallback\" fixes mechanism 1 only. Remediation proposal (priming + calibrated weight-specific fallbacks) awaits a separate owner decision. DEC-047 (2026-10-11): PARTIALLY REMEDIATED ON THE BRANCH (46785af), STILL OPEN. Mechanism A RESOLVED: root-layout in-flow primes (2 spans) + weight-specific calibrated 'Manrope Fallback' (Arial 100-500 at 103.25%, Arial Bold 600-900 at 99%; next/font adjustFontFallback off): official Firefox paints the calibrated face, never system-ui, in every pending run (JS on and off). Mechanism B MITIGATED, NOT REMOVED: consent banner height change 23px (11 views) -> 0; button re-wraps 28 -> 0; Chromium late-Manrope native layout-shift max 0.1215 -> 0.049, views > 0.01 23 -> 13, 3 views worse (/blog); weight-400 re-wraps about 3% of regular-weight element-views in every engine, essentially unchanged; paragraph moves up to 52px and button moves up to 29px remain when Manrope arrives late; Firefox normal loads: moves in 3 of 84 views (<= 37px). Loaded-state change: U+2192 arrows (not in Manrope's latin subset) now drawn by the new faces (bold arrows 0.71px narrower). Recommended classification: OPEN, residual late-font only; owner decision on the residual. OBS-19 final disposition assessment (2026-10-11, assessment only, no decision): STILL OPEN, owner decision pending. Realistic synthetic profiles: Chromium, WebKit, real Safari 26.2 Manrope ready at first paint in every run; Firefox fallback painted 13-49 ms after first paint on some loads (one above-the-fold CTA case, /ai-seo 430, 27px). /blog 'worse' = empty plain-build artefact (fixture: current <= pre). Official Firefox /contact pairs now verified (system-ui -> calibrated, 0px). font-display:optional and arrow-only faces tested, not adopted. Recommended, not decided: close for Manrope with documented exception; keep swap; accept arrow difference; register Bricolage late arrival separately (proposed OBS-20). See GATE_4_OBS19_FINAL_DISPOSITION.md. DEC-048 (2026-10-11, owner): CLOSED for the Manrope fallback-font remediation WITH A DOCUMENTED RESIDUAL EXCEPTION (not an unconditional pass): with Manrope held 2.5 s, text still reflows (about 3% of regular-weight elements) and above-the-fold paragraphs/CTAs move up to about 29px, Chromium layout shift up to 0.049; banner height and button wrapping stable. Under the tested realistic synthetic profiles the Manrope impact was limited, with one intermittent Firefox above-the-fold CTA movement (/ai-seo 430, 27px). Calibrated fallback (46785af) retained; font-display: swap retained (optional not adopted); U+2192 arrow difference accepted (arrow correction not adopted). The Bricolage part of this entry's title is tracked separately as OBS-20. Not verified: real devices, Windows/Linux, field data. Does not waive real-device testing, accessibility requirements or production release gates."
+    },
+    {
+      "id": "OBS-20",
+      "title": "Bricolage Grotesque (site heading face, next/font automatic fallback, pre-existing, unchanged by 46785af) can arrive after first paint on slow connections; its swap moves content in a few views",
+      "evidence": "gate-4/obs19-final/evidence/runs/bricolage-late-arrival.txt, runs/summary-playwright.txt (CLS by font arrival), runs/o19f-pw-*.jsonl.gz, runs/o19f-real-*.jsonl.gz; report GATE_4_OBS19_FINAL_DISPOSITION.md section 9.4",
+      "status": "OPEN, NON-BLOCKING (DEC-048, 2026-10-11), pending relevant future performance and conversion-page QA; no remediation authorised. Measured conditions: synthetic DevTools-preset Slow 4G (562.5 ms latency, 1.44 Mbit/s) on loopback HTTP/1.1, macOS, Playwright Chromium 151 / Firefox 153 / WebKit 26.5 (8 routes x 390-1440), plus official Firefox 157.0.1 and real Safari 26.2 (5 routes x 390/1440). Bricolage finished after FCP in 80/80 Slow 4G runs per engine (Manrope 0/80). Above-the-fold movement: Chromium /contact 430 form fields + paragraph 37px (native layout shift 0.0285, deterministic), /faq 768/1024 paragraphs 22-24px (native 0.0035/0.0013); WebKit /faq 390/768/1024 paragraphs 22-40px, /blog 390 26px (plain build); Firefox none above the fold. Fast 4G, unthrottled cold and warm loads: none. Identical with font-display: optional for Manrope. Limitations: synthetic throttling, not field data; no real devices, Windows/Linux or Android; CMS routes other than /blog on the plain build; HTTP/2 production delivery not modelled; no Bricolage-specific diagnosis or candidate fix tested."
+    }
+  ],
+  "b1_status": "Gate 4 B1 (DEC-037): LIVE-1 (branch only), DEC-030-STICKY, KD-02 chrome part and KD-08 chrome part resolved on ui-revamp; production unchanged; nothing closed. See b0/GATE_4_B0_KNOWN_DEFECTS.md \u00a74.",
+  "b4_closure_status": "Gate 4 B4 owner closure (DEC-042): OBS-13 seven approved instances corrected on ui-revamp (one /how-it-works candidate remains); KD-09, KD-10, OBS-17 added; nothing else closed. See b0/GATE_4_B0_KNOWN_DEFECTS.md \u00a710.",
+  "post_b4_remediation_status": "Gate 4 post-B4 remediation (DEC-043): OBS-17 corrected on ui-revamp and verified (closure recommended); OBS-13 eighth instance corrected, all 8 verified, scan finds 0 candidates on 17 static routes (closure recommended); OBS-18 added; KD-09/KD-10 deferred to a pre-production batch; nothing else closed. See b0/GATE_4_B0_KNOWN_DEFECTS.md \u00a711.",
+  "post_b4_closure_status": "Post-B4 closure and OBS-18 diagnostic (DEC-044): post-B4 remediation gate owner-accepted with exceptions; OBS-17 CLOSED for the verified scope (no iOS); OBS-13 eight verified instances CLOSED (98cfc82 x7, 0e8df27 x1; no site-wide claim; OBS-13 has no fingerprinted entry here); OBS-18 OPEN, classification D. UNVERIFIED; KD-09/KD-10 deferred; pixel-main.cjs Chromium-only, correction deferred (TOOL-1, not edited); nothing else closed. See b0/GATE_4_B0_KNOWN_DEFECTS.md \u00a712.",
+  "obs18_real_firefox_status": "OBS-18 real-Firefox verification (DEC-045): OBS-18 confirmed in official Firefox 157.0.1, recommended classification A, not fixed (candidate described for a separate owner decision); OBS-19 added; OBS-17/OBS-13 closed (DEC-044) unchanged; KD-09/KD-10 deferred; TOOL-1 deferred; nothing closed. See b0/GATE_4_B0_KNOWN_DEFECTS.md \u00a713.",
+  "obs18_impl_obs19_status": "OBS-18 implementation and OBS-19 diagnostic (DEC-046): OBS-18 corrected on the branch (3b333c4), all acceptance criteria passed, closure recommended not recorded; OBS-19 OPEN, classification A recommended, not fixed; OBS-6 Firefox not-found h1-count finding intermittent on both builds; OBS-17/OBS-13 closed unchanged; KD-09/KD-10 deferred; SR-1-SR-5 not performed; TOOL-1 deferred (not edited). See b0/GATE_4_B0_KNOWN_DEFECTS.md section 14.",
+  "obs18_closure_obs19_remediation_status": "OBS-18 closure and OBS-19 remediation (DEC-047): OBS-18 CLOSED (verified scope); OBS-19 partially remediated (46785af), mechanism A resolved, mechanism B mitigated, residual open, closure NOT recommended; OBS-17/OBS-13 closed unchanged (OBS-17 re-verified in real Safari 26.2 on 46785af); KD-09/KD-10 deferred; SR-1-SR-5 not performed; TOOL-1 deferred (not edited). See b0/GATE_4_B0_KNOWN_DEFECTS.md section 15.",
+  "obs19_final_disposition_status": "OBS-19 final disposition assessment (2026-10-11, owner brief, assessment only): no application change, no defect status changed; OBS-19 OPEN with owner decision pending (recommended: close for Manrope with documented exception, keep font-display swap, accept U+2192 arrow difference); proposed OBS-20 (Bricolage late arrival on Slow 4G) not registered pending owner. See b0/GATE_4_B0_KNOWN_DEFECTS.md section 16.",
+  "obs19_closure_status": "OBS-19 final closure (DEC-048, 2026-10-11, governance only): OBS-19 CLOSED with a documented residual exception (late-Manrope stress: CTA moves up to about 29px, Chromium layout shift up to 0.049; one intermittent Firefox above-the-fold CTA movement under realistic synthetic profiles); font-display swap retained; arrow difference accepted; OBS-20 (Bricolage late arrival) registered OPEN, NON-BLOCKING; KD-09/KD-10 deferred; SR-1-SR-5 mandatory before B5 reuse; E1 and production release gates not waived. See b0/GATE_4_B0_KNOWN_DEFECTS.md section 17."
+}

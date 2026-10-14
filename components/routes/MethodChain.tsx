@@ -39,16 +39,41 @@ const INK = 'var(--resolve-ink)';
 const GAP = 'var(--resolve-gap)';
 const DIM = 'var(--resolve-dim)';
 
-const nodeText = { fontSize: 12, fontWeight: 600, fill: DIM } as const;
-const smallText = { fontSize: 11, fontWeight: 600, fill: GAP } as const;
-const catText = { fontSize: 12, fontWeight: 600, fill: DIM } as const;
-const bdText = { fontSize: 12, fontWeight: 700, fill: INK, letterSpacing: '0.08em' } as const;
+/* GATE 4 · A1 (KD-09 / KD-10) — as in `components/commercial/ChainFigure.tsx`.
+   `GAP` stays on every line, dash and mark (non-text, ≥ 3:1); TEXT in the
+   not-measured register takes the text-grade token `--dc-gap-text` (4.90:1).
+   The recessive chain of the STATE drawing keeps its 34% lines and marks, but
+   its labels sit outside that group in `--dc-gap-text`: at 34% they measured
+   1.67:1. Recession is still carried by the drawing; the words stay readable.
+   SIZE is font-size × drawing scale. Every drawing is set at 14 units or more:
+   the vertical ones (330 units) are shown in a 284px column at a 320px viewport
+   (≥ 12.05px), and the horizontal ones (1000 units) take over only at 1100px,
+   where their column is 900px (12.6px). Below 1100px the vertical drawing is
+   shown: at 761–1099px the 1000-unit drawing rendered its text at 7.8–9.9px.
+   Every line of a vertical drawing is short enough to hold the WCAG 1.4.12
+   text-spacing overrides inside the drawing (KD-05): longer strings break at a
+   word boundary, never reworded. */
+const GAP_TEXT = 'var(--dc-gap-text)';
+
+const nodeText = { fontSize: 15, fontWeight: 600, fill: DIM } as const;
+const smallText = { fontSize: 14, fontWeight: 600, fill: GAP_TEXT } as const;
+const catText = { fontSize: 14, fontWeight: 600, fill: DIM } as const;
+const bdText = { fontSize: 14, fontWeight: 700, fill: INK, letterSpacing: '0.08em' } as const;
+const recessiveText = { fontSize: 14, fontWeight: 600, fill: GAP_TEXT } as const;
+const nodeTextH = { fontSize: 14, fontWeight: 600, fill: DIM } as const;
+/* the STATE drawing's horizontal form sits in a narrower column (792px at a
+   1100px viewport), so it is set at 16 units (12.7px there) */
+const catTextS = { fontSize: 16, fontWeight: 600, fill: DIM } as const;
+const smallTextS = { fontSize: 16, fontWeight: 600, fill: GAP_TEXT } as const;
+const recessiveTextS = { fontSize: 16, fontWeight: 600, fill: GAP_TEXT } as const;
+const bdTextS = { fontSize: 16, fontWeight: 700, fill: INK, letterSpacing: '0.08em' } as const;
 
 /* One accessible figure, two width-native drawings, exactly one ever displayed.
    ONE media query governs both and the conditions are exact complements, so
    there is no width at which neither renders — the one-pixel hole Phase F found
    at exactly 760px cannot recur here. The hidden drawing is `display:none` and
-   leaves the accessibility tree, so one accessible name is exposed, not two. */
+   leaves the accessibility tree, so one accessible name is exposed, not two.
+   The switch is at 1100px, as for `ChainFull` on /services (A1, see above). */
 function FigureFrame({
   vertical,
   horizontal,
@@ -64,10 +89,10 @@ function FigureFrame({
 }) {
   return (
     <figure className="m-0 mt-[clamp(26px,3.2vw,44px)]">
-      <div className="block min-[761px]:hidden" style={{ maxWidth: verticalMax }}>
+      <div className="block min-[1100px]:hidden" style={{ maxWidth: verticalMax }}>
         {vertical}
       </div>
-      <div className="hidden min-[761px]:block" style={{ maxWidth: horizontalMax }}>
+      <div className="hidden min-[1100px]:block" style={{ maxWidth: horizontalMax }}>
         {horizontal}
       </div>
       <figcaption className="mt-[clamp(16px,2vw,24px)] max-w-[64ch] text-[.9rem] leading-[1.55] text-resolve-dim">
@@ -104,7 +129,7 @@ const FULL_DESC =
 
 export function MethodChain() {
   const vertical = (
-    <svg viewBox="0 0 330 660" role="img" aria-labelledby="mc-v-t mc-v-d" className="block h-auto w-full">
+    <svg viewBox="0 0 330 708" role="img" aria-labelledby="mc-v-t mc-v-d" className="block h-auto w-full">
       <title id="mc-v-t">{FULL_TITLE}</title>
       <desc id="mc-v-d">{FULL_DESC}</desc>
 
@@ -125,10 +150,10 @@ export function MethodChain() {
 
       <path d="M44 271 V354" fill="none" stroke={INK} strokeWidth={3} />
       {/* the unattached arrival: no upstream segment, and it still counts */}
-      <OpenMark x={200} y={312} />
-      <path d="M193 312 H60" fill="none" stroke={GAP} strokeWidth={2} strokeDasharray="5 5" />
-      <text x="214" y="309" {...smallText}>no usable trail</text>
-      <text x="214" y="325" {...smallText}>&mdash; it still counts</text>
+      <OpenMark x={170} y={312} />
+      <path d="M163 312 H60" fill="none" stroke={GAP} strokeWidth={2} strokeDasharray="5 5" />
+      <text x="184" y="307" {...smallText}>no usable trail</text>
+      <text x="184" y="326" {...smallText}>&mdash; it still counts</text>
 
       <Node x={44} y={360} />
       <text x="72" y="365" {...nodeText}>the enquiry</text>
@@ -146,8 +171,10 @@ export function MethodChain() {
       <path d="M48 536 V596" fill="none" stroke={INK} strokeWidth={2} />
       <Node x={44} y={602} />
       <text x="72" y="600" {...nodeText}>opportunity and revenue</text>
-      <text x="72" y="618" {...smallText}>your numbers, from your system</text>
-      <text x="8" y="650" {...smallText}>nothing here is a count, a size or a rate</text>
+      <text x="72" y="621" {...smallText}>your numbers,</text>
+      <text x="72" y="641" {...smallText}>from your system</text>
+      <text x="8" y="676" {...smallText}>nothing here is a count,</text>
+      <text x="8" y="696" {...smallText}>a size or a rate</text>
     </svg>
   );
 
@@ -185,21 +212,21 @@ export function MethodChain() {
       <Node x={880} y={140} />
 
       {/* Node names on TWO alternating baselines. Neighbouring labels are 140-160
-          units apart and the longest is 21 characters (~134 units at 12px), so a
+          units apart and the longest is 21 characters (~150 units at 14), so a
           single baseline would run them together; alternating guarantees clearance
           without shortening any label. */}
-      <text x="10" y="176" {...nodeText}>discovery and source</text>
-      <text x="220" y="200" {...nodeText}>landing</text>
-      <text x="380" y="176" {...nodeText}>interaction</text>
-      <text x="520" y="200" {...nodeText}>the enquiry</text>
+      <text x="10" y="176" {...nodeTextH}>discovery and source</text>
+      <text x="220" y="200" {...nodeTextH}>landing</text>
+      <text x="380" y="176" {...nodeTextH}>interaction</text>
+      <text x="520" y="200" {...nodeTextH}>the enquiry</text>
       {/* END-anchored, hard against the boundary rule at x=760 rather than
           start-anchored at 640. Start-anchored it ran from 640 to ~774 and
           crossed the accountability rule — a text/line collision the
           text-versus-text collision sweep does not catch, and the one line on
           this drawing that must stay unambiguous. */}
-      <text x="750" y="176" textAnchor="end" {...nodeText}>the qualified enquiry</text>
-      <text x="1000" y="200" textAnchor="end" {...nodeText}>opportunity and revenue</text>
-      <text x="1000" y="216" textAnchor="end" {...smallText}>your numbers, from your system</text>
+      <text x="750" y="176" textAnchor="end" {...nodeTextH}>the qualified enquiry</text>
+      <text x="1000" y="200" textAnchor="end" {...nodeTextH}>opportunity and revenue</text>
+      <text x="1000" y="222" textAnchor="end" {...smallText}>your numbers, from your system</text>
 
       <text x="640" y="248" {...bdText}>ACCOUNTABLE UP TO HERE</text>
       <text x="10" y="248" {...smallText}>every point is reported against a starting point captured before the work begins</text>
@@ -251,9 +278,26 @@ const CATEGORIES = [
   'revenue, where no close data is supplied',
 ];
 
+/* The vertical drawing sets each category on two lines, broken after these
+   words, so every line holds the text-spacing overrides (KD-05). The words are
+   the category's own; `lines` checks that and fails loudly if they drift. */
+const CATEGORY_BREAKS = [
+  'researched on a phone,',
+  'tracking consent declined',
+  'shared in a message:',
+  'recommended, seen offline,',
+  'a phone call or an email:',
+  'revenue, where no close',
+];
+function lines(label: string, i: number): [string, string] {
+  const first = CATEGORY_BREAKS[i];
+  if (!label.startsWith(`${first} `)) throw new Error(`MethodChainState: break "${first}" does not start "${label}"`);
+  return [first, label.slice(first.length + 1)];
+}
+
 export function MethodChainState() {
   const vertical = (
-    <svg viewBox="0 0 330 640" role="img" aria-labelledby="ms-v-t ms-v-d" className="block h-auto w-full">
+    <svg viewBox="0 0 330 664" role="img" aria-labelledby="ms-v-t ms-v-d" className="block h-auto w-full">
       <title id="ms-v-t">{STATE_TITLE}</title>
       <desc id="ms-v-d">{STATE_DESC}</desc>
 
@@ -265,14 +309,14 @@ export function MethodChainState() {
         <Node x={44} y={92} />
         <path d="M44 99 V132" fill="none" stroke={INK} strokeWidth={3} />
         <Node x={44} y={138} />
-        <text x="72" y="51" {...nodeText}>discovery and source</text>
-        <text x="72" y="97" {...nodeText}>landing</text>
-        <text x="72" y="143" {...nodeText}>interaction</text>
       </g>
+      <text x="72" y="51" {...recessiveText}>discovery and source</text>
+      <text x="72" y="97" {...recessiveText}>landing</text>
+      <text x="72" y="143" {...recessiveText}>interaction</text>
 
       <path d="M44 145 V184" fill="none" stroke={INK} strokeWidth={3} opacity="0.34" />
       <Node x={44} y={190} />
-      <text x="72" y="195" fontSize={12} fontWeight={700} fill={INK}>the enquiry</text>
+      <text x="72" y="195" fontSize={15} fontWeight={700} fill={INK}>the enquiry</text>
 
       {/* the boundary, thickened */}
       <line x1="8" y1="224" x2="300" y2="224" stroke={INK} strokeWidth={5} />
@@ -280,25 +324,26 @@ export function MethodChainState() {
 
       {CATEGORIES.map((label, i) => {
         const y = 286 + i * 46;
+        const [first, rest] = lines(label, i);
         return (
           <g key={label}>
             <OpenMark x={22} y={y - 4} />
             <path d="M36 282 H36" fill="none" />
-            <text x="48" y={y} {...catText}>
-              {label}
-            </text>
+            <text x="48" y={y - 8} {...catText}>{first}</text>
+            <text x="48" y={y + 12} {...catText}>{rest}</text>
           </g>
         );
       })}
 
       <text x="8" y="586" {...bdText}>A GAP IS A GAP, NOT A</text>
-      <text x="8" y="604" {...bdText}>DISQUALIFICATION</text>
-      <text x="8" y="628" {...smallText}>no proportion is shown: none is measured</text>
+      <text x="8" y="606" {...bdText}>DISQUALIFICATION</text>
+      <text x="8" y="632" {...smallText}>no proportion is shown:</text>
+      <text x="8" y="652" {...smallText}>none is measured</text>
     </svg>
   );
 
   const horizontal = (
-    <svg viewBox="0 0 1000 440" role="img" aria-labelledby="ms-h-t ms-h-d" className="block h-auto w-full">
+    <svg viewBox="0 0 1000 448" role="img" aria-labelledby="ms-h-t ms-h-d" className="block h-auto w-full">
       <title id="ms-h-t">{STATE_TITLE}</title>
       <desc id="ms-h-d">{STATE_DESC}</desc>
 
@@ -317,13 +362,14 @@ export function MethodChainState() {
         <path d="M760 66 H880" fill="none" stroke={INK} strokeWidth={2} />
         <path d="M760 74 H880" fill="none" stroke={INK} strokeWidth={2} />
         <Node x={880} y={70} />
-        <text x="10" y="46" {...nodeText}>discovery and source</text>
-        <text x="750" y="46" textAnchor="end" {...nodeText}>the qualified enquiry</text>
       </g>
+      <text x="10" y="46" {...recessiveTextS}>discovery and source</text>
+      <text x="750" y="46" textAnchor="end" {...recessiveTextS}>the qualified enquiry</text>
 
       {/* the enquiry point stays solid: it is the subject of this state */}
       <Node x={520} y={70} />
-      <text x="520" y="46" fontSize={12} fontWeight={700} fill={INK}>the enquiry</text>
+      {/* centred on its point: start-anchored at 16 units it met "the qualified enquiry" */}
+      <text x="520" y="46" textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>the enquiry</text>
 
       {/* the boundary, thickened */}
       <line x1="760" y1="26" x2="760" y2="114" stroke={INK} strokeWidth={5} />
@@ -341,7 +387,7 @@ export function MethodChainState() {
           <g key={label}>
             <path d={`M${x - 24} 132 V${y - 20}`} fill="none" stroke={GAP} strokeWidth={2} strokeDasharray="5 5" />
             <OpenMark x={x - 24} y={y - 5} />
-            <text x={x} y={y} {...catText}>
+            <text x={x} y={y} {...catTextS}>
               {label}
             </text>
           </g>
@@ -349,9 +395,9 @@ export function MethodChainState() {
       })}
 
       <line x1="10" y1="356" x2="990" y2="356" stroke={INK} strokeWidth={2} />
-      <text x="10" y="386" {...bdText}>A MEASUREMENT GAP NEVER DISQUALIFIES A LEGITIMATE ENQUIRY</text>
-      <text x="10" y="410" {...smallText}>all six stay in the count, and the gap is reported as a gap</text>
-      <text x="10" y="430" {...smallText}>the six are drawn identically: no proportion is shown, because none is measured</text>
+      <text x="10" y="388" {...bdTextS}>A MEASUREMENT GAP NEVER DISQUALIFIES A LEGITIMATE ENQUIRY</text>
+      <text x="10" y="410" {...smallTextS}>all six stay in the count, and the gap is reported as a gap</text>
+      <text x="10" y="436" {...smallTextS}>the six are drawn identically: no proportion is shown, because none is measured</text>
     </svg>
   );
 

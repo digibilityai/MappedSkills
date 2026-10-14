@@ -1,0 +1,99 @@
+/* C+ traffic but no enquiries, revision 2, from the approved prototype (proto/direction-c-plus 0a8b611, app/proto/c-plus/traffic.css). */
+/* ------------------------------------------------------------ type roles -- */
+.tb-label { font: 700 .75rem/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-dim); }
+.b-ink .tb-label { color: var(--dc-on-ink-dim); }
+.px-h .tb-why .b-h2, .px-h .tb-check .b-h2 { font-size: min(var(--dc-t-statement), 12vw); }
+
+/* ---------------------------------------------------------------- 1 hero -- */
+.tb-hero-t { max-width: 46rem; }
+.px-h .tb-hero .b-h1 { font-size: min(clamp(2.3rem, 1.1rem + 3.6vw, 4.4rem), 12vw); max-width: 18ch; }
+.tb-fig { margin: clamp(36px, 5vw, 64px) 0 0; padding: clamp(20px, 3vw, 40px); background: var(--dc-paper); border: 3px solid var(--dc-ink); box-shadow: 10px 10px 0 var(--dc-tang); }
+.tb-journey { container: tb-j / inline-size; position: relative; margin-top: 22px; }
+.tb-stages { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, .8fr); gap: 0 14px; }
+/* the path: one line through the four nodes */
+.tb-stages::before { content: ""; position: absolute; left: 14px; top: 13px; width: calc(78.9cqw - 5px); height: 4px; background: var(--dc-ink); }  /* ends at the enquiry node */
+.tb-stage { position: relative; display: grid; align-content: start; gap: 6px; min-width: 0; }
+.tb-node { position: relative; z-index: 1; width: 30px; height: 30px; border-radius: 50%; background: var(--dc-paper); border: 4px solid var(--dc-ink); }
+.tb-stage-t { margin-top: 8px; font: 800 var(--dc-t-title)/1.2 var(--dc-f-title); }
+.tb-stage-d { min-height: 2.9em; color: var(--dc-dim); font-size: var(--dc-t-note); line-height: 1.45; max-width: 22ch; }  /* two lines, so the exits line up */
+/* the exit: a dashed chip under each stage, with a down-and-out arrow drawn in CSS */
+.tb-exit { justify-self: start; display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 6px 12px; border: 2px dashed var(--dc-tang-display); color: var(--dc-ink); font: 700 var(--dc-t-note)/1.3 var(--dc-f-body); }
+.tb-exit-arrow { position: relative; flex: none; width: 14px; height: 14px; border-left: 3px solid var(--dc-tang-display); border-bottom: 3px solid var(--dc-tang-display); border-bottom-left-radius: 8px; }
+.tb-exit-arrow::after { content: ""; position: absolute; right: -6px; bottom: -6.5px; border-block: 5px solid transparent; border-left: 7px solid var(--dc-tang-display); }
+.tb-stage-end .tb-node { background: var(--dc-tang); }
+.tb-end { margin-top: 8px; justify-self: start; padding: 8px 14px; background: var(--dc-ink); color: var(--dc-on-ink); font: 800 1.05rem/1.25 var(--dc-f-title); }
+.tb-fig .px-cap { margin-top: 22px; }
+.tb-dots { display: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* stages arrive in order (faint, never invisible) */
+  .tb-fig:not(.rv-pre) .tb-stage { animation: tb-in 520ms var(--dc-e-arrive) both; animation-delay: calc(var(--i, 0) * 380ms + 200ms); }
+  .tb-fig:not(.rv-pre) .tb-end { animation: tb-pop 600ms var(--dc-e-arrive) 4300ms; }
+}
+@keyframes tb-in { from { opacity: .25; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes tb-pop { 0% { transform: none; } 40% { transform: scale(1.08); } 100% { transform: none; } }
+@keyframes tb-flag { 0% { background: transparent; } 30% { background: var(--dc-tang); border-style: solid; } 100% { background: transparent; } }
+
+/* the dots: from 768px, decorative, one-shot */
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .tb-dots { display: block; position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+  .tb-dot { position: absolute; left: 0; top: 8px; width: 14px; height: 14px; border-radius: 50%; background: var(--dc-tang-display); opacity: 0; }
+  .tb-fig:not(.rv-pre) .tb-dot { animation: 3000ms cubic-bezier(.45, 0, .25, 1) both; }
+  .tb-fig:not(.rv-pre) .tb-dot-1 { animation-name: tb-d1; animation-delay: 1500ms; }
+  .tb-fig:not(.rv-pre) .tb-dot-2 { animation-name: tb-d1; animation-delay: 1680ms; }
+  .tb-fig:not(.rv-pre) .tb-dot-3 { animation-name: tb-d2; animation-delay: 1500ms; }
+  .tb-fig:not(.rv-pre) .tb-dot-4 { animation-name: tb-d3; animation-delay: 1580ms; }
+  .tb-fig:not(.rv-pre) .tb-dot-5 { animation-name: tb-d4; animation-delay: 1660ms; }
+  /* each exit lights up as a dot leaves there */
+  .tb-fig:not(.rv-pre) .tb-exit-1 { animation: tb-flag 900ms ease 2700ms; }
+  .tb-fig:not(.rv-pre) .tb-exit-2 { animation: tb-flag 900ms ease 3500ms; }
+  .tb-fig:not(.rv-pre) .tb-exit-3 { animation: tb-flag 900ms ease 4050ms; }
+}
+/* positions in container units: columns are 1fr 1fr 1fr .8fr with 14px gaps, so node centres sit at 0, 26.3cqw+3px,
+   52.6cqw+6px and 78.9cqw+9px (+15px to the centre, −7px for the dot) */
+@keyframes tb-d1 { 0% { opacity: 0; transform: translate(0, 0); } 8% { opacity: 1; } 30% { transform: translate(8px, 0); } 45% { opacity: 1; transform: translate(8px, 0); } 60% { opacity: 0; transform: translate(14px, 30px); } 100% { opacity: 0; transform: translate(14px, 30px); } }
+@keyframes tb-d2 { 0% { opacity: 0; transform: translate(0, 0); } 8% { opacity: 1; } 58% { opacity: 1; transform: translate(calc(26.3cqw + 11px), 0); } 73% { opacity: 0; transform: translate(calc(26.3cqw + 17px), 30px); } 100% { opacity: 0; transform: translate(calc(26.3cqw + 17px), 30px); } }
+@keyframes tb-d3 { 0% { opacity: 0; transform: translate(0, 0); } 8% { opacity: 1; } 76% { opacity: 1; transform: translate(calc(52.6cqw + 14px), 0); } 90% { opacity: 0; transform: translate(calc(52.6cqw + 20px), 30px); } 100% { opacity: 0; transform: translate(calc(52.6cqw + 20px), 30px); } }
+@keyframes tb-d4 { 0% { opacity: 0; transform: translate(0, 0); } 8% { opacity: 1; } 92% { opacity: 1; transform: translate(calc(78.9cqw + 17px), 0); } 100% { opacity: 0; transform: translate(calc(78.9cqw + 17px), 0); } }
+
+/* --------------------------------------------------------------- 2 causes -- */
+.tb-causes { margin-top: clamp(32px, 4vw, 56px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.tb-cause { display: grid; align-content: start; gap: 12px; padding: clamp(20px, 2.6vw, 30px); background: var(--dc-ground); border: 2px solid var(--dc-ink); border-top: 6px solid var(--dc-tang-display); min-width: 0; }
+.tb-cause-k { display: inline-flex; align-items: center; gap: 10px; font: 700 .75rem/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-dim); }
+.tb-cause-t { font: 800 var(--dc-t-title)/1.25 var(--dc-f-title); }
+.tb-cause-sign { padding-left: 12px; border-left: 3px solid var(--dc-control); line-height: 1.5; font-style: italic; }
+.tb-cause-help { color: var(--dc-ink); font-weight: 700; line-height: 1.5; }
+.tb-cause-link { margin-top: 0; }
+.tb-note { margin-top: clamp(24px, 3vw, 36px); max-width: 60ch; padding-left: 14px; border-left: 4px solid var(--dc-control); color: var(--dc-dim); line-height: 1.5; }
+
+/* --------------------------------------------------------------- 3 checks -- */
+.tb-check-intro { margin-top: 18px; max-width: 56ch; color: var(--dc-on-ink-soft); line-height: 1.55; }
+.tb-checks { margin-top: clamp(28px, 3.5vw, 48px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; counter-reset: tb; }
+.tb-checks li { counter-increment: tb; display: grid; align-content: start; gap: 10px; padding: clamp(20px, 2.6vw, 30px); border: 2px solid var(--dc-on-ink-dim); min-width: 0; }
+.tb-checks li::before { content: counter(tb); display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--dc-tang); color: var(--dc-ink); font: 800 .9375rem/1 var(--dc-f-body); }
+.tb-check-t { font: 800 var(--dc-t-title)/1.25 var(--dc-f-title); color: var(--dc-on-ink); }
+.tb-check-d { color: var(--dc-on-ink-soft); line-height: 1.5; }
+
+/* ---------------------------------------------------------------- close -- */
+.tb-close-k { color: var(--dc-ink); }
+.px-h:has(.tb-hero) .b-close-in > div { container-type: inline-size; min-width: 0; }
+.px-h:has(.tb-hero) .b-close .b-h2 { font-size: min(clamp(2.4rem, 1.2rem + 4vw, 5rem), 14cqi); max-width: 16ch; }
+@media (prefers-reduced-motion: no-preference) {
+  /* the next step: one small nudge when the close comes into view */
+  .rv-in .tb-nudge { animation: tb-nudge 900ms var(--dc-e-arrive) 400ms 2; }
+}
+@keyframes tb-nudge { 0%, 100% { transform: none; } 40% { transform: translateX(6px); } }
+.tb-check :focus-visible { outline-color: var(--dc-on-ink); }
+
+/* ----------------------------------------------------------- responsive -- */
+@media (max-width: 1023px) { .tb-causes, .tb-checks { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 767px) {
+  /* the journey stands up: the path runs down the left, each exit sits under its stage */
+  .tb-stages { grid-template-columns: minmax(0, 1fr); gap: 22px; padding-left: 44px; }
+  .tb-stages::before { left: 13px; right: auto; top: 14px; bottom: 14px; width: 4px; height: auto; }
+  .tb-node { position: absolute; left: -44px; top: 0; }
+  .tb-stage-t { margin-top: 2px; }
+  .tb-stage-d { max-width: none; min-height: 0; }
+  .tb-exit { margin-top: 6px; }
+  .tb-end { margin-top: 0; }
+}

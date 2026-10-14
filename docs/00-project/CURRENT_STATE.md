@@ -48,6 +48,11 @@
 > Start at `docs/ui-revamp/GATE_4_MASTER_ROLLOUT_PLAN.md` (seven `GATE_4_*.md` documents). Proposed owner decisions O1–O10
 > (§7); recommended first batch B0 + B1 (QA harness and baselines, then the global chrome flip). No application code changed.
 >
+> **Lean release preparation — 2026-10-14 (`DEC-052`). Branch `release/cplus-lean` from `main`; not pushed, not merged, not deployed.**
+> - Website code = `abcb/cplus-integration` @ `d27f464` (byte-identical outside `docs/`), plus the host-only lead export `scripts/export-enquiries.cjs` (`docs/10-technical/LEAD_EXPORT.md`). Evidence screenshots, run results and logs are left out of the branch.
+> - The full integration history and evidence are kept in a private, verified git bundle **outside** this public repository.
+> - Mini CRM: out of scope, unchanged. PR #3 (R0, dispatch-only deploys) awaits `anikesh-dev`'s review.
+>
 > **Gate 4 · C+ Hybrid selected; B5 owner acceptance withheld — 2026-10-12 (`DEC-051`). Direction and records only: no application change; not pushed or deployed. B6 NOT authorised.**
 > - **C+ Hybrid is the intended final creative direction.** Owner visual approval covers three **prototypes** (not production-integrated): Homepage, Conversion Optimization and How It Works, on branch `proto/direction-c-plus` (tip `cf91ce1` at recording). **Visual approval only:** production copy, SEO changes (H1s, metadata, canonicals, intent), claims and integration each need separate owner approval. C+ pages need a logical, accessible heading hierarchy, not the Direction C outline. `DEC-034` stays historically valid for the earlier Direction C work.
 > - **B5 owner acceptance WITHHELD** on `/how-it-works`, `/about` and `/faq` (Direction C visuals). No further Direction C remediation. B5's technical and accessibility work is the **integration baseline** (Option B). B5, KD-09, KD-10 and OBS-6 are **not closed**.

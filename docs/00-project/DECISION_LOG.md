@@ -1102,3 +1102,16 @@ Use this file only for meaningful project decisions.
   - on branch `proto/direction-c-plus`: `docs/ui-revamp/c-plus/README.md` and `components/proto-cplus/content.ts` (`METHOD_PLAIN` header).
 - **Supersedes:** `DEC-034` **only as the intended final creative direction.** `DEC-034` remains **historically valid** for the earlier Direction C work (Gate 2, Gates 3–4, B1–B4), whose acceptances stand. Direction C remains the implemented and accepted state of B1–B4 until a later decision. Read with `DEC-034`, `DEC-036`, `DEC-038`, `DEC-050`.
 - **Approved by:** Project owner, 2026-10-12 (Option B selection and C+ direction brief). Recorded by the repository worker.
+
+### DEC-052
+- **Date:** 2026-10-14
+- **Status:** **Approved — lean website release with a host-only lead CSV export; Mini CRM out of scope.** Release preparation only: **no deployment, no merge and no production change is authorised by this entry.**
+- **Decision (owner, as given in the "final release decisions" brief):**
+  1. **Lean release.** The approved release candidate (`abcb/cplus-integration` @ `d27f464`) ships from a clean branch based on `main`, with the approved website code, the lead-export script, essential documentation and the QA tooling, and **without** bulk screenshots, test-result archives or logs. The original integration branch and its full QA history are preserved in a private, verified archive and are **not** deleted or rewritten.
+  2. **Lead export.** A host-only script, `scripts/export-enquiries.cjs`, exports enquiries from the existing MariaDB `enquiries` table by date range to CSV (explicit safe columns; formula-injection safe; read-only; bounded; no personal data in logs; never modifies records). **No public admin route or dashboard.** Usage: `docs/10-technical/LEAD_EXPORT.md`.
+  3. **Mini CRM remains out of scope** for this release and is not changed.
+  4. **Deployment safety (PR #3, R0):** approved in principle through the normal GitHub review; branch protection is kept; `anikesh-dev` reviews; no approval bypass and no merge before the authorised reviewer approves.
+  5. **Production dependencies:** keep the verified dependency-preparation procedure ready; do not modify the production host yet.
+- **Implemented on:** branch `release/cplus-lean` (not pushed at recording). Every application, config and test file outside `docs/` is byte-identical to `d27f464` except the three added export files (`scripts/export-enquiries.cjs`, `tests/export-enquiries.test.cjs`, `tests/export-enquiries.db.test.cjs`).
+- **Outstanding:** PR #3 review and merge; owner review of the lean file inventory; pushing the release branch and opening its PR; production dependency preparation (`~/deps/<lock sha12>`); release dispatch. Each needs its own owner go-ahead.
+- **Read with:** `DEC-051`. **Approved by:** Project owner, 2026-10-14. Recorded by the repository worker.

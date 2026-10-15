@@ -78,8 +78,6 @@ export const SV_PLAIN = {
   stepOf: ['Step 1 of 4', 'Step 2 of 4', 'Step 3 of 4', 'Step 4 of 4'],
   sumManage: { k: 'What we manage and improve', d: 'Campaigns, website conversion paths and enquiry tracking—within the agreed scope.' },
   sumAffect: { k: 'What also affects results', d: 'Market demand, pricing, competition and how quickly your business responds to enquiries.' },
-  /* retained qualification (owner approval requested): the outcomes we report on but do not promise */
-  noPromise: 'We report on rankings, enquiry volumes, revenue and return on ad spend, but do not promise them.',
 
   /* 4 — boundaries (paper): what can be added later, what is outside our service */
   laterK: 'Starting out, and adding later',

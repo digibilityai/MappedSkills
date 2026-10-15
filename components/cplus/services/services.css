@@ -92,7 +92,6 @@
 @keyframes jr-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 .sv-sum { margin-top: clamp(28px, 3.5vw, 44px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 4vw, 64px); padding-top: 22px; border-top: 3px solid var(--dc-on-ink); }
 .sv-sum .sv-body { margin-top: 8px; }
-.sv-nopromise { margin-top: 18px; max-width: 70ch; font-size: var(--dc-t-note); line-height: 1.5; color: var(--dc-on-ink-dim); }
 @media (max-width: 900px) {
   .jr { --jr-node: 52px; }
   .jr-list { grid-template-columns: minmax(0, 1fr); gap: 0; }

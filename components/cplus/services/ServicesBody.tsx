@@ -123,7 +123,6 @@ export function ServicesBody() {
               <p className="sv-body">{S.sumAffect.d}</p>
             </div>
           </div>
-          <p className="sv-nopromise">{S.noPromise}</p>
         </div>
       </section>
 

@@ -1,0 +1,60 @@
+/* C+ FAQ (CHECKPOINT 6 section), from the approved prototype (proto/direction-c-plus, app/proto/c-plus/proto.css):
+   the rules only this page renders. Shared rules are in ../cplus.css. */
+.b-h2-s { font-size: clamp(1.5rem, 1rem + 1.6vw, 2.3rem); }
+.fq-hero-g { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+.px-h .fq-h1 { font-size: clamp(2.6rem, 1.2rem + 4.4vw, 5.2rem); max-width: 12ch; }
+.fq-side { margin-top: 18px; max-width: 46ch; padding-left: 16px; border-left: 4px solid var(--dc-tang-display); color: var(--dc-ink); font-weight: 600; line-height: 1.5; }
+.fq-index { min-width: 0; padding: clamp(18px, 2.4vw, 28px); background: var(--dc-paper); border: 2px solid var(--dc-ink); }
+.fq-index-h { margin-bottom: 14px; font: 700 .75rem/1.3 var(--dc-f-body); letter-spacing: .1em; text-transform: uppercase; color: var(--dc-dim); }
+.fq-index a { color: var(--dc-ink); text-decoration: none; }
+.fq-index a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.fq-index a:focus-visible { outline: 3px solid var(--dc-ink); outline-offset: 2px; }
+.fq-index-n { display: inline-grid; place-items: center; flex: none; min-width: 2.1em; padding: 2px 4px; background: var(--dc-ink); color: var(--dc-on-ink); font: 800 .75rem/1.2 var(--dc-f-body); }
+.fq-index-g { display: grid; gap: 16px; }
+.fq-index-grp { display: inline-flex; align-items: center; gap: 10px; font: 800 1.05rem/1.25 var(--dc-f-title); }
+.fq-index-g ul { margin-top: 8px; padding-left: calc(2.1em + 10px); display: grid; gap: 6px; }
+.fq-index-g ul a { display: block; padding: 3px 0; font-size: .9375rem; line-height: 1.4; color: var(--dc-dim); }
+.fq-index-g ul a:hover { color: var(--dc-ink); }
+.fq-index-groups { display: none; }
+.fq-index-groups ol { display: grid; gap: 8px; }
+.fq-index-groups a { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; min-height: 48px; padding: 8px 0; border-bottom: 1px solid var(--dc-line); }
+.fq-index-t { font: 800 1.05rem/1.25 var(--dc-f-title); }
+.fq-index-c { font-size: .875rem; color: var(--dc-dim); white-space: nowrap; }
+.fq-tools-w { padding-block: 22px 0; }
+html:not(.px-js) .fq-tools { display: none; }
+.fq-all { display: inline-flex; align-items: center; gap: 12px; min-height: 48px; padding: 6px 20px 6px 8px; border: 2px solid var(--dc-ink); border-radius: 999px; background: var(--dc-paper); color: var(--dc-ink); font: 700 1rem/1.2 var(--dc-f-body); cursor: pointer; }
+.fq-all:hover { background: var(--dc-ink); color: var(--dc-on-ink); }
+.fq-all:focus-visible { outline: 3px solid var(--dc-ink); outline-offset: 3px; }
+.fq-grp { padding-block: clamp(44px, 6vw, 88px); }
+.fq-grp-g { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(20px, 4vw, 64px); align-items: start; }
+.fq-grp-head { display: grid; gap: 6px; align-content: start; min-width: 0; }
+.fq-grp-n { font: 800 clamp(3.2rem, 2rem + 4vw, 5.6rem)/1.25 var(--dc-f-display); letter-spacing: -.05em; color: var(--dc-tang-display); }
+.fq-grp-h { font: 800 clamp(1.7rem, 1.1rem + 1.8vw, 2.6rem)/1.05 var(--dc-f-statement); letter-spacing: -.02em; overflow-wrap: anywhere; }
+.fq-grp-c { font: 700 .8125rem/1.45 var(--dc-f-body); letter-spacing: .08em; text-transform: uppercase; color: var(--dc-dim); }
+.fq-pm.is-open::after { transform: rotate(0deg); }
+.fq-start-first { margin-top: clamp(22px, 3vw, 32px); display: flex; align-items: center; gap: 12px; font: 700 var(--dc-t-lede)/1.4 var(--dc-f-body); color: var(--dc-on-ink); }
+.fq-start-first .dc-mk, .fq-start-notes .dc-mk { background: var(--dc-tang); }
+.fq-flow { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; }
+.fq-flow li { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 8px 16px 8px 8px; border: 2px solid var(--dc-on-ink-dim); font: 700 1rem/1.25 var(--dc-f-body); color: var(--dc-on-ink); }
+.fq-flow li.is-last { border-color: var(--dc-tang); }
+.fq-flow-n { display: grid; place-items: center; flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--dc-on-ink); color: var(--dc-ink); font: 800 .8125rem/1 var(--dc-f-title); }
+.fq-flow li.is-last .fq-flow-n { background: var(--dc-tang); }
+.fq-start-notes { margin-top: 20px; display: grid; gap: 10px; color: var(--dc-on-ink); font-weight: 600; }
+.fq-start-links { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 12px 28px; font-weight: 700; }
+.fq-start-links a { color: var(--dc-on-ink); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.fq-start :focus-visible { outline-color: var(--dc-on-ink); }
+.fq-more-b { margin-top: 14px; }
+.fq-close-k { color: var(--dc-ink); }
+.px-h:has(.fq-hero) .b-close-in > div { container-type: inline-size; min-width: 0; }
+.px-h:has(.fq-hero) .b-close .b-h2 { font-size: min(clamp(3rem, 1.3rem + 6vw, 6.6rem), 16cqi); }
+@media (max-width: 899px) {
+  .fq-hero-g, .fq-grp-g { grid-template-columns: minmax(0, 1fr); }
+  .fq-index-full { display: none; }
+  .fq-index-groups { display: block; }
+  .fq-grp-head { grid-template-columns: auto minmax(0, 1fr); align-items: end; column-gap: 14px; }
+  .fq-grp-n { grid-row: span 2; }
+}
+/* Enlarged text (320px at 200%, text-only zoom): a single long word may break rather than be clipped. break-word
+   does not change min-content sizing, so normal-size rendering is unchanged. Scoped to this page's own sections. */
+[aria-labelledby^="fq-"] :is(h1, h2, h3, p, li, a, b, span),
+[aria-labelledby^="g-"] :is(h2, p, li, a, b, span) { overflow-wrap: break-word; }

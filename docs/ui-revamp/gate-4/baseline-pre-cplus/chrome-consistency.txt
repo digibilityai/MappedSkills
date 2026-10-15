@@ -1,0 +1,107 @@
+PASS home: one chrome header and one chrome footer
+PASS home: skip link to #main
+PASS home: renders direction-c chrome (expected direction-c)
+PASS services: one chrome header and one chrome footer
+PASS services: skip link to #main
+PASS services: renders direction-c chrome (expected direction-c)
+PASS seo: one chrome header and one chrome footer
+PASS seo: skip link to #main
+PASS seo: renders direction-c chrome (expected direction-c)
+PASS google-ads: one chrome header and one chrome footer
+PASS google-ads: skip link to #main
+PASS google-ads: renders direction-c chrome (expected direction-c)
+PASS social-media-ads: one chrome header and one chrome footer
+PASS social-media-ads: skip link to #main
+PASS social-media-ads: renders direction-c chrome (expected direction-c)
+PASS ai-seo: one chrome header and one chrome footer
+PASS ai-seo: skip link to #main
+PASS ai-seo: renders direction-c chrome (expected direction-c)
+PASS lead-generation: one chrome header and one chrome footer
+PASS lead-generation: skip link to #main
+PASS lead-generation: renders direction-c chrome (expected direction-c)
+PASS conversion-optimization: one chrome header and one chrome footer
+PASS conversion-optimization: skip link to #main
+PASS conversion-optimization: renders direction-c chrome (expected direction-c)
+PASS problems: one chrome header and one chrome footer
+PASS problems: skip link to #main
+PASS problems: renders direction-c chrome (expected direction-c)
+PASS pricing: one chrome header and one chrome footer
+PASS pricing: skip link to #main
+PASS pricing: renders direction-c chrome (expected direction-c)
+PASS how-it-works: one chrome header and one chrome footer
+PASS how-it-works: skip link to #main
+PASS how-it-works: renders direction-c chrome (expected direction-c)
+PASS about: one chrome header and one chrome footer
+PASS about: skip link to #main
+PASS about: renders direction-c chrome (expected direction-c)
+PASS faq: one chrome header and one chrome footer
+PASS faq: skip link to #main
+PASS faq: renders direction-c chrome (expected direction-c)
+PASS contact: one chrome header and one chrome footer
+PASS contact: skip link to #main
+PASS contact: renders direction-c chrome (expected direction-c)
+PASS schedule-call: one chrome header and one chrome footer
+PASS schedule-call: skip link to #main
+PASS schedule-call: renders direction-c chrome (expected direction-c)
+PASS thank-you: one chrome header and one chrome footer
+PASS thank-you: skip link to #main
+PASS thank-you: renders direction-c chrome (expected direction-c)
+PASS blog: one chrome header and one chrome footer
+PASS blog: skip link to #main
+PASS blog: renders direction-c chrome (expected direction-c)
+PASS blog~fixture: one chrome header and one chrome footer
+PASS blog~fixture: skip link to #main
+PASS blog~fixture: renders direction-c chrome (expected direction-c)
+PASS research: one chrome header and one chrome footer
+PASS research: skip link to #main
+PASS research: renders direction-c chrome (expected direction-c)
+PASS research-slug~not-found: one chrome header and one chrome footer
+PASS research-slug~not-found: skip link to #main
+PASS research-slug~not-found: renders direction-c chrome (expected direction-c)
+PASS press: one chrome header and one chrome footer
+PASS press: skip link to #main
+PASS press: renders direction-c chrome (expected direction-c)
+PASS press-slug~not-found: one chrome header and one chrome footer
+PASS press-slug~not-found: skip link to #main
+PASS press-slug~not-found: renders direction-c chrome (expected direction-c)
+PASS blog-slug~fixture-full: one chrome header and one chrome footer
+PASS blog-slug~fixture-full: skip link to #main
+PASS blog-slug~fixture-full: renders direction-c chrome (expected direction-c)
+PASS blog-slug~fixture-minimal: one chrome header and one chrome footer
+PASS blog-slug~fixture-minimal: skip link to #main
+PASS blog-slug~fixture-minimal: renders direction-c chrome (expected direction-c)
+PASS blog-slug~not-found: one chrome header and one chrome footer
+PASS blog-slug~not-found: skip link to #main
+PASS blog-slug~not-found: renders direction-c chrome (expected direction-c)
+PASS work: one chrome header and one chrome footer
+PASS work: skip link to #main
+PASS work: renders direction-c chrome (expected direction-c)
+PASS work~fixture: one chrome header and one chrome footer
+PASS work~fixture: skip link to #main
+PASS work~fixture: renders direction-c chrome (expected direction-c)
+PASS portfolio-slug~fixture-open: one chrome header and one chrome footer
+PASS portfolio-slug~fixture-open: skip link to #main
+PASS portfolio-slug~fixture-open: renders direction-c chrome (expected direction-c)
+PASS portfolio-slug~fixture-withheld: one chrome header and one chrome footer
+PASS portfolio-slug~fixture-withheld: skip link to #main
+PASS portfolio-slug~fixture-withheld: renders direction-c chrome (expected direction-c)
+PASS portfolio-slug~not-found: one chrome header and one chrome footer
+PASS portfolio-slug~not-found: skip link to #main
+PASS portfolio-slug~not-found: renders direction-c chrome (expected direction-c)
+PASS privacy-policy: one chrome header and one chrome footer
+PASS privacy-policy: skip link to #main
+PASS privacy-policy: renders direction-c chrome (expected direction-c)
+PASS terms: one chrome header and one chrome footer
+PASS terms: skip link to #main
+PASS terms: renders direction-c chrome (expected direction-c)
+PASS 404: one chrome header and one chrome footer
+PASS 404: skip link to #main
+PASS 404: renders direction-c chrome (expected direction-c)
+PASS launch-checklist~gated: one chrome header and one chrome footer
+PASS launch-checklist~gated: skip link to #main
+PASS launch-checklist~gated: renders direction-c chrome (expected direction-c)
+PASS header: 1 distinct variant(s) for 1 chrome system(s) — direction-c×34
+PASS footer: 1 distinct variant(s) for 1 chrome system(s) — direction-c×34
+NOTE only one chrome system present; parity not applicable
+
+SUMMARY: 0 failures

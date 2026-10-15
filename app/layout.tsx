@@ -10,7 +10,13 @@ import { MetaPixel } from '@/lib/meta-pixel'
 import { generateOrganizationSchema } from '@/lib/schema'
 import { siteMetadata } from '@/lib/metadata'
 import { CONSENT_BOOTSTRAP_SCRIPT } from '@/lib/consent'
+import { ChromeSwitch } from '@/components/direction-c/ChromeSwitch'
+import { SiteHeader } from '@/components/direction-c/SiteHeader'
+import { SiteFooter } from '@/components/direction-c/SiteFooter'
 import './globals.css'
+// UI Revamp Gate 2 (DEC-034): Direction C. Every class and token is `dc-`
+// prefixed, so it styles only elements that opt in; see the file header.
+import './direction-c.css'
 
 // THE RESOLVE — display + body. Self-hosted and preloaded by next/font, so
 // there is no runtime request to Google Fonts. Both are variable fonts; weight
@@ -20,10 +26,17 @@ const bricolage = Bricolage_Grotesque({
   display: 'swap',
   variable: '--font-bricolage',
 });
+// OBS-19 (DEC-047): next/font's automatic fallback sizes Arial REGULAR once
+// for every weight (bold synthesised), so buttons, labels and the consent
+// banner re-wrapped when Manrope arrived late. It is replaced by the
+// weight-specific, calibrated "Manrope Fallback" faces in app/globals.css
+// (Arial for 100–500, Arial Bold for 600–900). Manrope itself is unchanged.
 const manrope = Manrope({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-manrope',
+  adjustFontFallback: false,
+  fallback: ['"Manrope Fallback"'],
 });
 
 /*
@@ -100,6 +113,18 @@ export default function RootLayout({
         />
       </head>
       <body className={`${bricolage.variable} ${manrope.variable} font-sans antialiased bg-background text-foreground`}>
+        {/*
+          OBS-19 (DEC-047) — Firefox does not load a later @font-face in a
+          family list while an earlier one is loading, so while Manrope
+          downloads it skipped "Manrope Fallback" and set the text in
+          system-ui. One hidden element per calibrated face, in flow BEFORE any
+          content, names that face first, so laying it out loads the face (the
+          OBS-18 mechanism, components/direction-c/primitives.tsx). Zero
+          height, `visibility: hidden`, `aria-hidden`, glyph from CSS
+          generated content (app/globals.css, `.site-font-prime`); no script.
+        */}
+        <span aria-hidden="true" className="site-font-prime site-font-prime--regular" />
+        <span aria-hidden="true" className="site-font-prime site-font-prime--bold" />
         <a href="#main" className="skip-link">Skip to main content</a>
         {/*
           SESSION 33 — PHASE H2 — ANALYTICS SURFACES, AND EXACTLY WHAT EACH IS.
@@ -152,11 +177,14 @@ export default function RootLayout({
           <GoogleTagManager />
           <MetaPixel />
           <AnalyticsRouteListener />
-          <Header />
+          {/* UI Revamp Gate 4 B1 (DEC-037): Direction C chrome on every route.
+              The legacy Header and Footer render only for a pathname in the
+              (empty) LEGACY_CHROME_ROUTES rollback list. B11 removes the seam. */}
+          <ChromeSwitch legacy={<Header />} next={<SiteHeader />} />
           <main id="main" tabIndex={-1}>
             {children}
           </main>
-          <Footer />
+          <ChromeSwitch legacy={<Footer />} next={<SiteFooter />} />
         </ConsentProvider>
       </body>
     </html>

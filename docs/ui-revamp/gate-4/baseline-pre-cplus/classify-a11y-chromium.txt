@@ -1,0 +1,14 @@
+# Findings classification (gate-4/qa/a11y.cjs, engine chromium)
+baseline:  docs/ui-revamp/gate-4/post-b4/evidence/run/a11y-chromium.json
+candidate: /private/tmp/claude-501/-Users-amitguptaamit-gitrepo-MappedSkills/47c9af84-bfab-4b8b-92b0-2c10b69a44b7/scratchpad/base34/run/a11y-chromium.json
+
+## NEW (0)
+## EXPECTED (0)
+## RESOLVED (4)
+- axe|about|390|color-contrast [KD-03] — color-contrast [serious] ×2: .text-\[\.94rem\] | .mt-\[clamp\(26px\,3vw\,38px\)\] > .text-resolve-gap
+- axe|how-it-works|390|color-contrast [KD-03] — color-contrast [serious] ×1: .mt-1
+- axe|about|1440|color-contrast [KD-03] — color-contrast [serious] ×2: .text-\[\.94rem\] | .mt-\[clamp\(26px\,3vw\,38px\)\] > .text-resolve-gap
+- axe|how-it-works|1440|color-contrast [KD-03] — color-contrast [serious] ×1: .mt-1
+## KNOWN (23) by register ID: {"KD-02":17,"KD-04":2,"KD-03":4}
+
+SUMMARY: NEW 0 · EXPECTED 0 · RESOLVED 4 · KNOWN 23

@@ -1,0 +1,346 @@
+{
+ "meta": {
+  "tool": "gate-4/qa/a11y.cjs",
+  "engine": "firefox",
+  "plain": "http://127.0.0.1:4391",
+  "fixture": "http://127.0.0.1:4392",
+  "at": "2026-10-12T07:58:25.692Z",
+  "summary": {
+   "404": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 45,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 52
+   },
+   "home": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 51,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 58
+   },
+   "services": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 47,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 54
+   },
+   "seo": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 50,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 57
+   },
+   "google-ads": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 49,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 56
+   },
+   "social-media-ads": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 42,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 49
+   },
+   "ai-seo": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 46,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 53
+   },
+   "lead-generation": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 49,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 56
+   },
+   "conversion-optimization": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 46,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 53
+   },
+   "problems": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 39,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 46
+   },
+   "pricing": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 39,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 46
+   },
+   "how-it-works": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 35,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 42
+   },
+   "about": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 37,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 44
+   },
+   "faq": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 48,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 55
+   },
+   "contact": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 43,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 50
+   },
+   "schedule-call": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 36,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 43
+   },
+   "thank-you": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 34,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 41
+   },
+   "blog": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 35,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 42
+   },
+   "blog~fixture": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 35,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 42
+   },
+   "research": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 35,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 42
+   },
+   "research-slug~not-found": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 45,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 52
+   },
+   "press": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 35,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 42
+   },
+   "press-slug~not-found": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 45,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 52
+   },
+   "blog-slug~fixture-full": {
+    "axe390": [
+     "scrollable-region-focusable×1"
+    ],
+    "rm390": 0,
+    "tab390": 50,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 56
+   },
+   "blog-slug~fixture-minimal": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 44,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 51
+   },
+   "blog-slug~not-found": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 45,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 52
+   },
+   "work": {
+    "axe390": [
+     "color-contrast×1"
+    ],
+    "rm390": 0,
+    "tab390": 35,
+    "axe1440": [
+     "color-contrast×1"
+    ],
+    "rm1440": 0,
+    "tab1440": 42
+   },
+   "work~fixture": {
+    "axe390": [
+     "color-contrast×1"
+    ],
+    "rm390": 0,
+    "tab390": 37,
+    "axe1440": [
+     "color-contrast×1"
+    ],
+    "rm1440": 0,
+    "tab1440": 44
+   },
+   "portfolio-slug~fixture-open": {
+    "axe390": [
+     "scrollable-region-focusable×1"
+    ],
+    "rm390": 0,
+    "tab390": 38,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 44
+   },
+   "portfolio-slug~fixture-withheld": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 38,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 45
+   },
+   "portfolio-slug~not-found": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 45,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 52
+   },
+   "privacy-policy": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 54,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 61
+   },
+   "terms": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 56,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 63
+   },
+   "launch-checklist~gated": {
+    "axe390": [],
+    "rm390": 0,
+    "tab390": 45,
+    "axe1440": [],
+    "rm1440": 0,
+    "tab1440": 52
+   }
+  }
+ },
+ "passes": 538,
+ "findings": [
+  {
+   "fp": "axe|blog-slug~fixture-full|390|scrollable-region-focusable",
+   "check": "axe",
+   "target": "blog-slug~fixture-full",
+   "width": 390,
+   "key": "scrollable-region-focusable",
+   "detail": "scrollable-region-focusable [serious] ×1: .max-w-full"
+  },
+  {
+   "fp": "axe|work|390|color-contrast",
+   "check": "axe",
+   "target": "work",
+   "width": 390,
+   "key": "color-contrast",
+   "detail": "color-contrast [serious] ×1: .text-\\[\\.94rem\\]"
+  },
+  {
+   "fp": "axe|work~fixture|390|color-contrast",
+   "check": "axe",
+   "target": "work~fixture",
+   "width": 390,
+   "key": "color-contrast",
+   "detail": "color-contrast [serious] ×1: .text-\\[\\.94rem\\]"
+  },
+  {
+   "fp": "axe|portfolio-slug~fixture-open|390|scrollable-region-focusable",
+   "check": "axe",
+   "target": "portfolio-slug~fixture-open",
+   "width": 390,
+   "key": "scrollable-region-focusable",
+   "detail": "scrollable-region-focusable [serious] ×1: .overflow-x-auto"
+  },
+  {
+   "fp": "axe|work|1440|color-contrast",
+   "check": "axe",
+   "target": "work",
+   "width": 1440,
+   "key": "color-contrast",
+   "detail": "color-contrast [serious] ×1: .text-\\[\\.94rem\\]"
+  },
+  {
+   "fp": "axe|work~fixture|1440|color-contrast",
+   "check": "axe",
+   "target": "work~fixture",
+   "width": 1440,
+   "key": "color-contrast",
+   "detail": "color-contrast [serious] ×1: .text-\\[\\.94rem\\]"
+  }
+ ]
+}

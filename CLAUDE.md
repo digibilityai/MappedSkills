@@ -65,7 +65,16 @@ The final website must be engineered for:
 - monitoring and regression testing
 
 ## Current Strategic Status
-The emerging business direction is:
+> **SUPERSEDED — read the decision log instead (annotation, 2026-10-08).** The three-pillar framing below is the
+> historical `DEC-004` hypothesis, **superseded by `DEC-005` (2026-08-31)** and retained here unaltered as history.
+>
+> - **Current approved positioning:** `DEC-005` in `docs/00-project/DECISION_LOG.md`.
+> - **Current service taxonomy:** `docs/01-business/SERVICE_ARCHITECTURE.md`.
+> - **For the UI revamp:** `DEC-032`.
+> - The UI Revamp Master Handoff's references to "websites" and "social media" are **contextual only** and **do not
+>   expand** the approved service taxonomy. Standalone web development and social media management remain excluded.
+
+*Historical (`DEC-004`, superseded):* the emerging business direction was:
 1. AI + Search Visibility
 2. Conversion Rate Optimisation
 3. Marketing Automation

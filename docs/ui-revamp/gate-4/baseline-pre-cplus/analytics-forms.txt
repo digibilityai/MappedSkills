@@ -1,0 +1,13 @@
+consent: {
+  undecided: 'consent default banner=true gtm=false',
+  denied: 'consent default banner=false gtm=false',
+  granted: 'consent default+consent update banner=false gtm=false'
+}
+page_view walk: / → /services → /seo → /about → /how-it-works → / → /how-it-works
+booking clicks: meeting_started (1 anchors)
+form empty submit: lead_form_validation_error:name, lead_form_validation_error:email, lead_form_validation_error:company, lead_form_validation_error:message apiCalls=0 summaryFocused=true
+form 429: requests=1 → /contact; events lead_form_started, lead_form_validation_error:rate_limited
+form 500: requests=1 → /contact; events lead_form_started, lead_form_validation_error:server
+form 2xx: requests=1 → /thank-you; events lead_form_started, lead_form_submitted
+form 400-field: requests=1 → /contact; events lead_form_started, lead_form_validation_error:server
+form network-abort: requests=1 → /contact; events lead_form_started, lead_form_validation_error:server

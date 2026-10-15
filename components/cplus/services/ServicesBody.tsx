@@ -1,0 +1,185 @@
+import Link from 'next/link';
+import { CONTACT_HREF, Mark } from '@/components/direction-c/primitives';
+import { SV_PLAIN as S } from './content';
+import './services.css';
+import { Breadcrumb } from '../Breadcrumb';
+
+/**
+ * C+ Services (/services): the approved prototype's page body (proto/direction-c-plus e5c1aa4, ServicesH.tsx),
+ * unchanged in markup and copy. Production changes only: the breadcrumb's Home link and the CTA point at the live
+ * routes (`/` and CONTACT_HREF) instead of prototype paths. No client JavaScript of its own.
+ */
+
+function Action() {
+  return (
+    <div className="dc-actions">
+      <Link href={CONTACT_HREF} className="dc-btn dc-btn-primary">
+        <Mark />
+        {S.primary}
+      </Link>
+    </div>
+  );
+}
+
+export function ServicesBody() {
+  const P = S.plate;
+  return (
+    <>
+      {/* 1 — hero (ivory): the outcome + the directory plate */}
+      <section className="b-hero sv-hero" aria-labelledby="sv-h1">
+        <div className="px-wrap b-hero-g h-hero-g sv-hero-g">
+          <div>
+            <Breadcrumb current={S.kicker} />
+            <p className="b-kicker">{S.kicker}</p>
+            <h1 id="sv-h1" className="b-h1">
+              {S.h1.a} <span className="b-named">{S.h1.b}</span>
+            </h1>
+            <p className="b-lede">{S.lede}</p>
+            <p className="sv-side">{S.side}</p>
+            <Action />
+          </div>
+
+          <figure className="sv-fig">
+            <div className="sv-plate">
+              <p className="sv-plate-t">{P.title}</p>
+              <dl className="sv-plate-l">
+                {P.rows.map((r) => (
+                  <div key={r.k} className="sv-plate-r">
+                    <dt>{r.k}</dt>
+                    <dd>
+                      <ul>
+                        {r.v.map((v) => (
+                          <li key={v}>{v}</li>
+                        ))}
+                      </ul>
+                    </dd>
+                  </div>
+                ))}
+                <div className="sv-plate-r sv-plate-base">
+                  <dt>{P.base.k}</dt>
+                  <dd>{P.base.v}</dd>
+                </div>
+              </dl>
+            </div>
+            <figcaption className="px-cap">{P.cap}</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      {/* 2 — the router (paper): start with the symptom */}
+      <section className="b-sec b-paper sv-route" aria-labelledby="sv-h-route">
+        <div className="px-wrap">
+          <p className="b-kicker">{S.routeKicker}</p>
+          <h2 id="sv-h-route" className="b-h2">
+            {S.routeH.a} <span className="b-named">{S.routeH.b}</span>
+          </h2>
+          <ol className="sv-routes" data-rv="">
+            {S.routes.map((r) => (
+              <li key={r.tag} className="sv-row" data-rv-i="">
+                <div className="sv-sym">
+                  <p className="sv-tag">{r.tag}</p>
+                  <h3 className="sv-sym-t">{r.sym}</h3>
+                  <p className="sv-job">{r.job}</p>
+                </div>
+                <ul className={'sv-svcs' + (r.svc.length > 1 ? ' is-many' : '')}>
+                  {r.svc.map((v) => (
+                    <li key={v.href}>
+                      <Link href={v.href} className="sv-door">
+                        <span className="sv-door-n">{v.name}</span>
+                        <span className="sv-door-d">{v.d}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ol>
+          <div className="sv-unsure">
+            <p className="sv-unsure-t">{S.unsure.t}</p>
+            <p className="sv-unsure-d">{S.unsure.d}</p>
+            <p className="b-tlink">
+              <Link href={S.unsure.link.href}>{S.unsure.link.label} →</Link>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 3 — how they work together (ink): the joins as seams, then where accountability stops */}
+      <section className="b-sec b-ink sv-join" aria-labelledby="sv-h-join">
+        <div className="px-wrap">
+          <p className="b-kicker">{S.joinKicker}</p>
+          <h2 id="sv-h-join" className="b-h2">
+            {S.joinH.a} <span className="b-named">{S.joinH.b}</span>
+          </h2>
+          <ul className="sv-seams" aria-label="The joins">
+            {S.joins.map(([a, b]) => (
+              <li key={a}>
+                <span className="sv-seam-a">{a}</span>
+                <span className="sv-seam" aria-hidden="true" />
+                <span className="px-sr"> to </span>
+                <span className="sv-seam-b">{b}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="sv-join-line">{S.joinLine}</p>
+          <div className="sv-join-g">
+            <div>
+              <p className="sv-body">{S.measure}</p>
+              <p className="sv-body">{S.scoped}</p>
+            </div>
+            <div className="sv-bd">
+              <p className="sv-bd-h">{S.bdH}</p>
+              <p className="sv-body">{S.bdD}</p>
+              <p className="sv-label" id="sv-np-k">
+                {S.notPromisedK}
+              </p>
+              <ul className="sv-np" aria-labelledby="sv-np-k">
+                {S.notPromised.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4 — boundaries (paper): what can be added later, what we do not do */}
+      <section className="b-sec b-paper sv-lim" aria-labelledby="sv-h-lim">
+        <div className="px-wrap sv-lim-g">
+          <div>
+            <h2 id="sv-h-lim" className="sv-lim-h">
+              {S.laterK}
+            </h2>
+            <p className="sv-body">{S.later}</p>
+            <p className="b-tlink">
+              <Link href={S.priceLink.href}>{S.priceLink.label} →</Link>
+            </p>
+          </div>
+          <div>
+            <h2 className="sv-lim-h">{S.notK}</h2>
+            <ul className="sv-not">
+              {S.not.map((t) => (
+                <li key={t}>{t}</li>
+              ))}
+            </ul>
+            <p className="sv-not-line">{S.notLine}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* close: the shared close's markup and classes; one CTA */}
+      <section className="b-close" aria-labelledby="sv-h-close">
+        <div className="px-wrap b-close-in">
+          <div>
+            <p className="b-kicker sv-close-k">{S.close.label}</p>
+            <h2 id="sv-h-close" className="b-h2">
+              {S.close.h.a} <span className="sv-close-em">{S.close.h.b}</span>
+            </h2>
+            <p className="b-lede">{S.close.body}</p>
+          </div>
+          <Action />
+        </div>
+      </section>
+    </>
+  );
+}

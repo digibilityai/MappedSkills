@@ -41,12 +41,29 @@ import type { ReactNode } from 'react';
 const INK = 'var(--resolve-ink)';
 const GAP = 'var(--resolve-gap)';
 const DIM = 'var(--resolve-dim)';
-const OWN = 'var(--resolve-accent-deep)';
 
-const nodeText = { fontSize: 12, fontWeight: 600, fill: DIM } as const;
-const smallText = { fontSize: 11, fontWeight: 600, fill: GAP } as const;
-const fixText = { fontSize: 11, fontWeight: 600, fill: DIM } as const;
-const bdText = { fontSize: 12, fontWeight: 700, fill: INK, letterSpacing: '0.08em' } as const;
+/* GATE 4 · A1 (KD-09 / KD-10) — as in `components/commercial/ChainFigure.tsx`.
+   `GAP` stays on every line, dash and mark (non-text, ≥ 3:1). TEXT in the
+   not-measured register takes the system's text-grade token `--dc-gap-text`
+   (4.90:1), and the zone titles — the only owned-colour element here, and
+   text — take the small-text accent `--resolve-accent-dark` (6.02:1; the
+   display accent `--resolve-accent-deep` measured 4.33:1).
+   SIZE is font-size × drawing scale. The vertical drawing (330 units) is shown
+   in a 288px column at a 320px viewport, the horizontal one (760 units) in a
+   700px column at 761px, so both are set at 14 units (≥ 12.2px and ≥ 12.9px
+   there). In the vertical drawing every line is short enough to hold the WCAG
+   1.4.12 text-spacing overrides inside the drawing (KD-05): about 25
+   characters from x=72, 32 from the left edge. Longer strings break at a word
+   boundary — the words are unchanged. */
+const GAP_TEXT = 'var(--dc-gap-text)';
+const OWN_TEXT = 'var(--resolve-accent-dark)';
+
+const nodeText = { fontSize: 15, fontWeight: 600, fill: DIM } as const;
+const zoneText = { fontSize: 14, fontWeight: 700, fill: OWN_TEXT } as const;
+const smallText = { fontSize: 14, fontWeight: 600, fill: GAP_TEXT } as const;
+const fixText = { fontSize: 14, fontWeight: 600, fill: DIM } as const;
+const bdText = { fontSize: 14, fontWeight: 700, fill: INK, letterSpacing: '0.08em' } as const;
+const nodeTextH = { fontSize: 14, fontWeight: 600, fill: DIM } as const;
 
 const TITLE = 'The four causes of traffic that does not become enquiries, each with its own fix';
 const DESC =
@@ -72,65 +89,72 @@ export function CauseZones() {
      (`06_PROBLEM_PAGE_UX.md` §7: "never a scaled-down horizontal branching
      graph", "never horizontal page scroll"). Every label present in the
      horizontal form is present here. Text runs from x=72 with 258 units of
-     width, which holds 40 characters at 12px — measured against the longest
-     string below. */
+     width; at 14 units each line holds the 1.4.12 spacing overrides (A1). */
   const vertical = (
-    <svg viewBox="0 0 330 700" role="img" aria-labelledby="f2-v-t f2-v-d" className="block h-auto w-full">
+    <svg viewBox="0 0 330 846" role="img" aria-labelledby="f2-v-t f2-v-d" className="block h-auto w-full">
       <title id="f2-v-t">{TITLE}</title>
       <desc id="f2-v-d">{DESC}</desc>
 
       {/* 01 — the demand, upstream and unmeasured */}
-      <line x1="44" y1="14" x2="44" y2="74" stroke={GAP} strokeWidth={2} strokeDasharray="5 5" />
-      <Gap x={22} y={30} />
-      <text x="72" y="30" fontSize={12} fontWeight={700} fill={OWN}>01 the demand</text>
-      <text x="72" y="48" {...smallText}>it was never the right visit</text>
-      <text x="72" y="66" {...fixText}>fix &mdash; what you are found for</text>
+      <line x1="44" y1="14" x2="44" y2="92" stroke={GAP} strokeWidth={2} strokeDasharray="5 5" />
+      <Gap x={22} y={22} />
+      <text x="72" y="32" {...zoneText}>01 the demand</text>
+      <text x="72" y="52" {...smallText}>it was never the right visit</text>
+      <text x="72" y="72" {...fixText}>fix &mdash; what you are found for</text>
 
-      <rect x="37" y="67" width="14" height="14" fill={INK} />
-      <text x="72" y="96" {...nodeText}>landing</text>
+      <rect x="37" y="92" width="14" height="14" fill={INK} />
+      <text x="72" y="105" {...nodeText}>landing</text>
 
       {/* 02 — the page */}
-      <path d="M44 81 V196" fill="none" stroke={INK} strokeWidth={3} />
-      <Gap x={22} y={128} />
-      <text x="72" y="128" fontSize={12} fontWeight={700} fill={OWN}>02 the page</text>
-      <text x="72" y="146" {...smallText}>it did not answer the visit</text>
-      <text x="72" y="164" {...fixText}>fix &mdash; message, offer, evidence</text>
+      <path d="M44 106 V234" fill="none" stroke={INK} strokeWidth={3} />
+      <Gap x={22} y={130} />
+      <text x="72" y="140" {...zoneText}>02 the page</text>
+      <text x="72" y="160" {...smallText}>it did not answer the visit</text>
+      <text x="72" y="180" {...fixText}>fix &mdash; message, offer,</text>
+      <text x="72" y="200" {...fixText}>evidence</text>
 
-      <rect x="37" y="189" width="14" height="14" fill={INK} />
-      <text x="72" y="218" {...nodeText}>interaction</text>
+      <rect x="37" y="220" width="14" height="14" fill={INK} />
+      <text x="72" y="233" {...nodeText}>interaction</text>
 
       {/* 03 — the path */}
-      <path d="M44 203 V318" fill="none" stroke={INK} strokeWidth={3} />
-      <Gap x={22} y={250} />
-      <text x="72" y="250" fontSize={12} fontWeight={700} fill={OWN}>03 the path</text>
-      <text x="72" y="268" {...smallText}>it could not complete, or never arrived</text>
-      <text x="72" y="286" {...fixText}>fix &mdash; the form, the inbox, the link</text>
+      <path d="M44 234 V381" fill="none" stroke={INK} strokeWidth={3} />
+      <Gap x={22} y={258} />
+      <text x="72" y="268" {...zoneText}>03 the path</text>
+      <text x="72" y="288" {...smallText}>it could not complete,</text>
+      <text x="72" y="308" {...smallText}>or never arrived</text>
+      <text x="72" y="328" {...fixText}>fix &mdash; the form, the inbox,</text>
+      <text x="72" y="348" {...fixText}>the link</text>
 
-      <rect x="37" y="311" width="14" height="14" fill={INK} />
-      <text x="72" y="340" {...nodeText}>the enquiry</text>
+      <rect x="37" y="367" width="14" height="14" fill={INK} />
+      <text x="72" y="380" {...nodeText}>the enquiry</text>
 
       {/* 04 — the measurement, drawn unmeasured, marked FIRST TO CHECK */}
-      <path d="M44 325 V440" fill="none" stroke={GAP} strokeWidth={2.5} strokeDasharray="6 6" />
-      <Gap x={22} y={372} />
-      <text x="72" y="372" fontSize={12} fontWeight={700} fill={OWN}>04 the measurement</text>
-      <text x="72" y="390" {...smallText}>nothing recorded it, so the loss is invisible</text>
-      <text x="72" y="408" {...fixText}>fix &mdash; this one first</text>
+      <path d="M44 381 V496" fill="none" stroke={GAP} strokeWidth={2.5} strokeDasharray="6 6" />
+      <Gap x={22} y={405} />
+      <text x="72" y="415" {...zoneText}>04 the measurement</text>
+      <text x="72" y="435" {...smallText}>nothing recorded it,</text>
+      <text x="72" y="455" {...smallText}>so the loss is invisible</text>
+      <text x="72" y="475" {...fixText}>fix &mdash; this one first</text>
 
-      <rect x="37" y="433" width="14" height="14" fill={INK} />
-      <text x="72" y="462" {...nodeText}>a recorded enquiry</text>
+      <rect x="37" y="496" width="14" height="14" fill={INK} />
+      <text x="72" y="509" {...nodeText}>a recorded enquiry</text>
 
       {/* the ordering rule, with its reason visible. This is a rule about the
           reader's PROCEDURE, and it is the one ordering the figure states. */}
-      <line x1="6" y1="500" x2="324" y2="500" stroke={INK} strokeWidth={2} />
-      <text x="6" y="524" {...bdText}>START AT 04</text>
-      <text x="6" y="546" {...smallText}>without the measurement you cannot tell</text>
-      <text x="6" y="562" {...smallText}>which of the other three you have</text>
+      <line x1="6" y1="542" x2="324" y2="542" stroke={INK} strokeWidth={2} />
+      <text x="6" y="570" {...bdText}>START AT 04</text>
+      <text x="6" y="594" {...smallText}>without the measurement</text>
+      <text x="6" y="614" {...smallText}>you cannot tell which of</text>
+      <text x="6" y="634" {...smallText}>the other three you have</text>
 
-      <text x="6" y="600" {...bdText}>TWO OF THE FOUR ARE NOT THE PAGE</text>
-      <text x="6" y="622" {...smallText}>and they are not alternatives &mdash; more than</text>
-      <text x="6" y="638" {...smallText}>one can be true at the same time</text>
-      <text x="6" y="668" {...smallText}>nothing here shows how common any of</text>
-      <text x="6" y="684" {...smallText}>them is: that is not measured</text>
+      <text x="6" y="678" {...bdText}>TWO OF THE FOUR ARE NOT</text>
+      <text x="6" y="698" {...bdText}>THE PAGE</text>
+      <text x="6" y="722" {...smallText}>and they are not alternatives</text>
+      <text x="6" y="742" {...smallText}>&mdash; more than one can be true</text>
+      <text x="6" y="762" {...smallText}>at the same time</text>
+      <text x="6" y="794" {...smallText}>nothing here shows how</text>
+      <text x="6" y="814" {...smallText}>common any of them is:</text>
+      <text x="6" y="834" {...smallText}>that is not measured</text>
     </svg>
   );
 
@@ -138,8 +162,9 @@ export function CauseZones() {
      Four columns 185 units wide, every label START-anchored from its own
      column x. Phase F found six overlapping label pairs from centre-anchoring
      exactly this arrangement; start-anchoring each column into the empty span
-     to its right is the fix that held. Longest string below is 38 characters
-     at 11px, which measures under 185 units. */
+     to its right is the fix that held. Longest column string is 23 characters
+     at 14 units, which measures under 185 units (A1 probe: no clipping or
+     overlap at 761–1440). */
   const horizontal = (
     <svg viewBox="0 0 760 400" role="img" aria-labelledby="f2-h-t f2-h-d" className="block h-auto w-full">
       <title id="f2-h-t">{TITLE}</title>
@@ -164,31 +189,31 @@ export function CauseZones() {
       <rect x="628" y="143" width="14" height="14" fill={INK} />
 
       {/* the points, under the route */}
-      <text x="80" y="180" {...nodeText}>landing</text>
-      <text x="265" y="180" {...nodeText}>interaction</text>
-      <text x="450" y="180" {...nodeText}>the enquiry</text>
-      <text x="760" y="180" textAnchor="end" {...nodeText}>a recorded enquiry</text>
+      <text x="80" y="180" {...nodeTextH}>landing</text>
+      <text x="265" y="180" {...nodeTextH}>interaction</text>
+      <text x="450" y="180" {...nodeTextH}>the enquiry</text>
+      <text x="760" y="180" textAnchor="end" {...nodeTextH}>a recorded enquiry</text>
 
       {/* the four zones, above the route */}
-      <text x="10" y="44" fontSize={12} fontWeight={700} fill={OWN}>01 the demand</text>
-      <text x="195" y="44" fontSize={12} fontWeight={700} fill={OWN}>02 the page</text>
-      <text x="380" y="44" fontSize={12} fontWeight={700} fill={OWN}>03 the path</text>
-      <text x="565" y="44" fontSize={12} fontWeight={700} fill={OWN}>04 the measurement</text>
+      <text x="10" y="40" {...zoneText}>01 the demand</text>
+      <text x="195" y="40" {...zoneText}>02 the page</text>
+      <text x="380" y="40" {...zoneText}>03 the path</text>
+      <text x="565" y="40" {...zoneText}>04 the measurement</text>
 
-      <text x="10" y="64" {...smallText}>never the right visit</text>
-      <text x="195" y="64" {...smallText}>did not answer it</text>
-      <text x="380" y="64" {...smallText}>could not complete</text>
-      <text x="565" y="64" {...smallText}>nothing recorded it</text>
+      <text x="10" y="62" {...smallText}>never the right visit</text>
+      <text x="195" y="62" {...smallText}>did not answer it</text>
+      <text x="380" y="62" {...smallText}>could not complete</text>
+      <text x="565" y="62" {...smallText}>nothing recorded it</text>
 
       {/* each zone's distinct fix — the depth the shallow version does not carry */}
-      <text x="10" y="90" {...fixText}>fix &mdash; what you are</text>
-      <text x="10" y="105" {...fixText}>found for</text>
-      <text x="195" y="90" {...fixText}>fix &mdash; message, offer,</text>
-      <text x="195" y="105" {...fixText}>evidence, objections</text>
-      <text x="380" y="90" {...fixText}>fix &mdash; the form, the</text>
-      <text x="380" y="105" {...fixText}>inbox, the booking link</text>
-      <text x="565" y="90" {...fixText}>fix &mdash; this one first,</text>
-      <text x="565" y="105" {...fixText}>before the other three</text>
+      <text x="10" y="82" {...fixText}>fix &mdash; what you are</text>
+      <text x="10" y="102" {...fixText}>found for</text>
+      <text x="195" y="82" {...fixText}>fix &mdash; message, offer,</text>
+      <text x="195" y="102" {...fixText}>evidence, objections</text>
+      <text x="380" y="82" {...fixText}>fix &mdash; the form, the</text>
+      <text x="380" y="102" {...fixText}>inbox, the booking link</text>
+      <text x="565" y="82" {...fixText}>fix &mdash; this one first,</text>
+      <text x="565" y="102" {...fixText}>before the other three</text>
 
       {/* the ordering rule, stated with its reason */}
       <line x1="10" y1="230" x2="750" y2="230" stroke={INK} strokeWidth={2} />
@@ -207,7 +232,7 @@ export function CauseZones() {
       horizontal={horizontal}
       caption={
         <>
-          The same object <span className="whitespace-nowrap">/conversion-optimization</span> draws at a
+          The same object <span className="whitespace-nowrap">/conversion-optimization</span>{' '}draws at a
           shallower depth, with each cause&rsquo;s own fix added and the measurement marked as the one to check
           first. The four are not alternatives &mdash; a business can have more than one at once &mdash; and the
           drawing shows no size, share, rate or likelihood for any of them, because none of that is measured.

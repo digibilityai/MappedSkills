@@ -1,14 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { EVENTS, pageTypeOf, safePagePath, track, trackOnce } from '@/lib/analytics';
 import { attributionForAnalytics, attributionForSubmission } from '@/lib/attribution';
+import { markEnquiryConfirmed } from '@/lib/enquiry-confirmation';
 
 /**
  * SESSION 31 — PHASE H1 — the enquiry form.
@@ -100,10 +98,30 @@ const FIELD_LABELS: Record<FieldName, string> = {
   name: 'Your name',
   email: 'Work email',
   company: 'Company',
-  message: "What you're trying to fix",
+  message: 'What you’re trying to fix',
   phone: 'Phone or WhatsApp',
   website: 'Website',
 };
+
+/**
+ * C+ presentation copy (proto/direction-c-plus 0a8b611, CONTACT_PLAIN): the hint under each label, the three field
+ * groups and the line above the send button. Labels, error messages, the consent text and the privacy line are
+ * unchanged. No hint asks for anything the frozen field contract does not already collect. The phone hint keeps the
+ * original meaning (a call), with WhatsApp as the other owner-confirmed reply channel (owner decision, 2026-10-14).
+ */
+const FIELD_HINTS: Record<FieldName, string> = {
+  name: 'However you would like us to address you.',
+  email: 'Where the reply goes.',
+  company: 'One word is enough.',
+  message: 'What’s happening now, in your own words. A few sentences is enough.',
+  phone: 'Only if you would rather we called or replied on WhatsApp.',
+  website: 'If you have one. It is usually the thing being discussed.',
+};
+
+const FIELD_GROUPS = { you: 'About you', what: 'What’s happening', optional: 'Optional' };
+
+/** Owner-confirmed follow-up channels (DEC-051). No response time is stated, here or anywhere on the form. */
+const REPLY_LINE = 'We’ll reply by email or WhatsApp.';
 
 /**
  * Word-for-word the server's messages in `lib/enquiry-validation.ts`. Kept
@@ -189,7 +207,14 @@ const FORM_ERRORS: Record<string, string> = {
     'Something went wrong at our end and your enquiry was not saved. Nothing you typed has been lost — try again.',
 };
 
-export function ContactForm() {
+/** `isHydrated` reads no external store; the server snapshot (false) is what makes the hydration pass differ. */
+const noSubscription = () => () => {};
+
+/**
+ * `labelledBy`: the id of the visible heading that names this form (C+ `/contact`: its H1), so the form is exposed as a
+ * named form region. Presentation only; nothing about submission depends on it.
+ */
+export function ContactForm({ labelledBy }: { labelledBy?: string } = {}) {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -197,6 +222,14 @@ export function ContactForm() {
   const [fieldErrors, setFieldErrors] = useState<Partial<Record<FieldName, string>>>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  /**
+   * False in the server HTML and until this component has hydrated, so the send button is rendered DISABLED and
+   * cannot trigger the browser's native submission (with JavaScript off, or before it has loaded). Only the
+   * `handleSubmit` path below can send an enquiry. `method="post"` on the form is the second line: even a native
+   * submission could never put a field value in the URL.
+   */
+  const isHydrated = useSyncExternalStore(noSubscription, () => true, () => false);
 
   /**
    * The synchronous in-flight guard. `isSubmitting` drives what the visitor
@@ -418,6 +451,8 @@ export function ContactForm() {
         // and this form is about to unmount, so a click landing in between has
         // to be ignored rather than sent as a second request.
         navigatedRef.current = true;
+        // The one-time `/thank-you` confirmation signal: a timestamp only, and it cannot throw (see the module).
+        markEnquiryConfirmed();
 
         /*
          * ★ THE PRIMARY CONTACT CONVERSION — SESSION 32 / PHASE H2.
@@ -522,8 +557,72 @@ export function ContactForm() {
   const errorEntries = (Object.keys(fieldErrors) as FieldName[]).filter((key) => fieldErrors[key]);
   const hasSummary = errorEntries.length > 0 || formError !== null;
 
+  /**
+   * One field, in the approved C+ layout (proto/direction-c-plus 0a8b611, DemoContactForm). The hint is associated
+   * before entry and the error through `aria-describedby`. Every label says "(required)" or "(optional)" in text
+   * (`FORM_AND_BOOKING_SPEC.md` §7; owner decision, 2026-10-14), and a required field also carries `aria-required`.
+   */
+  function field(
+    id: FieldName,
+    opts: { required?: boolean; type?: string; autoComplete?: string; inputMode?: 'email' | 'tel' | 'url'; area?: boolean }
+  ) {
+    const error = fieldErrors[id];
+    const describedBy = [`${id}-hint`, error ? `${id}-error` : null].filter(Boolean).join(' ');
+    const common = {
+      id,
+      name: id,
+      maxLength: MAX_LENGTHS[id],
+      value: values[id],
+      'aria-required': opts.required ? ('true' as const) : undefined,
+      'aria-invalid': Boolean(error),
+      'aria-describedby': describedBy,
+      disabled: isSubmitting,
+      className: 'ct-input' + (opts.area ? ' ct-area' : '') + (error ? ' is-invalid' : ''),
+    };
+    return (
+      <div className="ct-field">
+        <label htmlFor={id} className="ct-label">
+          {FIELD_LABELS[id]}
+          <span className="ct-opt"> ({opts.required ? 'required' : 'optional'})</span>
+        </label>
+        <p id={`${id}-hint`} className="ct-hint">
+          {FIELD_HINTS[id]}
+        </p>
+        {opts.area ? (
+          <textarea {...common} rows={6} onChange={(event) => setValue(id, event.target.value)} />
+        ) : (
+          <input
+            {...common}
+            type={opts.type ?? 'text'}
+            autoComplete={opts.autoComplete}
+            inputMode={opts.inputMode}
+            onChange={(event) => setValue(id, event.target.value)}
+          />
+        )}
+        {error ? (
+          <p id={`${id}-error`} className="ct-err">
+            <span className="ct-err-ic" aria-hidden="true">
+              !
+            </span>
+            {error}
+          </p>
+        ) : null}
+      </div>
+    );
+  }
+
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-6">
+    <form method="post" onSubmit={handleSubmit} noValidate className="ct-form" aria-labelledby={labelledBy}>
+      {/*
+        NO JAVASCRIPT. The form cannot send without it (the send button stays disabled), so say so before anyone
+        types, and keep the booking route, which works without JavaScript, one link away.
+      */}
+      <noscript>
+        <p className="ct-summary ct-summary-p">
+          This form needs JavaScript to send, and it is turned off in your browser. Nothing you type here can be sent.
+          You can still <Link href="/schedule-call">book a call</Link>.
+        </p>
+      </noscript>
       {/*
         ERROR SUMMARY. `FORM_AND_BOOKING_SPEC.md` §7 requires errors announced
         through a live region and focus moved to the first error on a failed
@@ -536,25 +635,19 @@ export function ContactForm() {
         tabIndex={-1}
         role="alert"
         aria-live="assertive"
-        className={
-          hasSummary
-            ? 'rounded-lg border border-destructive/40 bg-destructive/5 p-4 outline-none focus-visible:ring-2 focus-visible:ring-destructive/50'
-            : 'sr-only'
-        }
+        className={hasSummary ? 'ct-summary' : 'px-sr'}
       >
         {hasSummary ? (
           <>
-            <p className="text-sm font-semibold text-destructive">
-              {formError ? 'Your enquiry was not sent.' : 'Check the form before sending.'}
-            </p>
+            <p className="ct-summary-h">{formError ? 'Your enquiry was not sent.' : 'Check the form before sending.'}</p>
             {formError ? (
-              <p className="mt-1 text-sm text-destructive">{formError}</p>
+              <p className="ct-summary-p">{formError}</p>
             ) : (
-              <ul className="mt-2 space-y-1">
-                {errorEntries.map((field) => (
-                  <li key={field} className="text-sm">
-                    <a href={`#${field}`} className="text-destructive underline underline-offset-2">
-                      {FIELD_LABELS[field]}: {fieldErrors[field]}
+              <ul>
+                {errorEntries.map((key) => (
+                  <li key={key}>
+                    <a href={`#${key}`}>
+                      {FIELD_LABELS[key]}: {fieldErrors[key]}
                     </a>
                   </li>
                 ))}
@@ -589,255 +682,63 @@ export function ContactForm() {
         />
       </div>
 
-      <Field
-        id="name"
-        label={FIELD_LABELS.name}
-        required
-        error={fieldErrors.name}
-        hint="However you would like us to address you."
-      >
-        {({ describedBy, invalid }) => (
-          <Input
-            id="name"
-            name="name"
-            type="text"
-            className="h-11"
-            autoComplete="name"
-            maxLength={MAX_LENGTHS.name}
-            value={values.name}
-            onChange={(event) => setValue('name', event.target.value)}
-            aria-required="true"
-            aria-invalid={invalid}
-            aria-describedby={describedBy}
-            disabled={isSubmitting}
-          />
-        )}
-      </Field>
-
-      <Field
-        id="email"
-        label={FIELD_LABELS.email}
-        required
-        error={fieldErrors.email}
-        hint="Where the reply goes."
-      >
-        {({ describedBy, invalid }) => (
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            className="h-11"
-            autoComplete="email"
-            inputMode="email"
-            maxLength={MAX_LENGTHS.email}
-            value={values.email}
-            onChange={(event) => setValue('email', event.target.value)}
-            aria-required="true"
-            aria-invalid={invalid}
-            aria-describedby={describedBy}
-            disabled={isSubmitting}
-          />
-        )}
-      </Field>
-
-      <Field
-        id="company"
-        label={FIELD_LABELS.company}
-        required
-        error={fieldErrors.company}
-        hint="One word is enough."
-      >
-        {({ describedBy, invalid }) => (
-          <Input
-            id="company"
-            name="company"
-            type="text"
-            className="h-11"
-            autoComplete="organization"
-            maxLength={MAX_LENGTHS.company}
-            value={values.company}
-            onChange={(event) => setValue('company', event.target.value)}
-            aria-required="true"
-            aria-invalid={invalid}
-            aria-describedby={describedBy}
-            disabled={isSubmitting}
-          />
-        )}
-      </Field>
-
-      <Field
-        id="message"
-        label={FIELD_LABELS.message}
-        required
-        error={fieldErrors.message}
-        hint="What you are getting, what you are not, and what you can currently see. Not a brief."
-      >
-        {({ describedBy, invalid }) => (
-          <Textarea
-            id="message"
-            name="message"
-            className="min-h-32"
-            maxLength={MAX_LENGTHS.message}
-            value={values.message}
-            onChange={(event) => setValue('message', event.target.value)}
-            aria-required="true"
-            aria-invalid={invalid}
-            aria-describedby={describedBy}
-            disabled={isSubmitting}
-          />
-        )}
-      </Field>
-
-      <Field
-        id="phone"
-        label={FIELD_LABELS.phone}
-        error={fieldErrors.phone}
-        hint="Only if you would rather we called."
-      >
-        {({ describedBy, invalid }) => (
-          <Input
-            id="phone"
-            name="phone"
-            type="tel"
-            className="h-11"
-            autoComplete="tel"
-            inputMode="tel"
-            maxLength={MAX_LENGTHS.phone}
-            value={values.phone}
-            onChange={(event) => setValue('phone', event.target.value)}
-            aria-invalid={invalid}
-            aria-describedby={describedBy}
-            disabled={isSubmitting}
-          />
-        )}
-      </Field>
-
-      <Field
-        id="website"
-        label={FIELD_LABELS.website}
-        error={fieldErrors.website}
-        hint="If you have one. It is usually the thing being discussed."
-      >
-        {({ describedBy, invalid }) => (
-          <Input
-            id="website"
-            name="website"
-            type="url"
-            className="h-11"
-            autoComplete="url"
-            inputMode="url"
-            maxLength={MAX_LENGTHS.website}
-            value={values.website}
-            onChange={(event) => setValue('website', event.target.value)}
-            aria-invalid={invalid}
-            aria-describedby={describedBy}
-            disabled={isSubmitting}
-          />
-        )}
-      </Field>
-
-      {/*
-        MARKETING CONSENT — separate, unticked, and never a condition of
-        submitting (`POST_SUBMISSION_AND_FOLLOWUP.md` §7). A native checkbox
-        rather than a scripted one, so it behaves correctly for every assistive
-        technology without depending on this component's own state machine. The
-        wrapping label gives it a target well above 44px on touch.
-      */}
-      <div>
-        <label
-          htmlFor="marketingConsent"
-          className="flex min-h-11 cursor-pointer items-start gap-3 py-1 text-sm"
-        >
+      <fieldset className="ct-group">
+        <legend className="ct-legend">{FIELD_GROUPS.you}</legend>
+        {field('name', { required: true, autoComplete: 'name' })}
+        {field('email', { required: true, type: 'email', autoComplete: 'email', inputMode: 'email' })}
+        {field('company', { required: true, autoComplete: 'organization' })}
+      </fieldset>
+      <fieldset className="ct-group">
+        <legend className="ct-legend">{FIELD_GROUPS.what}</legend>
+        {field('message', { required: true, area: true })}
+      </fieldset>
+      <fieldset className="ct-group">
+        <legend className="ct-legend">{FIELD_GROUPS.optional}</legend>
+        {field('phone', { type: 'tel', autoComplete: 'tel', inputMode: 'tel' })}
+        {field('website', { type: 'url', autoComplete: 'url', inputMode: 'url' })}
+        {/*
+          MARKETING CONSENT — separate, unticked, and never a condition of
+          submitting (`POST_SUBMISSION_AND_FOLLOWUP.md` §7). A native checkbox
+          rather than a scripted one, so it behaves correctly for every assistive
+          technology without depending on this component's own state machine. The
+          wrapping label gives it a target above 44px on touch.
+        */}
+        <label htmlFor="marketingConsent" className="ct-check">
           <input
             id="marketingConsent"
             name="marketingConsent"
             type="checkbox"
-            className="mt-0.5 h-5 w-5 shrink-0 rounded border-border accent-current"
             checked={values.marketingConsent}
             onChange={(event) => setValue('marketingConsent', event.target.checked)}
             disabled={isSubmitting}
           />
-          <span className="text-muted-foreground">{MARKETING_CONSENT_LABEL}</span>
+          <span>{MARKETING_CONSENT_LABEL}</span>
         </label>
+      </fieldset>
+
+      <div className="ct-send-w">
+        <p className="ct-reply">{REPLY_LINE}</p>
+        {/*
+          PENDING STATE, announced rather than only shown. `aria-live="polite"`
+          means a screen-reader user is told the form is sending instead of
+          meeting a silently disabled button. Success is not announced here —
+          success is a navigation to `/thank-you`, which announces itself.
+        */}
+        <p aria-live="polite" className="px-sr">
+          {isSubmitting ? 'Sending your enquiry.' : ''}
+        </p>
+        <button type="submit" className="ct-send" disabled={isSubmitting || !isHydrated}>
+          {isSubmitting ? 'Sending…' : 'Send this'}
+        </button>
+        {/*
+          Privacy statement adjacent to the submit control, per
+          `FORM_AND_BOOKING_SPEC.md` §2. It states the PURPOSE of the processing
+          and nothing more. In particular it makes no security claim.
+        */}
+        <p className="ct-privacy">
+          We use what you send here to reply to you. <Link href="/privacy-policy">Privacy policy</Link>.
+        </p>
       </div>
-
-      {/*
-        PENDING STATE, announced rather than only shown. `aria-live="polite"`
-        means a screen-reader user is told the form is sending instead of
-        meeting a silently disabled button. Success is not announced here —
-        success is a navigation to `/thank-you`, which announces itself.
-      */}
-      <p aria-live="polite" className="sr-only">
-        {isSubmitting ? 'Sending your enquiry.' : ''}
-      </p>
-
-      <Button type="submit" size="lg" className="h-12 w-full" disabled={isSubmitting}>
-        {isSubmitting ? 'Sending…' : 'Send this'}
-      </Button>
-
-      {/*
-        Privacy statement adjacent to the submit control, per
-        `FORM_AND_BOOKING_SPEC.md` §2. It states the PURPOSE of the processing
-        and nothing more. In particular it makes no security claim — "your info
-        is secure" was removed from this page in Session 29 and is not
-        reintroduced here in a quieter form.
-      */}
-      <p className="text-xs text-muted-foreground">
-        We use what you send here to reply to you.{' '}
-        <Link href="/privacy-policy" className="underline underline-offset-2">
-          Privacy policy
-        </Link>
-        .
-      </p>
     </form>
-  );
-}
-
-/**
- * One field, wired for accessibility once so no call site can forget a piece.
- *
- * The requirement is conveyed in TEXT ("required" / "optional") as well as
- * through `aria-required`, because `FORM_AND_BOOKING_SPEC.md` §7 forbids colour
- * or an asterisk alone carrying it. The hint is associated BEFORE entry rather
- * than appearing only after an error, and the error is associated with the
- * input through `aria-describedby` rather than merely sitting next to it.
- */
-function Field({
-  id,
-  label,
-  hint,
-  error,
-  required = false,
-  children,
-}: {
-  id: FieldName;
-  label: string;
-  hint?: string;
-  error?: string;
-  required?: boolean;
-  children: (props: { describedBy: string | undefined; invalid: boolean }) => React.ReactNode;
-}) {
-  const hintId = hint ? `${id}-hint` : undefined;
-  const errorId = error ? `${id}-error` : undefined;
-  const describedBy = [hintId, errorId].filter(Boolean).join(' ') || undefined;
-
-  return (
-    <div>
-      <label htmlFor={id} className="block text-sm font-medium">
-        {label}{' '}
-        <span className="font-normal text-muted-foreground">{required ? '(required)' : '(optional)'}</span>
-      </label>
-      {hint ? (
-        <p id={hintId} className="mt-1 text-xs text-muted-foreground">
-          {hint}
-        </p>
-      ) : null}
-      <div className="mt-2">{children({ describedBy, invalid: Boolean(error) })}</div>
-      {error ? (
-        <p id={errorId} className="mt-2 text-sm font-medium text-destructive">
-          {error}
-        </p>
-      ) : null}
-    </div>
   );
 }

@@ -1,0 +1,1 @@
+layout [webkit]: 34 targets × 7 widths · 1757 checks clean · 501 findings {"target-size":455,"overflow":8,"pinned":14,"headings":14,"text-spacing":8,"zoom400":2}

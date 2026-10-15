@@ -478,3 +478,640 @@ Use this file only for meaningful project decisions.
   - It does not authorise deleting `backup/main-pre-canonical-64ecf03`, `~/mappedskills.com.prev` or `~/deps/b36d87e127cf`.
   - It does not resolve any owner content blocker (`/pricing` facts, the `/how-it-works` real process, the conditional manufacturing route).
 - **Approved by:** Project owner / orchestrator, 2026-09-18 — dispatched and environment-approved by the owner in GitHub. Verified and recorded by the repository worker, which has no authority to accept a deployment.
+
+---
+
+> **UI REVAMP PROGRAMME — GATE 0 CLOSURE (2026-10-08).** `DEC-029` – `DEC-033` below were made by the owner on review of
+> `docs/ui-revamp/GATE_0_BASELINE_AUDIT.md`. They govern the UI revamp programme defined by
+> `docs/ui-revamp/MappedSkills_UI_Revamp_Master_Handoff.md` and `…_Implementation_Plan.md`. **No application code, dependency,
+> workflow or production system was changed by any of them.** Repository activity between `DEC-028` (2026-09-18) and
+> 2026-10-07 was not recorded in this log at the time; it is described as audited fact in the Gate 0 audit §2.1 and is
+> **not** retro-approved by these entries.
+
+### DEC-029
+- **Date:** 2026-10-08
+- **Status:** **Approved.**
+- **Decision:** **THE RESOLVE (`DEC-018`, validated `DEC-019`, extended by `DEC-022`) remains the approved strategic/design foundation for the UI revamp.** Gate 1 may explore **2–3 evolutionary visual and motion directions within that foundation**. These are **not limited to cosmetic variation**: they may substantially elevate typography, composition, grid, hierarchy, spacing, surfaces, proof presentation, interaction, motion and responsive composition.
+  - **Must be preserved:**
+    - ivory / ink / tangerine restraint;
+    - evidence-first communication;
+    - the analytical/performance character;
+    - the marker language (named · anonymous · unattributed · owned);
+    - honesty around proof;
+    - strategic clarity;
+    - avoidance of generic agency/AI aesthetics.
+  - **Gate 1 must NOT reopen:** business strategy, approved positioning, service taxonomy, conversion architecture, SEO strategy or analytics architecture.
+  - The goal is **evolution and elevation, not replacement** with an unrelated visual identity.
+- **Reason / basis:** Gate 0 audit §19 found that the site's strongest qualities *are* THE RESOLVE's principles. The Master Handoff's request for "2–3 directions" needed bounding against an approved, binding direction (audit §21.0 Q1).
+- **Evidence:** `docs/ui-revamp/GATE_0_BASELINE_AUDIT.md` §§1, 19, 21.0, 24; `docs/24-resolve-governance/00_ACTIVE_DIRECTION.md` §4.
+- **Impacted files:** `docs/00-project/DECISION_LOG.md`, `docs/00-project/CURRENT_STATE.md`, `docs/ui-revamp/*` (annotations only).
+- **Interpretation note:** `00_ACTIVE_DIRECTION.md` §5 already lists exact type sizes, section padding, grid ratios, composition and exact hex values (with contrast floors and roles preserved) as non-binding. A Gate 1 direction proposing to change a **§4 binding characteristic** — e.g. introducing sticky/fixed elements, imagery, a second accent or a monospace face — must name the characteristic and justify it for owner approval. It is not pre-authorised by this decision.
+- **Supersedes:** nothing. Read with `DEC-018`.
+- **Approved by:** Project owner / orchestrator, 2026-10-08 (Gate 0 closure). Recorded by the repository worker.
+
+### DEC-030
+- **Date:** 2026-10-08
+- **Status:** **Approved.**
+- **Decision:** **The UI changes introduced by commit `1557f74` (2026-10-05, "style: update section spacing, hero alignment, header sticky, and page-specific layout fixes") are UNAPPROVED REGRESSIONS.** No repository evidence records an approval for them. **They do not define the Gate 1 baseline.** The approved design intent is THE RESOLVE (`DEC-018`) as extended by Phase J (`DEC-022`).
+  - **The commit is NOT reverted.** Each regression is to be corrected deliberately inside its owning approved workstream, not by an indiscriminate `git revert`. The commit also carries research, rich-text, Contentful-client and page-specific changes that are out of scope for this decision.
+  - **Recorded regressions:**
+
+    | Behaviour introduced by `1557f74` | Conflicts with | Owning workstream |
+    |---|---|---|
+    | Header `relative z-40` → **`sticky top-0 z-50`** (`components/layout/Header.tsx`). Causes the mobile-menu CTA defect (audit §12 R1) | `DEC-018` / `00_ACTIVE_DIRECTION.md` §4.5 "0 fixed / sticky elements"; frozen CTA architecture ("no sticky bar") | 4D Navigation & Global Chrome. The **live defect** is tracked separately as `LIVE-1` |
+    | Global `section { py-16 }` → `py-[50px]`; `Section` → `py-[50px]`; every homepage section → `py-[50px]` | Validated Resolve rhythm (fluid section spacing, `DEC-019` homepage baseline, Phase J) | 4C Spacing & Layout |
+    | `CommercialHero` and `RouteHero` fixed `pb-[65px] pt-[70px]` replacing fluid `clamp(…)` padding | Same | 4C |
+    | **Phase J opener modes removed** from `CommercialHero` / `RouteHero` (`OPENER_GRID/RAIL/MAIN` no longer applied; `mode` prop now ignored) | `DEC-022` (Phase J Stage 3 opener system) | 4C / 4F |
+    | **Reading-measure cap removed** from hero ledes (`max-w-[58ch]` → column at `60vw`) → ≈104–118-character lines. `BoundaryBlock` / `/services` copy also runs at ≈130–161 characters | `--resolve-measure: 58ch`; Phase J "never changes the reading measure" | 4A / 4C |
+- **Reason / basis:** owner review of Gate 0 audit §§2.1, 8, 12 and 22 (X3). Per the Master Handoff hierarchy, implemented behaviour (rank 4) does not override approved decisions (rank 1).
+- **Evidence:** `git show 1557f74`; audit §6, §8, §12 R1/R8, §20 C3.
+- **Impacted files:** documentation only.
+- **Supersedes:** nothing. **It does not approve or reject any other post-`DEC-028` commit**; those remain unrecorded audited facts.
+- **Approved by:** Project owner / orchestrator, 2026-10-08. Recorded by the repository worker.
+
+### DEC-031
+- **Date:** 2026-10-08
+- **Status:** **Approved.**
+- **Decision:** **`DEC-012` and `docs/05-content/CLAIMS_AND_EVIDENCE_GOVERNANCE.md` remain controlling for all proof in the UI revamp.**
+  - **Withheld client figures are not to be invented, restored, inferred or exposed.** This covers `lib/case-study-proof.ts`, which withholds figures, the derived headline result, testimonials and star ratings for `seo-ameba-software`, `seo-for-home-decor-brand` and `google-ads-for-online-courses`. Removing a slug from that list remains a separate owner decision.
+  - **Gate 1 must design a strong proof system that works without quantitative client figures.** It may use legitimate available evidence: qualitative outcomes, client quotations (only where publication is approved in writing — currently none are), methodology, challenge / intervention / outcome narratives, verified facts, and first-party measurements shown with their stated scope and limits.
+  - **Gate 1 must not fabricate dashboard metrics, charts, counters, uplift figures or performance claims**, including as "illustrative" placeholders in prototypes.
+  - **The contradiction is acknowledged as a real issue but is NOT fixed by this decision.** The homepage reads *"We have no case studies to show you."* and `/work` reads *"There are no published case studies here…"*, while three case studies are published. The fix is a separately authorised content/proof correction (tracked as `LIVE-2`). The copy is LOCKED until that authorisation.
+- **Reason / basis:** Gate 0 audit §11 and §21.0 Q3.
+- **Evidence:** `lib/case-study-proof.ts`; `components/homepage/HomepageAccountability.tsx:108`; `app/(pages)/work/page.tsx:80`; production `/work` (three published entries, verified 2026-10-07).
+- **Impacted files:** documentation only.
+- **Supersedes:** nothing.
+- **Approved by:** Project owner / orchestrator, 2026-10-08. Recorded by the repository worker.
+
+### DEC-032
+- **Date:** 2026-10-08
+- **Status:** **Approved.**
+- **Decision:** **Approved positioning (`DEC-005`) and the approved service taxonomy (`docs/01-business/SERVICE_ARCHITECTURE.md`, as rendered on `/services`) govern the UI revamp.** The Master Handoff's "Business Context" mentions "websites" and "social media". **These are contextual descriptions only and do not authorise any expansion of the service positioning.**
+  - `SERVICE_ARCHITECTURE.md` explicitly excludes standalone web development and social media management as service lines.
+  - Paid social appears only as an optional acquisition channel (`/social-media-ads`).
+  - **The exclusions stand.**
+- **Also clarified:** `CLAUDE.md` § "Current Strategic Status" still presents the three-pillar journey "GET FOUND → CONVERT → AUTOMATE → GROW" as the working hypothesis. That is the `DEC-004` framing, **superseded by `DEC-005`** (2026-08-31). Where `CLAUDE.md` and `DEC-005` disagree, **`DEC-005` governs**. `CLAUDE.md` was not edited by this decision.
+- **Reason / basis:** Gate 0 audit §21.0 Q4.
+- **Evidence:** `DEC-004` (superseded), `DEC-005`; `SERVICE_ARCHITECTURE.md` lines 61 and 158–169; `app/(pages)/services/page.tsx:286–290`; `docs/00-project/ASSUMPTIONS_AND_OPEN_QUESTIONS.md` §1.
+- **Impacted files:** `docs/ui-revamp/MappedSkills_UI_Revamp_Master_Handoff.md` (annotation added; original wording retained), documentation only.
+- **Supersedes:** nothing. Read with `DEC-005`.
+- **Approved by:** Project owner / orchestrator, 2026-10-08. Recorded by the repository worker.
+
+### DEC-033
+- **Date:** 2026-10-08
+- **Status:** **Approved — GATE 0 CLOSED (with exceptions).**
+- **Decision:** **UI Revamp Gate 0 (Baseline & Full-Site UI Audit) is closed.**
+  - **Evidence of record:** `docs/ui-revamp/GATE_0_BASELINE_AUDIT.md` and `docs/ui-revamp/gate-0-evidence/screenshots/`.
+  - **Three live issues are carried forward as tracked items, outside the UI revamp design scope** (`docs/ui-revamp/PROGRAMME_RISKS_AND_LIVE_ISSUES.md`):
+
+    | Item | Class | Problem |
+    |---|---|---|
+    | `LIVE-1` | live production defect | Mobile-menu CTAs are unreachable under the sticky header |
+    | `LIVE-2` | live content/proof defect | Proof-copy contradiction |
+    | `PROC-1` | deployment/process risk | Commit `eff9704` makes a push to `main` deploy to production and downgrades the required-reviewer check to a warning. This conflicts with `DEC-026` and with the programme's staging gate |
+
+  - **None is fixed by this decision.** None may be absorbed into a redesign task.
+- **Reason / basis:** owner review of the Gate 0 audit and closure prompt.
+- **Impacted files:** documentation only.
+- **What this decision explicitly does NOT do:**
+  - start Gate 1;
+  - approve any commit after `DEC-028`;
+  - revert anything;
+  - change any workflow, secret or production system.
+- **Approved by:** Project owner / orchestrator, 2026-10-08. Recorded by the repository worker.
+
+---
+
+> **UI REVAMP PROGRAMME — GATE 1 DIRECTION SELECTION (2026-10-08).** Made by the owner on review of
+> `docs/ui-revamp/GATE_1_DESIGN_DIRECTIONS.md`, `docs/ui-revamp/gate-1/mobile-refinement/MOBILE_UX_RESOLUTION.md` (pass 1) and
+> `docs/ui-revamp/gate-1/mobile-refinement/pass-2/MOBILE_UX_PASS_2.md` (pass 2). It does not amend `DEC-029` – `DEC-033`.
+
+### DEC-034
+- **Date:** 2026-10-08
+- **Status:** **Approved.**
+- **Decision:** **Direction C — Resolution is the selected visual direction for UI Revamp Gate 2 implementation.**
+  - **Approved reference (frozen):** `docs/ui-revamp/gate-1/prototypes/direction-c-resolution-approved.html`,
+    sha256 `193b4ab8e536da39489f768ae8c707c560d8742cdcc9c1d71862ced28da205a3`. It is the pass-2 prototype
+    (frozen byte-for-byte as `direction-c-resolution-r2.html`, sha256 `046dcc29…bf91340`) plus the two navigation
+    rulings below (items 4 and 6), and nothing else. `direction-c-resolution.html` is the working copy and was identical
+    to it when this entry was recorded.
+  - **Scope of approval:** the visual direction, and **Gate 2 implementation** of it in the Next.js application on
+    branch `ui-revamp` for the three representative pages — homepage `/`, services overview `/services` and the SEO
+    service page `/seo` — including the global chrome as rendered on those three pages.
+  - **Owner rulings recorded with the selection:**
+
+    | # | Ruling | How it is applied |
+    |---|---|---|
+    | 1 | Direction C approved for Gate 2 | This entry |
+    | 2 | **Retain the earlier placement of the `/seo` 12-month-plus horizon disclosure** (pass-2 F1, C3) | The horizon panel stays directly after the opener CTAs on mobile and first (left) beside the situation block on desktop. *Recorded interpretation:* "earlier placement" is read as the pass-2 position, which the pass-2 report recommended keeping; it is **not** read as a reversion to the pre-pass-2 order |
+    | 3 | **Conditionally approve** the pass-1 §2.1 interface labels — "How to read the marks"; "One mark per run. A named run would be filled."; "4 capabilities" · "2 capabilities" · "1 capability"; "Horizon" · "If it is urgent" · "Not promised" — **subject to accuracy and consistency with the evidence standard** (`DEC-012`, `DEC-031`) | Each label is used only where it is literally true of what it labels, and is re-checked against the page it appears on |
+    | 4 | **Resolve the duplicate "Contact Us"** in the mobile open-menu state, without changing destinations or tracking | While the menu is open (below 1200px) the header bar's CTA pair is withdrawn; the menu's own pair, which comes first, remains. Same destinations, same labels, nothing added |
+    | 5 | **Preserve** the simplified mobile Capture/Convert chain treatment (pass-2 F3) unless usability testing shows confusion | Stage labels stay hidden below 900px |
+    | 6 | **Add a simple "Company" heading** to the mobile navigation (pass-2 F4) | A "Company" group label precedes, and names, the company links |
+    | 7 | **Preserve** all previously approved copy, IA, SEO, conversion, analytics and backend boundaries | Governs Gate 2 |
+
+- **What this decision does NOT do:**
+  - approve **staging or production deployment**, a merge to `main`, or any change to a workflow, secret or production system;
+  - approve **Gate 3** (representative-page approval), or extend Direction C to any other route (that is Gate 4);
+  - approve the prototype's **new microcopy** beyond ruling 3. The bracketed placeholder lines remain unapproved
+    (`GATE_1_DESIGN_DIRECTIONS.md` §4.5), and so does other prototype-only wording that has no source in the repository;
+  - adopt the Gate 1 §11 borrowings (Direction A's document register, Direction B's diagnosis figure). They remain proposals;
+  - fix or absorb `LIVE-1`, `LIVE-2` or `PROC-1` (`DEC-033`).
+- **Reason / basis:** owner review of the Gate 1 package and both mobile passes.
+- **Evidence:** the documents named above; Gate 2 Phase A regression run `docs/ui-revamp/gate-1/mobile-refinement/gate2-phase-a/`.
+- **Impacted files:** `docs/ui-revamp/gate-1/prototypes/direction-c-resolution{,-approved,-r2}.html`, `docs/ui-revamp/gate-1/README.md`, `docs/00-project/CURRENT_STATE.md`, this log.
+- **Supersedes:** nothing. Read with `DEC-018`, `DEC-029`, `DEC-031`, `DEC-033`.
+- **Approved by:** Project owner / orchestrator, 2026-10-08 (Direction C approval & Gate 2 authorisation). Recorded by the repository worker.
+
+---
+
+> **UI REVAMP PROGRAMME — GATE 3 DESIGN DECISIONS AND FINAL ACCESSIBILITY CORRECTION (2026-10-08).** Made by the owner on
+> review of `docs/ui-revamp/GATE_3_FINAL_ACCEPTANCE.md` (§5, decision matrix). It does not amend `DEC-034`.
+> **This entry is NOT the Gate 3 approval.** Gate 3 remains unapproved until the owner records it.
+
+### DEC-035
+- **Date:** 2026-10-08
+- **Status:** **Approved** (the three design decisions and the correction authorisation below). **Gate 3 itself: not approved by this entry.**
+- **Decision — three Gate 3 design decisions** (`GATE_3_REVIEW.md` §5 decisions 4, 6 and 7; `GATE_3_FINAL_ACCEPTANCE.md` §5 items 5, 7 and 8):
+
+  | # | Decision | Condition / interpretation as recorded |
+  |---|---|---|
+  | 1 | **Evidence / Method / Limitation / Claim plate labels are approved** on the Direction C evidence plates | **Subject to accurate evidence representation** (`DEC-012`, `DEC-031`): a label is used only where it is literally true of what it labels; Limitation is never collapsed or hidden; a plate never carries a number without its scope. Withheld figures stay withheld |
+  | 2 | **The always-open Capture / Convert / Measure presentation is approved** | All rows and links visible, nothing gated. This retires the homepage's auto-advancing Phase D tablist on `/` for the Direction C implementation |
+  | 3 | **The `/seo` 12-month-plus horizon panel is approved immediately after the opening CTAs** | This confirms the `DEC-034` ruling-2 interpretation (the pass-2 position). The panel carries the full approved copy, unchanged; its measure cap (Gate 3 remediation R6) stays |
+
+- **Also authorised by the owner with this decision (implementation scope only):**
+  - **A1:** fix the CTA text-spacing / narrow-screen overflow (WCAG 1.4.10 / 1.4.12) without changing CTA wording, destinations or analytics;
+  - **A2:** make the Traffic / Enquiries selected state visible in forced-colours / High Contrast mode.
+  - Both were implemented and verified on 2026-10-08 (`GATE_3_FINAL_ACCEPTANCE.md` §10).
+- **Retained as an outstanding acceptance requirement:** real-device and cross-browser testing. That means real Android Chrome, real iPhone Safari, desktop Safari, desktop Firefox, and VoiceOver. It has **not** been performed.
+- **What this decision does NOT do:**
+  - approve **Gate 3** (no unconditional or conditional Gate 3 approval is recorded here);
+  - approve Gate 4, a merge to `main`, staging or production deployment;
+  - change approved copy, URLs, metadata, analytics or any route other than `/`, `/services`, `/seo` and their Direction C chrome;
+  - close or alter `LIVE-1`, `LIVE-2` or `PROC-1` (`DEC-033`).
+- **Reason / basis:** owner review of the Gate 3 final acceptance pack.
+- **Evidence:** `docs/ui-revamp/GATE_3_FINAL_ACCEPTANCE.md`; `docs/ui-revamp/gate-3-acceptance/evidence/`.
+- **Impacted files:**
+  - `app/direction-c.css` (A1), `app/direction-c-pages.css` (A2);
+  - `docs/ui-revamp/GATE_3_FINAL_ACCEPTANCE.md`, `docs/00-project/CURRENT_STATE.md`, this log.
+- **Supersedes:** nothing. Read with `DEC-012`, `DEC-031`, `DEC-033`, `DEC-034`.
+- **Approved by:** Project owner / orchestrator, 2026-10-08 (Gate 3 final accessibility correction brief). Recorded by the repository worker.
+
+---
+
+> **UI REVAMP PROGRAMME — GATE 3 FORMAL APPROVAL (2026-10-08).** Made by the owner on review of the Gate 3 checkpoint audit
+> and `docs/ui-revamp/GATE_3_FINAL_ACCEPTANCE.md` (§§10–11). It does not amend `DEC-034` or `DEC-035`.
+> **This is the UI-revamp Gate 3 ("Direction Approval"). It is NOT Gate 3 of `QUALITY_GATES.md` ("Search Opportunity
+> Validation"), which is unaffected.**
+
+### DEC-036
+- **Date:** 2026-10-08
+- **Status:** **Approved — UI Revamp Gate 3: APPROVED WITH RECORDED EXCEPTIONS.**
+- **Decision — what is approved** (build `--Lpst9W4pkiythkOhmVS`, checkpointed on `ui-revamp`):
+  - **Direction C on `/`, `/services` and `/seo`**, with the approved header, navigation, mobile menu and footer as rendered on those routes;
+  - the **Gate 2 implementation** and its documented intended differences (`GATE_2_IMPLEMENTATION.md` §5, D1–D12),
+    including **D10**: the duplicate footer `mailto` icon is removed. The functional email link (`mailto:info@mappedskills.com`,
+    with its visible address) remains in the Direction C footer on all three routes. This was verified 2026-10-08;
+  - **Gate 3 remediation R1–R7** (`GATE_3_REMEDIATION.md`);
+  - **accessibility corrections A1 and A2** (`GATE_3_FINAL_ACCEPTANCE.md` §10);
+  - the decisions already approved in **`DEC-034`** and **`DEC-035`**, and owner directions D1–D7;
+  - the approved typography, evidence presentation, navigation and interaction patterns as implemented;
+  - the documented **non-blocking limitations** E2–E5 (`GATE_3_FINAL_ACCEPTANCE.md` §10.6).
+- **Mandatory conditions (outstanding):**
+
+  | # | Condition | Required before |
+  |---|---|---|
+  | **E1** | **Real-device and cross-browser QA:** real Android Chrome; real iPhone Safari; desktop Safari; desktop Firefox; VoiceOver; relevant larger-text and High Contrast checks (checklist `GATE_3_FINAL_ACCEPTANCE.md` §2.1 + §10.6 E1). **Any material issue found is corrected and retested** | **Staging approval** |
+  | **E6** | **GTM trigger research and validation** (triggers keyed on legacy DOM). Existing analytics, conversion tracking and approved event semantics are preserved | **Staging** |
+  | — | **Protected behaviour:** approved copy, URLs, headings, metadata, canonical tags, Open Graph, JSON-LD and analytics do not change without separate approval | Always |
+  | — | **`LIVE-1`, `LIVE-2`, `PROC-1` remain OPEN** (`DEC-033`). **No merge of `ui-revamp` into `main` while `PROC-1` is unresolved** | Any merge |
+
+  E1 and E6 do **not** block Gate 4 planning or controlled local implementation.
+- **Also approved with this decision (checkpoint housekeeping):**
+  - `docs/ui-revamp/gate-2/screenshots/app/` is **excluded from the Git checkpoint**. Its captures predate Gate 3 remediation and are superseded by later evidence. They are retained locally, not deleted;
+  - `.claude/launch.json` is ignored by a narrowly scoped `.gitignore` entry;
+  - QA-script portability: `playwright-core` `1.62.1` and `axe-core` `4.13.0` are added as exact-pinned `devDependencies`. Eight reusable scripts now resolve them from the project, and 21 scripts are labelled archival (`docs/ui-revamp/QA_REGRESSION_RUNBOOK.md`).
+- **Gate 4 boundary:** this decision **satisfies the Gate 3 prerequisite** for Gate 4 planning and controlled local
+  implementation. **Gate 4 begins only on a separate owner instruction.**
+- **What this decision does NOT do:**
+  - start Gate 4;
+  - approve a merge to `main`, a push, or staging or production deployment;
+  - close or alter `LIVE-1`, `LIVE-2` or `PROC-1`, or conditions E1 and E6;
+  - extend Direction C to any route other than `/`, `/services` and `/seo`;
+  - approve any copy, URL, metadata, structured-data or analytics change.
+- **Reason / basis:** owner review of the Gate 3 checkpoint audit (2026-10-08). All automated suites pass on the final build, and every
+  portable suite reproduced its recorded result on re-run. The approval is conditional because no WebKit, Gecko, real-device or screen-reader evidence exists (E1).
+- **Evidence:** `docs/ui-revamp/GATE_3_FINAL_ACCEPTANCE.md`; `docs/ui-revamp/gate-3-acceptance/evidence/`;
+  `docs/ui-revamp/QA_REGRESSION_RUNBOOK.md`.
+- **Impacted files:**
+  - this log; `docs/00-project/CURRENT_STATE.md`;
+  - `docs/ui-revamp/GATE_3_FINAL_ACCEPTANCE.md`, `GATE_2_IMPLEMENTATION.md`, `gate-2/README.md`, `QA_REGRESSION_RUNBOOK.md`;
+  - `.gitignore`; `package.json`, `package-lock.json`; the eight scripts listed in the runbook §3.
+- **Supersedes:** nothing. Read with `DEC-012`, `DEC-031`, `DEC-033`, `DEC-034`, `DEC-035`.
+- **Approved by:** Project owner / orchestrator, 2026-10-08 (Gate 3 formal approval and local Git checkpoint brief). Recorded by the repository worker.
+
+---
+
+> **UI REVAMP PROGRAMME — GATE 4 · B1 AUTHORISATION (2026-10-08).** Made by the owner on review of the Gate 4 B0 checkpoint
+> (`docs/ui-revamp/GATE_4_B0_QA_FOUNDATION.md`, commit `9656df7`) and `docs/ui-revamp/gate-4/b0/GATE_4_B1_ENTRY_CRITERIA.md`.
+> It does not amend `DEC-033` – `DEC-036`.
+
+### DEC-037
+- **Date:** 2026-10-08
+- **Status:** **Approved — Gate 4 Batch B1 (global chrome) authorised. Batch B1 only.**
+- **Decision:**
+
+  | # | Owner decision | As recorded |
+  |---|---|---|
+  | O1 | **B1 implementation authorised** | Direction C header, navigation, mobile menu and footer on every route. **Chrome only**: no page body changes |
+  | O2 | **Chrome strategy S3** (`docs/ui-revamp/GATE_4_CHROME_MIGRATION_STRATEGY.md`) | All routes switch to Direction C chrome now. An explicit, initially empty **legacy-chrome exception list** is retained as the rollback mechanism. The legacy `Header`/`Footer` and the `ChromeSwitch` seam are **retained until B11**, which alone may remove them |
+  | O3 | **Batch-by-batch migration approved** | Each later batch needs its own validation and an explicit owner instruction. B2 is **not** authorised by this entry |
+  | — | **LIVE-1** | B1 may eliminate the legacy mobile-navigation defect **on the development branch**. **This does not resolve the production incident. LIVE-1 remains OPEN** pending a separate production decision (`DEC-033`) |
+  | — | **High Contrast chevron border** (Gate 3 E4) | **Not added.** The optional decorative border is declined |
+  | — | **E6** (GTM and consent investigation, incl. OBS-1) | Remains a **separate pre-staging requirement**. No analytics or consent code is changed in B1 |
+  | — | **E1** (real-device and cross-browser QA) | Remains **mandatory before staging** |
+
+- **What this decision does NOT do:**
+  - authorise B2 or any later batch;
+  - authorise any change to page bodies, approved copy, headings, URLs, routing, link destinations, forms, `BookingLink`, analytics, GTM, consent, SEO metadata, canonicals, Open Graph, JSON-LD, Contentful integration or dependencies;
+  - approve staging or production deployment, a push, or a merge to `main` (`PROC-1` remains open);
+  - close `LIVE-1`, `LIVE-2`, `PROC-1`, `E1`, `E6`, `KD-02` or `OBS-1`.
+- **Acceptance:** `docs/ui-revamp/gate-4/b0/GATE_4_B1_ENTRY_CRITERIA.md` §B, run against the B0 baseline of record (`docs/ui-revamp/gate-4/b0/evidence/baseline/`).
+- **Evidence / report:** `docs/ui-revamp/GATE_4_B1_GLOBAL_CHROME.md`; `docs/ui-revamp/gate-4/b1/evidence/`.
+- **Supersedes:** nothing. Read with `DEC-030`, `DEC-033`, `DEC-034`, `DEC-036`.
+- **Approved by:** Project owner / orchestrator, 2026-10-08 (Gate 4 B1 global chrome migration brief). Recorded by the repository worker.
+
+---
+
+> **UI REVAMP PROGRAMME — E6-A1 R1 CONSENT SAFEGUARD: LOCAL IMPLEMENTATION AUTHORISED (2026-10-08).** Made by the owner on review of
+> `docs/ui-revamp/GATE_4_E6_GTM_CONSENT_AUDIT.md` and `docs/ui-revamp/gate-4/e6/E6_R1_CONSENT_SAFEGUARD_DESIGN.md`.
+> It does not amend `DEC-020`, `DEC-021` or `DEC-033` – `DEC-037`.
+
+### DEC-038
+- **Date:** 2026-10-08
+- **Status:** **Approved — E6-A1 remediation R1, Approach A, local implementation and local validation only.**
+- **Context:** the E6 audit found that a returning visitor who had accepted analytics, landing on a route-level `notFound()` response (served as Next's client-rendered `__next_error__` shell, in which the consent bootstrap never executes), reached the GTM container with no Consent Mode command in `dataLayer`. This breaches the application's own contract that the denied default comes first. It was observed locally against a stubbed container. **It is not established that any tag actually executed without authorisation, or that any regulatory requirement was breached.** The behaviour of the real container under unset consent is RESEARCH REQUIRED (GTM Preview).
+- **Decision:**
+  - **Approach A selected:**
+    - the inline script that injects `gtm.js` first establishes the denied default, plus the replay of a stored grant, wherever no default exists;
+    - a banner decision first establishes the denied default where none exists.
+  - **Scope:** limited to consent initialisation before GTM loads (`lib/consent.ts`, `lib/gtm.tsx`, unit tests, evidence). This is a narrowly scoped exception to the locked consent implementation. The bootstrap, the two loader gates, stored values, consent choices, the advertising-denied rule, and every event name and payload remain unchanged.
+  - **R2** (serving the full layout for segment `notFound()`) remains **separate and unauthorised**.
+- **What this decision does NOT do:** approve staging or production deployment, a hotfix branch, a push, or a merge to `main`; change the published GTM container; start B2; close **E6, OBS-1, OBS-6, PROC-1, LIVE-1, LIVE-2 or E1**.
+- **Evidence / report:** `docs/ui-revamp/gate-4/e6/E6_R1_IMPLEMENTATION_ACCEPTANCE.md`; `docs/ui-revamp/gate-4/e6/evidence/r1-impl/`.
+- **Supersedes:** nothing. Read with `DEC-020`, `DEC-021`, `DEC-036`, `DEC-037`.
+- **Approved by:** Project owner / orchestrator, 2026-10-08 (E6 R1 consent safeguard local implementation brief). Recorded by the repository worker.
+
+---
+
+> **UI REVAMP PROGRAMME — GATE 4 BATCH B2 (PAID MEDIA SERVICE PAGES): LOCAL IMPLEMENTATION AUTHORISED (2026-10-08).** Made by the
+> owner in the Gate 4 B2 brief. It does not amend `DEC-034` – `DEC-038`.
+
+### DEC-039
+- **Date:** 2026-10-08
+- **Status:** **Approved — Gate 4 Batch B2 only: `/google-ads` and `/social-media-ads` page bodies in Direction C. Local implementation and local validation only.**
+- **Decision:**
+  - redesign the two existing routes with the approved Direction C system, reusing its primitives; preserve the B1 header and footer and the R1 consent safeguard;
+  - motion per `GATE_4_MOTION_SPECIFICATION.md`: no new library, no new signature animation, reduced motion and no-JS respected;
+  - protected without further approval: copy, CTA text and destinations, `BookingLink`, `ContactForm`, event names and payloads, GTM selectors and tracking attributes, consent initialisation, lead attribution, conversion measurement, metadata, canonicals and JSON-LD;
+  - an early E1 real-device checkpoint is prepared after B2. Browser emulation does not satisfy E1.
+- **What this decision does NOT do:** authorise B3 or any later batch; change the approved `/`, `/services` or `/seo` bodies, the global header/footer, consent or GTM code; approve a push, merge, staging or production deployment, or a hotfix branch; close **E1, E6, OBS-1, OBS-6, LIVE-1, LIVE-2, KD-02 or PROC-1**.
+- **Evidence / report:** `docs/ui-revamp/GATE_4_B2_PAID_MEDIA_PAGES.md`; `docs/ui-revamp/gate-4/b2/evidence/`.
+- **Supersedes:** nothing. Read with `DEC-034`, `DEC-036`, `DEC-037`, `DEC-038`.
+- **Approved by:** Project owner / orchestrator, 2026-10-08 (Gate 4 B2 paid media service pages brief). Recorded by the repository worker.
+
+---
+
+> **UI REVAMP PROGRAMME — GATE 4 BATCH B3 (CAPABILITY SERVICE PAGES): LOCAL IMPLEMENTATION, VALIDATION AND LOCAL CHECKPOINT AUTHORISED (2026-10-09).**
+> Made by the owner in the Gate 4 B3 brief and its final-validation instruction. It does not amend `DEC-034` – `DEC-039`.
+
+### DEC-040
+- **Date:** 2026-10-09
+- **Status:** **Approved — Gate 4 Batch B3 only: `/ai-seo`, `/lead-generation` and `/conversion-optimization` page bodies in Direction C, with the shared `Figure`, `DataTable` and `ScopeRows numbered` primitives introduced with these first consumers. Local implementation, local validation and local commits only, subject to every mandatory B3 acceptance criterion.**
+- **Decision:**
+  - recompose the three existing routes with the approved Direction C system; preserve the B1 header and footer, the R1 consent safeguard, copy, headings, CTA text and destinations, `BookingLink`, `ContactForm`, event names and payloads, metadata, canonicals and JSON-LD;
+  - the existing calibrated display fallback (`dc-fallback-b`, 92%, B2) may be opted into per page where measurement requires it; no new fallback variant unless measurement requires one;
+  - complete the B3 validation (navigation, E6 consent probe and I1–I9, analytics, SEO/JSON-LD, inventory, accessibility, responsive, pixel, CLS, Gate 2/3 suites, static gates, cPanel build) and create **separate local** application and documentation/evidence commits, **only if every mandatory check passes**;
+  - the pre-existing missing space after some bold runs (OBS-13) is recorded separately and **not** fixed in B3.
+- **What this decision does NOT do:** authorise B4; change the global header/footer, consent or GTM code; approve a LAN preview, push, merge, staging or production deployment; decide the small-text floor (E1-a R-3) or OBS-7–OBS-13; close **E1, E6, OBS-1, OBS-6, LIVE-1, LIVE-2 or PROC-1**. KD-04 may be marked resolved **on `/ai-seo` only**, on proof that its original failing checks pass.
+- **Evidence / report:** `docs/ui-revamp/GATE_4_B3_SERVICE_PAGES.md`; `docs/ui-revamp/gate-4/b3/evidence/`.
+- **Supersedes:** nothing. Read with `DEC-034`, `DEC-036` – `DEC-039`.
+- **Approved by:** Project owner / orchestrator, 2026-10-09 (Gate 4 B3 brief; "B3 final validation, acceptance and local checkpoint" instruction). Recorded by the repository worker.
+
+---
+
+> **UI REVAMP PROGRAMME — GATE 4 BATCH B4 (DECISION PAGES): LOCAL DEVELOPMENT AUTHORISED (2026-10-09).** Made by the owner in the Gate 4 B4
+> brief, which also accepts Gate 4 B3 as a local checkpoint with documented exceptions. It does not amend `DEC-034` – `DEC-040`.
+
+### DEC-041
+- **Date:** 2026-10-09
+- **Status:** **Approved — Gate 4 Batch B4 only: the existing `/problems/traffic-but-no-enquiries` page and `/pricing` in Direction C. Local development, local validation and local commits only, subject to every mandatory B4 check.**
+- **Decision:**
+  - **B3 accepted as a local checkpoint with documented exceptions** (`GATE_4_B3_SERVICE_PAGES.md`). The `/ai-seo` KD-04 correction is accepted locally; it does not establish that other tables are fixed;
+  - recompose the two existing routes with the approved Direction C system, reusing B1–B3 components; preserve copy, CTAs and destinations, `BookingLink`, `ContactForm`, event names and payloads, consent bootstrap, GTM loader, attribution, global header/footer, metadata, canonicals and the meaning of structured data;
+  - `/pricing` is commercially sensitive: no unapproved copy, pricing, claim or offer change, and the design must not obscure limitations or make the offer appear more inclusive than it is;
+  - **R-3 typography — owner-approved working rule for newly created B4 HTML:** minimum rendered label text 12px; prefer 13px or larger where practical; do not shrink meaningful information merely to fit a layout; document any exception for owner approval. Not applied retroactively to B1–B3. Inherited SVG text below 12px remains a documented exception, not a precedent;
+  - the display fallback is measured per new heading; B3's 92% is not reused automatically.
+- **What this decision does NOT do:** authorise B5; approve a LAN preview, push, merge, staging or production deployment; change consent, GTM, analytics or database code; close **E1, E6, PROC-1, OBS-1, OBS-6, LIVE-1, LIVE-2** or KD-05; decide OBS-13 or a redraw of the inherited figures.
+- **Outcome (recorded by the worker, not part of the authorisation):** COMPLETE WITH EXCEPTIONS. `/pricing` publishes no prices, plans, billing periods or currency, before or after (every figure is owner-blocked); copy, headings, links, CTAs, table cells, served head and JSON-LD identical. KD-04 resolved on the branch for `/pricing`. `/pricing` opts into the existing 92% fallback (measured: 0.025 @360 with 90.5%); `/problems` keeps 90.5%. Throttled CLS 0.000 in 42/42.
+- **Evidence / report:** `docs/ui-revamp/GATE_4_B4_DECISION_PAGES.md`; `docs/ui-revamp/gate-4/b4/evidence/`.
+- **Supersedes:** nothing. Read with `DEC-034`, `DEC-036` – `DEC-040`.
+- **Approved by:** Project owner / orchestrator, 2026-10-09 (Gate 4 B4 problem/solution pages and pricing brief). Recorded by the repository worker.
+
+### DEC-042
+- **Date:** 2026-10-09
+- **Status:** **Approved — Gate 4 Batch B4 owner closure: B4 accepted with documented exceptions; one text-only OBS-13 correction; CauseZones remediation deferred; screen-reader verification required before B5 reuse; Safari/WebKit layout-shift investigation authorised. Local work and local commits only.**
+- **Decision (five owner decisions, recorded as given):**
+  1. **B4 acceptance.** Gate 4 B4 is **owner-accepted as a completed implementation batch, with documented exceptions.** Acceptance does **not** mean every inherited defect is resolved and does **not** authorise B5;
+  2. **OBS-13.** One separately scoped, **text-only** correction covering the **seven** documented missing-space instances is authorised. Restore only the missing whitespace; no rewriting, rephrasing, removal or addition of content;
+  3. **CauseZones.** Redesign of the legacy `CauseZones` diagram is **deferred.** Its small SVG text and its SVG text contrast (reported 3.41:1 grey labels, 4.33:1 orange titles) are to be recorded as **known defects** for accessibility remediation in a future, separately authorised batch. `CauseZones` is not modified in the closure pass except for a verified OBS-13 whitespace correction;
+  4. **Screen readers.** Manual **VoiceOver and TalkBack** verification is **required before B5 reuses the affected components** (mobile pricing table, five-check `Sequence`, `/problems` breadcrumb, the checkbox-like indicators in `NotPromised`). It may not be claimed unless it actually took place;
+  5. **Safari / WebKit.** Investigation of the WebKit heading-wrap difference and its layout-shift behaviour is authorised. A different line wrap is not automatically a defect; no typography change without a verified reason and separate approval.
+- **What this decision does NOT do:** authorise B5 or any new visual design work; change the Direction C design system or typography; approve a LAN preview, push, merge, staging or production deployment; close **E1, E6, OBS-1, OBS-6, OBS-15, OBS-16, LIVE-1, LIVE-2, PROC-1, KD-02, KD-05** or any other open item; authorise a performance refactor (OBS-16) or a `CauseZones` redraw.
+- **Outcome (recorded by the worker, not part of the authorisation):** closure pass **COMPLETE WITH OUTSTANDING PREREQUISITES** (`docs/ui-revamp/GATE_4_B4_OWNER_CLOSURE.md`). OBS-13: the seven instances corrected by replacing each dropped literal space with `{' '}` (7 source lines, 4 files), verified 7/7 in live DOM, served HTML and the figure's accessible name; every changed text block differs from before by exactly one inserted space; layout/a11y NEW 0 × 3 engines; served head 34/34; analytics 0 diffs. An eighth candidate on `/how-it-works` (B5 route) recorded, not changed. CauseZones size/contrast registered as **KD-09/KD-10** (the contrast defect is shared by every inherited figure, incl. approved `/seo` at 3.13:1). Screen readers: **not performed** (no VoiceOver control, no Android/TalkBack in this environment); supplementary semantic checks and a manual checklist delivered. WebKit: **real Safari 26.2 and Playwright WebKit both ignore `font-variation-settings: "opsz" 96` under `font-optical-sizing: auto`**, so the display face renders ~9% wider than designed and its metric fallback no longer matches; the H1 gains a line at the font swap in 5 of 10 B4 views (31–46 px; approximate score 0.009–0.021) and in 8 of 40 views on earlier Direction C routes. Recorded as **OBS-17** (systemic, pre-existing since the Gate 3 R2 fallbacks); a one-property candidate correction was verified in real Safari by injection only and **needs owner approval**.
+- **Evidence / report:** `docs/ui-revamp/GATE_4_B4_OWNER_CLOSURE.md`; `docs/ui-revamp/gate-4/b4/closure/evidence/`; `docs/ui-revamp/gate-4/b4/owner-review/`.
+- **Supersedes:** nothing. Read with `DEC-041`.
+- **Approved by:** Project owner, 2026-10-09 (Gate 4 B4 closure & governance instruction). Recorded by the repository worker.
+
+---
+
+> **UI REVAMP PROGRAMME — GATE 4 POST-B4 REMEDIATION GATE (2026-10-09).** Made by the owner in the "Post-B4 Remediation Gate — OBS-17 Safari
+> Typography + OBS-13 Final Whitespace Correction" brief, after review of `GATE_4_B4_OWNER_CLOSURE.md`. It does not amend `DEC-042` or earlier decisions.
+
+### DEC-043
+- **Date:** 2026-10-09
+- **Status:** **Approved — Gate 4 post-B4 remediation only: the OBS-17 display-font correction (subject to full regression validation) and the eighth OBS-13 whitespace correction. Local work, local validation and local commits only.**
+- **Decision (owner decisions, recorded as given):**
+  1. **OBS-17.** A targeted remediation is approved: `font-optical-sizing: none` applied only where necessary on the Direction C display roles that set an explicit optical size, preserving the approved family, weight, hierarchy and `opsz` settings; **subject to full regression validation**. Approval of the change does **not** by itself resolve OBS-17;
+  2. **OBS-13.** The eighth whitespace-only correction is approved: `/how-it-works` "AI search**occupies**" → "AI search occupies". One space; no other text change. Further candidates, if found, are documented separately and not fixed;
+  3. **KD-09 / KD-10.** Remediation of the inherited SVG diagram issues (small SVG text, SVG text contrast, shared diagram text styling) is **deferred to a dedicated batch before production approval**. Both stay open; no diagram is changed;
+  4. **Screen readers.** Manual VoiceOver/TalkBack verification (`GATE_4_B4_OWNER_CLOSURE.md` §F, SR-1 – SR-5) **remains mandatory before B5 reuses** the mobile pricing table, the five-check sequence, the `/problems` breadcrumb and the `NotPromised` indicators. Automated accessibility-tree inspection does not substitute for it;
+  5. **B5.** Not authorised.
+- **What this decision does NOT do:** authorise B5, a site-wide redesign, new motion, unrelated refactoring, or any change to fallback calibration, font size, line height, letter spacing, widths or breakpoints; relax any accessibility requirement; approve a push, merge, LAN preview, staging or production deployment; close E1, E6, KD-09, KD-10 or any other open item.
+- **Outcome (recorded by the worker, not part of the authorisation):** remediation **complete; recommended PASS WITH EXCEPTIONS** (`docs/ui-revamp/GATE_4_POST_B4_REMEDIATION.md`). OBS-17: `font-optical-sizing: none` added to `.dc-display` and `.dc-statement` only; real Safari 26.2 (macOS) H1 swap re-wraps 16 → 0 over 10 Direction C routes × 7 widths, final H1 lines = Chromium 70/70; Playwright WebKit views above 0.01 8 → 0; Chromium and Firefox renders identical before/after; iOS Safari not tested. OBS-13: `/how-it-works` space restored with `{' '}`; all 8 instances verified; scan 0 candidates on 17 static routes; no wrapping consequence. Regression: layout/a11y NEW 0 ×3 engines; served head 34/34; analytics 0 diffs; inventory 849 identical + 1 declared; throttled CLS 0.000 in 42/42; build and cPanel build pass. New **OBS-18** (pre-existing; Playwright Firefox paints display roles in Arial Narrow while the face loads) recorded, not fixed. Closure of OBS-17 and OBS-13 is **recommended, not recorded**: owner to confirm.
+- **Evidence / report:** `docs/ui-revamp/GATE_4_POST_B4_REMEDIATION.md`; `docs/ui-revamp/gate-4/post-b4/evidence/`.
+- **Supersedes:** nothing. Read with `DEC-041`, `DEC-042`.
+- **Approved by:** Project owner, 2026-10-09 (post-B4 remediation gate brief). Recorded by the repository worker.
+
+---
+
+> **UI REVAMP PROGRAMME — GATE 4 POST-B4 CLOSURE AND OBS-18 FIREFOX DIAGNOSTIC GATE (2026-10-09).** Made by the owner in the "Post-B4 Closure &
+> OBS-18 Firefox Diagnostic Gate" brief, after review of `GATE_4_POST_B4_REMEDIATION.md`. It does not amend `DEC-043` or earlier decisions.
+
+### DEC-044
+- **Date:** 2026-10-09
+- **Status:** **Approved — owner acceptance of the Gate 4 post-B4 remediation gate with documented exceptions; formal closure of OBS-17 and OBS-13 within their verified scope; a diagnostic-only OBS-18 investigation in real Firefox. Governance and diagnostics only: no application, design-system or tooling change; local commits only.**
+- **Decision (seven owner decisions, recorded as given):**
+  - **A. Post-B4 remediation.** The post-B4 remediation gate (`DEC-043`) is **accepted with documented exceptions**;
+  - **B. OBS-17.** The Safari/WebKit optical-sizing defect is **formally closed for the verified scope** (real Safari 26.2 on macOS 15.7.3 and Playwright WebKit; the 10 Direction C routes; 320–1440 px). The limitation that **no real iPhone/iOS** test took place is preserved;
+  - **C. OBS-13.** The **eight verified** missing-space defects are **formally closed.** This does **not** state that every possible whitespace defect across the whole website has been excluded;
+  - **D. OBS-18.** A **diagnostic investigation in real Firefox** is authorised **before** any application correction is considered;
+  - **E. Playwright tooling.** Correction of `docs/ui-revamp/gate-4/qa/pixel-main.cjs` (it launches Chromium whatever `--engine` requests) is **deferred**; the tool is not edited in this assignment;
+  - **F. Accessibility.** KD-09/KD-10 remain **deferred** to the dedicated pre-production remediation batch (`DEC-043`). Manual VoiceOver/TalkBack verification **SR-1 – SR-5 remains mandatory before B5 reuses the affected components**;
+  - **G. B5.** **Not authorised.**
+- **What this decision does NOT do:** authorise a Firefox font fix or any change to application code, CSS, font assets, fallback calibration, the Direction C design system, typography or motion; authorise an edit to `pixel-main.cjs` or other QA tooling; close OBS-18, KD-09, KD-10, E1, E6, OBS-1, OBS-6, OBS-11, OBS-15, OBS-16, LIVE-1, LIVE-2, KD-02, KD-05, PROC-1 or any other open item; authorise installing software or changing system settings; authorise B5, diagram remediation, a push, merge, LAN preview, staging or production deployment.
+- **Outcome (recorded by the worker, not part of the authorisation):** governance closure recorded and the OBS-18 diagnostic completed within this environment (`docs/ui-revamp/GATE_4_OBS18_FIREFOX_DIAGNOSTIC.md`). **OBS-17 CLOSED** for the verified scope (real Safari 26.2 on macOS 15.7.3 + Playwright WebKit; 10 Direction C routes; 320–1440 px; no iOS). **OBS-13: the eight verified instances CLOSED** (`98cfc82` ×7, `0e8df27` ×1; no site-wide claim). **OBS-18: no real Firefox was available** (none installed; nothing installed). In Playwright Firefox 153.0 (1,108 runs across 3 engines and both builds): while the display face is pending, Firefox paints the display roles in Arial Narrow because Gecko does not load a later `@font-face` (the `local()` calibrated fallback) while an earlier one is loading — a rule verified in Gecko source at the release revision behind Playwright's build and in 115/128 ESR; Playwright's patch set changes no font code; removing request interception changes nothing. Late face: deterministic (27/70 views move, 19 above an approximate 0.01, max ≈ 0.041; identical pre/post `DEC-043`); normal loopback loading: the Arial Narrow state is painted for 12–53 ms in about half of loads (Chromium and WebKit: never). Runtime-only probes that load the calibrated faces first remove every re-wrap (0/70). **Classification D. UNVERIFIED** (expected real-Firefox outcome C, condition-dependent: WORKING HYPOTHESIS). Recommended next action: real-Firefox verification with the prepared harness (owner decision); a script-free candidate correction is described, not implemented. Nothing in application code or tooling changed.
+- **Evidence / report:** `docs/ui-revamp/GATE_4_OBS18_FIREFOX_DIAGNOSTIC.md`; `docs/ui-revamp/gate-4/obs18/evidence/`.
+- **Supersedes:** nothing. Read with `DEC-042`, `DEC-043`.
+- **Approved by:** Project owner, 2026-10-09 (post-B4 closure and OBS-18 Firefox diagnostic brief). Recorded by the repository worker.
+
+---
+
+> **UI REVAMP PROGRAMME — GATE 4 OBS-18 REAL FIREFOX VERIFICATION GATE (2026-10-09).** Made by the owner in the "OBS-18 Real Firefox Verification Gate"
+> brief, after review of `GATE_4_OBS18_FIREFOX_DIAGNOSTIC.md`. It does not amend `DEC-044` or earlier decisions.
+
+### DEC-045
+- **Date:** 2026-10-09
+- **Status:** **Approved — diagnostic-only real-Firefox verification of OBS-18, with authority to install official Firefox Stable. No application, design-system or tooling change; local commits only.**
+- **Decision (owner decisions, recorded as given):**
+  - **Approved:** installing official Mozilla Firefox Stable for diagnostic testing; using the existing OBS-18 harness; testing normal and delayed font loading; comparing official Firefox Stable with Playwright Firefox; evaluating candidate fixes through temporary runtime-only injection; creating diagnostic evidence and updating governance records;
+  - **Not approved:** application CSS, JSX, JavaScript or font-file changes; permanent Firefox browser configuration changes; modifying existing Playwright QA tooling; KD-09/KD-10 diagram remediation; B5 implementation; production deployment;
+  - **Unchanged:** manual VoiceOver/TalkBack verification SR-1 – SR-5 remains mandatory before B5 reuses the affected components.
+- **What this decision does NOT do:** approve an application fix for OBS-18 (or OBS-19); close OBS-18; change `DEC-044` or any other decision; authorise B5, a push, merge, staging or production deployment.
+- **Outcome (recorded by the worker, not part of the authorisation):** verification complete (`docs/ui-revamp/GATE_4_OBS18_REAL_FIREFOX_VERIFICATION.md`). Official **Firefox 157.0.1** (release channel; Mozilla-signed, notarised, checksum-verified) installed at `/Applications/Firefox.app`; default browser unchanged; temporary profiles only. **OBS-18 reproduces in official Firefox:** while the display face loads, the calibrated `local()` fallback stays unloaded and the display text is laid out in Arial Narrow (every painted pending run); under a late face (300 ms / 2.5 s) deterministic — 7 of 21 key views and 24 of 63 views on all Direction C routes change H1 lines, max ≈ 0.041 (geometric approximation; Firefox has no Layout Instability API), visible CTA moves up to 78 px (101 px in one run combined with OBS-19); under normal cold loopback loading the pending face was painted in 16 of 61 loads (≈ 16 ms) with H1 re-wraps in 6 views. Playwright Firefox 153 matches on face, geometry and severity; Chromium unaffected. Runtime-only candidate (four in-flow, hidden, `aria-hidden` priming spans, one per calibrated face): 0 H1 line changes in every condition and engine, accessibility tree and Tab order identical, works without JavaScript; the earlier out-of-flow form is unreliable (correction to the `DEC-044` report). **Recommended classification A — confirmed real-Firefox defect**; a narrowly scoped correction is proposed for separate owner approval. New **OBS-19**: the site `next/font` fallbacks (`Manrope Fallback`, `Bricolage Grotesque Fallback`) meet the same Gecko rule; non-H1 moves up to ≈ 0.018. No application code or tooling changed.
+- **Evidence / report:** `docs/ui-revamp/GATE_4_OBS18_REAL_FIREFOX_VERIFICATION.md`; `docs/ui-revamp/gate-4/obs18-real-firefox/evidence/`.
+- **Supersedes:** nothing. Read with `DEC-043`, `DEC-044`.
+- **Approved by:** Project owner, 2026-10-09 (OBS-18 real Firefox verification gate brief). Recorded by the repository worker.
+
+---
+
+> **UI REVAMP PROGRAMME — GATE 4 OBS-18 IMPLEMENTATION AND OBS-19 DIAGNOSTIC GATE (2026-10-09).** Made by the owner in the "Gate 4: OBS-18
+> Implementation & OBS-19 Diagnostic" brief, after review of `GATE_4_OBS18_REAL_FIREFOX_VERIFICATION.md`. It does not amend `DEC-045` or earlier decisions.
+
+### DEC-046
+- **Date:** 2026-10-09
+- **Status:** **Approved — targeted OBS-18 application correction (in-flow fallback-face priming, subject to regression testing) and a diagnostic-only OBS-19 investigation. Local work, local validation and local commits only.**
+- **Decision (owner decisions, recorded as given):**
+  - **Approved:** (1) targeted OBS-18 application implementation using the verified **in-flow** fallback-font priming approach, **subject to regression testing**; (2) **diagnostic-only** investigation of OBS-19; (3) local testing in official Firefox Stable, Playwright Firefox, Chromium, WebKit and real Safari where available; (4) necessary governance and evidence updates; (5) local application and documentation commits after successful verification;
+  - **Not approved:** an OBS-19 application fix; a site-wide typography redesign; changes to approved font sizes, weights, optical sizing, line heights or letter spacing; new animations or conversion elements; KD-09/KD-10 remediation; changes to `pixel-main.cjs` (TOOL-1 stays deferred); starting B5; push, merge or deployment;
+  - **Unchanged:** KD-09/KD-10 remain **deferred** to the dedicated pre-production accessibility batch; manual VoiceOver/TalkBack verification **SR-1 – SR-5 remains mandatory before B5 reuses** the affected components; B5 is **not authorised**.
+- **Implementation detail confirmed by the owner in session (not a design change):** each priming element takes its one glyph from CSS generated content (`::before { content: "a" }`) instead of a literal text node, so no priming text enters the DOM `textContent`; the elements otherwise follow the verified in-flow form (hidden, zero height, `aria-hidden`, in flow before the page content). If that variant proved less effective than the verified literal form, the literal form was to be used and the reason recorded.
+- **What this decision does NOT do:** close OBS-18 (closure requires all acceptance criteria to pass and a separate owner confirmation); close or fix OBS-19; change `DEC-042` – `DEC-045` or the `.dc-display` / `.dc-statement` optical-sizing settings (OBS-17); authorise B5, diagram remediation, a push, merge, LAN preview, staging or production deployment.
+- **Outcome (recorded by the worker, not part of the authorisation):** **OBS-18 implemented and verified; every acceptance criterion passed; closure RECOMMENDED, not recorded** (`docs/ui-revamp/GATE_4_OBS18_IMPLEMENTATION.md`). Application commit **`3b333c4`**: `DcPage` renders four hidden, zero-height, `aria-hidden`, in-flow `span.dc-font-prime` (one per calibrated display fallback, glyph from `::before`) before the page content; CSS in `app/direction-c.css`; nothing else changed. The `::before` glyph proved as effective as the verified literal form (real Firefox 157.0.1 and Playwright Firefox, 0 H1 line changes each). **Official Firefox 157.0.1**, 10 Direction C routes × 7 widths × 0 / 300 / 2,500 ms: H1 line changes **10 / 25 / 25 views → 0 / 0 / 0** (672 runs, 2 excluded); calibrated face painted while pending in every after-build pending run; Playwright Firefox the same; Chromium, WebKit and **real Safari 26.2** unchanged (Safari H1 re-wraps 0 → 0; OBS-17 preserved); final loaded state identical 70/70 × 4 engines; Chromium `<main>` pixels 68/68; accessibility tree, Tab order, accessible names, headings and `<main>` text identical; 0 hydration/console errors; works without JavaScript (real Firefox 3/3). Regression: typecheck, lint, 30/30 tests, builds and cPanel build pass; layout/a11y NEW 0 except one pre-existing intermittent not-found finding (OBS-6 family, both builds); served head 34/34; analytics 0 diffs; inventory 850/850; served HTML/DOM identical apart from the declared primes and one consequential `<!-- -->` separator on `/services`; throttled CLS max 0.001 (pre-existing). Residual non-H1 Firefox moves are OBS-19. **OBS-19 diagnostic** (`docs/ui-revamp/GATE_4_OBS19_DIAGNOSTIC.md`, 2,164 runs): confirmed, site-wide, two mechanisms — (1) Firefox lays Manrope text out in system-ui while Manrope loads (the OBS-18 Gecko rule; on `/` and `/pricing` an incidental U+2192 arrow loads the fallback mid-pending); (2) `next/font`'s automatic Manrope fallback metrics do not hold line breaks in any engine when Manrope arrives late (Chromium native layout-shift up to 0.10–0.12, chiefly the first-visit consent banner). Normal first visits: Firefox painted the pending state in ≈ 20 % of cold loopback loads (moves ≤ 32 px); Chromium never. A runtime-only in-flow prime of `Manrope Fallback` removes mechanism 1 with no side effects found; it does not address mechanism 2. **Recommended classification A** (remediation proposed for a separate owner decision; not implemented). KD-09/KD-10 deferred; SR-1 – SR-5 not performed; `pixel-main.cjs` not edited; B5 not started; nothing pushed, merged or deployed.
+- **Evidence / report:** `docs/ui-revamp/GATE_4_OBS18_IMPLEMENTATION.md`, `docs/ui-revamp/gate-4/obs18-impl/evidence/`; `docs/ui-revamp/GATE_4_OBS19_DIAGNOSTIC.md`, `docs/ui-revamp/gate-4/obs19/evidence/`.
+- **Supersedes:** nothing. Read with `DEC-044`, `DEC-045`.
+- **Approved by:** Project owner, 2026-10-09 (OBS-18 implementation and OBS-19 diagnostic brief). Recorded by the repository worker.
+
+---
+
+> **UI REVAMP PROGRAMME — GATE 4 OBS-18 CLOSURE AND OBS-19 REMEDIATION (2026-10-10).** Made by the owner in the "Gate 4: OBS-18 Closure & OBS-19
+> Remediation" brief, after review of `GATE_4_OBS18_IMPLEMENTATION.md` and `GATE_4_OBS19_DIAGNOSTIC.md`. It does not amend `DEC-046` or earlier decisions.
+
+### DEC-047
+- **Date:** 2026-10-10
+- **Status:** **Approved — formal closure of OBS-18 (subject to the worker re-verifying the evidence) and a targeted OBS-19 remediation (Firefox fallback-face priming where shown necessary; weight-specific Manrope fallback-metric calibration where supported by measurement). Local work, local validation and local commits only.**
+- **Decision (owner decisions, recorded as given):**
+  - **Approved:** (1) formal OBS-18 closure after evidence verification; (2) targeted OBS-19 implementation; (3) Firefox fallback-face priming where demonstrated necessary; (4) weight-specific fallback-metric calibration where supported by measurements; (5) cross-browser and accessibility regression testing; (6) governance updates and local commits;
+  - **Not approved:** changing the actual Manrope or Bricolage display fonts; changing loaded-font typography or approved design tokens (font sizes, weights, line heights, letter spacing, text, component spacing, breakpoints); broad CSS refactoring; reworking components to conceal layout shifts; unrelated performance optimisations; KD-09/KD-10 remediation; changes to deferred Playwright tooling (`pixel-main.cjs`, TOOL-1); B5; push, merge or deployment;
+  - **Unchanged:** KD-09/KD-10 remain **deferred** to the dedicated pre-production accessibility batch; manual VoiceOver/TalkBack verification **SR-1 – SR-5 remains mandatory before B5 reuses** the affected components; B5 is **not authorised**.
+- **OBS-18 closure (recorded by the worker after re-verification, 2026-10-10):** the application tree at `ad9d702` is identical to `3b333c4`; the four `span.dc-font-prime` render on exactly the ten Direction C routes and on no legacy, dynamic or not-found route (served HTML of the `3b333c4` build); the stored acceptance data (`gate-4/obs18-impl/evidence/runs/accept-summary.txt`, `run/impl-checks.txt`, `safari/safari-real-summary.txt`) support every claim of `GATE_4_OBS18_IMPLEMENTATION.md` §10 — official Firefox 157.0.1 and Playwright Firefox 0 H1 line changes in every after-build condition, final loaded state identical 70/70 × 4 engines, accessibility tree / Tab order / no-JavaScript checks identical or passing, Chromium, WebKit and real Safari 26.2 unchanged — and no contradictory evidence was found. **OBS-18 is CLOSED** for the verified scope (official Firefox 157.0.1 and Playwright Firefox 153 on macOS; the ten Direction C routes; 320–1440 px; loopback, cold cache). The historical OBS-18 reports and evidence are unchanged.
+- **What this decision does NOT do:** close OBS-19 unless its acceptance criteria are met; change the OBS-17 optical-sizing settings, the Direction C display fallbacks or primes; authorise B5, diagram remediation, a push, merge, LAN preview, staging or production deployment.
+- **Outcome (recorded by the worker, not part of the authorisation):** **OBS-18 CLOSED** as above. **OBS-19 partially remediated — NOT closed** (`docs/ui-revamp/GATE_4_OBS19_REMEDIATION.md`). Application commit **`46785af`**: `next/font`'s automatic Manrope fallback turned off (`adjustFontFallback: false`, `fallback: ['"Manrope Fallback"']`; emitted stack unchanged); `"Manrope Fallback"` declared in `app/globals.css` as two calibrated `local()` faces — Arial 100–500 at `size-adjust` 103.25 %, Arial Bold 600–900 at 99 % (ascent/descent reproduce Manrope's 1.066 / 0.300 em), values swept on the site's own copy (28 targets × 7 widths) in Chromium, Firefox and WebKit; two hidden, zero-height, `aria-hidden`, in-flow primes (glyph from `::before`) at the start of `<body>`. Manrope's file is byte-identical; no loaded-font style, token, text or spacing changed. **Mechanism A RESOLVED:** official Firefox 157.0.1 paints the calibrated face, never system-ui, in every pending run (normal, 300, 2,500 ms; JavaScript on and off). **Mechanism B MITIGATED:** consent banner height change 23 px → 0 (all engines and conditions); button re-wraps 28 → 0; Chromium late-Manrope native layout-shift max 0.1215 → 0.049 (views > 0.1: 3 → 0; > 0.01: 23 → 13; 3 views worse, `/blog`). **Residual:** ≈ 3 % of weight-400 element-views still change lines at a late swap in every engine (per-string Arial/Manrope variance; 3.65 → 3.28 % Chromium), paragraph moves ≤ 52 px and button moves ≤ 29 px with late Manrope, Firefox normal loads 3 of 84 views (≤ 37 px), a few Firefox views worse where system-ui happened to match; the U+2192 arrows (outside Manrope's latin subset) are drawn by the new faces even when Manrope is loaded (bold arrows 0.7 px narrower; Chromium `<main>` pixels 48/68 identical, differences confined to arrow-bearing routes). Acceptance criteria 1, 3, 6, 7, 8, 9 PASS; 4, 5, 10 PARTIAL; 2 FAIL. Regression: typecheck, lint, 30/30 tests, plain/fixture/cPanel builds pass; layout/a11y NEW 0 × 3 engines; served head 34/34; analytics 0 diffs; content 0 diffs; GTM DOM identical; a11y tree (with and without banner), Tab order and accessible names identical; 0 hydration errors; throttled CLS max 0.001 (pre-existing); OBS-17 (real Safari) and OBS-18 (official Firefox) preserved; no font-loading regression. **Recommended:** keep OBS-19 OPEN as a late-font-only residual; owner to choose between accepting the residual, `font-display: optional`, restoring the arrow rendering, or no further action (report §13). KD-09/KD-10 deferred; SR-1 – SR-5 not performed; `pixel-main.cjs` not edited; B5 not started; nothing pushed, merged or deployed.
+- **Evidence / report:** `docs/ui-revamp/GATE_4_OBS19_REMEDIATION.md`, `docs/ui-revamp/gate-4/obs19-remediation/evidence/`.
+- **Supersedes:** nothing. Read with `DEC-046`.
+- **Approved by:** Project owner, 2026-10-10 (OBS-18 closure and OBS-19 remediation brief) and 2026-10-11 (continuation instruction). Recorded by the repository worker.
+
+---
+
+> **UI REVAMP PROGRAMME — GATE 4 OBS-19 FINAL CLOSURE (2026-10-11).** Made by the owner in the "Owner Approval: OBS-19 Final Closure" brief, after review of
+> `GATE_4_OBS19_FINAL_DISPOSITION.md` (local commit `66fd6a7`). It does not amend `DEC-047` or earlier decisions.
+
+### DEC-048
+- **Date:** 2026-10-11
+- **Status:** **Approved — governance-only closure of OBS-19 with a documented residual exception; OBS-20 registered OPEN, NON-BLOCKING.**
+- **Decision (owner decisions, recorded as given):**
+  1. **Close OBS-19** for the Manrope fallback-font issue **with the explicitly documented residual exception** (below) — not a perfect or unconditional pass;
+  2. **Retain `font-display: swap`** for Manrope (`font-display: optional` not adopted);
+  3. **Accept the minor U+2192 arrow-glyph rendering difference** without additional application changes (the arrow-only `@font-face` experiment not adopted);
+  4. **Register the pre-existing Bricolage late-font movement as OBS-20, OPEN and NON-BLOCKING**, pending relevant future performance and conversion-page QA.
+- **Closure wording (owner):** OBS-19 is accepted and closed for the Manrope fallback-font remediation. The owner acknowledges that synthetic 2.5-second
+  font-delay tests still produce some text reflow and element movement, including CTA movement up to approximately 29 px and Chromium layout shift up to
+  0.049. Under the tested realistic-loading conditions, the remaining Manrope impact was limited, with one intermittent Firefox above-the-fold CTA movement
+  observed. The calibrated fallback correction remains in place, `font-display: swap` is retained, and the minor arrow-glyph difference is accepted. This
+  decision does not waive real-device testing, accessibility requirements or production release gates.
+- **Documented exception (from the report, §6, §5, §8):** with Manrope held 2.5 s, ≈ 3 % of regular-weight elements may change lines; above-the-fold paragraphs
+  and hero CTAs move ≤ ≈ 29 px (`/pricing` 768, `/ai-seo` 430, `/faq` 768, `/problems/traffic-but-no-enquiries` 768), lower content further below the fold;
+  Chromium native ≤ 0.049; the consent banner does not change height and buttons do not re-wrap. Realistic synthetic profiles: Chromium, WebKit and real
+  Safari 26.2 had Manrope ready at first paint in every run; Firefox painted the calibrated fallback 13–49 ms after first paint on some loads (one
+  above-the-fold CTA case, `/ai-seo` 430, 27 px, intermittent). CTA arrows (U+2192, `aria-hidden`) 0.7 px narrower than pre-OBS-19 (1.2 px in Firefox).
+- **Scope of verification the closure rests on:** macOS; Playwright Chromium 151 / Firefox 153 / WebKit 26.5, official Firefox 157.0.1, real Safari 26.2;
+  synthetic loopback throttling (not field data). **Not verified:** real devices (iOS, Android), Windows/Linux, field/RUM data.
+- **What this decision does NOT do:** change application code or CSS; implement `font-display: optional` or the arrow correction; begin OBS-20 remediation;
+  re-run the OBS-19 campaign; waive real-device testing (E1), accessibility requirements (KD-09/KD-10 remain deferred to the pre-production accessibility
+  batch; SR-1 – SR-5 remain mandatory before B5 reuse) or production release gates; authorise B5, a push, merge or deployment.
+- **Evidence / report:** `docs/ui-revamp/GATE_4_OBS19_FINAL_DISPOSITION.md`, `docs/ui-revamp/gate-4/obs19-final/evidence/` (commit `66fd6a7`); `docs/ui-revamp/GATE_4_OBS19_REMEDIATION.md` (`DEC-047`).
+- **Supersedes:** nothing. Read with `DEC-047`.
+- **Approved by:** Project owner, 2026-10-11. Recorded by the repository worker.
+
+---
+
+> **UI REVAMP PROGRAMME — GATE 4 · A1 ACCESSIBILITY READINESS AND B5 PREPARATION (2026-10-11).** Made by the owner in the "A1: Accessibility Readiness
+> and B5 Preparation" brief, after the decision to complete B5–B11 before launching the redesign. It does not amend `DEC-048` or earlier decisions.
+
+### DEC-049
+- **Date:** 2026-10-11
+- **Status:** **Approved — bounded A1 accessibility engineering (KD-09 / KD-10 and known inherited figure defects) and B5 preparation only. Local work, local validation and local commits only. B5 is NOT authorised.**
+- **Decision (owner, as given):**
+  - **Release objective:** complete all planned Direction C batches B5–B11 before launching the redesigned website; no partial redesign release. This sets the objective only and authorises no implementation, deployment or governance change beyond this entry.
+  - **Authorised:**
+    - (A) fix SVG figure text below 12px and below 4.5:1 and known inherited figure defects, within the approved design, prioritising `ChainFigure`, `CauseZones`, `MethodChain` and the `/seo` figure, without changing copy or claims;
+    - (B) focused verification with the existing harness;
+    - (C) a concise SR-1 – SR-5 manual checklist;
+    - (D) a B5 readiness review that does not modify B5 routes;
+    - commits of the A1 engineering changes and concise evidence.
+  - **Not authorised:**
+    - B5;
+    - changes to `.github/workflows/`, deployment scripts, production configuration, OBS-19 files, fonts or font loading, or unrelated routes;
+    - a push, merge or deployment.
+  - **Unchanged:** SR-1 – SR-5 remain mandatory before B5 reuses the affected components, and automated checks do not count as a manual screen-reader PASS. E1 remains outstanding.
+- **Outcome (recorded by the worker, not part of the authorisation):** **engineering complete and verified; manual screen-reader checks BLOCKED** (`docs/ui-revamp/GATE_4_A1_ACCESSIBILITY_READINESS.md`).
+  - **Files changed:** `components/commercial/ChainFigure.tsx`, `components/routes/CauseZones.tsx`, `components/routes/MethodChain.tsx`.
+  - **What changed:**
+    - figure text takes the existing text-grade tokens (`--dc-gap-text`, `--resolve-accent-dark`); marks keep `--resolve-gap` / `--resolve-accent-deep`;
+    - vertical-drawing type is set to render ≥ 12px at a 320px viewport;
+    - the `/how-it-works` drawings switch to their horizontal form at 1100px (as `ChainFull`) instead of 761px;
+    - long labels break at word boundaries so they hold the WCAG 1.4.12 overrides;
+    - colliding labels are moved.
+  - **Measured** (6 routes × 9 widths; Playwright Chromium / WebKit / Firefox):
+    - text < 12px 377 → 0; text < 4.5:1 464 → 0;
+    - text–line crossings 38 → 0 (Chromium);
+    - under 1.4.12 at 320–430px, clipped figure text 52 → 0 (KD-05, `layout.cjs` RESOLVED 15 × 3 engines);
+    - OBS-14 resolved;
+    - words and figure accessible names unchanged.
+  - **Regression:** layout/a11y NEW 0 × 3 engines; inventory 850/850; served head 34/34; analytics/forms 0 diffs; accessible names identical × 3; throttled CLS max 0.004 before and after; typecheck, lint, 30/30 tests, build, cPanel build pass.
+  - **Declared visible differences:**
+    - darker, larger figure text;
+    - narrow drawings 4–24 % taller;
+    - `/how-it-works` shows its existing vertical drawings at 761–1099px;
+    - moved labels.
+  - **SR-1 – SR-5: not performed** (no real iPhone/Android screen-reader environment). **B5 cannot begin under the existing requirements** until they pass (or the owner revises that prerequisite) and B5 is authorised; S2 is still undecided. KD-09 / KD-10 closure (and the figure-text scope of KD-05) is **recommended, not recorded**: owner to confirm.
+- **Evidence / report:** `docs/ui-revamp/GATE_4_A1_ACCESSIBILITY_READINESS.md`; `docs/ui-revamp/gate-4/a1/evidence/`.
+- **Supersedes:** nothing. Read with `DEC-042`, `DEC-043`, `DEC-048`.
+- **Approved by:** Project owner, 2026-10-11 (A1 brief). Recorded by the repository worker.
+
+---
+
+> **UI REVAMP PROGRAMME — GATE 4 · B5 IMPLEMENTATION AND SCREEN-READER SEQUENCING EXCEPTION (2026-10-12).** Made by the owner in the "B5
+> Implementation: Direction C" brief. It does not amend `DEC-049` or earlier decisions.
+
+### DEC-050
+- **Date:** 2026-10-12
+- **Status:** **Approved — Gate 4 Batch B5 (`/how-it-works`, `/about`, `/faq`) implementation, local validation and local commits; and a TEMPORARY SEQUENCING EXCEPTION to the pre-B5 SR-1 – SR-5 requirement.**
+- **Decision (owner, as given):**
+  - B5 is authorised on `ui-revamp`. Copy, claims, metadata, analytics, consent and functional behaviour are preserved. No change to lead capture, CRM, database, deployment workflows or the R0 worktree; no unrelated refactoring; no new animation (S2 not authorised — static presentation).
+  - **Manual Android TalkBack and iPhone VoiceOver testing (SR-1 – SR-5) is deferred.** This permits B5 to proceed before them. **It is not an accessibility PASS and not a permanent waiver.** SR-1 – SR-5 stay visibly outstanding for release readiness, and no claim of full accessibility or production approval is made.
+- **What this decision does NOT do:** authorise B6, a push, merge, staging or production deployment; close SR-1 – SR-5, E1, KD-02, LIVE-1, LIVE-2 or PROC-1.
+- **Outcome (recorded by the worker, not part of the authorisation):** **B5 COMPLETE — awaiting owner review** (`docs/ui-revamp/GATE_4_B5_TRUST_METHOD_PAGES.md`).
+  - **New primitives:** `Stages`, `Compare`, `DisclosureGroup`, `StatedRows` (additions only).
+  - **Fallback:** all three pages opt into the 92 % display fallback (sweep).
+  - **Content:** inventory 845 identical, with 5 declared differences (shared close motion; `TLink` arrow); served head 34/34; analytics 0 diffs; accessible names identical × 3 engines.
+  - **Checks:** layout/a11y NEW 0 × 3 engines, KD-03 resolved on `/how-it-works` and `/about`; FAQ disclosures 23/23 (keyboard and no-JS, × 3 engines); figure probe 0 defects; CLS max 0.028 → 0.004; B1–B4 `<main>` pixels 22/22 identical.
+  - **Static gates:** typecheck, lint, 30/30 tests, build and cPanel build pass.
+- **Evidence / report:** `docs/ui-revamp/GATE_4_B5_TRUST_METHOD_PAGES.md`; `docs/ui-revamp/gate-4/b5/evidence/`.
+- **Supersedes:** nothing. Modifies the *sequencing* of `DEC-043` – `DEC-049` ("SR-1 – SR-5 mandatory before B5 reuse") for B5 only; the requirement itself stands for release.
+- **Approved by:** Project owner, 2026-10-12 (B5 brief). Recorded by the repository worker.
+
+---
+
+> **UI REVAMP PROGRAMME — C+ HYBRID SELECTED AS THE FINAL CREATIVE DIRECTION; B5 OWNER ACCEPTANCE WITHHELD (2026-10-12).** Made by the
+> owner after the B5 visual review and the B5 remediation assessment (Option B). It supersedes `DEC-034` only as the intended final
+> creative direction (`DEC-034` stays historically valid for the earlier Direction C work); it does not amend `DEC-035` – `DEC-050`.
+
+### DEC-051
+- **Date:** 2026-10-12
+- **Status:** **Approved — C+ Hybrid is the intended final creative direction; B5 owner acceptance withheld; B5 technical work retained as the integration baseline.** Direction and planning only: no implementation is authorised by this entry.
+- **Decision (owner, as given):**
+  1. **C+ Hybrid is the intended final creative direction** for the MappedSkills website.
+  2. **Three C+ prototypes have owner VISUAL approval:** Homepage, Conversion Optimization and How It Works. They are **prototypes, not production-integrated pages**: isolated, `noindex` routes under `/proto/c-plus/…` on branch `proto/direction-c-plus` (worktree `../MappedSkills-cplus`), from `ui-revamp` `e2d5541`, branch tip `cf91ce1` when this entry was recorded.
+     **Visual approval is not production approval.** Each of the following needs its own explicit owner approval at integration:
+     - production copy;
+     - SEO changes (H1s, titles, descriptions, canonicals, URLs, structured data, search intent);
+     - claims;
+     - the integration itself.
+  3. **B5 owner acceptance is WITHHELD** for the Direction C versions of `/how-it-works`, `/about` and `/faq` ("changes required" on all three). The method-chain figure was not reviewed. **No further Direction C creative remediation cycle** is to be run on these pages.
+  4. **Option B:** B5's verified technical and accessibility work is kept as the **integration baseline**. Its visual compositions are not repaired; the creative objections are resolved through the C+ process.
+  5. **Owner-confirmed operating facts** (source: owner-confirmed C+ creative-brief information, the "checkpoint 3" brief, restated by the owner in this decision). OWNER REQUIREMENT for use in copy:
+     - initial enquiry follow-up is by email or WhatsApp;
+     - the process is Discovery Call → Audit → Proposal → Approval → Execution;
+     - clients receive audit findings, a recommended action plan and a proposal before work begins;
+     - MappedSkills handles most agreed implementation, with client input where required;
+     - clients receive monthly performance reports and monthly review calls.
+
+     **Nothing beyond these is confirmed.** No response time, guarantee, outcome, named person, personnel detail, address, company fact, document count, payment or contract term, or report metric may be stated or implied.
+- **Outstanding (not decided here):**
+  - **C+ designs for `/about` and `/faq`** do not exist; they need the C+ creative process and owner visual approval.
+  - **Exact approved revisions:** the specific prototype commit approved for each of the three pages is to be pinned when integration is planned.
+  - **Production approval of prototype content:** where a C+ prototype's copy, H1, metadata, claims or structure differs from the live approved page, its production use is a separate explicit owner decision at integration (copy, SEO and claims reviewed in their own right). This entry records **visual** approval only.
+  - **`/how-it-works` §2 and §9:** the facts in item 5 may unblock parts of §2 (delivery stages) and §9 (what happens after an enquiry), within the limits stated there. §9's response-time item stays EVIDENCE REQUIRED (unmeasured).
+  - **`/about` §4 (people) and §6 (company facts)** remain owner-blocked; they render nothing, with no entity JSON-LD.
+  - **B1–B4:** their Direction C acceptances are not revoked. How and when those routes move to C+ is not decided here.
+- **Technical requirements that must survive C+ integration** (verified in B0–B5 and the B5 addendum):
+  - **SEO and metadata:**
+    - URLs are preserved unless a change is explicitly approved;
+    - **any changed H1, title, description, canonical, robots directive, structured data or search intent is reviewed explicitly** against the live page before integration;
+    - **`FAQPage` is generated from the same array as the visible questions**, with names matching in order.
+  - **Native `<details>` FAQ disclosures, closed on load**, operable by keyboard and without JavaScript. (They were already native before B5.)
+  - **Headings:** C+ pages are **not** required to keep the Direction C heading outline. They must have a **logical, accessible heading hierarchy**: one H1, no skipped levels, headings that describe their sections. Changed accessible names are declared.
+  - **Owner-blocked content renders nothing:** no placeholder, partial address, unverified year or "our team" filler.
+  - **KD-09/KD-10 figure-text rules** where figures are used: rendered text ≥ 12px and ≥ 4.5:1; marks ≥ 3:1 non-text.
+  - **Consent and analytics:**
+    - the consent bootstrap comes first; the R1 safeguard (`DEC-038`) is kept;
+    - the event taxonomy, `ContactForm` and `BookingLink` behaviour and CTA destinations are unchanged;
+    - no new `dataLayer` events or `data-*` tracking hooks without a taxonomy decision;
+    - the E6 probe must pass I1–I9 in 3 engines;
+    - GTM-relevant structural changes (IDs, classes, link text, visibility behaviour) are recorded for E6, as in `gate-4/b5/evidence/addendum/`.
+  - **Motion:** reduced motion is respected; no content is hidden without JavaScript; S2 (chain draw-in) is still unauthorised unless approved separately.
+  - **Regression:** compare against `gate-4/baseline-pre-cplus/` (layout/a11y NEW 0 × 3 engines, inventory, served head, analytics parity), plus the static gates and the cPanel build.
+- **Still OUTSTANDING (unchanged by this decision):**
+  - **E6** container-level verification (GTM export and Preview);
+  - **SR-1 – SR-5** manual VoiceOver/TalkBack checks (`DEC-050` deferral, required for release);
+  - **E1** real-device and cross-browser release testing;
+  - **production integration** of any C+ page;
+  - KD-02, OBS-1, OBS-20, LIVE-1, LIVE-2 and PROC-1.
+- **What this decision does NOT do:**
+  - close B5, KD-09, KD-10 or OBS-6;
+  - authorise B6, C+ implementation on `ui-revamp`, a merge of `proto/direction-c-plus`, or any change to application code;
+  - give production approval to any prototype's copy, SEO changes or claims;
+  - expand the service taxonomy (`DEC-005`, `SERVICE_ARCHITECTURE.md`);
+  - approve a push, merge, staging or production deployment.
+- **Evidence / context:**
+  - `docs/ui-revamp/GATE_4_B5_TRUST_METHOD_PAGES.md`;
+  - `docs/ui-revamp/gate-4/b5/evidence/addendum/README.md` (`3bd7e37`);
+  - `docs/ui-revamp/gate-4/baseline-pre-cplus/` (`3d7f97b`);
+  - on branch `proto/direction-c-plus`: `docs/ui-revamp/c-plus/README.md` and `components/proto-cplus/content.ts` (`METHOD_PLAIN` header).
+- **Supersedes:** `DEC-034` **only as the intended final creative direction.** `DEC-034` remains **historically valid** for the earlier Direction C work (Gate 2, Gates 3–4, B1–B4), whose acceptances stand. Direction C remains the implemented and accepted state of B1–B4 until a later decision. Read with `DEC-034`, `DEC-036`, `DEC-038`, `DEC-050`.
+- **Approved by:** Project owner, 2026-10-12 (Option B selection and C+ direction brief). Recorded by the repository worker.
+
+### DEC-052
+- **Date:** 2026-10-14
+- **Status:** **Approved — lean website release with a host-only lead CSV export; Mini CRM out of scope.** Release preparation only: **no deployment, no merge and no production change is authorised by this entry.**
+- **Decision (owner, as given in the "final release decisions" brief):**
+  1. **Lean release.** The approved release candidate (`abcb/cplus-integration` @ `d27f464`) ships from a clean branch based on `main`, with the approved website code, the lead-export script, essential documentation and the QA tooling, and **without** bulk screenshots, test-result archives or logs. The original integration branch and its full QA history are preserved in a private, verified archive and are **not** deleted or rewritten.
+  2. **Lead export.** A host-only script, `scripts/export-enquiries.cjs`, exports enquiries from the existing MariaDB `enquiries` table by date range to CSV (explicit safe columns; formula-injection safe; read-only; bounded; no personal data in logs; never modifies records). **No public admin route or dashboard.** Usage: `docs/10-technical/LEAD_EXPORT.md`.
+  3. **Mini CRM remains out of scope** for this release and is not changed.
+  4. **Deployment safety (PR #3, R0):** approved in principle through the normal GitHub review; branch protection is kept; `anikesh-dev` reviews; no approval bypass and no merge before the authorised reviewer approves.
+  5. **Production dependencies:** keep the verified dependency-preparation procedure ready; do not modify the production host yet.
+- **Implemented on:** branch `release/cplus-lean` (not pushed at recording). Every application, config and test file outside `docs/` is byte-identical to `d27f464` except the three added export files (`scripts/export-enquiries.cjs`, `tests/export-enquiries.test.cjs`, `tests/export-enquiries.db.test.cjs`).
+- **Outstanding:** PR #3 review and merge; owner review of the lean file inventory; pushing the release branch and opening its PR; production dependency preparation (`~/deps/<lock sha12>`); release dispatch. Each needs its own owner go-ahead.
+- **Read with:** `DEC-051`. **Approved by:** Project owner, 2026-10-14. Recorded by the repository worker.

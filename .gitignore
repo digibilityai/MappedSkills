@@ -33,3 +33,21 @@ __MACOSX/
 node_modules
 .next/
 .DS_Store
+
+# Local Claude Code preview configuration (machine-specific ports and scratchpad
+# paths). Only this file is ignored; the rest of .claude/ is unaffected (DEC-036).
+.claude/launch.json
+
+# UI revamp screenshot and video evidence. The QA scripts write captures into
+# many differently named folders under docs/ui-revamp/, so the rule is by file
+# type. Reports, manifests, hashes, JSON, text, scripts, SVG and PDF are not
+# affected. Files already tracked stay tracked. To commit a curated capture on
+# purpose, use `git add -f <path>`.
+docs/ui-revamp/**/*.jpg
+docs/ui-revamp/**/*.jpeg
+docs/ui-revamp/**/*.png
+docs/ui-revamp/**/*.webp
+docs/ui-revamp/**/*.gif
+docs/ui-revamp/**/*.mp4
+docs/ui-revamp/**/*.webm
+docs/ui-revamp/**/*.mov

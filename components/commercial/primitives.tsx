@@ -59,30 +59,39 @@ export function Mark({
    `BreadcrumbList` are generated FROM THE SAME ARRAY here, so the two cannot
    drift apart the way they did when each route hand-wrote both. `/services` is
    top level and carries no breadcrumb at all. */
-export function Breadcrumb({ label, path }: { label: string; path: string }) {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://mappedskills.com';
-  const trail = [
+/* UI Revamp Gate 2: the trail and its `BreadcrumbList` are exported so the
+   Direction C crumb (components/direction-c/primitives.tsx) emits the SAME
+   structured data from the same code. This component's output is unchanged. */
+export function breadcrumbTrail(label: string, path: string) {
+  return [
     { name: 'Home', href: '/' },
     { name: 'What we do', href: '/services' },
     { name: label, href: path },
   ];
+}
+
+export function breadcrumbJsonLd(trail: { name: string; href: string }[]) {
+  const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://mappedskills.com';
+  return JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: trail.map((crumb, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: crumb.name,
+      item: `${base}${crumb.href === '/' ? '' : crumb.href}`,
+    })),
+  });
+}
+
+export function Breadcrumb({ label, path }: { label: string; path: string }) {
+  const trail = breadcrumbTrail(label, path);
 
   return (
     <nav aria-label="Breadcrumb" className="border-b border-resolve-line bg-resolve-ground">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'BreadcrumbList',
-            itemListElement: trail.map((crumb, i) => ({
-              '@type': 'ListItem',
-              position: i + 1,
-              name: crumb.name,
-              item: `${base}${crumb.href === '/' ? '' : crumb.href}`,
-            })),
-          }),
-        }}
+        dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd(trail) }}
       />
       <Container className="max-w-[1400px] px-[var(--resolve-pad)]">
         {/* Every crumb link is a real 40px-tall control. Phase B's floor is

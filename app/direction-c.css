@@ -1,0 +1,329 @@
+/* =============================================================================
+   DIRECTION C — RESOLUTION. UI Revamp Gate 2 (DEC-034).
+
+   Source of truth: docs/ui-revamp/gate-1/prototypes/direction-c-resolution-approved.html
+   (frozen, sha256 193b4ab8…). This file is that prototype's design system,
+   translated for the application. Selectors, values and breakpoints follow the
+   prototype one for one; every deliberate difference is marked "APP:".
+
+   SCOPE — WHY EVERYTHING IS PREFIXED AND UNLAYERED.
+   - Gate 2 renders Direction C on three routes only (/, /services, /seo). The
+     rest of the site still uses the legacy layer, and App Router keeps CSS
+     loaded across client navigation, so a generic class name here (`.btn`,
+     `.label`) would restyle legacy pages after a visit to the homepage. Every
+     class is `dc-` prefixed and every token `--dc-` prefixed; nothing here can
+     match an element that does not carry a `dc-` class.
+   - The rules are deliberately OUTSIDE any cascade layer. `app/globals.css`
+     puts its element rules (`section { py-[50px] }`, `ul { pl-6 }`,
+     `a { text-accent }`, the `h1`–`h4` display scale) in `@layer base`, and
+     unlayered CSS outranks every layer regardless of specificity. The resets
+     below are wrapped in `:where()` so that they carry zero specificity and
+     every `dc-` component class still beats them.
+
+   SPLIT: this file is global (it styles the chrome, which the root layout
+   renders); the page components live in app/direction-c-pages.css, imported
+   only by the Direction C pages.
+
+   BREAKPOINTS: three, as in the prototype — 600 / 900 / 1200.
+   ========================================================================== */
+
+:root {
+  /* colour — THE RESOLVE roles (app/globals.css) plus the two Gate 1 tokens */
+  --dc-ground: var(--resolve-ground);
+  --dc-paper: var(--resolve-paper);
+  --dc-ink: var(--resolve-ink);
+  --dc-ink-deep: var(--resolve-ink-deep);
+  --dc-dim: var(--resolve-dim);            /* 6.38:1 on ground */
+  --dc-gap: var(--resolve-gap);            /* MARKS ONLY — 3.13:1, non-text */
+  --dc-gap-text: #6E6778;                  /* not-measured register as text — 4.90:1 */
+  --dc-line: var(--resolve-line);          /* decorative rules only */
+  --dc-control: #8A8174;                   /* plate / input boundary — 3.47:1 (WCAG 1.4.11) */
+  --dc-rule-on-ink: var(--resolve-rule);
+  --dc-tang: var(--resolve-accent);
+  --dc-tang-display: var(--resolve-accent-deep);
+  --dc-tang-small: var(--resolve-accent-dark);
+  --dc-on-ink: var(--resolve-ground);
+  --dc-on-ink-soft: #C0B9CA;
+  --dc-on-ink-dim: #A29BAC;
+
+  /* type. The Bricolage stacks (--dc-f-display, --dc-f-statement,
+     --dc-f-title) are declared on `.dc` below, not here: see the note there. */
+  --dc-f-body: var(--font-manrope), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --dc-t-hero: clamp(2.55rem, 1.05rem + 6.1vw, 6.4rem);
+  --dc-t-statement: clamp(1.85rem, 1.05rem + 3.2vw, 3.9rem);
+  --dc-t-title: clamp(1.3rem, 1.08rem + .9vw, 1.75rem);
+  --dc-t-lede: clamp(1.1rem, 1rem + .4vw, 1.3rem);
+  --dc-t-body: 1.0625rem;
+  --dc-t-note: .9375rem;
+  --dc-t-label: .78rem;
+  --dc-measure: 58ch;
+
+  /* layout */
+  --dc-wrap: 1360px;
+  --dc-pad: clamp(16px, 4vw, 56px);
+  --dc-col-gap: clamp(16px, 2.2vw, 32px);
+  --dc-rhythm: clamp(72px, 9vw, 148px);
+  --dc-rhythm-tight: clamp(48px, 6vw, 88px);
+
+  /* motion — the Gate 1 timing categories and the two easings */
+  --dc-d-fast: 180ms;
+  --dc-d-standard: 420ms;
+  --dc-d-state: 620ms;
+  --dc-d-expressive: 900ms;
+  --dc-e-state: cubic-bezier(.65, 0, .35, 1);
+  --dc-e-arrive: cubic-bezier(.16, 1, .3, 1);
+}
+
+/* ---------------------------------------------------------------- scope -- */
+.dc {
+  /* APP: the display face is the opsz-capable Bricolage instance that the
+     three Direction C pages load (components/direction-c/fonts.ts); where it
+     is not present (the shared header), the site's own Bricolage is used.
+     Gate 3 R2: declared HERE, not on :root, because a custom property
+     resolves its var() where it is declared — on :root `--font-dc-display`
+     does not exist (DcPage sets it), so the stack fell through to the site
+     variable and its generic Arial fallback. The display roles name a
+     calibrated fallback (the @font-face rules under "type roles"); titles,
+     whose size barely moves the optical axis, fall back to the site
+     Bricolage, which is preloaded on every route.
+     Titles use the opsz face too: in Gate 2 they reached it only because both
+     instances shared one family name (components/direction-c/fonts.ts). */
+  --dc-f-display: var(--font-dc-display, var(--font-bricolage)), "DC Display 96 Fallback", "Arial Narrow", system-ui, sans-serif;
+  --dc-f-hero: var(--font-dc-display, var(--font-bricolage)), "DC Display Hero Fallback", "Arial Narrow", system-ui, sans-serif;
+  --dc-f-statement: var(--font-dc-display, var(--font-bricolage)), "DC Display 72 Fallback", "Arial Narrow", system-ui, sans-serif;
+  --dc-f-title: var(--font-dc-display, var(--font-bricolage)), var(--font-bricolage), "Arial Narrow", system-ui, sans-serif;
+  font-family: var(--dc-f-body);
+  font-size: var(--dc-t-body);
+  line-height: 1.6;
+  color: var(--dc-ink);
+  font-feature-settings: "ss01";
+}
+:where(.dc) :where(h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote) { margin: 0; padding: 0; }
+:where(.dc) :where(h1, h2, h3, h4) { font: inherit; letter-spacing: inherit; }
+:where(.dc) :where(p, li, label, dt, dd) { font-size: inherit; line-height: inherit; font-family: inherit; }
+:where(.dc) :where(ul, ol) { list-style: none; }
+:where(.dc) :where(li) { margin: 0; }
+:where(.dc) :where(section) { padding-block: 0; }
+:where(.dc) :where(a) { color: inherit; }
+:where(.dc) :where(a:hover) { color: inherit; }
+:where(.dc) :where(button) { font: inherit; color: inherit; }
+:where(.dc) :where(b, strong) { font-weight: 700; }
+.dc :focus-visible { outline: 3px solid var(--dc-ink); outline-offset: 3px; }
+.dc-on-ink :focus-visible { outline-color: var(--dc-on-ink); }
+.dc-on-tang :focus-visible { outline-color: var(--dc-ink); }
+
+.dc-wrap { max-width: var(--dc-wrap); margin-inline: auto; padding-inline: var(--dc-pad); }
+.dc-g12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--dc-col-gap); }
+.dc-g12 > * { min-width: 0; }
+
+/* ------------------------------------------------------------ type roles -- */
+.dc-label { font: 700 var(--dc-t-label)/1.35 var(--dc-f-body); letter-spacing: .15em; text-transform: uppercase; color: var(--dc-dim); }
+/* Gate 3 R2 — metric-matched fallbacks for the opsz display roles, so text
+   that paints before the opsz face arrives wraps on the same lines (no reflow
+   when it swaps in). local() only — nothing is downloaded; Liberation Sans is
+   metric-compatible with Arial (Linux). ascent/descent reproduce Bricolage's
+   own 0.93 / 0.27 em at each size-adjust.
+   size-adjust is Bricolage 800's advance width at that optical size ÷ Arial
+   Bold's (MEASURED over every .dc-display / .dc-statement text on /,
+   /services and /seo: 91.68% at opsz 96, 96.01% at 72), then set to the
+   middle of the window in which each string keeps its line count at 360 /
+   390 / 430 / 768 / 1024 / 1440 (sweep: docs/ui-revamp/gate-3-remediation/
+   evidence/sweep.cjs). One value cannot hold for all three H1s, so the
+   homepage hero has its own. These are tuned to the approved copy: if a
+   display line changes, re-run the sweep.
+   OBS-17 (DEC-043): font-optical-sizing is none on the two opsz roles because
+   WebKit (Safari 26.2) ignores "opsz" in font-variation-settings while it is
+   auto, renders the face ~9% wider than these fallbacks and re-wraps H1s at
+   the swap. Chromium already honoured the explicit opsz; its rendering is
+   unchanged. */
+@font-face { font-family: "DC Display Hero Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"), local("LiberationSans-Bold"); font-weight: 100 900; size-adjust: 93.5%; ascent-override: 99.47%; descent-override: 28.88%; line-gap-override: 0%; }
+@font-face { font-family: "DC Display 96 Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"), local("LiberationSans-Bold"); font-weight: 100 900; size-adjust: 90.5%; ascent-override: 102.76%; descent-override: 29.83%; line-gap-override: 0%; }
+@font-face { font-family: "DC Display 72 Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"), local("LiberationSans-Bold"); font-weight: 100 900; size-adjust: 96.4%; ascent-override: 96.47%; descent-override: 28.01%; line-gap-override: 0%; }
+/* OBS-18 (DEC-046): Firefox loads these fallbacks only when text names them
+   FIRST, so DcPage renders one hidden, zero-height element per face before the
+   page content (components/direction-c/primitives.tsx, FallbackPrimes). The
+   glyph is generated content: no text node, nothing in the DOM text. "B" is
+   declared in app/direction-c-pages.css. */
+.dc-font-prime { display: block; height: 0; overflow: hidden; visibility: hidden; font-weight: 800; }
+.dc-font-prime::before { content: "a"; }
+.dc-font-prime--hero { font-family: "DC Display Hero Fallback"; }
+.dc-font-prime--96 { font-family: "DC Display 96 Fallback"; }
+.dc-font-prime--72 { font-family: "DC Display 72 Fallback"; }
+.dc-font-prime--96b { font-family: "DC Display 96 Fallback B"; }
+.dc-display { font-family: var(--dc-f-display); font-weight: 800; letter-spacing: -.035em; line-height: .98; text-wrap: balance; font-optical-sizing: none; font-variation-settings: "opsz" 96; }
+.dc-statement { font-family: var(--dc-f-statement); font-weight: 800; font-size: var(--dc-t-statement); letter-spacing: -.03em; line-height: 1.02; text-wrap: balance; font-optical-sizing: none; font-variation-settings: "opsz" 72; }
+.dc-title { font-family: var(--dc-f-title); font-weight: 700; font-size: var(--dc-t-title); letter-spacing: -.02em; line-height: 1.15; text-wrap: balance; }
+.dc-lede { font-size: var(--dc-t-lede); line-height: 1.5; max-width: var(--dc-measure); color: var(--dc-dim); }
+.dc-lede b { color: var(--dc-ink); font-weight: 700; }
+.dc-body { max-width: var(--dc-measure); }
+.dc-body.dim { color: var(--dc-dim); }
+.dc-body b { color: var(--dc-ink); }
+.dc-note { font-size: var(--dc-t-note); line-height: 1.55; color: var(--dc-dim); max-width: var(--dc-measure); }
+.dc-note b { color: var(--dc-ink); }
+.dc-k-named { color: var(--dc-tang-display); }
+.dc-k-traffic { color: var(--dc-dim); }
+.dc-num { font-variant-numeric: tabular-nums lining-nums; }
+.dc-inline-link { font-weight: 700; color: var(--dc-ink); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+.dc-inline-link:hover { color: var(--dc-tang-small); text-decoration-thickness: 3px; }
+
+/* ---------------------------------------------------------- marks -------- */
+.dc-mk { display: inline-block; flex: none; width: 12px; height: 12px; vertical-align: -1px; }
+.dc-mk.named { background: var(--dc-ink); }
+.dc-mk.owned { background: var(--dc-tang-display); }
+.dc-mk.anon { background: var(--dc-dim); opacity: .42; }
+.dc-mk.open { border: 2px dashed var(--dc-gap); }
+.dc-mk.withheld { background: repeating-linear-gradient(45deg, var(--dc-gap) 0 1.5px, transparent 1.5px 4px); outline: 1px solid var(--dc-gap); outline-offset: -1px; }
+.dc-on-ink .dc-mk.named { background: var(--dc-on-ink); }
+
+/* -------------------------------------------------------------- actions -- */
+.dc-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.dc-btn { display: inline-flex; align-items: center; gap: 12px; max-width: 100%; min-height: 48px; padding: 0 24px 0 20px; border-radius: 999px; font: 700 1rem/1 var(--dc-f-body); text-decoration: none; cursor: pointer; border: 2px solid transparent; transition: background-color var(--dc-d-fast) var(--dc-e-state), color var(--dc-d-fast) var(--dc-e-state), border-color var(--dc-d-fast) var(--dc-e-state); }
+/* Gate 3 final acceptance, A1 (WCAG 1.4.10 / 1.4.12): a label may wrap inside the
+   pill instead of pushing it past the viewport. Single-line pills are unchanged
+   (min-height governs their height); wrapped lines get leading and block padding. */
+.dc-btn { white-space: normal; overflow-wrap: break-word; text-wrap: balance; text-align: center; line-height: 1.25; padding-block: 10px; }
+.dc-btn .dc-mk { width: 10px; height: 10px; transition: background-color var(--dc-d-fast) var(--dc-e-state), transform var(--dc-d-fast) var(--dc-e-arrive); }
+.dc-btn-primary, .dc-btn-primary:hover { color: #fff; text-decoration: none; }
+.dc-btn-primary { background: var(--dc-tang-small); }
+.dc-btn-primary .dc-mk { background: rgba(255, 255, 255, .45); }
+.dc-btn-primary:hover { background: #8F2C00; }
+.dc-btn-primary:hover .dc-mk, .dc-btn-primary:focus-visible .dc-mk { background: #fff; transform: scale(1.25); }
+.dc-btn-secondary, .dc-btn-secondary:hover { text-decoration: none; }
+.dc-btn-secondary { border-color: var(--dc-ink); color: var(--dc-ink); background: transparent; }
+.dc-btn-secondary .dc-mk { border: 2px dashed var(--dc-gap); background: transparent; width: 10px; height: 10px; }
+.dc-btn-secondary:hover { background: var(--dc-ink); color: var(--dc-on-ink); }
+.dc-btn-secondary:hover .dc-mk, .dc-btn-secondary:focus-visible .dc-mk { border: 0; background: var(--dc-tang); }
+.dc-on-tang .dc-btn-primary { background: var(--dc-ink); color: var(--dc-on-ink); }
+.dc-on-tang .dc-btn-primary .dc-mk { background: var(--dc-tang); }
+.dc-on-tang .dc-btn-primary:hover { background: var(--dc-ink-deep); color: var(--dc-on-ink); }
+.dc-on-tang .dc-btn-secondary { border-color: var(--dc-ink); color: var(--dc-ink); }
+.dc-on-tang .dc-btn-secondary .dc-mk { border-color: var(--dc-ink); }
+.dc-on-tang .dc-btn-secondary:hover { background: var(--dc-ink); color: var(--dc-tang); }
+.dc-tlink { display: inline-block; padding-block: 10px; font-weight: 700; color: var(--dc-ink); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 6px; transition: text-decoration-color var(--dc-d-fast), color var(--dc-d-fast); }
+.dc-tlink:hover, .dc-tlink:focus-visible { color: var(--dc-tang-small); text-decoration-thickness: 3px; }
+.dc-tlink .dc-arr { margin-left: .45em; display: inline-block; transition: transform var(--dc-d-fast) var(--dc-e-arrive); }
+.dc-tlink:hover .dc-arr { transform: translateX(3px); }
+.dc-tlink.dim { color: var(--dc-dim); }
+
+/* --------------------------------------------------------------- header -- */
+.dc-hdr { position: relative; background: var(--dc-ground); border-bottom: 1px solid var(--dc-line); z-index: 5; }
+/* flex-wrap: at 320px with 200% text the right cluster cannot fit beside the logo; it drops to a second row
+   instead of pushing the page 2px wider than the viewport. At normal text sizes everything fits and nothing wraps. */
+.dc-hdr .dc-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 28px; min-height: 72px; }
+/* APP: the brand mark is the production logo asset (Gate 1 E6 — the
+   typographic placeholder was never proposed copy). 44px target, as the
+   prototype's `.logo`. */
+.dc-logo { display: inline-flex; align-items: center; min-height: 44px; flex: none; }
+.dc-logo img { height: 28px; width: auto; }
+/* the logo link itself is the 44px target (the image is 22–28px tall) */
+.dc-logo a, .dc-ftr .dc-brand > a { display: inline-flex; align-items: center; min-height: 44px; }
+.dc-nav { display: none; align-items: center; gap: 4px; flex: 1; }
+.dc-nav a, .dc-nav .dc-svc-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; font: 600 .95rem/1 var(--dc-f-body); color: var(--dc-dim); text-decoration: none; background: none; border: 0; cursor: pointer; transition: color var(--dc-d-fast); }
+.dc-nav a:hover, .dc-nav .dc-svc-btn:hover { color: var(--dc-ink); text-decoration: none; }
+.dc-nav a[aria-current="page"], .dc-nav a[data-current], .dc-nav .dc-svc-btn[data-current] { color: var(--dc-ink); }
+.dc-nav a[aria-current="page"]::before, .dc-nav a[data-current]::before { content: ""; width: 8px; height: 8px; background: var(--dc-tang-display); }
+/* Gate 3 R1 — the split Services control: the link to /services, then a
+   44 × 44 button that only discloses the panel. Set tight, they read as one
+   item; each is its own target and its own Tab stop. */
+.dc-nav .dc-svc-link { padding-right: 2px; }
+.dc-nav .dc-svc-btn { justify-content: center; min-width: 44px; padding: 0; margin-left: -4px; }
+.dc-chev { width: 9px; height: 9px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg) translateY(-3px); transition: transform var(--dc-d-fast) var(--dc-e-state); }
+.dc-svc-btn[aria-expanded="true"] .dc-chev { transform: rotate(225deg) translate(-2px, -1px); }
+.dc-hdr .dc-right { display: flex; align-items: center; gap: 14px; margin-left: auto; }
+.dc-hdr .dc-book { display: none; font-weight: 700; font-size: .95rem; min-height: 44px; align-items: center; text-decoration: none; color: var(--dc-ink); }
+.dc-hdr .dc-book:hover { color: var(--dc-ink); text-decoration: underline; text-underline-offset: 4px; }
+.dc-hdr .dc-bar .dc-btn { min-height: 44px; padding: 0 18px 0 16px; font-size: .95rem; }
+.dc-hdr .dc-bar .dc-btn { line-height: 1; } /* A1: keeps the bar's short label on its Gate 2 baseline; it may still wrap */
+.dc-menu-btn { flex: none; display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px; border: 2px solid var(--dc-ink); border-radius: 999px; background: transparent; font-weight: 700; cursor: pointer; }
+.dc-menu-btn .dc-bars { width: 16px; height: 10px; border-block: 2px solid currentColor; position: relative; transition: border-color var(--dc-d-fast) var(--dc-e-state); }
+.dc-menu-btn .dc-bars::before, .dc-menu-btn .dc-bars::after { content: ""; position: absolute; left: -1px; right: -1px; top: 50%; height: 2px; margin-top: -1px; background: currentColor; opacity: 0; transition: transform var(--dc-d-fast) var(--dc-e-arrive), opacity var(--dc-d-fast) var(--dc-e-state); }
+.dc-menu-btn[aria-expanded="true"] .dc-bars { border-color: transparent; }
+.dc-menu-btn[aria-expanded="true"] .dc-bars::before { opacity: 1; transform: rotate(45deg); }
+.dc-menu-btn[aria-expanded="true"] .dc-bars::after { opacity: 1; transform: rotate(-45deg); }
+/* services disclosure — a disclosure of links, not role=menu */
+.dc-svc-panel { position: absolute; left: 0; right: 0; top: 100%; background: var(--dc-paper); border-bottom: 1px solid var(--dc-control); transform-origin: top; transition: opacity var(--dc-d-fast) var(--dc-e-state), transform var(--dc-d-standard) var(--dc-e-arrive), visibility 0s linear var(--dc-d-fast); }
+.dc-svc-panel[data-open="false"] { opacity: 0; transform: translateY(-6px); pointer-events: none; visibility: hidden; }
+.dc-svc-panel[data-open="true"] { transition: opacity var(--dc-d-fast) var(--dc-e-state), transform var(--dc-d-standard) var(--dc-e-arrive), visibility 0s; }
+.dc-svc-panel .dc-g12 { padding-block: 32px 40px; }
+.dc-svc-group { grid-column: span 4; }
+.dc-svc-group .dc-label { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
+.dc-svc-group a { display: flex; align-items: center; min-height: 44px; padding: 6px 0; border-top: 1px solid var(--dc-line); text-decoration: none; font-weight: 700; color: var(--dc-ink); }
+.dc-svc-group a:hover, .dc-svc-group a[aria-current="page"] { color: var(--dc-tang-small); text-decoration: none; }
+/* mobile menu — in normal page flow, CTAs first (LIVE-1 cannot occur in this structure) */
+.dc-mnav { border-top: 1px solid var(--dc-line); padding-block: 20px 28px; }
+.dc-mnav[hidden] { display: none; }
+.dc-mnav .dc-actions { flex-direction: column; align-items: stretch; }
+.dc-mnav .dc-actions .dc-btn { justify-content: center; min-height: 52px; padding: 0 24px 0 20px; font-size: 1rem; gap: 12px; }
+.dc-mnav:not([hidden]) { animation: dc-menu-in var(--dc-d-standard) var(--dc-e-arrive) both; }
+@keyframes dc-menu-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+.dc-mnav .dc-m-svc { margin-top: 24px; border-top: 1px solid var(--dc-line); padding-bottom: 6px; }
+.dc-mnav .dc-m-all, .dc-mnav .dc-m-main a { display: flex; justify-content: space-between; align-items: center; min-height: 52px; font: 700 1.15rem/1 var(--dc-f-title); letter-spacing: -.01em; text-decoration: none; color: var(--dc-ink); }
+.dc-mnav .dc-m-grp { display: grid; grid-template-columns: 6.2rem minmax(0, 1fr); gap: 4px 12px; padding: 6px 0; border-top: 1px dashed var(--dc-line); }
+.dc-mnav .dc-m-grp .dc-label { display: flex; gap: 8px; align-items: center; min-height: 44px; letter-spacing: .1em; }
+.dc-mnav .dc-m-grp ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px; }
+/* overflow-wrap: at 320px with 200% text a single long service name is wider than its menu column; let it break
+   rather than overflow the open menu. At normal text sizes nothing breaks. */
+.dc-mnav .dc-m-grp a { display: flex; align-items: center; min-height: 44px; overflow-wrap: anywhere; font: 600 .98rem/1.2 var(--dc-f-body); color: var(--dc-ink); text-decoration: none; }
+.dc-mnav .dc-m-grp a:hover { color: var(--dc-tang-small); }
+/* DEC-034 ruling 6 — the "Company" label; an integer line box so the list below sits on whole pixels */
+.dc-mnav .dc-m-co { margin-top: 14px; padding-top: 14px; border-top: 2px solid var(--dc-ink); line-height: 17px; }
+.dc-mnav .dc-m-main { margin-top: 6px; }
+.dc-mnav .dc-m-main li a { border-top: 1px solid var(--dc-line); }
+.dc-mnav .dc-m-main li:first-child a { border-top: 0; }
+/* DEC-034 ruling 4 — one Contact Us while the menu is open: the menu's own pair comes first, the bar's pair is withdrawn */
+.dc-hdr.dc-menu-open .dc-right .dc-btn, .dc-hdr.dc-menu-open .dc-right .dc-book { display: none; }
+@media (max-width: 379px) { .dc-mnav .dc-m-grp { grid-template-columns: 1fr; } .dc-mnav .dc-m-grp .dc-label { min-height: 32px; } }
+@media (min-width: 600px) { .dc-hdr .dc-book { display: inline-flex; } }
+@media (max-width: 379px) { .dc-hdr .dc-bar .dc-btn { padding: 0 14px; font-size: .9rem; } .dc-hdr .dc-bar .dc-btn .dc-mk { display: none; } .dc-logo img { height: 22px; } }
+@media (max-width: 599px) {
+  .dc-hdr .dc-bar { gap: 10px; min-height: 64px; }
+  .dc-logo img { height: 24px; }
+  .dc-hdr .dc-right { gap: 8px; }
+  .dc-hdr .dc-bar .dc-btn { min-height: 44px; padding: 0 16px 0 14px; gap: 9px; font-size: .92rem; }
+  .dc-menu-btn { width: 44px; height: 44px; padding: 0; justify-content: center; }
+  .dc-menu-btn .dc-lbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+@media (min-width: 1200px) { .dc-nav { display: flex; } .dc-menu-btn { display: none; } .dc-mnav { display: none !important; } }
+/* Forced colours: the open menu button's "X" is two filled bars, which that mode does not paint, and below 600px its
+   "Close menu" text is visually hidden, so the open button showed no symbol. Redraw the bars in a system colour. */
+@media (forced-colors: active) {
+  .dc-menu-btn[aria-expanded="true"] .dc-bars { forced-color-adjust: none; border-color: transparent; }
+  .dc-menu-btn[aria-expanded="true"] .dc-bars::before, .dc-menu-btn[aria-expanded="true"] .dc-bars::after { background: CanvasText; }
+}
+
+/* ---------------------------------------------------------------- FOOTER -- */
+.dc-ftr { background: var(--dc-ink); color: var(--dc-on-ink-soft); padding-block: 64px 28px; font-size: .95rem; }
+.dc-ftr .dc-g12 > div { min-width: 0; }
+.dc-ftr .dc-brand { grid-column: 1 / span 4; }
+.dc-ftr .dc-brand p { margin-top: 16px; max-width: 36ch; }
+.dc-ftr .dc-col { grid-column: span 2; }
+.dc-ftr .dc-col.wide { grid-column: span 4; }
+.dc-ftr h2 { font: 700 .74rem/1.4 var(--dc-f-body); letter-spacing: .15em; text-transform: uppercase; color: var(--dc-on-ink-dim); margin-bottom: 10px; }
+/* overflow-wrap: a single long word ("generation" at 200% text) is wider than a 136px column at 320px; let it break
+   rather than overflow the page, as the contact details below already do */
+.dc-ftr li a { display: inline-flex; width: 100%; min-height: 44px; align-items: center; overflow-wrap: anywhere; text-decoration: none; color: var(--dc-on-ink); }
+.dc-ftr a:hover { color: var(--dc-tang); text-decoration: none; }
+.dc-ftr .dc-contact dt { font-size: .8rem; color: var(--dc-on-ink-dim); }
+.dc-ftr .dc-contact dd { color: var(--dc-on-ink); margin-bottom: 10px; overflow-wrap: anywhere; }
+.dc-ftr .dc-contact dd a { display: inline-flex; align-items: center; min-height: 44px; color: var(--dc-on-ink); text-decoration: none; }
+.dc-ftr .dc-base { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--dc-rule-on-ink); font-size: .86rem; }
+.dc-ftr .dc-base-links { display: flex; flex-wrap: wrap; gap: 0 20px; }
+.dc-ftr .dc-base a, .dc-ftr .dc-base button { color: var(--dc-on-ink-soft); min-height: 44px; padding-inline: 3px; display: inline-flex; align-items: center; text-decoration: none; background: none; border: 0; font: inherit; cursor: pointer; }
+.dc-ftr .dc-base a:hover, .dc-ftr .dc-base button:hover { color: var(--dc-tang); }
+.dc-ftr .dc-two { columns: 1; }
+@media (max-width: 1199px) { .dc-ftr .dc-brand { grid-column: 1 / -1; margin-bottom: 28px; } .dc-ftr .dc-col, .dc-ftr .dc-col.wide { grid-column: span 4; } }
+@media (max-width: 599px) {
+  .dc-ftr { padding-block: 48px 20px; }
+  .dc-ftr .dc-g12 { row-gap: 30px; }
+  .dc-ftr .dc-brand { margin-bottom: 0; }
+  .dc-ftr .dc-col, .dc-ftr .dc-col.wide, .dc-ftr .dc-col.dc-contact { grid-column: 1 / -1; margin-top: 0; }
+  .dc-ftr h2 { padding-bottom: 8px; border-bottom: 1px solid var(--dc-rule-on-ink); }
+  .dc-ftr ul.dc-fl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px; }
+  .dc-ftr .dc-contact dl { display: grid; gap: 2px; }
+  .dc-ftr .dc-base { flex-direction: column; align-items: flex-start; gap: 6px; margin-top: 36px; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .dc *, .dc *::before, .dc *::after { transition-duration: 1ms !important; transition-delay: 0ms !important; animation: none !important; }
+}

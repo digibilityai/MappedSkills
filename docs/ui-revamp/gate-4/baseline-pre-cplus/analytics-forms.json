@@ -1,0 +1,649 @@
+{
+ "meta": {
+  "tool": "gate-4/qa/analytics-forms.cjs",
+  "engine": "chromium",
+  "plain": "http://127.0.0.1:4391",
+  "at": "2026-10-12T07:54:07.871Z"
+ },
+ "results": {
+  "consent": {
+   "undecided": {
+    "dataLayer": [
+     {
+      "command": "consent default",
+      "args": {
+       "ad_storage": "denied",
+       "ad_user_data": "denied",
+       "ad_personalization": "denied",
+       "analytics_storage": "denied"
+      }
+     }
+    ],
+    "banner": true,
+    "gtmScript": false,
+    "metaPixel": false,
+    "blockedExternal": 0
+   },
+   "denied": {
+    "dataLayer": [
+     {
+      "command": "consent default",
+      "args": {
+       "ad_storage": "denied",
+       "ad_user_data": "denied",
+       "ad_personalization": "denied",
+       "analytics_storage": "denied"
+      }
+     }
+    ],
+    "banner": false,
+    "gtmScript": false,
+    "metaPixel": false,
+    "blockedExternal": 0
+   },
+   "granted": {
+    "dataLayer": [
+     {
+      "command": "consent default",
+      "args": {
+       "ad_storage": "denied",
+       "ad_user_data": "denied",
+       "ad_personalization": "denied",
+       "analytics_storage": "denied"
+      }
+     },
+     {
+      "command": "consent update",
+      "args": {
+       "analytics_storage": "granted",
+       "ad_storage": "denied",
+       "ad_user_data": "denied",
+       "ad_personalization": "denied"
+      }
+     }
+    ],
+    "banner": false,
+    "gtmScript": false,
+    "metaPixel": false,
+    "blockedExternal": 0
+   }
+  },
+  "consentBannerButtons": [
+   "Accept analytics",
+   "Reject analytics"
+  ],
+  "consentAfterFirstButton": {
+   "cmds": [
+    {
+     "command": "consent default",
+     "args": {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied",
+      "analytics_storage": "denied"
+     }
+    },
+    {
+     "command": "consent update",
+     "args": {
+      "analytics_storage": "granted",
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied"
+     }
+    }
+   ],
+   "banner": false,
+   "stored": "granted"
+  },
+  "pageView": [
+   {
+    "event": "page_view",
+    "page_path": "/",
+    "page_type": "homepage",
+    "environment": "production"
+   },
+   {
+    "event": "page_view",
+    "page_path": "/services",
+    "page_type": "commercial",
+    "environment": "production"
+   },
+   {
+    "event": "page_view",
+    "page_path": "/seo",
+    "page_type": "commercial",
+    "environment": "production"
+   },
+   {
+    "event": "page_view",
+    "page_path": "/about",
+    "page_type": "about",
+    "environment": "production"
+   },
+   {
+    "event": "page_view",
+    "page_path": "/how-it-works",
+    "page_type": "methodology",
+    "environment": "production"
+   },
+   {
+    "event": "page_view",
+    "page_path": "/",
+    "page_type": "homepage",
+    "environment": "production"
+   },
+   {
+    "event": "page_view",
+    "page_path": "/how-it-works",
+    "page_type": "methodology",
+    "environment": "production"
+   }
+  ],
+  "pageViewFirstLoad": {
+   "/": [
+    "/|homepage"
+   ],
+   "/services": [
+    "/services|commercial"
+   ],
+   "/seo": [
+    "/seo|commercial"
+   ],
+   "/google-ads": [
+    "/google-ads|commercial"
+   ],
+   "/problems/traffic-but-no-enquiries": [
+    "/problems/traffic-but-no-enquiries|problem"
+   ],
+   "/pricing": [
+    "/pricing|pricing"
+   ],
+   "/how-it-works": [
+    "/how-it-works|methodology"
+   ],
+   "/about": [
+    "/about|about"
+   ],
+   "/faq": [
+    "/faq|other"
+   ],
+   "/contact": [
+    "/contact|contact"
+   ],
+   "/schedule-call": [
+    "/schedule-call|booking"
+   ],
+   "/thank-you": [
+    "/thank-you|other"
+   ],
+   "/blog": [
+    "/blog|editorial"
+   ],
+   "/research": [
+    "/research|research"
+   ],
+   "/press": [
+    "/press|other"
+   ],
+   "/work": [
+    "/work|other"
+   ],
+   "/privacy-policy": [
+    "/privacy-policy|other"
+   ],
+   "/terms": [
+    "/terms|other"
+   ],
+   "/b0-no-such-page": [
+    "/b0-no-such-page|other"
+   ]
+  },
+  "booking": {
+   "anchors": [
+    {
+     "href": "https://calendly.com/mappedskills/client-discovery",
+     "text": "Open the booking page",
+     "rel": "noopener noreferrer",
+     "region": "main"
+    }
+   ],
+   "clicks": [
+    [
+     {
+      "event": "meeting_started",
+      "environment": "production",
+      "page_path": "/schedule-call",
+      "page_type": "booking",
+      "cta_location": "inline",
+      "cta_role": "direct",
+      "conversion_surface": "booking"
+     }
+    ]
+   ],
+   "externalRequestsBlocked": 1
+  },
+  "form": {
+   "contract": [
+    {
+     "tag": "input",
+     "type": "text",
+     "name": "contactReference",
+     "id": "contactReference",
+     "required": false,
+     "ariaRequired": null,
+     "autocomplete": "off",
+     "tabindex": "-1",
+     "hiddenFromPeople": true
+    },
+    {
+     "tag": "input",
+     "type": "text",
+     "name": "name",
+     "id": "name",
+     "required": false,
+     "ariaRequired": "true",
+     "autocomplete": "name",
+     "tabindex": null,
+     "hiddenFromPeople": false
+    },
+    {
+     "tag": "input",
+     "type": "email",
+     "name": "email",
+     "id": "email",
+     "required": false,
+     "ariaRequired": "true",
+     "autocomplete": "email",
+     "tabindex": null,
+     "hiddenFromPeople": false
+    },
+    {
+     "tag": "input",
+     "type": "text",
+     "name": "company",
+     "id": "company",
+     "required": false,
+     "ariaRequired": "true",
+     "autocomplete": "organization",
+     "tabindex": null,
+     "hiddenFromPeople": false
+    },
+    {
+     "tag": "textarea",
+     "type": null,
+     "name": "message",
+     "id": "message",
+     "required": false,
+     "ariaRequired": "true",
+     "autocomplete": null,
+     "tabindex": null,
+     "hiddenFromPeople": false
+    },
+    {
+     "tag": "input",
+     "type": "tel",
+     "name": "phone",
+     "id": "phone",
+     "required": false,
+     "ariaRequired": null,
+     "autocomplete": "tel",
+     "tabindex": null,
+     "hiddenFromPeople": false
+    },
+    {
+     "tag": "input",
+     "type": "url",
+     "name": "website",
+     "id": "website",
+     "required": false,
+     "ariaRequired": null,
+     "autocomplete": "url",
+     "tabindex": null,
+     "hiddenFromPeople": false
+    },
+    {
+     "tag": "input",
+     "type": "checkbox",
+     "name": "marketingConsent",
+     "id": "marketingConsent",
+     "required": false,
+     "ariaRequired": null,
+     "autocomplete": null,
+     "tabindex": null,
+     "hiddenFromPeople": false
+    },
+    {
+     "tag": "button",
+     "type": "submit",
+     "name": null,
+     "id": "",
+     "ariaRequired": null,
+     "autocomplete": null,
+     "tabindex": null,
+     "hiddenFromPeople": false
+    }
+   ],
+   "emptySubmit": {
+    "events": [
+     {
+      "event": "lead_form_validation_error",
+      "environment": "production",
+      "page_path": "/contact",
+      "page_type": "contact",
+      "form_id": "contact_enquiry",
+      "field_name": "name",
+      "error_type": "required",
+      "error_scope": "field"
+     },
+     {
+      "event": "lead_form_validation_error",
+      "environment": "production",
+      "page_path": "/contact",
+      "page_type": "contact",
+      "form_id": "contact_enquiry",
+      "field_name": "email",
+      "error_type": "required",
+      "error_scope": "field"
+     },
+     {
+      "event": "lead_form_validation_error",
+      "environment": "production",
+      "page_path": "/contact",
+      "page_type": "contact",
+      "form_id": "contact_enquiry",
+      "field_name": "company",
+      "error_type": "required",
+      "error_scope": "field"
+     },
+     {
+      "event": "lead_form_validation_error",
+      "environment": "production",
+      "page_path": "/contact",
+      "page_type": "contact",
+      "form_id": "contact_enquiry",
+      "field_name": "message",
+      "error_type": "required",
+      "error_scope": "field"
+     }
+    ],
+    "apiCalls": 0,
+    "alert": {
+     "text": "Check the form before sending. Your name: Enter the name we should use when we reply. Work email: Enter an email address so we can reply to you. Company: Enter your company name. One word is enough. What you're trying to fix: Tell us what you are trying to fix, in your own words.",
+     "focused": true
+    },
+    "invalid": [
+     "name",
+     "email",
+     "company",
+     "message"
+    ]
+   },
+   "startedCount": 1,
+   "outcomes": {
+    "429": {
+     "requests": 1,
+     "bodyKeys": [
+      "attribution",
+      "company",
+      "contactReference",
+      "elapsedMs",
+      "email",
+      "idempotencyKey",
+      "marketingConsent",
+      "message",
+      "name",
+      "phone",
+      "sourcePage",
+      "website"
+     ],
+     "attributionKeys": [
+      "firstCampaign",
+      "firstContent",
+      "firstLandingPage",
+      "firstMedium",
+      "firstReferrerHost",
+      "firstSource",
+      "firstSourceDerived",
+      "firstTerm",
+      "firstTouchAt",
+      "latestCampaign",
+      "latestMedium",
+      "latestReferrerHost",
+      "latestSource",
+      "status"
+     ],
+     "sourcePage": "/contact",
+     "honeypotEmpty": true,
+     "finalPath": "/contact",
+     "events": [
+      {
+       "event": "lead_form_started",
+       "page_path": "/contact",
+       "page_type": "contact",
+       "form_id": "contact_enquiry"
+      },
+      {
+       "event": "lead_form_validation_error",
+       "page_path": "/contact",
+       "page_type": "contact",
+       "form_id": "contact_enquiry",
+       "error_type": "rate_limited"
+      }
+     ],
+     "alert": "Your enquiry was not sent. That is several attempts in a short time, so this one was not saved. Wait a few minutes and try again."
+    },
+    "500": {
+     "requests": 1,
+     "bodyKeys": [
+      "attribution",
+      "company",
+      "contactReference",
+      "elapsedMs",
+      "email",
+      "idempotencyKey",
+      "marketingConsent",
+      "message",
+      "name",
+      "phone",
+      "sourcePage",
+      "website"
+     ],
+     "attributionKeys": [
+      "firstCampaign",
+      "firstContent",
+      "firstLandingPage",
+      "firstMedium",
+      "firstReferrerHost",
+      "firstSource",
+      "firstSourceDerived",
+      "firstTerm",
+      "firstTouchAt",
+      "latestCampaign",
+      "latestMedium",
+      "latestReferrerHost",
+      "latestSource",
+      "status"
+     ],
+     "sourcePage": "/contact",
+     "honeypotEmpty": true,
+     "finalPath": "/contact",
+     "events": [
+      {
+       "event": "lead_form_started",
+       "page_path": "/contact",
+       "page_type": "contact",
+       "form_id": "contact_enquiry"
+      },
+      {
+       "event": "lead_form_validation_error",
+       "page_path": "/contact",
+       "page_type": "contact",
+       "form_id": "contact_enquiry",
+       "error_type": "server"
+      }
+     ],
+     "alert": "Your enquiry was not sent. Something went wrong at our end and your enquiry was not saved. Nothing you typed has been lost — try again."
+    },
+    "2xx": {
+     "requests": 1,
+     "bodyKeys": [
+      "attribution",
+      "company",
+      "contactReference",
+      "elapsedMs",
+      "email",
+      "idempotencyKey",
+      "marketingConsent",
+      "message",
+      "name",
+      "phone",
+      "sourcePage",
+      "website"
+     ],
+     "attributionKeys": [
+      "firstCampaign",
+      "firstContent",
+      "firstLandingPage",
+      "firstMedium",
+      "firstReferrerHost",
+      "firstSource",
+      "firstSourceDerived",
+      "firstTerm",
+      "firstTouchAt",
+      "latestCampaign",
+      "latestMedium",
+      "latestReferrerHost",
+      "latestSource",
+      "status"
+     ],
+     "sourcePage": "/contact",
+     "honeypotEmpty": true,
+     "finalPath": "/thank-you",
+     "events": [
+      {
+       "event": "lead_form_started",
+       "page_path": "/contact",
+       "page_type": "contact",
+       "form_id": "contact_enquiry"
+      },
+      {
+       "event": "lead_form_submitted",
+       "page_path": "/contact",
+       "page_type": "contact",
+       "form_id": "contact_enquiry",
+       "conversion_surface": "form",
+       "qualification_status": "not_evaluated"
+      }
+     ],
+     "alert": null
+    },
+    "400-field": {
+     "requests": 1,
+     "bodyKeys": [
+      "attribution",
+      "company",
+      "contactReference",
+      "elapsedMs",
+      "email",
+      "idempotencyKey",
+      "marketingConsent",
+      "message",
+      "name",
+      "phone",
+      "sourcePage",
+      "website"
+     ],
+     "attributionKeys": [
+      "firstCampaign",
+      "firstContent",
+      "firstLandingPage",
+      "firstMedium",
+      "firstReferrerHost",
+      "firstSource",
+      "firstSourceDerived",
+      "firstTerm",
+      "firstTouchAt",
+      "latestCampaign",
+      "latestMedium",
+      "latestReferrerHost",
+      "latestSource",
+      "status"
+     ],
+     "sourcePage": "/contact",
+     "honeypotEmpty": true,
+     "finalPath": "/contact",
+     "events": [
+      {
+       "event": "lead_form_started",
+       "page_path": "/contact",
+       "page_type": "contact",
+       "form_id": "contact_enquiry"
+      },
+      {
+       "event": "lead_form_validation_error",
+       "page_path": "/contact",
+       "page_type": "contact",
+       "form_id": "contact_enquiry",
+       "error_type": "server",
+       "field_name": "email"
+      }
+     ],
+     "alert": "Check the form before sending. Work email: Enter a valid email"
+    },
+    "network-abort": {
+     "requests": 1,
+     "bodyKeys": [
+      "attribution",
+      "company",
+      "contactReference",
+      "elapsedMs",
+      "email",
+      "idempotencyKey",
+      "marketingConsent",
+      "message",
+      "name",
+      "phone",
+      "sourcePage",
+      "website"
+     ],
+     "attributionKeys": [
+      "firstCampaign",
+      "firstContent",
+      "firstLandingPage",
+      "firstMedium",
+      "firstReferrerHost",
+      "firstSource",
+      "firstSourceDerived",
+      "firstTerm",
+      "firstTouchAt",
+      "latestCampaign",
+      "latestMedium",
+      "latestReferrerHost",
+      "latestSource",
+      "status"
+     ],
+     "sourcePage": "/contact",
+     "honeypotEmpty": true,
+     "finalPath": "/contact",
+     "events": [
+      {
+       "event": "lead_form_started",
+       "page_path": "/contact",
+       "page_type": "contact",
+       "form_id": "contact_enquiry"
+      },
+      {
+       "event": "lead_form_validation_error",
+       "page_path": "/contact",
+       "page_type": "contact",
+       "form_id": "contact_enquiry",
+       "error_type": "server"
+      }
+     ],
+     "alert": "Your enquiry was not sent. We could not reach the server, so your enquiry has not been saved. Check your connection and try again."
+    }
+   }
+  }
+ }
+}

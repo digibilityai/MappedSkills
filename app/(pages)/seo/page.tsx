@@ -4,13 +4,13 @@ import { CplusPage } from '@/components/cplus/CplusPage';
 import { SeoBody } from '@/components/cplus/seo/SeoBody';
 
 /**
- * `/seo` — the approved C+ SEO design (proto/direction-c-plus 0a8b611) in production. The URL, metadata
- * (title, description, canonical, Open Graph/Twitter), the global structured data and this route's `BreadcrumbList`
- * (same trail, same helpers) are unchanged. The Direction C header and footer come from the root layout.
+ * `/seo` — the redesigned, visually led C+ SEO page. The URL, canonical, Open Graph/Twitter generation, the global
+ * structured data and this route's `BreadcrumbList` (same trail, same helpers) are unchanged; the title and description
+ * were updated to match the redesigned page (owner-approved wording, 2026-10-15). The Direction C header and footer come from the root layout.
  */
 export const metadata = createMetadata(
-  'SEO Judged on the Enquiries It Produces | B2B & Enterprise SEO | MappedSkills',
-  'Technical foundations, structure and content aimed at searches that indicate someone wants to buy — then the page they land on, the enquiry they send, and the measurement that proves it happened.',
+  'SEO Judged on the Enquiries It Produces | MappedSkills',
+  'We help your business appear for relevant searches, improve the pages visitors land on and measure whether organic search brings genuine enquiries.',
   '/seo'
 );
 

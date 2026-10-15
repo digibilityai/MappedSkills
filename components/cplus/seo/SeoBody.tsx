@@ -1,16 +1,19 @@
 import Link from 'next/link';
-import { BOOKING_HREF, CONTACT_HREF, InlineLink, Mark } from '@/components/direction-c/primitives';
+import { BOOKING_HREF, CONTACT_HREF, Mark } from '@/components/direction-c/primitives';
 import { SEO_PLAIN as S } from './content';
 import './seo.css';
 import { Breadcrumb } from '../Breadcrumb';
+import { Sequence } from './Sequence';
 
 /**
- * C+ SEO (/seo): the approved prototype's page body (proto/direction-c-plus 0a8b611, SeoH.tsx), unchanged in markup and
- * copy. Production changes only: the breadcrumb's Home link and the CTAs point at the live routes (`/`, CONTACT_HREF
- * and BOOKING_HREF) instead of prototype paths.
+ * C+ SEO (/seo), Direction B (owner-approved, 2026-10-15): one idea runs through the page, the route from a search to an
+ * enquiry. The hero draws it, the problems section shows where it breaks, the work is the route as a staircase, and the
+ * review sheet shows what a review covers without showing any figures. Server-rendered throughout; this phase is the
+ * static composition plus the motion (`Sequence`; each sequence plays once, calm to event to calm). The metadata, canonical, breadcrumb and structured data are set in
+ * `app/(pages)/seo/page.tsx` and are not touched here.
  */
 
-/* Small illustrations of the four stations — decorative; every station is named in text beside it. */
+/* Small illustrations of the four stations: decorative; every station is named in text beside it. */
 function Glyph({ k }: { k: string }) {
   return (
     <svg className="sx-g-svg" viewBox="0 0 64 48" aria-hidden="true" focusable="false">
@@ -46,36 +49,38 @@ function Glyph({ k }: { k: string }) {
   );
 }
 
-/* One short trail for the situation cards: four marks, broken where that version of the problem breaks. */
-function MiniTrail({ kind }: { kind: number }) {
-  return (
-    <div className={`sx-mini sx-mini-${kind}`} aria-hidden="true">
-      <span className="sx-mini-ln" />
-      {[0, 1, 2, 3].map((i) => (
-        <span key={i} className={`sx-mini-m sx-mini-m${i}`} />
-      ))}
-      {kind === 0 && <span className="sx-mini-off">competitor</span>}
-      {kind === 2 && <span className="sx-mini-rep">report</span>}
-    </div>
-  );
-}
+/* Anonymous marks travelling the problems trail (positions are layout only). */
+const TRAIL_MARKS: { x: number; off?: boolean }[] = [
+  { x: 6 },
+  { x: 9 },
+  { x: 12 },
+  { x: 15, off: true },
+  { x: 18, off: true },
+  { x: 20, off: true },
+  { x: 28 },
+  { x: 31 },
+  { x: 58 },
+  { x: 66 },
+  { x: 74 },
+  { x: 84 },
+  { x: 90 },
+];
 
 export function SeoBody() {
-  const midIdx = [1, 2];
+  const tm = S.trailMap;
   return (
     <>
-      {/* 1 — hero (ivory): the claim + the trail from a search to an enquiry */}
+      {/* 1 — hero (ivory): the claim, two short sentences, and the route from a search to an enquiry as one connected line */}
       <section className="b-hero sx-hero" aria-labelledby="sx-h1">
         <div className="px-wrap b-hero-g h-hero-g sx-hero-g">
           <div>
             <Breadcrumb trail={['What we do']} current={S.crumb} />
             <p className="b-kicker">{S.kicker}</p>
             <h1 id="sx-h1" className="b-h1">
-              {S.h1.a} <span className="b-named">{S.h1.b}</span> {S.h1.c}
+              {S.h1.a} <span className="b-named">{S.h1.b}</span> <span className="sx-h1-end">{S.h1.c}</span>
             </h1>
-            <p className="b-lede">{S.lede}</p>
-            <p className="sx-side">
-              {S.side.a} <b>{S.side.b}</b>
+            <p className="b-lede">
+              {S.lede[0]} {S.lede[1]}
             </p>
             <div className="dc-actions">
               <Link href={CONTACT_HREF} className="dc-btn dc-btn-primary">
@@ -89,270 +94,291 @@ export function SeoBody() {
             </div>
           </div>
 
-          <figure className="sx-hero-fig">
-            <div className="sx-trail">
-              <ol className="sx-st-list" aria-label="From a search to an enquiry">
+          <figure className="sx-route">
+            <Sequence trigger="load">
+              <div className="sx-route-art" aria-hidden="true">
+                <span className="sx-route-ln" />
+                <span className="sx-route-fill" />
+                <span className="sx-route-tr">
+                  {[0, 1, 2].map((m) => (
+                    <span key={m} className="sx-route-m" style={{ ['--m' as string]: m }} />
+                  ))}
+                </span>
+              </div>
+              <ol className="sx-route-list" aria-label={S.trailLabel}>
                 {S.trail.map((st, i) => (
-                  <li key={st.key} className={'sx-st' + (midIdx.includes(i) ? ' is-mid' : '') + (i === 3 ? ' is-end' : '')}>
+                  <li key={st.key} className={'sx-st' + (i === 3 ? ' is-end' : '')} style={{ ['--i' as string]: i }}>
                     <span className="sx-g">
                       <Glyph k={st.key} />
                     </span>
                     <span className="sx-st-tx">
                       <span className="sx-st-t">{st.name}</span>
-                      <span className="sx-st-n">{st.note}</span>
+                      {st.tag && <span className="sx-st-tag">{st.tag}</span>}
                     </span>
                   </li>
                 ))}
               </ol>
-              <p className="sx-br sx-br-mid">
-                <span className="sx-br-tag">{S.trailMid.tag}</span>
-                <span className="sx-br-t">{S.trailMid.t}</span>
-              </p>
-              <p className="sx-br sx-br-end">
-                <span className="sx-br-tag">{S.trailEnd.tag}</span>
-                <span className="sx-br-t">{S.trailEnd.t}</span>
-              </p>
-            </div>
-            <figcaption className="px-cap">
-              <b>{S.trailCap}</b> {S.trailNote}
-            </figcaption>
+            </Sequence>
+            <figcaption className="px-cap">{S.trailCap}</figcaption>
           </figure>
         </div>
       </section>
 
-      {/* 2 — horizon and limitations (ink): before any scope, the horizon in months and the boundary */}
-      <section className="b-sec b-ink sx-hz-sec" aria-labelledby="sx-h-hz">
+      {/* 2 — where SEO goes wrong (paper): one trail, three points of failure */}
+      <section className="b-sec b-paper sx-prob-sec" aria-labelledby="sx-h-prob">
         <div className="px-wrap">
-          <p className="b-kicker">{S.hzKicker}</p>
-          <h2 id="sx-h-hz" className="b-h2">
-            {S.hzH.a} <span className="b-named">{S.hzH.b}</span>
+          <p className="b-kicker">{S.probKicker}</p>
+          <h2 id="sx-h-prob" className="b-h2">
+            {S.probH.a} <span className="b-named">{S.probH.b}</span>
           </h2>
-          <p className="sx-hz-st">
-            {S.hzStatement.a} <span className="sx-hz-em">{S.hzStatement.b}</span>
-          </p>
 
-          <figure className="sx-hz" data-rv="">
-            <div className="sx-hz-g">
-              <div className="sx-hz-ticks" aria-hidden="true">
-                <span className="sx-hz-axis">{S.hzFig.axis}</span>
-                {S.hzFig.ticks.map((t) => (
-                  <span key={t} className="sx-hz-tick">
-                    {t}
+          <Sequence className="sx-prob-seq">
+            {/* the drawing is decorative and shown only on wide screens; every question below is real text */}
+            <div className="sx-trail" aria-hidden="true">
+              <span
+                className="sx-tl"
+                style={{ left: `${tm.stations[0].x}%`, width: `${tm.stations[3].x - tm.stations[0].x}%` }}
+              />
+              <span
+                className="sx-tl is-dash"
+                style={{ left: `${tm.stations[3].x}%`, width: `${96 - tm.stations[3].x}%` }}
+              />
+              {TRAIL_MARKS.map((m, k) => (
+                <span
+                  key={m.x}
+                  className={'sx-tm' + (m.off ? ' is-off' : '')}
+                  style={{ ['--x' as string]: `${m.x}%`, ['--k' as string]: k }}
+                />
+              ))}
+              <span className="sx-else" style={{ ['--x' as string]: '14%' }}>
+                {tm.elsewhere}
+              </span>
+              {tm.stations.map((st) => (
+                <span
+                  key={st.name}
+                  className={'sx-sta' + (st.end ? ' is-end' : '')}
+                  style={{ ['--x' as string]: `${st.x}%` }}
+                >
+                  <i />
+                  <b>{st.name}</b>
+                </span>
+              ))}
+              {tm.breaks.map((x, i) => (
+                <span key={x} className="sx-brk" style={{ ['--x' as string]: `${x}%`, ['--k' as string]: i }}>
+                  {i + 1}
+                </span>
+              ))}
+            </div>
+            <ol className="sx-co">
+              {S.problems.map((p, i) => (
+                <li
+                  key={p.q}
+                  className="sx-co-i"
+                  style={{ ['--x' as string]: `${tm.breaks[i]}%`, ['--k' as string]: i }}
+                >
+                  <span className="sx-co-n" aria-hidden="true">
+                    {i + 1}
                   </span>
-                ))}
-              </div>
-              <div className="sx-hz-bar" aria-hidden="true">
-                <span className="sx-hz-rep" />
-                <span className="sx-hz-on" />
-                <span className="sx-hz-plus" />
-              </div>
-              <ul className="sx-hz-notes">
-                <li className="sx-hz-n-rep">
-                  <i aria-hidden="true" /> {S.hzFig.repair}
+                  <h3 className="sx-co-q">{p.q}</h3>
+                  <p className="sx-co-a">{p.a}</p>
                 </li>
-                <li className="sx-hz-n-plus">
-                  <i aria-hidden="true" /> {S.hzFig.plus}
-                </li>
-              </ul>
-            </div>
-            <figcaption className="px-cap px-cap-ink">{S.hzFig.label}</figcaption>
-          </figure>
-
-          <div className="sx-hz-rows">
-            <dl className="sx-hz-dl">
-              <div>
-                <dt>{S.rows.horizon.k}</dt>
-                <dd>{S.rows.horizon.t}</dd>
-              </div>
-              <div className="sx-hz-urgent">
-                <dt>{S.rows.urgent.k}</dt>
-                <dd>
-                  <b>{S.rows.urgent.t}</b>
-                </dd>
-              </div>
-            </dl>
-            <div className="sx-np">
-              <p className="sx-np-k" id="sx-np-k">
-                {S.rows.not.k}
-              </p>
-              <ul aria-labelledby="sx-np-k">
-                {S.rows.not.items.map((t) => (
-                  <li key={t}>
-                    <span>{t}</span>
-                    <em>{S.rows.not.tag}</em>
-                  </li>
-                ))}
-              </ul>
-              <p className="b-tlink sx-link-ink">
-                <Link href={S.hzLink.href}>{S.hzLink.label} →</Link>
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3 — the situation (paper): three short trails, each breaking somewhere else */}
-      <section className="b-sec b-paper sx-sit-sec" aria-labelledby="sx-h-sit">
-        <div className="px-wrap">
-          <p className="b-kicker">{S.sitKicker}</p>
-          <h2 id="sx-h-sit" className="b-h2">
-            {S.sitH.a} <span className="b-named">{S.sitH.b}</span>
-          </h2>
-          <ol className="sx-sits" data-rv="" aria-label="Three versions of the situation">
-            {S.sits.map((s, i) => (
-              <li key={s.tag} data-rv-i="" className={'sx-sit' + (i > 0 ? ' is-more' : '')}>
-                <MiniTrail kind={i} />
-                <p className="sx-sit-tag">{s.tag}</p>
-                <p className="sx-sit-t">{s.t}</p>
-              </li>
-            ))}
-          </ol>
-          <div className="sx-sit-more">
-            <span className="sx-sit-br" aria-hidden="true" />
-            <p>{S.sitMore}</p>
-          </div>
-          <p className="px-cap">{S.sitCap}</p>
+              ))}
+            </ol>
+          </Sequence>
           <p className="b-tlink">
-            <Link href={S.sitLink.href}>{S.sitLink.label} →</Link>
+            <Link href={S.probLink.href}>{S.probLink.label} →</Link>
           </p>
         </div>
       </section>
 
-      {/* 4 — month to month (ivory): the six parts of the work against the four stations of the trail */}
+      {/* 3 — what the work includes (ivory): the route as a staircase of four stages */}
       <section className="b-sec sx-work-sec" aria-labelledby="sx-h-work">
         <div className="px-wrap">
           <p className="b-kicker">{S.workKicker}</p>
           <h2 id="sx-h-work" className="b-h2">
-            {S.workH}
+            {S.workH.a} <span className="b-named">{S.workH.b}</span>
           </h2>
-          <p className="sx-work-cap">{S.workCap}</p>
-          <div className="sx-cov">
-            <div className="sx-cov-head" aria-hidden="true">
-              <span />
-              {S.workCols.map((c, i) => (
-                <span key={c} className={'sx-cov-col' + (i === 3 ? ' is-end' : '')}>
-                  <span className="sx-cov-g">
-                    <Glyph k={S.trail[i].key} />
+          <p className="sx-sub">{S.workSub}</p>
+          <Sequence>
+            <ol className="sx-stairs">
+              {S.groups.map((g, i) => (
+                <li key={g.key} className={'sx-stair' + (i === 3 ? ' is-end' : '')} style={{ ['--i' as string]: i }}>
+                  <span className="sx-g sx-g-sm">
+                    <Glyph k={g.key} />
                   </span>
-                  {c}
-                </span>
-              ))}
-            </div>
-            <ol className="sx-cov-list" data-rv="">
-              {S.work.map((w) => (
-                <li key={w.lead} className="sx-cov-r" data-rv-i="">
-                  <div className="sx-cov-tx">
-                    <h3 className="sx-cov-t">{w.lead}</h3>
-                    <p className="sx-cov-b">{w.body}</p>
-                    <p className="px-sr">Acts on: {w.on.map((n) => S.workColsSr[n]).join(', ')}.</p>
-                  </div>
-                  <div className="sx-cov-m" aria-hidden="true">
-                    {S.workCols.map((c, i) => (
-                      <span key={c} className={'sx-cov-c' + (w.on.includes(i) ? ' is-on' : '') + (i === 3 ? ' is-end' : '')}>
-                        <span className="sx-cov-c-l">{c}</span>
-                      </span>
+                  <h3 className="sx-stair-t">{g.t}</h3>
+                  <p className="sx-stair-d">{g.d}</p>
+                  <ul className="sx-stair-l">
+                    {g.items.map((it) => (
+                      <li key={it}>{it}</li>
                     ))}
-                  </div>
+                  </ul>
+                  {g.also && <p className="sx-also">{g.also}</p>}
                 </li>
               ))}
             </ol>
-          </div>
+          </Sequence>
         </div>
       </section>
 
-      {/* 5 — how you will know (ink): the report drawn as its shape (no data); the self-test is cross-linked to /ai-seo, not printed here */}
+      {/* 4 — how we work (paper): one quiet line of four words */}
+      <section className="b-sec b-paper sx-how-sec" aria-labelledby="sx-h-how">
+        <div className="px-wrap">
+          <p className="b-kicker">{S.howKicker}</p>
+          <h2 id="sx-h-how" className="b-h2 sx-how-h">
+            {S.howH.a} <span className="b-named">{S.howH.b}</span>
+          </h2>
+          <ol className="sx-how" aria-label={S.howLabel}>
+            {S.steps.map((st, i) => (
+              <li key={st.k}>
+                <h3 className="sx-how-t">
+                  {st.k}
+                  {i < S.steps.length - 1 && (
+                    <span className="sx-how-ar" aria-hidden="true">
+                      →
+                    </span>
+                  )}
+                </h3>
+                <p className="sx-how-d">{st.d}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="b-tlink">
+            <Link href={S.howLink.href}>{S.howLink.label} →</Link>
+          </p>
+        </div>
+      </section>
+
+      {/* 5 — measurement (ink): one ruled sheet with withheld (hatched) fills; no figures */}
       <section className="b-sec b-ink sx-meas-sec" aria-labelledby="sx-h-meas">
         <div className="px-wrap">
           <p className="b-kicker">{S.measKicker}</p>
-          <h2 id="sx-h-meas" className="b-h2">
-            {S.measH}
-          </h2>
-          <div className="sx-meas-g">
-            <div className="sx-meas-tx">
-              {S.meas.map((t) => (
-                <p key={t} className="sx-meas-p">
-                  {t}
-                </p>
-              ))}
+          <div className="sx-meas">
+            <div>
+              <h2 id="sx-h-meas" className="b-h2">
+                {S.measH.a} <span className="b-named">{S.measH.b}</span>
+              </h2>
+              <p className="sx-meas-note">{S.measNote}</p>
               <p className="b-tlink sx-link-ink">
                 <Link href={S.measLink.href}>{S.measLink.label} →</Link>
               </p>
-              <p className="b-tlink sx-link-ink">
-                <Link href={S.selfLink.href}>{S.selfLink.label} →</Link>
-              </p>
             </div>
-            <figure className="sx-rep" data-rv="">
-              <figcaption className="sx-rep-cap">{S.report.cap}</figcaption>
-              <div className="sx-rep-row sx-rep-start" data-rv-i="">
-                <p className="sx-rep-k">{S.report.start.k}</p>
-                <p className="sx-rep-t">{S.report.start.t}</p>
-              </div>
-              <div className="sx-rep-row sx-rep-enq" data-rv-i="">
-                <p className="sx-rep-k sx-rep-big">{S.report.enq.k}</p>
-                <ul className="sx-rep-cols">
-                  {S.report.enq.cols.map((c) => (
-                    <li key={c}>
-                      <span className="sx-rep-bars" aria-hidden="true">
-                        <i />
-                        <i />
-                        <i />
-                      </span>
-                      {c}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="sx-rep-row sx-rep-un" data-rv-i="">
-                <p className="sx-rep-k">
-                  <Mark state="open" /> {S.report.unattr.k}
-                </p>
-                <p className="sx-rep-t">{S.report.unattr.t}</p>
-              </div>
-              <div className="sx-rep-row sx-rep-diag" data-rv-i="">
-                <p className="sx-rep-k">{S.report.diag.k}</p>
-                <p className="sx-rep-t">{S.report.diag.t}</p>
-              </div>
+            <figure className="sx-sheet">
+              <figcaption className="sx-stamp">{S.measTag}</figcaption>
+              <ul data-rv="">
+                {S.tiles.map((t) => (
+                  <li key={t.key} className={t.lead ? 'is-lead' : undefined} data-rv-i="">
+                    <div>
+                      <h3 className="sx-sheet-t">{t.t}</h3>
+                      <p className="sx-sheet-d">{t.d}</p>
+                    </div>
+                    {t.key === 'next' ? (
+                      <div className="sx-nx" aria-hidden="true">
+                        {S.nextRows.map((r, i) => (
+                          <span key={r}>
+                            <b className={i === 1 ? 'is-next' : undefined}>{i === 0 ? '✓' : '→'}</b>
+                            {r}
+                            <i />
+                          </span>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="sx-bar" aria-hidden="true" />
+                    )}
+                  </li>
+                ))}
+              </ul>
             </figure>
           </div>
         </div>
       </section>
 
-      {/* 6 — questions (paper): three native disclosures, closed on load (the approved FAQ pattern) */}
-      <section className="b-sec b-paper sx-q-sec" aria-labelledby="sx-h-qs">
+      {/* 6 — commitments (ivory): a statement and a ruled list */}
+      <section className="b-sec sx-com-sec" aria-labelledby="sx-h-com">
+        <div className="px-wrap sx-com">
+          <div>
+            <p className="b-kicker">{S.comKicker}</p>
+            <h2 id="sx-h-com" className="b-h2">
+              {S.comH.a} <span className="b-named">{S.comH.b}</span>
+            </h2>
+            <p className="sx-com-line">{S.comLine}</p>
+            <p className="sx-com-note">{S.comNote}</p>
+          </div>
+          <ul className="sx-cl" data-rv="">
+            {S.commitments.map((c, i) => (
+              <li key={c.t} data-rv-i="">
+                <span className={'sx-cl-m' + (i === S.commitments.length - 1 ? ' is-last' : '')} aria-hidden="true" />
+                <h3 className="sx-cl-t">{c.t}</h3>
+                <p className="sx-cl-d">{c.d}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 7 — projects (paper): two separate historical SEO projects, set as index entries; no results, no links */}
+      <section className="b-sec b-paper sx-proj-sec" aria-labelledby="sx-h-proj">
+        <div className="px-wrap">
+          <p className="b-kicker">{S.projKicker}</p>
+          <h2 id="sx-h-proj" className="b-h2">
+            {S.projH.a} <span className="b-named">{S.projH.b}</span>
+          </h2>
+          <p className="sx-sub">{S.projIntro}</p>
+          <ul className="sx-pj" data-rv="">
+            {S.projects.map((p) => (
+              <li key={p.key} data-rv-i="">
+                <span className="sx-pj-i" aria-hidden="true">
+                  {p.initial}
+                </span>
+                <div className="sx-pj-b">
+                  <h3 className="sx-pj-name">{p.name}</h3>
+                  <p className="sx-pj-field">{p.field}</p>
+                  <p className="sx-pj-role">
+                    {p.role} <span className="sx-pj-tag">{p.tag}</span>
+                  </p>
+                </div>
+                <p className="sx-pj-state">
+                  <span>{p.state}</span>
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 8 — questions (ivory): four native disclosures, closed on load (the approved FAQ pattern) */}
+      <section className="b-sec sx-q-sec" aria-labelledby="sx-h-qs">
         <div className="px-wrap sx-q-g">
           <div>
             <p className="b-kicker">{S.qKicker}</p>
             <h2 id="sx-h-qs" className="b-h2">
-              {S.qH}
+              {S.qH.a} <span className="b-named">{S.qH.b}</span>
             </h2>
           </div>
-          <div>
-            <ul className="fq-list">
-              {S.questions.map((qa) => (
-                <li key={qa.q}>
-                  <details className="fq-d">
-                    <summary>
-                      <span className="fq-q">{qa.q}</span>
-                      <span className="fq-pm" aria-hidden="true" />
-                    </summary>
-                    <div className="fq-a">
-                      <p>{qa.a}</p>
-                    </div>
-                  </details>
-                </li>
-              ))}
-            </ul>
-            <p className="b-tlink">
-              <Link href={S.qLink.href}>{S.qLink.label} →</Link>
-            </p>
-            <p className="sx-above">
-              {S.qAbove.a} <InlineLink href={S.qAbove.href}>{S.qAbove.link}</InlineLink>.
-            </p>
-          </div>
+          <ul className="fq-list">
+            {S.questions.map((qa) => (
+              <li key={qa.q}>
+                <details className="fq-d">
+                  <summary>
+                    <span className="fq-q">{qa.q}</span>
+                    <span className="fq-pm" aria-hidden="true" />
+                  </summary>
+                  <div className="fq-a">
+                    <p>{qa.a}</p>
+                    {qa.link && (
+                      <p className="b-tlink">
+                        <Link href={qa.link.href}>{qa.link.label} →</Link>
+                      </p>
+                    )}
+                  </div>
+                </details>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* close (tangerine): the shared close's markup and classes, with the prototype routes */}
+      {/* close (tangerine): the shared close's markup and classes */}
       <section className="b-close" aria-labelledby="sx-h-close">
         <div className="px-wrap b-close-in">
           <div>
@@ -373,6 +399,18 @@ export function SeoBody() {
             </Link>
           </div>
         </div>
+        <nav className="px-wrap sx-rel" aria-label={S.related.label}>
+          <span className="sx-rel-k" aria-hidden="true">
+            {S.related.label}
+          </span>
+          <ul>
+            {S.related.links.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href}>{l.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </section>
     </>
   );

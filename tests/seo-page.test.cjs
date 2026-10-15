@@ -129,3 +129,8 @@ test('the project section has no links and the decorative art is hidden from ass
   assert.ok(/className="sx-trail" aria-hidden="true"/.test(body));
   assert.ok(/className="sx-route-art" aria-hidden="true"/.test(body));
 });
+
+test('the headline keeps its last words together (no single-word last line in Firefox)', () => {
+  assert.ok(body.includes('<span className="sx-h1-end">{S.h1.c}</span>'));
+  assert.ok(/\.sx-h1-end\s*\{\s*white-space:\s*nowrap;\s*\}/.test(css));
+});

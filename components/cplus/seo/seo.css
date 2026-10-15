@@ -2,6 +2,8 @@
    Breakpoints follow the Brand DNA: narrow <=760, medium 761-1080, wide >=1081. No shared token is changed. */
 .px-h .sx-hero .b-h1 { font-size: min(clamp(2.4rem, 1.2rem + 3.8vw, 4.6rem), 15.5vw); max-width: 13ch; }
 .px-h .sx-hero-g { align-items: center; }
+/* keep the headline's last words together so one word is never left alone on the last line (Firefox broke before "produces.") */
+.sx-h1-end { white-space: nowrap; }
 .sx-hero .b-lede { max-width: 40ch; }
 .sx-hero .dc-actions { margin-top: 30px; }
 .sx-sub { margin-top: 18px; max-width: 52ch; font-size: var(--dc-t-lede); line-height: 1.5; color: var(--dc-dim); }

@@ -77,7 +77,7 @@ export function SeoBody() {
             <Breadcrumb trail={['What we do']} current={S.crumb} />
             <p className="b-kicker">{S.kicker}</p>
             <h1 id="sx-h1" className="b-h1">
-              {S.h1.a} <span className="b-named">{S.h1.b}</span> {S.h1.c}
+              {S.h1.a} <span className="b-named">{S.h1.b}</span> <span className="sx-h1-end">{S.h1.c}</span>
             </h1>
             <p className="b-lede">
               {S.lede[0]} {S.lede[1]}

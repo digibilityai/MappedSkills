@@ -1,9 +1,8 @@
 import { Mark } from '@/components/direction-c/primitives';
 
 /**
- * C+ Home figures, from the approved prototype (proto/direction-c-plus 0a8b611): `ReportPanel` and `CountBar`
- * (ConceptB.tsx) and `Num` (PxPage.tsx), unchanged except one owner-approved correction: the panel heading "What we
- * report" is now "What we look at". `Num` prints the real value; CplusMotion counts it up once.
+ * C+ Home figure, from the approved prototype (proto/direction-c-plus 0a8b611): `ReportPanel` (ConceptB.tsx), unchanged
+ * except one owner-approved correction: the panel heading "What we report" is now "What we look at".
  */
 
 const SOURCES = [
@@ -39,34 +38,5 @@ export function ReportPanel() {
         ))}
       </ul>
     </div>
-  );
-}
-
-export function CountBar({ label, value, of, mark }: { label: string; value: number; of: number; mark: 'owned' | 'named' }) {
-  return (
-    <div className="b-cbar">
-      <p className="b-cbar-h">
-        <span>{label}</span>
-        <b>
-          <Num value={value} /> <span className="b-of">of {of}</span>
-        </b>
-      </p>
-      <div className="b-cbar-row" aria-hidden="true">
-        {Array.from({ length: of }).map((_, i) => (
-          <i key={i} className={'dc-mk ' + (i < value ? mark : 'open')} style={{ ['--k' as string]: i }} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-export function Num({ value, className }: { value: number; className?: string }) {
-  return (
-    <span className={className}>
-      <span aria-hidden="true" data-count={value}>
-        {value}
-      </span>
-      <span className="px-sr">{value}</span>
-    </span>
   );
 }

@@ -4,7 +4,8 @@ import { HOME } from './content';
 import './home.css';
 import { Icon } from '../Icons';
 import { Close } from '../Close';
-import { CountBar, Num, ReportPanel } from './HomeFigures';
+import { ReportPanel } from './HomeFigures';
+import { AiVisibilityChart } from './AiVisibilityChart';
 
 /**
  * C+ Home (/): the approved prototype's page body (proto/direction-c-plus 0a8b611, ConceptH.tsx `Home`), unchanged in
@@ -150,9 +151,12 @@ export function HomeBody() {
                 <span className="on">Measure</span>
               </div>
             </div>
-            <p className="h-joins-t">
-              {h.joins.a} <span className="b-named">{h.joins.b}</span>
-            </p>
+            <div>
+              <p className="h-joins-t">
+                {h.joins.a} <span className="b-named">{h.joins.b}</span>
+              </p>
+              <p className="b-body">{h.joins.body}</p>
+            </div>
           </div>
         </div>
       </section>
@@ -160,7 +164,7 @@ export function HomeBody() {
       {/* B — accountability boundary */}
       <section className="b-sec" aria-labelledby="h-h-acc">
         <div className="px-wrap">
-          <p className="b-kicker">What we are accountable for, and where that stops</p>
+          <p className="b-kicker">{h.accountable.kicker}</p>
           <h2 id="h-h-acc" className="b-h2">
             {h.accountable.h} <span className="b-named">{h.accountable.named}</span>
           </h2>
@@ -168,16 +172,17 @@ export function HomeBody() {
             <div className="b-bound-bar" aria-hidden="true">
               <span>Capture</span>
               <span>Convert</span>
-              <span className="on">Qualified enquiry</span>
+              <span className="on">Enquiry</span>
               <span className="cl">Revenue · yours</span>
             </div>
             <p className="b-bound-lab" aria-hidden="true">
-              ← we answer for this much
+              ← the part we manage and measure
             </p>
           </div>
           <div className="b-acc-g">
             <div>
               <p className="b-body">{h.accountable.body}</p>
+              <p className="b-body">{h.accountable.bodyLimits}</p>
               <p className="b-tlink">
                 <Link href="/pricing">{h.accountable.pricing} →</Link>
               </p>
@@ -194,44 +199,27 @@ export function HomeBody() {
         </div>
       </section>
 
-      {/* B — proof: the published self-test as counts */}
-      <section className="b-sec b-ink" aria-labelledby="h-h-proof">
+      {/* B — AI visibility (third-party Reckona AI chart) and case-study entry point */}
+      <section className="b-sec b-ink h-aiv-sec" aria-labelledby="h-h-proof">
         <div className="px-wrap">
           <p className="b-kicker">{h.proof.label}</p>
-          <h2 id="h-h-proof" className="b-h2">
-            {h.proof.claimA} <span className="b-named">{h.proof.claimNamed}</span>
-          </h2>
-          <div className="b-proof-g" data-rv="">
-            <div className="b-stats">
-              <p>
-                <b>
-                  <Num value={h.proof.systems} />
-                </b>
-                AI assistants asked
-              </p>
-              <p>
-                <b>
-                  <Num value={h.proof.runs} />
-                </b>
-                runs, one day
-              </p>
-              <p>
-                <b>
-                  <Num value={h.proof.named} />
-                </b>
-                named us
+          <div className="h-aiv-g">
+            <div>
+              <h2 id="h-h-proof" className="b-h2">
+                {h.proof.claimA} <span className="b-named">{h.proof.claimNamed}</span>
+              </h2>
+              <p className="b-lede b-lede-ink">{h.proof.claimBody}</p>
+              <p className="b-tlink">
+                <Link href="/ai-seo">{h.proof.claimLink} →</Link>
               </p>
             </div>
-            <div className="b-bars">
-              <CountBar label="Runs that named MappedSkills" value={h.proof.named} of={h.proof.runs} mark="owned" />
-              <CountBar label="Runs where directory sources appeared" value={h.proof.directories} of={h.proof.runs} mark="named" />
-              <p className="b-limit">
-                <b>Limitation.</b> {h.proof.limitation} Bars are counts; their order is not run order.
-              </p>
-            </div>
+            <AiVisibilityChart />
           </div>
           <p className="b-lede b-lede-ink">
-            <b>{h.proof.noCases}</b> {h.proof.noCasesBody}
+            <b>{h.proof.cases}</b> {h.proof.casesBody}
+          </p>
+          <p className="b-tlink">
+            <Link href="/work">{h.proof.casesLink} →</Link>
           </p>
         </div>
       </section>

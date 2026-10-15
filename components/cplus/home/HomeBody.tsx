@@ -5,6 +5,7 @@ import './home.css';
 import { Icon } from '../Icons';
 import { Close } from '../Close';
 import { ReportPanel } from './HomeFigures';
+import { AiVisibilityChart } from './AiVisibilityChart';
 
 /**
  * C+ Home (/): the approved prototype's page body (proto/direction-c-plus 0a8b611, ConceptH.tsx `Home`), unchanged in
@@ -198,17 +199,22 @@ export function HomeBody() {
         </div>
       </section>
 
-      {/* B — proof: AI search visibility entry point and case-study entry point (research detail lives on /about and /how-it-works) */}
-      <section className="b-sec b-ink" aria-labelledby="h-h-proof">
+      {/* B — AI visibility (third-party Reckona AI chart) and case-study entry point */}
+      <section className="b-sec b-ink h-aiv-sec" aria-labelledby="h-h-proof">
         <div className="px-wrap">
           <p className="b-kicker">{h.proof.label}</p>
-          <h2 id="h-h-proof" className="b-h2">
-            {h.proof.claim}
-          </h2>
-          <p className="b-lede b-lede-ink">{h.proof.claimBody}</p>
-          <p className="b-tlink">
-            <Link href="/ai-seo">{h.proof.claimLink} →</Link>
-          </p>
+          <div className="h-aiv-g">
+            <div>
+              <h2 id="h-h-proof" className="b-h2">
+                {h.proof.claimA} <span className="b-named">{h.proof.claimNamed}</span>
+              </h2>
+              <p className="b-lede b-lede-ink">{h.proof.claimBody}</p>
+              <p className="b-tlink">
+                <Link href="/ai-seo">{h.proof.claimLink} →</Link>
+              </p>
+            </div>
+            <AiVisibilityChart />
+          </div>
           <p className="b-lede b-lede-ink">
             <b>{h.proof.cases}</b> {h.proof.casesBody}
           </p>

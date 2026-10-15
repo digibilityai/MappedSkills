@@ -76,11 +76,12 @@ export const HOME = {
   notPromised: ['rankings', 'a position in AI answers', 'a number of enquiries', 'revenue', 'a return on spend'],
   notPromisedClose: 'None of that is ours to control.',
   proof: {
-    label: 'What you can check before you commit',
+    label: 'AI visibility & client work',
     cases: 'Real businesses. Real marketing challenges.',
     casesBody: 'See how we’ve helped clients tackle their marketing challenges.',
     casesLink: 'See our work',
-    claim: 'Can customers find your business through AI search?',
+    claimA: 'Can customers find your business through',
+    claimNamed: 'AI search?',
     claimBody:
       'AI assistants are changing how people discover businesses. We help you understand where your business appears, what’s missing, and what can be improved.',
     claimLink: 'Explore AI Search Visibility',

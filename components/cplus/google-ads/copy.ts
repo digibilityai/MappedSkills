@@ -12,7 +12,9 @@
  *   - ad spend is paid directly to Google and the management fee is separate; no amounts and no fee schedule;
  *   - no ROI, figures, guarantees, case studies, testimonials, free offers, response times or call lengths;
  *   - the word "conversion" is used exactly once, and explained (OD-11); elsewhere the copy says "recorded action";
- *   - the title, description, canonical and structured data are not part of this module (they stay in page.tsx).
+ *   - the title, description, canonical and structured data are not part of this module (they stay in page.tsx);
+ *   - no section kickers: none are in the approved storyboard (v4), so none are added here. The hero kicker is the only one.
+ *     A kicker can be added later only with owner approval.
  */
 
 export const GA_COPY = {
@@ -53,7 +55,6 @@ export const GA_COPY = {
 
   /* 2 — suitability factors: an educational list, no score and no verdict */
   factors: {
-    kicker: 'Is it right for you?',
     h: 'What we look at before suggesting Google Ads.',
     lede: 'Google Ads isn’t right for every business. These are the questions we go through with you.',
     items: [
@@ -91,7 +92,6 @@ export const GA_COPY = {
 
   /* 3 — the Path Figure: budget to enquiry, and where it can go wrong */
   path: {
-    kicker: 'From budget to enquiry',
     h: 'From your budget to an enquiry — and where it can go wrong.',
     lede: 'Google Ads reports what it’s set up to record. That isn’t always the same as a genuine enquiry.',
     steps: [
@@ -108,7 +108,7 @@ export const GA_COPY = {
     },
     laneYou: {
       label: 'What your business needs to know',
-      item: 'Whether each recorded action was a genuine enquiry: a real person, reachable, asking about your work.',
+      item: 'Whether each recorded action was a genuine enquiry — a real person, reachable, asking about your work.',
     },
     /* the one use of the word (OD-11), explained in plain language */
     term: 'Google Ads calls a recorded action a “conversion”.',
@@ -117,7 +117,7 @@ export const GA_COPY = {
       {
         key: 'intended',
         tab: 'As intended',
-        text: 'People search, click, visit and enquire. We check the enquiries your business receives against what the ads record.',
+        text: 'People search, click, visit and enquire.',
         actor: '',
         separately: '',
       },
@@ -148,7 +148,6 @@ export const GA_COPY = {
 
   /* 4 — what the work covers: core service, oversight (both in the management fee) and work agreed separately */
   scope: {
-    kicker: 'What is in scope',
     h: 'What the work covers.',
     sub: 'Management and oversight are covered by our management fee. Anything we’d build or fix on your website or tracking is agreed separately.',
     core: {
@@ -173,19 +172,18 @@ export const GA_COPY = {
     },
     separate: {
       k: 'Agreed separately',
-      t: 'Work we’d agree with you first',
       items: [
         'Creating or changing landing pages',
         'Fixing your website or enquiry forms',
         'Setting up new tracking, or repairing it',
       ],
     },
+    callout: 'If we find a problem, we’ll explain what needs fixing. Any additional work is agreed with you separately.',
     tear: 'The click',
   },
 
   /* 5 — what we answer for: commitments, one qualification and one fee line */
   answer: {
-    kicker: 'Accountability',
     h: 'What we answer for.',
     lede: 'You pay Google for the clicks. You pay us to run the work well. These are ours to get right.',
     items: [
@@ -202,7 +200,6 @@ export const GA_COPY = {
 
   /* 6 — what you learn each month; the attribution limit is part of reporting */
   reporting: {
-    kicker: 'Reporting',
     h: 'What you learn each month, and what we do with it.',
     lede: 'Each month you get a report and a review call. Where the data allows, it covers:',
     questions: [
@@ -230,7 +227,6 @@ export const GA_COPY = {
 
   /* 7 — next step: both audiences, the confirmed process, and the two CTAs */
   next: {
-    kicker: 'Next step',
     h: 'Already running Google Ads, or thinking about it?',
     already: { k: 'Already advertising?', t: 'Tell us what you spend, what you’re getting, and whether you can tell which enquiries came from it.' },
     thinking: { k: 'Thinking about it?', t: 'Tell us what you sell and what one new customer is worth to you.' },

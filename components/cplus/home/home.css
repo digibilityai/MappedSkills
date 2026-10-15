@@ -189,3 +189,8 @@
 .c-tile { grid-template-columns: minmax(0, 1fr); }
 .c-tile-t { overflow-wrap: break-word; }
 .c-tile-l a { min-width: 0; overflow-wrap: break-word; }
+
+/* Links on the ink (dark) proof section need the on-ink colour; .b-tlink a is ink-on-paper by default. */
+.b-ink .b-tlink a { color: var(--dc-on-ink); }
+.h-joins .b-body { margin-top: 12px; }
+.b-acc-g .b-body + .b-body { margin-top: 12px; }

@@ -150,9 +150,12 @@ export function HomeBody() {
                 <span className="on">Measure</span>
               </div>
             </div>
-            <p className="h-joins-t">
-              {h.joins.a} <span className="b-named">{h.joins.b}</span>
-            </p>
+            <div>
+              <p className="h-joins-t">
+                {h.joins.a} <span className="b-named">{h.joins.b}</span>
+              </p>
+              <p className="b-body">{h.joins.body}</p>
+            </div>
           </div>
         </div>
       </section>
@@ -160,7 +163,7 @@ export function HomeBody() {
       {/* B — accountability boundary */}
       <section className="b-sec" aria-labelledby="h-h-acc">
         <div className="px-wrap">
-          <p className="b-kicker">What we are accountable for, and where that stops</p>
+          <p className="b-kicker">{h.accountable.kicker}</p>
           <h2 id="h-h-acc" className="b-h2">
             {h.accountable.h} <span className="b-named">{h.accountable.named}</span>
           </h2>
@@ -168,16 +171,17 @@ export function HomeBody() {
             <div className="b-bound-bar" aria-hidden="true">
               <span>Capture</span>
               <span>Convert</span>
-              <span className="on">Qualified enquiry</span>
+              <span className="on">Enquiry</span>
               <span className="cl">Revenue · yours</span>
             </div>
             <p className="b-bound-lab" aria-hidden="true">
-              ← we answer for this much
+              ← the part we manage and measure
             </p>
           </div>
           <div className="b-acc-g">
             <div>
               <p className="b-body">{h.accountable.body}</p>
+              <p className="b-body">{h.accountable.bodyLimits}</p>
               <p className="b-tlink">
                 <Link href="/pricing">{h.accountable.pricing} →</Link>
               </p>
@@ -201,6 +205,13 @@ export function HomeBody() {
           <h2 id="h-h-proof" className="b-h2">
             {h.proof.claimA} <span className="b-named">{h.proof.claimNamed}</span>
           </h2>
+          <p className="b-lede b-lede-ink">{h.proof.claimBody}</p>
+          <p className="b-lede b-lede-ink">
+            <b>{h.proof.ownTest}</b> {h.proof.method}
+          </p>
+          <p className="b-tlink">
+            <Link href="/how-it-works">{h.proof.researchLink} →</Link>
+          </p>
           <div className="b-proof-g" data-rv="">
             <div className="b-stats">
               <p>
@@ -231,7 +242,10 @@ export function HomeBody() {
             </div>
           </div>
           <p className="b-lede b-lede-ink">
-            <b>{h.proof.noCases}</b> {h.proof.noCasesBody}
+            <b>{h.proof.cases}</b> {h.proof.casesBody}
+          </p>
+          <p className="b-tlink">
+            <Link href="/work">{h.proof.casesLink} →</Link>
           </p>
         </div>
       </section>

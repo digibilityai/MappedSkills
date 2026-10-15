@@ -11,7 +11,7 @@ export const REPORT = {
   period: 'July–August 2026',
   url: 'https://reckonaai.com/resources/ai-visibility-by-industry-india-prompt-panel-data/',
   metric: 'Not mentioned in tested AI recommendations',
-  limitation: 'Selected brands and prompts; not representative of all businesses. Results vary by AI system and question.',
+  limitation: 'Selected, well-known brands: not an estimate for all Indian businesses.',
 } as const;
 
 export type IndiaFilterKey = 'all' | 'manufacturing' | 'realEstate' | 'd2c' | 'other';
@@ -21,20 +21,24 @@ export interface IndiaFilter {
   label: string;
   notMentioned: number;
   total: number;
+  /** Noun phrase used in explanatory text. */
+  scope: string;
   note?: string;
 }
 
+/** Jewellery is intentionally absent: the study has no Jewellery sector and no comparable dataset has been approved. */
 export const INDIA_FILTERS: readonly IndiaFilter[] = [
-  { key: 'all', label: 'All sectors', notMentioned: 141, total: 210 },
-  { key: 'manufacturing', label: 'Manufacturing', notMentioned: 18, total: 25 },
-  { key: 'realEstate', label: 'Real estate', notMentioned: 14, total: 20 },
-  { key: 'd2c', label: 'D2C', notMentioned: 16, total: 25 },
+  { key: 'all', label: 'All sectors', notMentioned: 141, total: 210, scope: 'tested brands' },
+  { key: 'manufacturing', label: 'Manufacturing', notMentioned: 18, total: 25, scope: 'manufacturing brands' },
+  { key: 'realEstate', label: 'Real estate', notMentioned: 14, total: 20, scope: 'real estate developers' },
+  { key: 'd2c', label: 'D2C', notMentioned: 16, total: 25, scope: 'D2C brands' },
   {
     key: 'other',
-    label: 'Other sectors',
+    label: 'Others',
     notMentioned: 93,
     total: 140,
-    note: 'Aggregate of the seven remaining sectors, not a separately sampled industry.',
+    scope: 'brands in other sectors',
+    note: 'Seven other sectors combined.',
   },
 ];
 

@@ -6,7 +6,7 @@ import { Breadcrumb } from '../Breadcrumb';
 
 /**
  * C+ Services (/services): the approved prototype's page body (proto/direction-c-plus e5c1aa4, ServicesH.tsx),
- * unchanged in markup and copy. Production changes only: the breadcrumb's Home link and the CTA point at the live
+ * with the copy revised in the 2026-10-15 customer-focused pass. Production changes only: the breadcrumb's Home link and the CTA point at the live
  * routes (`/` and CONTACT_HREF) instead of prototype paths. No client JavaScript of its own.
  */
 
@@ -35,7 +35,6 @@ export function ServicesBody() {
               {S.h1.a} <span className="b-named">{S.h1.b}</span>
             </h1>
             <p className="b-lede">{S.lede}</p>
-            <p className="sv-side">{S.side}</p>
             <Action />
           </div>
 
@@ -47,6 +46,7 @@ export function ServicesBody() {
                   <div key={r.k} className="sv-plate-r">
                     <dt>{r.k}</dt>
                     <dd>
+                      <p className="sv-plate-d">{r.d}</p>
                       <ul>
                         {r.v.map((v) => (
                           <li key={v}>{v}</li>
@@ -55,10 +55,6 @@ export function ServicesBody() {
                     </dd>
                   </div>
                 ))}
-                <div className="sv-plate-r sv-plate-base">
-                  <dt>{P.base.k}</dt>
-                  <dd>{P.base.v}</dd>
-                </div>
               </dl>
             </div>
             <figcaption className="px-cap">{P.cap}</figcaption>
@@ -81,16 +77,20 @@ export function ServicesBody() {
                   <h3 className="sv-sym-t">{r.sym}</h3>
                   <p className="sv-job">{r.job}</p>
                 </div>
-                <ul className={'sv-svcs' + (r.svc.length > 1 ? ' is-many' : '')}>
-                  {r.svc.map((v) => (
-                    <li key={v.href}>
-                      <Link href={v.href} className="sv-door">
-                        <span className="sv-door-n">{v.name}</span>
-                        <span className="sv-door-d">{v.d}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                {r.svc.length > 0 ? (
+                  <ul className={'sv-svcs' + (r.svc.length > 1 ? ' is-many' : '')}>
+                    {r.svc.map((v) => (
+                      <li key={v.href}>
+                        <Link href={v.href} className="sv-door">
+                          <span className="sv-door-n">{v.name}</span>
+                          <span className="sv-door-d">{v.d}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="sv-route-note">{r.note}</p>
+                )}
               </li>
             ))}
           </ol>
@@ -129,15 +129,21 @@ export function ServicesBody() {
             </div>
             <div className="sv-bd">
               <p className="sv-bd-h">{S.bdH}</p>
-              <p className="sv-body">{S.bdD}</p>
-              <p className="sv-label" id="sv-np-k">
-                {S.notPromisedK}
-              </p>
-              <ul className="sv-np" aria-labelledby="sv-np-k">
-                {S.notPromised.map((t) => (
-                  <li key={t}>{t}</li>
-                ))}
-              </ul>
+              {S.bdGroups.map((g, i) => (
+                <div key={g.k}>
+                  <p className="sv-label" id={`sv-bd-${i}`}>
+                    {g.k}
+                  </p>
+                  <p className="sv-body sv-bd-d">{g.d}</p>
+                  {g.list && (
+                    <ul className="sv-np" aria-labelledby={`sv-bd-${i}`}>
+                      {g.list.map((t) => (
+                        <li key={t}>{t}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -150,7 +156,10 @@ export function ServicesBody() {
             <h2 id="sv-h-lim" className="sv-lim-h">
               {S.laterK}
             </h2>
-            <p className="sv-body">{S.later}</p>
+            <p className="sv-label">{S.laterStart.k}</p>
+            <p className="sv-body sv-bd-d">{S.laterStart.d}</p>
+            <p className="sv-label sv-later-k">{S.laterAdd.k}</p>
+            <p className="sv-body sv-bd-d">{S.laterAdd.d}</p>
             <p className="b-tlink">
               <Link href={S.priceLink.href}>{S.priceLink.label} →</Link>
             </p>

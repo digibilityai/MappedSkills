@@ -73,3 +73,8 @@
   .sv-unsure { grid-template-columns: minmax(0, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) { .sv-door::after { transition: none; } }
+
+.sv-plate-d { margin-bottom: 8px; color: var(--dc-on-ink-soft); font-size: var(--dc-t-note); line-height: 1.45; }
+.sv-route-note { align-self: start; color: var(--dc-dim); line-height: 1.5; }
+.sv-bd-d { margin-top: 6px; }
+.sv-later-k { margin-top: 22px; }

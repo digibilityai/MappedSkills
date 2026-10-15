@@ -1,87 +1,99 @@
 /**
- * C+ Services (/services) — customer-facing copy from the approved prototype
- * (proto/direction-c-plus e5c1aa4, components/proto-cplus/servicesContent.ts, SV_PLAIN), with one owner-approved
- * correction: the Lead generation description (the lead verification standard is not yet operational). The
- * prototype's internal review register is not carried over.
+ * C+ Services (/services) — customer-facing copy. Originally from the approved prototype
+ * (proto/direction-c-plus e5c1aa4, components/proto-cplus/servicesContent.ts, SV_PLAIN); revised in the owner-approved
+ * customer-focused copy pass (2026-10-15). Service scope follows docs/01-business/SERVICE_ARCHITECTURE.md: organic
+ * social media management is not a service; paid social is an optional acquisition channel. The prototype's internal
+ * review register is not carried over.
  */
 
 export const SV_PLAIN = {
   kicker: 'What we do',
-  h1: { a: 'One outcome:', b: 'enquiries you can act on.' },
-  lede: 'Getting in front of buyers who are already looking, getting the enquiry to actually complete, and seeing which part worked are three different skills.',
-  side: 'Here they are connected, the joins between them are ours, and the enquiry at the end is what we answer for.',
+  h1: { a: 'Digital marketing', b: 'that works together.' },
+  lede: 'From reaching potential customers to improving your website and measuring enquiries, we help you connect the parts of your marketing that matter.',
   primary: 'Tell us what you’re trying to fix',
 
-  /* hero illustration: a directory plate — the three parts, who works on each, measurement underneath */
+  /* hero illustration: the three stages, each in plain language */
   plate: {
-    title: 'What we do',
+    title: 'Three stages, one approach',
     rows: [
-      { k: 'Capture the demand', v: ['SEO', 'Google Ads', 'Paid social', 'AI search'] },
-      { k: 'Turn it into enquiries', v: ['Conversion optimization'] },
-      { k: 'Enquiries you can act on', v: ['Lead generation'] },
+      { k: 'Capture', d: 'Reach people who may be interested in your business.', v: ['SEO', 'Google Ads', 'Paid social', 'AI search'] },
+      { k: 'Convert', d: 'Make it easier for visitors to contact you.', v: ['Conversion optimization', 'Lead generation'] },
+      { k: 'Measure', d: 'Understand what’s working and where improvements are needed. Not sold separately.', v: ['Analytics', 'Enquiry sources'] },
     ],
-    base: { k: 'Measurement', v: 'Underneath all three. Not sold separately.' },
     cap: 'Illustration.',
   },
 
-  /* 2 — the router (paper): start with the symptom */
+  /* 2 — start with what is going wrong (paper) */
   routeKicker: 'Where to start',
   routeH: { a: 'Start with what', b: 'is going wrong.' },
   routes: [
     {
-      tag: 'Traffic',
-      sym: 'Not enough of the right buyers find you.',
-      job: 'Capture the demand',
+      tag: 'Reach',
+      sym: 'Not enough of the right people find you.',
+      job: 'Capture',
       svc: [
-        { href: '/seo', name: 'SEO', d: 'The primary route, and the slowest: a 12-month-plus horizon, stated before you commit.' },
-        { href: '/google-ads', name: 'Google Ads', d: 'Demand that is active now. Your spend is paid directly to Google; our fee is separate.' },
-        { href: '/social-media-ads', name: 'Paid social', d: 'An optional source, only where the channel fits your business.' },
-        { href: '/ai-seo', name: 'AI search', d: 'Whether assistants name you when a buyer asks. Much of that depends on sources off your site. Nobody can guarantee it.' },
+        { href: '/seo', name: 'SEO', d: 'The main long-term route. It usually takes 12 months or more, and we say so before you commit.' },
+        { href: '/google-ads', name: 'Google Ads', d: 'Reaches people searching right now. Your ad spend is paid directly to Google; our fee is separate.' },
+        { href: '/social-media-ads', name: 'Paid social', d: 'An optional source, used only where the channel suits your business.' },
+        { href: '/ai-seo', name: 'AI search', d: 'Whether AI assistants mention you when a buyer asks. Much of this depends on sources outside your website, and nobody can guarantee it.' },
       ],
     },
     {
-      tag: 'Conversion',
-      sym: 'Visitors arrive, and too few enquire.',
-      job: 'Turn it into enquiries',
+      tag: 'Enquiries',
+      sym: 'Advertising brings traffic, but too few enquiries.',
+      job: 'Convert',
       svc: [
-        { href: '/conversion-optimization', name: 'Conversion optimization', d: 'The page, the form, the booking and the delivery. Diagnosed before it is optimised: in two of the four places a visit is lost, the page is not the fix.' },
-      ],
-    },
-    {
-      tag: 'Lead quality',
-      sym: 'Enquiries arrive, and too few are worth acting on.',
-      job: 'Enquiries you can act on',
-      svc: [
+        { href: '/conversion-optimization', name: 'Conversion optimization', d: 'We look at the page, the form, the booking and how enquiries reach you, and fix what is actually losing visitors.' },
         { href: '/lead-generation', name: 'Lead generation', d: 'More of the right enquiries, not just more enquiries.' },
       ],
     },
+    {
+      tag: 'Tracking',
+      sym: 'Enquiries arrive, but where they come from is unclear.',
+      job: 'Measure',
+      svc: [
+        { href: '/how-it-works', name: 'How we track enquiries', d: 'Analytics and enquiry-source tracking are part of the work, not a separate service.' },
+      ],
+    },
+    {
+      tag: 'Overview',
+      sym: 'Your marketing runs in separate pieces, with no clear view of how it performs.',
+      job: 'Connect',
+      svc: [],
+      note: 'The next section explains how the pieces fit together.',
+    },
   ],
-  unsure: { t: 'Not sure which?', d: 'The first conversation is about finding which part is breaking.', link: { href: '/how-it-works', label: 'How it works' } },
+  unsure: { t: 'Not sure which?', d: 'The first conversation is about finding which part needs attention.', link: { href: '/how-it-works', label: 'How it works' } },
 
-  /* 3 — how they work together (ink): the joins and the accountability boundary */
+  /* 3 — how they work together (ink) */
   joinKicker: 'How the parts work together',
-  joinH: { a: 'Different skills.', b: 'The joins decide the result.' },
-  joins: [['The search work', 'the page it feeds'], ['The page', 'the form'], ['The form', 'where the enquiry lands'], ['All of it', 'the measurement']],
-  joinLine: 'Split across suppliers, those joins can belong to nobody.',
-  measure: 'Measurement — analytics, event instrumentation, enquiry-source capture and attribution — is not sold separately. It is what makes the rest checkable.',
-  scoped: 'Parts can be scoped. If you want the search work alone, we will tell you honestly whether it is likely to change the number you care about.',
-  bdH: 'Our work connects traffic, conversion and lead quality—so the focus stays on enquiries worth acting on.',
-  bdD: 'We do not control your price, your product, your capacity, how quickly you follow up, or whether you win the work.',
-  notPromisedK: 'We do not promise',
-  notPromised: ['rankings', 'positions in AI answers', 'enquiry volumes', 'revenue', 'a return on spend'],
+  joinH: { a: 'Better results start when', b: 'your marketing works together.' },
+  joins: [['Advertising and search', 'your website'], ['Your website', 'the enquiry form'], ['The enquiry form', 'where enquiries arrive'], ['All of it', 'measurement']],
+  joinLine: 'Handled separately, the gaps between these can go unnoticed.',
+  measure: 'Measurement (analytics, tracking and enquiry-source records) is part of the work, not a separate service. It is how you can check what is working.',
+  scoped: 'You can start with one part. If you want search work alone, we will tell you honestly whether it is likely to make a difference, because fixing one part while another is broken often changes little.',
 
-  /* 4 — boundaries (paper): what can be added later, what we do not do */
-  laterK: 'What can be added later',
-  later: 'Once enquiries are arriving: routing each one to the right person, acknowledging it, and reminding both sides about a booked call. We do not implement CRMs, build lifecycle programmes or run sales operations.',
-  notK: 'What we do not do',
-  not: ['CRM implementation and migration', 'Revenue and sales operations', 'Lifecycle and nurture programmes', 'Standalone web development', 'Ecommerce merchandising', 'Social media management, brand building and PR'],
-  notLine: 'Some of those are good work. They are not this.',
+  /* 3b — what we commit to (ink): managed / measured / influenced by external factors */
+  bdH: 'What we commit to, and what depends on other factors',
+  bdGroups: [
+    { k: 'What we manage', d: 'Your search and advertising work, the pages and forms that turn visits into enquiries, and the tracking that connects them.' },
+    { k: 'What we measure and improve', d: 'Where enquiries come from, where visitors drop away, and how this changes over time. We report it honestly, including what we cannot trace.' },
+    { k: 'What depends on other factors', d: 'We track these and report on them, but do not promise them. They also depend on your price, product, capacity, how quickly you follow up, and whether you win the work.', list: ['Rankings', 'Positions in AI answers', 'Enquiry volumes', 'Revenue', 'Return on ad spend'] },
+  ],
+
+  /* 4 — boundaries (paper): what can be added later, what is outside our service */
+  laterK: 'Starting out, and adding later',
+  laterStart: { k: 'At the start', d: 'We scope the work to what your business needs, drawn from the three stages above. Not every service is part of every engagement.' },
+  laterAdd: { k: 'Added later, if needed', d: 'Once enquiries are arriving: routing each one to the right person, acknowledging it, and reminding both sides about a booked call.' },
+  notK: 'Outside what we do',
+  not: ['CRM setup and migration', 'Sales and revenue operations', 'Lifecycle and nurture programmes', 'Standalone website development', 'Ecommerce merchandising', 'Organic social media management, brand building and PR'],
+  notLine: 'Some of this is good work. We keep our focus narrow so we do our own work well.',
   priceLink: { href: '/pricing', label: 'What this costs, and what moves the number' },
 
   /* close — the live close */
   close: {
-    label: 'Start with the situation, not the service',
-    h: { a: 'Tell us where the enquiry path is', b: 'breaking.' },
-    body: 'The enquiries you are getting, the ones you are not, and what you can currently see. That is a more useful first message than a list of services, and it is what the first conversation will be about anyway.',
+    label: 'Start a conversation',
+    h: { a: 'Not sure what’s holding your marketing back?', b: 'Let’s find out.' },
+    body: 'Tell us what you’re seeing and what you can currently measure. That is enough to start working out where to look first.',
   },
 };

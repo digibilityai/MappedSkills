@@ -74,3 +74,58 @@ test('heading structure: one h1 and an h2 per section', () => {
   assert.strictEqual((body.match(/<h1\b/g) || []).length, 1);
   assert.ok((body.match(/<h2\b/g) || []).length >= 8);
 });
+
+/* ---- Direction B: structure, motion rules and proof boundaries ---- */
+const css = read('components/cplus/seo/seo.css');
+const seq = read('components/cplus/seo/Sequence.tsx');
+const seoDir = path.join(__dirname, '..', 'components/cplus/seo');
+
+test('Sequence is the only client component and has no timers or loops', () => {
+  const clients = fs.readdirSync(seoDir).filter((f) => /\.tsx?$/.test(f) && /^['"]use client['"]/.test(read('components/cplus/seo/' + f).trimStart()));
+  assert.deepStrictEqual(clients, ['Sequence.tsx']);
+  for (const banned of ['setTimeout', 'setInterval', 'while (true)', 'for (;;)']) assert.ok(!seq.includes(banned), `Sequence must not use ${banned}`);
+  assert.ok(seq.includes("data-seq={trigger === 'load' ? 'idle' : undefined}"));
+  assert.ok(seq.includes('prefers-reduced-motion: reduce'));
+});
+
+test('seo.css has no looping, pinned or scroll-linked motion', () => {
+  assert.ok(!/infinite/.test(css), 'no infinite animation');
+  assert.ok(!/position:\s*(sticky|fixed)/.test(css), 'no sticky or fixed positioning');
+  assert.ok(!/animation-timeline|scroll-timeline|view-timeline/.test(css), 'no scroll-linked animation');
+  assert.ok(!/import\s/.test(css.replace(/\/\*[\s\S]*?\*\//g, '')), 'no css imports');
+});
+
+test('every idle (start) state is gated to motion-allowed visitors', () => {
+  const gated = css.slice(css.indexOf('@media (prefers-reduced-motion: no-preference)'));
+  const before = css.slice(0, css.indexOf('@media (prefers-reduced-motion: no-preference)'));
+  assert.ok(gated.length > 0 && before.length > 0);
+  assert.ok(!/data-seq="idle"/.test(before), 'no idle styling outside the no-preference block');
+  assert.ok(!/data-seq="run"/.test(before), 'no run styling outside the no-preference block');
+});
+
+test('each motion sequence uses Sequence and the hero plays on load', () => {
+  assert.ok(body.includes('<Sequence trigger="load">'));
+  assert.ok((body.match(/<Sequence\b/g) || []).length === 3, 'hero, problems trail and staircase');
+  assert.ok(body.includes('data-rv=""'), 'existing reveal on sheet, commitments and projects');
+});
+
+test('all nine sections are labelled and keep their approved headings', () => {
+  for (const id of ['sx-h1', 'sx-h-prob', 'sx-h-work', 'sx-h-how', 'sx-h-meas', 'sx-h-com', 'sx-h-proj', 'sx-h-qs', 'sx-h-close']) {
+    assert.ok(body.includes(`id="${id}"`), `${id} heading present`);
+  }
+  assert.ok(copy.includes("howH: { a: 'Four steps,', b: 'in this order.' }"));
+  assert.strictEqual((body.match(/<h1\b/g) || []).length, 1);
+});
+
+test('dropped labels stay dropped; project stub is the approved sentence', () => {
+  assert.ok(!/what the report counts/i.test(body + copy), 'no "what the report counts" label');
+  assert.ok(copy.includes("state: 'Results not yet published.'"));
+  assert.ok(!/<h3[^>]*>\s*Results\s*</.test(body));
+});
+
+test('the project section has no links and the decorative art is hidden from assistive technology', () => {
+  const proj = body.slice(body.indexOf('7 — projects'), body.indexOf('8 — questions'));
+  assert.ok(!/<Link|href=/.test(proj), 'project entries must not link anywhere');
+  assert.ok(/className="sx-trail" aria-hidden="true"/.test(body));
+  assert.ok(/className="sx-route-art" aria-hidden="true"/.test(body));
+});

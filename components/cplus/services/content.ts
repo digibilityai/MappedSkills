@@ -68,18 +68,18 @@ export const SV_PLAIN = {
   /* 3 — how they work together (ink) */
   joinKicker: 'How the parts work together',
   joinH: { a: 'Better results start when', b: 'your marketing works together.' },
-  joins: [['Advertising and search', 'your website'], ['Your website', 'the enquiry form'], ['The enquiry form', 'where enquiries arrive'], ['All of it', 'measurement']],
-  joinLine: 'Handled separately, the gaps between these can go unnoticed.',
-  measure: 'Measurement (analytics, tracking and enquiry-source records) is part of the work, not a separate service. It is how you can check what is working.',
-  scoped: 'You can start with one part. If you want search work alone, we will tell you honestly whether it is likely to make a difference, because fixing one part while another is broken often changes little.',
-
-  /* 3b — what we commit to (ink): managed / measured / influenced by external factors */
-  bdH: 'What we commit to, and what depends on other factors',
-  bdGroups: [
-    { k: 'What we manage', d: 'Your search and advertising work, the pages and forms that turn visits into enquiries, and the tracking that connects them.' },
-    { k: 'What we measure and improve', d: 'Where enquiries come from, where visitors drop away, and how this changes over time. We report it honestly, including what we cannot trace.' },
-    { k: 'What depends on other factors', d: 'We track these and report on them, but do not promise them. They also depend on your price, product, capacity, how quickly you follow up, and whether you win the work.', list: ['Rankings', 'Positions in AI answers', 'Enquiry volumes', 'Revenue', 'Return on ad spend'] },
+  journeyLabel: 'Marketing journey in four connected steps',
+  journey: [
+    { k: 'Get discovered', s: 'Ads & search', d: 'Help potential customers discover your business.' },
+    { k: 'Visit your website', s: 'Clear information', d: 'Give visitors a clear reason to contact you.' },
+    { k: 'Make an enquiry', s: 'Forms & calls', d: 'Make it easy to reach your business.' },
+    { k: 'Measure & improve', s: 'Tracking & insights', d: 'See where enquiries come from and what needs improving.' },
   ],
+  stepOf: ['Step 1 of 4', 'Step 2 of 4', 'Step 3 of 4', 'Step 4 of 4'],
+  sumManage: { k: 'What we manage and improve', d: 'Campaigns, website conversion paths and enquiry tracking—within the agreed scope.' },
+  sumAffect: { k: 'What also affects results', d: 'Market demand, pricing, competition and how quickly your business responds to enquiries.' },
+  /* retained qualification (owner approval requested): the outcomes we report on but do not promise */
+  noPromise: 'We report on rankings, enquiry volumes, revenue and return on ad spend, but do not promise them.',
 
   /* 4 — boundaries (paper): what can be added later, what is outside our service */
   laterK: 'Starting out, and adding later',

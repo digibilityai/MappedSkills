@@ -3,11 +3,12 @@ import { CONTACT_HREF, Mark } from '@/components/direction-c/primitives';
 import { SV_PLAIN as S } from './content';
 import './services.css';
 import { Breadcrumb } from '../Breadcrumb';
+import { Journey } from './Journey';
 
 /**
  * C+ Services (/services): the approved prototype's page body (proto/direction-c-plus e5c1aa4, ServicesH.tsx),
  * with the copy revised in the 2026-10-15 customer-focused pass. Production changes only: the breadcrumb's Home link and the CTA point at the live
- * routes (`/` and CONTACT_HREF) instead of prototype paths. No client JavaScript of its own.
+ * routes (`/` and CONTACT_HREF) instead of prototype paths. The only client JavaScript is the Journey in section 3.
  */
 
 function Action() {
@@ -104,48 +105,25 @@ export function ServicesBody() {
         </div>
       </section>
 
-      {/* 3 — how they work together (ink): the joins as seams, then where accountability stops */}
+      {/* 3 — how they work together (ink): the animated journey, then a compact scope summary */}
       <section className="b-sec b-ink sv-join" aria-labelledby="sv-h-join">
         <div className="px-wrap">
           <p className="b-kicker">{S.joinKicker}</p>
           <h2 id="sv-h-join" className="b-h2">
             {S.joinH.a} <span className="b-named">{S.joinH.b}</span>
           </h2>
-          <ul className="sv-seams" aria-label="The joins">
-            {S.joins.map(([a, b]) => (
-              <li key={a}>
-                <span className="sv-seam-a">{a}</span>
-                <span className="sv-seam" aria-hidden="true" />
-                <span className="px-sr"> to </span>
-                <span className="sv-seam-b">{b}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="sv-join-line">{S.joinLine}</p>
-          <div className="sv-join-g">
+          <Journey stages={S.journey} label={S.journeyLabel} stepOf={S.stepOf} />
+          <div className="sv-sum">
             <div>
-              <p className="sv-body">{S.measure}</p>
-              <p className="sv-body">{S.scoped}</p>
+              <h3 className="sv-label">{S.sumManage.k}</h3>
+              <p className="sv-body">{S.sumManage.d}</p>
             </div>
-            <div className="sv-bd">
-              <p className="sv-bd-h">{S.bdH}</p>
-              {S.bdGroups.map((g, i) => (
-                <div key={g.k}>
-                  <p className="sv-label" id={`sv-bd-${i}`}>
-                    {g.k}
-                  </p>
-                  <p className="sv-body sv-bd-d">{g.d}</p>
-                  {g.list && (
-                    <ul className="sv-np" aria-labelledby={`sv-bd-${i}`}>
-                      {g.list.map((t) => (
-                        <li key={t}>{t}</li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ))}
+            <div>
+              <h3 className="sv-label">{S.sumAffect.k}</h3>
+              <p className="sv-body">{S.sumAffect.d}</p>
             </div>
           </div>
+          <p className="sv-nopromise">{S.noPromise}</p>
         </div>
       </section>
 

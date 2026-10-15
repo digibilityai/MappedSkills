@@ -106,13 +106,15 @@
 .sx-todo-k { font-size: 1.05rem; color: var(--dc-on-ink); }
 .sx-todo-k.is-next { color: var(--dc-tang); }
 .sx-todo-bar { height: 8px; background: var(--dc-on-ink-dim); opacity: .5; }
+@media (min-width: 1200px) { .sx-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .sx-meas-note { margin-top: clamp(20px, 2.4vw, 30px); max-width: 56ch; color: var(--dc-on-ink-soft); line-height: 1.5; }
 .sx-link-ink a { color: var(--dc-on-ink); }
 
-/* 6 — commitments: four steps that rise to the right */
+/* 6 — commitments: four steps that rise to the right (desktop only; stacked on smaller screens) */
 .sx-com-line { margin-top: 18px; max-width: 40ch; font: 800 clamp(1.25rem, 1.05rem + .9vw, 1.7rem)/1.3 var(--dc-f-title); letter-spacing: -.01em; }
 .sx-com { margin-top: clamp(32px, 4vw, 52px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 22px); align-items: end; padding-bottom: 0; }
-.sx-com-i { display: grid; align-content: start; gap: 8px; padding: clamp(18px, 2vw, 26px); background: var(--dc-paper); border: 2px solid var(--dc-ink); border-top-width: 6px; border-top-color: var(--dc-tang-display); min-width: 0; min-height: calc(11rem + var(--sx-rise, 0) * 2.5rem); }
+.sx-com-i { display: grid; align-content: start; gap: 8px; padding: clamp(18px, 2vw, 26px); background: var(--dc-paper); border: 2px solid var(--dc-ink); border-top-width: 6px; border-top-color: var(--dc-tang-display); min-width: 0; min-height: 0; }
+@media (min-width: 1024px) { .sx-com-i { min-height: calc(9rem + var(--sx-rise, 0) * 1.5rem); } }
 .sx-tick { display: grid; place-items: center; width: 36px; height: 36px; background: var(--dc-tang); color: var(--dc-ink); }
 .sx-com-t { font: 800 clamp(1.15rem, 1rem + .6vw, 1.45rem)/1.25 var(--dc-f-title); letter-spacing: -.01em; }
 .sx-com-d { color: var(--dc-dim); line-height: 1.45; }

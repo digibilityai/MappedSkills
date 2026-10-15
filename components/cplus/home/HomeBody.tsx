@@ -210,7 +210,7 @@ export function HomeBody() {
             <b>{h.proof.ownTest}</b> {h.proof.method}
           </p>
           <p className="b-tlink">
-            <Link href="/how-it-works">{h.proof.researchLink} →</Link>
+            <Link href="/about#ab-h-check">{h.proof.researchLink} →</Link>
           </p>
           <div className="b-proof-g" data-rv="">
             <div className="b-stats">

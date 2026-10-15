@@ -84,7 +84,7 @@ export const HOME = {
     claimNamed: 'customers ask AI for recommendations?',
     claimBody: 'We study how businesses appear in AI-generated recommendations, identify visibility gaps and help businesses improve the information that search engines and AI platforms can discover and understand.',
     ownTest: 'We also ran the test on ourselves, and we publish what we found.',
-    researchLink: 'See how we measured this',
+    researchLink: 'See what we measured',
     method: 'We asked four AI assistants for agencies like us, 28 times, on one day, from Pune, in English, signed out.',
     limitation:
       '28 runs on one day, one location, signed out. Counts, not rates. No confidence interval is claimed and none is available. Two systems could not be tested at all.',

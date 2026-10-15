@@ -4,7 +4,7 @@ import { HOME } from './content';
 import './home.css';
 import { Icon } from '../Icons';
 import { Close } from '../Close';
-import { CountBar, Num, ReportPanel } from './HomeFigures';
+import { ReportPanel } from './HomeFigures';
 
 /**
  * C+ Home (/): the approved prototype's page body (proto/direction-c-plus 0a8b611, ConceptH.tsx `Home`), unchanged in
@@ -198,49 +198,17 @@ export function HomeBody() {
         </div>
       </section>
 
-      {/* B — proof: the published self-test as counts */}
+      {/* B — proof: AI search visibility entry point and case-study entry point (research detail lives on /about and /how-it-works) */}
       <section className="b-sec b-ink" aria-labelledby="h-h-proof">
         <div className="px-wrap">
           <p className="b-kicker">{h.proof.label}</p>
           <h2 id="h-h-proof" className="b-h2">
-            {h.proof.claimA} <span className="b-named">{h.proof.claimNamed}</span>
+            {h.proof.claim}
           </h2>
           <p className="b-lede b-lede-ink">{h.proof.claimBody}</p>
-          <p className="b-lede b-lede-ink">
-            <b>{h.proof.ownTest}</b> {h.proof.method}
-          </p>
           <p className="b-tlink">
-            <Link href="/about#ab-h-check">{h.proof.researchLink} →</Link>
+            <Link href="/ai-seo">{h.proof.claimLink} →</Link>
           </p>
-          <div className="b-proof-g" data-rv="">
-            <div className="b-stats">
-              <p>
-                <b>
-                  <Num value={h.proof.systems} />
-                </b>
-                AI assistants asked
-              </p>
-              <p>
-                <b>
-                  <Num value={h.proof.runs} />
-                </b>
-                runs, one day
-              </p>
-              <p>
-                <b>
-                  <Num value={h.proof.named} />
-                </b>
-                named us
-              </p>
-            </div>
-            <div className="b-bars">
-              <CountBar label="Runs that named MappedSkills" value={h.proof.named} of={h.proof.runs} mark="owned" />
-              <CountBar label="Runs where directory sources appeared" value={h.proof.directories} of={h.proof.runs} mark="named" />
-              <p className="b-limit">
-                <b>Limitation.</b> {h.proof.limitation} Bars are counts; their order is not run order.
-              </p>
-            </div>
-          </div>
           <p className="b-lede b-lede-ink">
             <b>{h.proof.cases}</b> {h.proof.casesBody}
           </p>

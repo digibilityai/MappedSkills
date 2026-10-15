@@ -78,20 +78,12 @@ export const HOME = {
   proof: {
     label: 'What you can check before you commit',
     cases: 'Real businesses. Real marketing challenges.',
-    casesBody: 'Explore how we’ve worked with businesses to identify marketing challenges and improve how their campaigns are measured.',
+    casesBody: 'See how we’ve helped clients tackle their marketing challenges.',
     casesLink: 'See our work',
-    claimA: 'Is your business visible when',
-    claimNamed: 'customers ask AI for recommendations?',
-    claimBody: 'We study how businesses appear in AI-generated recommendations, identify visibility gaps and help businesses improve the information that search engines and AI platforms can discover and understand.',
-    ownTest: 'We also ran the test on ourselves, and we publish what we found.',
-    researchLink: 'See what we measured',
-    method: 'We asked four AI assistants for agencies like us, 28 times, on one day, from Pune, in English, signed out.',
-    limitation:
-      '28 runs on one day, one location, signed out. Counts, not rates. No confidence interval is claimed and none is available. Two systems could not be tested at all.',
-    runs: 28,
-    systems: 4,
-    named: 0,
-    directories: 15, // published on /how-it-works: "directory sources appeared in 15 of them"
+    claim: 'Can customers find your business through AI search?',
+    claimBody:
+      'AI assistants are changing how people discover businesses. We help you understand where your business appears, what’s missing, and what can be improved.',
+    claimLink: 'Explore AI Search Visibility',
   },
   fit: {
     works:

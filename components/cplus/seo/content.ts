@@ -44,6 +44,17 @@ export const SEO_PLAIN = {
       a: 'Rankings and visits are not the same as enquiries. We focus on what changed for the business.',
     },
   ],
+  /* 2 — structure of the trail drawing (layout only; no copy). x = position along the trail, in percent. */
+  trailMap: {
+    stations: [
+      { name: 'A search', x: 3 },
+      { name: 'A result', x: 24 },
+      { name: 'Your page', x: 36 },
+      { name: 'An enquiry', x: 52, end: true },
+    ],
+    breaks: [13, 41, 69],
+    elsewhere: 'somebody else',
+  },
   probLink: { label: 'Have the traffic but not the enquiries? Start here', href: '/problems/traffic-but-no-enquiries' },
 
   /* 3 — what the work includes */

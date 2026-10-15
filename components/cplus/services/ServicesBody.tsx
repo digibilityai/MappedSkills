@@ -3,11 +3,12 @@ import { CONTACT_HREF, Mark } from '@/components/direction-c/primitives';
 import { SV_PLAIN as S } from './content';
 import './services.css';
 import { Breadcrumb } from '../Breadcrumb';
+import { Journey } from './Journey';
 
 /**
  * C+ Services (/services): the approved prototype's page body (proto/direction-c-plus e5c1aa4, ServicesH.tsx),
- * unchanged in markup and copy. Production changes only: the breadcrumb's Home link and the CTA point at the live
- * routes (`/` and CONTACT_HREF) instead of prototype paths. No client JavaScript of its own.
+ * with the copy revised in the 2026-10-15 customer-focused pass. Production changes only: the breadcrumb's Home link and the CTA point at the live
+ * routes (`/` and CONTACT_HREF) instead of prototype paths. The only client JavaScript is the Journey in section 3.
  */
 
 function Action() {
@@ -35,7 +36,6 @@ export function ServicesBody() {
               {S.h1.a} <span className="b-named">{S.h1.b}</span>
             </h1>
             <p className="b-lede">{S.lede}</p>
-            <p className="sv-side">{S.side}</p>
             <Action />
           </div>
 
@@ -47,6 +47,7 @@ export function ServicesBody() {
                   <div key={r.k} className="sv-plate-r">
                     <dt>{r.k}</dt>
                     <dd>
+                      <p className="sv-plate-d">{r.d}</p>
                       <ul>
                         {r.v.map((v) => (
                           <li key={v}>{v}</li>
@@ -55,10 +56,6 @@ export function ServicesBody() {
                     </dd>
                   </div>
                 ))}
-                <div className="sv-plate-r sv-plate-base">
-                  <dt>{P.base.k}</dt>
-                  <dd>{P.base.v}</dd>
-                </div>
               </dl>
             </div>
             <figcaption className="px-cap">{P.cap}</figcaption>
@@ -81,16 +78,20 @@ export function ServicesBody() {
                   <h3 className="sv-sym-t">{r.sym}</h3>
                   <p className="sv-job">{r.job}</p>
                 </div>
-                <ul className={'sv-svcs' + (r.svc.length > 1 ? ' is-many' : '')}>
-                  {r.svc.map((v) => (
-                    <li key={v.href}>
-                      <Link href={v.href} className="sv-door">
-                        <span className="sv-door-n">{v.name}</span>
-                        <span className="sv-door-d">{v.d}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                {r.svc.length > 0 ? (
+                  <ul className={'sv-svcs' + (r.svc.length > 1 ? ' is-many' : '')}>
+                    {r.svc.map((v) => (
+                      <li key={v.href}>
+                        <Link href={v.href} className="sv-door">
+                          <span className="sv-door-n">{v.name}</span>
+                          <span className="sv-door-d">{v.d}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="sv-route-note">{r.note}</p>
+                )}
               </li>
             ))}
           </ol>
@@ -104,40 +105,22 @@ export function ServicesBody() {
         </div>
       </section>
 
-      {/* 3 — how they work together (ink): the joins as seams, then where accountability stops */}
+      {/* 3 — how they work together (ink): the animated journey, then a compact scope summary */}
       <section className="b-sec b-ink sv-join" aria-labelledby="sv-h-join">
         <div className="px-wrap">
           <p className="b-kicker">{S.joinKicker}</p>
           <h2 id="sv-h-join" className="b-h2">
             {S.joinH.a} <span className="b-named">{S.joinH.b}</span>
           </h2>
-          <ul className="sv-seams" aria-label="The joins">
-            {S.joins.map(([a, b]) => (
-              <li key={a}>
-                <span className="sv-seam-a">{a}</span>
-                <span className="sv-seam" aria-hidden="true" />
-                <span className="px-sr"> to </span>
-                <span className="sv-seam-b">{b}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="sv-join-line">{S.joinLine}</p>
-          <div className="sv-join-g">
+          <Journey stages={S.journey} label={S.journeyLabel} stepOf={S.stepOf} />
+          <div className="sv-sum">
             <div>
-              <p className="sv-body">{S.measure}</p>
-              <p className="sv-body">{S.scoped}</p>
+              <h3 className="sv-label">{S.sumManage.k}</h3>
+              <p className="sv-body">{S.sumManage.d}</p>
             </div>
-            <div className="sv-bd">
-              <p className="sv-bd-h">{S.bdH}</p>
-              <p className="sv-body">{S.bdD}</p>
-              <p className="sv-label" id="sv-np-k">
-                {S.notPromisedK}
-              </p>
-              <ul className="sv-np" aria-labelledby="sv-np-k">
-                {S.notPromised.map((t) => (
-                  <li key={t}>{t}</li>
-                ))}
-              </ul>
+            <div>
+              <h3 className="sv-label">{S.sumAffect.k}</h3>
+              <p className="sv-body">{S.sumAffect.d}</p>
             </div>
           </div>
         </div>
@@ -150,7 +133,10 @@ export function ServicesBody() {
             <h2 id="sv-h-lim" className="sv-lim-h">
               {S.laterK}
             </h2>
-            <p className="sv-body">{S.later}</p>
+            <p className="sv-label">{S.laterStart.k}</p>
+            <p className="sv-body sv-bd-d">{S.laterStart.d}</p>
+            <p className="sv-label sv-later-k">{S.laterAdd.k}</p>
+            <p className="sv-body sv-bd-d">{S.laterAdd.d}</p>
             <p className="b-tlink">
               <Link href={S.priceLink.href}>{S.priceLink.label} →</Link>
             </p>

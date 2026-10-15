@@ -3,12 +3,13 @@ import { BOOKING_HREF, CONTACT_HREF, Mark } from '@/components/direction-c/primi
 import { SEO_PLAIN as S } from './content';
 import './seo.css';
 import { Breadcrumb } from '../Breadcrumb';
+import { Sequence } from './Sequence';
 
 /**
  * C+ SEO (/seo), Direction B (owner-approved, 2026-10-15): one idea runs through the page, the route from a search to an
  * enquiry. The hero draws it, the problems section shows where it breaks, the work is the route as a staircase, and the
  * review sheet shows what a review covers without showing any figures. Server-rendered throughout; this phase is the
- * static composition (final state only). The metadata, canonical, breadcrumb and structured data are set in
+ * static composition plus the motion (`Sequence`; each sequence plays once, calm to event to calm). The metadata, canonical, breadcrumb and structured data are set in
  * `app/(pages)/seo/page.tsx` and are not touched here.
  */
 
@@ -94,23 +95,30 @@ export function SeoBody() {
           </div>
 
           <figure className="sx-route">
-            <div className="sx-route-art" aria-hidden="true">
-              <span className="sx-route-ln" />
-              <span className="sx-route-fill" />
-            </div>
-            <ol className="sx-route-list" aria-label={S.trailLabel}>
-              {S.trail.map((st, i) => (
-                <li key={st.key} className={'sx-st' + (i === 3 ? ' is-end' : '')}>
-                  <span className="sx-g">
-                    <Glyph k={st.key} />
-                  </span>
-                  <span className="sx-st-tx">
-                    <span className="sx-st-t">{st.name}</span>
-                    {st.tag && <span className="sx-st-tag">{st.tag}</span>}
-                  </span>
-                </li>
-              ))}
-            </ol>
+            <Sequence trigger="load">
+              <div className="sx-route-art" aria-hidden="true">
+                <span className="sx-route-ln" />
+                <span className="sx-route-fill" />
+                <span className="sx-route-tr">
+                  {[0, 1, 2].map((m) => (
+                    <span key={m} className="sx-route-m" style={{ ['--m' as string]: m }} />
+                  ))}
+                </span>
+              </div>
+              <ol className="sx-route-list" aria-label={S.trailLabel}>
+                {S.trail.map((st, i) => (
+                  <li key={st.key} className={'sx-st' + (i === 3 ? ' is-end' : '')} style={{ ['--i' as string]: i }}>
+                    <span className="sx-g">
+                      <Glyph k={st.key} />
+                    </span>
+                    <span className="sx-st-tx">
+                      <span className="sx-st-t">{st.name}</span>
+                      {st.tag && <span className="sx-st-tag">{st.tag}</span>}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </Sequence>
             <figcaption className="px-cap">{S.trailCap}</figcaption>
           </figure>
         </div>
@@ -124,39 +132,59 @@ export function SeoBody() {
             {S.probH.a} <span className="b-named">{S.probH.b}</span>
           </h2>
 
-          {/* the drawing is decorative and shown only on wide screens; every question below is real text */}
-          <div className="sx-trail" aria-hidden="true">
-            <span className="sx-tl" style={{ left: `${tm.stations[0].x}%`, width: `${tm.stations[3].x - tm.stations[0].x}%` }} />
-            <span className="sx-tl is-dash" style={{ left: `${tm.stations[3].x}%`, width: `${96 - tm.stations[3].x}%` }} />
-            {TRAIL_MARKS.map((m) => (
-              <span key={m.x} className={'sx-tm' + (m.off ? ' is-off' : '')} style={{ ['--x' as string]: `${m.x}%` }} />
-            ))}
-            <span className="sx-else" style={{ ['--x' as string]: '14%' }}>
-              {tm.elsewhere}
-            </span>
-            {tm.stations.map((st) => (
-              <span key={st.name} className={'sx-sta' + (st.end ? ' is-end' : '')} style={{ ['--x' as string]: `${st.x}%` }}>
-                <i />
-                <b>{st.name}</b>
+          <Sequence className="sx-prob-seq">
+            {/* the drawing is decorative and shown only on wide screens; every question below is real text */}
+            <div className="sx-trail" aria-hidden="true">
+              <span
+                className="sx-tl"
+                style={{ left: `${tm.stations[0].x}%`, width: `${tm.stations[3].x - tm.stations[0].x}%` }}
+              />
+              <span
+                className="sx-tl is-dash"
+                style={{ left: `${tm.stations[3].x}%`, width: `${96 - tm.stations[3].x}%` }}
+              />
+              {TRAIL_MARKS.map((m, k) => (
+                <span
+                  key={m.x}
+                  className={'sx-tm' + (m.off ? ' is-off' : '')}
+                  style={{ ['--x' as string]: `${m.x}%`, ['--k' as string]: k }}
+                />
+              ))}
+              <span className="sx-else" style={{ ['--x' as string]: '14%' }}>
+                {tm.elsewhere}
               </span>
-            ))}
-            {tm.breaks.map((x, i) => (
-              <span key={x} className="sx-brk" style={{ ['--x' as string]: `${x}%` }}>
-                {i + 1}
-              </span>
-            ))}
-          </div>
-          <ol className="sx-co">
-            {S.problems.map((p, i) => (
-              <li key={p.q} className="sx-co-i" style={{ ['--x' as string]: `${tm.breaks[i]}%` }}>
-                <span className="sx-co-n" aria-hidden="true">
+              {tm.stations.map((st) => (
+                <span
+                  key={st.name}
+                  className={'sx-sta' + (st.end ? ' is-end' : '')}
+                  style={{ ['--x' as string]: `${st.x}%` }}
+                >
+                  <i />
+                  <b>{st.name}</b>
+                </span>
+              ))}
+              {tm.breaks.map((x, i) => (
+                <span key={x} className="sx-brk" style={{ ['--x' as string]: `${x}%`, ['--k' as string]: i }}>
                   {i + 1}
                 </span>
-                <h3 className="sx-co-q">{p.q}</h3>
-                <p className="sx-co-a">{p.a}</p>
-              </li>
-            ))}
-          </ol>
+              ))}
+            </div>
+            <ol className="sx-co">
+              {S.problems.map((p, i) => (
+                <li
+                  key={p.q}
+                  className="sx-co-i"
+                  style={{ ['--x' as string]: `${tm.breaks[i]}%`, ['--k' as string]: i }}
+                >
+                  <span className="sx-co-n" aria-hidden="true">
+                    {i + 1}
+                  </span>
+                  <h3 className="sx-co-q">{p.q}</h3>
+                  <p className="sx-co-a">{p.a}</p>
+                </li>
+              ))}
+            </ol>
+          </Sequence>
           <p className="b-tlink">
             <Link href={S.probLink.href}>{S.probLink.label} →</Link>
           </p>
@@ -171,23 +199,25 @@ export function SeoBody() {
             {S.workH.a} <span className="b-named">{S.workH.b}</span>
           </h2>
           <p className="sx-sub">{S.workSub}</p>
-          <ol className="sx-stairs">
-            {S.groups.map((g, i) => (
-              <li key={g.key} className={'sx-stair' + (i === 3 ? ' is-end' : '')} style={{ ['--i' as string]: i }}>
-                <span className="sx-g sx-g-sm">
-                  <Glyph k={g.key} />
-                </span>
-                <h3 className="sx-stair-t">{g.t}</h3>
-                <p className="sx-stair-d">{g.d}</p>
-                <ul className="sx-stair-l">
-                  {g.items.map((it) => (
-                    <li key={it}>{it}</li>
-                  ))}
-                </ul>
-                {g.also && <p className="sx-also">{g.also}</p>}
-              </li>
-            ))}
-          </ol>
+          <Sequence>
+            <ol className="sx-stairs">
+              {S.groups.map((g, i) => (
+                <li key={g.key} className={'sx-stair' + (i === 3 ? ' is-end' : '')} style={{ ['--i' as string]: i }}>
+                  <span className="sx-g sx-g-sm">
+                    <Glyph k={g.key} />
+                  </span>
+                  <h3 className="sx-stair-t">{g.t}</h3>
+                  <p className="sx-stair-d">{g.d}</p>
+                  <ul className="sx-stair-l">
+                    {g.items.map((it) => (
+                      <li key={it}>{it}</li>
+                    ))}
+                  </ul>
+                  {g.also && <p className="sx-also">{g.also}</p>}
+                </li>
+              ))}
+            </ol>
+          </Sequence>
         </div>
       </section>
 
@@ -235,9 +265,9 @@ export function SeoBody() {
             </div>
             <figure className="sx-sheet">
               <figcaption className="sx-stamp">{S.measTag}</figcaption>
-              <ul>
+              <ul data-rv="">
                 {S.tiles.map((t) => (
-                  <li key={t.key} className={t.lead ? 'is-lead' : undefined}>
+                  <li key={t.key} className={t.lead ? 'is-lead' : undefined} data-rv-i="">
                     <div>
                       <h3 className="sx-sheet-t">{t.t}</h3>
                       <p className="sx-sheet-d">{t.d}</p>
@@ -274,9 +304,9 @@ export function SeoBody() {
             <p className="sx-com-line">{S.comLine}</p>
             <p className="sx-com-note">{S.comNote}</p>
           </div>
-          <ul className="sx-cl">
+          <ul className="sx-cl" data-rv="">
             {S.commitments.map((c, i) => (
-              <li key={c.t}>
+              <li key={c.t} data-rv-i="">
                 <span className={'sx-cl-m' + (i === S.commitments.length - 1 ? ' is-last' : '')} aria-hidden="true" />
                 <h3 className="sx-cl-t">{c.t}</h3>
                 <p className="sx-cl-d">{c.d}</p>
@@ -294,9 +324,9 @@ export function SeoBody() {
             {S.projH.a} <span className="b-named">{S.projH.b}</span>
           </h2>
           <p className="sx-sub">{S.projIntro}</p>
-          <ul className="sx-pj">
+          <ul className="sx-pj" data-rv="">
             {S.projects.map((p) => (
-              <li key={p.key}>
+              <li key={p.key} data-rv-i="">
                 <span className="sx-pj-i" aria-hidden="true">
                   {p.initial}
                 </span>

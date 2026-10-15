@@ -28,7 +28,9 @@
 .sx-route-art { position: absolute; inset: 0; pointer-events: none; }
 .sx-route-ln, .sx-route-fill { position: absolute; left: 35px; top: 40px; bottom: 76px; width: 3px; }
 .sx-route-ln { background: var(--dc-line); }
-.sx-route-fill { background: var(--dc-tang-display); }
+.sx-route-fill { background: var(--dc-tang-display); transform-origin: top; }
+.sx-route-tr { position: absolute; left: 29px; top: 40px; bottom: 76px; width: 14px; }
+.sx-route-m { position: absolute; left: 0; top: 0; width: 14px; height: 14px; background: var(--dc-ink); opacity: 0; }
 .sx-route-list { position: relative; display: grid; }
 .sx-st { position: relative; display: flex; align-items: center; gap: 18px; padding-block: 16px; }
 .sx-st .sx-g { position: relative; z-index: 1; }
@@ -58,12 +60,12 @@
 
 /* 3 — the work as a staircase */
 .sx-stairs { margin-top: clamp(36px, 4.4vw, 64px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: clamp(18px, 2.4vw, 36px); }
-.sx-stair { position: relative; margin-top: calc(var(--i) * 58px); padding-top: 20px; border-top: 3px solid var(--dc-ink); min-width: 0; }
+.sx-stair { --ln: var(--dc-ink); position: relative; margin-top: calc(var(--i) * 58px); padding-top: 20px; background: linear-gradient(var(--ln), var(--ln)) top left / 100% 3px no-repeat; min-width: 0; }
 .sx-stair::before { content: ""; position: absolute; left: 0; top: -61px; width: 3px; height: 58px; background: var(--dc-ink); }
 .sx-stair:first-child::before { display: none; }
 .sx-stair::after { content: ""; position: absolute; left: -7px; top: -8px; width: 13px; height: 13px; background: var(--dc-ink); }
 .sx-stair:first-child::after { left: -1px; }
-.sx-stair.is-end { border-top-color: var(--dc-tang-display); }
+.sx-stair.is-end { --ln: var(--dc-tang-display); }
 .sx-stair.is-end::after { background: var(--dc-tang); outline: 2px solid var(--dc-ink); }
 .sx-stair .sx-g { margin-bottom: 14px; }
 .sx-stair-t { font: 800 clamp(1.3rem, 1.05rem + .9vw, 1.75rem)/1.15 var(--dc-f-title); letter-spacing: -.015em; text-wrap: balance; }
@@ -165,7 +167,7 @@
 @media (max-width: 760px) {
   .sx-stairs { grid-template-columns: minmax(0, 1fr); position: relative; padding-left: 26px; row-gap: 28px; }
   .sx-stairs::before { content: ""; position: absolute; left: 5px; top: 6px; bottom: 6px; width: 3px; background: var(--dc-ink); }
-  .sx-stair { border-top: 0; padding-top: 0; }
+  .sx-stair { background: none; padding-top: 0; }
   .sx-stair::after, .sx-stair:first-child::after { left: -26px; top: 4px; }
   .sx-stair.is-end::after { outline-offset: 0; }
   .sx-how { flex-direction: column; border-top: 0; padding-top: 0; }
@@ -180,3 +182,67 @@
   .sx-sheet, .sx-pj-state, .sx-brk { border: 2px solid CanvasText; }
   .sx-sheet li.is-lead { border: 2px solid CanvasText; }
 }
+
+/* ---- Motion: calm, event, calm. Each sequence plays once (Sequence.tsx flips data-seq idle -> run). ----
+   The start state exists only while a sequence is idle and motion is allowed, so without JavaScript, with reduced motion,
+   and after a sequence has run, the page is in its final state. Nothing loops, nothing is pinned. */
+@media (prefers-reduced-motion: no-preference) {
+  /* 1 — hero route: the line draws down through four stations (650ms a segment); the enquiry lands last */
+  html.px-js .sx-route [data-seq="idle"] .sx-route-fill { transform: scaleY(0); }
+  html.px-js .sx-route [data-seq="idle"] .sx-st:nth-child(n + 2) .sx-g,
+  html.px-js .sx-route [data-seq="idle"] .sx-st:nth-child(n + 2) .sx-st-tx { opacity: .3; }
+  html.px-js .sx-route [data-seq="idle"] .sx-st.is-end .sx-g { box-shadow: 0 0 0 var(--dc-tang); }
+  .sx-route [data-seq="run"] .sx-route-fill { transition: transform 1950ms linear 400ms; }
+  .sx-route [data-seq="run"] .sx-st .sx-g,
+  .sx-route [data-seq="run"] .sx-st .sx-st-tx { transition: opacity 320ms ease-out calc(400ms + var(--i) * 650ms); }
+  .sx-route [data-seq="run"] .sx-st.is-end .sx-g { transition: opacity 320ms ease-out calc(400ms + var(--i) * 650ms), box-shadow 280ms ease-out 2350ms; animation: sx-pop 280ms ease-out 2350ms both; }
+  .sx-route [data-seq="run"] .sx-route-m { animation: sx-travel 1900ms linear calc(400ms + var(--m) * 260ms) both; }
+  /* if the script never runs, the hero start state releases itself after a few seconds (the hero is always in view) */
+  html.px-js .sx-route [data-seq="idle"] .sx-route-fill,
+  html.px-js .sx-route [data-seq="idle"] .sx-st .sx-g,
+  html.px-js .sx-route [data-seq="idle"] .sx-st .sx-st-tx { animation: sx-release 1ms 4s forwards; }
+  html.px-js .sx-route [data-seq="idle"] .sx-st.is-end .sx-g { animation: sx-release-end 1ms 4s forwards; }
+
+  /* 2 — the trail: three breaks appear in turn, 700ms apart (marker, leader, question) */
+  .sx-prob-seq[data-seq="idle"] .sx-tm { opacity: 0; }
+  .sx-prob-seq[data-seq="idle"] .sx-brk { opacity: 0; transform: translateX(-50%) scale(.8); }
+  .sx-prob-seq[data-seq="idle"] .sx-co-n { opacity: 0; transform: scale(.8); }
+  .sx-prob-seq[data-seq="idle"] .sx-co-i > h3,
+  .sx-prob-seq[data-seq="idle"] .sx-co-i > p { opacity: 0; transform: translateY(8px); }
+  .sx-prob-seq[data-seq="run"] .sx-tm { transition: opacity 400ms ease-out calc(var(--k) * 40ms); }
+  .sx-prob-seq[data-seq="run"] .sx-brk,
+  .sx-prob-seq[data-seq="run"] .sx-co-n { transition: opacity 200ms ease-out calc(300ms + var(--k) * 700ms), transform 200ms ease-out calc(300ms + var(--k) * 700ms); }
+  .sx-prob-seq[data-seq="run"] .sx-co-i > h3,
+  .sx-prob-seq[data-seq="run"] .sx-co-i > p { transition: opacity 350ms ease-out calc(700ms + var(--k) * 700ms), transform 350ms ease-out calc(700ms + var(--k) * 700ms); }
+  @media (min-width: 1081px) {
+    .sx-prob-seq[data-seq="idle"] .sx-co-i::before { transform: scaleY(0); transform-origin: top; }
+    .sx-prob-seq[data-seq="run"] .sx-co-i::before { transform-origin: top; transition: transform 300ms ease-out calc(450ms + var(--k) * 700ms); }
+  }
+  @media (max-width: 1080px) {
+    .sx-prob-seq[data-seq="idle"] .sx-co::before { transform: scaleY(0); transform-origin: top; }
+    .sx-prob-seq[data-seq="run"] .sx-co::before { transform-origin: top; transition: transform 2100ms linear 300ms; }
+  }
+
+  /* 3 — the staircase draws step by step (300ms a step): riser, line, then the stage */
+  .sx-work-sec [data-seq="idle"] .sx-stair { background-size: 0 3px; }
+  .sx-work-sec [data-seq="idle"] .sx-stair::before { transform: scaleY(0); transform-origin: top; }
+  .sx-work-sec [data-seq="idle"] .sx-stair::after { opacity: 0; }
+  .sx-work-sec [data-seq="idle"] .sx-stair > * { opacity: 0; transform: translateY(6px); }
+  .sx-work-sec [data-seq="run"] .sx-stair { transition: background-size 300ms ease-out calc(var(--i) * 300ms + 100ms); }
+  .sx-work-sec [data-seq="run"] .sx-stair::before { transform-origin: top; transition: transform 150ms ease-out calc(var(--i) * 300ms); }
+  .sx-work-sec [data-seq="run"] .sx-stair::after { transition: opacity 150ms ease-out calc(var(--i) * 300ms); }
+  .sx-work-sec [data-seq="run"] .sx-stair > * { transition: opacity 350ms ease-out calc(var(--i) * 300ms + 250ms), transform 350ms ease-out calc(var(--i) * 300ms + 250ms); }
+  @media (max-width: 760px) {
+    .sx-work-sec [data-seq="idle"] .sx-stairs::before { transform: scaleY(0); transform-origin: top; }
+    .sx-work-sec [data-seq="run"] .sx-stairs::before { transform-origin: top; transition: transform 1500ms linear; }
+  }
+}
+@keyframes sx-pop { 0% { transform: scale(1); } 50% { transform: scale(1.06); } 100% { transform: scale(1); } }
+@keyframes sx-travel {
+  0% { top: 0; opacity: 0; }
+  12% { opacity: .5; }
+  88% { opacity: .5; }
+  100% { top: calc(100% - 14px); opacity: 0; }
+}
+@keyframes sx-release { to { opacity: 1; transform: none; } }
+@keyframes sx-release-end { to { opacity: 1; box-shadow: 6px 6px 0 var(--dc-tang); } }

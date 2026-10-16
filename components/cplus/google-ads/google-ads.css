@@ -313,9 +313,10 @@ html:not(.px-js) .ga-find .px-tabpanel { grid-column: 1 / -1; grid-row: auto; ma
   .ga-jy-tabs[data-demo="running"] .ga-jy-box { transition: border-color .45s ease; }
   .ga-jy-tabs[data-demo="running"][data-demo-step="3"] .ga-jy-box { border-color: var(--dc-tang); }
 
-  /* Reporting: the finding is selected first, then the action it leads to arrives. */
-  .ga-find[data-demo="running"] .ga-dec { transition: opacity .5s ease; }
-  .ga-find[data-demo="running"][data-demo-step="0"] .ga-dec { opacity: 0; }
+  /* Reporting: the finding is selected first, then the action card lifts to its shadow. Transform and shadow only: nothing that holds text is ever
+     faded, so its contrast never drops (it was 1:1 at the bottom of the earlier opacity fade). */
+  .ga-find[data-demo="running"] .ga-dec { transition: transform .4s ease, box-shadow .4s ease; }
+  .ga-find[data-demo="running"][data-demo-step="0"] .ga-dec { transform: translate(8px, 8px); box-shadow: 0 0 0 var(--dc-tang); }
 
   /* Onboarding: six steps in turn. The finished steps stay lit, the current one is emphasised, the rest wait; connectors draw. */
   .ga-demo[data-demo="running"] .ga-step-ico { transition: opacity .35s ease, background-color .35s ease; }

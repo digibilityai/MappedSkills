@@ -425,4 +425,11 @@ test('everything that moves, or exists only while something moves, is inside the
   assert.ok(!/\.ga-pause:hover|\.ga-pause \{[^}]*(display: inline-flex|background)/.test(raw), 'no visible resting style for Pause');
   // the spacing once reserved for a visible Pause chip is gone: the page is the G1.3a spacing for everyone
   assert.ok(!/html\.px-js \.ga-(fx|jy-tabs|find-k|steps) \{ margin-top/.test(raw));
+  // nothing that holds text is faded: in the demonstration block, `opacity` is only ever set on the two icon-only elements
+  const block = raw.slice(at);
+  const withOpacity = [...block.matchAll(/([^{}]+)\{([^{}]*)\}/g)].filter((m) => /(^|[;\s])opacity\s*:/.test(m[2])).map((m) => m[1].trim());
+  assert.ok(withOpacity.length >= 8, 'the icon dimming rules were found');
+  for (const sel of withOpacity) assert.ok(/\.ga-jy-node$|\.ga-step-ico$/.test(sel), `${sel} sets opacity on something other than an icon`);
+  assert.ok(!/\.ga-dec[^{]*\{[^}]*opacity/.test(block), 'the Reporting action card is never faded');
+  assert.ok(/\.ga-find\[data-demo="running"\]\[data-demo-step="0"\] \.ga-dec \{[^}]*transform: translate\(8px, 8px\)[^}]*box-shadow: 0 0 0/.test(block), 'the action card lifts to its shadow');
 });

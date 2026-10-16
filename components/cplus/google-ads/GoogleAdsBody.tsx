@@ -25,13 +25,13 @@ const PAUSE = { text: S.demo.pause, aria: S.demo.pauseAria };
 const NUDGE = 300;
 const T = {
   hero: 1200, // each of the four stages
-  factor: 3000, // each of the first two factors
+  factor: 5000, // each of the first two factors
   station: 1000, // each journey station
-  outcome: 2000, // the hold on the outcome, which carries the readouts and the case text
+  outcome: 3000, // the hold on the outcome, which carries the readouts and the case text
   find: 800, // the finding on its own
-  action: 3000, // then the action
-  step: 900, // each onboarding step (the last holds 600 longer)
-  stepLast: 1500,
+  action: 4500, // then the action
+  step: 1500, // each onboarding step (the last holds 600 longer)
+  stepLast: 2100,
 };
 const nudges = (ids: string[]) => ids.map((nudge) => ({ nudge, hold: NUDGE }));
 

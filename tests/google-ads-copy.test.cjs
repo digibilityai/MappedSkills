@@ -349,9 +349,9 @@ test('exactly five guided demonstrations are configured, in page order, none in 
   assert.ok(!/Interactive/.test(body.replace(/\/\*[\s\S]*?\*\//g, '')));
 });
 
-test('the approved demonstration timings and rest states are as recorded (decisions 1 to 8)', () => {
+test('the demonstration timings (approved set, slowed for readability by the owner after the G1.3c readability report) and rest states are as recorded', () => {
   const t = (k) => +body.match(new RegExp(`\\b${k}: (\\d+),`))[1];
-  assert.deepStrictEqual([t('hero'), t('factor'), t('station'), t('outcome'), t('find'), t('action'), t('step'), t('stepLast')], [1200, 3000, 1000, 2000, 800, 3000, 900, 1500]);
+  assert.deepStrictEqual([t('hero'), t('factor'), t('station'), t('outcome'), t('find'), t('action'), t('step'), t('stepLast')], [1200, 5000, 1000, 3000, 800, 4500, 1500, 2100]);
   assert.ok(/NUDGE = 300/.test(body));
   assert.ok(/rest: F\.items\[1\]\.key/.test(body) && /rest: P\.cases\[0\]\.key/.test(body) && /rest: G\.findings\[0\]\.key/.test(body) && /restStep=\{0\}/.test(body), 'rest states');
   assert.ok(/radios="ga-stage"/.test(body), 'the hero drives the real radio group');

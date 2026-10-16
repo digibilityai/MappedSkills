@@ -349,10 +349,14 @@ test('exactly five guided demonstrations are configured, in page order, none in 
   assert.ok(!/Interactive/.test(body.replace(/\/\*[\s\S]*?\*\//g, '')));
 });
 
-test('the demonstration timings (approved set, slowed for readability by the owner after the G1.3c readability report) and rest states are as recorded', () => {
+test('the demonstration timings (owner-approved, each total 5 s or less for WCAG 2.2.2) and rest states are as recorded', () => {
   const t = (k) => +body.match(new RegExp(`\\b${k}: (\\d+),`))[1];
-  assert.deepStrictEqual([t('hero'), t('factor'), t('station'), t('outcome'), t('find'), t('action'), t('step'), t('stepLast')], [1200, 5000, 1000, 3000, 800, 4500, 1500, 2100]);
-  assert.ok(/NUDGE = 300/.test(body));
+  const hero = t('hero'), fa = t('factorA'), fb = t('factorB'), st = t('station'), out = t('outcome'), find = t('find'), act = t('action'), step = t('step'), last = t('stepLast');
+  const nudge = +body.match(/NUDGE = (\d+)/)[1];
+  assert.deepStrictEqual([hero, fa, fb, st, out, find, act, step, last, nudge], [1000, 2000, 2500, 700, 1200, 700, 2500, 700, 800, 300]);
+  const totals = { hero: 4 * hero, factors: fa + fb, journey: 3 * st + out + 3 * nudge, reporting: find + act + 2 * nudge, process: 5 * step + last };
+  assert.deepStrictEqual(totals, { hero: 4000, factors: 4500, journey: 4200, reporting: 3800, process: 4300 });
+  for (const [k, ms] of Object.entries(totals)) assert.ok(ms <= 4500, `${k} is ${ms} ms: keep every demonstration under 5 s with margin`);
   assert.ok(/rest: F\.items\[1\]\.key/.test(body) && /rest: P\.cases\[0\]\.key/.test(body) && /rest: G\.findings\[0\]\.key/.test(body) && /restStep=\{0\}/.test(body), 'rest states');
   assert.ok(/radios="ga-stage"/.test(body), 'the hero drives the real radio group');
   assert.ok(/\.\.\.nudges\(P\.cases\.slice\(1\)/.test(body) && /\.\.\.nudges\(G\.findings\.slice\(1\)/.test(body), 'one-time nudges on the journey and reporting demonstrations only');
@@ -404,7 +408,7 @@ test('GaTabs keeps the shared Tabs markup contract (roles, ids, classes, keyboar
   assert.ok(t.includes('className="px-tab"') && g.includes("className={nudge === it.id ? 'px-tab is-nudge' : 'px-tab'}"));
 });
 
-test('everything that moves, or exists only while something moves, is inside the no-preference block; the Pause chip is 44px', () => {
+test('everything that moves, or exists only while something moves, is inside the no-preference block; Pause is hidden until focused', () => {
   const raw = read('components/cplus/google-ads/google-ads.css');
   const at = raw.indexOf('@media (prefers-reduced-motion: no-preference) {');
   assert.ok(at > 0, 'the no-preference block exists');
@@ -412,6 +416,13 @@ test('everything that moves, or exists only while something moves, is inside the
   for (const token of ['data-demo', '.ga-pause', 'is-nudge', 'visibility: hidden']) assert.ok(!before.includes(token), `${token} appears outside the no-preference block`);
   // no keyframes or animation anywhere in the stylesheet: the demonstrations are timer-driven state changes with CSS transitions
   assert.ok(!/@keyframes|animation\s*:/.test(raw));
-  assert.ok(/\.ga-pause \{[^}]*min-height: 44px/.test(raw));
-  assert.ok(/\.ga-pause \{[^}]*bottom: calc\(100% \+ 8px\)/.test(raw), 'the Pause chip hangs above its region and moves nothing');
+  // Pause is invisible until it has keyboard focus (clip-path), and then a 44px chip hung above its region, so it moves nothing
+  assert.ok(/\.ga-pause \{[^}]*clip-path: inset\(50%\)/.test(raw), 'hidden until focused');
+  assert.ok(/\.ga-pause:focus \{[^}]*min-height: 44px[^}]*clip-path: none[^}]*outline: 3px solid/.test(raw), 'revealed, 44px and outlined on focus');
+  assert.ok(/\.ga-pause \{[^}]*top: -52px/.test(raw), 'top-anchored above its region');
+  assert.ok(/tabIndex=\{0\}/.test(read('components/cplus/google-ads/DemoPause.tsx')), 'explicit tabindex, or Safari skips the button when tabbing');
+  assert.ok(/onFocus=.*scrollIntoView\(\{ block: 'nearest'/.test(read('components/cplus/google-ads/DemoPause.tsx')), 'the revealed chip is scrolled fully into view');
+  assert.ok(!/\.ga-pause:hover|\.ga-pause \{[^}]*(display: inline-flex|background)/.test(raw), 'no visible resting style for Pause');
+  // the spacing once reserved for a visible Pause chip is gone: the page is the G1.3a spacing for everyone
+  assert.ok(!/html\.px-js \.ga-(fx|jy-tabs|find-k|steps) \{ margin-top/.test(raw));
 });

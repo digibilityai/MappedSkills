@@ -284,20 +284,13 @@ html:not(.px-js) .ga-find .px-tabpanel { grid-column: 1 / -1; grid-row: auto; ma
      autoplay, so it keeps the G1.3a behaviour.) */
   html.px-js .ga-fx .px-tabpanel.is-off { display: block; visibility: hidden; }
 
-  /* Pause: hangs above its region at the right, so showing it moves nothing. 44px high; on ink it is a light chip. */
-  .ga-pause { position: absolute; z-index: 5; right: 0; bottom: calc(100% + 8px); display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 2px solid var(--dc-ink); background: var(--dc-paper); color: var(--dc-ink); cursor: pointer; font: 700 .8125rem/1 var(--dc-f-body); letter-spacing: .04em; text-transform: uppercase; }
-  .ga-pause:hover { background: var(--dc-ink); color: var(--dc-on-ink); }
-  .ga-pause:focus-visible { outline: 3px solid var(--dc-ink); outline-offset: 3px; }
-  .b-ink .ga-pause { border-color: var(--dc-on-ink); background: var(--dc-on-ink); color: var(--dc-ink); }
-  .b-ink .ga-pause:hover { background: var(--dc-tang); border-color: var(--dc-tang); }
-  .b-ink .ga-pause:focus-visible { outline-color: var(--dc-on-ink); }
-
-  /* Room for the Pause chip above each stepper, so it never covers text: slightly more air above the steppers for visitors who get
-     the demonstrations (the static page for everyone else is unchanged). */
-  html.px-js .ga-fx { margin-top: max(56px, clamp(28px, 3.5vw, 48px)); }
-  html.px-js .ga-jy-tabs { margin-top: 56px; }
-  html.px-js .ga-find-k { margin-top: 56px; }
-  html.px-js .ga-steps { margin-top: max(56px, clamp(32px, 4vw, 56px)); }
+  /* Pause (WCAG 2.2.2, alongside the 5 s cap on every demonstration): in the page and in the accessibility tree while a demonstration
+     runs, but invisible to sighted pointer users. It is the first tab stop in its region and appears, clearly, only when it has keyboard
+     focus: a 44px chip hung above the region at the right (top-anchored, so scrolling it into view shows all of it), on top of whatever is there
+     for as long as it is focused. */
+  .ga-pause { position: absolute; right: 0; top: -52px; z-index: 5; width: 1px; height: 1px; margin: 0; padding: 0; overflow: hidden; border: 0; clip-path: inset(50%); white-space: nowrap; }
+  .ga-pause:focus { width: auto; height: auto; min-height: 44px; padding: 0 16px; overflow: visible; clip-path: none; display: inline-flex; align-items: center; gap: 8px; border: 2px solid var(--dc-ink); background: var(--dc-paper); color: var(--dc-ink); cursor: pointer; font: 700 .8125rem/1 var(--dc-f-body); letter-spacing: .04em; text-transform: uppercase; outline: 3px solid var(--dc-ink); outline-offset: 3px; }
+  .b-ink .ga-pause:focus { border-color: var(--dc-on-ink); background: var(--dc-on-ink); color: var(--dc-ink); outline-color: var(--dc-on-ink); }
 
   /* The one-time nudge: after the journey and reporting demonstrations, each remaining button is outlined for a moment, so it is
      clear they can be selected. */

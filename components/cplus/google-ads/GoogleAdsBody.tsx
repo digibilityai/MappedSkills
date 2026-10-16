@@ -24,14 +24,15 @@ import { DemoRegion } from './DemoRegion';
 const PAUSE = { text: S.demo.pause, aria: S.demo.pauseAria };
 const NUDGE = 300;
 const T = {
-  hero: 1200, // each of the four stages
-  factor: 5000, // each of the first two factors
-  station: 1000, // each journey station
-  outcome: 3000, // the hold on the outcome, which carries the readouts and the case text
-  find: 800, // the finding on its own
-  action: 4500, // then the action
-  step: 1500, // each onboarding step (the last holds 600 longer)
-  stepLast: 2100,
+  hero: 1000, // each of the four stages: 4.0 s
+  factorA: 2000, // the first factor, already showing: then 2.5 s on the second, 4.5 s in all
+  factorB: 2500,
+  station: 700, // each of three journey stations
+  outcome: 1200, // the hold on the outcome, which carries the readouts and the case text; with three 0.3 s nudges, 4.2 s in all
+  find: 700, // the finding on its own
+  action: 2500, // then the action; with two 0.3 s nudges, 3.8 s in all
+  step: 700, // each of the first five onboarding steps
+  stepLast: 800, // the sixth: 4.3 s in all
 };
 const nudges = (ids: string[]) => ids.map((nudge) => ({ nudge, hold: NUDGE }));
 
@@ -167,8 +168,8 @@ function Factors() {
             id: 'ga-demo-factors',
             order: 2,
             steps: [
-              { tab: F.items[0].key, hold: T.factor },
-              { tab: F.items[1].key, hold: T.factor },
+              { tab: F.items[0].key, hold: T.factorA },
+              { tab: F.items[1].key, hold: T.factorB },
             ],
             rest: F.items[1].key,
             pause: PAUSE,

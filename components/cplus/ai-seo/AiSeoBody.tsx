@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import { BOOKING_HREF, CONTACT_HREF, InlineLink, Mark } from '@/components/direction-c/primitives';
-import { AI_PLAIN as S } from './content';
+import { AI_PLAIN as S, MEASURED_ON, RUNS } from './content';
+import { Journey } from './Journey';
 import './ai-seo.css';
 import { Breadcrumb } from '../Breadcrumb';
 
 /**
- * C+ AI search (/ai-seo): the approved prototype's page body (proto/direction-c-plus 0a8b611, AiSeoH.tsx), unchanged in markup and
- * copy. Production changes only: the breadcrumb's Home link and the CTAs point at the live routes (`/`, CONTACT_HREF
- * and BOOKING_HREF) instead of prototype paths.
+ * C+ AI search (/ai-seo): the owner-approved G1 R2 design (docs/ai-search-redesign; mockup/src/body.html), eight
+ * sections in the approved order. Markup and classes follow the mockup; copy lives in ./content. Only the journey is a
+ * client component; every other section is static and complete without JavaScript.
  */
-const RUNS = 28;
 
 function Actions() {
   return (
@@ -26,412 +26,368 @@ function Actions() {
   );
 }
 
-/* 28 squares, none filled: one per question. Decorative; the count is stated in text beside it. */
-function Strip() {
+/** Two-colour heading: `a` plain, `b` orange. */
+function Hx({ h }: { h: { a: string; b: string } }) {
   return (
-    <span className="as-strip" aria-hidden="true">
-      {Array.from({ length: RUNS }, (_, i) => (
+    <>
+      {h.a} <span className="b-named">{h.b}</span>
+    </>
+  );
+}
+
+/** Marks for one result row: open squares, one per question (none filled), or two filled marks for the two crawlers
+ *  that could read the site. Decorative; the result is stated in text beside it. */
+function Squares({ kind }: { kind: 'access' | 'runs' }) {
+  const count = kind === 'runs' ? RUNS : 2;
+  return (
+    <span className={kind === 'runs' ? 'ax-sq' : 'ax-sq ax-sq-ok'} aria-hidden="true">
+      {Array.from({ length: count }, (_, i) => (
         <i key={i} />
       ))}
     </span>
   );
 }
 
-function Tokens({ list }: { list: string[] }) {
-  return (
-    <ul className="as-tok">
-      {list.map((t) => {
-        const on = S.crawl.checked.includes(t);
-        return (
-          <li key={t} className={on ? 'is-on' : undefined}>
-            <span className="as-tok-n">{t}</span>
-            <span className="as-tok-tag">{on ? S.crawl.checkedTag : S.crawl.uncheckedTag}</span>
-          </li>
-        );
-      })}
-    </ul>
-  );
-}
-
-function WorkItem({ it, tag }: { it: { lead: string; body: string }; tag?: string }) {
-  return (
-    <div className="as-it">
-      {tag && <p className="as-it-tag">{tag}</p>}
-      <h3 className="as-it-t">{it.lead}</h3>
-      <p className="as-it-b">{it.body}</p>
-    </div>
-  );
-}
-
-function SourceChips({ className }: { className: string }) {
-  return (
-    <ol className={className}>
-      {S.answer.sources.map((s) => (
-        <li key={s.n}>
-          <span className="as-src-n" aria-hidden="true">
-            {s.n}
-          </span>
-          <span className="as-src-t">{s.t}</span>
-        </li>
-      ))}
-    </ol>
-  );
-}
-
 export function AiSeoBody() {
-  const W = S.work;
+  const T = S.test;
   return (
     <>
-      {/* 1 — hero (ivory): the claim + one answer taken apart */}
-      <section className="b-hero as-hero" aria-labelledby="as-h1">
-        <div className="px-wrap b-hero-g h-hero-g as-hero-g">
-          <div>
+      {/* 1 — hero (ivory): the question every owner recognises, and one AI answer taken apart */}
+      <section className="b-hero ax-hero" aria-labelledby="as-h1">
+        <div className="px-wrap b-hero-g h-hero-g ax-hero-g">
+          <div className="ax-hero-tx">
             <Breadcrumb trail={['What we do']} current={S.crumb} />
             <p className="b-kicker">{S.kicker}</p>
             <h1 id="as-h1" className="b-h1">
-              {S.h1.a} <span className="b-named">{S.h1.b}</span> {S.h1.c}
+              <Hx h={S.h1} />
             </h1>
             <p className="b-lede">{S.lede}</p>
-            <p className="as-side">{S.side}</p>
             <Actions />
           </div>
 
-          <figure className="as-ans-fig">
-            <div className="as-ans">
-              <div className="as-card">
-                <p className="as-label">{S.answer.label}</p>
-                <p className="as-card-ask">{S.answer.ask}</p>
-                <div className="as-card-lines" aria-hidden="true">
-                  <span className="as-ln" />
-                  <span className="as-ln as-ln-s">
-                    <sup>1</sup>
-                  </span>
-                  <span className="as-ln" />
-                  <span className="as-ln as-ln-m">
-                    <sup>2</sup>
-                  </span>
-                  <span className="as-ln as-ln-s">
-                    <sup>3</sup>
-                  </span>
-                </div>
-              </div>
-              <div className="as-src">
-                <p className="as-label">{S.answer.builtFrom}</p>
-                <SourceChips className="as-src-list" />
-                <p className="as-own">
-                  <span className="as-src-n as-own-n" aria-hidden="true" />
-                  <span className="as-own-tx">
-                    <span className="as-src-t">{S.answer.own.t}</span>
-                    <span className="as-own-d">{S.answer.own.d}</span>
+          <figure className="ax-chat">
+            <div className="ax-chat-win">
+              <p className="ax-q">
+                <span className="ax-q-k">{S.chat.askK}</span>
+                {S.chat.ask}
+              </p>
+              <div className="ax-a">
+                <p className="ax-a-k">{S.chat.ansK}</p>
+                <ol className="ax-a-l">
+                  {S.chat.names.map((src, i) => (
+                    <li key={src}>
+                      <span className={['ax-nm', 'ax-nm ax-nm-m', 'ax-nm ax-nm-s'][i]} aria-hidden="true" />
+                      <span className="px-sr">{S.chat.name}</span>
+                      <span className="ax-src">{src}</span>
+                    </li>
+                  ))}
+                </ol>
+                <p className="ax-you">
+                  <span className="ax-you-b" aria-hidden="true" />
+                  <span>
+                    <b>{S.chat.you.b}</b> {S.chat.you.t}
                   </span>
                 </p>
               </div>
             </div>
-            <figcaption className="px-cap">{S.answer.cap}</figcaption>
+            <figcaption className="px-cap">{S.chat.cap}</figcaption>
           </figure>
         </div>
       </section>
 
-      {/* 2 — the situation (ink): how people find out, then the size of it */}
-      <section className="b-sec b-ink as-sit" aria-labelledby="as-h-sit">
+      {/* 2 — what is changing (ink): links became a shortlist */}
+      <section className="b-sec b-ink ax-shift" aria-labelledby="as-h-shift">
         <div className="px-wrap">
-          <p className="b-kicker">{S.sitKicker}</p>
-          <h2 id="as-h-sit" className="b-h2">
-            {S.sitH}
+          <p className="b-kicker">{S.shift.kicker}</p>
+          <h2 id="as-h-shift" className="b-h2">
+            <Hx h={S.shift.h} />
           </h2>
-          <p className="as-label as-ways-k" id="as-ways-k">
-            {S.sitWaysLabel}
+          <div className="ax-shift-g">
+            <figure className="ax-tile ax-tile-cream ax-then">
+              <p className="ax-tl">{S.shift.then.l}</p>
+              <ul className="ax-serp" aria-hidden="true">
+                {Array.from({ length: 6 }, (_, i) => (
+                  <li key={i} />
+                ))}
+              </ul>
+              <figcaption className="ax-tt">{S.shift.then.t}</figcaption>
+            </figure>
+            <span className="ax-arrow" aria-hidden="true" />
+            <figure className="ax-tile ax-tile-ink ax-now">
+              <p className="ax-tl">{S.shift.now.l}</p>
+              <ul className="ax-short" aria-hidden="true">
+                {S.shift.now.names.map((n, i) => (
+                  <li key={i}>{n}</li>
+                ))}
+                <li className="ax-short-you">{S.shift.now.you}</li>
+              </ul>
+              <figcaption className="ax-tt">
+                {S.shift.now.t} <b>{S.shift.now.tb}</b>
+              </figcaption>
+            </figure>
+          </div>
+          <p className="ax-size">
+            <b>{S.shift.size.b}</b> {S.shift.size.t}
           </p>
-          <ol className="as-ways" aria-labelledby="as-ways-k" data-rv="">
-            {S.sitWays.map((w) => (
-              <li key={w.ask} className="as-way" data-rv-i="">
-                <p className="as-way-q">{w.ask}</p>
-                <p className="as-way-a">{w.got}</p>
-              </li>
-            ))}
-          </ol>
-          <div className="as-size-g">
-            <p className="as-size">{S.sitSize}</p>
-            <div className="as-limit">
-              <p>
-                <b>{S.sitLimit.b}</b> {S.sitLimit.t}
+        </div>
+      </section>
+
+      {/* 3 — where answers come from (paper): the mechanism, then our own dated test as a visible three-step sequence.
+           The material result (0 of 28) and the four separate results are visible; the disclosure holds method and the
+           full record. Untested systems are never shown as zero (DEC-015). */}
+      <section className="b-sec b-paper ax-src-sec" aria-labelledby="as-h-src">
+        <div className="px-wrap">
+          <div className="ax-src-top">
+            <div>
+              <p className="b-kicker">{S.src.kicker}</p>
+              <h2 id="as-h-src" className="b-h2">
+                <Hx h={S.src.h} />
+              </h2>
+            </div>
+            <figure className="ax-hub">
+              <ul className="ax-feeds">
+                {S.src.feeds.map((f) => (
+                  <li key={f} className="ax-feed">
+                    <span className="ax-feed-n">{f}</span>
+                  </li>
+                ))}
+                <li className="ax-feed ax-feed-own">
+                  <span className="ax-feed-n">{S.src.own.t}</span>
+                  <span className="ax-feed-d">{S.src.own.d}</span>
+                </li>
+              </ul>
+              <p className="ax-hub-ans" aria-hidden="true">
+                <span>{S.src.hub}</span>
+              </p>
+              <figcaption className="px-cap">{S.src.cap}</figcaption>
+            </figure>
+          </div>
+
+          <div className="ax-test">
+            <div className="ax-test-head">
+              <h3 className="ax-test-h">{T.h}</h3>
+              <p className="ax-test-m">
+                <time dateTime="2026-08-31">{MEASURED_ON}</time>
+                {T.meta.map((m) => ` · ${m}`).join('')}
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3 — the work (paper): placed by where it acts; then the two crawler lanes */}
-      <section className="b-sec b-paper as-work" aria-labelledby="as-h-work">
-        <div className="px-wrap">
-          <p className="b-kicker">{S.workKicker}</p>
-          <h2 id="as-h-work" className="b-h2">
-            {S.workH}
-          </h2>
-          <div className="as-terr" data-rv="">
-            <div className="as-zone as-zone-own" data-rv-i="">
-              <p className="as-label">{S.zones.own}</p>
-              <WorkItem it={W.access} />
-              <WorkItem it={W.citable} />
-            </div>
-            <div className="as-zone as-zone-off" data-rv-i="">
-              <p className="as-label">{S.zones.off}</p>
-              <WorkItem it={W.authority} />
-              <SourceChips className="as-off-src" />
-            </div>
-            <div className="as-zone as-zone-both" data-rv-i="">
-              <WorkItem it={W.entity} tag={S.zones.both} />
-            </div>
-            <div className="as-zone as-zone-ans" data-rv-i="">
-              <WorkItem it={W.measure} tag={S.zones.answers} />
-            </div>
-          </div>
-
-          <figure className="as-crawl">
-            <figcaption className="as-sub-h">{S.crawl.cap}</figcaption>
-            <div className="as-lanes">
-              <div className="as-lane">
-                <h3 className="as-lane-h">{S.crawl.training.h}</h3>
-                <p className="as-lane-t">{S.crawl.training.t}</p>
-                <Tokens list={S.crawl.training.tokens} />
-                <p className="as-lane-dest">{S.crawl.training.dest}</p>
-              </div>
-              <div className="as-lane is-ret">
-                <h3 className="as-lane-h">{S.crawl.retrieval.h}</h3>
-                <p className="as-lane-t">{S.crawl.retrieval.t}</p>
-                <Tokens list={S.crawl.retrieval.tokens} />
-                <p className="as-lane-dest">{S.crawl.retrieval.dest}</p>
-              </div>
-            </div>
-            <p className="as-note">{S.crawl.note}</p>
-          </figure>
-        </div>
-      </section>
-
-      {/* 4 — evidence (ink), BEFORE the boundary: the dated record, two findings, the four layers kept apart, the limits */}
-      <section className="b-sec b-ink as-ev" aria-labelledby="as-h-ev">
-        <div className="px-wrap">
-          <p className="b-kicker">{S.evKicker}</p>
-          <h2 id="as-h-ev" className="b-h2">
-            {S.evH.a} <span className="b-named">{S.evH.b}</span>
-          </h2>
-
-          <div className="as-ev-g">
-            <div className="as-rec">
-              <h3 className="as-rec-h">
-                <span>{S.record.title}</span> <time dateTime="2026-08-31">{S.record.date}</time>
-              </h3>
-              <dl className="as-rec-meta">
-                {S.record.meta.map((m) => (
-                  <div key={m.k}>
-                    <dt>{m.k}</dt>
-                    <dd>{m.v}</dd>
-                  </div>
-                ))}
-              </dl>
-              <table className="as-rec-tb">
-                <caption>{S.record.tableCap}</caption>
-                <thead>
-                  <tr>
-                    {S.record.cols.map((c) => (
-                      <th key={c} scope="col">
-                        {c}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {S.record.rows.map((r) => (
-                    <tr key={r.s}>
-                      <th scope="row">
-                        {r.s}
-                        {r.note && <span className="as-rec-note">{r.note}</span>}
-                      </th>
-                      <td>{r.n}</td>
-                      <td>0</td>
-                    </tr>
+            <ol className="ax-tr">
+              <li className="ax-tile ax-tile-cream ax-tr-s">
+                <p className="ax-tl">{T.checked.l}</p>
+                <p className="ax-tr-big">{T.checked.big}</p>
+                <p>{T.checked.t}</p>
+                <ul className="ax-tools">
+                  {T.checked.tools.map((t) => (
+                    <li key={t}>{t}</li>
                   ))}
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <th scope="row">{S.record.total}</th>
-                    <td>{RUNS}</td>
-                    <td>0</td>
-                  </tr>
-                </tfoot>
-              </table>
-              <div className="as-rec-un">
-                <p className="as-rec-un-k">
-                  <Mark state="open" /> {S.record.untestedK}
+                </ul>
+                <p className="ax-tr-sub ax-push">
+                  <span className="ax-dash" aria-hidden="true" />
+                  {T.checked.untested}
                 </p>
-                <ul>
-                  {S.record.untested.map((u) => (
-                    <li key={u.s}>
-                      <b>{u.s}</b> {u.t}
+              </li>
+              <li className="ax-tile ax-tile-ink ax-tr-s ax-tr-found">
+                <p className="ax-tl">{T.found.l}</p>
+                <p className="ax-tr-zero">
+                  <span className="ax-fig">
+                    {T.found.fig} <small>{T.found.of}</small>
+                  </span>
+                  <span>{T.found.t}</span>
+                </p>
+                <ul className="ax-ly" aria-label={T.found.layersLabel}>
+                  {T.found.layers.map((l) => (
+                    <li key={l.q}>
+                      <span className="ax-ly-q">{l.q}</span>
+                      <Squares kind={l.kind} />
+                      <span className="ax-ly-r">{l.r}</span>
                     </li>
                   ))}
                 </ul>
-                <p className="as-rec-un-n">{S.record.untestedNote}</p>
+                <p className="ax-tr-sub">{T.found.key}</p>
+                <p className="ax-tr-sub">{T.found.branded}</p>
+              </li>
+              <li className="ax-tile ax-tile-cream ax-tr-s">
+                <p className="ax-tl">{T.taught.l}</p>
+                <p className="ax-tr-lead">{T.taught.lead}</p>
+                <p>{T.taught.t}</p>
+                <p className="ax-tr-so">{T.taught.so}</p>
+              </li>
+            </ol>
+            <p className="ax-tr-lim">
+              <b>{T.lim.b}</b> {T.lim.t}
+            </p>
+            <details className="fq-d ax-rec">
+              <summary>
+                <span className="fq-q">{S.record.summary}</span>
+                <span className="fq-pm" aria-hidden="true" />
+              </summary>
+              <div className="ax-rec-in">
+                <table className="ax-rec-tb">
+                  <caption>{S.record.tableCap}</caption>
+                  <thead>
+                    <tr>
+                      {S.record.cols.map((c) => (
+                        <th key={c} scope="col">
+                          {c}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {S.record.rows.map((r) => (
+                      <tr key={r.s}>
+                        <th scope="row">
+                          {r.s}
+                          {r.note && <span>{r.note}</span>}
+                        </th>
+                        <td>{r.n}</td>
+                        <td>0</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th scope="row">{S.record.total}</th>
+                      <td>{S.record.rows.reduce((a, r) => a + r.n, 0)}</td>
+                      <td>0</td>
+                    </tr>
+                  </tfoot>
+                </table>
+                <p className="ax-rec-un">
+                  <b>{S.record.untested.b}</b> {S.record.untested.t}
+                </p>
+                {S.record.notes.map((n) => (
+                  <p key={n.b} className="ax-rec-l">
+                    <b>{n.b}</b> {n.t}
+                  </p>
+                ))}
               </div>
-              <p className="as-rec-br">{S.record.branded}</p>
-              <details className="fq-d as-method">
-                <summary>
-                  <span className="fq-q">{S.method.summary}</span>
-                  <span className="fq-pm" aria-hidden="true" />
-                </summary>
-                <ul className="as-method-l">
-                  {S.method.items.map((t) => (
-                    <li key={t}>{t}</li>
-                  ))}
-                </ul>
-              </details>
-            </div>
+            </details>
+          </div>
+        </div>
+      </section>
 
-            <div className="as-find">
-              <ul className="as-find-l">
-                {S.findings.map((f) => (
-                  <li key={f.b}>
-                    <p className="as-find-b">{f.b}</p>
-                    <p className="as-find-t">{f.t}</p>
+      {/* 4 — how the work moves (ink): five-step journey, auto-advances every 2 s, plays once */}
+      <section className="b-sec b-ink ax-jr-sec" aria-labelledby="as-h-jr">
+        <div className="px-wrap">
+          <Journey
+            heading={
+              <>
+                <p className="b-kicker">{S.journey.kicker}</p>
+                <h2 id="as-h-jr" className="b-h2">
+                  <Hx h={S.journey.h} />
+                </h2>
+              </>
+            }
+            steps={S.journey.steps}
+            big={S.journey.big}
+            labels={S.journey.ctl}
+          />
+          <details className="fq-d ax-crawl">
+            <summary>
+              <span className="fq-q">{S.crawl.summary}</span>
+              <span className="fq-pm" aria-hidden="true" />
+            </summary>
+            <div className="ax-crawl-in">
+              <p>
+                <b>{S.crawl.retrieval.b}</b> {S.crawl.retrieval.t}
+              </p>
+              <p>
+                <b>{S.crawl.training.b}</b> {S.crawl.training.t}
+              </p>
+              <p>{S.crawl.note}</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      {/* 5 — clear reporting (paper): one picture, two sides of a line */}
+      <section className="b-sec b-paper ax-rep-sec" aria-labelledby="as-h-rep">
+        <div className="px-wrap">
+          <p className="b-kicker">{S.rep.kicker}</p>
+          <h2 id="as-h-rep" className="b-h2">
+            <Hx h={S.rep.h} />
+          </h2>
+          <figure className="ax-bd">
+            <div className="ax-tile ax-tile-cream ax-bd-can">
+              <p className="ax-tl">{S.rep.can.l}</p>
+              <ol className="ax-bd-l">
+                {S.rep.can.items.map((it) => (
+                  <li key={it.b}>
+                    <b>{it.b}</b>
+                    <span>{it.t}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <p className="ax-bd-line">
+              <span>{S.rep.line}</span>
+            </p>
+            <div className="ax-tile ax-tile-ink ax-bd-not">
+              <p className="ax-tl">{S.rep.not.l}</p>
+              <ul className="ax-bd-l">
+                {S.rep.not.items.map((it) => (
+                  <li key={it.b}>
+                    <b>{it.b}</b>
+                    <span>{it.t}</span>
                   </li>
                 ))}
               </ul>
-              <p className="as-find-k">{S.findingsBold}</p>
             </div>
-          </div>
-
-          <figure className="as-layers">
-            <figcaption className="as-sub-h">{S.layersCap}</figcaption>
-            <ol className="as-ly-list" data-rv="">
-              {S.layers.map((l) => (
-                <li key={l.k} className={`as-ly as-ly-${l.kind}`} data-rv-i="">
-                  <h3 className="as-ly-k">{l.k}</h3>
-                  <p className="as-ly-q">{l.q}</p>
-                  {l.kind === 'runs' ? (
-                    <Strip />
-                  ) : (
-                    <span className="as-acc" aria-hidden="true">
-                      <i />
-                      <i />
-                    </span>
-                  )}
-                  <p className="as-ly-r">{l.r}</p>
-                </li>
-              ))}
-            </ol>
-            <div className="as-ly-un">
-              <p className="as-ly-un-k">
-                <Mark state="open" /> {S.layersUntested.k}
-              </p>
-              <p>{S.layersUntested.t}</p>
-            </div>
-            <p className="as-note as-note-ink">{S.layersKey}</p>
           </figure>
-
-          <div className="as-lim">
-            <h3 className="as-label">{S.limitsK}</h3>
-            <ul>
-              {S.limits.map((t) => (
-                <li key={t}>{t}</li>
-              ))}
-            </ul>
-          </div>
+          <p className="ax-rep-note">
+            {S.rep.note} <b>{S.rep.why.b}</b> {S.rep.why.t}
+          </p>
         </div>
       </section>
 
-      {/* 5 — the boundary (paper), after the evidence: the score this page will not give, and what is not promised */}
-      <section className="b-sec b-paper as-bd" aria-labelledby="as-h-bd">
+      {/* 6 — is it right for you (ivory): a quick decision; the situations are our usual judgement, not rules */}
+      <section className="b-sec ax-fit-sec" aria-labelledby="as-h-fit">
         <div className="px-wrap">
-          <p className="b-kicker">{S.bdKicker}</p>
-          <div className="as-bd-g">
-            <div>
-              <h2 id="as-h-bd" className="b-h2">
-                {S.bdH.a} <span className="b-named">{S.bdH.b}</span>
-              </h2>
-              <p className="b-lede as-bd-lede">{S.bdLede}</p>
-              <ul className="as-bd-l">
-                {S.bdBody.map((t) => (
-                  <li key={t}>{t}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="as-bd-side">
-              <figure className="as-score">
-                <div className="as-score-tile">
-                  <p className="as-label">{S.bdScore.k}</p>
-                  <span className="as-score-slot" aria-hidden="true" />
-                  <p className="as-score-v">{S.bdScore.v}</p>
-                </div>
-                <figcaption className="px-cap">{S.bdScore.cap}</figcaption>
-              </figure>
-              <div className="as-np">
-                <p className="as-label" id="as-np-k">
-                  {S.notPromisedK}
-                </p>
-                <ul aria-labelledby="as-np-k">
-                  {S.notPromised.map((t) => (
+          <p className="b-kicker">{S.fit.kicker}</p>
+          <h2 id="as-h-fit" className="b-h2">
+            <Hx h={S.fit.h} />
+          </h2>
+          <p className="ax-fit-lede">{S.fit.lede}</p>
+          <figure className="ax-dec">
+            <p className="ax-dec-start" aria-hidden="true">
+              <span>{S.fit.start}</span>
+            </p>
+            <div className="ax-dec-g">
+              <div className="ax-tile ax-tile-cream ax-dec-c ax-dec-yes">
+                <h3 className="ax-dec-h">{S.fit.yes.h}</h3>
+                <ul className="ax-dec-l">
+                  {S.fit.yes.items.map((t) => (
                     <li key={t}>{t}</li>
                   ))}
                 </ul>
-                <p className="as-np-c">{S.notPromisedClose}</p>
+                <p className="ax-dec-next">{S.fit.yes.next}</p>
+              </div>
+              <div className="ax-tile ax-tile-ink ax-dec-c ax-dec-other">
+                <h3 className="ax-dec-h">{S.fit.other.h}</h3>
+                <ul className="ax-dec-l">
+                  {S.fit.other.items.map((it) => (
+                    <li key={it.b}>
+                      <b>{it.b}</b>{' '}
+                      <span>
+                        {it.link && (
+                          <>
+                            <InlineLink href={it.link.href}>{it.link.t}</InlineLink>{' '}
+                          </>
+                        )}
+                        {it.t}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-          </div>
+          </figure>
+          <p className="ax-fit-close">{S.fit.close}</p>
         </div>
       </section>
 
-      {/* 6 — measurement (ivory): what is reported, beside the shape of the report, per assistant */}
-      <section className="b-sec as-meas" aria-labelledby="as-h-meas">
-        <div className="px-wrap">
-          <p className="b-kicker">{S.measKicker}</p>
-          <h2 id="as-h-meas" className="b-h2">
-            {S.measH}
-          </h2>
-          <div className="as-meas-g">
-            <div className="as-meas-tx">
-              <p className="b-lede">{S.meas}</p>
-              <div className="as-limit as-limit-light">
-                <p>
-                  {S.measLimit.a} <b>{S.measLimit.b}</b>
-                </p>
-              </div>
-            </div>
-            <figure className="as-sheet" data-rv="">
-              <figcaption className="as-label">{S.sheet.cap}</figcaption>
-              <div className="as-sheet-g">
-                {S.sheet.sys.map((sys) => (
-                  <div key={sys} className="as-sys" data-rv-i="">
-                    <p className="as-sys-h">{sys}</p>
-                    <dl>
-                      {S.sheet.rows.map((r) => (
-                        <div key={r}>
-                          <dt>{r}</dt>
-                          <dd>
-                            <span className="as-blank" aria-hidden="true" />
-                            <span className="px-sr">no data</span>
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </div>
-                ))}
-                <div className="as-sys as-sys-un" data-rv-i="">
-                  <p className="as-sys-h">
-                    <Mark state="open" /> {S.sheet.untested}
-                  </p>
-                  <p className="as-sys-t">{S.sheet.untestedT}</p>
-                </div>
-                <div className="as-sys as-sys-x" data-rv-i="">
-                  <p className="as-sys-h">{S.sheet.blended}</p>
-                  <p className="as-sys-t">{S.sheet.blendedT}</p>
-                </div>
-              </div>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      {/* 7 — questions (paper): native disclosures, closed on load. The blocked objection renders nothing. */}
+      {/* 7 — questions (paper): native disclosures, closed on load. No FAQPage structured data on this route. */}
       <section className="b-sec b-paper as-q" aria-labelledby="as-h-qs">
         <div className="px-wrap as-q-g">
           <div>
@@ -464,11 +420,10 @@ export function AiSeoBody() {
         </div>
       </section>
 
-      {/* close: the shared close's markup and classes, with the prototype routes */}
+      {/* close (tangerine): one decision, the two existing destinations */}
       <section className="b-close" aria-labelledby="as-h-close">
         <div className="px-wrap b-close-in">
           <div>
-            <p className="b-kicker as-close-k">{S.close.label}</p>
             <h2 id="as-h-close" className="b-h2">
               {S.close.h}
             </h2>

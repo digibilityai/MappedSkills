@@ -4,9 +4,10 @@ import { CplusPage } from '@/components/cplus/CplusPage';
 import { AiSeoBody } from '@/components/cplus/ai-seo/AiSeoBody';
 
 /**
- * `/ai-seo` — the approved C+ AI search design (proto/direction-c-plus 0a8b611) in production. The URL, metadata
- * (title, description, canonical, Open Graph/Twitter), the global structured data and this route's `BreadcrumbList`
- * (same trail, same helpers) are unchanged. The Direction C header and footer come from the root layout.
+ * `/ai-seo` — the owner-approved G1 R2 AI search design (docs/ai-search-redesign). The URL, metadata (title,
+ * description, canonical, Open Graph/Twitter), the global structured data and this route's `BreadcrumbList` (same
+ * trail, same helpers) are unchanged; only the visible H1 changed (owner-approved for G2 under DEC-051). The Direction C
+ * header and footer come from the root layout.
  */
 export const metadata = createMetadata(
   'AI Search: Why Your Business Is Not in the Answer | MappedSkills',

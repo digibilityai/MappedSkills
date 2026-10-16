@@ -331,3 +331,55 @@ test('no tab or selector row in google-ads.css draws its border with the decorat
   const row = rules.find((r) => /^\.ga-find \.px-tab$/.test(r.sel));
   assert.ok(row && /border:\s*2px solid var\(--dc-control\)/.test(row.body));
 });
+
+// ---- G1.3c Commit 1: the autoplay infrastructure must stay inert until the demonstrations are authorised
+const demoSrc = read('components/cplus/google-ads/demo.ts');
+const gaTabsSrc = read('components/cplus/google-ads/GaTabs.tsx');
+const regionSrc = read('components/cplus/google-ads/DemoRegion.tsx');
+
+test('the page configures no demonstration yet (no demo prop, no DemoRegion), and no section autoplays', () => {
+  assert.ok(!/DemoRegion/.test(body), 'GoogleAdsBody does not use DemoRegion');
+  assert.ok(!/\bdemo\s*=/.test(body), 'no GaTabs receives a demo');
+  assert.ok(/import \{ GaTabs \} from '\.\/GaTabs'/.test(body) && !/Interactive/.test(body.replace(/\/\*[\s\S]*?\*\//g, '')), 'the page uses the local GaTabs, not the shared Tabs');
+  assert.ok(!/<Tabs\b/.test(body));
+});
+
+test('the shared Tabs component and the SEO sequence are not modified by this change', () => {
+  const shared = read('components/cplus/Interactive.tsx');
+  assert.ok(!/demo|registerDemo/i.test(shared));
+});
+
+test('the coordinator never loops: no setInterval, no requestAnimationFrame loop, no replay path', () => {
+  const code = [demoSrc, gaTabsSrc, regionSrc].join('\n').replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+  assert.ok(!/setInterval|requestAnimationFrame/.test(code));
+  assert.ok(!/state\s*=\s*'idle'/.test(demoSrc.replace(/state: 'idle'/, '')), 'a finished demonstration never returns to idle');
+});
+
+test('the coordinator honours reduced motion, Escape, manual interaction, tab hiding and one-at-a-time playback', () => {
+  assert.ok(/prefers-reduced-motion: reduce/.test(demoSrc) && /prefersReducedMotion\(\)/.test(demoSrc));
+  assert.ok(/'Escape'/.test(demoSrc));
+  for (const ev of ['click', 'keydown', 'focusin']) assert.ok(new RegExp(`addEventListener\\('${ev}'`).test(demoSrc), ev);
+  assert.ok(!/touchstart|touchmove|pointerdown/.test(demoSrc.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '')), 'a touch-scroll must not count as interaction');
+  assert.ok(/visibilitychange/.test(demoSrc) && /if \(active \|\| !fontsReady\) return/.test(demoSrc));
+  // every listener added is removed
+  const added = (demoSrc.match(/addEventListener\(/g) || []).length;
+  const removed = (demoSrc.match(/removeEventListener\(/g) || []).length;
+  assert.ok(added === removed, `${added} added vs ${removed} removed`);
+});
+
+test('the approved timing constants and the Pause control wiring are in place', () => {
+  assert.ok(/DWELL_MS = 400/.test(demoSrc) && /FONT_WAIT_MS = 1000/.test(demoSrc) && /ENTER_RATIO = 0\.4/.test(demoSrc) && /ENTER_VIEWPORT = 0\.45/.test(demoSrc) && /LEAVE_RATIO = 0\.2/.test(demoSrc));
+  for (const src of [gaTabsSrc, regionSrc]) assert.ok(/state === 'running'/.test(src) && /stopDemo\(/.test(src) && /aria-label=\{/.test(src), 'Pause is rendered only while running');
+});
+
+test('GaTabs keeps the shared Tabs markup contract (roles, ids, classes, keyboard map)', () => {
+  const norm = (s) => s.replace(/\s+/g, ' ');
+  const t = norm(read('components/cplus/Interactive.tsx'));
+  const g = norm(gaTabsSrc);
+  for (const frag of [
+    "role=\"tablist\" aria-label={label} className=\"px-tablist\"",
+    "role=\"tab\" type=\"button\" id={`${base}-t-${it.id}`} aria-selected={cur === it.id} aria-controls={`${base}-p-${it.id}`} tabIndex={cur === it.id ? 0 : -1} className=\"px-tab\"",
+    "role=\"tabpanel\" id={`${base}-p-${it.id}`} aria-labelledby={`${base}-t-${it.id}`} tabIndex={0} className={cur === it.id ? 'px-tabpanel' : 'px-tabpanel is-off'}",
+    "{ ArrowRight: i + 1, ArrowDown: i + 1, ArrowLeft: i - 1, ArrowUp: i - 1, Home: 0, End: n - 1 }",
+  ]) assert.ok(t.includes(frag) && g.includes(frag), frag);
+});

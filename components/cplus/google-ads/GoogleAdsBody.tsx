@@ -4,7 +4,7 @@ import { GA_COPY as S } from './copy';
 import './google-ads.css';
 import { Breadcrumb } from '../Breadcrumb';
 import { Icon } from '../Icons';
-import { Tabs } from '../Interactive';
+import { GaTabs } from './GaTabs';
 
 /**
  * C+ Google Ads (/google-ads), G1.3a (DEC-053 and the owner-approved G1.3 scope and decisions): the static composition of the page,
@@ -134,7 +134,7 @@ function Factors() {
       <div className="px-wrap">
         <Heading id="ga-h-fac" h={F.h} />
         <p className="b-lede ga-fac-lede">{F.lede}</p>
-        <Tabs
+        <GaTabs
           className="ga-fx"
           label={F.tabsLabel}
           items={F.items.map((it) => ({
@@ -266,7 +266,7 @@ function Path() {
           <Heading id="ga-h-path" h={P.h} />
           <p className="ga-path-lede">{P.lede}</p>
         </div>
-        <Tabs
+        <GaTabs
           className="ga-jy-tabs"
           label={P.tabsLabel}
           items={P.cases.map((c) => ({
@@ -398,7 +398,7 @@ function Reporting() {
         </div>
         <p className="ga-rep-covers">{G.covers}</p>
         <p className="ga-label ga-find-k">{G.findingsK}</p>
-        <Tabs
+        <GaTabs
           className="ga-find"
           label={G.tabsLabel}
           items={G.findings.map((f) => ({

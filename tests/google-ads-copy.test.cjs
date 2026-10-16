@@ -1,7 +1,7 @@
-// Guards for the /google-ads v4 copy module (G0 / G0.1, DEC-053). These check the module's STRUCTURE, not just that strings
-// exist somewhere: the service boundary (what sits in the fee and what is agreed separately), the spend/fee separation,
-// every approved commitment and qualification, the Path Figure cases, the process, and the claim limits. Copy only: this
-// does not test markup, and the module is not imported by the page yet. No framework needed.
+// Guards for the /google-ads copy module, revision 2 (DEC-053 and the owner-approved R2 proposal). These check the module's
+// STRUCTURE, not just that strings exist somewhere: the service boundary (what sits in the fee and what is agreed
+// separately), the spend/fee separation, every accountability commitment, the qualifications, which journey ending carries
+// which "agreed separately" marker, the process, no score, and the claim limits. Copy only: this does not test markup.
 const test = require('node:test');
 const assert = require('node:assert');
 const fs = require('node:fs');
@@ -29,25 +29,43 @@ const strings = [];
   else if (v && typeof v === 'object') Object.values(v).forEach(walk);
 })(GA);
 const prose = strings.join('\n');
+const heading = (h) => `${h.a} ${h.b}`;
 
-test('only the seven approved blocks exist, in the approved order, and no section carries an unapproved kicker', () => {
-  const order = ['hero', 'factors', 'path', 'scope', 'answer', 'reporting', 'next'];
+test('the eight approved sections exist, in order; no section carries an unapproved kicker', () => {
+  const order = ['hero', 'factors', 'path', 'scope', 'answer', 'reporting', 'process', 'close'];
   assert.deepStrictEqual(GA.blocks, order);
   assert.deepStrictEqual(Object.keys(GA).sort(), ['blocks', ...order].sort());
-  for (const k of order.filter((b) => b !== 'hero')) assert.ok(!('kicker' in GA[k]), `${k} has an unapproved kicker`);
+  let kickers = 0;
+  (function walk(v) {
+    if (Array.isArray(v)) v.forEach(walk);
+    else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) { if (k === 'kicker') kickers++; walk(x); }
+  })(GA);
+  assert.strictEqual(kickers, 1);
   assert.strictEqual(GA.hero.kicker, 'Google Ads');
 });
 
-test('H1 and the supporting copy are the owner-approved wording', () => {
-  assert.strictEqual(`${GA.hero.h1.a} ${GA.hero.h1.b}`, 'We run your ads. We look beyond the click.');
-  assert.deepStrictEqual(GA.hero.lede, [
-    "We manage your Google Ads, including your ads, searches and budget. We also check whether your website makes it easy for people to enquire.",
-    "If we find a problem with your website or tracking, we'll explain what needs fixing. Any additional work is agreed with you separately.",
-  ]);
+test('H1, the hero paragraph and every heading are the approved wording (two-colour split, joined text unchanged)', () => {
+  assert.strictEqual(heading(GA.hero.h1), 'We run your ads. We look beyond the click.');
+  assert.strictEqual(
+    GA.hero.lede,
+    "We manage your Google Ads: your ads, searches and budget. We also check that your website makes it easy to enquire. If we find a problem with your website or tracking, we'll explain it. Fixing it is agreed separately."
+  );
+  assert.deepStrictEqual(
+    [GA.factors.h, GA.path.h, GA.scope.h, GA.answer.h, GA.reporting.h, GA.process.h, GA.close.h].map(heading),
+    [
+      'What we look at before suggesting Google Ads.',
+      'From your budget to an enquiry — and where it can go wrong.',
+      'What the work covers.',
+      'What we answer for.',
+      'What you learn each month, and what we do with it.',
+      'What happens after you get in touch.',
+      'Already running Google Ads, or thinking about it?',
+    ]
+  );
 });
 
 test('both approved CTAs are present, in the hero and the close', () => {
-  for (const b of [GA.hero, GA.next]) {
+  for (const b of [GA.hero, GA.close]) {
     assert.strictEqual(b.primary, "Tell us what you're trying to fix");
     assert.strictEqual(b.secondary, 'Book a call');
   }
@@ -55,43 +73,45 @@ test('both approved CTAs are present, in the hero and the close', () => {
 
 test('service boundary: core service and oversight are in the fee; website, landing-page and tracking work is agreed separately', () => {
   const { core, oversight, separate } = GA.scope;
-  assert.deepStrictEqual(core.items, [
+  assert.deepStrictEqual(core.items.map((i) => i.full), [
     'Set up and manage your Google Ads',
     'Write and improve your ads',
     'Manage your advertising budget',
     'Review search performance and improve your campaigns',
   ]);
-  assert.deepStrictEqual(oversight.items, [
+  assert.deepStrictEqual(oversight.items.map((i) => i.full), [
     'Review the page people land on',
     'Check whether visitors can make an enquiry',
     'Spot problems with your website, enquiry route or tracking',
     'Explain what we find and recommend improvements',
   ]);
-  assert.deepStrictEqual(separate.items, [
+  assert.deepStrictEqual(separate.items.map((i) => i.full), [
     'Creating or changing landing pages',
     'Fixing your website or enquiry forms',
     'Setting up new tracking, or repairing it',
   ]);
+  assert.deepStrictEqual(separate.items.map((i) => i.chip), ['Landing pages', 'Website and form fixes', 'New or repaired tracking']);
   assert.strictEqual(separate.k, 'Agreed separately');
-  // None of the separately agreed work may appear in the lists that are covered by the fee.
+  assert.strictEqual(GA.scope.frame, 'Covered by our management fee');
+  // None of the separately agreed work may appear in the lists that are covered by the fee (full text or chip).
   for (const item of [...core.items, ...oversight.items]) {
-    assert.ok(!/landing pages?\b.*\b(creat|chang)|fix(ing)? your website|enquiry forms?|setting up new tracking|repair/i.test(item), item);
+    for (const s of [item.full, item.chip]) {
+      assert.ok(!/landing pages?\b.*\b(creat|chang)|fix(ing)? your website|enquiry forms?|setting up new tracking|repair|new or repaired/i.test(s), s);
+    }
   }
   assert.strictEqual(
     GA.scope.sub,
     "Management and oversight are covered by our management fee. Anything we'd build or fix on your website or tracking is agreed separately."
   );
-  assert.strictEqual(
-    GA.scope.callout,
-    "If we find a problem, we'll explain what needs fixing. Any additional work is agreed with you separately."
-  );
+  assert.ok(!('callout' in GA.scope), 'the callout duplicates the hero and was removed (decision E)');
 });
 
-test('the receipt: spend to Google, a separate fee, what the fee covers, and fixes agreed separately', () => {
+test('the receipt: spend to Google, a separate fee, what the fee covers, fixes agreed separately, and the four stages', () => {
   const r = GA.hero.receipt;
   assert.strictEqual(r.topTag, 'Paid to Google');
   assert.strictEqual(r.bottomTag, 'Paid to us, separately');
   assert.strictEqual(r.bottomK, 'What our management fee covers');
+  assert.deepStrictEqual(r.top, ['Someone searches for what you sell', 'Your ad appears', 'They click it']);
   assert.deepStrictEqual(r.bottom, [
     'Choosing which searches your ads show for',
     'Writing and improving your ads',
@@ -101,6 +121,8 @@ test('the receipt: spend to Google, a separate fee, what the fee covers, and fix
   for (const line of r.bottom) assert.ok(!/\b(fix|fixes|repair|build|implement)/i.test(line), `a ticked line implies fixing: ${line}`);
   assert.strictEqual(r.separately, 'Fixes to your website or tracking: agreed separately');
   assert.strictEqual(r.tear, 'The click');
+  assert.deepStrictEqual(GA.hero.stages.map((s) => s.label), ['Search', 'Click', 'Visit', 'Enquiry']);
+  assert.deepStrictEqual(GA.path.stations.map((s) => s.label), ['Search', 'Click', 'Visit', 'Enquiry']);
 });
 
 test('spend is paid to Google and the management fee is separate, with no amounts', () => {
@@ -109,22 +131,28 @@ test('spend is paid to Google and the management fee is separate, with no amount
   assert.ok(!/[₹$£€]|\blakh|\bcrore/i.test(prose));
 });
 
-test('every approved accountability commitment is present, in wording', () => {
+test('every approved accountability commitment is present, in wording, under the four pledges', () => {
+  assert.strictEqual(GA.answer.lede, 'These are ours to get right.');
   assert.deepStrictEqual(
-    GA.answer.items.map((i) => `${i.t} ${i.d}`),
+    GA.answer.pledges.map((p) => [p.t, ...p.lines]),
     [
-      'Your budget. We manage it, and adjust your campaigns when the results call for it.',
-      "A starting point. Before we make significant changes, we record your starting performance, where it's available.",
-      'Your website and enquiry route. We review them and recommend improvements. Making the changes is agreed separately.',
-      'Clear reasons. We explain significant changes and why we made them.',
-      'Straight answers. If results disappoint, we tell you and recommend what to change.',
-      'A monthly review. A performance report and a review call every month. We use what they show to decide what to do next.',
+      [
+        'Your budget',
+        'We manage it, and adjust your campaigns when the results call for it.',
+        "Before we make significant changes, we record your starting performance, where it's available.",
+      ],
+      [
+        'Clear reasons',
+        'We explain significant changes and why we made them.',
+        'We review your website and enquiry route and recommend improvements. Making the changes is agreed separately.',
+      ],
+      ['Honest reporting', 'A performance report and a review call every month. We use what they show to decide what to do next.'],
+      ['Corrective action', 'If results disappoint, we tell you and recommend what to change.'],
     ]
   );
-  assert.strictEqual(GA.answer.lede, 'You pay Google for the clicks. You pay us to run the work well. These are ours to get right.');
 });
 
-test('one qualification: no promised volume or cost; and no claim that every enquiry can be traced', () => {
+test('one qualification: no promised volume or cost; no claim that every enquiry can be traced', () => {
   assert.strictEqual(
     GA.answer.qualification,
     'We cannot promise a number of enquiries or what each will cost. Your market, prices, competitors and how quickly you answer all play a part.'
@@ -135,67 +163,104 @@ test('one qualification: no promised volume or cost; and no claim that every enq
   );
   assert.strictEqual(
     GA.path.close,
-    'So we look past the report to the enquiries your business receives, as far as your tracking allows. Not every enquiry can be traced to an ad.'
+    'So we look past the report to the enquiries your business receives, as far as your tracking allows.'
   );
   assert.ok(!/(?<!not )\b(every|all) enquir(y|ies) (is|are|can be|will be) (tracked|traced|attributed)\b/i.test(prose));
   assert.ok(!/we (can|will) (always )?(track|trace|attribute) (every|all)/i.test(prose));
 });
 
-test('the Path Figure separates a recorded action from a genuine enquiry, and says who acts in each case', () => {
+test('the journey: one search, four endings; recorded action versus genuine enquiry; who acts; where the fix is agreed separately', () => {
   const p = GA.path;
   assert.strictEqual(p.lede, "Google Ads reports what it's set up to record. That isn't always the same as a genuine enquiry.");
   assert.strictEqual(p.term, 'Google Ads calls a recorded action a "conversion".');
   assert.strictEqual(p.laneAds.note, 'Only where tracking is set up.');
-  assert.strictEqual(p.laneYou.item, 'Whether each recorded action was a genuine enquiry — a real person, reachable, asking about your work.');
-  assert.strictEqual(p.steps.length, 5);
+  assert.deepStrictEqual(p.laneAds.items, ['Ad shown', 'Click', 'A recorded action, such as a form being sent or a button pressed']);
+  assert.strictEqual(p.laneYou.item, 'Whether it was a genuine enquiry — a real person, reachable, asking about your work.');
+  assert.deepStrictEqual(p.laneYou.status, { yes: 'A genuine enquiry', no: 'No genuine enquiry', not: 'Not a genuine enquiry' });
   assert.deepStrictEqual(
-    p.cases.map((c) => [c.key, c.actor, c.separately]),
+    p.cases.map((c) => [c.key, c.tab, c.stop, c.recorded, c.genuine, c.actor, c.separately]),
     [
-      ['intended', '', ''],
-      ['searches', 'We manage this.', ''],
-      ['page', 'We find and recommend.', 'Changing the page is agreed separately.'],
-      ['record', 'We find and recommend.', 'Tracking repairs are agreed separately.'],
+      ['intended', 'A genuine enquiry', 3, true, 'yes', '', ''],
+      ['searches', 'The wrong person clicks', 1, false, 'no', 'We manage this.', ''],
+      ['page', "The page doesn't answer", 2, false, 'no', 'We find and recommend.', 'Changing the page is agreed separately.'],
+      ['record', "A recorded action that isn't an enquiry", 3, true, 'not', 'We find and recommend.', 'Tracking repairs are agreed separately.'],
     ]
   );
-  // The calm state describes the steps and makes no commitment; only the problem cases carry "we".
+  // The calm state describes the steps and makes no commitment; only the problem endings carry "we".
   assert.ok(!/\bwe\b/i.test(p.cases[0].text));
   assert.ok(/review the searches and change your campaigns/.test(p.cases[1].text));
   assert.ok(/what we'd change/.test(p.cases[2].text));
   assert.ok(/what needs fixing/.test(p.cases[3].text));
 });
 
-test('reporting: monthly report and call, the three questions, and findings that lead to decisions, not promises', () => {
+test('reporting: monthly report and call, three questions as the report, findings that lead to decisions, source unknown', () => {
   const r = GA.reporting;
-  assert.strictEqual(r.lede, 'Each month you get a report and a review call. Where the data allows, it covers:');
-  assert.deepStrictEqual(r.questions, [
+  assert.strictEqual(r.lede, 'Each month you get a report and a review call.');
+  assert.strictEqual(r.report.note, 'Where the data allows');
+  assert.deepStrictEqual(r.report.sections, [
     'Which campaigns brought enquiries',
     'Which searches brought them',
     'How that compares with the starting point we recorded',
   ]);
-  assert.strictEqual(r.pairs.length, 3);
-  assert.ok(r.pairs.every((x) => /^We (look|check)/.test(x.do)), 'each decision starts as an investigation');
-  assert.ok(r.pairs[2].do.endsWith('Making them is agreed separately.'));
-  assert.strictEqual(r.pairsK, 'For example');
+  assert.strictEqual(r.report.illus, 'Illustrative layout. No real figures.');
+  assert.deepStrictEqual(r.findings.map((x) => x.find), [
+    'Some searches bring enquiries',
+    'Some searches bring clicks but few enquiries',
+    'A page gets visits but no enquiries',
+  ]);
+  assert.ok(r.findings.every((x) => /^We (look|check)/.test(x.do)), 'each decision starts as an investigation');
+  assert.ok(r.findings[2].do.endsWith('Making them is agreed separately.'));
+  assert.strictEqual(r.unknown, 'Source unknown');
+  assert.strictEqual(r.findingsK, 'For example');
 });
 
-test('next step: both audiences and the confirmed process, in order, with no free offer or timing', () => {
-  const n = GA.next;
-  assert.deepStrictEqual(n.steps.map((s) => s.t), ['Get in touch', 'Discovery call', 'Audit', 'Proposal', 'Your approval', 'Work begins']);
-  assert.strictEqual(n.steps[0].d, 'You send a message. We reply by email or WhatsApp.');
-  assert.strictEqual(n.line, 'You see our findings, a recommended plan and a proposal before any work starts.');
-  assert.strictEqual(n.h, 'Already running Google Ads, or thinking about it?');
-  assert.ok(n.already.t && n.thinking.t);
+test('process: both audiences and the confirmed process, in order, with no free offer or timing', () => {
+  const pr = GA.process;
+  assert.deepStrictEqual(pr.steps.map((s) => s.t), ['Get in touch', 'Discovery call', 'Audit', 'Proposal', 'Your approval', 'Work begins']);
+  assert.strictEqual(pr.steps[0].d, 'You send a message. We reply by email or WhatsApp.');
+  assert.strictEqual(pr.line, 'You see our findings, a recommended plan and a proposal before any work starts.');
+  assert.strictEqual(GA.close.already.k, 'Already advertising?');
+  assert.strictEqual(GA.close.thinking.k, 'Thinking about it?');
+  assert.strictEqual(GA.close.already.t, "Tell us what you spend and what you're getting.");
+  assert.strictEqual(GA.close.thinking.t, 'Tell us what you sell and what a new customer is worth.');
 });
 
-test('suitability factors are an educational list: six factors, no score and no verdict', () => {
-  assert.strictEqual(GA.factors.items.length, 6);
-  assert.strictEqual(
-    GA.factors.close,
-    "There's no score. We talk these through with you before we recommend Google Ads, including when something else may suit you better."
-  );
+test('suitability factors: six, in three groups of two, an educational framework with no score and no verdict', () => {
+  const f = GA.factors;
+  assert.strictEqual(f.items.length, 6);
+  assert.deepStrictEqual(f.items.map((i) => [i.group, i.label]), [
+    ['The market', 'Search demand'],
+    ['The market', 'Other routes'],
+    ['Your business', 'Customer value'],
+    ['Your business', 'Your response'],
+    ['Your website', 'Enquiry route'],
+    ['Your website', 'Tracking'],
+  ]);
+  assert.deepStrictEqual(f.items.map((i) => i.q), [
+    'Are people already searching for what you sell?',
+    'What else could reach the same people?',
+    'What is a new customer worth to you?',
+    'Can your business answer enquiries when they arrive?',
+    'Can people easily enquire on your website?',
+    'Can your enquiries be tracked?',
+  ]);
+  assert.ok(f.items[5].a.includes('How far it can go depends on your website and how people contact you.'));
+  assert.deepStrictEqual(f.items[1].links.map((l) => l.href), ['/seo', '/social-media-ads']);
+  assert.strictEqual(f.close, 'No score. We talk these through with you first, and tell you when something else may suit you better.');
   // The word "score" may appear only in the closing line that says there is none.
-  for (const s of strings.filter((x) => /\bscore/i.test(x))) assert.strictEqual(s, GA.factors.close);
+  for (const s of strings.filter((x) => /\bscore/i.test(x))) assert.strictEqual(s, f.close);
   assert.ok(!/\b(suitable for you|you should|you are ready|not suitable|recommended for you|verdict)\b/i.test(prose));
+});
+
+test('every icon named in the copy exists in the icon set (a missing name silently draws the fallback)', () => {
+  const icons = new Set([...read('components/cplus/Icons.tsx').matchAll(/^\s{2}([a-z]+):\s*'/gm)].map((m) => m[1]));
+  const used = [];
+  (function walk(v) {
+    if (Array.isArray(v)) v.forEach(walk);
+    else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) { if (k === 'icon') used.push(x); walk(x); }
+  })(GA);
+  assert.ok(used.length > 20);
+  for (const i of used) assert.ok(icons.has(i), `unknown icon: ${i}`);
 });
 
 test('"conversion" is used exactly once, and explained', () => {

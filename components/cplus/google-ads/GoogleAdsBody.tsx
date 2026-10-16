@@ -288,9 +288,11 @@ function Chips({ items }: { items: Chip[] }) {
   return (
     <ul className="ga-chips">
       {items.map((it) => (
-        <li key={it.chip} title={it.full}>
+        <li key={it.chip}>
           <Icon name={it.icon} size={20} />
-          <span>{it.chip}</span>
+          {/* the chip is the short label; assistive technology gets the full approved sentence instead, once */}
+          <span aria-hidden="true">{it.chip}</span>
+          <span className="px-sr">{it.full}</span>
         </li>
       ))}
     </ul>

@@ -203,9 +203,10 @@ test('reporting: monthly report and call, three questions as the report, finding
     'How that compares with the starting point we recorded',
   ]);
   assert.strictEqual(r.report.illus, 'Illustrative layout. No real figures.');
+  // The first finding is the one shown on load (decision D1, option B): the investigation, not the assumption.
   assert.deepStrictEqual(r.findings.map((x) => x.find), [
-    'Some searches bring enquiries',
     'Some searches bring clicks but few enquiries',
+    'Some searches bring enquiries',
     'A page gets visits but no enquiries',
   ]);
   assert.ok(r.findings.every((x) => /^We (look|check)/.test(x.do)), 'each decision starts as an investigation');
@@ -297,4 +298,23 @@ test('the page metadata is untouched by this stage', () => {
   );
   assert.ok(page.includes("'/google-ads'"));
   assert.ok(page.includes('<BreadcrumbJsonLd label="Paid search" path="/google-ads" />'));
+});
+
+// ---- G1.1 guards: the 12 px text floor and the chips' accessible text (markup and CSS, read as source)
+const css = read('components/cplus/google-ads/google-ads.css').replace(/\/\*[\s\S]*?\*\//g, '');
+const body = read('components/cplus/google-ads/GoogleAdsBody.tsx');
+
+test('no text in google-ads.css is set below 12px (the programme rule for rendered figure text)', () => {
+  const toPx = (v, unit) => (unit === 'rem' || unit === 'em' ? parseFloat(v) * 16 : parseFloat(v));
+  const sizes = [];
+  // `font-size: <n><unit>` and the size in a `font:` shorthand (`font: 700 .75rem/1.3 ...`); a clamp() is judged on its first argument.
+  for (const m of css.matchAll(/font-size:\s*(?:min\(|clamp\()?\s*(-?[\d.]+)(rem|em|px)/g)) sizes.push([m[0], toPx(m[1], m[2])]);
+  for (const m of css.matchAll(/font:\s*(?:[a-z]+\s+)?\d{3}\s+(?:clamp\(|min\()?\s*(-?[\d.]+)(rem|em|px)/g)) sizes.push([m[0], toPx(m[1], m[2])]);
+  assert.ok(sizes.length >= 14, 'the size declarations were found');
+  for (const [decl, px] of sizes) assert.ok(px >= 12, `${decl} is ${px}px`);
+});
+
+test('each scope chip gives assistive technology its full approved sentence, once, and hides the short label from it', () => {
+  assert.ok(/<span aria-hidden="true">\{it\.chip\}<\/span>\s*<span className="px-sr">\{it\.full\}<\/span>/.test(body));
+  assert.ok(!/title=\{it\.full\}/.test(body), 'a title tooltip would repeat the sentence');
 });

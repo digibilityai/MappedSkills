@@ -77,7 +77,7 @@
 .ga-fx-tab svg { flex: none; color: var(--dc-tang-display); }
 .ga-fx .px-tab[aria-selected="true"] svg { color: var(--dc-tang); }
 .ga-fx-tt { display: grid; gap: 3px; min-width: 0; }
-.ga-fx-eyebrow { font: 700 .6875rem/1.2 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-dim); }
+.ga-fx-eyebrow { font: 700 .75rem/1.2 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-dim); }
 .ga-fx .px-tab[aria-selected="true"] .ga-fx-eyebrow { color: var(--dc-on-ink-dim); }
 .ga-fx-label { font: 800 1.1rem/1.2 var(--dc-f-title); }
 .ga-fx-panel { padding: clamp(20px, 2.4vw, 32px); border: 3px solid var(--dc-ink); background: var(--dc-ground); box-shadow: 8px 8px 0 var(--dc-tang); }

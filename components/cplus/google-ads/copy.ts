@@ -282,9 +282,10 @@ export const GA_COPY = {
     findingsK: 'For example',
     findingLabel: 'Finding',
     decisionLabel: 'What we do',
+    /* the first finding is the one shown on load: it shows an investigation most clearly (owner decision D1, option B) */
     findings: [
-      { key: 'works', find: 'Some searches bring enquiries', do: 'We look at why, and decide whether they deserve more of the budget.' },
       { key: 'noenq', find: 'Some searches bring clicks but few enquiries', do: 'We check whether they’re the right searches, and decide whether to change or stop them.' },
+      { key: 'works', find: 'Some searches bring enquiries', do: 'We look at why, and decide whether they deserve more of the budget.' },
       { key: 'page', find: 'A page gets visits but no enquiries', do: 'We look at what it asks people to do, and recommend changes. Making them is agreed separately.' },
     ],
     unknown: 'Source unknown',

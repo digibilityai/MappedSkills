@@ -1,7 +1,7 @@
 # Google Ads — G1 Visual Redesign Proposal, Revision 2
 
 **Date:** 2026-10-16 · **Responds to:** owner review of the G1 screenshots ("static page NOT APPROVED") · **Basis:** DEC-053, storyboard v4, `copy.ts` (G0/G0.1)
-**Status (updated 2026-10-16): IMPLEMENTED AS REVISION 2 AND OWNER-APPROVED VISUALLY; THIS DOCUMENT HAS BEEN CORRECTED TO MATCH WHAT WAS BUILT.** The R2 build is commit `74aec4e` on `feat/google-ads-redesign` (pushed; no PR; not merged; not deployed). It was written as a design-only proposal and approved by the owner on 2026-10-16 (decisions A to J, with the owner's recommendations); the owner then approved the built look. §11 records where the build differs from the original proposal, and §12 the verification evidence. G2 (motion) is not started and is not authorised. This file is not yet committed.
+**Status (updated 2026-10-16): IMPLEMENTED AS REVISION 2 AND OWNER-APPROVED VISUALLY; THIS DOCUMENT HAS BEEN CORRECTED TO MATCH WHAT WAS BUILT.** The R2 build is commit `74aec4e`; two bounded follow-ups were then applied, G1.1 (`1f3b5af`) and G1.2 (`33940ec`), so the **current build is `33940ec`** on `feat/google-ads-redesign` (pushed; no PR; not merged; not deployed). It was written as a design-only proposal and approved by the owner on 2026-10-16 (decisions A to J, with the owner's recommendations); the owner then approved the built look. §11 records where the build differs from the original proposal, §12 the owner feedback comparison and §13 the verification evidence. G2 (motion) is not started and is not authorised.
 
 ---
 
@@ -107,7 +107,7 @@ Receipt lines, tags and caption: **unchanged from `copy.ts`.** New micro-copy: t
 
 **Concept.** A **decision framework**: six tiles in three groups, read one at a time. No score, no result, no recommendation.
 
-**What the visitor sees.** Six tiles in a 3 × 2 grid, paired by group (the market, your business, your website). **Each tile carries its group as a small eyebrow above its label; there are no separate group headings, because the existing `Tabs` component renders one flat list.** Each tile is an icon, the group eyebrow and a compact label. The first tile is selected by default; a detail panel beside (or, on mobile, below) shows its approved question and one-sentence answer.
+**What the visitor sees.** Six tiles in a 3 × 2 grid, paired by group (the market, your business, your website). **Each tile carries its group as a small eyebrow above its label (12 px; it was 11 px until G1.1); there are no separate group headings, because the existing `Tabs` component renders one flat list.** Each tile is an icon, the group eyebrow and a compact label. The first tile is selected by default; a detail panel beside (or, on mobile, below) shows its approved question and one-sentence answer.
 
 ```
  What we look at before suggesting Google Ads.        ┌ Search demand ───────────────┐
@@ -209,7 +209,7 @@ Receipt lines, tags and caption: **unchanged from `copy.ts`.** New micro-copy: t
  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ```
 
-**Copy reduction.** Items become short chips (new micro-copy, 3 to 5 words each), the approved sentences are kept in `copy.ts` and shown as a `title` tooltip on each chip. **A `title` is not reliably announced by screen readers; see §11 item 4 for the open fix.** The Block 4 callout (the same sentence as the hero) is **removed**, because the hero and this section's sub-line already state it.
+**Copy reduction.** Items become short chips (new micro-copy, 3 to 5 words each), the approved sentences are kept in `copy.ts`. **Since G1.1 each chip gives assistive technology its full approved sentence once, as visually hidden text, with the short visible label hidden from it; the earlier `title` tooltip was removed (see §11 item 4).** The Block 4 callout (the same sentence as the hero) is **removed**, because the hero and this section's sub-line already state it.
 
 | Layer | Chip labels (proposed) |
 |---|---|
@@ -282,7 +282,7 @@ Receipt lines, tags and caption: **unchanged from `copy.ts`.** New micro-copy: t
  Not every enquiry can be traced to an ad. A phone call after someone saw your ad is a common example. Where we cannot tell, we say so. …
 ```
 
-**Interaction.** Three findings are selectable rows inside the report. The default is the **first** finding ("Some searches bring enquiries"); the second is the one that shows an investigation most clearly, so you may prefer it as the default. Selecting a row shows its approved decision sentence in the "What we do" card; the third finding's card also states "Making them is agreed separately". A fourth, **non-selectable "Source unknown" row with a hatched swatch (not dashed)**, sits in the report as the visual form of the attribution limit; the full limit sentence is printed beneath. Keyboard: arrows, Home, End. No JavaScript: all three findings and their decisions are shown as stacked pairs.
+**Interaction.** Three findings are selectable rows inside the report. The default is **"Some searches bring clicks but few enquiries"** (owner decision D1, option B, applied in G1.1): the finding that shows an investigation most clearly. Unselected finding rows use the control-grey border (3.47:1, G1.2). Selecting a row shows its approved decision sentence in the "What we do" card; the third finding's card also states "Making them is agreed separately". A fourth, **non-selectable "Source unknown" row with a hatched swatch (not dashed)**, sits in the report as the visual form of the attribution limit; the full limit sentence is printed beneath. Keyboard: arrows, Home, End. No JavaScript: all three findings and their decisions are shown as stacked pairs.
 
 **Why this beats text.** Three pairs of "finding, then decision" sentences repeat the accountability section and read as promises. A report with a selected finding shows the *mechanism*: a finding is read, investigated and turned into a decision. The hatched "Source unknown" row shows honest measurement as a normal part of the report, not a disclaimer.
 
@@ -454,15 +454,17 @@ Everything in §§1 to 10 has been corrected in place to match the build. These 
 | 1 | Stage selector beneath the receipt | Selector **above** the receipt, so it is visible in the first screen | Corrected in §3.1; deliberate |
 | 2 | Three labelled groups of tiles | Six tiles with the group shown as a **small eyebrow on each tile**; no group headings (the existing `Tabs` renders one flat list) | Corrected in §3.2; deliberate |
 | 3 | A marker shows where the search ended | Stations are **filled** up to where the search ended and the end station is **ringed**; no separate marker | Corrected in §3.3 |
-| 4 | Chip sentences kept as `aria` descriptions | Kept as a **`title` tooltip** only. `title` is not reliably read by screen readers | **OPEN accessibility gap** (see §14) |
+| 4 | Chip sentences kept as `aria` descriptions | Kept as a **`title` tooltip** only. `title` is not reliably read by screen readers | **CLOSED in G1.1** (visually hidden full sentence; `title` removed) |
 | 5 | Qualification as a dashed strip (diagram) | Solid strip with an orange bar; dashed is reserved for "agreed separately" | Corrected in §3.5 |
 | 6 | "Source unknown" as a dashed row | A **hatched-swatch** row (not dashed) | Corrected in §3.6 |
-| 7 | Default finding is "clicks but few enquiries" | Default is the **first** finding ("Some searches bring enquiries") | Corrected in §3.6; your choice (§14) |
+| 7 | Default finding is "clicks but few enquiries" | Default is the **first** finding ("Some searches bring enquiries") | **RESOLVED in G1.1:** owner chose option B, so "clicks but few enquiries" is the default |
 | 8 | On mobile the decision card sits under the selected finding | The card sits **below the whole findings list** (limit of the existing `Tabs`) | Corrected in §3.6 |
 | 9 | Two-colour headings on every heading | **Single ink colour on the tangerine close**, because an orange phrase is invisible on orange | Corrected in §2 |
 | 10 | Dashed outline "nowhere else" | The receipt's "Paid to Google" tag and tear line stay dashed (approved prototype receipt) | Corrected in §2 |
 | 11 | Visible words fall to 40 to 60 % of G1 | They fall to **76 %** (1,164 → 890, about 24 % fewer) | Corrected in §5; **target not met** |
 | 12 | Eight H2s; H3 only for scope layers | One H1, **seven** H2s; H3s also on the four pledges (and per-panel headings without JavaScript) | Corrected in §7 |
+| 13 | (not specified) | The factor-tile eyebrow was **11 px** in `74aec4e` | Corrected to 12 px (the programme text floor) in G1.1 |
+| 14 | (not specified) | Unselected finding rows used the decorative `--dc-line` border, **1.3:1** | Corrected to `--dc-control`, 3.47:1, in G1.2 |
 
 ## 12. Owner feedback on G1 and what R2 did about it
 
@@ -471,7 +473,7 @@ Everything in §§1 to 10 has been corrected in place to match the build. These 
 | 1 | Hero: one paragraph; receipt as an interactive story; keep its identity | One 38-word paragraph; the receipt follows one search through Search, Click, Visit, Enquiry with a native radio selector that lights the lines; paper, tilt, tear, shadow and tags kept | Resolved |
 | 2 | Before suggesting: a decision framework, all six factors, compact labels, progressive disclosure, no scoring | Six tiles with compact labels and group eyebrows, one factor read at a time (master-detail, not an accordion), no score or verdict | Resolved |
 | 3 | Journey: rebuild from the ground up around one search; include success, unsuitable clicks, website problems and misleading recorded actions; show Google Ads versus the business versus our actions; keep the boundary | One search, four endings; journey stations, a "What Google Ads can record" panel, a "What your business needs to know" panel, and a who-acts strip that separates "we manage this" from "we find and recommend, fix agreed separately" | Resolved |
-| 4 | Scope: keep three layers, less text, obvious boundary | Solid frame ("Covered by our management fee") beside a dashed box ("Agreed separately"); short chips; the duplicate callout removed | Resolved, with the accessibility gap in item 4 above |
+| 4 | Scope: keep three layers, less text, obvious boundary | Solid frame ("Covered by our management fee") beside a dashed box ("Agreed separately"); short chips; the duplicate callout removed | Resolved; the chip accessibility gap was closed in G1.1 |
 | 5 | Answer: a stronger concept, every commitment preserved | Four pledges (budget, clear reasons, honest reporting, corrective action) carrying all six commitments | Resolved |
 | 6 | Reporting: not a repeat of the accountability section; one interactive example; no invented data | One illustrative monthly report with hatched placeholders and a selectable finding that shows its decision | Resolved |
 | 7 | Close: separate the process from the call to action; shorter, decisive; both actions | New "What happens after you get in touch" section; a short tangerine close with two prompts and both buttons; the section change was approved as decision A | Resolved |
@@ -487,16 +489,27 @@ Everything in §§1 to 10 has been corrected in place to match the build. These 
 - **Metadata:** title, description, canonical, Open Graph, Twitter and JSON-LD match production (local base URL normalised).
 - **DEC-053 on the rendered page:** all of OD-01 to OD-11, the three-layer boundary and the approved H1 were checked against the served text; "conversion" appears once; no ROI, "return on", guarantee, "free" or digits.
 
+### 13b. Verification evidence for G1.1 (`1f3b5af`) and G1.2 (`33940ec`) (2026-10-16)
+
+- **What changed:** G1.1 raised the eyebrow to 12 px, gave each scope chip its full approved sentence once (visually hidden text, short label hidden from assistive technology, `title` removed), made "clicks but few enquiries" the default finding, and added guards for the 12 px floor and the chip markup. G1.2 changed one CSS declaration (unselected finding rows from `--dc-line` to `--dc-control`) and added a guard that no tab rule uses the decorative `--dc-line` border. G1.2 touched two files (14 insertions, 1 deletion).
+- **Checks, run from a clean archive of `33940ec`:** copy guard 21 of 21; full suite 79 tests, 78 pass, 0 fail, 1 skipped (the export test against a disposable MariaDB, which needs `EXPORT_TEST_DB_ADMIN_*`); typecheck, lint and build clean; **mutation checks 11 of 11 behave as expected** (including a decorative hairline on a non-control row, which the guard correctly does not flag); the CSS of the clean build is byte-identical to the CSS the preview serves.
+- **Page behaviour:** a text scan of every state finds **0 styles under 12 px** (185 styles) and no text-contrast failures; **17 marks and boundaries measured, all at least 3:1** (unselected finding row 3.47:1; selected and hover 16.8:1); against the previous build 14 of 14 unrelated section captures are pixel-identical, and only the reporting section changed; the chips' accessibility tree gives each full sentence once; 0 axe findings at 1440 px and across 13 interaction states at 390 px; all 21 keyboard stops show a ring; no overflow at 10 widths from 320 to 1440 px; both CTAs resolve; the served head matches production.
+- **WebKit and Firefox:** full pages at 1440, 768 and 390 px render with no overflow or clipping and the selectors work. **The WebKit radio focus ring was closed by the owner's hand check in real Safari 26.2 on this Mac (2026-10-16):** Tab reached the stage buttons, the outline was visible and the arrow keys moved the selection. This is recorded as owner-reported. Playwright's WebKit is not a faithful stand-in for Safari's Tab behaviour.
+
 ## 14. Open items
 
-1. **Chip sentences are a `title` tooltip only.** Recommended fix (not made): put the approved full sentence in each chip as visually hidden text, or label the chip with it, so screen readers get it. Needs your decision because it changes what assistive technology reads.
-2. **Real screen readers and real devices** (SR-1 to SR-5, E1) are not yet done. Playwright checks and axe are not a substitute.
-3. **Calendly event:** `/schedule-call` links to `calendly.com/mappedskills/client-discovery` (page reachable); open slots and whether it is the intended event are unverified.
-4. **Default finding** in the reporting example (item 7 in §11).
-5. **Text volume** (item 8 above).
-6. **Not yet verified:** WebKit and Firefox full-page layout (only the first screen and selectors were checked); contrast ratios for the new orange-on-ground, orange-on-ink and ink-on-tangerine pairs (axe passed, but its colour-contrast rule does not cover every state or non-text mark); motion (none exists yet).
-7. **Pushed code, no PR:** `feat/google-ads-redesign` is at `74aec4e` with no pull request; nothing is merged or deployed.
+**Closed since the first version of this list:** the chip sentences (G1.1), the default finding (G1.1), the 11 px eyebrow (G1.1), the finding-row border (G1.2), the WebKit radio focus ring (owner's real-Safari check), and the "WebKit and Firefox full-page layout" and "non-text contrast" items (verified, §13b).
+
+1. **Real screen readers and real devices** (SR-1 to SR-5, E1) are not done. The owner's Safari keyboard check covers only the stage buttons. Playwright checks and axe are not a substitute.
+2. **Calendly event:** `/schedule-call` links to `calendly.com/mappedskills/client-discovery` (page reachable); open slots and whether it is the intended event are unverified.
+3. **Text volume:** about 24 % fewer words visible by default than the first static build, against the 40 to 60 % originally estimated.
+4. **Consent and analytics regression** has not been re-run for this page.
+5. **Not measured:** the contrast of the hatch pattern, gradients and focus rings. The contrast numbers come from a script over rendered colours, not a certified tool.
+6. **Observation, not changed:** the shared `.px-tab` default in `cplus.css` still gives unselected tabs the decorative `--dc-line` border, and `/conversion-optimization` also uses it.
+7. **The mutation checks and browser probes live outside the repository**; only the guard tests are in it.
+8. **Code branch:** `feat/google-ads-redesign` is at `33940ec` with no pull request; nothing is merged or deployed; G2 (motion), pre-release QA and a code PR are not authorised.
+9. **The `main` ruleset question** in DEC-054 item 4 is undecided.
 
 ---
 
-**Document status.** Corrected to match the build on 2026-10-16 and not yet committed. It is recommended as a design and implementation record (see the commit proposal made alongside this correction).
+**Document status.** Corrected to match the build `74aec4e` on 2026-10-16, then updated on 2026-10-16 for G1.1 (`1f3b5af`) and G1.2 (`33940ec`). It is kept as the design and implementation record for the R2 redesign (`DEC-054`).

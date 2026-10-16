@@ -176,7 +176,7 @@ html:not(.px-js) .ga-fx .px-tabpanel { grid-column: 1 / -1; grid-row: auto; marg
 .ga-mock-k { padding: 14px 20px 6px; }
 .ga-mock-tabs { display: contents; }
 .ga-mock-tabs .px-tablist { grid-column: 1; grid-row: 2; display: grid; gap: 8px; padding: 0 12px 12px; border: 3px solid var(--dc-ink); border-top: 0; border-bottom: 0; background: var(--dc-ground); }
-.ga-mock-tabs .px-tab { width: 100%; min-height: 52px; padding: 12px 16px; border: 2px solid var(--dc-line); border-radius: 0; background: var(--dc-paper); color: var(--dc-ink); justify-content: flex-start; text-align: left; font-weight: 700; }
+.ga-mock-tabs .px-tab { width: 100%; min-height: 52px; padding: 12px 16px; border: 2px solid var(--dc-control); border-radius: 0; background: var(--dc-paper); color: var(--dc-ink); justify-content: flex-start; text-align: left; font-weight: 700; }
 .ga-mock-tabs .px-tab:hover { border-color: var(--dc-ink); }
 .ga-mock-tabs .px-tab[aria-selected="true"] { background: var(--dc-ink); border-color: var(--dc-ink); color: var(--dc-on-ink); box-shadow: inset 6px 0 0 var(--dc-tang); padding-left: 22px; }
 .ga-mock-src { grid-column: 1; grid-row: 3; margin: 0; display: flex; align-items: center; gap: 12px; padding: 14px 20px; border: 3px solid var(--dc-ink); border-top: 1px solid var(--dc-line); background: var(--dc-ground); color: var(--dc-dim); font-weight: 700; }

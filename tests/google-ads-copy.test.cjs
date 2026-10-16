@@ -318,3 +318,16 @@ test('each scope chip gives assistive technology its full approved sentence, onc
   assert.ok(/<span aria-hidden="true">\{it\.chip\}<\/span>\s*<span className="px-sr">\{it\.full\}<\/span>/.test(body));
   assert.ok(!/title=\{it\.full\}/.test(body), 'a title tooltip would repeat the sentence');
 });
+
+// ---- G1.2 guard: a selector's boundary is a UI boundary (WCAG 1.4.11, 3:1), so it must not use the decorative --dc-line token
+test('no tab or selector row in google-ads.css draws its border with the decorative --dc-line token', () => {
+  const rules = [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)].map((m) => ({ sel: m[1].trim(), body: m[2] }));
+  const tabRules = rules.filter((r) => /\.px-tab\b/.test(r.sel));
+  assert.ok(tabRules.length >= 8, 'the tab rules were found');
+  for (const r of tabRules) {
+    assert.ok(!/border[a-z-]*\s*:[^;]*var\(--dc-line\)/.test(r.body), `${r.sel} uses --dc-line for a border`);
+  }
+  // The unselected finding row is the one that was 1.3:1; it must use the control token (3.47:1 on the ground it sits on).
+  const row = rules.find((r) => /^\.ga-mock-tabs \.px-tab$/.test(r.sel));
+  assert.ok(row && /border:\s*2px solid var\(--dc-control\)/.test(row.body));
+});

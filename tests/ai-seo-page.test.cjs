@@ -143,6 +143,12 @@ test('journey: five approved steps and copy; every numbered step is selectable',
   assert.ok(journey.includes('onSelect={() => q.select(j)}'));
 });
 
+test('scenario: step 1 shown from the start, 1 s between steps; the other three stories stay at 1.5 s', () => {
+  assert.ok(/export const SCENARIO_STEP_MS = 1000;/.test(sequence));
+  assert.ok(/useSequence<HTMLOListElement>\(4, \{ stepMs: SCENARIO_STEP_MS, first: 0, dwellMs: 0 \}\)/.test(scenario));
+  for (const f of [journey, industry, reporting]) assert.equal(/SCENARIO_STEP_MS|stepMs|first:/.test(f), false);
+});
+
 test('animation: 1.5 s, once, no controls, reduced motion, no live region, no focus movement', () => {
   assert.ok(/export const STEP_MS = 1500;/.test(sequence));
   assert.ok(sequence.includes('prefers-reduced-motion: reduce'));

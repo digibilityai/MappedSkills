@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { CONTACT_HREF, Mark } from '@/components/direction-c/primitives';
 import { AI_PLAIN } from './content';
-import { StepNumber, useSequence } from './Sequence';
+import { SCENARIO_STEP_MS, StepNumber, useSequence } from './Sequence';
 
 const [ASK, LOOK, TWO, YOU] = AI_PLAIN.scenario.steps as [
   { w: string; label: string; q: string },
@@ -32,11 +32,11 @@ function Biz({ biz, ink }: { biz: Biz; ink?: boolean }) {
 
 /**
  * "The question is already being asked" (R3): one illustrative question, two fictional businesses, then the visitor's
- * own. Four steps revealed one after another (STEP_MS apart), once; each number is a button. Complete without
+ * own. Four steps revealed one after another (SCENARIO_STEP_MS apart), once; step 1 is on screen from the start, so the section is never blank; each number is a button. Complete without
  * JavaScript. Nothing here says Business A will appear or Business B will be left out.
  */
 export function Scenario() {
-  const [ref, q] = useSequence<HTMLOListElement>(4);
+  const [ref, q] = useSequence<HTMLOListElement>(4, { stepMs: SCENARIO_STEP_MS, first: 0, dwellMs: 0 });
   const li = (j: number, extra = '') => ({ className: `ax-sc-i ${extra} ${q.state(j)}`.replace(/\s+/g, ' ').trim(), 'data-i': '', 'aria-current': q.on(j) ? ('step' as const) : undefined });
   const num = (j: number, label: string) => <StepNumber armed={q.armed} n={j + 1} label={label} onSelect={() => q.select(j)} />;
   return (

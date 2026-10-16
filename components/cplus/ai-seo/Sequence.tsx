@@ -4,6 +4,8 @@ import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type CS
 
 /** Owner rule (R3 approval, 2026-10-16): 1.5 seconds between steps in every animated sequence on this page. */
 export const STEP_MS = 1500;
+/** The scenario story is quicker: 1 second between steps, and its first step is on screen from the start. */
+export const SCENARIO_STEP_MS = 1000;
 /** The block must stay in view this long before it starts (the same dwell as the Google Ads demonstrations). */
 export const DWELL_MS = 400;
 /** Share of the block that counts as "in view"; for very tall blocks (phones) 45% of the window is enough. */
@@ -41,7 +43,17 @@ const subscribeMotion = (cb: () => void) => {
 /** No animation: reduced motion asked for, or the browser cannot tell us when the block is on screen. */
 const getStill = () => typeof IntersectionObserver !== 'function' || (typeof window.matchMedia === 'function' && window.matchMedia(REDUCE).matches);
 
-export function useSequence<T extends HTMLElement>(n: number): [RefObject<T | null>, Sequence] {
+export type SequenceOptions = {
+  /** Milliseconds between steps (default STEP_MS). */
+  stepMs?: number;
+  /** Step shown from the start, so the block is never blank while it waits (default: none, -1). */
+  first?: number;
+  /** Milliseconds the block must be in view before the next step is scheduled (default DWELL_MS). */
+  dwellMs?: number;
+};
+
+export function useSequence<T extends HTMLElement>(n: number, opts: SequenceOptions = {}): [RefObject<T | null>, Sequence] {
+  const { stepMs = STEP_MS, first = -1, dwellMs = DWELL_MS } = opts;
   const ref = useRef<T>(null);
   const stopRef = useRef<() => void>(() => {});
   /** False on the server and during hydration (everything shown complete); true once the page is interactive. */
@@ -49,7 +61,7 @@ export function useSequence<T extends HTMLElement>(n: number): [RefObject<T | nu
   /** True when nothing should move: every step is shown, still, and the numbers remain selectable. */
   const still = useSyncExternalStore(subscribeMotion, getStill, () => false);
   /** Active step index; -1 before the first step. */
-  const [k, setK] = useState(-1);
+  const [k, setK] = useState(first);
   /** True once a visitor has chosen: every step is shown. */
   const [chosen, setChosen] = useState(false);
   const all = chosen || still;
@@ -58,7 +70,7 @@ export function useSequence<T extends HTMLElement>(n: number): [RefObject<T | nu
     const root = ref.current;
     if (!root || still) return;
 
-    let i = -1;
+    let i = first;
     let state: 'idle' | 'running' | 'paused' | 'manual' | 'done' = 'idle';
     let inView = false;
     let timer: ReturnType<typeof setTimeout> | null = null;
@@ -69,7 +81,7 @@ export function useSequence<T extends HTMLElement>(n: number): [RefObject<T | nu
       if (i < n - 1) {
         i += 1;
         setK(i);
-        timer = setTimeout(tick, STEP_MS);
+        timer = setTimeout(tick, stepMs);
       } else {
         state = 'done';
         timer = null;
@@ -79,7 +91,7 @@ export function useSequence<T extends HTMLElement>(n: number): [RefObject<T | nu
       state = 'running';
       clear(timer);
       if (i < 0) tick();
-      else timer = setTimeout(tick, STEP_MS);
+      else timer = setTimeout(tick, stepMs);
     };
     const pause = () => {
       clear(timer);
@@ -101,7 +113,7 @@ export function useSequence<T extends HTMLElement>(n: number): [RefObject<T | nu
           if (inView) {
             dwell = setTimeout(() => {
               if (state === 'idle' || state === 'paused') run();
-            }, DWELL_MS);
+            }, dwellMs);
           } else if (state === 'running') pause();
         });
       },
@@ -121,7 +133,7 @@ export function useSequence<T extends HTMLElement>(n: number): [RefObject<T | nu
       io.disconnect();
       document.removeEventListener('visibilitychange', onVis);
     };
-  }, [n, still]);
+  }, [n, still, stepMs, first, dwellMs]);
 
   /** A visitor's choice: stop the sequence and show step `j`. */
   const select = useCallback((j: number) => {
@@ -130,7 +142,9 @@ export function useSequence<T extends HTMLElement>(n: number): [RefObject<T | nu
     setK(j);
   }, []);
 
-  const p = !armed || (still && k < 0) ? 100 : (Math.max(0, k) / Math.max(n - 1, 1)) * 100;
+  /* Static (server render, no JavaScript, reduced motion before a choice): no step is highlighted. */
+  const kk = !armed || (still && !chosen) ? -1 : k;
+  const p = !armed || (still && kk < 0) ? 100 : (Math.max(0, kk) / Math.max(n - 1, 1)) * 100;
   return [
     ref,
     {
@@ -140,8 +154,8 @@ export function useSequence<T extends HTMLElement>(n: number): [RefObject<T | nu
       cls: `ax-seq${armed ? ' is-armed' : ''}${still ? ' is-static' : ''}${all ? ' is-all' : ''}`,
       style: { '--ax-p': p } as CSSProperties,
       /** State classes for step `j`. */
-      state: (j: number) => [j <= k ? 'is-seen' : '', j < k ? 'is-done' : '', j === k ? 'is-on' : ''].filter(Boolean).join(' '),
-      on: (j: number) => armed && j === k,
+      state: (j: number) => [j <= kk ? 'is-seen' : '', j < kk ? 'is-done' : '', j === kk ? 'is-on' : ''].filter(Boolean).join(' '),
+      on: (j: number) => j === kk,
     },
   ];
 }

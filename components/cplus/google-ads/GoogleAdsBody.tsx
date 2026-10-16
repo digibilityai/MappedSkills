@@ -1,58 +1,123 @@
-import Link from 'next/link';
-import { CONTACT_HREF, InlineLink, Mark } from '@/components/direction-c/primitives';
-import { GA_PLAIN as S } from './content';
+import type { ReactNode } from 'react';
+import { ActionPair, InlineLink, TLink } from '@/components/direction-c/primitives';
+import { GA_COPY as S } from './copy';
 import './google-ads.css';
 import { Breadcrumb } from '../Breadcrumb';
+import { Icon } from '../Icons';
+import { GaTabs } from './GaTabs';
+import { DemoRegion } from './DemoRegion';
 
 /**
- * C+ Google Ads (/google-ads): the approved prototype's page body (proto/direction-c-plus 0a8b611, GoogleAdsH.tsx), unchanged in markup and
- * copy. Production changes only: the breadcrumb's Home link and the CTAs point at the live routes (`/`, CONTACT_HREF
- * and BOOKING_HREF) instead of prototype paths.
+ * C+ Google Ads (/google-ads), G1.3a (DEC-053 and the owner-approved G1.3 scope and decisions): the static composition of the page,
+ * built from `copy.ts`. Sections 2 and 7 are unchanged from G1.2. The selectors are the page's own WAI-ARIA `GaTabs` (every panel is shown, stacked, when JavaScript is off) and a native radio group;
+ * G1.3c adds five guided demonstrations over them (see `T` below).
+ * Page metadata and structured data live in `page.tsx` and are not touched.
+ *
+ * The boundary device, used identically on every graphic: a TICKED box, or a SOLID frame, is part of the service (core
+ * service and oversight, covered by the management fee); a DASHED outline, with an EMPTY dashed box where a box is used,
+ * is work that is agreed separately, and nothing else is ever drawn dashed. A plain empty box or a hatched swatch is
+ * neutral (not recorded, not confirmed, or a placeholder).
  */
 
-function Action() {
+/* The guided demonstrations (G1.3c, owner-approved). Page order is the play order. Each plays once per page load, over the real
+   selection state, stops on any manual interaction, and has a Pause control while it runs. Timings are in ms. */
+const PAUSE = { text: S.demo.pause, aria: S.demo.pauseAria };
+const NUDGE = 300;
+const T = {
+  hero: 1000, // each of the four stages: 4.0 s
+  factorA: 2000, // the first factor, already showing: then 2.5 s on the second, 4.5 s in all
+  factorB: 2500,
+  station: 700, // each of three journey stations
+  outcome: 1200, // the hold on the outcome, which carries the readouts and the case text; with three 0.3 s nudges, 4.2 s in all
+  find: 700, // the finding on its own
+  action: 2500, // then the action; with two 0.3 s nudges, 3.8 s in all
+  step: 700, // each of the first five onboarding steps
+  stepLast: 800, // the sixth: 4.3 s in all
+};
+const nudges = (ids: string[]) => ids.map((nudge) => ({ nudge, hold: NUDGE }));
+
+const Tick = ({ on = false, sep = false }: { on?: boolean; sep?: boolean }) => (
+  <span className={'ga-tick' + (on ? ' is-on' : '') + (sep ? ' is-sep' : '')} aria-hidden="true" />
+);
+
+/* A two-colour C+ heading: `a` in the plain colour, `b` in orange (`.b-named`). */
+function Heading({ id, h, className }: { id: string; h: { a: string; b: string }; className?: string }) {
   return (
-    <div className="dc-actions">
-      <Link href={CONTACT_HREF} className="dc-btn dc-btn-primary">
-        <Mark />
-        {S.primary}
-      </Link>
-    </div>
+    <h2 id={id} className={'b-h2' + (className ? ' ' + className : '')}>
+      {h.a} <span className="b-named">{h.b}</span>
+    </h2>
   );
 }
 
-export function GoogleAdsBody() {
-  const R = S.receipt;
+/* "the click." must not be left alone on a line: the last two words travel together. */
+function keepEnd(text: string) {
+  const words = text.split(' ');
+  if (words.length < 3) return text;
   return (
     <>
-      {/* 1 — hero (ivory): the claim + one click, as a receipt */}
-      <section className="b-hero ga-hero" aria-labelledby="ga-h1">
-        <div className="px-wrap b-hero-g h-hero-g ga-hero-g">
-          <div>
-            <Breadcrumb trail={['What we do']} current={S.crumb} />
-            <p className="b-kicker">{S.kicker}</p>
-            <h1 id="ga-h1" className="b-h1">
-              {S.h1.a} <span className="b-named">{S.h1.b}</span>
-            </h1>
-            <p className="b-lede">{S.lede}</p>
-            <p className="ga-side">{S.side}</p>
-            <Action />
-          </div>
+      {words.slice(0, -2).join(' ')} <span className="ga-nowrap">{words.slice(-2).join(' ')}</span>
+    </>
+  );
+}
 
-          <figure className="ga-fig">
+/* ---------------------------------------------------------------- 1 hero -- */
+function Hero() {
+  const H = S.hero;
+  const R = H.receipt;
+  return (
+    <section className="b-hero ga-hero" aria-labelledby="ga-h1">
+      <div className="px-wrap b-hero-g h-hero-g ga-hero-g">
+        <div>
+          <Breadcrumb trail={['What we do']} current={H.crumb} />
+          <p className="b-kicker">{H.kicker}</p>
+          <h1 id="ga-h1" className="b-h1">
+            <span className="ga-h1-a">{H.h1.a}</span> <span className="b-named ga-h1-b">{keepEnd(H.h1.b)}</span>
+          </h1>
+          <p className="b-lede">{H.lede}</p>
+          <ActionPair primaryLabel={H.primary} secondaryLabel={H.secondary} />
+        </div>
+
+        {/* The receipt follows one search. The four stage controls sit beside it (above it on narrower screens) and are a
+            native radio group: the chosen stage lights the receipt lines that belong to it (CSS `:has()`), so it works
+            with scripts off and with a keyboard. */}
+        <DemoRegion
+          as="figure"
+          className="ga-fig ga-follow ga-demo"
+          id="ga-demo-hero"
+          order={1}
+          radios="ga-stage"
+          restStep={0}
+          steps={H.stages.map(() => ({ hold: T.hero }))}
+          pause={PAUSE}
+        >
+          <div className="ga-fig-row">
+            <fieldset className="ga-st">
+              <legend className="ga-label">{H.stagesLabel}</legend>
+              <div className="ga-st-row">
+                {H.stages.map((s, i) => (
+                  <label key={s.key} className="ga-st-b">
+                    <input type="radio" name="ga-stage" value={s.key} defaultChecked={i === 0} className="ga-st-in" />
+                    <Icon name={s.icon} size={22} />
+                    <span>{s.label}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
             <div className="ga-rc">
               <p className="ga-rc-title">{R.title}</p>
               <div className="ga-rc-part">
                 <p className="ga-rc-k">
                   <span className="ga-label">{R.topK}</span>
-                  <span className="ga-tag">{R.topTag}</span>
+                  <span className="ga-tag" data-st="click">
+                    {R.topTag}
+                  </span>
                 </p>
                 <ul className="ga-rc-l">
-                  {R.top.map((t) => (
-                    <li key={t}>
+                  {R.top.map((t, i) => (
+                    <li key={t} data-st={i === 0 ? 'search' : 'click'}>
                       <span>{t}</span>
                       <span className="ga-dots" aria-hidden="true" />
-                      <span className="ga-tick" aria-hidden="true" />
+                      <Tick />
                     </li>
                   ))}
                 </ul>
@@ -66,151 +131,438 @@ export function GoogleAdsBody() {
                   <span className="ga-tag ga-tag-ours">{R.bottomTag}</span>
                 </p>
                 <ul className="ga-rc-l">
-                  {R.bottom.map((t) => (
-                    <li key={t}>
+                  {R.bottom.map((t, i) => (
+                    <li key={t} data-st={['search', 'click', 'click', 'visit enquiry'][i]}>
                       <span>{t}</span>
                       <span className="ga-dots" aria-hidden="true" />
-                      <span className="ga-tick is-on" aria-hidden="true" />
+                      <Tick on />
                     </li>
                   ))}
                 </ul>
               </div>
-            </div>
-            <figcaption className="px-cap">{R.cap}</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      {/* 2 — where paid search sits (ink): a ruler — where the work is measured */}
-      <section className="b-sec b-ink ga-sit" aria-labelledby="ga-h-sit">
-        <div className="px-wrap">
-          <p className="b-kicker">{S.sitKicker}</p>
-          <h2 id="ga-h-sit" className="b-h2">
-            {S.sitH.a} <span className="b-named">{S.sitH.b}</span>
-          </h2>
-          <p className="b-lede ga-sit-body">{S.sitBody}</p>
-          <figure className="ga-ruler" data-rv="">
-            <figcaption className="ga-label">{S.ruler.label}</figcaption>
-            <ol className="ga-ticks">
-              {S.ruler.ticks.map((t, i) => (
-                <li key={t} className={i === 0 ? 'is-them' : i === 2 ? 'is-us' : undefined} data-rv-i="">
-                  <span className="ga-tick-mk" aria-hidden="true" />
-                  <span className="ga-tick-t">{t}</span>
-                  {i === 0 ? <span className="ga-pin">{S.ruler.them}</span> : null}
-                  {i === 2 ? <span className="ga-pin ga-pin-us">{S.ruler.us}</span> : null}
-                </li>
-              ))}
-            </ol>
-          </figure>
-          <p className="ga-line">{S.sitLine}</p>
-        </div>
-      </section>
-
-      {/* 3 — the boundary (paper): spend paid to Google, our fee separate; what we will not promise */}
-      <section className="b-sec b-paper ga-bd" aria-labelledby="ga-h-bd">
-        <div className="px-wrap">
-          <p className="b-kicker">{S.bdKicker}</p>
-          <div className="ga-bd-g">
-            <div>
-              <h2 id="ga-h-bd" className="b-h2 ga-bd-h">
-                {S.bdH.a} <span className="b-named">{S.bdH.b}</span>
-              </h2>
-              {S.bdBody.map((t) => (
-                <p key={t} className="ga-body">
-                  {t}
-                </p>
-              ))}
-            </div>
-            <div className="ga-np">
-              <p className="ga-label" id="ga-np-k">
-                {S.notPromisedK}
+              <p className="ga-sep" data-st="enquiry">
+                <Tick sep />
+                <span>{R.separately}</span>
               </p>
-              <ul aria-labelledby="ga-np-k">
-                {S.notPromised.map((t) => (
-                  <li key={t}>{t}</li>
-                ))}
-              </ul>
-              <p className="ga-np-close">{S.notPromisedClose}</p>
             </div>
           </div>
-        </div>
-      </section>
+          <figcaption className="px-cap">{R.cap}</figcaption>
+        </DemoRegion>
+      </div>
+    </section>
+  );
+}
 
-      {/* 4 — scope (ink): grouped by where each item acts, the click between the account and the rest */}
-      <section className="b-sec b-ink ga-scope" aria-labelledby="ga-h-scope">
-        <div className="px-wrap">
-          <p className="b-kicker">{S.scopeKicker}</p>
-          <h2 id="ga-h-scope" className="b-h2">
-            {S.scopeH.a} <span className="b-named">{S.scopeH.b}</span>
-          </h2>
-          <div className="ga-groups" data-rv="">
-            {S.scope.map((g, i) => (
-              <div key={g.k} className={'ga-group' + (i === 0 ? ' is-acct' : '')} data-rv-i="">
-                <h3 className="ga-label ga-group-k">{g.k}</h3>
-                <ul className="ga-items">
-                  {g.items.map((it) => (
-                    <li key={it.t}>
-                      <p className="ga-item-t">{it.t}</p>
-                      <p className="ga-item-d">{it.d}</p>
-                    </li>
-                  ))}
-                </ul>
-                {i === 0 ? (
-                  <p className="ga-vtear" aria-hidden="true">
-                    <span>{S.scopeTear}</span>
+/* ------------------------------------------------------------ 2 factors -- */
+function Factors() {
+  const F = S.factors;
+  return (
+    <section className="b-sec b-paper ga-fac" aria-labelledby="ga-h-fac">
+      <div className="px-wrap">
+        <Heading id="ga-h-fac" h={F.h} />
+        <p className="b-lede ga-fac-lede">{F.lede}</p>
+        <GaTabs
+          className="ga-fx ga-demo"
+          label={F.tabsLabel}
+          demo={{
+            id: 'ga-demo-factors',
+            order: 2,
+            steps: [
+              { tab: F.items[0].key, hold: T.factorA },
+              { tab: F.items[1].key, hold: T.factorB },
+            ],
+            rest: F.items[1].key,
+            pause: PAUSE,
+          }}
+          items={F.items.map((it) => ({
+            id: it.key,
+            tab: (
+              <span className="ga-fx-tab">
+                <Icon name={it.icon} size={22} />
+                <span className="ga-fx-tt">
+                  <span className="ga-fx-eyebrow">{it.group}</span>
+                  <span className="ga-fx-label">{it.label}</span>
+                </span>
+              </span>
+            ),
+            panel: (
+              <div className="ga-fx-panel">
+                <h3 className="ga-fx-h">{it.label}</h3>
+                <p className="ga-fx-q">{it.q}</p>
+                <p className="ga-fx-a">
+                  {it.a}
+                  {'links' in it && it.links ? (
+                    <>
+                      {' '}
+                      See{' '}
+                      {it.links.map((l, i) => (
+                        <span key={l.href}>
+                          {i ? ' and ' : ''}
+                          <InlineLink href={l.href}>{l.label}</InlineLink>
+                        </span>
+                      ))}
+                      .
+                    </>
+                  ) : null}
+                </p>
+              </div>
+            ),
+          }))}
+        />
+        <p className="ga-fac-close">{F.close}</p>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- 3 path -- */
+type PathCase = (typeof S.path.cases)[number];
+
+/* One outcome of one search, in a single panel: where it stopped, what Google Ads recorded, what the business sees, and who acts. */
+function Ending({ c }: { c: PathCase }) {
+  const P = S.path;
+  const status = P.laneYou.status[c.genuine as 'yes' | 'no' | 'not'];
+  const ends = c.stop === 3;
+  return (
+    <div className="ga-jy" data-end={c.key}>
+      <h3 className="ga-pf-h">{c.tab}</h3>
+      <ol className="ga-jy-st">
+        {P.stations.map((st, i) => {
+          const cls = i < c.stop ? 'is-done' : i === c.stop ? 'is-stop' : 'is-off';
+          const mark = i === c.stop && ends ? (c.genuine === 'yes' ? 'check' : 'cross') : null;
+          return (
+            <li key={st.key} className={cls + (mark ? ' has-' + mark : '')}>
+              <span className="ga-jy-node" aria-hidden="true">
+                <Icon name={mark || st.icon} size={20} />
+              </span>
+              <span className="ga-jy-name">{st.label}</span>
+            </li>
+          );
+        })}
+      </ol>
+
+      <div className="ga-jy-read">
+        <div className="ga-jy-box">
+          <p className="ga-label">{P.laneAds.label}</p>
+          <ul>
+            <li>
+              <Tick on />
+              <span>{P.laneAds.items[0]}</span>
+            </li>
+            <li className={c.stop >= 1 ? '' : 'is-off'}>
+              <Tick on={c.stop >= 1} />
+              <span>{P.laneAds.items[1]}</span>
+            </li>
+            <li className={c.recorded ? '' : 'is-off'}>
+              <Tick on={c.recorded} />
+              <span>{P.laneAds.items[2]}</span>
+            </li>
+          </ul>
+          <p className="ga-jy-note">{P.laneAds.note}</p>
+        </div>
+        <div className={'ga-jy-box ga-jy-you is-' + c.genuine}>
+          <p className="ga-label">{P.laneYou.label}</p>
+          <p>{P.laneYou.item}</p>
+          <p className="ga-jy-status">
+            <span className="ga-jy-ico" aria-hidden="true">
+              <Icon name={c.genuine === 'yes' ? 'check' : 'cross'} size={18} />
+            </span>
+            {status}
+          </p>
+        </div>
+      </div>
+
+      <div className="ga-jy-case">
+        <p className="ga-pf-text">{c.text}</p>
+        {c.actor ? (
+          <div className="ga-pf-act">
+            <p>
+              <Tick on />
+              <span>{c.actor}</span>
+            </p>
+            {c.separately ? (
+              <p className="ga-pf-sep">
+                <Tick sep />
+                <span>{c.separately}</span>
+              </p>
+            ) : null}
+          </div>
+        ) : null}
+        {c.key === 'record' ? <p className="ga-term">{P.term}</p> : null}
+      </div>
+    </div>
+  );
+}
+
+function Path() {
+  const P = S.path;
+  return (
+    <section className="b-sec b-ink ga-path ga-tight" aria-labelledby="ga-h-path">
+      <div className="px-wrap">
+        <div className="ga-head">
+          <Heading id="ga-h-path" h={P.h} />
+          <p className="ga-path-lede">{P.lede}</p>
+        </div>
+        <GaTabs
+          className="ga-jy-tabs ga-demo"
+          label={P.tabsLabel}
+          demo={{
+            id: 'ga-demo-journey',
+            order: 3,
+            steps: [
+              { tab: P.cases[0].key, hold: T.station },
+              { tab: P.cases[0].key, hold: T.station },
+              { tab: P.cases[0].key, hold: T.station },
+              { tab: P.cases[0].key, hold: T.outcome },
+              ...nudges(P.cases.slice(1).map((c) => c.key)),
+            ],
+            rest: P.cases[0].key,
+            pause: PAUSE,
+          }}
+          items={P.cases.map((c) => ({
+            id: c.key,
+            tab: (
+              <span className="ga-jy-tab">
+                <Icon name={c.icon} size={22} />
+                <span>{c.tab}</span>
+              </span>
+            ),
+            panel: <Ending c={c} />,
+          }))}
+        />
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------- 4 scope -- */
+function Scope() {
+  const C = S.scope;
+  const list = (items: string[], sep = false) => (
+    <ul className="ga-det-l">
+      {items.map((it) => (
+        <li key={it}>
+          <Tick on={!sep} sep={sep} />
+          <span>{it}</span>
+        </li>
+      ))}
+    </ul>
+  );
+  return (
+    <section className="b-sec ga-scope ga-tight" aria-labelledby="ga-h-scope">
+      <div className="px-wrap">
+        <div className="ga-head ga-head-scope">
+          <Heading id="ga-h-scope" h={C.h} />
+          <p className="ga-sc-sub">{C.sub}</p>
+        </div>
+
+        {/* three connected responsibilities: the first two sit inside the solid frame (covered by the management fee),
+            the third sits outside it, dashed (agreed separately). The tags are always visible. */}
+        <div className="ga-chain">
+          <div className="ga-frame" aria-hidden="true">
+            <span className="ga-frame-k">{C.frame}</span>
+          </div>
+          <ol className="ga-nodes">
+            {C.nodes.map((n) => (
+              <li key={n.key} className={'ga-node' + (n.key === 'separate' ? ' is-sep' : '')}>
+                <span className="ga-node-ico" aria-hidden="true">
+                  <Icon name={n.icon} size={24} />
+                </span>
+                <p className="ga-node-t">{n.t}</p>
+                <p className="ga-node-d">{n.d}</p>
+                <p className="ga-node-tag">
+                  <Tick on={n.key !== 'separate'} sep={n.key === 'separate'} />
+                  <span>{n.tag}</span>
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        {/* only the detailed lists collapse; the responsibilities and their commercial labels above never do */}
+        <details className="ga-det">
+          <summary>
+            <span>{C.detailsSummary}</span>
+            <span className="ga-det-pm" aria-hidden="true" />
+          </summary>
+          <div className="ga-det-g">
+            <div>
+              <h3 className="ga-label">{C.core.k}</h3>
+              {list(C.core.items)}
+            </div>
+            <div>
+              <h3 className="ga-label">{C.oversight.k}</h3>
+              {list(C.oversight.items)}
+            </div>
+            <div className="ga-det-sep">
+              <h3 className="ga-label">{C.separate.k}</h3>
+              {list(C.separate.items, true)}
+            </div>
+          </div>
+        </details>
+
+        <p className="ga-fee">
+          {C.fee.text} <InlineLink href={C.fee.link.href}>{C.fee.link.label}</InlineLink>.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------- 5 answer -- */
+function Answer() {
+  const A = S.answer;
+  return (
+    <section className="b-sec b-ink ga-ans ga-tight" aria-labelledby="ga-h-ans">
+      <div className="px-wrap">
+        <div className="ga-ans-top">
+          <Heading id="ga-h-ans" h={A.h} />
+          <p className="ga-ans-lede">{A.lede}</p>
+        </div>
+        <ul className="ga-pledges">
+          {A.pledges.map((p) => (
+            <li key={p.t} className="ga-pledge">
+              <span className="ga-pledge-ico" aria-hidden="true">
+                <Icon name={p.icon} size={26} />
+              </span>
+              <h3 className="ga-pledge-t">{p.t}</h3>
+              <p>{p.line}</p>
+            </li>
+          ))}
+        </ul>
+        <p className="ga-closing">{A.closing}</p>
+      </div>
+    </section>
+  );
+}
+
+/* ----------------------------------------------------------- 6 reporting -- */
+function Reporting() {
+  const G = S.reporting;
+  return (
+    <section className="b-sec b-paper ga-rep ga-tight" aria-labelledby="ga-h-rep">
+      <div className="px-wrap">
+        <div className="ga-head">
+          <Heading id="ga-h-rep" h={G.h} />
+          <p className="ga-rep-lede">{G.lede}</p>
+        </div>
+        <p className="ga-rep-covers">{G.covers}</p>
+        <p className="ga-label ga-find-k">{G.findingsK}</p>
+        <GaTabs
+          className="ga-find ga-demo"
+          label={G.tabsLabel}
+          demo={{
+            id: 'ga-demo-reporting',
+            order: 4,
+            steps: [
+              { tab: G.findings[0].key, hold: T.find },
+              { tab: G.findings[0].key, hold: T.action },
+              ...nudges(G.findings.slice(1).map((f) => f.key)),
+            ],
+            rest: G.findings[0].key,
+            pause: PAUSE,
+          }}
+          items={G.findings.map((f) => ({
+            id: f.key,
+            tab: <span className="ga-find-tab">{f.find}</span>,
+            panel: (
+              <div className="ga-dec">
+                <h3 className="ga-pf-h">{f.find}</h3>
+                <p className="ga-label">{G.decisionLabel}</p>
+                <p className="ga-dec-d">{f.do}</p>
+                {f.separately ? (
+                  <p className="ga-dec-sep">
+                    <Tick sep />
+                    <span>{f.separately}</span>
                   </p>
                 ) : null}
               </div>
-            ))}
-          </div>
+            ),
+          }))}
+        />
+        <div className="ga-rep-notes">
+          <p className="ga-baseline">{G.baseline}</p>
+          <p className="ga-limit-line">{G.limit}</p>
         </div>
-      </section>
+        <p className="b-tlink">
+          <TLink href={G.link.href}>{G.link.label}</TLink>
+        </p>
+        <p className="ga-related">
+          {G.related.a}{' '}
+          {G.related.links.map((l, i) => (
+            <span key={l.href}>
+              {i ? ' · ' : ''}
+              <InlineLink href={l.href}>{l.label}</InlineLink>
+            </span>
+          ))}
+          .
+        </p>
+      </div>
+    </section>
+  );
+}
 
-      {/* 5 — measurement (paper): the claim, with its limit beside it */}
-      <section className="b-sec b-paper ga-meas" aria-labelledby="ga-h-meas">
-        <div className="px-wrap ga-meas-g">
-          <div>
-            <p className="b-kicker">{S.measKicker}</p>
-            <h2 id="ga-h-meas" className="b-h2">
-              {S.measH.a} <span className="b-named">{S.measH.b}</span>
-            </h2>
-            <p className="ga-body ga-meas-body">{S.measBody}</p>
-            <p className="b-tlink">
-              <Link href={S.measLink.href}>{S.measLink.label} →</Link>
-            </p>
-            <p className="ga-related">
-              {S.related.a}{' '}
-              {S.related.links.map((l, i) => (
-                <span key={l.href}>
-                  {i ? ' · ' : ''}
-                  <InlineLink href={l.href}>{l.label}</InlineLink>
-                </span>
-              ))}
-              .
-            </p>
-          </div>
-          <aside className="ga-limit" aria-labelledby="ga-limit-k">
-            <p className="ga-label" id="ga-limit-k">
-              {S.limitK}
-            </p>
-            <p>{S.limit}</p>
-          </aside>
-        </div>
-      </section>
+/* ------------------------------------------------------------ 7 process -- */
+function Process() {
+  const P = S.process;
+  return (
+    <section className="b-sec ga-proc" aria-labelledby="ga-h-proc">
+      <div className="px-wrap">
+        <Heading id="ga-h-proc" h={P.h} />
+        <DemoRegion
+          className="ga-demo"
+          id="ga-demo-process"
+          order={5}
+          steps={P.steps.map((_, i) => ({ hold: i === P.steps.length - 1 ? T.stepLast : T.step }))}
+          pause={PAUSE}
+        >
+        <ol className="ga-steps">
+          {P.steps.map((s) => (
+            <li key={s.t}>
+              <span className="ga-step-ico" aria-hidden="true">
+                <Icon name={s.icon} size={24} />
+              </span>
+              <p className="ga-step-t">{s.t}</p>
+              <p className="ga-step-d">{s.d}</p>
+            </li>
+          ))}
+        </ol>
+        </DemoRegion>
+        <p className="ga-proc-line">{P.line}</p>
+      </div>
+    </section>
+  );
+}
 
-      {/* close: the shared close's markup and classes; one CTA */}
-      <section className="b-close" aria-labelledby="ga-h-close">
-        <div className="px-wrap b-close-in">
-          <div>
-            <p className="b-kicker ga-close-k">{S.close.label}</p>
-            <h2 id="ga-h-close" className="b-h2">
-              {S.close.h}
-            </h2>
-            <p className="b-lede">{S.close.body}</p>
-          </div>
-          <Action />
+/* --------------------------------------------------------------- 8 close -- */
+function Close() {
+  const N = S.close;
+  return (
+    <section className="b-close ga-next" aria-labelledby="ga-h-next">
+      <div className="px-wrap b-close-in">
+        <div>
+          <h2 id="ga-h-next" className="b-h2">
+            {N.h.a} {N.h.b}
+          </h2>
+          <p className="ga-prompt">{N.body}</p>
         </div>
-      </section>
+        <ActionPair primaryLabel={N.primary} secondaryLabel={N.secondary} />
+      </div>
+    </section>
+  );
+}
+
+export function GoogleAdsBody(): ReactNode {
+  return (
+    <>
+      <Hero />
+      <Factors />
+      <Path />
+      <Scope />
+      <Answer />
+      <Reporting />
+      <Process />
+      <Close />
     </>
   );
 }

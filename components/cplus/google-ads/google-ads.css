@@ -1,10 +1,23 @@
-/* C+ google-ads, from the approved prototype (proto/direction-c-plus, app/proto/c-plus/google-ads.css). */
+/* C+ google-ads, G1.3a (DEC-053; owner-approved G1.3 scope and decisions): static composition, no motion. Sections 2 and 7 are
+   unchanged from G1.2. Headings are two-colour (plain + orange, `.b-named`). BOUNDARY DEVICE, used identically on every
+   graphic: a TICKED box or a SOLID frame is part of the service, covered by the management fee; a DASHED outline (with an
+   EMPTY dashed box where a box is used) means "agreed separately", and nothing else is drawn dashed. Words always say it too;
+   marks are aria-hidden. */
 .ga-label { font: 700 .75rem/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-dim); }
 .b-ink .ga-label { color: var(--dc-on-ink-dim); }
-.ga-body { margin-top: 14px; max-width: 60ch; line-height: 1.55; }
-.px-h .ga-hero .b-h1 { font-size: min(clamp(2.4rem, 1.2rem + 3.8vw, 4.6rem), 15.5vw); max-width: 15ch; }
+.ga-nowrap { white-space: nowrap; }
+.ga-tick { display: block; flex: none; width: 18px; height: 18px; border: 2px solid var(--dc-control); border-radius: 3px; }
+.ga-tick.is-on { border-color: var(--dc-ink); background: var(--dc-tang); }
+.ga-tick.is-sep { border: 2px dashed var(--dc-ink); background: transparent; }
+.b-ink .ga-tick { border-color: var(--dc-on-ink-dim); }
+.b-ink .ga-tick.is-on { border-color: var(--dc-on-ink); background: var(--dc-tang); }
+.b-ink .ga-tick.is-sep { border-color: var(--dc-on-ink); background: transparent; }
+
+/* 1 — hero ------------------------------------------------------------------------------------------------------ */
+.px-h .ga-hero .b-h1 { font-size: min(clamp(2.4rem, 1.2rem + 3.8vw, 4.6rem), 15.5vw); max-width: 14ch; }
+.ga-h1-a, .ga-h1-b { display: block; }
 .px-h .ga-hero-g { align-items: center; }
-.ga-side { margin-top: 22px; max-width: 44ch; padding-left: 16px; border-left: 4px solid var(--dc-tang-display); line-height: 1.55; color: var(--dc-ink); }
+.px-h .ga-hero .b-lede { max-width: 44ch; color: var(--dc-ink); }
 .ga-hero .dc-actions { margin-top: 32px; }
 .ga-fig { margin: 0; min-width: 0; display: grid; justify-items: center; }
 .ga-rc { width: min(100%, 25rem); background: var(--dc-paper); border: 3px solid var(--dc-ink); box-shadow: 10px 10px 0 var(--dc-tang); transform: rotate(-1.5deg); }
@@ -12,12 +25,11 @@
 .ga-rc-part { display: grid; gap: 12px; padding: 18px 22px; }
 .ga-rc-k { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 10px; }
 .ga-tag { padding: 2px 8px; border: 2px dashed var(--dc-control); font: 700 .8125rem/1.3 var(--dc-f-body); white-space: nowrap; }
+.ga-tag-solid { border-style: solid; border-color: var(--dc-ink); }
 .ga-tag-ours { border: 2px solid var(--dc-ink); background: var(--dc-tang); color: var(--dc-ink); }
-.ga-rc-l { display: grid; gap: 10px; }
-.ga-rc-l li { display: grid; grid-template-columns: auto minmax(12px, 1fr) 18px; align-items: center; gap: 10px; font-size: var(--dc-t-note); line-height: 1.35; }
+.ga-rc-l { display: grid; gap: 4px; }
+.ga-rc-l li { display: grid; grid-template-columns: auto minmax(12px, 1fr) 18px; align-items: center; gap: 10px; margin-inline: -10px; padding: 5px 10px; border-left: 4px solid transparent; font-size: var(--dc-t-note); line-height: 1.35; }
 .ga-dots { display: block; border-bottom: 2px dotted var(--dc-control); transform: translateY(4px); }
-.ga-tick { display: block; width: 18px; height: 18px; border: 2px solid var(--dc-control); border-radius: 3px; }
-.ga-tick.is-on { border-color: var(--dc-ink); background: var(--dc-tang); }
 .ga-rc-ours { background: var(--dc-ground); }
 .ga-rc-ours .ga-rc-l li { font-weight: 700; }
 .ga-tear { position: relative; display: flex; align-items: center; gap: 12px; margin: 0 -3px; padding: 0 22px; height: 30px; }
@@ -26,59 +38,315 @@
   radial-gradient(circle at 0 50%, var(--dc-ground) 9px, var(--dc-ink) 9px 12px, transparent 12px) left / 24px 100% no-repeat,
   radial-gradient(circle at 100% 50%, var(--dc-ground) 9px, var(--dc-ink) 9px 12px, transparent 12px) right / 24px 100% no-repeat; }
 .ga-tear span { position: relative; z-index: 1; margin-inline: auto; padding: 3px 10px; background: var(--dc-ink); color: var(--dc-on-ink); font: 700 .75rem/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; }
-.ga-fig .px-cap { margin-top: 26px; }
-.ga-sit-body { margin-top: 18px; color: var(--dc-on-ink-soft); }
-.ga-ruler { margin: clamp(40px, 5vw, 72px) 0 0; display: grid; gap: 18px; }
-.ga-ticks { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding-top: 6px; }
-.ga-ticks::before { content: ""; position: absolute; left: 11px; right: calc(33.333% - 16px); top: 16px; border-top: 3px solid var(--dc-on-ink-dim); }
-.ga-ticks li { position: relative; display: grid; align-content: start; gap: 12px; min-width: 0; }
-.ga-tick-mk { position: relative; z-index: 1; width: 24px; height: 24px; border-radius: 50%; border: 3px solid var(--dc-on-ink-dim); background: var(--dc-ink); }
-.ga-ticks .is-us .ga-tick-mk { border-color: var(--dc-tang); background: var(--dc-tang); }
-.ga-tick-t { font: 800 var(--dc-t-title)/1.2 var(--dc-f-title); color: var(--dc-on-ink); }
-.ga-pin { max-width: 30ch; padding: 12px 14px; border: 2px dashed var(--dc-on-ink-dim); color: var(--dc-on-ink-soft); font-size: var(--dc-t-note); line-height: 1.5; }
-.ga-pin-us { border: 0; background: var(--dc-tang); color: var(--dc-ink); font-weight: 700; }
-.ga-line { margin-top: clamp(32px, 4vw, 56px); max-width: 34ch; font: 800 clamp(1.3rem, 1rem + 1vw, 1.8rem)/1.25 var(--dc-f-title); color: var(--dc-on-ink); }
-.ga-bd-g { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
-.px-h .ga-bd-h { max-width: 18ch; font-size: min(var(--dc-t-statement), 13vw); }
-.ga-bd-h + .ga-body { margin-top: 24px; }
-.ga-np { padding-top: 16px; border-top: 3px solid var(--dc-ink); }
-.ga-np ul { margin-top: 8px; }
-.ga-np li { display: flex; gap: 12px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--dc-control); font: 800 1.05rem/1.35 var(--dc-f-title); }
-.ga-np li::before { content: ""; flex: none; width: 12px; height: 12px; border: 2px dashed var(--dc-control); transform: translateY(1px); }
-.ga-np-close { margin-top: 16px; color: var(--dc-dim); font-size: var(--dc-t-note); line-height: 1.5; }
-.ga-groups { margin-top: clamp(36px, 4.5vw, 64px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
-.ga-group { position: relative; display: grid; align-content: start; gap: 16px; padding: clamp(22px, 2.6vw, 32px); border: 2px solid var(--dc-on-ink-dim); border-left: 0; min-width: 0; }
-.ga-group.is-acct { border-left: 2px solid var(--dc-on-ink-dim); border-right: 0; }
-.ga-group-k { padding-bottom: 12px; border-bottom: 1px solid var(--dc-rule-on-ink); }
-.ga-group:not(.is-acct) .ga-group-k { color: var(--dc-tang); }
-.ga-items { display: grid; gap: 20px; }
-.ga-item-t { font: 800 1.05rem/1.25 var(--dc-f-title); color: var(--dc-on-ink); }
-.ga-item-d { margin-top: 6px; color: var(--dc-on-ink-soft); font-size: var(--dc-t-note); line-height: 1.5; }
-.ga-vtear { position: absolute; top: -2px; bottom: -2px; right: -1px; width: 2px; border-left: 2px dashed var(--dc-tang); }
-.ga-vtear span { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-90deg); white-space: nowrap; padding: 3px 10px; background: var(--dc-tang); color: var(--dc-ink); font: 700 .75rem/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; }
-.ga-scope :focus-visible, .ga-sit :focus-visible { outline-color: var(--dc-on-ink); }
-.ga-meas-g { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(28px, 5vw, 80px); align-items: end; }
-.ga-meas-body { margin-top: 20px; }
-.ga-related { margin-top: 20px; color: var(--dc-dim); line-height: 1.7; }
-.ga-limit { display: grid; gap: 10px; padding: clamp(20px, 2.4vw, 28px); background: var(--dc-ground); border: 3px solid var(--dc-ink); border-left-width: 10px; }
-.ga-limit p:last-child { line-height: 1.55; }
-.ga-close-k { color: var(--dc-ink); }
-.px-h:has(.ga-hero) .b-close-in > div { container-type: inline-size; min-width: 0; }
-.px-h:has(.ga-hero) .b-close .b-h2 { font-size: min(clamp(2.4rem, 1.2rem + 4vw, 5rem), 14cqi); max-width: 16ch; }
+/* the receipt's footer: work that is NOT part of the fee. Dashed outline and an empty dashed box, no tick. */
+.ga-sep { display: flex; align-items: flex-start; gap: 12px; margin: 0 22px 20px; padding: 12px 14px; border: 2px dashed var(--dc-control); background: transparent; font-size: var(--dc-t-note); line-height: 1.4; }
+.ga-sep .ga-tick { margin-top: 1px; }
+/* follow one search: the chosen stage lights the receipt lines that belong to it (native radios + :has(); no script) */
+.ga-follow:has(input[value="search"]:checked) [data-st~="search"],
+.ga-follow:has(input[value="click"]:checked) [data-st~="click"],
+.ga-follow:has(input[value="visit"]:checked) [data-st~="visit"],
+.ga-follow:has(input[value="enquiry"]:checked) [data-st~="enquiry"] { background: color-mix(in srgb, var(--dc-tang) 24%, transparent); }
+.ga-follow:has(input:checked) li[data-st] { transition: none; }
+.ga-follow:has(input[value="search"]:checked) li[data-st~="search"],
+.ga-follow:has(input[value="click"]:checked) li[data-st~="click"],
+.ga-follow:has(input[value="visit"]:checked) li[data-st~="visit"],
+.ga-follow:has(input[value="enquiry"]:checked) li[data-st~="enquiry"] { border-left-color: var(--dc-tang-display); }
+.ga-follow:has(input[value="enquiry"]:checked) .ga-sep { border-color: var(--dc-tang-display); }
+.ga-follow:has(input[value="click"]:checked) .ga-tag[data-st~="click"] { border-color: var(--dc-tang-display); }
+.ga-st-b { position: relative; display: grid; justify-items: center; align-content: center; gap: 4px; min-height: 64px; padding: 8px 4px; border: 2px solid var(--dc-ink); background: var(--dc-paper); color: var(--dc-ink); cursor: pointer; font: 700 .8125rem/1.2 var(--dc-f-body); }
+.ga-st-b svg { color: var(--dc-tang-display); }
+.ga-st-in { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.ga-st-b:has(input:checked) { background: var(--dc-ink); color: var(--dc-on-ink); }
+.ga-st-b:has(input:checked) svg { color: var(--dc-tang); }
+.ga-st-b:has(input:focus-visible) { outline: 3px solid var(--dc-ink); outline-offset: 3px; }
+
+
+/* G1.3a: the hero fits the first screen. The right column is wider (560px) so the four stage controls sit in a vertical column
+   beside the receipt at full size (400px); the vertical padding is cut. Below 1200px the controls are a row above the receipt. */
+.px-h .b-hero.ga-hero { padding-block: clamp(28px, 3vw, 44px) clamp(28px, 3vw, 40px); }
+.ga-fig .px-cap { margin-top: 14px; }
+.ga-fig-row { display: grid; justify-items: center; justify-content: center; min-width: 0; }
+.ga-st { width: min(100%, 25rem); min-width: 0; margin: 0 0 22px; padding: 0; border: 0; }
+.ga-st legend { padding: 0; margin-bottom: 10px; }
+.ga-st-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+@media (min-width: 1024px) {
+  .px-h .ga-hero .ga-hero-g { grid-template-columns: minmax(0, 1fr) clamp(440px, 40vw, 560px); }
+}
+@media (min-width: 1200px) {
+  .ga-fig-row { display: flex; align-items: flex-start; gap: 16px; }
+  .ga-st { flex: none; width: 84px; margin: 0; }
+  .ga-st-row { grid-template-columns: minmax(0, 1fr); }
+  .ga-st-b { min-height: 66px; }
+  .ga-fig-row .ga-rc { flex: 0 1 400px; width: auto; min-width: 0; }
+}
+
+/* 2 — what we look at (paper): six factors in three groups, one read at a time --------------------------------------- */
+.px-h .ga-fac .b-h2 { max-width: 18ch; }
+.ga-fac-lede { margin-top: 20px; max-width: 46ch; }
+.ga-fx { margin-top: clamp(28px, 3.5vw, 48px); display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 0 clamp(24px, 4vw, 56px); align-items: start; }
+.ga-fx .px-tablist { grid-column: 1; grid-row: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.ga-fx .px-tabpanel { grid-column: 2; grid-row: 1; margin-top: 0; }
+.ga-fx .px-tab { width: 100%; min-height: 88px; padding: 14px 16px; border: 2px solid var(--dc-ink); border-radius: 0; background: var(--dc-ground); color: var(--dc-ink); justify-content: flex-start; text-align: left; }
+.ga-fx .px-tab:hover { background: var(--dc-paper); }
+.ga-fx .px-tab[aria-selected="true"] { background: var(--dc-ink); color: var(--dc-on-ink); }
+.ga-fx-tab { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.ga-fx-tab svg { flex: none; color: var(--dc-tang-display); }
+.ga-fx .px-tab[aria-selected="true"] svg { color: var(--dc-tang); }
+.ga-fx-tt { display: grid; gap: 3px; min-width: 0; }
+.ga-fx-eyebrow { font: 700 .75rem/1.2 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-dim); }
+.ga-fx .px-tab[aria-selected="true"] .ga-fx-eyebrow { color: var(--dc-on-ink-dim); }
+.ga-fx-label { font: 800 1.1rem/1.2 var(--dc-f-title); }
+.ga-fx-panel { padding: clamp(20px, 2.4vw, 32px); border: 3px solid var(--dc-ink); background: var(--dc-ground); box-shadow: 8px 8px 0 var(--dc-tang); }
+.ga-fx-h, .ga-pf-h { display: none; font: 800 var(--dc-t-title)/1.2 var(--dc-f-title); }
+html:not(.px-js) .ga-fx-h, html:not(.px-js) .ga-pf-h { display: block; margin-bottom: 12px; }
+html:not(.px-js) .ga-fx .px-tabpanel { grid-column: 1 / -1; grid-row: auto; margin-top: 16px; }
+.ga-fx-q { font: 800 var(--dc-t-title)/1.2 var(--dc-f-title); }
+.ga-fx-a { margin-top: 12px; line-height: 1.5; color: var(--dc-dim); }
+.ga-fx-a a { color: var(--dc-ink); }
+.ga-fac-close { margin-top: clamp(28px, 3.5vw, 44px); max-width: 52ch; padding-left: 16px; border-left: 4px solid var(--dc-tang-display); font-weight: 700; line-height: 1.45; }
+
+/* 3 — from ad spend to enquiries (ink): one search, four outcomes, one explanation panel ---------------------------------- */
+.px-h .b-sec.ga-tight { padding-block: clamp(48px, 5.5vw, 80px); }
+.ga-head { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 16px clamp(24px, 4vw, 64px); align-items: end; }
+.px-h .ga-path .b-h2 { max-width: 20ch; }
+.ga-path-lede { max-width: 46ch; color: var(--dc-on-ink-soft); font-size: var(--dc-t-lede); line-height: 1.45; }
+.ga-jy-tabs { margin-top: clamp(22px, 2.6vw, 32px); }
+.ga-jy-tabs .px-tablist { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.ga-jy-tabs .px-tab { width: 100%; min-height: 60px; padding: 10px 14px; border: 2px solid var(--dc-on-ink-dim); border-radius: 14px; color: var(--dc-on-ink); justify-content: flex-start; text-align: left; }
+.ga-jy-tabs .px-tab:hover { border-color: var(--dc-on-ink); }
+.ga-jy-tabs .px-tab[aria-selected="true"] { background: var(--dc-on-ink); border-color: var(--dc-on-ink); color: var(--dc-ink); }
+.ga-jy-tab { display: flex; align-items: center; gap: 10px; font: 700 .9375rem/1.25 var(--dc-f-body); }
+.ga-jy-tab svg { flex: none; color: var(--dc-tang); }
+.ga-jy-tabs .px-tab[aria-selected="true"] svg { color: var(--dc-tang-display); }
+.ga-jy-tabs .px-tabpanel { margin-top: 14px; }
+.ga-jy-tabs .px-tabpanel:focus-visible { outline-color: var(--dc-on-ink); }
+.ga-jy { display: grid; gap: 16px; padding: clamp(16px, 2vw, 24px); border: 2px solid var(--dc-on-ink-dim); }
+.ga-pf-h { color: var(--dc-on-ink); }
+.ga-jy-st { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.ga-jy-st li { position: relative; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.ga-jy-node { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; border: 3px solid var(--dc-on-ink-dim); background: transparent; color: var(--dc-on-ink-dim); }
+.ga-jy-name { font: 700 .9375rem/1.25 var(--dc-f-body); color: var(--dc-on-ink); }
+.ga-jy-st li:not(:last-child)::after { content: ""; position: absolute; top: 18px; left: 50px; width: calc(100% - 38px); border-top: 3px solid var(--dc-on-ink-dim); }
+.ga-jy-st li.is-done .ga-jy-node, .ga-jy-st li.is-stop .ga-jy-node { background: var(--dc-tang); border-color: var(--dc-tang); color: var(--dc-ink); }
+.ga-jy-st li.is-done::after { border-top-color: var(--dc-tang); }
+.ga-jy-st li.is-stop .ga-jy-node { box-shadow: 0 0 0 3px var(--dc-ink), 0 0 0 6px var(--dc-tang); }
+.ga-jy-st li.is-off .ga-jy-name { color: var(--dc-on-ink-dim); }
+.ga-jy-st li.has-cross .ga-jy-node { background: var(--dc-ink); color: var(--dc-tang); border-color: var(--dc-tang); }
+.ga-jy-read { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.ga-jy-box { display: grid; gap: 8px; align-content: start; padding: 14px 16px; border: 2px solid var(--dc-on-ink-dim); color: var(--dc-on-ink-soft); font-size: var(--dc-t-note); line-height: 1.4; }
+.ga-jy-box ul { display: grid; gap: 6px; }
+.ga-jy-box li { display: flex; align-items: flex-start; gap: 10px; }
+.ga-jy-box li.is-off { color: var(--dc-on-ink-dim); }
+.ga-jy-box .ga-tick { margin-top: 1px; }
+.ga-jy-note { font-size: .8125rem; color: var(--dc-on-ink-dim); }
+.ga-jy-status { display: flex; align-items: center; gap: 10px; font: 800 1rem/1.25 var(--dc-f-title); color: var(--dc-on-ink); }
+.ga-jy-ico { display: grid; place-items: center; flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--dc-tang); color: var(--dc-ink); }
+.ga-jy-you.is-not { border-color: var(--dc-tang); border-width: 3px; }
+.ga-jy-you.is-no .ga-jy-ico, .ga-jy-you.is-not .ga-jy-ico { background: var(--dc-ink); border: 2px solid var(--dc-tang); color: var(--dc-tang); }
+.ga-jy-case { display: grid; gap: 10px; padding-top: 14px; border-top: 1px solid var(--dc-rule-on-ink); }
+.ga-pf-text { max-width: 64ch; font: 700 1.05rem/1.4 var(--dc-f-body); color: var(--dc-on-ink); }
+.ga-pf-act { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.ga-pf-act p { display: flex; align-items: flex-start; gap: 10px; font-size: var(--dc-t-note); font-weight: 700; color: var(--dc-on-ink); }
+.ga-pf-act .ga-tick { margin-top: 2px; }
+.ga-pf-sep { padding: 6px 12px; border: 2px dashed var(--dc-on-ink); }
+.ga-term { max-width: 62ch; color: var(--dc-on-ink-soft); font-size: var(--dc-t-note); line-height: 1.5; }
+
+/* 4 — what the work covers (ground): three connected responsibilities, then the fee line -------------------------------- */
+.px-h .ga-scope .b-h2 { max-width: 16ch; }
+.ga-sc-sub { max-width: 52ch; color: var(--dc-dim); font-size: var(--dc-t-lede); line-height: 1.45; }
+.ga-chain { position: relative; margin-top: clamp(36px, 4vw, 52px); }
+.ga-frame { position: absolute; top: -16px; bottom: -16px; left: -14px; width: calc((200% - 44px) / 3 + 28px); border: 3px solid var(--dc-ink); background: var(--dc-paper); }
+.ga-frame-k { position: absolute; top: -17px; left: 20px; padding: 6px 14px; border: 3px solid var(--dc-ink); background: var(--dc-tang); color: var(--dc-ink); font: 800 .8125rem/1.2 var(--dc-f-body); letter-spacing: .06em; text-transform: uppercase; }
+.ga-nodes { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px; }
+.ga-node { position: relative; display: grid; gap: 8px; align-content: start; min-width: 0; padding: 18px 18px 16px; border: 2px solid var(--dc-ink); background: var(--dc-ground); }
+.ga-node.is-sep { border: 2px dashed var(--dc-control); background: transparent; }
+.ga-node:not(:last-child)::after { content: ""; position: absolute; top: 50%; left: 100%; width: 44px; border-top: 3px solid var(--dc-tang-display); }
+.ga-node:not(:last-child)::before { content: ""; position: absolute; top: calc(50% - 6px); left: calc(100% + 31px); width: 10px; height: 10px; border-top: 3px solid var(--dc-tang-display); border-right: 3px solid var(--dc-tang-display); transform: rotate(45deg); }
+.ga-node:nth-child(2)::after { border-top-style: dashed; }
+.ga-node-ico { display: grid; place-items: center; width: 44px; height: 44px; background: var(--dc-tang); color: var(--dc-ink); }
+.ga-node.is-sep .ga-node-ico { background: transparent; border: 2px dashed var(--dc-control); color: var(--dc-dim); }
+.ga-node-t { margin-top: 4px; font: 800 var(--dc-t-title)/1.2 var(--dc-f-title); }
+.ga-node-d { color: var(--dc-dim); font-size: var(--dc-t-note); line-height: 1.4; }
+.ga-node-tag { display: flex; align-items: flex-start; gap: 8px; margin-top: 4px; font: 700 .8125rem/1.3 var(--dc-f-body); }
+.ga-node-tag .ga-tick { margin-top: 0; width: 16px; height: 16px; }
+.ga-det { margin-top: clamp(36px, 4vw, 52px); border: 2px solid var(--dc-ink); background: var(--dc-paper); }
+.ga-det summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 12px 20px; cursor: pointer; list-style: none; font: 800 1.05rem/1.2 var(--dc-f-title); }
+.ga-det summary::-webkit-details-marker { display: none; }
+.ga-det summary::marker { content: ""; }
+.ga-det summary:focus-visible { outline: 3px solid var(--dc-ink); outline-offset: 3px; }
+.ga-det-pm { position: relative; flex: none; width: 18px; height: 18px; }
+.ga-det-pm::before, .ga-det-pm::after { content: ""; position: absolute; background: var(--dc-tang-display); }
+.ga-det-pm::before { left: 0; right: 0; top: 8px; height: 3px; }
+.ga-det-pm::after { top: 0; bottom: 0; left: 8px; width: 3px; }
+.ga-det[open] .ga-det-pm::after { display: none; }
+.ga-det-g { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; padding: 4px 20px 20px; }
+.ga-det-l { display: grid; gap: 10px; margin-top: 10px; }
+.ga-det-l li { display: flex; align-items: flex-start; gap: 10px; font-weight: 700; line-height: 1.35; }
+.ga-det-l .ga-tick { margin-top: 2px; }
+.ga-det-sep { padding: 14px 16px; border: 2px dashed var(--dc-control); }
+.ga-fee { margin-top: 22px; color: var(--dc-dim); line-height: 1.5; }
+.ga-fee a { color: var(--dc-ink); }
+
+/* 5 — what we answer for (ink): four pledges and one closing line ------------------------------------------------------ */
+.ga-ans-top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 48px; }
+.px-h .ga-ans .b-h2 { max-width: 12ch; }
+.ga-ans-lede { font: 800 clamp(1.2rem, 1rem + .9vw, 1.7rem)/1.3 var(--dc-f-title); color: var(--dc-on-ink); }
+.ga-pledges { margin-top: clamp(24px, 3vw, 36px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.ga-pledge { display: grid; gap: 10px; align-content: start; padding: clamp(18px, 2vw, 24px); border: 2px solid var(--dc-on-ink-dim); color: var(--dc-on-ink-soft); line-height: 1.45; }
+.ga-pledge-ico { display: grid; place-items: center; width: 44px; height: 44px; background: var(--dc-tang); color: var(--dc-ink); }
+.ga-pledge-t { font: 800 var(--dc-t-title)/1.2 var(--dc-f-title); color: var(--dc-on-ink); }
+.ga-closing { margin-top: clamp(24px, 3vw, 36px); max-width: 70ch; padding: 16px 22px; border: 2px solid var(--dc-on-ink-dim); border-left: 10px solid var(--dc-tang); color: var(--dc-on-ink); line-height: 1.5; }
+
+/* 6 — monthly reporting (paper): a compact finding-to-action example --------------------------------------------------- */
+.px-h .ga-rep .b-h2 { max-width: 16ch; }
+.ga-rep-lede { max-width: 46ch; font-size: var(--dc-t-lede); line-height: 1.45; color: var(--dc-dim); }
+.ga-rep-covers { margin-top: clamp(20px, 2.4vw, 28px); max-width: 74ch; color: var(--dc-dim); line-height: 1.5; }
+.ga-find-k { margin-top: 22px; margin-bottom: 10px; }
+.ga-find { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 0 clamp(20px, 3vw, 40px); align-items: start; }
+.ga-find .px-tablist { grid-column: 1; grid-row: 1; display: grid; gap: 8px; }
+.ga-find .px-tab { width: 100%; min-height: 52px; padding: 12px 16px; border: 2px solid var(--dc-control); border-radius: 0; background: var(--dc-paper); color: var(--dc-ink); justify-content: flex-start; text-align: left; font-weight: 700; }
+.ga-find .px-tab:hover { border-color: var(--dc-ink); }
+.ga-find .px-tab[aria-selected="true"] { background: var(--dc-ink); border-color: var(--dc-ink); color: var(--dc-on-ink); box-shadow: inset 6px 0 0 var(--dc-tang); padding-left: 22px; }
+.ga-find .px-tabpanel { grid-column: 2; grid-row: 1; margin-top: 0; }
+html:not(.px-js) .ga-find .px-tabpanel { grid-column: 1 / -1; grid-row: auto; margin-top: 16px; }
+.ga-dec { display: grid; gap: 10px; padding: clamp(18px, 2.2vw, 28px); border: 3px solid var(--dc-ink); background: var(--dc-ground); box-shadow: 8px 8px 0 var(--dc-tang); }
+.ga-dec .ga-pf-h { color: var(--dc-ink); }
+.ga-dec-d { font: 700 var(--dc-t-lede)/1.4 var(--dc-f-body); }
+.ga-dec-sep { display: flex; align-items: flex-start; gap: 10px; padding: 8px 12px; border: 2px dashed var(--dc-ink); font-size: var(--dc-t-note); font-weight: 700; line-height: 1.35; }
+.ga-dec-sep .ga-tick { margin-top: 1px; }
+.ga-rep-notes { margin-top: clamp(28px, 3.4vw, 40px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 32px; }
+.ga-baseline, .ga-limit-line { padding: 14px 18px; background: var(--dc-ground); border: 2px solid var(--dc-ink); border-left-width: 10px; line-height: 1.5; }
+.ga-related { margin-top: 18px; color: var(--dc-dim); line-height: 1.7; }
+.b-tlink { margin-top: 22px; }
+
+/* 7 — what happens after you get in touch (ground) ------------------------------------------------------------------- */
+.px-h .ga-proc .b-h2 { max-width: 16ch; }
+.ga-steps { margin-top: clamp(32px, 4vw, 56px); display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
+.ga-steps li { position: relative; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.ga-step-ico { display: grid; place-items: center; width: 52px; height: 52px; border: 3px solid var(--dc-ink); background: var(--dc-paper); color: var(--dc-ink); }
+.ga-steps li:first-child .ga-step-ico { background: var(--dc-tang); }
+.ga-steps li:not(:last-child)::after { content: ""; position: absolute; top: 24px; left: 62px; width: calc(100% - 46px); border-top: 3px solid var(--dc-ink); }
+.ga-step-t { margin-top: 6px; font: 800 1.05rem/1.25 var(--dc-f-title); }
+.ga-step-d { font-size: var(--dc-t-note); line-height: 1.45; color: var(--dc-dim); }
+.ga-proc-line { margin-top: clamp(28px, 3.5vw, 44px); max-width: 52ch; padding-left: 16px; border-left: 4px solid var(--dc-tang-display); font-weight: 700; line-height: 1.45; }
+
+/* 8 — the close (the shared tangerine close): a short headline, one invitation, two buttons ----------------------------- */
+.px-h .b-close.ga-next { padding-block: clamp(48px, 5.5vw, 80px); }
+.px-h:has(.ga-next) .b-close-in > div { container-type: inline-size; min-width: 0; }
+.px-h:has(.ga-next) .b-close .b-h2 { font-size: min(clamp(2.2rem, 1.2rem + 3.6vw, 4.4rem), 14cqi); max-width: 16ch; }
+.ga-prompt { margin-top: 22px; max-width: 46ch; line-height: 1.45; color: var(--dc-ink); font-size: var(--dc-t-lede); }
+
+
 @media (max-width: 1023px) {
-  .ga-groups { grid-template-columns: minmax(0, 1fr); }
-  .ga-group, .ga-group.is-acct { border: 2px solid var(--dc-on-ink-dim); border-top: 0; }
-  .ga-group.is-acct { border-top: 2px solid var(--dc-on-ink-dim); }
-  .ga-vtear { top: auto; bottom: -1px; left: -2px; right: -2px; width: auto; height: 2px; border-left: 0; border-top: 2px dashed var(--dc-tang); }
-  .ga-vtear span { transform: translate(-50%, -50%); }
+  .ga-head { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  .ga-fx { grid-template-columns: minmax(0, 1fr); }
+  .ga-fx .px-tabpanel { grid-column: 1; grid-row: 2; margin-top: 24px; }
+  .ga-jy-tabs .px-tablist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ga-frame { display: none; }
+  .ga-nodes { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .ga-node:not(:last-child)::after { top: 100%; left: 30px; width: 0; height: 36px; border-top: 0; border-left: 3px solid var(--dc-tang-display); }
+  .ga-node:nth-child(2)::after { border-left-style: dashed; }
+  .ga-node:not(:last-child)::before { display: none; }
+  .ga-det-g { grid-template-columns: minmax(0, 1fr); }
+  .ga-pledges { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ga-find { grid-template-columns: minmax(0, 1fr); }
+  .ga-find .px-tabpanel { grid-column: 1; grid-row: 2; margin-top: 20px; }
+  .ga-rep-notes { grid-template-columns: minmax(0, 1fr); }
+  .ga-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 28px; }
+  .ga-steps li:nth-child(3)::after { display: none; }
 }
 @media (max-width: 767px) {
-  .ga-bd-g, .ga-meas-g { grid-template-columns: minmax(0, 1fr); }
-  .ga-ticks { grid-template-columns: minmax(0, 1fr); gap: 22px; padding-left: 0; }
-  .ga-ticks::before { content: none; }
-  .ga-ticks li:not(:last-child)::after { content: ""; position: absolute; left: 11px; top: 24px; bottom: -22px; border-left: 3px solid var(--dc-on-ink-dim); }
-  .ga-ticks li { grid-template-columns: 24px minmax(0, 1fr); column-gap: 14px; }
-  .ga-ticks li > :not(.ga-tick-mk) { grid-column: 2; }
-  .ga-ticks .ga-tick-mk { grid-row: 1; }
   .ga-rc { transform: none; box-shadow: 6px 6px 0 var(--dc-tang); }
+  .ga-fx .px-tablist { grid-template-columns: minmax(0, 1fr); }
+  .ga-jy-st { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .ga-jy-st li { grid-template-columns: 40px minmax(0, 1fr); column-gap: 14px; align-items: center; }
+  .ga-jy-st li:not(:last-child)::after { top: 42px; left: 18px; width: 0; height: 16px; border-top: 0; border-left: 3px solid var(--dc-on-ink-dim); }
+  .ga-jy-st li.is-done::after { border-left-color: var(--dc-tang); }
+  .ga-jy-read { grid-template-columns: minmax(0, 1fr); }
+  .ga-pledges { grid-template-columns: minmax(0, 1fr); }
+  .ga-steps { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+  .ga-steps li { grid-template-columns: 52px minmax(0, 1fr); column-gap: 16px; padding-bottom: 20px; }
+  .ga-steps li > p { grid-column: 2; margin-top: 0; }
+  .ga-step-ico { grid-row: 1 / span 2; }
+  .ga-steps li:not(:last-child)::after { top: 56px; bottom: 4px; left: 24px; width: 0; height: auto; border-top: 0; border-left: 3px solid var(--dc-ink); }
+  .ga-steps li:nth-child(3)::after { display: block; }
+}
+
+/* G1.3c — guided demonstrations ------------------------------------------------------------------------------------------
+   Everything that moves, or that only exists while something moves, is inside the no-preference block: with reduced motion the
+   page is exactly the static G1.3a page and no demonstration ever starts. The coordinator writes data-demo="running" and
+   data-demo-step on the region while it runs, and removes both when it ends or is stopped (the resting look is the markup). */
+.ga-demo { position: relative; --ga-hide: scaleX(0); }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Equal-height suitability panels: all six share one grid cell, so autoplay cannot shift the page (CLS) at any width. Hidden panels use
+     visibility, so they stay out of the accessibility tree and the tab order, exactly like display: none. (Reduced motion has no
+     autoplay, so it keeps the G1.3a behaviour.) */
+  html.px-js .ga-fx .px-tabpanel.is-off { display: block; visibility: hidden; }
+
+  /* Pause (WCAG 2.2.2, alongside the 5 s cap on every demonstration): in the page and in the accessibility tree while a demonstration
+     runs, but invisible to sighted pointer users. It is the first tab stop in its region and appears, clearly, only when it has keyboard
+     focus: a 44px chip hung above the region at the right (top-anchored, so scrolling it into view shows all of it), on top of whatever is there
+     for as long as it is focused. */
+  .ga-pause { position: absolute; right: 0; top: -52px; z-index: 5; width: 1px; height: 1px; margin: 0; padding: 0; overflow: hidden; border: 0; clip-path: inset(50%); white-space: nowrap; }
+  .ga-pause:focus { width: auto; height: auto; min-height: 44px; padding: 0 16px; overflow: visible; clip-path: none; display: inline-flex; align-items: center; gap: 8px; border: 2px solid var(--dc-ink); background: var(--dc-paper); color: var(--dc-ink); cursor: pointer; font: 700 .8125rem/1 var(--dc-f-body); letter-spacing: .04em; text-transform: uppercase; outline: 3px solid var(--dc-ink); outline-offset: 3px; }
+  .b-ink .ga-pause:focus { border-color: var(--dc-on-ink); background: var(--dc-on-ink); color: var(--dc-ink); outline-color: var(--dc-on-ink); }
+
+  /* The one-time nudge: after the journey and reporting demonstrations, each remaining button is outlined for a moment, so it is
+     clear they can be selected. */
+  html.px-js .px-tab.is-nudge { outline: 3px solid var(--dc-tang-display); outline-offset: 3px; }
+  html.px-js .ga-jy-tabs .px-tab.is-nudge { outline-color: var(--dc-tang); }
+
+  /* Journey: the stations light one at a time and the connectors draw; the readouts are outlined when the outcome arrives. Only icons and connectors dim
+     (never text), so everything stays readable and at full contrast while it runs. */
+  .ga-jy-tabs[data-demo="running"] .ga-jy-node { transition: opacity .35s ease; }
+  .ga-jy-tabs[data-demo="running"] .ga-jy-st li:not(:last-child)::after { transform-origin: left center; transition: transform .5s ease; }
+
+  .ga-jy-tabs[data-demo="running"][data-demo-step="0"] .ga-jy-st li:nth-child(n+2) .ga-jy-node { opacity: .4; }
+  .ga-jy-tabs[data-demo="running"][data-demo-step="0"] .ga-jy-st li:nth-child(n+1)::after { transform: var(--ga-hide); }
+  .ga-jy-tabs[data-demo="running"][data-demo-step="1"] .ga-jy-st li:nth-child(n+3) .ga-jy-node { opacity: .4; }
+  .ga-jy-tabs[data-demo="running"][data-demo-step="1"] .ga-jy-st li:nth-child(n+2)::after { transform: var(--ga-hide); }
+  .ga-jy-tabs[data-demo="running"][data-demo-step="2"] .ga-jy-st li:nth-child(n+4) .ga-jy-node { opacity: .4; }
+  .ga-jy-tabs[data-demo="running"][data-demo-step="2"] .ga-jy-st li:nth-child(n+3)::after { transform: var(--ga-hide); }
+  .ga-jy-tabs[data-demo="running"][data-demo-step="3"] .ga-jy-st li:nth-child(n+5) .ga-jy-node { opacity: .4; }
+  .ga-jy-tabs[data-demo="running"][data-demo-step="3"] .ga-jy-st li:nth-child(n+4)::after { transform: var(--ga-hide); }
+  .ga-jy-tabs[data-demo="running"] .ga-jy-box { transition: border-color .45s ease; }
+  .ga-jy-tabs[data-demo="running"][data-demo-step="3"] .ga-jy-box { border-color: var(--dc-tang); }
+
+  /* Reporting: the finding is selected first, then the action card lifts to its shadow. Transform and shadow only: nothing that holds text is ever
+     faded, so its contrast never drops (it was 1:1 at the bottom of the earlier opacity fade). */
+  .ga-find[data-demo="running"] .ga-dec { transition: transform .4s ease, box-shadow .4s ease; }
+  .ga-find[data-demo="running"][data-demo-step="0"] .ga-dec { transform: translate(8px, 8px); box-shadow: 0 0 0 var(--dc-tang); }
+
+  /* Onboarding: six steps in turn. The finished steps stay lit, the current one is emphasised, the rest wait; connectors draw. */
+  .ga-demo[data-demo="running"] .ga-step-ico { transition: opacity .35s ease, background-color .35s ease; }
+  .ga-demo[data-demo="running"] .ga-step-d { transition: color .35s ease; }
+  .ga-demo[data-demo="running"] .ga-steps li:not(:last-child)::after { transform-origin: left center; transition: transform .5s ease; }
+  .ga-demo[data-demo="running"][data-demo-step="0"] .ga-steps li:nth-child(n+2) .ga-step-ico { opacity: .4; }
+  .ga-demo[data-demo="running"][data-demo-step="0"] .ga-steps li:nth-child(n+1)::after { transform: var(--ga-hide); }
+  .ga-demo[data-demo="running"][data-demo-step="0"] .ga-steps li:nth-child(-n+1) .ga-step-ico { background: var(--dc-tang); }
+  .ga-demo[data-demo="running"][data-demo-step="0"] .ga-steps li:nth-child(1) .ga-step-d { color: var(--dc-ink); }
+  .ga-demo[data-demo="running"][data-demo-step="1"] .ga-steps li:nth-child(n+3) .ga-step-ico { opacity: .4; }
+  .ga-demo[data-demo="running"][data-demo-step="1"] .ga-steps li:nth-child(n+2)::after { transform: var(--ga-hide); }
+  .ga-demo[data-demo="running"][data-demo-step="1"] .ga-steps li:nth-child(-n+2) .ga-step-ico { background: var(--dc-tang); }
+  .ga-demo[data-demo="running"][data-demo-step="1"] .ga-steps li:nth-child(2) .ga-step-d { color: var(--dc-ink); }
+  .ga-demo[data-demo="running"][data-demo-step="2"] .ga-steps li:nth-child(n+4) .ga-step-ico { opacity: .4; }
+  .ga-demo[data-demo="running"][data-demo-step="2"] .ga-steps li:nth-child(n+3)::after { transform: var(--ga-hide); }
+  .ga-demo[data-demo="running"][data-demo-step="2"] .ga-steps li:nth-child(-n+3) .ga-step-ico { background: var(--dc-tang); }
+  .ga-demo[data-demo="running"][data-demo-step="2"] .ga-steps li:nth-child(3) .ga-step-d { color: var(--dc-ink); }
+  .ga-demo[data-demo="running"][data-demo-step="3"] .ga-steps li:nth-child(n+5) .ga-step-ico { opacity: .4; }
+  .ga-demo[data-demo="running"][data-demo-step="3"] .ga-steps li:nth-child(n+4)::after { transform: var(--ga-hide); }
+  .ga-demo[data-demo="running"][data-demo-step="3"] .ga-steps li:nth-child(-n+4) .ga-step-ico { background: var(--dc-tang); }
+  .ga-demo[data-demo="running"][data-demo-step="3"] .ga-steps li:nth-child(4) .ga-step-d { color: var(--dc-ink); }
+  .ga-demo[data-demo="running"][data-demo-step="4"] .ga-steps li:nth-child(n+6) .ga-step-ico { opacity: .4; }
+  .ga-demo[data-demo="running"][data-demo-step="4"] .ga-steps li:nth-child(n+5)::after { transform: var(--ga-hide); }
+  .ga-demo[data-demo="running"][data-demo-step="4"] .ga-steps li:nth-child(-n+5) .ga-step-ico { background: var(--dc-tang); }
+  .ga-demo[data-demo="running"][data-demo-step="4"] .ga-steps li:nth-child(5) .ga-step-d { color: var(--dc-ink); }
+  .ga-demo[data-demo="running"][data-demo-step="5"] .ga-steps li:nth-child(-n+6) .ga-step-ico { background: var(--dc-tang); }
+  .ga-demo[data-demo="running"][data-demo-step="5"] .ga-steps li:nth-child(6) .ga-step-d { color: var(--dc-ink); }
+  /* below 768px the connectors are vertical: they draw downwards */
+  @media (max-width: 767px) {
+    .ga-demo { --ga-hide: scaleY(0); }
+    .ga-demo[data-demo="running"] .ga-steps li:not(:last-child)::after, .ga-jy-tabs[data-demo="running"] .ga-jy-st li:not(:last-child)::after { transform-origin: center top; }
+  }
 }

@@ -70,6 +70,13 @@ function setState(e: Entry, s: DemoState) {
   e.spec.onState?.(s);
 }
 
+/** Removes the region listeners exactly once. */
+function detach(e: Entry) {
+  const d = e.detach;
+  e.detach = () => {};
+  d();
+}
+
 function clearTimers(e: Entry) {
   if (e.dwell) clearTimeout(e.dwell);
   if (e.step) clearTimeout(e.step);
@@ -83,7 +90,7 @@ function finish(e: Entry, rest: boolean) {
   clearTimers(e);
   e.io?.disconnect();
   e.io = null;
-  e.detach();
+  detach(e);
   if (rest && wasRunning) e.spec.onRest();
   setState(e, 'done');
   if (active === e) {
@@ -223,7 +230,11 @@ export function registerDemo(spec: DemoSpec): () => void {
 
   // Manual interaction anywhere in the region cancels the demonstration, before or during playback.
   // A tap is a click; touchstart is deliberately not used, so scrolling over the region does not cancel it.
-  const stop = () => finish(e, false);
+  // The Pause control sits inside the region: reaching or pressing it must not count as "manual interaction".
+  const stop = (ev: Event) => {
+    if ((ev.target as Element | null)?.closest?.('[data-demo-pause]')) return;
+    finish(e, false);
+  };
   const el = spec.el;
   el.addEventListener('click', stop);
   el.addEventListener('keydown', stop);
@@ -241,7 +252,7 @@ export function registerDemo(spec: DemoSpec): () => void {
     clearTimers(e);
     e.io?.disconnect();
     e.io = null;
-    e.detach();
+    detach(e);
     if (active === e) {
       active = null;
       syncDocument();
@@ -256,4 +267,19 @@ export function registerDemo(spec: DemoSpec): () => void {
 export function stopDemo(id: string) {
   const e = entries.get(id);
   if (e && e.state !== 'done') finish(e, false);
+}
+
+/**
+ * Puts focus somewhere sensible when the Pause control, which had focus, disappears (the demonstration ended or was
+ * paused): the selected tab or the checked radio of the region, else the region itself.
+ */
+export function restoreFocus(root: HTMLElement) {
+  const a = document.activeElement;
+  if (!a || !(a as HTMLElement).hasAttribute?.('data-demo-pause')) return;
+  const target = root.querySelector<HTMLElement>('[role="tab"][aria-selected="true"], input[type="radio"]:checked');
+  if (target) target.focus();
+  else {
+    if (!root.hasAttribute('tabindex')) root.setAttribute('tabindex', '-1');
+    root.focus();
+  }
 }

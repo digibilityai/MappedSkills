@@ -309,4 +309,10 @@ export const GA_COPY = {
     primary: 'Tell us about your Google Ads',
     secondary: 'Book a call',
   },
+
+  /* The guided demonstrations (G1.3c): the one control they add. Not page copy; owner-approved micro-copy (decision 1). */
+  demo: {
+    pause: 'Pause',
+    pauseAria: 'Pause the demonstration',
+  },
 };

@@ -271,3 +271,88 @@ html:not(.px-js) .ga-find .px-tabpanel { grid-column: 1 / -1; grid-row: auto; ma
   .ga-steps li:not(:last-child)::after { top: 56px; bottom: 4px; left: 24px; width: 0; height: auto; border-top: 0; border-left: 3px solid var(--dc-ink); }
   .ga-steps li:nth-child(3)::after { display: block; }
 }
+
+/* G1.3c — guided demonstrations ------------------------------------------------------------------------------------------
+   Everything that moves, or that only exists while something moves, is inside the no-preference block: with reduced motion the
+   page is exactly the static G1.3a page and no demonstration ever starts. The coordinator writes data-demo="running" and
+   data-demo-step on the region while it runs, and removes both when it ends or is stopped (the resting look is the markup). */
+.ga-demo { position: relative; --ga-hide: scaleX(0); }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Equal-height suitability panels: all six share one grid cell, so autoplay cannot shift the page (CLS) at any width. Hidden panels use
+     visibility, so they stay out of the accessibility tree and the tab order, exactly like display: none. (Reduced motion has no
+     autoplay, so it keeps the G1.3a behaviour.) */
+  html.px-js .ga-fx .px-tabpanel.is-off { display: block; visibility: hidden; }
+
+  /* Pause: hangs above its region at the right, so showing it moves nothing. 44px high; on ink it is a light chip. */
+  .ga-pause { position: absolute; z-index: 5; right: 0; bottom: calc(100% + 8px); display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 2px solid var(--dc-ink); background: var(--dc-paper); color: var(--dc-ink); cursor: pointer; font: 700 .8125rem/1 var(--dc-f-body); letter-spacing: .04em; text-transform: uppercase; }
+  .ga-pause:hover { background: var(--dc-ink); color: var(--dc-on-ink); }
+  .ga-pause:focus-visible { outline: 3px solid var(--dc-ink); outline-offset: 3px; }
+  .b-ink .ga-pause { border-color: var(--dc-on-ink); background: var(--dc-on-ink); color: var(--dc-ink); }
+  .b-ink .ga-pause:hover { background: var(--dc-tang); border-color: var(--dc-tang); }
+  .b-ink .ga-pause:focus-visible { outline-color: var(--dc-on-ink); }
+
+  /* Room for the Pause chip above each stepper, so it never covers text: slightly more air above the steppers for visitors who get
+     the demonstrations (the static page for everyone else is unchanged). */
+  html.px-js .ga-fx { margin-top: max(56px, clamp(28px, 3.5vw, 48px)); }
+  html.px-js .ga-jy-tabs { margin-top: 56px; }
+  html.px-js .ga-find-k { margin-top: 56px; }
+  html.px-js .ga-steps { margin-top: max(56px, clamp(32px, 4vw, 56px)); }
+
+  /* The one-time nudge: after the journey and reporting demonstrations, each remaining button is outlined for a moment, so it is
+     clear they can be selected. */
+  html.px-js .px-tab.is-nudge { outline: 3px solid var(--dc-tang-display); outline-offset: 3px; }
+  html.px-js .ga-jy-tabs .px-tab.is-nudge { outline-color: var(--dc-tang); }
+
+  /* Journey: the stations light one at a time and the connectors draw; the readouts are outlined when the outcome arrives. Only icons and connectors dim
+     (never text), so everything stays readable and at full contrast while it runs. */
+  .ga-jy-tabs[data-demo="running"] .ga-jy-node { transition: opacity .35s ease; }
+  .ga-jy-tabs[data-demo="running"] .ga-jy-st li:not(:last-child)::after { transform-origin: left center; transition: transform .5s ease; }
+
+  .ga-jy-tabs[data-demo="running"][data-demo-step="0"] .ga-jy-st li:nth-child(n+2) .ga-jy-node { opacity: .4; }
+  .ga-jy-tabs[data-demo="running"][data-demo-step="0"] .ga-jy-st li:nth-child(n+1)::after { transform: var(--ga-hide); }
+  .ga-jy-tabs[data-demo="running"][data-demo-step="1"] .ga-jy-st li:nth-child(n+3) .ga-jy-node { opacity: .4; }
+  .ga-jy-tabs[data-demo="running"][data-demo-step="1"] .ga-jy-st li:nth-child(n+2)::after { transform: var(--ga-hide); }
+  .ga-jy-tabs[data-demo="running"][data-demo-step="2"] .ga-jy-st li:nth-child(n+4) .ga-jy-node { opacity: .4; }
+  .ga-jy-tabs[data-demo="running"][data-demo-step="2"] .ga-jy-st li:nth-child(n+3)::after { transform: var(--ga-hide); }
+  .ga-jy-tabs[data-demo="running"][data-demo-step="3"] .ga-jy-st li:nth-child(n+5) .ga-jy-node { opacity: .4; }
+  .ga-jy-tabs[data-demo="running"][data-demo-step="3"] .ga-jy-st li:nth-child(n+4)::after { transform: var(--ga-hide); }
+  .ga-jy-tabs[data-demo="running"] .ga-jy-box { transition: border-color .45s ease; }
+  .ga-jy-tabs[data-demo="running"][data-demo-step="3"] .ga-jy-box { border-color: var(--dc-tang); }
+
+  /* Reporting: the finding is selected first, then the action it leads to arrives. */
+  .ga-find[data-demo="running"] .ga-dec { transition: opacity .5s ease; }
+  .ga-find[data-demo="running"][data-demo-step="0"] .ga-dec { opacity: 0; }
+
+  /* Onboarding: six steps in turn. The finished steps stay lit, the current one is emphasised, the rest wait; connectors draw. */
+  .ga-demo[data-demo="running"] .ga-step-ico { transition: opacity .35s ease, background-color .35s ease; }
+  .ga-demo[data-demo="running"] .ga-step-d { transition: color .35s ease; }
+  .ga-demo[data-demo="running"] .ga-steps li:not(:last-child)::after { transform-origin: left center; transition: transform .5s ease; }
+  .ga-demo[data-demo="running"][data-demo-step="0"] .ga-steps li:nth-child(n+2) .ga-step-ico { opacity: .4; }
+  .ga-demo[data-demo="running"][data-demo-step="0"] .ga-steps li:nth-child(n+1)::after { transform: var(--ga-hide); }
+  .ga-demo[data-demo="running"][data-demo-step="0"] .ga-steps li:nth-child(-n+1) .ga-step-ico { background: var(--dc-tang); }
+  .ga-demo[data-demo="running"][data-demo-step="0"] .ga-steps li:nth-child(1) .ga-step-d { color: var(--dc-ink); }
+  .ga-demo[data-demo="running"][data-demo-step="1"] .ga-steps li:nth-child(n+3) .ga-step-ico { opacity: .4; }
+  .ga-demo[data-demo="running"][data-demo-step="1"] .ga-steps li:nth-child(n+2)::after { transform: var(--ga-hide); }
+  .ga-demo[data-demo="running"][data-demo-step="1"] .ga-steps li:nth-child(-n+2) .ga-step-ico { background: var(--dc-tang); }
+  .ga-demo[data-demo="running"][data-demo-step="1"] .ga-steps li:nth-child(2) .ga-step-d { color: var(--dc-ink); }
+  .ga-demo[data-demo="running"][data-demo-step="2"] .ga-steps li:nth-child(n+4) .ga-step-ico { opacity: .4; }
+  .ga-demo[data-demo="running"][data-demo-step="2"] .ga-steps li:nth-child(n+3)::after { transform: var(--ga-hide); }
+  .ga-demo[data-demo="running"][data-demo-step="2"] .ga-steps li:nth-child(-n+3) .ga-step-ico { background: var(--dc-tang); }
+  .ga-demo[data-demo="running"][data-demo-step="2"] .ga-steps li:nth-child(3) .ga-step-d { color: var(--dc-ink); }
+  .ga-demo[data-demo="running"][data-demo-step="3"] .ga-steps li:nth-child(n+5) .ga-step-ico { opacity: .4; }
+  .ga-demo[data-demo="running"][data-demo-step="3"] .ga-steps li:nth-child(n+4)::after { transform: var(--ga-hide); }
+  .ga-demo[data-demo="running"][data-demo-step="3"] .ga-steps li:nth-child(-n+4) .ga-step-ico { background: var(--dc-tang); }
+  .ga-demo[data-demo="running"][data-demo-step="3"] .ga-steps li:nth-child(4) .ga-step-d { color: var(--dc-ink); }
+  .ga-demo[data-demo="running"][data-demo-step="4"] .ga-steps li:nth-child(n+6) .ga-step-ico { opacity: .4; }
+  .ga-demo[data-demo="running"][data-demo-step="4"] .ga-steps li:nth-child(n+5)::after { transform: var(--ga-hide); }
+  .ga-demo[data-demo="running"][data-demo-step="4"] .ga-steps li:nth-child(-n+5) .ga-step-ico { background: var(--dc-tang); }
+  .ga-demo[data-demo="running"][data-demo-step="4"] .ga-steps li:nth-child(5) .ga-step-d { color: var(--dc-ink); }
+  .ga-demo[data-demo="running"][data-demo-step="5"] .ga-steps li:nth-child(-n+6) .ga-step-ico { background: var(--dc-tang); }
+  .ga-demo[data-demo="running"][data-demo-step="5"] .ga-steps li:nth-child(6) .ga-step-d { color: var(--dc-ink); }
+  /* below 768px the connectors are vertical: they draw downwards */
+  @media (max-width: 767px) {
+    .ga-demo { --ga-hide: scaleY(0); }
+    .ga-demo[data-demo="running"] .ga-steps li:not(:last-child)::after, .ga-jy-tabs[data-demo="running"] .ga-jy-st li:not(:last-child)::after { transform-origin: center top; }
+  }
+}

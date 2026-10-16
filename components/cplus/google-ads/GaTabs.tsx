@@ -1,20 +1,23 @@
 'use client';
 
 import { useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
-import { registerDemo, stopDemo, type DemoState } from './demo';
+import { registerDemo, restoreFocus, type DemoState } from './demo';
+import { DemoPause } from './DemoPause';
 
 /**
  * The Google Ads page's own tabs: the shared `Tabs` (components/cplus/Interactive.tsx), copied so that the shared
  * component, which /conversion-optimization also uses, stays untouched. The markup, ids, classes and keyboard map are
- * identical. The only addition is the optional `demo`, which lets the demonstration coordinator select tabs in turn.
- * Without `demo` (every use in this commit) it registers nothing: no observer, timer or listener.
+ * identical. The addition is the optional `demo`, which lets the demonstration coordinator drive the real selection:
+ * each step selects a tab (and, on a nudge step, outlines one other tab for a moment). While it runs the root carries
+ * `data-demo="running"` and `data-demo-step`, which the stylesheet uses for the section's own visuals. Without `demo`
+ * it registers nothing.
  */
 export type GaTabsDemo = {
   id: string;
   order: number;
-  /** Tab ids in the order they are shown, with how long each stays selected (ms). */
-  steps: { tab: string; hold: number }[];
-  /** Tab selected if the demonstration is cut short (left the screen, tab hidden). */
+  /** Selects `tab` and holds `hold` ms; a `nudge` step outlines that tab for `hold` ms without selecting it. */
+  steps: ({ tab: string; hold: number } | { nudge: string; hold: number })[];
+  /** Tab selected when the demonstration ends on its own or is cut short. */
   rest: string;
   pause: { text: string; aria: string };
 };
@@ -31,6 +34,7 @@ export function GaTabs({
   demo?: GaTabsDemo;
 }) {
   const [active, setActive] = useState<string | null>(null);
+  const [nudge, setNudge] = useState<string | null>(null);
   const [state, setState] = useState<DemoState>('idle');
   const base = useId();
   const root = useRef<HTMLDivElement | null>(null);
@@ -38,16 +42,46 @@ export function GaTabs({
   const cur = active ?? items[0].id;
 
   useEffect(() => {
-    if (!demo || !root.current) return;
-    return registerDemo({
+    const el = root.current;
+    if (!demo || !el) return;
+    const clear = () => {
+      delete el.dataset.demo;
+      delete el.dataset.demoStep;
+      setNudge(null);
+    };
+    const unregister = registerDemo({
       id: demo.id,
       order: demo.order,
-      el: root.current,
+      el,
       steps: demo.steps.map((s) => ({ hold: s.hold })),
-      onStep: (i) => setActive(demo.steps[i].tab),
-      onRest: () => setActive(demo.rest),
-      onState: setState,
+      onStep: (i) => {
+        const s = demo.steps[i];
+        if ('nudge' in s) {
+          setNudge(s.nudge);
+          return;
+        }
+        setNudge(null);
+        el.dataset.demoStep = String(i);
+        setActive(s.tab);
+      },
+      onRest: () => {
+        setActive(demo.rest);
+        clear();
+      },
+      onState: (s) => {
+        if (s === 'running') el.dataset.demo = 'running';
+        else {
+          clear();
+          restoreFocus(el);
+        }
+        setState(s);
+      },
     });
+    return () => {
+      unregister();
+      delete el.dataset.demo;
+      delete el.dataset.demoStep;
+    };
     // The demonstration is configured once per page load.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -67,11 +101,7 @@ export function GaTabs({
   };
   return (
     <div className={className} data-tabs="" ref={root}>
-      {demo && state === 'running' ? (
-        <button type="button" className="ga-pause" aria-label={demo.pause.aria} onClick={() => stopDemo(demo.id)}>
-          {demo.pause.text}
-        </button>
-      ) : null}
+      {demo && state === 'running' ? <DemoPause id={demo.id} text={demo.pause.text} aria={demo.pause.aria} /> : null}
       <div role="tablist" aria-label={label} className="px-tablist">
         {items.map((it, i) => (
           <button
@@ -85,7 +115,7 @@ export function GaTabs({
             aria-selected={cur === it.id}
             aria-controls={`${base}-p-${it.id}`}
             tabIndex={cur === it.id ? 0 : -1}
-            className="px-tab"
+            className={nudge === it.id ? 'px-tab is-nudge' : 'px-tab'}
             onClick={() => setActive(it.id)}
             onKeyDown={(e) => onKey(e, i)}
           >

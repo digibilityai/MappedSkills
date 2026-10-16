@@ -5,11 +5,12 @@ import './google-ads.css';
 import { Breadcrumb } from '../Breadcrumb';
 import { Icon } from '../Icons';
 import { GaTabs } from './GaTabs';
+import { DemoRegion } from './DemoRegion';
 
 /**
  * C+ Google Ads (/google-ads), G1.3a (DEC-053 and the owner-approved G1.3 scope and decisions): the static composition of the page,
- * built from `copy.ts`. Sections 2 and 7 are unchanged from G1.2. Nothing here moves (motion is a later stage), and nothing is a client component: the four selectors
- * are the existing WAI-ARIA `Tabs` (every panel is shown, stacked, when JavaScript is off) and a native radio group.
+ * built from `copy.ts`. Sections 2 and 7 are unchanged from G1.2. The selectors are the page's own WAI-ARIA `GaTabs` (every panel is shown, stacked, when JavaScript is off) and a native radio group;
+ * G1.3c adds five guided demonstrations over them (see `T` below).
  * Page metadata and structured data live in `page.tsx` and are not touched.
  *
  * The boundary device, used identically on every graphic: a TICKED box, or a SOLID frame, is part of the service (core
@@ -17,6 +18,22 @@ import { GaTabs } from './GaTabs';
  * is work that is agreed separately, and nothing else is ever drawn dashed. A plain empty box or a hatched swatch is
  * neutral (not recorded, not confirmed, or a placeholder).
  */
+
+/* The guided demonstrations (G1.3c, owner-approved). Page order is the play order. Each plays once per page load, over the real
+   selection state, stops on any manual interaction, and has a Pause control while it runs. Timings are in ms. */
+const PAUSE = { text: S.demo.pause, aria: S.demo.pauseAria };
+const NUDGE = 300;
+const T = {
+  hero: 1200, // each of the four stages
+  factor: 3000, // each of the first two factors
+  station: 1000, // each journey station
+  outcome: 2000, // the hold on the outcome, which carries the readouts and the case text
+  find: 800, // the finding on its own
+  action: 3000, // then the action
+  step: 900, // each onboarding step (the last holds 600 longer)
+  stepLast: 1500,
+};
+const nudges = (ids: string[]) => ids.map((nudge) => ({ nudge, hold: NUDGE }));
 
 const Tick = ({ on = false, sep = false }: { on?: boolean; sep?: boolean }) => (
   <span className={'ga-tick' + (on ? ' is-on' : '') + (sep ? ' is-sep' : '')} aria-hidden="true" />
@@ -62,7 +79,16 @@ function Hero() {
         {/* The receipt follows one search. The four stage controls sit beside it (above it on narrower screens) and are a
             native radio group: the chosen stage lights the receipt lines that belong to it (CSS `:has()`), so it works
             with scripts off and with a keyboard. */}
-        <figure className="ga-fig ga-follow">
+        <DemoRegion
+          as="figure"
+          className="ga-fig ga-follow ga-demo"
+          id="ga-demo-hero"
+          order={1}
+          radios="ga-stage"
+          restStep={0}
+          steps={H.stages.map(() => ({ hold: T.hero }))}
+          pause={PAUSE}
+        >
           <div className="ga-fig-row">
             <fieldset className="ga-st">
               <legend className="ga-label">{H.stagesLabel}</legend>
@@ -120,7 +146,7 @@ function Hero() {
             </div>
           </div>
           <figcaption className="px-cap">{R.cap}</figcaption>
-        </figure>
+        </DemoRegion>
       </div>
     </section>
   );
@@ -135,8 +161,18 @@ function Factors() {
         <Heading id="ga-h-fac" h={F.h} />
         <p className="b-lede ga-fac-lede">{F.lede}</p>
         <GaTabs
-          className="ga-fx"
+          className="ga-fx ga-demo"
           label={F.tabsLabel}
+          demo={{
+            id: 'ga-demo-factors',
+            order: 2,
+            steps: [
+              { tab: F.items[0].key, hold: T.factor },
+              { tab: F.items[1].key, hold: T.factor },
+            ],
+            rest: F.items[1].key,
+            pause: PAUSE,
+          }}
           items={F.items.map((it) => ({
             id: it.key,
             tab: (
@@ -267,8 +303,21 @@ function Path() {
           <p className="ga-path-lede">{P.lede}</p>
         </div>
         <GaTabs
-          className="ga-jy-tabs"
+          className="ga-jy-tabs ga-demo"
           label={P.tabsLabel}
+          demo={{
+            id: 'ga-demo-journey',
+            order: 3,
+            steps: [
+              { tab: P.cases[0].key, hold: T.station },
+              { tab: P.cases[0].key, hold: T.station },
+              { tab: P.cases[0].key, hold: T.station },
+              { tab: P.cases[0].key, hold: T.outcome },
+              ...nudges(P.cases.slice(1).map((c) => c.key)),
+            ],
+            rest: P.cases[0].key,
+            pause: PAUSE,
+          }}
           items={P.cases.map((c) => ({
             id: c.key,
             tab: (
@@ -399,8 +448,19 @@ function Reporting() {
         <p className="ga-rep-covers">{G.covers}</p>
         <p className="ga-label ga-find-k">{G.findingsK}</p>
         <GaTabs
-          className="ga-find"
+          className="ga-find ga-demo"
           label={G.tabsLabel}
+          demo={{
+            id: 'ga-demo-reporting',
+            order: 4,
+            steps: [
+              { tab: G.findings[0].key, hold: T.find },
+              { tab: G.findings[0].key, hold: T.action },
+              ...nudges(G.findings.slice(1).map((f) => f.key)),
+            ],
+            rest: G.findings[0].key,
+            pause: PAUSE,
+          }}
           items={G.findings.map((f) => ({
             id: f.key,
             tab: <span className="ga-find-tab">{f.find}</span>,
@@ -448,6 +508,13 @@ function Process() {
     <section className="b-sec ga-proc" aria-labelledby="ga-h-proc">
       <div className="px-wrap">
         <Heading id="ga-h-proc" h={P.h} />
+        <DemoRegion
+          className="ga-demo"
+          id="ga-demo-process"
+          order={5}
+          steps={P.steps.map((_, i) => ({ hold: i === P.steps.length - 1 ? T.stepLast : T.step }))}
+          pause={PAUSE}
+        >
         <ol className="ga-steps">
           {P.steps.map((s) => (
             <li key={s.t}>
@@ -459,6 +526,7 @@ function Process() {
             </li>
           ))}
         </ol>
+        </DemoRegion>
         <p className="ga-proc-line">{P.line}</p>
       </div>
     </section>

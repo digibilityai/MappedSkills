@@ -34,7 +34,8 @@ const heading = (h) => `${h.a} ${h.b}`;
 test('the eight approved sections exist, in order; no section carries an unapproved kicker', () => {
   const order = ['hero', 'factors', 'path', 'scope', 'answer', 'reporting', 'process', 'close'];
   assert.deepStrictEqual(GA.blocks, order);
-  assert.deepStrictEqual(Object.keys(GA).sort(), ['blocks', ...order].sort());
+  assert.deepStrictEqual(Object.keys(GA).sort(), ['blocks', 'demo', ...order].sort());
+  assert.deepStrictEqual(GA.demo, { pause: 'Pause', pauseAria: 'Pause the demonstration' });
   let kickers = 0;
   (function walk(v) {
     if (Array.isArray(v)) v.forEach(walk);
@@ -337,11 +338,25 @@ const demoSrc = read('components/cplus/google-ads/demo.ts');
 const gaTabsSrc = read('components/cplus/google-ads/GaTabs.tsx');
 const regionSrc = read('components/cplus/google-ads/DemoRegion.tsx');
 
-test('the page configures no demonstration yet (no demo prop, no DemoRegion), and no section autoplays', () => {
-  assert.ok(!/DemoRegion/.test(body), 'GoogleAdsBody does not use DemoRegion');
-  assert.ok(!/\bdemo\s*=/.test(body), 'no GaTabs receives a demo');
-  assert.ok(/import \{ GaTabs \} from '\.\/GaTabs'/.test(body) && !/Interactive/.test(body.replace(/\/\*[\s\S]*?\*\//g, '')), 'the page uses the local GaTabs, not the shared Tabs');
-  assert.ok(!/<Tabs\b/.test(body));
+test('exactly five guided demonstrations are configured, in page order, none in the scope or accountability sections', () => {
+  const ids = [...body.matchAll(/id: ?'(ga-demo-[a-z]+)'|id="(ga-demo-[a-z]+)"/g)].map((m) => m[1] || m[2]);
+  assert.deepStrictEqual(ids, ['ga-demo-hero', 'ga-demo-factors', 'ga-demo-journey', 'ga-demo-reporting', 'ga-demo-process']);
+  const orders = [...body.matchAll(/order(?:=\{|: )(\d)/g)].map((m) => +m[1]);
+  assert.deepStrictEqual(orders, [1, 2, 3, 4, 5]);
+  const fn = (name) => body.slice(body.indexOf(`function ${name}(`), body.indexOf('\n}\n', body.indexOf(`function ${name}(`)));
+  assert.ok(!/demo|DemoRegion/.test(fn('Scope')) && !/demo|DemoRegion/.test(fn('Answer')), 'no autoplay in scope or accountability');
+  assert.ok(/import \{ GaTabs \} from '\.\/GaTabs'/.test(body) && !/<Tabs\b/.test(body), 'the page uses the local GaTabs, not the shared Tabs');
+  assert.ok(!/Interactive/.test(body.replace(/\/\*[\s\S]*?\*\//g, '')));
+});
+
+test('the approved demonstration timings and rest states are as recorded (decisions 1 to 8)', () => {
+  const t = (k) => +body.match(new RegExp(`\\b${k}: (\\d+),`))[1];
+  assert.deepStrictEqual([t('hero'), t('factor'), t('station'), t('outcome'), t('find'), t('action'), t('step'), t('stepLast')], [1200, 3000, 1000, 2000, 800, 3000, 900, 1500]);
+  assert.ok(/NUDGE = 300/.test(body));
+  assert.ok(/rest: F\.items\[1\]\.key/.test(body) && /rest: P\.cases\[0\]\.key/.test(body) && /rest: G\.findings\[0\]\.key/.test(body) && /restStep=\{0\}/.test(body), 'rest states');
+  assert.ok(/radios="ga-stage"/.test(body), 'the hero drives the real radio group');
+  assert.ok(/\.\.\.nudges\(P\.cases\.slice\(1\)/.test(body) && /\.\.\.nudges\(G\.findings\.slice\(1\)/.test(body), 'one-time nudges on the journey and reporting demonstrations only');
+  assert.ok(!/nudges\(F\./.test(body));
 });
 
 test('the shared Tabs component and the SEO sequence are not modified by this change', () => {
@@ -369,7 +384,10 @@ test('the coordinator honours reduced motion, Escape, manual interaction, tab hi
 
 test('the approved timing constants and the Pause control wiring are in place', () => {
   assert.ok(/DWELL_MS = 400/.test(demoSrc) && /FONT_WAIT_MS = 1000/.test(demoSrc) && /ENTER_RATIO = 0\.4/.test(demoSrc) && /ENTER_VIEWPORT = 0\.45/.test(demoSrc) && /LEAVE_RATIO = 0\.2/.test(demoSrc));
-  for (const src of [gaTabsSrc, regionSrc]) assert.ok(/state === 'running'/.test(src) && /stopDemo\(/.test(src) && /aria-label=\{/.test(src), 'Pause is rendered only while running');
+  const pauseSrc = read('components/cplus/google-ads/DemoPause.tsx');
+  for (const src of [gaTabsSrc, regionSrc]) assert.ok(/state === 'running' \? <DemoPause/.test(src) && /restoreFocus\(/.test(src), 'Pause is rendered only while running, and focus is handed back');
+  assert.ok(/stopDemo\(id\)/.test(pauseSrc) && /aria-label=\{aria\}/.test(pauseSrc) && /data-demo-pause/.test(pauseSrc) && /<span>\{text\}<\/span>/.test(pauseSrc), 'a labelled button that stops its demonstration');
+  assert.ok(/data-demo-pause/.test(demoSrc), 'interaction with the Pause control itself does not cancel the demonstration');
 });
 
 test('GaTabs keeps the shared Tabs markup contract (roles, ids, classes, keyboard map)', () => {
@@ -378,8 +396,22 @@ test('GaTabs keeps the shared Tabs markup contract (roles, ids, classes, keyboar
   const g = norm(gaTabsSrc);
   for (const frag of [
     "role=\"tablist\" aria-label={label} className=\"px-tablist\"",
-    "role=\"tab\" type=\"button\" id={`${base}-t-${it.id}`} aria-selected={cur === it.id} aria-controls={`${base}-p-${it.id}`} tabIndex={cur === it.id ? 0 : -1} className=\"px-tab\"",
+    "role=\"tab\" type=\"button\" id={`${base}-t-${it.id}`} aria-selected={cur === it.id} aria-controls={`${base}-p-${it.id}`} tabIndex={cur === it.id ? 0 : -1}",
     "role=\"tabpanel\" id={`${base}-p-${it.id}`} aria-labelledby={`${base}-t-${it.id}`} tabIndex={0} className={cur === it.id ? 'px-tabpanel' : 'px-tabpanel is-off'}",
     "{ ArrowRight: i + 1, ArrowDown: i + 1, ArrowLeft: i - 1, ArrowUp: i - 1, Home: 0, End: n - 1 }",
   ]) assert.ok(t.includes(frag) && g.includes(frag), frag);
+  // the one difference: the transient nudge outline on a tab
+  assert.ok(t.includes('className="px-tab"') && g.includes("className={nudge === it.id ? 'px-tab is-nudge' : 'px-tab'}"));
+});
+
+test('everything that moves, or exists only while something moves, is inside the no-preference block; the Pause chip is 44px', () => {
+  const raw = read('components/cplus/google-ads/google-ads.css');
+  const at = raw.indexOf('@media (prefers-reduced-motion: no-preference) {');
+  assert.ok(at > 0, 'the no-preference block exists');
+  const before = raw.slice(0, at).replace(/\/\*[\s\S]*?\*\//g, '');
+  for (const token of ['data-demo', '.ga-pause', 'is-nudge', 'visibility: hidden']) assert.ok(!before.includes(token), `${token} appears outside the no-preference block`);
+  // no keyframes or animation anywhere in the stylesheet: the demonstrations are timer-driven state changes with CSS transitions
+  assert.ok(!/@keyframes|animation\s*:/.test(raw));
+  assert.ok(/\.ga-pause \{[^}]*min-height: 44px/.test(raw));
+  assert.ok(/\.ga-pause \{[^}]*bottom: calc\(100% \+ 8px\)/.test(raw), 'the Pause chip hangs above its region and moves nothing');
 });

@@ -5,8 +5,8 @@ import './social-ads.css';
 import { Breadcrumb } from '../Breadcrumb';
 
 /**
- * C+ Social Media Ads (/social-media-ads): the approved prototype's page body (proto/direction-c-plus 0a8b611, SocialAdsH.tsx), unchanged in markup and
- * copy. Production changes only: the breadcrumb's Home link and the CTAs point at the live routes (`/`, CONTACT_HREF
+ * C+ Social Media Ads (/social-media-ads): the approved prototype's page body (proto/direction-c-plus 0a8b611, SocialAdsH.tsx) with the
+ * owner-approved Paid Social refinement (hero route, five-step journey, plain-English copy; no new motion). Production changes: the breadcrumb's Home link and the CTAs point at the live routes (`/`, CONTACT_HREF
  * and BOOKING_HREF) instead of prototype paths.
  */
 
@@ -22,7 +22,7 @@ function Action() {
 }
 
 export function SocialAdsBody() {
-  const F = S.feed;
+  const R = S.route;
   return (
     <>
       {/* 1 — hero (ivory): the claim + one ad in a feed */}
@@ -35,51 +35,58 @@ export function SocialAdsBody() {
               {S.h1.a} <span className="b-named">{S.h1.b}</span>
             </h1>
             <p className="b-lede">{S.lede}</p>
-            <p className="sa-side">{S.side}</p>
             <Action />
           </div>
 
           <figure className="sa-fig">
-            <div className="sa-scene">
-              <div className="sa-phone">
-                <p className="sa-label sa-phone-k">{F.label}</p>
-                <ul className="sa-feed">
-                  <li className="sa-post">
-                    <span className="sa-media" aria-hidden="true" />
-                    <span className="sa-post-t">{F.posts[0]}</span>
-                  </li>
-                  <li className="sa-post">
-                    <span className="sa-media" aria-hidden="true" />
-                    <span className="sa-post-t">{F.posts[1]}</span>
-                  </li>
-                  <li className="sa-post sa-ad">
-                    <span className="sa-ad-tag">{F.ad.tag}</span>
-                    <span className="sa-media sa-media-ad" aria-hidden="true" />
-                    <span className="sa-post-t">{F.ad.t}</span>
-                    <span className="sa-ad-note">{F.ad.note}</span>
-                  </li>
-                  <li className="sa-post">
-                    <span className="sa-media" aria-hidden="true" />
-                    <span className="sa-post-t">{F.posts[2]}</span>
-                  </li>
-                </ul>
-              </div>
-              <div className="sa-read">
-                <div className="sa-reacts">
-                  <p className="sa-label">{F.reactsK}</p>
-                  <ul>
-                    {F.reacts.map((r) => (
-                      <li key={r}>{r}</li>
-                    ))}
+            <ol className="sa-route" role="list">
+              <li className="sa-r-a">
+                <p className="sa-grp">{R.runK}</p>
+                <div className="sa-phone">
+                  <ul className="sa-feed">
+                    <li className="sa-post">
+                      <span className="sa-media" aria-hidden="true" />
+                      <span className="sa-post-t">{R.posts[0]}</span>
+                    </li>
+                    <li className="sa-post sa-ad">
+                      <span className="sa-ad-tag">{R.ad.tag}</span>
+                      <span className="sa-media sa-media-ad" aria-hidden="true" />
+                      <span className="sa-post-t">{R.ad.t}</span>
+                    </li>
+                    <li className="sa-post">
+                      <span className="sa-media" aria-hidden="true" />
+                      <span className="sa-post-t">{R.posts[1]}</span>
+                    </li>
                   </ul>
                 </div>
-                <div className="sa-counts">
-                  <p className="sa-label">{F.countsK}</p>
-                  <p className="sa-counts-t">{F.counts}</p>
-                </div>
-              </div>
-            </div>
-            <figcaption className="px-cap">{F.cap}</figcaption>
+                <p className="sa-st">
+                  <span className="sa-n" aria-hidden="true">1</span>
+                  {R.steps[0]}
+                </p>
+              </li>
+              <li className="sa-r-b">
+                <p className="sa-st">
+                  <span className="sa-n" aria-hidden="true">2</span>
+                  {R.steps[1]}
+                </p>
+              </li>
+              <li className="sa-r-c">
+                <p className="sa-grp">{R.nextK}</p>
+                <p className="sa-card">{R.page}</p>
+                <p className="sa-st">
+                  <span className="sa-n" aria-hidden="true">3</span>
+                  {R.steps[2]}
+                </p>
+              </li>
+              <li className="sa-r-d">
+                <p className="sa-card sa-card-on">{R.enquiry}</p>
+                <p className="sa-st">
+                  <span className="sa-n sa-n-end" aria-hidden="true">4</span>
+                  {R.steps[3]}
+                </p>
+              </li>
+            </ol>
+            <figcaption className="px-cap">{R.cap}</figcaption>
           </figure>
         </div>
       </section>
@@ -91,16 +98,15 @@ export function SocialAdsBody() {
           <h2 id="sa-h-scope" className="b-h2">
             {S.scopeH.a} <span className="b-named">{S.scopeH.b}</span>
           </h2>
-          <ul className="sa-tiles" data-rv="">
-            {S.scope.map((t) => (
-              <li key={t} className="sa-tile" data-rv-i="">
-                {t}
+          <ol className="sa-journey" role="list" data-rv="">
+            {S.scope.map((s, i) => (
+              <li key={s.t} className={i === S.scope.length - 1 ? 'sa-j-end' : undefined} data-rv-i="">
+                <span className="sa-dot" aria-hidden="true">{i + 1}</span>
+                <p className="sa-jt">{s.t}</p>
+                <p className="sa-jd">{s.d}</p>
               </li>
             ))}
-            <li className="sa-tile sa-tile-on" data-rv-i="">
-              {S.scopeLanding}
-            </li>
-          </ul>
+          </ol>
           <p className="sa-meas">{S.scopeMeas}</p>
           <p className="sa-bill">{S.billing}</p>
         </div>
@@ -150,7 +156,6 @@ export function SocialAdsBody() {
       <section className="b-close" aria-labelledby="sa-h-close">
         <div className="px-wrap b-close-in">
           <div>
-            <p className="b-kicker sa-close-k">{S.close.label}</p>
             <h2 id="sa-h-close" className="b-h2">
               {S.close.h}
             </h2>

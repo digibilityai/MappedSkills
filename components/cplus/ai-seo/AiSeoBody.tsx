@@ -1,14 +1,18 @@
 import Link from 'next/link';
 import { BOOKING_HREF, CONTACT_HREF, InlineLink, Mark } from '@/components/direction-c/primitives';
-import { AI_PLAIN as S, MEASURED_ON, RUNS } from './content';
+import { AI_PLAIN as S } from './content';
+import { IndustryExamples } from './IndustryExamples';
 import { Journey } from './Journey';
+import { ReportingSteps } from './ReportingSteps';
+import { Scenario } from './Scenario';
 import './ai-seo.css';
 import { Breadcrumb } from '../Breadcrumb';
 
 /**
- * C+ AI search (/ai-seo): the owner-approved G1 R2 design (docs/ai-search-redesign; mockup/src/body.html), eight
- * sections in the approved order. Markup and classes follow the mockup; copy lives in ./content. Only the journey is a
- * client component; every other section is static and complete without JavaScript.
+ * C+ AI search (/ai-seo): the owner-approved R3 design (docs/ai-search-redesign/r3; mockup/src/parts), nine sections in
+ * the approved order: hero, shortlist, industry examples, scenario, five steps, reporting, the record, questions, close.
+ * Markup and classes follow the mockup; copy lives in ./content. The four animated stories (industry, scenario, five
+ * steps, reporting) are client components built on ./Sequence; every section is complete without JavaScript.
  */
 
 function Actions() {
@@ -35,21 +39,7 @@ function Hx({ h }: { h: { a: string; b: string } }) {
   );
 }
 
-/** Marks for one result row: open squares, one per question (none filled), or two filled marks for the two crawlers
- *  that could read the site. Decorative; the result is stated in text beside it. */
-function Squares({ kind }: { kind: 'access' | 'runs' }) {
-  const count = kind === 'runs' ? RUNS : 2;
-  return (
-    <span className={kind === 'runs' ? 'ax-sq' : 'ax-sq ax-sq-ok'} aria-hidden="true">
-      {Array.from({ length: count }, (_, i) => (
-        <i key={i} />
-      ))}
-    </span>
-  );
-}
-
 export function AiSeoBody() {
-  const T = S.test;
   return (
     <>
       {/* 1 — hero (ivory): the question every owner recognises, and one AI answer taken apart */}
@@ -132,157 +122,40 @@ export function AiSeoBody() {
         </div>
       </section>
 
-      {/* 3 — where answers come from (paper): the mechanism, then our own dated test as a visible three-step sequence.
-           The material result (0 of 28) and the four separate results are visible; the disclosure holds method and the
-           full record. Untested systems are never shown as zero (DEC-015). */}
-      <section className="b-sec b-paper ax-src-sec" aria-labelledby="as-h-src">
+      {/* 3 — industry examples (paper): illustrative questions, no statistics. Replaces the self-test as the evidence story. */}
+      <section className="b-sec b-paper ax-ind" aria-labelledby="as-h-ind">
         <div className="px-wrap">
-          <div className="ax-src-top">
-            <div>
-              <p className="b-kicker">{S.src.kicker}</p>
-              <h2 id="as-h-src" className="b-h2">
-                <Hx h={S.src.h} />
-              </h2>
-            </div>
-            <figure className="ax-hub">
-              <ul className="ax-feeds">
-                {S.src.feeds.map((f) => (
-                  <li key={f} className="ax-feed">
-                    <span className="ax-feed-n">{f}</span>
-                  </li>
-                ))}
-                <li className="ax-feed ax-feed-own">
-                  <span className="ax-feed-n">{S.src.own.t}</span>
-                  <span className="ax-feed-d">{S.src.own.d}</span>
-                </li>
-              </ul>
-              <p className="ax-hub-ans" aria-hidden="true">
-                <span>{S.src.hub}</span>
-              </p>
-              <figcaption className="px-cap">{S.src.cap}</figcaption>
-            </figure>
-          </div>
-
-          <div className="ax-test">
-            <div className="ax-test-head">
-              <h3 className="ax-test-h">{T.h}</h3>
-              <p className="ax-test-m">
-                <time dateTime="2026-08-31">{MEASURED_ON}</time>
-                {T.meta.map((m) => ` · ${m}`).join('')}
-              </p>
-            </div>
-            <ol className="ax-tr">
-              <li className="ax-tile ax-tile-cream ax-tr-s">
-                <p className="ax-tl">{T.checked.l}</p>
-                <p className="ax-tr-big">{T.checked.big}</p>
-                <p>{T.checked.t}</p>
-                <ul className="ax-tools">
-                  {T.checked.tools.map((t) => (
-                    <li key={t}>{t}</li>
-                  ))}
-                </ul>
-                <p className="ax-tr-sub ax-push">
-                  <span className="ax-dash" aria-hidden="true" />
-                  {T.checked.untested}
-                </p>
-              </li>
-              <li className="ax-tile ax-tile-ink ax-tr-s ax-tr-found">
-                <p className="ax-tl">{T.found.l}</p>
-                <p className="ax-tr-zero">
-                  <span className="ax-fig">
-                    {T.found.fig} <small>{T.found.of}</small>
-                  </span>
-                  <span>{T.found.t}</span>
-                </p>
-                <ul className="ax-ly" aria-label={T.found.layersLabel}>
-                  {T.found.layers.map((l) => (
-                    <li key={l.q}>
-                      <span className="ax-ly-q">{l.q}</span>
-                      <Squares kind={l.kind} />
-                      <span className="ax-ly-r">{l.r}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="ax-tr-sub">{T.found.key}</p>
-                <p className="ax-tr-sub">{T.found.branded}</p>
-              </li>
-              <li className="ax-tile ax-tile-cream ax-tr-s">
-                <p className="ax-tl">{T.taught.l}</p>
-                <p className="ax-tr-lead">{T.taught.lead}</p>
-                <p>{T.taught.t}</p>
-                <p className="ax-tr-so">{T.taught.so}</p>
-              </li>
-            </ol>
-            <p className="ax-tr-lim">
-              <b>{T.lim.b}</b> {T.lim.t}
-            </p>
-            <details className="fq-d ax-rec">
-              <summary>
-                <span className="fq-q">{S.record.summary}</span>
-                <span className="fq-pm" aria-hidden="true" />
-              </summary>
-              <div className="ax-rec-in">
-                <table className="ax-rec-tb">
-                  <caption>{S.record.tableCap}</caption>
-                  <thead>
-                    <tr>
-                      {S.record.cols.map((c) => (
-                        <th key={c} scope="col">
-                          {c}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {S.record.rows.map((r) => (
-                      <tr key={r.s}>
-                        <th scope="row">
-                          {r.s}
-                          {r.note && <span>{r.note}</span>}
-                        </th>
-                        <td>{r.n}</td>
-                        <td>0</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <th scope="row">{S.record.total}</th>
-                      <td>{S.record.rows.reduce((a, r) => a + r.n, 0)}</td>
-                      <td>0</td>
-                    </tr>
-                  </tfoot>
-                </table>
-                <p className="ax-rec-un">
-                  <b>{S.record.untested.b}</b> {S.record.untested.t}
-                </p>
-                {S.record.notes.map((n) => (
-                  <p key={n.b} className="ax-rec-l">
-                    <b>{n.b}</b> {n.t}
-                  </p>
-                ))}
-              </div>
-            </details>
-          </div>
+          <p className="b-kicker">{S.industry.kicker}</p>
+          <h2 id="as-h-ind" className="b-h2">
+            <Hx h={S.industry.h} />
+          </h2>
+          <IndustryExamples />
         </div>
       </section>
 
-      {/* 4 — how the work moves (ink): five-step journey, auto-advances every 2 s, plays once */}
+      {/* 4 — scenario (ivory): one illustrative question, two fictional businesses, then the visitor's own */}
+      <section className="b-sec ax-scn" aria-labelledby="as-h-scn">
+        <div className="px-wrap">
+          <p className="b-kicker">{S.scenario.kicker}</p>
+          <h2 id="as-h-scn" className="b-h2">
+            <Hx h={S.scenario.h} />
+          </h2>
+          <Scenario />
+        </div>
+      </section>
+
+      {/* 5 — how the work moves (ink): five steps, auto-advance every 1.5 s, plays once; the numbers are buttons */}
       <section className="b-sec b-ink ax-jr-sec" aria-labelledby="as-h-jr">
         <div className="px-wrap">
-          <Journey
-            heading={
-              <>
-                <p className="b-kicker">{S.journey.kicker}</p>
-                <h2 id="as-h-jr" className="b-h2">
-                  <Hx h={S.journey.h} />
-                </h2>
-              </>
-            }
-            steps={S.journey.steps}
-            big={S.journey.big}
-            labels={S.journey.ctl}
-          />
+          <div className="ax-jr-head">
+            <div>
+              <p className="b-kicker">{S.journey.kicker}</p>
+              <h2 id="as-h-jr" className="b-h2">
+                <Hx h={S.journey.h} />
+              </h2>
+            </div>
+          </div>
+          <Journey steps={S.journey.steps} />
           <details className="fq-d ax-crawl">
             <summary>
               <span className="fq-q">{S.crawl.summary}</span>
@@ -301,93 +174,78 @@ export function AiSeoBody() {
         </div>
       </section>
 
-      {/* 5 — clear reporting (paper): one picture, two sides of a line */}
-      <section className="b-sec b-paper ax-rep-sec" aria-labelledby="as-h-rep">
+      {/* 6 — clear reporting (paper): Ask, Compare, Track */}
+      <section className="b-sec b-paper ax-rp-sec" aria-labelledby="as-h-rp">
         <div className="px-wrap">
           <p className="b-kicker">{S.rep.kicker}</p>
-          <h2 id="as-h-rep" className="b-h2">
+          <h2 id="as-h-rp" className="b-h2">
             <Hx h={S.rep.h} />
           </h2>
-          <figure className="ax-bd">
-            <div className="ax-tile ax-tile-cream ax-bd-can">
-              <p className="ax-tl">{S.rep.can.l}</p>
-              <ol className="ax-bd-l">
-                {S.rep.can.items.map((it) => (
-                  <li key={it.b}>
-                    <b>{it.b}</b>
-                    <span>{it.t}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-            <p className="ax-bd-line">
-              <span>{S.rep.line}</span>
-            </p>
-            <div className="ax-tile ax-tile-ink ax-bd-not">
-              <p className="ax-tl">{S.rep.not.l}</p>
-              <ul className="ax-bd-l">
-                {S.rep.not.items.map((it) => (
-                  <li key={it.b}>
-                    <b>{it.b}</b>
-                    <span>{it.t}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </figure>
-          <p className="ax-rep-note">
-            {S.rep.note} <b>{S.rep.why.b}</b> {S.rep.why.t}
-          </p>
+          <ReportingSteps />
+          <p className="ax-rp-note">{S.rep.note}</p>
+          <p className="px-cap">{S.rep.cap}</p>
         </div>
       </section>
 
-      {/* 6 — is it right for you (ivory): a quick decision; the situations are our usual judgement, not rules */}
-      <section className="b-sec ax-fit-sec" aria-labelledby="as-h-fit">
+      {/* 7 — the record (ivory): the complete dated self-test, unchanged in substance, in a native disclosure that is
+           closed on load (DEC-015, owner-approved relocation; see DEC-054). Measured zero and not-tested stay distinct. */}
+      <section className="b-sec ax-evi" aria-labelledby="as-h-evi">
         <div className="px-wrap">
-          <p className="b-kicker">{S.fit.kicker}</p>
-          <h2 id="as-h-fit" className="b-h2">
-            <Hx h={S.fit.h} />
+          <p className="b-kicker">{S.record.kicker}</p>
+          <h2 id="as-h-evi" className="b-h2 ax-evi-h">
+            {S.record.h}
           </h2>
-          <p className="ax-fit-lede">{S.fit.lede}</p>
-          <figure className="ax-dec">
-            <p className="ax-dec-start" aria-hidden="true">
-              <span>{S.fit.start}</span>
-            </p>
-            <div className="ax-dec-g">
-              <div className="ax-tile ax-tile-cream ax-dec-c ax-dec-yes">
-                <h3 className="ax-dec-h">{S.fit.yes.h}</h3>
-                <ul className="ax-dec-l">
-                  {S.fit.yes.items.map((t) => (
-                    <li key={t}>{t}</li>
+          <details className="fq-d ax-rec">
+            <summary>
+              <span className="fq-q">{S.record.summary}</span>
+              <span className="fq-pm" aria-hidden="true" />
+            </summary>
+            <div className="ax-rec-in">
+              <table className="ax-rec-tb">
+                <caption>{S.record.tableCap}</caption>
+                <thead>
+                  <tr>
+                    {S.record.cols.map((c) => (
+                      <th key={c} scope="col">
+                        {c}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {S.record.rows.map((r) => (
+                    <tr key={r.s}>
+                      <th scope="row">
+                        {r.s}
+                        {r.note && <span>{r.note}</span>}
+                      </th>
+                      <td>{r.n}</td>
+                      <td>0</td>
+                    </tr>
                   ))}
-                </ul>
-                <p className="ax-dec-next">{S.fit.yes.next}</p>
-              </div>
-              <div className="ax-tile ax-tile-ink ax-dec-c ax-dec-other">
-                <h3 className="ax-dec-h">{S.fit.other.h}</h3>
-                <ul className="ax-dec-l">
-                  {S.fit.other.items.map((it) => (
-                    <li key={it.b}>
-                      <b>{it.b}</b>{' '}
-                      <span>
-                        {it.link && (
-                          <>
-                            <InlineLink href={it.link.href}>{it.link.t}</InlineLink>{' '}
-                          </>
-                        )}
-                        {it.t}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th scope="row">{S.record.total}</th>
+                    <td>{S.record.rows.reduce((a, r) => a + r.n, 0)}</td>
+                    <td>0</td>
+                  </tr>
+                </tfoot>
+              </table>
+              <p className="ax-rec-un">
+                <b>{S.record.untested.b}</b> {S.record.untested.t}
+              </p>
+              {S.record.notes.map((n) => (
+                <p key={n.b} className="ax-rec-l">
+                  <b>{n.b}</b> {n.t}
+                </p>
+              ))}
             </div>
-          </figure>
-          <p className="ax-fit-close">{S.fit.close}</p>
+          </details>
         </div>
       </section>
 
-      {/* 7 — questions (paper): native disclosures, closed on load. No FAQPage structured data on this route. */}
+      {/* 8 — questions (paper): native disclosures, closed on load. No FAQPage structured data on this route. */}
       <section className="b-sec b-paper as-q" aria-labelledby="as-h-qs">
         <div className="px-wrap as-q-g">
           <div>

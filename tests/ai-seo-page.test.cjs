@@ -1,7 +1,8 @@
-// Guards for /ai-seo (owner-approved G1 R2 design, implemented in G2). Copy, evidence integrity and journey rules only:
-// the approved H1 with unchanged metadata, the eight sections in order, the 31 August 2026 record exactly as measured,
-// the four results kept separate, untested systems never shown as zero, the corrected Ahrefs/Semrush answer, and no
-// claims the page must not make. Runtime journey timing is verified in the browser (docs/ai-search-redesign/g2).
+// Guards for /ai-seo (owner-approved R3 design, implemented in G2). Copy, evidence integrity and animation rules only:
+// the approved H1 with unchanged metadata, the nine sections in order, the 31 August 2026 record exactly as measured
+// (kept in full under "The record"), untested systems never shown as zero, illustrative examples labelled and free of
+// statistics, the 1.5 s once-only sequences with no Pause/Play/Replay, and no claims the page must not make. Runtime
+// timing is verified in the browser (docs/ai-search-redesign/r3).
 const test = require('node:test');
 const assert = require('node:assert');
 const fs = require('node:fs');
@@ -13,6 +14,11 @@ const plain = (s) => s.replace(/[‘’]/g, "'").replace(/[“”]/g, '"').repla
 const page = read('app/(pages)/ai-seo/page.tsx');
 const body = read('components/cplus/ai-seo/AiSeoBody.tsx');
 const journey = read('components/cplus/ai-seo/Journey.tsx');
+const sequence = read('components/cplus/ai-seo/Sequence.tsx');
+const industry = read('components/cplus/ai-seo/IndustryExamples.tsx');
+const scenario = read('components/cplus/ai-seo/Scenario.tsx');
+const reporting = read('components/cplus/ai-seo/ReportingSteps.tsx');
+const css = read('components/cplus/ai-seo/ai-seo.css');
 const source = read('components/cplus/ai-seo/content.ts').replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
 const MEASURED_ON = /MEASURED_ON = '([^']+)'/.exec(source)[1];
 // drop TypeScript `as { ... }[]` assertions (braces may nest) so the object literal evaluates as JavaScript
@@ -44,86 +50,117 @@ test('approved H1; title, description and route unchanged', () => {
   assert.equal((body.match(/<h1\b/g) || []).length, 1);
 });
 
-test('eight sections in the approved order', () => {
+test('nine sections in the approved R3 order; one H1, no skipped heading levels', () => {
   const ids = [...body.matchAll(/aria-labelledby="([^"]+)"/g)].map((m) => m[1]);
-  assert.deepEqual(ids, ['as-h1', 'as-h-shift', 'as-h-src', 'as-h-jr', 'as-h-rep', 'as-h-fit', 'as-h-qs', 'as-h-close']);
+  assert.deepEqual(ids, ['as-h1', 'as-h-shift', 'as-h-ind', 'as-h-scn', 'as-h-jr', 'as-h-rp', 'as-h-evi', 'as-h-qs', 'as-h-close']);
+  const all = body + industry + scenario + reporting + journey;
+  assert.equal(/<h[4-6]\b/.test(all), false);
 });
 
-test('the 31 August 2026 record is unchanged: 28 questions, 0 appearances, per tool', () => {
+test('the 31 August 2026 record is unchanged and complete: 28 questions, 0 appearances, per tool', () => {
   assert.equal(MEASURED_ON, '31 August 2026');
   assert.deepEqual(S.record.rows.map((r) => [r.s, r.n]), [['Google AI Mode', 19], ['Google AI Overviews', 3], ['ChatGPT', 2], ['Perplexity', 3], ['Gemini', 1]]);
   assert.equal(S.record.rows.reduce((a, r) => a + r.n, 0), 28);
-  assert.equal(S.test.checked.tools.length, S.record.rows.length);
   assert.ok(body.includes('<td>0</td>'));
   assert.equal(/<td>[1-9]/.test(body.slice(body.indexOf('ax-rec-tb'), body.indexOf('</table>'))), false);
+  assert.equal(S.record.summary, 'Our own test, in full: 28 questions, 5 AI tools, 31 August 2026');
+  assert.deepEqual(S.record.cols, ['Where we asked', 'Asked', 'We appeared']);
 });
 
-test('the zero is visible, dated and scoped, with the visible limit', () => {
-  assert.equal(`${S.test.found.fig} ${S.test.found.of} ${S.test.found.t}`, '0 of 28 answers named us.');
-  assert.deepEqual(S.test.meta, ['one round', 'one location', 'English', 'signed out']);
-  assert.ok(body.includes('<time dateTime="2026-08-31">{MEASURED_ON}</time>'));
-  assert.equal(S.test.lim.t, "that our work raises anyone's visibility, or that AI answers bring enquiries. It's one round on one day, not a before and after.");
-  // the disclosure holds method and record; the zero must not be inside it only
-  assert.ok(body.indexOf('ax-tr-zero') < body.indexOf('<details className="fq-d ax-rec">'));
+test('the record is a native disclosure, closed on load, with a normal heading (DEC-015)', () => {
+  const sec = body.slice(body.indexOf('aria-labelledby="as-h-evi"'), body.indexOf('aria-labelledby="as-h-qs"'));
+  assert.ok(sec.includes('<details className="fq-d ax-rec">'));
+  assert.equal(/<details[^>]*\bopen\b/.test(sec), false);
+  assert.ok(sec.includes('<h2 id="as-h-evi"'));
+  assert.ok(sec.includes('<summary>'));
 });
 
-test('four results are kept separate and never blended', () => {
-  assert.deepEqual(S.test.found.layers.map((l) => [l.q, l.r]), [
-    ['AI crawlers could read our site', 'Yes, both checked'],
-    ['Named in the answer', '0 of 28'],
-    ['Recommended', '0 of 28'],
-    ['Our site quoted as a source', '0 of 28'],
-  ]);
-  assert.equal(S.test.found.branded, 'Asked about us by name, 7 of 8 answers described us substantially accurately.');
-  assert.ok(S.record.notes.some((n) => n.b.startsWith('Four results, kept separate, never one number')));
-});
-
-test('Claude and Grok are untested, never zero', () => {
-  for (const s of [S.test.checked.untested, S.record.untested.t]) {
-    assert.ok(/Claude/.test(s) && /Grok/.test(s) && /not a zero/.test(s));
-  }
+test('measured zero and not-tested stay distinct; Claude and Grok are never zero', () => {
+  assert.ok(/Claude/.test(S.record.untested.t) && /Grok/.test(S.record.untested.t) && /not a zero/.test(S.record.untested.t));
   assert.equal(S.record.rows.some((r) => /Claude|Grok/.test(r.s)), false);
 });
 
-test('no claim that the test proves results; limits kept', () => {
-  const lims = S.record.notes.find((n) => n.b === 'What this does not show:').t;
-  for (const l of ['a trend', 'Claude or Grok', 'signed-in answers', 'why we were absent', 'whether AI answers bring enquiries']) assert.ok(lims.includes(l), l);
+test('the four results, the directory finding, the by-name result and the limits are all kept in the record', () => {
+  const notes = Object.fromEntries(S.record.notes.map((n) => [n.b, n.t]));
+  assert.ok(notes['Four results, kept separate, never one number.'].includes('0 of 28'));
+  assert.ok(notes['Four results, kept separate, never one number.'].includes('Yes, for the two crawlers we checked'));
+  assert.ok(notes['The directory finding:'].includes('at least 10 of the 28'));
+  assert.equal(notes['Asked about us by name:'], '7 of 8 answers described us substantially accurately.');
+  for (const l of ['a trend', 'Claude or Grok', 'signed-in answers', 'why we were absent', 'whether AI answers bring enquiries']) assert.ok(notes['What this does not show:'].includes(l), l);
+  assert.ok(notes['How we measured:'].includes('one location, in English, signed out'));
   assert.equal(/improved (our|your) (visibility|ranking)|we now appear|since then/i.test(text), false);
 });
 
-test('FAQ: the corrected Ahrefs and Semrush answer', () => {
+test('industry examples: the four approved industries, illustrative, no statistics', () => {
+  assert.deepEqual(S.industry.items.map((i) => i.k), ['Manufacturing', 'Jewellery', 'D2C brands', 'Real estate']);
+  assert.deepEqual(S.industry.items.map((i) => i.q), [
+    '"Which companies make custom packaging in Mumbai?"',
+    '"Which jewellery brands should I compare?"',
+    '"What are some good skincare brands for sensitive skin?"',
+    '"Which residential projects should I consider in this area?"',
+  ]);
+  assert.equal(S.industry.cap, 'Example questions for illustration. Not real AI answers or search data.');
+  assert.equal(`${S.industry.h.a} ${S.industry.h.b}`, 'Your customers are asking AI. Are they finding businesses like yours?');
+  const ind = JSON.stringify(S.industry).replace(/D2C/g, '');
+  assert.equal(/\d/.test(ind), false, 'no figures in the industry examples');
+  assert.ok(industry.includes('aria-pressed={j === cur}'));
+  assert.ok(industry.includes('hidden={q.armed && j !== cur}'));
+});
+
+test('scenario: two fictional businesses, labelled, no guarantee; destination unchanged', () => {
+  const [, , two, you] = S.scenario.steps;
+  assert.equal(two.cap, 'Two fictional businesses. An illustration, not a prediction: clear information gives AI more to work with, and no answer is guaranteed.');
+  assert.equal(two.a.n, 'Business A');
+  assert.equal(two.b.n, 'Business B');
+  assert.equal(you.t, 'Where does your business stand?');
+  assert.equal(you.p, 'We help you understand what AI can find about your business and where your online information needs work.');
+  assert.ok(scenario.includes('href={CONTACT_HREF}'));
+  assert.equal(/guaranteed to|will appear|will be recommended|will rank|excluded from/i.test(JSON.stringify(S.scenario)), false);
+});
+
+test('reporting: Ask, Compare, Track; the example is visibly labelled; no score, number or capability invented', () => {
+  assert.equal(`${S.rep.h.a} ${S.rep.h.b}`, 'See where your business stands. See what changes.');
+  assert.deepEqual(S.rep.steps.map((s) => s.w), ['Ask', 'Compare', 'Track']);
+  assert.equal(S.rep.steps[2].tag, 'Illustrative example');
+  assert.ok(reporting.includes('{TRK.tag}'));
+  assert.equal(S.rep.note, 'We show what we found and what changed. AI answers can vary.');
+  assert.equal(S.rep.cap, 'Illustration: example wording only, not a report or real results.');
+  assert.equal(/monthly|weekly|quarterly report|every month|dashboard|analytics access|visibility score of|\d/i.test(JSON.stringify(S.rep.steps.map((s) => ({ ...s, label: '' }))).replace(/Question \d/g, '')), false);
+});
+
+test('FAQ: the corrected Ahrefs and Semrush answer (unchanged)', () => {
   const q2 = S.questions.find((q) => q.q.startsWith('Ahrefs and Semrush'));
   assert.ok(q2.a.includes('some paid versions also show which sites the answers cite'));
   assert.ok(q2.a.includes('Different tools answer different questions'));
   assert.equal(/(don't|do not|doesn't|cannot|can't) show/i.test(q2.a), false);
+  assert.deepEqual(S.questions.map((q) => q.q), ['Everyone sells this now. What makes you different?', 'Ahrefs and Semrush give me a checker for free.', 'Can you get us into ChatGPT?']);
 });
 
-test('reporting: the four checks and four non-promises; no score, frequency or platform data', () => {
-  assert.equal(`${S.rep.h.a} ${S.rep.h.b}`, 'What we can check. What nobody can promise.');
-  assert.deepEqual(S.rep.can.items.map((i) => i.b), ['Your site', 'Your details', 'Other sites', 'The answers']);
-  assert.deepEqual(S.rep.not.items.map((i) => i.b), ['A place in the answer', 'A ranking or a score', 'Improvement every time', 'Enquiries']);
-  assert.equal(/monthly|weekly|quarterly report|every month|dashboard|analytics access|visibility score of/i.test(text), false);
-});
-
-test('fit: six qualified situations; cross-links point at existing routes', () => {
-  assert.equal(S.fit.yes.items.length + S.fit.other.items.length, 6);
-  assert.equal(S.fit.close, "Not sure which side you're on? That's what a first conversation is for.");
-  for (const it of S.fit.other.items.filter((i) => i.link)) {
-    assert.ok(fs.existsSync(path.join(ROOT, 'app/(pages)', it.link.href, 'page.tsx')), it.link.href);
-  }
-  assert.ok(fs.existsSync(path.join(ROOT, 'app/(pages)', S.across.href2, 'page.tsx')));
-});
-
-test('journey: five approved steps, 2 s, plays once, accessible', () => {
+test('journey: five approved steps and copy; every numbered step is selectable', () => {
   assert.deepEqual(S.journey.steps.map((s) => s.t), ['See what AI says now', 'Open your site to AI', 'Get your facts straight', 'Be where answers come from', 'Check again, honestly']);
-  assert.equal(S.journey.steps[S.journey.big].t, 'Be where answers come from');
-  assert.ok(/export const STEP_MS = 2000;/.test(journey));
-  assert.ok(journey.includes('prefers-reduced-motion: reduce'));
-  assert.ok(journey.includes("aria-current={on ? 'step' : undefined}"));
-  assert.equal(/setInterval|aria-live|\.focus\(|role="status"/.test(journey), false);
+  assert.equal(S.journey.steps[3].d, 'Get listed on the directories, review sites and lists the answers use. The biggest part of the work.');
+  assert.deepEqual(S.journey.steps.map((s) => s.label), S.journey.steps.map((s, i) => `Step ${i + 1}: ${s.t}`));
+  assert.ok(journey.includes('onSelect={() => q.select(j)}'));
 });
 
-test('copy rules: no long or double dashes; no results, figures, guarantees or testimonials', () => {
+test('animation: 1.5 s, once, no controls, reduced motion, no live region, no focus movement', () => {
+  assert.ok(/export const STEP_MS = 1500;/.test(sequence));
+  assert.ok(sequence.includes('prefers-reduced-motion: reduce'));
+  assert.equal(/setInterval|aria-live|\.focus\(|role="status"|role="alert"/.test(sequence + journey + industry + scenario + reporting + body), false);
+  assert.equal(/Pause|Replay|Play\b/.test(JSON.stringify(S) + journey + sequence.replace(/\/\*[\s\S]*?\*\//g, '')), false, 'no Pause, Play or Replay control');
+  assert.equal(/ax-jr-ctl|data-mode/.test(css + journey + body), false);
+  for (const f of [journey, industry, scenario, reporting]) assert.ok(f.includes('useSequence'));
+  assert.ok(journey.includes("aria-current={q.on(j) ? 'step' : undefined}"));
+  assert.ok(sequence.includes('button type="button" className="ax-st-n"'));
+});
+
+test('internal links: only existing routes; the old /seo and /conversion-optimization in-page links are gone', () => {
+  assert.ok(fs.existsSync(path.join(ROOT, 'app/(pages)', S.across.href, 'page.tsx')));
+  assert.ok(fs.existsSync(path.join(ROOT, 'app/(pages)', S.across.href2, 'page.tsx')));
+  assert.equal(/conversion-optimization/.test(JSON.stringify(S) + body + scenario), false);
+});
+
+test('copy rules: no long or double dashes; no results, percentages, guarantees or testimonials', () => {
   assert.equal(/[–—]|--/.test(text), false);
-  assert.equal(/\d+\s?%|guarantee|testimonial|\bROI\b|case study/i.test(text), false);
+  assert.equal(/\d+\s?%|guarantee d|testimonial|\bROI\b|case study/i.test(text), false);
 });

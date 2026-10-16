@@ -1,14 +1,12 @@
 /**
- * C+ AI search (/ai-seo): customer-facing copy of the owner-approved G1 R2 design (docs/ai-search-redesign, R2 review
- * package; R2_COPY.md). The research figures are the 31 August 2026 record, unchanged
- * (docs/04-ai-visibility/AI_VISIBILITY_BASELINE.md). Nothing here states a result, a score, a reporting frequency or
- * access to AI platform data. Headings are stored as { a, b }: `a` in the plain colour, `b` in orange (`.b-named`).
+ * C+ AI search (/ai-seo): customer-facing copy of the owner-approved R3 design (docs/ai-search-redesign/r3, R3_COPY.md;
+ * hero, shortlist, questions and close are the approved G1 R2 copy, unchanged). The research figures are the 31 August
+ * 2026 record, unchanged (docs/04-ai-visibility/AI_VISIBILITY_BASELINE.md), kept in full under "The record". Nothing
+ * here states a result, a score, a reporting frequency, an industry statistic or access to AI platform data; every
+ * example is labelled as an illustration. Headings are stored as { a, b }: `a` in the plain colour, `b` in orange.
  */
 
 export const MEASURED_ON = '31 August 2026';
-
-/** One run is one question that did not name us, asked once in one AI tool. */
-export const RUNS = 28;
 
 export const AI_PLAIN = {
   crumb: 'AI search',
@@ -44,53 +42,44 @@ export const AI_PLAIN = {
     size: { b: 'How big is this?', t: 'Our view, not a measurement: still much smaller than ordinary Google search. Worth getting right. Not worth betting everything on.' },
   },
 
-  /* 3 — where answers come from (paper), then our own dated test */
-  src: {
-    kicker: 'Where answers come from',
-    h: { a: 'AI answers lean on', b: 'what others say about you.' },
-    feeds: ['Directories and listings', 'Review sites', 'Lists and articles by others'],
-    own: { t: 'Your website', d: 'One voice among many' },
-    hub: 'The AI answer',
-    cap: 'Illustration. Line weight shows the idea, not measured shares.',
+  /* 3 — industry examples (paper): illustrative questions only, no statistics */
+  industry: {
+    kicker: 'Your customers',
+    h: { a: 'Your customers are asking AI.', b: 'Are they finding businesses like yours?' },
+    group: 'Choose an industry',
+    labels: { ask: 'A buyer asks', ans: 'AI answers', names: 'A few names appear', you: 'And you?' },
+    youQ: 'Is your business one of them?',
+    cap: 'Example questions for illustration. Not real AI answers or search data.',
+    items: [
+      { k: 'Manufacturing', q: '“Which companies make custom packaging in Mumbai?”', a: 'A few suppliers, with what they make and where.', name: 'Supplier', sr: 'Three suppliers are named.' },
+      { k: 'Jewellery', q: '“Which jewellery brands should I compare?”', a: 'A few brands, with what each is known for.', name: 'Brand', sr: 'Three brands are named.' },
+      { k: 'D2C brands', q: '“What are some good skincare brands for sensitive skin?”', a: 'A few brands, with what each is known for.', name: 'Brand', sr: 'Three brands are named.' },
+      { k: 'Real estate', q: '“Which residential projects should I consider in this area?”', a: 'A few projects, with where they are and who builds them.', name: 'Project', sr: 'Three projects are named.' },
+    ],
   },
-  test: {
-    h: 'We tested this on ourselves first.',
-    meta: ['one round', 'one location', 'English', 'signed out'],
-    checked: {
-      l: 'What we checked',
-      big: '28 questions',
-      t: 'a buyer might ask that didn’t name us. Each asked once, across five AI tools:',
-      tools: ['Google AI Mode', 'Google AI Overviews', 'ChatGPT', 'Perplexity', 'Gemini'],
-      untested: 'Claude and Grok couldn’t be tested. No data, so not a zero.',
-    },
-    found: {
-      l: 'What we found',
-      fig: '0',
-      of: 'of 28',
-      t: 'answers named us.',
-      layersLabel: 'Four results, kept separate',
-      layers: [
-        { q: 'AI crawlers could read our site', r: 'Yes, both checked', kind: 'access' },
-        { q: 'Named in the answer', r: '0 of 28', kind: 'runs' },
-        { q: 'Recommended', r: '0 of 28', kind: 'runs' },
-        { q: 'Our site quoted as a source', r: '0 of 28', kind: 'runs' },
-      ] as { q: string; r: string; kind: 'access' | 'runs' }[],
-      key: 'Each open square is one question. Counts, not rates. Gemini showed no sources at all.',
-      branded: 'Asked about us by name, 7 of 8 answers described us substantially accurately.',
-    },
-    taught: {
-      l: 'What it taught us',
-      lead: 'Being readable isn’t enough.',
-      t: 'At least 10 of the 28 answers cited directories. On the day, we weren’t listed on the two cited most.',
-      so: 'So listings come first in our work.',
-    },
-    lim: {
-      b: 'What this test doesn’t show:',
-      t: 'that our work raises anyone’s visibility, or that AI answers bring enquiries. It’s one round on one day, not a before and after.',
-    },
+
+  /* 4 — scenario (ivory): one illustrative question, two fictional businesses, then the visitor's own */
+  scenario: {
+    kicker: 'A closer look',
+    h: { a: 'The question is already being asked.', b: 'Will your business be considered?' },
+    steps: [
+      { w: 'A buyer asks', label: 'A buyer asks', q: '“Which suppliers can manufacture custom packaging in Mumbai?”' },
+      { w: 'AI looks for information', label: 'AI looks for information', t: 'It reads what it can find about each business.', where: ['Their websites', 'Directories', 'Reviews', 'Lists by others'], whereLabel: 'Where it looks' },
+      {
+        w: 'Two businesses, one question',
+        label: 'Two businesses, one question',
+        a: { n: 'Business A', s: 'Clearly described online', items: ['What they make', 'Where they are', 'How to contact them', 'Listed and reviewed elsewhere'] },
+        b: { n: 'Business B', s: 'Hard to find online', items: ['What they make is unclear', 'Location is missing', 'Contact details are out of date', 'No listings found'] },
+        cap: 'Two fictional businesses. An illustration, not a prediction: clear information gives AI more to work with, and no answer is guaranteed.',
+      },
+      { w: 'Your turn', label: 'Where does your business stand?', t: 'Where does your business stand?', p: 'We help you understand what AI can find about your business and where your online information needs work.', cta: 'Ask us how your business appears' },
+    ],
   },
+
   record: {
-    summary: 'How we measured, and the full record',
+    kicker: 'The record',
+    h: 'We test our own business too, and publish the record.',
+    summary: `Our own test, in full: 28 questions, 5 AI tools, ${MEASURED_ON}`,
     tableCap: `Questions that did not name us, by where we asked, ${MEASURED_ON}`,
     cols: ['Where we asked', 'Asked', 'We appeared'],
     rows: [
@@ -111,6 +100,7 @@ export const AI_PLAIN = {
         b: 'The directory finding:',
         t: 'directories were cited in at least 10 of the 28 answers. One ChatGPT answer credited the agencies it named to two directories. When we measured, we had a profile on neither.',
       },
+      { b: 'Asked about us by name:', t: '7 of 8 answers described us substantially accurately.' },
       {
         b: 'What this does not show:',
         t: 'a trend (it is one round, on one day); anything about Claude or Grok; signed-in answers, other places or languages; why we were absent (consistent with missing directory profiles, not proof of it); whether AI answers bring enquiries.',
@@ -122,20 +112,17 @@ export const AI_PLAIN = {
     ],
   },
 
-  /* 4 — how the work moves (ink): five steps, auto-advancing every 2 s, playing once */
+  /* 5 — how the work moves (ink): five steps, auto-advancing every 1.5 s, playing once (copy unchanged from G1 R2) */
   journey: {
     kicker: 'How the work moves',
     h: { a: 'Five steps.', b: 'Most of them off your website.' },
     steps: [
-      { w: 'In the answers', t: 'See what AI says now', d: 'We ask your buyers’ questions in each AI tool and note who gets named, and from which sites.' },
-      { w: 'Your website', t: 'Open your site to AI', d: 'Check AI tools can read your pages, and that key questions get clear answers.' },
-      { w: 'Everywhere', t: 'Get your facts straight', d: 'The same name, services, location and contact details wherever you appear.' },
-      { w: 'Other sites', t: 'Be where answers come from', d: 'Get listed on the directories, review sites and lists the answers use. The biggest part of the work.' },
-      { w: 'In the answers', t: 'Check again, honestly', d: 'Ask the same questions again. Report what changed, and what didn’t.' },
+      { w: 'In the answers', t: 'See what AI says now', label: 'Step 1: See what AI says now', d: 'We ask your buyers’ questions in each AI tool and note who gets named, and from which sites.' },
+      { w: 'Your website', t: 'Open your site to AI', label: 'Step 2: Open your site to AI', d: 'Check AI tools can read your pages, and that key questions get clear answers.' },
+      { w: 'Everywhere', t: 'Get your facts straight', label: 'Step 3: Get your facts straight', d: 'The same name, services, location and contact details wherever you appear.' },
+      { w: 'Other sites', t: 'Be where answers come from', label: 'Step 4: Be where answers come from', d: 'Get listed on the directories, review sites and lists the answers use. The biggest part of the work.' },
+      { w: 'In the answers', t: 'Check again, honestly', label: 'Step 5: Check again, honestly', d: 'Ask the same questions again. Report what changed, and what didn’t.' },
     ],
-    /** Index of the step that stays orange once the journey is complete ("the biggest part of the work"). */
-    big: 3,
-    ctl: { pause: 'Pause', play: 'Play', replay: 'Replay', of: 'the five-step journey' },
   },
   /* crawler names as listed in each vendor's documentation, retrieved 2026-08-31 (AI_CRAWLER_POLICY.md) */
   crawl: {
@@ -145,56 +132,32 @@ export const AI_PLAIN = {
     note: `Which to allow is your decision. We set out the trade-offs. Names as listed in each vendor’s documentation, retrieved ${MEASURED_ON}.`,
   },
 
-  /* 5 — clear reporting (paper): one picture with a line through it */
+  /* 6 — clear reporting (paper): Ask, Compare, Track */
   rep: {
     kicker: 'Clear reporting',
-    h: { a: 'What we can check.', b: 'What nobody can promise.' },
-    can: {
-      l: 'We can check and explain',
-      items: [
-        { b: 'Your site', t: 'Can AI tools read it?' },
-        { b: 'Your details', t: 'Are they the same everywhere?' },
-        { b: 'Other sites', t: 'Are you on the ones answers use?' },
-        { b: 'The answers', t: 'Were you named, how, and from which sites?' },
-      ],
-    },
-    line: 'Past this line, the AI tool decides',
-    not: {
-      l: 'We can’t promise',
-      items: [
-        { b: 'A place in the answer', t: 'Ask again and the names can change.' },
-        { b: 'A ranking or a score', t: 'There’s no fixed order to rank in.' },
-        { b: 'Improvement every time', t: 'Some checks show no change. We’ll say so.' },
-        { b: 'Enquiries', t: 'Being named doesn’t mean a buyer gets in touch.' },
-      ],
-    },
-    note: 'Each time we check, you see the same questions asked in each AI tool, and what changed. A tool we couldn’t test shows as untested, never as zero.',
-    why: { b: 'Why no score?', t: 'One number would hide how much answers change from one ask, and one tool, to the next.' },
+    h: { a: 'See where your business stands.', b: 'See what changes.' },
+    steps: [
+      { w: 'Ask', label: 'Step 1: Ask', t: 'See what AI says', d: 'We ask the questions your buyers ask, in the AI tools they use.', q: '“Who should I buy this from?”' },
+      { w: 'Compare', label: 'Step 2: Compare', t: 'See who gets named', d: 'Which businesses and which sites appear in the answers.', cmp: ['from a directory', 'from a review site'], you: 'You?' },
+      {
+        w: 'Track',
+        label: 'Step 3: Track',
+        t: 'See what changes',
+        d: 'We repeat the same checks and show you what moved, and what didn’t.',
+        tag: 'Illustrative example',
+        cap: 'Example only: the same two questions, checked twice',
+        cols: ['First check', 'Next check'],
+        rows: [
+          { q: 'Question 1', a: 'Not named', b: 'Named', up: true },
+          { q: 'Question 2', a: 'Not named', b: 'Not named', up: false },
+        ],
+      },
+    ],
+    note: 'We show what we found and what changed. AI answers can vary.',
+    cap: 'Illustration: example wording only, not a report or real results.',
   },
 
-  /* 6 — is it right for you (ivory): our usual judgement, not eligibility rules */
-  fit: {
-    kicker: 'Is it right for you?',
-    h: { a: 'Worth doing now,', b: 'or later?' },
-    lede: 'AI search isn’t the right first step for every business. Here’s how we usually see it.',
-    start: 'Where are you today?',
-    yes: {
-      h: 'Worth exploring now',
-      items: ['You already show up on Google.', 'Buyers compare a few suppliers before they get in touch.', 'Your details are missing, or differ, across listings.'],
-      next: 'We’d start by checking what AI tools say about you today.',
-    },
-    other: {
-      h: 'Something else may come first',
-      items: [
-        { b: 'You don’t show up on Google yet.', link: { t: 'Organic search', href: '/seo' }, t: 'usually comes first.' },
-        { b: 'You need more enquiries this quarter.', t: 'This is slower work. We’ll talk through what could move sooner.' },
-        { b: 'Visitors come, but few get in touch.', link: { t: 'Making it easier to enquire', href: '/conversion-optimization' }, t: 'may come first.' },
-      ] as { b: string; t: string; link?: { t: string; href: string } }[],
-    },
-    close: 'Not sure which side you’re on? That’s what a first conversation is for.',
-  },
-
-  /* 7 — questions (paper). Q2 no longer says these tools cannot show cited sources: their paid reports can (R2 evidence notes §5). */
+  /* 8 — questions (paper). Q2 no longer says these tools cannot show cited sources: their paid reports can (R2 evidence notes §5). */
   qKicker: 'Questions',
   qH: 'What people ask us',
   questions: [

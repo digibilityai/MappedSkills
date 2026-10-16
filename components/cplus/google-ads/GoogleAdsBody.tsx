@@ -7,8 +7,8 @@ import { Icon } from '../Icons';
 import { Tabs } from '../Interactive';
 
 /**
- * C+ Google Ads (/google-ads), G1 revision 2 (DEC-053; owner-approved R2 proposal): the static composition of the page,
- * built from `copy.ts`. Nothing here moves (motion is a later stage), and nothing is a client component: the four selectors
+ * C+ Google Ads (/google-ads), G1.3a (DEC-053 and the owner-approved G1.3 scope and decisions): the static composition of the page,
+ * built from `copy.ts`. Sections 2 and 7 are unchanged from G1.2. Nothing here moves (motion is a later stage), and nothing is a client component: the four selectors
  * are the existing WAI-ARIA `Tabs` (every panel is shown, stacked, when JavaScript is off) and a native radio group.
  * Page metadata and structured data live in `page.tsx` and are not touched.
  *
@@ -59,62 +59,65 @@ function Hero() {
           <ActionPair primaryLabel={H.primary} secondaryLabel={H.secondary} />
         </div>
 
-        {/* The receipt follows one search. The stage selector is a native radio group: the chosen stage lights the receipt
-            lines that belong to it (CSS `:has()`), so it works with scripts off and with a keyboard. */}
+        {/* The receipt follows one search. The four stage controls sit beside it (above it on narrower screens) and are a
+            native radio group: the chosen stage lights the receipt lines that belong to it (CSS `:has()`), so it works
+            with scripts off and with a keyboard. */}
         <figure className="ga-fig ga-follow">
-          <fieldset className="ga-st">
-            <legend className="ga-label">{H.stagesLabel}</legend>
-            <div className="ga-st-row">
-              {H.stages.map((s, i) => (
-                <label key={s.key} className="ga-st-b">
-                  <input type="radio" name="ga-stage" value={s.key} defaultChecked={i === 0} className="ga-st-in" />
-                  <Icon name={s.icon} size={22} />
-                  <span>{s.label}</span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
-          <div className="ga-rc">
-            <p className="ga-rc-title">{R.title}</p>
-            <div className="ga-rc-part">
-              <p className="ga-rc-k">
-                <span className="ga-label">{R.topK}</span>
-                <span className="ga-tag" data-st="click">
-                  {R.topTag}
-                </span>
-              </p>
-              <ul className="ga-rc-l">
-                {R.top.map((t, i) => (
-                  <li key={t} data-st={i === 0 ? 'search' : 'click'}>
-                    <span>{t}</span>
-                    <span className="ga-dots" aria-hidden="true" />
-                    <Tick />
-                  </li>
+          <div className="ga-fig-row">
+            <fieldset className="ga-st">
+              <legend className="ga-label">{H.stagesLabel}</legend>
+              <div className="ga-st-row">
+                {H.stages.map((s, i) => (
+                  <label key={s.key} className="ga-st-b">
+                    <input type="radio" name="ga-stage" value={s.key} defaultChecked={i === 0} className="ga-st-in" />
+                    <Icon name={s.icon} size={22} />
+                    <span>{s.label}</span>
+                  </label>
                 ))}
-              </ul>
-            </div>
-            <p className="ga-tear">
-              <span>{R.tear}</span>
-            </p>
-            <div className="ga-rc-part ga-rc-ours">
-              <p className="ga-rc-k">
-                <span className="ga-label">{R.bottomK}</span>
-                <span className="ga-tag ga-tag-ours">{R.bottomTag}</span>
+              </div>
+            </fieldset>
+            <div className="ga-rc">
+              <p className="ga-rc-title">{R.title}</p>
+              <div className="ga-rc-part">
+                <p className="ga-rc-k">
+                  <span className="ga-label">{R.topK}</span>
+                  <span className="ga-tag" data-st="click">
+                    {R.topTag}
+                  </span>
+                </p>
+                <ul className="ga-rc-l">
+                  {R.top.map((t, i) => (
+                    <li key={t} data-st={i === 0 ? 'search' : 'click'}>
+                      <span>{t}</span>
+                      <span className="ga-dots" aria-hidden="true" />
+                      <Tick />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <p className="ga-tear">
+                <span>{R.tear}</span>
               </p>
-              <ul className="ga-rc-l">
-                {R.bottom.map((t, i) => (
-                  <li key={t} data-st={['search', 'click', 'click', 'visit enquiry'][i]}>
-                    <span>{t}</span>
-                    <span className="ga-dots" aria-hidden="true" />
-                    <Tick on />
-                  </li>
-                ))}
-              </ul>
+              <div className="ga-rc-part ga-rc-ours">
+                <p className="ga-rc-k">
+                  <span className="ga-label">{R.bottomK}</span>
+                  <span className="ga-tag ga-tag-ours">{R.bottomTag}</span>
+                </p>
+                <ul className="ga-rc-l">
+                  {R.bottom.map((t, i) => (
+                    <li key={t} data-st={['search', 'click', 'click', 'visit enquiry'][i]}>
+                      <span>{t}</span>
+                      <span className="ga-dots" aria-hidden="true" />
+                      <Tick on />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <p className="ga-sep" data-st="enquiry">
+                <Tick sep />
+                <span>{R.separately}</span>
+              </p>
             </div>
-            <p className="ga-sep" data-st="enquiry">
-              <Tick sep />
-              <span>{R.separately}</span>
-            </p>
           </div>
           <figcaption className="px-cap">{R.cap}</figcaption>
         </figure>
@@ -178,7 +181,7 @@ function Factors() {
 /* --------------------------------------------------------------- 3 path -- */
 type PathCase = (typeof S.path.cases)[number];
 
-/* One ending of one search: where it stopped, what Google Ads recorded, what the business sees, and who acts. */
+/* One outcome of one search, in a single panel: where it stopped, what Google Ads recorded, what the business sees, and who acts. */
 function Ending({ c }: { c: PathCase }) {
   const P = S.path;
   const status = P.laneYou.status[c.genuine as 'yes' | 'no' | 'not'];
@@ -193,7 +196,7 @@ function Ending({ c }: { c: PathCase }) {
           return (
             <li key={st.key} className={cls + (mark ? ' has-' + mark : '')}>
               <span className="ga-jy-node" aria-hidden="true">
-                <Icon name={mark || st.icon} size={22} />
+                <Icon name={mark || st.icon} size={20} />
               </span>
               <span className="ga-jy-name">{st.label}</span>
             </li>
@@ -225,7 +228,7 @@ function Ending({ c }: { c: PathCase }) {
           <p>{P.laneYou.item}</p>
           <p className="ga-jy-status">
             <span className="ga-jy-ico" aria-hidden="true">
-              <Icon name={c.genuine === 'yes' ? 'check' : 'cross'} size={20} />
+              <Icon name={c.genuine === 'yes' ? 'check' : 'cross'} size={18} />
             </span>
             {status}
           </p>
@@ -248,6 +251,7 @@ function Ending({ c }: { c: PathCase }) {
             ) : null}
           </div>
         ) : null}
+        {c.key === 'record' ? <p className="ga-term">{P.term}</p> : null}
       </div>
     </div>
   );
@@ -256,10 +260,12 @@ function Ending({ c }: { c: PathCase }) {
 function Path() {
   const P = S.path;
   return (
-    <section className="b-sec b-ink ga-path" aria-labelledby="ga-h-path">
+    <section className="b-sec b-ink ga-path ga-tight" aria-labelledby="ga-h-path">
       <div className="px-wrap">
-        <Heading id="ga-h-path" h={P.h} />
-        <p className="ga-path-lede">{P.lede}</p>
+        <div className="ga-head">
+          <Heading id="ga-h-path" h={P.h} />
+          <p className="ga-path-lede">{P.lede}</p>
+        </div>
         <Tabs
           className="ga-jy-tabs"
           label={P.tabsLabel}
@@ -274,62 +280,80 @@ function Path() {
             panel: <Ending c={c} />,
           }))}
         />
-        <p className="ga-term">{P.term}</p>
-        <p className="ga-pf-close">{P.close}</p>
       </div>
     </section>
   );
 }
 
 /* -------------------------------------------------------------- 4 scope -- */
-type Chip = { chip: string; full: string; icon: string };
-
-function Chips({ items }: { items: Chip[] }) {
-  return (
-    <ul className="ga-chips">
+function Scope() {
+  const C = S.scope;
+  const list = (items: string[], sep = false) => (
+    <ul className="ga-det-l">
       {items.map((it) => (
-        <li key={it.chip}>
-          <Icon name={it.icon} size={20} />
-          {/* the chip is the short label; assistive technology gets the full approved sentence instead, once */}
-          <span aria-hidden="true">{it.chip}</span>
-          <span className="px-sr">{it.full}</span>
+        <li key={it}>
+          <Tick on={!sep} sep={sep} />
+          <span>{it}</span>
         </li>
       ))}
     </ul>
   );
-}
-
-function Scope() {
-  const C = S.scope;
   return (
-    <section className="b-sec ga-scope" aria-labelledby="ga-h-scope">
+    <section className="b-sec ga-scope ga-tight" aria-labelledby="ga-h-scope">
       <div className="px-wrap">
-        <Heading id="ga-h-scope" h={C.h} />
-        <p className="ga-sc-sub">{C.sub}</p>
-        <div className="ga-sc-g">
-          <div className="ga-frame">
-            <p className="ga-frame-k">{C.frame}</p>
-            <div className="ga-frame-in">
-              <div className="ga-layer">
-                <h3 className="ga-label ga-layer-k">{C.core.k}</h3>
-                <p className="ga-layer-t">{C.core.t}</p>
-                <Chips items={C.core.items} />
-              </div>
-              <p className="ga-vtear" aria-hidden="true">
-                <span>{C.tear}</span>
-              </p>
-              <div className="ga-layer">
-                <h3 className="ga-label ga-layer-k">{C.oversight.k}</h3>
-                <p className="ga-layer-t">{C.oversight.t}</p>
-                <Chips items={C.oversight.items} />
-              </div>
+        <div className="ga-head ga-head-scope">
+          <Heading id="ga-h-scope" h={C.h} />
+          <p className="ga-sc-sub">{C.sub}</p>
+        </div>
+
+        {/* three connected responsibilities: the first two sit inside the solid frame (covered by the management fee),
+            the third sits outside it, dashed (agreed separately). The tags are always visible. */}
+        <div className="ga-chain">
+          <div className="ga-frame" aria-hidden="true">
+            <span className="ga-frame-k">{C.frame}</span>
+          </div>
+          <ol className="ga-nodes">
+            {C.nodes.map((n) => (
+              <li key={n.key} className={'ga-node' + (n.key === 'separate' ? ' is-sep' : '')}>
+                <span className="ga-node-ico" aria-hidden="true">
+                  <Icon name={n.icon} size={24} />
+                </span>
+                <p className="ga-node-t">{n.t}</p>
+                <p className="ga-node-d">{n.d}</p>
+                <p className="ga-node-tag">
+                  <Tick on={n.key !== 'separate'} sep={n.key === 'separate'} />
+                  <span>{n.tag}</span>
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        {/* only the detailed lists collapse; the responsibilities and their commercial labels above never do */}
+        <details className="ga-det">
+          <summary>
+            <span>{C.detailsSummary}</span>
+            <span className="ga-det-pm" aria-hidden="true" />
+          </summary>
+          <div className="ga-det-g">
+            <div>
+              <h3 className="ga-label">{C.core.k}</h3>
+              {list(C.core.items)}
+            </div>
+            <div>
+              <h3 className="ga-label">{C.oversight.k}</h3>
+              {list(C.oversight.items)}
+            </div>
+            <div className="ga-det-sep">
+              <h3 className="ga-label">{C.separate.k}</h3>
+              {list(C.separate.items, true)}
             </div>
           </div>
-          <div className="ga-sepbox">
-            <h3 className="ga-label ga-layer-k">{C.separate.k}</h3>
-            <Chips items={C.separate.items} />
-          </div>
-        </div>
+        </details>
+
+        <p className="ga-fee">
+          {C.fee.text} <InlineLink href={C.fee.link.href}>{C.fee.link.label}</InlineLink>.
+        </p>
       </div>
     </section>
   );
@@ -339,7 +363,7 @@ function Scope() {
 function Answer() {
   const A = S.answer;
   return (
-    <section className="b-sec b-ink ga-ans" aria-labelledby="ga-h-ans">
+    <section className="b-sec b-ink ga-ans ga-tight" aria-labelledby="ga-h-ans">
       <div className="px-wrap">
         <div className="ga-ans-top">
           <Heading id="ga-h-ans" h={A.h} />
@@ -352,18 +376,11 @@ function Answer() {
                 <Icon name={p.icon} size={26} />
               </span>
               <h3 className="ga-pledge-t">{p.t}</h3>
-              {p.lines.map((l) => (
-                <p key={l}>{l}</p>
-              ))}
+              <p>{p.line}</p>
             </li>
           ))}
         </ul>
-        <aside className="ga-qual">
-          <p>{A.qualification}</p>
-        </aside>
-        <p className="ga-fee">
-          {A.fee.text} <InlineLink href={A.fee.link.href}>{A.fee.link.label}</InlineLink>.
-        </p>
+        <p className="ga-closing">{A.closing}</p>
       </div>
     </section>
   );
@@ -373,54 +390,39 @@ function Answer() {
 function Reporting() {
   const G = S.reporting;
   return (
-    <section className="b-sec b-paper ga-rep" aria-labelledby="ga-h-rep">
+    <section className="b-sec b-paper ga-rep ga-tight" aria-labelledby="ga-h-rep">
       <div className="px-wrap">
-        <Heading id="ga-h-rep" h={G.h} />
-        <p className="b-lede ga-rep-lede">{G.lede}</p>
-        <div className="ga-rep-wrap">
-          {/* the report: a header, the three things it covers (hatched bars are placeholders, not data), then the findings */}
-          <div className="ga-mock-head">
-            <p className="ga-mock-bar">
-              <span className="ga-label">{G.report.k}</span>
-              <span className="ga-tag ga-tag-solid">{G.report.note}</span>
-            </p>
-            <ul className="ga-mock-sec">
-              {G.report.sections.map((t, i) => (
-                <li key={t}>
-                  <span>{t}</span>
-                  <span className={'ga-hatch h' + (i + 1)} aria-hidden="true" />
-                </li>
-              ))}
-            </ul>
-            <p className="ga-label ga-mock-k">{G.findingsK}</p>
-          </div>
-          <Tabs
-            className="ga-mock-tabs"
-            label={G.tabsLabel}
-            items={G.findings.map((f) => ({
-              id: f.key,
-              tab: <span className="ga-find-tab">{f.find}</span>,
-              panel: (
-                <div className="ga-dec">
-                  <h3 className="ga-pf-h">{f.find}</h3>
-                  <p className="ga-label">{G.findingLabel}</p>
-                  <p className="ga-dec-f">{f.find}</p>
-                  <span className="ga-dec-arr" aria-hidden="true" />
-                  <p className="ga-label">{G.decisionLabel}</p>
-                  <p className="ga-dec-d">{f.do}</p>
-                </div>
-              ),
-            }))}
-          />
-          <p className="ga-mock-src">
-            <span className="ga-hatch ga-hatch-sw" aria-hidden="true" />
-            <span>{G.unknown}</span>
-          </p>
-          <p className="ga-mock-cap px-cap">{G.report.illus}</p>
+        <div className="ga-head">
+          <Heading id="ga-h-rep" h={G.h} />
+          <p className="ga-rep-lede">{G.lede}</p>
         </div>
-        <aside className="ga-limit">
-          <p>{G.limit}</p>
-        </aside>
+        <p className="ga-rep-covers">{G.covers}</p>
+        <p className="ga-label ga-find-k">{G.findingsK}</p>
+        <Tabs
+          className="ga-find"
+          label={G.tabsLabel}
+          items={G.findings.map((f) => ({
+            id: f.key,
+            tab: <span className="ga-find-tab">{f.find}</span>,
+            panel: (
+              <div className="ga-dec">
+                <h3 className="ga-pf-h">{f.find}</h3>
+                <p className="ga-label">{G.decisionLabel}</p>
+                <p className="ga-dec-d">{f.do}</p>
+                {f.separately ? (
+                  <p className="ga-dec-sep">
+                    <Tick sep />
+                    <span>{f.separately}</span>
+                  </p>
+                ) : null}
+              </div>
+            ),
+          }))}
+        />
+        <div className="ga-rep-notes">
+          <p className="ga-baseline">{G.baseline}</p>
+          <p className="ga-limit-line">{G.limit}</p>
+        </div>
         <p className="b-tlink">
           <TLink href={G.link.href}>{G.link.label}</TLink>
         </p>
@@ -473,12 +475,7 @@ function Close() {
           <h2 id="ga-h-next" className="b-h2">
             {N.h.a} {N.h.b}
           </h2>
-          <p className="ga-prompt">
-            <strong>{N.already.k}</strong> {N.already.t}
-          </p>
-          <p className="ga-prompt">
-            <strong>{N.thinking.k}</strong> {N.thinking.t}
-          </p>
+          <p className="ga-prompt">{N.body}</p>
         </div>
         <ActionPair primaryLabel={N.primary} secondaryLabel={N.secondary} />
       </div>

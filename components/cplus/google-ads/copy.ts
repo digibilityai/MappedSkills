@@ -12,6 +12,9 @@
  *   - the title, description, canonical and structured data are not part of this module (they stay in page.tsx);
  *   - no section kickers: none are approved. The hero kicker is the only one.
  *
+ * G1.3a (owner-approved scope and decisions B to E, 2026-10-16): sections 1, 3, 4, 5, 6 and 8 carry the approved G1.3 copy;
+ * sections 2 (factors) and 7 (process) are unchanged.
+ *
  * Headings are stored as { a, b }: `a` is set in the plain colour and `b` in orange (the C+ two-colour heading). Joined
  * with a space, `a` and `b` are the heading text.
  */
@@ -26,7 +29,7 @@ export const GA_COPY = {
     kicker: 'Google Ads',
     h1: { a: 'We run your ads.', b: 'We look beyond the click.' },
     lede: 'We manage your Google Ads: your ads, searches and budget. We also check that your website makes it easy to enquire. If we find a problem with your website or tracking, we’ll explain it. Fixing it is agreed separately.',
-    primary: 'Tell us what you’re trying to fix',
+    primary: 'Tell us about your Google Ads',
     secondary: 'Book a call',
 
     /* the receipt: ticked lines are part of the service; the dashed footer is agreed separately */
@@ -119,15 +122,15 @@ export const GA_COPY = {
     close: 'No score. We talk these through with you first, and tell you when something else may suit you better.',
   },
 
-  /* 3 — one search, four endings: the journey, what Google Ads records, what the business sees, and who acts */
+  /* 3 — from ad spend to enquiries: one search, four outcomes, one explanation panel */
   path: {
-    h: { a: 'From your budget to an enquiry —', b: 'and where it can go wrong.' },
-    lede: 'Google Ads reports what it’s set up to record. That isn’t always the same as a genuine enquiry.',
+    h: { a: 'From ad spend to enquiries.', b: 'Where does it break?' },
+    lede: 'A click isn’t a customer. We look at what happens after someone clicks your ad — and where potential enquiries are lost.',
     stations: [
       { key: 'search', label: 'Search', icon: 'search' },
       { key: 'click', label: 'Click', icon: 'cursor' },
       { key: 'visit', label: 'Visit', icon: 'page' },
-      { key: 'enquiry', label: 'Enquiry', icon: 'form' },
+      { key: 'outcome', label: 'Outcome', icon: 'target' },
     ],
     laneAds: {
       label: 'What Google Ads can record',
@@ -139,14 +142,15 @@ export const GA_COPY = {
       item: 'Whether it was a genuine enquiry — a real person, reachable, asking about your work.',
       status: { yes: 'A genuine enquiry', no: 'No genuine enquiry', not: 'Not a genuine enquiry' },
     },
-    /* the one use of the word (OD-11), explained in plain language */
+    /* the one use of the word (OD-11), explained in plain language; shown in the fourth outcome's panel */
     term: 'Google Ads calls a recorded action a “conversion”.',
     tabsLabel: 'Ways one search can end',
-    /* stop: the station where the search ended (0 to 3); recorded: whether Google Ads recorded an action; genuine: yes / no / not */
+    /* stop: the station where the search ended (0 to 3); recorded: whether Google Ads recorded an action; genuine: yes / no / not.
+       Only the first outcome reaches a genuine enquiry. */
     cases: [
       {
         key: 'intended',
-        tab: 'A genuine enquiry',
+        tab: 'Genuine enquiry',
         icon: 'check',
         stop: 3,
         recorded: true,
@@ -157,7 +161,7 @@ export const GA_COPY = {
       },
       {
         key: 'searches',
-        tab: 'The wrong person clicks',
+        tab: 'Unsuitable click',
         icon: 'user',
         stop: 1,
         recorded: false,
@@ -168,7 +172,7 @@ export const GA_COPY = {
       },
       {
         key: 'page',
-        tab: 'The page doesn’t answer',
+        tab: 'Website problem',
         icon: 'page',
         stop: 2,
         recorded: false,
@@ -179,7 +183,7 @@ export const GA_COPY = {
       },
       {
         key: 'record',
-        tab: 'A recorded action that isn’t an enquiry',
+        tab: 'Recorded action that is not a genuine enquiry',
         icon: 'eyeoff',
         stop: 3,
         recorded: true,
@@ -189,107 +193,90 @@ export const GA_COPY = {
         separately: 'Tracking repairs are agreed separately.',
       },
     ],
-    close: 'So we look past the report to the enquiries your business receives, as far as your tracking allows.',
   },
 
-  /* 4 — what the work covers: inside the frame is covered by the management fee; the dashed box is agreed separately */
+  /* 4 — what the work covers: three connected responsibilities; the first two are covered by the management fee, the third is
+     agreed separately. The detailed lists sit in a disclosure (owner exception to the UX rule on collapsed content, decision 7). */
   scope: {
     h: { a: 'What the work', b: 'covers.' },
     sub: 'Management and oversight are covered by our management fee. Anything we’d build or fix on your website or tracking is agreed separately.',
     frame: 'Covered by our management fee',
+    nodes: [
+      { key: 'run', t: 'Run the ads', d: 'Core Google Ads management', tag: 'Included in the management fee', icon: 'target' },
+      { key: 'beyond', t: 'Look beyond the click', d: 'Website, enquiry-route and tracking oversight', tag: 'Included in the management fee', icon: 'search' },
+      {
+        key: 'separate',
+        t: 'Agree additional fixes separately',
+        d: 'Landing-page creation, website and form repairs, and tracking implementation',
+        tag: 'Agreed separately',
+        icon: 'wrench',
+      },
+    ],
+    detailsSummary: 'See what’s included',
     core: {
       k: 'Core service',
       t: 'We run your Google Ads',
       items: [
-        { chip: 'Set up and manage', full: 'Set up and manage your Google Ads', icon: 'target' },
-        { chip: 'Write and improve ads', full: 'Write and improve your ads', icon: 'message' },
-        { chip: 'Manage the budget', full: 'Manage your advertising budget', icon: 'chart' },
-        { chip: 'Review and improve campaigns', full: 'Review search performance and improve your campaigns', icon: 'search' },
+        'Set up and manage your Google Ads',
+        'Write and improve your ads',
+        'Manage your advertising budget',
+        'Review search performance and improve your campaigns',
       ],
     },
     oversight: {
       k: 'Oversight',
       t: 'We look beyond the click',
       items: [
-        { chip: 'Review the landing page', full: 'Review the page people land on', icon: 'page' },
-        { chip: 'Check people can enquire', full: 'Check whether visitors can make an enquiry', icon: 'form' },
-        { chip: 'Spot website and tracking problems', full: 'Spot problems with your website, enquiry route or tracking', icon: 'eyeoff' },
-        { chip: 'Explain and recommend', full: 'Explain what we find and recommend improvements', icon: 'message' },
+        'Review the page people land on',
+        'Check whether visitors can make an enquiry',
+        'Spot problems with your website, enquiry route or tracking',
+        'Explain what we find and recommend improvements',
       ],
     },
     separate: {
       k: 'Agreed separately',
-      items: [
-        { chip: 'Landing pages', full: 'Creating or changing landing pages', icon: 'page' },
-        { chip: 'Website and form fixes', full: 'Fixing your website or enquiry forms', icon: 'wrench' },
-        { chip: 'New or repaired tracking', full: 'Setting up new tracking, or repairing it', icon: 'chart' },
-      ],
+      items: ['Creating or changing landing pages', 'Fixing your website or enquiry forms', 'Setting up new tracking, or repairing it'],
     },
-    tear: 'The click',
+    /* the spend-versus-fee explanation and the pricing link moved here from the accountability section (decision 8) */
+    fee: {
+      text: 'Your ad spend is paid directly to Google. Our management fee is separate. What it depends on is on the',
+      link: { href: '/pricing', label: 'pricing page' },
+    },
   },
 
-  /* 5 — what we answer for: four pledges, one qualification and one fee line */
+  /* 5 — what we answer for: four pledges and one closing line */
   answer: {
     h: { a: 'What we', b: 'answer for.' },
     lede: 'These are ours to get right.',
     pledges: [
-      {
-        t: 'Your budget',
-        icon: 'target',
-        lines: [
-          'We manage it, and adjust your campaigns when the results call for it.',
-          'Before we make significant changes, we record your starting performance, where it’s available.',
-        ],
-      },
-      {
-        t: 'Clear reasons',
-        icon: 'message',
-        lines: [
-          'We explain significant changes and why we made them.',
-          'We review your website and enquiry route and recommend improvements. Making the changes is agreed separately.',
-        ],
-      },
-      {
-        t: 'Honest reporting',
-        icon: 'chart',
-        lines: ['A performance report and a review call every month. We use what they show to decide what to do next.'],
-      },
-      {
-        t: 'Corrective action',
-        icon: 'wrench',
-        lines: ['If results disappoint, we tell you and recommend what to change.'],
-      },
+      { t: 'Your budget', icon: 'target', line: 'We review spending and adjust campaigns when performance calls for it.' },
+      { t: 'Clear reasons', icon: 'message', line: 'We explain significant changes and why we make them.' },
+      { t: 'Honest reporting', icon: 'chart', line: 'A monthly performance report and review call.' },
+      { t: 'Corrective action', icon: 'wrench', line: 'When results disappoint, we discuss what isn’t working and recommend improvements.' },
     ],
-    qualification: 'We cannot promise a number of enquiries or what each will cost. Your market, prices, competitors and how quickly you answer all play a part.',
-    fee: { text: 'Our management fee is separate from your ad spend. What it depends on is on the', link: { href: '/pricing', label: 'pricing page' } },
+    closing: 'We explain our decisions, discuss poor results and recommend what to change. We cannot promise a number of enquiries or what each will cost.',
   },
 
-  /* 6 — what you learn each month: one illustrative report, one finding at a time; the attribution limit is part of it */
+  /* 6 — monthly reporting: a compact finding-to-action example; the baseline commitment (OD-07) and the attribution limit live here */
   reporting: {
-    h: { a: 'What you learn each month,', b: 'and what we do with it.' },
-    lede: 'Each month you get a report and a review call.',
-    report: {
-      k: 'A monthly report',
-      note: 'Where the data allows',
-      sections: [
-        'Which campaigns brought enquiries',
-        'Which searches brought them',
-        'How that compares with the starting point we recorded',
-      ],
-      illus: 'Illustrative layout. No real figures.',
-    },
+    h: { a: 'Clear reports.', b: 'Clearer decisions.' },
+    lede: 'Every month you get a performance report and a review call. We review your Google Ads performance with you and explain what needs attention.',
+    covers: 'Where the data allows, it covers campaigns, searches and how performance compares with the starting point we recorded.',
+    baseline: 'Before we make significant changes, we record your starting performance, where it’s available.',
     tabsLabel: 'Findings',
     findingsK: 'For example',
-    findingLabel: 'Finding',
     decisionLabel: 'What we do',
-    /* the first finding is the one shown on load: it shows an investigation most clearly (owner decision D1, option B) */
     findings: [
-      { key: 'noenq', find: 'Some searches bring clicks but few enquiries', do: 'We check whether they’re the right searches, and decide whether to change or stop them.' },
-      { key: 'works', find: 'Some searches bring enquiries', do: 'We look at why, and decide whether they deserve more of the budget.' },
-      { key: 'page', find: 'A page gets visits but no enquiries', do: 'We look at what it asks people to do, and recommend changes. Making them is agreed separately.' },
+      { key: 'noenq', find: 'Clicks, but few enquiries', do: 'Review the searches and adjust or exclude those that aren’t relevant.', separately: '' },
+      { key: 'works', find: 'Searches bringing enquiries', do: 'Review what’s working and consider where to focus the budget.', separately: '' },
+      {
+        key: 'page',
+        find: 'Visits, but no enquiries',
+        do: 'Check the landing-page experience and recommend improvements.',
+        separately: 'Making the changes is agreed separately.',
+      },
     ],
-    unknown: 'Source unknown',
-    limit: 'Not every enquiry can be traced to an ad. A phone call after someone saw your ad is a common example. Where we cannot tell, we say so. We do not claim those enquiries, and we do not hide them.',
+    limit: 'Not every enquiry can be traced to an ad. Where we cannot tell, we say so.',
     link: { href: '/how-it-works', label: 'How we measure, including what can’t be traced' },
     related: {
       a: 'Related:',
@@ -315,12 +302,11 @@ export const GA_COPY = {
     line: 'You see our findings, a recommended plan and a proposal before any work starts.',
   },
 
-  /* 8 — the close: short, decisive, both actions */
+  /* 8 — the close: one invitation, both actions */
   close: {
     h: { a: 'Already running Google Ads,', b: 'or thinking about it?' },
-    already: { k: 'Already advertising?', t: 'Tell us what you spend and what you’re getting.' },
-    thinking: { k: 'Thinking about it?', t: 'Tell us what you sell and what a new customer is worth.' },
-    primary: 'Tell us what you’re trying to fix',
+    body: 'Let’s discuss what your business needs and whether Google Ads is the right fit.',
+    primary: 'Tell us about your Google Ads',
     secondary: 'Book a call',
   },
 };

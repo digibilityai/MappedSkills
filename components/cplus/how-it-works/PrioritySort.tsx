@@ -1,13 +1,12 @@
 'use client';
 
 import { useLayoutEffect, useRef, useState } from 'react';
-import { Icon } from '../Icons';
+import { Glyph } from './icons';
 
 /**
- * C+ How It Works: the priority sort, from the approved prototype (proto/direction-c-plus 0a8b611,
- * components/proto-cplus/PrioritySort.tsx), unchanged.
+ * How It Works: the priority sort (owner-approved G1 R2 design, DEC-058; behaviour unchanged from the released page).
  *   - One native button (aria-pressed) toggles the view; focus stays on it; a polite status line announces the result.
- *   - Groups are never colour-only: each has a heading, an icon, a position, and "not worth doing" is struck through.
+ *   - Groups are never colour-only: each has a heading, an icon and a position, and "not worth doing" is struck through.
  *   - Motion: the cards glide from where they were to where they land (FLIP, Web Animations), once per press. Under
  *     prefers-reduced-motion they simply appear in place. Nothing loops.
  *   - Without JavaScript (`html.px-js` absent) the button and the unsorted pile are hidden and the sorted groups are
@@ -26,8 +25,8 @@ export function PrioritySort({
   statusSorted,
   statusPile,
 }: {
-  lanes: Lane[];
-  items: Item[];
+  lanes: readonly Lane[];
+  items: readonly Item[];
   button: string;
   pileLabel: string;
   statusSorted: string;
@@ -40,7 +39,7 @@ export function PrioritySort({
 
   const press = () => {
     const m = new Map<string, DOMRect>();
-    root.current?.querySelectorAll<HTMLElement>('.ps-live [data-k]').forEach((el) => m.set(el.dataset.k!, el.getBoundingClientRect()));
+    root.current?.querySelectorAll<HTMLElement>('.hx-ps-live [data-k]').forEach((el) => m.set(el.dataset.k!, el.getBoundingClientRect()));
     first.current = m;
     setTouched(true);
     setSorted((v) => !v);
@@ -51,7 +50,7 @@ export function PrioritySort({
     if (!m.size) return;
     first.current = new Map();
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    root.current?.querySelectorAll<HTMLElement>('.ps-live [data-k]').forEach((el, i) => {
+    root.current?.querySelectorAll<HTMLElement>('.hx-ps-live [data-k]').forEach((el, i) => {
       const a = m.get(el.dataset.k!);
       if (!a || typeof el.animate !== 'function') return;
       const b = el.getBoundingClientRect();
@@ -67,55 +66,51 @@ export function PrioritySort({
     });
   }, [sorted]);
 
-  const card = (it: Item, withWhy: boolean) => (
-    <li key={it.k} data-k={it.k} className={'ps-card ps-' + it.lane}>
-      <span className="ps-card-t">{it.t}</span>
-      {withWhy && <span className="ps-card-why">{it.why}</span>}
+  const card = (it: Item) => (
+    <li key={it.k} data-k={it.k} className="hx-pc">
+      <b>{it.t}</b>
+      <span>{it.why}</span>
     </li>
   );
 
   const groups = (
-    <div className="ps-lanes">
+    <div className="hx-ps-lanes">
       {lanes.map((l) => (
-        <div key={l.key} className={'ps-lane ps-lane-' + l.key}>
-          <h3 className="ps-lane-h">
-            <span className="ps-lane-ic" aria-hidden="true">
-              <Icon name={LANE_ICON[l.key]} size={20} />
+        <div key={l.key} className={'hx-lane hx-lane-' + l.key}>
+          <h3 className="hx-lane-h">
+            <span className="hx-lane-ic" aria-hidden="true">
+              <Glyph name={LANE_ICON[l.key]} />
             </span>
             {l.t}
           </h3>
-          <p className="ps-lane-d">{l.d}</p>
-          <ul className="ps-list" aria-label={l.t}>
-            {items.filter((it) => it.lane === l.key).map((it) => card(it, true))}
-          </ul>
+          <p className="hx-lane-d">{l.d}</p>
+          <ul aria-label={l.t}>{items.filter((it) => it.lane === l.key).map(card)}</ul>
         </div>
       ))}
     </div>
   );
 
   return (
-    <div className="ps" ref={root} data-sorted={sorted ? '' : undefined}>
-      <div className="ps-ctl">
-        <button type="button" className="px-toggle ps-btn" aria-pressed={sorted} onClick={press}>
+    <div className="hx-ps" ref={root}>
+      <div className="hx-ps-ctl">
+        <button type="button" className="px-toggle hx-ps-btn" aria-pressed={sorted} onClick={press}>
           <span className="px-toggle-sw" aria-hidden="true" />
           {button}
         </button>
+        {!sorted ? <p className="hx-ps-hint">{pileLabel}</p> : null}
         <p className="px-sr" role="status" aria-live="polite">
           {touched ? (sorted ? statusSorted : statusPile) : ''}
         </p>
       </div>
       {sorted ? (
-        <div className="ps-live">{groups}</div>
+        <div className="hx-ps-live">{groups}</div>
       ) : (
         <>
           {/* JS: the pile, as found. No JS: hidden, and the sorted groups below are the page. */}
-          <div className="ps-live ps-pile-w">
-            <p className="ps-pile-l">{pileLabel}</p>
-            <ul className="ps-pile" aria-label={pileLabel}>
-              {items.map((it) => card(it, false))}
-            </ul>
-          </div>
-          <div className="ps-nojs">{groups}</div>
+          <ul className="hx-ps-live hx-ps-pile" aria-label={pileLabel}>
+            {items.map(card)}
+          </ul>
+          <div className="hx-ps-nojs">{groups}</div>
         </>
       )}
     </div>

@@ -1210,3 +1210,32 @@ Use this file only for meaningful project decisions.
   3. **Local commit authorisation:** one local commit on `feat/lead-generation-g2` (base `origin/main` `0fe87b2`) containing only the G2 implementation and its supporting documentation, subject to pre-commit verification.
   4. **Still NOT authorised:** push, pull request, merge and deployment. `LG-D24` (the live-page production factual correction) remains separately gated; `LG-D22` and `LG-D29` remain separately scoped and are not implemented. No change to `/google-ads`, `/social-media-ads`, `/ai-seo` or `/conversion-optimization`.
   5. **Repository footprint addendum (2026-10-17, owner approval of the pre-push hygiene recommendation):** the local commit was replaced by a lean one. Kept in Git: source, tests, this log, the G1 and G2 records, the approved mockup, the owner's annotated PDF (`docs/lead-generation-redesign/g1/owner-pdf/LG_owner_review.pdf`, the only surviving copy of the original), result JSON and five portable verification scripts. Moved outside Git, with no loss: 192 review screenshots, the two review pages and seven superseded or non-portable tools, in `LG_G1_G2_evidence_archive.zip` (204 files, SHA-256 manifest, verified). No approval decision or evidence was removed. Push, PR, merge and deployment remain unauthorised.
+
+### DEC-058
+- **Date:** 2026-10-18
+- **Status:** **Approved (owner): `/how-it-works` G1 R2 design, copy and SEO metadata; local G2 implementation and verification on `feat/how-it-works-g2` authorised.** No commit, push, PR, merge or deployment is authorised.
+- **Decision (owner, "How It Works | G1 Visual Refinement (R2)", R2 approval of 2026-10-18, and "G2 Implementation Authorization", 2026-10-18; scope is the `/how-it-works` page only):**
+  1. **G1 R2 is approved:** visual design, structure, customer-facing copy, interactions and responsive layouts of the mockup in `docs/how-it-works-redesign/g1/` (`mockup/`, `HIW_G1_NOTES.md`). The audit is `docs/how-it-works-redesign/g0/HIW_G0_AUDIT.html`.
+  2. **HW-D01 (approved 2026-10-17):** reporting and review-call wording, exactly: "A monthly performance report, and a review call where your service includes one." This is folded into the redesign; there is no separate live-page correction.
+  3. **HW-D02:** the qualified-enquiry ledger, "Accountable up to here" and "every one of the six points is reported" are removed from this page. The `DEC-005` wording on other pages is unchanged.
+  4. **HW-D06:** "What we do not know" (the keyword tool, own analytics start, the AI test round, the organic horizon) is removed from this page.
+  5. **HW-D08:**
+     - title "How It Works: From First Call to Monthly Review | MappedSkills";
+     - meta description "How working with MappedSkills runs: a discovery call, an audit, a plan you approve, then the work and a monthly report. Including what tracking can’t show.";
+     - the H1 ("No mystery about what happens next."), URL, canonical, robots and structured data are unchanged;
+     - no `BreadcrumbList` is added.
+  6. **HW-D03, D04, D05 and D07, as resolved in G1:**
+     - the "entered by a person" logging claim is removed;
+     - the audit step is kept (`DEC-051` item 5);
+     - the channel line is softened to "If we don’t think something suits your business, we’ll say so.";
+     - seven sections;
+     - the limits section stays visible and condensed (five items), because `/conversion-optimization`, `/google-ads`, `/about` and `/faq` link here promising it;
+     - 1.5 s between journey steps.
+  7. **G2 scope:**
+     - implement only `/how-it-works`, on `feat/how-it-works-g2` from `origin/main` `347ac5e`, following `docs/how-it-works-redesign/g2/HIW_G2_IMPLEMENTATION_PLAN.md`;
+     - the analytics page type stays `methodology`;
+     - no previously released page and no shared component may be modified.
+- **Facts used (no new claims):** `DEC-051` item 5; HW-D01; `DEC-053` F-2 and OD-04 ("where the data allows"); `DEC-056` (no causation claim from small numbers). Not stated: response time, price, duration, guarantee, report metric, or that MappedSkills reviews or qualifies enquiries.
+- **Not authorised:** commit, push, PR, merge, deployment; changes to other pages or shared components; new analytics events.
+- **Read with:** `DEC-005`, `DEC-051`, `DEC-053`, `DEC-056`, `DEC-057`. **Approved by:** Project owner, 2026-10-17 (HW-D01) and 2026-10-18 (R2, HW-D02, HW-D06, HW-D08, G2 authorisation). Recorded by the repository worker.
+- **Addendum (2026-10-18, owner):** G2 accepted for a local commit on `feat/how-it-works-g2` only. Review screenshots (`docs/how-it-works-redesign/g2/screenshots/`) are kept outside Git. Push, PR, merge and deployment remain unauthorised.

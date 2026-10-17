@@ -1,0 +1,672 @@
+{
+ "pixel": [
+  {
+   "w": 1440,
+   "s": 1,
+   "pct": 0.002,
+   "size": [
+    1440,
+    537,
+    1440,
+    537
+   ]
+  },
+  {
+   "w": 1440,
+   "s": 2,
+   "pct": 0,
+   "size": [
+    1440,
+    1091,
+    1440,
+    1091
+   ]
+  },
+  {
+   "w": 1440,
+   "s": 3,
+   "pct": 0,
+   "size": [
+    1440,
+    860,
+    1440,
+    860
+   ]
+  },
+  {
+   "w": 1440,
+   "s": 4,
+   "pct": 0.006,
+   "size": [
+    1440,
+    940,
+    1440,
+    940
+   ]
+  },
+  {
+   "w": 1440,
+   "s": 5,
+   "pct": 0,
+   "size": [
+    1440,
+    1625,
+    1440,
+    1625
+   ]
+  },
+  {
+   "w": 1440,
+   "s": 6,
+   "pct": 0,
+   "size": [
+    1440,
+    655,
+    1440,
+    655
+   ]
+  },
+  {
+   "w": 1440,
+   "s": 7,
+   "pct": 0,
+   "size": [
+    1440,
+    572,
+    1440,
+    572
+   ]
+  },
+  {
+   "w": 1024,
+   "s": 1,
+   "pct": 0.02,
+   "size": [
+    1024,
+    856,
+    1024,
+    856
+   ]
+  },
+  {
+   "w": 1024,
+   "s": 2,
+   "pct": 0,
+   "size": [
+    1024,
+    1461,
+    1024,
+    1461
+   ]
+  },
+  {
+   "w": 1024,
+   "s": 3,
+   "pct": 0,
+   "size": [
+    1024,
+    741,
+    1024,
+    741
+   ]
+  },
+  {
+   "w": 1024,
+   "s": 4,
+   "pct": 0.007,
+   "size": [
+    1024,
+    1151,
+    1024,
+    1151
+   ]
+  },
+  {
+   "w": 1024,
+   "s": 5,
+   "pct": 0,
+   "size": [
+    1024,
+    1881,
+    1024,
+    1881
+   ]
+  },
+  {
+   "w": 1024,
+   "s": 6,
+   "pct": 0,
+   "size": [
+    1024,
+    711,
+    1024,
+    711
+   ]
+  },
+  {
+   "w": 1024,
+   "s": 7,
+   "pct": 0,
+   "size": [
+    1024,
+    606,
+    1024,
+    606
+   ]
+  },
+  {
+   "w": 768,
+   "s": 1,
+   "pct": 0.003,
+   "size": [
+    768,
+    821,
+    768,
+    821
+   ]
+  },
+  {
+   "w": 768,
+   "s": 2,
+   "pct": 0,
+   "size": [
+    768,
+    1373,
+    768,
+    1373
+   ]
+  },
+  {
+   "w": 768,
+   "s": 3,
+   "pct": 0,
+   "size": [
+    768,
+    717,
+    768,
+    717
+   ]
+  },
+  {
+   "w": 768,
+   "s": 4,
+   "pct": 0.01,
+   "size": [
+    768,
+    1095,
+    768,
+    1095
+   ]
+  },
+  {
+   "w": 768,
+   "s": 5,
+   "pct": 0.011,
+   "size": [
+    768,
+    1765,
+    768,
+    1765
+   ]
+  },
+  {
+   "w": 768,
+   "s": 6,
+   "pct": 0,
+   "size": [
+    768,
+    652,
+    768,
+    652
+   ]
+  },
+  {
+   "w": 768,
+   "s": 7,
+   "pct": 0.045,
+   "size": [
+    768,
+    528,
+    768,
+    528
+   ]
+  },
+  {
+   "w": 390,
+   "s": 1,
+   "pct": 0.005,
+   "size": [
+    390,
+    966,
+    390,
+    966
+   ]
+  },
+  {
+   "w": 390,
+   "s": 2,
+   "pct": 0,
+   "size": [
+    390,
+    1270,
+    390,
+    1270
+   ]
+  },
+  {
+   "w": 390,
+   "s": 3,
+   "pct": 0,
+   "size": [
+    390,
+    1097,
+    390,
+    1097
+   ]
+  },
+  {
+   "w": 390,
+   "s": 4,
+   "pct": 0.016,
+   "size": [
+    390,
+    1363,
+    390,
+    1363
+   ]
+  },
+  {
+   "w": 390,
+   "s": 5,
+   "pct": 0,
+   "size": [
+    390,
+    2038,
+    390,
+    2038
+   ]
+  },
+  {
+   "w": 390,
+   "s": 6,
+   "pct": 0,
+   "size": [
+    390,
+    691,
+    390,
+    691
+   ]
+  },
+  {
+   "w": 390,
+   "s": 7,
+   "pct": 0,
+   "size": [
+    390,
+    487,
+    390,
+    487
+   ]
+  },
+  {
+   "w": 320,
+   "s": 1,
+   "pct": 0.006,
+   "size": [
+    320,
+    973,
+    320,
+    973
+   ]
+  },
+  {
+   "w": 320,
+   "s": 2,
+   "pct": 0,
+   "size": [
+    320,
+    1432,
+    320,
+    1432
+   ]
+  },
+  {
+   "w": 320,
+   "s": 3,
+   "pct": 0,
+   "size": [
+    320,
+    1202,
+    320,
+    1202
+   ]
+  },
+  {
+   "w": 320,
+   "s": 4,
+   "pct": 0.019,
+   "size": [
+    320,
+    1410,
+    320,
+    1410
+   ]
+  },
+  {
+   "w": 320,
+   "s": 5,
+   "pct": 0,
+   "size": [
+    320,
+    2334,
+    320,
+    2334
+   ]
+  },
+  {
+   "w": 320,
+   "s": 6,
+   "pct": 0,
+   "size": [
+    320,
+    736,
+    320,
+    736
+   ]
+  },
+  {
+   "w": 320,
+   "s": 7,
+   "pct": 0,
+   "size": [
+    320,
+    519,
+    320,
+    519
+   ]
+  }
+ ],
+ "functional": {
+  "head": {
+   "title": "How It Works: From First Call to Monthly Review | MappedSkills",
+   "description": "How working with MappedSkills runs: a discovery call, an audit, a plan you approve, then the work and a monthly report. Including what tracking can’t show.",
+   "ogTitle": "How It Works: From First Call to Monthly Review | MappedSkills",
+   "ogDesc": "How working with MappedSkills runs: a discovery call, an audit, a plan you approve, then the work and a monthly report. Including what tracking can’t show.",
+   "twTitle": "How It Works: From First Call to Monthly Review | MappedSkills",
+   "twDesc": "How working with MappedSkills runs: a discovery call, an audit, a plan you approve, then the work and a monthly report. Including what tracking can’t show.",
+   "canonical": "https://mappedskills.com/how-it-works",
+   "robots": "index, follow",
+   "ld": [
+    "Organization"
+   ],
+   "h1": [
+    "No mystery about what happens next."
+   ],
+   "headings": [
+    "H1 No mystery about what happens next.",
+    "H2 First, we get to know your business.",
+    "H3 We get to know you",
+    "H3 We look, then recommend",
+    "H3 You decide",
+    "H2 Not everything needs fixing.",
+    "H3 Fix first",
+    "H3 Later",
+    "H3 Not worth doing",
+    "H2 We do the work. You stay in the loop.",
+    "H3 WHAT WE’LL NEED FROM YOU",
+    "H2 Every month, you see what changed.",
+    "H3 What the numbers can’t always show",
+    "H2 What people ask us",
+    "H2 Start with a conversation."
+   ],
+   "ids": [
+    "hw-h1",
+    "hx-hero-cap",
+    "hw-h-start",
+    "hx-sheet-cap",
+    "hw-h-sort",
+    "hw-h-work",
+    "hx-board-cap",
+    "hw-h-info",
+    "hx-rep-cap",
+    "hw-h-gaps",
+    "hw-h-qs",
+    "b-close-h"
+   ],
+   "labelledbyOk": true,
+   "faqClosed": true,
+   "faq": 5,
+   "initialAt": [
+    "0",
+    "0",
+    "0",
+    "0"
+   ],
+   "dataLayerEvents": [
+    "page_view"
+   ],
+   "links": [
+    "/",
+    "/contact",
+    "/schedule-call",
+    "/services",
+    "/pricing",
+    "/faq"
+   ],
+   "words": 866
+  },
+  "timing": {
+   ".hx-card": {
+    "steps": [
+     "0",
+     "1",
+     "2"
+    ],
+    "gapsMs": [
+     1501
+    ]
+   },
+   ".hx-start-g": {
+    "steps": [
+     "0",
+     "1",
+     "2"
+    ],
+    "gapsMs": [
+     1501
+    ]
+   },
+   ".hx-board": {
+    "steps": [
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "gapsMs": [
+     1502,
+     1501
+    ]
+   },
+   ".hx-rep": {
+    "steps": [
+     "0",
+     "1",
+     "2"
+    ],
+    "gapsMs": [
+     1502
+    ]
+   }
+  },
+  "keyboard": {
+   "at": "1",
+   "focused": "Show step 2: We plan",
+   "all": true,
+   "stepButtons": 9
+  },
+  "sort": {
+   "pressed": "true",
+   "status": "Sorted into three groups: fix first, later, and not worth doing.",
+   "focus": "px-toggle hx-ps-btn",
+   "lanes": 3
+  },
+  "consoleErrors": [],
+  "layout": [
+   {
+    "w": 1440,
+    "overflow": false,
+    "vp": 7.8,
+    "heroBottom": 610,
+    "ctaBottom": 561,
+    "small": 0,
+    "axe": []
+   },
+   {
+    "w": 1366,
+    "overflow": false,
+    "vp": 9,
+    "heroBottom": 598,
+    "ctaBottom": 552,
+    "small": 0
+   },
+   {
+    "w": 1280,
+    "overflow": false,
+    "vp": 9.4,
+    "heroBottom": 584,
+    "ctaBottom": 541,
+    "small": 0
+   },
+   {
+    "w": 1024,
+    "overflow": false,
+    "vp": 10.9,
+    "heroBottom": 929,
+    "ctaBottom": 505,
+    "small": 0
+   },
+   {
+    "w": 768,
+    "overflow": false,
+    "vp": 7.8,
+    "heroBottom": 893,
+    "ctaBottom": 473,
+    "small": 0
+   },
+   {
+    "w": 390,
+    "overflow": false,
+    "vp": 11,
+    "heroBottom": 1030,
+    "ctaBottom": 446,
+    "small": 0,
+    "axe": []
+   },
+   {
+    "w": 320,
+    "overflow": false,
+    "vp": 14.3,
+    "heroBottom": 1037,
+    "ctaBottom": 457,
+    "small": 0,
+    "axe": []
+   }
+  ],
+  "axeAnimatedEnd": [],
+  "doneFlags": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "noJs": {
+   "lanes": true,
+   "pile": "none",
+   "ctl": "none",
+   "hidden": 0,
+   "buttons": 1,
+   "faqClosed": true
+  },
+  "linkStatus": {
+   "/contact": 200,
+   "/schedule-call": 200,
+   "/services": 200,
+   "/pricing": 200,
+   "/faq": 200,
+   "/": 200
+  }
+ },
+ "regression": [
+  {
+   "path": "/",
+   "pct": 0,
+   "size": [
+    1440,
+    6137,
+    1440,
+    6137
+   ]
+  },
+  {
+   "path": "/lead-generation",
+   "pct": 0,
+   "size": [
+    1440,
+    5455,
+    1440,
+    5455
+   ]
+  },
+  {
+   "path": "/conversion-optimization",
+   "pct": 0,
+   "size": [
+    1440,
+    5786,
+    1440,
+    5786
+   ]
+  },
+  {
+   "path": "/google-ads",
+   "pct": 0,
+   "size": [
+    1440,
+    5862,
+    1440,
+    5862
+   ]
+  },
+  {
+   "path": "/ai-seo",
+   "pct": 0,
+   "size": [
+    1440,
+    6877,
+    1440,
+    6877
+   ]
+  },
+  {
+   "path": "/contact",
+   "pct": 0,
+   "size": [
+    1440,
+    2747,
+    1440,
+    2747
+   ]
+  },
+  {
+   "path": "/contact after client navigation from /how-it-works (vs fresh load)",
+   "pct": 0,
+   "size": [
+    1440,
+    2747,
+    1440,
+    2747
+   ]
+  }
+ ]
+}

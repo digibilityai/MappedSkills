@@ -1,0 +1,272 @@
+{
+ "/lead-generation@1440": {
+  "title": "Lead Generation Where the Unit Is an Enquiry You Can Act On | MappedSkills",
+  "titleLen": 74,
+  "h1": "Lead generation, where the unit is an enquiry you can actually act on.",
+  "height": 6243,
+  "vp": 6.9,
+  "words": 545,
+  "sections": 7,
+  "h2": 6,
+  "h3": 10,
+  "ctaContact": 2,
+  "ctaBook": 2,
+  "inBodyLinks": [
+   "/",
+   "/contact",
+   "/schedule-call",
+   "/how-it-works",
+   "/problems/traffic-but-no-enquiries",
+   "/services",
+   "/seo",
+   "/google-ads"
+  ],
+  "details": 3,
+  "buttons": 15,
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ]
+ },
+ "/lead-generation@390": {
+  "title": "Lead Generation Where the Unit Is an Enquiry You Can Act On | MappedSkills",
+  "titleLen": 74,
+  "h1": "Lead generation, where the unit is an enquiry you can actually act on.",
+  "height": 8175,
+  "vp": 9.7,
+  "words": 545,
+  "sections": 7,
+  "h2": 6,
+  "h3": 10,
+  "ctaContact": 2,
+  "ctaBook": 2,
+  "inBodyLinks": [
+   "/",
+   "/contact",
+   "/schedule-call",
+   "/how-it-works",
+   "/problems/traffic-but-no-enquiries",
+   "/services",
+   "/seo",
+   "/google-ads"
+  ],
+  "details": 3,
+  "buttons": 15,
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ]
+ },
+ "/google-ads@1440": {
+  "title": "Google Ads Measured on the Enquiries, Not the Clicks | MappedSkills",
+  "titleLen": 67,
+  "h1": "We run your ads. We look beyond the click.",
+  "height": 6650,
+  "vp": 7.4,
+  "words": 760,
+  "sections": 8,
+  "h2": 7,
+  "h3": 20,
+  "ctaContact": 2,
+  "ctaBook": 2,
+  "inBodyLinks": [
+   "/",
+   "/contact",
+   "/schedule-call",
+   "/seo",
+   "/social-media-ads",
+   "/pricing",
+   "/how-it-works",
+   "/problems/traffic-but-no-enquiries",
+   "/services",
+   "/lead-generation"
+  ],
+  "details": 1,
+  "buttons": 13,
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ]
+ },
+ "/google-ads@390": {
+  "title": "Google Ads Measured on the Enquiries, Not the Clicks | MappedSkills",
+  "titleLen": 67,
+  "h1": "We run your ads. We look beyond the click.",
+  "height": 9821,
+  "vp": 11.6,
+  "words": 755,
+  "sections": 8,
+  "h2": 7,
+  "h3": 20,
+  "ctaContact": 2,
+  "ctaBook": 2,
+  "inBodyLinks": [
+   "/",
+   "/contact",
+   "/schedule-call",
+   "/seo",
+   "/social-media-ads",
+   "/pricing",
+   "/how-it-works",
+   "/problems/traffic-but-no-enquiries",
+   "/services",
+   "/lead-generation"
+  ],
+  "details": 1,
+  "buttons": 13,
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ]
+ },
+ "/ai-seo@1440": {
+  "title": "AI Search: Why Your Business Is Not in the Answer | MappedSkills",
+  "titleLen": 64,
+  "h1": "When buyers ask AI, is your business in the answer?",
+  "height": 7665,
+  "vp": 8.5,
+  "words": 755,
+  "sections": 9,
+  "h2": 8,
+  "h3": 14,
+  "ctaContact": 3,
+  "ctaBook": 2,
+  "inBodyLinks": [
+   "/",
+   "/contact",
+   "/schedule-call",
+   "/seo",
+   "/services"
+  ],
+  "details": 5,
+  "buttons": 16,
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ]
+ },
+ "/ai-seo@390": {
+  "title": "AI Search: Why Your Business Is Not in the Answer | MappedSkills",
+  "titleLen": 64,
+  "h1": "When buyers ask AI, is your business in the answer?",
+  "height": 9679,
+  "vp": 11.5,
+  "words": 755,
+  "sections": 9,
+  "h2": 8,
+  "h3": 14,
+  "ctaContact": 3,
+  "ctaBook": 2,
+  "inBodyLinks": [
+   "/",
+   "/contact",
+   "/schedule-call",
+   "/seo",
+   "/services"
+  ],
+  "details": 5,
+  "buttons": 16,
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ]
+ },
+ "/conversion-optimization@1440": {
+  "title": "Conversion Rate Optimization: Find Where Visits Are Lost | MappedSkills",
+  "titleLen": 71,
+  "h1": "Plenty of visitors, not enough enquiries? We find out why.",
+  "height": 6574,
+  "vp": 7.3,
+  "words": 603,
+  "sections": 6,
+  "h2": 5,
+  "h3": 8,
+  "ctaContact": 2,
+  "ctaBook": 2,
+  "inBodyLinks": [
+   "/",
+   "/contact",
+   "/schedule-call",
+   "/problems/traffic-but-no-enquiries",
+   "/how-it-works"
+  ],
+  "details": 0,
+  "buttons": 15,
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ]
+ },
+ "/conversion-optimization@390": {
+  "title": "Conversion Rate Optimization: Find Where Visits Are Lost | MappedSkills",
+  "titleLen": 71,
+  "h1": "Plenty of visitors, not enough enquiries? We find out why.",
+  "height": 9077,
+  "vp": 10.8,
+  "words": 603,
+  "sections": 6,
+  "h2": 5,
+  "h3": 8,
+  "ctaContact": 2,
+  "ctaBook": 2,
+  "inBodyLinks": [
+   "/",
+   "/contact",
+   "/schedule-call",
+   "/problems/traffic-but-no-enquiries",
+   "/how-it-works"
+  ],
+  "details": 0,
+  "buttons": 15,
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ]
+ },
+ "/how-it-works@1440": {
+  "title": "How We Work, What We Measure, and What We Cannot Tell You | MappedSkills",
+  "titleLen": 72,
+  "h1": "No mystery about what happens next.",
+  "height": 12108,
+  "vp": 13.5,
+  "words": 2012,
+  "sections": 8,
+  "h2": 7,
+  "h3": 16,
+  "ctaContact": 2,
+  "ctaBook": 2,
+  "inBodyLinks": [
+   "/",
+   "/contact",
+   "/schedule-call"
+  ],
+  "details": 0,
+  "buttons": 1,
+  "ld": [
+   "Organization"
+  ]
+ },
+ "/how-it-works@390": {
+  "title": "How We Work, What We Measure, and What We Cannot Tell You | MappedSkills",
+  "titleLen": 72,
+  "h1": "No mystery about what happens next.",
+  "height": 17612,
+  "vp": 20.9,
+  "words": 2003,
+  "sections": 8,
+  "h2": 7,
+  "h3": 16,
+  "ctaContact": 2,
+  "ctaBook": 2,
+  "inBodyLinks": [
+   "/",
+   "/contact",
+   "/schedule-call"
+  ],
+  "details": 0,
+  "buttons": 1,
+  "ld": [
+   "Organization"
+  ]
+ }
+}

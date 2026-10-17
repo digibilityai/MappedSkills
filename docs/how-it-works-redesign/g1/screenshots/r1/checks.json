@@ -1,0 +1,158 @@
+{
+ "desktop-1440": {
+  "words": 884,
+  "height": 7118,
+  "vp": 7.9,
+  "overflow": false,
+  "wide": [],
+  "seqStates": [
+   "hx-card hx-seq is-static is-all at=null",
+   "hx-start-g hx-seq is-static is-all at=null",
+   "hx-board hx-seq is-static is-all at=null",
+   "hx-rep hx-seq is-static is-all at=null"
+  ],
+  "headings": [
+   "H1 No mystery about what happens next.",
+   "H2 First, we get to know your business.",
+   "H2 Not everything needs fixing.",
+   "H2 We do the work. You stay in the loop.",
+   "H3 WHAT WE’LL NEED FROM YOU",
+   "H2 Every month, you see what changed.",
+   "H3 What the numbers can’t always show",
+   "H2 What people ask us",
+   "H2 Start with a conversation."
+  ],
+  "sections": [
+   [
+    "hw-h1",
+    537,
+    98
+   ],
+   [
+    "hw-h-start",
+    1145,
+    183
+   ],
+   [
+    "hw-h-sort",
+    860,
+    116
+   ],
+   [
+    "hw-h-work",
+    938,
+    177
+   ],
+   [
+    "hw-h-info",
+    1625,
+    225
+   ],
+   [
+    "hw-h-qs",
+    654,
+    50
+   ],
+   [
+    "b-close-h",
+    571,
+    35
+   ]
+  ],
+  "dashes": 0,
+  "small": [],
+  "ctaBottom": 561,
+  "heroBottom": 610,
+  "axe": [],
+  "errs": [],
+  "sort": {
+   "pressed": "true",
+   "status": "Sorted into three groups: fix first, later, and not worth doing.",
+   "focus": "px-toggle hx-ps-btn"
+  },
+  "pick": "3"
+ },
+ "mobile-390": {
+  "words": 884,
+  "height": 9911,
+  "vp": 11.7,
+  "overflow": false,
+  "wide": [],
+  "seqStates": [
+   "hx-card hx-seq is-static is-all at=null",
+   "hx-start-g hx-seq is-static is-all at=null",
+   "hx-board hx-seq is-static is-all at=null",
+   "hx-rep hx-seq is-static is-all at=null"
+  ],
+  "headings": [
+   "H1 No mystery about what happens next.",
+   "H2 First, we get to know your business.",
+   "H2 Not everything needs fixing.",
+   "H2 We do the work. You stay in the loop.",
+   "H3 WHAT WE’LL NEED FROM YOU",
+   "H2 Every month, you see what changed.",
+   "H3 What the numbers can’t always show",
+   "H2 What people ask us",
+   "H2 Start with a conversation."
+  ],
+  "sections": [
+   [
+    "hw-h1",
+    910,
+    98
+   ],
+   [
+    "hw-h-start",
+    1513,
+    183
+   ],
+   [
+    "hw-h-sort",
+    1167,
+    116
+   ],
+   [
+    "hw-h-work",
+    1362,
+    177
+   ],
+   [
+    "hw-h-info",
+    2428,
+    225
+   ],
+   [
+    "hw-h-qs",
+    694,
+    50
+   ],
+   [
+    "b-close-h",
+    486,
+    35
+   ]
+  ],
+  "dashes": 0,
+  "small": [],
+  "ctaBottom": 446,
+  "heroBottom": 975,
+  "axe": [],
+  "errs": [],
+  "sort": {
+   "pressed": "true",
+   "status": "Sorted into three groups: fix first, later, and not worth doing.",
+   "focus": "px-toggle hx-ps-btn"
+  },
+  "pick": "3"
+ },
+ "reduced": {
+  "static": true,
+  "hidden": 0
+ },
+ "noJs": {
+  "lanesShown": true,
+  "btnHidden": true,
+  "hidden": 0,
+  "buttons": 1
+ }
+}

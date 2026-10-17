@@ -1,0 +1,258 @@
+{
+ "journeys": [
+  {
+   "sel": ".lx-hero-fig",
+   "firstStateOnLoad": "0",
+   "steps": [
+    [
+     "0",
+     0
+    ],
+    [
+     "1",
+     1718
+    ],
+    [
+     "2",
+     3719
+    ]
+   ],
+   "gapsMs": [
+    2001
+   ],
+   "finalStep": "2",
+   "noLoop": true
+  },
+  {
+   "sel": ".lx-path",
+   "firstStateOnLoad": "0",
+   "steps": [
+    [
+     "0",
+     0
+    ],
+    [
+     "1",
+     2619
+    ],
+    [
+     "2",
+     4621
+    ],
+    [
+     "3",
+     6622
+    ]
+   ],
+   "gapsMs": [
+    2002,
+    2001
+   ],
+   "finalStep": "3",
+   "noLoop": true
+  },
+  {
+   "sel": ".lx-sort",
+   "firstStateOnLoad": "0",
+   "steps": [
+    [
+     "0",
+     0
+    ],
+    [
+     "1",
+     2445
+    ],
+    [
+     "2",
+     4445
+    ]
+   ],
+   "gapsMs": [
+    2000
+   ],
+   "finalStep": "2",
+   "noLoop": true
+  },
+  {
+   "sel": ".lx-next",
+   "firstStateOnLoad": "0",
+   "steps": [
+    [
+     "0",
+     0
+    ],
+    [
+     "1",
+     2702
+    ],
+    [
+     "2",
+     4703
+    ],
+    [
+     "3",
+     6706
+    ],
+    [
+     "4",
+     8707
+    ]
+   ],
+   "gapsMs": [
+    2001,
+    2003,
+    2001
+   ],
+   "finalStep": "4",
+   "noLoop": true
+  }
+ ],
+ "keyboard": {
+  "at": "1",
+  "all": true,
+  "current": "They send an enquiry",
+  "buttons": 15,
+  "labels": [
+   "Show step 1: Someone sees your ad",
+   "Show step 2: They send an enquiry",
+   "Show step 3: Your team receives it"
+  ],
+  "focusStillOnButton": true,
+  "focusOutlineWidth": "3px",
+  "liveRegions": 0,
+  "stillAtAfter2600ms": "1"
+ },
+ "tabStops": 15,
+ "tabReached": 15,
+ "consoleErrors": [],
+ "reducedMotion": [
+  {
+   "sel": "lx-hero-fig",
+   "allShown": true,
+   "still": true,
+   "highlighted": 0,
+   "dim": 0,
+   "buttons": 3
+  },
+  {
+   "sel": "lx-path",
+   "allShown": true,
+   "still": true,
+   "highlighted": 0,
+   "dim": 0,
+   "buttons": 4
+  },
+  {
+   "sel": "lx-sort",
+   "allShown": true,
+   "still": true,
+   "highlighted": 0,
+   "dim": 0,
+   "buttons": 3
+  },
+  {
+   "sel": "lx-next",
+   "allShown": true,
+   "still": true,
+   "highlighted": 0,
+   "dim": 0,
+   "buttons": 5
+  },
+  {
+   "afterWaiting2600ms_reach_data_at": "-1"
+  }
+ ],
+ "noJs": {
+  "hiddenSteps": 0,
+  "steps": 15,
+  "chipVisible": "block",
+  "adVisible": "1",
+  "detailsClosed": true,
+  "stepButtons": 0,
+  "numbersHiddenFromAT": true
+ },
+ "copy": {
+  "longOrDoubleDash": 0,
+  "forbiddenFound": [],
+  "h1Count": 1,
+  "skippedHeadingLevels": 0,
+  "headings": [
+   "H1 Lead generation, where the unit is an enquiry you can actually act on.",
+   "H2 Too few enquiries, or too many of the wrong ones?",
+   "H3 It’s quiet",
+   "H3 It’s busy, but not with buyers",
+   "H2 We don’t sell you a list. We bring potential customers to you.",
+   "H3 Reach the people you want",
+   "H3 Make it easy to enquire",
+   "H3 Check delivery",
+   "H3 See where it came from",
+   "H2 Enquiries go straight to your team.",
+   "H3 Someone sees your ad",
+   "H3 They send an enquiry",
+   "H3 Your team receives it",
+   "H2 We manage the campaigns. Your team handles the enquiries.",
+   "H2 What people ask us",
+   "H2 How many enquiries do you get? How many are any good?",
+   "H3 WHAT HAPPENS NEXT"
+  ],
+  "links": [
+   "Home -> /",
+   "Tell us what you’re trying to fix -> /contact",
+   "Book a call -> /schedule-call",
+   "See how we work → -> /how-it-works",
+   "traffic but no enquiries -> /problems/traffic-but-no-enquiries",
+   "the whole system -> /services",
+   "organic search -> /seo",
+   "paid search -> /google-ads",
+   "Tell us what you’re trying to fix -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "sectionsWithLabel": [
+   "lg-h1",
+   "lg-h-prob",
+   "lg-h-do",
+   "lg-h-chk",
+   "lg-h-bd",
+   "lg-h-qs",
+   "lg-h-close"
+  ],
+  "labelsResolve": true,
+  "imgsWithoutAlt": 0,
+  "svgDecorative": true
+ },
+ "seo": {
+  "title": "Lead Generation Where the Unit Is an Enquiry You Can Act On | MappedSkills",
+  "description": "Lead generation that brings in enquiries worth calling back. We manage the campaigns; enquiries go directly to your own form, CRM or WhatsApp.",
+  "canonical": "http://localhost:3000/lead-generation",
+  "robots": "index, follow",
+  "ogTitle": "Lead Generation Where the Unit Is an Enquiry You Can Act On | MappedSkills",
+  "ogDescription": "Lead generation that brings in enquiries worth calling back. We manage the campaigns; enquiries go directly to your own form, CRM or WhatsApp.",
+  "ogUrl": "http://localhost:3000/lead-generation",
+  "twitterDescription": "Lead generation that brings in enquiries worth calling back. We manage the campaigns; enquiries go directly to your own form, CRM or WhatsApp.",
+  "jsonLd": [
+   {
+    "type": "Organization",
+    "names": []
+   },
+   {
+    "type": "BreadcrumbList",
+    "names": [
+     "Home>http://localhost:3000",
+     "What we do>http://localhost:3000/services",
+     "Enquiry generation>http://localhost:3000/lead-generation"
+    ]
+   }
+  ]
+ },
+ "linkStatus": {
+  "/": 200,
+  "/contact": 200,
+  "/schedule-call": 200,
+  "/how-it-works": 200,
+  "/problems/traffic-but-no-enquiries": 200,
+  "/services": 200,
+  "/seo": 200,
+  "/google-ads": 200
+ }
+}

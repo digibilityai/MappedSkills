@@ -16,7 +16,7 @@
 .co-tile-cream .co-tl { color: var(--dc-tang-small); }
 .co-short { width: 60% !important; }
 
-.co-n { flex: none; width: 40px; height: 40px; display: grid; place-items: center; border: 3px solid var(--dc-ink); background: var(--dc-paper); color: var(--dc-ink); font: 800 1.05rem/1 var(--dc-f-title); transition: background-color .3s, color .3s, border-color .3s, transform .3s; }
+.co-n { flex: none; width: 40px; height: 40px; display: grid; place-items: center; border: 3px solid var(--dc-ink); background: var(--dc-paper); color: var(--dc-ink); font: 800 1.05rem/1 var(--dc-f-title); transition: background-color .2s, color .2s, border-color .2s, transform .2s; }
 button.co-n { appearance: none; padding: 0; margin: 0; cursor: pointer; }
 button.co-n:hover { border-color: var(--dc-tang); }
 button.co-n:focus-visible { outline: 3px solid var(--dc-tang); outline-offset: 4px; }
@@ -27,7 +27,7 @@ button.co-n:focus-visible { outline: 3px solid var(--dc-tang); outline-offset: 4
 .co-tile-ink.is-on > .co-n, .b-ink .is-on > .co-n { background: var(--dc-tang); border-color: var(--dc-tang); color: var(--dc-ink); }
 
 /* sequencing (JS adds .is-armed; without JavaScript, or with reduced motion, everything is shown complete) */
-.co-seq [data-i] { transition: opacity .45s var(--dc-e-arrive, ease), transform .45s var(--dc-e-arrive, ease), box-shadow .3s, visibility .45s; }
+.co-seq [data-i] { transition: opacity .4s var(--dc-e-arrive, ease), transform .4s var(--dc-e-arrive, ease), box-shadow .2s, visibility .4s; }
 .co-seq.is-armed[data-reveal="cum"]:not(.is-all) [data-i]:not(.is-seen) { opacity: 0; visibility: hidden; transform: translateY(10px); }
 .co-seq.is-armed[data-reveal="dim"]:not(.is-all) [data-i]:not(.is-seen) { opacity: .42; }
 
@@ -75,12 +75,12 @@ button.co-n:focus-visible { outline: 3px solid var(--dc-tang); outline-offset: 4
 .co-route-l { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
 .co-stn { display: flex; flex-direction: column; gap: 10px; min-height: 15.5rem; }
 .co-stn-top { display: flex; justify-content: space-between; align-items: center; }
-.co-ic { fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: square; stroke-linejoin: miter; transition: color .3s; }
+.co-ic { fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: square; stroke-linejoin: miter; transition: color .2s; }
 .co-stn-t { margin-top: 6px; font: 800 1.35rem/1.15 var(--dc-f-title); }
 .co-stn-d { font-size: 1.0625rem; line-height: 1.45; color: var(--dc-dim); }
 .co-stn.is-on { box-shadow: 7px 7px 0 var(--dc-tang); }
 .co-stn.is-on .co-ic { color: var(--dc-tang-small); }
-.co-tag { margin: auto 0 0; align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; font: 700 .75rem/1.2 var(--dc-f-body); letter-spacing: .1em; text-transform: uppercase; transition: opacity .45s, visibility .45s; }
+.co-tag { margin: auto 0 0; align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; font: 700 .75rem/1.2 var(--dc-f-body); letter-spacing: .1em; text-transform: uppercase; transition: opacity .4s, visibility .4s; }
 .co-tag-fix { background: var(--dc-ink); color: var(--dc-on-ink); border: 2px solid var(--dc-ink); }
 .co-tag-fix::before { content: ""; width: 8px; height: 8px; background: var(--dc-tang); }
 .co-tag-not { border: 2px dashed var(--dc-ink); color: var(--dc-ink); }
@@ -101,12 +101,12 @@ button.co-n:focus-visible { outline: 3px solid var(--dc-tang); outline-offset: 4
 .co-ws { position: relative; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 18px; padding: 16px 0 22px; }
 .co-ws:not(:last-child)::before { content: ""; position: absolute; left: 18.5px; top: 60px; bottom: -14px; width: 3px; background: repeating-linear-gradient(180deg, var(--dc-control) 0 7px, transparent 7px 12px); }
 .co-ws.is-done::before { background: var(--dc-tang) !important; }
-.co-ws-t { font: 800 1.4rem/1.15 var(--dc-f-title); margin-top: 6px; transition: color .3s, opacity .3s; }
-.co-ws-d { margin-top: 6px; max-width: 34ch; font-size: 1.0625rem; line-height: 1.45; color: var(--dc-dim); transition: opacity .3s; }
+.co-ws-t { font: 800 1.4rem/1.15 var(--dc-f-title); margin-top: 6px; transition: color .2s, opacity .2s; }
+.co-ws-d { margin-top: 6px; max-width: 34ch; font-size: 1.0625rem; line-height: 1.45; color: var(--dc-dim); transition: opacity .2s; }
 .co-work.is-armed:not(.is-all) .co-ws:not(.is-seen) .co-ws-t, .co-work.is-armed:not(.is-all) .co-ws:not(.is-seen) .co-ws-d { opacity: .6; }
 .co-ws.is-on .co-ws-t { color: var(--dc-tang-small); }
 .co-stage { display: grid; min-height: 25rem; padding: clamp(20px, 2.4vw, 32px); }
-.co-work.is-armed:not(.is-static) .co-fig { grid-area: 1 / 1; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .45s var(--dc-e-arrive, ease), transform .45s var(--dc-e-arrive, ease), visibility .45s; }
+.co-work.is-armed:not(.is-static) .co-fig { grid-area: 1 / 1; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .4s var(--dc-e-arrive, ease), transform .4s var(--dc-e-arrive, ease), visibility .4s; }
 .co-work.is-armed:not(.is-static) .co-fig.is-on { opacity: 1; visibility: visible; transform: none; }
 .co-work:not(.is-armed) .co-fig + .co-fig, .co-work.is-static .co-fig + .co-fig { margin-top: 28px; padding-top: 28px; border-top: 2px solid var(--dc-ink); }
 .co-fig { min-width: 0; align-self: start; }
@@ -169,7 +169,7 @@ button.co-n:focus-visible { outline: 3px solid var(--dc-tang); outline-offset: 4
 .co-proof { margin-top: clamp(32px, 4vw, 52px); }
 .co-pl { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; --co-arw-y: 158px; }
 .co-pi { display: flex; flex-direction: column; gap: 14px; }
-.co-pi-art { height: 236px; display: grid; place-items: center; padding: 16px; transition: box-shadow .3s; }
+.co-pi-art { height: 236px; display: grid; place-items: center; padding: 16px; transition: box-shadow .2s; }
 .co-pi.is-on .co-pi-art { box-shadow: 7px 7px 0 var(--dc-tang); }
 .co-pi-t { font: 800 1.25rem/1.25 var(--dc-f-title); color: var(--dc-on-ink); }
 .co-ph { width: 116px; height: 196px; border: 3px solid var(--dc-ink); border-radius: 18px; padding: 26px 12px 14px; display: flex; flex-direction: column; gap: 9px; background: var(--dc-ground); color: var(--dc-ink); }

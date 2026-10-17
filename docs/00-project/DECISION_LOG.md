@@ -1181,3 +1181,10 @@ Use this file only for meaningful project decisions.
 - **Unchanged:** page title, meta description, canonical, URL, breadcrumb trail, structured data, H1, and all CTA and in-body link destinations (`/contact`, `/schedule-call`, `/problems/traffic-but-no-enquiries`, `/how-it-works`).
 - **Not authorised:** push, PR, merge, deployment, changes to other pages or shared components, new analytics events.
 - **Evidence:** `docs/conversion-redesign/g1/`; `docs/conversion-redesign/g2/` (implementation report). **Read with:** `DEC-005`, `DEC-032`, `DEC-050`, `DEC-051`, `DEC-054`. **Approved by:** Project owner, 2026-10-17. Recorded by the repository worker.
+
+### DEC-056
+- **Date:** 2026-10-17
+- **Status:** **Approved (owner) — final approval of the `/conversion-optimization` redesign; push and PR authorised. No merge and no deployment authorised.**
+- **Decision (owner, "Final Approval and PR Preparation", 2026-10-17):** the implementation on `feat/conversion-optimization-redesign` (local commit `b5a8ce0`, preview BUILD_ID `0005ab9f0tP4t8h-mD-P8`) is approved in full: the G1 design, copy, claims, structure and interactions as recorded in `DEC-055`, including the revised CO-D06 (improve, measure, review; no routine A/B testing) and CO-D07 ("Our own enquiry form wasn't working."), and the CO-D11 timing revision. **Approved journey settings:** 1,500 ms between steps; 400 ms entrance transitions; 200 ms hover and state transitions; step 1 visible immediately; each journey plays once and keeps its completed state; manual step selection, keyboard access and reduced-motion support. The released `/ai-seo` animations are unchanged.
+- **Not authorised:** merge of the PR, deployment, further design or copy changes.
+- **Read with:** `DEC-055`. **Approved by:** Project owner, 2026-10-17. Recorded by the repository worker.

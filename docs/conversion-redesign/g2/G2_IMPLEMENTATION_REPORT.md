@@ -25,7 +25,7 @@ Not touched: `ai-seo/Sequence.tsx` (imported as is), any shared component, any o
 - `tsc --noEmit`: pass. `npm run lint`: pass. `npm test`: 117 tests, 116 pass, 0 fail, 1 skipped (pre-existing skip).
 - `npm run build` + `npm run verify:build`: pass. BUILD_ID `ihcC_v__YUuXofmCYGFWS`. `verify:build:production` (GTM required) was not run: no production GTM env here.
 - Chromium 1440/1024/768/390/320, Firefox and WebKit 1440/390: no horizontal overflow, no console or page errors (`screenshots/verify-results.json`).
-- Timing, six journeys, desktop and 390 and 320: step 1 is active at load, then steps at about 2,000 ms intervals (measured 2,440 to 2,540 ms from the first sample because the 400 ms in-view dwell and my scroll start precede it; intervals between steps are 2,000 ms +/- 20 ms). Plays once, finishes on the last step.
+- Timing, six journeys, desktop and 390 and 320: step 1 is active at load, then steps at 1,500 ms intervals (revised from 2,000 ms, DEC-055 CO-D11 and DEC-056) (final measurement after the revision: 1,500 ms +/- 20 ms between steps; transitions 400 ms entrance, 200 ms hover and state). Plays once, finishes on the last step.
 - Reduced motion: nothing highlighted or hidden, all four "How we work" pictures shown. No JavaScript: full content, 0 step buttons, nothing hidden (`checks.json`).
 - Keyboard: 15 step buttons with labels; Enter stops the sequence and shows the chosen step; 3px focus outline.
 - CTAs: `/contact`, `/schedule-call` (hero and close); in-body links `/problems/traffic-but-no-enquiries`, `/how-it-works`. Title, description, canonical and 2 JSON-LD blocks unchanged.

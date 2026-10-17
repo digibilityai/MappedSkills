@@ -1,6 +1,6 @@
 // Guards for /conversion-optimization (owner-approved G1 design, implemented in G2; DEC-055): unchanged H1 and metadata,
 // no long or double dashes, the owner's revised claims (no routine A/B testing, no absolute "every enquiry was lost"),
-// the 2 s once-only sequences that start on step 1, and unchanged CTA and link destinations.
+// the 1.5 s once-only sequences that start on step 1, and unchanged CTA and link destinations.
 const test = require('node:test');
 const assert = require('node:assert');
 const fs = require('node:fs');
@@ -42,8 +42,8 @@ test('verdict replaces the toggle', () => {
   assert.doesNotMatch(body + journeys + copy, /PressToggle|Show what a website redesign can fix|The last one is the hardest/);
 });
 
-test('sequences: 2 s, step 1 shown from the start, played once, no replay control', () => {
-  assert.match(journeys, /stepMs: 2000, first: 0/);
+test('sequences: 1.5 s, step 1 shown from the start, played once, no replay control', () => {
+  assert.match(journeys, /stepMs: 1500, first: 0/);
   assert.doesNotMatch(code(journeys), /setInterval|Replay|Pause/);
 });
 

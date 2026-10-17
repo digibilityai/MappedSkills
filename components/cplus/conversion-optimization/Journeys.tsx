@@ -11,7 +11,7 @@ import { CO } from './content';
  * with reduced motion every step is shown complete. A numbered step is a button once the page is interactive: choosing
  * one stops the sequence and shows that step.
  */
-const OPTS = { stepMs: 2000, first: 0, dwellMs: 150 };
+const OPTS = { stepMs: 1500, first: 0, dwellMs: 150 };
 
 const at = (q: Sequence, n: number) => {
   for (let j = 0; j < n; j++) if (q.on(j)) return j;

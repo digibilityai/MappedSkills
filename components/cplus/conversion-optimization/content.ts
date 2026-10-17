@@ -1,61 +1,84 @@
 /**
- * C+ Conversion Optimization (/conversion-optimization) — customer-facing copy from the approved prototype
- * (proto/direction-c-plus 0a8b611, components/proto-cplus/content.ts, SERVICE_PLAIN, and the one HOME label it uses), with
- * one owner-approved correction to unsupported frequency wording (`close.body`). The prototype's internal review
- * registers are not carried over.
+ * C+ Conversion Optimization (/conversion-optimization): customer-facing copy of the owner-approved G1 design
+ * (docs/conversion-redesign/g1/CO_G1_COPY.md) with the owner's G2 revisions (DEC-055): CO-D06 (improve, measure, review;
+ * no routine A/B testing) and CO-D07 (the form headline and the takeaway). No long dashes and no double hyphens.
  */
 
-/* The only HOME field the page uses (the primary action label), verbatim from HOME.hero.primary. */
+/* The primary action label, verbatim from HOME.hero.primary (unchanged). */
 export const HOME = { hero: { primary: 'Tell us what you’re trying to fix' } };
 
-export const SERVICE_PLAIN = {
+export const CO = {
   crumb: 'Conversion optimisation',
   h1: { a: 'Plenty of visitors, not enough enquiries?', b: 'We find out why.' },
-  lede: 'Conversion optimisation means getting more of the people who visit your website to contact you. We judge the work by real enquiries you can follow up, not by a percentage on a report.',
-  artCaption: '1 the wrong visitors · 2 the page doesn’t help · 3 getting in touch fails · 4 nothing is recorded.',
-  artNote: 'Four places you can lose a potential customer. Illustration.',
-  briefKicker: 'What business owners usually ask us to do',
-  brief: ['Redesign the website.', 'Shorten the form.', 'Move the button.'],
-  briefTurn: 'Sometimes that helps. But often customers are being lost somewhere else, and changing the website won’t fix it.',
-  lossesKicker: 'Four places you can lose a customer',
-  lossesH: { a: 'Your website isn’t', b: 'always the problem.' },
-  toggle: 'Show what a website redesign can fix',
-  losses: [
-    { n: '01', name: 'The visitors', what: 'The wrong people arrive, or the right people never find you.', page: false, hidden: false, icon: 'search' },
-    { n: '02', name: 'Your page', what: 'It doesn’t answer what they came to find out.', page: true, hidden: false, icon: 'page' },
-    { n: '03', name: 'Getting in touch', what: 'The form, booking or button doesn’t work for them — on a phone, for example.', page: true, hidden: false, icon: 'form' },
-    { n: '04', name: 'Your tracking', what: 'Nothing records what happened, so nobody notices the loss.', page: false, hidden: true, icon: 'eyeoff' },
+  lede: 'Conversion optimisation means getting more of your visitors to contact you. We judge it by real enquiries, not a percentage on a report.',
+  story: {
+    label: 'What happens on many websites',
+    steps: [
+      { t: 'Visitors arrive', d: 'They found your website.' },
+      { t: 'Something stops them', d: 'A doubt, a long form, a slow page.' },
+      { t: 'They leave without enquiring', d: 'And you never find out why.' },
+    ],
+    caption: 'Illustration.',
+  },
+
+  fourKicker: 'Four places you can lose a customer',
+  fourH: { a: 'Your website isn’t', b: 'always the problem.' },
+  askK: 'What owners usually ask us',
+  ask: '“Can you redesign our website?”',
+  tagFix: 'A redesign can help',
+  tagNot: 'Not the website',
+  stations: [
+    { label: '1: The visitors', t: 'The visitors', d: 'The wrong people arrive, or the right people never find you.', fix: false, icon: 'M10.5 3.5a7 7 0 1 1 0 14 7 7 0 0 1 0-14Zm5 12 5 5' },
+    { label: '2: Your page', t: 'Your page', d: 'It doesn’t answer what they came to find out.', fix: true, icon: 'M5 3.5h10l4 4v13H5zM15 3.5v4h4M8.5 11h7M8.5 14.5h7M8.5 18h4' },
+    { label: '3: Getting in touch', t: 'Getting in touch', d: 'The form, booking or button lets them down, on a phone for example.', fix: true, icon: 'M4 4.5h16v15H4zM7.5 9h9M7.5 12.5h9M7.5 16h5' },
+    { label: '4: Your tracking', t: 'Your tracking', d: 'Nothing records what happened, so nobody notices the loss.', fix: false, icon: 'M3 12s3.5-6.5 9-6.5S21 12 21 12s-3.5 6.5-9 6.5S3 12 3 12Zm9-3a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM4 4l16 16' },
   ],
-  tagFix: 'a redesign can help',
-  tagNot: 'not the website',
-  lossesNote: 'The last one is the hardest: if nothing records what happens, a lost enquiry leaves no trace.',
+  verdictK: 'So, a new website?',
   start: { href: '/problems/traffic-but-no-enquiries', label: 'Not sure where you’re losing them?', note: 'Start with three free checks you can do yourself.' },
+
   workKicker: 'How we work',
   workH: { a: 'First we find the problem.', b: 'Then we fix that problem.' },
   steps: [
-    { tab: 'Find the problem', t: 'Find the problem', d: 'We look at who is visiting and what they wanted, and whether your page answers that. We send real test enquiries — on a phone and on a slow connection — and confirm they arrive. And we check whether anything is being recorded at all.', icon: 'search' },
-    { tab: 'Plan the fix', t: 'Plan the fix', d: 'We fix the biggest problem first. That might be what your page says, a form that is too hard to fill in, enquiries that are sent but never reach you, or missing tracking.', icon: 'wrench' },
-    { tab: 'Make the change', t: 'Make the change', d: 'We make the changes ourselves: the form, the booking page, what happens after someone gets in touch, and the tracking. You don’t just get a list of recommendations.', icon: 'build' },
-    { tab: 'Check the results', t: 'Check the results', d: 'Before we change anything, we record how things are today. Without that starting point, nobody can honestly say whether things got better.', icon: 'chart' },
+    { label: 'Step 1: Find the problem', t: 'Find the problem', d: 'We use your website like a customer, and send test enquiries to see if they arrive.' },
+    { label: 'Step 2: Plan the fix', t: 'Plan the fix', d: 'We start with the biggest problem.' },
+    { label: 'Step 3: Make the change', t: 'Make the change', d: 'We make the agreed changes, with your input where needed.' },
+    { label: 'Step 4: Check the results', t: 'Check the results', d: 'We note where things stand first, so we can compare honestly.' },
   ],
-  testKicker: 'How do we know a change worked?',
-  testH: { a: 'With only a few enquiries,', b: 'luck can look like improvement.' },
-  testBody: 'If you get a handful of enquiries a month, a good or bad week can happen by chance. Proving a change worked needs enough visits and enquiries — how many depends on your business and on the change. A business with only a few enquiries a month may not have enough yet.',
-  below: { k: 'Not enough yet', t: 'We find the problem, make the change and watch what happens. We tell you what we saw — but we don’t claim an improvement we can’t prove.' },
-  above: { k: 'Enough to test', t: 'We can compare two versions properly and tell you how confident we are in the result.' },
-  line: 'enough to judge — different for every business',
-  noBench: 'We don’t quote “typical” improvements or industry averages. We don’t have reliable figures, so we won’t invent them.',
-  /* correction (OD-03/CP7 follow-up): restores the live page's link to the method (live `/conversion-optimization` "Related:") */
+
+  measKicker: 'How do we know a change worked?',
+  measH: { a: 'We make improvements.', b: 'Then we measure what changes.' },
+  measBody: 'We check how visitors respond after the changes and compare the results with what was happening before.',
+  measSteps: [
+    { label: '1: Improve', t: 'Improve', d: 'We make the agreed changes.' },
+    { label: '2: Measure', t: 'Measure', d: 'We see how visitors respond.' },
+    { label: '3: Review', t: 'Review', d: 'We compare it with what came before.' },
+  ],
+  measCaption: 'We tell you what we saw. We don’t claim more than we can prove.',
+  noBench: 'We don’t quote “typical” improvements or industry averages.',
   methodLink: { href: '/how-it-works', label: 'The method, including what cannot be attributed' },
+
   proofKicker: 'We checked our own website first',
-  proofH: { a: 'Our own contact form was losing every enquiry —', b: 'while telling visitors it had worked.' },
-  saw: 'What visitors saw',
-  arrived: 'What we received',
-  arrivedValue: 'Nothing',
-  reconstruction: 'Our recreation of the message — not a screenshot.',
-  proofBody: 'Every enquiry sent through it was lost, and we had no tracking to notice. You couldn’t have spotted it by looking at the design, the wording or the visitor numbers.',
+  proofH: { a: 'Our own enquiry form', b: 'wasn’t working.' },
+  proof: [
+    { label: '1: A visitor sends an enquiry', t: 'A visitor sends an enquiry.' },
+    { label: '2: The website says thank you', t: 'Our website says “Thank you”.' },
+    { label: '3: The inbox stays empty', t: 'Our inbox stays empty.' },
+    { label: '4: Nobody noticed', t: 'Nothing was tracked, so nobody noticed.' },
+  ],
+  thanks: { t: 'Thank you', d: 'Your enquiry has been sent.' },
+  inbox: { h: 'Our inbox', v: 'Nothing.' },
+  reconstruction: 'Our recreation of the message, not a screenshot.',
+  lesson: { k: 'What it taught us', a: 'A website can look fine and still lose enquiries.', b: 'That’s why one of our first checks is simple: send a test enquiry and see if it arrives.' },
+
   close: {
     h: 'Let’s find out where your enquiries are going.',
-    body: 'If you’re not sure your website records enquiries at all, that’s a good place to start — and the quickest thing to check.',
+    body: 'Not sure your website records enquiries at all? That’s the quickest thing to check.',
+    nextK: 'What happens next',
+    next: [
+      'You tell us what isn’t working.',
+      'We reply by email or WhatsApp.',
+      'We talk it through on a call.',
+      'You get our findings and a proposal before any work starts.',
+    ],
   },
 };

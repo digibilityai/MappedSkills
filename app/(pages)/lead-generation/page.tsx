@@ -4,13 +4,14 @@ import { CplusPage } from '@/components/cplus/CplusPage';
 import { LeadGenBody } from '@/components/cplus/lead-generation/LeadGenBody';
 
 /**
- * `/lead-generation` — the approved C+ Lead generation design (proto/direction-c-plus 0a8b611) in production. The URL, metadata
- * (title, description, canonical, Open Graph/Twitter), the global structured data and this route's `BreadcrumbList`
- * (same trail, same helpers) are unchanged. The Direction C header and footer come from the root layout.
+ * `/lead-generation`: the owner-approved G1 redesign (DEC-057). The URL, title, canonical, H1, the global structured data
+ * and this route's `BreadcrumbList` (same trail, same helpers) are unchanged. The meta description (and so the Open Graph
+ * and Twitter description) is the owner-approved option A (LG-D19). The Direction C header and footer come from the root
+ * layout.
  */
 export const metadata = createMetadata(
   'Lead Generation Where the Unit Is an Enquiry You Can Act On | MappedSkills',
-  'Enquiries from real businesses, with a real need, worth picking up the phone about — with a published definition of what counts as one, and that definition is the number we report.',
+  'Lead generation that brings in enquiries worth calling back. We manage the campaigns; enquiries go directly to your own form, CRM or WhatsApp.',
   '/lead-generation'
 );
 

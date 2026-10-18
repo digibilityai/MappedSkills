@@ -19,7 +19,8 @@
  * MINIMUM MESSAGE LENGTH IS NOT SET, and that is deliberate.
  * `QUALIFIED_ENQUIRY_DEFINITION.md` §10 decision 1 leaves it an open
  * calibration parameter, to be proposed against real submissions rather than
- * guessed. A non-empty message is required; a number invented here would be
+ * guessed. A non-empty message is required on an enquiry (optional on a call
+ * request, DEC-062); a number invented here would be
  * invented precision, which this programme forbids.
  */
 
@@ -301,10 +302,22 @@ export function validateEnquiry(input: unknown): ValidationResult {
     return { ok: false, formError: 'malformed', fieldErrors };
   }
 
+  // --- Request type --------------------------------------------------------
+  // DEC-062. `'call'` is the /schedule-call "Request a call" form: name, email and phone are required, and the message
+  // is optional. Company is not asked for. Absent means the original enquiry form, so every existing client is
+  // unchanged. Anything else is a client defect, so it fails the request like a bad idempotency key.
+  const requestTypeRaw = body.requestType;
+  if (requestTypeRaw !== undefined && requestTypeRaw !== 'enquiry' && requestTypeRaw !== 'call') {
+    return { ok: false, formError: 'malformed', fieldErrors };
+  }
+  const isCall = requestTypeRaw === 'call';
+
   // --- Required: name ------------------------------------------------------
   const name = asString(body.name);
   if (!name) {
-    fieldErrors.name = 'Enter the name we should use when we reply.';
+    fieldErrors.name = isCall
+      ? 'Enter the name we should use when we get in touch.'
+      : 'Enter the name we should use when we reply.';
   } else if (name.length > FIELD_LIMITS.name) {
     fieldErrors.name = `Use ${FIELD_LIMITS.name} characters or fewer.`;
   }
@@ -312,30 +325,40 @@ export function validateEnquiry(input: unknown): ValidationResult {
   // --- Required: work email ------------------------------------------------
   const email = asString(body.email);
   if (!email) {
-    fieldErrors.email = 'Enter an email address so we can reply to you.';
+    fieldErrors.email = isCall
+      ? 'Enter an email address so we can get in touch.'
+      : 'Enter an email address so we can reply to you.';
   } else if (email.length > FIELD_LIMITS.email) {
     fieldErrors.email = `Use ${FIELD_LIMITS.email} characters or fewer.`;
   } else if (!EMAIL_PATTERN.test(email)) {
     fieldErrors.email = 'Enter an email address in the form name@company.com.';
   }
 
-  // --- Required: company ---------------------------------------------------
-  const company = asString(body.company);
-  if (!company) {
-    fieldErrors.company = 'Enter your company name. One word is enough.';
-  } else if (company.length > FIELD_LIMITS.company) {
-    fieldErrors.company = `Use ${FIELD_LIMITS.company} characters or fewer.`;
+  // --- Company: required on an enquiry; not collected on a call request ----
+  // A call request stores '' (the column is NOT NULL), so no migration is needed. A company sent with a call request
+  // is ignored rather than stored: the form does not ask for one.
+  let company = '';
+  if (!isCall) {
+    const companyRaw = asString(body.company);
+    if (!companyRaw) {
+      fieldErrors.company = 'Enter your company name. One word is enough.';
+    } else if (companyRaw.length > FIELD_LIMITS.company) {
+      fieldErrors.company = `Use ${FIELD_LIMITS.company} characters or fewer.`;
+    } else {
+      company = companyRaw;
+    }
   }
 
-  // --- Required: what you're trying to fix ---------------------------------
-  const message = asString(body.message);
-  if (!message) {
+  // --- Message: required on an enquiry; optional on a call request ---------
+  // An empty optional message is stored as '' (the column is NOT NULL).
+  const message = asString(body.message) ?? '';
+  if (!message && !isCall) {
     fieldErrors.message = 'Tell us what you are trying to fix, in your own words.';
   } else if (message.length > FIELD_LIMITS.message) {
     fieldErrors.message = `Use ${FIELD_LIMITS.message} characters or fewer.`;
   }
 
-  // --- Optional: phone / WhatsApp ------------------------------------------
+  // --- Phone / WhatsApp: optional on an enquiry; required on a call request -
   let phone: string | null = null;
   const phoneRaw = asString(body.phone);
   if (phoneRaw !== undefined && phoneRaw !== '') {
@@ -343,17 +366,21 @@ export function validateEnquiry(input: unknown): ValidationResult {
       fieldErrors.phone = `Use ${FIELD_LIMITS.phone} characters or fewer.`;
     } else if ((phoneRaw.match(/\d/g) ?? []).length < 6) {
       // Deliberately loose. International formats vary far too much to pattern
-      // match, and this field is optional — a strict rule here would reject
-      // valid numbers to catch junk that costs nothing to store.
-      fieldErrors.phone = 'Enter a number we can reach you on, or leave this blank.';
+      // match, and a strict rule here would reject valid numbers to catch junk
+      // that costs nothing to store.
+      fieldErrors.phone = isCall
+        ? 'Enter a number we can reach you on, including the country code.'
+        : 'Enter a number we can reach you on, or leave this blank.';
     } else {
       phone = phoneRaw;
     }
+  } else if (isCall) {
+    fieldErrors.phone = 'Enter a number we can reach you on, including the country code.';
   }
 
-  // --- Optional: website ---------------------------------------------------
+  // --- Optional: website (not collected on a call request) -----------------
   let website: string | null = null;
-  const websiteRaw = asString(body.website);
+  const websiteRaw = isCall ? undefined : asString(body.website);
   if (websiteRaw !== undefined && websiteRaw !== '') {
     if (websiteRaw.length > FIELD_LIMITS.website) {
       fieldErrors.website = `Use ${FIELD_LIMITS.website} characters or fewer.`;
@@ -422,8 +449,8 @@ export function validateEnquiry(input: unknown): ValidationResult {
       idempotencyKey: idempotencyKey.toLowerCase(),
       name: cleanLine(name as string),
       email: (email as string).toLowerCase(),
-      company: cleanLine(company as string),
-      message: cleanBlock(message as string),
+      company: cleanLine(company),
+      message: cleanBlock(message),
       phone: phone === null ? null : cleanLine(phone),
       website,
       sourcePage,

@@ -1239,3 +1239,42 @@ Use this file only for meaningful project decisions.
 - **Not authorised:** commit, push, PR, merge, deployment; changes to other pages or shared components; new analytics events.
 - **Read with:** `DEC-005`, `DEC-051`, `DEC-053`, `DEC-056`, `DEC-057`. **Approved by:** Project owner, 2026-10-17 (HW-D01) and 2026-10-18 (R2, HW-D02, HW-D06, HW-D08, G2 authorisation). Recorded by the repository worker.
 - **Addendum (2026-10-18, owner):** G2 accepted for a local commit on `feat/how-it-works-g2` only. Review screenshots (`docs/how-it-works-redesign/g2/screenshots/`) are kept outside Git. Push, PR, merge and deployment remain unauthorised.
+
+### DEC-059
+- **Date:** 2026-10-18
+- **Status:** **Approved (owner): `/services` G1 design (final visual approval); local G2 implementation and verification on `feat/services-g2` authorised.** No commit, push, PR, merge or deployment is authorised.
+- **Decision (owner, "Services | G1 Final Refinement", final G1 approval, and "Services Page | G2 Implementation Authorization", 2026-10-18; scope is the `/services` page only):**
+  1. **The final G1 design is approved:** `docs/services-redesign/g1/` (`mockup/`, `SV_G1_NOTES.md`). The G0 audit is `docs/services-redesign/g0/SV_G0_AUDIT.html`. There are five sections:
+     - the hero, with "the route" drawn still;
+     - "Where to start": the problem selector and the six service cards, in one section;
+     - "One enquiry, start to finish": Capture → Convert → Measure;
+     - the scope strip;
+     - the tangerine close.
+  2. **SV-D01:** the H1 is "Get found. Get enquiries. See what's working." The title, description, canonical, URL and structured data are unchanged.
+  3. **SV-D02, D03, D04:** the selector and the cards are combined; there are three equal stages; the scope is one compact strip.
+  4. **SV-D05:** concise service-card copy. The detailed qualifications stay on the dedicated service pages (for example the Google Ads fee note and the AI search limits).
+  5. **SV-D06:** "Book a call" is the secondary CTA in both the hero and the close. Primary CTAs go to `/contact`.
+  6. **SV-D07:** micro-interactions are 150 ms on this page (`/conversion-optimization` keeps its 200 ms from `DEC-056`). The journey shows step 1 from the start, moves on every 1.5 s, and plays once. Reduced motion and no JavaScript show it complete.
+  7. **SV-D08:** the Lead generation card follows `DEC-057`: "Ad campaigns that send enquiries straight to your own form, CRM or WhatsApp."
+  8. **Example:** a fictional kitchen fitter, labelled "Illustrative example. Not a real client. No real figures."
+  9. **Measurement** is part of every service, not a seventh service.
+  10. **Phone length:** accepted after the R1 refinement.
+- **Facts used (no new claims):**
+  - `DEC-051` item 5: reply by email or WhatsApp, a call, then a plan before work starts;
+  - the monthly report (HW-D01, `DEC-057`);
+  - "where tracking allows" (`DEC-053` OD-04);
+  - SEO "usually 12 months or more" (live copy).
+- **Not stated:** guarantees, lead quality, figures, response times or review calls.
+- **Technical notes (GTM, for E6):**
+  - no analytics code reads these ids or classes;
+  - heading ids are now `sv-h1` (kept), `sv-h-pick`, `sv-h-jr`, `sv-h-scope` and `b-close-h`;
+  - removed ids: `sv-h-route`, `sv-h-join`, `sv-h-lim`, `sv-h-close`;
+  - new elements: `button.sx-opt[aria-pressed]` (the problem selector) and `button.sx-n` (journey steps, "Show step N: …");
+  - CTA text unchanged; a "Book a call" link is new in the hero and the close;
+  - no events, `dataLayer` pushes or `data-*` hooks were added;
+  - the analytics page type stays `commercial`.
+- **Not authorised:** commit, push, PR, merge, deployment; changes to other pages or shared components; new analytics events.
+- **Read with:** `DEC-005`, `DEC-032`, `DEC-051`, `DEC-053`, `DEC-056`, `DEC-057`, `DEC-058`.
+- **Approved by:** Project owner, 2026-10-18. Recorded by the repository worker.
+- **Addendum (2026-10-18, owner, "G2 implementation for /services approved. Stop here; commit not yet authorised."):** the G2 implementation on `feat/services-g2` (`docs/services-redesign/g2/SV_G2_REPORT.md`) is approved. Automated checks only. **Not done:** manual screen-reader, Firefox/WebKit, real-device and GTM Preview checks. **Still not authorised:** commit, push, PR, merge and deployment.
+- **Addendum (2026-10-18, owner, "Services | G2 Approval and Local Commit"):** the G2 implementation and visual design for `/services` are approved. One local commit on `feat/services-g2` is authorised. **Open before production release:** manual screen-reader testing, Firefox/WebKit verification, real-device testing and GTM Preview validation. **Still not authorised:** push, PR, merge, deployment and release workflows.

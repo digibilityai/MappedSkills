@@ -1,0 +1,755 @@
+{
+ "compare": [
+  {
+   "pair": "1440-sv-h1",
+   "size": [
+    [
+     1440,
+     517
+    ],
+    [
+     1440,
+     517
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "1440-sv-h-pick",
+   "size": [
+    [
+     1440,
+     1516
+    ],
+    [
+     1440,
+     1516
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "1440-sv-h-jr",
+   "size": [
+    [
+     1440,
+     913
+    ],
+    [
+     1440,
+     913
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "1440-sv-h-scope",
+   "size": [
+    [
+     1440,
+     602
+    ],
+    [
+     1440,
+     602
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "1440-b-close-h",
+   "size": [
+    [
+     1440,
+     738
+    ],
+    [
+     1440,
+     738
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "820-sv-h1",
+   "size": [
+    [
+     820,
+     671
+    ],
+    [
+     820,
+     671
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "820-sv-h-pick",
+   "size": [
+    [
+     820,
+     1474
+    ],
+    [
+     820,
+     1474
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "820-sv-h-jr",
+   "size": [
+    [
+     820,
+     1213
+    ],
+    [
+     820,
+     1213
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "820-sv-h-scope",
+   "size": [
+    [
+     820,
+     561
+    ],
+    [
+     820,
+     561
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "820-b-close-h",
+   "size": [
+    [
+     820,
+     706
+    ],
+    [
+     820,
+     706
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "390-sv-h1",
+   "size": [
+    [
+     390,
+     771
+    ],
+    [
+     390,
+     771
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "390-sv-h-pick",
+   "size": [
+    [
+     390,
+     1979
+    ],
+    [
+     390,
+     1979
+    ]
+   ],
+   "pct": 0.029
+  },
+  {
+   "pair": "390-sv-h-jr",
+   "size": [
+    [
+     390,
+     1329
+    ],
+    [
+     390,
+     1329
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "390-sv-h-scope",
+   "size": [
+    [
+     390,
+     778
+    ],
+    [
+     390,
+     778
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "390-b-close-h",
+   "size": [
+    [
+     390,
+     739
+    ],
+    [
+     390,
+     739
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "320-sv-h1",
+   "size": [
+    [
+     320,
+     824
+    ],
+    [
+     320,
+     824
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "320-sv-h-pick",
+   "size": [
+    [
+     320,
+     2165
+    ],
+    [
+     320,
+     2165
+    ]
+   ],
+   "pct": 0.032
+  },
+  {
+   "pair": "320-sv-h-jr",
+   "size": [
+    [
+     320,
+     1511
+    ],
+    [
+     320,
+     1511
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "320-sv-h-scope",
+   "size": [
+    [
+     320,
+     796
+    ],
+    [
+     320,
+     796
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "320-b-close-h",
+   "size": [
+    [
+     320,
+     765
+    ],
+    [
+     320,
+     765
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "1440-state-pick-cv",
+   "size": [
+    [
+     1440,
+     1516
+    ],
+    [
+     1440,
+     1516
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "1440-state-journey-step1",
+   "size": [
+    [
+     1440,
+     913
+    ],
+    [
+     1440,
+     913
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "pair": "390-state-pick-cv",
+   "size": [
+    [
+     390,
+     2072
+    ],
+    [
+     390,
+     2072
+    ]
+   ],
+   "pct": 0.027
+  },
+  {
+   "pair": "390-state-journey-step1",
+   "size": [
+    [
+     390,
+     1329
+    ],
+    [
+     390,
+     1329
+    ]
+   ],
+   "pct": 0
+  }
+ ],
+ "checks": {
+  "head": {
+   "title": "Services: Digital Marketing That Works Together | MappedSkills",
+   "desc": "Reach potential customers, make it easier for them to contact you, and measure what is working. MappedSkills connects search, advertising, your website and enquiry tracking.",
+   "canonical": "https://mappedskills.com/services",
+   "robots": "index, follow",
+   "ogTitle": "Services: Digital Marketing That Works Together | MappedSkills",
+   "jsonld": [
+    "Organization"
+   ],
+   "h1": "Get found. Get enquiries. See what’s working.",
+   "h1Count": 1,
+   "headings": [
+    "H1 Get found. Get enquiries. See what’s working.",
+    "H2 What’s not working?",
+    "H3 Get found",
+    "H3 Get enquiries",
+    "H3 See what’s working",
+    "H2 One enquiry, start to finish.",
+    "H2 What we do, and what we don’t.",
+    "H3 We start with what you need",
+    "H3 Added later, if you need it",
+    "H3 Not something we do",
+    "H2 Not sure where it’s breaking? Let’s find out."
+   ],
+   "dataLayer": [
+    "consent:default",
+    "page_view",
+    "consent:update"
+   ]
+  },
+  "ctas": [
+   [
+    "dc-btn-primary",
+    "/contact",
+    "Tell us what you’re trying to fix"
+   ],
+   [
+    "dc-btn-secondary",
+    "/schedule-call",
+    "Book a call"
+   ],
+   [
+    "dc-btn-primary",
+    "/contact",
+    "Tell us what you’re trying to fix"
+   ],
+   [
+    "dc-btn-secondary",
+    "/schedule-call",
+    "Book a call"
+   ]
+  ],
+  "cards": [
+   [
+    "/seo",
+    "SEO"
+   ],
+   [
+    "/google-ads",
+    "Google Ads"
+   ],
+   [
+    "/social-media-ads",
+    "Paid social"
+   ],
+   [
+    "/ai-seo",
+    "AI search"
+   ],
+   [
+    "/conversion-optimization",
+    "Conversion optimisation"
+   ],
+   [
+    "/lead-generation",
+    "Lead generation"
+   ]
+  ],
+  "micro": [
+   "0.15s, 0.15s, 0.15s, 0.15s, 0.15s",
+   "0.15s, 0.15s, 0.15s, 0.15s",
+   "0.15s, 0.15s",
+   "0.15s"
+  ],
+  "selector": {
+   "chooseCapture": {
+    "pressed": [
+     "true",
+     "false",
+     "false"
+    ],
+    "pick": [
+     "sx-g-cap"
+    ],
+    "status": "Start with Get found: four services, just below.",
+    "cardsVisible": 6
+   },
+   "switchToMeasure": {
+    "pressed": [
+     "false",
+     "false",
+     "true"
+    ],
+    "pick": [
+     "sx-g-ms"
+    ],
+    "status": "Start with See what’s working. It’s part of every service.",
+    "cardsVisible": 6
+   },
+   "clear": {
+    "pressed": [
+     "false",
+     "false",
+     "false"
+    ],
+    "pick": [],
+    "status": "",
+    "cardsVisible": 6
+   }
+  },
+  "keyboardSelector": [
+   "sx-opt",
+   "true"
+  ],
+  "focusRing": "solid 3px rgb(255, 91, 4)",
+  "journey": {
+   "atStart": "0",
+   "steps": [
+    [
+     "1",
+     3641
+    ],
+    [
+     "2",
+     5142
+    ]
+   ],
+   "gaps": [
+    1501
+   ],
+   "done": true
+  },
+  "journeyStill": "2",
+  "keyboardStep": {
+   "focus": "Show step 2: Get enquiries",
+   "at": "1",
+   "cls": "sx-seq sx-jr-seq ax-seq is-armed is-all"
+  },
+  "tabOrder": [
+   "A:Home",
+   "dc-btn dc-btn-primary:Tell us what you’re trying to ",
+   "dc-btn dc-btn-secondary:Book a call",
+   "sx-opt:Not enough people find us",
+   "sx-opt:People visit, but few get in t",
+   "sx-opt:We can’t tell what’s working",
+   "sx-sel-unsure:Something else? Tell us",
+   "sx-card:SEOShow up when people search ",
+   "sx-card:Google AdsReach people searchi",
+   "sx-card:Paid socialSocial media ads, w",
+   "sx-card:AI searchWork on how AI tools ",
+   "sx-card:Conversion optimisationFind an",
+   "sx-card:Lead generationAd campaigns th",
+   "A:How we work and report →",
+   "sx-n:Show step 1: Get found",
+   "sx-n:Show step 2: Get enquiries",
+   "sx-n:Show step 3: See what’s workin",
+   "A:What this costs, and what move"
+  ],
+  "links": {
+   "/": 200,
+   "/contact": 200,
+   "/schedule-call": 200,
+   "/seo": 200,
+   "/google-ads": 200,
+   "/social-media-ads": 200,
+   "/ai-seo": 200,
+   "/conversion-optimization": 200,
+   "/lead-generation": 200,
+   "/how-it-works": 200,
+   "/pricing": 200
+  },
+  "axe-1440": [
+   "target-size: .dc-logo > .flex.items-center.group"
+  ],
+  "axe-390": [
+   "target-size: .dc-logo > .flex.items-center.group"
+  ],
+  "axe-320": [
+   "target-size: .dc-logo > .flex.items-center.group"
+  ],
+  "consoleErrors": [],
+  "failedRequests": [
+   "http://127.0.0.1:3199/work?_rsc=KYvdZcpfaUBIcRGq",
+   "http://127.0.0.1:3199/work?_rsc=aq-mObehYpPYC3z9",
+   "http://127.0.0.1:3199/work?_rsc=zzk9_a3EvJEbQbnV",
+   "http://127.0.0.1:3199/blog?_rsc=aU2bnqkFOHST-qd-",
+   "http://127.0.0.1:3199/blog?_rsc=O9Lr6k23vrn65dTc",
+   "http://127.0.0.1:3199/blog?_rsc=zzk9_a3EvJEbQbnV",
+   "http://127.0.0.1:3199/?_rsc=vBo7aPBpB66dA2X_",
+   "http://127.0.0.1:3199/?_rsc=zzk9_a3EvJEbQbnV",
+   "http://127.0.0.1:3199/work?_rsc=1RpmAqYJEMFF4n7A",
+   "http://127.0.0.1:3199/blog?_rsc=1RpmAqYJEMFF4n7A",
+   "http://127.0.0.1:3199/?_rsc=1RpmAqYJEMFF4n7A"
+  ],
+  "layout": {
+   "320": {
+    "overflowX": false,
+    "height": 7498,
+    "heroCtaBottom": 502,
+    "stationVsHeadline": null,
+    "minFont": 12
+   },
+   "390": {
+    "overflowX": false,
+    "height": 6942,
+    "heroCtaBottom": 449,
+    "stationVsHeadline": null,
+    "minFont": 12
+   },
+   "820": {
+    "overflowX": false,
+    "height": 5651,
+    "heroCtaBottom": 452,
+    "stationVsHeadline": null,
+    "minFont": 12
+   },
+   "1024": {
+    "overflowX": false,
+    "height": 5881,
+    "heroCtaBottom": 477,
+    "stationVsHeadline": null,
+    "minFont": 12
+   },
+   "1280": {
+    "overflowX": false,
+    "height": 4766,
+    "heroCtaBottom": 512,
+    "stationVsHeadline": [
+     0,
+     0,
+     0
+    ],
+    "minFont": 12
+   },
+   "1366": {
+    "overflowX": false,
+    "height": 4987,
+    "heroCtaBottom": 522,
+    "stationVsHeadline": [
+     0,
+     0,
+     0
+    ],
+    "minFont": 12
+   },
+   "1440": {
+    "overflowX": false,
+    "height": 5070,
+    "heroCtaBottom": 532,
+    "stationVsHeadline": [
+     0,
+     0,
+     0
+    ],
+    "minFont": 12
+   }
+  },
+  "reducedMotion": {
+   "cls": "sx-seq sx-jr-seq ax-seq is-armed is-static is-all",
+   "dimmed": 0
+  },
+  "noJs": {
+   "selectorHidden": true,
+   "problemLines": 3,
+   "cards": [
+    "/seo",
+    "/google-ads",
+    "/social-media-ads",
+    "/ai-seo",
+    "/conversion-optimization",
+    "/lead-generation"
+   ],
+   "stepSpans": 3,
+   "dimmed": 0
+  }
+ },
+ "regression": [
+  {
+   "route": "/",
+   "size": [
+    [
+     1440,
+     6137
+    ],
+    [
+     1440,
+     6137
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "route": "/how-it-works",
+   "size": [
+    [
+     1440,
+     6274
+    ],
+    [
+     1440,
+     6274
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "route": "/seo",
+   "size": [
+    [
+     1440,
+     6681
+    ],
+    [
+     1440,
+     6681
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "route": "/google-ads",
+   "size": [
+    [
+     1440,
+     5862
+    ],
+    [
+     1440,
+     5862
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "route": "/social-media-ads",
+   "size": [
+    [
+     1440,
+     3022
+    ],
+    [
+     1440,
+     3022
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "route": "/ai-seo",
+   "size": [
+    [
+     1440,
+     6877
+    ],
+    [
+     1440,
+     6877
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "route": "/conversion-optimization",
+   "size": [
+    [
+     1440,
+     5786
+    ],
+    [
+     1440,
+     5786
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "route": "/lead-generation",
+   "size": [
+    [
+     1440,
+     5455
+    ],
+    [
+     1440,
+     5455
+    ]
+   ],
+   "pct": 0
+  },
+  {
+   "route": "/contact",
+   "size": [
+    [
+     1440,
+     2747
+    ],
+    [
+     1440,
+     2747
+    ]
+   ],
+   "pct": 0
+  }
+ ]
+}

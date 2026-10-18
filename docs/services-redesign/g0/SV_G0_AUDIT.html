@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Services G0 Audit</title>
+<style>
+:root{--bg:#F7F3EC;--paper:#FFFDF8;--ink:#141219;--mute:#5d5866;--line:#d9d2c5;--acc:#C24400;--acc-bg:#FFE7D9;--ok:#1e6b3a;--ok-bg:#e3f2e7;--warn:#8a5a00;--warn-bg:#fdf0d2;--bad:#a1221b;--bad-bg:#fbe1de;--tan:#FF5B04}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141219;--paper:#1d1a23;--ink:#efeae2;--mute:#a9a3b2;--line:#39343f;--acc:#ff8a4c;--acc-bg:#3a2216;--ok:#7fd39b;--ok-bg:#16301f;--warn:#f0c46a;--warn-bg:#3a2e12;--bad:#ff9a92;--bad-bg:#3d1714}}
+:root[data-theme="dark"]{--bg:#141219;--paper:#1d1a23;--ink:#efeae2;--mute:#a9a3b2;--line:#39343f;--acc:#ff8a4c;--acc-bg:#3a2216;--ok:#7fd39b;--ok-bg:#16301f;--warn:#f0c46a;--warn-bg:#3a2e12;--bad:#ff9a92;--bad-bg:#3d1714}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 16px 80px}
+h1{font-size:clamp(28px,4vw,40px);line-height:1.1;margin:.2em 0 .3em}
+h2{font-size:24px;margin:56px 0 12px;padding-top:12px;border-top:2px solid var(--ink)}
+h3{font-size:18px;margin:28px 0 8px}
+p,li{max-width:78ch}
+.k{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:600}
+.meta{color:var(--mute);font-size:14px}
+.card{background:var(--paper);border:1px solid var(--line);padding:16px 18px;margin:16px 0}
+.verdict{border-left:4px solid var(--tan)}
+table{width:100%;border-collapse:collapse;font-size:15px;margin:12px 0;background:var(--paper)}
+th,td{text-align:left;vertical-align:top;padding:9px 10px;border-bottom:1px solid var(--line)}
+th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:600}
+.tw{overflow-x:auto}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:1px 7px;border-radius:2px;white-space:nowrap}
+.keep{background:var(--ok-bg);color:var(--ok)}.simp{background:var(--warn-bg);color:var(--warn)}.drop{background:var(--bad-bg);color:var(--bad)}.new{background:var(--acc-bg);color:var(--acc)}
+figure{margin:16px 0}
+figure img{display:block;width:100%;height:auto;border:1px solid var(--line)}
+figcaption{font-size:14px;color:var(--mute);margin-top:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+.wf{display:grid;gap:8px;margin:12px 0}
+.wf div{background:var(--paper);border:1px solid var(--line);padding:10px 14px}
+.wf b{display:inline-block;min-width:1.6em;color:var(--acc)}
+.wf .ink{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.wf .ink b{color:var(--tan)}
+.wf .tanb{background:var(--tan);color:#141219;border-color:var(--tan)}
+.wf .tanb b{color:#141219}
+svg{max-width:100%;height:auto}
+code{font-size:.9em}
+a{color:var(--acc)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="k">MappedSkills · /services · G0 design audit · 2026-10-18</p>
+<h1>/services: G0 audit and recommendation</h1>
+<p class="meta">Read-only review of the live page (<code>https://mappedskills.com/services</code>, HTTP 200) and the <code>origin/main</code> source (<code>components/cplus/services/</code>). Nothing implemented, committed or deployed. Measured at 1440×900, 820×1180 and 390×844 in Chromium (playwright-core). Brand basis: MappedSkills Brand DNA v1.0 (18-page PDF) and the released C+ pages, with <code>/how-it-works</code> (DEC-058) as the nearest visual reference.</p>
+
+<div class="card verdict">
+<p><strong>Recommendation in one paragraph.</strong> Keep the page's best idea, which is starting from the visitor's problem, and fix the rest. The live page lists the six services three times (hero plate, router, journey), uses two competing labelling systems, and spends 1,685 px (desktop) or 2,221 px (mobile) on 14 bordered boxes. The proposed five-section direction is sound, with one change: <strong>merge the problem selector and the six service cards into one section</strong>. As two sections they would repeat the same six links again. Tell the whole page as one visual story, <strong>"the route"</strong>: a single drawn path from search to enquiry to report, which the hero shows, the selector lights up where it breaks, and the journey plays once.</p>
+</div>
+
+<h2>1. What the live page does today</h2>
+<div class="tw"><table>
+<tr><th>#</th><th>Section</th><th>Desktop height</th><th>Mobile height</th><th>Words</th></tr>
+<tr><td>1</td><td>Hero: "Digital marketing that works together." plus a dark "Three stages" plate</td><td>734</td><td>1,085</td><td>92</td></tr>
+<tr><td>2</td><td>"Start with what is going wrong": 4 problem rows, 7 service boxes, "Not sure which?"</td><td>1,685</td><td>2,221</td><td>208</td></tr>
+<tr><td>3</td><td>Ink: "Better results start when your marketing works together", 4-step animated journey, 2 summary notes</td><td>835</td><td>1,013</td><td>109</td></tr>
+<tr><td>4</td><td>Paper: "Starting out, and adding later" and "Outside what we do"</td><td>651</td><td>958</td><td>112</td></tr>
+<tr><td>5</td><td>Tangerine close: "Not sure what's holding your marketing back? Let's find out."</td><td>696</td><td>504</td><td>42</td></tr>
+<tr><td></td><td><strong>Page</strong></td><td><strong>5,390 px</strong></td><td><strong>7,133 px</strong></td><td><strong>563</strong></td></tr>
+</table></div>
+<p class="meta">VERIFIED FACT (measured). No horizontal overflow at any width. Hero CTA visible on the first screen at all three widths (desktop bottom 684 px, tablet 675 px, mobile 478 px). One CTA type only (<code>/contact</code>, twice); no "Book a call" in the body. Structured data: global <code>Organization</code> only. Analytics page type <code>commercial</code> comes from the path list in <code>lib/analytics.ts</code>; no analytics code reads any <code>sv-</code> class.</p>
+
+<figure><img src="screenshots/desktop-1440-fold.png" alt="Live /services hero at 1440 by 900"><figcaption>Desktop fold. The dark plate's white chips look like buttons but are not links, and the caption just says "Illustration."</figcaption></figure>
+
+<h2>2. Main weaknesses</h2>
+<h3>Visual and UI</h3>
+<ul>
+<li><strong>False affordance in the hero.</strong> The plate's eight chips (SEO, Google Ads …) are styled like buttons and are not clickable. On mobile the plate adds about 600 px before the visitor reaches anything they can use.</li>
+<li><strong>A card grid, not a composition.</strong> Section 2 is 14 identically bordered boxes with uneven heights. The Brand DNA (p.11) asks for "asymmetry, editorial offsets and meaningful spatial contrast over repetitive card grids".</li>
+<li><strong>The same list three times.</strong> The hero plate, the router and the journey each restate the services or stages, each with a different visual language.</li>
+<li><strong>Section 4 reads as fine print.</strong> Two side-by-side H2s in small type. The content (scope and exclusions) is useful; the treatment buries it.</li>
+<li><strong>The journey's active text looks faded</strong> on ink in the capture ("See where enquiries come from…"). Contrast to be measured in G1.</li>
+</ul>
+<div class="two">
+<figure><img src="screenshots/desktop-1440-s02.png" alt="Live router section, desktop"><figcaption>Section 2: four rows, two label systems (Reach + Capture), the fourth row ("Overview / Connect") has no destination.</figcaption></figure>
+<figure><img src="screenshots/desktop-1440-s03.png" alt="Live journey section, desktop"><figcaption>Section 3: four steps against a three-stage brand system; steps advance every 650 ms.</figcaption></figure>
+</div>
+
+<h3>UX and interaction</h3>
+<ul>
+<li><strong>Two taxonomies at once.</strong> Each problem row carries a tag (Reach, Enquiries, Tracking, Overview) and a stage (Capture, Convert, Measure, Connect). "Connect" is a fourth stage that the Brand DNA does not have.</li>
+<li><strong>A dead-end row.</strong> "Your marketing runs in separate pieces…" links nowhere; its only content is "The next section explains how the pieces fit together."</li>
+<li><strong>Journey timing is out of line</strong> with the released pages: <code>STEP_MS = 650</code> in <code>Journey.tsx</code>, against 1.5 s on <code>/ai-seo</code>, <code>/conversion-optimization</code> and <code>/how-it-works</code> (2 s on <code>/lead-generation</code>).</li>
+<li><strong>The journey is four steps</strong> (discovered, visit, enquiry, measure), which blurs the Capture → Convert → Measure system it is meant to explain.</li>
+</ul>
+
+<h3>Copy</h3>
+<ul>
+<li>The H1 and the section 3 H2 say the same thing ("works together"), and neither names a customer problem. "Better results start when…" is generic agency language.</li>
+<li>Several service lines lead with a caveat rather than what the visitor gets: Paid social "An optional source…", AI search "…nobody can guarantee it". The honesty belongs on the page, but not as each card's first impression.</li>
+<li>One long dash in the rendered copy ("tracking—within the agreed scope"), against the owner's no-long-dash rule applied on other pages.</li>
+</ul>
+
+<h3>Conversion</h3>
+<ul>
+<li>No secondary "Book a call" route in the body, unlike <code>/how-it-works</code> and <code>/lead-generation</code>.</li>
+<li>No "What happens next" in the close (present on <code>/conversion-optimization</code> and <code>/how-it-works</code>).</li>
+<li>The useful prompt "Not sure which?" sits in a dashed box at the bottom of the longest section and sends visitors to <code>/how-it-works</code>, not to <code>/contact</code>.</li>
+</ul>
+
+<h2>3. Preserve, simplify, remove</h2>
+<div class="tw"><table>
+<tr><th>Element</th><th>Call</th><th>Why</th></tr>
+<tr><td>Start from the visitor's problem</td><td><span class="tag keep">Keep</span></td><td>Matches Brand DNA "start from a business tension". It is the page's strongest idea.</td></tr>
+<tr><td>Links to all six service pages and to <code>/how-it-works</code>, <code>/pricing</code>, <code>/contact</code></td><td><span class="tag keep">Keep</span></td><td>Internal links and SEO equity. They must be in the server HTML and work without JavaScript.</td></tr>
+<tr><td>Title, description, canonical, URL, page type <code>commercial</code></td><td><span class="tag keep">Keep</span></td><td>SEO essentials and analytics. The H1 is a separate decision (SV-D01).</td></tr>
+<tr><td>"Measurement is part of the work, not sold separately"</td><td><span class="tag keep">Keep</span></td><td>Accurate scope, and it explains why there are six cards and three stages.</td></tr>
+<tr><td>"Outside what we do" list</td><td><span class="tag simp">Simplify</span></td><td>Approved scope (<code>SERVICE_ARCHITECTURE.md</code>). Becomes one compact strip.</td></tr>
+<tr><td>"Starting out, and adding later"</td><td><span class="tag simp">Simplify</span></td><td>Merge into the same strip, one line each.</td></tr>
+<tr><td>Animated journey</td><td><span class="tag simp">Simplify</span></td><td>Three equal stages, 1.5 s steps, plays once.</td></tr>
+<tr><td>Tangerine close</td><td><span class="tag simp">Simplify</span></td><td>Keep the full-bleed moment; add "Book a call" and "What happens next".</td></tr>
+<tr><td>Hero "Three stages" plate with fake chips</td><td><span class="tag drop">Remove</span></td><td>False affordance and repetition. Replaced by the route drawing.</td></tr>
+<tr><td>"Overview / Connect" row</td><td><span class="tag drop">Remove</span></td><td>Dead end and a fourth stage.</td></tr>
+<tr><td>Double tags (Reach + Capture …)</td><td><span class="tag drop">Remove</span></td><td>Use Capture / Convert / Measure only, as the header menu already does.</td></tr>
+<tr><td>"What we manage" / "What also affects results" notes</td><td><span class="tag drop">Remove</span></td><td>The second note is fair but is covered on <code>/how-it-works</code> and <code>/faq</code>. Owner may keep it as one line in the strip.</td></tr>
+</table></div>
+
+<h2>4. The proposed direction, challenged</h2>
+<div class="tw"><table>
+<tr><th>Proposed</th><th>Verdict</th><th>Recommendation</th></tr>
+<tr><td>1. Hero "Get found. Get enquiries. Know what works."</td><td>Good pattern; two words need care</td><td>It follows the Brand DNA "System" headline pattern. "Know what works" overstates what tracking can show (the released <code>/how-it-works</code> has a whole section on what the numbers cannot show). <strong>Use "See what's working."</strong> "Get enquiries" is acceptable as a description of the work only if no nearby line implies a volume or guarantee.</td></tr>
+<tr><td>2. Interactive problem selector</td><td>Yes, merged with 4</td><td>As a separate section it would show the same six links as section 4. Merge them: three problem buttons above the six cards; choosing one <em>highlights</em> the matching cards and the break point on the route. Nothing is hidden, so all six links stay visible, crawlable and usable without JavaScript.</td></tr>
+<tr><td>3. Capture → Convert → Measure journey</td><td>Yes</td><td>Three equal stages (Brand DNA p.6: no stage visually larger or "better"). Each stage names its services. Played as one example enquiry's path.</td></tr>
+<tr><td>4. Six service cards</td><td>Yes, inside section 2</td><td>Six cards on a ruled, asymmetric layout grouped by stage (4 · 2), not 14 equal boxes. One plain line per card about what it does for you.</td></tr>
+<tr><td>5. Contact CTA</td><td>Yes</td><td>Primary "Tell us what's not working" → <code>/contact</code>; secondary "Book a call" → <code>/schedule-call</code>; "What happens next" from confirmed facts only.</td></tr>
+<tr><td>(not proposed) scope and exclusions</td><td>Keep, condensed</td><td>A one-strip section between journey and close. Cutting it entirely removes useful, honest scope. Owner choice (SV-D04).</td></tr>
+</table></div>
+
+<h2>5. Recommended page structure</h2>
+<div class="wf">
+<div><b>1</b> <strong>Hero (cream).</strong> Kicker "Our services". H1 "Get found. Get enquiries. See what's working." One short lede. Contact CTA + Book a call. Right: the route drawing, still (Search → Your page → Enquiry → Report), labelled "Illustration".</div>
+<div><b>2</b> <strong>"What's not working?" (paper).</strong> Three native buttons: "Not enough people find us" · "People visit, but few get in touch" · "We can't tell what's working". Below, six cards grouped Capture (4) · Convert (2), plus a Measure line linking to <code>/how-it-works</code>. Choosing a problem highlights its cards and its point on a mini route. A fourth option, "Not sure", points to the contact CTA.</div>
+<div class="ink"><b>3</b> <strong>"One enquiry, start to finish" (ink).</strong> The route plays once at 1.5 s per stage: Capture (someone searches and finds you) → Convert (they visit and send an enquiry) → Measure (it shows up in your monthly report, with its source where tracking allows). Example business, labelled "Illustrative example".</div>
+<div><b>4</b> <strong>"What we do, and don't" (cream strip).</strong> Start with what you need · add later if needed · six exclusions as one line of chips · link to pricing.</div>
+<div class="tanb"><b>5</b> <strong>Close (tangerine).</strong> Two-colour heading, "What happens next" row, Contact primary, Book a call secondary.</div>
+</div>
+<p class="meta">Estimate (WORKING HYPOTHESIS until a G1 mockup is measured): roughly 300 to 350 visible words against 563 today, and a shorter page at every width, mainly from removing the hero plate and the 14 boxes.</p>
+
+<h2>6. One visual storytelling concept: "the route"</h2>
+<p>One drawn path, used three times, so the page explains itself without paragraphs. It is the Brand DNA's own idea ("show the path from demand to action") and visually distinct from the step cards on <code>/how-it-works</code>.</p>
+<svg viewBox="0 0 960 230" role="img" aria-label="Sketch of the route concept: four stations on a line labelled Capture, Convert and Measure, used in the hero, the selector and the journey">
+<rect x="0" y="0" width="960" height="230" fill="#F7F3EC"/>
+<g font-family="system-ui,sans-serif" fill="#141219">
+<text x="24" y="34" font-size="13" font-weight="700" letter-spacing="1.5">CAPTURE</text>
+<text x="360" y="34" font-size="13" font-weight="700" letter-spacing="1.5">CONVERT</text>
+<text x="700" y="34" font-size="13" font-weight="700" letter-spacing="1.5">MEASURE</text>
+<line x1="24" y1="44" x2="330" y2="44" stroke="#141219" stroke-width="1"/>
+<line x1="360" y1="44" x2="670" y2="44" stroke="#141219" stroke-width="1"/>
+<line x1="700" y1="44" x2="936" y2="44" stroke="#141219" stroke-width="1"/>
+<line x1="70" y1="110" x2="880" y2="110" stroke="#141219" stroke-width="3"/>
+<line x1="300" y1="110" x2="520" y2="110" stroke="#FF5B04" stroke-width="6"/>
+<rect x="50" y="90" width="40" height="40" fill="#FFFDF9" stroke="#141219" stroke-width="2"/>
+<rect x="280" y="90" width="40" height="40" fill="#FFFDF9" stroke="#141219" stroke-width="2"/>
+<rect x="500" y="90" width="40" height="40" fill="#FF5B04" stroke="#141219" stroke-width="2"/>
+<rect x="860" y="90" width="40" height="40" fill="#141219"/>
+<text x="70" y="158" font-size="15" font-weight="700" text-anchor="middle">Search</text>
+<text x="300" y="158" font-size="15" font-weight="700" text-anchor="middle">Your page</text>
+<text x="520" y="158" font-size="15" font-weight="700" text-anchor="middle">Enquiry</text>
+<text x="880" y="158" font-size="15" font-weight="700" text-anchor="middle">Report</text>
+<text x="410" y="88" font-size="13" text-anchor="middle" fill="#A83400">break point lit by the selector</text>
+<text x="24" y="206" font-size="13" fill="#5d5866">Hero: drawn still. Section 2: the chosen problem lights its segment. Section 3: plays once, one stage every 1.5 s. Sketch only.</text>
+</g>
+</svg>
+<ul>
+<li><strong>Calm, event, calm.</strong> One play per visit, no loop, no sticky or pinned scrolling, step 1 visible from the start.</li>
+<li><strong>Tangerine marks the event only:</strong> the selected break point, the enquiry station, the CTAs.</li>
+<li><strong>Honest geometry.</strong> No numbers, bars or dashboard shapes; "Illustration" and "Illustrative example" labels.</li>
+<li><strong>Responsive by design.</strong> Horizontal at ≥1081 px, vertical from 761 to 1080 px and below (Brand DNA breakpoints), not a shrunk desktop.</li>
+<li><strong>Motion.</strong> About 150 ms for hover, press and selection; 1.5 s between journey stages; reduced motion and no-JavaScript show the completed route and all cards.</li>
+</ul>
+
+<h2>7. Brand DNA, scope and claim risks</h2>
+<div class="tw"><table>
+<tr><th>Risk</th><th>Detail</th><th>Mitigation</th></tr>
+<tr><td>Guarantee read into "Get enquiries"</td><td>DEC-057: no guarantee of lead quality or conversion.</td><td>No numbers, "more", or speed claims near the H1; lede frames it as what we help with.</td></tr>
+<tr><td>"Qualified" or quality claims</td><td>Live Lead generation card says "More of the right enquiries, not just more enquiries", which implies quality that DEC-057 does not allow us to claim.</td><td>Rewrite in line with DEC-057, for example "Ad campaigns that send enquiries straight to your form, CRM or WhatsApp." (SV-D08)</td></tr>
+<tr><td>Measurement certainty</td><td>"Know what works" and "See where enquiries come from" read as universal.</td><td>"See what's working" and "where tracking allows" (DEC-053 OD-04 wording).</td></tr>
+<tr><td>Monthly review call</td><td>Not a standard commitment (DEC-057, HW-D01).</td><td>Mention the monthly report only, or the exact HW-D01 sentence.</td></tr>
+<tr><td>Example business in the journey</td><td>Could read as a client result.</td><td>Fictional, visibly labelled, no figures (as DEC-054 item 5).</td></tr>
+<tr><td>Service list becoming the brand</td><td>Brand DNA p.13: "Never let the service list become the brand."</td><td>Problems and the route lead; cards support.</td></tr>
+<tr><td>Scope creep</td><td>Standalone web development and organic social are excluded (DEC-005, DEC-032).</td><td>Keep the exclusions strip; no new cards.</td></tr>
+<tr><td>H1 change</td><td>The H1 currently matches the title ("Digital marketing that works together").</td><td>Title and description unchanged; "digital marketing" kept in the lede. Owner decision SV-D01.</td></tr>
+<tr><td>Interaction and analytics</td><td>New buttons add no events; no tracking is requested.</td><td>No <code>dataLayer</code> pushes or <code>data-*</code> hooks; GTM Preview check stays with E6.</td></tr>
+</table></div>
+
+<h2>8. Owner decisions before G1</h2>
+<div class="tw"><table>
+<tr><th>ID</th><th>Decision</th><th>Recommended</th></tr>
+<tr><td>SV-D01</td><td>H1: keep "Digital marketing that works together." or use "Get found. Get enquiries. See what's working."</td><td>New H1; title and description unchanged.</td></tr>
+<tr><td>SV-D02</td><td>Selector and six cards: one merged section, or two sections as proposed</td><td>Merged.</td></tr>
+<tr><td>SV-D03</td><td>Journey: three stages (Capture, Convert, Measure) or keep four steps</td><td>Three.</td></tr>
+<tr><td>SV-D04</td><td>Scope and exclusions: compact strip, or remove from this page</td><td>Compact strip.</td></tr>
+<tr><td>SV-D05</td><td>Card copy: one plain benefit line each, caveats left to the service pages (SEO's 12-month horizon kept as a short note)</td><td>Yes.</td></tr>
+<tr><td>SV-D06</td><td>Add "Book a call" as the secondary CTA in the hero and close</td><td>Yes, matching <code>/how-it-works</code>.</td></tr>
+<tr><td>SV-D07</td><td>Micro-interaction timing: 150 ms (this brief) or 200 ms (approved for <code>/conversion-optimization</code>, DEC-056)</td><td>150 ms on this page; 1.5 s journey steps.</td></tr>
+<tr><td>SV-D08</td><td>Lead generation card wording in line with DEC-057</td><td>Yes.</td></tr>
+</table></div>
+
+<p class="meta">Evidence: <code>screenshots/</code> (fold, full page and per-section captures at 1440, 820 and 390 wide; <code>measurements.json</code>; <code>ref-how-it-works-1440-*.png</code> for the reference page). This audit records no decision in <code>DECISION_LOG.md</code>; it is read-only, and the checkout is <code>feat/ai-search-redesign</code>, not <code>main</code>.</p>
+</div>
+</body>
+</html>

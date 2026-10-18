@@ -1,0 +1,359 @@
+{
+ "desktop-1440x900": {
+  "title": "Services: Digital Marketing That Works Together | MappedSkills",
+  "desc": "Reach potential customers, make it easier for them to contact you, and measure what is working. MappedSkills connects search, advertising, your website and enquiry tracking.",
+  "canonical": "https://mappedskills.com/services",
+  "h1": "Digital marketing that works together.",
+  "h1Lines": 3,
+  "heroBottom": 807,
+  "ctaBottom": 684,
+  "figTop": 174,
+  "figBottom": 706,
+  "pageHeight": 5390,
+  "overflowX": false,
+  "mainWords": 563,
+  "headings": [
+   "H1 Digital marketing that works together.",
+   "H2 Start with what is going wrong.",
+   "H3 Not enough of the right people find you.",
+   "H3 Advertising brings traffic, but too few enquiries.",
+   "H3 Enquiries arrive, but where they come from is unclear.",
+   "H3 Your marketing runs in separate pieces, with no clear view of how it performs.",
+   "H2 Better results start when your marketing works together.",
+   "H3 WHAT WE MANAGE AND IMPROVE",
+   "H3 WHAT ALSO AFFECTS RESULTS",
+   "H2 Starting out, and adding later",
+   "H2 Outside what we do",
+   "H2 Not sure what’s holding your marketing back? Let’s find out."
+  ],
+  "jsonld": [
+   "Organization"
+  ],
+  "secs": [
+   {
+    "id": "sv-h1",
+    "cls": "b-hero sv-hero",
+    "top": 73,
+    "h": 734,
+    "words": 92
+   },
+   {
+    "id": "sv-h-route",
+    "cls": "b-sec b-paper sv-route",
+    "top": 807,
+    "h": 1685,
+    "words": 208
+   },
+   {
+    "id": "sv-h-join",
+    "cls": "b-sec b-ink sv-join",
+    "top": 2492,
+    "h": 835,
+    "words": 109
+   },
+   {
+    "id": "sv-h-lim",
+    "cls": "b-sec b-paper sv-lim",
+    "top": 3327,
+    "h": 651,
+    "words": 112
+   },
+   {
+    "id": "sv-h-close",
+    "cls": "b-close",
+    "top": 3978,
+    "h": 696,
+    "words": 42
+   }
+  ],
+  "links": [
+   [
+    "/",
+    "Home"
+   ],
+   [
+    "/contact",
+    "Tell us what you’re trying to fix"
+   ],
+   [
+    "/seo",
+    "SEO The main long-term route. It usually takes 12 months or "
+   ],
+   [
+    "/google-ads",
+    "Google Ads Reaches people searching right now. Your ad spend"
+   ],
+   [
+    "/social-media-ads",
+    "Paid social An optional source, used only where the channel "
+   ],
+   [
+    "/ai-seo",
+    "AI search Whether AI assistants mention you when a buyer ask"
+   ],
+   [
+    "/conversion-optimization",
+    "Conversion optimization We look at the page, the form, the b"
+   ],
+   [
+    "/lead-generation",
+    "Lead generation More of the right enquiries, not just more e"
+   ],
+   [
+    "/how-it-works",
+    "How we track enquiries Analytics and enquiry-source tracking"
+   ],
+   [
+    "/how-it-works",
+    "How it works →"
+   ],
+   [
+    "/pricing",
+    "What this costs, and what moves the number →"
+   ],
+   [
+    "/contact",
+    "Tell us what you’re trying to fix"
+   ]
+  ],
+  "status": 200
+ },
+ "tablet-820x1180": {
+  "title": "Services: Digital Marketing That Works Together | MappedSkills",
+  "desc": "Reach potential customers, make it easier for them to contact you, and measure what is working. MappedSkills connects search, advertising, your website and enquiry tracking.",
+  "canonical": "https://mappedskills.com/services",
+  "h1": "Digital marketing that works together.",
+  "h1Lines": 3,
+  "heroBottom": 832,
+  "ctaBottom": 675,
+  "figTop": 130,
+  "figBottom": 775,
+  "pageHeight": 5466,
+  "overflowX": false,
+  "mainWords": 550,
+  "headings": [
+   "H1 Digital marketing that works together.",
+   "H2 Start with what is going wrong.",
+   "H3 Not enough of the right people find you.",
+   "H3 Advertising brings traffic, but too few enquiries.",
+   "H3 Enquiries arrive, but where they come from is unclear.",
+   "H3 Your marketing runs in separate pieces, with no clear view of how it performs.",
+   "H2 Better results start when your marketing works together.",
+   "H3 WHAT WE MANAGE AND IMPROVE",
+   "H3 WHAT ALSO AFFECTS RESULTS",
+   "H2 Starting out, and adding later",
+   "H2 Outside what we do",
+   "H2 Not sure what’s holding your marketing back? Let’s find out."
+  ],
+  "jsonld": [
+   "Organization"
+  ],
+  "secs": [
+   {
+    "id": "sv-h1",
+    "cls": "b-hero sv-hero",
+    "top": 73,
+    "h": 759,
+    "words": 92
+   },
+   {
+    "id": "sv-h-route",
+    "cls": "b-sec b-paper sv-route",
+    "top": 832,
+    "h": 1785,
+    "words": 208
+   },
+   {
+    "id": "sv-h-join",
+    "cls": "b-sec b-ink sv-join",
+    "top": 2617,
+    "h": 846,
+    "words": 96
+   },
+   {
+    "id": "sv-h-lim",
+    "cls": "b-sec b-paper sv-lim",
+    "top": 3462,
+    "h": 559,
+    "words": 112
+   },
+   {
+    "id": "sv-h-close",
+    "cls": "b-close",
+    "top": 4021,
+    "h": 488,
+    "words": 42
+   }
+  ],
+  "links": [
+   [
+    "/",
+    "Home"
+   ],
+   [
+    "/contact",
+    "Tell us what you’re trying to fix"
+   ],
+   [
+    "/seo",
+    "SEO The main long-term route. It usually takes 12 months or "
+   ],
+   [
+    "/google-ads",
+    "Google Ads Reaches people searching right now. Your ad spend"
+   ],
+   [
+    "/social-media-ads",
+    "Paid social An optional source, used only where the channel "
+   ],
+   [
+    "/ai-seo",
+    "AI search Whether AI assistants mention you when a buyer ask"
+   ],
+   [
+    "/conversion-optimization",
+    "Conversion optimization We look at the page, the form, the b"
+   ],
+   [
+    "/lead-generation",
+    "Lead generation More of the right enquiries, not just more e"
+   ],
+   [
+    "/how-it-works",
+    "How we track enquiries Analytics and enquiry-source tracking"
+   ],
+   [
+    "/how-it-works",
+    "How it works →"
+   ],
+   [
+    "/pricing",
+    "What this costs, and what moves the number →"
+   ],
+   [
+    "/contact",
+    "Tell us what you’re trying to fix"
+   ]
+  ],
+  "status": 200
+ },
+ "mobile-390x844": {
+  "title": "Services: Digital Marketing That Works Together | MappedSkills",
+  "desc": "Reach potential customers, make it easier for them to contact you, and measure what is working. MappedSkills connects search, advertising, your website and enquiry tracking.",
+  "canonical": "https://mappedskills.com/services",
+  "h1": "Digital marketing that works together.",
+  "h1Lines": 2,
+  "heroBottom": 1150,
+  "ctaBottom": 478,
+  "figTop": 506,
+  "figBottom": 1094,
+  "pageHeight": 7133,
+  "overflowX": false,
+  "mainWords": 550,
+  "headings": [
+   "H1 Digital marketing that works together.",
+   "H2 Start with what is going wrong.",
+   "H3 Not enough of the right people find you.",
+   "H3 Advertising brings traffic, but too few enquiries.",
+   "H3 Enquiries arrive, but where they come from is unclear.",
+   "H3 Your marketing runs in separate pieces, with no clear view of how it performs.",
+   "H2 Better results start when your marketing works together.",
+   "H3 WHAT WE MANAGE AND IMPROVE",
+   "H3 WHAT ALSO AFFECTS RESULTS",
+   "H2 Starting out, and adding later",
+   "H2 Outside what we do",
+   "H2 Not sure what’s holding your marketing back? Let’s find out."
+  ],
+  "jsonld": [
+   "Organization"
+  ],
+  "secs": [
+   {
+    "id": "sv-h1",
+    "cls": "b-hero sv-hero",
+    "top": 65,
+    "h": 1085,
+    "words": 92
+   },
+   {
+    "id": "sv-h-route",
+    "cls": "b-sec b-paper sv-route",
+    "top": 1150,
+    "h": 2221,
+    "words": 208
+   },
+   {
+    "id": "sv-h-join",
+    "cls": "b-sec b-ink sv-join",
+    "top": 3371,
+    "h": 1013,
+    "words": 96
+   },
+   {
+    "id": "sv-h-lim",
+    "cls": "b-sec b-paper sv-lim",
+    "top": 4385,
+    "h": 958,
+    "words": 112
+   },
+   {
+    "id": "sv-h-close",
+    "cls": "b-close",
+    "top": 5343,
+    "h": 504,
+    "words": 42
+   }
+  ],
+  "links": [
+   [
+    "/",
+    "Home"
+   ],
+   [
+    "/contact",
+    "Tell us what you’re trying to fix"
+   ],
+   [
+    "/seo",
+    "SEO The main long-term route. It usually takes 12 months or "
+   ],
+   [
+    "/google-ads",
+    "Google Ads Reaches people searching right now. Your ad spend"
+   ],
+   [
+    "/social-media-ads",
+    "Paid social An optional source, used only where the channel "
+   ],
+   [
+    "/ai-seo",
+    "AI search Whether AI assistants mention you when a buyer ask"
+   ],
+   [
+    "/conversion-optimization",
+    "Conversion optimization We look at the page, the form, the b"
+   ],
+   [
+    "/lead-generation",
+    "Lead generation More of the right enquiries, not just more e"
+   ],
+   [
+    "/how-it-works",
+    "How we track enquiries Analytics and enquiry-source tracking"
+   ],
+   [
+    "/how-it-works",
+    "How it works →"
+   ],
+   [
+    "/pricing",
+    "What this costs, and what moves the number →"
+   ],
+   [
+    "/contact",
+    "Tell us what you’re trying to fix"
+   ]
+  ],
+  "status": 200
+ }
+}

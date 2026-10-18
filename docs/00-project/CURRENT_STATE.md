@@ -48,6 +48,8 @@
 > Start at `docs/ui-revamp/GATE_4_MASTER_ROLLOUT_PLAN.md` (seven `GATE_4_*.md` documents). Proposed owner decisions O1–O10
 > (§7); recommended first batch B0 + B1 (QA harness and baselines, then the global chrome flip). No application code changed.
 >
+> **`/pricing` redesign LIVE — 2026-10-18 (`DEC-061`).** Fully customised pricing; no prices, ranges or packages published. `7e18ffc` (PR #20), deploy run `39148209163`, live `BUILD_ID` `NvTejYkD7V4j88x51zJY_`; rollback `bU2OI0K6q5Pfp9epXREbb` (`/about`, `74dca3e`), not used. Open: screen reader, Firefox/WebKit, real devices, GTM Preview.
+>
 > **Lean release preparation — 2026-10-14 (`DEC-052`). Branch `release/cplus-lean` from `main`; not pushed, not merged, not deployed.**
 > - Website code = `abcb/cplus-integration` @ `d27f464` (byte-identical outside `docs/`), plus the host-only lead export `scripts/export-enquiries.cjs` (`docs/10-technical/LEAD_EXPORT.md`). Evidence screenshots, run results and logs are left out of the branch.
 > - The full integration history and evidence are kept in a private, verified git bundle **outside** this public repository.

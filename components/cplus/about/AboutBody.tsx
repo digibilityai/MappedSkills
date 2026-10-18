@@ -1,238 +1,210 @@
+import Image from 'next/image';
 import Link from 'next/link';
-import { BOOKING_HREF, CONTACT_HREF, Mark } from '@/components/direction-c/primitives';
-import { ABOUT_PLAIN as A } from './content';
-import './about.css';
-import { Icon } from '../Icons';
-import { AccountFigure } from './AccountFigure';
+import { ActionPair } from '@/components/direction-c/primitives';
 import { Breadcrumb } from '../Breadcrumb';
+import { AB, TEAM_HEADS } from './content';
+import { Glyph } from './icons';
+import './about.css';
 
 /**
- * C+ About (/about): the approved prototype's page body (proto/direction-c-plus 0a8b611, AboutH.tsx `About`),
- * unchanged in markup and copy. Production changes only: the breadcrumb's Home link, the method links and the CTAs
- * point at the live routes (`/`, `/how-it-works`, CONTACT_HREF and BOOKING_HREF) instead of prototype paths.
- * Absent by owner decision, and not replaced: location, size, founding year, legal entity, people, history, logos,
- * testimonials, awards, team imagery. No entity JSON-LD.
+ * C+ About (/about): the owner-approved G1 design, frozen at R4 (DEC-060; docs/about-redesign/g1/mockup/), as a server
+ * component with no client JavaScript. Five sections: hero with "the bigger picture" drawn still; why we work this way
+ * (a still comparison); what you can count on us for (four commitments, the boundary, one line on guarantees); the four
+ * team heads (placeholders until the owner supplies profiles: see TEAM_HEADS); close. The close uses the shared close's
+ * classes and ActionPair, as /services does. Absent by decision: entity or Person JSON-LD.
  */
-
 export function AboutBody() {
+  const b = AB.big;
+  const w = AB.why;
+  const k = AB.count;
+  const p = AB.people;
+  const c = AB.close;
+  const anyPlaceholder = TEAM_HEADS.some((t) => t.placeholder);
   return (
     <>
-      {/* 1 — hero (ivory): the accountability problem, at once */}
-      <section className="b-hero ab-hero" aria-labelledby="ab-h1">
-        <div className="px-wrap b-hero-g ab-hero-g">
-          <div>
-            <Breadcrumb current={A.crumb} />
-            <h1 id="ab-h1" className="b-h1 ab-h1">
-              {A.h1.a} <span className="b-named">{A.h1.b}</span>
+      {/* 1: hero (ground) */}
+      <section className="b-hero ax-hero" aria-labelledby="ab-h1">
+        <div className="px-wrap b-hero-g ax-hero-g">
+          <div className="ax-hero-tx">
+            <Breadcrumb current={AB.crumb} />
+            <p className="b-kicker">{AB.kicker}</p>
+            <h1 id="ab-h1" className="b-h1 ax-h1">
+              <span>{AB.h1.a}</span> <span className="b-named">{AB.h1.b}</span>
             </h1>
-            <p className="b-lede">{A.lede}</p>
+            <p className="b-lede">{AB.lede}</p>
+            <ActionPair primaryLabel={AB.primary} />
           </div>
-          <figure className="ab-slips-fig">
-            <ul className="ab-slips">
-              {A.slips.map((s) => (
-                <li key={s.who} className={'ab-slip is-' + s.state}>
-                  <span className="ab-slip-who">{s.who}</span>
-                  <span className="ab-slip-what">
-                    <span className="ab-slip-m" aria-hidden="true">
-                      {s.state === 'ok' ? <Icon name="check" size={16} /> : '?'}
+
+          <figure className="ax-big" aria-label={b.label}>
+            <div className="ax-big-frame">
+              <span className="ax-big-k" aria-hidden="true">
+                {b.k}
+              </span>
+              <ul className="ax-big-g" aria-hidden="true">
+                {b.parts.map((part, i) => (
+                  <li key={part.t} className={'ax-big-p' + (i + 1)}>
+                    <span className="ax-big-i">
+                      <Glyph name={part.icon} />
                     </span>
-                    {s.what}
+                    {part.t}
+                  </li>
+                ))}
+                <li className="ax-big-c">
+                  <span className="ax-big-i">
+                    <Glyph name="mail" />
                   </span>
+                  {b.centre}
                 </li>
-              ))}
-            </ul>
-            <figcaption className="px-cap">{A.slipsCaption}</figcaption>
+              </ul>
+            </div>
+            <figcaption className="ax-cap">{b.cap}</figcaption>
           </figure>
         </div>
       </section>
 
-      {/* 2 — why we work this way (ink) */}
-      <section className="b-sec b-ink ab-why" aria-labelledby="ab-h-why">
-        <div className="px-wrap ab-why-g">
-          <div>
-            <p className="b-kicker">{A.why.kicker}</p>
-            <h2 id="ab-h-why" className="b-h2 ab-why-h">
-              {A.why.h.a} <span className="b-named">{A.why.h.b}</span>
-            </h2>
+      {/* 2: why we work this way (ink): a still comparison, side by side on wide screens */}
+      <section className="b-sec b-ink ax-why" aria-labelledby="ab-h-why">
+        <div className="px-wrap">
+          <div className="ax-why-head">
+            <div>
+              <p className="b-kicker">{w.kicker}</p>
+              <h2 id="ab-h-why" className="b-h2">
+                {w.h.a} <span className="b-named">{w.h.b}</span>
+              </h2>
+            </div>
+            <div className="ax-why-l">
+              <p>{w.body}</p>
+            </div>
           </div>
-          <div className="ab-why-b">
-            {A.why.body.map((t) => (
-              <p key={t}>{t}</p>
-            ))}
-            <p className="ab-belief">{A.why.belief}</p>
-            <p className="ab-skills-l">{A.why.skillsLead}</p>
-            <ol className="ab-skills">
-              {A.why.skills.map((s) => (
-                <li key={s.t}>
-                  <span className="ab-skill-t">{s.t}</span>
-                  <span className="ab-skill-d">{s.d}</span>
-                </li>
-              ))}
-            </ol>
+
+          <div className="ax-cmp">
+            {(['apart', 'together'] as const).map((key) => {
+              const panel = w[key];
+              return (
+                <div key={key} className={'ax-cmp-p is-' + key}>
+                  <h3 className="ax-cmp-h">{panel.t}</h3>
+                  <ul className="ax-cmp-row">
+                    {w.parts.map((part) => (
+                      <li key={part.t}>
+                        <span className="ax-cmp-i" aria-hidden="true">
+                          <Glyph name={part.icon} />
+                        </span>
+                        {part.t}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="ax-cmp-end">
+                    <span className="ax-cmp-q" aria-hidden="true">
+                      {key === 'apart' ? '?' : <Glyph name="mail" />}
+                    </span>
+                    {panel.end}
+                  </p>
+                  <p className="ax-cmp-s">{panel.s}</p>
+                </div>
+              );
+            })}
           </div>
+          <p className="ax-cap ax-cap-ink">{w.cap}</p>
         </div>
       </section>
 
-      {/* 3 — what we take responsibility for (paper): the boundary, then what is not promised */}
-      <section className="b-sec b-paper ab-hold" aria-labelledby="ab-h-hold">
+      {/* 3: what you can count on us for (paper) */}
+      <section className="b-sec b-paper ax-count" aria-labelledby="ab-h-count">
         <div className="px-wrap">
-          <p className="b-kicker">{A.hold.kicker}</p>
-          <h2 id="ab-h-hold" className="b-h2">
-            {A.hold.h.a} <span className="b-named">{A.hold.h.b}</span>
+          <p className="b-kicker">{k.kicker}</p>
+          <h2 id="ab-h-count" className="b-h2">
+            {k.h.a} <span className="b-named">{k.h.b}</span>
           </h2>
-          <p className="b-lede ab-define">{A.hold.define}</p>
-          <div className="ab-bound">
-            <div className="ab-ours">
-              <h3 className="ab-bound-t">{A.hold.ours.t}</h3>
-              <p>{A.hold.ours.d}</p>
-            </div>
-            <div className="ab-line" aria-hidden="true">
-              <span>{A.hold.line}</span>
-            </div>
-            <div className="ab-yours">
-              <h3 className="ab-bound-t">{A.hold.yours.t}</h3>
-              <p>{A.hold.yours.d}</p>
-            </div>
-          </div>
-          <div className="ab-not">
-            <h3 className="ab-not-h">{A.hold.notH}</h3>
-            <ul>
-              {A.hold.not.map((n) => (
-                <li key={n}>
-                  <span>{n}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="b-body ab-not-b">{A.hold.notBody}</p>
-          </div>
-        </div>
-      </section>
 
-      {/* 4 — the signature figure (ivory) */}
-      <section className="b-sec ab-figsec" aria-labelledby="ab-h-fig">
-        <div className="px-wrap">
-          <p className="b-kicker">{A.fig.kicker}</p>
-          <h2 id="ab-h-fig" className="b-h2">
-            {A.fig.h}
-          </h2>
-          <p className="b-lede ab-fig-intro">{A.fig.intro}</p>
-          <figure className="ab-figure" aria-labelledby="ab-h-fig">
-            <AccountFigure />
-            <figcaption className="px-cap">{A.fig.caption}</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      {/* 5 — how we work (ink): the confirmed sequence, compact */}
-      <section className="b-sec b-ink ab-how" aria-labelledby="ab-h-how">
-        <div className="px-wrap">
-          <p className="b-kicker">{A.how.kicker}</p>
-          <h2 id="ab-h-how" className="b-h2">
-            {A.how.h.a} <span className="b-named">{A.how.h.b}</span>
-          </h2>
-          <ol className="ab-steps">
-            {A.how.steps.map((s, i) => (
-              <li key={s} className={i === A.how.steps.length - 1 ? 'is-last' : undefined}>
-                <span className="ab-step-n" aria-hidden="true">
-                  {i + 1}
+          <ol className="ax-commit">
+            {k.items.map((item) => (
+              <li key={item.t}>
+                <span className="ax-commit-i" aria-hidden="true">
+                  <Glyph name={item.icon} />
                 </span>
-                <span className="ab-step-t">{s}</span>
+                <h3>{item.t}</h3>
+                <p>{item.d}</p>
               </li>
             ))}
           </ol>
-          <div className="ab-how-g">
-            <p>
-              <Mark state="owned" /> {A.how.work}
-            </p>
-            <p>
-              <Mark state="owned" /> {A.how.monthly}
-            </p>
+
+          <div className="ax-split" role="group" aria-label={k.splitLabel}>
+            <div className="ax-ours">
+              <p className="ax-split-t">{k.ours.t}</p>
+              <p>{k.ours.d}</p>
+            </div>
+            <div className="ax-yours">
+              <p className="ax-split-t">{k.yours.t}</p>
+              <p>{k.yours.d}</p>
+            </div>
           </div>
-          <p className="ab-link-ink">
-            <Link href="/how-it-works">{A.how.link} →</Link>
+          <p className="ax-honest">
+            {k.honest}{' '}
+            <Link href={k.link.href}>
+              {k.link.label} <span aria-hidden="true">→</span>
+            </Link>
           </p>
         </div>
       </section>
 
-      {/* 6 — what you can check (paper): the method + a compact, fully scoped self-measurement */}
-      <section className="b-sec b-paper ab-check" aria-labelledby="ab-h-check">
+      {/* 4: the four team heads (ground). Placeholders until the owner supplies the profiles. */}
+      <section className="b-sec ax-people" aria-labelledby="ab-h-people">
         <div className="px-wrap">
-          <p className="b-kicker">{A.check.kicker}</p>
-          <h2 id="ab-h-check" className="b-h2">
-            {A.check.h.a} <span className="b-named">{A.check.h.b}</span>
-          </h2>
-          <div className="ab-check-g">
-            <div className="ab-ev">
-              <h3 className="ab-ev-t">{A.check.method.t}</h3>
-              <p className="ab-ev-d">{A.check.method.d}</p>
-              <p className="ab-ev-l">
-                <Link href="/how-it-works">{A.check.method.link} →</Link>
-              </p>
+          <div className="ax-people-head">
+            <div>
+              <p className="b-kicker">{p.kicker}</p>
+              <h2 id="ab-h-people" className="b-h2">
+                {p.h.a} <span className="b-named">{p.h.b}</span>
+              </h2>
+              <p className="ax-people-l">{p.lede}</p>
             </div>
-            <div className="ab-ev ab-ev-self">
-              <h3 className="ab-ev-t">{A.check.self.t}</h3>
-              <p className="ab-self-fig">
-                <span className="ab-self-n">{A.check.self.fig}</span> <span className="ab-self-of">{A.check.self.of}</span>
-                <span className="ab-self-l">{A.check.self.figLabel}</span>
-              </p>
-              <p className="ab-ev-d">{A.check.self.d}</p>
-              <p className="ab-limits">{A.check.self.limits}</p>
-            </div>
+            {anyPlaceholder && <p className="ax-ph-tag">{p.placeholderTag}</p>}
           </div>
+          <ul className="ax-team">
+            {TEAM_HEADS.map((t, i) => (
+              <li key={i} className={'ax-card' + (t.placeholder ? ' is-placeholder' : '')}>
+                {t.photo ? (
+                  <div className="ax-photo ax-photo-real">
+                    <Image src={t.photo.src} alt={t.photo.alt} fill sizes="(max-width: 760px) 50vw, (max-width: 1080px) 50vw, 25vw" />
+                  </div>
+                ) : (
+                  <div className="ax-photo">
+                    <Glyph name="person" />
+                    <span>{p.photo}</span>
+                  </div>
+                )}
+                <h3 className="ax-card-n">{t.name}</h3>
+                <p className="ax-card-r">{t.role}</p>
+                <p className="ax-card-s">{t.intro}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* 7 — who this is for, and who it isn't (ivory) */}
-      <section className="b-sec ab-fit" aria-labelledby="ab-h-fit">
+      {/* 5: close (tangerine): contact primary, booking secondary; what happens next */}
+      <section className="b-close ax-close" aria-labelledby="b-close-h">
         <div className="px-wrap">
-          <p className="b-kicker">{A.fit.kicker}</p>
-          <h2 id="ab-h-fit" className="b-h2">
-            {A.fit.h.a} <span className="b-named">{A.fit.h.b}</span>
-          </h2>
-          <div className="ab-fit-g">
-            <div className="ab-fit-yes">
-              <h3 className="ab-fit-t">{A.fit.forH}</h3>
-              <ul>
-                {A.fit.for.map((t) => (
-                  <li key={t}>
-                    <Mark state="named" /> <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
+          <div className="b-close-in">
+            <div>
+              <p className="b-kicker ax-close-k">{c.kicker}</p>
+              <h2 id="b-close-h" className="b-h2">
+                {c.h.a} <span className="ax-close-2">{c.h.b}</span>
+              </h2>
+              <p className="b-lede">{c.body}</p>
             </div>
-            <div className="ab-fit-no">
-              <h3 className="ab-fit-t">{A.fit.notH}</h3>
-              <ul>
-                {A.fit.not.map((t) => (
-                  <li key={t}>
-                    <Mark state="open" /> <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <ActionPair primaryLabel={AB.primary} />
           </div>
-        </div>
-      </section>
-
-      {/* 8 — close (tangerine): the shared close's markup and classes, with the live routes */}
-      <section className="b-close" aria-labelledby="ab-h-close">
-        <div className="px-wrap b-close-in">
-          <div>
-            <p className="b-kicker ab-close-k">{A.close.label}</p>
-            <h2 id="ab-h-close" className="b-h2">
-              {A.close.h}
-            </h2>
-            <p className="b-lede">{A.close.body}</p>
-          </div>
-          <div className="dc-actions">
-            <Link href={CONTACT_HREF} className="dc-btn dc-btn-primary">
-              <Mark />
-              {A.close.primary}
-            </Link>
-            <Link href={BOOKING_HREF} className="dc-btn dc-btn-secondary">
-              <Mark />
-              {A.close.secondary}
-            </Link>
+          <div className="ax-next">
+            <p className="ax-next-k">{c.nextK}</p>
+            <ol>
+              {c.next.map((t, i) => (
+                <li key={t}>
+                  <b>{i + 1}</b>
+                  {t}
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>

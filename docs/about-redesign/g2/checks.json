@@ -1,0 +1,612 @@
+{
+ "desktop-1440": {
+  "overflowX": false,
+  "heroCtas": [
+   "Tell us about your business -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "closeCtas": [
+   "Tell us about your business -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "ctaInFold": true,
+  "links": [
+   "/",
+   "/contact",
+   "/schedule-call",
+   "/how-it-works",
+   "/contact",
+   "/schedule-call"
+  ],
+  "headings": [
+   "H1 A marketing partner who sees the bigger picture.",
+   "H2 Your marketing should work together.",
+   "H3 Working separately",
+   "H3 Working together",
+   "H2 Four things we promise to do.",
+   "H3 A clear plan",
+   "H3 Connected work",
+   "H3 Honest measurement",
+   "H3 Straight answers",
+   "H2 Meet the people leading the work.",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H2 We’d like to hear about your business."
+  ],
+  "h1Count": 1,
+  "cards": 4,
+  "placeholderCards": 4,
+  "placeholderTag": true,
+  "small": 0,
+  "words": 371,
+  "title": "About MappedSkills | Our Team & Approach",
+  "desc": "Meet the team behind MappedSkills. Discover how we connect digital marketing services, turn interest into enquiries and measure what matters.",
+  "canonical": "https://mappedskills.com/about",
+  "jsonld": [
+   "Organization"
+  ],
+  "pageHeight": 4892,
+  "status": 200,
+  "secs": [
+   {
+    "id": "ab-h1",
+    "h": 586
+   },
+   {
+    "id": "ab-h-why",
+    "h": 903
+   },
+   {
+    "id": "ab-h-count",
+    "h": 853
+   },
+   {
+    "id": "ab-h-people",
+    "h": 993
+   },
+   {
+    "id": "b-close-h",
+    "h": 768
+   }
+  ],
+  "consoleErrors": [],
+  "failed": [],
+  "mockSecs": [
+   {
+    "id": "ab-h1",
+    "h": 586
+   },
+   {
+    "id": "ab-h-why",
+    "h": 903
+   },
+   {
+    "id": "ab-h-count",
+    "h": 928
+   },
+   {
+    "id": "ab-h-people",
+    "h": 993
+   },
+   {
+    "id": "b-close-h",
+    "h": 768
+   }
+  ],
+  "mockWords": 478,
+  "textEqual": false
+ },
+ "desktop-1280": {
+  "overflowX": false,
+  "heroCtas": [
+   "Tell us about your business -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "closeCtas": [
+   "Tell us about your business -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "ctaInFold": true,
+  "links": [
+   "/",
+   "/contact",
+   "/schedule-call",
+   "/how-it-works",
+   "/contact",
+   "/schedule-call"
+  ],
+  "headings": [
+   "H1 A marketing partner who sees the bigger picture.",
+   "H2 Your marketing should work together.",
+   "H3 Working separately",
+   "H3 Working together",
+   "H2 Four things we promise to do.",
+   "H3 A clear plan",
+   "H3 Connected work",
+   "H3 Honest measurement",
+   "H3 Straight answers",
+   "H2 Meet the people leading the work.",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H2 We’d like to hear about your business."
+  ],
+  "h1Count": 1,
+  "cards": 4,
+  "placeholderCards": 4,
+  "placeholderTag": true,
+  "small": 0,
+  "words": 371,
+  "title": "About MappedSkills | Our Team & Approach",
+  "desc": "Meet the team behind MappedSkills. Discover how we connect digital marketing services, turn interest into enquiries and measure what matters.",
+  "canonical": "https://mappedskills.com/about",
+  "jsonld": [
+   "Organization"
+  ],
+  "pageHeight": 4692,
+  "status": 200,
+  "secs": [
+   {
+    "id": "ab-h1",
+    "h": 559
+   },
+   {
+    "id": "ab-h-why",
+    "h": 856
+   },
+   {
+    "id": "ab-h-count",
+    "h": 815
+   },
+   {
+    "id": "ab-h-people",
+    "h": 960
+   },
+   {
+    "id": "b-close-h",
+    "h": 714
+   }
+  ],
+  "consoleErrors": [],
+  "failed": [],
+  "mockSecs": [
+   {
+    "id": "ab-h1",
+    "h": 559
+   },
+   {
+    "id": "ab-h-why",
+    "h": 856
+   },
+   {
+    "id": "ab-h-count",
+    "h": 890
+   },
+   {
+    "id": "ab-h-people",
+    "h": 960
+   },
+   {
+    "id": "b-close-h",
+    "h": 714
+   }
+  ],
+  "mockWords": 478,
+  "textEqual": false
+ },
+ "tablet-820": {
+  "overflowX": false,
+  "heroCtas": [
+   "Tell us about your business -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "closeCtas": [
+   "Tell us about your business -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "ctaInFold": true,
+  "links": [
+   "/",
+   "/contact",
+   "/schedule-call",
+   "/how-it-works",
+   "/contact",
+   "/schedule-call"
+  ],
+  "headings": [
+   "H1 A marketing partner who sees the bigger picture.",
+   "H2 Your marketing should work together.",
+   "H3 Working separately",
+   "H3 Working together",
+   "H2 Four things we promise to do.",
+   "H3 A clear plan",
+   "H3 Connected work",
+   "H3 Honest measurement",
+   "H3 Straight answers",
+   "H2 Meet the people leading the work.",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H2 We’d like to hear about your business."
+  ],
+  "h1Count": 1,
+  "cards": 4,
+  "placeholderCards": 4,
+  "placeholderTag": true,
+  "small": 0,
+  "words": 371,
+  "title": "About MappedSkills | Our Team & Approach",
+  "desc": "Meet the team behind MappedSkills. Discover how we connect digital marketing services, turn interest into enquiries and measure what matters.",
+  "canonical": "https://mappedskills.com/about",
+  "jsonld": [
+   "Organization"
+  ],
+  "pageHeight": 5879,
+  "status": 200,
+  "secs": [
+   {
+    "id": "ab-h1",
+    "h": 818
+   },
+   {
+    "id": "ab-h-why",
+    "h": 790
+   },
+   {
+    "id": "ab-h-count",
+    "h": 860
+   },
+   {
+    "id": "ab-h-people",
+    "h": 1646
+   },
+   {
+    "id": "b-close-h",
+    "h": 735
+   }
+  ],
+  "consoleErrors": [],
+  "failed": [],
+  "mockSecs": [
+   {
+    "id": "ab-h1",
+    "h": 818
+   },
+   {
+    "id": "ab-h-why",
+    "h": 914
+   },
+   {
+    "id": "ab-h-count",
+    "h": 986
+   },
+   {
+    "id": "ab-h-people",
+    "h": 1646
+   },
+   {
+    "id": "b-close-h",
+    "h": 735
+   }
+  ],
+  "mockWords": 478,
+  "textEqual": false
+ },
+ "mobile-390": {
+  "overflowX": false,
+  "heroCtas": [
+   "Tell us about your business -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "closeCtas": [
+   "Tell us about your business -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "ctaInFold": true,
+  "links": [
+   "/",
+   "/contact",
+   "/schedule-call",
+   "/how-it-works",
+   "/contact",
+   "/schedule-call"
+  ],
+  "headings": [
+   "H1 A marketing partner who sees the bigger picture.",
+   "H2 Your marketing should work together.",
+   "H3 Working separately",
+   "H3 Working together",
+   "H2 Four things we promise to do.",
+   "H3 A clear plan",
+   "H3 Connected work",
+   "H3 Honest measurement",
+   "H3 Straight answers",
+   "H2 Meet the people leading the work.",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H2 We’d like to hear about your business."
+  ],
+  "h1Count": 1,
+  "cards": 4,
+  "placeholderCards": 4,
+  "placeholderTag": true,
+  "small": 0,
+  "words": 371,
+  "title": "About MappedSkills | Our Team & Approach",
+  "desc": "Meet the team behind MappedSkills. Discover how we connect digital marketing services, turn interest into enquiries and measure what matters.",
+  "canonical": "https://mappedskills.com/about",
+  "jsonld": [
+   "Organization"
+  ],
+  "pageHeight": 6258,
+  "status": 200,
+  "secs": [
+   {
+    "id": "ab-h1",
+    "h": 854
+   },
+   {
+    "id": "ab-h-why",
+    "h": 1067
+   },
+   {
+    "id": "ab-h-count",
+    "h": 1100
+   },
+   {
+    "id": "ab-h-people",
+    "h": 1129
+   },
+   {
+    "id": "b-close-h",
+    "h": 758
+   }
+  ],
+  "consoleErrors": [],
+  "failed": [],
+  "mockSecs": [
+   {
+    "id": "ab-h1",
+    "h": 854
+   },
+   {
+    "id": "ab-h-why",
+    "h": 1276
+   },
+   {
+    "id": "ab-h-count",
+    "h": 1378
+   },
+   {
+    "id": "ab-h-people",
+    "h": 1129
+   },
+   {
+    "id": "b-close-h",
+    "h": 758
+   }
+  ],
+  "mockWords": 478,
+  "textEqual": false
+ },
+ "mobile-320": {
+  "overflowX": false,
+  "heroCtas": [
+   "Tell us about your business -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "closeCtas": [
+   "Tell us about your business -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "ctaInFold": true,
+  "links": [
+   "/",
+   "/contact",
+   "/schedule-call",
+   "/how-it-works",
+   "/contact",
+   "/schedule-call"
+  ],
+  "headings": [
+   "H1 A marketing partner who sees the bigger picture.",
+   "H2 Your marketing should work together.",
+   "H3 Working separately",
+   "H3 Working together",
+   "H2 Four things we promise to do.",
+   "H3 A clear plan",
+   "H3 Connected work",
+   "H3 Honest measurement",
+   "H3 Straight answers",
+   "H2 Meet the people leading the work.",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H2 We’d like to hear about your business."
+  ],
+  "h1Count": 1,
+  "cards": 4,
+  "placeholderCards": 4,
+  "placeholderTag": true,
+  "small": 0,
+  "words": 371,
+  "title": "About MappedSkills | Our Team & Approach",
+  "desc": "Meet the team behind MappedSkills. Discover how we connect digital marketing services, turn interest into enquiries and measure what matters.",
+  "canonical": "https://mappedskills.com/about",
+  "jsonld": [
+   "Organization"
+  ],
+  "pageHeight": 7434,
+  "status": 200,
+  "secs": [
+   {
+    "id": "ab-h1",
+    "h": 892
+   },
+   {
+    "id": "ab-h-why",
+    "h": 1170
+   },
+   {
+    "id": "ab-h-count",
+    "h": 1176
+   },
+   {
+    "id": "ab-h-people",
+    "h": 1902
+   },
+   {
+    "id": "b-close-h",
+    "h": 852
+   }
+  ],
+  "consoleErrors": [],
+  "failed": [],
+  "mockSecs": [
+   {
+    "id": "ab-h1",
+    "h": 892
+   },
+   {
+    "id": "ab-h-why",
+    "h": 1333
+   },
+   {
+    "id": "ab-h-count",
+    "h": 1529
+   },
+   {
+    "id": "ab-h-people",
+    "h": 1902
+   },
+   {
+    "id": "b-close-h",
+    "h": 852
+   }
+  ],
+  "mockWords": 478,
+  "textEqual": false
+ },
+ "keyboard": [
+  {
+   "t": "Tell us about your business",
+   "href": "/contact",
+   "ring": true
+  },
+  {
+   "t": "Book a call",
+   "href": "/schedule-call",
+   "ring": true
+  },
+  {
+   "t": "See how the work runs →",
+   "href": "/how-it-works",
+   "ring": true
+  },
+  {
+   "t": "Tell us about your business",
+   "href": "/contact",
+   "ring": true
+  },
+  {
+   "t": "Book a call",
+   "href": "/schedule-call",
+   "ring": true
+  }
+ ],
+ "reducedMotion": {
+  "photo": "1e-05s",
+  "link": "1e-05s",
+  "running": 0,
+  "hiddenSections": 0
+ },
+ "noJs": {
+  "words": 371,
+  "cards": 4,
+  "invisible": 0
+ },
+ "aboutHead": {
+  "same": false,
+  "local": {
+   "title": "About MappedSkills | Our Team & Approach",
+   "desc": "Meet the team behind MappedSkills. Discover how we connect digital marketing services, turn interest into enquiries and measure what matters.",
+   "canonical": "https://mappedskills.com/about",
+   "robots": "index, follow",
+   "ogTitle": "About MappedSkills | Our Team & Approach"
+  }
+ },
+ "siblings": [
+  {
+   "path": "/",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/services",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/how-it-works",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/seo",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/google-ads",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/social-media-ads",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/ai-seo",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/conversion-optimization",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/lead-generation",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/pricing",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/faq",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/contact",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/schedule-call",
+   "headSame": true,
+   "mainSame": true
+  }
+ ]
+}

@@ -1,0 +1,296 @@
+{
+ "desktop-1440": {
+  "pageHeight": 4967,
+  "overflowX": false,
+  "overElems": [],
+  "mainWords": 478,
+  "firstCtaBottom": 594,
+  "ctaInFold": true,
+  "headings": [
+   "H1 A marketing partner who sees the bigger picture.",
+   "H2 Your marketing should work together.",
+   "H3 Working separately",
+   "H3 Working together",
+   "H2 Four things we promise to do.",
+   "H3 A clear plan",
+   "H3 Connected work",
+   "H3 Honest measurement",
+   "H3 Straight answers",
+   "H2 Meet the people leading the work.",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H2 We’d like to hear about your business."
+  ],
+  "secs": [
+   {
+    "id": "ab-h1",
+    "h": 586,
+    "words": 61
+   },
+   {
+    "id": "ab-h-why",
+    "h": 903,
+    "words": 110
+   },
+   {
+    "id": "ab-h-count",
+    "h": 928,
+    "words": 157
+   },
+   {
+    "id": "ab-h-people",
+    "h": 993,
+    "words": 80
+   },
+   {
+    "id": "b-close-h",
+    "h": 768,
+    "words": 70
+   }
+  ],
+  "smallText": [],
+  "cards": 4,
+  "cardCols": 1,
+  "microMs": "0.15s, 0.15s",
+  "consoleErrors": []
+ },
+ "desktop-1280": {
+  "pageHeight": 4767,
+  "overflowX": false,
+  "overElems": [],
+  "mainWords": 478,
+  "firstCtaBottom": 574,
+  "ctaInFold": true,
+  "headings": [
+   "H1 A marketing partner who sees the bigger picture.",
+   "H2 Your marketing should work together.",
+   "H3 Working separately",
+   "H3 Working together",
+   "H2 Four things we promise to do.",
+   "H3 A clear plan",
+   "H3 Connected work",
+   "H3 Honest measurement",
+   "H3 Straight answers",
+   "H2 Meet the people leading the work.",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H2 We’d like to hear about your business."
+  ],
+  "secs": [
+   {
+    "id": "ab-h1",
+    "h": 559,
+    "words": 61
+   },
+   {
+    "id": "ab-h-why",
+    "h": 856,
+    "words": 110
+   },
+   {
+    "id": "ab-h-count",
+    "h": 890,
+    "words": 157
+   },
+   {
+    "id": "ab-h-people",
+    "h": 960,
+    "words": 80
+   },
+   {
+    "id": "b-close-h",
+    "h": 714,
+    "words": 70
+   }
+  ],
+  "smallText": [],
+  "cards": 4,
+  "cardCols": 1,
+  "microMs": "0.15s, 0.15s",
+  "consoleErrors": []
+ },
+ "tablet-820": {
+  "pageHeight": 6129,
+  "overflowX": false,
+  "overElems": [],
+  "mainWords": 478,
+  "firstCtaBottom": 510,
+  "ctaInFold": true,
+  "headings": [
+   "H1 A marketing partner who sees the bigger picture.",
+   "H2 Your marketing should work together.",
+   "H3 Working separately",
+   "H3 Working together",
+   "H2 Four things we promise to do.",
+   "H3 A clear plan",
+   "H3 Connected work",
+   "H3 Honest measurement",
+   "H3 Straight answers",
+   "H2 Meet the people leading the work.",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H2 We’d like to hear about your business."
+  ],
+  "secs": [
+   {
+    "id": "ab-h1",
+    "h": 818,
+    "words": 61
+   },
+   {
+    "id": "ab-h-why",
+    "h": 914,
+    "words": 110
+   },
+   {
+    "id": "ab-h-count",
+    "h": 986,
+    "words": 157
+   },
+   {
+    "id": "ab-h-people",
+    "h": 1646,
+    "words": 80
+   },
+   {
+    "id": "b-close-h",
+    "h": 735,
+    "words": 70
+   }
+  ],
+  "smallText": [],
+  "cards": 4,
+  "cardCols": 2,
+  "microMs": "0.15s, 0.15s",
+  "consoleErrors": []
+ },
+ "mobile-390": {
+  "pageHeight": 6745,
+  "overflowX": false,
+  "overElems": [],
+  "mainWords": 478,
+  "firstCtaBottom": 515,
+  "ctaInFold": true,
+  "headings": [
+   "H1 A marketing partner who sees the bigger picture.",
+   "H2 Your marketing should work together.",
+   "H3 Working separately",
+   "H3 Working together",
+   "H2 Four things we promise to do.",
+   "H3 A clear plan",
+   "H3 Connected work",
+   "H3 Honest measurement",
+   "H3 Straight answers",
+   "H2 Meet the people leading the work.",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H2 We’d like to hear about your business."
+  ],
+  "secs": [
+   {
+    "id": "ab-h1",
+    "h": 854,
+    "words": 61
+   },
+   {
+    "id": "ab-h-why",
+    "h": 1276,
+    "words": 110
+   },
+   {
+    "id": "ab-h-count",
+    "h": 1378,
+    "words": 157
+   },
+   {
+    "id": "ab-h-people",
+    "h": 1129,
+    "words": 80
+   },
+   {
+    "id": "b-close-h",
+    "h": 758,
+    "words": 70
+   }
+  ],
+  "smallText": [],
+  "cards": 4,
+  "cardCols": 2,
+  "microMs": "0.15s, 0.15s",
+  "consoleErrors": []
+ },
+ "mobile-320": {
+  "pageHeight": 7949,
+  "overflowX": false,
+  "overElems": [],
+  "mainWords": 478,
+  "firstCtaBottom": 555,
+  "ctaInFold": true,
+  "headings": [
+   "H1 A marketing partner who sees the bigger picture.",
+   "H2 Your marketing should work together.",
+   "H3 Working separately",
+   "H3 Working together",
+   "H2 Four things we promise to do.",
+   "H3 A clear plan",
+   "H3 Connected work",
+   "H3 Honest measurement",
+   "H3 Straight answers",
+   "H2 Meet the people leading the work.",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H3 [Name]",
+   "H2 We’d like to hear about your business."
+  ],
+  "secs": [
+   {
+    "id": "ab-h1",
+    "h": 892,
+    "words": 61
+   },
+   {
+    "id": "ab-h-why",
+    "h": 1333,
+    "words": 110
+   },
+   {
+    "id": "ab-h-count",
+    "h": 1529,
+    "words": 157
+   },
+   {
+    "id": "ab-h-people",
+    "h": 1902,
+    "words": 80
+   },
+   {
+    "id": "b-close-h",
+    "h": 852,
+    "words": 70
+   }
+  ],
+  "smallText": [],
+  "cards": 4,
+  "cardCols": 4,
+  "microMs": "0.15s, 0.15s",
+  "consoleErrors": []
+ },
+ "nojs": {
+  "words": 478,
+  "cards": 4,
+  "panels": 2
+ },
+ "reducedMotion": {
+  "photo": "1e-05s",
+  "animations": 1
+ }
+}

@@ -1,0 +1,299 @@
+{
+ "desktop-1440x900": {
+  "title": "Who We Are, and What We Can Actually Show You | MappedSkills",
+  "desc": "A small firm in Pune working on one thing: turning demand that already exists into enquiries a business can act on. The accountability boundary, what can be checked, and an honest account of where the firm is today.",
+  "canonical": "https://mappedskills.com/about",
+  "h1": "Everyone has a report. Who owns the enquiry?",
+  "pageHeight": 7256,
+  "overflowX": false,
+  "mainWords": 808,
+  "firstCtaTop": 6279,
+  "ctas": [
+   "Home -> /",
+   "See how the work runs → -> /how-it-works",
+   "Read the method → -> /how-it-works",
+   "Tell us what you’re trying to fix -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "headings": [
+   "H1 Everyone has a report. Who owns the enquiry?",
+   "H2 The enquiry sits at the end of everybody else’s report.",
+   "H2 Accountable up to the qualified enquiry.",
+   "H3 Ours",
+   "H3 Yours",
+   "H3 What we do not promise",
+   "H2 Whose report is the enquiry in?",
+   "H3 View 1 of 2Split across suppliers",
+   "H3 VIEW 2 OF 2 One line to the enquiry",
+   "H2 Look first. Then do the agreed work.",
+   "H2 Two things you can check, and one of them does not flatter us.",
+   "H3 The method, published",
+   "H3 A measurement of ourselves",
+   "H2 Who this is for, and who it isn’t.",
+   "H3 A good fit",
+   "H3 Not a good fit",
+   "H2 Tell us what is actually happening."
+  ],
+  "jsonld": [
+   "Organization"
+  ],
+  "secs": [
+   {
+    "id": "ab-h1",
+    "cls": "b-hero ab-hero",
+    "top": 73,
+    "h": 705,
+    "words": 73
+   },
+   {
+    "id": "ab-h-why",
+    "cls": "b-sec b-ink ab-why",
+    "top": 778,
+    "h": 765,
+    "words": 144
+   },
+   {
+    "id": "ab-h-hold",
+    "cls": "b-sec b-paper ab-hold",
+    "top": 1544,
+    "h": 1032,
+    "words": 144
+   },
+   {
+    "id": "ab-h-fig",
+    "cls": "b-sec ab-figsec",
+    "top": 2575,
+    "h": 912,
+    "words": 134
+   },
+   {
+    "id": "ab-h-how",
+    "cls": "b-sec b-ink ab-how",
+    "top": 3488,
+    "h": 750,
+    "words": 56
+   },
+   {
+    "id": "ab-h-check",
+    "cls": "b-sec b-paper ab-check",
+    "top": 4238,
+    "h": 918,
+    "words": 139
+   },
+   {
+    "id": "ab-h-fit",
+    "cls": "b-sec ab-fit",
+    "top": 5156,
+    "h": 680,
+    "words": 73
+   },
+   {
+    "id": "ab-h-close",
+    "cls": "b-close",
+    "top": 5836,
+    "h": 705,
+    "words": 45
+   }
+  ],
+  "status": 200,
+  "consoleErrors": []
+ },
+ "tablet-820x1180": {
+  "title": "Who We Are, and What We Can Actually Show You | MappedSkills",
+  "desc": "A small firm in Pune working on one thing: turning demand that already exists into enquiries a business can act on. The accountability boundary, what can be checked, and an honest account of where the firm is today.",
+  "canonical": "https://mappedskills.com/about",
+  "h1": "Everyone has a report. Who owns the enquiry?",
+  "pageHeight": 6703,
+  "overflowX": false,
+  "mainWords": 808,
+  "firstCtaTop": 5534,
+  "ctas": [
+   "Home -> /",
+   "See how the work runs → -> /how-it-works",
+   "Read the method → -> /how-it-works",
+   "Tell us what you’re trying to fix -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "headings": [
+   "H1 Everyone has a report. Who owns the enquiry?",
+   "H2 The enquiry sits at the end of everybody else’s report.",
+   "H2 Accountable up to the qualified enquiry.",
+   "H3 Ours",
+   "H3 Yours",
+   "H3 What we do not promise",
+   "H2 Whose report is the enquiry in?",
+   "H3 View 1 of 2Split across suppliers",
+   "H3 VIEW 2 OF 2 One line to the enquiry",
+   "H2 Look first. Then do the agreed work.",
+   "H2 Two things you can check, and one of them does not flatter us.",
+   "H3 The method, published",
+   "H3 A measurement of ourselves",
+   "H2 Who this is for, and who it isn’t.",
+   "H3 A good fit",
+   "H3 Not a good fit",
+   "H2 Tell us what is actually happening."
+  ],
+  "jsonld": [
+   "Organization"
+  ],
+  "secs": [
+   {
+    "id": "ab-h1",
+    "cls": "b-hero ab-hero",
+    "top": 73,
+    "h": 550,
+    "words": 73
+   },
+   {
+    "id": "ab-h-why",
+    "cls": "b-sec b-ink ab-why",
+    "top": 623,
+    "h": 717,
+    "words": 144
+   },
+   {
+    "id": "ab-h-hold",
+    "cls": "b-sec b-paper ab-hold",
+    "top": 1339,
+    "h": 887,
+    "words": 144
+   },
+   {
+    "id": "ab-h-fig",
+    "cls": "b-sec ab-figsec",
+    "top": 2226,
+    "h": 930,
+    "words": 134
+   },
+   {
+    "id": "ab-h-how",
+    "cls": "b-sec b-ink ab-how",
+    "top": 3156,
+    "h": 692,
+    "words": 56
+   },
+   {
+    "id": "ab-h-check",
+    "cls": "b-sec b-paper ab-check",
+    "top": 3848,
+    "h": 855,
+    "words": 139
+   },
+   {
+    "id": "ab-h-fit",
+    "cls": "b-sec ab-fit",
+    "top": 4703,
+    "h": 553,
+    "words": 73
+   },
+   {
+    "id": "ab-h-close",
+    "cls": "b-close",
+    "top": 5256,
+    "h": 490,
+    "words": 45
+   }
+  ],
+  "status": 200,
+  "consoleErrors": []
+ },
+ "mobile-390x844": {
+  "title": "Who We Are, and What We Can Actually Show You | MappedSkills",
+  "desc": "A small firm in Pune working on one thing: turning demand that already exists into enquiries a business can act on. The accountability boundary, what can be checked, and an honest account of where the firm is today.",
+  "canonical": "https://mappedskills.com/about",
+  "h1": "Everyone has a report. Who owns the enquiry?",
+  "pageHeight": 8637,
+  "overflowX": false,
+  "mainWords": 808,
+  "firstCtaTop": 7147,
+  "ctas": [
+   "Home -> /",
+   "See how the work runs → -> /how-it-works",
+   "Read the method → -> /how-it-works",
+   "Tell us what you’re trying to fix -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "headings": [
+   "H1 Everyone has a report. Who owns the enquiry?",
+   "H2 The enquiry sits at the end of everybody else’s report.",
+   "H2 Accountable up to the qualified enquiry.",
+   "H3 Ours",
+   "H3 Yours",
+   "H3 What we do not promise",
+   "H2 Whose report is the enquiry in?",
+   "H3 View 1 of 2Split across suppliers",
+   "H3 VIEW 2 OF 2 One line to the enquiry",
+   "H2 Look first. Then do the agreed work.",
+   "H2 Two things you can check, and one of them does not flatter us.",
+   "H3 The method, published",
+   "H3 A measurement of ourselves",
+   "H2 Who this is for, and who it isn’t.",
+   "H3 A good fit",
+   "H3 Not a good fit",
+   "H2 Tell us what is actually happening."
+  ],
+  "jsonld": [
+   "Organization"
+  ],
+  "secs": [
+   {
+    "id": "ab-h1",
+    "cls": "b-hero ab-hero",
+    "top": 65,
+    "h": 858,
+    "words": 73
+   },
+   {
+    "id": "ab-h-why",
+    "cls": "b-sec b-ink ab-why",
+    "top": 923,
+    "h": 1014,
+    "words": 144
+   },
+   {
+    "id": "ab-h-hold",
+    "cls": "b-sec b-paper ab-hold",
+    "top": 1937,
+    "h": 1270,
+    "words": 144
+   },
+   {
+    "id": "ab-h-fig",
+    "cls": "b-sec ab-figsec",
+    "top": 3206,
+    "h": 1008,
+    "words": 134
+   },
+   {
+    "id": "ab-h-how",
+    "cls": "b-sec b-ink ab-how",
+    "top": 4215,
+    "h": 824,
+    "words": 56
+   },
+   {
+    "id": "ab-h-check",
+    "cls": "b-sec b-paper ab-check",
+    "top": 5039,
+    "h": 930,
+    "words": 139
+   },
+   {
+    "id": "ab-h-fit",
+    "cls": "b-sec ab-fit",
+    "top": 5969,
+    "h": 815,
+    "words": 73
+   },
+   {
+    "id": "ab-h-close",
+    "cls": "b-close",
+    "top": 6784,
+    "h": 568,
+    "words": 45
+   }
+  ],
+  "status": 200,
+  "consoleErrors": []
+ }
+}

@@ -1,0 +1,197 @@
+/* G1 REVIEW ARTIFACT: proposed /about styles. Not production code. Uses the live C+ tokens (--dc-*) and shared classes
+   (b-hero, b-sec, b-ink, b-paper, b-h1, b-h2, b-named, b-kicker, b-lede, b-tlink, dc-btn, b-close). New classes use ax-.
+   Concept "one line": ink-framed tiles; tangerine marks the one event (the gap, the resolved line, the CTA); hatching
+   marks what stays with the client. Micro-interactions 150 ms (AB-D09); the line draws once in 400 ms after a press.
+   Brand DNA breakpoints: narrow <=760, medium 761-1080, wide >=1081. */
+
+:root { --ax-micro: 150ms; --ax-draw: 400ms; --ax-hatch: repeating-linear-gradient(135deg, transparent 0 7px, rgba(20,18,25,.16) 7px 9px); }
+
+.ax-banner { position: relative; z-index: 5; padding: 6px 16px; background: var(--dc-ink, #141219); color: #F7F3EC; font: 600 12px/1.4 var(--font-manrope), system-ui, sans-serif; text-align: center; }
+.ax-hero svg, .ax-fig svg, .ax-bound svg, .ax-work svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: square; stroke-linejoin: miter; }
+.ax-cap { margin: 14px 0 0; font-size: .875rem; line-height: 1.4; color: var(--dc-dim); }
+.ax-cap-ink { color: var(--dc-on-ink-dim); margin-top: 20px; }
+
+/* ---------- 1. hero ---------- */
+.px-h .b-hero.ax-hero { padding-block: clamp(24px, 2.6vw, 40px) clamp(40px, 4.5vw, 72px); }
+.ax-hero-g { grid-template-columns: minmax(0, 11fr) minmax(0, 9fr); align-items: center; column-gap: clamp(28px, 4.5vw, 72px); }
+.px-h .ax-hero .b-crumb { margin-bottom: 14px; }
+.px-h .ax-hero .b-kicker { margin-bottom: 10px; }
+.px-h .ax-hero .ax-h1 { font-size: clamp(2.5rem, 1.1rem + 3.4vw, 4.4rem); line-height: .98; max-width: 14ch; }
+.ax-h1 > span { display: block; }
+.px-h .ax-hero .b-lede { max-width: 44ch; margin-top: 20px; color: var(--dc-ink); }
+.ax-hero .dc-actions { margin-top: 26px; flex-wrap: wrap; }
+.ax-slips-fig { margin: 0; }
+.ax-slips { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.ax-slip { display: grid; gap: 6px; padding: 16px 18px; border: 3px solid var(--dc-ink); background: var(--dc-paper); }
+.ax-slip-who { font: 700 var(--dc-t-label)/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-dim); }
+.ax-slip-what { display: flex; align-items: center; gap: 10px; font: 800 1.25rem/1.2 var(--dc-f-title); }
+.ax-slip-m { flex: none; width: 26px; height: 26px; display: grid; place-items: center; background: var(--dc-ink); color: var(--dc-on-ink); }
+.ax-slip-m svg { width: 16px; height: 16px; }
+.ax-slip.is-gap { border: 3px dashed var(--dc-tang); background: transparent; }
+.ax-slip.is-gap .ax-slip-m { background: transparent; color: var(--dc-tang-small); border: 2px dashed var(--dc-tang); font: 800 1rem/1 var(--dc-f-title); }
+
+/* ---------- 2. why (ink) + the one-line figure ---------- */
+.ax-why-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 4vw, 64px); align-items: end; }
+.ax-why .b-h2 { max-width: 16ch; }
+.ax-why-l p { margin: 0; font-size: var(--dc-t-lede); line-height: 1.5; color: var(--dc-on-ink-soft); max-width: 44ch; }
+.ax-why-l p + p { margin-top: 14px; }
+.ax-why-l .ax-why-b { color: var(--dc-on-ink); font-weight: 700; padding-left: 16px; border-left: 4px solid var(--dc-tang); }
+
+.ax-fig { margin-top: clamp(36px, 4.5vw, 64px); }
+.ax-fig-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; margin-bottom: 22px; }
+.ax-tog { appearance: none; display: inline-flex; align-items: center; gap: 12px; min-height: 52px; margin: 0; padding: 6px 20px 6px 6px; border: 3px solid var(--dc-on-ink); border-radius: 999px; background: transparent; color: var(--dc-on-ink); cursor: pointer; font: 800 1.0625rem/1.2 var(--dc-f-title); transition: background-color var(--ax-micro) ease, color var(--ax-micro) ease, transform var(--ax-micro) ease; }
+.ax-tog[hidden] { display: none; }
+.ax-tog-i { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; background: var(--dc-tang); color: var(--dc-ink); }
+.ax-tog-i svg { width: 22px; height: 22px; }
+.ax-tog-i svg[hidden] { display: none; }
+.ax-tog:hover { background: var(--dc-on-ink); color: var(--dc-ink); }
+.ax-tog:active { transform: scale(.98); }
+.ax-tog:focus-visible { outline: 3px solid var(--dc-tang); outline-offset: 4px; }
+.ax-fig-n { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: 0; font: 700 var(--dc-t-label)/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-on-ink-dim); }
+
+.ax-state + .ax-state { margin-top: 40px; }
+.px-js .ax-fig.is-ready .ax-state + .ax-state { margin-top: 0; }
+.px-js .ax-fig.is-ready .ax-state.is-off { display: none; }
+.ax-state-h { margin: 0 0 18px; font: 800 var(--dc-t-title)/1.2 var(--dc-f-title); color: var(--dc-on-ink); }
+.ax-state-k { display: block; margin-bottom: 4px; font: 700 var(--dc-t-label)/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-on-ink-dim); }
+.px-js .ax-fig.is-ready .ax-state-k { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* one grid per state: stations on row 1, brackets on row 2, a bracket spans exactly the stations it covers */
+.ax-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 12px; row-gap: 14px; }
+.ax-route, .ax-who { display: contents; list-style: none; margin: 0; padding: 0; }
+.ax-route li { grid-row: 1; grid-column: var(--c); display: grid; gap: 4px; padding: 14px 16px; border: 3px solid var(--dc-on-ink); background: var(--dc-ink); }
+.ax-route li.is-yours { border-style: dashed; border-color: var(--dc-on-ink-dim); }
+.ax-st-k { font: 700 var(--dc-t-label)/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-tang); }
+.ax-route li.is-yours .ax-st-k { color: var(--dc-on-ink-dim); }
+.ax-st-t { font: 800 1.1875rem/1.2 var(--dc-f-title); color: var(--dc-on-ink); }
+.ax-br { grid-row: 2; grid-column: var(--a) / var(--b); position: relative; display: grid; gap: 4px; align-content: start; padding: 16px 16px 14px; border-top: 4px solid var(--dc-on-ink); color: var(--dc-on-ink); }
+.ax-br b { font: 800 1.0625rem/1.25 var(--dc-f-title); }
+.ax-br span { font-size: .9375rem; line-height: 1.4; color: var(--dc-on-ink-soft); }
+.ax-br.is-gap { border-top: 4px dashed var(--dc-tang); }
+.ax-br.is-gap b { color: var(--dc-tang); }
+.ax-br.is-yours { border-top: 4px dashed var(--dc-on-ink-dim); background: repeating-linear-gradient(135deg, transparent 0 7px, rgba(247,243,236,.10) 7px 9px); }
+.ax-br.is-ours { border-top: 0; background: var(--dc-paper); color: var(--dc-ink); padding-top: 20px; }
+.ax-br.is-ours span { color: var(--dc-dim); }
+.ax-br.is-ours::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 8px; background: var(--dc-tang); transform-origin: left center; }
+.ax-br.is-ours::after { content: ""; position: absolute; right: -8px; top: 0; bottom: 0; width: 4px; background: var(--dc-tang); }
+
+/* the one event: after a press, the line draws once and the bracket settles */
+.ax-state.is-entering .ax-br.is-ours::before { animation: ax-draw var(--ax-draw) var(--dc-e-arrive, ease) both; }
+.ax-state.is-entering .ax-br:not(.is-ours) { animation: ax-in var(--ax-draw) var(--dc-e-arrive, ease) both; }
+@keyframes ax-draw { from { transform: scaleX(0); } to { transform: none; } }
+@keyframes ax-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ---------- 3. where our job starts and ends (paper) ---------- */
+.ax-split { margin-top: clamp(28px, 3.5vw, 44px); display: grid; grid-template-columns: minmax(0, 7fr) auto minmax(0, 4fr); align-items: stretch; }
+.ax-ours { padding: 24px clamp(18px, 2.4vw, 32px); background: var(--dc-ink); color: var(--dc-on-ink); border-top: 8px solid var(--dc-tang); }
+.ax-yours { padding: 24px clamp(18px, 2.4vw, 32px); border: 3px dashed var(--dc-control); background: var(--ax-hatch); }
+.ax-split-t { margin: 0; font: 800 1.5rem/1.1 var(--dc-f-title); }
+.ax-split p { margin: 10px 0 0; font-size: 1.0625rem; line-height: 1.5; max-width: 46ch; }
+.ax-ours p { color: var(--dc-on-ink-soft); }
+.ax-edge { position: relative; width: 4px; margin: 0 clamp(14px, 1.6vw, 22px); background: var(--dc-tang); }
+.ax-edge span { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); white-space: nowrap; font: 700 var(--dc-t-label)/1.2 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-tang-small); }
+
+.ax-not { margin-top: clamp(32px, 4vw, 48px); display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: 12px clamp(20px, 4vw, 64px); align-items: start; padding-top: 18px; border-top: 3px solid var(--dc-ink); }
+.ax-not-h, .ax-fit-t, .ax-work-h { margin: 0; font: 800 1.1875rem/1.2 var(--dc-f-title); }
+.ax-not ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.ax-not li { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px 6px 8px; border: 2px solid var(--dc-ink); background: var(--dc-ground); font: 700 .9375rem/1.2 var(--dc-f-body); }
+.ax-not li svg { width: 16px; height: 16px; color: var(--dc-tang-small); }
+.ax-not-b { grid-column: 2; margin: 0; color: var(--dc-dim); font-size: 1rem; }
+
+.ax-fit { margin-top: clamp(32px, 4vw, 48px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px clamp(20px, 4vw, 64px); }
+.ax-fit-col { padding-top: 18px; border-top: 3px solid var(--dc-ink); }
+.ax-fit-col.is-no { border-top-style: dashed; border-top-color: var(--dc-control); }
+.ax-fit ul { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 10px; }
+.ax-fit li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; font-size: 1.0625rem; line-height: 1.45; }
+.ax-fit li svg { width: 20px; height: 20px; margin-top: 3px; color: var(--dc-ink); }
+.ax-fit-col.is-no li { color: var(--dc-dim); }
+.ax-fit-col.is-no li svg { color: var(--dc-control); }
+
+/* ---------- 4. who you'll work with (ground) ---------- */
+.ax-person { margin-top: clamp(28px, 3.5vw, 44px); display: grid; grid-template-columns: minmax(180px, 3fr) minmax(0, 7fr); gap: clamp(20px, 3vw, 44px); align-items: start; }
+.ax-photo { width: 100%; max-width: 280px; aspect-ratio: 4 / 5; display: grid; place-items: center; border: 3px dashed var(--dc-tang); background: var(--ax-hatch); text-align: center; font: 700 var(--dc-t-label)/1.5 var(--dc-f-body); letter-spacing: .1em; text-transform: uppercase; color: var(--dc-tang-small); }
+.ax-ph-tag { display: inline-block; margin: 0 0 14px; padding: 4px 8px; border: 1.5px dashed var(--dc-tang); font: 700 .75rem/1.2 var(--dc-f-body); letter-spacing: .1em; text-transform: uppercase; color: var(--dc-tang-small); }
+.ax-person-n { margin: 0; font: 800 clamp(1.8rem, 1.2rem + 1.6vw, 2.6rem)/1.05 var(--dc-f-title); }
+.ax-person-r { margin: 6px 0 0; font: 700 1.0625rem/1.3 var(--dc-f-body); color: var(--dc-dim); }
+.ax-person-s { margin: 18px 0 0; font-size: var(--dc-t-lede); line-height: 1.5; max-width: 52ch; }
+.ax-person-o { margin: 12px 0 0; color: var(--dc-dim); max-width: 52ch; }
+[data-placeholder] .ax-person-n, [data-placeholder] .ax-person-r, [data-placeholder] .ax-person-s, [data-placeholder] .ax-person-o { color: var(--dc-tang-small); }
+
+.ax-work { margin-top: clamp(36px, 4.5vw, 56px); padding-top: 18px; border-top: 3px solid var(--dc-ink); }
+.ax-work ol { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px clamp(16px, 2vw, 28px); }
+.ax-work li { display: grid; gap: 12px; align-content: start; }
+.ax-work-i { width: 44px; height: 44px; display: grid; place-items: center; border: 3px solid var(--dc-ink); background: var(--dc-paper); }
+.ax-work-i svg { width: 22px; height: 22px; }
+.ax-work li p { margin: 0; font-size: 1.0625rem; line-height: 1.45; font-weight: 600; }
+.ax-work-l { margin-top: 22px; }
+
+/* ---------- 5. close (tangerine) ---------- */
+.px-h .b-close.ax-close .b-h2 { max-width: 13ch; font-size: clamp(2.6rem, 1.2rem + 4.6vw, 5.4rem); }
+.ax-close-k { color: var(--dc-ink); }
+.ax-close-2 { color: var(--dc-paper); }
+.ax-close .dc-actions { flex-wrap: wrap; }
+.ax-close .b-lede { color: var(--dc-ink); }
+.ax-next { margin-top: clamp(32px, 4vw, 56px); padding-top: 18px; border-top: 3px solid var(--dc-ink); display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: 16px clamp(20px, 4vw, 64px); }
+.ax-next-k { margin: 0; font: 700 var(--dc-t-label)/1.35 var(--dc-f-body); letter-spacing: .14em; text-transform: uppercase; }
+.ax-next ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 28px; }
+.ax-next li { display: flex; gap: 12px; align-items: baseline; font: 700 1.0625rem/1.4 var(--dc-f-body); }
+.ax-next li b { flex: none; width: 28px; height: 28px; display: inline-grid; place-items: center; background: var(--dc-ink); color: var(--dc-tang); font: 800 .9375rem/1 var(--dc-f-title); transform: translateY(5px); }
+
+/* ---------- medium 761-1080 ---------- */
+@media (max-width: 1080px) {
+  .ax-hero-g { grid-template-columns: minmax(0, 1fr); row-gap: 36px; }
+  .ax-slips-fig { max-width: 640px; }
+  .ax-why-head { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  /* the figure turns vertical: stations in column 1, brackets in column 2 spanning the rows they cover */
+  .ax-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); column-gap: 16px; row-gap: 10px; }
+  .ax-route li { grid-column: 1; grid-row: var(--c); }
+  .ax-br { grid-column: 2; grid-row: var(--a) / var(--b); border-top: 0; border-left: 4px solid var(--dc-on-ink); padding: 12px 14px; }
+  .ax-br.is-gap { border-top: 0; border-left: 4px dashed var(--dc-tang); }
+  .ax-br.is-yours { border-top: 0; border-left: 4px dashed var(--dc-on-ink-dim); }
+  .ax-br.is-ours { padding: 14px 14px 14px 22px; }
+  .ax-br.is-ours::before { left: 0; top: 0; bottom: 0; right: auto; width: 8px; height: auto; transform-origin: center top; }
+  .ax-br.is-ours::after { right: 0; left: 0; top: auto; bottom: -8px; width: auto; height: 4px; }
+  @keyframes ax-draw { from { transform: scaleY(0); } to { transform: none; } }
+  .ax-split { grid-template-columns: minmax(0, 1fr); }
+  .ax-edge { width: auto; height: 4px; margin: 34px 0 0; }
+  .ax-edge span { top: -24px; left: 0; transform: none; }
+  .ax-work ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ax-next { grid-template-columns: minmax(0, 1fr); }
+  .px-h .b-close.ax-close .b-close-in { grid-template-columns: minmax(0, 1fr); align-items: start; }
+}
+
+/* ---------- narrow <=760 ---------- */
+@media (max-width: 760px) {
+  .ax-hero .dc-actions .dc-btn, .ax-close .dc-actions .dc-btn { justify-content: center; }
+  .ax-slips { gap: 8px; }
+  .ax-slip { padding: 12px 12px; gap: 4px; }
+  .ax-slip-what { font-size: 1rem; gap: 8px; }
+  .ax-slip-m { width: 22px; height: 22px; }
+  .ax-slip-who { font-size: .75rem; letter-spacing: .08em; }
+  .ax-route li { padding: 10px 12px; }
+  .ax-st-t { font-size: 1.0625rem; }
+  .ax-br b { font-size: 1rem; }
+  .ax-br span { font-size: .875rem; }
+  .ax-not, .ax-fit { grid-template-columns: minmax(0, 1fr); }
+  .ax-not-b { grid-column: 1; }
+  .ax-not li { padding: 4px 10px 4px 6px; font-size: .875rem; }
+  .ax-person { grid-template-columns: minmax(0, 1fr); }
+  .ax-photo { max-width: 240px; aspect-ratio: 1; }
+  .ax-work ol { grid-template-columns: minmax(0, 1fr); }
+  .ax-work li { grid-template-columns: 44px minmax(0, 1fr); align-items: center; gap: 14px; }
+  .ax-next ol { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .ax-close .dc-actions { flex-direction: column; align-items: stretch; }
+  .ax-tog { font-size: 1rem; }
+}
+@media (max-width: 360px) {
+  .px-h .ax-hero .ax-h1 { font-size: 2.3rem; }
+  .ax-hero .dc-btn, .ax-close .dc-btn { padding-inline: 14px; font-size: .9375rem; gap: 8px; }
+  .ax-slips { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ax-tog { transition: none !important; }
+  .ax-tog:active { transform: none; }
+  .ax-state.is-entering .ax-br { animation: none !important; }
+  .ax-state.is-entering .ax-br.is-ours::before { animation: none !important; }
+}

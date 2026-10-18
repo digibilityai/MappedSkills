@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>About G0 Audit</title>
+<style>
+:root{--bg:#F7F3EC;--paper:#FFFDF8;--ink:#141219;--mute:#5d5866;--line:#d9d2c5;--acc:#C24400;--acc-bg:#FFE7D9;--ok:#1e6b3a;--ok-bg:#e3f2e7;--warn:#8a5a00;--warn-bg:#fdf0d2;--bad:#a1221b;--bad-bg:#fbe1de;--tan:#FF5B04}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141219;--paper:#1d1a23;--ink:#efeae2;--mute:#a9a3b2;--line:#39343f;--acc:#ff8a4c;--acc-bg:#3a2216;--ok:#7fd39b;--ok-bg:#16301f;--warn:#f0c46a;--warn-bg:#3a2e12;--bad:#ff9a92;--bad-bg:#3d1714}}
+:root[data-theme="dark"]{--bg:#141219;--paper:#1d1a23;--ink:#efeae2;--mute:#a9a3b2;--line:#39343f;--acc:#ff8a4c;--acc-bg:#3a2216;--ok:#7fd39b;--ok-bg:#16301f;--warn:#f0c46a;--warn-bg:#3a2e12;--bad:#ff9a92;--bad-bg:#3d1714}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 16px 80px}
+h1{font-size:clamp(28px,4vw,40px);line-height:1.1;margin:.2em 0 .3em}
+h2{font-size:24px;margin:56px 0 12px;padding-top:12px;border-top:2px solid var(--ink)}
+h3{font-size:18px;margin:28px 0 8px}
+p,li{max-width:78ch}
+.k{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:600}
+.meta{color:var(--mute);font-size:14px}
+.card{background:var(--paper);border:1px solid var(--line);padding:16px 18px;margin:16px 0}
+.verdict{border-left:4px solid var(--tan)}
+table{width:100%;border-collapse:collapse;font-size:15px;margin:12px 0;background:var(--paper)}
+th,td{text-align:left;vertical-align:top;padding:9px 10px;border-bottom:1px solid var(--line)}
+th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:600}
+.tw{overflow-x:auto}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:1px 7px;border-radius:2px;white-space:nowrap}
+.keep{background:var(--ok-bg);color:var(--ok)}.simp{background:var(--warn-bg);color:var(--warn)}.drop{background:var(--bad-bg);color:var(--bad)}.new{background:var(--acc-bg);color:var(--acc)}
+figure{margin:16px 0}
+figure img{display:block;width:100%;height:auto;border:1px solid var(--line)}
+figcaption{font-size:14px;color:var(--mute);margin-top:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.three{display:grid;grid-template-columns:2fr 1fr;gap:16px;align-items:start}
+@media (max-width:760px){.two,.three{grid-template-columns:1fr}}
+.tall img{max-height:900px;object-fit:cover;object-position:top}
+.wf{display:grid;gap:8px;margin:12px 0}
+.wf div{background:var(--paper);border:1px solid var(--line);padding:10px 14px}
+.wf b{display:inline-block;min-width:1.6em;color:var(--acc)}
+.wf .ink{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.wf .ink b{color:var(--tan)}
+.wf .tanb{background:var(--tan);color:#141219;border-color:var(--tan)}
+.wf .tanb b{color:#141219}
+.hero-prop{background:var(--paper);border:1px solid var(--line);padding:22px 20px}
+.hero-prop .h{font-size:clamp(26px,4vw,38px);line-height:1.08;font-weight:800;margin:6px 0 12px;letter-spacing:-.01em}
+.hero-prop .h span{color:var(--acc)}
+.btn{display:inline-block;padding:9px 16px;border-radius:999px;font-weight:700;font-size:15px;margin:4px 8px 4px 0}
+.btn-p{background:var(--tan);color:#141219}.btn-s{border:2px solid var(--ink)}
+svg{max-width:100%;height:auto}
+code{font-size:.9em}
+a{color:var(--acc)}
+nav.toc{font-size:14px;display:flex;flex-wrap:wrap;gap:4px 12px}
+nav.toc a{white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="k">MappedSkills · /about · G0 design audit · 2026-10-18</p>
+<h1>/about: G0 audit and design direction</h1>
+<p class="meta">This is a read-only review of the live page (<code>https://mappedskills.com/about</code>, HTTP 200) and its <code>origin/main</code> source (<code>a6d75b7</code>, <code>components/cplus/about/</code>). Nothing was implemented, committed or deployed. The page was measured at 1440×900, 820×1180 and 390×844 in Chromium (playwright-core), with the consent banner declined. Raw figures are in <code>screenshots/measurements.json</code>. Brand basis: MappedSkills Brand DNA v1.0, plus the released pages <code>/services</code> (DEC-059) and <code>/how-it-works</code> (DEC-058).</p>
+<nav class="toc"><a href="#s1">1 Findings</a><a href="#s2">2 Keep / change</a><a href="#s3">3 Structure</a><a href="#s4">4 Visual story</a><a href="#s5">5 Hero and CTA</a><a href="#s6">6 Facts needed</a><a href="#s7">7 Decisions</a><a href="#s8">Screenshots</a></nav>
+
+<div class="card verdict">
+<p><strong>The recommendation in one paragraph.</strong> The live page has one strong idea: <em>everyone reports on their own part, and nobody reports on the enquiry</em>. It makes that point in five of its eight sections. It never says who MappedSkills is, and it offers no contact route until 87% of the way down the page (6,279 px of 7,256 on desktop). The redesign should <strong>say the idea once and show it once</strong>, then use the space it frees up for what an About page is for: who you will work with, why the business works this way, and where its job starts and ends. That takes five sections instead of eight, with a CTA in the hero. The visual story is <strong>"one line"</strong>: the live comparison figure, simplified, becomes the page's single interaction. Three separate suppliers' reports resolve into one line that ends where the enquiry reaches the client.</p>
+</div>
+
+<h2 id="s1">1. Current-page findings</h2>
+<div class="tw"><table>
+<tr><th>#</th><th>Section</th><th>Desktop px</th><th>Mobile px</th><th>Words</th></tr>
+<tr><td>1</td><td>Hero: "Everyone has a report. Who owns the enquiry?", plus four report slips</td><td>705</td><td>858</td><td>73</td></tr>
+<tr><td>2</td><td>Ink: "The enquiry sits at the end of everybody else's report." Capture / Convert / Measure</td><td>765</td><td>1,014</td><td>144</td></tr>
+<tr><td>3</td><td>Paper: "Accountable up to the qualified enquiry." Ours / Yours, plus "What we do not promise"</td><td>1,032</td><td>1,270</td><td>144</td></tr>
+<tr><td>4</td><td>"Whose report is the enquiry in?" The two-view comparison figure</td><td>912</td><td>1,008</td><td>134</td></tr>
+<tr><td>5</td><td>Ink: "Look first. Then do the agreed work." Six steps and two notes</td><td>750</td><td>824</td><td>56</td></tr>
+<tr><td>6</td><td>Paper: "Two things you can check…" The method link and "0 of 28"</td><td>918</td><td>930</td><td>139</td></tr>
+<tr><td>7</td><td>"Who this is for, and who it isn't."</td><td>680</td><td>815</td><td>73</td></tr>
+<tr><td>8</td><td>Tangerine close: "Tell us what is actually happening."</td><td>705</td><td>568</td><td>45</td></tr>
+<tr><td></td><td><strong>Page (with header and footer)</strong></td><td><strong>7,256</strong></td><td><strong>8,637</strong></td><td><strong>808</strong></td></tr>
+</table></div>
+<p class="meta">VERIFIED FACT (measured): no horizontal overflow at any width, and no console errors. There is <strong>no CTA in the body before the close</strong>; the first contact link sits at 6,279 px on desktop, 5,534 px on tablet and 7,147 px on mobile (83% to 87% down the page). The only other routes out are two links to <code>/how-it-works</code>. Structured data is the global <code>Organization</code> only, and there is no BreadcrumbList. Title: "Who We Are, and What We Can Actually Show You | MappedSkills".</p>
+
+<div class="two">
+<figure><img src="screenshots/desktop-1440-fold.png" alt="Live /about hero at 1440 by 900"><figcaption>Desktop fold. A strong, clear hook, but no CTA, and nothing saying who MappedSkills is.</figcaption></figure>
+<figure><img src="screenshots/mobile-390-fold.png" alt="Live /about hero at 390 by 844" style="max-width:390px;margin:auto"><figcaption>Mobile fold. The four slips stack to about 400 px, and the first screen has no action.</figcaption></figure>
+</div>
+
+<h3>What is already working</h3>
+<ul>
+<li><strong>The hook.</strong> "Everyone has a report" names a frustration a business owner recognises straight away. It is the Brand DNA "core frustration" in customer language.</li>
+<li><strong>The report slips.</strong> Three ticks and one dashed gap tell the story without a paragraph. The idea is honest and on-brand: hatched or dashed fills mark uncertainty.</li>
+<li><strong>The comparison figure</strong> is built well. Both views are real text, it works without JavaScript, it never relies on colour alone, and it does not move on load. It is the page's best visual asset.</li>
+<li><strong>The Ours / Yours boundary</strong> and the "What we do not promise" chips are clear, honest and distinctive. Few agencies publish this.</li>
+<li><strong>The fit section</strong> filters out the wrong buyers, which is useful for a small firm.</li>
+<li><strong>The tangerine close</strong> is a strong full-bleed moment, and it already pairs Contact with "Book a call".</li>
+</ul>
+
+<h3>What genuinely needs to improve</h3>
+<ol>
+<li><strong>Enquiry accountability is explained five times:</strong> in the hero lede, the slips, section 2 (three paragraphs and a callout), section 3 (a definition, Ours and Yours) and both views of the figure. The figure then asks again, "Whose report is the enquiry in?", which the hero already answered.</li>
+<li><strong>It never says who MappedSkills is.</strong> No people, no location and no company in the body. "A small firm in Pune" appears only in the meta description, and Pune and Mumbai only in the footer. The page title promises "Who We Are", and the page does not deliver it. (The absence was an owner decision under DEC-050 and DEC-051, because no facts were confirmed. It is now the page's biggest trust gap.)</li>
+<li><strong>The conversion path is buried.</strong> No hero CTA, nothing in between, and the close only after about 6,300 px. Every other released page offers Contact plus "Book a call" in the hero.</li>
+<li><strong>It duplicates <code>/how-it-works</code>.</strong> Section 5 restates the six-step process, and the page links to <code>/how-it-works</code> twice with different labels ("See how the work runs", "Read the method").</li>
+<li><strong>The self-measurement does not build trust here.</strong> To a business owner, "0 of 28" in large tangerine reads as "this firm is invisible", and it needs four sentences of caveats. The page omits the date (31 August 2026), and its count ("four AI assistants… two further systems") is worded differently from the dated record on <code>/ai-seo</code> ("five AI tools", DEC-054). It belongs to the AI search story, where it already lives in full.</li>
+<li><strong>The copy is long and abstract</strong> for an About page: 808 words, with phrases like "measured against a starting point", "where measurement access is not a problem", and "Not a good fit: Not businesses that…" (a double negative). There are long dashes throughout, against the owner's no-long-dash rule.</li>
+<li><strong>The figure needs one tap to make its point</strong>, and the button label "Show who answers for the enquiry" does not say what will change. Many visitors will only ever see the problem view.</li>
+</ol>
+
+<h3>Responsibility boundaries: commercial accuracy</h3>
+<p>These are pre-existing live-copy issues measured against the recorded decisions. They should be fixed in the redesign. Whether any needs a separate live correction first is an owner decision (AB-D08).</p>
+<div class="tw"><table>
+<tr><th>ID</th><th>Live copy</th><th>Issue</th><th>Basis</th></tr>
+<tr><td>F1</td><td>"Every month: a performance report and a review call."</td><td>States the review call as universal.</td><td>HW-D01 / DEC-058: "A monthly performance report, and a review call where your service includes one." DEC-057: no call for Lead Generation.</td></tr>
+<tr><td>F2</td><td>Figure view 2: "MappedSkills: one line. Answers for the whole route, from search to the qualified enquiry", across Search, Ads, Website and Form</td><td>Implies every client buys every service, and that MappedSkills owns the website. Standalone web development is excluded, and clients can "start with what you need".</td><td>DEC-005, DEC-032, DEC-059 scope strip.</td></tr>
+<tr><td>F3</td><td>"…measured against a starting point"</td><td>A baseline in every engagement is not a confirmed fact.</td><td>DEC-051 item 5 (nothing beyond the listed facts).</td></tr>
+<tr><td>F4</td><td>"recording where each enquiry came from"</td><td>Suggests MappedSkills receives or logs enquiries.</td><td>DEC-057: enquiries go directly to the client, and MappedSkills does not routinely receive them. HW-D03 removed a similar logging claim.</td></tr>
+<tr><td>F5</td><td>"Where you share your sales figures, we report them as your numbers."</td><td>Not a confirmed operating fact.</td><td>DEC-051 item 5.</td></tr>
+<tr><td>F6</td><td>"Who owns the enquiry?" with the answer "We answer for…"</td><td>"Owns" can read as owning the client's leads. The enquiry is the client's.</td><td>DEC-057 item 3.</td></tr>
+<tr><td>F7</td><td>"qualified enquiry", used six times, with a definition</td><td>This is the approved positioning (DEC-005, and the Brand DNA outcome language), but DEC-057 forbids claiming that enquiries <em>are</em> qualified, and HW-D02 removed the ledger from <code>/how-it-works</code>. The page should use it once, as what the work is aimed at, never as a description of what clients receive.</td><td>DEC-005, DEC-057, LG-D29 (positioning not to be rewritten).</td></tr>
+<tr><td>F8</td><td>"0 of 28", undated, "four AI assistants"</td><td>The date is missing, and the count is worded differently from the canonical record.</td><td>DEC-054 item 3, DEC-015.</td></tr>
+</table></div>
+
+<div class="three">
+<figure><img src="screenshots/desktop-1440-s04.png" alt="Comparison figure, view 1, desktop"><figcaption>Figure, view 1 (default). Clear, but "Ads" as a step after "Search" makes a route out of two parallel sources.</figcaption></figure>
+<figure><img src="screenshots/mobile-390-s04.png" alt="Comparison figure, view 1, mobile"><figcaption>Mobile: stacks well with readable brackets.</figcaption></figure>
+</div>
+<figure><img src="screenshots/desktop-1440-fig-view2.png" alt="Comparison figure, view 2, desktop"><figcaption>View 2, after the tap. "One line" across Search, Ads, Website and Form overstates scope (F2), and "measured against a starting point" is unconfirmed (F3).</figcaption></figure>
+<div class="two">
+<figure><img src="screenshots/desktop-1440-s05.png" alt="How we work section, desktop"><figcaption>Section 5 repeats <code>/how-it-works</code> and states the review call as universal (F1).</figcaption></figure>
+<figure><img src="screenshots/desktop-1440-s06.png" alt="What you can check section, desktop"><figcaption>Section 6. "0 of 28" is the most prominent number on the page, it is undated, and it is about AI search, not about who MappedSkills is.</figcaption></figure>
+</div>
+<div class="two">
+<figure><img src="screenshots/desktop-1440-s03.png" alt="Responsibility section, desktop"><figcaption>Section 3. The Ours / Yours split and the chips are worth keeping; the definition and the closing paragraph repeat section 2.</figcaption></figure>
+<figure><img src="screenshots/desktop-1440-s07.png" alt="Fit section, desktop"><figcaption>Section 7. A useful filter, but the kicker repeats the H2, and "Not a good fit: Not businesses…" is a double negative.</figcaption></figure>
+</div>
+
+<h2 id="s2">2. Keep, simplify, combine, remove</h2>
+<div class="tw"><table>
+<tr><th>Element</th><th>Call</th><th>Why</th></tr>
+<tr><td>The "everyone has a report" idea and the report slips</td><td><span class="tag keep">Keep</span></td><td>The page's hook, in customer language. Used once, in the hero.</td></tr>
+<tr><td>Comparison figure</td><td><span class="tag simp">Simplify</span></td><td>It becomes the page's single interaction ("one line"). Four stations instead of six; the line covers "the parts you hire us for"; the label says what will happen. The no-JS and accessibility build is kept.</td></tr>
+<tr><td>"Why we work this way" (section 2)</td><td><span class="tag simp">Combine</span></td><td>Two short sentences become the intro to the figure. Capture / Convert / Measure appear as the figure's three labels, not as a separate list.</td></tr>
+<tr><td>Ours / Yours and "What we do not promise"</td><td><span class="tag keep">Keep</span>, shorter</td><td>One sentence each side, with the corrected wording (F3 to F6). The five chips stay. The closing paragraph goes.</td></tr>
+<tr><td>Fit section</td><td><span class="tag simp">Combine</span></td><td>It moves into the boundary section as a compact pair: three lines "We're a good fit if…", three lines "We're not the right choice if…".</td></tr>
+<tr><td>Six-step process (section 5)</td><td><span class="tag simp">Simplify</span></td><td>One line inside "Who you'll work with" ("A call, a look at what you have, a plan you approve, then the work"), with one link to <code>/how-it-works</code>. HW-D01 wording for the report.</td></tr>
+<tr><td>"The method, published" card</td><td><span class="tag drop">Remove</span></td><td>It is a link card for <code>/how-it-works</code>, which the single process link already covers.</td></tr>
+<tr><td>"0 of 28" self-measurement</td><td><span class="tag drop">Remove</span> (recommended)</td><td>It stays, dated and complete, on <code>/ai-seo</code>. The underlying research is not altered (DEC-015, DEC-054). Owner choice: AB-D04.</td></tr>
+<tr><td>Who MappedSkills is (people, place, why it started)</td><td><span class="tag new">Add</span></td><td>This is the missing half of an About page. It uses only facts the owner supplies (§6). Without them, it uses the fallback in §3.</td></tr>
+<tr><td>Hero CTA</td><td><span class="tag new">Add</span></td><td>Contact plus "Book a call", as on every released page.</td></tr>
+<tr><td>"What happens next" in the close</td><td><span class="tag new">Add</span></td><td>Uses the confirmed facts only: a reply by email or WhatsApp, a call, then a plan before any work (DEC-051 item 5).</td></tr>
+<tr><td>URL, canonical, analytics page type, Organization JSON-LD, no BreadcrumbList</td><td><span class="tag keep">Keep</span></td><td>SEO and analytics continuity. The H1, title and description are separate decisions (AB-D02, AB-D07).</td></tr>
+</table></div>
+
+<h2 id="s3">3. Recommended page structure (five sections)</h2>
+<div class="wf">
+<div><b>1</b> <strong>Hero (cream): who we are and what we stand for.</strong> Kicker "About MappedSkills". H1 (see §5). A two-sentence lede says who MappedSkills is and what it does. Contact plus "Book a call". Right: the three report slips and the dashed "Enquiries: not in any report", drawn still. It answers <em>who</em>.</div>
+<div class="ink"><b>2</b> <strong>"Why we work this way" (ink): one line.</strong> Two sentences: separate suppliers each report on their own part, so the enquiry can become nobody's job, and that is why the work is joined up. Then the single interaction: one button resolves three separate brackets into one tangerine line under Capture · Convert · Measure, ending where the enquiry reaches the client. It answers <em>why</em>.</div>
+<div><b>3</b> <strong>"Where our job starts and ends" (paper).</strong> Ours / Yours, one sentence each. Five "We don't promise" chips. A fit pair (three short lines each). This is the honest, commercial part of the trust story.</div>
+<div><b>4</b> <strong>"Who you'll work with" (cream).</strong> A short founder or team introduction in the owner's own words, with a real photograph if one is supplied (§6). Underneath: one process line plus HW-D01 report wording, linking to <code>/how-it-works</code>. <em>Fallback if no people facts are approved:</em> "How we work with you", three plain principles taken from existing approved copy ("We look before we recommend." "You approve the plan before work starts." "If something won't suit your business, we'll say so."). It answers <em>why trust it</em>.</div>
+<div class="tanb"><b>5</b> <strong>Close (tangerine).</strong> "Tell us what's not working." A "What happens next" row with three confirmed facts. Contact as the primary CTA, Book a call as the secondary.</div>
+</div>
+<p class="meta">Estimate (WORKING HYPOTHESIS until a G1 mockup is measured): about 350 to 420 visible words against 808 today, and roughly 40% shorter on every width, mainly from saying the accountability idea once and removing the process and self-measurement blocks. The first CTA moves from about 6,300 px into the first screen.</p>
+
+<h2 id="s4">4. Visual storytelling direction: "one line"</h2>
+<p>The page tells one story with one drawing, in three states. It is THE RESOLVE's own move (fragments resolve into something named), and it reuses the figure the owner has already approved in C+, so it is not a new invention. It also differs from <code>/services</code> ("the route", stations along a path) and <code>/how-it-works</code> (step cards): this page draws <em>who answers for</em> the path, not the path itself.</p>
+<svg viewBox="0 0 960 330" role="img" aria-label="Sketch of the one line concept. Top: three separate supplier brackets with their own reports and a dashed gap at Enquiry. Bottom: after one press, a single tangerine line spans Capture, Convert and Measure and ends at the enquiry; a hatched area marked Yours covers replying, quoting and selling.">
+<rect width="960" height="330" fill="#F7F3EC"/>
+<defs><pattern id="h" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#8a8494" stroke-width="1.2"/></pattern></defs>
+<g font-family="system-ui,sans-serif" fill="#141219">
+<text x="24" y="30" font-size="12" font-weight="700" letter-spacing="1.5" fill="#5d5866">BEFORE: SPLIT ACROSS SUPPLIERS (THE HERO SHOWS THIS STILL)</text>
+<g font-size="14" font-weight="700">
+<text x="60" y="62">Found</text><text x="290" y="62">Visit</text><text x="520" y="62">Enquiry</text><text x="760" y="62">Reply and sale</text></g>
+<path d="M40 76 v14 h190 v-14" fill="none" stroke="#141219" stroke-width="2"/><text x="44" y="110" font-size="12">Search report: rankings up</text>
+<path d="M270 76 v14 h190 v-14" fill="none" stroke="#141219" stroke-width="2"/><text x="274" y="110" font-size="12">Site report: delivered</text>
+<path d="M500 76 v14 h190 v-14" fill="none" stroke="#FF5B04" stroke-width="2" stroke-dasharray="5 4"/><text x="504" y="110" font-size="12" fill="#A83400">Not in any report</text>
+<rect x="740" y="76" width="196" height="16" fill="url(#h)"/><text x="744" y="110" font-size="12">Yours</text>
+<line x1="24" y1="140" x2="936" y2="140" stroke="#d9d2c5"/>
+<text x="24" y="170" font-size="12" font-weight="700" letter-spacing="1.5" fill="#5d5866">AFTER ONE PRESS: ONE LINE, FOR THE PARTS YOU HIRE US FOR</text>
+<g font-size="12" font-weight="700" letter-spacing="1.5">
+<text x="60" y="200">CAPTURE</text><text x="290" y="200">CONVERT</text><text x="520" y="200">MEASURE</text></g>
+<rect x="40" y="214" width="650" height="8" fill="#FF5B04"/>
+<rect x="40" y="222" width="650" height="44" fill="#141219"/>
+<text x="54" y="250" font-size="14" font-weight="700" fill="#F7F3EC">MappedSkills: one team, judged on the enquiry</text>
+<rect x="690" y="214" width="6" height="52" fill="#FF5B04"/>
+<text x="700" y="290" font-size="12" fill="#A83400">the line ends where the enquiry reaches you</text>
+<rect x="740" y="214" width="196" height="52" fill="url(#h)" stroke="#8a8494" stroke-dasharray="4 3"/>
+<text x="752" y="236" font-size="13" font-weight="700">Yours</text><text x="752" y="254" font-size="12">reply, quote, sell</text>
+<text x="24" y="318" font-size="12" fill="#5d5866">Sketch only. Hero: "before", still. Section 2: the button plays "after" once. Section 3: the same edge, line and hatching, labelled Ours / Yours.</text>
+</g>
+</svg>
+<ul>
+<li><strong>Calm, then one event, then calm.</strong> The only motion is the line resolving after a press: the brackets slide together and the tangerine line draws in about 400 ms, once. No autoplay, no loop, nothing sticky. Hover, press and focus states are 150 ms. Under reduced motion it switches instantly; without JavaScript both states show, one under the other, as they do now.</li>
+<li><strong>Tangerine marks the event only:</strong> the gap in the hero, the resolved line, and the CTAs.</li>
+<li><strong>The boundary is the same drawing.</strong> Section 3 reuses the line's end and the hatched "Yours" area, so the responsibility split is seen rather than explained.</li>
+<li><strong>People, if supplied, are shown plainly:</strong> one real photograph and a name with a role, set in the editorial grid. No stock imagery, no "team around a laptop" (Brand DNA p.11).</li>
+<li><strong>Responsive:</strong> horizontal from 1081 px up; vertical brackets (the current mobile pattern, which already works well) at 1080 px and below.</li>
+</ul>
+
+<h2 id="s5">5. Proposed hero headline and primary CTA</h2>
+<div class="hero-prop">
+<p class="k">About MappedSkills</p>
+<p class="h">Judge us on the enquiries, <span>not the traffic.</span></p>
+<p>We're MappedSkills, a small digital marketing team [in Pune: owner to confirm]. We help businesses get found by people already looking, turn more visits into enquiries, and see what's working.</p>
+<p><span class="btn btn-p">Tell us what's not working →</span> <span class="btn btn-s">Book a call</span></p>
+<p class="meta" style="margin:8px 0 0">Primary → <code>/contact</code>. Secondary → <code>/schedule-call</code>.</p>
+</div>
+<ul>
+<li><strong>Why this H1:</strong> it is the Brand DNA's north star ("what we are remembered for"), and an About page is the natural home for it. It answers "why should I trust you?" in eight words, and it promises a standard, not an outcome. The lede then answers "who are you?" and states the method in plain English, without repeating <code>/services</code>.</li>
+<li><strong>Alternative:</strong> keep the live H1, "Everyone has a report. Who owns the enquiry?" It is a good hook, but it is a question about a problem, not about MappedSkills, and "owns" carries risk F6. It could move to section 2 as that section's H2.</li>
+<li><strong>Primary CTA:</strong> "Tell us what's not working" follows the Brand DNA CTA language, and the close's current wording ("Tell us what you're trying to fix") is close to it. One wording across hero and close.</li>
+</ul>
+
+<h2 id="s6">6. Missing factual inputs (owner)</h2>
+<p>Nothing below will be written, guessed or illustrated without the owner's written confirmation (DEC-051 item 5; Brand DNA p.7). Each item is UNKNOWN until supplied.</p>
+<div class="tw"><table>
+<tr><th>Input</th><th>Used for</th><th>Note</th></tr>
+<tr><td>Founder or lead names and roles, which people to show</td><td>Section 4</td><td>Required for the founder/team version; otherwise the fallback is used.</td></tr>
+<tr><td>A real photograph (with consent) or a decision to have none</td><td>Section 4</td><td>No stock or generated imagery.</td></tr>
+<tr><td>A short "why we started" in the owner's own words (two or three sentences)</td><td>Section 4</td><td>No invented history.</td></tr>
+<tr><td>Relevant background or experience the owner is happy to state and can support</td><td>Section 4</td><td>Optional. Only verifiable statements, no titles or numbers we cannot check.</td></tr>
+<tr><td>Location wording: "Pune", or the footer's "Pune, Mumbai, and India-wide"</td><td>Hero lede</td><td>Currently public in the meta description and footer, but not confirmed for body copy.</td></tr>
+<tr><td>Company name or legal entity to display, founding year, team size</td><td>Optional</td><td>Only if the owner wants them; not needed for the design.</td></tr>
+</table></div>
+
+<h2 id="s7">7. Decisions needed before G1</h2>
+<div class="tw"><table>
+<tr><th>ID</th><th>Decision</th><th>Recommended</th></tr>
+<tr><td>AB-D01</td><td>Five-section structure (§3), with the "one line" visual direction (§4)</td><td>Approve.</td></tr>
+<tr><td>AB-D02</td><td>H1: "Judge us on the enquiries, not the traffic." or keep "Everyone has a report. Who owns the enquiry?"</td><td>New H1; the old H1 idea moves to section 2.</td></tr>
+<tr><td>AB-D03</td><td>Founder/team introduction: include it (the owner supplies the §6 facts), or use the principles-only fallback</td><td>Include it, if the owner is comfortable. It is the page's largest trust gain.</td></tr>
+<tr><td>AB-D04</td><td>"0 of 28" self-measurement: remove from <code>/about</code> (it stays, dated, on <code>/ai-seo</code>), or keep it dated in a closed disclosure</td><td>Remove from this page.</td></tr>
+<tr><td>AB-D05</td><td>"Qualified enquiry" positioning: state it once, as the aim ("We judge our work on the enquiries it brings"), with no definition block and no "qualified" claim about what clients receive</td><td>Yes, within DEC-005 and DEC-057.</td></tr>
+<tr><td>AB-D06</td><td>Scope wording of the line: "the parts you hire us for"; four stations; no Website or Ads stations implying a build or a full bundle; review-call wording per HW-D01</td><td>Yes (fixes F1 to F6).</td></tr>
+<tr><td>AB-D07</td><td>Title and description: the title promises "What We Can Actually Show You" and the description "an honest account of where the firm is today", both tied to the self-measurement. Rewrite them in G1 for owner approval if AB-D04 removes it.</td><td>Draft new wording in G1; URL, canonical and JSON-LD unchanged.</td></tr>
+<tr><td>AB-D08</td><td>F1 to F8 on the live page: fold the fixes into the redesign, or correct the live page first</td><td>Fold into the redesign, as with HW-D01.</td></tr>
+<tr><td>AB-D09</td><td>CTAs: Contact plus "Book a call" in the hero and the close; "What happens next" from confirmed facts only; 150 ms micro-interactions</td><td>Yes, matching <code>/services</code> (DEC-059).</td></tr>
+</table></div>
+
+<h2 id="s8">Screenshots for review</h2>
+<p class="meta">All files are in <code>screenshots/</code>: <code>{desktop-1440, tablet-820, mobile-390}-{fold, fold-with-consent, full, s01…s08, fig-view2}.png</code>. Capture script: <code>tools/capture.cjs</code>.</p>
+<div class="three tall">
+<figure><a href="screenshots/desktop-1440-full.png"><img src="screenshots/desktop-1440-full.png" alt="Full live /about page at 1440 wide"></a><figcaption>Desktop, full page (7,256 px). Click to open at full size.</figcaption></figure>
+<figure><a href="screenshots/mobile-390-full.png"><img src="screenshots/mobile-390-full.png" alt="Full live /about page at 390 wide"></a><figcaption>Mobile, full page (8,637 px).</figcaption></figure>
+</div>
+<div class="two">
+<figure><img src="screenshots/tablet-820-fold.png" alt="Live /about hero at 820 wide"><figcaption>Tablet fold (820×1180). There is a CTA in the header only.</figcaption></figure>
+<figure><img src="screenshots/mobile-390-s08.png" alt="Close section on mobile"><figcaption>Mobile close: the first body CTA, at 7,147 px.</figcaption></figure>
+</div>
+
+<p class="meta" style="margin-top:48px">Evidence labels: the measurements and quoted live copy are VERIFIED FACT; the decision references cite <code>DECISION_LOG.md</code> on <code>origin/main</code>; the word and height estimates for the new structure are WORKING HYPOTHESIS; the §6 inputs are UNKNOWN. G0 stops here. No G1 mockup will be started before the owner approves the direction.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!-- G1 REVIEW ARTIFACT. Proposed /about body. Not production code. New classes use the ax- prefix.
+     Central concept: ONE LINE (AB-D01). The hero shows the split still (three reports, one gap). Section 2 resolves it,
+     after one press, into one line under Capture, Convert and Measure that ends where the enquiry reaches the client.
+     Section 3 reuses the same edge and hatching as Ours / Yours. Facts: DEC-051 item 5, HW-D01, DEC-053 OD-04, DEC-057.
+     Section 4 people: PLACEHOLDERS ONLY until the owner supplies facts (AB-D03). -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-join" viewBox="0 0 24 24"><path d="M3 7h6M3 17h6M15 12h6M9 7l6 5-6 5"/></symbol>
+    <symbol id="i-split" viewBox="0 0 24 24"><path d="M3 12h6M15 7h6M15 17h6M9 12l6-5M9 12l6 5"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M9 11h7M9 15h7"/></symbol>
+    <symbol id="i-tool" viewBox="0 0 24 24"><path d="M14 6a4 4 0 0 0 5 5l-9 9-3-3 9-9a4 4 0 0 1-2-2z"/></symbol>
+    <symbol id="i-report" viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="M8 16v-4M12 16V8M16 16v-6"/></symbol>
+  </defs>
+</svg>
+
+<!-- 1. HERO (ground). AB-D02 H1. AB-D09 CTAs. The split, drawn still: the "before" of the one-line story. -->
+<section class="b-hero ax-hero" aria-labelledby="ab-h1">
+  <div class="px-wrap b-hero-g ax-hero-g">
+    <div class="ax-hero-tx">
+      <nav aria-label="Breadcrumb" class="b-crumb"><ol><li><a href="/">Home</a> </li><li><span aria-hidden="true">/</span> <span aria-current="page">About</span></li></ol></nav>
+      <p class="b-kicker">About MappedSkills</p>
+      <h1 id="ab-h1" class="b-h1 ax-h1"><span>Judge us on the enquiries,</span> <span class="b-named">not the traffic.</span></h1>
+      <p class="b-lede">We’re a small digital marketing firm. We help businesses get found by people already looking, turn more visits into enquiries, and see what’s working.</p>
+      <div class="dc-actions"><a class="dc-btn dc-btn-primary" href="/contact"><span aria-hidden="true" class="dc-mk"></span>Tell us what’s not working</a><a class="dc-btn dc-btn-secondary" href="/schedule-call"><span aria-hidden="true" class="dc-mk"></span>Book a call</a></div>
+    </div>
+
+    <figure class="ax-slips-fig">
+      <ul class="ax-slips">
+        <li class="ax-slip"><span class="ax-slip-who">Search report</span><span class="ax-slip-what"><span class="ax-slip-m" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Rankings up</span></li>
+        <li class="ax-slip"><span class="ax-slip-who">Ads report</span><span class="ax-slip-what"><span class="ax-slip-m" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Clicks up</span></li>
+        <li class="ax-slip"><span class="ax-slip-who">Website handover</span><span class="ax-slip-what"><span class="ax-slip-m" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Site delivered</span></li>
+        <li class="ax-slip is-gap"><span class="ax-slip-who">Enquiries</span><span class="ax-slip-what"><span class="ax-slip-m" aria-hidden="true">?</span>Not in any report</span></li>
+      </ul>
+      <figcaption class="ax-cap">Illustration of a common setup, not of any particular supplier.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 2. WHY WE WORK THIS WAY (ink). The live H1's idea, with "answers for" instead of "owns" (F6).
+     ONE interaction: a single button switches between the split view and the one line. Both views are real text.
+     No JavaScript: both views shown, one under the other, button hidden. Reduced motion: instant switch.
+     Motion: the line draws once in 400 ms after a press; micro-interactions 150 ms; nothing on load, nothing looping. -->
+<section class="b-sec b-ink ax-why" aria-labelledby="ab-h-why">
+  <div class="px-wrap">
+    <div class="ax-why-head">
+      <div>
+        <p class="b-kicker">Why we work this way</p>
+        <h2 id="ab-h-why" class="b-h2">Everyone has a report. <span class="b-named">Who answers for the enquiry?</span></h2>
+      </div>
+      <div class="ax-why-l">
+        <p>When search, ads and your website sit with different suppliers, each one reports on its own part. The enquiry comes at the end of all of them, so it can easily become nobody’s job.</p>
+        <p class="ax-why-b">So we join up the parts you hire us for, and judge the work on the enquiries it brings.</p>
+      </div>
+    </div>
+
+    <div class="ax-fig" data-fig>
+      <div class="ax-fig-bar">
+        <button type="button" class="ax-tog" data-tog hidden><span class="ax-tog-i" aria-hidden="true"><svg data-ico-join><use href="#i-join"/></svg><svg data-ico-split hidden><use href="#i-split"/></svg></span><span data-tog-t>Join it into one line</span></button>
+        <p class="ax-fig-n" data-fig-n aria-live="polite"></p>
+      </div>
+
+      <section class="ax-state ax-state-a" data-state="a" aria-labelledby="ax-st-a">
+        <h3 id="ax-st-a" class="ax-state-h"><span class="ax-state-k">View 1 of 2</span> Split across suppliers</h3>
+        <div class="ax-grid">
+          <ol class="ax-route" aria-label="The route to a sale">
+            <li style="--c:1"><span class="ax-st-k">Capture</span><span class="ax-st-t">They find you</span></li>
+            <li style="--c:2"><span class="ax-st-k">Convert</span><span class="ax-st-t">They get in touch</span></li>
+            <li style="--c:3"><span class="ax-st-k">Measure</span><span class="ax-st-t">You see where it came from</span></li>
+            <li style="--c:4" class="is-yours"><span class="ax-st-k">After the enquiry</span><span class="ax-st-t">You reply and sell</span></li>
+          </ol>
+          <ul class="ax-who" aria-label="Who answers for each part">
+            <li class="ax-br" style="--a:1;--b:2"><b>Search and ads suppliers</b><span>Report rankings and clicks</span></li>
+            <li class="ax-br" style="--a:2;--b:3"><b>Website supplier</b><span>Reports the site is delivered</span></li>
+            <li class="ax-br is-gap" style="--a:3;--b:4"><b>No one</b><span>The enquiry is in nobody’s report</span></li>
+            <li class="ax-br is-yours" style="--a:4;--b:5"><b>You</b><span>Replying, quoting, selling</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="ax-state ax-state-b" data-state="b" aria-labelledby="ax-st-b">
+        <h3 id="ax-st-b" class="ax-state-h"><span class="ax-state-k">View 2 of 2</span> One line, for the parts you hire us for</h3>
+        <div class="ax-grid">
+          <ol class="ax-route" aria-label="The route to a sale">
+            <li style="--c:1"><span class="ax-st-k">Capture</span><span class="ax-st-t">They find you</span></li>
+            <li style="--c:2"><span class="ax-st-k">Convert</span><span class="ax-st-t">They get in touch</span></li>
+            <li style="--c:3"><span class="ax-st-k">Measure</span><span class="ax-st-t">You see where it came from</span></li>
+            <li style="--c:4" class="is-yours"><span class="ax-st-k">After the enquiry</span><span class="ax-st-t">You reply and sell</span></li>
+          </ol>
+          <ul class="ax-who" aria-label="Who answers for each part">
+            <li class="ax-br is-ours" style="--a:1;--b:4"><b>MappedSkills: one line</b><span>Judged on the enquiries it brings, tracked where tracking allows</span></li>
+            <li class="ax-br is-yours" style="--a:4;--b:5"><b>You</b><span>Replying, quoting, selling</span></li>
+          </ul>
+        </div>
+      </section>
+      <p class="ax-cap ax-cap-ink">Illustration. A common setup, not a claim about any particular supplier.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3. WHERE OUR JOB STARTS AND ENDS (paper). Same edge and hatching as the figure. F3 to F6 corrected.
+     "What we don't promise" chips kept. Fit pair folded in from the live section 7. -->
+<section class="b-sec b-paper ax-bound" aria-labelledby="ab-h-bound">
+  <div class="px-wrap">
+    <p class="b-kicker">Where our job starts and ends</p>
+    <h2 id="ab-h-bound" class="b-h2">Our part, <span class="b-named">and yours.</span></h2>
+
+    <div class="ax-split">
+      <div class="ax-ours">
+        <h3 class="ax-split-t">Ours</h3>
+        <p>Helping the right people find you, making it easy for them to get in touch, and tracking where enquiries come from, where tracking allows.</p>
+      </div>
+      <div class="ax-edge" aria-hidden="true"><span>The enquiry reaches you</span></div>
+      <div class="ax-yours">
+        <h3 class="ax-split-t">Yours</h3>
+        <p>What happens next: replying, quoting and selling, in your own way and your own systems.</p>
+      </div>
+    </div>
+
+    <div class="ax-not">
+      <h3 class="ax-not-h">What we don’t promise</h3>
+      <ul>
+        <li><svg aria-hidden="true"><use href="#i-x"/></svg>Rankings</li>
+        <li><svg aria-hidden="true"><use href="#i-x"/></svg>A place in AI answers</li>
+        <li><svg aria-hidden="true"><use href="#i-x"/></svg>A number of enquiries</li>
+        <li><svg aria-hidden="true"><use href="#i-x"/></svg>Revenue</li>
+        <li><svg aria-hidden="true"><use href="#i-x"/></svg>A return on spend</li>
+      </ul>
+      <p class="ax-not-b">We’d rather tell you what we can’t measure than pretend we can.</p>
+    </div>
+
+    <div class="ax-fit">
+      <div class="ax-fit-col">
+        <h3 class="ax-fit-t">We’re a good fit if</h3>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>One good enquiry is worth real money to you.</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>People already look for what you sell.</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>You can give us access to see how your marketing performs.</li>
+        </ul>
+      </div>
+      <div class="ax-fit-col is-no">
+        <h3 class="ax-fit-t">We’re not the right choice if</h3>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#i-x"/></svg>You need demand created from nothing.</li>
+          <li><svg aria-hidden="true"><use href="#i-x"/></svg>People buy from you on impulse or price alone.</li>
+          <li><svg aria-hidden="true"><use href="#i-x"/></svg>You need results guaranteed.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. WHO YOU'LL WORK WITH (ground). AB-D03: founder/team introduction, owner facts ONLY.
+     Every [bracketed] item below is a visible PLACEHOLDER awaiting the owner. Nothing here is invented.
+     The working line uses DEC-051 item 5 and HW-D01 exactly; one link to /how-it-works. -->
+<section class="b-sec ax-team" aria-labelledby="ab-h-team">
+  <div class="px-wrap">
+    <p class="b-kicker">Who you’ll work with</p>
+    <h2 id="ab-h-team" class="b-h2">The people <span class="b-named">behind MappedSkills.</span></h2>
+
+    <div class="ax-person" data-placeholder>
+      <div class="ax-photo"><span>Photo<br>owner to supply<br>(or none)</span></div>
+      <div class="ax-person-tx">
+        <p class="ax-ph-tag">Placeholder: awaiting owner facts</p>
+        <h3 class="ax-person-n">[Name]</h3>
+        <p class="ax-person-r">[Role]</p>
+        <p class="ax-person-s">[Two or three sentences, in the owner’s own words, on why MappedSkills started and what they care about.]</p>
+        <p class="ax-person-o">[Optional: background or experience the owner is happy to state and can support.]</p>
+      </div>
+    </div>
+
+    <div class="ax-work">
+      <h3 class="ax-work-h">How we work with you</h3>
+      <ol>
+        <li><span class="ax-work-i" aria-hidden="true"><svg><use href="#i-phone"/></svg></span><p>A call first. Then we look at what you have.</p></li>
+        <li><span class="ax-work-i" aria-hidden="true"><svg><use href="#i-doc"/></svg></span><p>You get our findings, a plan and a proposal. Nothing starts until you approve it.</p></li>
+        <li><span class="ax-work-i" aria-hidden="true"><svg><use href="#i-tool"/></svg></span><p>We do most of the agreed work, with your input where needed.</p></li>
+        <li><span class="ax-work-i" aria-hidden="true"><svg><use href="#i-report"/></svg></span><p>A monthly performance report, and a review call where your service includes one.</p></li>
+      </ol>
+      <p class="b-tlink ax-work-l"><a href="/how-it-works">See how the work runs <span aria-hidden="true">→</span></a></p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. CLOSE (tangerine, shared .b-close look). AB-D09: contact primary, booking secondary. The live close H2 kept.
+     "What happens next" uses only confirmed facts (DEC-051 item 5), as on /services. -->
+<section class="b-close ax-close" aria-labelledby="b-close-h">
+  <div class="px-wrap">
+    <div class="b-close-in">
+      <div>
+        <p class="b-kicker ax-close-k">Start a conversation</p>
+        <h2 id="b-close-h" class="b-h2">Tell us what’s <span class="ax-close-2">actually happening.</span></h2>
+        <p class="b-lede">What you’re getting, what you’re not, and what you can see today. That’s enough to start.</p>
+      </div>
+      <div class="dc-actions"><a class="dc-btn dc-btn-primary" href="/contact"><span aria-hidden="true" class="dc-mk"></span>Tell us what’s not working</a><a class="dc-btn dc-btn-secondary" href="/schedule-call"><span aria-hidden="true" class="dc-mk"></span>Book a call</a></div>
+    </div>
+    <div class="ax-next">
+      <p class="ax-next-k">What happens next</p>
+      <ol>
+        <li><b>1</b>You tell us what’s going on.</li>
+        <li><b>2</b>We reply by email or WhatsApp.</li>
+        <li><b>3</b>A call, then a plan. Nothing starts until you say yes.</li>
+      </ol>
+    </div>
+  </div>
+</section>

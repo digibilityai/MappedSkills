@@ -48,6 +48,8 @@
 > Start at `docs/ui-revamp/GATE_4_MASTER_ROLLOUT_PLAN.md` (seven `GATE_4_*.md` documents). Proposed owner decisions O1–O10
 > (§7); recommended first batch B0 + B1 (QA harness and baselines, then the global chrome flip). No application code changed.
 >
+> **`/schedule-call` "Request a call" LIVE — 2026-10-19 (`DEC-062`).** No online booking; a short request form that feeds Mini CRM's "Website requests" list (Mini CRM `8d250d4`, PR #79). `07e76e9` (PR #22), deploy run `39195363054`, live `BUILD_ID` `hfiv2Hfw_dru9XB4q3p0g`; rollback `NvTejYkD7V4j88x51zJY_` (`/pricing`, `7e18ffc`), not used. One synthetic request delivered end to end and seen as "Call request" in the CRM. Open: synthetic-data cleanup (awaiting owner), outside-workspace denial verified locally only, GTM-without-consent behaviour, D4 relabel.
+>
 > **Lean release preparation — 2026-10-14 (`DEC-052`). Branch `release/cplus-lean` from `main`; not pushed, not merged, not deployed.**
 > - Website code = `abcb/cplus-integration` @ `d27f464` (byte-identical outside `docs/`), plus the host-only lead export `scripts/export-enquiries.cjs` (`docs/10-technical/LEAD_EXPORT.md`). Evidence screenshots, run results and logs are left out of the branch.
 > - The full integration history and evidence are kept in a private, verified git bundle **outside** this public repository.

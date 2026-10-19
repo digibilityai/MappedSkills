@@ -1,60 +1,176 @@
-/* C+ FAQ (CHECKPOINT 6 section), from the approved prototype (proto/direction-c-plus, app/proto/c-plus/proto.css):
-   the rules only this page renders. Shared rules are in ../cplus.css. */
-.b-h2-s { font-size: clamp(1.5rem, 1rem + 1.6vw, 2.3rem); }
-.fq-hero-g { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
-.px-h .fq-h1 { font-size: clamp(2.6rem, 1.2rem + 4.4vw, 5.2rem); max-width: 12ch; }
-.fq-side { margin-top: 18px; max-width: 46ch; padding-left: 16px; border-left: 4px solid var(--dc-tang-display); color: var(--dc-ink); font-weight: 600; line-height: 1.5; }
-.fq-index { min-width: 0; padding: clamp(18px, 2.4vw, 28px); background: var(--dc-paper); border: 2px solid var(--dc-ink); }
-.fq-index-h { margin-bottom: 14px; font: 700 .75rem/1.3 var(--dc-f-body); letter-spacing: .1em; text-transform: uppercase; color: var(--dc-dim); }
-.fq-index a { color: var(--dc-ink); text-decoration: none; }
-.fq-index a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
-.fq-index a:focus-visible { outline: 3px solid var(--dc-ink); outline-offset: 2px; }
-.fq-index-n { display: inline-grid; place-items: center; flex: none; min-width: 2.1em; padding: 2px 4px; background: var(--dc-ink); color: var(--dc-on-ink); font: 800 .75rem/1.2 var(--dc-f-body); }
-.fq-index-g { display: grid; gap: 16px; }
-.fq-index-grp { display: inline-flex; align-items: center; gap: 10px; font: 800 1.05rem/1.25 var(--dc-f-title); }
-.fq-index-g ul { margin-top: 8px; padding-left: calc(2.1em + 10px); display: grid; gap: 6px; }
-.fq-index-g ul a { display: block; padding: 3px 0; font-size: .9375rem; line-height: 1.4; color: var(--dc-dim); }
-.fq-index-g ul a:hover { color: var(--dc-ink); }
-.fq-index-groups { display: none; }
-.fq-index-groups ol { display: grid; gap: 8px; }
-.fq-index-groups a { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; min-height: 48px; padding: 8px 0; border-bottom: 1px solid var(--dc-line); }
-.fq-index-t { font: 800 1.05rem/1.25 var(--dc-f-title); }
-.fq-index-c { font-size: .875rem; color: var(--dc-dim); white-space: nowrap; }
-.fq-tools-w { padding-block: 22px 0; }
-html:not(.px-js) .fq-tools { display: none; }
-.fq-all { display: inline-flex; align-items: center; gap: 12px; min-height: 48px; padding: 6px 20px 6px 8px; border: 2px solid var(--dc-ink); border-radius: 999px; background: var(--dc-paper); color: var(--dc-ink); font: 700 1rem/1.2 var(--dc-f-body); cursor: pointer; }
-.fq-all:hover { background: var(--dc-ink); color: var(--dc-on-ink); }
-.fq-all:focus-visible { outline: 3px solid var(--dc-ink); outline-offset: 3px; }
-.fq-grp { padding-block: clamp(44px, 6vw, 88px); }
-.fq-grp-g { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(20px, 4vw, 64px); align-items: start; }
-.fq-grp-head { display: grid; gap: 6px; align-content: start; min-width: 0; }
-.fq-grp-n { font: 800 clamp(3.2rem, 2rem + 4vw, 5.6rem)/1.25 var(--dc-f-display); letter-spacing: -.05em; color: var(--dc-tang-display); }
-.fq-grp-h { font: 800 clamp(1.7rem, 1.1rem + 1.8vw, 2.6rem)/1.05 var(--dc-f-statement); letter-spacing: -.02em; overflow-wrap: anywhere; }
-.fq-grp-c { font: 700 .8125rem/1.45 var(--dc-f-body); letter-spacing: .08em; text-transform: uppercase; color: var(--dc-dim); }
-.fq-pm.is-open::after { transform: rotate(0deg); }
-.fq-start-first { margin-top: clamp(22px, 3vw, 32px); display: flex; align-items: center; gap: 12px; font: 700 var(--dc-t-lede)/1.4 var(--dc-f-body); color: var(--dc-on-ink); }
-.fq-start-first .dc-mk, .fq-start-notes .dc-mk { background: var(--dc-tang); }
-.fq-flow { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; }
-.fq-flow li { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 8px 16px 8px 8px; border: 2px solid var(--dc-on-ink-dim); font: 700 1rem/1.25 var(--dc-f-body); color: var(--dc-on-ink); }
-.fq-flow li.is-last { border-color: var(--dc-tang); }
-.fq-flow-n { display: grid; place-items: center; flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--dc-on-ink); color: var(--dc-ink); font: 800 .8125rem/1 var(--dc-f-title); }
-.fq-flow li.is-last .fq-flow-n { background: var(--dc-tang); }
-.fq-start-notes { margin-top: 20px; display: grid; gap: 10px; color: var(--dc-on-ink); font-weight: 600; }
-.fq-start-links { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 12px 28px; font-weight: 700; }
-.fq-start-links a { color: var(--dc-on-ink); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
-.fq-start :focus-visible { outline-color: var(--dc-on-ink); }
-.fq-more-b { margin-top: 14px; }
-.fq-close-k { color: var(--dc-ink); }
-.px-h:has(.fq-hero) .b-close-in > div { container-type: inline-size; min-width: 0; }
-.px-h:has(.fq-hero) .b-close .b-h2 { font-size: min(clamp(3rem, 1.3rem + 6vw, 6.6rem), 16cqi); }
-@media (max-width: 899px) {
-  .fq-hero-g, .fq-grp-g { grid-template-columns: minmax(0, 1fr); }
-  .fq-index-full { display: none; }
-  .fq-index-groups { display: block; }
-  .fq-grp-head { grid-template-columns: auto minmax(0, 1fr); align-items: end; column-gap: 14px; }
-  .fq-grp-n { grid-row: span 2; }
+/* C+ FAQ (/faq): the owner-approved G1 design (DEC-063), ported from docs/faq-redesign/g1/mockup/src/fx.css. Every rule
+   is scoped to faq- classes so nothing here can reach another page (the mockup's fx- prefix is used by /google-ads); the
+   shared rules (b-*, dc-*, px-*) live in ../cplus.css and are not redefined. Not carried over: the review banner, the
+   "New" markers, the :root variable. Added: the forced-colors treatment the shared .fq-pm already has.
+   THE RESOLVE: ink-framed shapes, tangerine for the one event (an open answer, your decision, the CTA), dashes for what
+   is agreed rather than standard. 150 ms feedback only; no sticky elements.
+   Brand DNA breakpoints: narrow <=760, medium 761-1080, wide >=1081. */
+
+.faq-gl { display: block; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: square; stroke-linejoin: miter; }
+.faq-grp { position: relative; }
+.faq-legacy { position: absolute; left: 0; top: -8px; width: 1px; height: 1px; }
+
+/* ---------- A. hero ---------- */
+.px-h .b-hero.faq-hero { padding-block: clamp(28px, 3vw, 48px) clamp(48px, 5vw, 80px); }
+.faq-hero-g { display: grid; grid-template-columns: minmax(0, 13fr) minmax(0, 7fr); column-gap: clamp(28px, 5vw, 88px); align-items: end; }
+.faq-hero-g > .b-crumb, .faq-hero-g > .b-kicker, .faq-h1, .faq-lede { grid-column: 1; }
+.px-h .faq-hero .b-crumb { margin-bottom: 14px; }
+.px-h .faq-hero .b-kicker { margin-bottom: 10px; }
+.px-h .faq-hero .faq-h1 { font-size: clamp(2.4rem, 1rem + 3.6vw, 4.6rem); line-height: .98; max-width: 15ch; }
+.faq-h1 > span { display: block; }
+.px-h .faq-hero .faq-lede { max-width: 40ch; margin-top: 20px; color: var(--dc-ink); }
+
+/* five category links: a compact list on the right at wide widths, wrapped chips below that */
+.faq-cats { grid-column: 2; grid-row: 1 / span 4; align-self: end; }
+.faq-cats-l { margin: 0 0 10px; font: 700 var(--dc-t-label)/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-dim); }
+.faq-cats ul { list-style: none; margin: 0; padding: 0; border-top: 3px solid var(--dc-ink); }
+.faq-cats li { border-bottom: 1px solid var(--dc-line); }
+.faq-cats a { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; padding: 0 4px; color: var(--dc-ink); text-decoration: none;
+  font: 800 1.25rem/1.15 var(--dc-f-title); transition: color 150ms ease, padding 150ms ease, background 150ms ease; }
+.faq-cat-n { flex: none; min-width: 28px; height: 28px; display: grid; place-items: center; border: 2px solid var(--dc-ink); font: 700 .8125rem/1 var(--dc-f-body); }
+.faq-cats a::after { content: "↓"; order: 3; font: 700 1rem/1 var(--dc-f-body); color: var(--dc-tang-small); opacity: 0; transition: opacity 150ms ease; }
+.faq-cats a:hover { padding-left: 10px; background: var(--dc-paper); }
+.faq-cats a:hover::after, .faq-cats a:focus-visible::after { opacity: 1; }
+.faq-cats a:hover .faq-cat-n { background: var(--dc-ink); color: var(--dc-paper); }
+.faq-cat-t { flex: 1; }
+
+/* ---------- B. FAQ groups (paper) ---------- */
+.faq-body { padding-block: clamp(40px, 5vw, 72px) var(--dc-rhythm); }
+.faq-tools { display: flex; justify-content: flex-end; margin-bottom: 8px; }
+.faq-all { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 4px; background: none; border: 0; color: var(--dc-ink); font: 700 .9375rem/1 var(--dc-f-body); cursor: pointer; }
+.faq-all:hover { text-decoration: underline; text-underline-offset: 4px; }
+.faq-all .faq-pm { width: 28px; height: 28px; }
+
+.faq-grp { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: clamp(24px, 4vw, 72px); padding-block: clamp(28px, 3.4vw, 48px); border-top: 3px solid var(--dc-ink); scroll-margin-top: 16px; }
+.faq-grp-head { align-self: start; }
+.faq-grp-n { display: inline-grid; place-items: center; min-width: 40px; height: 32px; padding: 0 8px; background: var(--dc-ink); color: var(--dc-tang); font: 800 1rem/1 var(--dc-f-title); }
+.faq-grp-h { margin: 14px 0 0; font: 800 clamp(1.75rem, 1.2rem + 1.6vw, 2.6rem)/1.02 var(--dc-f-title); letter-spacing: -.02em; scroll-margin-top: 24px; }
+.faq-grp-p { margin: 10px 0 0; max-width: 28ch; font-size: 1.0625rem; line-height: 1.45; color: var(--dc-dim); }
+
+.faq-list { list-style: none; margin: 0; padding: 0; }
+.faq-list > li + li { border-top: 1px solid var(--dc-line); }
+.faq-d { scroll-margin-top: 24px; }
+.faq-d > summary { list-style: none; display: flex; align-items: center; gap: 16px; min-height: 64px; padding: 14px 4px; cursor: pointer; border-radius: 2px;
+  transition: background 150ms ease, padding 150ms ease; }
+.faq-d > summary::-webkit-details-marker { display: none; }
+.faq-q { flex: 1; font: 700 clamp(1.125rem, 1.02rem + .35vw, 1.3125rem)/1.3 var(--dc-f-title); letter-spacing: -.005em; color: var(--dc-ink); }
+.faq-d > summary:hover { background: var(--dc-ground); padding-inline: 12px; }
+.faq-d > summary:focus-visible { outline: 3px solid var(--dc-tang); outline-offset: 2px; }
+.faq-d[open] > summary .faq-q { color: var(--dc-ink); }
+
+/* plus / minus: a square, ink-framed; turns tangerine when open */
+.faq-pm { position: relative; flex: none; width: 32px; height: 32px; border: 2px solid var(--dc-ink); background: transparent; transition: background 150ms ease, border-color 150ms ease; }
+.faq-pm::before, .faq-pm::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 2px; margin: -1px 0 0 -6px; background: var(--dc-ink); transition: transform 150ms ease; }
+.faq-pm::after { transform: rotate(90deg); }
+.faq-d > summary:hover .faq-pm { background: var(--dc-ink); }
+.faq-d > summary:hover .faq-pm::before, .faq-d > summary:hover .faq-pm::after { background: var(--dc-paper); }
+.faq-d[open] > summary .faq-pm, .faq-all .faq-pm.is-open { background: var(--dc-tang); border-color: var(--dc-tang); }
+.faq-d[open] > summary .faq-pm::before, .faq-d[open] > summary .faq-pm::after { background: var(--dc-ink); }
+.faq-d[open] > summary .faq-pm::after, .faq-all .faq-pm.is-open::after { transform: rotate(0deg); }
+
+/* the answer: direct answer first, then the explanation; a comfortable measure */
+.faq-a { max-width: 64ch; padding: 0 4px 26px; border-left: 3px solid var(--dc-tang); padding-left: 18px; margin-left: 4px; }
+.faq-d[open] .faq-a { animation: faq-in 150ms ease-out; }
+@keyframes faq-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.faq-a p { margin: 0; font-size: 1.0625rem; line-height: 1.65; color: var(--dc-dim); }
+.faq-a p + p, .faq-a .faq-dl { margin-top: 12px; }
+.faq-a .faq-direct { font-weight: 700; color: var(--dc-ink); font-size: 1.125rem; line-height: 1.55; }
+.faq-more a { display: inline-flex; align-items: center; min-height: 32px; color: var(--dc-ink); font-weight: 700; text-decoration: underline; text-decoration-color: var(--dc-tang); text-decoration-thickness: 2px; text-underline-offset: 5px; transition: color 150ms ease; }
+.faq-more a::after { content: "→"; margin-left: 8px; color: var(--dc-tang-small); transition: transform 150ms ease; }
+.faq-more a:hover { color: var(--dc-tang-small); }
+.faq-more a:hover::after { transform: translateX(3px); }
+.faq-dl { margin: 0; display: grid; gap: 0; border-top: 1px solid var(--dc-line); }
+.faq-dl > div { display: grid; grid-template-columns: minmax(0, 11rem) minmax(0, 1fr); gap: 4px 18px; padding: 10px 0; border-bottom: 1px solid var(--dc-line); }
+.faq-dl dt { font: 800 1rem/1.4 var(--dc-f-title); color: var(--dc-ink); }
+.faq-dl dd { margin: 0; font-size: 1.0625rem; line-height: 1.5; color: var(--dc-dim); }
+
+/* ---------- C. how working together starts (ink) ---------- */
+.faq-start-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px clamp(20px, 4vw, 64px); align-items: end; }
+.faq-start-head .b-h2 { max-width: 14ch; }
+.faq-start-l { margin: 0; font-size: var(--dc-t-lede); line-height: 1.5; max-width: 38ch; color: var(--dc-on-ink-soft); }
+.faq-steps { list-style: none; margin: clamp(32px, 4vw, 52px) 0 0; padding: 0; position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 48px); }
+.faq-steps::before { content: ""; position: absolute; left: 28px; right: 28px; top: 27px; height: 3px; background: linear-gradient(90deg, var(--dc-on-ink-dim) 0 64%, var(--dc-tang) 64% 100%); }
+.faq-s { position: relative; }
+.faq-s-i { position: relative; display: grid; place-items: center; width: 56px; height: 56px; background: var(--dc-ink); border: 3px solid var(--dc-on-ink); color: var(--dc-on-ink); transition: transform 150ms ease, box-shadow 150ms ease; }
+.faq-s-i svg { width: 26px; height: 26px; }
+.faq-s:hover .faq-s-i { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--dc-tang); }
+.faq-s.is-you .faq-s-i { background: var(--dc-tang); border-color: var(--dc-tang); color: var(--dc-ink); }
+.faq-s.is-you:hover .faq-s-i { box-shadow: 4px 4px 0 var(--dc-on-ink); }
+.faq-s-n { display: block; margin-top: 20px; font: 700 var(--dc-t-label)/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-on-ink-dim); }
+.faq-s-t { margin: 6px 0 0; font: 800 clamp(1.375rem, 1.1rem + .6vw, 1.75rem)/1.12 var(--dc-f-title); }
+.faq-s-p { margin: 8px 0 0; font-size: 1.0625rem; line-height: 1.5; color: var(--dc-on-ink-soft); max-width: 32ch; }
+.faq-s.is-you .faq-s-p { color: var(--dc-on-ink); }
+
+.faq-after { margin-top: clamp(32px, 4vw, 52px); display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr) auto; align-items: stretch; gap: 0; border-top: 3px solid var(--dc-on-ink); padding-top: 18px; column-gap: 14px; }
+.faq-after-k { margin: 0; align-self: center; padding-right: 10px; font: 700 var(--dc-t-label)/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-on-ink-dim); }
+.faq-after-a, .faq-after-b { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; font-size: 1.0625rem; }
+.faq-after-a { background: var(--dc-paper); color: var(--dc-ink); border-left: 4px solid var(--dc-tang); }
+.faq-after-b { border: 3px dashed var(--dc-on-ink-dim); }
+.faq-after b { font: 800 1.0625rem/1.25 var(--dc-f-title); }
+.faq-after span { flex: none; padding: 3px 8px; font: 700 .8125rem/1.3 var(--dc-f-body); letter-spacing: .06em; text-transform: uppercase; }
+.faq-after-a span { background: var(--dc-ink); color: var(--dc-on-ink); }
+.faq-after-b span { border: 2px dashed var(--dc-on-ink-dim); color: var(--dc-on-ink-soft); }
+.faq-after-link { align-self: center; padding: 10px 0 10px 10px; color: var(--dc-on-ink); font-weight: 700; text-decoration: underline; text-decoration-color: var(--dc-tang); text-decoration-thickness: 2px; text-underline-offset: 5px; white-space: nowrap; transition: color 150ms ease; }
+.faq-after-link:hover { color: var(--dc-tang); }
+.faq-start :focus-visible { outline: 3px solid var(--dc-tang); outline-offset: 3px; }
+
+/* ---------- D. close (shared tangerine look), quieter heading ---------- */
+.px-h .b-close.faq-close .b-h2 { max-width: 14ch; font-size: clamp(2.4rem, 1.2rem + 3.8vw, 4.6rem); }
+.faq-close-k { color: var(--dc-ink); }
+.faq-close-2 { display: block; color: var(--dc-paper); }
+
+/* ---------- medium 761-1080 ---------- */
+@media (max-width: 1080px) {
+  .faq-hero-g { grid-template-columns: minmax(0, 1fr); }
+  .faq-cats { grid-column: 1; grid-row: auto; margin-top: 32px; }
+  .faq-cats ul { display: flex; flex-wrap: wrap; gap: 10px; border: 0; }
+  .faq-cats li { border: 0; }
+  .faq-cats a { min-height: 48px; padding: 0 10px 0 16px; border: 2px solid var(--dc-ink); font-size: 1.0625rem; background: var(--dc-paper); }
+  .faq-cats a:hover { padding-left: 16px; background: var(--dc-ink); color: var(--dc-paper); }
+  .faq-cats a:hover .faq-cat-n { border-color: var(--dc-paper); background: transparent; color: var(--dc-paper); }
+  .faq-cats a::after { display: none; }
+  .faq-cat-n { min-width: 24px; height: 24px; border-width: 1.5px; }
+  .faq-grp { grid-template-columns: minmax(0, 1fr); row-gap: 14px; }
+  .faq-grp-head { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 14px; align-items: center; }
+  .faq-grp-h { margin: 0; }
+  .faq-grp-p { grid-column: 1 / -1; max-width: none; }
+  .faq-after { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); row-gap: 12px; }
+  .faq-after-k { grid-column: 1 / -1; }
+  .faq-after-link { grid-column: 1 / -1; padding-left: 0; justify-self: start; }
 }
-/* Enlarged text (320px at 200%, text-only zoom): a single long word may break rather than be clipped. break-word
-   does not change min-content sizing, so normal-size rendering is unchanged. Scoped to this page's own sections. */
-[aria-labelledby^="fq-"] :is(h1, h2, h3, p, li, a, b, span),
-[aria-labelledby^="g-"] :is(h2, p, li, a, b, span) { overflow-wrap: break-word; }
+
+/* ---------- narrow <=760 ---------- */
+@media (max-width: 760px) {
+  .px-h .faq-hero .faq-h1 { font-size: clamp(2.15rem, 1.2rem + 5vw, 2.9rem); }
+  .faq-cats ul { gap: 8px; }
+  .faq-cats a { min-height: 44px; padding: 0 8px 0 12px; font-size: 1rem; gap: 8px; }
+  .faq-tools { justify-content: flex-start; }
+  .faq-d > summary { gap: 12px; min-height: 56px; padding-block: 12px; }
+  .faq-d > summary:hover { padding-inline: 4px; }
+  .faq-pm { width: 28px; height: 28px; }
+  .faq-a { padding-left: 14px; margin-left: 0; }
+  .faq-a p, .faq-dl dd { font-size: 1rem; }
+  .faq-a .faq-direct { font-size: 1.0625rem; }
+  .faq-dl > div { grid-template-columns: minmax(0, 1fr); }
+  .faq-start-head { grid-template-columns: minmax(0, 1fr); }
+  .faq-steps { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .faq-steps::before { left: 27px; right: auto; top: 28px; bottom: 28px; width: 3px; height: auto; background: linear-gradient(180deg, var(--dc-on-ink-dim) 0 70%, var(--dc-tang) 70% 100%); }
+  .faq-s { display: grid; grid-template-columns: 56px minmax(0, 1fr); column-gap: 18px; }
+  .faq-s-i { grid-row: 1 / span 3; }
+  .faq-s-n { margin-top: 2px; }
+  .faq-after { grid-template-columns: minmax(0, 1fr); }
+  .px-h .b-close.faq-close .b-h2 { font-size: clamp(2.1rem, 1.2rem + 5vw, 2.9rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-cats a, .faq-cats a::after, .faq-cat-n, .faq-d > summary, .faq-pm, .faq-pm::before, .faq-pm::after, .faq-more a, .faq-more a::after,
+  .faq-s-i, .faq-after-link { transition: none; }
+  .faq-d[open] .faq-a { animation: none; }
+}
+
+html:not(.px-js) .faq-tools { display: none; }
+
+@media (forced-colors: active) {
+  .faq-pm { forced-color-adjust: none; background: Canvas; border-color: CanvasText; }
+  .faq-pm::before, .faq-pm::after { background: CanvasText; }
+}

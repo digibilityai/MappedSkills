@@ -1,0 +1,10 @@
+/_next/static/media/33553e7595b74ccf.p.woff2
+/_next/static/media/438aa629764e75f3.woff2
+/_next/static/media/4c9affa5bc8f420e.p.woff2
+/_next/static/media/51251f8b9793cdb3.woff2
+/_next/static/media/875ae681bfde4580.woff2
+/_next/static/media/93a6e477e1480c92-s.woff2
+/_next/static/media/9d5a263311222317-s.p.woff2
+/_next/static/media/c7e0cf6c760983e7-s.woff2
+/_next/static/media/cc978ac5ee68c2b6.woff2
+/_next/static/media/e857b654a2caa584.woff2

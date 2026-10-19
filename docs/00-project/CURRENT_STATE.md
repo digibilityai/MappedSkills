@@ -50,6 +50,8 @@
 >
 > **`/schedule-call` "Request a call" LIVE — 2026-10-19 (`DEC-062`).** No online booking; a short request form that feeds Mini CRM's "Website requests" list (Mini CRM `8d250d4`, PR #79). `07e76e9` (PR #22), deploy run `39195363054`, live `BUILD_ID` `hfiv2Hfw_dru9XB4q3p0g`; rollback `NvTejYkD7V4j88x51zJY_` (`/pricing`, `7e18ffc`), not used. One synthetic request delivered end to end and seen as "Call request" in the CRM. Open: synthetic-data cleanup (awaiting owner), outside-workspace denial verified locally only, GTM-without-consent behaviour, D4 relabel.
 >
+> **`/pricing` redesign LIVE — 2026-10-18 (`DEC-061`).** Fully customised pricing; no prices, ranges or packages published. `7e18ffc` (PR #20), deploy run `39148209163`, live `BUILD_ID` `NvTejYkD7V4j88x51zJY_`; rollback `bU2OI0K6q5Pfp9epXREbb` (`/about`, `74dca3e`), not used. Open: screen reader, Firefox/WebKit, real devices, GTM Preview.
+>
 > **Lean release preparation — 2026-10-14 (`DEC-052`). Branch `release/cplus-lean` from `main`; not pushed, not merged, not deployed.**
 > - Website code = `abcb/cplus-integration` @ `d27f464` (byte-identical outside `docs/`), plus the host-only lead export `scripts/export-enquiries.cjs` (`docs/10-technical/LEAD_EXPORT.md`). Evidence screenshots, run results and logs are left out of the branch.
 > - The full integration history and evidence are kept in a private, verified git bundle **outside** this public repository.

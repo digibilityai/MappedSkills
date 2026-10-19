@@ -1,0 +1,276 @@
+<!-- G1 REVIEW ARTIFACT. Proposed /faq body. Not production code. New classes use the fx- prefix.
+     Owner brief "FAQ Redesign | G1 Visual Design & Copy Proposal" (2026-10-20).
+     Facts used, no new claims: customised pricing, three price factors, ad budget paid to the platform, "No one can
+     honestly guarantee…" (DEC-061); follow-up by email or WhatsApp, findings/plan/proposal before work (DEC-051 item 5);
+     form, email or WhatsApp, approval before work, client handles replies and selling (DEC-060); monthly report as
+     standard, review calls only where agreed (DEC-058 HW-D01, DEC-060, DEC-061, owner brief); "where tracking allows"
+     (DEC-053 OD-04); request a call, not a booking (DEC-062); AI search wording and the record (DEC-054, /ai-seo);
+     qualified-enquiry wording kept (DEC-005; DEC-057 item 5).
+     Every question keeps its live id (q-…), so existing links to a question still open it. The five live group ids
+     (g-commercial, g-outcome, g-measurement, g-fit, g-ai-search) survive as anchors inside the new categories. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-msg" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></symbol>
+    <symbol id="i-look" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5"/></symbol>
+    <symbol id="i-ok" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="m8 12.3 2.8 2.8L16.2 9.6"/></symbol>
+  </defs>
+</svg>
+
+<!-- A. HERO (ground). H1, one line of support, five category links. The long desktop index is gone. -->
+<section class="b-hero fx-hero" aria-labelledby="fx-h1">
+  <div class="px-wrap">
+    <nav aria-label="Breadcrumb" class="b-crumb"><ol><li><a href="/">Home</a> </li><li><span aria-hidden="true">/</span> <span aria-current="page">FAQ</span></li></ol></nav>
+    <p class="b-kicker">Questions, answered plainly</p>
+    <h1 id="fx-h1" class="b-h1 fx-h1"><span>Before we work together,</span> <span class="b-named">you should know.</span></h1>
+    <p class="b-lede fx-lede">How we work, what it costs, what to expect—and what we won’t promise.</p>
+
+    <nav class="fx-cats" aria-labelledby="fx-cats-l">
+      <p id="fx-cats-l" class="fx-cats-l">Jump to</p>
+      <ul>
+        <li><a href="#pricing"><span class="fx-cat-t">Pricing</span><span class="fx-cat-n">3</span></a></li>
+        <li><a href="#results"><span class="fx-cat-t">Results</span><span class="fx-cat-n">3</span></a></li>
+        <li><a href="#measurement"><span class="fx-cat-t">Measurement</span><span class="fx-cat-n">2</span></a></li>
+        <li><a href="#working-together"><span class="fx-cat-t">Working together</span><span class="fx-cat-n">4</span></a></li>
+        <li><a href="#ai-search"><span class="fx-cat-t">AI search</span><span class="fx-cat-n">2</span></a></li>
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<!-- B. FAQ GROUPS (paper). Category heading left, native <details> right. Every answer: the direct answer first
+     (.fx-direct), then the explanation. Closed on load; a #q-… address opens that question. -->
+<div class="b-paper fx-body" id="fx-body">
+  <div class="px-wrap">
+    <div class="fx-tools">
+      <button type="button" class="fx-all" hidden><span class="fx-pm" aria-hidden="true"></span><span class="fx-all-t">Open all answers</span></button>
+      <p class="px-sr" role="status" aria-live="polite" data-status></p>
+    </div>
+
+    <!-- 1. Pricing -->
+    <section class="fx-grp" aria-labelledby="pricing">
+      <span id="g-commercial" class="fx-legacy" aria-hidden="true"></span>
+      <div class="fx-grp-head">
+        <span class="fx-grp-n" aria-hidden="true">01</span>
+        <h2 id="pricing" class="fx-grp-h">Pricing</h2>
+        <p class="fx-grp-p">What it costs and what you pay for.</p>
+      </div>
+      <ul class="fx-list">
+        <li><details id="q-what-does-this-cost-and-what-changes-that-number" class="fx-d">
+          <summary><span class="fx-q">How much does it cost?</span><span class="fx-pm" aria-hidden="true"></span></summary>
+          <div class="fx-a">
+            <p class="fx-direct">It depends on what your business needs. Every quote is worked out for you; there are no packages or price lists.</p>
+            <p>Three things shape the price: what you need, what needs fixing (your website, tracking and existing setup), and how much work is involved. You see the scope and the fee in a proposal before anything starts.</p>
+            <p class="fx-more"><a href="/pricing">What affects your price</a></p>
+          </div>
+        </details></li>
+        <li><details id="q-is-the-ad-budget-part-of-your-fee" class="fx-d">
+          <summary><span class="fx-q">Is the ad budget part of your fee?</span><span class="fx-new">New</span><span class="fx-pm" aria-hidden="true"></span></summary>
+          <div class="fx-a">
+            <p class="fx-direct">No. If we run ads for you, the ad budget is paid directly to the platform.</p>
+            <p>Our fee is charged separately, as set out in your proposal.</p>
+          </div>
+        </details></li>
+        <li><details id="q-what-is-the-minimum-commitment" class="fx-d">
+          <summary><span class="fx-q">Is there a minimum commitment?</span><span class="fx-pm" aria-hidden="true"></span></summary>
+          <div class="fx-a">
+            <p class="fx-direct">It depends on the work.</p>
+            <p>Some projects have a defined scope and finish line; ongoing services need enough time to measure progress and make improvements. We’ll explain the proposed duration and terms before you commit.</p>
+          </div>
+        </details></li>
+      </ul>
+    </section>
+
+    <!-- 2. Results -->
+    <section class="fx-grp" aria-labelledby="results">
+      <span id="g-outcome" class="fx-legacy" aria-hidden="true"></span>
+      <div class="fx-grp-head">
+        <span class="fx-grp-n" aria-hidden="true">02</span>
+        <h2 id="results" class="fx-grp-h">Results</h2>
+        <p class="fx-grp-p">What to expect, and what we won’t promise.</p>
+      </div>
+      <ul class="fx-list">
+        <li><details id="q-why-wont-you-guarantee-results" class="fx-d">
+          <summary><span class="fx-q">Can you guarantee results?</span><span class="fx-pm" aria-hidden="true"></span></summary>
+          <div class="fx-a">
+            <p class="fx-direct">No. No one can honestly guarantee rankings, enquiries or revenue, so we don’t.</p>
+            <p>Too much sits outside anyone’s control: how search engines and AI tools choose what to show, what your competitors do, your prices, and how quickly enquiries are answered.</p>
+            <p>What we do instead: record where you’re starting from, report what changes, and say plainly what the numbers can’t show.</p>
+          </div>
+        </details></li>
+        <li><details id="q-what-are-you-accountable-for-and-what-will-you-not-promise" class="fx-d">
+          <summary><span class="fx-q">What are you responsible for?</span><span class="fx-pm" aria-hidden="true"></span></summary>
+          <div class="fx-a">
+            <p class="fx-direct">The marketing work we manage for you. We’re accountable up to the qualified enquiry.</p>
+            <p>That means a real, reachable person from a business with a stated need, not a duplicate. Replying to enquiries, quoting and selling stay with you. Where you share usable sales data and tracking allows, we can report through to revenue, shown as your numbers.</p>
+            <p>We don’t promise rankings, a place in AI answers, a number of enquiries, revenue or a return on spend.</p>
+          </div>
+        </details></li>
+        <li><details id="q-how-long-before-anything-changes" class="fx-d">
+          <summary><span class="fx-q">How long before we see a difference?</span><span class="fx-pm" aria-hidden="true"></span></summary>
+          <div class="fx-a">
+            <p class="fx-direct">It depends on the channel.</p>
+            <dl class="fx-dl">
+              <div><dt>Paid search</dt><dd>Campaigns can start producing measurable activity fairly quickly. How soon, and what results follow, varies.</dd></div>
+              <div><dt>Organic search</dt><dd>Usually 12 months or more. We say so before you commit.</dd></div>
+              <div><dt>A broken enquiry form</dt><dd>Simple problems can be fixed quickly. Complex ones depend on what we find, the access we have and what needs to be built.</dd></div>
+            </dl>
+          </div>
+        </details></li>
+      </ul>
+    </section>
+
+    <!-- 3. Measurement -->
+    <section class="fx-grp" aria-labelledby="measurement">
+      <span id="g-measurement" class="fx-legacy" aria-hidden="true"></span>
+      <div class="fx-grp-head">
+        <span class="fx-grp-n" aria-hidden="true">03</span>
+        <h2 id="measurement" class="fx-grp-h">Measurement</h2>
+        <p class="fx-grp-p">How we count enquiries, and what tracking can’t see.</p>
+      </div>
+      <ul class="fx-list">
+        <li><details id="q-how-do-you-know-an-enquiry-came-from-your-work-and-what-cant-you-tell" class="fx-d">
+          <summary><span class="fx-q">How do you know where an enquiry came from?</span><span class="fx-pm" aria-hidden="true"></span></summary>
+          <div class="fx-a">
+            <p class="fx-direct">Where tracking allows, your website records where each enquiry came from at the moment it’s sent.</p>
+            <p>Some things can’t be tracked: someone who researched on their phone and enquired on a laptop, visitors who decline tracking, and phone calls or emails. We show those as “source unknown”. We never assign them to a channel to make a report look complete.</p>
+            <p class="fx-more"><a href="/how-it-works">What tracking can’t show</a></p>
+          </div>
+        </details></li>
+        <li><details id="q-what-counts-as-a-qualified-enquiry-here-and-who-decides" class="fx-d">
+          <summary><span class="fx-q">What counts as a qualified enquiry?</span><span class="fx-pm" aria-hidden="true"></span></summary>
+          <div class="fx-a">
+            <p class="fx-direct">A real person you can reach, from a business with a stated need, that isn’t spam or a duplicate.</p>
+            <p>It’s a check on the enquiry, not a judgement on whether the work is right for you. That takes a conversation.</p>
+            <p>Job applications, sales pitches, student requests and requests for services we don’t offer aren’t counted.</p>
+          </div>
+        </details></li>
+      </ul>
+    </section>
+
+    <!-- 4. Working together -->
+    <section class="fx-grp" aria-labelledby="working-together">
+      <span id="g-fit" class="fx-legacy" aria-hidden="true"></span>
+      <div class="fx-grp-head">
+        <span class="fx-grp-n" aria-hidden="true">04</span>
+        <h2 id="working-together" class="fx-grp-h">Working together</h2>
+        <p class="fx-grp-p">Who we suit, how it starts and what you get.</p>
+      </div>
+      <ul class="fx-list">
+        <li><details id="q-who-is-this-for-and-who-is-it-not-for" class="fx-d">
+          <summary><span class="fx-q">Are we a good fit for MappedSkills?</span><span class="fx-pm" aria-hidden="true"></span></summary>
+          <div class="fx-a">
+            <p class="fx-direct">Usually, if your customers take time to decide and one good enquiry is worth real money to you.</p>
+            <p>We’re usually a poor fit if demand would have to be created from scratch, if people buy on impulse or price alone, if no one can answer enquiries when they arrive, or if you need a guaranteed result.</p>
+            <p>There’s no minimum size. What a customer is worth to you matters more than how big you are.</p>
+          </div>
+        </details></li>
+        <li><details id="q-do-we-have-to-start-with-a-call" class="fx-d">
+          <summary><span class="fx-q">Do we have to start with a call?</span><span class="fx-new">New</span><span class="fx-pm" aria-hidden="true"></span></summary>
+          <div class="fx-a">
+            <p class="fx-direct">No. You can tell us about your business through the form, by email or on WhatsApp.</p>
+            <p>If you’d rather talk, you can request a call and we’ll get in touch to find a convenient time.</p>
+            <p class="fx-more"><a href="/schedule-call">Request a call</a></p>
+          </div>
+        </details></li>
+        <li><details id="q-how-will-we-know-how-its-going" class="fx-d">
+          <summary><span class="fx-q">How will we know how it’s going?</span><span class="fx-new">New</span><span class="fx-pm" aria-hidden="true"></span></summary>
+          <div class="fx-a">
+            <p class="fx-direct">You get a monthly performance report as standard.</p>
+            <p>Review calls happen when we agree them in your proposal, not automatically every month.</p>
+          </div>
+        </details></li>
+        <li><details id="q-what-access-do-you-need-and-what-do-we-keep" class="fx-d">
+          <summary><span class="fx-q">What access do you need, and what do we keep?</span><span class="fx-pm" aria-hidden="true"></span></summary>
+          <div class="fx-a">
+            <p class="fx-direct">Access to your analytics, search console, ad accounts and website, and sight of where enquiries arrive.</p>
+            <p>Without measurement access, nothing we report could be checked. Accounts and measurement set up in your name stay with you, including if we stop working together. That doesn’t automatically extend to every third-party tool or agency asset.</p>
+          </div>
+        </details></li>
+      </ul>
+    </section>
+
+    <!-- 5. AI search -->
+    <section class="fx-grp" aria-labelledby="ai-search">
+      <span id="g-ai-search" class="fx-legacy" aria-hidden="true"></span>
+      <div class="fx-grp-head">
+        <span class="fx-grp-n" aria-hidden="true">05</span>
+        <h2 id="ai-search" class="fx-grp-h">AI search</h2>
+        <p class="fx-grp-p">ChatGPT, AI answers and the new acronyms.</p>
+      </div>
+      <ul class="fx-list">
+        <li><details id="q-can-you-get-our-business-into-chatgpt-and-ai-answers" class="fx-d">
+          <summary><span class="fx-q">Can you get our business into ChatGPT and AI answers?</span><span class="fx-pm" aria-hidden="true"></span></summary>
+          <div class="fx-a">
+            <p class="fx-direct">Nobody can honestly promise that.</p>
+            <p>AI tools build their answers mostly from other websites: directories, review sites and lists. We work on those places and on your own site, keep your business details consistent, then check what each AI tool says about you and report what changed, and what didn’t.</p>
+            <p>We test our own business too. The full, dated record is on our AI search page.</p>
+            <p class="fx-more"><a href="/ai-seo">How AI search works with us</a></p>
+          </div>
+        </details></li>
+        <li><details id="q-is-geo-or-aeo-a-separate-discipline-from-seo" class="fx-d">
+          <summary><span class="fx-q">Is GEO or AEO different from SEO?</span><span class="fx-pm" aria-hidden="true"></span></summary>
+          <div class="fx-a">
+            <p class="fx-direct">Mostly, no.</p>
+            <p>The real difference is where the work goes: AI tools lean more on other websites when they put an answer together. It’s the same discipline, pointed at more places. Be wary of paying for the same work twice under a new name.</p>
+          </div>
+        </details></li>
+      </ul>
+    </section>
+  </div>
+</div>
+
+<!-- C. HOW WORKING TOGETHER STARTS (ink). Replaces the six-step flow. Three stages on one line; the third (your
+     decision) in tangerine. The call is optional. Below: what's standard vs agreed, drawn solid vs dashed. -->
+<section class="b-sec b-ink fx-start" aria-labelledby="fx-h-start">
+  <div class="px-wrap">
+    <div class="fx-start-head">
+      <div>
+        <p class="b-kicker">How working together starts</p>
+        <h2 id="fx-h-start" class="b-h2">Three steps. <span class="b-named">You decide.</span></h2>
+      </div>
+      <p class="fx-start-l">Nothing starts until you’ve seen the plan and approved it.</p>
+    </div>
+
+    <ol class="fx-steps">
+      <li class="fx-s">
+        <span class="fx-s-i" aria-hidden="true"><svg><use href="#i-msg"/></svg></span>
+        <span class="fx-s-n">Step 1</span>
+        <h3 class="fx-s-t">Tell us the problem</h3>
+        <p class="fx-s-p">By form, email or WhatsApp. A call is there if you’d rather talk, not required.</p>
+      </li>
+      <li class="fx-s">
+        <span class="fx-s-i" aria-hidden="true"><svg><use href="#i-look"/></svg></span>
+        <span class="fx-s-n">Step 2</span>
+        <h3 class="fx-s-t">We review the situation</h3>
+        <p class="fx-s-p">We look at what’s working and what isn’t, then share our findings, a recommended plan and a proposal.</p>
+      </li>
+      <li class="fx-s is-you">
+        <span class="fx-s-i" aria-hidden="true"><svg><use href="#i-ok"/></svg></span>
+        <span class="fx-s-n">Step 3</span>
+        <h3 class="fx-s-t">Agree on next steps</h3>
+        <p class="fx-s-p">You decide. Work starts only after you approve the scope and the fee.</p>
+      </li>
+    </ol>
+
+    <div class="fx-after" role="group" aria-label="Once the work starts">
+      <p class="fx-after-k">Once the work starts</p>
+      <div class="fx-after-a"><b>Monthly performance report</b><span>Standard</span></div>
+      <div class="fx-after-b"><b>Review calls</b><span>When agreed</span></div>
+      <a class="fx-after-link" href="/how-it-works">See the full process <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- D. CLOSE (shared tangerine close). Helpful, not pushy: ask a question, and an honest "we'll say so". -->
+<section class="b-close fx-close" aria-labelledby="b-close-h">
+  <div class="px-wrap">
+    <div class="b-close-in">
+      <div>
+        <p class="b-kicker fx-close-k">Still have a question?</p>
+        <h2 id="b-close-h" class="b-h2">Ask us. <span class="fx-close-2">You’ll get a straight answer.</span></h2>
+        <p class="b-lede">Tell us what’s going on in your business. If we’re not the right fit, we’ll say so.</p>
+      </div>
+      <div class="dc-actions"><a class="dc-btn dc-btn-primary" href="/contact"><span aria-hidden="true" class="dc-mk"></span>Tell us about your business</a><a class="dc-btn dc-btn-secondary" href="/schedule-call"><span aria-hidden="true" class="dc-mk"></span>Request a call</a></div>
+    </div>
+  </div>
+</section>

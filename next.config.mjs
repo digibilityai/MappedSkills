@@ -254,7 +254,38 @@ const nextConfig = {
       destination: '/portfolio/:slug',
       permanent: true,
     },
+    /*
+      C1 (DEC-071) — ONE CONTACT PAGE. `/schedule-call` ("Request a call", DEC-062) is now the call-request state of
+      `/contact`. Permanent, like every other moved page above. Next.js carries the incoming query string over, so
+      campaign parameters (utm_*, gclid, …) survive; `intent=call` is written first, and the page reads the first
+      `intent` value, so it wins over any `intent` the old link carried.
+    */
+    {
+      source: '/schedule-call',
+      destination: '/contact?intent=call',
+      permanent: true,
+    },
+    // The internal segment behind `/contact?intent=call` (see `rewrites`) is not a public URL.
+    {
+      source: '/contact/call',
+      destination: '/contact?intent=call',
+      permanent: true,
+    },
   ],
+  /*
+    C1 (DEC-071). `/contact?intent=call` is served by `app/(pages)/contact/call` so both intentions are prerendered and
+    share one layout (see `app/(pages)/contact/layout.tsx`). `beforeFiles`, because `/contact` itself exists and would
+    otherwise match first. The visitor's URL is unchanged.
+  */
+  rewrites: async () => ({
+    beforeFiles: [
+      {
+        source: '/contact',
+        has: [{ type: 'query', key: 'intent', value: 'call' }],
+        destination: '/contact/call',
+      },
+    ],
+  }),
 }
 
 export default nextConfig

@@ -148,6 +148,10 @@ export async function POST(request: Request): Promise<Response> {
       // `ATTRIBUTION_MODEL.md` §1 — measurement is reported, never enforced.
       attribution: enquiry.attribution,
       crmPayload,
+      // C1 (DEC-071), migration 004.
+      requestType: enquiry.requestType,
+      serviceInterest: enquiry.service,
+      preferredContactTime: enquiry.preferredContactTime,
     });
 
     // CRM delivery is step 4: after the durable write, never awaited, and unable

@@ -84,6 +84,10 @@ export interface EnquiryRecord {
   attribution: ValidatedAttribution;
   /** Exact CRM request body (lib/crm-delivery.cjs), stored so retries resend identical bytes. */
   crmPayload: string;
+  /** C1 (DEC-071), migration 004. What the visitor chose; null only where the form did not ask. */
+  requestType: 'enquiry' | 'call';
+  serviceInterest: string | null;
+  preferredContactTime: string | null;
 }
 
 export type InsertOutcome =
@@ -124,9 +128,11 @@ export async function insertEnquiry(record: EnquiryRecord): Promise<InsertOutcom
        \`first_source\`, \`first_medium\`, \`first_campaign\`,
        \`first_content\`, \`first_term\`, \`first_touch_at\`, \`first_source_derived\`,
        \`latest_source\`, \`latest_medium\`, \`latest_campaign\`, \`latest_referrer_host\`,
-       \`attribution_status\`, \`crm_payload\`)
+       \`attribution_status\`, \`crm_payload\`,
+       \`request_type\`, \`service_interest\`, \`preferred_contact_time\`)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+            ?, ?, ?)
   `;
 
   const params = [
@@ -166,6 +172,9 @@ export async function insertEnquiry(record: EnquiryRecord): Promise<InsertOutcom
     record.attribution.latestReferrerHost,
     record.attribution.status,
     record.crmPayload,
+    record.requestType,
+    record.serviceInterest,
+    record.preferredContactTime,
   ];
 
   try {

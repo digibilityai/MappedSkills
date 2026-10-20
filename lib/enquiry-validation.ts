@@ -24,6 +24,14 @@
  * invented precision, which this programme forbids.
  */
 
+import {
+  CONTACT_LIMITS,
+  CONTACT_MESSAGES,
+  EMAIL_PATTERN as CONTACT_EMAIL_PATTERN,
+  normalisePhone,
+  serviceLabelOf,
+} from '@/lib/contact-request';
+
 /** Hard ceiling on the raw request body. Comfortably above a real enquiry. */
 export const MAX_BODY_BYTES = 16 * 1024;
 
@@ -53,7 +61,15 @@ export const MARKETING_CONSENT_TEXT_V1 =
 /** Below this, a submission is FLAGGED for review. It is never rejected. */
 export const MIN_PLAUSIBLE_ELAPSED_MS = 2000;
 
-export type FieldName = 'name' | 'email' | 'company' | 'message' | 'phone' | 'website';
+export type FieldName =
+  | 'name'
+  | 'email'
+  | 'company'
+  | 'message'
+  | 'phone'
+  | 'website'
+  | 'service'
+  | 'preferredContactTime';
 
 /**
  * SESSION 32 — PHASE H2 — the acquisition context stored on the enquiry row.
@@ -119,6 +135,17 @@ export interface ValidatedEnquiry {
   suspect: boolean;
   /** SESSION 32 — H2. Never null: `UNATTRIBUTED` when nothing was captured. */
   attribution: ValidatedAttribution;
+  /**
+   * C1 (DEC-071). The visitor's intention. Always set: the consolidated form sends it, and the two earlier forms map
+   * to it (`requestType: 'call'` → call, otherwise enquiry).
+   */
+  requestType: 'enquiry' | 'call';
+  /** C1. The stable service value from `SERVICE_OPTIONS`; null from the earlier forms, which did not ask. */
+  service: string | null;
+  /** C1. The display label of `service` at submission time, for the CRM message lines; null with `service`. */
+  serviceLabel: string | null;
+  /** C1. Free text ("Weekdays, 2–5 PM IST"); call requests only, optional. Never a reservation. */
+  preferredContactTime: string | null;
 }
 
 export type ValidationResult =
@@ -302,6 +329,13 @@ export function validateEnquiry(input: unknown): ValidationResult {
     return { ok: false, formError: 'malformed', fieldErrors };
   }
 
+  // --- C1 (DEC-071): the consolidated /contact form ------------------------
+  // It always sends `service`; the two earlier forms never did. Their rules below are unchanged, so a page loaded
+  // before a release (or any other existing client) keeps working exactly as before.
+  if (body.service !== undefined) {
+    return validateContactRequest(body, idempotencyKey);
+  }
+
   // --- Request type --------------------------------------------------------
   // DEC-062. `'call'` is the /schedule-call "Request a call" form: name, email and phone are required, and the message
   // is optional. Company is not asked for. Absent means the original enquiry form, so every existing client is
@@ -407,18 +441,7 @@ export function validateEnquiry(input: unknown): ValidationResult {
   // asking. A same-origin path only — never a full URL, never a query string,
   // so nothing a third party controls and nothing bearing PII is stored. A bad
   // value is DROPPED, never an error: page context is not the visitor's problem.
-  let sourcePage: string | null = null;
-  const sourcePageRaw = asString(body.sourcePage);
-  if (
-    sourcePageRaw &&
-    sourcePageRaw.startsWith('/') &&
-    !sourcePageRaw.startsWith('//') &&
-    !sourcePageRaw.includes('?') &&
-    !sourcePageRaw.includes('#') &&
-    sourcePageRaw.length <= FIELD_LIMITS.sourcePage
-  ) {
-    sourcePage = sourcePageRaw;
-  }
+  const sourcePage = parseSourcePage(body.sourcePage);
 
   // --- Abuse layers 1 and 2 — FLAG ONLY, NEVER REJECT ----------------------
   // A hidden field a human cannot see, and an implausibly fast submission. Both
@@ -430,14 +453,7 @@ export function validateEnquiry(input: unknown): ValidationResult {
   // answered exactly like any other. Per `FORM_AND_BOOKING_SPEC.md` §2 the
   // visitor sees the same success state either way, and nothing in the
   // response reveals that a layer fired.
-  const honeypot = asString(body.contactReference);
-  const honeypotTripped = honeypot !== undefined && honeypot !== '';
-
-  const elapsedRaw = body.elapsedMs;
-  const elapsedMs =
-    typeof elapsedRaw === 'number' && Number.isFinite(elapsedRaw) ? elapsedRaw : null;
-  const impossiblyFast =
-    elapsedMs !== null && elapsedMs >= 0 && elapsedMs < MIN_PLAUSIBLE_ELAPSED_MS;
+  const suspect = isSuspect(body);
 
   if (Object.keys(fieldErrors).length > 0) {
     return { ok: false, fieldErrors };
@@ -455,8 +471,150 @@ export function validateEnquiry(input: unknown): ValidationResult {
       website,
       sourcePage,
       marketingConsent,
-      suspect: honeypotTripped || impossiblyFast,
+      suspect,
       attribution: parseAttribution(body.attribution),
+      requestType: isCall ? 'call' : 'enquiry',
+      service: null,
+      serviceLabel: null,
+      preferredContactTime: null,
+    },
+  };
+}
+
+/**
+ * The page the submission was sent from. Replaces the removed "service interest" dropdown of the original form:
+ * `FORM_AND_BOOKING_SPEC.md` §1.3 derives interest from the converting page. A same-origin path only — never a full
+ * URL, never a query string, so nothing a third party controls and nothing bearing PII is stored. A bad value is
+ * DROPPED, never an error: page context is not the visitor's problem.
+ */
+function parseSourcePage(raw: unknown): string | null {
+  const value = asString(raw);
+  if (
+    value &&
+    value.startsWith('/') &&
+    !value.startsWith('//') &&
+    !value.includes('?') &&
+    !value.includes('#') &&
+    value.length <= FIELD_LIMITS.sourcePage
+  ) {
+    return value;
+  }
+  return null;
+}
+
+/**
+ * Abuse layers 1 and 2 — FLAG ONLY, NEVER REJECT. A hidden field a human cannot see, and an implausibly fast
+ * submission. Both are cheap signals and both are wrong sometimes — a password manager can fill a hidden input, and a
+ * returning visitor pasting prepared text can be genuinely fast. `QUALIFIED_ENQUIRY_DEFINITION.md` §7A: uncertain is
+ * not spam. A hit is recorded on the row and the submission is stored and answered exactly like any other; per
+ * `FORM_AND_BOOKING_SPEC.md` §2 nothing in the response reveals that a layer fired.
+ */
+function isSuspect(body: Record<string, unknown>): boolean {
+  const honeypot = asString(body.contactReference);
+  const honeypotTripped = honeypot !== undefined && honeypot !== '';
+
+  const elapsedRaw = body.elapsedMs;
+  const elapsedMs =
+    typeof elapsedRaw === 'number' && Number.isFinite(elapsedRaw) ? elapsedRaw : null;
+  const impossiblyFast =
+    elapsedMs !== null && elapsedMs >= 0 && elapsedMs < MIN_PLAUSIBLE_ELAPSED_MS;
+
+  return honeypotTripped || impossiblyFast;
+}
+
+/**
+ * C1 (DEC-071) — the consolidated `/contact` form: one form, two intentions (`requestType` 'enquiry' | 'call').
+ * Required: full name, business email, phone / WhatsApp (normalised to E.164 by `normalisePhone`) and the service.
+ * Optional: the message and, on a call request only, the preferred time to be contacted (ignored and not stored on an
+ * enquiry). Company, website and marketing consent are not asked for: company is stored as '' (the column is NOT
+ * NULL), website as null, consent as not given. Same honeypot, timing flag, attribution and source-page handling as
+ * the earlier forms.
+ */
+function validateContactRequest(body: Record<string, unknown>, idempotencyKey: string): ValidationResult {
+  const fieldErrors: Partial<Record<FieldName, string>> = {};
+
+  // A missing or unknown intention, or a non-boolean consent value, is a client defect, not a visitor's mistake.
+  const requestType = body.requestType;
+  if (requestType !== 'enquiry' && requestType !== 'call') {
+    return { ok: false, formError: 'malformed', fieldErrors };
+  }
+  if (body.marketingConsent !== undefined && typeof body.marketingConsent !== 'boolean') {
+    return { ok: false, formError: 'malformed', fieldErrors };
+  }
+
+  const name = asString(body.name);
+  if (!name) {
+    fieldErrors.name = CONTACT_MESSAGES.nameRequired;
+  } else if (name.length > CONTACT_LIMITS.name) {
+    fieldErrors.name = CONTACT_MESSAGES.tooLong(CONTACT_LIMITS.name);
+  }
+
+  const email = asString(body.email);
+  if (!email) {
+    fieldErrors.email = CONTACT_MESSAGES.emailRequired;
+  } else if (email.length > CONTACT_LIMITS.email) {
+    fieldErrors.email = CONTACT_MESSAGES.tooLong(CONTACT_LIMITS.email);
+  } else if (!CONTACT_EMAIL_PATTERN.test(email)) {
+    fieldErrors.email = CONTACT_MESSAGES.emailFormat;
+  }
+
+  let phone: string | null = null;
+  const phoneRaw = asString(body.phone);
+  if (!phoneRaw) {
+    fieldErrors.phone = CONTACT_MESSAGES.phoneRequired;
+  } else if (phoneRaw.length > CONTACT_LIMITS.phone) {
+    fieldErrors.phone = CONTACT_MESSAGES.tooLong(CONTACT_LIMITS.phone);
+  } else {
+    phone = normalisePhone(phoneRaw);
+    if (phone === null) fieldErrors.phone = CONTACT_MESSAGES.phoneFormat;
+  }
+
+  // Only a value from SERVICE_OPTIONS is accepted; the stored value is the stable key, never the label.
+  const service = asString(body.service) ?? '';
+  const serviceLabel = serviceLabelOf(service);
+  if (serviceLabel === null) {
+    fieldErrors.service = CONTACT_MESSAGES.serviceRequired;
+  }
+
+  const message = asString(body.message) ?? '';
+  if (message.length > CONTACT_LIMITS.message) {
+    fieldErrors.message = CONTACT_MESSAGES.tooLong(CONTACT_LIMITS.message);
+  }
+
+  // A preference, not a reservation. Sent with an enquiry (the form keeps the value when the visitor switches), it is
+  // ignored: the visitor did not ask for a call.
+  let preferredContactTime: string | null = null;
+  if (requestType === 'call') {
+    const time = asString(body.preferredContactTime) ?? '';
+    if (time.length > CONTACT_LIMITS.preferredContactTime) {
+      fieldErrors.preferredContactTime = CONTACT_MESSAGES.tooLong(CONTACT_LIMITS.preferredContactTime);
+    } else if (time) {
+      preferredContactTime = cleanLine(time);
+    }
+  }
+
+  if (Object.keys(fieldErrors).length > 0) {
+    return { ok: false, fieldErrors };
+  }
+
+  return {
+    ok: true,
+    value: {
+      idempotencyKey: idempotencyKey.toLowerCase(),
+      name: cleanLine(name as string),
+      email: (email as string).toLowerCase(),
+      company: '',
+      message: cleanBlock(message),
+      phone,
+      website: null,
+      sourcePage: parseSourcePage(body.sourcePage),
+      marketingConsent: false,
+      suspect: isSuspect(body),
+      attribution: parseAttribution(body.attribution),
+      requestType,
+      service,
+      serviceLabel,
+      preferredContactTime,
     },
   };
 }

@@ -53,6 +53,10 @@ const COLUMNS = [
   ['website', 'website', 'text'],
   ['message', 'message', 'text'],
   ['source_page', 'source_page', 'text'],
+  // C1 (DEC-071), migration 004. Empty on rows that predate it (there, source_page /schedule-call means a call request).
+  ['request_type', 'request_type', 'text'],
+  ['service_interest', 'service_interest', 'text'],
+  ['preferred_contact_time', 'preferred_contact_time', 'text'],
   ['marketing_consent', 'marketing_consent', 'yesno'],
   ['marketing_consent_text', 'marketing_consent_text', 'text'],
   ['marketing_consent_at', 'marketing_consent_at', 'datetime'],

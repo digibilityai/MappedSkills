@@ -93,11 +93,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/problems/traffic-but-no-enquiries',
     '/how-it-works',
     '/pricing',
-    // The firm, questions, and the two enquiry surfaces
+    // The firm, questions, and the contact page. `/schedule-call` is not listed: it redirects to
+    // `/contact?intent=call` (C1, DEC-071), whose canonical is `/contact`.
     '/about',
     '/faq',
     '/contact',
-    '/schedule-call',
     // Case-study hub. SEO-001 (GATE R4): indexable now that the three
     // permissioned studies are published and the four unpermissioned ones are
     // unpublished. It is the only hub for the indexable `/portfolio/[slug]`

@@ -16,7 +16,9 @@ function load(rel, globals = {}) {
     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2019 },
   }).outputText;
   const mod = { exports: {} };
-  vm.runInNewContext(js, { module: mod, exports: mod.exports, require, ...globals });
+  // `@/lib/x` imports (C1: lib/contact-request.ts) are transpiled the same way.
+  const req = (id) => (id.startsWith('@/') ? load(`${id.slice(2)}.ts`, globals) : require(id));
+  vm.runInNewContext(js, { module: mod, exports: mod.exports, require: req, ...globals });
   return mod.exports;
 }
 
@@ -36,6 +38,10 @@ test('a call request needs name, email and phone, and stores empty company and m
   assert.equal(r.value.phone, '+44 7700 900000');
   assert.equal(r.value.website, null);
   assert.equal(r.value.sourcePage, '/schedule-call');
+  // C1 (DEC-071): the earlier forms map to the new structured fields.
+  assert.equal(r.value.requestType, 'call');
+  assert.equal(r.value.service, null);
+  assert.equal(r.value.preferredContactTime, null);
 });
 
 test('a call request keeps an optional message and ignores company and website', () => {
@@ -70,6 +76,7 @@ test('an unknown requestType is malformed', () => {
 
 test('the enquiry rules are unchanged without requestType (and with requestType "enquiry")', () => {
   assert.equal(enquiry().ok, true);
+  assert.equal(enquiry().value.requestType, 'enquiry');
   assert.equal(enquiry({ requestType: 'enquiry' }).ok, true);
   const r = enquiry({ company: '', message: '' });
   assert.equal(r.ok, false);

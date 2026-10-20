@@ -77,7 +77,7 @@ export const PRIMARY_LINKS: NavLink[] = [
 
 export const CONTACT_LINK: NavLink = { href: '/contact', label: 'Contact us' };
 /** Secondary action in the mobile and tablet menu only (DEC-062 destination). */
-export const CALL_LINK: NavLink = { href: '/schedule-call', label: 'Request a call' };
+export const CALL_LINK: NavLink = { href: '/contact?intent=call', label: 'Request a call' };
 
 /** Capability routes: the Services column of the footer and the routes that mark "Services" current. */
 const CAPABILITIES: NavLink[] = SERVICE_GROUPS.filter((g) => g.stage !== 'Measure').flatMap((g) => g.links);

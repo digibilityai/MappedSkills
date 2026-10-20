@@ -460,7 +460,7 @@ export default function PrivacyPolicyPage() {
                 <Link href="/contact">Contact Us</Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <Link href="/schedule-call">Book a call</Link>
+                <Link href="/contact?intent=call">Book a call</Link>
               </Button>
             </div>
           </div>

@@ -1662,3 +1662,56 @@ Use this file only for meaningful project decisions.
 - **Supersedes:** the `DEC-067` "Not decided here" line for the Contentful editorial track, except for the held
   items above. **Read with:** `DEC-051`, `DEC-061`, `DEC-062`, `DEC-066`, `DEC-067`. **Approved by:** Project
   owner, 2026-10-20. Recorded by the repository worker.
+
+### DEC-069
+- **Date:** 2026-10-20
+- **Status:** **Approved (owner): G1 for the corrected MappedSkills logo (artwork and header sizing). G2 (production
+  implementation) is NOT authorised and is held until the owner authorises it.**
+- **Decision (owner, as given, 2026-10-20):** "G1 approved: corrected MappedSkills lockup and wordmark, header sizes
+  28/24/19px. Record the decision; hold G2 until I authorise it."
+  - **Name ruling, the same day:** "It is not mappedskill, it is mappedskills. The logo has an error."
+  - **Typeface:** "Bricolage is fine."
+- **What is approved:**
+  1. **Artwork:** the lockup and wordmark in `docs/logo-redesign/proposal/`, as
+     `mappedskills-{lockup,wordmark}-{light,dark}-bg.svg`. All four read **"MappedSkills"**:
+     - "apped" in ink `#232323` (`#FAFAFA` on dark) and "Skills" in tangerine `#FD5C03`;
+     - Bricolage Grotesque ExtraBold, opsz 96, converted to outlines;
+     - a vector redraw of the existing M mark (`#FF5F24`), within about 1px of the production raster;
+     - on the lockup only, the tagline "TURN DEMAND INTO OPPORTUNITY" in Manrope Bold caps.
+     - Both fonts are SIL OFL and already in the repo.
+  2. **Use:** the wordmark (no tagline) is for the header and footer. The lockup is for uses at least 44px tall.
+  3. **Header wordmark heights:** 28px at ≥600px, 24px at 360–599px, 19px below 360px.
+- **Reason:**
+  - **VERIFIED FACT:** The production logo (`public/mappedskills-logo-{light,dark}-bg.webp`, 555×144) reads
+    "MappedSkill", and the error is in the artwork, not caused by cropping:
+    - the last glyph ends about 11px before the canvas edge;
+    - the 500×500 masters in `de16f5c` also end in "Skill";
+    - `ef34657` imported the lockup describing it as "apped" + "Skill".
+  - **VERIFIED FACT:** The tagline is about 2–3px tall at the live header sizes, so it cannot be read.
+  - **VERIFIED FACT:** No SVG or wordmark-only version existed.
+  - **VERIFIED FACT (live, 2026-10-20):** Below 380px the logo renders at 24px, not the intended 22px. In
+    `app/direction-c.css`, the `max-width:379px` rule (line 277) comes before the `max-width:599px` block (line 280),
+    which overrides it.
+- **Evidence:** `docs/logo-redesign/LOGO_G1_GATE.md` and `proposal/REVIEW.html`. Header fit was checked by measuring the
+  live DOM and by swapping the image client-side in a local browser pane. Nothing was deployed.
+  - **Free space vs proposed width:** 320px: 111.6px free vs 104.5px; 340px: 131.6 vs 104.5; 360px: 151.6 vs 132;
+    375px: 166.6 vs 132; 600px: 171.9 vs 154. At ≥1200px the nav slack goes from 129px to 83px.
+  - **Result:** no header row wraps and there is no horizontal scroll at 320, 340, 360, 375, 600 or 1200px.
+  - **200% text:** at 320px the header wraps with both the current and the proposed logo. This is the header's existing
+    designed behaviour.
+  - **Letter size:** the lowercase letters are the same size or larger at every width. Below 360px: 8.5 → 8.7px.
+    360–599px: 8.5 → 10.9px. ≥600px: 9.9 → 12.8px.
+  - Screenshots are in `docs/logo-redesign/proposal/screenshots/`.
+- **NOT approved / NOT done:**
+  - **G2:** any change to `public/`, `lib/metadata.ts`, `components/Logo.tsx`, `app/direction-c.css`, structured data,
+    the legacy `Header`/`Footer`, or any build, commit to an application branch, or deploy. The G2 plan is in
+    `LOGO_G1_GATE.md` §4 and needs separate owner authorisation.
+  - **Schema `logo` format:** RESEARCH REQUIRED (which formats Google accepts for an Organization logo). The default
+    plan is a PNG export of the approved lockup.
+  - **Off-site brand assets:** replacing them (social profiles, Business Profile, decks) is outside this repo. UNKNOWN
+    where they are used.
+  - **Not tested:** real devices, Safari/Firefox SVG rendering, forced-colours mode.
+- **Impacted files:** `docs/logo-redesign/` (new: gate document, proposal SVGs, review page, generator, screenshots);
+  `docs/00-project/DECISION_LOG.md`; `docs/00-project/CURRENT_STATE.md`. No application files.
+- **Supersedes:** nothing. **Read with:** `DEC-018` (THE RESOLVE: Bricolage + Manrope, tangerine), `DEC-061` (deploy
+  process, for G2). **Approved by:** Project owner, 2026-10-20. Recorded by the repository worker.

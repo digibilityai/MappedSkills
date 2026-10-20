@@ -48,6 +48,12 @@
 > Start at `docs/ui-revamp/GATE_4_MASTER_ROLLOUT_PLAN.md` (seven `GATE_4_*.md` documents). Proposed owner decisions O1–O10
 > (§7); recommended first batch B0 + B1 (QA harness and baselines, then the global chrome flip). No application code changed.
 >
+> **Logo correction G1 APPROVED — 2026-10-20 (`DEC-069`). G2 NOT authorised; production unchanged.** The live
+> logo artwork reads "MappedSkill" (an artwork error, owner ruling). Approved: the corrected "MappedSkills" SVG lockup
+> and wordmark (Bricolage ExtraBold, redrawn M mark, Manrope tagline on the lockup only), with header wordmark heights
+> of 28 / 24 / 19px at ≥600 / 360–599 / <360px. Found along the way: the 22px `max-width:379px` logo rule in
+> `direction-c.css` has no effect (the logo renders at 24px). Records: `docs/logo-redesign/LOGO_G1_GATE.md`.
+>
 > **BL-D6 blog editorial corrections LIVE — 2026-10-20 (`DEC-068`).** 42 approved changes published in Contentful
 > (7 articles, 10 image alt texts), 12:44–13:11Z, with no code change or deploy (live `BUILD_ID` still
 > `6jXxz2KR2GcpH1l1lD5r6`).

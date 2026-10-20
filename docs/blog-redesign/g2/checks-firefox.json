@@ -1,0 +1,1814 @@
+{
+ "engine": "firefox",
+ "widths": {
+  "320": {
+   "g1": {
+    "secs": [
+     378,
+     2317,
+     579
+    ],
+    "pageH": 4714,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Practical reads on search, ads, content and turning website visits into enquiries — for business owners deciding what to do next.",
+     "7 GUIDES",
+     "CONTENT MARKETING · 6 MIN READ",
+     "Content Marketing Services in Pune | Boost Your Business Now",
+     "Explore top content marketing services in Pune. Drive traffic, boost engagement, and achieve your business goals with expert strategies.",
+     "EMAIL MARKETING · 3 MIN READ",
+     "Building an Email List: A Comprehensive Guide",
+     "Unlock the potential of email marketing! Explore proven strategies and actionable tips to grow your email list for maximum engagement.",
+     "BRAND STRATEGY · 5 MIN READ",
+     "The Importance of Content Writing: A Guide for Business Owners and Marketing Managers",
+     "Learn the importance of content writing and why it is essential for marketing success, brand growth, SEO, and lead generation.",
+     "INSIGHTS · 4 MIN READ",
+     "Performance Marketing vs. Digital Marketing: Which is Right for Your Business?",
+     "Performance Marketing vs. Digital Marketing, their pros and cons, and which approach is best for your business.",
+     "REAL ESTATE · 14 MIN READ",
+     "7 Proven Strategies of Digital Marketing for Real Estate Developers",
+     "Boost sales with Digital Marketing for Real Estate Strategies—SEO to lead generation, MappedSkills gets results.",
+     "CONTENT MARKETING · 9 MIN READ",
+     "Best SEO Company in Pune for Businesses That Want Qualified Leads, Not Just Rankings",
+     "Looking for an SEO company in Pune? MappedSkills helps businesses improve rankings, organic traffic, qualified leads, technical SEO, and local SEO.",
+     "PPC · 9 MIN READ",
+     "Facebook Advertising Agency in Pune for Facebook & Instagram Ads That Drive Qualified Leads",
+     "Looking for a Facebook advertising agency in Pune? We help you plan, launch, and optimize FB and Insta ad campaigns for leads & sales.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 7 GUIDES",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [
+     [
+      "/blog/content-marketing-services-in-pune",
+      305
+     ],
+     [
+      "/blog/building-an-email-list",
+      305
+     ],
+     [
+      "/blog/importance-of-content-writing",
+      325
+     ],
+     [
+      "/blog/performance-marketing-vs-digital-marketing",
+      301
+     ],
+     [
+      "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers",
+      301
+     ],
+     [
+      "/blog/seo-company-in-pune",
+      328
+     ],
+     [
+      "/blog/facebook-advertising-agency-pune",
+      301
+     ]
+    ],
+    "metaH": [
+     16,
+     16,
+     16,
+     16,
+     16,
+     16,
+     16
+    ],
+    "left": {
+     "h1": 16,
+     "list": 16
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "38.4px"
+     ]
+    ],
+    "errs": []
+   },
+   "live7": {
+    "secs": [
+     378,
+     2317,
+     579
+    ],
+    "pageH": 4714,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Practical reads on search, ads, content and turning website visits into enquiries — for business owners deciding what to do next.",
+     "7 GUIDES",
+     "CONTENT MARKETING · 6 MIN READ",
+     "Content Marketing Services in Pune | Boost Your Business Now",
+     "Explore top content marketing services in Pune. Drive traffic, boost engagement, and achieve your business goals with expert strategies.",
+     "EMAIL MARKETING · 3 MIN READ",
+     "Building an Email List: A Comprehensive Guide",
+     "Unlock the potential of email marketing! Explore proven strategies and actionable tips to grow your email list for maximum engagement.",
+     "BRAND STRATEGY · 5 MIN READ",
+     "The Importance of Content Writing: A Guide for Business Owners and Marketing Managers",
+     "Learn the importance of content writing and why it is essential for marketing success, brand growth, SEO, and lead generation.",
+     "INSIGHTS · 4 MIN READ",
+     "Performance Marketing vs. Digital Marketing: Which is Right for Your Business?",
+     "Performance Marketing vs. Digital Marketing, their pros and cons, and which approach is best for your business.",
+     "REAL ESTATE · 14 MIN READ",
+     "7 Proven Strategies of Digital Marketing for Real Estate Developers",
+     "Boost sales with Digital Marketing for Real Estate Strategies—SEO to lead generation, MappedSkills gets results.",
+     "CONTENT MARKETING · 9 MIN READ",
+     "Best SEO Company in Pune for Businesses That Want Qualified Leads, Not Just Rankings",
+     "Looking for an SEO company in Pune? MappedSkills helps businesses improve rankings, organic traffic, qualified leads, technical SEO, and local SEO.",
+     "PPC · 9 MIN READ",
+     "Facebook Advertising Agency in Pune for Facebook & Instagram Ads That Drive Qualified Leads",
+     "Looking for a Facebook advertising agency in Pune? We help you plan, launch, and optimize FB and Insta ad campaigns for leads & sales.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 7 GUIDES",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [
+     [
+      "/blog/content-marketing-services-in-pune",
+      305
+     ],
+     [
+      "/blog/building-an-email-list",
+      305
+     ],
+     [
+      "/blog/importance-of-content-writing",
+      325
+     ],
+     [
+      "/blog/performance-marketing-vs-digital-marketing",
+      301
+     ],
+     [
+      "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers",
+      301
+     ],
+     [
+      "/blog/seo-company-in-pune",
+      328
+     ],
+     [
+      "/blog/facebook-advertising-agency-pune",
+      301
+     ]
+    ],
+    "metaH": [
+     16,
+     16,
+     16,
+     16,
+     16,
+     16,
+     16
+    ],
+    "left": {
+     "h1": 16,
+     "list": 16
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "38.4px"
+     ]
+    ],
+    "errs": []
+   },
+   "states": {
+    "rest": {
+     "bg": "rgba(0, 0, 0, 0)",
+     "pad": "4px",
+     "outline": "none 3px oklab(0.187897 0.00675899 -0.0126655 / 0.5)",
+     "ul": "rgb(222, 214, 200)",
+     "arw": "rgba(0, 0, 0, 0)",
+     "dur": "0.15s, 0.15s"
+    },
+    "hover": {
+     "bg": "rgb(247, 243, 236)",
+     "pad": "8px",
+     "outline": "none 3px oklab(0.187897 0.00675899 -0.0126655 / 0.5)",
+     "ul": "rgb(255, 91, 4)",
+     "arw": "rgb(20, 18, 25)",
+     "dur": "0.15s, 0.15s"
+    },
+    "focus": {
+     "bg": "rgba(0, 0, 0, 0)",
+     "pad": "4px",
+     "outline": "solid 3px rgb(255, 91, 4)",
+     "ul": "rgb(255, 91, 4)",
+     "arw": "rgba(0, 0, 0, 0)",
+     "dur": "0.15s, 0.15s"
+    },
+    "keyboardReached": true,
+    "tabOrderInMainBeforeRow": [
+     "Home",
+     "Content Marketing · 6 min"
+    ],
+    "enterNavigatesTo": "/blog/content-marketing-services-in-pune"
+   },
+   "edge": {
+    "secs": [
+     378,
+     1145,
+     579
+    ],
+    "pageH": 3542,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Practical reads on search, ads, content and turning website visits into enquiries — for business owners deciding what to do next.",
+     "3 GUIDES",
+     "CONVERSION RATE OPTIMISATION AND LANDING PAGE EXPERIMENTS · 25 MIN READ",
+     "FIXTURE A deliberately very long article title that keeps going to test wrapping across every breakpoint without breaking the row layout or the arrow box alignment",
+     "FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt.",
+     "MARKETING STRATEGY · 1 MIN READ",
+     "FIXTURE No excerpt, no category, one-minute read",
+     "SEO · 2 MIN READ",
+     "FIXTURE Supercalifragilisticexpialidociousandevenlongerunbrokenwordtotestoverflowbehaviour",
+     "Short.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 3 GUIDES",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [
+     [
+      "/blog/fixture-very-long-title",
+      594
+     ],
+     [
+      "/blog/fixture-no-excerpt",
+      161
+     ],
+     [
+      "/blog/fixture-unbroken",
+      243
+     ]
+    ],
+    "metaH": [
+     49,
+     16,
+     16
+    ],
+    "left": {
+     "h1": 16,
+     "list": 16
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "38.4px"
+     ]
+    ],
+    "errs": []
+   },
+   "plain": {
+    "secs": [
+     299,
+     579
+    ],
+    "pageH": 2318,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Nothing is published here yet.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [],
+    "metaH": [],
+    "left": {
+     "h1": 16,
+     "list": null
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "38.4px"
+     ]
+    ],
+    "errs": []
+   }
+  },
+  "375": {
+   "g1": {
+    "secs": [
+     340,
+     2134,
+     529
+    ],
+    "pageH": 4354,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Practical reads on search, ads, content and turning website visits into enquiries — for business owners deciding what to do next.",
+     "7 GUIDES",
+     "CONTENT MARKETING · 6 MIN READ",
+     "Content Marketing Services in Pune | Boost Your Business Now",
+     "Explore top content marketing services in Pune. Drive traffic, boost engagement, and achieve your business goals with expert strategies.",
+     "EMAIL MARKETING · 3 MIN READ",
+     "Building an Email List: A Comprehensive Guide",
+     "Unlock the potential of email marketing! Explore proven strategies and actionable tips to grow your email list for maximum engagement.",
+     "BRAND STRATEGY · 5 MIN READ",
+     "The Importance of Content Writing: A Guide for Business Owners and Marketing Managers",
+     "Learn the importance of content writing and why it is essential for marketing success, brand growth, SEO, and lead generation.",
+     "INSIGHTS · 4 MIN READ",
+     "Performance Marketing vs. Digital Marketing: Which is Right for Your Business?",
+     "Performance Marketing vs. Digital Marketing, their pros and cons, and which approach is best for your business.",
+     "REAL ESTATE · 14 MIN READ",
+     "7 Proven Strategies of Digital Marketing for Real Estate Developers",
+     "Boost sales with Digital Marketing for Real Estate Strategies—SEO to lead generation, MappedSkills gets results.",
+     "CONTENT MARKETING · 9 MIN READ",
+     "Best SEO Company in Pune for Businesses That Want Qualified Leads, Not Just Rankings",
+     "Looking for an SEO company in Pune? MappedSkills helps businesses improve rankings, organic traffic, qualified leads, technical SEO, and local SEO.",
+     "PPC · 9 MIN READ",
+     "Facebook Advertising Agency in Pune for Facebook & Instagram Ads That Drive Qualified Leads",
+     "Looking for a Facebook advertising agency in Pune? We help you plan, launch, and optimize FB and Insta ad campaigns for leads & sales.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 7 GUIDES",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [
+     [
+      "/blog/content-marketing-services-in-pune",
+      278
+     ],
+     [
+      "/blog/building-an-email-list",
+      278
+     ],
+     [
+      "/blog/importance-of-content-writing",
+      301
+     ],
+     [
+      "/blog/performance-marketing-vs-digital-marketing",
+      274
+     ],
+     [
+      "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers",
+      251
+     ],
+     [
+      "/blog/seo-company-in-pune",
+      301
+     ],
+     [
+      "/blog/facebook-advertising-agency-pune",
+      301
+     ]
+    ],
+    "metaH": [
+     16,
+     16,
+     16,
+     16,
+     16,
+     16,
+     16
+    ],
+    "left": {
+     "h1": 16,
+     "list": 16
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "38.4px"
+     ]
+    ],
+    "errs": []
+   },
+   "live7": {
+    "secs": [
+     340,
+     2134,
+     529
+    ],
+    "pageH": 4354,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Practical reads on search, ads, content and turning website visits into enquiries — for business owners deciding what to do next.",
+     "7 GUIDES",
+     "CONTENT MARKETING · 6 MIN READ",
+     "Content Marketing Services in Pune | Boost Your Business Now",
+     "Explore top content marketing services in Pune. Drive traffic, boost engagement, and achieve your business goals with expert strategies.",
+     "EMAIL MARKETING · 3 MIN READ",
+     "Building an Email List: A Comprehensive Guide",
+     "Unlock the potential of email marketing! Explore proven strategies and actionable tips to grow your email list for maximum engagement.",
+     "BRAND STRATEGY · 5 MIN READ",
+     "The Importance of Content Writing: A Guide for Business Owners and Marketing Managers",
+     "Learn the importance of content writing and why it is essential for marketing success, brand growth, SEO, and lead generation.",
+     "INSIGHTS · 4 MIN READ",
+     "Performance Marketing vs. Digital Marketing: Which is Right for Your Business?",
+     "Performance Marketing vs. Digital Marketing, their pros and cons, and which approach is best for your business.",
+     "REAL ESTATE · 14 MIN READ",
+     "7 Proven Strategies of Digital Marketing for Real Estate Developers",
+     "Boost sales with Digital Marketing for Real Estate Strategies—SEO to lead generation, MappedSkills gets results.",
+     "CONTENT MARKETING · 9 MIN READ",
+     "Best SEO Company in Pune for Businesses That Want Qualified Leads, Not Just Rankings",
+     "Looking for an SEO company in Pune? MappedSkills helps businesses improve rankings, organic traffic, qualified leads, technical SEO, and local SEO.",
+     "PPC · 9 MIN READ",
+     "Facebook Advertising Agency in Pune for Facebook & Instagram Ads That Drive Qualified Leads",
+     "Looking for a Facebook advertising agency in Pune? We help you plan, launch, and optimize FB and Insta ad campaigns for leads & sales.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 7 GUIDES",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [
+     [
+      "/blog/content-marketing-services-in-pune",
+      278
+     ],
+     [
+      "/blog/building-an-email-list",
+      278
+     ],
+     [
+      "/blog/importance-of-content-writing",
+      301
+     ],
+     [
+      "/blog/performance-marketing-vs-digital-marketing",
+      274
+     ],
+     [
+      "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers",
+      251
+     ],
+     [
+      "/blog/seo-company-in-pune",
+      301
+     ],
+     [
+      "/blog/facebook-advertising-agency-pune",
+      301
+     ]
+    ],
+    "metaH": [
+     16,
+     16,
+     16,
+     16,
+     16,
+     16,
+     16
+    ],
+    "left": {
+     "h1": 16,
+     "list": 16
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "38.4px"
+     ]
+    ],
+    "errs": []
+   },
+   "states": {
+    "rest": {
+     "bg": "rgba(0, 0, 0, 0)",
+     "pad": "4px",
+     "outline": "none 3px oklab(0.187897 0.00675899 -0.0126655 / 0.5)",
+     "ul": "rgb(222, 214, 200)",
+     "arw": "rgba(0, 0, 0, 0)",
+     "dur": "0.15s, 0.15s"
+    },
+    "hover": {
+     "bg": "rgb(247, 243, 236)",
+     "pad": "8px",
+     "outline": "none 3px oklab(0.187897 0.00675899 -0.0126655 / 0.5)",
+     "ul": "rgb(255, 91, 4)",
+     "arw": "rgb(20, 18, 25)",
+     "dur": "0.15s, 0.15s"
+    },
+    "focus": {
+     "bg": "rgba(0, 0, 0, 0)",
+     "pad": "4px",
+     "outline": "solid 3px rgb(255, 91, 4)",
+     "ul": "rgb(255, 91, 4)",
+     "arw": "rgba(0, 0, 0, 0)",
+     "dur": "0.15s, 0.15s"
+    },
+    "keyboardReached": true,
+    "tabOrderInMainBeforeRow": [
+     "Home",
+     "Content Marketing · 6 min"
+    ],
+    "enterNavigatesTo": "/blog/content-marketing-services-in-pune"
+   },
+   "edge": {
+    "secs": [
+     340,
+     1067,
+     529
+    ],
+    "pageH": 3287,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Practical reads on search, ads, content and turning website visits into enquiries — for business owners deciding what to do next.",
+     "3 GUIDES",
+     "CONVERSION RATE OPTIMISATION AND LANDING PAGE EXPERIMENTS · 25 MIN READ",
+     "FIXTURE A deliberately very long article title that keeps going to test wrapping across every breakpoint without breaking the row layout or the arrow box alignment",
+     "FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt.",
+     "MARKETING STRATEGY · 1 MIN READ",
+     "FIXTURE No excerpt, no category, one-minute read",
+     "SEO · 2 MIN READ",
+     "FIXTURE Supercalifragilisticexpialidociousandevenlongerunbrokenwordtotestoverflowbehaviour",
+     "Short.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 3 GUIDES",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [
+     [
+      "/blog/fixture-very-long-title",
+      516
+     ],
+     [
+      "/blog/fixture-no-excerpt",
+      161
+     ],
+     [
+      "/blog/fixture-unbroken",
+      243
+     ]
+    ],
+    "metaH": [
+     49,
+     16,
+     16
+    ],
+    "left": {
+     "h1": 16,
+     "list": 16
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "38.4px"
+     ]
+    ],
+    "errs": []
+   },
+   "plain": {
+    "secs": [
+     261,
+     529
+    ],
+    "pageH": 2141,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Nothing is published here yet.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [],
+    "metaH": [],
+    "left": {
+     "h1": 16,
+     "list": null
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "38.4px"
+     ]
+    ],
+    "errs": []
+   }
+  },
+  "768": {
+   "g1": {
+    "secs": [
+     331,
+     1403,
+     470
+    ],
+    "pageH": 3234,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Practical reads on search, ads, content and turning website visits into enquiries — for business owners deciding what to do next.",
+     "7 GUIDES",
+     "CONTENT MARKETING 6 MIN READ",
+     "Content Marketing Services in Pune | Boost Your Business Now",
+     "Explore top content marketing services in Pune. Drive traffic, boost engagement, and achieve your business goals with expert strategies.",
+     "EMAIL MARKETING 3 MIN READ",
+     "Building an Email List: A Comprehensive Guide",
+     "Unlock the potential of email marketing! Explore proven strategies and actionable tips to grow your email list for maximum engagement.",
+     "BRAND STRATEGY 5 MIN READ",
+     "The Importance of Content Writing: A Guide for Business Owners and Marketing Managers",
+     "Learn the importance of content writing and why it is essential for marketing success, brand growth, SEO, and lead generation.",
+     "INSIGHTS 4 MIN READ",
+     "Performance Marketing vs. Digital Marketing: Which is Right for Your Business?",
+     "Performance Marketing vs. Digital Marketing, their pros and cons, and which approach is best for your business.",
+     "REAL ESTATE 14 MIN READ",
+     "7 Proven Strategies of Digital Marketing for Real Estate Developers",
+     "Boost sales with Digital Marketing for Real Estate Strategies—SEO to lead generation, MappedSkills gets results.",
+     "CONTENT MARKETING 9 MIN READ",
+     "Best SEO Company in Pune for Businesses That Want Qualified Leads, Not Just Rankings",
+     "Looking for an SEO company in Pune? MappedSkills helps businesses improve rankings, organic traffic, qualified leads, technical SEO, and local SEO.",
+     "PPC 9 MIN READ",
+     "Facebook Advertising Agency in Pune for Facebook & Instagram Ads That Drive Qualified Leads",
+     "Looking for a Facebook advertising agency in Pune? We help you plan, launch, and optimize FB and Insta ad campaigns for leads & sales.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 7 GUIDES",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [
+     [
+      "/blog/content-marketing-services-in-pune",
+      179
+     ],
+     [
+      "/blog/building-an-email-list",
+      154
+     ],
+     [
+      "/blog/importance-of-content-writing",
+      179
+     ],
+     [
+      "/blog/performance-marketing-vs-digital-marketing",
+      179
+     ],
+     [
+      "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers",
+      179
+     ],
+     [
+      "/blog/seo-company-in-pune",
+      179
+     ],
+     [
+      "/blog/facebook-advertising-agency-pune",
+      204
+     ]
+    ],
+    "metaH": [
+     42,
+     42,
+     42,
+     42,
+     42,
+     42,
+     42
+    ],
+    "left": {
+     "h1": 31,
+     "list": 31
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "43.6333px"
+     ]
+    ],
+    "errs": []
+   },
+   "live7": {
+    "secs": [
+     331,
+     1403,
+     470
+    ],
+    "pageH": 3234,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Practical reads on search, ads, content and turning website visits into enquiries — for business owners deciding what to do next.",
+     "7 GUIDES",
+     "CONTENT MARKETING 6 MIN READ",
+     "Content Marketing Services in Pune | Boost Your Business Now",
+     "Explore top content marketing services in Pune. Drive traffic, boost engagement, and achieve your business goals with expert strategies.",
+     "EMAIL MARKETING 3 MIN READ",
+     "Building an Email List: A Comprehensive Guide",
+     "Unlock the potential of email marketing! Explore proven strategies and actionable tips to grow your email list for maximum engagement.",
+     "BRAND STRATEGY 5 MIN READ",
+     "The Importance of Content Writing: A Guide for Business Owners and Marketing Managers",
+     "Learn the importance of content writing and why it is essential for marketing success, brand growth, SEO, and lead generation.",
+     "INSIGHTS 4 MIN READ",
+     "Performance Marketing vs. Digital Marketing: Which is Right for Your Business?",
+     "Performance Marketing vs. Digital Marketing, their pros and cons, and which approach is best for your business.",
+     "REAL ESTATE 14 MIN READ",
+     "7 Proven Strategies of Digital Marketing for Real Estate Developers",
+     "Boost sales with Digital Marketing for Real Estate Strategies—SEO to lead generation, MappedSkills gets results.",
+     "CONTENT MARKETING 9 MIN READ",
+     "Best SEO Company in Pune for Businesses That Want Qualified Leads, Not Just Rankings",
+     "Looking for an SEO company in Pune? MappedSkills helps businesses improve rankings, organic traffic, qualified leads, technical SEO, and local SEO.",
+     "PPC 9 MIN READ",
+     "Facebook Advertising Agency in Pune for Facebook & Instagram Ads That Drive Qualified Leads",
+     "Looking for a Facebook advertising agency in Pune? We help you plan, launch, and optimize FB and Insta ad campaigns for leads & sales.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 7 GUIDES",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [
+     [
+      "/blog/content-marketing-services-in-pune",
+      179
+     ],
+     [
+      "/blog/building-an-email-list",
+      154
+     ],
+     [
+      "/blog/importance-of-content-writing",
+      179
+     ],
+     [
+      "/blog/performance-marketing-vs-digital-marketing",
+      179
+     ],
+     [
+      "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers",
+      179
+     ],
+     [
+      "/blog/seo-company-in-pune",
+      179
+     ],
+     [
+      "/blog/facebook-advertising-agency-pune",
+      204
+     ]
+    ],
+    "metaH": [
+     42,
+     42,
+     42,
+     42,
+     42,
+     42,
+     42
+    ],
+    "left": {
+     "h1": 31,
+     "list": 31
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "43.6333px"
+     ]
+    ],
+    "errs": []
+   },
+   "states": {
+    "rest": {
+     "bg": "rgba(0, 0, 0, 0)",
+     "pad": "4px",
+     "outline": "none 3px oklab(0.187897 0.00675899 -0.0126655 / 0.5)",
+     "ul": "rgb(222, 214, 200)",
+     "arw": "rgba(0, 0, 0, 0)",
+     "dur": "0.15s, 0.15s"
+    },
+    "hover": {
+     "bg": "rgb(247, 243, 236)",
+     "pad": "12px",
+     "outline": "none 3px oklab(0.187897 0.00675899 -0.0126655 / 0.5)",
+     "ul": "rgb(255, 91, 4)",
+     "arw": "rgb(20, 18, 25)",
+     "dur": "0.15s, 0.15s"
+    },
+    "focus": {
+     "bg": "rgba(0, 0, 0, 0)",
+     "pad": "4px",
+     "outline": "solid 3px rgb(255, 91, 4)",
+     "ul": "rgb(255, 91, 4)",
+     "arw": "rgba(0, 0, 0, 0)",
+     "dur": "0.15s, 0.15s"
+    },
+    "keyboardReached": true,
+    "tabOrderInMainBeforeRow": [
+     "Home",
+     "Content Marketing · 6 min"
+    ],
+    "enterNavigatesTo": "/blog/content-marketing-services-in-pune"
+   },
+   "edge": {
+    "secs": [
+     331,
+     722,
+     470
+    ],
+    "pageH": 2552,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Practical reads on search, ads, content and turning website visits into enquiries — for business owners deciding what to do next.",
+     "3 GUIDES",
+     "CONVERSION RATE OPTIMISATION AND LANDING PAGE EXPERIMENTS 25 MIN READ",
+     "FIXTURE A deliberately very long article title that keeps going to test wrapping across every breakpoint without breaking the row layout or the arrow box alignment",
+     "FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt.",
+     "MARKETING STRATEGY 1 MIN READ",
+     "FIXTURE No excerpt, no category, one-minute read",
+     "SEO 2 MIN READ",
+     "FIXTURE Supercalifragilisticexpialidociousandevenlongerunbrokenwordtotestoverflowbehaviour",
+     "Short.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 3 GUIDES",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [
+     [
+      "/blog/fixture-very-long-title",
+      337
+     ],
+     [
+      "/blog/fixture-no-excerpt",
+      89
+     ],
+     [
+      "/blog/fixture-unbroken",
+      149
+     ]
+    ],
+    "metaH": [
+     91,
+     42,
+     42
+    ],
+    "left": {
+     "h1": 31,
+     "list": 31
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "43.6333px"
+     ]
+    ],
+    "errs": []
+   },
+   "plain": {
+    "secs": [
+     273,
+     470
+    ],
+    "pageH": 1773,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Nothing is published here yet.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [],
+    "metaH": [],
+    "left": {
+     "h1": 31,
+     "list": null
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "43.6333px"
+     ]
+    ],
+    "errs": []
+   }
+  },
+  "1280": {
+   "g1": {
+    "secs": [
+     401,
+     1436,
+     584
+    ],
+    "pageH": 3209,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Practical reads on search, ads, content and turning website visits into enquiries — for business owners deciding what to do next.",
+     "7 GUIDES",
+     "CONTENT MARKETING 6 MIN READ",
+     "Content Marketing Services in Pune | Boost Your Business Now",
+     "Explore top content marketing services in Pune. Drive traffic, boost engagement, and achieve your business goals with expert strategies.",
+     "EMAIL MARKETING 3 MIN READ",
+     "Building an Email List: A Comprehensive Guide",
+     "Unlock the potential of email marketing! Explore proven strategies and actionable tips to grow your email list for maximum engagement.",
+     "BRAND STRATEGY 5 MIN READ",
+     "The Importance of Content Writing: A Guide for Business Owners and Marketing Managers",
+     "Learn the importance of content writing and why it is essential for marketing success, brand growth, SEO, and lead generation.",
+     "INSIGHTS 4 MIN READ",
+     "Performance Marketing vs. Digital Marketing: Which is Right for Your Business?",
+     "Performance Marketing vs. Digital Marketing, their pros and cons, and which approach is best for your business.",
+     "REAL ESTATE 14 MIN READ",
+     "7 Proven Strategies of Digital Marketing for Real Estate Developers",
+     "Boost sales with Digital Marketing for Real Estate Strategies—SEO to lead generation, MappedSkills gets results.",
+     "CONTENT MARKETING 9 MIN READ",
+     "Best SEO Company in Pune for Businesses That Want Qualified Leads, Not Just Rankings",
+     "Looking for an SEO company in Pune? MappedSkills helps businesses improve rankings, organic traffic, qualified leads, technical SEO, and local SEO.",
+     "PPC 9 MIN READ",
+     "Facebook Advertising Agency in Pune for Facebook & Instagram Ads That Drive Qualified Leads",
+     "Looking for a Facebook advertising agency in Pune? We help you plan, launch, and optimize FB and Insta ad campaigns for leads & sales.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 7 GUIDES",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [
+     [
+      "/blog/content-marketing-services-in-pune",
+      151
+     ],
+     [
+      "/blog/building-an-email-list",
+      151
+     ],
+     [
+      "/blog/importance-of-content-writing",
+      178
+     ],
+     [
+      "/blog/performance-marketing-vs-digital-marketing",
+      178
+     ],
+     [
+      "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers",
+      178
+     ],
+     [
+      "/blog/seo-company-in-pune",
+      205
+     ],
+     [
+      "/blog/facebook-advertising-agency-pune",
+      178
+     ]
+    ],
+    "metaH": [
+     42,
+     42,
+     42,
+     42,
+     42,
+     42,
+     42
+    ],
+    "left": {
+     "h1": 71,
+     "list": 71
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "62.0667px"
+     ]
+    ],
+    "errs": []
+   },
+   "live7": {
+    "secs": [
+     401,
+     1436,
+     584
+    ],
+    "pageH": 3209,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Practical reads on search, ads, content and turning website visits into enquiries — for business owners deciding what to do next.",
+     "7 GUIDES",
+     "CONTENT MARKETING 6 MIN READ",
+     "Content Marketing Services in Pune | Boost Your Business Now",
+     "Explore top content marketing services in Pune. Drive traffic, boost engagement, and achieve your business goals with expert strategies.",
+     "EMAIL MARKETING 3 MIN READ",
+     "Building an Email List: A Comprehensive Guide",
+     "Unlock the potential of email marketing! Explore proven strategies and actionable tips to grow your email list for maximum engagement.",
+     "BRAND STRATEGY 5 MIN READ",
+     "The Importance of Content Writing: A Guide for Business Owners and Marketing Managers",
+     "Learn the importance of content writing and why it is essential for marketing success, brand growth, SEO, and lead generation.",
+     "INSIGHTS 4 MIN READ",
+     "Performance Marketing vs. Digital Marketing: Which is Right for Your Business?",
+     "Performance Marketing vs. Digital Marketing, their pros and cons, and which approach is best for your business.",
+     "REAL ESTATE 14 MIN READ",
+     "7 Proven Strategies of Digital Marketing for Real Estate Developers",
+     "Boost sales with Digital Marketing for Real Estate Strategies—SEO to lead generation, MappedSkills gets results.",
+     "CONTENT MARKETING 9 MIN READ",
+     "Best SEO Company in Pune for Businesses That Want Qualified Leads, Not Just Rankings",
+     "Looking for an SEO company in Pune? MappedSkills helps businesses improve rankings, organic traffic, qualified leads, technical SEO, and local SEO.",
+     "PPC 9 MIN READ",
+     "Facebook Advertising Agency in Pune for Facebook & Instagram Ads That Drive Qualified Leads",
+     "Looking for a Facebook advertising agency in Pune? We help you plan, launch, and optimize FB and Insta ad campaigns for leads & sales.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 7 GUIDES",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [
+     [
+      "/blog/content-marketing-services-in-pune",
+      151
+     ],
+     [
+      "/blog/building-an-email-list",
+      151
+     ],
+     [
+      "/blog/importance-of-content-writing",
+      178
+     ],
+     [
+      "/blog/performance-marketing-vs-digital-marketing",
+      178
+     ],
+     [
+      "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers",
+      178
+     ],
+     [
+      "/blog/seo-company-in-pune",
+      205
+     ],
+     [
+      "/blog/facebook-advertising-agency-pune",
+      178
+     ]
+    ],
+    "metaH": [
+     42,
+     42,
+     42,
+     42,
+     42,
+     42,
+     42
+    ],
+    "left": {
+     "h1": 71,
+     "list": 71
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "62.0667px"
+     ]
+    ],
+    "errs": []
+   },
+   "states": {
+    "rest": {
+     "bg": "rgba(0, 0, 0, 0)",
+     "pad": "4px",
+     "outline": "none 3px oklab(0.187897 0.00675899 -0.0126655 / 0.5)",
+     "ul": "rgb(222, 214, 200)",
+     "arw": "rgba(0, 0, 0, 0)",
+     "dur": "0.15s, 0.15s"
+    },
+    "hover": {
+     "bg": "rgb(247, 243, 236)",
+     "pad": "12px",
+     "outline": "none 3px oklab(0.187897 0.00675899 -0.0126655 / 0.5)",
+     "ul": "rgb(255, 91, 4)",
+     "arw": "rgb(20, 18, 25)",
+     "dur": "0.15s, 0.15s"
+    },
+    "focus": {
+     "bg": "rgba(0, 0, 0, 0)",
+     "pad": "4px",
+     "outline": "solid 3px rgb(255, 91, 4)",
+     "ul": "rgb(255, 91, 4)",
+     "arw": "rgba(0, 0, 0, 0)",
+     "dur": "0.15s, 0.15s"
+    },
+    "keyboardReached": true,
+    "tabOrderInMainBeforeRow": [
+     "Home",
+     "Content Marketing · 6 min"
+    ],
+    "enterNavigatesTo": "/blog/content-marketing-services-in-pune"
+   },
+   "edge": {
+    "secs": [
+     401,
+     781,
+     584
+    ],
+    "pageH": 2555,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Practical reads on search, ads, content and turning website visits into enquiries — for business owners deciding what to do next.",
+     "3 GUIDES",
+     "CONVERSION RATE OPTIMISATION AND LANDING PAGE EXPERIMENTS 25 MIN READ",
+     "FIXTURE A deliberately very long article title that keeps going to test wrapping across every breakpoint without breaking the row layout or the arrow box alignment",
+     "FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt.",
+     "MARKETING STRATEGY 1 MIN READ",
+     "FIXTURE No excerpt, no category, one-minute read",
+     "SEO 2 MIN READ",
+     "FIXTURE Supercalifragilisticexpialidociousandevenlongerunbrokenwordtotestoverflowbehaviour",
+     "Short.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 3 GUIDES",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [
+     [
+      "/blog/fixture-very-long-title",
+      286
+     ],
+     [
+      "/blog/fixture-no-excerpt",
+      104
+     ],
+     [
+      "/blog/fixture-unbroken",
+      178
+     ]
+    ],
+    "metaH": [
+     59,
+     42,
+     42
+    ],
+    "left": {
+     "h1": 71,
+     "list": 71
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "62.0667px"
+     ]
+    ],
+    "errs": []
+   },
+   "plain": {
+    "secs": [
+     339,
+     584
+    ],
+    "pageH": 1711,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Nothing is published here yet.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [],
+    "metaH": [],
+    "left": {
+     "h1": 71,
+     "list": null
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "62.0667px"
+     ]
+    ],
+    "errs": []
+   }
+  },
+  "1440": {
+   "g1": {
+    "secs": [
+     425,
+     1479,
+     635
+    ],
+    "pageH": 3328,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Practical reads on search, ads, content and turning website visits into enquiries — for business owners deciding what to do next.",
+     "7 GUIDES",
+     "CONTENT MARKETING 6 MIN READ",
+     "Content Marketing Services in Pune | Boost Your Business Now",
+     "Explore top content marketing services in Pune. Drive traffic, boost engagement, and achieve your business goals with expert strategies.",
+     "EMAIL MARKETING 3 MIN READ",
+     "Building an Email List: A Comprehensive Guide",
+     "Unlock the potential of email marketing! Explore proven strategies and actionable tips to grow your email list for maximum engagement.",
+     "BRAND STRATEGY 5 MIN READ",
+     "The Importance of Content Writing: A Guide for Business Owners and Marketing Managers",
+     "Learn the importance of content writing and why it is essential for marketing success, brand growth, SEO, and lead generation.",
+     "INSIGHTS 4 MIN READ",
+     "Performance Marketing vs. Digital Marketing: Which is Right for Your Business?",
+     "Performance Marketing vs. Digital Marketing, their pros and cons, and which approach is best for your business.",
+     "REAL ESTATE 14 MIN READ",
+     "7 Proven Strategies of Digital Marketing for Real Estate Developers",
+     "Boost sales with Digital Marketing for Real Estate Strategies—SEO to lead generation, MappedSkills gets results.",
+     "CONTENT MARKETING 9 MIN READ",
+     "Best SEO Company in Pune for Businesses That Want Qualified Leads, Not Just Rankings",
+     "Looking for an SEO company in Pune? MappedSkills helps businesses improve rankings, organic traffic, qualified leads, technical SEO, and local SEO.",
+     "PPC 9 MIN READ",
+     "Facebook Advertising Agency in Pune for Facebook & Instagram Ads That Drive Qualified Leads",
+     "Looking for a Facebook advertising agency in Pune? We help you plan, launch, and optimize FB and Insta ad campaigns for leads & sales.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 7 GUIDES",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [
+     [
+      "/blog/content-marketing-services-in-pune",
+      154
+     ],
+     [
+      "/blog/building-an-email-list",
+      154
+     ],
+     [
+      "/blog/importance-of-content-writing",
+      181
+     ],
+     [
+      "/blog/performance-marketing-vs-digital-marketing",
+      181
+     ],
+     [
+      "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers",
+      181
+     ],
+     [
+      "/blog/seo-company-in-pune",
+      208
+     ],
+     [
+      "/blog/facebook-advertising-agency-pune",
+      181
+     ]
+    ],
+    "metaH": [
+     42,
+     42,
+     42,
+     42,
+     42,
+     42,
+     42
+    ],
+    "left": {
+     "h1": 156,
+     "list": 156
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "67.8333px"
+     ]
+    ],
+    "errs": []
+   },
+   "live7": {
+    "secs": [
+     425,
+     1479,
+     635
+    ],
+    "pageH": 3328,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Practical reads on search, ads, content and turning website visits into enquiries — for business owners deciding what to do next.",
+     "7 GUIDES",
+     "CONTENT MARKETING 6 MIN READ",
+     "Content Marketing Services in Pune | Boost Your Business Now",
+     "Explore top content marketing services in Pune. Drive traffic, boost engagement, and achieve your business goals with expert strategies.",
+     "EMAIL MARKETING 3 MIN READ",
+     "Building an Email List: A Comprehensive Guide",
+     "Unlock the potential of email marketing! Explore proven strategies and actionable tips to grow your email list for maximum engagement.",
+     "BRAND STRATEGY 5 MIN READ",
+     "The Importance of Content Writing: A Guide for Business Owners and Marketing Managers",
+     "Learn the importance of content writing and why it is essential for marketing success, brand growth, SEO, and lead generation.",
+     "INSIGHTS 4 MIN READ",
+     "Performance Marketing vs. Digital Marketing: Which is Right for Your Business?",
+     "Performance Marketing vs. Digital Marketing, their pros and cons, and which approach is best for your business.",
+     "REAL ESTATE 14 MIN READ",
+     "7 Proven Strategies of Digital Marketing for Real Estate Developers",
+     "Boost sales with Digital Marketing for Real Estate Strategies—SEO to lead generation, MappedSkills gets results.",
+     "CONTENT MARKETING 9 MIN READ",
+     "Best SEO Company in Pune for Businesses That Want Qualified Leads, Not Just Rankings",
+     "Looking for an SEO company in Pune? MappedSkills helps businesses improve rankings, organic traffic, qualified leads, technical SEO, and local SEO.",
+     "PPC 9 MIN READ",
+     "Facebook Advertising Agency in Pune for Facebook & Instagram Ads That Drive Qualified Leads",
+     "Looking for a Facebook advertising agency in Pune? We help you plan, launch, and optimize FB and Insta ad campaigns for leads & sales.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 7 GUIDES",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [
+     [
+      "/blog/content-marketing-services-in-pune",
+      154
+     ],
+     [
+      "/blog/building-an-email-list",
+      154
+     ],
+     [
+      "/blog/importance-of-content-writing",
+      181
+     ],
+     [
+      "/blog/performance-marketing-vs-digital-marketing",
+      181
+     ],
+     [
+      "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers",
+      181
+     ],
+     [
+      "/blog/seo-company-in-pune",
+      208
+     ],
+     [
+      "/blog/facebook-advertising-agency-pune",
+      181
+     ]
+    ],
+    "metaH": [
+     42,
+     42,
+     42,
+     42,
+     42,
+     42,
+     42
+    ],
+    "left": {
+     "h1": 156,
+     "list": 156
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "67.8333px"
+     ]
+    ],
+    "errs": []
+   },
+   "states": {
+    "rest": {
+     "bg": "rgba(0, 0, 0, 0)",
+     "pad": "4px",
+     "outline": "none 3px oklab(0.187897 0.00675899 -0.0126655 / 0.5)",
+     "ul": "rgb(222, 214, 200)",
+     "arw": "rgba(0, 0, 0, 0)",
+     "dur": "0.15s, 0.15s"
+    },
+    "hover": {
+     "bg": "rgb(247, 243, 236)",
+     "pad": "12px",
+     "outline": "none 3px oklab(0.187897 0.00675899 -0.0126655 / 0.5)",
+     "ul": "rgb(255, 91, 4)",
+     "arw": "rgb(20, 18, 25)",
+     "dur": "0.15s, 0.15s"
+    },
+    "focus": {
+     "bg": "rgba(0, 0, 0, 0)",
+     "pad": "4px",
+     "outline": "solid 3px rgb(255, 91, 4)",
+     "ul": "rgb(255, 91, 4)",
+     "arw": "rgba(0, 0, 0, 0)",
+     "dur": "0.15s, 0.15s"
+    },
+    "keyboardReached": true,
+    "tabOrderInMainBeforeRow": [
+     "Home",
+     "Content Marketing · 6 min"
+    ],
+    "enterNavigatesTo": "/blog/content-marketing-services-in-pune"
+   },
+   "edge": {
+    "secs": [
+     425,
+     813,
+     635
+    ],
+    "pageH": 2662,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Practical reads on search, ads, content and turning website visits into enquiries — for business owners deciding what to do next.",
+     "3 GUIDES",
+     "CONVERSION RATE OPTIMISATION AND LANDING PAGE EXPERIMENTS 25 MIN READ",
+     "FIXTURE A deliberately very long article title that keeps going to test wrapping across every breakpoint without breaking the row layout or the arrow box alignment",
+     "FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt. FIXTURE a long excerpt.",
+     "MARKETING STRATEGY 1 MIN READ",
+     "FIXTURE No excerpt, no category, one-minute read",
+     "SEO 2 MIN READ",
+     "FIXTURE Supercalifragilisticexpialidociousandevenlongerunbrokenwordtotestoverflowbehaviour",
+     "Short.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 3 GUIDES",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [
+     [
+      "/blog/fixture-very-long-title",
+      290
+     ],
+     [
+      "/blog/fixture-no-excerpt",
+      106
+     ],
+     [
+      "/blog/fixture-unbroken",
+      181
+     ]
+    ],
+    "metaH": [
+     59,
+     42,
+     42
+    ],
+    "left": {
+     "h1": 156,
+     "list": 156
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "67.8333px"
+     ]
+    ],
+    "errs": []
+   },
+   "plain": {
+    "secs": [
+     363,
+     635
+    ],
+    "pageH": 1786,
+    "overflowX": false,
+    "clipped": [],
+    "text": [
+     "Home / Blog",
+     "BLOG",
+     "Marketing guides, written plainly.",
+     "Nothing is published here yet.",
+     "Reading about a problem you have?",
+     "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+     "Tell us about your business",
+     "Request a call"
+    ],
+    "small": 0,
+    "heads": [
+     "H1 Marketing guides, written plainly.",
+     "H2 Reading about a problem you have?"
+    ],
+    "rows": [],
+    "metaH": [],
+    "left": {
+     "h1": 156,
+     "list": null
+    },
+    "targetsUnder44": [
+     [
+      "Home",
+      20
+     ]
+    ],
+    "contrastUnder45": [
+     [
+      "b-named",
+      3.97,
+      "67.8333px"
+     ]
+    ],
+    "errs": []
+   }
+  }
+ },
+ "reducedMotion": [
+  "0.00001s",
+  "0.00001s",
+  "0.00001s"
+ ],
+ "noJs": {
+  "rows": 7,
+  "h1": "Marketing guides, written plainly."
+ }
+}

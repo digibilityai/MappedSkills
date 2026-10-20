@@ -1,0 +1,229 @@
+{
+ "routes": {
+  "/blog": {
+   "status": [
+    200,
+    200
+   ],
+   "title": true,
+   "meta": false,
+   "canonical": true,
+   "jsonld": true,
+   "mainText": false,
+   "dataAttrs": true,
+   "dataLayer": true,
+   "metaDiff": {
+    "base": [
+     "<meta name=\"description\" content=\"Pieces on why websites receive visits and not enquiries, and on how buyers find suppliers through AI-assisted search.\"/>",
+     "<meta name=\"robots\" content=\"index, follow\"/>",
+     "<meta name=\"twitter:card\" content=\"summary_large_image\"/>",
+     "<meta name=\"twitter:description\" content=\"Pieces on why websites receive visits and not enquiries, and on how buyers find suppliers through AI-assisted search.\"/>",
+     "<meta name=\"twitter:image\" content=\"http://localhost:3000/ms_icon.webp\"/>",
+     "<meta name=\"twitter:title\" content=\"Writing | MappedSkills\"/>",
+     "<meta property=\"og:description\" content=\"Pieces on why websites receive visits and not enquiries, and on how buyers find suppliers through AI-assisted search.\"/>",
+     "<meta property=\"og:image\" content=\"http://localhost:3000/ms_icon.webp\"/>",
+     "<meta property=\"og:image:alt\" content=\"Writing | MappedSkills\"/>",
+     "<meta property=\"og:locale\" content=\"en_US\"/>",
+     "<meta property=\"og:site_name\" content=\"MappedSkills\"/>",
+     "<meta property=\"og:title\" content=\"Writing | MappedSkills\"/>",
+     "<meta property=\"og:type\" content=\"website\"/>",
+     "<meta property=\"og:url\" content=\"http://localhost:3000/blog\"/>"
+    ],
+    "g2": [
+     "<meta name=\"description\" content=\"Practical guides on search, paid ads, content and turning website visits into enquiries, written for business owners.\"/>",
+     "<meta name=\"robots\" content=\"index, follow\"/>",
+     "<meta name=\"twitter:card\" content=\"summary_large_image\"/>",
+     "<meta name=\"twitter:description\" content=\"Practical guides on search, paid ads, content and turning website visits into enquiries, written for business owners.\"/>",
+     "<meta name=\"twitter:image\" content=\"http://localhost:3000/ms_icon.webp\"/>",
+     "<meta name=\"twitter:title\" content=\"Writing | MappedSkills\"/>",
+     "<meta property=\"og:description\" content=\"Practical guides on search, paid ads, content and turning website visits into enquiries, written for business owners.\"/>",
+     "<meta property=\"og:image\" content=\"http://localhost:3000/ms_icon.webp\"/>",
+     "<meta property=\"og:image:alt\" content=\"Writing | MappedSkills\"/>",
+     "<meta property=\"og:locale\" content=\"en_US\"/>",
+     "<meta property=\"og:site_name\" content=\"MappedSkills\"/>",
+     "<meta property=\"og:title\" content=\"Writing | MappedSkills\"/>",
+     "<meta property=\"og:type\" content=\"website\"/>",
+     "<meta property=\"og:url\" content=\"http://localhost:3000/blog\"/>"
+    ]
+   },
+   "jsonldCount": [
+    1,
+    1
+   ],
+   "dataAttrsG2": "",
+   "dlBase": "[[\"consent\",\"default\"],{\"event\":\"page_view\",\"environment\":\"production\",\"page_path\":\"/blog\",\"page_type\":\"editorial\"}]",
+   "dlG2": "[[\"consent\",\"default\"],{\"event\":\"page_view\",\"environment\":\"production\",\"page_path\":\"/blog\",\"page_type\":\"editorial\"}]"
+  },
+  "/blog/content-marketing-services-in-pune": {
+   "status": [
+    200,
+    200
+   ],
+   "title": true,
+   "meta": true,
+   "canonical": true,
+   "jsonld": true,
+   "mainText": true,
+   "dataAttrs": true,
+   "dataLayer": true
+  },
+  "/blog/building-an-email-list": {
+   "status": [
+    200,
+    200
+   ],
+   "title": true,
+   "meta": true,
+   "canonical": true,
+   "jsonld": true,
+   "mainText": true,
+   "dataAttrs": true,
+   "dataLayer": true
+  },
+  "/blog/importance-of-content-writing": {
+   "status": [
+    200,
+    200
+   ],
+   "title": true,
+   "meta": true,
+   "canonical": true,
+   "jsonld": true,
+   "mainText": true,
+   "dataAttrs": true,
+   "dataLayer": true
+  },
+  "/blog/performance-marketing-vs-digital-marketing": {
+   "status": [
+    200,
+    200
+   ],
+   "title": true,
+   "meta": true,
+   "canonical": true,
+   "jsonld": true,
+   "mainText": true,
+   "dataAttrs": true,
+   "dataLayer": true
+  },
+  "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers": {
+   "status": [
+    200,
+    200
+   ],
+   "title": true,
+   "meta": true,
+   "canonical": true,
+   "jsonld": true,
+   "mainText": true,
+   "dataAttrs": true,
+   "dataLayer": true
+  },
+  "/blog/seo-company-in-pune": {
+   "status": [
+    200,
+    200
+   ],
+   "title": true,
+   "meta": true,
+   "canonical": true,
+   "jsonld": true,
+   "mainText": true,
+   "dataAttrs": true,
+   "dataLayer": true
+  },
+  "/blog/facebook-advertising-agency-pune": {
+   "status": [
+    200,
+    200
+   ],
+   "title": true,
+   "meta": true,
+   "canonical": true,
+   "jsonld": true,
+   "mainText": true,
+   "dataAttrs": true,
+   "dataLayer": true
+  },
+  "/press": {
+   "status": [
+    200,
+    200
+   ],
+   "title": true,
+   "meta": true,
+   "canonical": true,
+   "jsonld": true,
+   "mainText": true,
+   "dataAttrs": true,
+   "dataLayer": true
+  },
+  "/research": {
+   "status": [
+    200,
+    200
+   ],
+   "title": true,
+   "meta": true,
+   "canonical": true,
+   "jsonld": true,
+   "mainText": true,
+   "dataAttrs": true,
+   "dataLayer": true
+  },
+  "/work": {
+   "status": [
+    200,
+    200
+   ],
+   "title": true,
+   "meta": true,
+   "canonical": true,
+   "jsonld": true,
+   "mainText": true,
+   "dataAttrs": true,
+   "dataLayer": true
+  },
+  "/faq": {
+   "status": [
+    200,
+    200
+   ],
+   "title": true,
+   "meta": true,
+   "canonical": true,
+   "jsonld": true,
+   "mainText": true,
+   "dataAttrs": true,
+   "dataLayer": true
+  },
+  "/": {
+   "status": [
+    200,
+    200
+   ],
+   "title": true,
+   "meta": true,
+   "canonical": true,
+   "jsonld": true,
+   "mainText": true,
+   "dataAttrs": true,
+   "dataLayer": true
+  },
+  "/this-page-does-not-exist": {
+   "status": [
+    404,
+    404
+   ],
+   "title": true,
+   "meta": true,
+   "canonical": true,
+   "jsonld": true,
+   "mainText": true,
+   "dataAttrs": true,
+   "dataLayer": true
+  }
+ },
+ "sitemapIdentical": true,
+ "sitemapBlogUrls": 8
+}

@@ -1,0 +1,383 @@
+{
+ "desktop-1440": {
+  "pageH": 3327,
+  "overflowX": false,
+  "small": [],
+  "targetsUnder44": [
+   [
+    "Home",
+    19
+   ]
+  ],
+  "heads": [
+   "H1 Marketing guides, written plainly.",
+   "H2 7 guides",
+   "H2 Reading about a problem you have?"
+  ],
+  "rowLinks": [
+   "/blog/content-marketing-services-in-pune",
+   "/blog/building-an-email-list",
+   "/blog/importance-of-content-writing",
+   "/blog/performance-marketing-vs-digital-marketing",
+   "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers",
+   "/blog/seo-company-in-pune",
+   "/blog/facebook-advertising-agency-pune"
+  ],
+  "leftEdge": {
+   "header": 96,
+   "h1": 156,
+   "list": 156
+  },
+  "rowH": [
+   154,
+   154,
+   181,
+   181,
+   181,
+   208,
+   181
+  ],
+  "metaLines": [
+   42,
+   42,
+   42,
+   42,
+   42,
+   42,
+   42
+  ],
+  "rest": {
+   "bg": "rgba(0, 0, 0, 0)",
+   "padL": "4px",
+   "outline": "none 3px oklab(0.187895 0.00676733 -0.0126613 / 0.5)",
+   "underline": "rgb(222, 214, 200)",
+   "arwBg": "rgba(0, 0, 0, 0)",
+   "trans": "0.15s, 0.15s"
+  },
+  "hover": {
+   "bg": "rgb(247, 243, 236)",
+   "padL": "12px",
+   "outline": "none 3px oklab(0.187895 0.00676733 -0.0126613 / 0.5)",
+   "underline": "rgb(255, 91, 4)",
+   "arwBg": "rgb(20, 18, 25)",
+   "trans": "0.15s, 0.15s"
+  },
+  "focus": {
+   "bg": "rgba(0, 0, 0, 0)",
+   "padL": "4px",
+   "outline": "solid 3px rgb(255, 91, 4)",
+   "underline": "rgb(255, 91, 4)",
+   "arwBg": "rgba(0, 0, 0, 0)",
+   "trans": "0.15s, 0.15s"
+  },
+  "errs": []
+ },
+ "desktop-1280": {
+  "pageH": 3209,
+  "overflowX": false,
+  "small": [],
+  "targetsUnder44": [
+   [
+    "Home",
+    19
+   ]
+  ],
+  "heads": [
+   "H1 Marketing guides, written plainly.",
+   "H2 7 guides",
+   "H2 Reading about a problem you have?"
+  ],
+  "rowLinks": [
+   "/blog/content-marketing-services-in-pune",
+   "/blog/building-an-email-list",
+   "/blog/importance-of-content-writing",
+   "/blog/performance-marketing-vs-digital-marketing",
+   "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers",
+   "/blog/seo-company-in-pune",
+   "/blog/facebook-advertising-agency-pune"
+  ],
+  "leftEdge": {
+   "header": 51,
+   "h1": 71,
+   "list": 71
+  },
+  "rowH": [
+   151,
+   151,
+   178,
+   178,
+   178,
+   205,
+   178
+  ],
+  "metaLines": [
+   42,
+   42,
+   42,
+   42,
+   42,
+   42,
+   42
+  ],
+  "rest": {
+   "bg": "rgba(0, 0, 0, 0)",
+   "padL": "4px",
+   "outline": "none 3px oklab(0.187895 0.00676733 -0.0126613 / 0.5)",
+   "underline": "rgb(222, 214, 200)",
+   "arwBg": "rgba(0, 0, 0, 0)",
+   "trans": "0.15s, 0.15s"
+  },
+  "hover": {
+   "bg": "rgb(247, 243, 236)",
+   "padL": "12px",
+   "outline": "none 3px oklab(0.187895 0.00676733 -0.0126613 / 0.5)",
+   "underline": "rgb(255, 91, 4)",
+   "arwBg": "rgb(20, 18, 25)",
+   "trans": "0.15s, 0.15s"
+  },
+  "focus": {
+   "bg": "rgba(0, 0, 0, 0)",
+   "padL": "4px",
+   "outline": "solid 3px rgb(255, 91, 4)",
+   "underline": "rgb(255, 91, 4)",
+   "arwBg": "rgba(0, 0, 0, 0)",
+   "trans": "0.15s, 0.15s"
+  },
+  "errs": []
+ },
+ "tablet-768": {
+  "pageH": 3234,
+  "overflowX": false,
+  "small": [],
+  "targetsUnder44": [
+   [
+    "Home",
+    19
+   ]
+  ],
+  "heads": [
+   "H1 Marketing guides, written plainly.",
+   "H2 7 guides",
+   "H2 Reading about a problem you have?"
+  ],
+  "rowLinks": [
+   "/blog/content-marketing-services-in-pune",
+   "/blog/building-an-email-list",
+   "/blog/importance-of-content-writing",
+   "/blog/performance-marketing-vs-digital-marketing",
+   "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers",
+   "/blog/seo-company-in-pune",
+   "/blog/facebook-advertising-agency-pune"
+  ],
+  "leftEdge": {
+   "header": 31,
+   "h1": 31,
+   "list": 31
+  },
+  "rowH": [
+   179,
+   154,
+   179,
+   179,
+   179,
+   179,
+   204
+  ],
+  "metaLines": [
+   42,
+   42,
+   42,
+   42,
+   42,
+   42,
+   42
+  ],
+  "rest": {
+   "bg": "rgba(0, 0, 0, 0)",
+   "padL": "4px",
+   "outline": "none 3px oklab(0.187895 0.00676733 -0.0126613 / 0.5)",
+   "underline": "rgb(222, 214, 200)",
+   "arwBg": "rgba(0, 0, 0, 0)",
+   "trans": "0.15s, 0.15s"
+  },
+  "hover": {
+   "bg": "rgb(247, 243, 236)",
+   "padL": "12px",
+   "outline": "none 3px oklab(0.187895 0.00676733 -0.0126613 / 0.5)",
+   "underline": "rgb(255, 91, 4)",
+   "arwBg": "rgb(20, 18, 25)",
+   "trans": "0.15s, 0.15s"
+  },
+  "focus": {
+   "bg": "rgba(0, 0, 0, 0)",
+   "padL": "4px",
+   "outline": "solid 3px rgb(255, 91, 4)",
+   "underline": "rgb(255, 91, 4)",
+   "arwBg": "rgba(0, 0, 0, 0)",
+   "trans": "0.15s, 0.15s"
+  },
+  "errs": []
+ },
+ "mobile-375": {
+  "pageH": 4353,
+  "overflowX": false,
+  "small": [],
+  "targetsUnder44": [
+   [
+    "Home",
+    19
+   ]
+  ],
+  "heads": [
+   "H1 Marketing guides, written plainly.",
+   "H2 7 guides",
+   "H2 Reading about a problem you have?"
+  ],
+  "rowLinks": [
+   "/blog/content-marketing-services-in-pune",
+   "/blog/building-an-email-list",
+   "/blog/importance-of-content-writing",
+   "/blog/performance-marketing-vs-digital-marketing",
+   "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers",
+   "/blog/seo-company-in-pune",
+   "/blog/facebook-advertising-agency-pune"
+  ],
+  "leftEdge": {
+   "header": 16,
+   "h1": 16,
+   "list": 16
+  },
+  "rowH": [
+   278,
+   278,
+   301,
+   274,
+   251,
+   301,
+   301
+  ],
+  "metaLines": [
+   16,
+   16,
+   16,
+   16,
+   16,
+   16,
+   16
+  ],
+  "rest": {
+   "bg": "rgba(0, 0, 0, 0)",
+   "padL": "4px",
+   "outline": "none 3px oklab(0.187895 0.00676733 -0.0126613 / 0.5)",
+   "underline": "rgb(222, 214, 200)",
+   "arwBg": "rgba(0, 0, 0, 0)",
+   "trans": "0.15s, 0.15s"
+  },
+  "hover": {
+   "bg": "rgb(247, 243, 236)",
+   "padL": "8px",
+   "outline": "none 3px oklab(0.187895 0.00676733 -0.0126613 / 0.5)",
+   "underline": "rgb(255, 91, 4)",
+   "arwBg": "rgb(20, 18, 25)",
+   "trans": "0.15s, 0.15s"
+  },
+  "focus": {
+   "bg": "rgba(0, 0, 0, 0)",
+   "padL": "4px",
+   "outline": "solid 3px rgb(255, 91, 4)",
+   "underline": "rgb(255, 91, 4)",
+   "arwBg": "rgba(0, 0, 0, 0)",
+   "trans": "0.15s, 0.15s"
+  },
+  "errs": []
+ },
+ "mobile-320": {
+  "pageH": 4714,
+  "overflowX": false,
+  "small": [],
+  "targetsUnder44": [
+   [
+    "Home",
+    19
+   ]
+  ],
+  "heads": [
+   "H1 Marketing guides, written plainly.",
+   "H2 7 guides",
+   "H2 Reading about a problem you have?"
+  ],
+  "rowLinks": [
+   "/blog/content-marketing-services-in-pune",
+   "/blog/building-an-email-list",
+   "/blog/importance-of-content-writing",
+   "/blog/performance-marketing-vs-digital-marketing",
+   "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers",
+   "/blog/seo-company-in-pune",
+   "/blog/facebook-advertising-agency-pune"
+  ],
+  "leftEdge": {
+   "header": 16,
+   "h1": 16,
+   "list": 16
+  },
+  "rowH": [
+   305,
+   305,
+   325,
+   301,
+   301,
+   328,
+   301
+  ],
+  "metaLines": [
+   16,
+   16,
+   16,
+   16,
+   16,
+   16,
+   16
+  ],
+  "rest": {
+   "bg": "rgba(0, 0, 0, 0)",
+   "padL": "4px",
+   "outline": "none 3px oklab(0.187895 0.00676733 -0.0126613 / 0.5)",
+   "underline": "rgb(222, 214, 200)",
+   "arwBg": "rgba(0, 0, 0, 0)",
+   "trans": "0.15s, 0.15s"
+  },
+  "hover": {
+   "bg": "rgb(247, 243, 236)",
+   "padL": "8px",
+   "outline": "none 3px oklab(0.187895 0.00676733 -0.0126613 / 0.5)",
+   "underline": "rgb(255, 91, 4)",
+   "arwBg": "rgb(20, 18, 25)",
+   "trans": "0.15s, 0.15s"
+  },
+  "focus": {
+   "bg": "rgba(0, 0, 0, 0)",
+   "padL": "4px",
+   "outline": "solid 3px rgb(255, 91, 4)",
+   "underline": "rgb(255, 91, 4)",
+   "arwBg": "rgba(0, 0, 0, 0)",
+   "trans": "0.15s, 0.15s"
+  },
+  "errs": []
+ },
+ "reducedMotion": [
+  "1e-05s",
+  "1e-05s",
+  "1e-05s"
+ ],
+ "empty": {
+  "rows": 0,
+  "lede": "Nothing is published here yet.",
+  "h2": [
+   "Reading about a problem you have?"
+  ]
+ },
+ "noJs": {
+  "rows": 7,
+  "listPresent": true
+ }
+}

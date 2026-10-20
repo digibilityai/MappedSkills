@@ -48,6 +48,8 @@
 > Start at `docs/ui-revamp/GATE_4_MASTER_ROLLOUT_PLAN.md` (seven `GATE_4_*.md` documents). Proposed owner decisions O1–O10
 > (§7); recommended first batch B0 + B1 (QA harness and baselines, then the global chrome flip). No application code changed.
 >
+> **`/faq` redesign LIVE — 2026-10-20 (`DEC-063`).** Five categories, 14 questions, direct answers first; claims aligned with later decisions (no AI self-test figures, review calls only when agreed, no booking). Metadata unchanged. `1dcd10e` (PR #24), deploy run `39309979441`, live `BUILD_ID` `icztRBLn9sS1dBFF8WuF3`; rollback `hfiv2Hfw_dru9XB4q3p0g` (`/schedule-call`, `07e76e9`), not used. Open: screen reader, Firefox/WebKit, real devices, GTM Preview.
+>
 > **`/schedule-call` "Request a call" LIVE — 2026-10-19 (`DEC-062`).** No online booking; a short request form that feeds Mini CRM's "Website requests" list (Mini CRM `8d250d4`, PR #79). `07e76e9` (PR #22), deploy run `39195363054`, live `BUILD_ID` `hfiv2Hfw_dru9XB4q3p0g`; rollback `NvTejYkD7V4j88x51zJY_` (`/pricing`, `7e18ffc`), not used. One synthetic request delivered end to end and seen as "Call request" in the CRM. Open: synthetic-data cleanup (awaiting owner), outside-workspace denial verified locally only, GTM-without-consent behaviour, D4 relabel.
 >
 > **`/pricing` redesign LIVE — 2026-10-18 (`DEC-061`).** Fully customised pricing; no prices, ranges or packages published. `7e18ffc` (PR #20), deploy run `39148209163`, live `BUILD_ID` `NvTejYkD7V4j88x51zJY_`; rollback `bU2OI0K6q5Pfp9epXREbb` (`/about`, `74dca3e`), not used. Open: screen reader, Firefox/WebKit, real devices, GTM Preview.

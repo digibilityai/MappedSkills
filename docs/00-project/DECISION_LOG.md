@@ -1715,3 +1715,69 @@ Use this file only for meaningful project decisions.
   `docs/00-project/DECISION_LOG.md`; `docs/00-project/CURRENT_STATE.md`. No application files.
 - **Supersedes:** nothing. **Read with:** `DEC-018` (THE RESOLVE: Bricolage + Manrope, tangerine), `DEC-061` (deploy
   process, for G2). **Approved by:** Project owner, 2026-10-20. Recorded by the repository worker.
+
+### DEC-070
+- **Date:** 2026-10-20
+- **Status:** **Authorised (owner, via the project orchestrator): IMPLEMENTATION of the navigation redesign (R2) and of
+  the corrected logo (`DEC-069` G2) on a feature branch, with a pull request for review. Merge and production deployment
+  are NOT authorised.**
+- **Authorisation (as given in the implementation brief, 2026-10-20, "Navigation Redesign + Corrected Logo | Production
+  Code Implementation"):** "This authorizes implementation on a dedicated feature branch only. It does NOT authorize
+  merging or production deployment."
+  - **Authorised:** inspect the repository; reconcile the duplicate untracked `docs/logo-redesign/` copy; create a feature
+    branch; implement the approved navigation and logo; run tests and local previews; commit and push the branch; open a
+    pull request.
+  - **Not authorised:** merging the pull request; deploying to production; changing live server configuration; modifying
+    unrelated pages or services; new brand or navigation decisions outside the approved scope.
+  - **Follow-up (same day):** after the initial implementation review of PR #32, the orchestrator asked for this
+    authorisation to be recorded and for merge approval to wait for explicit authorisation.
+- **What this authorises, and what was implemented (PR #32, branch `feat/navigation-and-logo-redesign`):**
+  1. **Navigation (R2 prototype, `docs/nav-redesign/prototype/index.html`):**
+     - **Desktop (≥64em / 1024px):** Services (one disclosure button) · How it works · Case studies · Pricing · Blog ·
+       About, with one primary CTA, "Contact us" → `/contact`. The header stays non-sticky (`DEC-018`, `DEC-030`).
+     - **Services panel:** Capture "Get found." (SEO, Google Ads, Paid social, AI search), Convert "Get enquiries."
+       (Conversion optimisation, Lead generation), Measure "See what's working." (How it works). It uses the approved
+       descriptors, "All services" → `/services` and the secondary link "Getting traffic but no enquiries?". The
+       Measure stage is not presented as a purchasable service.
+     - **Mobile and tablet:** Services expands and starts closed. "Contact us" is the one primary CTA. "Request a call"
+       → `/schedule-call` and the email address are secondary actions. This applies the `DEC-062` D4 relabel to the
+       chrome only.
+     - **Footer:** Services · Company · Insights · Contact (email, "Pune, India"). Mumbai, both phone numbers, the
+       Service Area line and Press are removed **from the footer only**. `offices`, structured data and other pages are
+       unchanged.
+  2. **Logo (`DEC-069` G2, `LOGO_G1_GATE.md` §4):**
+     - The approved SVGs are added to `public/`, and the wordmark is used in the header and footer at
+       28 / 24 / 19px (≥600 / 360–599 / <360px; footer 28px). This also fixes the rule-order bug.
+     - The intrinsic size is 616×112. The old WebP files are kept for rollback.
+  3. **Schema `logo` (resolves the `DEC-069` research item):**
+     - **VERIFIED FACT:** Google's Organization structured-data documentation (last updated 2026-09-08) requires a
+       format supported by Google Images, at least 112×112px, that looks as intended on white. Google Images lists SVG
+       among its supported formats.
+     - **Implemented:** `/mappedskills-logo-schema.png`, a 1278×288 transparent PNG export of the approved light
+       lockup, in Organization, Article and blog-post JSON-LD. A PNG is used because SVG support among other
+       schema.org consumers is uneven.
+- **Deliberate differences from the R2 prototype:**
+  - logo sizes follow `DEC-069`;
+  - the Services panel shifts left only if it would cross the right page gutter;
+  - inside the panel, transitions are limited to colour, background and transform, so that ArrowDown can focus under
+    the site's reduced-motion rule;
+  - colliding class names were renamed.
+  - No visual design change.
+- **Verification (local production build, 2026-10-20):**
+  - Typecheck, lint, tests (179 pass, 1 skipped), production build and `verify:build` pass.
+  - Playwright with Chromium, Firefox and WebKit at 320–1440px: 0 failures. Checked: overflow, overlaps, logo size and
+    spelling, keyboard behaviour, links.
+  - axe (WCAG A/AA, including contrast): 0 violations on the header and footer.
+  - Real 200% default text (Firefox) and 200% zoom: no overflow.
+  - CLS ≤ 0.0001.
+  - **Not tested:** real devices, forced-colours mode, screen readers, the legacy rollback chrome.
+  - Evidence is kept outside Git: `docs/nav-redesign/g2/`.
+- **Still requires separate explicit owner authorisation:** merging PR #32; the production deployment (`DEC-061`
+  process); replacing off-site brand assets that still read "MappedSkill".
+- **Impacted files:** `components/direction-c/{nav.ts,SiteHeader.tsx,SiteFooter.tsx}`, `app/direction-c.css`,
+  `components/Logo.tsx`, `lib/metadata.ts`, `lib/schema.ts`, `app/(pages)/blog/[slug]/page.tsx`,
+  `public/mappedskills-{wordmark,lockup}-{light,dark}-bg.svg`, `public/mappedskills-logo-schema.png`;
+  `docs/00-project/DECISION_LOG.md`; `docs/00-project/CURRENT_STATE.md`.
+- **Supersedes:** nothing. Completes the G2 hold in `DEC-069` for implementation only. **Read with:** `DEC-018`,
+  `DEC-034`, `DEC-037`, `DEC-061`, `DEC-062` (D4), `DEC-069`. **Authorised by:** Project owner, via the project
+  orchestrator, 2026-10-20. Recorded by the repository worker.

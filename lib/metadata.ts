@@ -84,15 +84,19 @@ export const siteMetadata = {
   siteName,
   author,
   baseUrl,
-  // The MappedSkills lockup (M mark + "apped" in ink + "Skill" in tangerine),
-  // supplied as TWO CONTRAST VARIANTS because the mark is raster and cannot be
-  // recoloured in CSS. `logoPath` carries ink text for LIGHT surfaces — THE
-  // RESOLVE's ivory ground, which the header uses; `logoPathOnDark` carries
-  // white text for DARK surfaces, which is the footer. This is the lockup
-  // production has been serving; the legacy `/ms_Logo.webp` mark it replaces
-  // is white-text only and was therefore illegible on the light header.
-  logoPath: '/mappedskills-logo-light-bg.webp',
-  logoPathOnDark: '/mappedskills-logo-dark-bg.webp',
+  // DEC-069: the corrected "MappedSkills" WORDMARK (M mark + "apped" in ink +
+  // "Skills" in tangerine, no tagline), vector, in TWO CONTRAST VARIANTS.
+  // `logoPath` carries ink text for LIGHT surfaces (the header); `logoPathOnDark`
+  // carries light text for DARK surfaces (the footer). The previous raster
+  // lockups, which read "MappedSkill", stay in public/ for rollback:
+  // '/mappedskills-logo-light-bg.webp' and '/mappedskills-logo-dark-bg.webp'.
+  logoPath: '/mappedskills-wordmark-light-bg.svg',
+  logoPathOnDark: '/mappedskills-wordmark-dark-bg.svg',
+  // Structured-data logo: a PNG export of the approved light LOCKUP (1278 × 288).
+  // Google requires a format Google Images supports, ≥112 × 112px, that reads
+  // on white; PNG is used rather than the SVG because not every consumer of
+  // schema.org markup renders SVG (LOGO_G1_GATE.md §4 step 5).
+  schemaLogoPath: '/mappedskills-logo-schema.png',
   faviconPath: '/ms_icon.webp',
   email: process.env.NEXT_PUBLIC_BUSINESS_EMAIL || 'info@mappedskills.com',
   phone: process.env.NEXT_PUBLIC_BUSINESS_PHONE || '+91 9873232662',

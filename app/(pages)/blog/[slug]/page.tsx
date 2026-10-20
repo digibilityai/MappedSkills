@@ -105,7 +105,7 @@ function generateArticleSchema(post: CmsBlogPost, url: string) {
       name: 'MappedSkills',
       logo: {
         '@type': 'ImageObject',
-        url: `${siteMetadata.baseUrl}${siteMetadata.logoPath}`,
+        url: `${siteMetadata.baseUrl}${siteMetadata.schemaLogoPath}`,
       },
     },
     datePublished: post.publishedAtISO,

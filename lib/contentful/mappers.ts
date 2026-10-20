@@ -29,6 +29,7 @@ import {
   parseCaseStudyContent,
   serviceLabelFromSections,
 } from '@/lib/contentful/case-study-sections';
+import { createHeadingIdAllocator, nodeText } from '@/lib/contentful/heading-ids';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://mappedskills.com';
 
@@ -49,22 +50,29 @@ function collectText(node: { content?: Array<{ nodeType?: string; value?: string
     .join('');
 }
 
+/**
+ * Every H2/H3 of an article, with the id its rendered heading carries (BL-D6: `lib/contentful/heading-ids.ts`). The
+ * allocator is called for EVERY H2/H3 in document order, including one with no text, exactly as the article renderer
+ * does, so the ids stay in step; a heading with no text is then left out of the list. (Was `section-${index}`, which
+ * matched no heading.)
+ */
 export function extractTocFromDocument(document?: Document | null): TocItem[] {
   if (!document?.content) return [];
 
   const items: TocItem[] = [];
-  let index = 0;
+  const idFor = createHeadingIdAllocator();
 
   for (const block of document.content as TopLevelBlock[]) {
     if (block.nodeType === BLOCKS.HEADING_2 || block.nodeType === BLOCKS.HEADING_3) {
-      const text = collectText(block).trim();
+      const raw = nodeText(block);
+      const id = idFor(raw);
+      const text = raw.trim();
       if (!text) continue;
       items.push({
-        id: `section-${index}`,
+        id,
         text,
         level: block.nodeType === BLOCKS.HEADING_2 ? 2 : 3,
       });
-      index += 1;
     }
   }
 

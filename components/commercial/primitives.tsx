@@ -446,7 +446,7 @@ export function ActionPair({
         {primaryLabel}
       </Link>
       <Link
-        href="/schedule-call"
+        href="/contact?intent=call"
         className="inline-flex min-h-[52px] items-center justify-center rounded-full border-2 px-[26px] text-base font-bold no-underline max-[520px]:basis-full"
         style={secondary}
       >

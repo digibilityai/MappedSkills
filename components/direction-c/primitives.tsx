@@ -159,7 +159,7 @@ export function InlineLink({ href, children }: { href: string; children: ReactNo
    action, booking is secondary, no third button, no sticky bar. The mark
    inside each control resolves on hover/focus (Direction C L1). */
 export const CONTACT_HREF = '/contact';
-export const BOOKING_HREF = '/schedule-call';
+export const BOOKING_HREF = '/contact?intent=call';
 
 export function ActionPair({
   primaryLabel,

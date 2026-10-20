@@ -1781,3 +1781,65 @@ Use this file only for meaningful project decisions.
 - **Supersedes:** nothing. Completes the G2 hold in `DEC-069` for implementation only. **Read with:** `DEC-018`,
   `DEC-034`, `DEC-037`, `DEC-061`, `DEC-062` (D4), `DEC-069`. **Authorised by:** Project owner, via the project
   orchestrator, 2026-10-20. Recorded by the repository worker.
+
+### DEC-071
+- **Date:** 2026-10-20
+- **Status:** **Authorised (owner, Phase C1 brief): consolidation of `/contact` and `/schedule-call` into one contact
+  page, IMPLEMENTED on `feat/contact-experience-consolidation` and committed locally for owner review.** Push, pull
+  request, merge, production migration and deployment are **NOT** authorised. Production is unchanged. The CRM
+  compatibility mapping and the `/contact` title and copy were approved by the owner on 2026-10-20 (see the
+  addendum); they were first recorded here as proposals.
+- **Decision (OWNER REQUIREMENT):** one canonical contact page, `/contact`, with two visitor intentions: "Send an
+  enquiry" (default) and "Request a call" (`/contact?intent=call`). `/schedule-call` redirects to the call state.
+  No calendar booking; nothing may imply that an appointment is confirmed (continues `DEC-062` item 1).
+- **Implementation (VERIFIED FACT, local):**
+  1. **Form.** `components/forms/ContactForm.tsx` is now the single form: intention radio group (switching keeps all
+     values and updates `?intent=` with `replaceState`, other query parameters kept); full name, business email,
+     phone / WhatsApp (required, normalised to E.164, India default for mobile-shaped numbers), "What do you need
+     help with?" (required, eight stable values, nothing preselected), requirements (optional, 4000 characters),
+     preferred time to be contacted (call only, optional, 120 characters). Submit labels "Send enquiry" /
+     "Request a call". Success still goes to the `/thank-you` enquiry or call confirmation (`DEC-062` D3).
+  2. **Routing.** `app/(pages)/contact/layout.tsx` renders the page; `contact/page.tsx` and `contact/call/page.tsx`
+     set metadata only. A `beforeFiles` rewrite serves `/contact?intent=call` from `contact/call`, so both states are
+     prerendered and navigating between them keeps the form mounted. Permanent (308) redirects: `/schedule-call` →
+     `/contact?intent=call` (query string carried; `intent=call` wins) and `/contact/call` → the same. Canonical
+     `/contact` for both. `/schedule-call` removed from the sitemap. Internal links repointed (header menu, footer,
+     `BOOKING_HREF`, `CALL_LINK`, FAQ, privacy and terms pages, legacy components).
+  3. **Server.** `POST /api/enquiry` unchanged in protection (rate limits, honeypot, timing flag, idempotency, durable
+     row before success, attribution). A body with `service` uses the new rules; bodies without it keep the original
+     enquiry and `DEC-062` call rules, so pages loaded before a release still submit.
+  4. **Storage.** Migration `004_add_enquiry_request_details.sql` (additive, nullable, no default): `request_type`,
+     `service_interest`, `preferred_contact_time`. Host CSV export includes them.
+  5. **CRM (Mini CRM contract unchanged).** The CRM's schema_version 1 payload is strict (unknown key → 400, terminal
+     on the website side), so no key was added. **Approved (owner, 2026-10-20):** the intention, service and preferred time are written as
+     labelled lines at the top of `message`, and a call request is sent with `source_page` `/schedule-call` so the
+     existing "Website requests" list keeps labelling it "Call request". The website row stores the true page.
+  6. **Analytics.** Event names, parameters and the conversion rule unchanged. `form_id` still distinguishes
+     `contact_enquiry` and `call_request`; `page_path` is now `/contact` for both.
+- **Copy (approved by the owner, 2026-10-20, as implemented):** `/contact` title "Contact Us: Send an Enquiry or Request a Call |
+  MappedSkills" and description; hero lede, intention descriptions, field labels, hints and the "How getting in touch
+  works" list. The H1, "What we'll talk about" and the closing section reuse `DEC-062` approved copy; the call state
+  keeps the `DEC-062` title and description.
+- **Removed from the form (per the brief's field list):** company, website and the optional marketing opt-in. The
+  server no longer records marketing consent from this form (no existing consent record is changed).
+- **Verification (2026-10-20, local):** typecheck, lint, `npm test` (201 pass, 1 skipped), production build and
+  `verify:build` pass. `tests/e2e/contact-consolidation.e2e.cjs` (mocked submissions): 324/324 checks in Chromium,
+  Firefox and WebKit at 320–1440px. Migration 004 and real submissions verified on a throwaway local MariaDB (removed
+  afterwards); the DB export test passes. Evidence outside Git: `docs/contact-consolidation/c1/`.
+- **Release prerequisites (not authorised):** apply migration 004 to production before activating the release
+  (`release.sh` refuses to swap while it is pending); GTM / GA4 reports that filter on `page_path = /schedule-call` must use `form_id = call_request` instead.
+- **Read with:** `DEC-011`, `DEC-051`, `DEC-062`, `DEC-070`. **Authorised by:** Project owner (Phase C1 brief),
+  2026-10-20. Recorded by the repository worker.
+- **Addendum (2026-10-20, owner, "I approve the CRM compatibility mapping and the proposed /contact title and copy as
+  implemented. Record the approval in DEC-071; don't push yet."):**
+  1. **APPROVED DECISION:** the CRM compatibility mapping in item 5 (details as labelled message lines; call requests
+     sent with `source_page` `/schedule-call`; schema_version 1 unchanged).
+  2. **APPROVED DECISION:** the `/contact` title "Contact Us: Send an Enquiry or Request a Call | MappedSkills", its
+     description and the C1 copy, as implemented in `9aba6fa`.
+  3. **Not covered by this approval:** the removal of company, website and the marketing opt-in from the form; it
+     remains as implemented, per the brief's field list.
+  4. **Still not authorised:** push, pull request, merge, the production migration and deployment.
+- **Addendum (2026-10-20, owner, "Authorised: push feat/contact-experience-consolidation and open a PR against main.
+  No merge or deployment."):** the branch was pushed and PR
+  [#33](https://github.com/digibilityai/MappedSkills/pull/33) was opened against `main` (base `87ad476`, unchanged at
+  the time). **Still not authorised:** merge, the production migration 004 and deployment.

@@ -1,232 +1,109 @@
 'use client';
 
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSelectedLayoutSegment } from 'next/navigation';
 import Link from 'next/link';
 
 import { EVENTS, pageTypeOf, safePagePath, track, trackOnce } from '@/lib/analytics';
 import { attributionForAnalytics, attributionForSubmission } from '@/lib/attribution';
+import {
+  CONTACT_LIMITS,
+  CONTACT_MESSAGES,
+  EMAIL_PATTERN,
+  SERVICE_OPTIONS,
+  normalisePhone,
+  type ContactIntent,
+} from '@/lib/contact-request';
 import { markEnquiryConfirmed } from '@/lib/enquiry-confirmation';
 import { Icon } from '@/components/cplus/Icons';
 
 /**
- * SESSION 31 — PHASE H1 — the enquiry form.
+ * C1 (DEC-071) — THE ONE CONTACT FORM, with two visitor intentions.
  *
- * WHAT THIS REPLACED, AND WHY THAT IS THE POINT OF THE PHASE.
- * The previous version of this file did this:
+ * `/contact` and `/schedule-call` used to carry two forms (the H1 enquiry form, and its DEC-062 "Request a call"
+ * variant). They are consolidated here: the visitor chooses "Send an enquiry" or "Request a call", and can switch at
+ * any time without losing anything typed. `/contact` starts on the enquiry; `/contact?intent=call` (and the
+ * `/schedule-call` redirect) starts on the call request. A call request is a REQUEST: there is no scheduling system,
+ * the team contacts the visitor to arrange a time, and nothing here may imply that an appointment is confirmed.
  *
- *     await new Promise((resolve) => setTimeout(resolve, 1000));
- *     setIsSuccess(true);
+ * WHAT IS UNCHANGED FROM THE H1/H2 FORM, AND MUST STAY SO:
+ *   - NO FALSE SUCCESS. The only path to `/thank-you` is inside `if (response.ok)`, and `POST /api/enquiry` returns
+ *     2xx only after MariaDB has acknowledged a durable row. No timer, no optimistic state.
+ *   - `lead_form_submitted` is emitted from that branch only, once per idempotency key (`trackOnce`). It cannot be
+ *     produced by a click, a submit attempt, a passing client validation, a 4xx/5xx or a network failure.
+ *     `form_id` keeps the two existing values — `contact_enquiry` and `call_request` — so existing reports and tags
+ *     keep distinguishing the intentions. Event names, parameters and the conversion rule are unchanged.
+ *   - NO PII IN ANY EVENT: path, page type, form id, field NAME, error CATEGORY and channel labels only.
+ *   - The idempotency key (one per attempt, reused across retries), the synchronous in-flight guard, the honeypot
+ *     and the timing signal. The server re-validates everything and is the only authority on what is stored.
+ *   - NO PROMISES: no response time, no "shortly", no claim about who reads it.
  *
- * There was no endpoint, no request and no record. It waited one second and
- * showed a success screen. Every enquiry it ever received was lost while the
- * visitor was told it had worked. `POST_SUBMISSION_AND_FOLLOWUP.md` §0 names a
- * false success as the one outcome that is "never acceptable", and deleting
- * that path is Phase H1's load-bearing acceptance condition. It is deleted, not
- * disabled: there is no longer any code path in this component that can show a
- * successful outcome without a 2xx from `POST /api/enquiry`, and that endpoint
- * returns 2xx only after MariaDB has acknowledged a durable row.
- *
- * THE FIELD CONTRACT IS THE FROZEN ONE — `FORM_AND_BOOKING_SPEC.md` §1, Gate 6
- * / DEC-011. Four required, three optional:
- *
- *   required   name · work email · company · what you're trying to fix
- *   optional   phone/WhatsApp · website · marketing consent
- *
- * THREE FIELDS ARE GONE, and each removal is specified rather than a preference:
- *   - BUDGET. `FORM_AND_BOOKING_SPEC.md` §1.4 removes it outright:
- *     unverifiable, the highest-friction control on the page, and
- *     `QUALIFIED_ENQUIRY_DEFINITION.md` §1 establishes it cannot qualify
- *     anything. Nothing replaces it — §1.4 also rules out job title, company
- *     size, revenue, timeframe and "how did you hear about us".
- *   - SERVICE INTEREST. §1.3 derives it from the converting page instead of
- *     asking; `sourcePage` below carries that context.
- *   - REQUIRED PHONE. §1.2 makes phone optional on the form and required on the
- *     booking surface. Requiring it costs completions and invites junk numbers.
- *
- * SESSION 32 — PHASE H2 — ANALYTICS, AND WHERE ITS AUTHORITY COMES FROM.
- *
- * The three `window.gtag(...)` calls that used to be here are gone and are not
- * coming back. One of them fired `contact_form_submit` on a submission that
- * never happened, which is the defect in miniature: an event that describes an
- * outcome the system never achieved. Their replacement is one event, and it is
- * derived from ONE FACT ONLY —
- *
- *     `POST /api/enquiry` RETURNED 2xx,
- *
- * which `app/api/enquiry/route.ts` does exclusively after MariaDB has
- * acknowledged a durable row. Read the submit handler below and there is exactly
- * one place `lead_form_submitted` can be emitted from: inside `if
- * (response.ok)`. It is unreachable from a click, from a submit attempt, from a
- * passing client validation, from a fetch that started, from a 4xx, from a 503,
- * from a network failure, and from a view of `/thank-you` — which is a separate
- * document this component has no code on.
- *
- * DELIVERY IS CLIENT-SIDE; AUTHORITY IS NOT. `05_FORMS_ANALYTICS.md` §2.2 asks
- * for this conversion to be DELIVERED by a server. It cannot be, today: server
- * delivery needs a configured provider endpoint and credential — a GA4
- * Measurement Protocol secret, a server-side container, a Meta CAPI token — and
- * NONE EXISTS. Inventing one is prohibited outright. So the server AUTHORS the
- * conversion and the browser only carries it, and the limitation that separation
- * leaves is stated rather than hidden: AN AD-BLOCKED OR OFFLINE VISITOR'S
- * CONVERSION IS NEVER DELIVERED TO ANY PLATFORM. It is not lost — the row is in
- * MariaDB either way, and the enquiries table, not an analytics property, is the
- * system of record for how many enquiries exist. Analytics is for channel and
- * behaviour, and it is known to undercount.
- *
- * NO PII, AND STRUCTURALLY SO. No event below is passed a form value. The
- * payloads carry a path, a page category, a field NAME, an error CATEGORY and
- * channel labels. Not the name, the email, the phone number, the company, the
- * website or one character of the message. The idempotency key is used as a
- * local de-duplication token inside `trackOnce` and is never put in a payload:
- * it is stored against the row, so it would be a database identifier resolvable
- * to a person.
- *
- * ANALYTICS CANNOT BREAK THIS FORM. `track` and `trackOnce` swallow their own
- * errors and return `void`, nothing is awaited, and the conversion call sits
- * before `router.push` in the same block rather than inside the request path.
- *
- * NO PROMISES. No response time, in hours, days, or as "shortly" or "soon". No
- * claim about what happens next, who reads it, or how secure the transmission
- * is. None of those has been measured or committed to, and this is the surface
- * where an unsupported promise would be least defensible.
+ * Analytics cannot break the form: `track`/`trackOnce` swallow their own errors and nothing is awaited.
  */
 
-const REQUIRED_FIELDS = ['name', 'email', 'company', 'message'] as const;
-type FieldName = 'name' | 'email' | 'company' | 'message' | 'phone' | 'website';
+type FieldName = 'name' | 'email' | 'phone' | 'service' | 'message' | 'preferredContactTime';
 
-const FIELD_LABELS: Record<FieldName, string> = {
-  name: 'Your name',
-  email: 'Work email',
-  company: 'Company',
-  message: 'What you’re trying to fix',
-  phone: 'Phone or WhatsApp',
-  website: 'Website',
-};
+const REQUIRED_FIELDS = ['name', 'email', 'phone', 'service'] as const;
 
-/**
- * C+ presentation copy (proto/direction-c-plus 0a8b611, CONTACT_PLAIN): the hint under each label, the three field
- * groups and the line above the send button. Labels, error messages, the consent text and the privacy line are
- * unchanged. No hint asks for anything the frozen field contract does not already collect. The phone hint keeps the
- * original meaning (a call), with WhatsApp as the other owner-confirmed reply channel (owner decision, 2026-10-14).
- */
-const FIELD_HINTS: Record<FieldName, string> = {
-  name: 'However you would like us to address you.',
-  email: 'Where the reply goes.',
-  company: 'One word is enough.',
-  message: 'What’s happening now, in your own words. A few sentences is enough.',
-  phone: 'Only if you would rather we called or replied on WhatsApp.',
-  website: 'If you have one. It is usually the thing being discussed.',
-};
-
-const FIELD_GROUPS = { you: 'About you', what: 'What’s happening', optional: 'Optional' };
-
-/** Owner-confirmed follow-up channels (DEC-051). No response time is stated, here or anywhere on the form. */
-const REPLY_LINE = 'We’ll reply by email or WhatsApp.';
-
-/**
- * DEC-062 — the `/schedule-call` "Request a call" variant (G1 approved 2026-10-18). There is no online scheduling
- * system: the visitor sends a short request and the team gets in touch to agree a time. Four fields, three required
- * (name, email, phone: D1) and an optional message; no company, website or marketing consent. Same endpoint, same
- * protection, same conversion path; the server applies the same rules when the body says `requestType: 'call'`.
- * Nothing here may imply that an appointment is booked.
- */
-export type ContactFormVariant = 'enquiry' | 'call';
-
-const CALL_REQUIRED_FIELDS = ['name', 'email', 'phone'] as const;
-
-const CALL_LABELS: Partial<Record<FieldName, string>> = {
+const LABELS: Record<FieldName, string> = {
   name: 'Full name',
-  email: 'Email address',
+  email: 'Business email',
   phone: 'Phone / WhatsApp number',
-  message: 'What would you like to discuss?',
+  service: 'What do you need help with?',
+  message: 'Tell us a little about your requirements',
+  preferredContactTime: 'Preferred time to be contacted',
 };
 
-/** Empty means no hint is rendered for that field. */
-const CALL_HINTS: Partial<Record<FieldName, string>> = {
-  phone: 'We’ll use this to arrange the call. Include your country code.',
-  message: 'A line or two is plenty.',
-};
-
-/** Word-for-word the server's call-request messages in `lib/enquiry-validation.ts`. */
-const CALL_REQUIRED_MESSAGES: Record<(typeof CALL_REQUIRED_FIELDS)[number], string> = {
-  name: 'Enter the name we should use when we get in touch.',
-  email: 'Enter an email address so we can get in touch.',
-  phone: 'Enter a number we can reach you on, including the country code.',
-};
-
-const CALL_NOTE = 'This sends a request, not a booking. We’ll contact you by phone, WhatsApp or email to agree a time.';
-
-/**
- * Word-for-word the server's messages in `lib/enquiry-validation.ts`. Kept
- * identical on purpose: a visitor who fails the same check twice — once locally
- * and once on the server — must not be shown two different explanations of the
- * same problem.
- */
-const REQUIRED_MESSAGES: Record<(typeof REQUIRED_FIELDS)[number], string> = {
-  name: 'Enter the name we should use when we reply.',
-  email: 'Enter an email address so we can reply to you.',
-  company: 'Enter your company name. One word is enough.',
-  message: 'Tell us what you are trying to fix, in your own words.',
-};
-
-/**
- * Mirrors `lib/enquiry-validation.ts`. These are a convenience so a visitor is
- * not made to wait on a round trip to learn a box is empty — the server applies
- * every one of them again and is the only authority on whether a submission is
- * stored.
- */
-const MAX_LENGTHS: Record<FieldName, number> = {
-  name: 120,
-  email: 254,
-  company: 160,
-  message: 5000,
-  phone: 40,
-  website: 512,
-};
-
-/**
- * Must match `MARKETING_CONSENT_TEXT_V1` in `lib/enquiry-validation.ts`, which
- * is what gets stored against the record. Changing the wording means adding a
- * new version constant on the server, not editing the existing one.
- */
-const MARKETING_CONSENT_LABEL =
-  'Email me occasionally about what MappedSkills publishes. Not required to send this.';
-
-type FormValues = {
-  name: string;
-  email: string;
-  company: string;
-  message: string;
-  phone: string;
-  website: string;
-  marketingConsent: boolean;
-  /** Honeypot. Never shown, never read by a person. */
-  contactReference: string;
-};
-
-const EMPTY: FormValues = {
+/** Empty means no hint. Hints are associated with their field before entry, through `aria-describedby`. */
+const HINTS: Record<FieldName, string> = {
   name: '',
   email: '',
-  company: '',
+  phone: 'Include your country code. Indian mobile numbers can be entered without +91.',
+  service: '',
   message: '',
-  phone: '',
-  website: '',
-  marketingConsent: false,
-  contactReference: '',
+  preferredContactTime: 'For example, weekdays 2–5 PM IST. This helps us plan; it isn’t a booking.',
+};
+
+const MESSAGE_PLACEHOLDER: Record<ContactIntent, string> = {
+  enquiry: 'What challenges are you facing, or what would you like to achieve?',
+  call: 'What would you like to discuss on the call?',
+};
+
+const REQUIRED_MESSAGES: Record<(typeof REQUIRED_FIELDS)[number], string> = {
+  name: CONTACT_MESSAGES.nameRequired,
+  email: CONTACT_MESSAGES.emailRequired,
+  phone: CONTACT_MESSAGES.phoneRequired,
+  service: CONTACT_MESSAGES.serviceRequired,
+};
+
+const MAX_LENGTHS: Partial<Record<FieldName, number>> = {
+  name: CONTACT_LIMITS.name,
+  email: CONTACT_LIMITS.email,
+  phone: CONTACT_LIMITS.phone,
+  message: CONTACT_LIMITS.message,
+  preferredContactTime: CONTACT_LIMITS.preferredContactTime,
+};
+
+/** The two intentions, as the visitor reads them. */
+const INTENTS: { value: ContactIntent; label: string; detail: string }[] = [
+  { value: 'enquiry', label: 'Send an enquiry', detail: 'Ask a question or tell us what you need.' },
+  { value: 'call', label: 'Request a call', detail: 'We’ll contact you to arrange a conversation.' },
+];
+
+const SUBMIT_LABEL: Record<ContactIntent, string> = { enquiry: 'Send enquiry', call: 'Request a call' };
+const SENDING_LABEL: Record<ContactIntent, string> = {
+  enquiry: 'Sending your enquiry.',
+  call: 'Sending your request.',
+};
+/** Owner-confirmed reply channels (DEC-051) and the DEC-062 "request, not a booking" line. No response time. */
+const SEND_NOTE: Record<ContactIntent, string> = {
+  enquiry: 'We’ll reply by email or WhatsApp.',
+  call: 'This sends a request, not a booking. We’ll contact you by phone, WhatsApp or email to arrange a time.',
 };
 
 /**
- * Failure text, by the server's error code. Every one of these says the same
- * load-bearing thing in different words — NOTHING WAS SAVED — because the
- * defect this phase exists to remove is a visitor believing otherwise.
- *
- * NO FALLBACK CONTACT ROUTE IS OFFERED, and its absence is deliberate.
- * `POST_SUBMISSION_AND_FOLLOWUP.md` §4 asks for one on a persistence failure,
- * but the published phone number and email address are OWNER-BLOCKED and Phase
- * G correctly renders them nowhere. Inventing one here would be worse than the
- * gap: a failing form that then sends people to an address nobody has confirmed
- * is monitored. Recorded as an owner dependency in the H1 document.
+ * Failure text, by the server's error code. Every one says the load-bearing thing — NOTHING WAS SAVED — and that
+ * nothing typed has been lost. No fallback contact route is offered: the published phone and email are owner-blocked.
  */
 const FORM_ERRORS: Record<string, string> = {
   unavailable:
@@ -240,94 +117,72 @@ const FORM_ERRORS: Record<string, string> = {
   unknown:
     'Something went wrong at our end and your enquiry was not saved. Nothing you typed has been lost — try again.',
 };
+const formErrorText = (code: string, intent: ContactIntent) => {
+  const text = FORM_ERRORS[code] ?? FORM_ERRORS.unknown;
+  return intent === 'call' ? text.replace(/enquiry/g, 'request') : text;
+};
 
-/** The same failures for a call request: the same sentences, about a request rather than an enquiry. */
-const CALL_FORM_ERRORS: Record<string, string> = Object.fromEntries(
-  Object.entries(FORM_ERRORS).map(([code, text]) => [code, text.replace(/enquiry/g, 'request')])
-);
+type FormValues = Record<FieldName, string> & {
+  /** Honeypot. Never shown, never read by a person. */
+  contactReference: string;
+};
+
+const EMPTY: FormValues = {
+  name: '',
+  email: '',
+  phone: '',
+  service: '',
+  message: '',
+  preferredContactTime: '',
+  contactReference: '',
+};
+
+/** Anything on the page can switch the form's intention (the "Request a call" link further down `/contact`). */
+export const CONTACT_INTENT_EVENT = 'ms:contact-intent';
 
 /** `isHydrated` reads no external store; the server snapshot (false) is what makes the hydration pass differ. */
 const noSubscription = () => () => {};
 
 /**
- * `labelledBy`: the id of the visible heading that names this form (C+ `/contact`: its H1), so the form is exposed as a
- * named form region. Presentation only; nothing about submission depends on it.
+ * `labelledBy`: the id of the visible heading that names this form, so it is exposed as a named form region.
+ * The starting intention comes from the route: `/contact?intent=call` is served by the `contact/call` segment
+ * (a rewrite in `next.config.mjs`), so the server HTML is already in the right state and nothing flashes.
  */
-export function ContactForm({
-  labelledBy,
-  variant = 'enquiry',
-}: { labelledBy?: string; variant?: ContactFormVariant } = {}) {
-  const isCall = variant === 'call';
-  const formErrors = isCall ? CALL_FORM_ERRORS : FORM_ERRORS;
-  const labelOf = (id: FieldName) => (isCall ? (CALL_LABELS[id] ?? FIELD_LABELS[id]) : FIELD_LABELS[id]);
-  const hintOf = (id: FieldName) => (isCall ? (CALL_HINTS[id] ?? '') : FIELD_HINTS[id]);
+export function ContactForm({ labelledBy }: { labelledBy?: string } = {}) {
   const router = useRouter();
   const pathname = usePathname();
+  const routeIntent: ContactIntent = useSelectedLayoutSegment() === 'call' ? 'call' : 'enquiry';
+
+  const [intent, setIntentState] = useState<ContactIntent>(routeIntent);
+  // A navigation to the other intention (a header link while already on /contact) re-renders the shared layout
+  // without remounting this form, so typed values survive; the intention follows the route.
+  const [seenRouteIntent, setSeenRouteIntent] = useState<ContactIntent>(routeIntent);
+  if (seenRouteIntent !== routeIntent) {
+    setSeenRouteIntent(routeIntent);
+    setIntentState(routeIntent);
+  }
 
   const [values, setValues] = useState<FormValues>(EMPTY);
   const [fieldErrors, setFieldErrors] = useState<Partial<Record<FieldName, string>>>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  /**
-   * False in the server HTML and until this component has hydrated, so the send button is rendered DISABLED and
-   * cannot trigger the browser's native submission (with JavaScript off, or before it has loaded). Only the
-   * `handleSubmit` path below can send an enquiry. `method="post"` on the form is the second line: even a native
-   * submission could never put a field value in the URL.
-   */
+  /** False in the server HTML: the send button is disabled until hydration, so only `handleSubmit` can send. */
   const isHydrated = useSyncExternalStore(noSubscription, () => true, () => false);
 
-  /**
-   * The synchronous in-flight guard. `isSubmitting` drives what the visitor
-   * SEES, but React state is not readable within the tick that sets it, so two
-   * clicks landing before the next render would both pass a state-based check
-   * and both send a request. A ref is updated immediately, so the second one is
-   * dropped where it happens.
-   *
-   * This does not replace the database's unique index — nothing on the client
-   * can, because a browser retry or a reload is outside this component's
-   * lifetime entirely. It just stops the redundant requests that a state check
-   * would let through.
-   */
+  /** Synchronous double-submit guard (state is not readable within the tick that sets it). */
   const inFlightRef = useRef(false);
   /** Set once the success navigation has started, so the guard is never reopened. */
   const navigatedRef = useRef(false);
-
   const summaryRef = useRef<HTMLDivElement>(null);
-  /** Set once the form has actually been submitted, so nothing is validated before it is touched. */
+  /** Set once the form has been submitted, so nothing is validated before it is touched. */
   const attemptedRef = useRef(false);
-  /** Focus moves to the summary only on the submit that produced it, never on a re-render. */
   const shouldFocusSummaryRef = useRef(false);
-
-  /**
-   * Abuse layer 2 — the submission-timing signal. Recorded on mount rather than
-   * on first keystroke so a script that posts the moment the page parses is
-   * visible. It is a soft signal: the server FLAGS an implausibly fast
-   * submission for review and never rejects it.
-   */
+  /** Abuse layer 2: recorded on mount; the server FLAGS an implausibly fast submission, never rejects it. */
   const mountedAtRef = useRef<number>(0);
-
-  /**
-   * Abuse layer, and the durable one — the idempotency key. Generated once per
-   * enquiry attempt and reused across retries, so a double-click, a browser
-   * retry or a "try again" after a network error all carry the SAME key. The
-   * database's unique index on that column is what actually guarantees one row;
-   * the disabled button below is only the first line of defence and does not
-   * survive a retry.
-   */
+  /** One key per attempt, reused across retries; the database's unique index guarantees one row. */
   const idempotencyKeyRef = useRef<string | null>(null);
-
-  /**
-   * SESSION 32 — H2. `lead_form_started` fires ONCE per mounted form, on the
-   * first real edit of a real field. A ref rather than state because the guard
-   * has to hold within the same tick as the keystroke that trips it, and because
-   * re-rendering the whole form to record that it has been touched would be a
-   * measurable cost paid for nothing.
-   *
-   * NOT ON EVERY KEYSTROKE, and not on focus. The session brief is explicit that
-   * per-keystroke instrumentation is out of proportion, and a focus event fires
-   * when someone tabs past a field without intending to fill it in.
-   */
+  /** `lead_form_started` fires once per mounted form, on the first real edit of a real field. */
   const startedRef = useRef(false);
 
   useEffect(() => {
@@ -342,27 +197,63 @@ export function ContactForm({
   });
 
   /**
-   * The page context every event on this form carries. Path only — the query
-   * string is stripped by `safePagePath`, per `EVENT_TAXONOMY.md` §7, because it
-   * is the part of a location that carries identifiers.
+   * Changes the intention and keeps the address bar in step (`?intent=call`, or none for the enquiry), so a reload or
+   * a shared link opens the same state. Every other query parameter is kept. `replaceState` adds no history entry and
+   * does not navigate, so nothing typed is touched.
    */
-  function pageContext() {
-    const path = safePagePath(pathname ?? (isCall ? '/schedule-call' : '/contact'));
-    return { page_path: path, page_type: pageTypeOf(path), form_id: isCall ? 'call_request' : 'contact_enquiry' };
+  function chooseIntent(next: ContactIntent) {
+    if (isSubmitting) return;
+    setIntentState(next);
+    // The preferred-time error belongs to the call request only.
+    if (next === 'enquiry' && fieldErrors.preferredContactTime) {
+      setFieldErrors((previous) => {
+        const rest = { ...previous };
+        delete rest.preferredContactTime;
+        return rest;
+      });
+    }
+    try {
+      const url = new URL(window.location.href);
+      if (next === 'call') url.searchParams.set('intent', 'call');
+      else url.searchParams.delete('intent');
+      window.history.replaceState(window.history.state, '', url.pathname + url.search + url.hash);
+    } catch {
+      /* The address bar is a convenience; the form state is what counts. */
+    }
   }
 
-  function setValue<K extends keyof FormValues>(field: K, value: FormValues[K]) {
-    // `lead_form_started` — first meaningful interaction, once. The honeypot is
-    // excluded deliberately: it is invisible to people, so a fill there is a
-    // machine and must not be reported as a human starting the form.
+  // Links elsewhere on the page ask for an intention through a DOM event (the form owns the state).
+  const chooseIntentRef = useRef(chooseIntent);
+  useEffect(() => {
+    chooseIntentRef.current = chooseIntent;
+  });
+  useEffect(() => {
+    function onIntent(event: Event) {
+      const next = (event as CustomEvent<ContactIntent>).detail;
+      if (next === 'call' || next === 'enquiry') chooseIntentRef.current(next);
+    }
+    window.addEventListener(CONTACT_INTENT_EVENT, onIntent);
+    return () => window.removeEventListener(CONTACT_INTENT_EVENT, onIntent);
+  }, []);
+
+  /** Path only (`safePagePath` strips the query string); `form_id` names the intention. */
+  function pageContext(forIntent: ContactIntent = intent) {
+    const path = safePagePath(pathname ?? '/contact');
+    return {
+      page_path: path,
+      page_type: pageTypeOf(path),
+      form_id: forIntent === 'call' ? 'call_request' : 'contact_enquiry',
+    };
+  }
+
+  function setValue(field: keyof FormValues, value: string) {
+    // The honeypot is excluded: a fill there is a machine, not a person starting the form.
     if (!startedRef.current && field !== 'contactReference') {
       startedRef.current = true;
       track(EVENTS.LEAD_FORM_STARTED, pageContext());
     }
     setValues((previous) => ({ ...previous, [field]: value }));
-    // Clear a field's error as soon as it is edited, but only after a submit
-    // has been attempted — re-validating on every keystroke before that would
-    // shout at someone halfway through typing their address.
+    // After a submit attempt, an edited field's error clears as it is edited; never before.
     if (attemptedRef.current && field in fieldErrors) {
       setFieldErrors((previous) => {
         const next = { ...previous };
@@ -374,40 +265,24 @@ export function ContactForm({
 
   function validateLocally(): Partial<Record<FieldName, string>> {
     const errors: Partial<Record<FieldName, string>> = {};
-
-    const required: readonly FieldName[] = isCall ? CALL_REQUIRED_FIELDS : REQUIRED_FIELDS;
-    const requiredMessages: Partial<Record<FieldName, string>> = isCall ? CALL_REQUIRED_MESSAGES : REQUIRED_MESSAGES;
-    for (const field of required) {
-      if (!values[field].trim()) {
-        errors[field] = requiredMessages[field];
-      } else if (values[field].trim().length > MAX_LENGTHS[field]) {
-        errors[field] = `Use ${MAX_LENGTHS[field]} characters or fewer.`;
-      }
+    for (const field of REQUIRED_FIELDS) {
+      if (!values[field].trim()) errors[field] = REQUIRED_MESSAGES[field];
     }
-
-    if (isCall && !errors.phone && (values.phone.match(/\d/g) ?? []).length < 6) {
-      errors.phone = CALL_REQUIRED_MESSAGES.phone;
+    for (const field of Object.keys(MAX_LENGTHS) as FieldName[]) {
+      if (field === 'preferredContactTime' && intent !== 'call') continue;
+      const max = MAX_LENGTHS[field] as number;
+      if (!errors[field] && values[field].trim().length > max) errors[field] = CONTACT_MESSAGES.tooLong(max);
     }
-
-    if (!errors.email && values.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.email.trim())) {
-      errors.email = 'Enter an email address in the form name@company.com.';
+    if (!errors.email && !EMAIL_PATTERN.test(values.email.trim())) {
+      errors.email = CONTACT_MESSAGES.emailFormat;
     }
-
+    if (!errors.phone && normalisePhone(values.phone) === null) {
+      errors.phone = CONTACT_MESSAGES.phoneFormat;
+    }
     return errors;
   }
 
-  /**
-   * `lead_form_validation_error` — `EVENT_TAXONOMY.md` §2 row 3, whose
-   * `error_type` enum (`required` · `format` · `server` · `rate_limited`) covers
-   * both the client's own checks and a rejection that came back from the server.
-   *
-   * FIELD NAME ONLY, NEVER FIELD VALUE. §7 states that rule in exactly those
-   * words, and it is enforced by this function's signature: it takes a
-   * `FieldName`, so there is no parameter a value could be passed through.
-   *
-   * ONE EVENT PER FAILING FIELD PER SUBMIT ATTEMPT — not per keystroke, and not
-   * one aggregate event that hides which field people are actually failing.
-   */
+  /** One diagnostic per failing field per submit attempt: field NAME and error CATEGORY, never a value. */
   function reportValidationErrors(
     errors: Partial<Record<FieldName, string>>,
     classify: (field: FieldName) => 'required' | 'format' | 'server'
@@ -434,40 +309,30 @@ export function ContactForm({
     if (Object.keys(localErrors).length > 0) {
       setFieldErrors(localErrors);
       shouldFocusSummaryRef.current = true;
-      // A DIAGNOSTIC, AND EMPHATICALLY NOT A CONVERSION. Nothing was sent and
-      // nothing was stored; this records only that the visitor was stopped here.
-      reportValidationErrors(localErrors, (field) =>
-        values[field].trim() === '' ? 'required' : 'format'
-      );
+      // A diagnostic, not a conversion: nothing was sent.
+      reportValidationErrors(localErrors, (field) => (values[field].trim() === '' ? 'required' : 'format'));
       return;
     }
 
     setFieldErrors({});
     inFlightRef.current = true;
     setIsSubmitting(true);
+    // The intention is fixed for this attempt: the controls are disabled while it is in flight.
+    const sentIntent = intent;
 
     if (idempotencyKeyRef.current === null) {
       idempotencyKeyRef.current =
         typeof crypto !== 'undefined' && 'randomUUID' in crypto
           ? crypto.randomUUID()
-          : // Older Safari. The value only has to be unique enough for the
-            // database's unique index to do its job on a retry seconds later.
+          : // Older Safari: unique enough for the unique index to catch a retry seconds later.
             `${Date.now().toString(16).padStart(12, '0').slice(-8)}-0000-4000-8000-${Math.random()
               .toString(16)
               .slice(2, 14)
               .padEnd(12, '0')}`;
     }
-    /** Narrowed once, so nothing below has to re-assert it is set. */
     const idempotencyKey = idempotencyKeyRef.current;
 
-    // SESSION 32 — H2. Read ONCE, before the request, and passed through
-    // untouched. It is captured from `sessionStorage` by `lib/attribution.ts`
-    // and it CANNOT fail this submission: `attributionForSubmission` never
-    // throws and returns `EMPTY_ATTRIBUTION` — every field null,
-    // `status: 'unavailable'` — whenever storage is unavailable or nothing was
-    // recorded. The server re-validates all of it and can also reduce it to
-    // nothing without rejecting the enquiry. `ATTRIBUTION_MODEL.md` §1:
-    // measurement is reported, never enforced.
+    // Never throws; `EMPTY_ATTRIBUTION` when storage is unavailable. Measurement is reported, never enforced.
     const attribution = attributionForSubmission();
 
     try {
@@ -475,15 +340,15 @@ export function ContactForm({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...(isCall ? { requestType: 'call' } : {}),
+          requestType: sentIntent,
           idempotencyKey,
           name: values.name,
           email: values.email,
-          company: values.company,
-          message: values.message,
           phone: values.phone,
-          website: values.website,
-          marketingConsent: values.marketingConsent,
+          service: values.service,
+          message: values.message,
+          // Kept in the form when the visitor switches, but sent only with a call request.
+          preferredContactTime: sentIntent === 'call' ? values.preferredContactTime : '',
           contactReference: values.contactReference,
           elapsedMs: mountedAtRef.current ? Date.now() - mountedAtRef.current : null,
           sourcePage: pathname,
@@ -491,61 +356,19 @@ export function ContactForm({
         }),
       });
 
-      // The ONLY branch that leads anywhere but back to this form. A 2xx is
-      // returned by `app/api/enquiry/route.ts` only after the database has
-      // acknowledged the write, so this is the point at which the enquiry
-      // demonstrably exists. No timer, no optimistic state, no assumption.
+      // THE ONLY BRANCH THAT LEADS ANYWHERE BUT BACK TO THIS FORM: a durable row exists.
       if (response.ok) {
-        // No id, no email, no company, no message — nothing in the URL, nothing
-        // handed to a third party beyond the event below. The destination page
-        // is a confirmation, not a record.
-        // The guard STAYS CLOSED. `finally` runs even on this early return, so
-        // it must be told not to reopen it: the navigation is still in flight
-        // and this form is about to unmount, so a click landing in between has
-        // to be ignored rather than sent as a second request.
         navigatedRef.current = true;
-        // The one-time `/thank-you` confirmation signal: a timestamp only, and it cannot throw (see the module).
-        markEnquiryConfirmed(variant);
-
-        /*
-         * ★ THE PRIMARY CONTACT CONVERSION — SESSION 32 / PHASE H2.
-         *
-         * THE ONLY PLACE IN THIS APPLICATION THAT EMITS IT. Reaching this line
-         * required a 2xx from `POST /api/enquiry`, and that handler returns 2xx
-         * on exactly one path: after `insertEnquiry` resolved, which happens only
-         * once MariaDB has acknowledged a durable row. Every other outcome —
-         * 400, 413, 415, 429, 503, a thrown fetch — leaves this block unentered.
-         * The event therefore cannot be produced by a click, a submit attempt, a
-         * passing client validation, a started request, a failed persistence, or
-         * a visit to `/thank-you`.
-         *
-         * `trackOnce`, KEYED ON THE IDEMPOTENCY KEY — the same key the database's
-         * unique index uses. One enquiry produces one row and one event, and the
-         * two agree by construction. A double-click is stopped earlier by
-         * `inFlightRef`; a retry after a network failure re-sends the SAME key,
-         * so the server's duplicate path returns 2xx a second time and this guard
-         * suppresses the second event. The key is a de-duplication token here and
-         * NOTHING ELSE: it is stored against the row, so it is resolvable to a
-         * person, and it never enters a payload.
-         *
-         * `qualification_status: 'not_evaluated'` IS THE HONEST VALUE AND IS SENT
-         * DELIBERATELY. `EVENT_TAXONOMY.md` §4 makes this event a BUSINESS
-         * CONVERSION ONLY WHEN `qualification_status = 'qualified'`. Nothing in
-         * this system can currently establish that: WQE condition 5 needs a
-         * deduplication window `QUALIFIED_ENQUIRY_DEFINITION.md` §10 leaves
-         * unset, and no column, workflow or reviewer exists to resolve it. Sending
-         * `qualified` would fabricate a verdict; omitting the parameter would let
-         * a container default it. An explicit out-of-enum value is visible, cannot
-         * be mistaken for a verdict, and makes any report that counts these as
-         * qualified enquiries fail loudly instead of quietly.
-         */
+        // The one-time `/thank-you` signal: a timestamp (prefixed `call:` for a call request), no personal data.
+        markEnquiryConfirmed(sentIntent);
+        // ★ THE PRIMARY CONTACT CONVERSION — the only place it is emitted. `qualification_status: 'not_evaluated'`
+        // is the honest value (nothing can establish `qualified` yet). The key de-duplicates; it is never sent.
         trackOnce(EVENTS.LEAD_FORM_SUBMITTED, idempotencyKey, {
-          ...pageContext(),
+          ...pageContext(sentIntent),
           conversion_surface: 'form',
           qualification_status: 'not_evaluated',
           ...attributionForAnalytics(attribution),
         });
-
         router.push('/thank-you');
         return;
       }
@@ -562,22 +385,11 @@ export function ContactForm({
         setFormError(null);
         reportValidationErrors(payload.fieldErrors, () => 'server');
       } else {
-        setFormError(formErrors[payload.error ?? 'unknown'] ?? formErrors.unknown);
-        /*
-         * A WHOLE-FORM FAILURE. NO ROW EXISTS AND NO CONVERSION IS EMITTED — the
-         * conversion block above was not entered, and this is a sibling branch of
-         * it, so there is no ordering or timing by which both could run.
-         *
-         * CATEGORIES ONLY. `error_type` is the server's own machine-readable
-         * code, which `app/api/enquiry/route.ts` defines as a closed set
-         * containing no SQL, no driver message, no table name and no connection
-         * detail. The visitor-facing sentence is not sent, and neither is
-         * anything they typed. An unrecognised code is reported as `unexpected`
-         * rather than passed through, so a future code cannot leak by default.
-         */
+        setFormError(formErrorText(payload.error ?? 'unknown', sentIntent));
+        // A whole-form failure: no row, no conversion. Categories only; an unknown code is reported as `unexpected`.
         const code = payload.error ?? 'unexpected';
         track(EVENTS.LEAD_FORM_VALIDATION_ERROR, {
-          ...pageContext(),
+          ...pageContext(sentIntent),
           error_type: code === 'rate_limited' ? 'rate_limited' : 'server',
           error_scope: 'form',
           failure_reason: code in FORM_ERRORS || code === 'validation' ? code : 'unexpected',
@@ -585,15 +397,10 @@ export function ContactForm({
       }
       shouldFocusSummaryRef.current = true;
     } catch {
-      // Thrown before a response existed: offline, DNS, a dropped connection.
-      // Nothing reached the server, so nothing was saved, and that is what the
-      // visitor is told. Every value they typed is still in state.
-      setFormError(formErrors.network);
-      // Nothing reached the server, so nothing was saved and NO CONVERSION IS
-      // EMITTED. This is the branch an offline visitor and a dropped connection
-      // land in, and it is a diagnostic.
+      // Nothing reached the server, so nothing was saved and no conversion is emitted. Every value is still in state.
+      setFormError(formErrorText('network', sentIntent));
       track(EVENTS.LEAD_FORM_VALIDATION_ERROR, {
-        ...pageContext(),
+        ...pageContext(sentIntent),
         error_type: 'server',
         error_scope: 'form',
         failure_reason: 'network',
@@ -607,89 +414,85 @@ export function ContactForm({
     }
   }
 
-  const errorEntries = (Object.keys(fieldErrors) as FieldName[]).filter((key) => fieldErrors[key]);
+  const visibleFields: FieldName[] = ['name', 'email', 'phone', 'service', 'message'];
+  if (intent === 'call') visibleFields.push('preferredContactTime');
+  const errorEntries = visibleFields.filter((key) => fieldErrors[key]);
   const hasSummary = errorEntries.length > 0 || formError !== null;
 
-  /**
-   * One field, in the approved C+ layout (proto/direction-c-plus 0a8b611, DemoContactForm). The hint is associated
-   * before entry and the error through `aria-describedby`. Every label says "(required)" or "(optional)" in text
-   * (`FORM_AND_BOOKING_SPEC.md` §7; owner decision, 2026-10-14), and a required field also carries `aria-required`.
-   */
-  function field(
-    id: FieldName,
-    opts: { required?: boolean; type?: string; autoComplete?: string; inputMode?: 'email' | 'tel' | 'url'; area?: boolean }
+  /** Describes a field by its hint (before entry) and its error (after a failed submit). */
+  function describedBy(id: FieldName) {
+    return [HINTS[id] ? `${id}-hint` : null, fieldErrors[id] ? `${id}-error` : null].filter(Boolean).join(' ') || undefined;
+  }
+
+  function labelAndHint(id: FieldName, required: boolean) {
+    return (
+      <>
+        <label htmlFor={id} className="ct-label">
+          {LABELS[id]}
+          <span className="ct-opt"> ({required ? 'required' : 'optional'})</span>
+        </label>
+        {HINTS[id] ? (
+          <p id={`${id}-hint`} className="ct-hint">
+            {HINTS[id]}
+          </p>
+        ) : null}
+      </>
+    );
+  }
+
+  function errorOf(id: FieldName) {
+    const error = fieldErrors[id];
+    return error ? (
+      <p id={`${id}-error`} className="ct-err">
+        <span className="ct-err-ic" aria-hidden="true">
+          !
+        </span>
+        {error}
+      </p>
+    ) : null;
+  }
+
+  function input(
+    id: Exclude<FieldName, 'service' | 'message'>,
+    opts: { required?: boolean; type?: string; autoComplete?: string; inputMode?: 'email' | 'tel'; placeholder?: string }
   ) {
     const error = fieldErrors[id];
-    const hint = hintOf(id);
-    const describedBy = [hint ? `${id}-hint` : null, error ? `${id}-error` : null].filter(Boolean).join(' ') || undefined;
-    const common = {
-      id,
-      name: id,
-      maxLength: MAX_LENGTHS[id],
-      value: values[id],
-      'aria-required': opts.required ? ('true' as const) : undefined,
-      'aria-invalid': Boolean(error),
-      'aria-describedby': describedBy,
-      disabled: isSubmitting,
-      className: 'ct-input' + (opts.area ? (isCall ? ' ct-area ct-area-s' : ' ct-area') : '') + (error ? ' is-invalid' : ''),
-    };
     return (
       <div className="ct-field">
-        <label htmlFor={id} className="ct-label">
-          {labelOf(id)}
-          <span className="ct-opt"> ({opts.required ? 'required' : 'optional'})</span>
-        </label>
-        {hint ? (
-          <p id={`${id}-hint`} className="ct-hint">
-            {hint}
-          </p>
-        ) : null}
-        {opts.area ? (
-          <textarea {...common} rows={isCall ? 3 : 6} onChange={(event) => setValue(id, event.target.value)} />
-        ) : (
-          <input
-            {...common}
-            type={opts.type ?? 'text'}
-            autoComplete={opts.autoComplete}
-            inputMode={opts.inputMode}
-            onChange={(event) => setValue(id, event.target.value)}
-          />
-        )}
-        {error ? (
-          <p id={`${id}-error`} className="ct-err">
-            <span className="ct-err-ic" aria-hidden="true">
-              !
-            </span>
-            {error}
-          </p>
-        ) : null}
+        {labelAndHint(id, Boolean(opts.required))}
+        <input
+          id={id}
+          name={id}
+          type={opts.type ?? 'text'}
+          autoComplete={opts.autoComplete}
+          inputMode={opts.inputMode}
+          placeholder={opts.placeholder}
+          maxLength={MAX_LENGTHS[id]}
+          value={values[id]}
+          aria-required={opts.required ? 'true' : undefined}
+          aria-invalid={Boolean(error)}
+          aria-describedby={describedBy(id)}
+          disabled={isSubmitting}
+          className={'ct-input' + (error ? ' is-invalid' : '')}
+          onChange={(event) => setValue(id, event.target.value)}
+        />
+        {errorOf(id)}
       </div>
     );
   }
 
   return (
-    <form method="post" onSubmit={handleSubmit} noValidate className="ct-form" aria-labelledby={labelledBy}>
-      {/*
-        NO JAVASCRIPT. The form cannot send without it (the send button stays disabled), so say so before anyone
-        types, and keep the booking route, which works without JavaScript, one link away.
-      */}
+    <form method="post" onSubmit={handleSubmit} noValidate className="ct-form ct-form-c1" aria-labelledby={labelledBy}>
+      {/* The form cannot send without JavaScript (the send button stays disabled), so say so before anyone types. */}
       <noscript>
         <p className="ct-summary ct-summary-p">
           This form needs JavaScript to send, and it is turned off in your browser. Nothing you type here can be sent.
-          {isCall ? null : (
-            <>
-              {' '}
-              You can still <Link href="/schedule-call">book a call</Link>.
-            </>
-          )}
         </p>
       </noscript>
+
       {/*
-        ERROR SUMMARY. `FORM_AND_BOOKING_SPEC.md` §7 requires errors announced
-        through a live region and focus moved to the first error on a failed
-        submit. It is focusable (`tabIndex={-1}`) but not in the tab order, and
-        each entry is a real link to its field, so a keyboard or screen-reader
-        user reaches the problem in one step rather than hunting for it.
+        ERROR SUMMARY — announced through a live region; focus moves here on a failed submit. Each entry links to its
+        field, so a keyboard or screen-reader user reaches the problem in one step.
       */}
       <div
         ref={summaryRef}
@@ -700,7 +503,13 @@ export function ContactForm({
       >
         {hasSummary ? (
           <>
-            <p className="ct-summary-h">{formError ? (isCall ? 'Your request was not sent.' : 'Your enquiry was not sent.') : 'Check the form before sending.'}</p>
+            <p className="ct-summary-h">
+              {formError
+                ? intent === 'call'
+                  ? 'Your request was not sent.'
+                  : 'Your enquiry was not sent.'
+                : 'Check the form before sending.'}
+            </p>
             {formError ? (
               <p className="ct-summary-p">{formError}</p>
             ) : (
@@ -708,7 +517,7 @@ export function ContactForm({
                 {errorEntries.map((key) => (
                   <li key={key}>
                     <a href={`#${key}`}>
-                      {labelOf(key)}: {fieldErrors[key]}
+                      {LABELS[key]}: {fieldErrors[key]}
                     </a>
                   </li>
                 ))}
@@ -719,16 +528,8 @@ export function ContactForm({
       </div>
 
       {/*
-        HONEYPOT — abuse layer 1. Hidden from sighted users AND from assistive
-        technology: `aria-hidden` plus `tabIndex={-1}` means a screen reader
-        never announces it and a keyboard user never lands on it, so no
-        legitimate visitor can fill it in by accident. It is NOT
-        `display: none`, which some bots detect and skip.
-
-        A hit FLAGS the row for review; it never rejects the submission. A
-        password manager can fill a hidden input, and
-        `QUALIFIED_ENQUIRY_DEFINITION.md` §7A is explicit that the cost of
-        wrongly discarding a real buyer far exceeds the cost of a human glance.
+        HONEYPOT — abuse layer 1. Hidden from sighted users and from assistive technology (`aria-hidden`, no tab stop),
+        not `display: none`. A hit FLAGS the row for review; it never rejects the submission.
       */}
       <div aria-hidden="true" className="absolute h-px w-px overflow-hidden opacity-0" style={{ left: '-9999px' }}>
         <label htmlFor="contactReference">Do not fill this in</label>
@@ -743,95 +544,116 @@ export function ContactForm({
         />
       </div>
 
-      {isCall ? (
-        <>
-          <div className="ct-call-fields">
-            {field('name', { required: true, autoComplete: 'name' })}
-            {field('email', { required: true, type: 'email', autoComplete: 'email', inputMode: 'email' })}
-            {field('phone', { required: true, type: 'tel', autoComplete: 'tel', inputMode: 'tel' })}
-            {field('message', { area: true })}
-          </div>
-          <div className="ct-send-w ct-send-w-call">
-            <p aria-live="polite" className="px-sr">
-              {isSubmitting ? 'Sending your request.' : ''}
-            </p>
-            <button type="submit" className="ct-send" disabled={isSubmitting || !isHydrated}>
-              {isSubmitting ? (
-                'Sending…'
-              ) : (
-                <>
-                  Request a call
-                  <Icon name="arrow" size={22} />
-                </>
-              )}
-            </button>
-            <p className="ct-call-note">{CALL_NOTE}</p>
-            <p className="ct-privacy">
-              We use these details only to arrange the call. <Link href="/privacy-policy">Privacy policy</Link>.
-            </p>
-          </div>
-        </>
-      ) : (
-        <>
-        <fieldset className="ct-group">
-          <legend className="ct-legend">{FIELD_GROUPS.you}</legend>
-          {field('name', { required: true, autoComplete: 'name' })}
-          {field('email', { required: true, type: 'email', autoComplete: 'email', inputMode: 'email' })}
-          {field('company', { required: true, autoComplete: 'organization' })}
-        </fieldset>
-        <fieldset className="ct-group">
-          <legend className="ct-legend">{FIELD_GROUPS.what}</legend>
-          {field('message', { required: true, area: true })}
-        </fieldset>
-        <fieldset className="ct-group">
-          <legend className="ct-legend">{FIELD_GROUPS.optional}</legend>
-          {field('phone', { type: 'tel', autoComplete: 'tel', inputMode: 'tel' })}
-          {field('website', { type: 'url', autoComplete: 'url', inputMode: 'url' })}
-          {/*
-            MARKETING CONSENT — separate, unticked, and never a condition of
-            submitting (`POST_SUBMISSION_AND_FOLLOWUP.md` §7). A native checkbox
-            rather than a scripted one, so it behaves correctly for every assistive
-            technology without depending on this component's own state machine. The
-            wrapping label gives it a target above 44px on touch.
-          */}
-          <label htmlFor="marketingConsent" className="ct-check">
-            <input
-              id="marketingConsent"
-              name="marketingConsent"
-              type="checkbox"
-              checked={values.marketingConsent}
-              onChange={(event) => setValue('marketingConsent', event.target.checked)}
-              disabled={isSubmitting}
-            />
-            <span>{MARKETING_CONSENT_LABEL}</span>
-          </label>
-        </fieldset>
-
-        <div className="ct-send-w">
-          <p className="ct-reply">{REPLY_LINE}</p>
-          {/*
-            PENDING STATE, announced rather than only shown. `aria-live="polite"`
-            means a screen-reader user is told the form is sending instead of
-            meeting a silently disabled button. Success is not announced here —
-            success is a navigation to `/thank-you`, which announces itself.
-          */}
-          <p aria-live="polite" className="px-sr">
-            {isSubmitting ? 'Sending your enquiry.' : ''}
-          </p>
-          <button type="submit" className="ct-send" disabled={isSubmitting || !isHydrated}>
-            {isSubmitting ? 'Sending…' : 'Send this'}
-          </button>
-          {/*
-            Privacy statement adjacent to the submit control, per
-            `FORM_AND_BOOKING_SPEC.md` §2. It states the PURPOSE of the processing
-            and nothing more. In particular it makes no security claim.
-          */}
-          <p className="ct-privacy">
-            We use what you send here to reply to you. <Link href="/privacy-policy">Privacy policy</Link>.
-          </p>
+      {/*
+        THE INTENTION — a native radio group, so arrow keys, Tab and screen readers behave as they expect without any
+        scripted focus management. Switching keeps every value typed.
+      */}
+      <fieldset className="ct-intent">
+        <legend className="ct-intent-l">How would you like to start?</legend>
+        <div className="ct-intent-g">
+          {INTENTS.map((option) => (
+            <label key={option.value} className={'ct-intent-o' + (intent === option.value ? ' is-on' : '')}>
+              <input
+                type="radio"
+                name="intent"
+                value={option.value}
+                checked={intent === option.value}
+                disabled={isSubmitting}
+                aria-describedby={`intent-${option.value}-d`}
+                onChange={() => chooseIntent(option.value)}
+              />
+              <span className="ct-intent-t">{option.label}</span>
+              <span id={`intent-${option.value}-d`} className="ct-intent-d">
+                {option.detail}
+              </span>
+            </label>
+          ))}
         </div>
-        </>
-      )}
+      </fieldset>
+
+      <div className="ct-call-fields">
+        {input('name', { required: true, autoComplete: 'name' })}
+        {input('email', { required: true, type: 'email', autoComplete: 'email', inputMode: 'email' })}
+        {input('phone', {
+          required: true,
+          type: 'tel',
+          autoComplete: 'tel',
+          inputMode: 'tel',
+          placeholder: '+91 98765 43210',
+        })}
+
+        <div className="ct-field">
+          {labelAndHint('service', true)}
+          <div className="ct-select-w">
+            <select
+              id="service"
+              name="service"
+              value={values.service}
+              aria-required="true"
+              aria-invalid={Boolean(fieldErrors.service)}
+              aria-describedby={describedBy('service')}
+              disabled={isSubmitting}
+              className={'ct-input ct-select' + (values.service ? '' : ' is-empty') + (fieldErrors.service ? ' is-invalid' : '')}
+              onChange={(event) => setValue('service', event.target.value)}
+            >
+              <option value="" disabled>
+                Select a service
+              </option>
+              {SERVICE_OPTIONS.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <span className="ct-select-ic" aria-hidden="true" />
+          </div>
+          {errorOf('service')}
+        </div>
+
+        <div className="ct-field">
+          {labelAndHint('message', false)}
+          <textarea
+            id="message"
+            name="message"
+            rows={4}
+            maxLength={CONTACT_LIMITS.message}
+            placeholder={MESSAGE_PLACEHOLDER[intent]}
+            value={values.message}
+            aria-invalid={Boolean(fieldErrors.message)}
+            aria-describedby={describedBy('message')}
+            disabled={isSubmitting}
+            className={'ct-input ct-area ct-area-s' + (fieldErrors.message ? ' is-invalid' : '')}
+            onChange={(event) => setValue('message', event.target.value)}
+          />
+          {errorOf('message')}
+        </div>
+
+        {/* Call requests only. Not rendered for an enquiry, but its value stays in state, so it survives a switch. */}
+        {intent === 'call'
+          ? input('preferredContactTime', { autoComplete: 'off', placeholder: 'Weekdays, 2–5 PM IST' })
+          : null}
+      </div>
+
+      <div className="ct-send-w ct-send-w-call">
+        {/* The pending state is announced, not only shown. Success is the navigation to /thank-you. */}
+        <p aria-live="polite" className="px-sr">
+          {isSubmitting ? SENDING_LABEL[intent] : ''}
+        </p>
+        <button type="submit" className="ct-send" disabled={isSubmitting || !isHydrated}>
+          {isSubmitting ? (
+            'Sending…'
+          ) : (
+            <>
+              {SUBMIT_LABEL[intent]}
+              <Icon name="arrow" size={22} />
+            </>
+          )}
+        </button>
+        <p className="ct-call-note">{SEND_NOTE[intent]}</p>
+        <p className="ct-privacy">
+          We use these details only to respond to you. <Link href="/privacy-policy">Privacy policy</Link>.
+        </p>
+      </div>
     </form>
   );
 }

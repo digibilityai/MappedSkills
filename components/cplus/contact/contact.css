@@ -122,7 +122,8 @@
 }
 
 /* ==========================================================================================================
-   /schedule-call "Request a call" (DEC-062), from the approved G1 mockup (docs/schedule-call-redesign/g1, sc.css).
+   The contact page (C1, DEC-071) uses the DEC-062 "Request a call" layout, from the approved G1 mockup
+   (docs/schedule-call-redesign/g1, sc.css); it was /schedule-call's.
    The form itself keeps the ct-* styles above. Tangerine marks the one action and the step that comes next.
    150 ms micro-interactions only; none under reduced motion. Breakpoints: narrow <=760, medium 761-1080.
    ========================================================================================================== */
@@ -157,6 +158,35 @@
 .ct-send:hover svg { transform: translateX(3px); }
 .ct-call-note { display: flex; gap: 10px; font: 700 .9375rem/1.45 var(--dc-f-body); color: var(--dc-ink); }
 .ct-call-note::before { content: ""; flex: none; width: 10px; height: 10px; margin-top: .45em; background: var(--dc-tang-display); }
+
+/* C1 (DEC-071): the consolidated form's intention choice and service select. Native controls, styled; the selected
+   option is marked by a filled square and a heavier border as well as colour. */
+.ct-intent { margin: 0 0 4px; padding: 0; border: 0; min-width: 0; }
+.ct-intent-l { padding: 0; margin-bottom: 10px; font: 700 1rem/1.3 var(--dc-f-body); color: var(--dc-ink); }
+.ct-intent-g { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.ct-intent-o { position: relative; display: grid; grid-template-columns: 22px minmax(0, 1fr); column-gap: 12px; row-gap: 2px; align-items: start; min-height: 56px; padding: 14px 14px 14px 12px; border: 2px solid var(--dc-control); background: var(--dc-ground); cursor: pointer; transition: border-color 150ms ease, background-color 150ms ease; }
+.ct-intent-o:hover { border-color: var(--dc-ink); }
+.ct-intent-o input { grid-row: span 2; width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--dc-ink); cursor: pointer; }
+.ct-intent-o input:focus-visible { outline: 3px solid var(--dc-ink); outline-offset: 2px; }
+.ct-intent-o:has(input:focus-visible) { border-color: var(--dc-ink); }
+.ct-intent-t { font: 800 1.0625rem/1.25 var(--dc-f-title); color: var(--dc-ink); }
+.ct-intent-d { font-size: .9375rem; line-height: 1.4; color: var(--dc-dim); }
+.ct-intent-o.is-on { border: 3px solid var(--dc-ink); padding: 13px 13px 13px 11px; background: var(--dc-paper); box-shadow: inset 0 -4px 0 var(--dc-tang-display); }
+.ct-intent-o input:disabled { cursor: progress; }
+.ct-select-w { position: relative; min-width: 0; }
+.ct-select { appearance: none; -webkit-appearance: none; padding-right: 48px; cursor: pointer; text-overflow: ellipsis; }
+.ct-select.is-empty { color: var(--dc-dim); }
+.ct-select option { color: var(--dc-ink); }
+.ct-select-ic { position: absolute; right: 18px; top: 50%; width: 10px; height: 10px; margin-top: -7px; border-right: 2px solid var(--dc-ink); border-bottom: 2px solid var(--dc-ink); transform: rotate(45deg); pointer-events: none; }
+.ct-input::placeholder { color: var(--dc-dim); opacity: 1; }
+.ct-form-c1 .ct-send-w-call { margin-top: 18px; }
+@media (max-width: 420px) {
+  .ct-intent-g { grid-template-columns: minmax(0, 1fr); }
+}
+@media (forced-colors: active) {
+  .ct-intent-o.is-on { border-color: Highlight; }
+  .ct-select-ic { border-color: CanvasText; }
+}
 
 /* what we'll talk about (paper): one rule through three numbers */
 .px-h .sc-talk, .px-h .sc-calm { padding-block: var(--dc-rhythm-tight); }
@@ -212,6 +242,6 @@
   .sc-calm-a, .sc-back { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ct-call-fields .ct-input, .ct-send-w-call .ct-send, .ct-send svg, .sc-step-n, .sc-calm .sc-back, .sc-alt a, .sc-alt a svg { transition: none; }
+  .ct-call-fields .ct-input, .ct-intent-o, .ct-send-w-call .ct-send, .ct-send svg, .sc-step-n, .sc-calm .sc-back, .sc-alt a, .sc-alt a svg { transition: none; }
   .ct-send:hover svg, .sc-alt a:hover svg { transform: none; }
 }

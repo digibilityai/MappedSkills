@@ -138,7 +138,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
         q: 'Do we have to start with a call?',
         direct: 'No. You can tell us about your business through the form, by email or on WhatsApp.',
         body: ['If you’d rather talk, you can request a call and we’ll get in touch to find a convenient time.'],
-        more: { href: '/schedule-call', label: 'Request a call' },
+        more: { href: '/contact?intent=call', label: 'Request a call' },
       },
       {
         id: 'q-how-will-we-know-how-its-going',

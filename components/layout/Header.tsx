@@ -157,7 +157,7 @@ export function Header() {
           {/* Desktop CTAs — primary goes to /contact; booking is secondary */}
           <div className="hidden md:flex items-center gap-4 flex-shrink-0">
             <Link
-              href="/schedule-call"
+              href="/contact?intent=call"
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded px-2 py-1"
             >
               Book a call
@@ -230,7 +230,7 @@ export function Header() {
                 </Link>
               </Button>
               <Link
-                href="/schedule-call"
+                href="/contact?intent=call"
                 className="block text-center text-sm font-medium text-muted-foreground hover:text-foreground py-2"
                 onClick={() => setIsMenuOpen(false)}
               >

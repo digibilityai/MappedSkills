@@ -143,7 +143,7 @@ test('export against a disposable MariaDB', { skip: !enabled && 'EXPORT_TEST_DB_
     assert.ok(text.startsWith('﻿'));
     assert.ok(!text.includes(SECRET_MARKER) && !text.includes('crm_') && !text.includes('failed'));
     const [header, ...rows] = parseCsv(text.slice(1));
-    assert.equal(header.length, 27);
+    assert.equal(header.length, 30);
     assert.ok(!header.includes('idempotency_key') && !header.includes('notification_status'));
     assert.deepEqual(rows.map((r) => r[header.indexOf('email')]), expected.map((l) => l.email));
     assert.deepEqual(rows.map((r) => r[header.indexOf('submitted_at')]), expected.map((l) => l.at));

@@ -1,49 +1,26 @@
 /**
- * C+ Contact and Thank you — customer-facing copy, verbatim from the approved prototype (proto/direction-c-plus
- * 0a8b611, components/proto-cplus/content.ts: CONTACT_PLAIN, THANKS_PLAIN). SCHEDULE_PLAIN and THANKS_CALL are the
- * DEC-062 "Request a call" copy.
+ * Contact and Thank you — customer-facing copy. THANKS_PLAIN is verbatim from the approved C+ prototype
+ * (proto/direction-c-plus 0a8b611, THANKS_PLAIN); THANKS_CALL is the DEC-062 "Request a call" copy; CONTACT is the
+ * C1 consolidated page (DEC-071), which replaced the separate C+ Contact (CONTACT_PLAIN) and DEC-062 Schedule
+ * (SCHEDULE_PLAIN) pages.
  * Not carried over: the prototype labels and notes ("sends nothing", "simulated"), the demo controls, and the form's
  * own strings, which stay in components/forms/ContactForm.tsx (they are word-for-word the same).
  */
 
-export const CONTACT_PLAIN = {
-  kicker: 'Contact',
-  h1: 'Tell us what you’re trying to fix.',
-  lede: 'Send us a message about your business. We’ll get back to you by email or WhatsApp.',
-  talk: 'Rather talk? Book a call',
-  sheetTitle: 'Working sheet · your business',
-  rowLabel: 'What you want',
-  next: {
-    kicker: 'What happens next',
-    h: { a: 'Three steps,', b: 'in this order.' },
-    steps: [
-      { n: '01', t: 'You send this', d: 'Your message becomes the first row of the working sheet.' },
-      { n: '02', t: 'We reply by email or WhatsApp', d: 'Using the details you give us above.' },
-      { n: '03', t: 'Discovery call', d: 'A conversation about your business. The agreed work starts only after the audit, the proposal and your approval.' },
-    ],
-    here: 'You are here',
-    link: 'See how the work runs',
-  },
-  talkSec: {
-    kicker: 'If you would rather talk',
-    h: 'Booking a call reaches the same place.',
-    body: 'Book the discovery call directly, without writing first.',
-    button: 'Book a call',
-  },
-};
-
 /**
- * `/schedule-call` "Request a call" (DEC-062): the owner-approved G1 copy (docs/schedule-call-redesign/g1, approved
- * 2026-10-18). There is no online scheduling system, so nothing here may imply a booked appointment. No response time,
- * call length, host, availability or price is stated. The form's own strings live in components/forms/ContactForm.tsx.
+ * C1 (DEC-071) — the consolidated `/contact` page: one form, two intentions ("Send an enquiry", "Request a call").
+ * The hero heading, the "What we'll talk about" steps and the closing line are the owner-approved DEC-062 copy; the
+ * lede is the C1 brief's suggested copy. Nothing here may imply that a call is booked: it is a request, and MappedSkills
+ * gets in touch to arrange a time. No response time, call length, host, availability or price is stated. The form's
+ * own strings live in components/forms/ContactForm.tsx.
  */
-export const SCHEDULE_PLAIN = {
-  kicker: 'Request a call',
+export const CONTACT = {
+  kicker: 'Contact',
   h1: { a: 'Let’s talk about', b: 'your business.' },
-  lede: 'Tell us what you’re working on. We’ll get in touch to find a convenient time to talk.',
-  how: ['You send a short request', 'We get in touch', 'We agree a time that suits you'],
-  howLabel: 'How a call request works',
-  card: { title: 'Request a call', sub: 'Takes about a minute' },
+  lede: 'Tell us what you’re looking for. We’ll get back to you to discuss the next steps.',
+  how: ['Send an enquiry or request a call', 'We get back to you', 'We agree the next step together'],
+  howLabel: 'How getting in touch works',
+  card: { title: 'Get in touch', sub: 'Takes about a minute' },
   talk: {
     kicker: 'What we’ll talk about',
     h: { a: 'One conversation,', b: 'three things.' },
@@ -56,9 +33,9 @@ export const SCHEDULE_PLAIN = {
   calm: {
     h: { a: 'No presentation needed.', b: 'Just a conversation.' },
     body: 'Come as you are. Rough numbers and open questions are fine.',
-    back: 'Request a call',
+    call: 'Request a call',
     alt: 'Prefer to write?',
-    altLink: 'Send us a message instead',
+    altLink: 'Send an enquiry',
   },
 };
 
@@ -71,6 +48,7 @@ export const THANKS_PLAIN = {
     { n: '02', t: 'We reply by email or WhatsApp', s: 'Next', state: 'next' },
     { n: '03', t: 'Discovery call', s: 'If it helps', state: 'later' },
   ],
+  sheetTitle: 'Working sheet · your business',
   sheetCaption: 'Your working sheet has its first row.',
   wait: {
     kicker: 'While you wait',

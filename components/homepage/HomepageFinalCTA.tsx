@@ -75,7 +75,7 @@ export function HomepageFinalCTA() {
             Tell us what you&rsquo;re trying to fix
           </Link>
           <Link
-            href="/schedule-call"
+            href="/contact?intent=call"
             className="inline-flex min-h-[52px] items-center justify-center rounded-full border-2 px-[26px] text-base font-bold no-underline max-[761px]:basis-full"
             style={{ borderColor: '#141219', color: '#141219' }}
           >

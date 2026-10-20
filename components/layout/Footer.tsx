@@ -296,7 +296,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/schedule-call"
+                    href="/contact?intent=call"
                     className="inline-flex items-center min-h-[40px] text-sm text-white/85 hover:text-accent transition-colors"
                   >
                     Book a call

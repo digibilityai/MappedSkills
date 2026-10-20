@@ -28,7 +28,8 @@ emails or messages are printed.
 ## What it exports
 
 `enquiry_id`, `submitted_at`, `name`, `email`, `phone`, `company`, `website`, `message`, `source_page`,
-`marketing_consent`, `marketing_consent_text`, `marketing_consent_at`, `screening` (`suspect` is a flag for a human, not a
+`request_type` (`enquiry` or `call`), `service_interest`, `preferred_contact_time` (these three are empty on rows from before
+migration 004, where `source_page` `/schedule-call` means a call request), `marketing_consent`, `marketing_consent_text`, `marketing_consent_at`, `screening` (`suspect` is a flag for a human, not a
 spam verdict), the first-touch attribution (`first_landing_page`, `first_referrer_host`, `first_source`, `first_medium`,
 `first_campaign`, `first_content`, `first_term`, `first_touch_at`, `first_source_derived`), the latest-touch attribution
 (`latest_source`, `latest_medium`, `latest_campaign`, `latest_referrer_host`) and `attribution_status`.

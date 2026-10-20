@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logo Correction G1</title>
+<style>
+  :root { --bg:#f7f3ea; --ink:#232323; --muted:#5d5a54; --line:#ddd6c8; --card:#fffdf8; --dark:#141414; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width:1040px; margin:0 auto; padding:32px 16px 64px; }
+  h1 { font-size:1.75rem; margin:0 0 4px; }
+  h2 { font-size:1.15rem; margin:44px 0 12px; }
+  p, li { max-width:74ch; }
+  .sub { color:var(--muted); margin:0 0 24px; }
+  .lbl { display:inline-block; font:600 .7rem/1 system-ui; letter-spacing:.04em; text-transform:uppercase; padding:4px 7px; border-radius:4px; background:#ece5d6; color:#4a463f; margin-right:6px; vertical-align:2px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:20px; }
+  .card.dark { background:var(--dark); border-color:#2a2a2a; color:#eee; }
+  .card h3 { margin:0 0 14px; font-size:.85rem; font-weight:600; opacity:.75; }
+  .card img.big { width:100%; height:auto; display:block; }
+  .scroll { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; background:var(--card); border:1px solid var(--line); border-radius:10px; overflow:hidden; font-size:.92rem; }
+  th, td { text-align:left; padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:middle; }
+  th { font-size:.78rem; color:var(--muted); font-weight:600; }
+  td.h { white-space:nowrap; color:var(--muted); font-size:.85rem; }
+  .shot { display:block; max-width:100%; height:auto; border:1px solid var(--line); border-radius:8px; margin:6px 0 16px; background:#fff; }
+  .ask { background:var(--card); border:1px solid var(--line); border-left:4px solid #FD5C03; border-radius:8px; padding:16px 20px; }
+  .ask ol { margin:8px 0 0; padding-left:20px; }
+  code { font-size:.88em; background:#ece5d6; padding:1px 5px; border-radius:4px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Logo correction — G1 review</h1>
+  <p class="sub">Local proposal for owner approval, 2026-10-20. No production code, assets, commits or deploys. Full gate text: <code>docs/logo-redesign/LOGO_G1_GATE.md</code>.</p>
+
+  <div class="ask">
+    <strong>G1 APPROVED by the owner on 2026-10-20 (DEC-069). G2 is not authorised.</strong> The decision requested was:
+    <ol>
+      <li>Approve the corrected artwork: the “MappedSkills” lockup and wordmark, in light and dark versions.</li>
+      <li>Approve the header and footer sizing: the wordmark at 28 / 24 / 19px for viewports ≥600 / 360–599 / &lt;360px.</li>
+      <li>Then, separately, authorise or hold G2 (the production implementation).</li>
+    </ol>
+  </div>
+
+  <h2>1. Current vs proposed lockup</h2>
+  <p><span class="lbl">Owner requirement</span>The name is MappedSkills. <span class="lbl">Verified fact</span>The current artwork itself ends in “Skill”.</p>
+  <div class="grid">
+    <div class="card"><h3>Current (production)</h3><img class="big" src="current-light-bg.webp" alt="Current logo reading MappedSkill"></div>
+    <div class="card"><h3>Proposed lockup</h3><img class="big" src="mappedskills-lockup-light-bg.svg" alt="Proposed MappedSkills lockup"></div>
+    <div class="card dark"><h3>Current, dark surfaces</h3><img class="big" src="current-dark-bg.webp" alt="Current dark logo"></div>
+    <div class="card dark"><h3>Proposed lockup, dark surfaces</h3><img class="big" src="mappedskills-lockup-dark-bg.svg" alt="Proposed dark lockup"></div>
+  </div>
+
+  <h2>2. Proposed wordmark (header and footer)</h2>
+  <div class="grid">
+    <div class="card"><h3>Wordmark, light surfaces</h3><img class="big" src="mappedskills-wordmark-light-bg.svg" alt="Proposed MappedSkills wordmark"></div>
+    <div class="card dark"><h3>Wordmark, dark surfaces (footer)</h3><img class="big" src="mappedskills-wordmark-dark-bg.svg" alt="Proposed dark wordmark"></div>
+  </div>
+
+  <h2>3. At the sizes the header actually uses (1× CSS px)</h2>
+  <div class="scroll">
+  <table>
+    <tr><th>Viewport</th><th>Current, as rendered live</th><th>Proposed wordmark</th><th>Lowercase letter height</th></tr>
+    <tr><td class="h">&lt;360px</td><td><img src="current-light-bg.webp" style="height:24px" alt=""></td><td><img src="mappedskills-wordmark-light-bg.svg" style="height:19px" alt=""></td><td>8.5 → 8.7px</td></tr>
+    <tr><td class="h">360–599px</td><td><img src="current-light-bg.webp" style="height:24px" alt=""></td><td><img src="mappedskills-wordmark-light-bg.svg" style="height:24px" alt=""></td><td>8.5 → 10.9px</td></tr>
+    <tr><td class="h">≥600px</td><td><img src="current-light-bg.webp" style="height:28px" alt=""></td><td><img src="mappedskills-wordmark-light-bg.svg" style="height:28px" alt=""></td><td>9.9 → 12.8px</td></tr>
+  </table>
+  </div>
+  <p><span class="lbl">Verified fact</span>The live site renders 24px below 380px, not the intended 22px. In <code>direction-c.css</code> the 599px rule comes after the 379px rule and overrides it. G2 would fix this.</p>
+
+  <h2>4. Fit in the live header (simulated locally, not deployed)</h2>
+  <p><span class="lbl">Verified fact</span>I swapped the image client-side in a local browser pane on mappedskills.com. With the proposed sizes, no header row wrapped and there was no horizontal scroll at 320, 340, 360, 375, 600 or 1200px. At 200% text the header wraps with both the current and the proposed logo, which is its existing designed behaviour.</p>
+  <div class="scroll">
+  <table>
+    <tr><th>Viewport</th><th>Free space for logo</th><th>Proposed width</th><th>Result</th></tr>
+    <tr><td class="h">320</td><td>111.6px</td><td>104.5px (19px tall)</td><td>Fits</td></tr>
+    <tr><td class="h">340</td><td>131.6px</td><td>104.5px (19px)</td><td>Fits (24px would not)</td></tr>
+    <tr><td class="h">360</td><td>151.6px</td><td>132px (24px)</td><td>Fits</td></tr>
+    <tr><td class="h">375</td><td>166.6px</td><td>132px (24px)</td><td>Fits</td></tr>
+    <tr><td class="h">600</td><td>171.9px</td><td>154px (28px)</td><td>Fits</td></tr>
+    <tr><td class="h">1200</td><td>nav slack 129 → 83px</td><td>154px (28px)</td><td>Fits</td></tr>
+  </table>
+  </div>
+  <p class="sub" style="margin-top:16px">320px, wordmark at 19px</p><img class="shot" src="screenshots/live-header-320-proposed-19px.png" alt="Live header at 320px with proposed wordmark">
+  <p class="sub">360px, wordmark at 24px</p><img class="shot" src="screenshots/live-header-360-proposed-24px.png" alt="Live header at 360px with proposed wordmark">
+  <p class="sub">600px, wordmark at 28px</p><img class="shot" src="screenshots/live-header-600-proposed-28px.png" alt="Live header at 600px with proposed wordmark">
+  <p class="sub">1200px, wordmark at 28px (cropped to the left 800px)</p><img class="shot" src="screenshots/live-header-1200-proposed-28px.png" alt="Live header at 1200px with proposed wordmark">
+
+  <h2>5. What changed since the first draft</h2>
+  <ul>
+    <li>Tagline is now Manrope Bold, as intended (it was a Bricolage placeholder). The cap height went from 10.5 to 12 units, which reduced the tracking from 0.57em to 0.47em.</li>
+    <li>M mark: the mirror axis is corrected (70 → 70.5), and the pinch between the two panels is narrowed to match the original. Every row is now within about 1px of the production raster.</li>
+    <li>Wordmark viewBox is tightened to 4 units of clear space on each side, so the aspect ratio is 5.5:1.</li>
+    <li>Optical size: I tested opsz 14, 24, 48 and 96 for the small wordmark. The smaller optical sizes are about 9% wider and would not fit at 320px, so opsz 96 is used everywhere.</li>
+  </ul>
+
+  <h2>6. Not covered yet</h2>
+  <ul>
+    <li><span class="lbl">Research required</span>Which formats Google accepts for the structured-data Organization logo. Until confirmed, G2 gives schema a PNG export.</li>
+    <li><span class="lbl">Unknown</span>Where the old artwork is used off-site (social profiles, Business Profile, decks), and whether an original vector of the M mark exists.</li>
+    <li>Not tested: real devices, Safari and Firefox SVG rendering, forced-colours mode, the legacy rollback header and footer.</li>
+  </ul>
+</main>
+</body>
+</html>

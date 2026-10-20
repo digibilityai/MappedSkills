@@ -1,13 +1,13 @@
 import { createMetadata } from '@/lib/metadata';
 import { CplusPage } from '@/components/cplus/CplusPage';
 import { FaqBody } from '@/components/cplus/faq/FaqBody';
-import { QAS } from '@/components/cplus/faq/faqData';
+import { QAS, plainAnswer } from '@/components/cplus/faq/faqData';
 
 /**
- * `/faq` — the approved C+ FAQ design (proto/direction-c-plus 0a8b611) in production. The URL, metadata (title,
- * description, canonical, Open Graph/Twitter), the global structured data and this route's FAQPage are unchanged: the
- * FAQPage is emitted from the same `QAS` array the page body renders, so the two cannot drift. The Direction C header
- * and footer come from the root layout.
+ * `/faq`: the owner-approved G1 FAQ design (DEC-063; docs/faq-redesign/g1/). The URL and metadata (title, description,
+ * canonical, Open Graph/Twitter) are unchanged, as agreed (FQ-D6). The FAQPage is emitted from the same `QAS` array the
+ * page body renders (`plainAnswer` joins the rendered strings), so the two cannot drift; its questions changed with the
+ * approved copy (FQ-D1, FQ-D2). The Direction C header and footer come from the root layout.
  */
 export const metadata = createMetadata(
   'Questions We Get Asked, Answered Plainly | MappedSkills',
@@ -27,7 +27,7 @@ export default function FaqPage() {
             mainEntity: QAS.map((qa) => ({
               '@type': 'Question',
               name: qa.q,
-              acceptedAnswer: { '@type': 'Answer', text: qa.plain },
+              acceptedAnswer: { '@type': 'Answer', text: plainAnswer(qa) },
             })),
           }),
         }}

@@ -1,0 +1,201 @@
+{
+ "journeys": [
+  {
+   "sel": ".lx-hero-fig",
+   "firstStateOnLoad": "0",
+   "steps": [
+    [
+     "0",
+     0
+    ],
+    [
+     "1",
+     1804
+    ],
+    [
+     "2",
+     3806
+    ]
+   ],
+   "gapsMs": [
+    2002
+   ],
+   "playedOnceAndComplete": true
+  },
+  {
+   "sel": ".lx-path",
+   "firstStateOnLoad": "0",
+   "steps": [
+    [
+     "0",
+     0
+    ],
+    [
+     "1",
+     2608
+    ],
+    [
+     "2",
+     4611
+    ],
+    [
+     "3",
+     6614
+    ]
+   ],
+   "gapsMs": [
+    2003,
+    2003
+   ],
+   "playedOnceAndComplete": true
+  },
+  {
+   "sel": ".lx-sort",
+   "firstStateOnLoad": "0",
+   "steps": [
+    [
+     "0",
+     0
+    ],
+    [
+     "1",
+     2448
+    ],
+    [
+     "2",
+     4451
+    ]
+   ],
+   "gapsMs": [
+    2003
+   ],
+   "playedOnceAndComplete": true
+  },
+  {
+   "sel": ".lx-next",
+   "firstStateOnLoad": "0",
+   "steps": [
+    [
+     "0",
+     0
+    ],
+    [
+     "1",
+     2673
+    ],
+    [
+     "2",
+     4677
+    ],
+    [
+     "3",
+     6680
+    ],
+    [
+     "4",
+     8683
+    ]
+   ],
+   "gapsMs": [
+    2004,
+    2003,
+    2003
+   ],
+   "playedOnceAndComplete": true
+  }
+ ],
+ "keyboard": {
+  "at": "1",
+  "all": true,
+  "current": "They send an enquiry",
+  "buttons": 15,
+  "labels": [
+   "Show step 1: Someone sees your ad",
+   "Show step 2: They send an enquiry",
+   "Show step 3: Your team receives it"
+  ],
+  "stillAtAfter2600ms": "1"
+ },
+ "reducedMotion": [
+  true,
+  true,
+  true,
+  true
+ ],
+ "noJs": {
+  "hiddenSteps": 0,
+  "chip": "block",
+  "ad": "1",
+  "details": [
+   false,
+   false,
+   false
+  ]
+ },
+ "correction02": {
+  "checkSteps": 3,
+  "checkStepTitles": [
+   "Someone sees your ad",
+   "They send an enquiry",
+   "Your team receives it"
+  ],
+  "heroSteps": [
+   "Someone sees your ad",
+   "They send an enquiry",
+   "Your team receives it"
+  ],
+  "outcomeCards": 0,
+  "headline": "Enquiries go straight to your team.",
+  "forbidden": [],
+  "reviewWords": [
+   "sorting",
+   "Check",
+   "qualify",
+   "qualify",
+   "qualification",
+   "approve"
+  ],
+  "sentences": [
+   "The wrong ones Job applicationsStudentsSales pitchesWork you don’t doCourse questions It’s busy, but not with buyers More of the same only means more sorting.",
+   "3 Check delivery Where the setup allows, we test that enquiries reach the right destination.",
+   "We don’t call your enquiries to qualify them.",
+   "Will you call our leads to qualify them?No.",
+   "We don’t make qualification calls.",
+   "Tell us what you’re trying to fixBook a call What happens next 1You tell us what’s happening 2We reply by email or WhatsApp 3A discovery call 4We send our findings, a plan and a proposal 5Work starts once you approve "
+  ]
+ },
+ "copy": {
+  "longOrDoubleDash": 0,
+  "headings": [
+   "H1 Lead generation, where the unit is an enquiry you can actually act on.",
+   "H2 Too few enquiries, or too many of the wrong ones?",
+   "H3 It’s quiet",
+   "H3 It’s busy, but not with buyers",
+   "H2 We don’t sell you a list. We bring potential customers to you.",
+   "H3 Reach the people you want",
+   "H3 Make it easy to enquire",
+   "H3 Check delivery",
+   "H3 See where it came from",
+   "H2 Enquiries go straight to your team.",
+   "H3 Someone sees your ad",
+   "H3 They send an enquiry",
+   "H3 Your team receives it",
+   "H2 We manage the campaigns. Your team handles the enquiries.",
+   "H2 What people ask us",
+   "H2 How many enquiries do you get? How many are any good?",
+   "H3 WHAT HAPPENS NEXT"
+  ],
+  "links": [
+   "Home -> /",
+   "Tell us what you’re trying to fix -> /contact",
+   "Book a call -> /schedule-call",
+   "See how we work → -> /how-it-works",
+   "traffic but no enquiries -> /problems/traffic-but-no-enquiries",
+   "the whole system -> /services",
+   "organic search -> /seo",
+   "paid search -> /google-ads",
+   "Tell us what you’re trying to fix -> /contact",
+   "Book a call -> /schedule-call"
+  ]
+ }
+}

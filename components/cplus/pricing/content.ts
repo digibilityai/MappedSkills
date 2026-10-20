@@ -1,63 +1,91 @@
 /**
- * C+ Pricing (/pricing), revision 2 — customer-facing copy, verbatim from the approved prototype
- * (proto/direction-c-plus 0a8b611, components/proto-cplus/pricingContent.ts, PR_PLAIN). The prototype's internal review register
- * is not carried over.
+ * C+ Pricing (/pricing): customer-facing copy of the owner-approved G1 R0 design (docs/pricing-redesign/g1/:
+ * PR_G1_NOTES.md, mockup/). Owner requirement (2026-10-18): fully customised pricing, so no packages, starting prices,
+ * ranges, currency or time promises appear anywhere. Facts used: the owner brief and the eight statements confirmed in
+ * PR_G1_NOTES.md §4 (scope-based fee; monthly performance report with ongoing marketing work, review calls where agreed;
+ * ad spend paid directly to the platform, fee charged separately; nothing starts until the client approves).
  */
 
-export const PR_PLAIN = {
-  kicker: 'Pricing',
-  h1: { a: 'Your price depends on', b: 'what your business actually needs.' },
-  lede: 'We don’t sell fixed packages. We look at where you are now, then quote for the work that will actually help.',
-  primary: 'Get a scoped estimate',
-  secondary: 'Book a time to talk',
+export type PricingIcon = 'search' | 'mail' | 'chart' | 'check' | 'plan' | 'ok';
 
-  /* hero illustration: two businesses, two stacks of work — no prices */
-  stacks: {
-    label: 'Two businesses, two quotes',
-    items: [
-      { k: 'Business A', need: 'Its website works. It needs more of the right visitors.', blocks: ['Getting found'] },
-      { k: 'Business B', need: 'Visitors arrive, but enquiries don’t, and nothing is tracked.', blocks: ['Tracking enquiries', 'Fixing the enquiry form', 'Getting found'] },
-    ],
-    cap: 'Illustration. Different needs, different quotes. No prices.',
+export const PR = {
+  crumb: 'Pricing',
+  kicker: 'Pricing · Every quote is tailored',
+  h1: { a: 'The right work.', b: 'A price that makes sense.' },
+  lede: 'Every business needs something different. We look at what you need, recommend the right scope and explain the cost before work begins.',
+  primary: 'Discuss your requirements',
+
+  tag: {
+    label: 'Illustration: your price is set by what you need, what needs fixing and how much work is involved, and you know it before work begins.',
+    k: 'Your price',
+    v: { a: 'Built around', b: 'your business' },
+    lines: ['What you need', 'What needs fixing', 'How much work is involved'],
+    foot: 'Explained before work begins',
+    cap: 'Illustration. There’s no price list: every quote is worked out for your business.',
   },
 
-  /* 2 — what changes the price (paper) */
-  facKicker: 'What changes the price',
-  facH: { a: 'Five things', b: 'decide the quote.' },
-  factors: [
-    { t: 'How much needs doing', d: 'Fixing one problem is a smaller job than fixing several.', less: 'One thing to fix', more: 'Several things to fix' },
-    { t: 'The size of your website', d: 'More pages means more to check and improve.', less: 'A small site', more: 'A large site' },
-    { t: 'What already works', d: 'If tracking and your enquiry form already work, there is less to set up.', less: 'Tracking and forms work', more: 'Nothing set up yet' },
-    { t: 'Who writes the pages', d: 'Writing pages takes time. If you do it, the quote is lower.', less: 'You write them', more: 'We write them' },
-    { t: 'How busy your market is', d: 'Standing out among many competitors takes more work.', less: 'Few competitors', more: 'Many established competitors' },
-  ],
-  lessK: 'Costs less',
-  moreK: 'Costs more',
+  aff: {
+    kicker: 'What affects your price?',
+    h: { a: 'Three things', b: 'shape the quote.' },
+    line: 'The more there is to do, the more the work costs. These are the three things we look at.',
+    need: { t: 'What you need', p: 'One service or several working together.', scale: ['One service', 'Several, together'] },
+    fix: {
+      t: 'What needs fixing',
+      p: 'Your website, tracking and existing setup.',
+      rows: [
+        { t: 'Website', ok: true },
+        { t: 'Tracking', ok: false },
+        { t: 'Existing setup', ok: false },
+      ],
+      okLabel: 'Works',
+      fixLabel: 'Needs fixing',
+      scale: ['Little to fix', 'A lot to fix'],
+    },
+    load: {
+      t: 'How much work is involved',
+      p: 'Content, competition and ongoing management.',
+      rows: [
+        { t: 'Content', v: 2 },
+        { t: 'Competition', v: 4 },
+        { t: 'Ongoing management', v: 3 },
+      ],
+      scale: ['Lighter', 'Heavier'],
+    },
+    cap: 'Illustrations only. Your situation will be different.',
+  },
 
-  /* 3 — what you pay separately (ink) */
-  payKicker: 'What you pay separately',
-  payH: { a: 'Your ad spend goes', b: 'straight to the platform.' },
-  payIntro: 'When we run ads for you, the money for the ads and our fee are kept apart.',
-  payYou: 'You',
-  pay: [
-    { to: 'Google', what: 'Your Google Ads spend', how: 'Paid directly to Google.' },
-    { to: 'The social platform', what: 'Your social ads spend', how: 'Paid directly to the platform.' },
-    { to: 'MappedSkills', what: 'Our management fee', how: 'Charged separately.', ours: true },
-  ],
+  cov: {
+    kicker: 'What your fee covers',
+    h: { a: 'One plan, with', b: 'only what you need.' },
+    line: 'Your fee covers the work we recommend, planned so each part supports the next.',
+    chain: [
+      { t: 'Get found', p: 'More of the right people find your business.', tag: 'If you need it', icon: 'search', std: false },
+      { t: 'Get enquiries', p: 'More of those visitors get in touch.', tag: 'If you need it', icon: 'mail', std: false },
+      { t: 'See what’s working', p: 'A monthly performance report on the work.', tag: 'With ongoing marketing work', icon: 'chart', std: true },
+    ] as { t: string; p: string; tag: string; icon: PricingIcon; std: boolean }[],
+    prop: { t: 'Your proposal sets out', items: ['The services we recommend', 'The scope', 'The deliverables', 'How we report'], fee: 'Our fees' },
+    spend: {
+      label: 'What you pay separately',
+      a: { k: 'Ad spend', p: 'If we run ads for you, the ad budget is paid directly to the platform.' },
+      b: { k: 'Our fee', p: 'Charged separately, as set out in your proposal.' },
+    },
+    cap: 'Review calls are included where agreed in your proposal. No one can honestly guarantee rankings, enquiries or revenue, so we don’t.',
+  },
 
-  /* 4 — how to get an estimate (paper) */
-  stepsKicker: 'How to get an estimate',
-  stepsH: { a: 'Three steps,', b: 'before any work starts.' },
-  steps: [
-    { t: 'Tell us what’s going on', d: 'What you sell, and what is or isn’t working.' },
-    { t: 'We talk and take a look', d: 'A call, then a review of your site and your enquiries.' },
-    { t: 'You get a plan and a quote', d: 'Our findings, a recommended plan and a proposal. You decide from there.' },
-  ],
+  how: {
+    kicker: 'How you get a quote',
+    h: { a: 'Three steps,', b: 'and you decide.' },
+    steps: [
+      { n: '01', t: 'Tell us what you need', p: 'Share your business, goals and challenges.' },
+      { n: '02', t: 'Get a clear proposal', p: 'We recommend the scope and explain the cost.' },
+      { n: '03', t: 'You decide', p: 'Nothing starts until you approve it.' },
+    ],
+  },
 
-  /* close */
   close: {
-    label: 'Get an actual number',
-    h: 'A real number comes from a real conversation.',
-    body: 'Two businesses of the same size can need very different work. Tell us about yours.',
+    kicker: 'Get a proposal',
+    h: { a: 'Know what you’re', b: 'paying for.' },
+    lede: 'Before we begin, you’ll know what we’re recommending, why it matters, what it costs and how we’ll report on the work.',
+    primary: 'Get a proposal',
   },
 };

@@ -62,7 +62,7 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   ...createMetadata(
     'Work | MappedSkills',
-    'What can be checked about this firm today, and why there are no published case studies.',
+    'Explore selected MappedSkills client projects, marketing challenges and approaches.',
     '/work'
   ),
 };
@@ -76,10 +76,14 @@ export default async function WorkPage() {
         eyebrow="Work"
         title={<>What we can show you, and what we cannot.</>}
         lede={
-          <>
-            There are no published case studies here, because we do not have permission to publish client
-            results.
-          </>
+          caseStudies.length > 0 ? (
+            <>Explore selected client projects and how MappedSkills approached their marketing challenges.</>
+          ) : (
+            <>
+              There are no published case studies here, because we do not have permission to publish client
+              results.
+            </>
+          )
         } mode="offset" />
 
       {caseStudies.length > 0 ? (

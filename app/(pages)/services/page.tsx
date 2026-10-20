@@ -9,8 +9,8 @@ import { ServicesBody } from '@/components/cplus/services/ServicesBody';
  * root layout.
  */
 export const metadata = createMetadata(
-  'What We Do: One Outcome, Three Connected Parts | MappedSkills',
-  'Capture the demand, turn it into enquiries, and measure the whole chain. Three connected parts, the joins between them owned by one supplier, and a qualified enquiry as the unit.',
+  'Services: Digital Marketing That Works Together | MappedSkills',
+  'Reach potential customers, make it easier for them to contact you, and measure what is working. MappedSkills connects search, advertising, your website and enquiry tracking.',
   '/services'
 );
 

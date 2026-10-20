@@ -1,157 +1,234 @@
-import Link from 'next/link';
 import type { CSSProperties } from 'react';
-import { BOOKING_HREF, CONTACT_HREF, Mark } from '@/components/direction-c/primitives';
-import { PR_PLAIN as S } from './content';
-import './pricing.css';
+import { ActionPair } from '@/components/direction-c/primitives';
 import { Breadcrumb } from '../Breadcrumb';
+import { PR } from './content';
+import { Glyph } from './icons';
+import './pricing.css';
 
 /**
- * C+ Pricing (/pricing), revision 2: the approved prototype's page body (proto/direction-c-plus 0a8b611, PricingH.tsx), unchanged in markup and
- * copy. Production changes only: the breadcrumb's Home link and the CTAs point at the live routes (`/`, CONTACT_HREF
- * and BOOKING_HREF) instead of prototype paths.
+ * C+ Pricing (/pricing): the owner-approved G1 R0 design (docs/pricing-redesign/g1/mockup/) as a server component with
+ * no client JavaScript. Five sections: hero with a price tag that carries no number; what affects your price (three
+ * factors on one less-to-more axis); what your fee covers (optional vs standard work, the proposal contents, ad spend vs
+ * fee); how you get a quote (three steps ending in the client's decision); close. Fully customised pricing: no prices,
+ * packages, ranges, currency or time promises. Absent by decision: page-level structured data (none before either).
  */
-
-function Actions({ big }: { big?: boolean }) {
-  return (
-    <div className={'dc-actions' + (big ? ' pr-actions-big' : '')}>
-      <Link href={CONTACT_HREF} className="dc-btn dc-btn-primary">
-        <Mark />
-        {S.primary}
-      </Link>
-      <Link href={BOOKING_HREF} className="dc-btn dc-btn-secondary">
-        {S.secondary}
-      </Link>
-    </div>
-  );
-}
-
 export function PricingBody() {
-  const St = S.stacks;
+  const t = PR.tag;
+  const a = PR.aff;
+  const v = PR.cov;
+  const h = PR.how;
+  const c = PR.close;
   return (
     <>
-      {/* 1 — hero (ivory): the idea + two stacks of work */}
+      {/* 1: hero (ground) */}
       <section className="b-hero pr-hero" aria-labelledby="pr-h1">
-        <div className="px-wrap b-hero-g h-hero-g pr-hero-g">
-          <div>
-            <Breadcrumb current={S.kicker} />
-            <p className="b-kicker">{S.kicker}</p>
-            <h1 id="pr-h1" className="b-h1">
-              {S.h1.a} <span className="b-named">{S.h1.b}</span>
+        <div className="px-wrap b-hero-g pr-hero-g">
+          <div className="pr-hero-tx">
+            <Breadcrumb current={PR.crumb} />
+            <p className="b-kicker">{PR.kicker}</p>
+            <h1 id="pr-h1" className="b-h1 pr-h1">
+              <span>{PR.h1.a}</span> <span className="b-named">{PR.h1.b}</span>
             </h1>
-            <p className="b-lede">{S.lede}</p>
-            <Actions big />
+            <p className="b-lede">{PR.lede}</p>
+            <ActionPair primaryLabel={PR.primary} />
           </div>
 
-          <figure className="pr-fig">
-            <p className="pr-label pr-fig-k">{St.label}</p>
-            <div className="pr-stacks">
-              {St.items.map((it) => (
-                <div key={it.k} className="pr-stack">
-                  <ol className="pr-blocks" aria-label={`${it.k}: the work it needs`}>
-                    {it.blocks.map((b, i) => (
-                      <li key={b} className="pr-block" style={{ '--i': i } as CSSProperties}>
-                        {b}
-                      </li>
-                    ))}
-                  </ol>
-                  <p className="pr-stack-k">{it.k}</p>
-                  <p className="pr-stack-need">{it.need}</p>
-                </div>
-              ))}
+          <figure className="pr-tag-fig" aria-label={t.label}>
+            <div className="pr-tag-w" aria-hidden="true">
+              <div className="pr-tag">
+                <span className="pr-tag-hole" />
+                <p className="pr-tag-k">{t.k}</p>
+                <p className="pr-tag-v">
+                  {t.v.a} <span>{t.v.b}</span>
+                </p>
+                <ul className="pr-tag-l">
+                  {t.lines.map((line) => (
+                    <li key={line}>
+                      <Glyph name="check" />
+                      {line}
+                    </li>
+                  ))}
+                </ul>
+                <p className="pr-tag-f">
+                  <Glyph name="ok" />
+                  {t.foot}
+                </p>
+              </div>
             </div>
-            <figcaption className="px-cap">{St.cap}</figcaption>
+            <figcaption className="pr-cap">{t.cap}</figcaption>
           </figure>
         </div>
       </section>
 
-      {/* 2 — what changes the price (paper): five plain factors */}
-      <section className="b-sec b-paper pr-fac" aria-labelledby="pr-h-fac">
+      {/* 2: what affects your price (paper): three factors, each drawn still over one shared less-to-more axis */}
+      <section className="b-sec b-paper pr-aff" aria-labelledby="pr-h-aff">
         <div className="px-wrap">
-          <p className="b-kicker">{S.facKicker}</p>
-          <h2 id="pr-h-fac" className="b-h2">
-            {S.facH.a} <span className="b-named">{S.facH.b}</span>
-          </h2>
-          <ul className="pr-factors" data-rv="">
-            {S.factors.map((f) => (
-              <li key={f.t} className="pr-factor" data-rv-i="">
-                <div>
-                  <h3 className="pr-factor-t">{f.t}</h3>
-                  <p className="pr-factor-d">{f.d}</p>
+          <div className="pr-head">
+            <div>
+              <p className="b-kicker">{a.kicker}</p>
+              <h2 id="pr-h-aff" className="b-h2">
+                {a.h.a} <span className="b-named">{a.h.b}</span>
+              </h2>
+            </div>
+            <p className="pr-head-l">{a.line}</p>
+          </div>
+
+          <ol className="pr-aff-g">
+            <li className="pr-f">
+              <span className="pr-f-n" aria-hidden="true">
+                1
+              </span>
+              <h3 className="pr-f-t">{a.need.t}</h3>
+              <p className="pr-f-p">{a.need.p}</p>
+              <div className="pr-f-fig pr-f-need" aria-hidden="true">
+                <div className="pr-need-a">
+                  <span className="pr-blk" />
                 </div>
-                <div className="pr-range">
-                  <p className="pr-end pr-end-lo">
-                    <span className="pr-label">{S.lessK}</span>
-                    {f.less}
-                  </p>
-                  <span className="pr-arrow" aria-hidden="true" />
-                  <p className="pr-end pr-end-hi">
-                    <span className="pr-label">{S.moreK}</span>
-                    {f.more}
-                  </p>
+                <div className="pr-need-b">
+                  <span className="pr-blk" />
+                  <span className="pr-blk" />
+                  <span className="pr-blk" />
                 </div>
+              </div>
+              <Scale ends={a.need.scale} />
+            </li>
+            <li className="pr-f">
+              <span className="pr-f-n" aria-hidden="true">
+                2
+              </span>
+              <h3 className="pr-f-t">{a.fix.t}</h3>
+              <p className="pr-f-p">{a.fix.p}</p>
+              <ul className="pr-f-fig pr-fix" aria-hidden="true">
+                {a.fix.rows.map((row) => (
+                  <li key={row.t} className={row.ok ? undefined : 'is-fixrow'}>
+                    <span>{row.t}</span>
+                    <b className={row.ok ? 'is-ok' : 'is-fix'}>{row.ok ? a.fix.okLabel : a.fix.fixLabel}</b>
+                  </li>
+                ))}
+              </ul>
+              <Scale ends={a.fix.scale} />
+            </li>
+            <li className="pr-f">
+              <span className="pr-f-n" aria-hidden="true">
+                3
+              </span>
+              <h3 className="pr-f-t">{a.load.t}</h3>
+              <p className="pr-f-p">{a.load.p}</p>
+              <ul className="pr-f-fig pr-load" aria-hidden="true">
+                {a.load.rows.map((row) => (
+                  <li key={row.t}>
+                    <span>{row.t}</span>
+                    <i style={{ '--v': row.v } as CSSProperties} />
+                  </li>
+                ))}
+              </ul>
+              <Scale ends={a.load.scale} />
+            </li>
+          </ol>
+          <p className="pr-cap">{a.cap}</p>
+        </div>
+      </section>
+
+      {/* 3: what your fee covers (ink): dashed = if you need it, solid = standard with ongoing work */}
+      <section className="b-sec b-ink pr-cov" aria-labelledby="pr-h-cov">
+        <div className="px-wrap">
+          <div className="pr-head">
+            <div>
+              <p className="b-kicker">{v.kicker}</p>
+              <h2 id="pr-h-cov" className="b-h2">
+                {v.h.a} <span className="b-named">{v.h.b}</span>
+              </h2>
+            </div>
+            <p className="pr-head-l">{v.line}</p>
+          </div>
+
+          <ol className="pr-chain">
+            {v.chain.map((item) => (
+              <li key={item.t} className={'pr-c' + (item.std ? ' is-std' : '')}>
+                <span className="pr-c-i" aria-hidden="true">
+                  <Glyph name={item.icon} />
+                </span>
+                <h3 className="pr-c-t">{item.t}</h3>
+                <p className="pr-c-p">{item.p}</p>
+                <p className="pr-c-tag">{item.tag}</p>
               </li>
             ))}
-          </ul>
-        </div>
-      </section>
+          </ol>
 
-      {/* 3 — what you pay separately (ink): the money paths */}
-      <section className="b-sec b-ink pr-pay" aria-labelledby="pr-h-pay">
-        <div className="px-wrap">
-          <p className="b-kicker">{S.payKicker}</p>
-          <h2 id="pr-h-pay" className="b-h2">
-            {S.payH.a} <span className="b-named">{S.payH.b}</span>
-          </h2>
-          <p className="pr-body">{S.payIntro}</p>
-          <div className="pr-flow" data-rv="">
-            <p className="pr-you">{S.payYou}</p>
-            <ul className="pr-paths">
-              {S.pay.map((p, i) => (
-                <li key={p.to} className={'pr-path' + (p.ours ? ' is-ours' : '')} style={{ '--i': i } as CSSProperties}>
-                  <span className="pr-line" aria-hidden="true" />
-                  <div className="pr-dest">
-                    <p className="pr-dest-to">{p.to}</p>
-                    <p className="pr-dest-what">{p.what}</p>
-                    <p className="pr-dest-how">{p.how}</p>
-                  </div>
-                </li>
+          <div className="pr-prop">
+            <p className="pr-prop-t">
+              <span className="pr-prop-i" aria-hidden="true">
+                <Glyph name="plan" />
+              </span>
+              {v.prop.t}
+            </p>
+            <ul className="pr-prop-l">
+              {v.prop.items.map((item) => (
+                <li key={item}>{item}</li>
               ))}
+              <li className="is-fee">{v.prop.fee}</li>
             </ul>
           </div>
+
+          <div className="pr-spend" role="group" aria-label={v.spend.label}>
+            <div className="pr-spend-a">
+              <p className="pr-spend-k">{v.spend.a.k}</p>
+              <p>{v.spend.a.p}</p>
+            </div>
+            <div className="pr-spend-b">
+              <p className="pr-spend-k">{v.spend.b.k}</p>
+              <p>{v.spend.b.p}</p>
+            </div>
+          </div>
+          <p className="pr-cap pr-cap-ink">{v.cap}</p>
         </div>
       </section>
 
-      {/* 4 — how to get an estimate (paper): three steps */}
-      <section className="b-sec b-paper pr-steps-s" aria-labelledby="pr-h-steps">
+      {/* 4: how you get a quote (ground): one line through three numbers, tangerine at the client's decision */}
+      <section className="b-sec pr-how" aria-labelledby="pr-h-how">
         <div className="px-wrap">
-          <p className="b-kicker">{S.stepsKicker}</p>
-          <h2 id="pr-h-steps" className="b-h2">
-            {S.stepsH.a} <span className="b-named">{S.stepsH.b}</span>
+          <p className="b-kicker">{h.kicker}</p>
+          <h2 id="pr-h-how" className="b-h2">
+            {h.h.a} <span className="b-named">{h.h.b}</span>
           </h2>
-          <ol className="pr-steps" data-rv="">
-            {S.steps.map((s) => (
-              <li key={s.t} data-rv-i="">
-                <h3 className="pr-step-t">{s.t}</h3>
-                <p className="pr-step-d">{s.d}</p>
+          <ol className="pr-steps">
+            {h.steps.map((step, i) => (
+              <li key={step.n} className={'pr-s' + (i === h.steps.length - 1 ? ' is-you' : '')}>
+                <span className="pr-s-n" aria-hidden="true">
+                  {step.n}
+                </span>
+                <h3 className="pr-s-t">{step.t}</h3>
+                <p className="pr-s-p">{step.p}</p>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      {/* close */}
-      <section className="b-close" aria-labelledby="pr-h-close">
-        <div className="px-wrap b-close-in">
-          <div>
-            <p className="b-kicker pr-close-k">{S.close.label}</p>
-            <h2 id="pr-h-close" className="b-h2">
-              {S.close.h}
-            </h2>
-            <p className="b-lede">{S.close.body}</p>
+      {/* 5: close (tangerine, the shared close's classes) */}
+      <section className="b-close pr-close" aria-labelledby="b-close-h">
+        <div className="px-wrap">
+          <div className="b-close-in">
+            <div>
+              <p className="b-kicker pr-close-k">{c.kicker}</p>
+              <h2 id="b-close-h" className="b-h2">
+                {c.h.a} <span className="pr-close-2">{c.h.b}</span>
+              </h2>
+              <p className="b-lede">{c.lede}</p>
+            </div>
+            <ActionPair primaryLabel={c.primary} />
           </div>
-          <Actions />
         </div>
       </section>
     </>
+  );
+}
+
+function Scale({ ends }: { ends: string[] }) {
+  return (
+    <p className="pr-scale" aria-hidden="true">
+      <span>{ends[0]}</span>
+      <span>{ends[1]}</span>
+    </p>
   );
 }

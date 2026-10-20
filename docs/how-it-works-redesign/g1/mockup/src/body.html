@@ -1,0 +1,260 @@
+<!-- G1 REVIEW ARTIFACT. Proposed /how-it-works body. Not production code. New classes use the hx- prefix. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+    <symbol id="i-plan" viewBox="0 0 24 24"><path d="M7 4h10v3H7z"/><path d="M5 6h2M17 6h2v14H5V6"/><path d="m8.5 13 2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="m7 15 4-4 3 3 5-6"/></symbol>
+    <symbol id="i-reply" viewBox="0 0 24 24"><path d="M3 11 21 4l-7 17-3-7z"/><path d="m11 14 4-4"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6 3h4l1.5 4.5-2.5 1.5a11 11 0 0 0 6 6l1.5-2.5L21 14v4a2 2 0 0 1-2 2A16 16 0 0 1 4 5a2 2 0 0 1 2-2z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h1M4 12h1M4 18h1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4.5l3 2"/></symbol>
+    <symbol id="i-cross" viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="12" r="4"/><path d="M12 12h9M18 12v3M15 12v2"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4-6.5 8-6.5s7 2 8 6.5"/></symbol>
+    <symbol id="i-devices" viewBox="0 0 24 24"><path d="M3 5h13v9H3zM1 17h17"/><path d="M18 9h5v11h-5z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.5 8 8 9 4.5-1 8-4.5 8-9V6z"/><path d="m9 9 6 6M15 9l-6 6"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.5 0l3-3a4 4 0 0 0-5.5-5.5l-1 1"/><path d="M14 10a4 4 0 0 0-5.5 0l-3 3a4 4 0 0 0 5.5 5.5l1-1"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 4v16M7 20h10M5 7h14"/><path d="m5 7-3 6h6zM19 7l-3 6h6z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  </defs>
+</svg>
+
+<!-- 1. HERO (ground). The live H1 is kept (HW-D08). Three-stage overview card: Talk, Plan, Work and review.
+     Step 1 on screen from the start; one step every 1.5 s, once; numbers are buttons once the page is interactive. -->
+<section class="b-hero hx-hero" aria-labelledby="hw-h1">
+  <div class="px-wrap b-hero-g hx-hero-g">
+    <div class="hx-hero-tx">
+      <nav aria-label="Breadcrumb" class="b-crumb"><ol><li><a href="/">Home</a> </li><li><span aria-hidden="true">/</span> <span aria-current="page">How it works</span></li></ol></nav>
+      <p class="b-kicker">How it works</p>
+      <h1 id="hw-h1" class="b-h1">No mystery about <span class="b-named">what happens next.</span></h1>
+      <p class="b-lede">From the first conversation to the monthly review, here is how working with us runs. You see the plan before any work starts.</p>
+      <div class="dc-actions"><a class="dc-btn dc-btn-primary" href="/contact"><span aria-hidden="true" class="dc-mk"></span>Tell us what you’re trying to fix</a><a class="dc-btn dc-btn-secondary" href="/schedule-call"><span aria-hidden="true" class="dc-mk"></span>Book a call</a></div>
+    </div>
+
+    <figure class="hx-hero-fig" aria-labelledby="hx-hero-cap">
+      <div class="hx-card hx-seq" data-seq data-pick>
+        <div class="hx-card-top"><span class="hx-card-k">Working with us</span><span class="hx-tag">Illustration</span></div>
+        <ol class="hx-path">
+          <li data-i data-label="We talk"><span class="hx-n hx-node" aria-hidden="true"><svg><use href="#i-chat"/></svg></span><p><b>We talk</b><span>About your business and what you want more of.</span></p></li>
+          <li data-i data-label="We plan"><span class="hx-n hx-node" aria-hidden="true"><svg><use href="#i-plan"/></svg></span><p><b>We plan</b><span>You see our findings and a proposal, then decide.</span></p></li>
+          <li data-i data-label="We do the work"><span class="hx-n hx-node" aria-hidden="true"><svg><use href="#i-chart"/></svg></span><p><b>We do the work</b><span>And keep you informed every month.</span></p><span class="hx-loop" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v4h-4"/></svg>Every month</span></li>
+        </ol>
+      </div>
+      <figcaption id="hx-hero-cap" class="px-cap">How working with us runs: one conversation, one plan you approve, then the work.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 2. GETTING STARTED (ink). R2: the six steps are grouped into three customer-friendly stages (DEC-051 item 5 facts only):
+     1 We get to know you (get in touch, reply by email or WhatsApp, discovery call), 2 We look, then recommend (audit; findings,
+     plan and proposal), 3 You decide (approval; work starts). The working sheet fills in stage by stage. -->
+<section class="b-sec b-ink hx-start" aria-labelledby="hw-h-start">
+  <div class="px-wrap">
+    <p class="b-kicker">Getting started</p>
+    <h2 id="hw-h-start" class="b-h2">First, we get to <span class="b-named">know your business.</span></h2>
+    <p class="b-lede b-lede-ink hx-start-l">Nothing starts until you have seen what we found and agreed what we will do.</p>
+
+    <div class="hx-start-g hx-seq" data-seq data-pick>
+      <ol class="hx-stg" aria-label="What happens after you get in touch">
+        <li data-i data-label="We get to know you"><span class="hx-n" aria-hidden="true">1</span>
+          <div class="hx-stg-b"><h3 class="hx-stg-t">We get to know you</h3><p class="hx-stg-d">You tell us about your business. We reply by email or WhatsApp and book a discovery call.</p>
+          <ul class="hx-chips"><li>Get in touch</li><li>Our reply</li><li>Discovery call</li></ul></div></li>
+        <li data-i data-label="We look, then recommend"><span class="hx-n" aria-hidden="true">2</span>
+          <div class="hx-stg-b"><h3 class="hx-stg-t">We look, then recommend</h3><p class="hx-stg-d">We audit how things work today, then send our findings, a plan and a proposal.</p>
+          <ul class="hx-chips"><li>Audit</li><li>Findings and plan</li><li>Proposal</li></ul></div></li>
+        <li data-i data-label="You decide" class="hx-stg-ok"><span class="hx-n" aria-hidden="true">3</span>
+          <div class="hx-stg-b"><h3 class="hx-stg-t">You decide</h3><p class="hx-stg-d">Work starts only when you say yes.</p>
+          <ul class="hx-chips"><li>Your approval</li></ul></div></li>
+      </ol>
+
+      <figure class="hx-sheet-fig" aria-labelledby="hx-sheet-cap">
+        <div class="hx-sheet" aria-hidden="true">
+          <div class="hx-sheet-top"><span class="hx-sheet-t">Working sheet</span><span class="hx-tag hx-tag-ink">Example business</span></div>
+          <div class="hx-sr" data-from="0"><p class="hx-sr-k">What you want</p><p class="hx-sr-v">More enquiries from local homeowners planning a renovation.</p>
+            <p class="hx-sr-pills"><span class="hx-pill"><svg><use href="#i-reply"/></svg>Replied on WhatsApp</span><span class="hx-pill"><svg><use href="#i-phone"/></svg>Call booked</span></p></div>
+          <div class="hx-sr" data-from="1"><p class="hx-sr-k">What we found</p>
+            <ul class="hx-sr-list"><li>The contact form fails on some phones.</li><li>Nobody can see which enquiries came from Google.</li></ul>
+            <p class="hx-sr-k hx-sr-k2">What we recommend</p><p class="hx-sr-v">Fix the form first. Then record where enquiries come from.</p></div>
+          <div class="hx-sr hx-sr-ok" data-from="2"><p class="hx-sr-k">Your decision</p><p class="hx-stamp"><svg><use href="#i-check"/></svg>Approved by you</p></div>
+        </div>
+        <figcaption id="hx-sheet-cap" class="px-cap px-cap-ink">The working sheet fills in at each stage. Example business. Illustration.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 3. FINDING PRIORITIES (ground). The live priority sort, kept as the page's signature interaction (one pressed toggle,
+     cards glide once into three groups). Without JavaScript the sorted groups are shown and the toggle is hidden.
+     "Where a person decides" (five points) is reduced to one line (F13 softened). -->
+<section class="b-sec hx-sort" aria-labelledby="hw-h-sort">
+  <div class="px-wrap">
+    <div class="hx-sort-head">
+      <div>
+        <p class="b-kicker">Finding priorities</p>
+        <h2 id="hw-h-sort" class="b-h2">Not everything <span class="b-named">needs fixing.</span></h2>
+      </div>
+      <p class="b-lede hx-sort-l">An audit usually finds more than is worth doing. Problems that cost you enquiries come first. Things that only look dated can wait.</p>
+    </div>
+
+    <div class="hx-ps" data-ps>
+      <div class="hx-ps-ctl">
+        <button type="button" class="px-toggle hx-ps-btn" aria-pressed="false" hidden><span class="px-toggle-sw" aria-hidden="true"></span>Sort by priority</button>
+        <p class="hx-ps-hint" data-ps-hint hidden>What the audit found, in the order we found it.</p>
+        <p class="px-sr" role="status" aria-live="polite" data-ps-status></p>
+      </div>
+      <ul class="hx-ps-pile" data-ps-pile aria-label="What the audit found, in the order we found it"></ul>
+      <div class="hx-ps-lanes" data-ps-lanes>
+        <div class="hx-lane hx-lane-first">
+          <h3 class="hx-lane-h"><span class="hx-lane-ic" aria-hidden="true"><svg><use href="#i-target"/></svg></span>Fix first</h3>
+          <p class="hx-lane-d">Costing you enquiries now.</p>
+          <ul aria-label="Fix first" data-lane="first">
+            <li class="hx-pc" data-o="2"><b>The contact form fails on some phones</b><span>Some people who try to reach you never do.</span></li>
+            <li class="hx-pc" data-o="4"><b>Nobody can see which enquiries came from where</b><span>Without it, no later change can be judged.</span></li>
+          </ul>
+        </div>
+        <div class="hx-lane hx-lane-later">
+          <h3 class="hx-lane-h"><span class="hx-lane-ic" aria-hidden="true"><svg><use href="#i-clock"/></svg></span>Later</h3>
+          <p class="hx-lane-d">Worth doing once the basics work.</p>
+          <ul aria-label="Later" data-lane="later">
+            <li class="hx-pc" data-o="3"><b>The page for your main town is hard to find on Google</b><span>More of the right visitors, once the form works.</span></li>
+            <li class="hx-pc" data-o="6"><b>The services page doesn’t say which areas you cover</b><span>Fewer enquiries from outside your area.</span></li>
+          </ul>
+        </div>
+        <div class="hx-lane hx-lane-not">
+          <h3 class="hx-lane-h"><span class="hx-lane-ic" aria-hidden="true"><svg><use href="#i-cross"/></svg></span>Not worth doing</h3>
+          <p class="hx-lane-d">Costs money, changes little.</p>
+          <ul aria-label="Not worth doing" data-lane="not">
+            <li class="hx-pc" data-o="1"><b>The homepage looks a few years old</b><span>True, but it isn’t what is losing enquiries.</span></li>
+            <li class="hx-pc" data-o="5"><b>There is no social media account</b><span>Not where people look for a renovation company.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="px-cap hx-ps-cap">Example findings. Real findings, and how we weigh them, depend on your business. Illustration.</p>
+    <p class="hx-honest"><span class="hx-honest-ic" aria-hidden="true"><svg><use href="#i-chat"/></svg></span>If we don’t think something suits your business, we’ll say so.</p>
+  </div>
+</section>
+
+<!-- 4. DOING THE WORK (ink). The action board: who does each approved action and where it stands. Rows are reached one
+     at a time (1.5 s); a reached row shows its status. "What we need from you" is condensed to four items (F7 qualifier kept). -->
+<section class="b-sec b-ink hx-work" aria-labelledby="hw-h-work">
+  <div class="px-wrap hx-work-g">
+    <div class="hx-work-tx">
+      <p class="b-kicker">Doing the work</p>
+      <h2 id="hw-h-work" class="b-h2">We do the work. <span class="b-named">You stay in the loop.</span></h2>
+      <p class="b-lede b-lede-ink hx-work-l">Once you approve the plan, we handle most of the agreed work, with your input where needed. What’s included depends on your service. Some work, like website or tracking changes, may be agreed separately.</p>
+      <h3 class="hx-need-h">What we’ll need from you</h3>
+      <ul class="hx-need">
+        <li><span class="hx-need-ic" aria-hidden="true"><svg><use href="#i-key"/></svg></span><p><b>Access</b><span>To your website, accounts and wherever enquiries arrive.</span></p></li>
+        <li><span class="hx-need-ic" aria-hidden="true"><svg><use href="#i-user"/></svg></span><p><b>What you know</b><span>Who your customers are and what they ask before they buy.</span></p></li>
+        <li><span class="hx-need-ic" aria-hidden="true"><svg><use href="#i-clock"/></svg></span><p><b>Quick decisions</b><span>Work that waits weeks for a yes loses momentum.</span></p></li>
+        <li><span class="hx-need-ic" aria-hidden="true"><svg><use href="#i-chat"/></svg></span><p><b>Replies to enquiries</b><span>That part is yours, and it matters most.</span></p></li>
+      </ul>
+    </div>
+
+    <figure class="hx-board-fig" aria-labelledby="hx-board-cap">
+      <div class="hx-board hx-seq" data-seq>
+        <div class="hx-sheet-top"><span class="hx-sheet-t">Approved actions</span><span class="hx-tag hx-tag-ink">Example renovation business</span></div>
+        <table class="hx-acts">
+          <caption class="px-sr">Example approved actions, who does each one, and its status (illustration)</caption>
+          <thead><tr><th scope="col">Action</th><th scope="col">Who</th><th scope="col">Status</th></tr></thead>
+          <tbody>
+            <tr data-i><th scope="row">Fix the contact form on phones</th><td><span class="hx-who">Us</span></td><td><span class="hx-st hx-st-done"><svg aria-hidden="true"><use href="#i-check"/></svg>Done</span></td></tr>
+            <tr data-i><th scope="row">Record where enquiries come from, where possible</th><td><span class="hx-who">Us</span></td><td><span class="hx-st hx-st-done"><svg aria-hidden="true"><use href="#i-check"/></svg>Done</span></td></tr>
+            <tr data-i><th scope="row">Add the areas you cover to the services page<span class="hx-note">Needs your list of areas</span></th><td><span class="hx-who hx-who-both">Us + you</span></td><td><span class="hx-st hx-st-doing">In progress</span></td></tr>
+            <tr data-i><th scope="row">Improve the page for your main town<span class="hx-note">Needs photos of finished projects</span></th><td><span class="hx-who hx-who-both">Us + you</span></td><td><span class="hx-st hx-st-next">Next</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <figcaption id="hx-board-cap" class="px-cap px-cap-ink">Approved actions, who does them, and where they stand. Illustration.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 5. KEEPING YOU INFORMED (paper). Three-step monthly review (Starting point, What changed, What's next) beside the
+     HW-D01 commitment. Below, on ink, the condensed limits ("What the numbers can't always show"), kept visible because
+     /conversion-optimization, /google-ads, /about and /faq link here promising them (G0 §7). No metric is named (DEC-051). -->
+<section class="b-sec b-paper hx-info" aria-labelledby="hw-h-info">
+  <div class="px-wrap">
+    <p class="b-kicker">Keeping you informed</p>
+    <h2 id="hw-h-info" class="b-h2">Every month, <span class="b-named">you see what changed.</span></h2>
+    <p class="b-lede hx-info-l">Before we change anything, we note where things stand. Each month we compare against that starting point, where the data allows.</p>
+
+    <div class="hx-info-g">
+      <figure class="hx-rep-fig" aria-labelledby="hx-rep-cap">
+        <div class="hx-report">
+          <div class="hx-sheet-top hx-report-top"><span class="hx-sheet-t">Your monthly report</span><span class="hx-tag hx-tag-ink">Illustration</span></div>
+          <ol class="hx-rep hx-seq" data-seq data-pick aria-label="What each monthly report covers">
+            <li data-i data-label="Starting point"><span class="hx-n hx-mark hx-mark-start" aria-hidden="true">1</span>
+              <p><b>Starting point</b><span>Where things stood before we began.</span></p></li>
+            <li data-i data-label="What changed"><span class="hx-n hx-mark hx-mark-now" aria-hidden="true">2</span>
+              <p><b>What changed</b><span>This month, compared with your starting point.</span></p></li>
+            <li data-i data-label="What's next"><span class="hx-n hx-mark hx-mark-next" aria-hidden="true">3</span>
+              <p><b>What’s next</b><span>What we suggest for the coming month.</span></p></li>
+          </ol>
+        </div>
+        <figcaption id="hx-rep-cap" class="px-cap">One report, one story: where you started, what changed, what comes next. Illustration, not real data.</figcaption>
+      </figure>
+
+      <div class="hx-month">
+        <p class="hx-month-k">Every month</p>
+        <p class="hx-month-t">A monthly performance report, and a review call where your service includes one.</p>
+        <p class="hx-month-n">What the report covers depends on your service and on the data available.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="b-ink hx-gaps">
+    <div class="px-wrap">
+      <div class="hx-gaps-head">
+        <h3 id="hw-h-gaps" class="hx-gaps-h">What the numbers can’t always show</h3>
+        <p class="hx-gaps-l">Tracking helps, but it is never complete. We point out the gaps instead of hiding them.</p>
+      </div>
+      <ul class="hx-gaps-list" aria-labelledby="hw-h-gaps">
+        <li><span class="hx-gap-ic" aria-hidden="true"><svg><use href="#i-devices"/></svg></span><p><b>Phone, then laptop</b><span>Someone who browses on a phone and enquires on a laptop can look like two different people.</span></p></li>
+        <li><span class="hx-gap-ic" aria-hidden="true"><svg><use href="#i-shield"/></svg></span><p><b>Tracking declined</b><span>If a visitor says no to tracking, we respect it. Their enquiry arrives without a source.</span></p></li>
+        <li><span class="hx-gap-ic" aria-hidden="true"><svg><use href="#i-link"/></svg></span><p><b>Calls, emails and shared links</b><span>These often arrive with no record of how the person found you.</span></p></li>
+        <li><span class="hx-gap-ic" aria-hidden="true"><svg><use href="#i-receipt"/></svg></span><p><b>Sales and revenue</b><span>We only report these when you share figures from your own system.</span></p></li>
+        <li><span class="hx-gap-ic" aria-hidden="true"><svg><use href="#i-scale"/></svg></span><p><b>Small numbers</b><span>When the numbers are too small to tell, we won’t claim a change caused a result.</span></p></li>
+      </ul>
+      <p class="hx-gaps-line">A missing source doesn’t make an enquiry any less real. <span>We report the gap, not a tidier number.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. QUESTIONS (ground). Native <details>, closed on load. Five short answers; no guarantee, timeline or metric. -->
+<section class="b-sec hx-q" aria-labelledby="hw-h-qs">
+  <div class="px-wrap hx-q-g">
+    <div>
+      <p class="b-kicker">Questions</p>
+      <h2 id="hw-h-qs" class="b-h2">What people ask us</h2>
+    </div>
+    <div>
+      <ul class="fq-list">
+        <li><details class="fq-d"><summary><span class="fq-q">Do I have to commit before I see a plan?</span><span class="fq-pm" aria-hidden="true"></span></summary><div class="fq-a"><p>No. You’ll see our findings, a plan and a proposal first. Nothing starts until you say yes.</p></div></details></li>
+        <li><details class="fq-d"><summary><span class="fq-q">How soon will we see results?</span><span class="fq-pm" aria-hidden="true"></span></summary><div class="fq-a"><p>It depends on your service and your market, so we won’t promise a date. We note where you’re starting from, so you can see what changes each month.</p></div></details></li>
+        <li><details class="fq-d"><summary><span class="fq-q">Can you guarantee more enquiries or sales?</span><span class="fq-pm" aria-hidden="true"></span></summary><div class="fq-a"><p>No. We can’t control your prices, your sales team or your market. We do the work we agreed and show you what changed.</p></div></details></li>
+        <li><details class="fq-d"><summary><span class="fq-q">Who replies to the enquiries?</span><span class="fq-pm" aria-hidden="true"></span></summary><div class="fq-a"><p>Your team does. Replying quickly is the one part only you can do.</p></div></details></li>
+        <li><details class="fq-d"><summary><span class="fq-q">Do you do all the work, or do we?</span><span class="fq-pm" aria-hidden="true"></span></summary><div class="fq-a"><p>We do most of it. From you, we’ll need access to your accounts, a little of your time and quick decisions. Some work, like website changes, may be agreed separately.</p></div></details></li>
+      </ul>
+      <p class="hx-related">Related: <a class="dc-inline-link" href="/services">our services</a> · <a class="dc-inline-link" href="/pricing">pricing</a> · <a class="dc-inline-link" href="/faq">more questions</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. CLOSE (tangerine, shared .b-close look). Live H2 kept. -->
+<section class="b-close hx-close" aria-labelledby="b-close-h">
+  <div class="px-wrap">
+    <div class="b-close-in">
+      <div>
+        <h2 id="b-close-h" class="b-h2">Start with a <span class="hx-close-2">conversation.</span></h2>
+        <p class="b-lede">Tell us what you want more of. We’ll reply by email or WhatsApp, and nothing starts until you approve a plan.</p>
+      </div>
+      <div class="dc-actions"><a class="dc-btn dc-btn-primary" href="/contact"><span aria-hidden="true" class="dc-mk"></span>Tell us what you’re trying to fix</a><a class="dc-btn dc-btn-secondary" href="/schedule-call"><span aria-hidden="true" class="dc-mk"></span>Book a call</a></div>
+    </div>
+  </div>
+</section>

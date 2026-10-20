@@ -60,28 +60,31 @@ export const HOME = {
       links: [{ href: '/how-it-works', label: 'How we measure it' }],
     },
   ],
-  joins: { a: 'They are different skills.', b: 'The joins decide the result.' },
+  joins: {
+    a: 'Your marketing works better when',
+    b: 'everything works together.',
+    body: 'Running ads is only one part of generating enquiries. Your website needs to convince visitors to contact you, your forms need to work, and your business needs to know which marketing activities generate enquiries. We help connect these steps so you can identify what’s working and what needs improvement.',
+  },
   accountable: {
-    h: 'We are accountable for',
-    named: 'the qualified enquiry.',
-    body: 'Real, reachable, from a business context, with a stated need. What counts as one is published, and it is measured against a starting point we capture first.',
+    kicker: 'What we are responsible for, and where that stops',
+    h: 'We improve what can be',
+    named: 'measured and controlled.',
+    body: 'We manage and optimise the marketing activities that help your business attract potential customers. From campaign performance to website conversions and enquiry tracking, we focus on improving what can be measured and controlled.',
+    bodyLimits: 'Results also depend on factors such as market demand, competition, budgets, pricing and how quickly your business responds to enquiries.',
     pricing: 'What this costs, and what moves the number',
   },
   notPromised: ['rankings', 'a position in AI answers', 'a number of enquiries', 'revenue', 'a return on spend'],
   notPromisedClose: 'None of that is ours to control.',
   proof: {
-    label: 'What you can check before you commit',
-    noCases: 'We have no case studies to show you.',
-    noCasesBody: 'Writing around that would be the first thing you should not trust us on. What we do have is published, dated and checkable.',
-    claimA: 'We ran the test on ourselves, and',
-    claimNamed: 'we were named in none of them.',
-    method: 'We asked four AI assistants for agencies like us, 28 times, on one day, from Pune, in English, signed out.',
-    limitation:
-      '28 runs on one day, one location, signed out. Counts, not rates. No confidence interval is claimed and none is available. Two systems could not be tested at all.',
-    runs: 28,
-    systems: 4,
-    named: 0,
-    directories: 15, // published on /how-it-works: "directory sources appeared in 15 of them"
+    label: 'AI visibility & client work',
+    cases: 'Real businesses. Real marketing challenges.',
+    casesBody: 'See how we’ve helped clients tackle their marketing challenges.',
+    casesLink: 'See our work',
+    claimA: 'Can customers find your business through',
+    claimNamed: 'AI search?',
+    claimBody:
+      'AI assistants are changing how people discover businesses. We help you understand where your business appears, what’s missing, and what can be improved.',
+    claimLink: 'Explore AI Search Visibility',
   },
   fit: {
     works:

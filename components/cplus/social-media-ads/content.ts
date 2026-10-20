@@ -1,74 +1,72 @@
 /**
- * C+ Social Media Ads (/social-media-ads) — customer-facing copy, verbatim from the approved prototype
- * (proto/direction-c-plus 0a8b611, components/proto-cplus/socialAdsContent.ts, SA_PLAIN). The prototype's internal review register
- * is not carried over.
+ * C+ Social Media Ads (/social-media-ads) — customer-facing copy. Originated in the approved prototype (proto/direction-c-plus 0a8b611,
+ * SA_PLAIN); refined 2026-10-16 under the owner-approved Paid Social refinement (G-1 to G-12). H1, metadata, CTA text and the
+ * commercial boundaries are unchanged.
  */
 
 export const SA_PLAIN = {
   crumb: 'Paid social',
   kicker: 'Paid social',
   h1: { a: 'Paid social, judged on', b: 'the enquiries it produces.' },
-  lede: 'We run paid social advertising, and we will tell you when it is the wrong channel for your business. Search reaches people who have already decided they want something. Social interrupts people who have not.',
-  side: 'Where it genuinely fits, it is one demand source inside the same outcome as everything else here, and we are accountable for the enquiries it produces rather than for reach, clicks or engagement.',
+  lede: 'We run social media ads where they make business sense, and we’ll tell you when they don’t. We focus on the enquiries they generate, not just views, likes or clicks.',
   primary: 'Tell us what you’re trying to fix',
 
-  /* hero illustration: a feed — the ad is one interruption among other things; the reactions look like progress */
-  feed: {
-    label: 'A feed',
-    posts: ['A friend’s photo', 'Match highlights', 'A recipe video'],
-    ad: { tag: 'Sponsored', t: 'Your ad', note: 'They were thinking about something else.' },
-    reactsK: 'Looks like progress',
-    reacts: ['Reach', 'Likes', 'Shares', 'Comments'],
-    countsK: 'What counts',
-    counts: 'An enquiry you could quote for',
+  /* hero illustration: a four-stop route (ad, tap, page, enquiry). No figures. */
+  route: {
+    runK: 'We run the ads',
+    nextK: 'We look at what happens next',
+    posts: ['A friend’s photo', 'A recipe video'],
+    ad: { tag: 'Sponsored', t: 'Your ad' },
+    page: 'Your page',
+    enquiry: 'An enquiry',
+    steps: ['Your ad appears in their feed', 'They tap', 'They visit your page', 'They get in touch'],
     cap: 'Illustration. No figures.',
   },
 
-  /* 2 — scope (ink) */
-  scopeKicker: 'What is in scope',
-  scopeH: { a: 'The campaign,', b: 'and the page the click arrives on.' },
+  /* 2 — what we do (ink): the five approved responsibilities as a route */
+  scopeKicker: 'What we do',
+  scopeH: { a: 'From who sees your ad', b: 'to where they land.' },
   scope: [
-    'Audience definition',
-    'Creative and message testing, within the volume available',
-    'Campaign structure',
-    'Budget pacing',
+    { t: 'Choose who sees it', d: 'We decide which people your ads should reach.' },
+    { t: 'Set up the campaigns', d: 'We organise them so each one has a clear job.' },
+    { t: 'Try different ads', d: 'We test messages and visuals when enough people see them to compare.' },
+    { t: 'Pace the budget', d: 'We control how quickly your money is spent.' },
+    { t: 'Check where they land', d: 'We review the page people reach after clicking and recommend improvements that could help turn visits into enquiries.' },
   ],
-  scopeLanding: 'The landing experience the click arrives on',
-  scopeMeas: 'Conversion tracking configured around meaningful enquiry actions, where technically feasible.',
-  billing: 'Your advertising spend is paid directly to the platform. Our management fee is separate.',
+  scopeMeas: 'Where technically possible, we set up tracking for meaningful enquiry actions, not just clicks.',
+  billing: 'Your ad spend goes directly to the platform. Our management fee is separate.',
 
   /* 3 — the channel-fit boundary (paper): the page's most valuable content */
-  bdKicker: 'When we would tell you not to do this',
+  bdKicker: 'When we’d advise against it',
   bdH: { a: 'Cheap clicks are', b: 'not the same as enquiries.' },
   noes: [
     {
-      t: 'A considered purchase, a small audience, buyers who search by name.',
-      d: 'Our judgement in that situation is that the same budget works harder in search. Social reaches people while they are thinking about something else.',
+      t: 'A big decision, a small audience, buyers who search for you by name.',
+      d: 'We’d put that budget into search ads instead.',
     },
     {
-      t: 'No reliable way to measure what the spend produced.',
-      d: 'Reach and engagement figures look like progress. They are not enquiries.',
+      t: 'No reliable way to tell what the ads brought in.',
+      d: 'Likes and views look like progress. They aren’t enquiries.',
     },
     {
-      t: 'Social media management.',
-      d: 'We do not do content calendars, community management or brand-building campaigns. Those are different jobs with a different unit of value.',
+      t: 'Running your social media pages.',
+      d: 'We don’t do posting calendars, community management or brand campaigns.',
     },
   ],
-  principle: 'We do not claim one channel outperforms another for your business.',
-  principleD: 'Nothing has been measured on your account yet, and a claim made before that would be invented.',
-  methodLink: { href: '/how-it-works', label: 'The method, including what cannot be attributed' },
+  principle: 'We won’t claim one advertising channel works better than another for your business before seeing your results.',
+  principleD: 'Without that evidence, it would be a guess.',
+  methodLink: { href: '/how-it-works', label: 'How we measure, and what can’t be traced' },
   related: {
-    a: 'Related:',
+    a: 'Also see:',
     links: [
-      { href: '/google-ads', label: 'paid search as the alternative source' },
-      { href: '/services', label: 'the whole system' },
+      { href: '/google-ads', label: 'Google Ads' },
+      { href: '/services', label: 'All our services' },
     ],
   },
 
   /* close — the live close */
   close: {
-    label: 'Tell us what you are running now',
-    h: 'What it costs, and what it brings.',
-    body: 'If paid social is already running, the useful first message is what it costs, what it brings, and whether any of it turns into an enquiry you could quote for. If the honest answer is that you cannot tell, that is the finding worth starting from.',
+    h: 'Ready to make your social ads work harder?',
+    body: 'Tell us what you’re trying to achieve. We’ll talk through whether social ads are right for your business.',
   },
 };

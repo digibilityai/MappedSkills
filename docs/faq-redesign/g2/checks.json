@@ -1,0 +1,190 @@
+{
+ "widths": {
+  "desktop-1440": {
+   "sectionsG2": [
+    460,
+    1691,
+    829,
+    587
+   ],
+   "sectionsG1": [
+    460,
+    1691,
+    829,
+    587
+   ],
+   "sectionsEqual": true,
+   "openHeightG2": 7235,
+   "openHeightG1": 7235,
+   "textEqual": true,
+   "textDiff": [],
+   "overflowX": [
+    false,
+    false
+   ],
+   "smallText": 0,
+   "errors": []
+  },
+  "desktop-1280": {
+   "sectionsG2": [
+    430,
+    1620,
+    788,
+    543
+   ],
+   "sectionsG1": [
+    430,
+    1620,
+    788,
+    543
+   ],
+   "sectionsEqual": true,
+   "openHeightG2": 7053,
+   "openHeightG1": 7053,
+   "textEqual": true,
+   "textDiff": [],
+   "overflowX": [
+    false,
+    false
+   ],
+   "smallText": 0,
+   "errors": []
+  },
+  "tablet-768": {
+   "sectionsG2": [
+    509,
+    1768,
+    790,
+    399
+   ],
+   "sectionsG1": [
+    509,
+    1768,
+    790,
+    399
+   ],
+   "sectionsEqual": true,
+   "openHeightG2": 7412,
+   "openHeightG1": 7412,
+   "textEqual": true,
+   "textDiff": [],
+   "overflowX": [
+    false,
+    false
+   ],
+   "smallText": 0,
+   "errors": []
+  },
+  "mobile-375": {
+   "sectionsG2": [
+    530,
+    1842,
+    1103,
+    514
+   ],
+   "sectionsG1": [
+    530,
+    1842,
+    1103,
+    514
+   ],
+   "sectionsEqual": true,
+   "openHeightG2": 9371,
+   "openHeightG1": 9371,
+   "textEqual": true,
+   "textDiff": [],
+   "overflowX": [
+    false,
+    false
+   ],
+   "smallText": 0,
+   "errors": []
+  },
+  "mobile-320": {
+   "sectionsG2": [
+    600,
+    1955,
+    1225,
+    540
+   ],
+   "sectionsG1": [
+    600,
+    1955,
+    1225,
+    540
+   ],
+   "sectionsEqual": true,
+   "openHeightG2": 10393,
+   "openHeightG1": 10393,
+   "textEqual": true,
+   "textDiff": [],
+   "overflowX": [
+    false,
+    false
+   ],
+   "smallText": 0,
+   "errors": []
+  }
+ },
+ "behaviour": {
+  "meta": {
+   "title": "Questions We Get Asked, Answered Plainly | MappedSkills",
+   "desc": "Including the ones with answers that lose us work: what we are accountable for, why we will not guarantee results, what we cannot tell you about where an enquiry came from, and what counts as a qualified enquiry.",
+   "canonical": "https://mappedskills.com/faq",
+   "h1": "Before we work together, you should know."
+  },
+  "ldCount": 14,
+  "ldMatchesVisible": true,
+  "closedOnLoad": true,
+  "enterOpens": true,
+  "spaceCloses": true,
+  "focusRing": "solid rgb(255, 91, 4)",
+  "openAll": {
+   "all": true,
+   "label": "Close all answers",
+   "status": "All 14 answers are open."
+  },
+  "micro": [
+   "0.15s, 0.15s",
+   "0.15s, 0.15s",
+   "0.15s, 0.15s, 0.15s"
+  ],
+  "ctas": [
+   [
+    "Tell us about your business",
+    "/contact"
+   ],
+   [
+    "Request a call",
+    "/schedule-call"
+   ]
+  ],
+  "deep": {
+   "q-what-is-the-minimum-commitment": {
+    "top": 24,
+    "open": true
+   },
+   "q-who-is-this-for-and-who-is-it-not-for": {
+    "top": 24,
+    "open": true
+   },
+   "g-outcome": {
+    "top": 0,
+    "open": null
+   },
+   "g-ai-search": {
+    "top": 0,
+    "open": null
+   }
+  },
+  "catLink_measurementTop": 24
+ },
+ "noJs": {
+  "opens": true,
+  "toolsDisplay": "none"
+ },
+ "reducedMotion": {
+  "pm": "1e-05s",
+  "answerAnimation": "none"
+ }
+}

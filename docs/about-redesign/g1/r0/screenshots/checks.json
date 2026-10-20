@@ -1,0 +1,326 @@
+{
+ "desktop-1440": {
+  "pageHeight": 5164,
+  "overflowX": false,
+  "overElems": [],
+  "mainWords": 536,
+  "firstCtaBottom": 563,
+  "ctaInFold": true,
+  "headings": [
+   "H1 Judge us on the enquiries, not the traffic.",
+   "H2 Everyone has a report. Who answers for the enquiry?",
+   "H3 VIEW 1 OF 2 Split across suppliers",
+   "H2 Our part, and yours.",
+   "H3 Ours",
+   "H3 Yours",
+   "H3 What we don’t promise",
+   "H3 We’re a good fit if",
+   "H3 We’re not the right choice if",
+   "H2 The people behind MappedSkills.",
+   "H3 [Name]",
+   "H3 How we work with you",
+   "H2 Tell us what’s actually happening."
+  ],
+  "secs": [
+   {
+    "id": "ab-h1",
+    "h": 555,
+    "words": 73
+   },
+   {
+    "id": "ab-h-why",
+    "h": 980,
+    "words": 147
+   },
+   {
+    "id": "ab-h-bound",
+    "h": 957,
+    "words": 143
+   },
+   {
+    "id": "ab-h-team",
+    "h": 1116,
+    "words": 112
+   },
+   {
+    "id": "b-close-h",
+    "h": 768,
+    "words": 61
+   }
+  ],
+  "smallText": [],
+  "toggle": {
+   "label": "Show it split again",
+   "status": "View 2 of 2: one line",
+   "focus": true,
+   "anims": [
+    "undefined:150",
+    "undefined:150",
+    "ax-draw:400",
+    "ax-in:400"
+   ]
+  },
+  "consoleErrors": []
+ },
+ "desktop-1280": {
+  "pageHeight": 4898,
+  "overflowX": false,
+  "overElems": [],
+  "mainWords": 536,
+  "firstCtaBottom": 543,
+  "ctaInFold": true,
+  "headings": [
+   "H1 Judge us on the enquiries, not the traffic.",
+   "H2 Everyone has a report. Who answers for the enquiry?",
+   "H3 VIEW 1 OF 2 Split across suppliers",
+   "H2 Our part, and yours.",
+   "H3 Ours",
+   "H3 Yours",
+   "H3 What we don’t promise",
+   "H3 We’re a good fit if",
+   "H3 We’re not the right choice if",
+   "H2 The people behind MappedSkills.",
+   "H3 [Name]",
+   "H3 How we work with you",
+   "H2 Tell us what’s actually happening."
+  ],
+  "secs": [
+   {
+    "id": "ab-h1",
+    "h": 527,
+    "words": 73
+   },
+   {
+    "id": "ab-h-why",
+    "h": 867,
+    "words": 147
+   },
+   {
+    "id": "ab-h-bound",
+    "h": 923,
+    "words": 143
+   },
+   {
+    "id": "ab-h-team",
+    "h": 1078,
+    "words": 112
+   },
+   {
+    "id": "b-close-h",
+    "h": 714,
+    "words": 61
+   }
+  ],
+  "smallText": [],
+  "toggle": {
+   "label": "Show it split again",
+   "status": "View 2 of 2: one line",
+   "focus": true,
+   "anims": [
+    "undefined:150",
+    "undefined:150",
+    "ax-draw:400",
+    "ax-in:400"
+   ]
+  },
+  "consoleErrors": []
+ },
+ "tablet-820": {
+  "pageHeight": 5489,
+  "overflowX": false,
+  "overElems": [],
+  "mainWords": 536,
+  "firstCtaBottom": 481,
+  "ctaInFold": true,
+  "headings": [
+   "H1 Judge us on the enquiries, not the traffic.",
+   "H2 Everyone has a report. Who answers for the enquiry?",
+   "H3 VIEW 1 OF 2 Split across suppliers",
+   "H2 Our part, and yours.",
+   "H3 Ours",
+   "H3 Yours",
+   "H3 What we don’t promise",
+   "H3 We’re a good fit if",
+   "H3 We’re not the right choice if",
+   "H2 The people behind MappedSkills.",
+   "H3 [Name]",
+   "H3 How we work with you",
+   "H2 Tell us what’s actually happening."
+  ],
+  "secs": [
+   {
+    "id": "ab-h1",
+    "h": 702,
+    "words": 73
+   },
+   {
+    "id": "ab-h-why",
+    "h": 1064,
+    "words": 147
+   },
+   {
+    "id": "ab-h-bound",
+    "h": 1009,
+    "words": 143
+   },
+   {
+    "id": "ab-h-team",
+    "h": 951,
+    "words": 112
+   },
+   {
+    "id": "b-close-h",
+    "h": 735,
+    "words": 61
+   }
+  ],
+  "smallText": [],
+  "toggle": {
+   "label": "Show it split again",
+   "status": "View 2 of 2: one line",
+   "focus": true,
+   "anims": [
+    "undefined:150",
+    "undefined:150",
+    "ax-draw:400",
+    "ax-in:400"
+   ]
+  },
+  "consoleErrors": []
+ },
+ "mobile-390": {
+  "pageHeight": 6585,
+  "overflowX": false,
+  "overElems": [],
+  "mainWords": 536,
+  "firstCtaBottom": 475,
+  "ctaInFold": true,
+  "headings": [
+   "H1 Judge us on the enquiries, not the traffic.",
+   "H2 Everyone has a report. Who answers for the enquiry?",
+   "H3 VIEW 1 OF 2 Split across suppliers",
+   "H2 Our part, and yours.",
+   "H3 Ours",
+   "H3 Yours",
+   "H3 What we don’t promise",
+   "H3 We’re a good fit if",
+   "H3 We’re not the right choice if",
+   "H2 The people behind MappedSkills.",
+   "H3 [Name]",
+   "H3 How we work with you",
+   "H2 Tell us what’s actually happening."
+  ],
+  "secs": [
+   {
+    "id": "ab-h1",
+    "h": 767,
+    "words": 73
+   },
+   {
+    "id": "ab-h-why",
+    "h": 1147,
+    "words": 147
+   },
+   {
+    "id": "ab-h-bound",
+    "h": 1319,
+    "words": 143
+   },
+   {
+    "id": "ab-h-team",
+    "h": 1237,
+    "words": 112
+   },
+   {
+    "id": "b-close-h",
+    "h": 764,
+    "words": 61
+   }
+  ],
+  "smallText": [],
+  "toggle": {
+   "label": "Show it split again",
+   "status": "View 2 of 2: one line",
+   "focus": true,
+   "anims": [
+    "undefined:150",
+    "undefined:150",
+    "ax-draw:400",
+    "ax-in:400"
+   ]
+  },
+  "consoleErrors": []
+ },
+ "mobile-320": {
+  "pageHeight": 7147,
+  "overflowX": false,
+  "overElems": [],
+  "mainWords": 536,
+  "firstCtaBottom": 492,
+  "ctaInFold": true,
+  "headings": [
+   "H1 Judge us on the enquiries, not the traffic.",
+   "H2 Everyone has a report. Who answers for the enquiry?",
+   "H3 VIEW 1 OF 2 Split across suppliers",
+   "H2 Our part, and yours.",
+   "H3 Ours",
+   "H3 Yours",
+   "H3 What we don’t promise",
+   "H3 We’re a good fit if",
+   "H3 We’re not the right choice if",
+   "H2 The people behind MappedSkills.",
+   "H3 [Name]",
+   "H3 How we work with you",
+   "H2 Tell us what’s actually happening."
+  ],
+  "secs": [
+   {
+    "id": "ab-h1",
+    "h": 927,
+    "words": 73
+   },
+   {
+    "id": "ab-h-why",
+    "h": 1214,
+    "words": 147
+   },
+   {
+    "id": "ab-h-bound",
+    "h": 1431,
+    "words": 143
+   },
+   {
+    "id": "ab-h-team",
+    "h": 1350,
+    "words": 112
+   },
+   {
+    "id": "b-close-h",
+    "h": 784,
+    "words": 61
+   }
+  ],
+  "smallText": [],
+  "toggle": {
+   "label": "Show it split again",
+   "status": "View 2 of 2: one line",
+   "focus": true,
+   "anims": [
+    "undefined:150",
+    "undefined:150",
+    "ax-draw:400",
+    "ax-in:400"
+   ]
+  },
+  "consoleErrors": []
+ },
+ "nojs": {
+  "statesVisible": 2,
+  "buttonVisible": false,
+  "banner": true
+ },
+ "reducedMotion": {
+  "running": 0,
+  "entering": false
+ }
+}

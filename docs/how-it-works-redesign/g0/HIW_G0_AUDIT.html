@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>How It Works G0 Audit</title>
+<style>
+:root{--bg:#F7F3EC;--paper:#FFFDF8;--ink:#141219;--mute:#5d5866;--line:#d9d2c5;--acc:#C24400;--acc-bg:#FFE7D9;--ok:#1e6b3a;--ok-bg:#e3f2e7;--warn:#8a5a00;--warn-bg:#fdf0d2;--bad:#a1221b;--bad-bg:#fbe1de}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141219;--paper:#1d1a23;--ink:#efeae2;--mute:#a9a3b2;--line:#39343f;--acc:#ff8a4c;--acc-bg:#3a2216;--ok:#7fd39b;--ok-bg:#16301f;--warn:#f0c46a;--warn-bg:#3a2e12;--bad:#ff9a92;--bad-bg:#3d1714}}
+:root[data-theme="dark"]{--bg:#141219;--paper:#1d1a23;--ink:#efeae2;--mute:#a9a3b2;--line:#39343f;--acc:#ff8a4c;--acc-bg:#3a2216;--ok:#7fd39b;--ok-bg:#16301f;--warn:#f0c46a;--warn-bg:#3a2e12;--bad:#ff9a92;--bad-bg:#3d1714}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 16px 80px}
+h1{font-size:clamp(28px,4vw,40px);line-height:1.1;margin:.2em 0 .3em}
+h2{font-size:24px;margin:56px 0 12px;padding-top:12px;border-top:2px solid var(--ink)}
+h3{font-size:18px;margin:28px 0 8px}
+p,li{max-width:78ch}
+.k{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:600}
+.meta{color:var(--mute);font-size:14px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:16px 0}
+.sum{border-left:4px solid var(--acc)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}
+.stat{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px}
+.stat b{display:block;font-size:26px;line-height:1.1}
+.stat span{font-size:13px;color:var(--mute)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);margin:12px 0}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--bg);font-weight:600}
+.scroll{overflow-x:auto}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;padding:2px 6px;border-radius:4px;white-space:nowrap}
+.vf{background:var(--ok-bg);color:var(--ok)}
+.or,.ad{background:var(--acc-bg);color:var(--acc)}
+.wh{background:var(--warn-bg);color:var(--warn)}
+.rr,.un{background:var(--bad-bg);color:var(--bad)}
+.ok{color:var(--ok);font-weight:600}.warn{color:var(--warn);font-weight:600}.bad{color:var(--bad);font-weight:600}
+figure{margin:16px 0}
+figure img{max-width:100%;height:auto;border:1px solid var(--line);border-radius:6px;display:block;background:#fff}
+figcaption{font-size:13px;color:var(--mute);margin-top:6px}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.full{display:grid;grid-template-columns:3fr 1fr;gap:16px;align-items:start}
+.full .tall{max-height:900px;overflow:auto;border:1px solid var(--line);border-radius:6px}
+.full .tall img{border:0}
+@media (max-width:700px){.full{grid-template-columns:1fr}}
+code{font:13px ui-monospace,Menlo,monospace;background:var(--bg);padding:1px 4px;border-radius:3px}
+ol.arch>li{margin:10px 0}
+a{color:var(--acc)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="k">MappedSkills · How It Works · G0 audit (read-only)</p>
+<h1>/how-it-works: G0 audit</h1>
+<p class="meta">17 October 2026. Live page <code>https://mappedskills.com/how-it-works</code>, BUILD_ID <code>9u6ZI-y-WnT4tMz_jD-VG</code>. That is the build of <code>main</code> @ <code>347ac5e</code>, so the live page and the repository match. Source: <code>app/(pages)/how-it-works/page.tsx</code> and <code>components/cplus/how-it-works/*</code>. Read-only: I changed no source, made no commits and deployed nothing. G1 has not started.</p>
+
+<div class="card sum">
+<p><b>Summary.</b> The page is accurate on the process (Discovery call → Audit → Proposal → Approval → Execution), technically sound and accessible in the automated checks. It is much longer than the redesigned pages: <b>2,012 words against 545 to 760</b>, and <b>13.5 viewports on desktop and 20.9 on mobile</b>. About 40% of the words sit in one section (measuring and reviewing). Most of that is attribution limits written in analytics language. There is no call to action between the hero and the close, and there are no links to service pages.</p>
+<p>Two statements need correcting. Both need an owner decision:</p>
+<ol>
+<li>It promises <b>a monthly review call to every client</b>. <code>DEC-057</code> withdrew that for Lead Generation.</li>
+<li>It implies that MappedSkills <b>checks, qualifies and reports every client's enquiries</b>. <code>DEC-057</code> says Lead Generation enquiries go straight to the client and are not routinely received or reviewed.</li>
+</ol>
+<p>Recommended G1 direction: one <b>five-stage journey</b> using the shared sequencer, keep the <b>priority sort</b>, a short <b>monthly review</b> block, and a <b>condensed but visible "what we can't measure" section</b>. That section stays because four released pages link here promising it. Target 750 to 950 words.</p>
+</div>
+
+<div class="grid">
+<div class="stat"><b>2,012</b><span>words in &lt;main&gt; (approved pages: 545–760)</span></div>
+<div class="stat"><b>13.5 / 20.9</b><span>viewports tall, 1440 / 390 (approved: 6.9–8.5 / 9.7–11.6)</span></div>
+<div class="stat"><b>0</b><span>axe violations (WCAG 2.2 AA + best practice, Chromium)</span></div>
+<div class="stat"><b>0</b><span>in-body links to service pages (approved pages: 2–8)</span></div>
+<div class="stat"><b>2</b><span>CTA placements (hero and close), about 10,000 px apart on desktop</span></div>
+<div class="stat"><b>21</b><span>items framed as limits (6 not promised, 6 attribution gaps, 4 unknowns, 5 judgement calls)</span></div>
+</div>
+
+<p class="meta">Evidence labels follow <code>CLAUDE.md</code>: <span class="tag vf">VERIFIED</span> <span class="tag or">OWNER REQ.</span> <span class="tag ad">APPROVED DEC</span> <span class="tag wh">HYPOTHESIS</span> <span class="tag rr">RESEARCH REQ.</span> <span class="tag un">UNKNOWN</span>. The measurements come from Playwright Chromium against the live site, with analytics consent declined. They are in <code>screenshots/measurements.json</code> and <code>screenshots/comparison.json</code>. No manual screen-reader or real-device testing was done.</p>
+
+<!-- ============================================================== -->
+<h2>1. Screenshots</h2>
+<div class="full">
+<figure><div class="tall"><img src="screenshots/desktop-1440-full.png" alt="Full-page capture of /how-it-works at 1440 px wide" loading="lazy"></div><figcaption>Desktop 1440 × 900, full page (12,108 px). Scroll inside the frame. File: <code>screenshots/desktop-1440-full.png</code></figcaption></figure>
+<figure><div class="tall"><img src="screenshots/mobile-390-full.png" alt="Full-page capture of /how-it-works at 390 px wide" loading="lazy"></div><figcaption>Mobile 390 × 844, full page (17,612 px). File: <code>screenshots/mobile-390-full.png</code></figcaption></figure>
+</div>
+<div class="shots">
+<figure><img src="screenshots/desktop-1440-fold-with-consent.png" alt="Desktop first screen with consent banner" loading="lazy"><figcaption>Desktop first screen as a new visitor sees it (consent banner).</figcaption></figure>
+<figure><img src="screenshots/mobile-390-fold-with-consent.png" alt="Mobile first screen with consent banner" loading="lazy"><figcaption>Mobile first screen. The banner covers the hero figure. The primary CTA is visible (bottom at 456 px).</figcaption></figure>
+<figure><img src="screenshots/desktop-1440-sort-before.png" alt="Priority sort before pressing" loading="lazy"><figcaption>Priority sort before pressing: the findings in the order they were found.</figcaption></figure>
+<figure><img src="screenshots/desktop-1440-sort-after.png" alt="Priority sort after pressing" loading="lazy"><figcaption>After "Sort by priority": Fix first, Later, Not worth doing.</figcaption></figure>
+</div>
+<p class="meta">Section captures (desktop): <code>desktop-1440-s01.png</code> to <code>s08.png</code>. Also captured: the no-JavaScript full page (<code>desktop-1440-nojs-full.png</code>), the mobile sort states, and the first screens of the four approved pages (<code>ref-*.png</code>).</p>
+
+<!-- ============================================================== -->
+<h2>2. Inventory</h2>
+<div class="scroll"><table>
+<tr><th>#</th><th>Section (ground)</th><th>Heading</th><th>Components and visuals</th><th>Motion / interaction</th><th>Words</th><th>Height 1440 / 390</th></tr>
+<tr><td>1</td><td>Hero (ivory)</td><td>H1 "No mystery about what happens next."</td><td>Breadcrumb (Home / How it works), lede, <code>ActionPair</code> (/contact, /schedule-call), the "Working sheet" figure (six empty rows, <code>aria-hidden</code>, with a caption)</td><td>None</td><td>95</td><td>701 / 1,075</td></tr>
+<tr><td>2</td><td>First conversation (ink)</td><td>H2 "First, we get to know your business."</td><td>A six-square progress kicker; a three-step icon chain (get in touch, we reply, discovery call); a speech bubble that becomes sheet row 01 (with screen-reader text)</td><td>Reveal on scroll (<code>data-rv</code>)</td><td>159</td><td>1,082 / 1,258</td></tr>
+<tr><td>3</td><td>Before any work starts (paper)</td><td>H2 "We look before we recommend."</td><td>Five numbered H3 steps (Discovery call, Audit, Findings and plan, Proposal, Your approval) plus "Then the work begins"; an annotated sheet with five pins</td><td>Reveal</td><td>194</td><td>1,228 / 1,921</td></tr>
+<tr><td>4</td><td>Deciding what comes first (ivory)</td><td>H2 "Not everything needs fixing."</td><td><code>PrioritySort</code>: six finding cards, three lanes with H3s. Sub-block H3 "Where a person decides, not a process" (five points)</td><td>One <code>aria-pressed</code> toggle; FLIP glide of 560 ms with 35 ms stagger; polite status line; without JS the sorted lanes show</td><td>269</td><td>1,356 / 1,977</td></tr>
+<tr><td>5</td><td>Doing the work (ink)</td><td>H2 "A plan is only useful when someone acts on it."</td><td>A real <code>&lt;table&gt;</code> of approved actions and their status (Done, In progress, Next), with a screen-reader caption</td><td>Reveal</td><td>120</td><td>737 / 1,045</td></tr>
+<tr><td>6</td><td>Measuring and reviewing (paper, then an ink half)</td><td>H2 "You'll see what changed, and what the information can and cannot show."</td><td>A four-tile review band. H3 "What we measure": a six-point ledger with "Accountable up to here". H3 "Every month" (tangerine card). Baseline note. Ink half: H3 "What we do not promise" (6), H3 "What we cannot tell you about where an enquiry came from" (a six-row two-column list), and a tangerine callout</td><td>The band reveals; the limits are never animated, by design</td><td><b>808</b></td><td><b>4,224 / 6,068</b></td></tr>
+<tr><td>7</td><td>Working together (ivory)</td><td>H2 "Good work needs both sides."</td><td>Two panels: "What we need from you" (4, with icons) and "What you get from us" (6). H3 "What we do not know" (4)</td><td>The panels reveal</td><td>333</td><td>1,452 / 2,432</td></tr>
+<tr><td>8</td><td>Close (tangerine, shared <code>Close</code>)</td><td>H2 "Start with a conversation."</td><td>Body text and <code>ActionPair</code></td><td>Reveal</td><td>34</td><td>539 / 486</td></tr>
+</table></div>
+<p>Heading outline (<span class="tag vf">VERIFIED</span>): one H1, seven H2s and 16 visible H3s (plus three lane H3s that appear after sorting). No levels are skipped. Motion is global <code>CplusMotion</code> reveals plus the sort glide. Nothing loops, and no content is hidden under reduced motion or without JavaScript (both checked: 0 elements at opacity 0).</p>
+
+<!-- ============================================================== -->
+<h2>3. Copy: excess, repetition, jargon, density, friction</h2>
+<h3>3.1 Repetition (<span class="tag vf">VERIFIED</span> in <code>content.ts</code>)</h3>
+<div class="scroll"><table>
+<tr><th>Idea</th><th>Times</th><th>Where</th></tr>
+<tr><td>Nothing starts before your approval</td><td>6</td><td>§2 discovery-call step; §3 body (twice); §3 step 5; §7 "What you get" (twice)</td></tr>
+<tr><td>Starting point / baseline before any change</td><td>5</td><td>§6 body, band tile 1, baseline note, "not promised" item 6, §7 unknown 2. "This applies to our own site as much as to a client's" appears twice, word for word</td></tr>
+<tr><td>Reply by email or WhatsApp</td><td>4</td><td>§2 body, §2 step 2, §7 list, close</td></tr>
+<tr><td>Discovery call</td><td>3</td><td>§2 step 3, §3 step 1, §7 list. §2 and §3 tell the first half of the same journey twice</td></tr>
+<tr><td>Phone and email enquiries have no first-touch attribution</td><td>2</td><td>"Not promised" item 5; gaps item 5</td></tr>
+<tr><td>Claude and Grok untested</td><td>2</td><td>"Not promised" item 3; "unknown" item 4</td></tr>
+<tr><td>Monthly report and review call</td><td>2</td><td>"Every month" card; "What you get from us"</td></tr>
+</table></div>
+<h3>3.2 Jargon a business owner would stop at</h3>
+<p>"first-touch attribution", "no referrer … recorded as direct", "the direct bucket is a residual, not a channel", "statistical significance below a real traffic threshold", "usable acquisition context", "the chain" and "the joins between them", Capture / Convert / Measure, "close data", "the accountable number", "what it does not license us to say", "rather than surveillance". The meta description adds "the published method … Written to be checked."</p>
+<h3>3.3 Visual density</h3>
+<ul>
+<li>§6 alone is 4,224 px on desktop (6,068 on mobile), with five sub-blocks and three visual languages: tiles, ledger and dark lists.</li>
+<li>Three tangerine fills compete: the "Every month" card, the "measurement gap" callout and the close.</li>
+<li>There are six card or sheet treatments (hero sheet, entry sheet, audit sheet, sort cards, action table, band tiles). The approved pages use one or two motifs each.</li>
+<li><b>Progress-kicker defect</b> (<span class="tag vf">VERIFIED</span>, <code>MethodBody.tsx</code>). The six squares read 1, 4, 4, 5, 6, 6 across the sections: they skip 2 and 3 and repeat 4 and 6. The squares are decorative (<code>aria-hidden</code>), so this is a visual inconsistency, not an accessibility failure.</li>
+</ul>
+<h3>3.4 Conversion friction</h3>
+<ul>
+<li>There is no CTA and no "what happens next" between the hero and the close: about 10,000 px on desktop and 15,000 on mobile. Conversion Optimization closes with a four-line "What happens next" row (CO-D09). This page has none, even though it is the "what happens next" page.</li>
+<li>The page has no in-body links to services. Meanwhile, six pages link <em>into</em> it: Conversion Optimization, Google Ads, Lead Generation, About, Contact and FAQ.</li>
+<li>Tone: the title is "…and What We Cannot Tell You", and 21 items are framed as limits. That is honest, but it reads as defensive for a page that visitors reach just before they enquire. <span class="tag wh">HYPOTHESIS</span> (no conversion data).</li>
+</ul>
+
+<!-- ============================================================== -->
+<h2>4. Design language compared with the approved pages</h2>
+<div class="scroll"><table>
+<tr><th>Page (live)</th><th>Words</th><th>Viewports 1440 / 390</th><th>H2 / H3</th><th>Signature visual</th><th>Motion</th><th>In-body links</th><th>JSON-LD</th></tr>
+<tr><td>/lead-generation (DEC-057)</td><td>545</td><td>6.9 / 9.7</td><td>6 / 10</td><td>Example-enquiry card and a three-tile journey</td><td><code>useSequence</code>, 2 s, step 1 visible</td><td>8</td><td>Org + Breadcrumb</td></tr>
+<tr><td>/google-ads (DEC-053)</td><td>760</td><td>7.4 / 11.6</td><td>7 / 20</td><td>Receipt and the Path Figure tabs</td><td>Guided demonstrations</td><td>10</td><td>Org + Breadcrumb</td></tr>
+<tr><td>/ai-seo (DEC-054)</td><td>755</td><td>8.5 / 11.5</td><td>8 / 14</td><td>AI answer card and a five-step journey</td><td><code>useSequence</code>, 1.5 s</td><td>5</td><td>Org + Breadcrumb</td></tr>
+<tr><td>/conversion-optimization (DEC-055/056)</td><td>603</td><td>7.3 / 10.8</td><td>5 / 8</td><td>Three numbered tiles and Improve → Measure → Review</td><td><code>useSequence</code>, 1.5 s</td><td>5</td><td>Org + Breadcrumb</td></tr>
+<tr><td><b>/how-it-works</b></td><td><b>2,012</b></td><td><b>13.5 / 20.9</b></td><td>7 / 16</td><td>Working sheet (×4 variants) and the priority sort</td><td>Reveal only; sort glide</td><td><b>3</b> (Home, CTAs)</td><td><b>Org only</b></td></tr>
+</table></div>
+<p><b>Shared with the approved pages (keep):</b> ivory, ink and paper grounds; Bricolage and Manrope; the tangerine "named" second line in headings; the uppercase kicker; numbered black squares; captions labelled "Illustration"; <code>ActionPair</code>.</p>
+<p><b>Different (align in G1):</b></p>
+<ul>
+<li>The approved pages tell one story per section with a numbered three- to five-step sequence that plays once, starts with step 1 visible and lets the visitor select a step. This page has static lists instead.</li>
+<li>The approved pages put the hero figure in a white bordered card with an offset shadow and a single caption. This page uses that card for the hero but repeats the sheet four times.</li>
+<li>The approved pages use short sentences without long dashes (CO-D01/D08). This page has 12 long dashes in its visible copy.</li>
+<li>The approved pages have a hero kicker. This page has none (the breadcrumb stands in for it).</li>
+</ul>
+
+<!-- ============================================================== -->
+<h2>5. Factual audit against the approved operating model</h2>
+<p>Sources: <code>DEC-051</code> item 5 (owner-confirmed operating facts), <code>DEC-053</code> (Google Ads), <code>DEC-056</code> (no routine A/B testing), <code>DEC-057</code> and LG Confirmations 03 and 04 (Lead Generation), <code>DEC-054</code> (AI record), <code>AI_VISIBILITY_BASELINE.md</code>.</p>
+<div class="scroll"><table>
+<tr><th>#</th><th>Live statement</th><th>Against the record</th><th>Status</th><th>Proposed correction (needs owner approval)</th></tr>
+<tr><td>F1</td><td>"Every month: A performance report · A review call to go through it together"; "A monthly performance report and a monthly review call."</td><td>Confirmed in DEC-051 item 5 and in DEC-053 OD-03 (Google Ads). <b>DEC-057 item 4: for Lead Generation a monthly review call is not confirmed</b> and must not be presented as standard. The live /lead-generation page now says "a monthly report" only, so the two pages contradict each other.</td><td><span class="bad">Correction required</span> <span class="tag ad">APPROVED DEC</span> conflict</td><td>Option A: "A monthly performance report, and a review call where your service includes one." Option B: the owner confirms which services include the call, and the page names them. Option C: the owner confirms the call is universal and the LG record is revisited. <b>A is the smallest true statement.</b><br><b>Decided 17 Oct 2026 (HW-D01): option A, folded into G1; the live page is not corrected separately.</b></td></tr>
+<tr><td>F2</td><td>Ledger: "05 The qualified enquiry: whether it is real, reachable … not a duplicate. This is the accountable number", "Accountable up to here"; "Every one of the six points is reported against a starting point"; "The website can check that it is real, reachable and in context."</td><td>For Lead Generation, MappedSkills "does not routinely receive, manually review, approve, reject or release individual enquiries" (Confirmation 03, DEC-057). The own-site qualification is a separate process (LG Confirmation 03 §5.1). DEC-051 says no report metric may be stated or implied. "Reported … every one of the six points" implies a per-client report covering all six points, including enquiry qualification. LG-D29 already flagged this page's step 05 as ambiguous. Rescoping the shared "accountable up to the qualified enquiry" positioning (DEC-005) was <b>not</b> recommended there.</td><td><span class="bad">Correction required</span> (report claim); <span class="warn">owner decision</span> (positioning)</td><td>Remove "Every one of the six points is reported…" and say instead "We compare what changed with where you started, where the data allows" (DEC-053 OD-04 wording). For the ledger, either (a) keep the DEC-005 wording and scope it ("on the enquiry routes we set up and measure"), or (b) drop the six-point ledger from this page. Both need an explicit decision. Do not rewrite DEC-005 silently.</td></tr>
+<tr><td>F3</td><td>"Someone phones or emails … It is entered by a person, with the source recorded as unknown, and it is never quietly assigned to a channel."</td><td>This describes a manual logging step, but who does it for clients is not recorded. The CRM is deferred and the Mini CRM is out of scope (DEC-052).</td><td><span class="tag un">UNKNOWN</span></td><td>Keep only the attribution fact: "Phone calls and emails arrive without a source, so we report them as 'source unknown', never as a channel." Owner to confirm.</td></tr>
+<tr><td>F4</td><td>"A discovery call and an audit before we recommend anything."</td><td>DEC-051 item 5 and DEC-053 OD-08 confirm the sequence, and LG-D07 relies on it. Whether every engagement type, including Paid Social, gets an audit is not separately recorded. The audit's scope, length and cost are not confirmed and are not stated (correct).</td><td><span class="tag or">OWNER REQ.</span> (sequence); <span class="tag wh">HYPOTHESIS</span> (universal)</td><td>Keep the wording. Ask the owner to confirm it holds for every service. Do not add duration, cost or a "free audit".</td></tr>
+<tr><td>F5</td><td>Process: Discovery call → Audit → Findings and a recommended plan → Proposal → Your approval → "Then the work begins."</td><td>Matches DEC-051 (findings, plan and proposal before work begins).</td><td class="ok">Correct</td><td>Show it as one five-stage journey (not two sections).</td></tr>
+<tr><td>F6</td><td>"We get back to you by email or WhatsApp."</td><td>DEC-051. No response time is stated (correct).</td><td class="ok">Correct</td><td>Keep. Say it once.</td></tr>
+<tr><td>F7</td><td>"We handle most of the agreed work, with your input where needed … What exactly depends on the service and on what we agreed." Illustration: "Fix the contact form on phones: Done"; "Record each enquiry and its source".</td><td>DEC-051 confirms "most agreed implementation". For Google Ads, website, form and tracking work is <b>agreed separately</b> (DEC-053 F-2). The qualifier covers it.</td><td class="ok">Correct with qualifier</td><td>Keep the qualifier next to the illustration. Optionally add "Some work, such as website or tracking changes, is agreed separately."</td></tr>
+<tr><td>F8</td><td>"Statistical significance below a real traffic threshold … rather than calling an observation a test."</td><td>Consistent with DEC-056 (no routine A/B testing) but written in jargon.</td><td class="warn">Accurate, rewrite</td><td>Use the approved CO framing: "We make improvements, then measure what changes. We don't claim a change caused a result when the numbers are too small to tell."</td></tr>
+<tr><td>F9</td><td>"Order changed in every repeated prompt we measured."</td><td><code>AI_VISIBILITY_BASELINE.md</code> §7: three repeated prompts, and the order changed in all three.</td><td><span class="tag vf">VERIFIED</span></td><td>Keep only if the AI item stays. /ai-seo now holds the full record (DEC-054).</td></tr>
+<tr><td>F10</td><td>"Our AI measurement is one round. One day, one location … Claude and Grok could not be tested."</td><td>Matches the 31 August 2026 record (DEC-054). Whether a second round has happened since is not recorded.</td><td><span class="tag rr">RESEARCH REQ.</span> before re-publication</td><td>Date it ("as of 31 August 2026") or link to /ai-seo "The record" rather than restating it.</td></tr>
+<tr><td>F11</td><td>"As of August 2026, no keyword tool has been available…"; "Our own analytics only began in September 2026."</td><td>Dated statements that are now about two months old. The analytics start is based on the code comment citing DEC-021; I did not re-verify it.</td><td><span class="tag rr">RESEARCH REQ.</span></td><td>Move these to /faq or /about (they are about MappedSkills' own evidence, not how client work runs), or re-date them after checking.</td></tr>
+<tr><td>F12</td><td>"Organic search is a 12-month-plus horizon."</td><td>Labelled on the page as "our position". It is a timeline claim.</td><td><span class="tag wh">HYPOTHESIS</span></td><td>Move it to /seo or /faq, or keep it with the label. It isn't needed for "how it works".</td></tr>
+<tr><td>F13</td><td>"When to tell a client a channel is wrong … including when we would be paid to run it."</td><td>DEC-053 OD-09 confirms this for Google Ads only.</td><td><span class="warn">Generalised</span></td><td>Owner to confirm for all services, or soften to "We tell you when we think another approach would suit you better."</td></tr>
+</table></div>
+
+<!-- ============================================================== -->
+<h2>6. Accessibility, responsive layout, CTAs and SEO</h2>
+<h3>Accessibility (automated, Chromium only)</h3>
+<ul>
+<li><span class="ok">axe-core: 0 violations</span> at 1440 and 390 (WCAG 2.0/2.1/2.2 A and AA, plus best practice, scoped to <code>&lt;main&gt;</code>).</li>
+<li>Smallest rendered text is 12 px (figure labels at 390), which meets the KD-09 floor of 12 px or more.</li>
+<li>Sort button: native <code>button</code> with <code>aria-pressed</code>, 207 × 48 px, focus stays on it, and a polite status line announces the result (all verified). The FLIP glide is skipped under reduced motion.</li>
+<li>Breadcrumb "Home" link: 38 × 19 px. It is inline text, so the WCAG 2.5.8 inline exception probably applies. Note it for consistency only.</li>
+<li>The decorative sheets are <code>aria-hidden</code>, with figure captions and screen-reader text carrying the meaning (checked in source). The action table is a real table with header cells.</li>
+<li><b>Reveal-on-scroll risk</b> (<span class="tag wh">HYPOTHESIS</span>). Blocks below the fold are held at opacity 0 until 25% of each block is in view. My first automated capture used instant programmatic scrolling and left "Good work needs both sides" blank. Wheel scrolling revealed it normally. Find-in-page or anchor jumps could briefly land on content that is still invisible. This mechanism is global (<code>CplusMotion</code>) and is not specific to this page.</li>
+<li><b>Not done:</b> SR-1 to SR-5 (VoiceOver and TalkBack), Firefox and WebKit, real devices, Windows high-contrast mode.</li>
+</ul>
+<h3>Responsive layout</h3>
+<ul>
+<li>No horizontal overflow at 1440 or 390. Mobile H1 is 40.8 px. The mobile primary CTA bottom is at 456 px.</li>
+<li>The problem on mobile is length: 20.9 screens, with §6 alone taking about 7.2 screens.</li>
+</ul>
+<h3>CTA destinations</h3>
+<ul>
+<li>Hero and close both use <code>ActionPair</code>: "Tell us what you're trying to fix" → <code>/contact</code> and "Book a call" → <code>/schedule-call</code>. Both returned HTTP 200 today. This shows the pages are reachable; I did not check Calendly slot availability.</li>
+</ul>
+<h3>SEO metadata (<span class="tag vf">VERIFIED</span> in the served head)</h3>
+<div class="scroll"><table>
+<tr><th>Item</th><th>Live</th><th>Observation</th></tr>
+<tr><td>Title</td><td>"How We Work, What We Measure, and What We Cannot Tell You | MappedSkills" (72 characters)</td><td>Long, so it may be truncated in results (<span class="tag wh">HYPOTHESIS</span>). The negative clause leads the snippet.</td></tr>
+<tr><td>Description</td><td>"The published method: … Written to be checked." (172 characters)</td><td>Jargon ("the chain"). It no longer describes the page's main content (the process), and it is over about 155 characters.</td></tr>
+<tr><td>Canonical / robots</td><td><code>https://mappedskills.com/how-it-works</code>; index, follow</td><td>Correct.</td></tr>
+<tr><td>Open Graph / Twitter</td><td>The title and description repeat; the image is <code>ms_icon.webp</code> with <code>summary_large_image</code></td><td>Weak social card. This is site-wide and not a page fix.</td></tr>
+<tr><td>Structured data</td><td>Organization only</td><td>There is a visible breadcrumb but no <code>BreadcrumbList</code>. That is a deliberate earlier choice for top-level routes; the service pages emit one. Adding it is an SEO change that needs approval. HowTo markup is not recommended: Google retired HowTo rich results (<span class="tag wh">external knowledge, not re-checked</span>).</td></tr>
+<tr><td>H1</td><td>"No mystery about what happens next."</td><td>Clear and benefit-led, with no "how it works" or "process" term. Any change is an SEO decision (DEC-051).</td></tr>
+<tr><td>Internal links</td><td>None to services</td><td>Six pages link in. G1 could link each stage to the relevant service (an approved-scope decision).</td></tr>
+</table></div>
+
+<!-- ============================================================== -->
+<h2>7. Inbound-link constraint (important for G1)</h2>
+<p>Four released pages link to /how-it-works with labels that promise attribution and measurement limits. Their wording can't change without reopening those pages:</p>
+<ul>
+<li>/conversion-optimization: "The method, including what cannot be attributed"</li>
+<li>/google-ads: "How we measure, including what can't be traced"</li>
+<li>/about: "The method, published · Including what cannot be measured" and "Read the method"</li>
+<li>/faq: "the method is published"</li>
+<li>/lead-generation ("See how we work") and /contact ("See how the work runs") are neutral.</li>
+</ul>
+<p><b>So G1 must keep a clearly headed "what we can and can't measure or trace" section.</b> It can be shorter and plainer, but it must not be removed. A closed native disclosure was approved as an exception for /ai-seo (DEC-054). The owner deliberately restored these limits as always-visible here (OD-03, "never collapsed"), so a disclosure here needs its own decision.</p>
+
+<!-- ============================================================== -->
+<h2>8. Opportunities for simpler visual storytelling</h2>
+<ul>
+<li><b>One five-stage journey.</b> Merge §2 and §3 into Discovery call → Audit → Findings and plan → Proposal → Your approval, using the shared sequencer: plays once, step 1 visible, each number selectable, reduced-motion and no-JS show everything. The working sheet fills one row per step. That removes the repeated discovery call and three of the four sheet variants.</li>
+<li><b>A three-step hero.</b> "We talk → We plan → We do the work and review it monthly", the same pattern as the LG and CO heroes, with the existing working sheet as the visual.</li>
+<li><b>Interactive prioritisation (keep and sharpen).</b> The sort is the page's most distinctive element and it works. Options: (a) keep it as is; (b) let each card be selected to show its "why" before sorting, which adds a click target but no new library; (c) avoid a scoring or quiz mechanic, because the caption already says this is not a scoring system.</li>
+<li><b>The monthly review as Starting point → What changed → What's still uncertain.</b> Three steps instead of four tiles, a ledger and a callout. This echoes the approved Improve → Measure → Review.</li>
+<li><b>Limits as one compact list.</b> Merge "not promised" (6), "gaps" (6), "measurement gap" and "unknowns" (4) into about five plain-language items under one heading. Move the dated self-evidence items (keyword tool, own analytics, AI round) to /faq or /ai-seo.</li>
+<li><b>"What happens next" in the close.</b> Reuse the CO-D09 pattern with DEC-051 facts only.</li>
+</ul>
+
+<!-- ============================================================== -->
+<h2>9. Proposed section architecture for G1 (for approval; not started)</h2>
+<ol class="arch">
+<li><b>Hero.</b> H1 kept (SEO decision). One-sentence lede. CTAs. Working sheet showing three steps (talk, plan, work and review). <i>About 50 words.</i></li>
+<li><b>Before any work starts.</b> The reply by email or WhatsApp as step 0, then the five-stage journey (sequencer). The sheet fills per step. "Nothing starts until you approve it" stated once. <i>About 150 words.</i></li>
+<li><b>Not everything needs fixing.</b> The priority sort, kept. "Where a person decides" cut to one or two lines, or dropped. <i>About 120 words.</i></li>
+<li><b>Doing the work.</b> The action table, kept, with the "depends on the service; some work agreed separately" qualifier. <i>About 70 words.</i></li>
+<li><b>Every month.</b> Report (plus review call per F1 decision); Starting point → What changed → What's still uncertain; "where the data allows". <i>About 90 words.</i></li>
+<li><b>What we can and can't measure.</b> About five plain items covering attribution gaps, consent, phone and email, revenue from client data, and no causation claims on small numbers. Plus the "an untraced enquiry still counts" line. Must stay (see §7). Visible or disclosure per owner. <i>About 180 words.</i></li>
+<li><b>Good work needs both sides.</b> Two panels, trimmed to four and four items. <i>About 110 words.</i></li>
+<li><b>Close.</b> Shared <code>Close</code> plus a "What happens next" row. <i>About 50 words.</i></li>
+</ol>
+<p><b>Target:</b> about 750 to 950 words and 7 to 9 desktop viewports. That is in line with the approved pages, and slightly longer because this is the method page (<span class="tag wh">HYPOTHESIS</span>). Moved, not deleted: the "What we do not know" items go to /faq or /about, subject to those pages' own approval.</p>
+
+<!-- ============================================================== -->
+<h2>10. Components that can be reused without modifying released pages</h2>
+<div class="scroll"><table>
+<tr><th>Component</th><th>Location</th><th>Reuse</th><th>Constraint</th></tr>
+<tr><td><code>useSequence</code></td><td><code>components/cplus/ai-seo/Sequence.tsx</code></td><td>Import with page-local options (<code>{stepMs, first: 0, dwellMs}</code>), as /conversion-optimization and /lead-generation already do</td><td><b>Do not edit</b>: it drives /ai-seo, /conversion-optimization and /lead-generation. Timing is a per-page owner decision (1.5 s or 2 s).</td></tr>
+<tr><td><code>Close</code></td><td><code>components/cplus/Close.tsx</code></td><td>As is</td><td>Shared by Home, Google Ads and CO. A "What happens next" row should be page-local (CO built its own, <code>WhatHappensNext</code>), not added to <code>Close</code>.</td></tr>
+<tr><td><code>ActionPair</code>, <code>Mark</code></td><td><code>components/direction-c/primitives.tsx</code></td><td>As is</td><td>CTA destinations are fixed constants.</td></tr>
+<tr><td><code>Breadcrumb</code>, <code>Icon</code></td><td><code>components/cplus/</code></td><td>As is</td><td>None</td></tr>
+<tr><td><code>Tabs</code>, <code>PressToggle</code></td><td><code>components/cplus/Interactive.tsx</code></td><td>Optional</td><td>Used by released pages; don't edit.</td></tr>
+<tr><td><code>PrioritySort</code>, sheet styles</td><td><code>components/cplus/how-it-works/</code></td><td>Page-owned, free to refine</td><td>Only /how-it-works imports them (verified).</td></tr>
+<tr><td>Page patterns (numbered step button, step tile, CO <code>WhatHappensNext</code>)</td><td>CO and LG folders</td><td>Copy into <code>how-it-works/</code> rather than import across page folders</td><td>Avoids coupling to released pages' files.</td></tr>
+<tr><td>Shared CSS (<code>b-hero</code>, <code>b-sec</code>, <code>b-ink</code>, <code>b-paper</code>, <code>b-kicker</code>, <code>b-h1</code>/<code>b-h2</code>, <code>b-named</code>, <code>px-cap</code>)</td><td><code>cplus.css</code></td><td>Use</td><td>Don't change the shared rules. Add page-scoped <code>hw-*</code> classes only.</td></tr>
+</table></div>
+<p class="meta">Minor, unrelated observation: the header comments in the CO and LG <code>Journeys.tsx</code> files say "2 seconds", but CO's code uses 1,500 ms (which matches DEC-056). The comment is stale. No action proposed here.</p>
+
+<!-- ============================================================== -->
+<h2>11. Risks</h2>
+<div class="scroll"><table>
+<tr><th>Risk</th><th>Level</th><th>Mitigation</th></tr>
+<tr><td>Cutting about 1,100 words loses method and limits content that may support long-tail search or AI citation</td><td>Medium (<span class="tag un">UNKNOWN</span>: no Search Console baseline was reviewed)</td><td>Condense rather than delete; move dated items to /faq; capture a Search Console baseline for the URL before release.</td></tr>
+<tr><td>Reversing the owner's OD-03 choice to keep limits always visible</td><td>High (governance)</td><td>Explicit decision HW-D05 below.</td></tr>
+<tr><td>The monthly-call contradiction stays live until fixed</td><td>High (factual)</td><td>F1 can be scoped as its own small correction, like LG-D24, independent of G1.</td></tr>
+<tr><td>Rewording "qualified enquiry" touches DEC-005 positioning</td><td>Medium</td><td>Decide F2 explicitly; keep the change local to this page.</td></tr>
+<tr><td>Inbound-link promises break if the limits section goes</td><td>High</td><td>Keep the section (§7).</td></tr>
+<tr><td>Accidental edits to shared files ripple to released pages</td><td>Medium</td><td>Treat <code>Sequence.tsx</code>, <code>Close.tsx</code>, <code>Interactive.tsx</code>, <code>cplus.css</code> and <code>primitives.tsx</code> as read-only; diff-check in G2.</td></tr>
+<tr><td>GTM and E6: heading ids and classes change (<code>hw-h-*</code>, <code>.ps-btn</code>)</td><td>Low</td><td>Record them for E6 as in DEC-054 to DEC-057; add no events.</td></tr>
+<tr><td>SR-1 to SR-5, E1 and E6 are still outstanding</td><td>Existing</td><td>Not claimed. Carry forward.</td></tr>
+<tr><td>Title or meta changes</td><td>Medium</td><td>Only with explicit SEO approval; propose options in G1 and implement none.</td></tr>
+</table></div>
+
+<!-- ============================================================== -->
+<h2>12. Owner decisions requested before G1</h2>
+<ol>
+<li><b>HW-D01 (F1): DECIDED (owner, 17 Oct 2026).</b> Use option A, "A monthly performance report, and a review call where your service includes one." Applied in G1; no separate live-page correction. The live page keeps the current wording until the redesign ships.</li>
+<li><b>HW-D02 (F2):</b> the qualified-enquiry ledger and "Accountable up to here". Scope it, or drop it from this page? And confirm that "every one of the six points is reported" is removed.</li>
+<li><b>HW-D03 (F3, F4, F13):</b> confirm who logs phone and email enquiries for clients; whether an audit precedes every service; and whether "we'll tell you if a channel is wrong" applies to every service.</li>
+<li><b>HW-D04:</b> approve the G1 section architecture in §9 (merge §2 and §3; keep the sort; condense §6; add "What happens next").</li>
+<li><b>HW-D05:</b> the limits section. Visible and condensed (recommended, which keeps OD-03's intent), or a closed native disclosure (the /ai-seo precedent)?</li>
+<li><b>HW-D06:</b> move "What we do not know" (keyword tool, own analytics, AI round, organic horizon) to /faq or /about, or keep a single dated line here?</li>
+<li><b>HW-D07:</b> journey timing for this page (1.5 s like /ai-seo and CO, or 2 s like LG).</li>
+<li><b>HW-D08 (SEO):</b> keep the H1, title and description (recommended for G1), or ask G1 to propose options for a separate decision? Same question for adding <code>BreadcrumbList</code> and in-body service links.</li>
+</ol>
+
+<h2>13. Recommended G1 direction</h2>
+<p>A <b>calm, step-led page in the approved C+ service-page language</b>:</p>
+<ul>
+<li>one five-stage journey that fills the working sheet;</li>
+<li>the priority sort kept as the signature interaction;</li>
+<li>a three-step monthly review;</li>
+<li>one plain-English, clearly headed "what we can and can't measure" section;</li>
+<li>a close with "What happens next".</li>
+</ul>
+<p>Deliver G1 as copy plus a static HTML mockup with a decision register, like the LG and CO G1 packages. Apply the F1 and F2 corrections as the owner decides. Change no metadata, and build only on the reuse list in §10. <b>No implementation until the owner approves.</b></p>
+
+<p class="meta" style="margin-top:48px">Evidence files: <code>screenshots/</code> (27 files: PNGs, <code>measurements.json</code>, <code>comparison.json</code>). The capture scripts were run from the session scratchpad and are not in the repository. This audit made no changes to the source, the decision log or <code>CURRENT_STATE.md</code>.</p>
+</div>
+</body>
+</html>

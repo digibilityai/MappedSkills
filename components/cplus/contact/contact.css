@@ -1,4 +1,4 @@
-/* C+ Contact, Schedule a call and Thank you, from the approved prototype (proto/direction-c-plus 0a8b611,
+/* C+ Contact and Thank you, from the approved prototype (proto/direction-c-plus 0a8b611,
    app/proto/c-plus/proto.css, checkpoint 4), unchanged. Not carried over: the prototype-only demo controls, the
    prototype notes and the "simulated screen" frame. The sheet frame (`hw-sheet`, from How It Works) and `b-h2-s`
    are repeated here so these routes do not depend on another page's stylesheet. */
@@ -105,28 +105,113 @@
 .ct-rows .is-next .ct-row-m { border-style: solid; border-color: var(--dc-ink); }
 .ct-rows .is-next .ct-row-s { color: var(--dc-ink); }
 
-/* schedule */
-.ct-book { margin-top: 28px; display: grid; gap: 12px; justify-items: start; }
-.ct-book-btn { width: auto; padding-inline: 28px; }
-.ct-book-note { max-width: 46ch; font-size: .9375rem; line-height: 1.45; color: var(--dc-dim); }
-.ct-call-g { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 80px); }
-.ct-call-k { margin-bottom: 18px; }
-.ct-list { margin-top: 18px; display: grid; gap: 14px; }
-.ct-list li { display: grid; grid-template-columns: 12px minmax(0, 1fr); gap: 14px; align-items: baseline; font-size: var(--dc-t-lede); line-height: 1.45; }
-
 /* thanks */
 .ct-thanks-g { align-items: center; }
 .ct-wait-b { margin-top: 14px; }
 
 /* responsive */
 @media (max-width: 899px) {
-  .ct-hero-g, .ct-call-g { grid-template-columns: minmax(0, 1fr); }
+  .ct-hero-g { grid-template-columns: minmax(0, 1fr); }
   .ct-intro { padding-top: 0; }
   .ct-next-l { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 599px) {
-  .ct-book, .ct-book-btn { width: 100%; justify-items: stretch; }
   .ct-btn-out { width: 100%; }
   .ct-rows li { grid-template-columns: auto minmax(0, 1fr); }
   .ct-rows .ct-row-s { grid-column: 2; flex-wrap: wrap; }
+}
+
+/* ==========================================================================================================
+   /schedule-call "Request a call" (DEC-062), from the approved G1 mockup (docs/schedule-call-redesign/g1, sc.css).
+   The form itself keeps the ct-* styles above. Tangerine marks the one action and the step that comes next.
+   150 ms micro-interactions only; none under reduced motion. Breakpoints: narrow <=760, medium 761-1080.
+   ========================================================================================================== */
+.sc-card svg, .sc-calm svg { fill: none; stroke: currentColor; }
+.px-h .b-hero.sc-hero { padding-block: clamp(24px, 3vw, 48px) clamp(56px, 7vw, 104px); }
+.sc-hero-g { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(32px, 6vw, 104px); align-items: start; }
+.sc-intro { padding-top: clamp(0px, 3vw, 48px); }
+.px-h .sc-hero .b-crumb { margin-bottom: 14px; }
+.px-h .sc-hero .b-kicker { margin-bottom: 10px; }
+.px-h .sc-h1 { font-size: clamp(2.5rem, 1.1rem + 3.6vw, 4.75rem); line-height: .98; max-width: 11ch; }
+.sc-h1 .b-named { display: block; }
+.px-h .sc-lede { max-width: 38ch; margin-top: 22px; color: var(--dc-ink); }
+
+.sc-how { list-style: none; margin: clamp(28px, 3.5vw, 44px) 0 0; padding: 18px 0 0; border-top: 2px solid var(--dc-ink); display: grid; gap: 12px; max-width: 380px; }
+.sc-how li { display: flex; align-items: center; gap: 12px; font: 700 1.0625rem/1.3 var(--dc-f-body); }
+.sc-how-n { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border: 2px solid var(--dc-ink); font: 800 .875rem/1 var(--dc-f-title); background: var(--dc-paper); }
+.sc-how li:first-child .sc-how-n { background: var(--dc-ink); color: var(--dc-tang); }
+
+.sc-card { position: relative; background: var(--dc-paper); border: 2px solid var(--dc-ink); box-shadow: 10px 10px 0 var(--dc-tang); margin-right: 10px; scroll-margin-top: 96px; }
+.sc-card-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 12px; padding: 14px clamp(18px, 3vw, 32px); background: var(--dc-ink); color: var(--dc-on-ink); }
+.sc-card-t { font: 800 1.125rem/1.1 var(--dc-f-title); letter-spacing: -.01em; }
+.sc-card-s { font: 600 .875rem/1.3 var(--dc-f-body); color: var(--dc-on-ink-soft); }
+.sc-card-body { padding: clamp(22px, 3vw, 32px) clamp(18px, 3vw, 32px) clamp(22px, 3vw, 30px); }
+
+/* the call variant of ContactForm */
+.ct-call-fields { display: grid; gap: 20px; }
+.ct-area-s { min-height: 6.5rem; }
+.ct-call-fields .ct-input { transition: border-color 150ms ease, background-color 150ms ease; }
+.ct-send-w-call { margin-top: 10px; padding-top: 0; border-top: 0; }
+.ct-send-w-call .ct-send { min-height: 58px; font-size: 1.1875rem; transition: background-color 150ms ease, color 150ms ease; }
+.ct-send svg { flex: none; transition: transform 150ms ease; }
+.ct-send:hover svg { transform: translateX(3px); }
+.ct-call-note { display: flex; gap: 10px; font: 700 .9375rem/1.45 var(--dc-f-body); color: var(--dc-ink); }
+.ct-call-note::before { content: ""; flex: none; width: 10px; height: 10px; margin-top: .45em; background: var(--dc-tang-display); }
+
+/* what we'll talk about (paper): one rule through three numbers */
+.px-h .sc-talk, .px-h .sc-calm { padding-block: var(--dc-rhythm-tight); }
+.sc-h2 { max-width: 18ch; }
+.sc-seq { list-style: none; margin: clamp(32px, 4vw, 56px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); position: relative; }
+.sc-seq::before { content: ""; position: absolute; left: 0; right: 0; top: 21px; height: 2px; background: var(--dc-ink); }
+.sc-step { position: relative; padding-right: clamp(16px, 3vw, 48px); }
+.sc-step-n { position: relative; display: grid; place-items: center; width: 44px; height: 44px; background: var(--dc-paper); border: 2px solid var(--dc-ink); font: 800 1rem/1 var(--dc-f-title); transition: background-color 150ms ease, color 150ms ease; }
+.sc-step:hover .sc-step-n { background: var(--dc-ink); color: var(--dc-tang); }
+.sc-step.is-next .sc-step-n { background: var(--dc-tang); }
+.sc-step-t { margin: 18px 0 0; font: 800 clamp(1.375rem, 1.1rem + .6vw, 1.625rem)/1.12 var(--dc-f-title); }
+.sc-step-p { margin: 8px 0 0; font-size: 1.0625rem; line-height: 1.45; color: var(--dc-dim); max-width: 26ch; }
+
+/* reassurance (ink) */
+.sc-calm-g { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 28px clamp(28px, 5vw, 80px); align-items: end; }
+.sc-calm .sc-h2 { max-width: 14ch; }
+.sc-calm-2 { display: block; color: var(--dc-tang); }
+.sc-calm-p { margin: 18px 0 0; font-size: var(--dc-t-lede); line-height: 1.5; color: var(--dc-on-ink-soft); max-width: 40ch; }
+.sc-calm-a { display: grid; gap: 18px; justify-items: start; }
+.sc-calm .sc-back { border-color: var(--dc-on-ink); color: var(--dc-on-ink); transition: background-color 150ms ease, color 150ms ease; }
+.sc-calm .sc-back .dc-mk { border-color: var(--dc-on-ink); }
+.sc-calm .sc-back:hover, .sc-calm .sc-back:focus-visible { background: var(--dc-on-ink); color: var(--dc-ink); }
+.sc-calm .sc-back:focus-visible { outline: 3px solid var(--dc-tang); outline-offset: 3px; }
+.sc-alt { margin: 0; font: 600 1.0625rem/1.4 var(--dc-f-body); color: var(--dc-on-ink-soft); }
+.sc-alt a { display: inline-flex; align-items: center; gap: 6px; color: var(--dc-on-ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; transition: color 150ms ease; }
+.sc-alt a svg { transition: transform 150ms ease; }
+.sc-alt a:hover { color: var(--dc-tang); }
+.sc-alt a:hover svg { transform: translateX(3px); }
+.sc-alt a:focus-visible { outline: 3px solid var(--dc-tang); outline-offset: 3px; }
+
+@media (max-width: 1080px) {
+  .sc-hero-g { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .sc-intro { padding-top: 0; }
+  .px-h .sc-h1 { max-width: 14ch; }
+  .sc-how { display: none; }
+  .sc-card { max-width: 640px; }
+  .sc-calm-g { grid-template-columns: minmax(0, 1fr); align-items: start; }
+}
+@media (max-width: 760px) {
+  .px-h .b-hero.sc-hero { padding-top: 16px; }
+  .px-h .sc-h1 { font-size: clamp(2.25rem, 1.4rem + 4vw, 2.75rem); }
+  .px-h .sc-lede { margin-top: 14px; font-size: 1.0625rem; }
+  .sc-hero-g { gap: 24px; }
+  .sc-card { margin-right: 6px; box-shadow: 6px 6px 0 var(--dc-tang); }
+  .sc-card-s { display: none; }
+  .sc-seq { grid-template-columns: minmax(0, 1fr); gap: 26px; }
+  .sc-seq::before { display: none; }
+  .sc-step:not(:last-child)::before { content: ""; position: absolute; left: 21px; top: 44px; bottom: -26px; width: 2px; background: var(--dc-ink); }
+  .sc-step { display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 18px; padding-right: 0; }
+  .sc-step-n { grid-row: span 2; }
+  .sc-step-t { margin-top: 8px; }
+  .sc-step-p { max-width: none; }
+  .sc-calm-a, .sc-back { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ct-call-fields .ct-input, .ct-send-w-call .ct-send, .ct-send svg, .sc-step-n, .sc-calm .sc-back, .sc-alt a, .sc-alt a svg { transition: none; }
+  .ct-send:hover svg, .sc-alt a:hover svg { transform: none; }
 }

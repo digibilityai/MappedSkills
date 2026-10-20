@@ -1463,3 +1463,85 @@ Use this file only for meaningful project decisions.
   - **Live checks (VERIFIED FACT, automated, production; Playwright Chromium, Firefox and WebKit engines at 1440, 1280, 768, 375 and 320 px, consent not given):** `/blog` renders the 7 real Contentful articles in the same order, with the same titles, categories, excerpts and links as before the release; the page has the same visible text and section heights as the approved G1 mockup in all three engines; no horizontal overflow, clipping, text under 12 px or console errors; 150 ms hover, 3 px tangerine focus, keyboard Enter opens an article, reduced motion removes transitions, rows render without JavaScript; the close CTAs reach `/contact` and `/schedule-call`. Before/after comparison of served HTML: on `/blog` only the description (BL-D3) and the page content changed (title, canonical, robots and JSON-LD unchanged); the 7 articles, `/`, `/faq`, `/contact`, `/schedule-call`, `/press`, `/research`, `/work`, `/pricing`, `/services`, the 404 page, `sitemap.xml` and `robots.txt` are identical, including the load `dataLayer`. These are browser-engine builds and emulated viewports.
   - **Outstanding (manual, not performed):** the shipping Safari and Firefox applications; VoiceOver, TalkBack and NVDA; real devices (including Android Chrome); GTM Preview, including tag behaviour after consent. `CURRENT_STATE.md` still describes an empty `/blog` (not edited; needs separate authorisation).
   - **Unchanged:** BL-D6 is not started; no Contentful entry was changed.
+
+### DEC-067
+- **Date:** 2026-10-20
+- **Status:** **Approved (owner) and RELEASED — BL-D6 blog article template (`/blog/[slug]`): audit, G1 design and the G2 implementation. Merged to `main` as `619715d` (PR #28) and deployed to production on 2026-10-20 (run `39397273456`, BUILD_ID `6jXxz2KR2GcpH1l1lD5r6`).** Scope is the article page template only. Contentful content was not changed.
+- **Basis:** the audit `docs/blog-redesign/bl-d6/BL_D6_ARTICLE_AUDIT_AND_PROPOSAL.md` covered all 7 live articles. Its findings (VERIFIED FACT, production, 2026-10-20):
+  - **126 of 126** contents links were broken: the contents list used `section-${index}` ids, while the headings used `slugify(text)`.
+  - A dead newsletter block.
+  - Three to four overlapping conversion prompts per article.
+  - A cartoon avatar, plus an author role and bio that were hard-coded, not taken from Contentful.
+  - Body text at about 95–100 characters per line.
+- **Decision (owner, as given, 2026-10-20):**
+  1. **G1 directions** ("Proceed with BL-D6 G1 design and static mockup only"):
+     1. Fix the contents anchor mismatch; show main headings only.
+     2. A collapsed "In this article" panel on mobile and a restrained sticky contents rail on desktop.
+     3. Remove the dead newsletter block.
+     4. One closing CTA section: "Tell us about your business" → `/contact` and "Request a call" → `/schedule-call`.
+     5. Remove cartoon author avatars; use only verified author information.
+     6. Prepare an exact editorial correction list; **do not edit Contentful**.
+     7. Retain all Pune-focused articles and their URLs pending Search Console evidence: no unpublishing, merging or retitling.
+  2. **G1 approved and G2 authorised** ("GO for G2 implementation on a dedicated feature branch. Do not deploy to production."). G2 scope items 1–8:
+     1. The C+ article layout and reading column.
+     2. Contents links fixed, with H2s when an article has at least three, otherwise H2 + H3, and unique ids.
+     3. The rail and the panel.
+     4. Remove the newsletter and the overlapping conversion sections.
+     5. **The approved `/blog` close copy** (`DEC-066` BL-D5) with the CTA pair above. This settles G1 flag D-1.
+     6. Keep related-service and related-article navigation (settles D-3).
+     7. Remove avatars and unverified roles and bios; keep verified author names and dates (settles D-4).
+     8. Preserve URLs, Contentful integration, metadata, canonicals, structured data and published content.
+
+     The editorial track stays separate.
+  3. **Commit and PR** ("Approved: commit on feat/blog-article-g2 and open a PR against main. Keep the live date format. No merge or deploy."). This settles G2 deviation G-2: the byline reads "Updated September 24, 2026", the existing mapper format.
+  4. **Merge:** PR [#28](https://github.com/digibilityai/MappedSkills/pull/28) was squash-merged by the owner account `digibilityai` as `619715d` (08:23Z). The tree is identical to commit `e05646b`. Post-merge CI run `39393063488` passed; its release and rollback jobs were skipped.
+  5. **Release** ("Authorised: dispatch the production deploy of 619715d (action=deploy, confirm=619715d), then run post-release verification. No DEC entry yet."). This entry was then authorised separately: "Authorised: record the BL-D6 merge and production release as a DEC entry on a docs branch and open a PR. No merge."
+- **Implementation (`619715d`, 9 files):**
+  - `app/(pages)/blog/[slug]/page.tsx` renders `components/cplus/blog-article/` (`ArticleBody`, `ArticleRichText`, `ArticleShare`, `content.ts`, `article.css`, every rule `ba-` scoped). The following are unchanged: `generateStaticParams`, `generateMetadata`, the Article, BreadcrumbList and FAQPage JSON-LD, `revalidate = 60` and `notFound()`.
+  - The new `lib/contentful/heading-ids.ts` is one allocator shared by the contents list (`extractTocFromDocument` in `mappers.ts`) and the headings:
+    - it keeps the production slug rule, so existing `#heading` links keep working;
+    - a repeated heading gets `-2`, `-3`; an empty heading gets `section`;
+    - the contents list never includes H4.
+  - `tests/blog-article.test.cjs` adds 14 tests.
+  - Not changed: `components/blog/RichTextContent.tsx` (shared with `/press/[slug]`), `lib/contentful/queries.ts`, `lib/blog-services.ts`, analytics (no new events), the header and footer, dependencies, sitemap and robots. The other legacy `components/blog/*` files are now unused by the route and left in place.
+- **Verification before release (VERIFIED FACT, automated, local fixture builds of the 7 live articles; no local Contentful credentials):**
+  - Typecheck, ESLint, and `npm test` (179 pass, 1 pre-existing skip).
+  - `build:cpanel`, `verify:build:production` (GTM inlined) and `package-release.sh`.
+  - Playwright Chromium, Firefox and WebKit at 1440, 1280, 1024, 768, 375 and 320 px for all 7 articles, with all checks passing. One WebKit hover reading was a timing artefact; it re-ran 6/6.
+  - Synthetic duplicate-heading and H2/H3-fallback articles in all three engines.
+  - Head, JSON-LD, canonical, body text and dataLayer identical to `main`.
+  - 24 unaffected routes identical.
+  - Branded Chrome 155: 28/28.
+  - GTM container v4: no active tag depends on article elements.
+  - Consent accept path: `gtm.js` loads only after Accept.
+- **Release record:**
+  - **Run and approval:** dispatch run `39397273456`, with the `production` environment gate approved by the owner account `digibilityai`. Deployment `7195708461` (09:00Z).
+  - **Artifact:** `mappedskills-619715d.tar.gz`, sha256 `77323c0a2c0317106bf4fc55c1b09c2d43f1cefee57ba0a22f872571d1861b4d`, 35 prerendered pages, GTM compiled in.
+  - **Dependencies:** lockfile unchanged (`cf206545f758`); no migrations. The workflow smoke test passed.
+  - **Hosts:** live BUILD_ID `6jXxz2KR2GcpH1l1lD5r6`. **Rollback target:** `.prev` = `e5Y6oQ42T0UiiCD7NYY8G` (`8349853`), not used; `.prev2` = `HWV2k-ss7ZmkbNHQXInEm`. **Rollback:** a `workflow_dispatch` on `main` with `action=rollback`, confirmation `ROLLBACK`, approved in `production`.
+- **Live checks (VERIFIED FACT, automated, production with real Contentful, consent not given):**
+  - All 7 articles serve the new template.
+  - Contents links: **126 broken before, 0 after**.
+  - Title, every meta tag, canonical, all JSON-LD, article body text and the load `dataLayer` are **identical before and after** the release, for all 7.
+  - Chromium and Firefox: 0 fails across 6 widths × 7 articles. WebKit: 1 hover reading, re-run 9/9 on production, including the exact sequence.
+  - The previous release's article CSS returns 404 (the new release is serving).
+  - 22 other routes return 200; the unknown slug returns 404; the sitemap still lists 7 articles.
+  - Consent behaviour unchanged: default all denied, no Google request before consent.
+  - Records: `docs/blog-redesign/bl-d6/release/BL_D6_RELEASE_REPORT.md`, `BL_D6_READINESS_AUDIT.md`, `docs/blog-redesign/bl-d6/g2/BL_D6_G2_REPORT.md`.
+- **Correction recorded:** the fixture copied each image title into its description, so the G2 report's caption finding (G-4, ED-A1/ED-A2) was an artefact. Production renders no captions. **The real issue is the alt text** (the asset title, for example `alt="BlogDetailsA"`), which is unchanged from before the release.
+- **Outstanding (manual, not performed):**
+  - GTM Tag Assistant on production.
+  - VoiceOver (macOS/iOS), TalkBack and NVDA.
+  - Real devices (OnePlus 12, iPhone).
+  - The shipping Safari, Firefox and Edge applications.
+  - Windows forced colours.
+
+  None of these is a pass.
+- **Not decided here, still open:**
+  - The Contentful editorial track: `docs/blog-redesign/bl-d6/BL_D6_EDITORIAL_CORRECTIONS.md`, 24 items with 10 Must, plus the alt-text items. These include the "Book a Client Discovery Call (30 minutes)" text and published writer notes, which remain live as directed.
+  - D-6: the Pune titles, H1s and meta are held pending Search Console evidence.
+  - D-7: category taxonomy. "More on this topic" shows on 2 of 7 articles.
+  - Removal of the unused legacy `components/blog/*` files.
+  - The header and footer "Book a call" relabel (`DEC-062` D4).
+  - `CURRENT_STATE.md` (not edited).
+- **Supersedes:** the `DEC-066` line "BL-D6 is not started" (for the article template only; the other items it lists remain open as above). **Read with:** `DEC-005`, `DEC-051`, `DEC-062`, `DEC-063`, `DEC-066`. **Approved by:** Project owner, 2026-10-20. Recorded by the repository worker.

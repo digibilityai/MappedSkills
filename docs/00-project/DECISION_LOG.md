@@ -1839,3 +1839,7 @@ Use this file only for meaningful project decisions.
   3. **Not covered by this approval:** the removal of company, website and the marketing opt-in from the form; it
      remains as implemented, per the brief's field list.
   4. **Still not authorised:** push, pull request, merge, the production migration and deployment.
+- **Addendum (2026-10-20, owner, "Authorised: push feat/contact-experience-consolidation and open a PR against main.
+  No merge or deployment."):** the branch was pushed and PR
+  [#33](https://github.com/digibilityai/MappedSkills/pull/33) was opened against `main` (base `87ad476`, unchanged at
+  the time). **Still not authorised:** merge, the production migration 004 and deployment.

@@ -1786,8 +1786,9 @@ Use this file only for meaningful project decisions.
 - **Date:** 2026-10-20
 - **Status:** **Authorised (owner, Phase C1 brief): consolidation of `/contact` and `/schedule-call` into one contact
   page, IMPLEMENTED on `feat/contact-experience-consolidation` and committed locally for owner review.** Push, pull
-  request, merge, production migration and deployment are **NOT** authorised. Production is unchanged. The items
-  marked *proposed* below are implementation choices awaiting owner review, not approved decisions.
+  request, merge, production migration and deployment are **NOT** authorised. Production is unchanged. The CRM
+  compatibility mapping and the `/contact` title and copy were approved by the owner on 2026-10-20 (see the
+  addendum); they were first recorded here as proposals.
 - **Decision (OWNER REQUIREMENT):** one canonical contact page, `/contact`, with two visitor intentions: "Send an
   enquiry" (default) and "Request a call" (`/contact?intent=call`). `/schedule-call` redirects to the call state.
   No calendar booking; nothing may imply that an appointment is confirmed (continues `DEC-062` item 1).
@@ -1810,12 +1811,12 @@ Use this file only for meaningful project decisions.
   4. **Storage.** Migration `004_add_enquiry_request_details.sql` (additive, nullable, no default): `request_type`,
      `service_interest`, `preferred_contact_time`. Host CSV export includes them.
   5. **CRM (Mini CRM contract unchanged).** The CRM's schema_version 1 payload is strict (unknown key → 400, terminal
-     on the website side), so no key was added. *Proposed:* the intention, service and preferred time are written as
+     on the website side), so no key was added. **Approved (owner, 2026-10-20):** the intention, service and preferred time are written as
      labelled lines at the top of `message`, and a call request is sent with `source_page` `/schedule-call` so the
      existing "Website requests" list keeps labelling it "Call request". The website row stores the true page.
   6. **Analytics.** Event names, parameters and the conversion rule unchanged. `form_id` still distinguishes
      `contact_enquiry` and `call_request`; `page_path` is now `/contact` for both.
-- **Proposed copy (awaiting owner review):** `/contact` title "Contact Us: Send an Enquiry or Request a Call |
+- **Copy (approved by the owner, 2026-10-20, as implemented):** `/contact` title "Contact Us: Send an Enquiry or Request a Call |
   MappedSkills" and description; hero lede, intention descriptions, field labels, hints and the "How getting in touch
   works" list. The H1, "What we'll talk about" and the closing section reuse `DEC-062` approved copy; the call state
   keeps the `DEC-062` title and description.
@@ -1826,7 +1827,15 @@ Use this file only for meaningful project decisions.
   Firefox and WebKit at 320–1440px. Migration 004 and real submissions verified on a throwaway local MariaDB (removed
   afterwards); the DB export test passes. Evidence outside Git: `docs/contact-consolidation/c1/`.
 - **Release prerequisites (not authorised):** apply migration 004 to production before activating the release
-  (`release.sh` refuses to swap while it is pending); owner review of the proposed copy and the CRM compatibility
-  mapping; GTM / GA4 reports that filter on `page_path = /schedule-call` must use `form_id = call_request` instead.
+  (`release.sh` refuses to swap while it is pending); GTM / GA4 reports that filter on `page_path = /schedule-call` must use `form_id = call_request` instead.
 - **Read with:** `DEC-011`, `DEC-051`, `DEC-062`, `DEC-070`. **Authorised by:** Project owner (Phase C1 brief),
   2026-10-20. Recorded by the repository worker.
+- **Addendum (2026-10-20, owner, "I approve the CRM compatibility mapping and the proposed /contact title and copy as
+  implemented. Record the approval in DEC-071; don't push yet."):**
+  1. **APPROVED DECISION:** the CRM compatibility mapping in item 5 (details as labelled message lines; call requests
+     sent with `source_page` `/schedule-call`; schema_version 1 unchanged).
+  2. **APPROVED DECISION:** the `/contact` title "Contact Us: Send an Enquiry or Request a Call | MappedSkills", its
+     description and the C1 copy, as implemented in `9aba6fa`.
+  3. **Not covered by this approval:** the removal of company, website and the marketing opt-in from the form; it
+     remains as implemented, per the brief's field list.
+  4. **Still not authorised:** push, pull request, merge, the production migration and deployment.

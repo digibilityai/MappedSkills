@@ -7,22 +7,9 @@ import {
   getRelatedBlogCards,
 } from '@/lib/contentful/posts';
 import type { CmsBlogPost } from '@/lib/contentful/types';
-import { BlogHero } from '@/components/blog/BlogHero';
-import { BlogIntroduction } from '@/components/blog/BlogIntroduction';
-import { TableOfContents } from '@/components/blog/TableOfContents';
-import { RichTextContent } from '@/components/blog/RichTextContent';
-import { CTABlockFromType } from '@/components/blog/CTABlock';
-import { StickySidebarCTA } from '@/components/blog/StickySidebarCTA';
-import { RelatedPosts } from '@/components/blog/RelatedPosts';
-import { RelatedServices } from '@/components/blog/RelatedServices';
-import { AuthorBio } from '@/components/blog/AuthorBio';
 import { getRelatedServices } from '@/lib/blog-services';
-import { FAQSection } from '@/components/blog/FAQSection';
-import { SocialShare } from '@/components/blog/SocialShare';
-import { BlogNewsletterForm } from '@/components/BlogNewsletterForm';
-import { CTASection } from '@/components/CTASection';
-import { Container } from '@/components/Container';
-import { Section } from '@/components/Section';
+import { CplusPage } from '@/components/cplus/CplusPage';
+import { ArticleBody } from '@/components/cplus/blog-article/ArticleBody';
 
 // Must be a literal — Next.js cannot follow imported identifiers for route segment config
 export const revalidate = 60;
@@ -186,6 +173,15 @@ function generateBreadcrumbSchema(post: CmsBlogPost) {
  * substituted.
  */
 
+/*
+ * BL-D6 G2 (owner-approved G1 design, docs/blog-redesign/bl-d6/g1/; G2 authorised 2026-10-20). The page body is the C+
+ * article template (`components/cplus/blog-article/ArticleBody.tsx`): one reading column, a working contents list, the
+ * approved related-service and related-article navigation, and ONE closing section with the approved `/blog` close.
+ * Removed: the TOC card, in-body CTA card, sticky sidebar CTA, card grid, author card with the cartoon avatar and the
+ * hard-coded role/bio, the dead newsletter block and the final CTA band. UNCHANGED: `generateStaticParams`,
+ * `generateMetadata`, the Article / BreadcrumbList / FAQPage JSON-LD above, `revalidate`, the 404 branch, the
+ * per-slug related services (BLOG-007/008) and the same-category related articles. Contentful wording is not changed.
+ */
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
   const post = await getBlogDetailPost(slug);
@@ -199,9 +195,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const relatedPosts = await getRelatedBlogCards(post);
   const faqSchema = generateFAQSchema(post);
   const canonicalUrl = post.canonicalUrl;
-  const authorBio =
-    post.author.description ||
-    `${post.author.name} contributes performance marketing insights for MappedSkills.`;
 
   return (
     <>
@@ -226,125 +219,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         />
       )}
 
-      <BlogHero
-        title={post.title}
-        category={post.category}
-        author={post.author.name}
-        publishedDate={post.publishedDate}
-        updatedDate={post.updatedDate}
-        readingTime={post.readingTime}
-        heroImage={post.featuredImageUrl}
-        heroImageAlt={post.featuredImageAlt}
-      />
-
-      <Section>
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-            <div className="lg:col-span-2">
-              {post.introduction && (
-                <BlogIntroduction
-                  hook={post.introduction.hook}
-                  problem={post.introduction.problem}
-                  promise={post.introduction.promise}
-                />
-              )}
-
-              {!post.introduction && post.excerpt && (
-                <p className="text-lg text-foreground leading-relaxed mb-12 border-b border-border pb-8">
-                  {post.excerpt}
-                </p>
-              )}
-
-              <div className="mb-12">
-                <TableOfContents items={post.tableOfContents} />
-              </div>
-
-              <article className="prose dark:prose-invert max-w-none mb-12">
-                {post.contentJson && (
-                  <RichTextContent document={post.contentJson} links={post.contentLinks} />
-                )}
-
-                <CTABlockFromType ctaType={post.ctaType || 'generic'} />
-              </article>
-
-              <SocialShare title={post.title} url={canonicalUrl} />
-
-              {relatedPosts.length > 0 && (
-                <RelatedPosts
-                  posts={relatedPosts.map((p) => ({
-                    slug: p.slug,
-                    title: p.title,
-                    excerpt: p.excerpt,
-                    category: p.category,
-                    readingTime: p.readingTime,
-                  }))}
-                />
-              )}
-
-              <RelatedServices services={relatedServices} />
-
-              {/*
-                BLOG-009B (owner, 2026-09-23) — the author LinkedIn link is
-                REMOVED, not repointed. `https://linkedin.com/in/amit-gupta`
-                could not be verified: it serves LinkedIn's sign-up wall, and
-                it is not the profile the verified MappedSkills Marketing
-                company page associates with its founder. The approved fallback
-                for an unverifiable destination is remove/hide.
-
-                `linkedinUrl` is optional and `AuthorBio` already guards on it,
-                so omitting the prop renders no button and leaves no empty
-                framing. A different profile is NOT substituted here — that
-                would be a new owner decision, not this one.
-              */}
-              <AuthorBio
-                name={post.author.name}
-                role="Performance Marketing Strategist"
-                bio={authorBio}
-                avatarUrl={post.author.profileUrl}
-              />
-
-              {post.faqs && post.faqs.length > 0 && <FAQSection faqs={post.faqs} />}
-
-              <div className="border-t border-border pt-12 mb-12">
-                <h2 className="text-3xl font-bold tracking-tight mb-8">Get More Growth Insights</h2>
-                <BlogNewsletterForm />
-              </div>
-            </div>
-
-            <div className="lg:col-span-1">
-              {/* BLOG-008 — `relatedServices[0]` is the first approved service,
-                  or `undefined` when the article has none. `StickySidebarCTA`
-                  guards on the prop, so the sidebar service block then renders
-                  nothing and no substitute is shown. */}
-              <StickySidebarCTA
-                ctaHeadline="Want Us to Review This for Your Business?"
-                ctaLink="/schedule-call"
-                relatedService={relatedServices[0]}
-              />
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/*
-        SESSION 33 — PHASE I. "Book a free strategy call…" and "Schedule Free
-        Strategy Call" removed: "free" is blocked on the entry-offer decision.
-        The primary action is now `/contact` with the approved label used by
-        every commercial route's close, and booking is not offered here at all
-        while it remains owner-blocked.
-      */}
-      <CTASection
-        title="Ready to Turn This Insight Into Action?"
-        description="Tell us what is actually happening — the enquiries you are getting, the ones you are not, and what you can currently see."
-        primaryCta={{
-          text: 'Tell us what you\u2019re trying to fix',
-          href: '/contact',
-        }}
-        secondaryCta={{
-          text: 'Explore Services',
-          href: '/services',
-        }}
-      />
+      <CplusPage>
+        <ArticleBody post={post} services={relatedServices} related={relatedPosts} />
+      </CplusPage>
     </>
   );
 }

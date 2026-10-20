@@ -1,7 +1,11 @@
 # Google Ads Implementation Plan and Commit Scope — `/google-ads`
 
 **Date:** 2026-10-15 · **Basis:** `DEC-053` (incl. design-approval addendum), storyboard v4, Design Pass Proposal (approved)
-**Status: PROPOSAL. IMPLEMENTATION IS NOT AUTHORISED.** Nothing below has been done: no branch created, no code changed, no commit made. Every step needs the explicit owner approvals listed in §9.
+**Update 2026-10-16 (later): RELEASED.** The redesign was carried through G1.3a, G1.3c (guided demonstrations) and the accessibility refinements, merged as `1315200` (PR #11) and deployed to production; the authoritative record is `DEC-065`. The note below describes the state at `33940ec` and is kept as history.
+
+**Status (updated 2026-10-16): PARTLY EXECUTED; THIS DOCUMENT IS NOW A HISTORICAL PLAN WITH CORRECTIONS.** The original status read "PROPOSAL. IMPLEMENTATION IS NOT AUTHORISED" (2026-10-15). Since then the owner authorised Track B stage by stage. **Executed on `feat/google-ads-redesign` (pushed, no PR, not merged, not deployed):** G0 `51a79f6`, G0.1 `8711efe`, G1 `b6640ae` (unapproved prototype, replaced after owner review), and **G1 revision 2 `74aec4e`** (owner-approved visually, built from `docs/google-ads-redesign/GOOGLE_ADS_G1_VISUAL_REDESIGN_PROPOSAL_R2.md`). **G1.1** (`1f3b5af`: text floor, chip accessible text, default finding) and **G1.2** (`33940ec`: finding-row border and its guard) followed, each owner-approved and pushed; the branch is now at `33940ec`. **No further gate is authorised:** G2 (motion), pre-release QA, any pull request for the code and any release need the owner's explicit go-ahead. The authoritative record is `DEC-064` in `docs/00-project/DECISION_LOG.md`.
+
+> **Where this plan is superseded.** §§3 to 6 describe the original G1 (a text-led static composition) and a seven-block page. The built page has **eight sections**, different copy structure and different components, per the owner-approved R2 proposal. The guard test is `tests/google-ads-copy.test.cjs` (structural, extended through R2), not `tests/google-ads-page.test.cjs`. Read §§3 to 6 as history. Corrections to the facts in §1 are marked inline below.
 
 ---
 
@@ -9,11 +13,11 @@
 
 | Fact | Evidence | Consequence |
 |---|---|---|
-| Current branch `feat/seo-page-redesign` is `main` (`52ecdae`) plus **16 unmerged commits** (SEO redesign, home and services copy work) | `git rev-list main..HEAD` = 16; `HEAD..main` = 0 | Google Ads work must **not** be stacked on this branch or mixed into the SEO review |
+| Current branch `feat/seo-page-redesign` is `main` (`52ecdae`) plus **16 unmerged commits** (SEO redesign, home and services copy work) **[Corrected 2026-10-16: the SEO redesign and the home and services copy work were merged into `main` (PRs #6, #7, #8); that branch is superseded.]** | `git rev-list main..HEAD` = 16; `HEAD..main` = 0 | Google Ads work must **not** be stacked on this branch or mixed into the SEO review |
 | Shared C+ files are **identical** between `main` and the SEO branch (`cplus.css`, `Interactive.tsx`, `primitives.tsx`, `direction-c.css`, `globals.css`) | `git diff main HEAD --stat` on those paths: empty | The Google Ads branch can start from `main` and be independent of the SEO branch |
-| `DECISION_LOG.md` differs from `main` only by my `DEC-053` entry (+ addendum) | `git diff main --stat` | The decision-log change can be carried to a docs branch cleanly |
+| `DECISION_LOG.md` differs from `main` only by my `DEC-053` entry (+ addendum) **[Updated 2026-10-16: DEC-053 and its addendum are on `main` (PR #9, `e7bdc6a`)]** | `git diff main --stat` | The decision-log change can be carried to a docs branch cleanly |
 | Uncommitted today: `docs/00-project/DECISION_LOG.md` (modified); `docs/google-ads-redesign/` (untracked). `docs/seo-redesign/` is untracked and **belongs to another work stream** | `git status` | Commit only the first two; leave `docs/seo-redesign/` alone |
-| `main` is protected: changes arrive by pull request with a non-self approval; deploys are dispatch-only (R0, PR #3 merged) | Memory notes; `DEC-052` | Nothing reaches production without PR review and a separate release decision |
+| `main` is protected: changes arrive by pull request with a non-self approval; deploys are dispatch-only (R0, PR #3 merged) **[Corrected 2026-10-16: the "Protect main" ruleset requires a pull request but has required **0 approving reviews** since 2026-10-15 (ruleset history: approvals 1 → 0 at 13:39Z, last-push approval removed at 15:04Z, both by the owner account). PR #9 was merged by the owner account with no review. This was a statement made from memory and not checked against the live ruleset; the ruleset change is not recorded in the decision log (see DEC-064). Deploys remain dispatch-only and the `production` environment still requires reviewers.]** | Memory notes; `DEC-052` | Nothing reaches production without a pull request, the dispatch-only workflow and the production-environment reviewer, and a separate release decision |
 | Open PR: `fix/package-lead-export` (#5) | `gh pr list` | Unrelated; do not touch |
 | Existing guard-test precedent: `tests/seo-page.test.cjs`; `npm test` runs `node --test tests/*.test.cjs` | `package.json` | Add `tests/google-ads-page.test.cjs` in the same style |
 | Page route already exists with metadata and `BreadcrumbJsonLd` | `app/(pages)/google-ads/page.tsx` | The route file needs no functional change |

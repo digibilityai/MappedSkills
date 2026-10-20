@@ -1545,3 +1545,120 @@ Use this file only for meaningful project decisions.
   - The header and footer "Book a call" relabel (`DEC-062` D4).
   - `CURRENT_STATE.md` (not edited).
 - **Supersedes:** the `DEC-066` line "BL-D6 is not started" (for the article template only; the other items it lists remain open as above). **Read with:** `DEC-005`, `DEC-051`, `DEC-062`, `DEC-063`, `DEC-066`. **Approved by:** Project owner, 2026-10-20. Recorded by the repository worker.
+
+### DEC-068
+- **Date:** 2026-10-20
+- **Status:** **Approved (owner) and RELEASED: BL-D6 Contentful editorial corrections for the 7 blog articles.**
+  - **Published:** 42 approved change units (32 text, 10 image alt text) across 7 Post entries and 10 assets, in
+    Contentful space `owww06rzpjnj`, environment `master`, between 12:44 and 13:11Z.
+  - **Not changed:** website code, configuration, build and deployment (live BUILD_ID unchanged,
+    `6jXxz2KR2GcpH1l1lD5r6`).
+  - **Held, unchanged:** EM-1, RE-2 and ALT-10.
+- **Basis:**
+  - `docs/blog-redesign/bl-d6/editorial/BL_D6_EDITORIAL_PROPOSAL.md`, which re-verified that all 23 recorded items
+    were still live. The list on `main` has 23 items; `DEC-067` says "24".
+  - The Gate A manifest `BL_D6_CHANGE_MANIFEST.md` (r2), which carries the frozen wording and an exact
+    before-and-after diff for every unit.
+- **Decision (owner, as given, 2026-10-20):**
+  1. **Scope decisions:**
+     - FB-3: **remove** the unverified paid-social client list.
+     - CM-3a/CM-3b: **remove** all three agency, tools and freelancer price ranges.
+     - SEO-4/SEO-5: **soften** both "3 to 6 months" claims.
+     - EM-1/RE-2: **hold** pending direct attribution confirmation.
+     - PM-3: **delete** the unsupported Seth Godin quote.
+     - Facebook timeline: **soften** the unsupported timing claims.
+     - ALT-10: **hold** pending shared-asset verification.
+  2. **Gate A** (manifest freeze), acknowledged. Then:
+     - Q-A1: keep FB-8 and CM-7, subject to an exact wording review.
+     - Q-A2: descriptive Title for ALT-8.
+     - Q-A3: accept that publishing and rollback change each article's "Updated" date.
+     - Q-A4: keep the residuals R-2 to R-5 out of this release.
+     - Q-B1: manual editing in the Contentful web app.
+  3. **Read-only pre-flight** (P2–P6). It included a read-only Delivery API backup snapshot taken on the production
+     host with the site's existing delivery token. The token was never printed or copied. The owner accepted the
+     pre-flight.
+  4. **Gate B** ("Proceed with BL-D6 Gate B — draft preparation only"): drafts only, no publication.
+  5. **Re-draft** of 5 asset Titles whose first edit had not saved: "Titles only, one asset at a time, confirming
+     each save by reload and version number".
+  6. **Gate C**, authorised one article at a time: SEO + ALT-11 → FB → CM + ALT-9 (not ALT-10) → PM → EM + ALT-8 →
+     RE + ALT-1 to ALT-7 → CW. Each was published only after the previous article's live verification was reported.
+- **What changed (VERIFIED FACT, live production, 2026-10-20):**
+  - **Booking wording:** "Book a Client Discovery Call (30 minutes)" (4 instances) became "Request a call … and we'll
+    get in touch to find a time". There are 4 links to `/schedule-call` in the SEO and FB bodies (`DEC-062`).
+  - **Removed outright:**
+    - the published writer notes (SEO-2, FB-2);
+    - the unverified paid-social client list and its section (FB-3);
+    - the Statista-linked city claim (CM-1);
+    - the phantom case-study line (CM-2);
+    - all six ₹ price figures (CM-3a/3b), with CM-7 adjusting the lead-in;
+    - the Seth Godin quote (PM-3);
+    - RE's promotional close and "So why wait?" section (RE-3, RE-4).
+  - **Softened:**
+    - both "3 to 6 months" timelines (SEO-4/5);
+    - the Facebook timeline: the durations became stages in a real table (FB-5/6), the FAQ answer no longer gives a
+      duration (FB-7), and "quickly" was dropped (FB-8);
+    - the "ensures" and "guarantees" claims (CM-5/6, PM-1/2/4/5), the ROI comparisons (EM-2/3) and RE's percentage
+      benchmarks (RE-1, RE-5).
+  - **Corrected:** the Rebecca Lieb quote now uses her verified wording (CW-1).
+  - **Image alt text:** 10 asset Titles replaced with descriptive alt text (ALT-1 to ALT-9, ALT-11). Description is
+    left empty, so there are no captions.
+- **Verification (VERIFIED FACT):**
+  - **Drafts before publishing:**
+    - every entry, after a reload, matched the approved after-state block by block (text, marks, links, lists, table
+      cells);
+    - Contentful's own version compare showed exactly **one** changed field (`content`) per entry;
+    - each asset save was confirmed by reload and version number.
+  - **After each publish** (≥ 60 s, second fetch): the live body equalled the approved after-state
+    (SEO 148, FB 129, CM 66, EM 45, PM 51, RE 115, CW 57 blocks, all exact).
+  - **Unchanged on every article:** `<title>`, meta description, canonical, Open Graph, H1, `datePublished`,
+    BreadcrumbList, and `/blog` order.
+  - **Expected changes only:**
+    - "Updated" date, `dateModified` and `article:modified_time` now show 2026-10-20 (the entry publish times);
+    - reading time FB 9 → 8 and RE 14 → 13, as predicted;
+    - contents lists FB 12 → 11 and RE 9 → 8.
+  - **Asset publishes do not move an article's "Updated" date.** This was confirmed: the dates equal the entry
+    publish times.
+  - **EM-1 and RE-2 quotes are unchanged.** ALT-10 is unchanged in the body and in `og:image:alt`.
+  - **Final sweep (13:12Z):** 35 pages, all HTTP 200; **0** occurrences sitewide of every removed claim; Contentful
+    "Changed" view: 0 entries.
+- **Method and incidents (recorded for accuracy):**
+  - **Who made the edits:** at Gate B the edits were made by the repository worker in the owner's signed-in
+    Contentful web-app session (Claude in Chrome), at the owner's direction. They were not typed by the owner, as
+    Q-B1 had anticipated.
+  - **Editing incidents, all corrected before verification:** a dropped space (RE), a sentence not deleted on the
+    first attempt (RE), CM-7 text split across two blocks, the SEO-3 link escaping during retyping (rebuilt with the
+    hyperlink dialog), and a leftover empty paragraph (PM).
+  - **The Gate B report overstated the asset drafts:** only 5 of 10 Titles had saved. The page showed "Changed"
+    before its delayed autosave ran, and navigating away discarded the edit. Found in the readiness review, recorded
+    as a correction, and re-drafted under owner authorisation with reload and version confirmation.
+  - **Nothing unintended was published.**
+- **Rollback (not used):**
+  - Contentful Versions › Compare › "Select all fields from this version" › Apply, then publish. The pre-change
+    snapshots exist for all 7 entries.
+  - Alternatively, the B2 JSON backup `docs/blog-redesign/bl-d6/editorial/evidence/backup-b2-2026-10-20/` (SHA-256 list).
+  - Any rollback publish moves the "Updated" date again (accepted, Q-A3).
+- **Records:**
+  - `docs/blog-redesign/bl-d6/editorial/`:
+    - `BL_D6_CHANGE_MANIFEST.md` (r2; r1 in `superseded/`);
+    - `BL_D6_GATE_A_REPORT.md`;
+    - `BL_D6_PREFLIGHT_WORKSHEET.md`;
+    - `BL_D6_GATE_B_REPORT.md` (with the correction and the Gate C log);
+    - `evidence/`.
+  - These are added in the same PR as this entry.
+- **Not decided here, still open:**
+  - **EM-1 and RE-2:** Amit Gupta to confirm authorship. If not confirmed, delete B0; that would be a second publish.
+  - **ALT-10:** the CM featured image, so a change would also alter `og:image:alt`. The featured-image alt values
+    OG-1 to OG-3 are held as metadata. OG-1 is also the featured image of the unpublished draft Post "Freelancing in
+    India…".
+  - **Residuals R-2 to R-7**, out of scope:
+    - CM B9's unsourced "surge" sentence;
+    - the remaining "ensures" sentences in CM and RE;
+    - RE's "unprecedented growth";
+    - the table accessible-name quirk (renderer code);
+    - PM's "ensuring high performance" sentence.
+  - **Still held from `DEC-067`:** D-6 (Pune titles and the "Best" image text, pending Search Console evidence) and
+    D-7.
+  - **Not performed:** Search Console re-inspection, and a manual screen-reader pass of the new FB table.
+- **Supersedes:** the `DEC-067` "Not decided here" line for the Contentful editorial track, except for the held
+  items above. **Read with:** `DEC-051`, `DEC-061`, `DEC-062`, `DEC-066`, `DEC-067`. **Approved by:** Project
+  owner, 2026-10-20. Recorded by the repository worker.

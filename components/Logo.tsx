@@ -13,9 +13,10 @@ interface LogoProps {
   onDark?: boolean;
 }
 
-/** Intrinsic size of the lockup WebP. Both variants are 555x144 (3.854:1). */
-const LOGO_WIDTH = 555;
-const LOGO_HEIGHT = 144;
+/** Intrinsic size of the DEC-069 wordmark SVG. Both variants are 616x112 (5.5:1),
+    so the space reserved before the image loads has the rendered aspect ratio. */
+const LOGO_WIDTH = 616;
+const LOGO_HEIGHT = 112;
 
 export function Logo({ className, href = '/', priority = false, onDark = false }: LogoProps) {
   const image = (

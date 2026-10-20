@@ -78,7 +78,7 @@ export function generateOrganizationSchema() {
     '@id': `${siteMetadata.baseUrl}/#organization`,
     name: siteMetadata.siteName,
     url: siteMetadata.baseUrl,
-    logo: `${siteMetadata.baseUrl}${siteMetadata.logoPath}`,
+    logo: `${siteMetadata.baseUrl}${siteMetadata.schemaLogoPath}`,
     email: siteMetadata.email,
     telephone: pune.phoneDisplay,
     description:
@@ -196,7 +196,7 @@ export function generateArticleSchema(
       name: siteMetadata.siteName,
       logo: {
         '@type': 'ImageObject',
-        url: `${siteMetadata.baseUrl}${siteMetadata.logoPath}`,
+        url: `${siteMetadata.baseUrl}${siteMetadata.schemaLogoPath}`,
       },
     },
   };

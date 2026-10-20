@@ -1,129 +1,125 @@
 /**
- * C+ About (/about) — customer-facing copy from the approved prototype
- * (proto/direction-c-plus 0a8b611, components/proto-cplus/content.ts, ABOUT_PLAIN), with owner-approved corrections
- * that qualify attribution (`why.skills[2].d`, `hold.ours.d`). The prototype's internal review registers are not
- * carried over.
+ * C+ About (/about): customer-facing copy of the owner-approved G1 design, frozen at R4, with the owner-directed R5
+ * copy simplification of "Why we work this way" and "What you can count on us for" (proposed, pending visual approval) (docs/about-redesign/g1/:
+ * AB_G1_NOTES.md, mockup/). Facts used: the owner confirmations recorded in docs/about-redesign/g0/AB_G0_DECISIONS.md
+ * (independently operated agency; a wider team led by four team heads; plans and coordinates the services a client
+ * hires it to manage; R4 process copy), DEC-053 OD-04, DEC-058 HW-D01 and HW-D03.
  */
 
-export const ABOUT_PLAIN = {
+export type AboutIcon = 'search' | 'ads' | 'site' | 'chart' | 'mail' | 'plan' | 'link' | 'report' | 'talk' | 'person';
+
+export const AB = {
   crumb: 'About',
-  h1: { a: 'Everyone has a report.', b: 'Who owns the enquiry?' },
-  lede: 'Search, ads and websites each come with their own report. We answer for what usually sits outside all of them: the qualified enquiry — a real enquiry you can follow up.',
-  slips: [
-    { who: 'Search report', what: 'Rankings up', state: 'ok' },
-    { who: 'Ads report', what: 'Clicks up', state: 'ok' },
-    { who: 'Website handover', what: 'Site delivered', state: 'ok' },
-    { who: 'Enquiries', what: 'Not in any report', state: 'gap' },
-  ],
-  slipsCaption: 'Illustration of a common arrangement — not a description of any particular supplier.',
+  kicker: 'About MappedSkills',
+  h1: { a: 'A marketing partner', b: 'who sees the bigger picture.' },
+  lede: 'We’re an independently operated digital marketing agency. We look at how all your marketing fits together, then help more of the right people find you and get in touch.',
+  primary: 'Tell us about your business',
+
+  big: {
+    label: 'Illustration: search, ads, your website and tracking, all working towards one thing, your enquiries.',
+    k: 'The bigger picture',
+    parts: [
+      { t: 'Search', icon: 'search' },
+      { t: 'Ads', icon: 'ads' },
+      { t: 'Your website', icon: 'site' },
+      { t: 'Tracking', icon: 'chart' },
+    ] as { t: string; icon: AboutIcon }[],
+    centre: 'Your enquiries',
+    cap: 'Illustration',
+  },
 
   why: {
     kicker: 'Why we work this way',
-    h: { a: 'The enquiry sits at the end of', b: 'everybody else’s report.' },
-    body: [
-      'A search supplier reports rankings. An ads supplier reports clicks. A web developer reports a finished site. Each of those can be accurate and useful — and still not tell you whether more of the right people got in touch.',
-      'The enquiry comes at the end of all of them. Where the work is split between suppliers, it can easily become nobody’s job.',
-    ],
-    belief: 'That is the belief the firm is built on: the enquiry is what matters, and someone has to answer for the whole route to it — not one part of it.',
-    skillsLead: 'So the work covers three skills, as one route:',
-    skills: [
-      { t: 'Capture', d: 'Be found by buyers already looking.' },
-      { t: 'Convert', d: 'Turn the visit into a sent enquiry.' },
-      { t: 'Measure', d: 'See where enquiries came from, where the information is available.' },
-    ],
-  },
-
-  hold: {
-    kicker: 'What we take responsibility for',
-    h: { a: 'Accountable up to', b: 'the qualified enquiry.' },
-    define: 'A qualified enquiry is a real enquiry you can follow up: a real person, reachable, from a business, with a stated need.',
-    ours: { t: 'Ours', d: 'Everything up to that point — being found, the visit, the route to getting in touch, and recording where each enquiry came from, where the information is available.' },
-    line: 'The line',
-    yours: { t: 'Yours', d: 'What happens next — replying, quoting, selling and the revenue, in your own system. Where you share your sales figures, we report them as your numbers.' },
-    notH: 'What we do not promise',
-    not: ['Rankings', 'A position in AI answers', 'A number of enquiries', 'Revenue', 'A return on spend'],
-    notBody: 'We publish what cannot be measured rather than presenting a measurement as more complete than it is. We publish the limits because the alternative is asking you to take the numbers on trust.',
-  },
-
-  fig: {
-    kicker: 'An illustration',
-    h: 'Whose report is the enquiry in?',
-    intro: 'The same route to a sale, shown two ways. This is a common arrangement, not a description of every supplier.',
-    toB: 'Show who answers for the enquiry',
-    toA: 'Show it split across suppliers',
-    stateOf: (n: number) => `View ${n} of 2`,
-    stages: ['Search', 'Ads', 'Website', 'Form', 'Enquiry', 'Revenue'],
-    stagesB: ['Search', 'Ads', 'Website', 'Form', 'Qualified enquiry', 'Revenue'],
-    a: {
-      t: 'Split across suppliers',
-      sum: 'Three suppliers each report on their own part. The enquiry is in nobody’s report. Revenue is yours.',
-      brackets: [
-        { from: 0, to: 0, kind: 'sup', who: 'Search supplier', rep: 'Reports: rankings up' },
-        { from: 1, to: 1, kind: 'sup', who: 'Ads supplier', rep: 'Reports: clicks up' },
-        { from: 2, to: 3, kind: 'sup', who: 'Web developer', rep: 'Reports: site delivered' },
-        { from: 4, to: 4, kind: 'gap', who: 'No one', rep: 'Not in any report' },
-        { from: 5, to: 5, kind: 'yours', who: 'You', rep: 'Your sales and revenue' },
-      ],
+    h: { a: 'Your marketing should', b: 'work together.' },
+    body: 'Ads, search and your website shouldn’t work in isolation. We connect the services you hire us for, with one shared goal: more enquiries.',
+    parts: [
+      { t: 'Search', icon: 'search' },
+      { t: 'Ads', icon: 'ads' },
+      { t: 'Website', icon: 'site' },
+    ] as { t: string; icon: AboutIcon }[],
+    apart: { t: 'Working separately', end: 'Enquiries: nobody’s job', s: 'Separate reports. No shared picture.' },
+    together: {
+      t: 'Working together',
+      end: 'Enquiries: the shared goal',
+      s: 'One coordinated approach. Clear reporting.',
     },
-    b: {
-      t: 'One line to the enquiry',
-      sum: 'We answer for the whole route, from search to the qualified enquiry. Revenue stays yours.',
-      brackets: [
-        { from: 0, to: 4, kind: 'ours', who: 'MappedSkills — one line', rep: 'Answers for the qualified enquiry, measured against a starting point' },
-        { from: 5, to: 5, kind: 'yours', who: 'You', rep: 'Your sales and revenue, in your own system' },
-      ],
-    },
-    routeLabel: 'The route to a sale',
-    whoLabel: 'Who answers for each part',
-    covers: 'covers',
-    caption: 'Illustration. Not a claim about any particular supplier arrangement.',
+    cap: 'Illustration of a common setup.',
   },
 
-  how: {
-    kicker: 'How we work',
-    h: { a: 'Look first.', b: 'Then do the agreed work.' },
-    steps: ['Discovery call', 'Audit', 'Findings and a recommended plan', 'Proposal', 'Your approval', 'Work begins'],
-    work: 'We handle most of the agreed work, with your input where needed.',
-    monthly: 'Every month: a performance report and a review call.',
-    link: 'See how the work runs',
+  count: {
+    kicker: 'What you can count on us for',
+    h: { a: 'Four things we', b: 'promise to do.' },
+    items: [
+      {
+        t: 'A clear plan',
+        icon: 'plan',
+        d: 'You approve the approach and scope before we begin.',
+      },
+      {
+        t: 'Connected work',
+        icon: 'link',
+        d: 'We coordinate the services you hire us to manage.',
+      },
+      {
+        t: 'Honest measurement',
+        icon: 'report',
+        d: 'Monthly reports show what’s working and what needs attention.',
+      },
+      {
+        t: 'Straight answers',
+        icon: 'talk',
+        d: 'We tell you what we recommend, and what the data can’t tell us.',
+      },
+    ] as { t: string; icon: AboutIcon; d: string }[],
+    splitLabel: 'Who does what',
+    ours: { t: 'Our part', d: 'Managing your marketing.' },
+    yours: { t: 'Your part', d: 'Responding to enquiries and closing sales.' },
+    honest: 'We commit to the work and how we do it, not guaranteed outcomes.',
+    link: { href: '/how-it-works', label: 'See how the work runs' },
   },
 
-  check: {
-    kicker: 'What you can check',
-    h: { a: 'Two things you can check,', b: 'and one of them does not flatter us.' },
-    method: { t: 'The method, published', d: 'Including what cannot be measured — stated as part of the method, not as a footnote.', link: 'Read the method' },
-    self: {
-      t: 'A measurement of ourselves',
-      fig: '0',
-      of: 'of 28',
-      figLabel: 'AI-assistant runs that named this business',
-      d: 'We asked four AI assistants for agencies like this one, 28 times, on one day, in English, signed out. This business was named in none of them. Directory and listing sources appeared in 15 of those 28 runs. Two further systems returned no testable result at all, so we make no claim about either.',
-      limits: 'One round, on one day, in one language, from one location. It is a count, not a rate, and one measurement is not a trend. It says nothing about results for clients.',
-    },
-  },
-
-  fit: {
-    kicker: 'Who this is for',
-    h: { a: 'Who this is for,', b: 'and who it isn’t.' },
-    forH: 'A good fit',
-    for: [
-      'Businesses where a customer takes time to decide and one good enquiry is worth real money.',
-      'Businesses where demand already exists or can reasonably be reached.',
-      'Businesses where measurement access is not a problem.',
-    ],
-    notH: 'Not a good fit',
-    not: [
-      'Not businesses that need demand created from nothing.',
-      'Not impulse or price-only purchases.',
-      'Not anyone who needs the outcome guaranteed.',
-    ],
+  people: {
+    kicker: 'The people',
+    h: { a: 'Meet the people', b: 'leading the work.' },
+    lede: 'MappedSkills has a wider team. These are the four people who lead it.',
+    placeholderTag: 'Placeholders: photos, names, roles and introductions to come from the owner',
+    photo: 'Photo',
   },
 
   close: {
-    label: 'If that is the kind of supplier you want',
-    h: 'Tell us what is actually happening.',
-    body: 'The most useful first message is what you are getting, what you are not, and what you can currently see.',
-    primary: 'Tell us what you’re trying to fix',
-    secondary: 'Book a call',
+    kicker: 'Say hello',
+    h: { a: 'We’d like to hear', b: 'about your business.' },
+    body: 'Tell us what’s working, what isn’t, and what you’d like to change. A few lines is plenty.',
+    nextK: 'What happens next',
+    next: [
+      'You tell us what’s going on, using the form, email or WhatsApp.',
+      'We share our findings, the approach we suggest and the scope.',
+      'Work starts only after you approve it.',
+    ],
   },
 };
+
+/**
+ * The four team heads. PLACEHOLDERS: the owner supplies the real profiles (DEC-060). Replace each entry with the
+ * approved name, role, one-sentence introduction and photo (`photo`: a path under /public, plus `alt`; written photo
+ * consent from the person is a release requirement), and set
+ * `placeholder: false`. While ANY entry is a placeholder, the page renders the visible placeholder tag and the
+ * page must not be released publicly (owner condition, G2 authorisation).
+ * Do not invent identities, credentials or biographies.
+ */
+export type TeamHead = {
+  placeholder: boolean;
+  name: string;
+  role: string;
+  intro: string;
+  photo?: { src: string; alt: string };
+};
+
+const PLACEHOLDER: TeamHead = {
+  placeholder: true,
+  name: '[Name]',
+  role: '[Role]',
+  intro: '[One sentence introducing this person, in their own words.]',
+};
+
+export const TEAM_HEADS: TeamHead[] = [PLACEHOLDER, PLACEHOLDER, PLACEHOLDER, PLACEHOLDER];

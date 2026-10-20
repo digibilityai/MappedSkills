@@ -1,0 +1,582 @@
+{
+ "desktop-1440": {
+  "overflowX": false,
+  "heroCtas": [
+   "Discuss your requirements -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "closeCtas": [
+   "Get a proposal -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "ctaInFold": true,
+  "links": [
+   "/",
+   "/contact",
+   "/schedule-call",
+   "/contact",
+   "/schedule-call"
+  ],
+  "headings": [
+   "H1 The right work. A price that makes sense.",
+   "H2 Three things shape the quote.",
+   "H3 What you need",
+   "H3 What needs fixing",
+   "H3 How much work is involved",
+   "H2 One plan, with only what you need.",
+   "H3 Get found",
+   "H3 Get enquiries",
+   "H3 See what’s working",
+   "H2 Three steps, and you decide.",
+   "H3 Tell us what you need",
+   "H3 Get a clear proposal",
+   "H3 You decide",
+   "H2 Know what you’re paying for."
+  ],
+  "h1Count": 1,
+  "small": 0,
+  "words": 381,
+  "title": "Pricing | Tailored Digital Marketing Quotes | MappedSkills",
+  "desc": "Every MappedSkills quote is tailored to your business. See what affects your price, what your fee covers and how to get a clear proposal before work begins.",
+  "canonical": "https://mappedskills.com/pricing",
+  "jsonld": [
+   "Organization"
+  ],
+  "pageHeight": 4583,
+  "status": 200,
+  "secs": [
+   {
+    "id": "pr-h1",
+    "h": 562
+   },
+   {
+    "id": "pr-h-aff",
+    "h": 922
+   },
+   {
+    "id": "pr-h-cov",
+    "h": 1079
+   },
+   {
+    "id": "pr-h-how",
+    "h": 658
+   },
+   {
+    "id": "b-close-h",
+    "h": 573
+   }
+  ],
+  "consoleErrors": [],
+  "failed": [],
+  "mockSecs": [
+   {
+    "id": "pr-h1",
+    "h": 562
+   },
+   {
+    "id": "pr-h-aff",
+    "h": 922
+   },
+   {
+    "id": "pr-h-cov",
+    "h": 1079
+   },
+   {
+    "id": "pr-h-how",
+    "h": 658
+   },
+   {
+    "id": "b-close-h",
+    "h": 573
+   }
+  ],
+  "mockWords": 381,
+  "textEqual": true
+ },
+ "desktop-1280": {
+  "overflowX": false,
+  "heroCtas": [
+   "Discuss your requirements -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "closeCtas": [
+   "Get a proposal -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "ctaInFold": true,
+  "links": [
+   "/",
+   "/contact",
+   "/schedule-call",
+   "/contact",
+   "/schedule-call"
+  ],
+  "headings": [
+   "H1 The right work. A price that makes sense.",
+   "H2 Three things shape the quote.",
+   "H3 What you need",
+   "H3 What needs fixing",
+   "H3 How much work is involved",
+   "H2 One plan, with only what you need.",
+   "H3 Get found",
+   "H3 Get enquiries",
+   "H3 See what’s working",
+   "H2 Three steps, and you decide.",
+   "H3 Tell us what you need",
+   "H3 Get a clear proposal",
+   "H3 You decide",
+   "H2 Know what you’re paying for."
+  ],
+  "h1Count": 1,
+  "small": 0,
+  "words": 381,
+  "title": "Pricing | Tailored Digital Marketing Quotes | MappedSkills",
+  "desc": "Every MappedSkills quote is tailored to your business. See what affects your price, what your fee covers and how to get a clear proposal before work begins.",
+  "canonical": "https://mappedskills.com/pricing",
+  "jsonld": [
+   "Organization"
+  ],
+  "pageHeight": 4357,
+  "status": 200,
+  "secs": [
+   {
+    "id": "pr-h1",
+    "h": 534
+   },
+   {
+    "id": "pr-h-aff",
+    "h": 873
+   },
+   {
+    "id": "pr-h-cov",
+    "h": 1013
+   },
+   {
+    "id": "pr-h-how",
+    "h": 618
+   },
+   {
+    "id": "b-close-h",
+    "h": 531
+   }
+  ],
+  "consoleErrors": [],
+  "failed": [],
+  "mockSecs": [
+   {
+    "id": "pr-h1",
+    "h": 534
+   },
+   {
+    "id": "pr-h-aff",
+    "h": 873
+   },
+   {
+    "id": "pr-h-cov",
+    "h": 1013
+   },
+   {
+    "id": "pr-h-how",
+    "h": 618
+   },
+   {
+    "id": "b-close-h",
+    "h": 531
+   }
+  ],
+  "mockWords": 381,
+  "textEqual": true
+ },
+ "tablet-820": {
+  "overflowX": false,
+  "heroCtas": [
+   "Discuss your requirements -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "closeCtas": [
+   "Get a proposal -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "ctaInFold": true,
+  "links": [
+   "/",
+   "/contact",
+   "/schedule-call",
+   "/contact",
+   "/schedule-call"
+  ],
+  "headings": [
+   "H1 The right work. A price that makes sense.",
+   "H2 Three things shape the quote.",
+   "H3 What you need",
+   "H3 What needs fixing",
+   "H3 How much work is involved",
+   "H2 One plan, with only what you need.",
+   "H3 Get found",
+   "H3 Get enquiries",
+   "H3 See what’s working",
+   "H2 Three steps, and you decide.",
+   "H3 Tell us what you need",
+   "H3 Get a clear proposal",
+   "H3 You decide",
+   "H2 Know what you’re paying for."
+  ],
+  "h1Count": 1,
+  "small": 0,
+  "words": 381,
+  "title": "Pricing | Tailored Digital Marketing Quotes | MappedSkills",
+  "desc": "Every MappedSkills quote is tailored to your business. See what affects your price, what your fee covers and how to get a clear proposal before work begins.",
+  "canonical": "https://mappedskills.com/pricing",
+  "jsonld": [
+   "Organization"
+  ],
+  "pageHeight": 5212,
+  "status": 200,
+  "secs": [
+   {
+    "id": "pr-h1",
+    "h": 908
+   },
+   {
+    "id": "pr-h-aff",
+    "h": 1151
+   },
+   {
+    "id": "pr-h-cov",
+    "h": 1060
+   },
+   {
+    "id": "pr-h-how",
+    "h": 509
+   },
+   {
+    "id": "b-close-h",
+    "h": 554
+   }
+  ],
+  "consoleErrors": [],
+  "failed": [],
+  "mockSecs": [
+   {
+    "id": "pr-h1",
+    "h": 908
+   },
+   {
+    "id": "pr-h-aff",
+    "h": 1151
+   },
+   {
+    "id": "pr-h-cov",
+    "h": 1060
+   },
+   {
+    "id": "pr-h-how",
+    "h": 509
+   },
+   {
+    "id": "b-close-h",
+    "h": 554
+   }
+  ],
+  "mockWords": 381,
+  "textEqual": true
+ },
+ "mobile-390": {
+  "overflowX": false,
+  "heroCtas": [
+   "Discuss your requirements -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "closeCtas": [
+   "Get a proposal -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "ctaInFold": true,
+  "links": [
+   "/",
+   "/contact",
+   "/schedule-call",
+   "/contact",
+   "/schedule-call"
+  ],
+  "headings": [
+   "H1 The right work. A price that makes sense.",
+   "H2 Three things shape the quote.",
+   "H3 What you need",
+   "H3 What needs fixing",
+   "H3 How much work is involved",
+   "H2 One plan, with only what you need.",
+   "H3 Get found",
+   "H3 Get enquiries",
+   "H3 See what’s working",
+   "H2 Three steps, and you decide.",
+   "H3 Tell us what you need",
+   "H3 Get a clear proposal",
+   "H3 You decide",
+   "H2 Know what you’re paying for."
+  ],
+  "h1Count": 1,
+  "small": 0,
+  "words": 381,
+  "title": "Pricing | Tailored Digital Marketing Quotes | MappedSkills",
+  "desc": "Every MappedSkills quote is tailored to your business. See what affects your price, what your fee covers and how to get a clear proposal before work begins.",
+  "canonical": "https://mappedskills.com/pricing",
+  "jsonld": [
+   "Organization"
+  ],
+  "pageHeight": 6593,
+  "status": 200,
+  "secs": [
+   {
+    "id": "pr-h1",
+    "h": 951
+   },
+   {
+    "id": "pr-h-aff",
+    "h": 1544
+   },
+   {
+    "id": "pr-h-cov",
+    "h": 1639
+   },
+   {
+    "id": "pr-h-how",
+    "h": 595
+   },
+   {
+    "id": "b-close-h",
+    "h": 513
+   }
+  ],
+  "consoleErrors": [],
+  "failed": [],
+  "mockSecs": [
+   {
+    "id": "pr-h1",
+    "h": 951
+   },
+   {
+    "id": "pr-h-aff",
+    "h": 1544
+   },
+   {
+    "id": "pr-h-cov",
+    "h": 1639
+   },
+   {
+    "id": "pr-h-how",
+    "h": 595
+   },
+   {
+    "id": "b-close-h",
+    "h": 513
+   }
+  ],
+  "mockWords": 381,
+  "textEqual": true
+ },
+ "mobile-320": {
+  "overflowX": false,
+  "heroCtas": [
+   "Discuss your requirements -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "closeCtas": [
+   "Get a proposal -> /contact",
+   "Book a call -> /schedule-call"
+  ],
+  "ctaInFold": true,
+  "links": [
+   "/",
+   "/contact",
+   "/schedule-call",
+   "/contact",
+   "/schedule-call"
+  ],
+  "headings": [
+   "H1 The right work. A price that makes sense.",
+   "H2 Three things shape the quote.",
+   "H3 What you need",
+   "H3 What needs fixing",
+   "H3 How much work is involved",
+   "H2 One plan, with only what you need.",
+   "H3 Get found",
+   "H3 Get enquiries",
+   "H3 See what’s working",
+   "H2 Three steps, and you decide.",
+   "H3 Tell us what you need",
+   "H3 Get a clear proposal",
+   "H3 You decide",
+   "H2 Know what you’re paying for."
+  ],
+  "h1Count": 1,
+  "small": 0,
+  "words": 381,
+  "title": "Pricing | Tailored Digital Marketing Quotes | MappedSkills",
+  "desc": "Every MappedSkills quote is tailored to your business. See what affects your price, what your fee covers and how to get a clear proposal before work begins.",
+  "canonical": "https://mappedskills.com/pricing",
+  "jsonld": [
+   "Organization"
+  ],
+  "pageHeight": 7015,
+  "status": 200,
+  "secs": [
+   {
+    "id": "pr-h1",
+    "h": 986
+   },
+   {
+    "id": "pr-h-aff",
+    "h": 1615
+   },
+   {
+    "id": "pr-h-cov",
+    "h": 1752
+   },
+   {
+    "id": "pr-h-how",
+    "h": 644
+   },
+   {
+    "id": "b-close-h",
+    "h": 577
+   }
+  ],
+  "consoleErrors": [],
+  "failed": [],
+  "mockSecs": [
+   {
+    "id": "pr-h1",
+    "h": 986
+   },
+   {
+    "id": "pr-h-aff",
+    "h": 1615
+   },
+   {
+    "id": "pr-h-cov",
+    "h": 1752
+   },
+   {
+    "id": "pr-h-how",
+    "h": 644
+   },
+   {
+    "id": "b-close-h",
+    "h": 577
+   }
+  ],
+  "mockWords": 381,
+  "textEqual": true
+ },
+ "keyboard": [
+  {
+   "t": "Discuss your requirements",
+   "href": "/contact",
+   "ring": true
+  },
+  {
+   "t": "Book a call",
+   "href": "/schedule-call",
+   "ring": true
+  },
+  {
+   "t": "Get a proposal",
+   "href": "/contact",
+   "ring": true
+  },
+  {
+   "t": "Book a call",
+   "href": "/schedule-call",
+   "ring": true
+  }
+ ],
+ "reducedMotion": {
+  "tag": "1e-05s",
+  "step": "1e-05s",
+  "running": 0,
+  "hiddenSections": 0
+ },
+ "noJs": {
+  "words": 381,
+  "sections": 5,
+  "invisible": 0
+ },
+ "pricingHead": {
+  "same": false,
+  "local": {
+   "title": "Pricing | Tailored Digital Marketing Quotes | MappedSkills",
+   "desc": "Every MappedSkills quote is tailored to your business. See what affects your price, what your fee covers and how to get a clear proposal before work begins.",
+   "canonical": "https://mappedskills.com/pricing",
+   "robots": "index, follow",
+   "ogTitle": "Pricing | Tailored Digital Marketing Quotes | MappedSkills"
+  }
+ },
+ "siblings": [
+  {
+   "path": "/",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/services",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/how-it-works",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/seo",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/google-ads",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/social-media-ads",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/ai-seo",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/conversion-optimization",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/lead-generation",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/about",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/faq",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/contact",
+   "headSame": true,
+   "mainSame": true
+  },
+  {
+   "path": "/schedule-call",
+   "headSame": true,
+   "mainSame": true
+  }
+ ]
+}

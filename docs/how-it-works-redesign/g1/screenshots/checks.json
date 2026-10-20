@@ -1,0 +1,240 @@
+{
+ "desktop-1440": {
+  "words": 870,
+  "height": 7062,
+  "vp": 7.8,
+  "overflow": false,
+  "wide": [],
+  "seqStates": [
+   "hx-card hx-seq is-static is-all at=null",
+   "hx-start-g hx-seq is-static is-all at=null",
+   "hx-board hx-seq is-static is-all at=null",
+   "hx-rep hx-seq is-static is-all at=null"
+  ],
+  "headings": [
+   "H1 No mystery about what happens next.",
+   "H2 First, we get to know your business.",
+   "H3 We get to know you",
+   "H3 We look, then recommend",
+   "H3 You decide",
+   "H2 Not everything needs fixing.",
+   "H2 We do the work. You stay in the loop.",
+   "H3 WHAT WE’LL NEED FROM YOU",
+   "H2 Every month, you see what changed.",
+   "H3 What the numbers can’t always show",
+   "H2 What people ask us",
+   "H2 Start with a conversation."
+  ],
+  "sections": [
+   [
+    "hw-h1",
+    537,
+    99
+   ],
+   [
+    "hw-h-start",
+    1090,
+    158
+   ],
+   [
+    "hw-h-sort",
+    860,
+    116
+   ],
+   [
+    "hw-h-work",
+    938,
+    177
+   ],
+   [
+    "hw-h-info",
+    1625,
+    235
+   ],
+   [
+    "hw-h-qs",
+    654,
+    50
+   ],
+   [
+    "b-close-h",
+    571,
+    35
+   ]
+  ],
+  "dashes": 0,
+  "small": [],
+  "ctaBottom": 561,
+  "heroBottom": 610,
+  "axe": [],
+  "errs": [],
+  "sort": {
+   "pressed": "true",
+   "status": "Sorted into three groups: fix first, later, and not worth doing.",
+   "focus": "px-toggle hx-ps-btn"
+  },
+  "pick": "1"
+ },
+ "mobile-390": {
+  "words": 856,
+  "height": 9256,
+  "vp": 11,
+  "overflow": false,
+  "wide": [],
+  "seqStates": [
+   "hx-card hx-seq is-static is-all at=null",
+   "hx-start-g hx-seq is-static is-all at=null",
+   "hx-board hx-seq is-static is-all at=null",
+   "hx-rep hx-seq is-static is-all at=null"
+  ],
+  "headings": [
+   "H1 No mystery about what happens next.",
+   "H2 First, we get to know your business.",
+   "H3 We get to know you",
+   "H3 We look, then recommend",
+   "H3 You decide",
+   "H2 Not everything needs fixing.",
+   "H2 We do the work. You stay in the loop.",
+   "H3 WHAT WE’LL NEED FROM YOU",
+   "H2 Every month, you see what changed.",
+   "H3 What the numbers can’t always show",
+   "H2 What people ask us",
+   "H2 Start with a conversation."
+  ],
+  "sections": [
+   [
+    "hw-h1",
+    965,
+    99
+   ],
+   [
+    "hw-h-start",
+    1269,
+    144
+   ],
+   [
+    "hw-h-sort",
+    1096,
+    116
+   ],
+   [
+    "hw-h-work",
+    1362,
+    177
+   ],
+   [
+    "hw-h-info",
+    2037,
+    235
+   ],
+   [
+    "hw-h-qs",
+    690,
+    50
+   ],
+   [
+    "b-close-h",
+    486,
+    35
+   ]
+  ],
+  "dashes": 0,
+  "small": [],
+  "ctaBottom": 446,
+  "heroBottom": 1030,
+  "axe": [],
+  "errs": [],
+  "sort": {
+   "pressed": "true",
+   "status": "Sorted into three groups: fix first, later, and not worth doing.",
+   "focus": "px-toggle hx-ps-btn"
+  },
+  "pick": "1"
+ },
+ "mobile-320": {
+  "words": 850,
+  "height": 10041,
+  "vp": 14.3,
+  "overflow": false,
+  "wide": [],
+  "seqStates": [
+   "hx-card hx-seq is-static is-all at=null",
+   "hx-start-g hx-seq is-static is-all at=null",
+   "hx-board hx-seq is-static is-all at=null",
+   "hx-rep hx-seq is-static is-all at=null"
+  ],
+  "headings": [
+   "H1 No mystery about what happens next.",
+   "H2 First, we get to know your business.",
+   "H3 We get to know you",
+   "H3 We look, then recommend",
+   "H3 You decide",
+   "H2 Not everything needs fixing.",
+   "H2 We do the work. You stay in the loop.",
+   "H3 WHAT WE’LL NEED FROM YOU",
+   "H2 Every month, you see what changed.",
+   "H3 What the numbers can’t always show",
+   "H2 What people ask us",
+   "H2 Start with a conversation."
+  ],
+  "sections": [
+   [
+    "hw-h1",
+    972,
+    99
+   ],
+   [
+    "hw-h-start",
+    1431,
+    142
+   ],
+   [
+    "hw-h-sort",
+    1201,
+    116
+   ],
+   [
+    "hw-h-work",
+    1409,
+    174
+   ],
+   [
+    "hw-h-info",
+    2333,
+    234
+   ],
+   [
+    "hw-h-qs",
+    734,
+    50
+   ],
+   [
+    "b-close-h",
+    518,
+    35
+   ]
+  ],
+  "dashes": 0,
+  "small": [],
+  "ctaBottom": 457,
+  "heroBottom": 1037,
+  "axe": [],
+  "errs": [],
+  "sort": {
+   "pressed": "true",
+   "status": "Sorted into three groups: fix first, later, and not worth doing.",
+   "focus": "px-toggle hx-ps-btn"
+  },
+  "pick": "1"
+ },
+ "reduced": {
+  "static": true,
+  "hidden": 0
+ },
+ "noJs": {
+  "lanesShown": true,
+  "btnHidden": true,
+  "hidden": 0,
+  "buttons": 1
+ }
+}

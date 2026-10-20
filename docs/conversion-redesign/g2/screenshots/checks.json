@@ -1,0 +1,102 @@
+{
+ "desktop-consent": null,
+ "desktop-reduced": {
+  "on": 0,
+  "hiddenItems": 0,
+  "figsVisible": 4
+ },
+ "desktop-nojs": {
+  "h1": "Plenty of visitors, not enough enquiries? We find out why.",
+  "buttons": 0,
+  "hiddenItems": 0,
+  "figsVisible": 4
+ },
+ "mobile-consent": null,
+ "mobile-reduced": {
+  "on": 0,
+  "hiddenItems": 0,
+  "figsVisible": 4
+ },
+ "mobile-nojs": {
+  "h1": "Plenty of visitors, not enough enquiries? We find out why.",
+  "buttons": 0,
+  "hiddenItems": 0,
+  "figsVisible": 4
+ },
+ "buttons": [
+  "Show step 1: The visitors",
+  "Show step 2: Your page",
+  "Show step 3: Getting in touch",
+  "Show step 4: Your tracking",
+  "Show step 1: Find the problem",
+  "Show step 2: Plan the fix",
+  "Show step 3: Make the change",
+  "Show step 4: Check the results",
+  "Show step 1: Improve",
+  "Show step 2: Measure",
+  "Show step 3: Review",
+  "Show step 1: A visitor sends an enquiry",
+  "Show step 2: The website says thank you",
+  "Show step 3: The inbox stays empty",
+  "Show step 4: Nobody noticed"
+ ],
+ "manual": {
+  "at": "1",
+  "all": true,
+  "current": 2
+ },
+ "focusVisible": {
+  "tag": "BUTTON",
+  "outline": "solid 3px"
+ },
+ "links": [
+  "/contact",
+  "/schedule-call",
+  "/problems/traffic-but-no-enquiries",
+  "/how-it-works"
+ ],
+ "cta": [
+  [
+   "Tell us what you’re trying to fix",
+   "/contact"
+  ],
+  [
+   "Book a call",
+   "/schedule-call"
+  ],
+  [
+   "Tell us what you’re trying to fix",
+   "/contact"
+  ],
+  [
+   "Book a call",
+   "/schedule-call"
+  ]
+ ],
+ "headings": [
+  "H2 Analytics cookies",
+  "H1 Plenty of visitors, not enough enquiries? We find out why.",
+  "H2 Your website isn’t always the problem.",
+  "H3 The visitors",
+  "H3 Your page",
+  "H3 Getting in touch",
+  "H3 Your tracking",
+  "H2 First we find the problem. Then we fix that problem.",
+  "H3 Find the problem",
+  "H3 Plan the fix",
+  "H3 Make the change",
+  "H3 Check the results",
+  "H2 We make improvements. Then we measure what changes.",
+  "H2 Our own enquiry form wasn’t working.",
+  "H2 Let’s find out where your enquiries are going.",
+  "H2 Services",
+  "H2 Company",
+  "H2 Contact"
+ ],
+ "meta": {
+  "title": "Conversion Rate Optimization: Find Where Visits Are Lost | MappedSkills",
+  "canonical": "https://mappedskills.com/conversion-optimization",
+  "desc": "Conversion rate optimization services that start with diagnosis, because in at least two of the four places demand gets lost, changing the page is the wrong intervention.",
+  "ld": 2
+ }
+}

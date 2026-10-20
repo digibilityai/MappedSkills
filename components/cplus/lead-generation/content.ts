@@ -1,98 +1,103 @@
 /**
- * C+ Lead generation (/lead-generation) — customer-facing copy from the approved prototype
- * (proto/direction-c-plus 0a8b611, components/proto-cplus/leadGenContent.ts, LG_PLAIN), with owner-approved
- * corrections so the lead-verification standard reads as proposed, not as an operating service (`defH`,
- * `split.agreed.d`, `questions[0].a`, `questions[2].a`, `close.body`). The prototype's internal review registers are
- * not carried over.
+ * C+ Lead generation (/lead-generation): customer-facing copy of the owner-approved G1 design (DEC-057;
+ * docs/lead-generation-redesign/g1, LG_G1_CONFIRMATION_04.md). Operating model (OWNER REQUIREMENT): MappedSkills
+ * manages advertising campaigns; enquiries go directly to the client's own form, CRM or WhatsApp, depending on their
+ * setup; MappedSkills does not manually review, approve or release individual client enquiries. Delivery testing is
+ * conditional. Clients receive a monthly campaign performance report. No guarantee of lead quality, conversion,
+ * integration success or specific reporting metrics. No long or double dashes.
  */
 
-export const LG_PLAIN = {
+export const LG = {
   crumb: 'Enquiry generation',
   kicker: 'Enquiry generation',
   h1: { a: 'Lead generation, where the unit is', b: 'an enquiry you can actually act on.' },
-  lede: 'Enquiries from real businesses, with a real need, that are worth picking up the phone about.',
-  side: 'We don’t buy them in and forward them. They come from connected work: reaching the right buyers, making sure the enquiry arrives, and measuring where it came from.',
-  primary: 'Tell us what you’re trying to fix',
+  lede: 'Enquiries from potential customers, sent straight to your team. We don’t buy in lists of names and forward them.',
 
-  /* hero illustration: one campaign enquiry, read closely, with margin marks for the five steps */
-  card: {
-    label: 'A campaign enquiry',
-    cap: 'Illustration of the proposed process. Not a real enquiry.',
+  /* 1: hero illustration (a fictional example, never a real enquiry) and its three-step journey */
+  hero: {
+    cap: 'Illustration of how an enquiry reaches your team. Not a real enquiry.',
+    label: 'Example enquiry',
+    chips: ['Ad seen', 'Enquiry sent', 'Received'],
+    ad: { k: 'Your ad', t: 'Office fit-outs, quoted' },
     fields: [
-      { f: 'Name', n: 1 },
-      { f: 'Work email', n: 1 },
-      { f: 'Company', n: 2 },
-      { f: 'Requirement', n: 3, long: true },
-      { f: 'Budget — only if relevant', n: 2, optional: true },
+      { f: 'Name', v: 'Meera S.' },
+      { f: 'Business', v: 'Interiors studio' },
+      { f: 'Needs', v: 'A quote for an office fit-out' },
+      { f: 'Contact', v: 'Work email and WhatsApp' },
     ],
-    stamp: 'Reviewed',
-    handoff: 'Your sales team',
-    notesLabel: 'Margin notes: the five steps',
-    notes: [
-      { n: 1, t: 'Captured and screened', d: 'a working contact; no spam or repeats' },
-      { n: 2, t: 'Eligible for you', d: 'against criteria you agree' },
-      { n: 3, t: 'Confirmed by the prospect', d: 'an email reply, or a WhatsApp they start' },
-      { n: 4, t: 'Reviewed by us', d: 'the evidence checked — no calls' },
-      { n: 5, t: 'Handed to your sales team', d: 'qualified enquiries only' },
+    hand: 'Your sales team',
+    listLabel: 'How an enquiry reaches your team',
+    steps: [
+      { t: 'Someone sees your ad', label: 'Someone sees your ad' },
+      { t: 'They send an enquiry', label: 'They send an enquiry' },
+      { t: 'Your team receives it', label: 'Your team receives it' },
     ],
   },
 
-  /* 2 — the situation (ink): two versions, two different problems */
-  sitKicker: 'The situation',
-  sitH: { a: 'Two versions,', b: 'and they need different work.' },
-  few: { k: 'Not enough enquiries', t: 'The demand exists somewhere. It is not arriving here.' },
+  /* 2: the problem (ink) */
+  probKicker: 'The problem',
+  probH: { a: 'Too few enquiries,', b: 'or too many of the wrong ones?' },
+  few: { k: 'Too few', inbox: 'Your inbox', one: 'One enquiry', t: 'It’s quiet', d: 'The people who need you aren’t finding you, or aren’t getting in touch.' },
   wrong: {
-    k: 'Enough — and the wrong ones',
-    t: 'That is not a volume problem. More traffic makes it worse.',
-    tags: ['Job applications', 'Course questions', 'Vendor pitches', 'Students', 'Work you don’t do'],
+    k: 'The wrong ones',
+    tagsLabel: 'What arrives instead',
+    tags: ['Job applications', 'Students', 'Sales pitches', 'Work you don’t do', 'Course questions'],
+    t: 'It’s busy, but not with buyers',
+    d: 'More of the same only means more sorting.',
   },
-  sitCap: 'Illustration. No counts.',
-  sitLine: 'Telling them apart takes measurement, not opinion.',
+  probCap: 'Illustration.',
+  probLine: { a: 'Each needs a different fix.', b: 'We find out which one you have first.' },
 
-  /* 3 — the standard (paper): the five steps, the rule, the statuses */
-  defKicker: 'What counts as a qualified enquiry',
-  defH: 'The standard we are introducing: confirmed by the prospect and checked by us before it reaches your sales team.',
-  defIntro: 'A verification standard we are introducing for client campaigns:',
-  checks: [
-    { n: 1, t: 'Captured and screened', d: 'A working contact. Spam and repeat enquiries are kept out.' },
-    { n: 2, t: 'Eligible for you', d: 'Checked against criteria agreed with you for this campaign.' },
-    { n: 3, t: 'Confirmed by the prospect', d: 'They confirm their requirement by email reply, or in a WhatsApp conversation they start.' },
-    { n: 4, t: 'Reviewed by us', d: 'A MappedSkills operator checks the evidence. No calls.' },
-    { n: 5, t: 'Handed to your sales team', d: 'Only qualified enquiries go to your sales process.' },
+  /* 3: what we do (paper): one path, four stops */
+  doKicker: 'What we do',
+  doH: { a: 'We don’t sell you a list.', b: 'We bring potential customers to you.' },
+  doLabel: 'The path from potential customer to enquiry',
+  doCap: 'Illustration. The work depends on what we find.',
+  stops: [
+    { t: 'Reach the people you want', d: 'On search, ads and social media.' },
+    { t: 'Make it easy to enquire', d: 'Into your own form, CRM or WhatsApp.' },
+    { t: 'Check delivery', d: 'Where the setup allows, we test that enquiries reach the right destination.' },
+    { t: 'See where it came from', d: 'Where we can tell, which work brought it in.' },
   ],
-  rule: 'No confirmation, no qualified status.',
-  statusK: 'Where each enquiry stands',
-  statuses: [
-    { k: 'Qualified', t: 'Eligible, confirmed and reviewed. Handed to your sales process.', on: true },
-    { k: 'Pending verification', t: 'Eligible, waiting for the prospect to confirm.' },
-    { k: 'Expired — unverified', t: 'Not confirmed within the window — 48 hours in the pilot. Kept separate; not sent to sales.' },
-    { k: 'Unqualified', t: 'Does not meet the criteria agreed with you.' },
-    { k: 'Duplicate', t: 'Repeats an enquiry already open.' },
-  ],
-  split: {
-    agreed: { k: 'Agreed with you, per campaign', t: 'What makes an enquiry eligible depends on your business and the campaign.', d: 'Budget is one of the criteria only where it is relevant. Under the proposed standard, confirmation messages would carry your brand, and MappedSkills would manage the process.' },
-    not: { k: 'Not part of it', t: 'We don’t make qualification calls.', d: 'Your sales team handles the sales conversation.' },
-  },
 
-  /* 4 — the boundary (ink) */
+  /* 4: how an enquiry reaches you (ground): the same three steps */
+  reachKicker: 'How an enquiry reaches you',
+  reachH: { a: 'Enquiries go', b: 'straight to your team.' },
+  reachIntro: 'Enquiries go to your own form, CRM or WhatsApp, depending on your setup.',
+  reachLabel: 'The three steps',
+  reach: [
+    { t: 'Someone sees your ad', d: 'Your campaign reaches the people you want to reach.' },
+    { t: 'They send an enquiry', d: 'They tell you what they need.' },
+    { t: 'Your team receives it', d: 'In your own form, CRM or WhatsApp.' },
+  ],
+  facts: [
+    { b: 'You tell us who you want to reach.', t: 'We build campaigns around them.' },
+    { b: 'We don’t call your enquiries to qualify them.', t: 'Your team has the sales conversation.' },
+  ],
+
+  /* 5: what we answer for (ink) */
   bdKicker: 'What we answer for',
-  bdH: { a: 'We are accountable up to', b: 'the qualified enquiry.' },
-  rail: { ours: 'Ours', oursT: ['Reaching buyers', 'Eligibility and confirmation', 'Review'], mark: 'The qualified enquiry', yours: 'Yours', yoursT: ['The sales conversation', 'Quote', 'Win'] },
-  bdRows: [
-    { b: 'We don’t score enquiries.', t: 'A score needs past outcomes to calibrate against. Without them, the weights would be invented.' },
-    { b: 'Every enquiry should be accounted for.', t: 'Even when its source is unknown.' },
-  ],
-  notPromisedK: 'We do not promise',
-  notPromised: ['a number of enquiries per month', 'a cost per enquiry, or per lead', 'a conversion rate', 'a quality standard for demand we don’t control'],
-  bdLink: { label: 'The method, including what cannot be attributed', href: '/how-it-works' },
+  bdH: { a: 'We manage the campaigns.', b: 'Your team handles the enquiries.' },
+  relay: {
+    ours: 'Our part',
+    oursT: ['Run the campaigns', 'Bring people to you'],
+    mark: 'An enquiry, sent to your team',
+    yours: 'Your part',
+    yoursT: ['The conversation', 'The quote', 'The sale'],
+  },
+  notPromisedK: 'We won’t promise',
+  notPromised: ['A set number of enquiries', 'A fixed cost per lead', 'How many become sales'],
+  notPromisedWhy: 'These depend on your market and your sales team too.',
+  get: { k: 'What you do get', t: 'You receive a monthly report on campaign performance.' },
+  bdLink: { label: 'See how we work', href: '/how-it-works' },
 
-  /* 5 — questions (paper) */
+  /* 6: questions (paper) */
   qKicker: 'Questions',
   qH: 'What people ask us',
   questions: [
     {
       q: 'Lead gen agencies sell rubbish leads.',
-      a: 'It happens, and the mechanism is simple: when the contract is written on volume, volume is what arrives. The standard we are introducing is the alternative: an enquiry confirmed by the prospect and checked against criteria agreed with you before it reaches your sales team.',
+      a: 'It happens, and the mechanism is simple: when the contract is written on volume, volume is what arrives. Our alternative is to reach the people you want and make it easy to enquire, so enquiries go straight to your team.',
     },
     {
       q: 'How many enquiries will we get?',
@@ -100,7 +105,7 @@ export const LG_PLAIN = {
     },
     {
       q: 'Will you call our leads to qualify them?',
-      a: 'No. We don’t make qualification calls. Under the standard we are introducing, the prospect would confirm digitally, and your sales team would handle the sales conversation.',
+      a: 'No. We don’t make qualification calls. Enquiries go straight to your team, and your sales team handles the sales conversation.',
     },
   ],
   related: {
@@ -113,10 +118,19 @@ export const LG_PLAIN = {
     ],
   },
 
-  /* close */
+  /* 7: close (tangerine). "What happens next" uses only the confirmed DEC-051 item 5 facts (no time, price or guarantee). */
   close: {
-    label: 'Tell us what your enquiries look like now',
-    h: 'How many, and how many are worth quoting for.',
-    body: 'Roughly is fine. If you can’t separate the two today, say so — that is a good place to start.',
+    kicker: 'Tell us where you are now',
+    h: { a: 'How many enquiries do you get?', b: 'How many are any good?' },
+    body: 'A rough idea is fine. Not sure? That’s a good place to start.',
+    primary: 'Tell us what you’re trying to fix',
+    nextK: 'What happens next',
+    next: [
+      { t: 'You tell us what’s happening', label: 'You tell us' },
+      { t: 'We reply by email or WhatsApp', label: 'We reply' },
+      { t: 'A discovery call', label: 'A discovery call' },
+      { t: 'We send our findings, a plan and a proposal', label: 'Findings and a plan' },
+      { t: 'Work starts once you approve', label: 'Work starts' },
+    ],
   },
 };

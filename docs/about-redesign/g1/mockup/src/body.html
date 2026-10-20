@@ -1,0 +1,177 @@
+<!-- G1 R1 REVIEW ARTIFACT. Proposed /about body. Not production code. New classes use the ax- prefix.
+     R4 (owner, "/about Final Process Copy Confirmation", 2026-10-18): points 2, 4, 6 and 7 confirmed and worded as given;
+     points 1, 3 and 5 keep their qualified wording. Copy only; visual design unchanged.
+     R3 (owner, "About | Final G1 Copy Confirmation", 2026-10-18): MappedSkills plans and coordinates the services a client
+     hires it to manage; connected execution is how it works, not a guaranteed outcome.
+     R2 (owner, "About | G1 Factual Confirmation", 2026-10-18): independently operated agency; four team heads of a wider
+     team, heading "Meet the people leading the work."; "We do most of the agreed work ourselves" removed.
+     R1 (owner, "About Page | G1 Design Refinement", 2026-10-18):
+       1. hero H1 no longer duplicates the homepage; "independent digital marketing team";
+       2. "Your marketing should work together": a still, side-by-side comparison readable in seconds (no toggle);
+       3. commitments lead (plan, connected work, honest measurement, straight answers), one boundary, one line on
+          what isn't guaranteed;
+       4. People: exactly four placeholder cards (photo, name, role, one sentence). Nothing invented;
+       5. a warmer close, /contact primary and /schedule-call secondary.
+     Facts: DEC-051 item 5, HW-D01, HW-D03, DEC-053 OD-04, DEC-057. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5"/></symbol>
+    <symbol id="i-ads" viewBox="0 0 24 24"><path d="M4 10v4h3l7 4V6L7 10z"/><path d="M17.5 9.5a3.5 3.5 0 0 1 0 5"/></symbol>
+    <symbol id="i-site" viewBox="0 0 24 24"><path d="M3 5h18v14H3z"/><path d="M3 9h18"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="m7 15 4-4 3 3 5-6"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6.5L21 7"/></symbol>
+    <symbol id="i-plan" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="m9 13 2 2 4-4"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1"/><path d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1"/></symbol>
+    <symbol id="i-report" viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="M8 16v-4M12 16V8M16 16v-6"/></symbol>
+    <symbol id="i-talk" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-4 3.5-6 7-6s6 2 7 6"/></symbol>
+  </defs>
+</svg>
+
+<!-- 1. HERO (ground). R1-1: new H1 (the homepage keeps "Judge us on the enquiries…"). Short, human lede.
+     The figure is "the bigger picture": every piece of marketing pointed at one thing, your enquiries. Drawn still. -->
+<section class="b-hero ax-hero" aria-labelledby="ab-h1">
+  <div class="px-wrap b-hero-g ax-hero-g">
+    <div class="ax-hero-tx">
+      <nav aria-label="Breadcrumb" class="b-crumb"><ol><li><a href="/">Home</a> </li><li><span aria-hidden="true">/</span> <span aria-current="page">About</span></li></ol></nav>
+      <p class="b-kicker">About MappedSkills</p>
+      <h1 id="ab-h1" class="b-h1 ax-h1"><span>A marketing partner</span> <span class="b-named">who sees the bigger picture.</span></h1>
+      <p class="b-lede">We’re an independently operated digital marketing agency. We look at how all your marketing fits together, then help more of the right people find you and get in touch.</p>
+      <div class="dc-actions"><a class="dc-btn dc-btn-primary" href="/contact"><span aria-hidden="true" class="dc-mk"></span>Tell us about your business</a><a class="dc-btn dc-btn-secondary" href="/schedule-call"><span aria-hidden="true" class="dc-mk"></span>Book a call</a></div>
+    </div>
+
+    <figure class="ax-big" aria-label="Illustration: search, ads, your website and tracking, all working towards one thing, your enquiries.">
+      <div class="ax-big-frame">
+        <span class="ax-big-k" aria-hidden="true">The bigger picture</span>
+        <ul class="ax-big-g" aria-hidden="true">
+          <li style="--p:1"><span class="ax-big-i"><svg><use href="#i-search"/></svg></span>Search</li>
+          <li style="--p:2"><span class="ax-big-i"><svg><use href="#i-ads"/></svg></span>Ads</li>
+          <li style="--p:3"><span class="ax-big-i"><svg><use href="#i-site"/></svg></span>Your website</li>
+          <li style="--p:4"><span class="ax-big-i"><svg><use href="#i-chart"/></svg></span>Tracking</li>
+          <li class="ax-big-c"><span class="ax-big-i"><svg><use href="#i-mail"/></svg></span>Your enquiries</li>
+        </ul>
+      </div>
+      <figcaption class="ax-cap">Illustration</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 2. WHY WE WORK THIS WAY (ink). R1-2: plain words, no marketing terms. A still comparison, side by side on wide
+     screens and stacked on phones. Both panels are real text; no JavaScript, no animation. -->
+<section class="b-sec b-ink ax-why" aria-labelledby="ab-h-why">
+  <div class="px-wrap">
+    <div class="ax-why-head">
+      <div>
+        <p class="b-kicker">Why we work this way</p>
+        <h2 id="ab-h-why" class="b-h2">Your marketing should <span class="b-named">work together.</span></h2>
+      </div>
+      <div class="ax-why-l"><p>Many businesses have one company for ads, another for the website and someone else for search. Each one looks after its own part. Nobody checks whether it all brings in enquiries.</p><p class="ax-why-b">We plan and coordinate the services you hire us to manage, so they work together.</p></div>
+    </div>
+
+    <div class="ax-cmp">
+      <div class="ax-cmp-p is-apart">
+        <h3 class="ax-cmp-h">Working separately</h3>
+        <ul class="ax-cmp-row">
+          <li><span class="ax-cmp-i" aria-hidden="true"><svg><use href="#i-search"/></svg></span>Search</li>
+          <li><span class="ax-cmp-i" aria-hidden="true"><svg><use href="#i-ads"/></svg></span>Ads</li>
+          <li><span class="ax-cmp-i" aria-hidden="true"><svg><use href="#i-site"/></svg></span>Website</li>
+        </ul>
+        <p class="ax-cmp-end"><span class="ax-cmp-q" aria-hidden="true">?</span>Enquiries: nobody’s job</p>
+        <p class="ax-cmp-s">Three separate reports. Each says its part went well.</p>
+      </div>
+      <div class="ax-cmp-p is-together">
+        <h3 class="ax-cmp-h">Working together</h3>
+        <ul class="ax-cmp-row">
+          <li><span class="ax-cmp-i" aria-hidden="true"><svg><use href="#i-search"/></svg></span>Search</li>
+          <li><span class="ax-cmp-i" aria-hidden="true"><svg><use href="#i-ads"/></svg></span>Ads</li>
+          <li><span class="ax-cmp-i" aria-hidden="true"><svg><use href="#i-site"/></svg></span>Website</li>
+        </ul>
+        <p class="ax-cmp-end"><span class="ax-cmp-q" aria-hidden="true"><svg><use href="#i-mail"/></svg></span>Enquiries: the shared goal</p>
+        <p class="ax-cmp-s">One team plans and coordinates the services you hire us for, with a monthly performance report.</p>
+      </div>
+    </div>
+    <p class="ax-cap ax-cap-ink">Illustration. A common setup, not a description of any particular supplier.</p>
+  </div>
+</section>
+
+<!-- 3. WHAT YOU CAN COUNT ON (paper). R1-3: four positive commitments, each traced to a confirmed fact (see notes §3).
+     Then the boundary (our marketing, your sales) and ONE line on what isn't guaranteed. One link to /how-it-works. -->
+<section class="b-sec b-paper ax-count" aria-labelledby="ab-h-count">
+  <div class="px-wrap">
+    <p class="b-kicker">What you can count on us for</p>
+    <h2 id="ab-h-count" class="b-h2">Four things we <span class="b-named">promise to do.</span></h2>
+
+    <ol class="ax-commit">
+      <li>
+        <span class="ax-commit-i" aria-hidden="true"><svg><use href="#i-plan"/></svg></span>
+        <h3>A clear plan</h3>
+        <p>We look at what you have first. Then we share our findings, the approach we suggest and the scope. Work starts only after you approve it.</p>
+      </li>
+      <li>
+        <span class="ax-commit-i" aria-hidden="true"><svg><use href="#i-link"/></svg></span>
+        <h3>Connected work</h3>
+        <p>We plan and coordinate the services you hire us to manage, so they all work towards the same goal: your enquiries.</p>
+      </li>
+      <li>
+        <span class="ax-commit-i" aria-hidden="true"><svg><use href="#i-report"/></svg></span>
+        <h3>Honest measurement</h3>
+        <p>We track where enquiries come from, where tracking allows. You get a monthly performance report, and a review call where your service includes one.</p>
+      </li>
+      <li>
+        <span class="ax-commit-i" aria-hidden="true"><svg><use href="#i-talk"/></svg></span>
+        <h3>Straight answers</h3>
+        <p>If something won’t suit your business, we’ll say so. We’ll also tell you what the numbers can’t always show.</p>
+      </li>
+    </ol>
+
+    <div class="ax-split" role="group" aria-label="Who does what">
+      <div class="ax-ours"><p class="ax-split-t">Our part</p><p>The marketing services we manage for you.</p></div>
+      <div class="ax-yours"><p class="ax-split-t">Your part</p><p>Replying to enquiries, quoting and selling.</p></div>
+    </div>
+    <p class="ax-honest">These are commitments about how we work. No one can honestly guarantee rankings, a number of enquiries or revenue, so we don’t. <a href="/how-it-works">See how the work runs <span aria-hidden="true">→</span></a></p>
+  </div>
+</section>
+
+<!-- 4. PEOPLE (ground). R2: the four team heads, presented as leaders of a wider team (owner-confirmed). Exactly four placeholder cards in a responsive portrait grid (4 / 2 / 2 / 1 columns).
+     Every [bracketed] item is a visible placeholder awaiting the owner. No identities, photos or credentials invented. -->
+<section class="b-sec ax-people" aria-labelledby="ab-h-people">
+  <div class="px-wrap">
+    <div class="ax-people-head">
+      <div>
+        <p class="b-kicker">The people</p>
+        <h2 id="ab-h-people" class="b-h2">Meet the people <span class="b-named">leading the work.</span></h2>
+        <p class="ax-people-l">MappedSkills has a wider team. These are the four people who lead it.</p>
+      </div>
+      <p class="ax-ph-tag">Placeholders: photos, names, roles and introductions to come from the owner</p>
+    </div>
+    <ul class="ax-team" data-placeholder>
+      <li class="ax-card"><div class="ax-photo"><svg aria-hidden="true"><use href="#i-person"/></svg><span>Photo</span></div><h3 class="ax-card-n">[Name]</h3><p class="ax-card-r">[Role]</p><p class="ax-card-s">[One sentence introducing this person, in their own words.]</p></li>
+      <li class="ax-card"><div class="ax-photo"><svg aria-hidden="true"><use href="#i-person"/></svg><span>Photo</span></div><h3 class="ax-card-n">[Name]</h3><p class="ax-card-r">[Role]</p><p class="ax-card-s">[One sentence introducing this person, in their own words.]</p></li>
+      <li class="ax-card"><div class="ax-photo"><svg aria-hidden="true"><use href="#i-person"/></svg><span>Photo</span></div><h3 class="ax-card-n">[Name]</h3><p class="ax-card-r">[Role]</p><p class="ax-card-s">[One sentence introducing this person, in their own words.]</p></li>
+      <li class="ax-card"><div class="ax-photo"><svg aria-hidden="true"><use href="#i-person"/></svg><span>Photo</span></div><h3 class="ax-card-n">[Name]</h3><p class="ax-card-r">[Role]</p><p class="ax-card-s">[One sentence introducing this person, in their own words.]</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 5. CLOSE (tangerine, shared .b-close look). R1-5: warmer, contact-led. /contact primary, /schedule-call secondary.
+     "What happens next" uses only confirmed facts (DEC-051 item 5), as on /services. -->
+<section class="b-close ax-close" aria-labelledby="b-close-h">
+  <div class="px-wrap">
+    <div class="b-close-in">
+      <div>
+        <p class="b-kicker ax-close-k">Say hello</p>
+        <h2 id="b-close-h" class="b-h2">We’d like to hear <span class="ax-close-2">about your business.</span></h2>
+        <p class="b-lede">Tell us what’s working, what isn’t, and what you’d like to change. A few lines is plenty.</p>
+      </div>
+      <div class="dc-actions"><a class="dc-btn dc-btn-primary" href="/contact"><span aria-hidden="true" class="dc-mk"></span>Tell us about your business</a><a class="dc-btn dc-btn-secondary" href="/schedule-call"><span aria-hidden="true" class="dc-mk"></span>Book a call</a></div>
+    </div>
+    <div class="ax-next">
+      <p class="ax-next-k">What happens next</p>
+      <ol>
+        <li><b>1</b>You tell us what’s going on, using the form, email or WhatsApp.</li>
+        <li><b>2</b>We share our findings, the approach we suggest and the scope.</li>
+        <li><b>3</b>Work starts only after you approve it.</li>
+      </ol>
+    </div>
+  </div>
+</section>

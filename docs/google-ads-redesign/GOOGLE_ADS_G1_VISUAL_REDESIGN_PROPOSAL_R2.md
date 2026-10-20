@@ -508,8 +508,8 @@ Everything in §§1 to 10 has been corrected in place to match the build. These 
 6. **Observation, not changed:** the shared `.px-tab` default in `cplus.css` still gives unselected tabs the decorative `--dc-line` border, and `/conversion-optimization` also uses it.
 7. **The mutation checks and browser probes live outside the repository**; only the guard tests are in it.
 8. **Code branch:** `feat/google-ads-redesign` is at `33940ec` with no pull request; nothing is merged or deployed; G2 (motion), pre-release QA and a code PR are not authorised.
-9. **The `main` ruleset question** in DEC-054 item 4 is undecided.
+9. **The `main` ruleset question** in DEC-064 item 4 is undecided.
 
 ---
 
-**Document status.** Corrected to match the build `74aec4e` on 2026-10-16, then updated on 2026-10-16 for G1.1 (`1f3b5af`) and G1.2 (`33940ec`). It is kept as the design and implementation record for the R2 redesign (`DEC-054`).
+**Document status.** Corrected to match the build `74aec4e` on 2026-10-16, then updated on 2026-10-16 for G1.1 (`1f3b5af`) and G1.2 (`33940ec`). It is kept as the design and implementation record for the R2 redesign (`DEC-064`).

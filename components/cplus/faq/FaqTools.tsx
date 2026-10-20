@@ -3,17 +3,16 @@
 import { useCallback, useEffect, useState } from 'react';
 
 /**
- * C+ FAQ tools, from the approved prototype (proto/direction-c-plus 0a8b611, components/proto-cplus/FaqTools.tsx),
- * unchanged. Progressive enhancement for the FAQ's native <details>. It never replaces
- * the native behaviour — every disclosure still opens and closes by itself, with the keyboard, and with JavaScript
- * off (this component then renders nothing visible: `html:not(.px-js) .fq-tools { display: none }`).
+ * C+ FAQ tools: progressive enhancement for the FAQ's native <details>, behaviour unchanged from the previous page
+ * (only the class names and placement follow the DEC-063 design). It never replaces the native behaviour: every
+ * disclosure still opens and closes by itself, with the keyboard, and with JavaScript off (this component then renders
+ * nothing visible: `html:not(.px-js) .faq-tools { display: none }`).
  *
  *   1. ONE "Open all answers" / "Close all answers" button. Its label always describes what it will do next, and is
- *      re-derived from the page whenever any disclosure is toggled by hand (all open → "Close all", otherwise
- *      "Open all"). A polite status line reports the result. Focus stays on the button.
- *   2. JUMP LINKS. When the address targets a question (`#q-…`, on load or on hashchange — e.g. from the index), that
- *      question's disclosure is opened. Nothing else is opened on load, and focus is never moved by this code; the
- *      browser's own fragment navigation does the scrolling.
+ *      re-derived from the page whenever any disclosure is toggled by hand. A polite status line reports the result.
+ *      Focus stays on the button.
+ *   2. JUMP LINKS. When the address targets a question (`#q-…`, on load or on hashchange), that question's disclosure
+ *      is opened. Nothing else is opened on load, and focus is never moved by this code.
  */
 export function FaqTools({ scope, total }: { scope: string; total: number }) {
   const [allOpen, setAllOpen] = useState(false);
@@ -53,9 +52,9 @@ export function FaqTools({ scope, total }: { scope: string; total: number }) {
   };
 
   return (
-    <div className="fq-tools">
-      <button type="button" className="fq-all" onClick={press}>
-        <span className={'fq-pm' + (allOpen ? ' is-open' : '')} aria-hidden="true" />
+    <div className="faq-tools">
+      <button type="button" className="faq-all" onClick={press}>
+        <span className={'faq-pm' + (allOpen ? ' is-open' : '')} aria-hidden="true" />
         {allOpen ? 'Close all answers' : 'Open all answers'}
       </button>
       <p className="px-sr" role="status" aria-live="polite">

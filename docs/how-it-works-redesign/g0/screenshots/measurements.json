@@ -1,0 +1,417 @@
+{
+ "desktop-1440": {
+  "consent": "declined",
+  "consoleErrors": [],
+  "title": "How We Work, What We Measure, and What We Cannot Tell You | MappedSkills",
+  "titleLen": 72,
+  "description": "The published method: what is measured at each point on the chain, what cannot be attributed and why, and where a person decides rather than a process. Written to be checked.",
+  "canonical": "https://mappedskills.com/how-it-works",
+  "jsonLdTypes": [
+   "Organization"
+  ],
+  "pageHeight": 12108,
+  "viewportsTall": 13.5,
+  "overflowX": false,
+  "mainWords": 2012,
+  "h1Px": 102.4,
+  "heroBottom": 774,
+  "heroCtaBottom": 673,
+  "sections": [
+   {
+    "id": "hw-h1",
+    "heading": "No mystery about what happens next.",
+    "top": 73,
+    "height": 701,
+    "words": 95,
+    "cls": "b-hero hw-hero"
+   },
+   {
+    "id": "hw-h-first",
+    "heading": "First, we get to know your business.",
+    "top": 774,
+    "height": 1082,
+    "words": 159,
+    "cls": "b-sec b-ink hw-first"
+   },
+   {
+    "id": "hw-h-audit",
+    "heading": "We look before we recommend.",
+    "top": 1857,
+    "height": 1228,
+    "words": 194,
+    "cls": "b-sec b-paper hw-audit"
+   },
+   {
+    "id": "hw-h-sort",
+    "heading": "Not everything needs fixing.",
+    "top": 3085,
+    "height": 1356,
+    "words": 269,
+    "cls": "b-sec hw-sort"
+   },
+   {
+    "id": "hw-h-work",
+    "heading": "A plan is only useful when someone acts on it.",
+    "top": 4440,
+    "height": 737,
+    "words": 120,
+    "cls": "b-sec b-ink hw-work"
+   },
+   {
+    "id": "hw-h-review",
+    "heading": "You’ll see what changed, and what the information can and cannot show.",
+    "top": 5177,
+    "height": 4224,
+    "words": 808,
+    "cls": "b-sec b-paper hw-review"
+   },
+   {
+    "id": "hw-h-tog",
+    "heading": "Good work needs both sides.",
+    "top": 9401,
+    "height": 1452,
+    "words": 333,
+    "cls": "b-sec hw-together"
+   },
+   {
+    "id": "b-close-h",
+    "heading": "Start with a conversation.",
+    "top": 10853,
+    "height": 539,
+    "words": 34,
+    "cls": "b-close"
+   }
+  ],
+  "headings": [
+   "H1 No mystery about what happens next.",
+   "H2 First, we get to know your business.",
+   "H2 We look before we recommend.",
+   "H3 Discovery call",
+   "H3 Audit",
+   "H3 Findings and a recommended plan",
+   "H3 Proposal",
+   "H3 Your approval",
+   "H2 Not everything needs fixing.",
+   "H3 Where a person decides, not a process",
+   "H2 A plan is only useful when someone acts on it.",
+   "H2 You’ll see what changed, and what the information can and cannot show.",
+   "H3 What we measure",
+   "H3 Every month",
+   "H3 What we do not promise",
+   "H3 What we cannot tell you about where an enquiry came from",
+   "H2 Good work needs both sides.",
+   "H3 What we need from you",
+   "H3 What you get from us",
+   "H3 What we do not know",
+   "H2 Start with a conversation."
+  ],
+  "hiddenHeadings": [
+   "H3 Fix first",
+   "H3 Later",
+   "H3 Not worth doing"
+  ],
+  "links": [
+   {
+    "text": "Home",
+    "href": "/",
+    "w": 38,
+    "h": 19
+   },
+   {
+    "text": "Tell us what you’re trying to fix",
+    "href": "/contact",
+    "w": 305,
+    "h": 48
+   },
+   {
+    "text": "Book a call",
+    "href": "/schedule-call",
+    "w": 151,
+    "h": 48
+   },
+   {
+    "text": "Tell us what you’re trying to fix",
+    "href": "/contact",
+    "w": 457,
+    "h": 60
+   },
+   {
+    "text": "Book a call",
+    "href": "/schedule-call",
+    "w": 457,
+    "h": 60
+   }
+  ],
+  "buttons": [
+   {
+    "text": "Sort by priority",
+    "pressed": "false",
+    "w": 207,
+    "h": 48
+   }
+  ],
+  "smallText": [
+   "12px: Example renovation business · illustration",
+   "12px: 01",
+   "12.48px: What you want",
+   "12px: 02",
+   "12.48px: What the audit found",
+   "12px: 03",
+   "12.48px: What we recommend",
+   "12px: 04",
+   "12.48px: What you approved",
+   "12px: 05",
+   "12.48px: What has been done",
+   "12px: 06",
+   "12.48px: What changed",
+   "12.48px: The first conversation",
+   "12px: Example renovation business · illustration",
+   "12px: 01",
+   "12.48px: What you want",
+   "12.48px: Before any work starts",
+   "12px: Example renovation business · illustration",
+   "12px: What you want",
+   "12px: What the audit found",
+   "12px: What we recommend",
+   "12px: Proposal",
+   "12px: What you approved",
+   "12.48px: Deciding what comes first",
+   "12.48px: What the audit turned up, in the order we found it",
+   "12.48px: Doing the work",
+   "12px: Example renovation business · illustration",
+   "12px: Approved action",
+   "12px: Status",
+   "12.48px: Measuring and reviewing",
+   "12px: Capture",
+   "12px: Convert",
+   "12px: Convert",
+   "12px: Convert",
+   "12px: Measure",
+   "12px: Accountable up to here",
+   "12px: Measure",
+   "11.52px: What happens",
+   "11.52px: What the record shows"
+  ],
+  "smallTextCount": 47,
+  "figures": 5,
+  "ariaHiddenFigures": 3,
+  "axe": [],
+  "sortState": {
+   "pressed": "true",
+   "status": "Sorted into three groups: fix first, later, and not worth doing.",
+   "focused": "px-toggle ps-btn"
+  }
+ },
+ "mobile-390": {
+  "consent": "declined",
+  "consoleErrors": [],
+  "title": "How We Work, What We Measure, and What We Cannot Tell You | MappedSkills",
+  "titleLen": 72,
+  "description": "The published method: what is measured at each point on the chain, what cannot be attributed and why, and where a person decides rather than a process. Written to be checked.",
+  "canonical": "https://mappedskills.com/how-it-works",
+  "jsonLdTypes": [
+   "Organization"
+  ],
+  "pageHeight": 17612,
+  "viewportsTall": 20.9,
+  "overflowX": false,
+  "mainWords": 2003,
+  "h1Px": 40.8,
+  "heroBottom": 1140,
+  "heroCtaBottom": 456,
+  "sections": [
+   {
+    "id": "hw-h1",
+    "heading": "No mystery about what happens next.",
+    "top": 65,
+    "height": 1075,
+    "words": 95,
+    "cls": "b-hero hw-hero"
+   },
+   {
+    "id": "hw-h-first",
+    "heading": "First, we get to know your business.",
+    "top": 1140,
+    "height": 1258,
+    "words": 159,
+    "cls": "b-sec b-ink hw-first"
+   },
+   {
+    "id": "hw-h-audit",
+    "heading": "We look before we recommend.",
+    "top": 2398,
+    "height": 1921,
+    "words": 194,
+    "cls": "b-sec b-paper hw-audit"
+   },
+   {
+    "id": "hw-h-sort",
+    "heading": "Not everything needs fixing.",
+    "top": 4319,
+    "height": 1977,
+    "words": 269,
+    "cls": "b-sec hw-sort"
+   },
+   {
+    "id": "hw-h-work",
+    "heading": "A plan is only useful when someone acts on it.",
+    "top": 6295,
+    "height": 1045,
+    "words": 117,
+    "cls": "b-sec b-ink hw-work"
+   },
+   {
+    "id": "hw-h-review",
+    "heading": "You’ll see what changed, and what the information can and cannot show.",
+    "top": 7341,
+    "height": 6068,
+    "words": 802,
+    "cls": "b-sec b-paper hw-review"
+   },
+   {
+    "id": "hw-h-tog",
+    "heading": "Good work needs both sides.",
+    "top": 13409,
+    "height": 2432,
+    "words": 333,
+    "cls": "b-sec hw-together"
+   },
+   {
+    "id": "b-close-h",
+    "heading": "Start with a conversation.",
+    "top": 15841,
+    "height": 486,
+    "words": 34,
+    "cls": "b-close"
+   }
+  ],
+  "headings": [
+   "H1 No mystery about what happens next.",
+   "H2 First, we get to know your business.",
+   "H2 We look before we recommend.",
+   "H3 Discovery call",
+   "H3 Audit",
+   "H3 Findings and a recommended plan",
+   "H3 Proposal",
+   "H3 Your approval",
+   "H2 Not everything needs fixing.",
+   "H3 Where a person decides, not a process",
+   "H2 A plan is only useful when someone acts on it.",
+   "H2 You’ll see what changed, and what the information can and cannot show.",
+   "H3 What we measure",
+   "H3 Every month",
+   "H3 What we do not promise",
+   "H3 What we cannot tell you about where an enquiry came from",
+   "H2 Good work needs both sides.",
+   "H3 What we need from you",
+   "H3 What you get from us",
+   "H3 What we do not know",
+   "H2 Start with a conversation."
+  ],
+  "hiddenHeadings": [
+   "H3 Fix first",
+   "H3 Later",
+   "H3 Not worth doing"
+  ],
+  "links": [
+   {
+    "text": "Home",
+    "href": "/",
+    "w": 38,
+    "h": 19
+   },
+   {
+    "text": "Tell us what you’re trying to fix",
+    "href": "/contact",
+    "w": 305,
+    "h": 48
+   },
+   {
+    "text": "Book a call",
+    "href": "/schedule-call",
+    "w": 151,
+    "h": 48
+   },
+   {
+    "text": "Tell us what you’re trying to fix",
+    "href": "/contact",
+    "w": 358,
+    "h": 60
+   },
+   {
+    "text": "Book a call",
+    "href": "/schedule-call",
+    "w": 358,
+    "h": 60
+   }
+  ],
+  "buttons": [
+   {
+    "text": "Sort by priority",
+    "pressed": "false",
+    "w": 207,
+    "h": 48
+   }
+  ],
+  "smallText": [
+   "12px: Example renovation business · illustration",
+   "12px: 01",
+   "12.48px: What you want",
+   "12px: 02",
+   "12.48px: What the audit found",
+   "12px: 03",
+   "12.48px: What we recommend",
+   "12px: 04",
+   "12.48px: What you approved",
+   "12px: 05",
+   "12.48px: What has been done",
+   "12px: 06",
+   "12.48px: What changed",
+   "12.48px: The first conversation",
+   "12px: Example renovation business · illustration",
+   "12px: 01",
+   "12.48px: What you want",
+   "12.48px: Before any work starts",
+   "12px: Example renovation business · illustration",
+   "12px: What you want",
+   "12px: What the audit found",
+   "12px: What we recommend",
+   "12px: Proposal",
+   "12px: What you approved",
+   "12.48px: Deciding what comes first",
+   "12.48px: What the audit turned up, in the order we found it",
+   "12.48px: Doing the work",
+   "12px: Example renovation business · illustration",
+   "12.48px: Measuring and reviewing",
+   "12px: Capture",
+   "12px: Convert",
+   "12px: Convert",
+   "12px: Convert",
+   "12px: Measure",
+   "12px: Accountable up to here",
+   "12px: Measure",
+   "12.8px: 1",
+   "12.8px: 2",
+   "12.8px: 3",
+   "12.8px: 4"
+  ],
+  "smallTextCount": 43,
+  "figures": 5,
+  "ariaHiddenFigures": 3,
+  "axe": [],
+  "sortState": {
+   "pressed": "true",
+   "status": "Sorted into three groups: fix first, later, and not worth doing.",
+   "focused": "px-toggle ps-btn"
+  }
+ },
+ "noJs": {
+  "sortGroupsVisible": true,
+  "pileVisible": false,
+  "buttonVisible": false,
+  "hiddenByOpacity": 0
+ },
+ "reducedMotion": {
+  "hiddenByOpacity": 0
+ }
+}

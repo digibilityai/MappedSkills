@@ -1,0 +1,66 @@
+{
+ "title": "Lead Generation Where the Unit Is an Enquiry You Can Act On | MappedSkills",
+ "desc": "Enquiries from real businesses, with a real need, worth picking up the phone about — with a published definition of what counts as one, and that definition is the number we report.",
+ "canon": "https://mappedskills.com/lead-generation",
+ "robots": "index, follow",
+ "og": [
+  "og:title=Lead Generation Where the Unit Is an Enquiry You Can Act On | MappedSkills",
+  "og:description=Enquiries from real businesses, with a real need, worth picking up the phone about — with a published definition of what counts as one, and that definition is the number we report.",
+  "og:url=https://mappedskills.com/lead-generation",
+  "og:site_name=MappedSkills",
+  "og:locale=en_US",
+  "og:image=https://mappedskills.com/ms_icon.webp",
+  "og:image:alt=Lead Generation Where the Unit Is an Enquiry You Can Act On | MappedSkills",
+  "og:type=website",
+  "twitter:card=summary_large_image",
+  "twitter:title=Lead Generation Where the Unit Is an Enquiry You Can Act On | MappedSkills",
+  "twitter:description=Enquiries from real businesses, with a real need, worth picking up the phone about — with a published definition of what counts as one, and that definition is the number we report.",
+  "twitter:image=https://mappedskills.com/ms_icon.webp"
+ ],
+ "h": [
+  "H1 #lg-h1 Lead generation, where the unit is an enquiry you can actually act on.",
+  "H2 #lg-h-sit Two versions, and they need different work.",
+  "H3 # Not enough enquiries",
+  "H3 # Enough — and the wrong ones",
+  "H2 #lg-h-def The standard we are introducing: confirmed by the prospect and checked by us before it reaches your sales team.",
+  "H3 # Captured and screened",
+  "H3 # Eligible for you",
+  "H3 # Confirmed by the prospect",
+  "H3 # Reviewed by us",
+  "H3 # Handed to your sales team",
+  "H3 #lg-status-k WHERE EACH ENQUIRY STANDS",
+  "H2 #lg-h-bd We are accountable up to the qualified enquiry.",
+  "H2 #lg-h-qs What people ask us",
+  "H2 #lg-h-close How many, and how many are worth quoting for."
+ ],
+ "links": [
+  "Home -> /",
+  "Tell us what you’re trying to fix -> /contact",
+  "The method, including what cannot be attributed → -> /how-it-works",
+  "traffic but no enquiries -> /problems/traffic-but-no-enquiries",
+  "the whole system -> /services",
+  "organic search -> /seo",
+  "paid search -> /google-ads",
+  "Tell us what you’re trying to fix -> /contact"
+ ],
+ "ld": [
+  "{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"@id\":\"https://mappedskills.com/#organization\",\"name\":\"MappedSkills\",\"url\":\"https://mappedskills.com\",\"logo\":\"https://mappedskills.com/mappedskills-logo-light-bg.webp\",\"email\":\"info@mappedskills.com\",\"telephone\":\"+91 9873232662\",\"description\":\"We help businesses get found by the buyers already looking for what they sell, turn more of those visits into real enquiries, and measure the whole path so they can see what worked.\",\"contactPoint\":{\"@type\":\"ContactPoint\",\"contactType\":\"customer service\",\"email\":\"info@mappedskills.com\",\"telephone\":\"+91 9873232662\",\"availableLanguage\":[\"en\"]},\"sameAs\":[]}",
+  "{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://mappedskills.com\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"What we do\",\"item\":\"https://mappedskills.com/services\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"Enquiry generation\",\"item\":\"https://mappedskills.com/lead-generation\"}]}"
+ ],
+ "words": 631,
+ "secWords": [
+  164,
+  59,
+  229,
+  95,
+  40,
+  44
+ ],
+ "forms": 0,
+ "css": [
+  "https://mappedskills.com/_next/static/css/b2c7963cfd6bdb10.css",
+  "https://mappedskills.com/_next/static/css/2cb79945dd55b59a.css",
+  "https://mappedskills.com/_next/static/css/59024a514905b958.css",
+  "https://mappedskills.com/_next/static/css/b785f4e3652532d5.css"
+ ]
+}

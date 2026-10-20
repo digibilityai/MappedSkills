@@ -1,246 +1,182 @@
 import Link from 'next/link';
-import { CONTACT_HREF, InlineLink, Mark } from '@/components/direction-c/primitives';
-import { LG_PLAIN as S } from './content';
+import { ActionPair, InlineLink } from '@/components/direction-c/primitives';
+import { LG } from './content';
+import { HeroJourney, NextJourney, PathJourney, ReachJourney } from './Journeys';
 import './lead-gen.css';
 import { Breadcrumb } from '../Breadcrumb';
 
 /**
- * C+ Lead generation (/lead-generation): the approved prototype's page body (proto/direction-c-plus 0a8b611, LeadGenH.tsx), unchanged in markup and
- * copy. Production changes only: the breadcrumb's Home link and the CTAs point at the live routes (`/`, CONTACT_HREF
- * and BOOKING_HREF) instead of prototype paths.
+ * C+ Lead generation (/lead-generation): the owner-approved G1 design (docs/lead-generation-redesign/g1; DEC-057).
+ * Seven sections: hero, the problem, what we do, how an enquiry reaches you, what we answer for, questions, close.
+ * Markup and classes follow the approved mockup; copy lives in ./content; the four journeys are client components
+ * (./Journeys) built on the /ai-seo sequencer at 2 seconds per step. Every section is complete without JavaScript.
+ * Operating model (OWNER REQUIREMENT): enquiries go directly to the client's own form, CRM or WhatsApp; MappedSkills does
+ * not manually review, approve or release individual client enquiries.
  */
 
-function Action() {
+function Hx({ h }: { h: { a: string; b: string } }) {
   return (
-    <div className="dc-actions">
-      <Link href={CONTACT_HREF} className="dc-btn dc-btn-primary">
-        <Mark />
-        {S.primary}
-      </Link>
-    </div>
-  );
-}
-
-function N({ n, className }: { n: number; className?: string }) {
-  return (
-    <span className={'lg-n' + (className ? ' ' + className : '')} aria-hidden="true">
-      {n}
-    </span>
+    <>
+      {h.a} <span className="b-named">{h.b}</span>
+    </>
   );
 }
 
 export function LeadGenBody() {
   return (
     <>
-      {/* 1 — hero (ivory): the claim + one enquiry, read closely */}
-      <section className="b-hero lg-hero" aria-labelledby="lg-h1">
-        <div className="px-wrap b-hero-g h-hero-g lg-hero-g">
-          <div>
-            <Breadcrumb trail={['What we do']} current={S.crumb} />
-            <p className="b-kicker">{S.kicker}</p>
+      {/* 1: hero (ground): the unchanged H1, an example enquiry and its three-step journey; the whole hero fits above the fold */}
+      <section className="b-hero lx-hero" aria-labelledby="lg-h1">
+        <div className="px-wrap b-hero-g lx-hero-g">
+          <div className="lx-hero-tx">
+            <Breadcrumb trail={['What we do']} current={LG.crumb} />
+            <p className="b-kicker">{LG.kicker}</p>
             <h1 id="lg-h1" className="b-h1">
-              {S.h1.a} <span className="b-named">{S.h1.b}</span>
+              <Hx h={LG.h1} />
             </h1>
-            <p className="b-lede">{S.lede}</p>
-            <p className="lg-side">{S.side}</p>
-            <Action />
+            <p className="b-lede">{LG.lede}</p>
+            <ActionPair primaryLabel={LG.close.primary} />
           </div>
-
-          <figure className="lg-fig">
-            <div className="lg-read">
-              <div className="lg-stack">
-                <div className="lg-ghost" aria-hidden="true" />
-                <div className="lg-card">
-                  <p className="lg-card-k">
-                    <span className="lg-label">{S.card.label}</span>
-                    <N n={1} />
-                  </p>
-                  <dl className="lg-fields">
-                    {S.card.fields.map((f) => (
-                      <div key={f.f} className={(f.long ? 'is-long' : '') + (f.optional ? ' is-opt' : '') || undefined}>
-                        <dt>{f.f}</dt>
-                        <dd>
-                          <span className="lg-bar" aria-hidden="true" />
-                          <span className="px-sr">blank</span>
-                          <N n={f.n} />
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-                  <p className="lg-stamp">
-                    <N n={4} />
-                    <span>{S.card.stamp}</span>
-                  </p>
-                </div>
-                <p className="lg-hand">
-                  <N n={5} />
-                  <span className="lg-hand-t">{S.card.handoff}</span>
-                </p>
-              </div>
-              <ol className="lg-notes" aria-label={S.card.notesLabel}>
-                {S.card.notes.map((x) => (
-                  <li key={x.n}>
-                    <N n={x.n} />
-                    <span>
-                      <b>{x.t}</b> <span className="lg-notes-d">{x.d}</span>
-                    </span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-            <figcaption className="px-cap">{S.card.cap}</figcaption>
-          </figure>
+          <HeroJourney />
         </div>
       </section>
 
-      {/* 2 — the situation (ink): two inboxes, two different problems */}
-      <section className="b-sec b-ink lg-sit" aria-labelledby="lg-h-sit">
+      {/* 2: the problem (ink): two inboxes, static */}
+      <section className="b-sec b-ink lx-prob" aria-labelledby="lg-h-prob">
         <div className="px-wrap">
-          <p className="b-kicker">{S.sitKicker}</p>
-          <h2 id="lg-h-sit" className="b-h2">
-            {S.sitH.a} <span className="b-named">{S.sitH.b}</span>
+          <p className="b-kicker">{LG.probKicker}</p>
+          <h2 id="lg-h-prob" className="b-h2">
+            <Hx h={LG.probH} />
           </h2>
-          <div className="lg-pair" data-rv="">
-            <div className="lg-box lg-few" data-rv-i="">
-              <h3 className="lg-box-h">{S.few.k}</h3>
-              <div className="lg-tray" aria-hidden="true">
-                <i />
-                <i />
-                <i />
+          <div className="lx-pair">
+            <div className="lx-tile lx-tile-cream lx-box">
+              <p className="lx-tl">{LG.few.k}</p>
+              <div className="lx-inbox" aria-hidden="true">
+                <p className="lx-inbox-h">{LG.few.inbox}</p>
+                <i className="lx-row lx-row-real">
+                  <b />
+                  {LG.few.one}
+                </i>
+                <i className="lx-row lx-row-empty" />
+                <i className="lx-row lx-row-empty" />
+                <i className="lx-row lx-row-empty" />
               </div>
-              <p className="lg-box-t">{S.few.t}</p>
+              <h3 className="lx-box-t">{LG.few.t}</h3>
+              <p className="lx-box-d">{LG.few.d}</p>
             </div>
-            <div className="lg-box lg-wrong" data-rv-i="">
-              <h3 className="lg-box-h">{S.wrong.k}</h3>
-              <ul className="lg-pile" aria-label="What arrives instead">
-                {S.wrong.tags.map((t) => (
+            <div className="lx-tile lx-tile-ink lx-box">
+              <p className="lx-tl">{LG.wrong.k}</p>
+              <ul className="lx-pile" aria-label={LG.wrong.tagsLabel}>
+                {LG.wrong.tags.map((t) => (
                   <li key={t}>{t}</li>
                 ))}
               </ul>
-              <p className="lg-box-t">{S.wrong.t}</p>
+              <h3 className="lx-box-t">{LG.wrong.t}</h3>
+              <p className="lx-box-d">{LG.wrong.d}</p>
             </div>
           </div>
-          <p className="px-cap px-cap-ink">{S.sitCap}</p>
-          <p className="lg-line">{S.sitLine}</p>
+          <p className="px-cap px-cap-ink lx-cap">{LG.probCap}</p>
+          <p className="lx-verdict">
+            {LG.probLine.a} <span>{LG.probLine.b}</span>
+          </p>
         </div>
       </section>
 
-      {/* 3 — the standard (paper): five steps, the rule, where each enquiry stands, criteria per campaign, no calls */}
-      <section className="b-sec b-paper lg-def" aria-labelledby="lg-h-def">
+      {/* 3: what we do (paper): one path, four stops */}
+      <section className="b-sec b-paper lx-do" aria-labelledby="lg-h-do">
         <div className="px-wrap">
-          <p className="b-kicker">{S.defKicker}</p>
-          <h2 id="lg-h-def" className="b-h2">
-            {S.defH}
+          <p className="b-kicker">{LG.doKicker}</p>
+          <h2 id="lg-h-do" className="b-h2">
+            <Hx h={LG.doH} />
           </h2>
-          <p className="b-lede lg-def-intro">{S.defIntro}</p>
-          <ol className="lg-checks" data-rv="">
-            {S.checks.map((c) => (
-              <li key={c.n} className="lg-check" data-rv-i="">
-                <N n={c.n} />
-                <h3 className="lg-check-t">{c.t}</h3>
-                <p className="lg-check-d">{c.d}</p>
-              </li>
+          <PathJourney />
+          <p className="px-cap lx-cap">{LG.doCap}</p>
+        </div>
+      </section>
+
+      {/* 4: how an enquiry reaches you (ground): the same three steps */}
+      <section className="b-sec lx-chk" aria-labelledby="lg-h-chk">
+        <div className="px-wrap">
+          <p className="b-kicker">{LG.reachKicker}</p>
+          <h2 id="lg-h-chk" className="b-h2">
+            <Hx h={LG.reachH} />
+          </h2>
+          <p className="b-lede lx-intro">{LG.reachIntro}</p>
+          <ReachJourney />
+          <div className="lx-facts">
+            {LG.facts.map((f) => (
+              <p key={f.b}>
+                <b>{f.b}</b> {f.t}
+              </p>
             ))}
-          </ol>
-
-          <p className="lg-rule">{S.rule}</p>
-
-          <div className="lg-status">
-            <h3 className="lg-label" id="lg-status-k">
-              {S.statusK}
-            </h3>
-            <ul className="lg-status-l" aria-labelledby="lg-status-k">
-              {S.statuses.map((x) => (
-                <li key={x.k} className={x.on ? 'is-on' : undefined}>
-                  <p className="lg-status-k">{x.k}</p>
-                  <p className="lg-status-t">{x.t}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="lg-split">
-            <div className="lg-half lg-half-e">
-              <p className="lg-label">{S.split.agreed.k}</p>
-              <p className="lg-half-t">{S.split.agreed.t}</p>
-              <p className="lg-half-d">{S.split.agreed.d}</p>
-            </div>
-            <div className="lg-half lg-half-b">
-              <p className="lg-label">{S.split.not.k}</p>
-              <p className="lg-half-t">{S.split.not.t}</p>
-              <p className="lg-half-d">{S.split.not.d}</p>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* 4 — the boundary (ink): where our accountability stops */}
-      <section className="b-sec b-ink lg-bd" aria-labelledby="lg-h-bd">
+      {/* 5: what we answer for (ink): static */}
+      <section className="b-sec b-ink lx-bd" aria-labelledby="lg-h-bd">
         <div className="px-wrap">
-          <p className="b-kicker">{S.bdKicker}</p>
+          <p className="b-kicker">{LG.bdKicker}</p>
           <h2 id="lg-h-bd" className="b-h2">
-            {S.bdH.a} <span className="b-named">{S.bdH.b}</span>
+            <Hx h={LG.bdH} />
           </h2>
-          <figure className="lg-rail">
-            <div className="lg-rail-ours">
-              <p className="lg-label">{S.rail.ours}</p>
-              <ol className="lg-rail-t">
-                {S.rail.oursT.map((t) => (
+          <figure className="lx-relay">
+            <div className="lx-tile lx-tile-cream lx-relay-ours">
+              <p className="lx-tl">{LG.relay.ours}</p>
+              <ol className="lx-relay-l">
+                {LG.relay.oursT.map((t) => (
                   <li key={t}>{t}</li>
                 ))}
               </ol>
             </div>
-            <div className="lg-rail-mark">
-              <span className="lg-rail-pin" aria-hidden="true" />
-              <p className="lg-rail-m">{S.rail.mark}</p>
+            <div className="lx-relay-mark">
+              <span className="lx-relay-pin" aria-hidden="true" />
+              <p>{LG.relay.mark}</p>
             </div>
-            <div className="lg-rail-yours">
-              <p className="lg-label">{S.rail.yours}</p>
-              <ol className="lg-rail-t">
-                {S.rail.yoursT.map((t) => (
+            <div className="lx-tile lx-tile-ink lx-dash lx-relay-yours">
+              <p className="lx-tl">{LG.relay.yours}</p>
+              <ol className="lx-relay-l">
+                {LG.relay.yoursT.map((t) => (
                   <li key={t}>{t}</li>
                 ))}
               </ol>
             </div>
           </figure>
-          <div className="lg-bd-g">
-            <ul className="lg-bd-rows">
-              {S.bdRows.map((r) => (
-                <li key={r.b}>
-                  <p className="lg-bd-b">{r.b}</p>
-                  <p className="lg-bd-t">{r.t}</p>
-                </li>
-              ))}
-            </ul>
-            <div className="lg-np">
-              <p className="lg-label" id="lg-np-k">
-                {S.notPromisedK}
+          <div className="lx-bd-g">
+            <div className="lx-np">
+              <p className="lx-tl" id="lx-np-k">
+                {LG.notPromisedK}
               </p>
-              <ul aria-labelledby="lg-np-k">
-                {S.notPromised.map((t) => (
+              <ul className="lx-np-l" aria-labelledby="lx-np-k">
+                {LG.notPromised.map((t) => (
                   <li key={t}>{t}</li>
                 ))}
               </ul>
-              <p className="b-tlink lg-link-ink">
-                <Link href={S.bdLink.href}>{S.bdLink.label} →</Link>
+              <p className="lx-np-why">{LG.notPromisedWhy}</p>
+            </div>
+            <div className="lx-tile lx-tile-cream lx-get">
+              <p className="lx-tl">{LG.get.k}</p>
+              <p className="lx-get-t">{LG.get.t}</p>
+              <p className="b-tlink lx-get-a">
+                <Link href={LG.bdLink.href}>{LG.bdLink.label} →</Link>
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 5 — questions (paper): native disclosures, closed on load */}
+      {/* 6: questions (paper): native disclosures, closed on load */}
       <section className="b-sec b-paper lg-q" aria-labelledby="lg-h-qs">
         <div className="px-wrap lg-q-g">
           <div>
-            <p className="b-kicker">{S.qKicker}</p>
+            <p className="b-kicker">{LG.qKicker}</p>
             <h2 id="lg-h-qs" className="b-h2">
-              {S.qH}
+              {LG.qH}
             </h2>
           </div>
           <div>
             <ul className="fq-list">
-              {S.questions.map((qa) => (
+              {LG.questions.map((qa) => (
                 <li key={qa.q}>
                   <details className="fq-d">
                     <summary>
@@ -255,8 +191,8 @@ export function LeadGenBody() {
               ))}
             </ul>
             <p className="lg-related">
-              {S.related.a}{' '}
-              {S.related.links.map((l, i) => (
+              {LG.related.a}{' '}
+              {LG.related.links.map((l, i) => (
                 <span key={l.href}>
                   {i ? ' · ' : ''}
                   <InlineLink href={l.href}>{l.label}</InlineLink>
@@ -267,19 +203,26 @@ export function LeadGenBody() {
         </div>
       </section>
 
-      {/* close: the shared close's markup and classes; one CTA */}
-      <section className="b-close" aria-labelledby="lg-h-close">
-        <div className="px-wrap b-close-in">
-          <div>
-            <p className="b-kicker lg-close-k">{S.close.label}</p>
-            <h2 id="lg-h-close" className="b-h2">
-              {S.close.h}
-            </h2>
-            <p className="b-lede">{S.close.body}</p>
+      {/* 7: close (tangerine): the shared close's classes, two CTAs, and what happens next */}
+      <section className="b-close lx-close" aria-labelledby="lg-h-close">
+        <div className="px-wrap">
+          <div className="b-close-in">
+            <div>
+              <p className="b-kicker lg-close-k">{LG.close.kicker}</p>
+              <h2 id="lg-h-close" className="b-h2">
+                {LG.close.h.a} <span className="lx-close-2">{LG.close.h.b}</span>
+              </h2>
+              <p className="b-lede">{LG.close.body}</p>
+            </div>
+            <ActionPair primaryLabel={LG.close.primary} />
           </div>
-          <Action />
+          <h3 className="lx-next-k" id="lx-next-k">
+            {LG.close.nextK}
+          </h3>
+          <NextJourney />
         </div>
       </section>
     </>
   );
 }
+

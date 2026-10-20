@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><title>AI Search R3 Review</title>
+<style>
+:root{--ink:#131318;--paper:#fffdf8;--cream:#f6f1ea;--tang:#c43f00;--dim:#55555d;--line:#d9d2c7;--ok:#17653a}
+@media (prefers-color-scheme:dark){:root{--ink:#f4efe7;--paper:#131318;--cream:#1b1b22;--tang:#ff6a2b;--dim:#b4b0a8;--line:#3a3a44;--ok:#6fd49b}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:32px 20px 80px}
+h1{font-size:2.2rem;line-height:1.1;margin:.2em 0}h2{font-size:1.6rem;line-height:1.2;margin:2.4em 0 .5em;padding-top:.6em;border-top:3px solid var(--ink)}h3{font-size:1.2rem;margin:1.6em 0 .4em}h4{margin:1.4em 0 .3em}
+p,li{max-width:74ch}a{color:var(--tang)}code{background:var(--cream);padding:1px 5px;font-size:.9em}
+.note{background:var(--cream);border-left:5px solid var(--tang);padding:12px 16px;margin:16px 0}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:2px solid var(--ink);padding:1px 7px;margin-right:6px}
+.tw{overflow-x:auto;margin:12px 0}table{border-collapse:collapse;width:100%;font-size:.92rem}th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}th{background:var(--cream)}
+figure{margin:0}img{display:block;max-width:100%;height:auto;border:2px solid var(--ink)}figcaption{font-size:.82rem;color:var(--dim);margin-top:4px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}.pair-m{grid-template-columns:repeat(2,minmax(0,300px))}
+.strip{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,1fr);gap:12px;overflow-x:auto;margin:12px 0;padding-bottom:8px}
+.strip-m{grid-auto-columns:minmax(150px,200px)}
+.fold{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}.kpi div{border:3px solid var(--ink);padding:12px}.kpi b{display:block;font-size:1.5rem}
+.btn{display:inline-block;background:var(--ink);color:var(--paper);padding:10px 16px;text-decoration:none;font-weight:700;margin:4px 8px 4px 0}
+video{width:100%;max-width:1000px;border:2px solid var(--ink)}
+@media(max-width:760px){.pair,.pair-m,.fold{grid-template-columns:1fr}h1{font-size:1.7rem}}
+</style></head><body><main>
+<p><span class="tag">Proposal</span><span class="tag">Not approved</span><span class="tag">Design only</span></p>
+<h1>AI Search page: R3 visual revision</h1>
+<p>Review package for <code>/ai-seo</code>, revising the implemented page in PR #14 (commit <code>6e7a65e</code>) after the owner's Chrome review. Nothing here is production code. PR #14 was not modified, pushed, merged or deployed.</p>
+<p><a class="btn" href="mockup/index.html">Open the interactive R3 mockup</a><a class="btn" href="#video">Watch the animation recording</a><a class="btn" href="#decisions">Decisions needing approval</a></p>
+<div class="note"><b>How to view:</b> open <code>mockup/index.html</code> in a browser and scroll. Each journey starts when you reach it and advances every two seconds. Click a number to take control. Add <code>?motion=reduce</code> to see the static state, <code>?step=3</code> to freeze every sequence on step 3, <code>?banner=0</code> to hide the consent banner. The mockup's site menu and footer links point at the live site root and do not work offline.</div>
+
+<h2>1. Owner concerns and the response</h2>
+<div class="tw"><table><thead><tr><th>Concern</th><th>What R3 does</th></tr></thead><tbody>
+<tr><td>A. "0 of 28" makes the agency look unable to help itself</td><td>The self-test no longer leads any section. A new industry story ("Your customers are asking AI") takes its place using four recognisable industries and illustrative questions, with no statistics. The complete dated record stays on the page, closed, near the foot (decision AX-R3-D03).</td></tr>
+<tr><td>B. Five-step journey: remove the controls</td><td>Design and copy kept. Pause, Play and Replay are gone. It starts when seen, advances every two seconds, plays once and ends with step 5 highlighted. Each number is a button; choosing one stops the sequence and shows that step.</td></tr>
+<tr><td>C. Reporting is bland and defensive</td><td>Replaced by Ask, Compare, Track, advancing every two seconds. The qualification is one line: "We show what we found and what changed. AI answers can vary."</td></tr>
+<tr><td>D. "Worth doing now, or later?" confuses and discourages</td><td>Removed. Replaced by one illustrative scenario: a buyer's question, two fictional businesses (one clearly described, one hard to find), then "Where does your business stand?" and the MappedSkills offer.</td></tr>
+<tr><td>Whole-page continuity</td><td>Reviewed as one story. One structural change is proposed: the "where answers come from" diagram is merged into the scenario (AX-R3-D08).</td></tr>
+</tbody></table></div>
+
+<h2>2. Proposed storytelling sequence</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Section</th><th>Customer question it answers</th><th>Status</th></tr></thead><tbody>
+<tr><td>1</td><td>Hero: "When buyers ask AI, is your business in the answer?"</td><td>What is this about?</td><td>Unchanged</td></tr>
+<tr><td>2</td><td>"Buyers used to get a list of links. Now they get a shortlist."</td><td>Why does it matter?</td><td>Unchanged</td></tr>
+<tr><td>3</td><td><b>Your customers are asking AI</b> (four industries)</td><td>Is this about my kind of business?</td><td>New</td></tr>
+<tr><td>4</td><td><b>The question is already being asked. Will your business be considered?</b></td><td>What might I be missing? Why does the information about me matter?</td><td>New (replaces suitability and sources diagram)</td></tr>
+<tr><td>5</td><td>Five steps. Most of them off your website.</td><td>What would MappedSkills actually do?</td><td>Retained, interaction changed</td></tr>
+<tr><td>6</td><td><b>See where your business stands. See what changes.</b></td><td>How would I know whether anything changed?</td><td>New</td></tr>
+<tr><td>7</td><td>The record (closed disclosure)</td><td>Why should I trust this agency?</td><td>Relocated, quieter</td></tr>
+<tr><td>8</td><td>Questions</td><td>Objections</td><td>Unchanged</td></tr>
+<tr><td>9</td><td>"Wondering where you stand in AI answers?"</td><td>What do I do next?</td><td>Unchanged</td></tr>
+</tbody></table></div>
+<p>Story in one line: why AI Search matters (2, 3), what could be happening to my business (4), what MappedSkills does (5), how progress is checked (6), why trust us and enquire (7 to 9).</p>
+<div class="kpi"><div><b>{{PW}} words</b>proposed, 1440 wide (current {{BW}})</div><div><b>{{PH}} px</b>proposed page height at 1440 (current {{BH}})</div><div><b>{{PHM}} px</b>proposed at 375 (current {{BHM}})</div><div><b>610 px</b>hero bottom at 1440 × 780, unchanged, above the consent banner at 653</div></div>
+<p>Measured in Chromium with reduced motion; raw numbers in <code>screenshots/r3-measurements.json</code>. The page is slightly taller (the two new visual stories) with fewer words. If length matters, step 2 of the scenario can go (AX-R3-D09).</p>
+
+<h2>3. Full-page and hero previews</h2>
+<h3>Full page, desktop (1440)</h3>
+<div class="pair"><figure><a href="screenshots/baseline/baseline-1440-full.png"><img src="screenshots/baseline/baseline-1440-full.png" alt="Current page, full, desktop" loading="lazy"></a><figcaption>Current, PR #14 (commit 6e7a65e)</figcaption></figure><figure><a href="screenshots/proposed/proposed-1440-full.png"><img src="screenshots/proposed/proposed-1440-full.png" alt="Proposed page, full, desktop" loading="lazy"></a><figcaption>Proposed R3</figcaption></figure></div>
+<h3>Full page, mobile (375)</h3>
+<div class="pair pair-m"><figure><a href="screenshots/baseline/baseline-375-full.png"><img src="screenshots/baseline/baseline-375-full.png" alt="Current page, full, mobile" loading="lazy"></a><figcaption>Current</figcaption></figure><figure><a href="screenshots/proposed/proposed-375-full.png"><img src="screenshots/proposed/proposed-375-full.png" alt="Proposed page, full, mobile" loading="lazy"></a><figcaption>Proposed R3</figcaption></figure></div>
+<h3>Hero (unchanged), first visit with the consent banner open</h3>
+<div class="fold"><figure><img src="screenshots/proposed/proposed-1440x780-fold.png" alt="Hero at 1440 by 780" loading="lazy"><figcaption>1440 × 780</figcaption></figure><figure><img src="screenshots/proposed/proposed-1280x720-fold.png" alt="Hero at 1280 by 720" loading="lazy"><figcaption>1280 × 720</figcaption></figure><figure><img src="screenshots/proposed/proposed-375x812-fold.png" alt="Hero at 375 by 812" loading="lazy"><figcaption>375 × 812</figcaption></figure></div>
+
+<h2>4. The redesigned sections</h2>
+<h3>A. Industry story: replaces the self-test as the evidence section</h3>
+<p><b>Customer should understand:</b> people like my customers already ask AI for suppliers, brands and projects, and AI answers with a few names. <b>Visual:</b> four beats per industry (question, answer, a few names, "And you?"). The last tile is the only ink tile and carries the orange dashed slot. <b>Why clearer:</b> the visitor sees their own kind of question, not our test. <b>Leads to:</b> "Will your business be considered?" in section 4.</p>
+<p>Behaviour: plays once for Manufacturing (2 s per beat). Choosing an industry stops it and shows that industry complete. Without JavaScript all four industries are shown.</p>
+{{PAIR_IND}}
+<h4>Storyboard, desktop (Manufacturing, beats 1 to 4)</h4>{{SB_INDUSTRY}}
+<h4>The other three industries (final state)</h4>
+<div class="strip"><figure><img src="screenshots/storyboard/industry-desktop-jewellery.png" alt="Jewellery" loading="lazy"><figcaption>Jewellery</figcaption></figure><figure><img src="screenshots/storyboard/industry-desktop-d2c.png" alt="D2C" loading="lazy"><figcaption>D2C brands</figcaption></figure><figure><img src="screenshots/storyboard/industry-desktop-real-estate.png" alt="Real estate" loading="lazy"><figcaption>Real estate</figcaption></figure></div>
+<h4>Storyboard, mobile</h4><div class="strip strip-m">{{SB_INDUSTRY_M}}</div>
+
+<h3>D. Scenario: replaces "Worth doing now, or later?"</h3>
+<p><b>Customer should understand:</b> AI builds its answer from what it can find, so clear information about a business matters. <b>Visual:</b> a vertical four-step story: question, AI reads what it can find, Business A (ink tile, filled squares) beside Business B (cream tile, dashed squares for missing information), then an ink panel: "Where does your business stand?" with the offer and the button. <b>Why clearer:</b> nobody is asked to classify themselves, and nothing says the service will not help. <b>Different from section 3:</b> section 3 shows the question being asked; this shows why information about the business matters. <b>Leads to:</b> "what would you actually do?" in the five steps.</p>
+<p>Labelled as illustrative; two fictional businesses; no claim that A will appear or B will be excluded.</p>
+{{PAIR_FIT}}
+<h4>Storyboard, desktop</h4>{{SB_SCENARIO}}<h4>Storyboard, mobile</h4><div class="strip strip-m">{{SB_SCENARIO_M}}</div>
+
+<h3>B. Five steps: design retained, interaction changed</h3>
+<p><b>Customer should understand:</b> the work, in order, and that most of it happens off their website. <b>Change:</b> controls removed; the active step is shown by the number turning orange, the heading turning orange, and the connecting line filling to it. Finished state keeps step 5 active. The old permanent orange on step 4 is dropped so there is one highlight (AX-R3-D05).</p>
+{{PAIR_JR}}
+<h4>Storyboard, desktop</h4>{{SB_JOURNEY}}<h4>Storyboard, mobile</h4><div class="strip strip-m">{{SB_JOURNEY_M}}</div>
+
+<h3>C. Reporting: replaces "What we can check. What nobody can promise."</h3>
+<p><b>Customer should understand:</b> I will be able to see where I stand and what changes. <b>Visual:</b> three steps, Ask, Compare, Track, each with a small picture. The last picture is two plain rows of words ("Not named" then "Named", "Not named" then "Not named"), which shows honestly that some things do not change. No scores, no numbers. <b>Leads to:</b> the record, then questions and the enquiry.</p>
+{{PAIR_RP}}
+<h4>Storyboard, desktop</h4>{{SB_REPORTING}}<h4>Storyboard, mobile</h4><div class="strip strip-m">{{SB_REPORTING_M}}</div>
+
+<h3>Relocated self-test ("The record")</h3>
+<div class="pair"><figure><img src="screenshots/sections/proposed-record-1440.png" alt="The record, closed" loading="lazy"><figcaption>Closed on load, as a native disclosure (keyboard and no-JavaScript safe)</figcaption></figure><figure><img src="screenshots/sections/proposed-record-375.png" alt="The record, mobile" loading="lazy"><figcaption>Mobile</figcaption></figure></div>
+
+<h2 id="video">5. Animation recording</h2>
+<video controls muted playsinline preload="metadata" src="recordings/r3-sequences-1440.webm"></video>
+<p>Real recording of the mockup at 1440 × 900: industry, scenario, journey (about 10 seconds), reporting, then a manual click on step 3 that stops the sequence. Playwright test results: <code>tools/test.cjs</code>.</p>
+<div class="tw"><table><thead><tr><th>Check</th><th>Result (measured)</th></tr></thead><tbody>
+<tr><td>Journey step changes</td><td>1.0 s, 3.0 s, 5.1 s, 7.0 s, 9.0 s after scrolling into view (2 s apart); ends on step 5 highlighted; plays once</td></tr>
+<tr><td>Reporting / scenario / industry</td><td>Same 2 s cadence; end on step 3 / 4 / 4; no loop</td></tr>
+<tr><td>Pause, Play, Replay</td><td>No such buttons anywhere on the page</td></tr>
+<tr><td>Manual selection</td><td>Clicking step 4 highlights it at once; after 4.5 s still step 4. Clicking mid-run stops the run.</td></tr>
+<tr><td>Keyboard</td><td>Tab then Enter selects a step; focus outline 3 px; accessible name "Step 3: Get your facts straight"</td></tr>
+<tr><td>Reduced motion</td><td>Nothing moves; all content visible; steps still selectable</td></tr>
+<tr><td>No JavaScript</td><td>All 28 sequence items visible; all four industries shown</td></tr>
+<tr><td>Layout</td><td>No horizontal overflow at 1440, 1280, 375; no long dashes in page text</td></tr>
+</tbody></table></div>
+<p><b>Not verified:</b> VoiceOver/TalkBack, Safari and Firefox, and a real phone. Those remain outstanding (DEC-050 SR-1 to SR-5, E1).</p>
+
+<h2>6. Storytelling continuity review</h2>
+<div class="tw"><table><thead><tr><th>Question</th><th>Answer</th></tr></thead><tbody>
+<tr><td>Does each section add a new idea?</td><td>Yes: shortlist (2), my industry (3), why my information matters (4), the work (5), how I check progress (6), proof of method (7).</td></tr>
+<tr><td>Any repetition?</td><td>Sections 3 and 4 both involve a buyer question. They differ: 3 shows that people ask, 4 shows what AI finds about a business. The old "where answers come from" diagram would have been a third restatement, so it is merged into 4 (AX-R3-D08). Hero and section 6 both use a buyer question bubble, deliberately, as one visual grammar.</td></tr>
+<tr><td>Problem, opportunity, approach, measurement?</td><td>Yes, in that order.</td></tr>
+<tr><td>Unnecessary anxiety?</td><td>The zero result, the "not worth betting everything" sizing note and the "start elsewhere" caveats no longer lead. Section 2 still says "If you're not one of them, the buyer may never hear of you." That is the hero-approved stake and is kept.</td></tr>
+<tr><td>Technical concepts customers do not need?</td><td>Crawler names stay in a closed "For your web team" panel only.</td></tr>
+<tr><td>Is the visitor encouraged to enquire?</td><td>A button now sits inside the scenario, plus the unchanged close.</td></tr>
+<tr><td>Does every visual contribute?</td><td>Yes. The only candidate to cut is the example tracking table (AX-R3-D12).</td></tr>
+<tr><td>Any wall of text?</td><td>No section has a paragraph over about 25 words. The closed record is long by design.</td></tr>
+</tbody></table></div>
+
+<h2>7. Industry infographic and data-source assessment</h2>
+<p><span class="tag">Verified fact</span>The homepage AI visibility chart (<code>components/cplus/home/AiVisibilityChart.tsx</code>, data in <code>ai-visibility-data.ts</code>, commit <code>d2f517b</code>) is <b>third-party research, not MappedSkills research</b>. Source: Reckona AI, "AI visibility by industry: our prompt-panel results across 10 Indian sectors", page last updated 14 October 2026. I re-read the source page on 16 October 2026 and its sector counts match the code: Manufacturing 18 of 25 not mentioned, Real estate 14 of 20, D2C 16 of 25, all sectors 141 of 210. It has <b>no jewellery sector</b>.</p>
+<div class="tw"><table><thead><tr><th>Item</th><th>Finding</th></tr></thead><tbody>
+<tr><td>Sample</td><td>210 brands, 15 to 25 per sector, chosen by Reckona AI. Not random. The code states "selected, well-known brands: not an estimate for all Indian businesses."</td></tr>
+<tr><td>Period and systems</td><td>July and August 2026; ChatGPT, Gemini Advanced and Perplexity</td></tr>
+<tr><td>Metric</td><td>"Not mentioned": brand absent, unprompted, from category answers in Reckona's own prompt panel. A snapshot, prompts designed by Reckona.</td></tr>
+<tr><td>Decision record</td><td>I found no entry in <code>docs/</code> mentioning Reckona or approving the chart. It is shipped code, not an approved decision. <b>UNKNOWN</b> whether the owner has approved its use as evidence.</td></tr>
+<tr><td>Use in R3</td><td>None. The mockup contains no industry percentages. The industry examples are labelled illustrative. Optional sourced line: AX-R3-D02b, not recommended until the owner approves the source and an evidence record exists.</td></tr>
+</tbody></table></div>
+
+<h2>8. Governance and factual checks</h2>
+<h3>DEC-015 (Creative direction, "The Record")</h3>
+<ul><li>"Evidence is never removed to make the site feel commercial": the full dated record stays on the page in a native disclosure, with the table, the not-tested note, the four separate results, the directory finding and the limits. The text is unchanged in substance. Nothing is deleted or reworded to soften it.</li>
+<li>"Apparatus may be subordinate in prominence but never downgraded in typographic quality": the record uses the page's own type and disclosure styling, with a normal H2. It is quieter only by position and by being closed.</li>
+<li>"Measured zero is visually distinct from not-testable" is preserved inside the record (0 appeared; Claude and Grok shown as not tested).</li>
+<li>"Commercial meaning leads every screen": R3 moves toward this.</li>
+<li>"No fake dashboards" and "no proof container without proof": the example tracking table and the Business A/B cards are labelled illustrations, in words, with no numbers or scores. <b>Interpretation needing approval</b> (AX-R3-D12).</li>
+<li>"Dashed always means a genuine epistemic gap": dashed is used for "You?" (unknown) and for Business B's missing information. The second is a fictional gap, so this is an interpretation (AX-R3-D12).</li>
+<li><b>Approval needed:</b> the relocation of the self-test from a headline section to a closed disclosure is a change of prominence the owner must approve (AX-R3-D03).</li></ul>
+<h3>Disclosures that must remain</h3>
+<ul><li>All "illustration, not real data" labels (hero, industry, scenario, reporting).</li><li>The full record and its limits ("What this does not show", method, crawler check, untested tools).</li><li>"AI answers can vary" beside the reporting story, and FAQ Q3 ("Nobody can honestly promise that").</li></ul>
+<h3>Claims needing evidence or owner confirmation</h3>
+<div class="tw"><table><thead><tr><th>Claim</th><th>Status</th></tr></thead><tbody>
+<tr><td>"It reads what it can find about each business: websites, directories, reviews, lists"</td><td>Softer version of the already approved "answers lean on what others say about you". Support: the 31 August 2026 record (directories cited in at least 10 of 28) is one round only. <b>WORKING HYPOTHESIS</b> for the general mechanism.</td></tr>
+<tr><td>"Clear information gives AI more to work with, and no answer is guaranteed"</td><td>Reasonable and hedged; <b>WORKING HYPOTHESIS</b>, no outcome implied.</td></tr>
+<tr><td>Step 4 "The biggest part of the work"</td><td>Carried over from approved R2 copy. Its only support is the self-test finding, now inside the record. Keep, soften or reword (AX-R3-D05).</td></tr>
+<tr><td>"We repeat the same checks and show you what moved"</td><td>Consistent with the approved step 5 ("Report what changed, and what didn't"). No frequency, score or integration is stated (DEC-051 limits).</td></tr>
+<tr><td>Industry examples (manufacturing, jewellery, D2C, real estate)</td><td>Owner-named. Illustrative only. No claim that AI answers these questions this way, or about any real business.</td></tr>
+</tbody></table></div>
+<p>Not claimed anywhere: rankings, scores, recommendations, enquiries, search volumes, AI traffic, client results, or industry percentages.</p>
+<h3>Service positioning</h3><p>No change. The page remains AI search under the approved taxonomy (DEC-005, <code>SERVICE_ARCHITECTURE.md</code>). The scenario uses a supplier example but does not add or imply website building or any excluded service.</p>
+<h3>SEO implications (for owner review, none implemented)</h3>
+<ul><li>URL, H1, title, description, canonical and structured data are unchanged. The metadata description still says "publish the run counts", which remains true through the record (AX-R3-D13).</li>
+<li>Three H2s disappear ("AI answers lean on what others say about you", "What we can check. What nobody can promise.", "Worth doing now, or later?"); new H2s are added. Heading hierarchy stays one H1, no skipped levels.</li>
+<li>Body links to <code>/seo</code> and <code>/conversion-optimization</code> inside the suitability section are lost. <code>/seo</code> and <code>/services</code> remain in the FAQ "Related" line; <code>/conversion-optimization</code> would have no in-body link from this page (AX-R3-D07).</li>
+<li>The record remains in the HTML (closed disclosure), so its text is still present for crawlers.</li>
+<li>FAQ and its FAQPage data are untouched.</li>
+<li>The button label "Ask us how your business appears" is new link text (AX-R3-D11).</li>
+<li>Existing production tests assert the old headings and the "0 of 28" headline; they must be rewritten at implementation (AX-R3-D14).</li></ul>
+
+<h2>9. Exact revised copy</h2>
+{{COPY}}
+
+<h2 id="decisions">10. Decision register (none approved)</h2>
+{{DEC}}
+
+<h2>11. Boundaries confirmed</h2>
+<ul><li>PR #14 branch <code>feat/ai-search-redesign</code> was not modified, pushed, merged or deployed. No commit was made and no new branch or PR was opened.</li>
+<li>The baseline (commit <code>6e7a65e</code>, BUILD_ID <code>2zxd6fZZB-kQUX5lkkBxA</code>) is still served at <code>http://127.0.0.1:3217/ai-seo</code> for comparison.</li>
+<li>The R3 prototype is untracked design files under <code>docs/ai-search-redesign/r3/</code>. No production code changed.</li>
+<li>Stopped at the approval gate. Production implementation waits for owner approval of the revised direction.</li></ul>
+</main></body></html>

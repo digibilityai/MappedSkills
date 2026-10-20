@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { EVENTS, pageTypeOf, safePagePath, track, trackOnce } from '@/lib/analytics';
 import { attributionForAnalytics, attributionForSubmission } from '@/lib/attribution';
 import { markEnquiryConfirmed } from '@/lib/enquiry-confirmation';
+import { Icon } from '@/components/cplus/Icons';
 
 /**
  * SESSION 31 — PHASE H1 — the enquiry form.
@@ -124,6 +125,39 @@ const FIELD_GROUPS = { you: 'About you', what: 'What’s happening', optional: '
 const REPLY_LINE = 'We’ll reply by email or WhatsApp.';
 
 /**
+ * DEC-062 — the `/schedule-call` "Request a call" variant (G1 approved 2026-10-18). There is no online scheduling
+ * system: the visitor sends a short request and the team gets in touch to agree a time. Four fields, three required
+ * (name, email, phone: D1) and an optional message; no company, website or marketing consent. Same endpoint, same
+ * protection, same conversion path; the server applies the same rules when the body says `requestType: 'call'`.
+ * Nothing here may imply that an appointment is booked.
+ */
+export type ContactFormVariant = 'enquiry' | 'call';
+
+const CALL_REQUIRED_FIELDS = ['name', 'email', 'phone'] as const;
+
+const CALL_LABELS: Partial<Record<FieldName, string>> = {
+  name: 'Full name',
+  email: 'Email address',
+  phone: 'Phone / WhatsApp number',
+  message: 'What would you like to discuss?',
+};
+
+/** Empty means no hint is rendered for that field. */
+const CALL_HINTS: Partial<Record<FieldName, string>> = {
+  phone: 'We’ll use this to arrange the call. Include your country code.',
+  message: 'A line or two is plenty.',
+};
+
+/** Word-for-word the server's call-request messages in `lib/enquiry-validation.ts`. */
+const CALL_REQUIRED_MESSAGES: Record<(typeof CALL_REQUIRED_FIELDS)[number], string> = {
+  name: 'Enter the name we should use when we get in touch.',
+  email: 'Enter an email address so we can get in touch.',
+  phone: 'Enter a number we can reach you on, including the country code.',
+};
+
+const CALL_NOTE = 'This sends a request, not a booking. We’ll contact you by phone, WhatsApp or email to agree a time.';
+
+/**
  * Word-for-word the server's messages in `lib/enquiry-validation.ts`. Kept
  * identical on purpose: a visitor who fails the same check twice — once locally
  * and once on the server — must not be shown two different explanations of the
@@ -207,6 +241,11 @@ const FORM_ERRORS: Record<string, string> = {
     'Something went wrong at our end and your enquiry was not saved. Nothing you typed has been lost — try again.',
 };
 
+/** The same failures for a call request: the same sentences, about a request rather than an enquiry. */
+const CALL_FORM_ERRORS: Record<string, string> = Object.fromEntries(
+  Object.entries(FORM_ERRORS).map(([code, text]) => [code, text.replace(/enquiry/g, 'request')])
+);
+
 /** `isHydrated` reads no external store; the server snapshot (false) is what makes the hydration pass differ. */
 const noSubscription = () => () => {};
 
@@ -214,7 +253,14 @@ const noSubscription = () => () => {};
  * `labelledBy`: the id of the visible heading that names this form (C+ `/contact`: its H1), so the form is exposed as a
  * named form region. Presentation only; nothing about submission depends on it.
  */
-export function ContactForm({ labelledBy }: { labelledBy?: string } = {}) {
+export function ContactForm({
+  labelledBy,
+  variant = 'enquiry',
+}: { labelledBy?: string; variant?: ContactFormVariant } = {}) {
+  const isCall = variant === 'call';
+  const formErrors = isCall ? CALL_FORM_ERRORS : FORM_ERRORS;
+  const labelOf = (id: FieldName) => (isCall ? (CALL_LABELS[id] ?? FIELD_LABELS[id]) : FIELD_LABELS[id]);
+  const hintOf = (id: FieldName) => (isCall ? (CALL_HINTS[id] ?? '') : FIELD_HINTS[id]);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -301,8 +347,8 @@ export function ContactForm({ labelledBy }: { labelledBy?: string } = {}) {
    * is the part of a location that carries identifiers.
    */
   function pageContext() {
-    const path = safePagePath(pathname ?? '/contact');
-    return { page_path: path, page_type: pageTypeOf(path), form_id: 'contact_enquiry' };
+    const path = safePagePath(pathname ?? (isCall ? '/schedule-call' : '/contact'));
+    return { page_path: path, page_type: pageTypeOf(path), form_id: isCall ? 'call_request' : 'contact_enquiry' };
   }
 
   function setValue<K extends keyof FormValues>(field: K, value: FormValues[K]) {
@@ -329,12 +375,18 @@ export function ContactForm({ labelledBy }: { labelledBy?: string } = {}) {
   function validateLocally(): Partial<Record<FieldName, string>> {
     const errors: Partial<Record<FieldName, string>> = {};
 
-    for (const field of REQUIRED_FIELDS) {
+    const required: readonly FieldName[] = isCall ? CALL_REQUIRED_FIELDS : REQUIRED_FIELDS;
+    const requiredMessages: Partial<Record<FieldName, string>> = isCall ? CALL_REQUIRED_MESSAGES : REQUIRED_MESSAGES;
+    for (const field of required) {
       if (!values[field].trim()) {
-        errors[field] = REQUIRED_MESSAGES[field];
+        errors[field] = requiredMessages[field];
       } else if (values[field].trim().length > MAX_LENGTHS[field]) {
         errors[field] = `Use ${MAX_LENGTHS[field]} characters or fewer.`;
       }
+    }
+
+    if (isCall && !errors.phone && (values.phone.match(/\d/g) ?? []).length < 6) {
+      errors.phone = CALL_REQUIRED_MESSAGES.phone;
     }
 
     if (!errors.email && values.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.email.trim())) {
@@ -423,6 +475,7 @@ export function ContactForm({ labelledBy }: { labelledBy?: string } = {}) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ...(isCall ? { requestType: 'call' } : {}),
           idempotencyKey,
           name: values.name,
           email: values.email,
@@ -452,7 +505,7 @@ export function ContactForm({ labelledBy }: { labelledBy?: string } = {}) {
         // to be ignored rather than sent as a second request.
         navigatedRef.current = true;
         // The one-time `/thank-you` confirmation signal: a timestamp only, and it cannot throw (see the module).
-        markEnquiryConfirmed();
+        markEnquiryConfirmed(variant);
 
         /*
          * ★ THE PRIMARY CONTACT CONVERSION — SESSION 32 / PHASE H2.
@@ -509,7 +562,7 @@ export function ContactForm({ labelledBy }: { labelledBy?: string } = {}) {
         setFormError(null);
         reportValidationErrors(payload.fieldErrors, () => 'server');
       } else {
-        setFormError(FORM_ERRORS[payload.error ?? 'unknown'] ?? FORM_ERRORS.unknown);
+        setFormError(formErrors[payload.error ?? 'unknown'] ?? formErrors.unknown);
         /*
          * A WHOLE-FORM FAILURE. NO ROW EXISTS AND NO CONVERSION IS EMITTED — the
          * conversion block above was not entered, and this is a sibling branch of
@@ -535,7 +588,7 @@ export function ContactForm({ labelledBy }: { labelledBy?: string } = {}) {
       // Thrown before a response existed: offline, DNS, a dropped connection.
       // Nothing reached the server, so nothing was saved, and that is what the
       // visitor is told. Every value they typed is still in state.
-      setFormError(FORM_ERRORS.network);
+      setFormError(formErrors.network);
       // Nothing reached the server, so nothing was saved and NO CONVERSION IS
       // EMITTED. This is the branch an offline visitor and a dropped connection
       // land in, and it is a diagnostic.
@@ -567,7 +620,8 @@ export function ContactForm({ labelledBy }: { labelledBy?: string } = {}) {
     opts: { required?: boolean; type?: string; autoComplete?: string; inputMode?: 'email' | 'tel' | 'url'; area?: boolean }
   ) {
     const error = fieldErrors[id];
-    const describedBy = [`${id}-hint`, error ? `${id}-error` : null].filter(Boolean).join(' ');
+    const hint = hintOf(id);
+    const describedBy = [hint ? `${id}-hint` : null, error ? `${id}-error` : null].filter(Boolean).join(' ') || undefined;
     const common = {
       id,
       name: id,
@@ -577,19 +631,21 @@ export function ContactForm({ labelledBy }: { labelledBy?: string } = {}) {
       'aria-invalid': Boolean(error),
       'aria-describedby': describedBy,
       disabled: isSubmitting,
-      className: 'ct-input' + (opts.area ? ' ct-area' : '') + (error ? ' is-invalid' : ''),
+      className: 'ct-input' + (opts.area ? (isCall ? ' ct-area ct-area-s' : ' ct-area') : '') + (error ? ' is-invalid' : ''),
     };
     return (
       <div className="ct-field">
         <label htmlFor={id} className="ct-label">
-          {FIELD_LABELS[id]}
+          {labelOf(id)}
           <span className="ct-opt"> ({opts.required ? 'required' : 'optional'})</span>
         </label>
-        <p id={`${id}-hint`} className="ct-hint">
-          {FIELD_HINTS[id]}
-        </p>
+        {hint ? (
+          <p id={`${id}-hint`} className="ct-hint">
+            {hint}
+          </p>
+        ) : null}
         {opts.area ? (
-          <textarea {...common} rows={6} onChange={(event) => setValue(id, event.target.value)} />
+          <textarea {...common} rows={isCall ? 3 : 6} onChange={(event) => setValue(id, event.target.value)} />
         ) : (
           <input
             {...common}
@@ -620,7 +676,12 @@ export function ContactForm({ labelledBy }: { labelledBy?: string } = {}) {
       <noscript>
         <p className="ct-summary ct-summary-p">
           This form needs JavaScript to send, and it is turned off in your browser. Nothing you type here can be sent.
-          You can still <Link href="/schedule-call">book a call</Link>.
+          {isCall ? null : (
+            <>
+              {' '}
+              You can still <Link href="/schedule-call">book a call</Link>.
+            </>
+          )}
         </p>
       </noscript>
       {/*
@@ -639,7 +700,7 @@ export function ContactForm({ labelledBy }: { labelledBy?: string } = {}) {
       >
         {hasSummary ? (
           <>
-            <p className="ct-summary-h">{formError ? 'Your enquiry was not sent.' : 'Check the form before sending.'}</p>
+            <p className="ct-summary-h">{formError ? (isCall ? 'Your request was not sent.' : 'Your enquiry was not sent.') : 'Check the form before sending.'}</p>
             {formError ? (
               <p className="ct-summary-p">{formError}</p>
             ) : (
@@ -647,7 +708,7 @@ export function ContactForm({ labelledBy }: { labelledBy?: string } = {}) {
                 {errorEntries.map((key) => (
                   <li key={key}>
                     <a href={`#${key}`}>
-                      {FIELD_LABELS[key]}: {fieldErrors[key]}
+                      {labelOf(key)}: {fieldErrors[key]}
                     </a>
                   </li>
                 ))}
@@ -682,63 +743,95 @@ export function ContactForm({ labelledBy }: { labelledBy?: string } = {}) {
         />
       </div>
 
-      <fieldset className="ct-group">
-        <legend className="ct-legend">{FIELD_GROUPS.you}</legend>
-        {field('name', { required: true, autoComplete: 'name' })}
-        {field('email', { required: true, type: 'email', autoComplete: 'email', inputMode: 'email' })}
-        {field('company', { required: true, autoComplete: 'organization' })}
-      </fieldset>
-      <fieldset className="ct-group">
-        <legend className="ct-legend">{FIELD_GROUPS.what}</legend>
-        {field('message', { required: true, area: true })}
-      </fieldset>
-      <fieldset className="ct-group">
-        <legend className="ct-legend">{FIELD_GROUPS.optional}</legend>
-        {field('phone', { type: 'tel', autoComplete: 'tel', inputMode: 'tel' })}
-        {field('website', { type: 'url', autoComplete: 'url', inputMode: 'url' })}
-        {/*
-          MARKETING CONSENT — separate, unticked, and never a condition of
-          submitting (`POST_SUBMISSION_AND_FOLLOWUP.md` §7). A native checkbox
-          rather than a scripted one, so it behaves correctly for every assistive
-          technology without depending on this component's own state machine. The
-          wrapping label gives it a target above 44px on touch.
-        */}
-        <label htmlFor="marketingConsent" className="ct-check">
-          <input
-            id="marketingConsent"
-            name="marketingConsent"
-            type="checkbox"
-            checked={values.marketingConsent}
-            onChange={(event) => setValue('marketingConsent', event.target.checked)}
-            disabled={isSubmitting}
-          />
-          <span>{MARKETING_CONSENT_LABEL}</span>
-        </label>
-      </fieldset>
+      {isCall ? (
+        <>
+          <div className="ct-call-fields">
+            {field('name', { required: true, autoComplete: 'name' })}
+            {field('email', { required: true, type: 'email', autoComplete: 'email', inputMode: 'email' })}
+            {field('phone', { required: true, type: 'tel', autoComplete: 'tel', inputMode: 'tel' })}
+            {field('message', { area: true })}
+          </div>
+          <div className="ct-send-w ct-send-w-call">
+            <p aria-live="polite" className="px-sr">
+              {isSubmitting ? 'Sending your request.' : ''}
+            </p>
+            <button type="submit" className="ct-send" disabled={isSubmitting || !isHydrated}>
+              {isSubmitting ? (
+                'Sending…'
+              ) : (
+                <>
+                  Request a call
+                  <Icon name="arrow" size={22} />
+                </>
+              )}
+            </button>
+            <p className="ct-call-note">{CALL_NOTE}</p>
+            <p className="ct-privacy">
+              We use these details only to arrange the call. <Link href="/privacy-policy">Privacy policy</Link>.
+            </p>
+          </div>
+        </>
+      ) : (
+        <>
+        <fieldset className="ct-group">
+          <legend className="ct-legend">{FIELD_GROUPS.you}</legend>
+          {field('name', { required: true, autoComplete: 'name' })}
+          {field('email', { required: true, type: 'email', autoComplete: 'email', inputMode: 'email' })}
+          {field('company', { required: true, autoComplete: 'organization' })}
+        </fieldset>
+        <fieldset className="ct-group">
+          <legend className="ct-legend">{FIELD_GROUPS.what}</legend>
+          {field('message', { required: true, area: true })}
+        </fieldset>
+        <fieldset className="ct-group">
+          <legend className="ct-legend">{FIELD_GROUPS.optional}</legend>
+          {field('phone', { type: 'tel', autoComplete: 'tel', inputMode: 'tel' })}
+          {field('website', { type: 'url', autoComplete: 'url', inputMode: 'url' })}
+          {/*
+            MARKETING CONSENT — separate, unticked, and never a condition of
+            submitting (`POST_SUBMISSION_AND_FOLLOWUP.md` §7). A native checkbox
+            rather than a scripted one, so it behaves correctly for every assistive
+            technology without depending on this component's own state machine. The
+            wrapping label gives it a target above 44px on touch.
+          */}
+          <label htmlFor="marketingConsent" className="ct-check">
+            <input
+              id="marketingConsent"
+              name="marketingConsent"
+              type="checkbox"
+              checked={values.marketingConsent}
+              onChange={(event) => setValue('marketingConsent', event.target.checked)}
+              disabled={isSubmitting}
+            />
+            <span>{MARKETING_CONSENT_LABEL}</span>
+          </label>
+        </fieldset>
 
-      <div className="ct-send-w">
-        <p className="ct-reply">{REPLY_LINE}</p>
-        {/*
-          PENDING STATE, announced rather than only shown. `aria-live="polite"`
-          means a screen-reader user is told the form is sending instead of
-          meeting a silently disabled button. Success is not announced here —
-          success is a navigation to `/thank-you`, which announces itself.
-        */}
-        <p aria-live="polite" className="px-sr">
-          {isSubmitting ? 'Sending your enquiry.' : ''}
-        </p>
-        <button type="submit" className="ct-send" disabled={isSubmitting || !isHydrated}>
-          {isSubmitting ? 'Sending…' : 'Send this'}
-        </button>
-        {/*
-          Privacy statement adjacent to the submit control, per
-          `FORM_AND_BOOKING_SPEC.md` §2. It states the PURPOSE of the processing
-          and nothing more. In particular it makes no security claim.
-        */}
-        <p className="ct-privacy">
-          We use what you send here to reply to you. <Link href="/privacy-policy">Privacy policy</Link>.
-        </p>
-      </div>
+        <div className="ct-send-w">
+          <p className="ct-reply">{REPLY_LINE}</p>
+          {/*
+            PENDING STATE, announced rather than only shown. `aria-live="polite"`
+            means a screen-reader user is told the form is sending instead of
+            meeting a silently disabled button. Success is not announced here —
+            success is a navigation to `/thank-you`, which announces itself.
+          */}
+          <p aria-live="polite" className="px-sr">
+            {isSubmitting ? 'Sending your enquiry.' : ''}
+          </p>
+          <button type="submit" className="ct-send" disabled={isSubmitting || !isHydrated}>
+            {isSubmitting ? 'Sending…' : 'Send this'}
+          </button>
+          {/*
+            Privacy statement adjacent to the submit control, per
+            `FORM_AND_BOOKING_SPEC.md` §2. It states the PURPOSE of the processing
+            and nothing more. In particular it makes no security claim.
+          */}
+          <p className="ct-privacy">
+            We use what you send here to reply to you. <Link href="/privacy-policy">Privacy policy</Link>.
+          </p>
+        </div>
+        </>
+      )}
     </form>
   );
 }

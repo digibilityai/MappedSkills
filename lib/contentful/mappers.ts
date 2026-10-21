@@ -190,6 +190,10 @@ export function mapContentfulCaseStudyToCms(entry: ContentfulCaseStudy): CmsCase
 
   const highlightResult = firstHighlightFromSections(sections);
   const serviceLabel = serviceLabelFromSections(sections);
+  const newSummary = entry.summary?.trim() || '';
+  const problemDoc = entry.problem?.json ?? null;
+  const whatWeDidDoc = entry.whatWeDid?.json ?? null;
+  const impactDoc = entry.impact?.json ?? null;
   const reviewName = entry.review?.name?.trim() || '';
   const reviewQuote = entry.review?.testimonial?.trim() || '';
 
@@ -212,13 +216,34 @@ export function mapContentfulCaseStudyToCms(entry: ContentfulCaseStudy): CmsCase
     conclusionJson: entry.conclusion?.json ?? null,
     serviceLabel,
     highlightResult,
-    summary,
+    summary: newSummary || summary,
     href: `/portfolio/${slug}`,
     metaTitle: `${entry.title.trim()} | Case Study | MappedSkills`,
     metaDescription:
+      newSummary ||
       summary ||
       highlightResult ||
       `Case study: ${entry.title.trim()}${industry ? ` — ${industry}` : ''}`,
+    layout: 'legacy',
+    eligibility: {
+      publishedVersion: typeof entry.sys.publishedVersion === 'number' ? entry.sys.publishedVersion : null,
+      publishedAt: entry.sys.publishedAt ?? null,
+      hasSummary: Boolean(newSummary),
+      hasProblem: isDocumentPopulated(problemDoc),
+      hasWhatWeDid: isDocumentPopulated(whatWeDidDoc),
+      hasImpact: isDocumentPopulated(impactDoc),
+    },
+    newLayout:
+      problemDoc && whatWeDidDoc && impactDoc
+        ? {
+            summary: newSummary,
+            problem: problemDoc,
+            whatWeDid: whatWeDidDoc,
+            impact: impactDoc,
+            evidenceNote: entry.evidenceNote?.trim() || '',
+            showTestimonial: entry.showTestimonial === true,
+          }
+        : undefined,
   };
 }
 

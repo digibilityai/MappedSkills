@@ -60,7 +60,9 @@ test('studies come from Contentful: no fixed count, no hard-coded client facts',
 });
 
 test('withheld proof cannot reach the page (DEC-031)', () => {
-  assert.doesNotMatch(code(studies), /resultsMetrics|beforeAfter|highlightResult|review|businessGoals|summary|conclusion/);
+  // `study.summary` (the legacy summary, derived from content) is never read. The only summary read is the
+  // editor-approved `newLayout.summary` of a new-template study (simplified G6), checked in the next test.
+  assert.doesNotMatch(code(studies).replace(/study\.newLayout\.summary/g, ''), /resultsMetrics|beforeAfter|highlightResult|review|businessGoals|summary|conclusion/);
   assert.match(code(studies), /study\.sections\.problemStatement/);
   assert.doesNotMatch(copy, /\d+\s*%|₹|ROI|testimonial|guarantee|★/i);
 });
@@ -84,4 +86,10 @@ test('the page stylesheet is scoped to this page', () => {
 test('listing previews carry no year or date', () => {
   assert.doesNotMatch(code(studies), /\byear\b|clientDate/);
   assert.doesNotMatch(code(body), /\.year\b|\bdate\b/i);
+});
+
+test('simplified G6: a new-template study uses its approved summary; a legacy study never does', () => {
+  const src = code(studies);
+  assert.match(src, /study\.layout === 'new' && study\.newLayout\s*\?\s*study\.newLayout\.summary\s*:\s*excerptFromDocument\(study\.sections\.problemStatement/);
+  assert.strictEqual((src.match(/newLayout\.summary/g) || []).length, 1);
 });

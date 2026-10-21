@@ -99,11 +99,35 @@ export const GET_POST_SLUGS_QUERY = `
   }
 `;
 
+/**
+ * The six simplified-G6 fields do not exist in Contentful until the (separately authorised) schema migration runs.
+ * Requesting a missing field makes the WHOLE GraphQL query fail, so they are requested only when the build/runtime
+ * sets CONTENTFUL_CASE_STUDY_NEW_FIELDS=1. Unset (the default), behaviour is exactly the legacy-three behaviour.
+ */
+export const CASE_STUDY_NEW_FIELDS_ENABLED = process.env.CONTENTFUL_CASE_STUDY_NEW_FIELDS === '1';
+
+const CASE_STUDY_NEW_FIELDS_FRAGMENT = CASE_STUDY_NEW_FIELDS_ENABLED
+  ? `
+  summary
+  problem {
+    json
+  }
+  whatWeDid {
+    json
+  }
+  impact {
+    json
+  }
+  evidenceNote
+  showTestimonial`
+  : '';
+
 export const CASE_STUDY_CARD_FRAGMENT = `
   sys {
     id
     firstPublishedAt
     publishedAt
+    publishedVersion
   }
   title
   slug
@@ -132,7 +156,7 @@ export const CASE_STUDY_CARD_FRAGMENT = `
   }
   conclusion {
     json
-  }
+  }${CASE_STUDY_NEW_FIELDS_FRAGMENT}
 `;
 
 export const CASE_STUDY_DETAIL_FRAGMENT = `

@@ -74,7 +74,7 @@ const proseOptions: Options = {
   },
 };
 
-function ProseDocument({ document }: { document: Document }) {
+export function ProseDocument({ document }: { document: Document }) {
   if (!document?.content?.length) return null;
   return <div>{documentToReactComponents(document, proseOptions)}</div>;
 }

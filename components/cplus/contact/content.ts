@@ -34,7 +34,6 @@ export const CONTACT = {
     h: { a: 'No presentation needed.', b: 'Just a conversation.' },
     body: 'Come as you are. Rough numbers and open questions are fine.',
     call: 'Request a call',
-    alt: 'Prefer to write?',
     altLink: 'Send an enquiry',
   },
 };

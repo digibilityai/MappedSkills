@@ -303,10 +303,13 @@ jobs:
         run: |
           set -e
           sleep 10
-          for path in / /services /seo /contact /schedule-call /thank-you /robots.txt /sitemap.xml; do
+          for path in / /services /seo /contact '/contact?intent=call' /thank-you /robots.txt /sitemap.xml; do
             code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 "$SITE_URL$path")
             echo "$path -> $code"; test "$code" = 200
           done
+          # DEC-071: /schedule-call is a permanent redirect to the call-request state of /contact.
+          redirect=$(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' --max-time 30 "$SITE_URL/schedule-call")
+          echo "/schedule-call -> $redirect"; test "$redirect" = "308 $SITE_URL/contact?intent=call"
           code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 "$SITE_URL/definitely-not-a-page")
           test "$code" = 404
           # The live homepage must be served BY THIS BUILD: its layout chunk

@@ -16,6 +16,18 @@ export function getContentfulConfig() {
   return { spaceId, accessToken, environment, isPreview };
 }
 
+/**
+ * Delivery-only configuration: never uses the Preview token. Case studies use this so that a Preview token set in the
+ * environment (for blog drafts, say) can never expose draft or unpublished case studies on the public site.
+ */
+export function getContentfulDeliveryConfig() {
+  const spaceId = process.env.CONTENTFUL_SPACE_ID;
+  const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
+  const environment = process.env.CONTENTFUL_ENVIRONMENT || 'master';
+  if (!spaceId || !accessToken) return null;
+  return { spaceId, accessToken, environment, isPreview: false as const };
+}
+
 export function getContentfulGraphqlEndpoint() {
   const config = getContentfulConfig();
   if (!config) return null;
@@ -30,10 +42,13 @@ type GraphqlResponse<T> = {
 export async function contentfulGraphql<T>(
   query: string,
   variables?: Record<string, unknown>,
-  revalidate: number = DEFAULT_REVALIDATE_SECONDS
+  revalidate: number = DEFAULT_REVALIDATE_SECONDS,
+  options: { deliveryOnly?: boolean } = {}
 ): Promise<T | null> {
-  const config = getContentfulConfig();
-  const endpoint = getContentfulGraphqlEndpoint();
+  const config = options.deliveryOnly ? getContentfulDeliveryConfig() : getContentfulConfig();
+  const endpoint = config
+    ? `https://graphql.contentful.com/content/v1/spaces/${config.spaceId}/environments/${config.environment}`
+    : null;
 
   if (!config || !endpoint) {
     console.warn('[contentful] Missing CONTENTFUL_SPACE_ID or CONTENTFUL_ACCESS_TOKEN / CONTENTFUL_PREVIEW_ACCESS_TOKEN');

@@ -156,6 +156,7 @@ export type ContentfulCaseStudy = {
     id: string;
     firstPublishedAt?: string | null;
     publishedAt?: string | null;
+    publishedVersion?: number | null;
   };
   title?: string | null;
   slug?: string | null;
@@ -167,6 +168,13 @@ export type ContentfulCaseStudy = {
   content?: ContentfulRichText | null;
   review?: ContentfulCaseTestimonial | null;
   conclusion?: ContentfulRichText | null;
+  /** Simplified-G6 fields; absent until the schema migration is applied and CONTENTFUL_CASE_STUDY_NEW_FIELDS=1. */
+  summary?: string | null;
+  problem?: ContentfulRichText | null;
+  whatWeDid?: ContentfulRichText | null;
+  impact?: ContentfulRichText | null;
+  evidenceNote?: string | null;
+  showTestimonial?: boolean | null;
 };
 
 export type CaseStudyHeadingCard = {
@@ -227,6 +235,26 @@ export type CmsCaseStudy = {
   href: string;
   metaTitle: string;
   metaDescription: string;
+  /** `new` = the approved Problem / What We Did / Impact template; `legacy` = the existing section-split template. */
+  layout: 'new' | 'legacy';
+  /** Present when the three narrative documents exist. */
+  newLayout?: {
+    summary: string;
+    problem: Document;
+    whatWeDid: Document;
+    impact: Document;
+    evidenceNote: string;
+    showTestimonial: boolean;
+  };
+  /** Inputs for the shared eligibility rule (`lib/case-study-eligibility.ts`). */
+  eligibility: {
+    publishedVersion: number | null;
+    publishedAt: string | null;
+    hasSummary: boolean;
+    hasProblem: boolean;
+    hasWhatWeDid: boolean;
+    hasImpact: boolean;
+  };
 };
 
 export type CmsCaseStudyCard = {

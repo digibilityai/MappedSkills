@@ -6,6 +6,7 @@ import { Container } from '@/components/Container';
 import { CTASection } from '@/components/CTASection';
 import { Card } from '@/components/ui/card';
 import { CaseStudyContent } from '@/components/case-study/CaseStudyContent';
+import { CaseStudyLayout } from '@/components/case-study/CaseStudyLayout';
 import { createMetadata } from '@/lib/metadata';
 import { isCaseStudyProofWithheld } from '@/lib/case-study-proof';
 import { getCaseStudyService } from '@/lib/case-study-services';
@@ -78,6 +79,16 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
    */
   const relatedService = getCaseStudyService(caseStudy.slug);
 
+  /**
+   * Testimonial. The legacy template keeps its existing rule (a linked review, unless withheld). The new template is
+   * stricter: the editor must tick `showTestimonial`, the linked review must carry a quote, and the study must not be
+   * on the withholding list. A missing or empty review simply renders nothing. Stars are legacy-only (WORK-026).
+   */
+  const isNewLayout = caseStudy.layout === 'new' && Boolean(caseStudy.newLayout);
+  const showTestimonial = isNewLayout
+    ? Boolean(caseStudy.newLayout?.showTestimonial && caseStudy.review?.quote && !proofWithheld)
+    : Boolean(caseStudy.review && !proofWithheld);
+
   const metaItems = [
     caseStudy.clientName ? { label: 'Client', value: caseStudy.clientName } : null,
     caseStudy.clientDate ? { label: 'Timeline', value: caseStudy.clientDate } : null,
@@ -129,34 +140,44 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               </p>
             ) : null}
 
-            {metaItems.length > 0 ? (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                {metaItems.map((item) => (
-                  <div key={item.label}>
-                    <p className="text-xs text-muted-foreground mb-1">{item.label}</p>
-                    <p className="font-semibold text-sm sm:text-base">{item.value}</p>
-                  </div>
-                ))}
-              </div>
+            {caseStudy.layout === 'new' && caseStudy.newLayout?.summary ? (
+              <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-3xl mb-8">
+                {caseStudy.newLayout.summary}
+              </p>
             ) : null}
 
-            {caseStudy.audience ? (
-              <div className="rounded-lg border border-border/60 bg-secondary/20 p-4 sm:p-5 mb-2">
-                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">
-                  Target Audience
-                </p>
-                <p className="text-foreground leading-relaxed">{caseStudy.audience}</p>
-              </div>
+            {/* Context: the short facts in a row, Target Audience as a full-width row of the same grid. */}
+            {metaItems.length > 0 || caseStudy.audience ? (
+              <dl className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-5 border-t border-border pt-6">
+                {metaItems.map((item) => (
+                  <div key={item.label} className="min-w-0">
+                    <dt className="text-xs text-muted-foreground mb-1">{item.label}</dt>
+                    <dd className="m-0 font-semibold text-sm sm:text-base break-words">{item.value}</dd>
+                  </div>
+                ))}
+                {caseStudy.audience ? (
+                  <div className="col-span-2 md:col-span-4 min-w-0">
+                    <dt className="text-xs text-muted-foreground mb-1">Target Audience</dt>
+                    <dd className="m-0 max-w-3xl text-sm sm:text-base text-foreground leading-relaxed break-words">
+                      {caseStudy.audience}
+                    </dd>
+                  </div>
+                ) : null}
+              </dl>
             ) : null}
           </div>
         </Container>
       </Section>
 
-      <CaseStudyContent
-        sections={caseStudy.sections}
-        conclusionJson={caseStudy.conclusionJson}
-        withholdProof={proofWithheld}
-      />
+      {caseStudy.layout === 'new' && caseStudy.newLayout ? (
+        <CaseStudyLayout content={caseStudy.newLayout} />
+      ) : (
+        <CaseStudyContent
+          sections={caseStudy.sections}
+          conclusionJson={caseStudy.conclusionJson}
+          withholdProof={proofWithheld}
+        />
+      )}
 
       {/*
         WORK-027 (owner, 2026-09-19) — ONE contextual related-service link,
@@ -205,7 +226,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         proof, and they must not be reinstated for a withheld one without an
         attributable rating source.
       */}
-      {caseStudy.review && !proofWithheld ? (
+      {showTestimonial ? (
         <Section className="border-y border-border bg-secondary/5">
           <Container>
             <div className="max-w-2xl mx-auto text-center">
@@ -213,20 +234,22 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 What the Client Says
               </h2>
               <Card className="p-8 sm:p-10 hover:translate-y-0">
-                <div className="mb-6 flex justify-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-accent text-2xl">
-                      ★
-                    </span>
-                  ))}
-                </div>
-                {caseStudy.review.quote ? (
+                {isNewLayout ? null : (
+                  <div className="mb-6 flex justify-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className="text-accent text-2xl">
+                        ★
+                      </span>
+                    ))}
+                  </div>
+                )}
+                {caseStudy.review?.quote ? (
                   <p className="text-lg sm:text-xl text-foreground mb-6 leading-relaxed">
                     &ldquo;{caseStudy.review.quote}&rdquo;
                   </p>
                 ) : null}
                 <div className="border-t border-border pt-6">
-                  <p className="font-semibold text-foreground">{caseStudy.review.name}</p>
+                  <p className="font-semibold text-foreground">{caseStudy.review?.name}</p>
                   {caseStudy.industry ? (
                     <p className="text-sm text-muted-foreground">{caseStudy.industry}</p>
                   ) : null}

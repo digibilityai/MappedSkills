@@ -3,13 +3,16 @@
  * approved prototype (proto/direction-c-plus 0a8b611, components/proto-cplus/trafficContent.ts, TB_PLAIN), with one
  * owner-approved change: check 3 reads "the problem may be who is visiting" (was "is"), so it stays a possible cause, not
  * a diagnosis. The prototype's internal review register is not carried over.
+ *
+ * G2 (DEC-072, TB_G1_NOTES.md): the breadcrumb is Home → page (TB-D1); "Book a call" becomes "Request a call" (TB-D2);
+ * the hero kicker is removed, the lede is shortened and each cause's "What helps" line is folded into an action link
+ * with a service tag that says where it goes (TB-D4).
  */
 
 export const TB_PLAIN = {
-  crumb: { a: 'Problems', b: 'Traffic but no enquiries' },
-  kicker: 'Traffic but no enquiries',
+  crumb: 'Traffic but no enquiries',
   h1: { a: 'People visit your website.', b: 'So why don’t they get in touch?' },
-  lede: 'Visitors arrive, look around and leave. Not everyone should enquire — but if the right people aren’t, something along the way is stopping them.',
+  lede: 'Visitors arrive, look around and leave. Not everyone should get in touch. But if the right people don’t, something is stopping them.',
 
   /* hero illustration: the visitor journey, with an exit at each stage */
   journey: {
@@ -27,9 +30,9 @@ export const TB_PLAIN = {
   whyKicker: 'Where people leave',
   whyH: { a: 'Three places', b: 'people may drop off.' },
   causes: [
-    { k: 'Wrong visitors', t: 'People arrive, but they aren’t looking for what you sell.', sign: 'You might notice: enquiries about things you don’t do.', help: 'What helps: being found by the right people.', link: { href: '/seo', label: 'Being found' } },
-    { k: 'Unclear website', t: 'People can’t quickly tell what you offer or what to do next.', sign: 'You might notice: people ask questions your page should already answer.', help: 'What helps: a page that answers their question.', link: { href: '/conversion-optimization', label: 'Clearer pages' } },
-    { k: 'Difficult enquiry', t: 'The form is hard to use, breaks on a phone, or the message never arrives.', sign: 'You might notice: someone mentions they tried to contact you and gave up.', help: 'What helps: a simple way to get in touch that works.', link: { href: '/conversion-optimization', label: 'Easier enquiries' } },
+    { k: 'Wrong visitors', t: 'People arrive, but they aren’t looking for what you sell.', sign: 'You might notice: enquiries about things you don’t do.', link: { href: '/seo', label: 'Get found by the right people', service: 'SEO' } },
+    { k: 'Unclear website', t: 'People can’t quickly tell what you offer or what to do next.', sign: 'You might notice: people ask questions your page should already answer.', link: { href: '/conversion-optimization', label: 'Make your page clearer', service: 'Conversion optimisation' } },
+    { k: 'Difficult enquiry', t: 'The form is hard to use, breaks on a phone, or the message never arrives.', sign: 'You might notice: someone mentions they tried to contact you and gave up.', link: { href: '/conversion-optimization', label: 'Make enquiring easier', service: 'Conversion optimisation' } },
   ],
   note: 'These are possible causes, not a diagnosis. If your website doesn’t record visits and enquiries, it’s hard to tell which one it is.',
 
@@ -49,6 +52,6 @@ export const TB_PLAIN = {
     h: 'We can help you find out.',
     body: 'Tell us what’s happening. We start with a call and a look at your website.',
     primary: 'Tell us what you’re trying to fix',
-    secondary: 'Book a call',
+    secondary: 'Request a call',
   },
 };

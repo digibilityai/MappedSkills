@@ -23,38 +23,13 @@
 .tb-stage-end .tb-node { background: var(--dc-tang); }
 .tb-end { margin-top: 8px; justify-self: start; padding: 8px 14px; background: var(--dc-ink); color: var(--dc-on-ink); font: 800 1.05rem/1.25 var(--dc-f-title); }
 .tb-fig .px-cap { margin-top: 22px; }
-.tb-dots { display: none; }
 
+/* G2 (DEC-072, TB-D3): the journey shows complete. The staged arrival, travelling dots, exit flashes and end "pop" are
+   removed; what remains is one 150 ms fade of the figure. Reduced motion: nothing moves. */
 @media (prefers-reduced-motion: no-preference) {
-  /* stages arrive in order (faint, never invisible) */
-  .tb-fig:not(.rv-pre) .tb-stage { animation: tb-in 520ms var(--dc-e-arrive) both; animation-delay: calc(var(--i, 0) * 380ms + 200ms); }
-  .tb-fig:not(.rv-pre) .tb-end { animation: tb-pop 600ms var(--dc-e-arrive) 4300ms; }
+  .tb-fig { animation: tb-fade 150ms ease-out both; }
 }
-@keyframes tb-in { from { opacity: .25; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-@keyframes tb-pop { 0% { transform: none; } 40% { transform: scale(1.08); } 100% { transform: none; } }
-@keyframes tb-flag { 0% { background: transparent; } 30% { background: var(--dc-tang); border-style: solid; } 100% { background: transparent; } }
-
-/* the dots: from 768px, decorative, one-shot */
-@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
-  .tb-dots { display: block; position: absolute; inset: 0; pointer-events: none; z-index: 2; }
-  .tb-dot { position: absolute; left: 0; top: 8px; width: 14px; height: 14px; border-radius: 50%; background: var(--dc-tang-display); opacity: 0; }
-  .tb-fig:not(.rv-pre) .tb-dot { animation: 3000ms cubic-bezier(.45, 0, .25, 1) both; }
-  .tb-fig:not(.rv-pre) .tb-dot-1 { animation-name: tb-d1; animation-delay: 1500ms; }
-  .tb-fig:not(.rv-pre) .tb-dot-2 { animation-name: tb-d1; animation-delay: 1680ms; }
-  .tb-fig:not(.rv-pre) .tb-dot-3 { animation-name: tb-d2; animation-delay: 1500ms; }
-  .tb-fig:not(.rv-pre) .tb-dot-4 { animation-name: tb-d3; animation-delay: 1580ms; }
-  .tb-fig:not(.rv-pre) .tb-dot-5 { animation-name: tb-d4; animation-delay: 1660ms; }
-  /* each exit lights up as a dot leaves there */
-  .tb-fig:not(.rv-pre) .tb-exit-1 { animation: tb-flag 900ms ease 2700ms; }
-  .tb-fig:not(.rv-pre) .tb-exit-2 { animation: tb-flag 900ms ease 3500ms; }
-  .tb-fig:not(.rv-pre) .tb-exit-3 { animation: tb-flag 900ms ease 4050ms; }
-}
-/* positions in container units: columns are 1fr 1fr 1fr .8fr with 14px gaps, so node centres sit at 0, 26.3cqw+3px,
-   52.6cqw+6px and 78.9cqw+9px (+15px to the centre, −7px for the dot) */
-@keyframes tb-d1 { 0% { opacity: 0; transform: translate(0, 0); } 8% { opacity: 1; } 30% { transform: translate(8px, 0); } 45% { opacity: 1; transform: translate(8px, 0); } 60% { opacity: 0; transform: translate(14px, 30px); } 100% { opacity: 0; transform: translate(14px, 30px); } }
-@keyframes tb-d2 { 0% { opacity: 0; transform: translate(0, 0); } 8% { opacity: 1; } 58% { opacity: 1; transform: translate(calc(26.3cqw + 11px), 0); } 73% { opacity: 0; transform: translate(calc(26.3cqw + 17px), 30px); } 100% { opacity: 0; transform: translate(calc(26.3cqw + 17px), 30px); } }
-@keyframes tb-d3 { 0% { opacity: 0; transform: translate(0, 0); } 8% { opacity: 1; } 76% { opacity: 1; transform: translate(calc(52.6cqw + 14px), 0); } 90% { opacity: 0; transform: translate(calc(52.6cqw + 20px), 30px); } 100% { opacity: 0; transform: translate(calc(52.6cqw + 20px), 30px); } }
-@keyframes tb-d4 { 0% { opacity: 0; transform: translate(0, 0); } 8% { opacity: 1; } 92% { opacity: 1; transform: translate(calc(78.9cqw + 17px), 0); } 100% { opacity: 0; transform: translate(calc(78.9cqw + 17px), 0); } }
+@keyframes tb-fade { from { opacity: 0; } to { opacity: 1; } }
 
 /* --------------------------------------------------------------- 2 causes -- */
 .tb-causes { margin-top: clamp(32px, 4vw, 56px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
@@ -62,8 +37,18 @@
 .tb-cause-k { display: inline-flex; align-items: center; gap: 10px; font: 700 .75rem/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-dim); }
 .tb-cause-t { font: 800 var(--dc-t-title)/1.25 var(--dc-f-title); }
 .tb-cause-sign { padding-left: 12px; border-left: 3px solid var(--dc-control); line-height: 1.5; font-style: italic; }
-.tb-cause-help { color: var(--dc-ink); font-weight: 700; line-height: 1.5; }
-.tb-cause-link { margin-top: 0; }
+.tb-cause-link { margin-top: 4px; }
+/* the action link: what helps (the link text), then where it goes (the service tag); 150 ms feedback */
+.tb-go { display: inline-grid; grid-template-columns: auto auto; justify-content: start; column-gap: 6px; row-gap: 4px; color: var(--dc-ink); font-weight: 700; line-height: 1.35; text-decoration: none; }
+.tb-go-t { text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: 2px; text-underline-offset: 4px; transition: text-decoration-color 150ms ease; }
+.tb-go > span[aria-hidden] { transition: transform 150ms ease; }
+.tb-go:hover .tb-go-t { text-decoration-color: var(--dc-tang-display); }
+.tb-go:hover > span[aria-hidden] { transform: translateX(3px); }
+.tb-go-s { grid-column: 1 / -1; font: 700 .75rem/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-dim); }
+@media (prefers-reduced-motion: reduce) {
+  .tb-go-t, .tb-go > span[aria-hidden] { transition: none; }
+  .tb-go:hover > span[aria-hidden] { transform: none; }
+}
 .tb-note { margin-top: clamp(24px, 3vw, 36px); max-width: 60ch; padding-left: 14px; border-left: 4px solid var(--dc-control); color: var(--dc-dim); line-height: 1.5; }
 
 /* --------------------------------------------------------------- 3 checks -- */
@@ -78,11 +63,6 @@
 .tb-close-k { color: var(--dc-ink); }
 .px-h:has(.tb-hero) .b-close-in > div { container-type: inline-size; min-width: 0; }
 .px-h:has(.tb-hero) .b-close .b-h2 { font-size: min(clamp(2.4rem, 1.2rem + 4vw, 5rem), 14cqi); max-width: 16ch; }
-@media (prefers-reduced-motion: no-preference) {
-  /* the next step: one small nudge when the close comes into view */
-  .rv-in .tb-nudge { animation: tb-nudge 900ms var(--dc-e-arrive) 400ms 2; }
-}
-@keyframes tb-nudge { 0%, 100% { transform: none; } 40% { transform: translateX(6px); } }
 .tb-check :focus-visible { outline-color: var(--dc-on-ink); }
 
 /* ----------------------------------------------------------- responsive -- */

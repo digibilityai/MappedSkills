@@ -17,11 +17,10 @@ export const metadata = createMetadata(
   '/problems/traffic-but-no-enquiries'
 );
 
-/* "Problems" is a LABEL, not a link: no problems hub exists (`07_NAVIGATION_ARCHITECTURE.md` §6). The visible C+
-   breadcrumb draws the same three steps. */
+/* Home → page until a problems hub exists (`07_NAVIGATION_ARCHITECTURE.md` §6, DEC-072 TB-D1): `/problems` is not a
+   page, so it is not a step, and every `ListItem` carries an `item`. The visible C+ breadcrumb draws the same two steps. */
 const TRAIL: CrumbStep[] = [
   { name: 'Home', href: '/' },
-  { name: 'Problems', href: null },
   { name: 'Traffic but no enquiries', href: '/problems/traffic-but-no-enquiries' },
 ];
 

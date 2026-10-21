@@ -1954,3 +1954,56 @@ Use this file only for meaningful project decisions.
         production. No evidence recorded; none of these is a pass.
       - **Form fields:** removing company, website and the marketing opt-in is still not explicitly owner-approved
         (first addendum, item 3).
+
+### DEC-072
+- **Date:** 2026-10-21
+- **Status:** **Authorised (owner, "MAPPEDSKILLS — TRAFFIC BUT NO ENQUIRIES | G2: APPROVED DESIGN IMPLEMENTATION"):
+  IMPLEMENTATION of the approved G1 redesign of `/problems/traffic-but-no-enquiries`, committed locally on
+  `feat/problems-tb-g2`.** Push, pull request, merge and production deployment are **NOT** authorised. Production is
+  unchanged.
+- **Approvals this records (OWNER REQUIREMENT, quoted from `docs/problems-redesign/g1/TB_G1_NOTES.md`):**
+  - Audit decisions, 2026-10-21: "Approve TB-D1 option A, TB-D2, TB-D3 and TB-D4 as recommended. Prepare a G1 mockup
+    only; no implementation."
+  - G1, 2026-10-21: "TB G1 approved as shown, including the service tags, dropping the scroll reveal on this page, and
+    the 07 §6 amendment. Hold G2 until I authorise it."
+  - G2, 2026-10-21: authorised by the brief named above. Its explicit holds: TB-D5 (the optional "See how we measure it"
+    link) is **deferred, not implemented**; TB-D6: technical discovery is complete, actual traffic measurement stays
+    **open**, and no analytics investigation or configuration change is part of G2.
+- **What was implemented (VERIFIED FACT, local production build):**
+  1. **TB-D1 breadcrumb:** the visible breadcrumb and the `BreadcrumbList` are Home → *Traffic but no enquiries*, from
+     the route's one `TRAIL`; both `ListItem`s carry an `item`. The "Problems" step is removed because `/problems` is not
+     a page. No `/problems` hub and no Problems navigation item were created.
+  2. **TB-D2:** the close's secondary CTA reads "Request a call" → `/contact?intent=call` (was "Book a call", same
+     destination). The primary CTA is unchanged: "Tell us what you're trying to fix" → `/contact`.
+  3. **TB-D3 motion:** the journey figure shows complete, with one 150 ms fade (none under reduced motion). The staged
+     arrival, the five travelling dots, the exit flashes, the end "pop" and the CTA nudge are removed. The cause links
+     have 150 ms hover feedback. This page carries no `data-rv` / `data-rv-i`, so the shared one-shot reveal does not
+     run here. `CplusMotion` and the reveal styles are unchanged, and the reveal still runs on other pages.
+  4. **TB-D4 copy:** the hero kicker is removed and the lede shortened. Each cause card's "What helps" line is folded
+     into an action link with a service tag under it: "Get found by the right people →" `/seo` (SEO), "Make your page
+     clearer →" and "Make enquiring easier →" `/conversion-optimization` (Conversion optimisation).
+  5. **Navigation governance:** the `/problems/{slug}` row of `07_NAVIGATION_ARCHITECTURE.md` §6 now reads Home →
+     *page* until a problems hub exists. No other row changed.
+- **Unchanged:** title, description, canonical, robots, sitemap entry, the `problem` analytics page type, H1, the causes,
+  checks, note and figure copy, section order, header and footer. No shared component, global token, package, API,
+  form or tracking code changed.
+- **Verification (2026-10-21, local `next start` of the G2 build against a build of `main` `fa9d6f7`):**
+  - Typecheck, lint, `npm test` (208 pass, 1 skipped, including the new `tests/problems-traffic-page.test.cjs`),
+    production build and `verify:build` pass.
+  - Playwright 1.62 Chromium, Firefox and WebKit at 320, 390, 768, 1024 and 1440 px: no horizontal overflow, no
+    clipped or off-screen text, no text under 12 px, 0 console errors.
+  - axe WCAG 2.1 A/AA: 0 violations at every engine and width.
+  - Page heights match the G1 mockup (3894 px at 1440, 4956 px at 390).
+  - The cause links take the site's standard focus outline. All links on the page answer 200.
+  - Regression: `/`, `/contact`, `/contact?intent=call`, `/services`, `/seo`, `/conversion-optimization`,
+    `/google-ads`, `/ai-seo`, `/lead-generation`, `/social-media-ads` and `/how-it-works` are pixel-identical to `main`
+    at 1440 and 390 px, with identical `<main>` markup. Reveal counts on `/` and `/seo` are unchanged.
+  - **Not tested:** real devices, screen readers, forced-colours mode. No form was submitted.
+  - Evidence is kept outside Git: `docs/problems-redesign/g2/`.
+- **Impacted files:** `components/cplus/traffic/{content.ts,TrafficBody.tsx,traffic.css}`,
+  `app/(pages)/problems/traffic-but-no-enquiries/page.tsx`, `docs/16-ux/07_NAVIGATION_ARCHITECTURE.md` (§6, one row),
+  `tests/problems-traffic-page.test.cjs`, `docs/00-project/DECISION_LOG.md`, `docs/00-project/CURRENT_STATE.md`.
+- **Still requires separate explicit owner authorisation:** push and pull request; merge; production deployment
+  (`DEC-061` process); TB-D5; any TB-D6 measurement work.
+- **Supersedes:** nothing. Amends `07_NAVIGATION_ARCHITECTURE.md` §6 for `/problems/{slug}` only. **Read with:**
+  `DEC-061`, `DEC-062` (D4), `DEC-071`. **Authorised by:** Project owner, 2026-10-21. Recorded by the repository worker.

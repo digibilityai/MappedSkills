@@ -303,15 +303,39 @@ jobs:
         run: |
           set -e
           sleep 10
+          # READINESS, BOUNDED. Right after the restart LiteSpeed can briefly answer 503 itself while the app
+          # restarts (run 39550887466: /seo -> 503 at +11 s, app log empty). Wait for the homepage to answer 200,
+          # for at most 12 tries 5 s apart (~60 s); if it never does, the step fails and the release is rolled back.
+          ready=no
+          for attempt in $(seq 1 12); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 "$SITE_URL/") || code=000
+            echo "readiness / -> $code (attempt $attempt)"
+            if [ "$code" = 200 ]; then ready=yes; break; fi
+            sleep 5
+          done
+          test "$ready" = yes
+          # RETRY ONLY A SERVER ERROR OR NO CONNECTION (5xx, 000): up to 5 tries, 5 s apart. Any other answer is
+          # final, so a wrong status, a missing page or a wrong redirect still fails at once.
+          fetch() {
+            local out=000 attempt
+            for attempt in 1 2 3 4 5; do
+              out=$(curl -s -o /dev/null -w "$2" --max-time 30 "$SITE_URL$1") || out=000
+              case "${out%% *}" in
+                5??|000) echo "$1 -> $out (attempt $attempt, retrying)" >&2; sleep 5 ;;
+                *) break ;;
+              esac
+            done
+            printf '%s' "$out"
+          }
           for path in / /services /seo /contact '/contact?intent=call' /thank-you /robots.txt /sitemap.xml; do
-            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 "$SITE_URL$path")
+            code=$(fetch "$path" '%{http_code}')
             echo "$path -> $code"; test "$code" = 200
           done
           # DEC-071: /schedule-call is a permanent redirect to the call-request state of /contact.
-          redirect=$(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' --max-time 30 "$SITE_URL/schedule-call")
+          redirect=$(fetch /schedule-call '%{http_code} %{redirect_url}')
           echo "/schedule-call -> $redirect"; test "$redirect" = "308 $SITE_URL/contact?intent=call"
-          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 "$SITE_URL/definitely-not-a-page")
-          test "$code" = 404
+          code=$(fetch /definitely-not-a-page '%{http_code}')
+          echo "/definitely-not-a-page -> $code"; test "$code" = 404
           # The live homepage must be served BY THIS BUILD: its layout chunk
           # must be one the artifact contains, and must carry the container ID.
           chunk=$(curl -s --max-time 30 "$SITE_URL/" | grep -oE '/_next/static/chunks/app/layout-[a-z0-9]+\.js' | head -1)

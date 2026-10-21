@@ -48,9 +48,12 @@
 > Start at `docs/ui-revamp/GATE_4_MASTER_ROLLOUT_PLAN.md` (seven `GATE_4_*.md` documents). Proposed owner decisions O1–O10
 > (§7); recommended first batch B0 + B1 (QA harness and baselines, then the global chrome flip). No application code changed.
 >
-> **`/problems/traffic-but-no-enquiries` G2 IMPLEMENTED, committed locally only — 2026-10-21 (`DEC-072`).** The approved
-> G1 (TB-D1–TB-D4, service tags, no scroll reveal on this page, `07` §6 row) is on `feat/problems-tb-g2`. Push, pull
-> request, merge and deployment are NOT authorised. TB-D5 deferred; TB-D6 traffic measurement open.
+> **`/problems/traffic-but-no-enquiries` redesign LIVE — 2026-10-21 (`DEC-072`).** The approved G1 is live: TB-D1–TB-D4,
+> the service tags, no scroll reveal on this page, and the `07` §6 row.
+> - **Release:** PR #38 merged as `1ac9827`. Live is `1ac9827` (run `39565124648`, BUILD `OepyJ3b8W8Aq4Au79t0mr`).
+> - **Rollback target:** `0YcvuWgvuzwWGktVMDf-e`.
+> - **Checks:** the smoke test and the live browser checks passed. No form was submitted.
+> - **Still open:** TB-D5 (deferred) and TB-D6 (traffic measurement).
 >
 > **Contact consolidation (C1) + orange contact CTA LIVE — 2026-10-21 (`DEC-071`).** `/contact` is the one contact page
 > with two intentions ("Send an enquiry", "Request a call" at `/contact?intent=call`); `/schedule-call` redirects there

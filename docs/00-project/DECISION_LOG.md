@@ -1957,7 +1957,9 @@ Use this file only for meaningful project decisions.
 
 ### DEC-072
 - **Date:** 2026-10-21
-- **Status:** **Authorised (owner, "MAPPEDSKILLS — TRAFFIC BUT NO ENQUIRIES | G2: APPROVED DESIGN IMPLEMENTATION"):
+- **Status (current, 2026-10-21):** **LIVE** as `1ac9827` (BUILD_ID `OepyJ3b8W8Aq4Au79t0mr`). See the release-record
+  addendum at the end of this entry. The original status below is kept as history.
+- **Status (original):** **Authorised (owner, "MAPPEDSKILLS — TRAFFIC BUT NO ENQUIRIES | G2: APPROVED DESIGN IMPLEMENTATION"):
   IMPLEMENTATION of the approved G1 redesign of `/problems/traffic-but-no-enquiries`, committed locally on
   `feat/problems-tb-g2`.** Push, pull request, merge and production deployment are **NOT** authorised. Production is
   unchanged.
@@ -2007,3 +2009,63 @@ Use this file only for meaningful project decisions.
   (`DEC-061` process); TB-D5; any TB-D6 measurement work.
 - **Supersedes:** nothing. Amends `07_NAVIGATION_ARCHITECTURE.md` §6 for `/problems/{slug}` only. **Read with:**
   `DEC-061`, `DEC-062` (D4), `DEC-071`. **Authorised by:** Project owner, 2026-10-21. Recorded by the repository worker.
+- **Addendum (2026-10-21), push and pull request:** the owner wrote "Authorised: push feat/problems-tb-g2 (a72f76f) and
+  open a PR against main. No merge or deployment."
+  - PR #38 was opened from `a72f76f`, based on `fa9d6f7`.
+- **Addendum (2026-10-21), merge:** PR #38 was merged by the owner account `digibilityai` at 07:47:46Z as squash commit
+  `1ac9827` (parent `fa9d6f7`).
+  - Its tree is identical to the reviewed head `a72f76f`.
+  - Post-merge push run `39564512118`: verify succeeded; release and rollback were skipped.
+- **Addendum (2026-10-21), production release record:** the owner explicitly authorised production deployment of
+  `1ac98276e00d3b4d14d08014ff4bb426da1807ed` after that CI run.
+  - **Pre-deploy (VERIFIED FACT):**
+    - `origin/main` = `1ac9827`; `.github` unchanged since `fa9d6f7`; no pending runs.
+    - Live was `0YcvuWgvuzwWGktVMDf-e` (`9a5f8cc`).
+  - **Deployment:** run `39565124648` (workflow dispatch, `action=deploy`, confirm `1ac9827`). Deployment record
+    `7220802047`.
+    - The production environment gate was approved from the owner account `digibilityai` by the repository worker,
+      under the owner's explicit deployment authorisation.
+    - Live `BUILD_ID` `OepyJ3b8W8Aq4Au79t0mr`, built by this run from `1ac9827`.
+    - Rollback target `0YcvuWgvuzwWGktVMDf-e` (`.prev`, `9a5f8cc`); `.prev2` `gW5VqngqQ_weBne6C7A4a`. Not used.
+  - **Workflow smoke test (VERIFIED FACT):** passed.
+    - Readiness `/` returned 200 on attempt 1.
+    - `/`, `/services`, `/seo`, `/contact`, `/contact?intent=call`, `/thank-you`, `/robots.txt` and `/sitemap.xml`
+      returned 200.
+    - `/schedule-call` returned 308 → `/contact?intent=call`; an unknown page returned 404.
+    - The live layout chunk is in the artifact and carries the GTM container ID.
+    - The log line `tar: stdout: write error` is benign. It is SIGPIPE from `tar -tzf … | grep -q` (`deploy.yml`, the
+      chunk check), and the step passed.
+  - **Live checks (VERIFIED FACT, automated, production, read-only):**
+    - **Build:** the host reports `OepyJ3b8W8Aq4Au79t0mr`. The previous build's manifest returns 404. The app error log is
+      empty.
+    - **Engines and widths:** Chromium, Firefox and WebKit at 320, 390, 768, 1024 and 1440 px:
+      - the page returns 200;
+      - no horizontal overflow, no clipped or off-screen text, no text under 12 px;
+      - 0 console errors;
+      - axe WCAG 2.1 A/AA: 0 violations.
+    - **Page heights** equal the G1 mockup: 3894 px at 1440, 4956 px at 390.
+    - **Content:**
+      - The breadcrumb and `BreadcrumbList` are Home → *Traffic but no enquiries*, with both `item`s present.
+      - There is no hero kicker. The new lede is in place, and there are no "What helps" lines.
+      - Three action links with service tags: SEO → `/seo`, and Conversion optimisation → `/conversion-optimization`
+        twice.
+      - The figure has four stages, three exits and no dots.
+      - The CTAs are "Tell us what you're trying to fix" → `/contact` and "Request a call" → `/contact?intent=call`.
+    - **Motion:** in all three engines, the only page animation is `tb-fade` (150 ms, no delay), and no reveal classes
+      are applied.
+    - **Other pages:** `/contact` and `/contact?intent=call` return 200 with the expected titles and the canonical
+      `/contact`. They open in the enquiry and call states respectively.
+      - These 15 routes return 200 with one H1, no overflow and 0 errors at 1440 and 390 px: `/`, `/contact`,
+        `/contact?intent=call`, `/services`, `/seo`, `/conversion-optimization`, `/google-ads`, `/ai-seo`,
+        `/lead-generation`, `/social-media-ads`, `/how-it-works`, `/pricing`, `/about`, `/faq` and `/blog`.
+      - The first four were also checked in Firefox and WebKit.
+    - **SEO:** title, description, canonical, `index, follow` and `og:url` are unchanged. The page is in the sitemap, and
+      `robots.txt` is unchanged.
+    - **Analytics:**
+      - GTM `GTM-K8ZQPMXP` is compiled into the live layout chunk.
+      - Consent defaults are set, and no Google requests are made before consent.
+      - `page_view` reports `page_type` "problem".
+    - **Forms and leads:** 0 POST requests during all checks. No form was submitted and no lead was created.
+    - **Not tested:** real devices, screen readers, forced colours, GTM Tag Assistant on production.
+  - **Evidence** is kept outside Git: `docs/problems-redesign/g2/live/`.
+  - **Still open:** TB-D5 (deferred) and TB-D6 (traffic measurement).

@@ -48,10 +48,12 @@
 > Start at `docs/ui-revamp/GATE_4_MASTER_ROLLOUT_PLAN.md` (seven `GATE_4_*.md` documents). Proposed owner decisions O1–O10
 > (§7); recommended first batch B0 + B1 (QA harness and baselines, then the global chrome flip). No application code changed.
 >
-> **Contact consolidation (C1) IMPLEMENTED in PR #33, not merged — 2026-10-20 (`DEC-071`).** `/contact` is the one
-> contact page with two intentions ("Send an enquiry", "Request a call" at `/contact?intent=call`); `/schedule-call`
-> redirects there (308). Branch `feat/contact-experience-consolidation`, PR #33. CRM mapping and copy owner-approved.
-> Needs migration 004 in production before release. **Merge and deployment are NOT authorised; production is unchanged.**
+> **Contact consolidation (C1) + orange contact CTA LIVE — 2026-10-21 (`DEC-071`).** `/contact` is the one contact page
+> with two intentions ("Send an enquiry", "Request a call" at `/contact?intent=call`); `/schedule-call` redirects there
+> (308). Migration 004 is applied in production. PRs #33–#36 are merged. Live is `9a5f8cc` (run `39554040940`, BUILD
+> `0YcvuWgvuzwWGktVMDf-e`); the rollback target is `gW5VqngqQ_weBne6C7A4a`. Two failed deploy attempts rolled back
+> automatically. One controlled test submission passed end to end. Open and not authorised: test-record cleanup,
+> failed-release directory cleanup, GA4/Ads checks (see the `DEC-071` release addendum).
 >
 > **Navigation redesign (R2) + logo G2 IMPLEMENTED in PR #32, not merged — 2026-10-20 (`DEC-070`).** The owner
 > authorised implementation on `feat/navigation-and-logo-redesign` and a pull request only. **Merge and production

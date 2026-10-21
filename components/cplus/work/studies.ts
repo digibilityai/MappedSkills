@@ -8,8 +8,12 @@ import type { CmsCaseStudy } from '@/lib/contentful/types';
  * query (no new fields, no extra request). Nothing is paraphrased:
  * - client: the first part of the Client field (the rest, usually the location, is `detail`); the title if empty;
  * - challenge: the opening sentence(s) of the Problem Statement only. Business Goals, Results, Before & After and
- *   the review are never read here, so withheld proof (`lib/case-study-proof.ts`, DEC-031) cannot reach the page;
- * - blockers / changed: the Challenges and Services Provided headings;
+ *   the review are never read here, so withheld proof (`lib/case-study-proof.ts`, DEC-031) cannot reach the page.
+ *   A study on the new template (simplified G6, `layout: 'new'`) has no legacy sections: its challenge is the opening
+ *   sentence(s) of its editor-approved `newLayout.summary`, nothing else. A legacy study never reads that field, even
+ *   if an editor fills it in Contentful, so the three legacy studies render exactly as before;
+ * - blockers / changed: the Challenges and Services Provided headings (legacy template only; empty, and therefore
+ *   not shown, for a new-template study);
  * - service and stage: the owner-approved service for the study (WORK-027, `lib/case-study-services.ts`) and its
  *   stage in the site navigation. A study with no approved service shows neither.
  */
@@ -51,7 +55,12 @@ export function toWorkStudy(study: CmsCaseStudy, challengeSentences: number): Wo
     industry,
     service: service?.title ?? null,
     stage: stage === 'Measure' ? null : stage,
-    challenge: sentences(excerptFromDocument(study.sections.problemStatement, 10_000), challengeSentences),
+    challenge: sentences(
+      study.layout === 'new' && study.newLayout
+        ? study.newLayout.summary
+        : excerptFromDocument(study.sections.problemStatement, 10_000),
+      challengeSentences
+    ),
     blockers: (study.sections.challenges ?? []).map((c) => tidy(c.title)).filter(Boolean).slice(0, MAX_ITEMS),
     changed: (study.sections.servicesProvided ?? []).map((c) => tidy(c.title)).filter(Boolean).slice(0, MAX_ITEMS),
   };

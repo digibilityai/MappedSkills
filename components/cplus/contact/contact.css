@@ -127,7 +127,7 @@
    The form itself keeps the ct-* styles above. Tangerine marks the one action and the step that comes next.
    150 ms micro-interactions only; none under reduced motion. Breakpoints: narrow <=760, medium 761-1080.
    ========================================================================================================== */
-.sc-card svg, .sc-calm svg { fill: none; stroke: currentColor; }
+.sc-card svg { fill: none; stroke: currentColor; }
 .px-h .b-hero.sc-hero { padding-block: clamp(24px, 3vw, 48px) clamp(56px, 7vw, 104px); }
 .sc-hero-g { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(32px, 6vw, 104px); align-items: start; }
 .sc-intro { padding-top: clamp(0px, 3vw, 48px); }
@@ -189,7 +189,7 @@
 }
 
 /* what we'll talk about (paper): one rule through three numbers */
-.px-h .sc-talk, .px-h .sc-calm { padding-block: var(--dc-rhythm-tight); }
+.px-h .sc-talk { padding-block: var(--dc-rhythm-tight); }
 .sc-h2 { max-width: 18ch; }
 .sc-seq { list-style: none; margin: clamp(32px, 4vw, 56px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); position: relative; }
 .sc-seq::before { content: ""; position: absolute; left: 0; right: 0; top: 21px; height: 2px; background: var(--dc-ink); }
@@ -200,22 +200,10 @@
 .sc-step-t { margin: 18px 0 0; font: 800 clamp(1.375rem, 1.1rem + .6vw, 1.625rem)/1.12 var(--dc-f-title); }
 .sc-step-p { margin: 8px 0 0; font-size: 1.0625rem; line-height: 1.45; color: var(--dc-dim); max-width: 26ch; }
 
-/* reassurance (ink) */
-.sc-calm-g { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 28px clamp(28px, 5vw, 80px); align-items: end; }
-.sc-calm .sc-h2 { max-width: 14ch; }
-.sc-calm-2 { display: block; color: var(--dc-tang); }
-.sc-calm-p { margin: 18px 0 0; font-size: var(--dc-t-lede); line-height: 1.5; color: var(--dc-on-ink-soft); max-width: 40ch; }
-.sc-calm-a { display: grid; gap: 18px; justify-items: start; }
-.sc-calm .sc-back { border-color: var(--dc-on-ink); color: var(--dc-on-ink); transition: background-color 150ms ease, color 150ms ease; }
-.sc-calm .sc-back .dc-mk { border-color: var(--dc-on-ink); }
-.sc-calm .sc-back:hover, .sc-calm .sc-back:focus-visible { background: var(--dc-on-ink); color: var(--dc-ink); }
-.sc-calm .sc-back:focus-visible { outline: 3px solid var(--dc-tang); outline-offset: 3px; }
-.sc-alt { margin: 0; font: 600 1.0625rem/1.4 var(--dc-f-body); color: var(--dc-on-ink-soft); }
-.sc-alt a { display: inline-flex; align-items: center; gap: 6px; color: var(--dc-on-ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; transition: color 150ms ease; }
-.sc-alt a svg { transition: transform 150ms ease; }
-.sc-alt a:hover { color: var(--dc-tang); }
-.sc-alt a:hover svg { transform: translateX(3px); }
-.sc-alt a:focus-visible { outline: 3px solid var(--dc-tang); outline-offset: 3px; }
+/* the close: the shared tangerine `.b-close` (cplus.css), with the FAQ close's quieter heading size for a long
+   two-line headline; the second line in paper, as on every other C+ close */
+.px-h .b-close.ct-close .b-h2 { max-width: 14ch; font-size: clamp(2.4rem, 1.2rem + 3.8vw, 4.6rem); }
+.ct-close-2 { display: block; color: var(--dc-paper); }
 
 @media (max-width: 1080px) {
   .sc-hero-g { grid-template-columns: minmax(0, 1fr); gap: 32px; }
@@ -223,7 +211,6 @@
   .px-h .sc-h1 { max-width: 14ch; }
   .sc-how { display: none; }
   .sc-card { max-width: 640px; }
-  .sc-calm-g { grid-template-columns: minmax(0, 1fr); align-items: start; }
 }
 @media (max-width: 760px) {
   .px-h .b-hero.sc-hero { padding-top: 16px; }
@@ -239,9 +226,9 @@
   .sc-step-n { grid-row: span 2; }
   .sc-step-t { margin-top: 8px; }
   .sc-step-p { max-width: none; }
-  .sc-calm-a, .sc-back { width: 100%; }
+  .px-h .b-close.ct-close .b-h2 { font-size: clamp(2.1rem, 1.2rem + 5vw, 2.9rem); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ct-call-fields .ct-input, .ct-intent-o, .ct-send-w-call .ct-send, .ct-send svg, .sc-step-n, .sc-calm .sc-back, .sc-alt a, .sc-alt a svg { transition: none; }
-  .ct-send:hover svg, .sc-alt a:hover svg { transform: none; }
+  .ct-call-fields .ct-input, .ct-intent-o, .ct-send-w-call .ct-send, .ct-send svg, .sc-step-n { transition: none; }
+  .ct-send:hover svg { transform: none; }
 }

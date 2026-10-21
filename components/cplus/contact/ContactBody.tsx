@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Mark } from '@/components/direction-c/primitives';
 import { ContactForm } from '@/components/forms/ContactForm';
 import { Icon } from '../Icons';
 import { CONTACT as C, THANKS_CALL as TC, THANKS_PLAIN as T, THANKS_NEUTRAL as N } from './content';
@@ -110,26 +111,27 @@ export function ContactBody() {
         </div>
       </section>
 
-      <section className="b-sec b-ink sc-calm" aria-labelledby="sc-h-calm">
-        <div className="px-wrap sc-calm-g">
-          <div>
-            <h2 id="sc-h-calm" className="b-h2 sc-h2">
-              {C.calm.h.a} <span className="sc-calm-2">{C.calm.h.b}</span>
-            </h2>
-            <p className="sc-calm-p">{C.calm.body}</p>
-          </div>
-          <div className="sc-calm-a">
-            <IntentLink intent="call" className="dc-btn dc-btn-secondary sc-back">
-              <span aria-hidden="true" className="dc-mk" />
-              {C.calm.call}
-            </IntentLink>
-            <p className="sc-alt">
-              {C.calm.alt}{' '}
-              <IntentLink intent="enquiry">
-                {C.calm.altLink}
-                <Icon name="arrow" size={18} />
+      {/* The shared tangerine close (`.b-close`, as on /faq, /services and the homepage). The two actions keep the
+          site's CTA pair styling but stay on this page: they switch the form's intention and jump back to it. */}
+      <section className="b-close ct-close" aria-labelledby="ct-h-close">
+        <div className="px-wrap">
+          <div className="b-close-in">
+            <div>
+              <h2 id="ct-h-close" className="b-h2">
+                {C.calm.h.a} <span className="ct-close-2">{C.calm.h.b}</span>
+              </h2>
+              <p className="b-lede">{C.calm.body}</p>
+            </div>
+            <div className="dc-actions">
+              <IntentLink intent="call" className="dc-btn dc-btn-primary">
+                <Mark />
+                {C.calm.call}
               </IntentLink>
-            </p>
+              <IntentLink intent="enquiry" className="dc-btn dc-btn-secondary">
+                <Mark />
+                {C.calm.altLink}
+              </IntentLink>
+            </div>
           </div>
         </div>
       </section>

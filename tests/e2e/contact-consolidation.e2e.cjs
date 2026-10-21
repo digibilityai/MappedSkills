@@ -191,13 +191,17 @@ async function run(engineName, type) {
     check(E, 'header link: call state checked', await page.isChecked('input[name="intent"][value="call"]'));
     await page.setViewportSize({ width: 1280, height: 900 });
 
-    // in-page "Request a call" link (closing section)
+    // the tangerine close: primary "Request a call" and secondary "Send an enquiry" switch the form, keeping values
     await page.goto(`${BASE}/contact`);
     await page.waitForSelector('button.ct-send:not([disabled])');
     await page.fill('#name', 'Kept Again');
-    await page.click('.sc-calm a.sc-back');
+    await page.click('.ct-close a.dc-btn-primary');
     await page.waitForSelector('#preferredContactTime');
-    check(E, 'closing-section link selects call, keeps values', (await page.inputValue('#name')) === 'Kept Again');
+    check(E, 'close primary selects call, keeps values', (await page.inputValue('#name')) === 'Kept Again' && (await page.isChecked('input[name="intent"][value="call"]')));
+    await page.click('.ct-close a.dc-btn-secondary');
+    await page.waitForFunction(() => !document.getElementById('preferredContactTime'));
+    check(E, 'close secondary selects enquiry, keeps values', (await page.inputValue('#name')) === 'Kept Again' && (await page.isChecked('input[name="intent"][value="enquiry"]')));
+    check(E, 'close labels', (await page.textContent('.ct-close a.dc-btn-primary')).trim() === 'Request a call' && (await page.textContent('.ct-close a.dc-btn-secondary')).trim() === 'Send an enquiry');
 
     check(E, 'no console errors', consoleErrors.length === 0, consoleErrors.join(' | '));
     await ctx.close();

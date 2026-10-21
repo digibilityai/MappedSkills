@@ -1784,7 +1784,9 @@ Use this file only for meaningful project decisions.
 
 ### DEC-071
 - **Date:** 2026-10-20
-- **Status:** **Authorised (owner, Phase C1 brief): consolidation of `/contact` and `/schedule-call` into one contact
+- **Status (current, 2026-10-21):** **LIVE** as `9a5f8cc` (BUILD_ID `0YcvuWgvuzwWGktVMDf-e`). See the release-record
+  addendum at the end of this entry. The original status below is kept as history.
+- **Status (original):** **Authorised (owner, Phase C1 brief): consolidation of `/contact` and `/schedule-call` into one contact
   page, IMPLEMENTED on `feat/contact-experience-consolidation` and committed locally for owner review.** Push, pull
   request, merge, production migration and deployment are **NOT** authorised. Production is unchanged. The CRM
   compatibility mapping and the `/contact` title and copy were approved by the owner on 2026-10-20 (see the
@@ -1843,3 +1845,112 @@ Use this file only for meaningful project decisions.
   No merge or deployment."):** the branch was pushed and PR
   [#33](https://github.com/digibilityai/MappedSkills/pull/33) was opened against `main` (base `87ad476`, unchanged at
   the time). **Still not authorised:** merge, the production migration 004 and deployment.
+- **Addendum — release record (2026-10-21; each step separately authorised by the owner; recorded by the repository
+  worker; documentation only):** C1 and the orange contact CTA are **LIVE**. Final release commit `9a5f8cc`, dispatch
+  run `39554040940`, production BUILD_ID `0YcvuWgvuzwWGktVMDf-e`. This supersedes the "Production is unchanged" and
+  "not authorised" lines above for push, merge, migration 004 and deployment.
+  1. **Merges (VERIFIED FACT, GitHub):** all four PRs were merged by the owner account `digibilityai`, not by the
+     repository worker.
+     - [#33](https://github.com/digibilityai/MappedSkills/pull/33): the C1 feature, merged 2026-10-20T17:07:57Z →
+       `84b53d8`. The tree is identical to the authorised head `a06cbd3`.
+     - [#34](https://github.com/digibilityai/MappedSkills/pull/34): `.github/workflows/deploy.yml` only. The smoke list
+       now checks `/contact?intent=call` → 200 and asserts `/schedule-call` → `308 $SITE_URL/contact?intent=call`.
+       Merged 04:40:34Z → `39a2b74`.
+     - [#35](https://github.com/digibilityai/MappedSkills/pull/35): the contact close uses the shared `.b-close`
+       tangerine CTA (`#FF5B04`), with ink primary and ink-bordered secondary buttons. The intention links keep their
+       behaviour. Locally, e2e passed 330/330 and axe reported 0 violations. Merged 05:35:03Z → `7ec88a6`.
+     - [#36](https://github.com/digibilityai/MappedSkills/pull/36): `deploy.yml` smoke step only. It keeps the 10 s
+       wait, then polls `/` for readiness (12 × 5 s). Only 5xx or no-response results are retried (5 × 5 s); every
+       other check stays strict. It was tested against 8 mocked scenarios, a local build and a read-only run against
+       live. Merged 06:05:35Z → `9a5f8cc`.
+  2. **Pre-migration backup (VERIFIED FACT, host):** taken at 2026-10-21 04:12:47Z with the
+     `docs/27-production-translation/22_PRODUCTION_DEPLOYMENT_ACCEPTANCE.md` §6 procedure. The file is
+     `enquiries-pre-004-20261021T041247Z.sql` in the private, host-only backup directory (directory 700, file 600).
+     It is 13 622 bytes, sha256 `00baf876cd4a6414a7e9324791d41d6b0d476e762184208a5220f23b170e9460`. It contains 7/7
+     enquiry rows, 3/3 ledger rows and both table definitions, and ends with a completion marker. **A restore was not
+     test-executed:** there is no scratch database on the host, and §6 forbids moving the dump off-host.
+  3. **Migration 004 in production (VERIFIED FACT, host):** applied at 2026-10-21 04:17:19Z, before any release.
+     - It used the file from `main` `84b53d8` (sha256 `a0cf7ad0…51c3ec`), run with the host's Node 22 binaries: exit
+       0, 180 ms, with no other DB sessions open.
+     - The ledger records 004 with checksum `a0cf7ad0b3dc`.
+     - The original 34-column fingerprint is unchanged. The three new nullable columns are at positions 35–37. The
+       table still has 7 rows and 6 indexes. A re-run is a no-op.
+     - The live code at the time (`87ad476`) kept working: smoke 200s, and the CRM retry cron ran normally.
+  4. **Lead/CRM verification (VERIFIED FACT):**
+     - Before the migration, on a local MariaDB 10.6.19 replica: the column fingerprint matched production, 004 was
+       idempotent and `INSTANT`-capable, the live insert, CRM retry and export code worked after 004, and every stored
+       CRM body passed Mini CRM's real schema_version 1 schema.
+     - After each release: 0 CRM deliveries pending, the CRM retry cron returned its normal empty result, and the
+       application error log was empty.
+  5. **Deployment attempt 1 — FAILED, auto-recovered (VERIFIED FACT):** run `39543554623` (confirm `84b53d8`),
+     deployment `7217634209`.
+     - Staged BUILD `vaRzkyK92mhaaPccXHWce` went live at 04:27:28Z.
+     - The smoke test failed because `deploy.yml` still expected `/schedule-call` → 200, which is now 308 by design.
+       The worker's link sweep had not covered `.github/`.
+     - The in-job "Roll back on a failed smoke test" step restored `euJS2fTNGTZhUBqZppnTB` (`87ad476`) by 04:27:42Z.
+       The separate dispatch-only "Roll back" job showed as skipped, which is expected.
+     - No lead arrived during the window. 004 stayed applied, and the old code is compatible with it.
+     - Fixed by #34.
+  6. **Deployment attempt 2 — SUCCESS (C1):** run `39545599763` (confirm `39a2b74`), deployment `7217932482`. Live
+     BUILD `gW5VqngqQ_weBne6C7A4a` at 05:03:55Z. The smoke test passed, including the new redirect assertion.
+  7. **Controlled live test submission (VERIFIED FACT, owner-authorised, one submission):** test ID
+     `C1-E2E-20261021-3367`, made at 05:31:09Z through the public call form with an owner-controlled test contact.
+     Analytics consent was declined. The contact details are deliberately not recorded here.
+     - One `POST /api/enquiry` → 201, then the `/thank-you` call confirmation.
+     - Website row 14: `request_type` call, service and preferred time stored, phone in E.164, screening clean.
+     - The CRM delivered it on the first attempt. In Mini CRM, one new "Call request" card appeared (Website requests
+       3 → 4), shown "From /schedule-call" per the approved mapping, with the labelled message lines correct.
+  8. **Deployment attempt 3 — FAILED, auto-recovered (VERIFIED FACT):** run `39550887466` (confirm `7ec88a6`),
+     deployment `7218710631`.
+     - Staged BUILD `pdimsyRgmVnA2i98TlRdr` went live at 05:42:16Z.
+     - The smoke test got `/` 200 and `/services` 200, then `/seo` 503 at +11 s. That 503 was the web server's own
+       807-byte error page; the application error log was empty.
+     - The release rolled back to `gW5VqngqQ_weBne6C7A4a`.
+     - A read-only investigation found live healthy (`/seo` 15/15 200). The access log shows 503s clustered just after
+       earlier app restarts (17, 20 and 21 Oct). The root cause is **UNKNOWN**: the hosting account cannot see process
+       limits or the web server's error log.
+     - Mitigated by #36.
+  9. **Deployment attempt 4 — SUCCESS, final (VERIFIED FACT):** run `39554040940` (`workflow_dispatch`, confirm
+     `9a5f8cc`, `production` gate approved by `digibilityai`), deployment `7219165953` (status success). The workflow
+     ran 06:12:51Z–06:15:01Z.
+     - `release.sh` reported the staged BUILD_ID `0YcvuWgvuzwWGktVMDf-e`, "database schema is up to date", lockfile
+       `cf206545f758` unchanged and `.env` carried byte-for-byte.
+     - Smoke: readiness `/` 200 on attempt 1 with no retries. `/`, `/services`, `/seo`, `/contact`,
+       `/contact?intent=call`, `/thank-you`, `/robots.txt` and `/sitemap.xml` all returned 200. `/schedule-call` →
+       `308 https://mappedskills.com/contact?intent=call`; an unknown page → 404; GTM was compiled in.
+     - **Rollback target:** `.prev` = `gW5VqngqQ_weBne6C7A4a` (`39a2b74`); `.prev2` = `euJS2fTNGTZhUBqZppnTB`.
+  10. **Final production verification (VERIFIED FACT, automated, consent not given, no form submitted):**
+      - 30/30 sampled responses came from the new build, and 13 routes returned 200.
+      - The `/schedule-call` redirect keeps UTM parameters. `GET /api/enquiry` → 405.
+      - Chromium, Firefox and WebKit at 320, 390, 768, 1024 and 1440 px:
+        - the close section background is `rgb(255, 91, 4)`, with an ink primary button and a transparent,
+          ink-bordered secondary button;
+        - there is no overflow or clipping;
+        - both buttons switch the intention and keep the entered values;
+        - 0 console errors and 0 POSTs.
+      - The database has 8 rows (max id 14, the test row), 0 CRM deliveries pending, and an empty application error
+        log.
+      - Re-checked when this record was written: the live `/contact` carries BUILD_ID `0YcvuWgvuzwWGktVMDf-e`, and
+        `/schedule-call` returns 308 to `/contact?intent=call`.
+      - Evidence is outside Git, in the main checkout: `docs/contact-consolidation/c1/` and
+        `docs/contact-consolidation/cta/` (including `cta/live/`).
+  11. **Operational follow-ups (status as of 2026-10-21):**
+      - **Test data cleanup:** website row 14 and its Mini CRM card and contact. OPEN, **not authorised**, still in
+        place.
+      - **Failed release directories:** `~/mappedskills.com.failed-20261021002742` (attempt 1) and
+        `~/mappedskills.com.failed-20261021014228` (attempt 3). Retained; cleanup is OPEN and **not authorised**.
+      - **Idle old Node workers:** left untouched; they were not serving traffic when checked. These are the attempt-1
+        worker on the failed directory and one on a previous release.
+      - **Post-restart 503s:** the root cause is UNKNOWN (§8). The readiness wait and retry from #36 is the
+        mitigation, not a fix.
+      - **Analytics:** GA4 and GTM reports that filter on `page_path = /schedule-call` must move to
+        `form_id = call_request`. The GA4 and Google Ads conversion configuration has not been checked yet. OPEN.
+      - **Restore test of the pre-004 backup:** not performed (§2). OPEN.
+      - **`crm_delivered_at` offset:** the column is written about 4 h apart from `created_at`, because of a timezone
+        mismatch between Node and the DB clock. This is pre-existing and affects display only. OPEN.
+      - **CRM mapping:** call requests still reach the CRM with `source_page` `/schedule-call`. A proper fix needs a
+        coordinated Mini CRM change. OPEN.
+      - **Manual checks:** screen readers, real devices, the shipping browser applications and GTM Tag Assistant on
+        production. No evidence recorded; none of these is a pass.
+      - **Form fields:** removing company, website and the marketing opt-in is still not explicitly owner-approved
+        (first addendum, item 3).

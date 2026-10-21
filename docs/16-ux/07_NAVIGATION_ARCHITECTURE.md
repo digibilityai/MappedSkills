@@ -124,6 +124,7 @@
 | `/services` | **None** | Top level |
 | Capability pages | **Yes** | Home → What we do → *page* |
 | `/problems/{slug}` | **Yes** | Home → *page* until a problems hub exists (`DEC-072`, TB-D1; was Home → Problems → *page*) |
+| `/work` | **Yes** | Home → Case studies (WK-D5, owner-approved /work G1; the page is named as in the main navigation) |
 | `/industries/{slug}` *(conditional)* | **Yes** | Home → Industries → *page* |
 | `/research`, `/blog`, `/pricing`, `/about`, `/how-it-works` | **None** | Top level |
 | `/research/{slug}`, `/blog/{slug}` | **Yes** | Home → Evidence / Insights → *entry* |

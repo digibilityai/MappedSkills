@@ -123,7 +123,7 @@
 | `/` | **None** | — |
 | `/services` | **None** | Top level |
 | Capability pages | **Yes** | Home → What we do → *page* |
-| `/problems/{slug}` | **Yes** | Home → Problems → *page* |
+| `/problems/{slug}` | **Yes** | Home → *page* until a problems hub exists (`DEC-072`, TB-D1; was Home → Problems → *page*) |
 | `/industries/{slug}` *(conditional)* | **Yes** | Home → Industries → *page* |
 | `/research`, `/blog`, `/pricing`, `/about`, `/how-it-works` | **None** | Top level |
 | `/research/{slug}`, `/blog/{slug}` | **Yes** | Home → Evidence / Insights → *entry* |

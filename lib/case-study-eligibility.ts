@@ -4,7 +4,8 @@
  * An entry is public only when ALL of these hold:
  *   1. it is CURRENTLY published (it has a published version now; having been published once is not enough);
  *   2. its slug is valid (`SLUG_PATTERN`) and its public route is not claimed by another published entry;
- *   3. it has every required piece of new-layout content (summary, problem, whatWeDid, impact), OR its immutable
+ *   3. it is not one of the four unpermissioned historical studies and does not take one of their reserved routes;
+ *   4. it has every required piece of new-layout content (summary, problem, whatWeDid, impact), OR its immutable
  *      Contentful entry ID is one of the three legacy studies that were already public. Legacy studies stay on the
  *      legacy template until `LEGACY_IDS_ON_NEW_TEMPLATE` (below) names them.
  *
@@ -22,6 +23,24 @@ export const LEGACY_CASE_STUDY_IDS: ReadonlySet<string> = new Set([
   '4DpPjLCWdakD6tBmZNMnko', // Ameba Software (stored slug `portfolio/seo-ameba-software`)
   '4zQL4P8SR2xogxHN4qFfUl', // Home decor brand
   '6Ycb7aYvXrslOXKchQnqmi', // Online courses (Google Ads)
+]);
+
+/**
+ * THE FOUR UNPERMISSIONED HISTORICAL STUDIES (owner decisions WORK-010, WORK-015, WORK-025 and the Fine Living decision,
+ * 2026-09-19: removed from publication; their URLs stay 404). Never public, even if published again, and their old
+ * routes are RESERVED: no other entry may take a URL that external links still associate with a different client.
+ */
+export const EXCLUDED_CASE_STUDY_IDS: ReadonlySet<string> = new Set([
+  '7eQ2t6t7qzpTkp3mScfi6C', // seo-healthfirst
+  '6iXOA9jVUPJ1YZRpqorzJu', // portfolio/local-seo-service-usa
+  'B63etvFne4B1vL7XyOZiF', // google-ppc-for-real-estate
+  'xudVmwI50zzAYhucWzuY9', // google-ads-for-ecommerce
+]);
+export const RESERVED_CASE_STUDY_ROUTES: ReadonlySet<string> = new Set([
+  'seo-healthfirst',
+  'local-seo-service-usa',
+  'google-ppc-for-real-estate',
+  'google-ads-for-ecommerce',
 ]);
 
 /**
@@ -58,7 +77,7 @@ export type EligibilityInput = {
 
 export type Eligibility =
   | { public: true; layout: 'new' | 'legacy' }
-  | { public: false; reason: 'not-published' | 'invalid-slug' | 'route-collision' | 'incomplete' };
+  | { public: false; reason: 'not-published' | 'excluded' | 'invalid-slug' | 'route-collision' | 'incomplete' };
 
 export const isCurrentlyPublished = (e: Pick<EligibilityInput, 'publishedVersion' | 'publishedAt'>): boolean =>
   typeof e.publishedVersion === 'number' && e.publishedVersion > 0 && Boolean(e.publishedAt);
@@ -89,6 +108,7 @@ export function evaluateCaseStudies(
     const slug = e.slug?.trim() ?? '';
     const route = slug ? routeSlugOf(slug) : '';
     if (!slug || !route || !SLUG_PATTERN.test(slug)) { result.set(e.id, { public: false, reason: 'invalid-slug' }); continue; }
+    if (EXCLUDED_CASE_STUDY_IDS.has(e.id) || RESERVED_CASE_STUDY_ROUTES.has(route)) { result.set(e.id, { public: false, reason: 'excluded' }); continue; }
     const sharing = claims.get(route) ?? [];
     if (sharing.length > 1) {
       const legacySharing = sharing.filter((id) => LEGACY_CASE_STUDY_IDS.has(id));

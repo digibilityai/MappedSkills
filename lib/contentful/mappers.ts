@@ -30,6 +30,8 @@ import {
   serviceLabelFromSections,
 } from '@/lib/contentful/case-study-sections';
 import { createHeadingIdAllocator, nodeText } from '@/lib/contentful/heading-ids';
+import { LEGACY_CASE_STUDY_IDS, LEGACY_IDS_ON_NEW_TEMPLATE } from '@/lib/case-study-eligibility';
+import { asListingOrder, asSector, asService, periodLabel } from '@/lib/case-study-library';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://mappedskills.com';
 
@@ -190,7 +192,12 @@ export function mapContentfulCaseStudyToCms(entry: ContentfulCaseStudy): CmsCase
 
   const highlightResult = firstHighlightFromSections(sections);
   const serviceLabel = serviceLabelFromSections(sections);
-  const newSummary = entry.summary?.trim() || '';
+  /**
+   * A legacy study that code has not moved to the new template never reads the editor summary, so filling `summary`
+   * in Contentful cannot change its meta description, Open Graph text or /work excerpt (G7-P1 F2).
+   */
+  const legacyPinned = LEGACY_CASE_STUDY_IDS.has(entry.sys.id) && !LEGACY_IDS_ON_NEW_TEMPLATE.has(entry.sys.id);
+  const newSummary = legacyPinned ? '' : entry.summary?.trim() || '';
   const problemDoc = entry.problem?.json ?? null;
   const whatWeDidDoc = entry.whatWeDid?.json ?? null;
   const impactDoc = entry.impact?.json ?? null;
@@ -225,6 +232,12 @@ export function mapContentfulCaseStudyToCms(entry: ContentfulCaseStudy): CmsCase
       highlightResult ||
       `Case study: ${entry.title.trim()}${industry ? ` — ${industry}` : ''}`,
     layout: 'legacy',
+    library: {
+      sector: asSector(entry.sector),
+      serviceKey: asService(entry.serviceKey),
+      period: periodLabel(entry.periodStart, entry.periodEnd),
+      listingOrder: asListingOrder(entry.listingOrder),
+    },
     eligibility: {
       publishedVersion: typeof entry.sys.publishedVersion === 'number' ? entry.sys.publishedVersion : null,
       publishedAt: entry.sys.publishedAt ?? null,

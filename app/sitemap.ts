@@ -113,7 +113,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const [blogPosts, caseStudies, researchReports, researchCategories, pressReleases] = await Promise.all([
     getBlogListPosts(),
-    getCaseStudyListCards(),
+    // Case studies throw on a Contentful failure (G7); the sitemap keeps its documented fail-soft behaviour.
+    getCaseStudyListCards().catch(() => []),
     getResearchListCards(),
     getResearchCategories(),
     getPressListCards(),

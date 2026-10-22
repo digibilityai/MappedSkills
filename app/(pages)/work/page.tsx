@@ -4,9 +4,7 @@ import type { CrumbStep } from '@/components/direction-c/primitives';
 import { routeTrailJsonLd } from '@/components/routes/primitives';
 import { CplusPage } from '@/components/cplus/CplusPage';
 import { WorkBody } from '@/components/cplus/work/WorkBody';
-import { FEATURED_SLUG } from '@/components/cplus/work/content';
-import { splitStudies } from '@/components/cplus/work/studies';
-import { fetchContentfulCaseStudies } from '@/lib/contentful/case-studies';
+import { loadLibraryPage } from '@/components/cplus/work/load';
 
 export const revalidate = 60;
 
@@ -20,6 +18,8 @@ export const revalidate = 60;
  *   services provided (`components/cplus/work/studies.ts`). No figure, result, testimonial or rating (DEC-031).
  * - "Check us" (method, AI visibility, enquiry path) is removed from this page only.
  * - Breadcrumb Home → Case studies (WK-D5): the visible breadcrumb and the `BreadcrumbList` come from one trail.
+ * - G7: page 1 of the library (12 studies; later pages at `/work/page/[n]`, search over `/work/index.json`). Library
+ *   order: listing priority, then Contentful order; the featured study is the first.
  */
 export const metadata: Metadata = {
   ...createMetadata(
@@ -35,12 +35,12 @@ const TRAIL: CrumbStep[] = [
 ];
 
 export default async function WorkPage() {
-  const { featured, rest } = splitStudies(await fetchContentfulCaseStudies(), FEATURED_SLUG);
+  const library = (await loadLibraryPage(1))!;
 
   return (
     <CplusPage>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: routeTrailJsonLd(TRAIL) }} />
-      <WorkBody featured={featured} rest={rest} />
+      <WorkBody library={library} />
     </CplusPage>
   );
 }

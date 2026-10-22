@@ -48,13 +48,14 @@ test('approved R3 copy and the G2 close', () => {
   assert.match(body, /<Link href=\{BOOKING_HREF\} className="dc-btn dc-btn-secondary">/);
 });
 
-test('removed: the hero index, the filter, "Check us" and the old statements', () => {
+test('removed: the hero index, the R3 button filter (G7 uses native controls in WorkLibrary), "Check us" and the old statements', () => {
   assert.doesNotMatch(all, /On this page|wk-index|wk-filter|aria-pressed|Filter by|Check us|wk-check|\/ai-seo|\/how-it-works|traffic-but-no-enquiries/);
   assert.doesNotMatch(all, /What we can show you|Permission, not results|no published case studies|Book a call/i);
 });
 
 test('studies come from Contentful: no fixed count, no hard-coded client facts', () => {
-  assert.match(page, /splitStudies\(await fetchContentfulCaseStudies\(\), FEATURED_SLUG\)/);
+  assert.match(page, /const library = \(await loadLibraryPage\(1\)\)!;/);
+  assert.match(read('components/cplus/work/load.ts'), /libraryStudies\(await fetchContentfulCaseStudies\(\), FEATURED_SLUG\)/);
   assert.doesNotMatch(all, /Ameba Software|AnybodyCanBake|Home decor|Chandigarh|Bangalore|Pune|\b(two|three|four|five|six) (projects|case studies|studies)\b/i);
   assert.doesNotMatch(all, /placeholder/i);
 });

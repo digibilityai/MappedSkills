@@ -103,6 +103,10 @@ export const GET_POST_SLUGS_QUERY = `
  * The six simplified-G6 fields do not exist in Contentful until the (separately authorised) schema migration runs.
  * Requesting a missing field makes the WHOLE GraphQL query fail, so they are requested only when the build/runtime
  * sets CONTENTFUL_CASE_STUDY_NEW_FIELDS=1. Unset (the default), behaviour is exactly the legacy-three behaviour.
+ *
+ * G7 adds five optional library fields (sector, serviceKey, periodStart, periodEnd, listingOrder) behind the SAME
+ * flag. ORDER OF OPERATIONS: the G7 schema migration must be applied to the environment before the flag is turned on,
+ * or the query fails (and, since G7, the case-study pages keep their last good version instead of going empty).
  */
 export const CASE_STUDY_NEW_FIELDS_ENABLED = process.env.CONTENTFUL_CASE_STUDY_NEW_FIELDS === '1';
 
@@ -119,7 +123,12 @@ const CASE_STUDY_NEW_FIELDS_FRAGMENT = CASE_STUDY_NEW_FIELDS_ENABLED
     json
   }
   evidenceNote
-  showTestimonial`
+  showTestimonial
+  sector
+  serviceKey
+  periodStart
+  periodEnd
+  listingOrder`
   : '';
 
 export const CASE_STUDY_CARD_FRAGMENT = `
@@ -164,8 +173,8 @@ export const CASE_STUDY_DETAIL_FRAGMENT = `
 `;
 
 export const GET_ALL_CASE_STUDIES_QUERY = `
-  query GetAllCaseStudies($limit: Int = 100, $preview: Boolean = false) {
-    caseStudiesCollection(preview: $preview, limit: $limit, order: sys_firstPublishedAt_DESC) {
+  query GetAllCaseStudies($limit: Int = 100, $skip: Int = 0, $preview: Boolean = false) {
+    caseStudiesCollection(preview: $preview, limit: $limit, skip: $skip, order: [sys_firstPublishedAt_DESC, sys_id_ASC]) {
       total
       items {
         ${CASE_STUDY_CARD_FRAGMENT}

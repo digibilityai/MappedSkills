@@ -1,6 +1,7 @@
-import { contentfulGraphql, CONTENTFUL_REVALIDATE_SECONDS } from '@/lib/contentful/client';
+import { contentfulGraphql, CONTENTFUL_REVALIDATE_SECONDS, getContentfulDeliveryConfig } from '@/lib/contentful/client';
 import { GET_ALL_CASE_STUDIES_QUERY } from '@/lib/contentful/queries';
 import { selectPublic } from '@/lib/case-study-eligibility';
+import { orderStudies } from '@/lib/case-study-library';
 import { isCaseStudyProofWithheld } from '@/lib/case-study-proof';
 import { mapContentfulCaseStudyToCms, normalizeCaseStudySlug } from '@/lib/contentful/mappers';
 import type {
@@ -20,25 +21,47 @@ function filterNull<T>(items: Array<T | null | undefined>): T[] {
   return items.filter((item): item is T => Boolean(item));
 }
 
+/** Entries per GraphQL request. The whole set is read page by page, so more than 100 studies are never truncated. */
+export const CASE_STUDY_FETCH_PAGE = 100;
+/** Hard stop for the paging loop (10,000 entries), so a wrong `total` can never loop for ever. */
+const MAX_FETCH_PAGES = 100;
+
+/** Thrown when Contentful is configured but did not answer. See `fetchAllCaseStudiesRaw`. */
+export class CaseStudyFetchError extends Error {}
+
 /**
  * Every case study is fetched with the DELIVERY token only (never the Preview token), then passed through the one
  * eligibility rule in `lib/case-study-eligibility.ts`. Detail, listing, sitemap and static params all come from this
  * same filtered set, so they cannot disagree. Collisions need the whole set, so the detail page also reads the list.
+ *
+ * FAILURE (G7). With no Contentful configuration there is nothing to read and the result is empty, as before. With a
+ * configuration, a failed or empty-data response now THROWS instead of returning no studies: an ISR regeneration that
+ * throws keeps serving the last good page, so a Contentful outage no longer turns `/work` empty and the study pages
+ * into 404s for a revalidate cycle; a build that cannot read Contentful fails instead of shipping an empty library.
  */
-async function fetchAllCaseStudiesRaw(limit = 100): Promise<CmsCaseStudy[]> {
-  const data = await contentfulGraphql<CaseStudyCollectionResponse>(
-    GET_ALL_CASE_STUDIES_QUERY,
-    { limit },
-    CONTENTFUL_REVALIDATE_SECONDS,
-    { deliveryOnly: true }
-  );
-
-  const items = filterNull(data?.caseStudiesCollection?.items || []);
+async function fetchAllCaseStudiesRaw(): Promise<CmsCaseStudy[]> {
+  if (!getContentfulDeliveryConfig()) return [];
+  const items: ContentfulCaseStudy[] = [];
+  for (let page = 0; page < MAX_FETCH_PAGES; page += 1) {
+    const data = await contentfulGraphql<CaseStudyCollectionResponse>(
+      GET_ALL_CASE_STUDIES_QUERY,
+      { limit: CASE_STUDY_FETCH_PAGE, skip: page * CASE_STUDY_FETCH_PAGE },
+      CONTENTFUL_REVALIDATE_SECONDS,
+      { deliveryOnly: true }
+    );
+    const collection = data?.caseStudiesCollection;
+    if (!collection) throw new CaseStudyFetchError('[contentful] case studies could not be read');
+    const batch = filterNull(collection.items || []);
+    items.push(...batch);
+    const total = typeof collection.total === 'number' ? collection.total : items.length;
+    if (batch.length < CASE_STUDY_FETCH_PAGE || items.length >= total) break;
+  }
   return filterNull(items.map(mapContentfulCaseStudyToCms));
 }
 
-export async function fetchContentfulCaseStudies(limit = 100): Promise<CmsCaseStudy[]> {
-  return selectPublic(await fetchAllCaseStudiesRaw(limit));
+/** The public studies in library order: listing priority first, then newest first-published (Contentful order). */
+export async function fetchContentfulCaseStudies(): Promise<CmsCaseStudy[]> {
+  return orderStudies(selectPublic(await fetchAllCaseStudiesRaw()), (s) => s.library.listingOrder);
 }
 
 export async function fetchContentfulCaseStudyBySlug(slug: string): Promise<CmsCaseStudy | null> {

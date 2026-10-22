@@ -8,7 +8,6 @@ import { ConsentBanner } from '@/components/analytics/ConsentBanner'
 import { GoogleTagManager } from '@/lib/gtm'
 import { MetaPixel } from '@/lib/meta-pixel'
 import { generateOrganizationSchema } from '@/lib/schema'
-import { siteMetadata } from '@/lib/metadata'
 import { CONSENT_BOOTSTRAP_SCRIPT } from '@/lib/consent'
 import { ChromeSwitch } from '@/components/direction-c/ChromeSwitch'
 import { SiteHeader } from '@/components/direction-c/SiteHeader'
@@ -55,9 +54,15 @@ export const metadata: Metadata = {
   title: 'MappedSkills | Judge Us on the Enquiries, Not the Traffic',
   description: 'We help businesses get found by the buyers already looking for what they sell, turn more of those visits into real enquiries, and measure the whole path so they can see what worked.',
   icons: {
-    icon: siteMetadata.faviconPath,
-    apple: siteMetadata.faviconPath,
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
+  manifest: '/site.webmanifest',
 }
 
 export default function RootLayout({

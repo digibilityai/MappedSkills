@@ -86,6 +86,7 @@
     "axe-core": "4.13.0",
     "eslint": "9.39.5",
     "eslint-config-next": "16.2.12",
-    "playwright-core": "1.62.1"
+    "playwright-core": "1.62.1",
+    "sharp": "0.34.5"
   }
 }

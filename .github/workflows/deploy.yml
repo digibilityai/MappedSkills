@@ -90,6 +90,11 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      # Blocking: a failing test fails verification, so nothing is built or deployed. No secrets or database
+      # credentials are passed; the disposable-MariaDB export test skips itself when EXPORT_TEST_DB_ADMIN_* is unset.
+      - name: Test
+        run: npm test
+
       # Reported, not yet blocking: the lint backlog that predates this
       # workflow is recorded in docs/00-project/CURRENT_STATE.md. Make this
       # step blocking once that backlog is cleared.

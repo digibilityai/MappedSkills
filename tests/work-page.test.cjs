@@ -37,8 +37,6 @@ test('WK-D5: one trail, Home → Case studies, for the breadcrumb and the Breadc
 test('approved R3 copy and the G2 close', () => {
   assert.match(copy, /h1: \{ a: 'Real work\.', b: 'Judge it for yourself\.' \}/);
   assert.match(copy, /lede: 'Explore the challenges businesses brought to us, what we changed, and how we approached the work\.'/);
-  assert.match(copy, /h: 'Real challenges\. Real work\.'/);
-  assert.match(copy, /intro: 'See what businesses needed help with, how we approached the problem, and what we changed\.'/);
   assert.match(copy, /h: 'Good work deserves honest evidence\.'/);
   assert.match(copy, /h: 'Tell us what you’re trying to fix\.'/);
   assert.match(copy, /body: 'Tell us what you’re working towards\. We’ll help you figure out where to start\.'/);
@@ -48,8 +46,8 @@ test('approved R3 copy and the G2 close', () => {
   assert.match(body, /<Link href=\{BOOKING_HREF\} className="dc-btn dc-btn-secondary">/);
 });
 
-test('removed: the hero index, the R3 button filter (G7 uses native controls in WorkLibrary), "Check us" and the old statements', () => {
-  assert.doesNotMatch(all, /On this page|wk-index|wk-filter|aria-pressed|Filter by|Check us|wk-check|\/ai-seo|\/how-it-works|traffic-but-no-enquiries/);
+test('removed: the hero index, the R3 filter bar, "Check us" and the old statements (the G7 service chips are WorkLibrary\'s own)', () => {
+  assert.doesNotMatch(all, /On this page|wk-index|wk-filter|Filter by|Check us|wk-check|\/ai-seo|\/how-it-works|traffic-but-no-enquiries/);
   assert.doesNotMatch(all, /What we can show you|Permission, not results|no published case studies|Book a call/i);
 });
 

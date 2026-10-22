@@ -14,5 +14,6 @@ export async function loadLibraryPage(page: number) {
   const { all, facets: f } = await loadLibrary();
   const p = libraryPage(all, page);
   if (page < 1 || page > p.pages) return null;
-  return { items: p.items, page, pages: p.pages, total: p.total, facets: f };
+  const evidence = { figures: all.some((s) => s.figures > 0), outcomes: all.some((s) => s.outcomes.length > 0) };
+  return { items: p.items, page, pages: p.pages, total: p.total, facets: f, evidence };
 }

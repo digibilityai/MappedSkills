@@ -6,7 +6,8 @@ import { Container } from '@/components/Container';
 import { CTASection } from '@/components/CTASection';
 import { Card } from '@/components/ui/card';
 import { CaseStudyContent } from '@/components/case-study/CaseStudyContent';
-import { CaseStudyLayout } from '@/components/case-study/CaseStudyLayout';
+import { CaseStudyTemplate } from '@/components/case-study/CaseStudyTemplate';
+import { CplusPage } from '@/components/cplus/CplusPage';
 import { createMetadata } from '@/lib/metadata';
 import { isCaseStudyProofWithheld } from '@/lib/case-study-proof';
 import { getCaseStudyService } from '@/lib/case-study-services';
@@ -14,6 +15,7 @@ import { SERVICES } from '@/lib/services';
 import {
   getCaseStudyDetail,
   getCaseStudyStaticParams,
+  getNextCaseStudy,
 } from '@/lib/contentful/case-studies';
 
 export const revalidate = 60;
@@ -92,28 +94,31 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
     : Boolean(caseStudy.review && !proofWithheld);
 
   /**
-   * Context row. Legacy template: unchanged. New template (G7): Client, Period (optional Contentful dates, never the
-   * free-text timeline), Service (only an explicit current service), Company Size, Target Area. The free-text Target
-   * Audience is not shown on the new template: it has no review step and is where a sensitive buyer description would
-   * end up (`CLAIMS…` §6A).
+   * The new template (G7 design) is a complete page of its own: hero, the three sections, navigation back to `/work` and
+   * on to the next study, and the close. The legacy template below is unchanged.
    */
-  const metaItems = (
-    isNewLayout
-      ? [
-          caseStudy.clientName ? { label: 'Client', value: caseStudy.clientName } : null,
-          caseStudy.library.period ? { label: 'Period', value: caseStudy.library.period } : null,
-          relatedService ? { label: 'Service', value: relatedService.title } : null,
-          caseStudy.companySize ? { label: 'Company Size', value: caseStudy.companySize } : null,
-          caseStudy.targetArea ? { label: 'Target Area', value: caseStudy.targetArea } : null,
-        ]
-      : [
-          caseStudy.clientName ? { label: 'Client', value: caseStudy.clientName } : null,
-          caseStudy.clientDate ? { label: 'Timeline', value: caseStudy.clientDate } : null,
-          caseStudy.companySize ? { label: 'Company Size', value: caseStudy.companySize } : null,
-          caseStudy.targetArea ? { label: 'Target Area', value: caseStudy.targetArea } : null,
-        ]
-  ).filter(Boolean) as Array<{ label: string; value: string }>;
-  const audience = isNewLayout ? '' : caseStudy.audience;
+  if (isNewLayout && caseStudy.newLayout) {
+    return (
+      <CplusPage>
+        <CaseStudyTemplate
+          study={caseStudy}
+          content={caseStudy.newLayout}
+          service={relatedService ? { title: relatedService.title, link: relatedService.link } : null}
+          showTestimonial={showTestimonial}
+          next={await getNextCaseStudy(caseStudy.slug)}
+        />
+      </CplusPage>
+    );
+  }
+
+  /** Context row (legacy template, unchanged). */
+  const metaItems = [
+    caseStudy.clientName ? { label: 'Client', value: caseStudy.clientName } : null,
+    caseStudy.clientDate ? { label: 'Timeline', value: caseStudy.clientDate } : null,
+    caseStudy.companySize ? { label: 'Company Size', value: caseStudy.companySize } : null,
+    caseStudy.targetArea ? { label: 'Target Area', value: caseStudy.targetArea } : null,
+  ].filter(Boolean) as Array<{ label: string; value: string }>;
+  const audience = caseStudy.audience;
 
   return (
     <>
@@ -159,12 +164,6 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               </p>
             ) : null}
 
-            {caseStudy.layout === 'new' && caseStudy.newLayout?.summary ? (
-              <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-3xl mb-8">
-                {caseStudy.newLayout.summary}
-              </p>
-            ) : null}
-
             {/* Context: the short facts in a row, Target Audience as a full-width row of the same grid. */}
             {metaItems.length > 0 || audience ? (
               <dl className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-5 border-t border-border pt-6">
@@ -188,15 +187,11 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         </Container>
       </Section>
 
-      {caseStudy.layout === 'new' && caseStudy.newLayout ? (
-        <CaseStudyLayout content={caseStudy.newLayout} />
-      ) : (
-        <CaseStudyContent
-          sections={caseStudy.sections}
-          conclusionJson={caseStudy.conclusionJson}
-          withholdProof={proofWithheld}
-        />
-      )}
+      <CaseStudyContent
+        sections={caseStudy.sections}
+        conclusionJson={caseStudy.conclusionJson}
+        withholdProof={proofWithheld}
+      />
 
       {/*
         WORK-027 (owner, 2026-09-19) — ONE contextual related-service link,
@@ -253,15 +248,13 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 What the Client Says
               </h2>
               <Card className="p-8 sm:p-10 hover:translate-y-0">
-                {isNewLayout ? null : (
-                  <div className="mb-6 flex justify-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <span key={i} className="text-accent text-2xl">
-                        ★
-                      </span>
-                    ))}
-                  </div>
-                )}
+                <div className="mb-6 flex justify-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-accent text-2xl">
+                      ★
+                    </span>
+                  ))}
+                </div>
                 {caseStudy.review?.quote ? (
                   <p className="text-lg sm:text-xl text-foreground mb-6 leading-relaxed">
                     &ldquo;{caseStudy.review.quote}&rdquo;

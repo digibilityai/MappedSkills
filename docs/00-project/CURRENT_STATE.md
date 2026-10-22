@@ -48,6 +48,14 @@
 > Start at `docs/ui-revamp/GATE_4_MASTER_ROLLOUT_PLAN.md` (seven `GATE_4_*.md` documents). Proposed owner decisions O1–O10
 > (§7); recommended first batch B0 + B1 (QA harness and baselines, then the global chrome flip). No application code changed.
 >
+> **G7 Batch Five release LIVE — 2026-10-22 (`DEC-074`).** PR #48 (`450c1f9`) is live (run `39777221362`, BUILD
+> `_n1F93vcaNozCROg4D1J7`). Ten Contentful entries were published by the owner-run tool: six R3 case studies are live
+> (Om Sai, Ameba, Home decor, Online courses, InsurYo, ClassPe) and Om Sai is featured first on `/work`.
+> - **Rollback target:** `dF7uxZOq2q-Un3fsmVqyy`. Live verifier passed 38 of 38 checks twice; approved copy, URLs,
+>   sitemap and the checked responsive layouts verified. The existing Om Sai testimonial and rating are unchanged.
+> - **Still open (non-blocking):** VoiceOver/NVDA, consent and CTA analytics (GTM), real-device mobile testing, and a
+>   deploy smoke test for `/work` and `/portfolio`.
+>
 > **`/work` redesign + simplified G6 case-study release LIVE — 2026-10-22 (`DEC-073`).** PRs #39–#41 are live as
 > `17276bf` (run `39713297875`, BUILD `wMkS0ZyN-QeL52oN480S_`). The new Contentful case-study fields are **OFF**; the
 > three legacy studies are unchanged in layout.

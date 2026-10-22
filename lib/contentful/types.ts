@@ -1,3 +1,4 @@
+import type { SectorKey, ServiceRoute } from '@/lib/case-study-library';
 import type { Document } from '@contentful/rich-text-types';
 
 export type ContentfulAsset = {
@@ -175,6 +176,12 @@ export type ContentfulCaseStudy = {
   impact?: ContentfulRichText | null;
   evidenceNote?: string | null;
   showTestimonial?: boolean | null;
+  /** G7 library fields; same flag and migration rule as the G6 fields. */
+  sector?: string | null;
+  serviceKey?: string | null;
+  periodStart?: string | null;
+  periodEnd?: string | null;
+  listingOrder?: number | null;
 };
 
 export type CaseStudyHeadingCard = {
@@ -245,6 +252,13 @@ export type CmsCaseStudy = {
     impact: Document;
     evidenceNote: string;
     showTestimonial: boolean;
+  };
+  /** G7 library metadata (validated; unknown values are null). Never read by the legacy page body. */
+  library: {
+    sector: SectorKey | null;
+    serviceKey: ServiceRoute | null;
+    period: string;
+    listingOrder: number | null;
   };
   /** Inputs for the shared eligibility rule (`lib/case-study-eligibility.ts`). */
   eligibility: {

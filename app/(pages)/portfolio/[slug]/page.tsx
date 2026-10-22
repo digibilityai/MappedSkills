@@ -10,6 +10,7 @@ import { CaseStudyLayout } from '@/components/case-study/CaseStudyLayout';
 import { createMetadata } from '@/lib/metadata';
 import { isCaseStudyProofWithheld } from '@/lib/case-study-proof';
 import { getCaseStudyService } from '@/lib/case-study-services';
+import { SERVICES } from '@/lib/services';
 import {
   getCaseStudyDetail,
   getCaseStudyStaticParams,
@@ -77,24 +78,42 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
    * Independent of `proofWithheld` above: this is a service relationship, not
    * evidence, so it neither depends on nor can reintroduce withheld proof.
    */
-  const relatedService = getCaseStudyService(caseStudy.slug);
+  const isNewLayout = caseStudy.layout === 'new' && Boolean(caseStudy.newLayout);
+  const relatedService =
+    isNewLayout && caseStudy.library.serviceKey ? SERVICES[caseStudy.library.serviceKey] : getCaseStudyService(caseStudy.slug);
 
   /**
    * Testimonial. The legacy template keeps its existing rule (a linked review, unless withheld). The new template is
    * stricter: the editor must tick `showTestimonial`, the linked review must carry a quote, and the study must not be
    * on the withholding list. A missing or empty review simply renders nothing. Stars are legacy-only (WORK-026).
    */
-  const isNewLayout = caseStudy.layout === 'new' && Boolean(caseStudy.newLayout);
   const showTestimonial = isNewLayout
     ? Boolean(caseStudy.newLayout?.showTestimonial && caseStudy.review?.quote && !proofWithheld)
     : Boolean(caseStudy.review && !proofWithheld);
 
-  const metaItems = [
-    caseStudy.clientName ? { label: 'Client', value: caseStudy.clientName } : null,
-    caseStudy.clientDate ? { label: 'Timeline', value: caseStudy.clientDate } : null,
-    caseStudy.companySize ? { label: 'Company Size', value: caseStudy.companySize } : null,
-    caseStudy.targetArea ? { label: 'Target Area', value: caseStudy.targetArea } : null,
-  ].filter(Boolean) as Array<{ label: string; value: string }>;
+  /**
+   * Context row. Legacy template: unchanged. New template (G7): Client, Period (optional Contentful dates, never the
+   * free-text timeline), Service (only an explicit current service), Company Size, Target Area. The free-text Target
+   * Audience is not shown on the new template: it has no review step and is where a sensitive buyer description would
+   * end up (`CLAIMS…` §6A).
+   */
+  const metaItems = (
+    isNewLayout
+      ? [
+          caseStudy.clientName ? { label: 'Client', value: caseStudy.clientName } : null,
+          caseStudy.library.period ? { label: 'Period', value: caseStudy.library.period } : null,
+          relatedService ? { label: 'Service', value: relatedService.title } : null,
+          caseStudy.companySize ? { label: 'Company Size', value: caseStudy.companySize } : null,
+          caseStudy.targetArea ? { label: 'Target Area', value: caseStudy.targetArea } : null,
+        ]
+      : [
+          caseStudy.clientName ? { label: 'Client', value: caseStudy.clientName } : null,
+          caseStudy.clientDate ? { label: 'Timeline', value: caseStudy.clientDate } : null,
+          caseStudy.companySize ? { label: 'Company Size', value: caseStudy.companySize } : null,
+          caseStudy.targetArea ? { label: 'Target Area', value: caseStudy.targetArea } : null,
+        ]
+  ).filter(Boolean) as Array<{ label: string; value: string }>;
+  const audience = isNewLayout ? '' : caseStudy.audience;
 
   return (
     <>
@@ -147,7 +166,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             ) : null}
 
             {/* Context: the short facts in a row, Target Audience as a full-width row of the same grid. */}
-            {metaItems.length > 0 || caseStudy.audience ? (
+            {metaItems.length > 0 || audience ? (
               <dl className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-5 border-t border-border pt-6">
                 {metaItems.map((item) => (
                   <div key={item.label} className="min-w-0">
@@ -155,11 +174,11 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                     <dd className="m-0 font-semibold text-sm sm:text-base break-words">{item.value}</dd>
                   </div>
                 ))}
-                {caseStudy.audience ? (
+                {audience ? (
                   <div className="col-span-2 md:col-span-4 min-w-0">
                     <dt className="text-xs text-muted-foreground mb-1">Target Audience</dt>
                     <dd className="m-0 max-w-3xl text-sm sm:text-base text-foreground leading-relaxed break-words">
-                      {caseStudy.audience}
+                      {audience}
                     </dd>
                   </div>
                 ) : null}

@@ -12,8 +12,9 @@
  * - the footer has four columns: Services, Company, Insights, Contact.
  *
  * DESTINATIONS are unchanged production routes. The redesign drops links from
- * the chrome (the footer's Press, Contact and Book a call entries, the header's
- * Book a call) but adds no new destination.
+ * the chrome (the footer's Contact and Book a call entries, the header's Book a
+ * call) but adds no new destination. Press was returned to the footer's Insights
+ * column by the owner (DEC-076, a narrow revision of DEC-070).
  */
 
 export type NavLink = { href: string; label: string; desc?: string };
@@ -98,6 +99,7 @@ export const FOOTER_COMPANY: NavLink[] = [
 export const FOOTER_INSIGHTS: NavLink[] = [
   { href: '/blog', label: 'Blog' },
   { href: '/research', label: 'Research' },
+  { href: '/press', label: 'Press' },
 ];
 
 /** Gate 4 B1 (DEC-037, strategy S3): every route renders Direction C chrome.

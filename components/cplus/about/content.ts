@@ -86,6 +86,12 @@ export const AB = {
     photo: 'Photo',
   },
 
+  press: {
+    h: 'For journalists',
+    body: 'Press releases and our media contact are in the newsroom.',
+    link: 'Visit the newsroom',
+  },
+
   close: {
     kicker: 'Say hello',
     h: { a: 'We’d like to hear', b: 'about your business.' },

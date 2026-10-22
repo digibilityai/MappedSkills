@@ -2129,3 +2129,45 @@ Use this file only for meaningful project decisions.
 - **Supersedes:** the 2026-10-21 spelling ruling "AnybodyCanBake" (G6-P3 WK-D4b/C3, G6-D, G6-F C-03) and the G5 release
   hold on `/work`. **Read with:** `DEC-005`, `DEC-031`, `DEC-032`, `DEC-061`, `DEC-072`.
   Full record: `docs/work-redesign/g6/G6_P8_RELEASE_RECORD.md`. **Recorded by** the repository worker.
+
+### DEC-074
+- **Date:** 2026-10-22
+- **Status (current, 2026-10-22):** **LIVE and verified.** G7 Batch Five: six R3 case studies are live and Om Sai
+  Developer is featured first on `/work`.
+- **Scope:** the code switch that moves the three legacy case studies to the R3 template, the owner-run Contentful
+  publication of ten prepared entries, and the production verification. It does not change the service taxonomy
+  (`DEC-005`); work shown is not a service sold.
+- **Approvals this records (OWNER REQUIREMENT; owner chat messages, 2026-10-22):** PR #48 commit, push and PR; the
+  production deployment of `450c1f9`; the publication of exactly ten Contentful entries; the final live verification.
+- **Released (VERIFIED FACT, GitHub and host):**
+  - PR #48 merged as `450c1f9` (`LEGACY_IDS_ON_NEW_TEMPLATE` names the three legacy entry IDs; 3 files, tests
+    updated to the new behaviour). Post-merge CI run `39776545079` passed.
+  - Production deployment: run `39777221362` (workflow dispatch, `main`, `450c1f9`, created 2026-10-22 12:18Z).
+    Verify and build: success; release: success; automatic rollback: skipped. Production gate approved by `digibilityai`.
+  - Live `BUILD_ID` **`_n1F93vcaNozCROg4D1J7`**. **Rollback target `dF7uxZOq2q-Un3fsmVqyy`** (`900c92e`, host `.prev`).
+    Not used.
+  - Before this release the live site was `900c92e` (run `39756346527`, the G7 R3 template).
+- **Deploy-first sequencing (VERIFIED FACT):** after the deploy and before the publication, the rendered text of the
+  three legacy pages matched the pre-deployment baseline (`legacy-text-hash.sh`), because a legacy study moves to the
+  new template only once its summary, problem, what-we-did and impact are published.
+- **Contentful (VERIFIED FACT, space `owww06rzpjnj`, `master`, owner-run with the guarded tool; no Claude session held
+  a management token):**
+  - Drafts: six new entries created (InsurYo and ClassPe: industry, client, study) and four existing entries staged.
+    Approved source JSON SHA-256 `033fc480c6c25c0d3158831726a773e45c564407f7548b169246dc27373963f8`.
+  - Publication (about 12:23Z): ten entries published in dependency order, then read back. Tool result
+    `PUBLISH + VERIFY PASSED (10 entries published; nothing else touched)`. The four existing entries were published
+    from the staged drafts (Ameba v43, Home decor v47, Online courses v41, Om Sai v3); the six new entries are at
+    published version 1. Om Sai received `listingOrder: 1` only.
+  - Existing Om Sai testimonial and star rating: **retained unchanged** (published before this release; not edited by it).
+- **Live results (VERIFIED FACT):** six case-study pages return 200 on the R3 template, are indexable with self
+  canonicals and are in the sitemap; `/work` lists all six with Om Sai first. `verify-live.mjs --expect after` passed
+  38 of 38 checks on two consecutive runs after the cache interval. Rendered title, summary, problem, what-we-did and
+  impact text equals the approved editorial package for the five studies in the source JSON (0 missing blocks); no
+  unsupported metric, new testimonial or star rating appears on them. Checked layouts: `/work` and InsurYo at 1440 px,
+  all six at 375 px for horizontal overflow, ClassPe at 375 px by screenshot; no console errors on the pages loaded.
+- **Still open (NOT done; non-blocking):** VoiceOver and NVDA testing; consent behaviour and CTA analytics (GTM) on
+  the released pages; real-device mobile testing; extending the deploy smoke test to `/work` and `/portfolio`.
+- **Rollback available:** Contentful `rollback-publish` (owner-run; restores the four existing entries and unpublishes
+  the six new ones) and the workflow rollback to `dF7uxZOq2q-Un3fsmVqyy`. See
+  `docs/work-redesign/g7/batch-five/BATCH_FIVE_RELEASE_PLAN.md` where that file exists in the owner's checkout (untracked there).
+- **Read with:** `DEC-005`, `DEC-073`. **Recorded by** the repository worker.

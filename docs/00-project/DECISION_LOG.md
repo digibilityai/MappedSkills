@@ -2069,3 +2069,63 @@ Use this file only for meaningful project decisions.
     - **Not tested:** real devices, screen readers, forced colours, GTM Tag Assistant on production.
   - **Evidence** is kept outside Git: `docs/problems-redesign/g2/live/`.
   - **Still open:** TB-D5 (deferred) and TB-D6 (traffic measurement).
+
+### DEC-073
+- **Date:** 2026-10-22 (records work from 2026-10-21 to 2026-10-22)
+- **Status (current, 2026-10-22):** **LIVE** as `17276bf` (BUILD_ID `wMkS0ZyN-QeL52oN480S_`, run `39713297875`), with the
+  Contentful case-study fields **OFF** (`CONTENTFUL_CASE_STUDY_NEW_FIELDS`). Earlier approvals below are kept as history.
+- **Scope:** the `/work` case-studies redesign, the simplified G6 case-study frontend and Contentful schema, the G6-P3
+  and G6-P4 content corrections, and their joint production release. This entry is also the `/work` G1–G2 record that
+  the G6 drafts had proposed under this number.
+- **Approvals this records (OWNER REQUIREMENT, dated as given in the project records; the wording of some owner
+  messages was not available to the recording session and is not quoted):**
+  1. 2026-10-21: `/work` G1 R3 approved (filter hidden, year removed). G2 implemented on `feat/work-g2`.
+     The G5 audit held its release (WK-D4 "TechWave" in the Ameba study; WK-D7 attribution).
+  2. 2026-10-21: MappedSkills or its team did the AnybodyCanBake work (closes WK-D7 "who").
+  3. 2026-10-21: the signed-approval and nine-field G6 designs were dropped for a simplified design: six optional
+     `caseStudies` fields, a unique slug with a pattern rule, and a code-side eligibility gate. Staging, then `master`,
+     were migrated by owner-run guarded tools.
+  4. 2026-10-22: G6-P3 approved (C1, C2, C4b). C3 was **not** applied: `clientName` stays "AnyBodyCanBake, Pune, India".
+  5. 2026-10-22: **the brand spelling is "AnyBodyCanBake"**. This **supersedes the 2026-10-21 "AnybodyCanBake" ruling**
+     (recorded in the untracked G6-D/G6-F drafts and in G6-P3 §1 WK-D4b). G6-P4 approved.
+  6. 2026-10-22: production release of `17276bf` with the flag off (Option A of the G6-P2 audit).
+- **What was released (VERIFIED FACT):**
+  - Range `1ac9827..17276bf`: PR #39 `d9ff3e4` (docs, merged 2026-10-21 08:08Z), PR #40 `a57fc25` (`/work` redesign,
+    2026-10-21 09:53Z), PR #41 `17276bf` (simplified G6 frontend and eligibility, 2026-10-21 17:10Z), all merged by
+    `digibilityai`. No change to `.github/`, `package.json` or the lockfile.
+  - Behaviour on production data: the new `/work` design; three legacy studies unchanged in layout; a newly published
+    entry without the new fields is withheld; drafts cannot be fetched (Delivery API only). No study uses the new layout.
+- **Contentful changes (VERIFIED FACT, space `owww06rzpjnj`, `master`, owner-run, before the release):**
+  - **Migration (2026-10-21):** `caseStudies` additive schema change, 12 of 12 planned changes applied. The 4 draft
+    entries were untouched.
+  - **G6-P3 (2026-10-22):**
+    - Ameba: "TechWave Solutions" → "Ameba Software"; "Ameba Softwares’" → "Ameba Software’s". Entry published version
+      39 → 41.
+    - AnyBodyCanBake client entry: the timeline date was cleared; the client name was kept. Published version 4 → 6.
+    - Contentful post-check and live verification passed.
+  - **G6-P4 (2026-10-22):** in the study entry, "AnybodyCanBake" → "AnyBodyCanBake" in the Problem Statement hyperlink
+    text and in the conclusion. Published version 37 → 39. The link destination, slug, URL and other fields are
+    unchanged. Contentful post-check passed. The **conclusion is withheld and not public**; it was changed for
+    consistency only.
+- **Release (VERIFIED FACT, GitHub):**
+  - Run `39713297875` (workflow dispatch, `main`, `17276bf`), created 2026-10-22 02:47Z. Verify and build: success;
+    release: success; automatic rollback: skipped. Production gate approved from `digibilityai`; deployment record
+    `7242506248`.
+  - Live `BUILD_ID` **`wMkS0ZyN-QeL52oN480S_`**, built by this run.
+  - **Rollback target `OepyJ3b8W8Aq4Au79t0mr`** (`1ac9827`), logged by the swap as the previous release. Not used.
+  - Workflow smoke test passed (readiness 200 on the first attempt; the listed pages 200; `/schedule-call` 308 →
+    `/contact?intent=call`; unknown page 404).
+- **Post-deployment verification: PASS (G6-P7, per the owner brief).** Study page: 0 "AnybodyCanBake"; 10 rendered
+  "AnyBodyCanBake" (one source node rendered 8 times, plus the Client row twice, HTML and payload); correct SEO
+  descriptions; all three published legacy studies accessible; the four drafts remain unpublished.
+  - A read-only count check during the docs task agreed: `/work` 200 with 3 study links; 0 / 10 for the two spellings;
+    0 "TechWave" on the Ameba page.
+- **Still requires separate explicit owner authorisation:** enabling the new case-study fields (flag, host `.env` and
+  `deploy.yml`, plus a first editorially approved study); publishing any draft; any Contentful write; merge of the docs
+  PR that holds this record.
+- **Follow-up (NOT done; no evidence they passed):** real-device mobile testing; screen-reader testing; GTM
+  verification on the released pages; extending the deploy smoke test to `/work`, `/portfolio` and `/blog`; local
+  "superseded" markers on the untracked G6 drafts and the `/work` G2 report.
+- **Supersedes:** the 2026-10-21 spelling ruling "AnybodyCanBake" (G6-P3 WK-D4b/C3, G6-D, G6-F C-03) and the G5 release
+  hold on `/work`. **Read with:** `DEC-005`, `DEC-031`, `DEC-032`, `DEC-061`, `DEC-072`.
+  Full record: `docs/work-redesign/g6/G6_P8_RELEASE_RECORD.md`. **Recorded by** the repository worker.

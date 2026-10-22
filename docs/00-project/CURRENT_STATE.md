@@ -48,6 +48,15 @@
 > Start at `docs/ui-revamp/GATE_4_MASTER_ROLLOUT_PLAN.md` (seven `GATE_4_*.md` documents). Proposed owner decisions O1–O10
 > (§7); recommended first batch B0 + B1 (QA harness and baselines, then the global chrome flip). No application code changed.
 >
+> **`/work` redesign + simplified G6 case-study release LIVE — 2026-10-22 (`DEC-073`).** PRs #39–#41 are live as
+> `17276bf` (run `39713297875`, BUILD `wMkS0ZyN-QeL52oN480S_`). The new Contentful case-study fields are **OFF**; the
+> three legacy studies are unchanged in layout.
+> - **Content (Contentful `master`, before the release):** Ameba naming corrected (G6-P3); the AnyBodyCanBake timeline
+>   date removed; the brand spelling is **AnyBodyCanBake** (G6-P4, supersedes the 2026-10-21 ruling).
+> - **Rollback target:** `OepyJ3b8W8Aq4Au79t0mr`. Post-deployment verification passed.
+> - **Still open:** real-device mobile testing, screen-reader testing, GTM verification, and a deploy smoke test for
+>   `/work`, `/portfolio` and `/blog`. Record: `docs/work-redesign/g6/G6_P8_RELEASE_RECORD.md`.
+>
 > **`/problems/traffic-but-no-enquiries` redesign LIVE — 2026-10-21 (`DEC-072`).** The approved G1 is live: TB-D1–TB-D4,
 > the service tags, no scroll reveal on this page, and the `07` §6 row.
 > - **Release:** PR #38 merged as `1ac9827`. Live is `1ac9827` (run `39565124648`, BUILD `OepyJ3b8W8Aq4Au79t0mr`).

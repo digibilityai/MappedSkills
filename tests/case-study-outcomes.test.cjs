@@ -72,3 +72,14 @@ test('the new template links back to /work and on to the next study, and carries
   assert.ok(!fs.existsSync(path.join(root, 'app/(pages)/concepts')));
   assert.ok(!fs.existsSync(path.join(root, 'components/concepts')));
 });
+
+test('classification: only a bold lead that IS a number is a figure; signs are never trimmed; years, dates and counted words are statements', () => {
+  const O = load('lib/case-study-outcomes.ts');
+  const kinds = (...leads) => O.splitImpact(doc(ul(...leads.map((l) => item(l, 'context.'))))).outcomes.map((o) => o.kind);
+  assert.deepStrictEqual(kinds('+12%', '-27%', '−3 pts', '4.2×', '₹1.2 cr', '38% → 61%'), Array(6).fill('figure'));
+  assert.deepStrictEqual(kinds('120 to 340'), ['figure']);
+  assert.deepStrictEqual(kinds('2025', 'Q3 2025', '12 weeks', 'Top 3', 'Cut CPL by 38%', '3 stages'), Array(6).fill('statement'));
+  const r = O.splitImpact(doc(ul(item('-27%', 'cost per enquiry, Apr–Jun 2025 against Apr–Jun 2024.'), li(p(t('Cost per lead', true), t(' -12% against the prior quarter.'))), li(p(t('Reach', true), t(' – up in the second half.'))))));
+  assert.deepStrictEqual(r.outcomes.map((o) => [o.lead, o.context]), [['-27%', 'cost per enquiry, Apr–Jun 2025 against Apr–Jun 2024.'], ['Cost per lead', '-12% against the prior quarter.'], ['Reach', 'up in the second half.']]);
+  assert.deepStrictEqual(O.plainStatements(O.splitImpact(doc(ul(item('Q3 2025', 'x'), item('Calmer team', 'y')))).outcomes), ['Calmer team']);
+});

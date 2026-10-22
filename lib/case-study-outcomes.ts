@@ -13,7 +13,7 @@ import type { Block, Document, Inline, Text } from '@contentful/rich-text-types'
  *   ordinary rich text it is.
  */
 export type Outcome = {
-  /** `figure`: a short bold lead containing a digit. `statement`: any other bold lead (a documented outcome). */
+  /** `figure`: a bold lead that is a number (see `isFigure`). `statement`: any other bold lead (a documented outcome). */
   kind: 'figure' | 'statement';
   lead: string;
   context: string;
@@ -23,10 +23,21 @@ export type ImpactSplit = { outcomes: Outcome[]; before: Document; after: Docume
 
 /** A board of more outcomes than this is a long list, not a showcase. */
 export const MAX_OUTCOMES = 6;
-/** A bold lead up to this length with a digit in it is shown at figure size; longer is a sentence. */
-export const FIGURE_MAX_CHARS = 20;
+/**
+ * A figure is a bold lead that IS a number: optional sign or currency, digits, an optional unit (`%`, `×`, `x`, `k`, `m`,
+ * `pp`, `pts`, `cr`, `lakh`), optionally a before → after pair. A year, a date, a count with words ("12 weeks", "Q3 2025",
+ * "Top 3") or a sentence that merely contains a digit is a statement: shown as written, at statement size, never as a
+ * headline figure and never on a listing.
+ */
+const NUM = String.raw`[+\-−–~≈<>≥≤]?\s*[₹$€£]?\s*\d[\d,.]*\s*(?:%|×|x|k|m|bn|pp|pts|cr|lakhs?)?`;
+const FIGURE = new RegExp(String.raw`^${NUM}(?:\s*(?:→|->|to)\s*${NUM})?$`, 'i');
+const YEAR = /^(?:19|20)\d{2}$/;
+const isFigure = (lead: string) => FIGURE.test(lead) && !YEAR.test(lead) && lead.length <= 24;
 
-const tidy = (s: string) => s.replace(/\s+/g, ' ').replace(/^[\s:–—-]+/, '').trim();
+/** Whitespace only. A leading sign (`-27%`, `−3 pts`) is part of the editor's figure and is never trimmed. */
+const tidy = (s: string) => s.replace(/\s+/g, ' ').trim();
+/** The editor's separator between the bold lead and its context (`: `, ` – `, ` - `), not a sign on the context itself. */
+const separator = (s: string) => s.replace(/^\s*(:|[–—-]\s)\s*/, '');
 
 /** The bold lead and the remaining plain text of one list item, or null when the item cannot be reproduced exactly. */
 function parseItem(item: Block): { lead: string; context: string } | null {
@@ -36,7 +47,7 @@ function parseItem(item: Block): { lead: string; context: string } | null {
   if (!runs.length || runs.some((r) => r.nodeType !== 'text')) return null;
   const [first, ...rest] = runs as Text[];
   if (!first.marks?.some((m) => m.type === 'bold') || !first.value.trim()) return null;
-  return { lead: tidy(first.value).replace(/[:.]$/, ''), context: tidy(rest.map((r) => r.value).join('')) };
+  return { lead: tidy(first.value).replace(/[:.]$/, ''), context: tidy(separator(rest.map((r) => r.value).join(''))) };
 }
 
 export function splitImpact(impact: Document): ImpactSplit | null {
@@ -48,7 +59,7 @@ export function splitImpact(impact: Document): ImpactSplit | null {
   const parsed = items.map(parseItem);
   if (parsed.some((p) => !p)) return null;
   const outcomes = (parsed as Array<{ lead: string; context: string }>).map((p): Outcome => ({
-    kind: /\d/.test(p.lead) && p.lead.length <= FIGURE_MAX_CHARS ? 'figure' : 'statement',
+    kind: isFigure(p.lead) ? 'figure' : 'statement',
     ...p,
   }));
   // A figure without its metric, period or source is not shown on its own: the whole extraction is uncertain.

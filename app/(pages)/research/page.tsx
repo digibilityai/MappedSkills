@@ -1,16 +1,26 @@
 import { createMetadata } from '@/lib/metadata';
-import { CommercialSection, ChapterLabel, Display, Note } from '@/components/commercial/primitives';
-import { RouteHero, EntryList, FindingList } from '@/components/routes/primitives';
 import {
   getFeaturedResearchCards,
   getLatestResearchFindings,
   getResearchCategories,
   getResearchListCards,
+  getResearchReportBySlug,
 } from '@/lib/contentful/research';
-import { JournalistsCta } from '@/components/research/JournalistsCta';
+import { CplusPage } from '@/components/cplus/CplusPage';
+import { ResearchBody } from '@/components/cplus/research/ResearchBody';
 
 export const revalidate = 60;
 
+/**
+ * `/research` — the owner-approved C+ G1 R1 design (docs/research-redesign/g1/), implemented in G2.
+ *
+ * - The URL, title, description, indexing and structured data are unchanged (no BreadcrumbList is added; the live page
+ *   has none). The conversational H1 is approved; the metadata is not changed.
+ * - Every research fact is Contentful data, read by the existing getters. The featured report (else the newest) is read
+ *   once more by slug for its key findings, in report order, and its facts; if it has none, the latest-findings feed
+ *   is used, as before.
+ * - The report is shown once. Other reports and research areas are listed only when more than one exists.
+ */
 export const metadata = createMetadata(
   'MappedSkills Research',
   'Original MappedSkills research on how businesses are found, measured, and converted — published with method, limits, and the data behind each finding.',
@@ -18,104 +28,21 @@ export const metadata = createMetadata(
 );
 
 export default async function ResearchHubPage() {
-  const [featured, latest, categories, findings] = await Promise.all([
+  const [featured, latest, categories, feed] = await Promise.all([
     getFeaturedResearchCards(),
     getResearchListCards(),
     getResearchCategories(),
     getLatestResearchFindings(),
   ]);
 
+  const card = featured[0] ?? latest[0] ?? null;
+  const report = card ? await getResearchReportBySlug(card.slug) : null;
+  const findings = report?.keyFindings.length ? report.keyFindings : feed;
+  const others = latest.filter((r) => r.slug !== card?.slug);
+
   return (
-    <>
-      <RouteHero
-        eyebrow="Research"
-        title={<>MappedSkills Research</>}
-        lede="Published diagnostics on how businesses are found, measured, and converted. Each report states what was observed, over what period, and where the observation stops."
-        mode="editorial"
-      />
-
-      {featured.length > 0 ? (
-        <CommercialSection tone="paper">
-          <ChapterLabel>Featured research</ChapterLabel>
-          <Display>Featured reports.</Display>
-          <EntryList
-            entries={featured.map((report) => ({
-              href: report.href,
-              title: report.title,
-              meta: [report.categoryName, report.publishedDate].filter(Boolean).join(' · '),
-              summary: report.excerpt,
-            }))}
-          />
-        </CommercialSection>
-      ) : null}
-
-      {findings.length > 0 ? (
-        <CommercialSection tone="ground">
-          <ChapterLabel>Latest data</ChapterLabel>
-          <Display>Findings from published research.</Display>
-          <FindingList
-            items={findings.map((finding) => ({
-              term: finding.statistic ? `${finding.statistic} — ${finding.headline}` : finding.headline,
-              body: [finding.description, finding.baseSample, finding.sourceNote].filter(Boolean).join(' '),
-            }))}
-          />
-        </CommercialSection>
-      ) : null}
-
-      {categories.length > 0 ? (
-        <CommercialSection tone="paper">
-          <ChapterLabel>Research areas</ChapterLabel>
-          <Display>Where the work is grouped.</Display>
-          <EntryList
-            entries={categories.map((category) => ({
-              href: category.href,
-              title: category.name,
-              summary: category.description,
-            }))}
-          />
-        </CommercialSection>
-      ) : null}
-
-      {latest.length > 0 ? (
-        <CommercialSection tone="ground">
-          <ChapterLabel>Latest research</ChapterLabel>
-          <Display>Published reports, newest first.</Display>
-          <EntryList
-            entries={latest.map((report) => ({
-              href: report.href,
-              title: report.title,
-              meta: [report.categoryName, report.publishedDate].filter(Boolean).join(' · '),
-              summary: report.excerpt,
-            }))}
-          />
-        </CommercialSection>
-      ) : (
-        <CommercialSection tone="ground">
-          <ChapterLabel>Latest research</ChapterLabel>
-          <Display>Nothing is published here yet.</Display>
-          <Note>When a research report is published in Contentful, it will appear on this page. No stub or placeholder is shown in the meantime.</Note>
-        </CommercialSection>
-      )}
-
-      <CommercialSection tone="paper">
-        <ChapterLabel>Methodology</ChapterLabel>
-        <Display>What a report is allowed to claim.</Display>
-        <p className="mt-4 max-w-[58ch] text-[1.02rem] leading-relaxed text-resolve-dim">
-          MappedSkills research records what was observed, the period and geography it covers, the sample
-          where one exists, and the limits of that observation. Findings are not restated as guarantees.
-        </p>
-        <Note>
-          A dedicated research methodology page is not published yet, so this section does not link to one.
-        </Note>
-      </CommercialSection>
-
-      <CommercialSection tone="ground">
-        <ChapterLabel>For journalists</ChapterLabel>
-        <Display>Media enquiries.</Display>
-        <div className="mt-6">
-          <JournalistsCta subject="Media enquiry: MappedSkills Research" />
-        </div>
-      </CommercialSection>
-    </>
+    <CplusPage>
+      <ResearchBody data={{ report, card, findings, others, categories }} />
+    </CplusPage>
   );
 }

@@ -5,7 +5,7 @@ const siteName = 'MappedSkills';
 const author = 'MappedSkills';
 
 export function resolveOgImageUrl(image?: string | null): string {
-  const fallback = siteMetadata.faviconPath;
+  const fallback = siteMetadata.ogFallbackImagePath;
   const rawImage = image || fallback;
 
   if (!rawImage) {
@@ -97,7 +97,11 @@ export const siteMetadata = {
   // on white; PNG is used rather than the SVG because not every consumer of
   // schema.org markup renders SVG (LOGO_G1_GATE.md §4 step 5).
   schemaLogoPath: '/mappedskills-logo-schema.png',
-  faviconPath: '/ms_icon.webp',
+  // Browser icons live in public/ (icon.svg, favicon.ico, favicon-{16x16,32x32}.png,
+  // apple-touch-icon.png, site.webmanifest) and are declared in app/layout.tsx.
+  // `ms_icon.webp` is the old raster favicon; it is kept ONLY as the default
+  // social-share image so share cards do not change with the favicon fix.
+  ogFallbackImagePath: '/ms_icon.webp',
   email: process.env.NEXT_PUBLIC_BUSINESS_EMAIL || 'info@mappedskills.com',
   phone: process.env.NEXT_PUBLIC_BUSINESS_PHONE || '+91 9873232662',
   address: process.env.NEXT_PUBLIC_BUSINESS_ADDRESS || 'Pune, Maharashtra, India',

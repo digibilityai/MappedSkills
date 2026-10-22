@@ -17,7 +17,7 @@
  */
 const fs = require('node:fs');
 const path = require('node:path');
-// sharp is not a direct dependency; it resolves from Next's own install. Dev-time only.
+// sharp is an explicit devDependency (package.json). Dev-time only; not used at runtime.
 const sharp = require('sharp');
 
 const publicDir = path.join(__dirname, '..', 'public');

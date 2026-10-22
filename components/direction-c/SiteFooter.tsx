@@ -14,8 +14,8 @@ import { CONTACT_LINK, FOOTER_COMPANY, FOOTER_INSIGHTS, FOOTER_SERVICES, type Na
  * three social profiles, unchanged.
  *
  * The Contact column carries the email and "Pune, India" only. The footer no
- * longer lists the Mumbai office, the two phone numbers, the service-area line
- * or Press. Those details are untouched elsewhere (lib/metadata.ts `offices`,
+ * longer lists the Mumbai office, the two phone numbers or the service-area
+ * line. (Press is back in Insights: DEC-076.) Those details are untouched elsewhere (lib/metadata.ts `offices`,
  * structured data, /contact and the other pages).
  * No commercial CTA strip (Session 33 F10: each page closes once).
  */

@@ -37,6 +37,7 @@ export const RESEARCH = {
     tail: 'or use the contact form.',
     subject: 'Media enquiry: MappedSkills Research',
     link: 'Media enquiry',
+    press: 'Newsroom',
   },
   empty: {
     h: 'Nothing is published here yet.',

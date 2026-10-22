@@ -1191,7 +1191,7 @@ Use this file only for meaningful project decisions.
 
 ### DEC-057
 - **Date:** 2026-10-17
-- **Status:** **Approved (owner) — `/lead-generation` G1 visual direction, structure and finalized copy; local implementation (G2) on `feat/lead-generation-g2` authorised. No commit, push, PR, merge or deployment authorised.**
+- **Status:** **Approved (owner) — `/lead-generation` G1 visual direction, structure and finalized copy; local implementation (G2) on `feat/lead-generation-g2` authorised. Addendum (2026-10-22): owner visually approved the working G2 preview; commit, push and PR authorised. Merge and deployment are NOT authorised.**
 - **Decision (owner, "ABCB | Lead Generation | G1 Approved, Begin G2 Implementation", 2026-10-17; scope is the `/lead-generation` page only):**
   1. **G1 approved** following Owner Confirmation 04: visual direction, section order, layout, illustrations, interactions and finalized copy (`docs/lead-generation-redesign/g1/`: `LG_G1_COPY.md`, `LG_G1_DECISIONS.md`, `LG_G1_CONFIRMATION_04.md`, `mockup/`). Prior owner records: Correction 01 (no manual lead review), Correction 02 (direct delivery, three-step journey, no confirmation prerequisite), Confirmation 03 (operating model), Confirmation 04 (conditional delivery testing; monthly report; no monthly review call).
   2. **Approved decisions:** **LG-D01** retain the existing H1; **LG-D03** add the secondary CTA "Book a call" → `/schedule-call` (hero and close); **LG-D08** delivery-route testing is conditional ("Where the setup allows, we test that enquiries reach the right destination."); **LG-D19** use meta description option A ("Lead generation that brings in enquiries worth calling back. We manage the campaigns; enquiries go directly to your own form, CRM or WhatsApp."); **LG-D27** enquiries go directly to the client's own form, CRM or WhatsApp, depending on setup; **LG-D28** the targeting wording "You tell us who you want to reach. We build campaigns around them."; **LG-D30** monthly campaign performance reporting ("You receive a monthly report on campaign performance.").
@@ -2220,3 +2220,14 @@ Use this file only for meaningful project decisions.
   give); shipping browsers other than the in-app browser.
 - **Rollback available:** the workflow rollback to `WI31bqI9kz3gR-JejPARA`.
 - **Read with:** `DEC-005`, `DEC-071`, `DEC-074`. **Recorded by** the repository worker.
+
+### DEC-076
+- **Date:** 2026-10-22
+- **Status:** **Owner direction: `/press` G1 accepted; G2 local implementation authorised. A narrow, owner-directed revision of `DEC-070` (footer only). No commit, push, PR, merge or deployment authorised.**
+- **Decision (owner, "Press Page G2 Implementation", 2026-10-22):**
+  1. **APPROVED DECISION:** `/press` is rebuilt on the C+ shell as a compact newsroom consistent with `/research` (`docs/press-redesign/g1/PR_G1_PROPOSAL.md`): editorial hero; latest news with an honest empty state and dated editorial rows; Research and About background links; a media-enquiry close.
+  2. **Revision of `DEC-070` (footer only):** Press returns to the shared footer's Insights column (Blog · Research · Press). `DEC-070`'s other decisions, and its history, are unchanged and not rewritten. The header is unchanged.
+  3. **Contextual links:** Press → Research, About, Contact; Research → Press (the existing "For journalists" strip); About → Press (a slim "For journalists" strip). No outbound links are added.
+  4. **Unchanged:** the URL, title, description, canonical, indexing, structured data, `revalidate`, the Contentful getter and `/press/[slug]` (its redesign is out of scope). The media address stays `info@mappedskills.com`; **confirmed by the owner as the final media contact (2026-10-22)**.
+- **Not authorised:** any Git or release step until the owner visually approves the working G2 preview.
+- **Read with:** `DEC-032`, `DEC-070`, `DEC-075`. **Approved by:** Project owner, 2026-10-22. Recorded by the repository worker.

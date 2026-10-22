@@ -296,6 +296,9 @@ export function ResearchBody({ data }: { data: ResearchHubData }) {
             <Link className="rs-go" href={CONTACT_HREF}>
               <span className="rs-go-t">{S.media.link}</span> <span aria-hidden="true">→</span>
             </Link>
+            <Link className="rs-go" href="/press">
+              <span className="rs-go-t">{S.media.press}</span> <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </div>
       </aside>

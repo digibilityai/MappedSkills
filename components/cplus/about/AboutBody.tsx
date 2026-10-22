@@ -182,6 +182,21 @@ export function AboutBody() {
         </div>
       </section>
 
+      {/* a slim, secondary pointer to /press (DEC-076) */}
+      <aside className="ax-press" aria-labelledby="ab-h-press">
+        <div className="px-wrap ax-press-in">
+          <h2 id="ab-h-press" className="ax-press-k">
+            {AB.press.h}
+          </h2>
+          <div className="ax-press-b">
+            <p>{AB.press.body}</p>
+            <Link className="ax-press-go" href="/press">
+              <span>{AB.press.link}</span> <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </div>
+      </aside>
+
       {/* 5: close (tangerine): contact primary, booking secondary; what happens next */}
       <section className="b-close ax-close" aria-labelledby="b-close-h">
         <div className="px-wrap">

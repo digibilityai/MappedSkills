@@ -126,6 +126,22 @@
 .ax-next li { display: flex; gap: 12px; align-items: baseline; font: 700 1.0625rem/1.4 var(--dc-f-body); }
 .ax-next li b { flex: none; width: 28px; height: 28px; display: inline-grid; place-items: center; background: var(--dc-ink); color: var(--dc-tang); font: 800 .9375rem/1 var(--dc-f-title); transform: translateY(5px); }
 
+/* press pointer (DEC-076): the /research "For journalists" pattern, ax-scoped */
+.ax-press { padding-block: clamp(28px, 3.5vw, 44px); border-top: 1px solid var(--dc-line); }
+.ax-press-in { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: var(--dc-col-gap); align-items: baseline; }
+.ax-press-k { margin: 0; font: 700 .75rem/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-dim); }
+.ax-press-b { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px; }
+.ax-press-b p { margin: 0; max-width: 62ch; color: var(--dc-dim); line-height: 1.55; }
+.ax-press-go { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: var(--dc-ink); font-weight: 700; text-decoration: none; }
+.ax-press-go > span:first-child { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: var(--dc-line); transition: text-decoration-color var(--ax-micro, 150ms) ease; }
+.ax-press-go > span[aria-hidden] { transition: transform var(--ax-micro, 150ms) ease; }
+.ax-press-go:hover > span:first-child, .ax-press-go:focus-visible > span:first-child { text-decoration-color: var(--dc-tang-display); }
+.ax-press-go:hover > span[aria-hidden] { transform: translateX(3px); }
+@media (prefers-reduced-motion: reduce) {
+  .ax-press-go > span { transition: none; }
+  .ax-press-go:hover > span[aria-hidden] { transform: none; }
+}
+
 /* ---------- medium 761-1080 ---------- */
 @media (max-width: 1080px) {
   .ax-hero-g { grid-template-columns: minmax(0, 1fr); row-gap: 36px; }
@@ -135,7 +151,7 @@
   .ax-team { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ax-people-head { grid-template-columns: minmax(0, 1fr); }
   .ax-ph-tag { justify-self: start; }
-  .ax-next { grid-template-columns: minmax(0, 1fr); }
+  .ax-next, .ax-press-in { grid-template-columns: minmax(0, 1fr); }
   .px-h .b-close.ax-close .b-close-in { grid-template-columns: minmax(0, 1fr); align-items: start; }
 }
 

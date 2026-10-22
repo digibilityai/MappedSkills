@@ -71,7 +71,8 @@ const options: Options = {
     [BLOCKS.HEADING_4]: (_n, children) => <h4 className="ct-sub">{children}</h4>,
     [BLOCKS.HEADING_5]: (_n, children) => <h4 className="ct-sub">{children}</h4>,
     [BLOCKS.HEADING_6]: (_n, children) => <h4 className="ct-sub">{children}</h4>,
-    [BLOCKS.UL_LIST]: (node, children) => <ul className={isLedList(node as Block) ? 'ct-bullets' : 'ct-ul'}>{children}</ul>,
+    // `list-style: none` lists lose their list semantics in Safari/VoiceOver unless the role is explicit.
+    [BLOCKS.UL_LIST]: (node, children) => <ul role="list" className={isLedList(node as Block) ? 'ct-bullets' : 'ct-ul'}>{children}</ul>,
     [BLOCKS.OL_LIST]: (_n, children) => <ol className="ct-ol">{children}</ol>,
     [BLOCKS.LIST_ITEM]: (_n, children) => <li>{children}</li>,
     [BLOCKS.QUOTE]: (_n, children) => <blockquote>{children}</blockquote>,
@@ -121,7 +122,7 @@ function Blocks({ doc }: { doc: Document }) {
     if (!isLedList(b)) return void prose.push(b);
     flush(k);
     groups.push(
-      <ul key={`l${k}`} className="ct-bullets">
+      <ul role="list" key={`l${k}`} className="ct-bullets">
         {(b.content as Block[]).map((li, i) => (
           <li key={i}>{documentToReactComponents({ nodeType: 'document', data: {}, content: li.content } as unknown as Document, options)}</li>
         ))}
@@ -284,7 +285,7 @@ export function CaseStudyTemplate({ study, content: c, service, showTestimonial,
                         <p className="ct-res-c">{figures[0].context}</p>
                       </div>
                       {figures.length > 1 ? (
-                        <ul className="ct-res-more">
+                        <ul role="list" className="ct-res-more">
                           {figures.slice(1).map((o, i) => (
                             <li key={i}>
                               <Figure lead={o.lead} size="m" />
@@ -296,7 +297,7 @@ export function CaseStudyTemplate({ study, content: c, service, showTestimonial,
                     </div>
                   ) : null}
                   {statements.length ? (
-                    <ul className={figures.length ? 'ct-said' : 'ct-said is-only'}>
+                    <ul role="list" className={figures.length ? 'ct-said' : 'ct-said is-only'}>
                       {statements.map((o, i) => (
                         <li key={i}>
                           <p className="ct-said-k">

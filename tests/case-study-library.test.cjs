@@ -52,6 +52,7 @@ function legacyStudies() {
     review: { name: `${MARK} reviewer`, testimonial: `${MARK} LEGACY QUOTE` },
     content: { json: doc(head(2, 'Problem Statement'), para(`${MARK} legacy problem. Second sentence.`), head(2, 'Results & Metrics'), para(`${MARK} LEGACY METRIC`)) },
     summary: `${MARK} LEGACY SUMMARY`, sector,
+    problem: { json: doc(para(`${MARK} legacy R3 problem.`)) }, whatWeDid: { json: doc(para(`${MARK} legacy R3 work.`)) }, impact: { json: doc(para(`${MARK} legacy R3 impact.`)) },
   }));
 }
 /** Never public: the four unpermissioned drafts (one re-published), a reserved route, an incomplete study. */
@@ -134,7 +135,7 @@ test('flag OFF: no G6/G7 field is requested and only the three legacy studies ar
   for (const f of ['sector', 'serviceKey', 'periodStart', 'periodEnd', 'listingOrder']) assert.ok(on.calls[0].query.includes(f), f);
 });
 
-test('legacy pages are unchanged with the flag on: legacy template, no editor summary in metadata or /work', async () => {
+test('flag ON: the three legacy studies use the new template with their approved summary; flag OFF keeps them legacy', async () => {
   const off = setup(legacyStudies(), { newFields: '' });
   const before = await off.api.fetchContentfulCaseStudies();
   const on = setup(legacyStudies());
@@ -142,10 +143,11 @@ test('legacy pages are unchanged with the flag on: legacy template, no editor su
   for (const route of LEGACY_ROUTES) {
     const a = before.find((x) => x.slug === route);
     const b = after.find((x) => x.slug === route);
-    assert.strictEqual(b.layout, 'legacy');
-    for (const k of ['title', 'metaTitle', 'metaDescription', 'summary', 'href', 'clientName', 'clientDate', 'audience', 'highlightResult'])
-      assert.strictEqual(b[k], a[k], `${route}.${k}`);
-    assert.ok(!b.metaDescription.includes('LEGACY SUMMARY'));
+    assert.strictEqual(a.layout, 'legacy');
+    assert.strictEqual(b.layout, 'new');
+    for (const k of ['title', 'href', 'clientName', 'clientDate'])
+      assert.strictEqual(b[k], a[k], `${route}.${k} (identity and URL never change)`);
+    assert.strictEqual(b.metaDescription, 'SYNTHETIC LEGACY SUMMARY');
   }
   const page = fs.readFileSync(path.join(root, 'app/(pages)/portfolio/[slug]/page.tsx'), 'utf8');
   assert.ok(page.includes('const audience = caseStudy.audience;'), 'audience row kept for legacy only');
@@ -192,13 +194,13 @@ test('static pages and search agree: one order, 12 per page, featured first, fil
   assert.strictEqual(plain.work().libraryStudies(await plain.api.fetchContentfulCaseStudies(), 'seo-ameba-software')[0].slug, 'seo-ameba-software');
 });
 
-test('the public index carries preview fields only: no withheld proof, body, review, audience or legacy summary', async () => {
+test('the public index carries preview fields only: no withheld proof, body, review or audience', async () => {
   const s = setup([...legacyStudies(), ...syntheticStudies(8), ...hiddenStudies()]);
   const all = s.work().libraryStudies(await s.api.fetchContentfulCaseStudies(), 'seo-ameba-software');
   const keys = ['slug', 'href', 'title', 'client', 'detail', 'industry', 'service', 'stage', 'challenge', 'changed', 'outcomes', 'figures', 'sector', 'serviceKey', 'period', 'search'];
   for (const st of all) assert.deepStrictEqual(Object.keys(st).sort(), [...keys].sort());
   const json = JSON.stringify(all);
-  for (const banned of ['LEGACY METRIC', 'LEGACY QUOTE', 'LEGACY SUMMARY', 'legacy audience', 'HIDDEN']) assert.ok(!json.includes(banned), banned);
+  for (const banned of ['LEGACY METRIC', 'LEGACY QUOTE', 'legacy audience', 'HIDDEN']) assert.ok(!json.includes(banned), banned);
   const route = fs.readFileSync(path.join(root, 'app/(pages)/work/index.json/route.ts'), 'utf8');
   assert.match(route, /loadLibrary\(\)/);
   assert.match(route, /'X-Robots-Tag': 'noindex'/);

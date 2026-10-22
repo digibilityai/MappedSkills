@@ -44,14 +44,18 @@ export const RESERVED_CASE_STUDY_ROUTES: ReadonlySet<string> = new Set([
 ]);
 
 /**
- * THE TEMPLATE SWITCH FOR THE THREE LEGACY STUDIES. Empty on purpose.
+ * THE TEMPLATE SWITCH FOR THE THREE LEGACY STUDIES. Names all three since G7 batch five.
  *
  * A legacy study always renders on the legacy template, even if someone fills in the new fields in Contentful. It moves
  * to the new template only when its entry ID is added here, in code, as a deliberate editorial migration decision
  * (new copy approved, evidence checked, owner sign-off recorded). Removing the ID puts it back on the legacy template.
  * Entries that are not legacy are unaffected: they use the new template whenever their content is complete.
  */
-export const LEGACY_IDS_ON_NEW_TEMPLATE: ReadonlySet<string> = new Set<string>();
+export const LEGACY_IDS_ON_NEW_TEMPLATE: ReadonlySet<string> = new Set<string>([
+  '4DpPjLCWdakD6tBmZNMnko', // Ameba Software (G7 batch five, R3 copy approved)
+  '4zQL4P8SR2xogxHN4qFfUl', // Home decor brand (G7 batch five, R3 copy approved)
+  '6Ycb7aYvXrslOXKchQnqmi', // Online courses / AnyBodyCanBake (G7 batch five, R3 copy approved)
+]);
 
 /** Same pattern the later Contentful `slug` validation will use. The optional `portfolio/` prefix is Ameba's. */
 export const SLUG_PATTERN = /^(portfolio\/)?[a-z0-9]+(-[a-z0-9]+)*$/;

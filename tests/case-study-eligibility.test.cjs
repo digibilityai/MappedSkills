@@ -90,10 +90,12 @@ test('the three legacy IDs stay public without new fields; a lookalike ID or slu
 
 test('legacy studies stay on the legacy template even when new fields are filled; only the code-level list moves them', () => {
   const { evaluateCaseStudies, LEGACY_IDS_ON_NEW_TEMPLATE } = elig();
-  assert.strictEqual(LEGACY_IDS_ON_NEW_TEMPLATE.size, 0, 'no legacy study has been migrated to the new template');
+  assert.deepStrictEqual([...LEGACY_IDS_ON_NEW_TEMPLATE].sort(), [AMEBA, HOME, COURSES].sort(), 'G7 batch five moves exactly the three legacy studies');
+  const blank = { hasSummary: false, hasProblem: false, hasWhatWeDid: false, hasImpact: false };
   for (const id of [AMEBA, HOME, COURSES]) {
-    const filled = verdict([input(id, 'any-valid-slug')])(id);
-    assert.deepStrictEqual(filled, { public: true, layout: 'legacy' }, id);
+    // new copy not yet published: stays legacy, so deploying the code before the publish changes nothing visible
+    assert.deepStrictEqual(verdict([input(id, 'any-valid-slug', blank)])(id), { public: true, layout: 'legacy' }, id);
+    assert.deepStrictEqual(verdict([input(id, 'any-valid-slug')])(id), { public: true, layout: 'new' }, id);
   }
   const moved = evaluateCaseStudies([input(AMEBA, 'portfolio/seo-ameba-software')], new Set([AMEBA]));
   assert.deepStrictEqual(moved.get(AMEBA), { public: true, layout: 'new' });
@@ -117,7 +119,7 @@ test('normalised collisions: portfolio/slug vs slug withholds both non-legacy en
   assert.deepStrictEqual(v1('a'), { public: false, reason: 'route-collision' });
   assert.deepStrictEqual(v1('b'), { public: false, reason: 'route-collision' });
   const v2 = verdict([input('n', 'seo-for-home-decor-brand'), input(HOME, 'seo-for-home-decor-brand')]);
-  assert.deepStrictEqual(v2(HOME), { public: true, layout: 'legacy' });
+  assert.deepStrictEqual(v2(HOME), { public: true, layout: 'new' });
   assert.deepStrictEqual(v2('n'), { public: false, reason: 'route-collision' });
   // an unpublished entry does not claim the route
   const v3 = verdict([input('a', 'portfolio/q'), input('b', 'q', { publishedVersion: null })]);
@@ -171,11 +173,11 @@ test('existing three URLs: legacy layout, Ameba reachable by bare and prefixed s
   assert.strictEqual(await s.api.getCaseStudyDetail('no-such-study'), null);
 });
 
-test('end to end: a legacy entry with new fields populated still renders the legacy template', async () => {
+test('end to end: a legacy entry renders the new template once its new fields are published, and the legacy one before', async () => {
   const filled = [item(AMEBA, 'portfolio/seo-ameba-software', newContent()), item(HOME, 'seo-for-home-decor-brand'), item(COURSES, 'google-ads-for-online-courses')];
   const s = setup(filled, { newFields: '1' });
-  const d = await s.api.getCaseStudyDetail('seo-ameba-software');
-  assert.strictEqual(d.layout, 'legacy');
+  assert.strictEqual((await s.api.getCaseStudyDetail('seo-ameba-software')).layout, 'new');
+  assert.strictEqual((await s.api.getCaseStudyDetail('seo-for-home-decor-brand')).layout, 'legacy', 'new fields not yet published: unchanged');
 });
 
 test('detail, /work cards, sitemap entries and static params list exactly the same studies', async () => {
@@ -255,25 +257,25 @@ test('the Contentful slug validation prepared for the migration equals the appli
   assert.ok(read('docs/work-redesign/g6/simplified/SIMPLIFIED_SCHEMA_CONTRACT.md').includes(SLUG_PATTERN_SOURCE));
 });
 
-test('/work (PR #40 redesign): a new-template study shows its approved summary; legacy studies keep the Problem Statement', async () => {
+test('/work (PR #40 redesign): a new-template study shows its approved summary; a legacy study without published new fields keeps the Problem Statement', async () => {
   const problemStatement = { json: { nodeType: 'document', data: {}, content: [
     { nodeType: 'heading-2', data: {}, content: [{ nodeType: 'text', value: 'Problem Statement', marks: [], data: {} }] },
     { nodeType: 'paragraph', data: {}, content: [{ nodeType: 'text', value: 'Legacy problem sentence one. Legacy sentence two.', marks: [], data: {} }] },
   ] } };
   const items = [
-    item(AMEBA, 'portfolio/seo-ameba-software', { content: problemStatement, ...newContent({ summary: 'MUST NOT SHOW on a legacy study.' }) }),
-    item(HOME, 'seo-for-home-decor-brand'), item(COURSES, 'google-ads-for-online-courses'),
+    item(AMEBA, 'portfolio/seo-ameba-software', { content: problemStatement, ...newContent({ summary: 'Approved Ameba summary. Second.' }) }),
+    item(HOME, 'seo-for-home-decor-brand', { content: problemStatement }), item(COURSES, 'google-ads-for-online-courses'),
     item('newstudy0000000000001', 'new-study', newContent({ summary: 'Approved summary one. Approved summary two. Three.' })),
   ];
   const s = setup(items, { newFields: '1' });
   const { featured, rest } = load('components/cplus/work/studies.ts').splitStudies(await s.api.fetchContentfulCaseStudies(), 'seo-ameba-software');
   assert.strictEqual(featured.slug, 'seo-ameba-software');
-  assert.strictEqual(featured.challenge, 'Legacy problem sentence one. Legacy sentence two.');
+  assert.strictEqual(featured.challenge, 'Approved Ameba summary. Second.', 'a legacy study on the new template shows its approved summary');
+  assert.strictEqual(rest.find((w) => w.slug === 'seo-for-home-decor-brand').challenge, 'Legacy problem sentence one.', 'new fields not yet published: Problem Statement');
   const n = rest.find((w) => w.slug === 'new-study');
   assert.strictEqual(n.challenge, 'Approved summary one.');
   assert.deepStrictEqual([n.changed, n.outcomes, n.figures, n.service], [[], [], 0, null]);
   assert.strictEqual(n.href, '/portfolio/new-study');
-  for (const w of [featured, ...rest]) assert.ok(!w.challenge.includes('MUST NOT SHOW'), w.slug);
   const { featured: none } = load('components/cplus/work/studies.ts').splitStudies([], 'seo-ameba-software');
   assert.strictEqual(none, null);
 });

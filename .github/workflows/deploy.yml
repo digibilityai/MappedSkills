@@ -111,6 +111,8 @@ jobs:
           NEXT_PUBLIC_GTM_ID: ${{ vars.NEXT_PUBLIC_GTM_ID }}
           CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
           CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+          # G7: case-study library fields (G6 + G7). Must equal the host .env value; set only after the schema migration.
+          CONTENTFUL_CASE_STUDY_NEW_FIELDS: '1'
         run: npm run build
 
       - name: Verify build output (one H1 per page, assets, GTM compiled in)

@@ -48,6 +48,12 @@
 > Start at `docs/ui-revamp/GATE_4_MASTER_ROLLOUT_PLAN.md` (seven `GATE_4_*.md` documents). Proposed owner decisions O1–O10
 > (§7); recommended first batch B0 + B1 (QA harness and baselines, then the global chrome flip). No application code changed.
 >
+> **`/research` redesign LIVE — 2026-10-22 (`DEC-075`).** PR #51 (`1cd65e9`) is live (run `39797078053`, BUILD
+> `zYMheUD8VYkJyMF-yi00d`). The 120-square figure comes only from the CMS statistic and sample size.
+> - **Rollback target:** `WI31bqI9kz3gR-JejPARA`. Automated and in-app browser checks passed.
+> - **Still open (non-blocking):** VoiceOver/NVDA, real-device mobile testing, and GTM Preview (the container loads
+>   only after analytics consent).
+>
 > **G7 Batch Five release LIVE — 2026-10-22 (`DEC-074`).** PR #48 (`450c1f9`) is live (run `39777221362`, BUILD
 > `_n1F93vcaNozCROg4D1J7`). Ten Contentful entries were published by the owner-run tool: six R3 case studies are live
 > (Om Sai, Ameba, Home decor, Online courses, InsurYo, ClassPe) and Om Sai is featured first on `/work`.

@@ -2171,3 +2171,52 @@ Use this file only for meaningful project decisions.
   the six new ones) and the workflow rollback to `dF7uxZOq2q-Un3fsmVqyy`. See
   `docs/work-redesign/g7/batch-five/BATCH_FIVE_RELEASE_PLAN.md` where that file exists in the owner's checkout (untracked there).
 - **Read with:** `DEC-005`, `DEC-073`. **Recorded by** the repository worker.
+
+---
+
+### DEC-075
+- **Date:** 2026-10-22
+- **Status (current, 2026-10-22):** **LIVE; automated and browser checks passed, manual checks open.** The `/research`
+  page is redesigned on the C+ shell. It does not change the service taxonomy (`DEC-005`) or any research content.
+- **Decision (APPROVED DECISION; owner approvals, 2026-10-22):** the G1 R1 direction (hero with no CTA; one ink lead
+  finding with a 120-square figure; four supporting findings; the report once in a framed card with a method strip; a
+  slim "For journalists" strip; the owner close "Not sure what your marketing is actually measuring?") was approved
+  with refinements 1-10 and implemented as G2.
+- **Design rules (OWNER REQUIREMENT):**
+  - No research figure is stored in page logic. The figure is drawn only from the CMS `statistic` and the report
+    `sampleSize`, and only when they give a whole number of websites that splits into 10 rows (at most 200 squares).
+    Otherwise the finding stands as text.
+  - The report appears once. "Other reports" and "Research areas" render only when two or more exist.
+  - "Request a call" uses `BOOKING_HREF` (`/contact?intent=call`, `DEC-071`), not `/schedule-call`.
+  - The page title, description, canonical, `revalidate = 60` and the report and category pages are unchanged. No new
+    dependency and no shared-component change.
+- **Approvals this records (OWNER REQUIREMENT; owner chat messages, 2026-10-22):** the G2 commit, push and PR; the
+  production deployment of `1cd65e9`.
+- **Released (VERIFIED FACT, GitHub and host):**
+  - PR #51 merged as `1cd65e9562ec20caee978f1b09e957811fd9517c` (six files: `app/(pages)/research/page.tsx`,
+    `components/cplus/research/{ResearchBody.tsx,content.ts,research.css,sample.ts}`, `tests/research-page.test.cjs`).
+    PR check run `39792931739` and post-merge run `39794410605` both passed (typecheck, lint, build, build-output
+    verification, packaging; one existing lint warning in `CaseStudyTemplate.tsx`).
+  - Production deployment: run `39797078053` (workflow dispatch, `main`, `1cd65e9`, created 2026-10-22 14:36Z),
+    deployment `7255089883`. Verify and build: success; release: success; automatic rollback: skipped. Production gate
+    approved by `digibilityai`. The smoke test passed (readiness, ten routes, the `/schedule-call` 308, the 404, and the
+    live layout chunk carrying the GTM container ID).
+  - Live `BUILD_ID` **`zYMheUD8VYkJyMF-yi00d`**. **Rollback target `WI31bqI9kz3gR-JejPARA`** (`88f6ea5`, host
+    `.prev`; `.prev2` is `_n1F93vcaNozCROg4D1J7`). Not used. The dependency key `c1bdf1efea12` was unchanged.
+  - Before this release the live site was `88f6ea5` (the favicon release, run `39785120583`).
+- **Verified live (VERIFIED FACT; fetched HTML and the in-app browser):**
+  - Published data present and unchanged: statistics 42.5%, 35.8%, 27.5%, 97.5% and 66.7% vs 6.7%; sample text; source
+    notes (MSR-001 Audit Protocol v1.1); the report and its `#methodology` and `#limitations` anchors; the close copy.
+  - New H1 live; title, description and canonical unchanged; no page JSON-LD (Organization and ContactPoint only).
+  - Figure: 120 squares, 51 marked; the aria-label states the same.
+  - Links: `/contact`, `/contact?intent=call`, the report, and the media mailto with its subject line.
+  - 1440 px and 375 px: no horizontal overflow, no text under 12 px; page height 5,201 and 7,051 px, the same as the
+    approved mockup; head, figure and body appear in that order.
+  - Keyboard: every link in `<main>` takes a 3 px solid focus outline.
+  - Header navigation and footer present; `/`, `/work`, `/faq`, `/contact`, `/press`, `/sitemap.xml`,
+    `/favicon.ico` and the report and category pages return 200.
+- **Still open (NOT done; non-blocking):** VoiceOver and NVDA testing; real-device mobile testing; GTM Preview and
+  analytics firing on the new page (the container loads only after analytics consent, which the verifier did not
+  give); shipping browsers other than the in-app browser.
+- **Rollback available:** the workflow rollback to `WI31bqI9kz3gR-JejPARA`.
+- **Read with:** `DEC-005`, `DEC-071`, `DEC-074`. **Recorded by** the repository worker.

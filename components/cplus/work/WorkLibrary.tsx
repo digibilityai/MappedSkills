@@ -112,92 +112,97 @@ export function WorkLibrary({ items, page, pages, total, facets }: WorkLibraryPr
 
   return (
     <div className="wk-coll">
-      {showControls ? (
-        <form className="wk-ctl" role="search" aria-label={S.library.controls} hidden={!hydrated} onSubmit={(e) => e.preventDefault()}>
-          <div className="wk-ctl-f wk-ctl-q">
-            <label htmlFor="wk-q">{S.library.search}</label>
-            <input
-              id="wk-q"
-              type="search"
-              value={filter.q}
-              placeholder={S.library.searchHint}
-              autoComplete="off"
-              maxLength={100}
-              onFocus={load}
-              onChange={(e) => update({ q: e.target.value })}
-            />
-          </div>
-          {facets.sectors.length ? (
-            <div className="wk-ctl-f">
-              <label htmlFor="wk-industry">{S.library.industry}</label>
-              <select id="wk-industry" value={filter.sector ?? ''} onChange={(e) => update({ sector: asSector(e.target.value) })}>
-                <option value="">{S.library.anyIndustry}</option>
-                {facets.sectors.map((o) => (
-                  <option key={o.value} value={o.value}>
-                    {o.label} ({o.count})
-                  </option>
-                ))}
-              </select>
-            </div>
-          ) : null}
-          {facets.services.length ? (
-            <div className="wk-ctl-f">
-              <label htmlFor="wk-service">{S.library.service}</label>
-              <select
-                id="wk-service"
-                value={filter.service ? filter.service.slice(1) : ''}
-                onChange={(e) => update({ service: asService(e.target.value ? `/${e.target.value}` : null) })}
-              >
-                <option value="">{S.library.anyService}</option>
-                {facets.services.map((o) => (
-                  <option key={o.value} value={o.value}>
-                    {o.label} ({o.count})
-                  </option>
-                ))}
-              </select>
-            </div>
-          ) : null}
-          {filtering ? (
-            <button type="button" className="wk-ctl-clear" onClick={clear}>
-              {S.library.clear}
-            </button>
-          ) : null}
-        </form>
-      ) : null}
+      {!filtering && page === 1 && items[0] ? <Featured study={items[0]} /> : null}
 
-      {showControls ? (
-        <>
-          <p className="wk-count" role="status" aria-live="polite">
-            {hydrated ? status : ''}
+      <div className="wk-lib">
+        {showControls ? (
+          <form className="wk-ctl" role="search" aria-label={S.library.controls} hidden={!hydrated} onSubmit={(e) => e.preventDefault()}>
+            <div className="wk-ctl-row">
+              <label className="wk-q" htmlFor="wk-q">
+                <span className="px-sr">{S.library.search}</span>
+                <svg aria-hidden="true" viewBox="0 0 20 20" width="18" height="18">
+                  <circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" strokeWidth="2" />
+                  <path d="M13 13l5 5" stroke="currentColor" strokeWidth="2" />
+                </svg>
+                <input
+                  id="wk-q"
+                  type="search"
+                  value={filter.q}
+                  placeholder={S.library.searchHint}
+                  autoComplete="off"
+                  maxLength={100}
+                  onFocus={load}
+                  onChange={(e) => update({ q: e.target.value })}
+                />
+              </label>
+              {facets.sectors.length ? (
+                <label className="wk-sel" htmlFor="wk-industry">
+                  <span className="wk-k">{S.library.industry}</span>
+                  <select id="wk-industry" value={filter.sector ?? ''} onChange={(e) => update({ sector: asSector(e.target.value) })}>
+                    <option value="">{S.library.anyIndustry}</option>
+                    {facets.sectors.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label} ({o.count})
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              ) : null}
+            </div>
+            {facets.services.length ? (
+              <div className="wk-chips" role="group" aria-label={S.library.service}>
+                <button type="button" aria-pressed={!filter.service} onClick={() => update({ service: null })}>
+                  {S.library.anyService}
+                </button>
+                {facets.services.map((o) => {
+                  const route = asService(`/${o.value}`);
+                  return (
+                    <button key={o.value} type="button" aria-pressed={filter.service === route} onClick={() => update({ service: filter.service === route ? null : route })}>
+                      {o.label} <span className="wk-n">{o.count}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            ) : null}
+          </form>
+        ) : null}
+
+        <div className="wk-status">
+          <h2 className="wk-status-h" tabIndex={-1} ref={resultsRef}>
+            {filtering ? S.library.status : page === 1 ? S.library.more : `Case studies, page ${page}`}
+          </h2>
+          <p role="status" aria-live="polite">
+            {showControls ? (hydrated ? status : '') : status}
+            {filtering ? (
+              <button type="button" className="wk-clear" onClick={clear}>
+                {S.library.clear}
+              </button>
+            ) : null}
           </p>
-          <h3 className="px-sr" tabIndex={-1} ref={resultsRef}>
-            {filtering ? 'Search results' : 'Case studies'}
-          </h3>
-        </>
-      ) : null}
-
-      {!filtering ? (
-        <>
-          {page === 1 && items[0] ? <Featured study={items[0]} /> : null}
-          <Grid studies={page === 1 ? items.slice(1) : items} />
-          <ServerPager page={page} pages={pages} />
-        </>
-      ) : state === 'failed' ? (
-        <ServerPager page={page} pages={pages} />
-      ) : !all ? null : results.length ? (
-        <>
-          <Grid studies={pageSlice(results, shownPage)} />
-          <ClientPager page={shownPage} pages={resultPages} onPage={goTo} />
-        </>
-      ) : (
-        <div className="wk-nomatch">
-          <p className="wk-nomatch-h">{S.library.noMatch}</p>
-          <p>{S.library.noMatchHint}</p>
-          <button type="button" className="wk-ctl-clear" onClick={clear}>
-            {S.library.showAll}
-          </button>
         </div>
-      )}
+
+        {!filtering ? (
+          <>
+            <Grid studies={page === 1 ? items.slice(1) : items} />
+            <ServerPager page={page} pages={pages} />
+          </>
+        ) : state === 'failed' ? (
+          <ServerPager page={page} pages={pages} />
+        ) : !all ? null : results.length ? (
+          <>
+            <Grid studies={pageSlice(results, shownPage)} />
+            <ClientPager page={shownPage} pages={resultPages} onPage={goTo} />
+          </>
+        ) : (
+          <div className="wk-nomatch">
+            <p className="wk-nomatch-h">{S.library.noMatch}</p>
+            <p>{S.library.noMatchHint}</p>
+            <button type="button" className="wk-clear" onClick={clear}>
+              {S.library.showAll}
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -206,74 +211,93 @@ function Grid({ studies }: { studies: WorkStudy[] }) {
   if (!studies.length) return null;
   return (
     <ul className="wk-grid">
-      {studies.map((s) => (
-        <Card key={s.slug} study={s} />
+      {studies.map((s, i) => (
+        <Card key={s.slug} study={s} wide={i === 3} />
       ))}
     </ul>
   );
 }
 
-/** Numbered pages, previous and next as real links (crawlable, no JavaScript needed). */
-function ServerPager({ page, pages }: { page: number; pages: number }) {
+/** Numbered pages, windowed (first, last and one either side of the current page); previous and next are always shown. */
+function windowed(page: number, pages: number): Array<number | '…'> {
+  const keep = [...new Set([1, pages, page - 1, page, page + 1].filter((n) => n >= 1 && n <= pages))].sort((a, b) => a - b);
+  const out: Array<number | '…'> = [];
+  keep.forEach((n, i) => {
+    if (i && n - keep[i - 1] > 1) out.push('…');
+    out.push(n);
+  });
+  return out;
+}
+
+type PageItemProps = { n: number; cls: string; rel?: string; onPage?: (n: number) => void; children: React.ReactNode };
+
+/** A real link on the numbered server pages (crawlable, no JavaScript needed); a button for in-browser results. */
+function PageItem({ n, cls, rel, onPage, children }: PageItemProps) {
+  return onPage ? (
+    <button type="button" className={cls} onClick={() => onPage(n)}>
+      {children}
+    </button>
+  ) : (
+    <Link className={cls} href={pageHref(n)} rel={rel}>
+      {children}
+    </Link>
+  );
+}
+
+function Pager({ page, pages, onPage, label }: { page: number; pages: number; onPage?: (n: number) => void; label: string }) {
   if (pages <= 1) return null;
   return (
-    <nav className="wk-pager" aria-label={S.library.pages}>
+    <nav className="wk-pager" aria-label={label}>
       {page > 1 ? (
-        <Link className="wk-pg wk-pg-step" href={pageHref(page - 1)} rel="prev">
+        <PageItem n={page - 1} rel="prev" cls="wk-pg wk-pg-s" onPage={onPage}>
           <span aria-hidden="true">←</span> {S.library.prev}
-        </Link>
-      ) : null}
+        </PageItem>
+      ) : (
+        <button type="button" className="wk-pg wk-pg-s is-off" disabled>
+          ← {S.library.prev}
+        </button>
+      )}
       <ol>
-        {Array.from({ length: pages }, (_, i) => i + 1).map((n) => (
-          <li key={n}>
-            {n === page ? (
-              <span className="wk-pg is-on" aria-current="page">
-                <span className="px-sr">Page </span>
-                {n}
-              </span>
-            ) : (
-              <Link className="wk-pg" href={pageHref(n)}>
-                <span className="px-sr">Page </span>
-                {n}
-              </Link>
-            )}
-          </li>
-        ))}
+        {windowed(page, pages).map((n, i) =>
+          n === '…' ? (
+            <li key={`gap${i}`} className="wk-gap" aria-hidden="true">
+              …
+            </li>
+          ) : (
+            <li key={n}>
+              {n === page ? (
+                <span className="wk-pg is-on" aria-current="page">
+                  <span className="px-sr">Page </span>
+                  {n}
+                </span>
+              ) : (
+                <PageItem n={n} cls="wk-pg" onPage={onPage}>
+                  <span className="px-sr">Page </span>
+                  {n}
+                </PageItem>
+              )}
+            </li>
+          )
+        )}
       </ol>
+      <p className="wk-pg-of">
+        Page {page} of {pages}
+      </p>
       {page < pages ? (
-        <Link className="wk-pg wk-pg-step" href={pageHref(page + 1)} rel="next">
+        <PageItem n={page + 1} rel="next" cls="wk-pg wk-pg-s" onPage={onPage}>
           {S.library.next} <span aria-hidden="true">→</span>
-        </Link>
-      ) : null}
+        </PageItem>
+      ) : (
+        <button type="button" className="wk-pg wk-pg-s is-off" disabled>
+          {S.library.next} →
+        </button>
+      )}
     </nav>
   );
 }
 
-/** The same pager for filtered results, as buttons (the results exist only in the browser). */
-function ClientPager({ page, pages, onPage }: { page: number; pages: number; onPage: (p: number) => void }) {
-  if (pages <= 1) return null;
-  return (
-    <nav className="wk-pager" aria-label={`${S.library.pages} (search results)`}>
-      {page > 1 ? (
-        <button type="button" className="wk-pg wk-pg-step" onClick={() => onPage(page - 1)}>
-          <span aria-hidden="true">←</span> {S.library.prev}
-        </button>
-      ) : null}
-      <ol>
-        {Array.from({ length: pages }, (_, i) => i + 1).map((n) => (
-          <li key={n}>
-            <button type="button" className={n === page ? 'wk-pg is-on' : 'wk-pg'} aria-current={n === page ? 'page' : undefined} onClick={() => onPage(n)}>
-              <span className="px-sr">Page </span>
-              {n}
-            </button>
-          </li>
-        ))}
-      </ol>
-      {page < pages ? (
-        <button type="button" className="wk-pg wk-pg-step" onClick={() => onPage(page + 1)}>
-          {S.library.next} <span aria-hidden="true">→</span>
-        </button>
-      ) : null}
-    </nav>
-  );
-}
+const ServerPager = ({ page, pages }: { page: number; pages: number }) => <Pager page={page} pages={pages} label={S.library.pages} />;
+
+const ClientPager = ({ page, pages, onPage }: { page: number; pages: number; onPage: (p: number) => void }) => (
+  <Pager page={page} pages={pages} onPage={onPage} label={`${S.library.pages} (search results)`} />
+);

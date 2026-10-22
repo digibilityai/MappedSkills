@@ -1,5 +1,6 @@
 import { excerptFromDocument } from '@/lib/contentful/case-study-sections';
 import { getCaseStudyService } from '@/lib/case-study-services';
+import { plainStatements, splitImpact } from '@/lib/case-study-outcomes';
 import { SERVICES } from '@/lib/services';
 import {
   PAGE_SIZE,
@@ -17,14 +18,18 @@ import type { CmsCaseStudy } from '@/lib/contentful/types';
 /**
  * The `/work` view of a published case study, read only from fields Contentful already returns for the listing
  * query (no new fields, no extra request). Nothing is paraphrased:
+ * - title: the study's own title, whitespace-normalised;
  * - client: the first part of the Client field (the rest, usually the location, is `detail`); the title if empty;
  * - challenge: the opening sentence(s) of the Problem Statement only. Business Goals, Results, Before & After and
  *   the review are never read here, so withheld proof (`lib/case-study-proof.ts`, DEC-031) cannot reach the page.
  *   A study on the new template (simplified G6, `layout: 'new'`) has no legacy sections: its challenge is the opening
  *   sentence(s) of its editor-approved `newLayout.summary`, nothing else. A legacy study never reads that field, even
  *   if an editor fills it in Contentful, so the three legacy studies render exactly as before;
- * - blockers / changed: the Challenges and Services Provided headings (legacy template only; empty, and therefore
- *   not shown, for a new-template study);
+ * - changed: the Services Provided headings (legacy template only; empty, and therefore not shown, for a new-template
+ *   study);
+ * - outcomes / figures (new template only, presentation of the editor's own `impact` text; `lib/case-study-outcomes.ts`):
+ *   up to three outcome statements that contain no digit, and how many figures the study states. A figure itself never
+ *   reaches the listing, so no number can appear on a card without its metric, period and source;
  * - service and stage: the study's explicit Contentful service classification (G7, one of the six current services),
  *   or for the three legacy studies their owner-approved service (WORK-027, `lib/case-study-services.ts`), and its
  *   stage in the site navigation. A study with no service shows neither; nothing is inferred or substituted;
@@ -34,14 +39,16 @@ import type { CmsCaseStudy } from '@/lib/contentful/types';
 export type WorkStudy = {
   slug: string;
   href: string;
+  title: string;
   client: string;
   detail: string;
   industry: string;
   service: string | null;
   stage: NavGroup['stage'] | null;
   challenge: string;
-  blockers: string[];
   changed: string[];
+  outcomes: string[];
+  figures: number;
   sector: SectorKey | null;
   serviceKey: ServiceRoute | null;
   period: string;
@@ -49,6 +56,7 @@ export type WorkStudy = {
 };
 
 const MAX_ITEMS = 4;
+const MAX_OUTCOMES = 3;
 
 /** Only whitespace is normalised (Contentful text has spaces before some commas and full stops). */
 const tidy = (s: string) => s.replace(/\s+/g, ' ').replace(/\s+([,.;:!?])/g, '$1').trim();
@@ -71,25 +79,29 @@ export function toWorkStudy(study: CmsCaseStudy, challengeSentences: number): Wo
       : excerptFromDocument(study.sections.problemStatement, 10_000),
     challengeSentences
   );
+  const split = study.layout === 'new' && study.newLayout ? splitImpact(study.newLayout.impact) : null;
+  const outcomes = split ? plainStatements(split.outcomes).slice(0, MAX_OUTCOMES) : [];
   const sector = study.library.sector;
   const serviceKey = service ? service.link : null;
 
   return {
     slug: study.slug,
     href: study.href,
+    title: tidy(study.title),
     client,
     detail: rest.join(', '),
     industry,
     service: service?.title ?? null,
     stage: stage === 'Measure' ? null : stage,
     challenge,
-    blockers: (study.sections.challenges ?? []).map((c) => tidy(c.title)).filter(Boolean).slice(0, MAX_ITEMS),
     changed: (study.sections.servicesProvided ?? []).map((c) => tidy(c.title)).filter(Boolean).slice(0, MAX_ITEMS),
+    outcomes,
+    figures: split ? split.outcomes.filter((o) => o.kind === 'figure').length : 0,
     sector,
     serviceKey,
     period: study.library.period,
     search: normalise(
-      [client, rest.join(' '), study.title, study.industry, sector ? SECTORS[sector] : '', serviceKey ? SERVICE_FILTERS[serviceKey] : '', service?.title ?? '', challenge].join(' ')
+      [client, rest.join(' '), study.title, study.industry, sector ? SECTORS[sector] : '', serviceKey ? SERVICE_FILTERS[serviceKey] : '', service?.title ?? '', challenge, ...outcomes].join(' ')
     ),
   };
 }

@@ -148,7 +148,8 @@ test('legacy pages are unchanged with the flag on: legacy template, no editor su
     assert.ok(!b.metaDescription.includes('LEGACY SUMMARY'));
   }
   const page = fs.readFileSync(path.join(root, 'app/(pages)/portfolio/[slug]/page.tsx'), 'utf8');
-  assert.ok(page.includes("const audience = isNewLayout ? '' : caseStudy.audience;"), 'audience row kept for legacy only');
+  assert.ok(page.includes('const audience = caseStudy.audience;'), 'audience row kept for legacy only');
+  assert.ok(!/audience/i.test(fs.readFileSync(path.join(root, 'components/case-study/CaseStudyTemplate.tsx'), 'utf8')), 'the new template never shows the free-text audience');
   assert.ok(page.includes("caseStudy.clientDate ? { label: 'Timeline', value: caseStudy.clientDate } : null"), 'legacy context row unchanged');
 });
 
@@ -194,7 +195,7 @@ test('static pages and search agree: one order, 12 per page, featured first, fil
 test('the public index carries preview fields only: no withheld proof, body, review, audience or legacy summary', async () => {
   const s = setup([...legacyStudies(), ...syntheticStudies(8), ...hiddenStudies()]);
   const all = s.work().libraryStudies(await s.api.fetchContentfulCaseStudies(), 'seo-ameba-software');
-  const keys = ['slug', 'href', 'client', 'detail', 'industry', 'service', 'stage', 'challenge', 'blockers', 'changed', 'sector', 'serviceKey', 'period', 'search'];
+  const keys = ['slug', 'href', 'title', 'client', 'detail', 'industry', 'service', 'stage', 'challenge', 'changed', 'outcomes', 'figures', 'sector', 'serviceKey', 'period', 'search'];
   for (const st of all) assert.deepStrictEqual(Object.keys(st).sort(), [...keys].sort());
   const json = JSON.stringify(all);
   for (const banned of ['LEGACY METRIC', 'LEGACY QUOTE', 'LEGACY SUMMARY', 'legacy audience', 'HIDDEN']) assert.ok(!json.includes(banned), banned);

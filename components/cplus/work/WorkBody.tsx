@@ -8,9 +8,9 @@ import type { FacetOption } from '@/lib/case-study-library';
 import './work.css';
 
 /**
- * C+ Case studies (/work and /work/page/[n]): the owner-approved G1 R3 design (docs/work-redesign/g1-r3/) as a library
- * (G7). Hero → client work (page 1: one featured study, then the rest on a wrapping grid; 12 studies per page; search
- * and filters from `CONTROLS_MIN_STUDIES` studies) → one evidence note → the shared tangerine close. No `data-rv`.
+ * C+ Case studies (/work and /work/page/[n]): the owner-approved G7 listing design as a library. Hero → client work (page 1:
+ * one featured study, then the rest on a card grid; 12 studies per page; search and filters from `CONTROLS_MIN_STUDIES`
+ * studies) → one evidence note → the shared tangerine close. No `data-rv`.
  */
 
 export type WorkLibraryProps = {
@@ -19,6 +19,8 @@ export type WorkLibraryProps = {
   pages: number;
   total: number;
   facets: { sectors: FacetOption[]; services: FacetOption[] };
+  /** Whether any published study states figures or outcomes (the hero's orientation line is shown only then). */
+  evidence: { figures: boolean; outcomes: boolean };
 };
 
 export function WorkBody({ library }: { library: WorkLibraryProps }) {
@@ -32,21 +34,30 @@ export function WorkBody({ library }: { library: WorkLibraryProps }) {
             <h1 id="wk-h1" className="b-h1">
               {S.hero.h1.a} <span className="b-named">{S.hero.h1.b}</span>
             </h1>
-            <p className="b-lede">{S.hero.lede}</p>
+            <div>
+              <p className="b-lede">{S.hero.lede}</p>
+              {library.evidence.figures || library.evidence.outcomes ? (
+                <p className="wk-key">
+                  {library.evidence.figures ? (
+                    <span>
+                      <Mark state="named" /> {S.key.figures}
+                    </span>
+                  ) : null}
+                  {library.evidence.outcomes ? (
+                    <span>
+                      <Mark state="owned" /> {S.key.outcomes}
+                    </span>
+                  ) : null}
+                </p>
+              ) : null}
+            </div>
           </div>
         </div>
       </section>
 
       {/* 2 — client work (paper). Only published studies; an honest line when there are none. */}
-      <section className="b-sec b-paper wk-work" aria-labelledby="wk-h-work">
+      <section className="wk-body" aria-label="Case studies">
         <div className="px-wrap">
-          <div className="wk-work-h">
-            <p className="b-kicker">{S.work.kicker}</p>
-            <h2 id="wk-h-work" className="b-h2">
-              {S.work.h}
-            </h2>
-            <p className="wk-intro">{S.work.intro}</p>
-          </div>
           {library.total ? <WorkLibrary {...library} /> : <p className="wk-empty">{S.library.none}</p>}
           <aside className="wk-note" aria-label="About the evidence">
             <p>

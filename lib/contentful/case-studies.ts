@@ -94,6 +94,18 @@ export async function getCaseStudyListCards(): Promise<CmsCaseStudyCard[]> {
   }));
 }
 
+/**
+ * The study after `slug` in the library's own order (the order `/work` shows), wrapping from the last back to the first.
+ * Any public study can be next, legacy or new template. `null` when `slug` is the only public study.
+ */
+export async function getNextCaseStudy(slug: string): Promise<{ href: string; title: string; client: string } | null> {
+  const studies = await fetchContentfulCaseStudies();
+  const i = studies.findIndex((s) => s.slug === slug);
+  const next = i < 0 || studies.length < 2 ? null : studies[(i + 1) % studies.length];
+  if (!next) return null;
+  return { href: next.href, title: next.title, client: next.clientName.split(',')[0].trim() || next.title };
+}
+
 export async function getCaseStudyDetail(slug: string): Promise<CmsCaseStudy | null> {
   return fetchContentfulCaseStudyBySlug(slug);
 }

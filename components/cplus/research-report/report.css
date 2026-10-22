@@ -1,0 +1,176 @@
+/* /research/[slug] report (approved Research Report G1 R1 design, docs/research-redesign/report-g1/). Every rule is rr-
+   scoped; the shared C+ classes (b-*, px-*, dc-*) and the /research rs- ledger, link and media rules (research.css) are
+   used unchanged. Breakpoints follow the Brand DNA: narrow <=760, medium 761-1080, wide >=1081. Feedback is 150 ms and
+   nothing moves under reduced motion. The only sticky element is the wide-screen contents rail (the /blog article
+   precedent, DEC-067). */
+
+/* anchors land below the sticky site header */
+.rr-hero ~ * [id], #findings, #methodology, #limitations, #cite, #executive-summary { scroll-margin-top: 96px; }
+
+/* ----------------------------------------------------------------- hero -- */
+.rr-hero-g { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: clamp(32px, 5vw, 80px); align-items: end; }
+.rr-kicker { margin-bottom: 14px; }
+.px-h .rr-hero .rr-h1 { font-size: min(clamp(2.3rem, 1.1rem + 3.4vw, 4.2rem), 11vw); max-width: 18ch; }
+.rr-h1-sub { display: block; margin-top: .35em; font-size: .46em; line-height: 1.18; letter-spacing: -.01em; color: var(--dc-dim); max-width: 34ch; }
+.rr-lede { margin-top: clamp(18px, 2vw, 26px); max-width: 52ch; }
+.rr-facts { display: grid; border-top: 3px solid var(--dc-ink); }
+.rr-facts > div { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 12px; padding-block: 9px; border-bottom: 1px solid var(--dc-line); }
+.rr-facts dt { color: var(--dc-dim); font-size: var(--dc-t-note); }
+.rr-facts dd { font-weight: 700; }
+.rr-facts a { color: var(--dc-ink); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: var(--dc-line); transition: text-decoration-color 150ms ease; }
+.rr-facts a:hover { text-decoration-color: var(--dc-tang-display); }
+.rr-jump { margin-top: 18px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 18px; }
+.rr-jump .rs-go:hover > span[aria-hidden] { transform: translateY(3px); }
+
+/* the key-findings ledger uses the live /research padding; the headline finding's number is the one tangerine stat */
+.rr-more { padding-block: clamp(56px, 6vw, 88px); }
+.rs-row .rr-stat-lead { color: var(--dc-tang-small, #B83F00); }
+
+/* --------------------------------------------------- reading: rail + column -- */
+.rr-read { padding-block: clamp(56px, 6vw, 96px); }
+.rr-grid { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: clamp(32px, 5vw, 80px); }
+.rr-col { min-width: 0; max-width: 68ch; }
+.rr-rail { position: sticky; top: 96px; align-self: start; max-height: calc(100vh - 120px); overflow-y: auto; padding-right: 4px; }
+.rr-toc { list-style: none; padding: 0; margin-top: 10px; border-top: 3px solid var(--dc-ink); }
+.rr-toc li { border-bottom: 1px solid var(--dc-line); }
+.rr-toc a { display: block; padding-block: 11px; color: var(--dc-dim); font-size: .875rem; line-height: 1.35; text-decoration: none; transition: color 150ms ease; }
+.rr-toc a:hover, .rr-toc a:focus-visible, .rr-toc a[aria-current="true"] { color: var(--dc-ink); }
+.rr-toc a[aria-current="true"] { box-shadow: inset 3px 0 0 var(--dc-tang); padding-left: 10px; }
+.rr-toc .rr-toc-n { display: block; font: 700 .75rem/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-tang-small, #B83F00); }
+
+.rr-h2 { font: 800 clamp(1.7rem, 1.1rem + 1.8vw, 2.6rem)/1.08 var(--dc-f-title); letter-spacing: -.02em; max-width: 22ch; }
+.rr-sum .b-kicker { margin-bottom: 10px; }
+.rr-abstract { margin-top: 18px; padding: clamp(18px, 2.4vw, 28px); background: var(--dc-paper); border: 1px solid var(--dc-line); border-left: 4px solid var(--dc-ink); }
+.rr-abstract p { font-size: 1.125rem; line-height: 1.6; color: var(--dc-ink); }
+
+/* prose: the CMS rich text, unchanged in wording */
+.rr-prose { color: var(--dc-ink); }
+.rr-prose p { margin-top: 14px; line-height: 1.65; color: color-mix(in srgb, var(--dc-ink) 82%, transparent); }
+.rr-prose .rr-ch-intro { margin-top: clamp(28px, 3vw, 40px); }
+.rr-prose .rr-ch-intro > p:first-child { margin-top: 0; }
+.rr-ch { margin-top: clamp(44px, 5vw, 72px); padding-top: clamp(18px, 2vw, 26px); border-top: 3px solid var(--dc-ink); }
+.rr-ch h2 { font: 800 clamp(1.45rem, 1.05rem + 1.2vw, 2.1rem)/1.12 var(--dc-f-title); letter-spacing: -.02em; text-wrap: balance; }
+.rr-ch h2 .rr-fn { display: block; margin-bottom: 8px; font: 700 .75rem/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-tang-small, #B83F00); }
+.rr-prose h3 { margin-top: 28px; font: 800 1.2rem/1.25 var(--dc-f-title); letter-spacing: -.01em; }
+.rr-prose h2 + p, .rr-prose h3 + p, .rr-prose h3 + ul { margin-top: 12px; }
+
+/* a paragraph the CMS sets entirely in bold: the chapter's takeaway */
+.rr-prose .rr-take { margin-top: 22px; padding: 14px 0 14px 16px; border-left: 4px solid var(--dc-tang); font: 700 1.125rem/1.45 var(--dc-f-body); color: var(--dc-ink); }
+/* a paragraph the CMS sets entirely in italic: a caveat note, kept in full */
+.rr-prose .rr-note { margin-top: 12px; font-size: .9375rem; color: var(--dc-dim); }
+.rr-prose .rr-note::before { content: "Note"; display: inline-block; margin-right: 8px; font: 700 .75rem/1 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-ink); }
+
+/* bar list: drawn from a CMS list whose every item is "Label: NN.N%". The text is the content; the bar is decoration. */
+.rr-bars { list-style: none; padding: 0; margin-top: 18px; border-top: 1px solid var(--dc-ink); }
+.rr-bars li { display: grid; grid-template-columns: minmax(0, 24ch) 6ch minmax(0, 1fr); gap: 12px; align-items: center; padding-block: 10px; border-bottom: 1px solid var(--dc-line); }
+.rr-bar-l { font-weight: 700; }
+.rr-bar-v { font: 800 1.05rem/1 var(--dc-f-title); font-variant-numeric: tabular-nums; text-align: right; }
+.rr-bar-t { position: relative; height: 14px; background: repeating-linear-gradient(90deg, transparent 0 calc(10% - 1px), var(--dc-line) calc(10% - 1px) 10%); }
+.rr-bars::after { content: "Bar scale: 0 to 100%"; display: block; padding-top: 6px; color: var(--dc-dim); font-size: .75rem; text-align: right; }
+.rr-bar-t i { position: absolute; inset: 0 auto 0 0; width: var(--w); background: var(--dc-ink); border-radius: 0 2px 2px 0; }
+
+/* CMS chart images: framed on white, shown as published. A chart that a verified bar list replaces is not drawn; the list's caption links to it. */
+.rr-chart { margin-top: 22px; padding: 12px; background: #fff; border: 1px solid var(--dc-line); }
+.rr-chart img { display: block; width: 100%; height: auto; }
+/* a bar list that replaced a published chart: the chart's description, verbatim, is its caption, with the image linked */
+.rr-barfig { margin: 18px 0 0; }
+.rr-barfig .rr-bars { margin-top: 0; }
+.rr-barcap { margin-top: 10px; color: var(--dc-dim); font-size: .875rem; line-height: 1.5; }
+.rr-barcap-k { margin-right: 6px; font: 700 .75rem/1 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-ink); }
+.rr-barcap-a { display: inline-block; margin-left: 4px; color: var(--dc-ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; text-decoration-color: var(--dc-line); transition: text-decoration-color 150ms ease; }
+.rr-barcap-a:hover, .rr-barcap-a:focus-visible { text-decoration-color: var(--dc-tang-display); }
+
+/* "What Founders and CEOs Should Ask": the CMS numbers its H3 questions; they read as a checklist */
+.rr-prose .rr-q { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--dc-line); display: grid; grid-template-columns: 34px minmax(0, 1fr); column-gap: 12px; }
+.rr-q-n { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--dc-tang); color: var(--dc-ink); font: 800 .875rem/1 var(--dc-f-body); }
+.rr-prose .rr-q + p { margin-top: 6px; padding-left: 46px; }
+
+/* "A Note From ...": the CMS quote, set as a pull quote */
+.rr-ch-note .rr-quote { margin-top: 18px; font: 700 clamp(1.2rem, 1rem + .7vw, 1.5rem)/1.35 var(--dc-f-title); letter-spacing: -.01em; color: var(--dc-ink); }
+.rr-ch-note .rr-quote:first-of-type::before { content: "“"; display: block; height: .55em; font-size: 3.2em; line-height: 1; color: var(--dc-tang); }
+.rr-ch-note .rr-quote-by { margin-top: 12px; font-weight: 700; color: var(--dc-dim); }
+.rr-ch-note .rr-quote-by + .rr-quote { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--dc-line); font-size: 1.125rem; }
+
+/* -------------------------------------------------- method, limits, cite -- */
+.rr-grid-plain { align-items: start; }
+.rr-side-h { position: relative; }
+.rr-method .rr-prose h3:first-child, .rr-limits-b > p:first-child { margin-top: 0; }
+.rr-status { margin-top: 16px; border-top: 3px solid var(--dc-ink); }
+.rr-status > div { display: grid; grid-template-columns: minmax(0, 9ch) minmax(0, 1fr); gap: 16px; padding-block: 12px; border-bottom: 1px solid var(--dc-line); align-items: start; }
+.rr-status dt { display: flex; align-items: center; gap: 10px; font: 800 1rem/1.3 var(--dc-f-title); }
+.rr-status dd { line-height: 1.55; color: color-mix(in srgb, var(--dc-ink) 82%, transparent); }
+/* the Brand DNA honesty marks: shape and fill differ, not only colour */
+.rr-st { flex: none; width: 18px; height: 18px; border-radius: 3px; }
+.rr-st-yes { background: var(--dc-ink); }
+.rr-st-no { border: 2px dashed var(--dc-tang-small, #B83F00); }
+.rr-st-utd { border: 1px solid var(--dc-ink); background: repeating-linear-gradient(45deg, var(--dc-ink) 0 1.5px, transparent 1.5px 5px); }
+.rr-st-na { border: 1px solid var(--dc-dim); }
+.rr-limits-b > p { padding-left: 16px; border-left: 3px solid var(--dc-line); }
+.rr-limits-b > p:first-child { border-left-color: var(--dc-tang); }
+.rr-limits-b > p:last-child { border-left: 0; padding-left: 0; font-weight: 700; color: var(--dc-ink); }
+
+.rr-citation { padding: clamp(16px, 2vw, 24px); background: var(--dc-ground); border: 1px solid var(--dc-line); border-left: 4px solid var(--dc-ink); line-height: 1.6; overflow-wrap: anywhere; }
+.rr-canon { margin-top: 14px; color: var(--dc-dim); font-size: .9375rem; overflow-wrap: anywhere; }
+.rr-canon a { color: var(--dc-ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.rr-copy { margin-top: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.rr-copied { color: var(--dc-dim); font-size: var(--dc-t-note); }
+.rr-author { margin-top: 22px; display: flex; align-items: baseline; gap: 12px; }
+.rr-author a { color: var(--dc-ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.rr-close-a { align-items: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rr-toc a, .rr-facts a, .rr-barcap-a, .rr-prose a, .rr-abstract a { transition: none; }
+  .rr-jump .rs-go:hover > span[aria-hidden] { transform: none; }
+}
+
+/* ------------------------------------------------- medium: 761 to 1080 -- */
+@media (max-width: 1080px) {
+  .rr-hero-g, .rr-grid { grid-template-columns: minmax(0, 1fr); }
+  .rr-hero-g { align-items: start; }
+  .rr-hero-side { max-width: 560px; }
+  .rr-rail { display: none; }
+  .rr-grid-plain { gap: 18px; }
+}
+
+/* ------------------------------------------------------ narrow: <= 760 -- */
+@media (max-width: 760px) {
+  .rr-h1-sub { font-size: .56em; }
+  .rr-jump { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .rr-facts { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 16px; }
+  .rr-facts > div { grid-template-columns: minmax(0, 1fr); gap: 2px; padding-block: 8px; }
+  .rr-bars li { grid-template-columns: minmax(0, 1fr) auto; row-gap: 6px; }
+  .rr-bar-t { grid-column: 1 / -1; }
+  .rr-status > div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .rr-copy .dc-btn { flex: 1 1 140px; justify-content: center; }
+  .rr-close-a .dc-btn { width: 100%; justify-content: center; }
+}
+
+/* ------------------------------------------------------- additions (G2) -- */
+.rr-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.rr-prose ul, .rr-prose ol { margin-top: 14px; padding-left: 1.35em; }
+.rr-prose ul { list-style: disc; }
+.rr-prose ol { list-style: decimal; }
+.rr-prose li p { margin-top: 6px; }
+.rr-prose li p:first-child { margin-top: 0; }
+.rr-prose ul.rr-bars { list-style: none; padding-left: 0; }
+.rr-prose a, .rr-abstract a { color: var(--dc-ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; text-decoration-color: var(--dc-line); transition: text-decoration-color 150ms ease; }
+.rr-prose a:hover, .rr-abstract a:hover { text-decoration-color: var(--dc-tang-display); }
+.rr-prose blockquote { margin-top: 18px; padding-left: 16px; border-left: 3px solid var(--dc-line); }
+.rr-prose hr { margin-block: 28px; border: 0; border-top: 1px solid var(--dc-line); }
+.rr-prose h4, .rr-prose h5, .rr-prose h6 { margin-top: 22px; font: 700 .75rem/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-ink); }
+.rr-table { margin-top: 18px; max-width: 100%; overflow-x: auto; border-top: 3px solid var(--dc-ink); }
+.rr-table table { width: 100%; border-collapse: collapse; text-align: left; }
+.rr-table th, .rr-table td { padding: 10px 12px; vertical-align: top; border-bottom: 1px solid var(--dc-line); line-height: 1.5; }
+.rr-table th { font: 700 .75rem/1.3 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; }
+.rr-table p { margin: 0; }
+.rr-embed { margin-top: 22px; }
+.rr-files { margin-top: 26px; }
+.rr-files ul { list-style: none; padding: 0; margin-top: 8px; border-top: 1px solid var(--dc-line); }
+.rr-files li { padding-block: 10px; border-bottom: 1px solid var(--dc-line); }
+.rr-files li span { display: block; color: var(--dc-dim); font-size: var(--dc-t-note); }
+.rr-files a { color: var(--dc-ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.rr-related { padding-block: clamp(28px, 3.5vw, 44px); }
+.rr-related-l { margin-top: 0; }
+.rr-citation { margin: 0; }
+.rr-abstract > * + * { margin-top: 14px; }
+.rr-copy .dc-btn { cursor: pointer; }

@@ -52,10 +52,14 @@
 > `klC5_5AK-R6pAtg4LpKMU`). THE EVIDENCE EDITORIAL template with a two-colour H1; rendered SEO, structured data and
 > heading anchors are identical to the pre-release page.
 > - **Rollback target:** `Fs2A5ITz5bPU86vYZNZnA`. Automated checks and Chromium, WebKit and Firefox checks passed.
-> - **Evidence strip not yet shown:** it renders only from `ResearchFinding` entries embedded in the press body. The
->   Contentful step (create "120", embed three findings in MSR-001) is **separately gated and not done**.
-> - **Still open (non-blocking):** VoiceOver/NVDA, real-device mobile testing, GTM Preview, and re-reading the live
->   `ResearchFinding` model.
+> - **Evidence strip LIVE (Contentful C2, 2026-10-23):** MSR-001 (`6CweKsrhGqqltytZYsVNIj`) is published v28
+>   (`publishedAt` 2026-10-23T11:42:58.968Z; `datePublished` unchanged) and shows three figures: 42.5%
+>   (`5XkOVQWTn3K3dUP0H87GNw`), 97.5% (`hSgijBY8mimvs5nm9ak37`), 120 (`5ayanON2P7ZehBS3CnIpxG`, new). Live
+>   verification 46 of 46; article body, SEO, structured data (except `dateModified`), anchors, `/press`, `/research` and
+>   the report unchanged. C2 session `20261023113320-c2`; no anomalies.
+> - **Content rollback (not run):** owner-run `rollback` restores the pre-C2 snapshot (kept only in the owner's session
+>   folder); the code rollback target above is unchanged.
+> - **Still open (non-blocking, not done):** VoiceOver/NVDA, real-device mobile testing, GTM Preview.
 >
 > **`/research` redesign LIVE — 2026-10-22 (`DEC-075`).** PR #51 (`1cd65e9`) is live (run `39797078053`, BUILD
 > `zYMheUD8VYkJyMF-yi00d`). The 120-square figure comes only from the CMS statistic and sample size.

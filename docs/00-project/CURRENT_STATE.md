@@ -48,6 +48,15 @@
 > Start at `docs/ui-revamp/GATE_4_MASTER_ROLLOUT_PLAN.md` (seven `GATE_4_*.md` documents). Proposed owner decisions O1–O10
 > (§7); recommended first batch B0 + B1 (QA harness and baselines, then the global chrome flip). No application code changed.
 >
+> **`/press/[slug]` redesign LIVE — 2026-10-23 (`DEC-077`).** PR #56 (`c8c5771`) is live (run `39908828891`, BUILD
+> `klC5_5AK-R6pAtg4LpKMU`). THE EVIDENCE EDITORIAL template with a two-colour H1; rendered SEO, structured data and
+> heading anchors are identical to the pre-release page.
+> - **Rollback target:** `Fs2A5ITz5bPU86vYZNZnA`. Automated checks and Chromium, WebKit and Firefox checks passed.
+> - **Evidence strip not yet shown:** it renders only from `ResearchFinding` entries embedded in the press body. The
+>   Contentful step (create "120", embed three findings in MSR-001) is **separately gated and not done**.
+> - **Still open (non-blocking):** VoiceOver/NVDA, real-device mobile testing, GTM Preview, and re-reading the live
+>   `ResearchFinding` model.
+>
 > **`/research` redesign LIVE — 2026-10-22 (`DEC-075`).** PR #51 (`1cd65e9`) is live (run `39797078053`, BUILD
 > `zYMheUD8VYkJyMF-yi00d`). The 120-square figure comes only from the CMS statistic and sample size.
 > - **Rollback target:** `WI31bqI9kz3gR-JejPARA`. Automated and in-app browser checks passed.

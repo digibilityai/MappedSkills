@@ -164,9 +164,9 @@ test('every stylesheet rule is scoped to a ba- class', () => {
   }
 });
 
-test('RichTextContent (shared with /press) is not used by the article route and keeps its classes', () => {
+test('RichTextContent is not used by the article route and keeps its classes', () => {
+  /* /press/[slug] used to import it too; Press Detail G2 moved that page to its own renderer, and this file stays untouched. */
   const live = read('components/blog/RichTextContent.tsx');
-  assert.ok(read('app/(pages)/press/[slug]/page.tsx').includes("import { RichTextContent } from '@/components/blog/RichTextContent';"));
   assert.match(live, /className="scroll-mt-28 text-2xl sm:text-3xl font-bold font-heading tracking-tight mt-10 mb-4"/);
   assert.ok(!/className=/.test(code(rich).replace(/className="ba-(prose|table)"/g, '')), 'article renderer adds no utility classes');
 });

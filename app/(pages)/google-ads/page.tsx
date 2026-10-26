@@ -1,12 +1,14 @@
 import { createMetadata } from '@/lib/metadata';
 import { BreadcrumbJsonLd } from '@/components/cplus/BreadcrumbJsonLd';
-import { CplusPage } from '@/components/cplus/CplusPage';
-import { GoogleAdsBody } from '@/components/cplus/google-ads/GoogleAdsBody';
+import { PaidAdvertisingGoogleAds } from '@/components/paid-advertising/google-ads/PaidAdvertisingGoogleAds';
+import { GoogleAdsJsonLd } from '@/components/paid-advertising/google-ads/GoogleAdsJsonLd';
 
 /**
- * `/google-ads` — the approved C+ Google Ads design (proto/direction-c-plus 0a8b611) in production. The URL, metadata
- * (title, description, canonical, Open Graph/Twitter) and the global structured data and this route's `BreadcrumbList` (same trail, same helpers) are unchanged. The Direction C header and footer come
- * from the root layout.
+ * `/google-ads`: the paid-advertising Google Ads page (Content R2, Visual R1, 26 October 2026; DEC-079 supersedes DEC-053
+ * only for the H1, structure, CTA wording and the case-study rule). The route, canonical, live title and description, and
+ * the existing BreadcrumbList (same trail, same helper) are unchanged; the metadata awaits Search Console review. FAQPage
+ * and one Service node are added. The previous C+ components (components/cplus/google-ads/*) are no longer rendered but
+ * are left in the repository. Header and footer come from the root layout.
  */
 export const metadata = createMetadata(
   'Google Ads Measured on the Enquiries, Not the Clicks | MappedSkills',
@@ -16,9 +18,10 @@ export const metadata = createMetadata(
 
 export default function Page() {
   return (
-    <CplusPage>
+    <>
       <BreadcrumbJsonLd label="Paid search" path="/google-ads" />
-      <GoogleAdsBody />
-    </CplusPage>
+      <GoogleAdsJsonLd />
+      <PaidAdvertisingGoogleAds />
+    </>
   );
 }

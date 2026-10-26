@@ -1,12 +1,14 @@
 import { createMetadata } from '@/lib/metadata';
 import { BreadcrumbJsonLd } from '@/components/cplus/BreadcrumbJsonLd';
-import { CplusPage } from '@/components/cplus/CplusPage';
-import { SocialAdsBody } from '@/components/cplus/social-media-ads/SocialAdsBody';
+import { PaidAdvertisingMetaAds } from '@/components/paid-advertising/meta-ads/PaidAdvertisingMetaAds';
+import { MetaAdsJsonLd } from '@/components/paid-advertising/meta-ads/MetaAdsJsonLd';
 
 /**
- * `/social-media-ads` — the approved C+ Social Media Ads design (proto/direction-c-plus 0a8b611) in production. The URL, metadata
- * (title, description, canonical, Open Graph/Twitter) and the global structured data and this route's `BreadcrumbList` (same trail, same helpers) are unchanged. The Direction C header and footer come
- * from the root layout.
+ * `/social-media-ads`: the paid-advertising Meta Ads page (Content R2, Visual R1, 26 October 2026; DEC-080 supersedes the
+ * unlogged Paid Social refinement only for the H1, hero, CTA wording, structure, visible terminology, tracking boundary and
+ * creative allowances). The route, canonical, live title and description, and the existing BreadcrumbList (same trail and
+ * label) are unchanged; the metadata awaits Search Console review. FAQPage and one Service node are added. The previous C+
+ * components (components/cplus/social-media-ads/*) are no longer rendered but are left in the repository.
  */
 export const metadata = createMetadata(
   'Paid Social, Judged on the Enquiries It Produces | MappedSkills',
@@ -16,9 +18,10 @@ export const metadata = createMetadata(
 
 export default function Page() {
   return (
-    <CplusPage>
+    <>
       <BreadcrumbJsonLd label="Paid social" path="/social-media-ads" />
-      <SocialAdsBody />
-    </CplusPage>
+      <MetaAdsJsonLd />
+      <PaidAdvertisingMetaAds />
+    </>
   );
 }

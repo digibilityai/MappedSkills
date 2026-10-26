@@ -426,3 +426,18 @@
 @media (prefers-reduced-motion: reduce) {
   .dc *, .dc *::before, .dc *::after { transition-duration: 1ms !important; transition-delay: 0ms !important; animation: none !important; }
 }
+
+/* Paid-advertising revamp, owner-approved 26 October 2026.
+   Keep the existing tested disclosure/menu behaviour and privacy controls. */
+.dc-hdr .dc-btn-primary { border-radius: 7px; background: var(--dc-tang); color: var(--dc-ink); font-size: .84rem; }
+.dc-hdr .dc-btn-primary:hover { background: var(--dc-tang-small); color: white; }
+.dc-hdr .dc-btn-primary .dc-mk { display: none; }
+.dc-hdr .dc-btn-primary::after { content: '↗'; font-size: 1.1rem; }
+.dc-hdr .dc-menu-btn { border-radius: 7px; }
+.dc-ftr.pa-footer { --dc-on-ink: var(--dc-ink); --dc-on-ink-soft: var(--dc-dim); --dc-on-ink-dim: var(--dc-dim); --dc-rule-on-ink: var(--dc-line); background: var(--dc-ground); color: var(--dc-ink); padding-top: 28px; border-top: 1px solid var(--dc-line); }
+.dc-ftr.pa-footer .dc-brand > p { color: var(--dc-dim); }
+.dc-ftr.pa-footer .dc-ftr-top { row-gap: 40px; }
+.dc-ftr.pa-footer .dc-base { margin-top: 32px; }
+@media (max-width: 599px) {
+  .dc-hdr .dc-right > .dc-btn-primary { display: none; }
+}

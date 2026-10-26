@@ -1,5 +1,6 @@
 import { excerptFromDocument } from '@/lib/contentful/case-study-sections';
 import { getCaseStudyService } from '@/lib/case-study-services';
+import { caseStudyStage } from '@/lib/case-study-stage';
 import { plainStatements, splitImpact } from '@/lib/case-study-outcomes';
 import { SERVICES } from '@/lib/services';
 import {
@@ -12,7 +13,6 @@ import {
   type SectorKey,
   type ServiceRoute,
 } from '@/lib/case-study-library';
-import { SERVICE_GROUPS, type NavGroup } from '@/components/direction-c/nav';
 import type { CmsCaseStudy } from '@/lib/contentful/types';
 
 /**
@@ -44,7 +44,7 @@ export type WorkStudy = {
   detail: string;
   industry: string;
   service: string | null;
-  stage: NavGroup['stage'] | null;
+  stage: 'Capture' | 'Convert' | null;
   challenge: string;
   changed: string[];
   outcomes: string[];
@@ -71,7 +71,8 @@ export function toWorkStudy(study: CmsCaseStudy, challengeSentences: number): Wo
   const client = first || study.title;
   const explicit = study.library.serviceKey;
   const service = explicit ? SERVICES[explicit] : getCaseStudyService(study.slug);
-  const stage = service ? SERVICE_GROUPS.find((g) => g.links.some((l) => l.href === service.link))?.stage ?? null : null;
+  // Historical case classification is independent of the current sales navigation.
+  const stage = caseStudyStage(service?.link);
   const industry = study.industry.toLowerCase() === client.toLowerCase() ? '' : study.industry;
   const challenge = sentences(
     study.layout === 'new' && study.newLayout
@@ -92,7 +93,7 @@ export function toWorkStudy(study: CmsCaseStudy, challengeSentences: number): Wo
     detail: rest.join(', '),
     industry,
     service: service?.title ?? null,
-    stage: stage === 'Measure' ? null : stage,
+    stage,
     challenge,
     changed: (study.sections.servicesProvided ?? []).map((c) => tidy(c.title)).filter(Boolean).slice(0, MAX_ITEMS),
     outcomes,

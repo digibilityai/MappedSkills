@@ -101,6 +101,9 @@ const COMMERCIAL_PATHS = new Set([
   '/ai-seo',
   '/google-ads',
   '/social-media-ads',
+  '/who-we-help/d2c',
+  '/who-we-help/education',
+  '/who-we-help/real-estate',
   '/lead-generation',
   '/conversion-optimization',
 ]);

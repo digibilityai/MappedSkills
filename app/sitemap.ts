@@ -87,6 +87,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/ai-seo',
     '/google-ads',
     '/social-media-ads',
+    '/who-we-help/d2c',
+    '/who-we-help/education',
+    '/who-we-help/real-estate',
     '/lead-generation',
     '/conversion-optimization',
     // Diagnostic, method, cost

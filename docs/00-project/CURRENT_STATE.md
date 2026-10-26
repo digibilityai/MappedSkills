@@ -1,5 +1,22 @@
 # Current Project State
 
+> ## PAID-ADVERTISING REVAMP — CURRENT OWNER DIRECTION, 26 OCTOBER 2026
+>
+> Phases 1–3 and the homepage desktop/mobile visual direction are owner-approved in the current session.
+> These approvals supersede older positioning and homepage-copy restrictions where they conflict.
+> Development is authorised: first batch = shared styles/actions, header/footer and homepage on
+> `feat/paid-advertising-homepage`. Source baseline: `142bcee` (main). Local changes only.
+> Google Ads and Meta Ads are the only promoted core services. No personal dependency on Amit for every account.
+> Case-study drafts approved; missing details/assets may be completed later. Illustrative figures are not launch-ready results.
+> No CMS mutation, push, PR, merge or deployment performed or authorised by this batch.
+> Read `docs/paid-advertising-revamp/DEVELOPMENT_BATCH_01.md` and DEC-078 before the historical records below.
+>
+> **Owner workflow (latest, 26 October 2026):** Claude implements; ChatGPT coordinates and reviews. Amit visually reviews
+> and approves EVERY working page, desktop and mobile, before the next page begins. The homepage design reference is
+> approved; the implemented homepage still awaits visual approval. Local commits are authorised, made only after a page's
+> working preview is approved. No push, PR, merge, CMS publication or deployment; the whole site is approved locally first.
+
+
 > ## ⚠ ACTIVE OWNER-APPROVED VISUAL DIRECTION — READ FIRST
 >
 > ### **SESSION 15C — THE RESOLVE.**

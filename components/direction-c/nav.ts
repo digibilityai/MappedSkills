@@ -1,25 +1,11 @@
-/**
- * DIRECTION C — navigation data, ONE source for the header, the mobile menu
- * and the footer.
- *
- * NAVIGATION REDESIGN (R2 prototype, docs/nav-redesign/prototype/index.html):
- * - one Services disclosure, its links grouped by stage (Capture · Convert ·
- *   Measure), each with the approved stage line and descriptor;
- * - sentence-case labels throughout, one name per destination;
- * - "How it works" sits in the main navigation AND in the Measure stage. The
- *   Measure stage describes how the work is measured; it is not a separate
- *   purchasable service, so the footer's Services column does not list it;
- * - the footer has four columns: Services, Company, Insights, Contact.
- *
- * DESTINATIONS are unchanged production routes. The redesign drops links from
- * the chrome (the footer's Contact and Book a call entries, the header's Book a
- * call) but adds no new destination. Press was returned to the footer's Insights
- * column by the owner (DEC-076, a narrow revision of DEC-070).
+/** Paid-advertising navigation approved 26 October 2026.
+ * Shared by the header, mobile menu and footer. Existing routes are retained
+ * until the migration batch; historical service pages remain accessible.
  */
 
 export type NavLink = { href: string; label: string; desc?: string };
 export type NavGroup = {
-  stage: 'Capture' | 'Convert' | 'Measure';
+  stage: 'Paid advertising';
   mark: 'anon' | 'named' | 'owned';
   /** the approved stage line, e.g. "Get found." */
   line: string;
@@ -28,62 +14,44 @@ export type NavGroup = {
 
 export const SERVICE_GROUPS: NavGroup[] = [
   {
-    stage: 'Capture',
+    stage: 'Paid advertising',
     mark: 'anon',
-    line: 'Get found.',
+    line: 'Built around your business goals.',
     links: [
-      { href: '/seo', label: 'SEO', desc: 'Judged on the enquiries it produces.' },
-      { href: '/google-ads', label: 'Google Ads', desc: 'Measured on enquiries, not clicks.' },
-      { href: '/social-media-ads', label: 'Paid social', desc: 'Only where it fits your business.' },
-      { href: '/ai-seo', label: 'AI search', desc: 'Is your business in the answer?' },
+      { href: '/google-ads', label: 'Google Ads', desc: 'Reach people looking for what you offer.' },
+      { href: '/social-media-ads', label: 'Meta Ads', desc: 'Bring your offer to customers on Facebook and Instagram.' },
     ],
-  },
-  {
-    stage: 'Convert',
-    mark: 'named',
-    line: 'Get enquiries.',
-    links: [
-      { href: '/conversion-optimization', label: 'Conversion optimisation', desc: 'Find where visits are lost.' },
-      { href: '/lead-generation', label: 'Lead generation', desc: 'Enquiries you can act on.' },
-    ],
-  },
-  {
-    stage: 'Measure',
-    mark: 'owned',
-    line: 'See what’s working.',
-    links: [{ href: '/how-it-works', label: 'How it works', desc: 'From first call to monthly review.' }],
   },
 ];
 
 export const SERVICES_HUB: NavLink = {
   href: '/services',
   label: 'All services',
-  desc: 'Explore how our services work together.',
+  desc: 'Explore Google Ads and Meta Ads management.',
 };
 
 /** Secondary, contextual link at the foot of the Services panel and section. */
 export const PROBLEM_LINK: NavLink = {
-  href: '/problems/traffic-but-no-enquiries',
-  label: 'Getting traffic but no enquiries?',
+  href: '/pricing',
+  label: 'Understand Our Pricing Approach',
 };
 
 /** Primary navigation after Services. */
 export const PRIMARY_LINKS: NavLink[] = [
-  { href: '/how-it-works', label: 'How it works' },
-  { href: '/work', label: 'Case studies' },
-  { href: '/pricing', label: 'Pricing' },
-  { href: '/blog', label: 'Blog' },
+  { href: '/#who-we-help', label: 'Who We Help' },
+  { href: '/work', label: 'Our Work' },
+  { href: '/how-it-works', label: 'How We Work' },
   { href: '/about', label: 'About' },
 ];
 
-export const CONTACT_LINK: NavLink = { href: '/contact', label: 'Contact us' };
+export const CONTACT_LINK: NavLink = { href: '/contact', label: 'Discuss Your Advertising' };
 /** Secondary action in the mobile and tablet menu only (DEC-062 destination). */
 export const CALL_LINK: NavLink = { href: '/contact?intent=call', label: 'Request a call' };
 
 /** Capability routes: the Services column of the footer and the routes that mark "Services" current. */
-const CAPABILITIES: NavLink[] = SERVICE_GROUPS.filter((g) => g.stage !== 'Measure').flatMap((g) => g.links);
+const CAPABILITIES: NavLink[] = SERVICE_GROUPS.flatMap((g) => g.links);
 
-/** Footer "Services" column: the hub, then the six capability routes. */
+/** Footer services: the hub and the two core advertising services. */
 export const FOOTER_SERVICES: NavLink[] = [SERVICES_HUB, ...CAPABILITIES];
 
 /** Footer "Company" column. */

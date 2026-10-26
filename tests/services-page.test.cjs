@@ -18,10 +18,12 @@ const analytics = read('lib/analytics.ts');
 const code = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
 const copy = code(content);
 
-test('title, description and path unchanged; approved H1 (SV-D01)', () => {
-  assert.match(page, /'Services: Digital Marketing That Works Together \| MappedSkills'/);
-  assert.match(page, /'Reach potential customers, make it easier for them to contact you, and measure what is working\. MappedSkills connects search, advertising, your website and enquiry tracking\.'/);
+// SUPERSEDED 26 October 2026 (DEC-078, owner-approved /services Content R2): the route now renders the paid-advertising page,
+// so the old title, description and H1 assertions moved to tests/paid-advertising-services.test.cjs. This test keeps the
+// parts that still apply: the path is unchanged and the legacy C+ components stay in the repository for history.
+test('route path unchanged; the superseded C+ Services components are retained (SV-D01 history)', () => {
   assert.match(page, /'\/services'/);
+  assert.doesNotMatch(page, /ServicesBody/);
   assert.match(copy, /h1: \['Get found\.', 'Get enquiries\.', 'See what’s working\.'\]/);
   assert.match(body, /<h1 id="sv-h1"/);
 });

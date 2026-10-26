@@ -1,5 +1,14 @@
 # Service Architecture — APPROVED AND FROZEN
 
+> ## CURRENT-SERVICE SUMMARY — UPDATED 26 OCTOBER 2026 (`DEC-078`)
+>
+> - **Google Ads** and **Meta Ads** are the two promoted core services.
+> - **Meta Ads** means paid Facebook and Instagram advertising. It does **not** mean organic social media management.
+> - Historical service URLs and content remain accessible pending the separate approved migration batch.
+> - No additional channels are being launched.
+>
+> The architecture below is retained unaltered as the historical `DEC-005` record; where it conflicts with `DEC-078`, `DEC-078` governs.
+
 **Status:** APPROVED DECISION — frozen in Session 06 (2026-08-31).
 **Authority:** `DEC-005` in `docs/00-project/DECISION_LOG.md`.
 **Supersedes:** the three-pillar architecture (AI + Search Visibility / CRO / Marketing Automation) previously in this file.

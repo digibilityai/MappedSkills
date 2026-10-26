@@ -39,30 +39,13 @@ function Column({ id, title, links }: { id: string; title: string; links: NavLin
 export function SiteFooter() {
   const year = new Date().getFullYear();
   return (
-    <footer className="dc dc-ftr dc-on-ink">
+    <footer className="dc dc-ftr pa-footer">
       <div className="dc-wrap">
         <div className="dc-ftr-top">
           <div className="dc-brand">
-            <Logo href="/" onDark />
+            <Logo href="/" />
             <p>
-              We help businesses get found by the buyers already looking for what they sell, turn more of those
-              visits into real enquiries, and measure the whole path so they can see what worked.
-            </p>
-            <p className="dc-ftr-chain" aria-hidden="true">
-              <span>
-                <span className="dc-mk anon" />
-                Capture
-              </span>
-              <span className="sep">&rarr;</span>
-              <span>
-                <span className="dc-mk named" />
-                Convert
-              </span>
-              <span className="sep">&rarr;</span>
-              <span>
-                <span className="dc-mk owned" />
-                Measure
-              </span>
+              Google Ads and Meta Ads management for growing businesses.
             </p>
           </div>
 

@@ -96,7 +96,7 @@ test('footer: Who We Help group and a discreet, accurate More services group (D3
   const hrefs = (s) => [...s.matchAll(/href="([^"]+)"/g)].map((m) => m[1]);
   assert.deepEqual(hrefs(grp('dc-f-who')), ['/who-we-help/d2c', '/who-we-help/education', '/who-we-help/real-estate', '/who-we-help/enquiry-led-businesses']);
   assert.deepEqual(hrefs(grp('dc-f-more')), ['/lead-generation', '/seo', '/ai-seo', '/conversion-optimization']);
-  assert.match(grp('dc-f-more'), /Earlier service pages\. Our core work is Google Ads and Meta Ads\./);
+  assert.match(grp('dc-f-more'), /Supporting services\. Our core work is Google Ads and Meta Ads\./);
   assert.deepEqual(hrefs(grp('dc-f-svc')), ['/services', '/google-ads', '/social-media-ads']);
 });
 

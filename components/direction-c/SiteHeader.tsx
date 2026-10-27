@@ -15,7 +15,7 @@ import {
   SERVICE_ROUTES,
   WHO_WE_HELP_LABEL,
   WHO_WE_HELP_LINKS,
-  WHO_WE_HELP_OVERVIEW,
+  WHO_WE_HELP_NOJS_HREF,
   WHO_WE_HELP_ROUTES,
 } from '@/components/direction-c/nav';
 import { siteMetadata } from '@/lib/metadata';
@@ -55,6 +55,8 @@ export function SiteHeader() {
   /* hover opens the panel; a click then pins it open instead of toggling it shut */
   const whoHover = useRef(false);
   const whoTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const svcHover = useRef(false);
+  const svcTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const menuBtn = useRef<HTMLButtonElement>(null);
   const svcBtn = useRef<HTMLButtonElement>(null);
   const svcItem = useRef<HTMLLIElement>(null);
@@ -91,6 +93,7 @@ export function SiteHeader() {
       }
       if (svcOpen) {
         setSvcOpen(false);
+        svcHover.current = false;
         svcBtn.current?.focus();
         return;
       }
@@ -101,7 +104,10 @@ export function SiteHeader() {
       }
     };
     const outside = (e: Event) => {
-      if (svcOpen && svcItem.current && !svcItem.current.contains(e.target as Node)) setSvcOpen(false);
+      if (svcOpen && svcItem.current && !svcItem.current.contains(e.target as Node)) {
+        setSvcOpen(false);
+        svcHover.current = false;
+      }
       if (whoOpen && whoItem.current && !whoItem.current.contains(e.target as Node)) {
         setWhoOpen(false);
         whoHover.current = false;
@@ -170,15 +176,46 @@ export function SiteHeader() {
     focusFirstOnOpen.current = false;
   }, [svcOpen]);
 
+  useEffect(() => () => clearTimeout(svcTimer.current), []);
+
+  const openSvc = () => {
+    setWhoOpen(false);
+    setSvcOpen(true);
+  };
+  /* hover opens the panel; a click then pins it open instead of toggling it shut */
+  const onSvcBtnClick = () => {
+    if (svcOpen && svcHover.current) {
+      svcHover.current = false;
+      return;
+    }
+    if (svcOpen) setSvcOpen(false);
+    else openSvc();
+  };
+  const onSvcEnter = (e: ReactPointerEvent) => {
+    if (e.pointerType !== 'mouse') return;
+    clearTimeout(svcTimer.current);
+    if (!svcOpen) svcHover.current = true;
+    openSvc();
+  };
+  const onSvcLeave = (e: ReactPointerEvent) => {
+    if (e.pointerType !== 'mouse' || !svcHover.current) return;
+    clearTimeout(svcTimer.current);
+    svcTimer.current = setTimeout(() => {
+      svcHover.current = false;
+      setSvcOpen(false);
+    }, 160);
+  };
+
   const onSvcBtnKey = (e: ReactKeyboardEvent) => {
     if (e.key !== 'ArrowDown') return;
     e.preventDefault();
+    svcHover.current = false;
     if (svcOpen) {
       panelLinks()[0]?.focus();
       return;
     }
     focusFirstOnOpen.current = true;
-    setSvcOpen(true);
+    openSvc();
   };
 
   const onPanelKey = (e: ReactKeyboardEvent) => {
@@ -204,6 +241,7 @@ export function SiteHeader() {
   useEffect(() => () => clearTimeout(whoTimer.current), []);
 
   const openWho = () => {
+    svcHover.current = false;
     setSvcOpen(false);
     setWhoOpen(true);
   };
@@ -267,7 +305,7 @@ export function SiteHeader() {
 
         <nav className="dc-nav" aria-label="Primary">
           <ul className="dc-nav-list">
-            <li className="dc-nav-svc" ref={svcItem}>
+            <li className="dc-nav-svc" ref={svcItem} onPointerEnter={onSvcEnter} onPointerLeave={onSvcLeave}>
               <button
                 ref={svcBtn}
                 type="button"
@@ -275,10 +313,7 @@ export function SiteHeader() {
                 aria-expanded={svcOpen}
                 aria-controls="dc-svc-panel"
                 data-current={inServices ? '' : undefined}
-                onClick={() => {
-                  setWhoOpen(false);
-                  setSvcOpen((v) => !v);
-                }}
+                onClick={onSvcBtnClick}
                 onKeyDown={onSvcBtnKey}
               >
                 Services
@@ -292,7 +327,10 @@ export function SiteHeader() {
                 inert={!svcOpen}
                 onKeyDown={onPanelKey}
                 onClick={(e) => {
-                  if ((e.target as HTMLElement).closest('a')) setSvcOpen(false);
+                  if ((e.target as HTMLElement).closest('a')) {
+                    setSvcOpen(false);
+                    svcHover.current = false;
+                  }
                 }}
               >
                 <div className="dc-sp-rows">
@@ -380,18 +418,10 @@ export function SiteHeader() {
                     </li>
                   ))}
                 </ul>
-                <div className="dc-panel-ft">
-                  <Link className="dc-all" href={WHO_WE_HELP_OVERVIEW.href}>
-                    {WHO_WE_HELP_OVERVIEW.label}{' '}
-                    <span className="dc-arr" aria-hidden="true">
-                      &rarr;
-                    </span>
-                  </Link>
-                </div>
               </div>
               <noscript>
                 <style>{'.dc-nav-who .dc-svc-btn{display:none!important}'}</style>
-                <a className="dc-svc-nojs" href={WHO_WE_HELP_OVERVIEW.href}>
+                <a className="dc-svc-nojs" href={WHO_WE_HELP_NOJS_HREF}>
                   {WHO_WE_HELP_LABEL}
                 </a>
               </noscript>
@@ -503,9 +533,6 @@ export function SiteHeader() {
                     </li>
                   ))}
                 </ul>
-                <Link className="dc-m-ctx" href={WHO_WE_HELP_OVERVIEW.href}>
-                  {WHO_WE_HELP_OVERVIEW.label}
-                </Link>
               </div>
             </li>
             {PRIMARY_LINKS.map((l) => (

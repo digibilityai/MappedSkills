@@ -1,80 +1,101 @@
-/** /services Content R2, approved by the owner with the five corrections of 26 October 2026.
- * Evidence notes live in docs/paid-advertising-revamp/SERVICES_R1_NOTES.md. No YouTube, no other platform, no free audit,
- * no response times, no figures. Click-to-WhatsApp is an option within Meta Ads, not a service.
+/** /services R2, owner-approved design direction with four final corrections (27 October 2026).
+ * Evidence notes: docs/paid-advertising-revamp/SERVICES_R1_NOTES.md. No YouTube, no other platform, no free audit,
+ * no response times, no figures, no Click-to-WhatsApp (delivery unconfirmed). Case cards are the verified entries that
+ * were already on this page; the shared tag-matched case-study system is a separate requirement (not built here).
  */
 export const HERO = {
   eyebrow: 'Google Ads and Meta Ads for Indian businesses',
-  h1: 'Reach more of the right customers with Google Ads and Meta Ads.',
-  lede: 'Some customers search for what they need. Others discover businesses while browsing. We help you reach both, with advertising planned around how people find, consider and buy from your business.',
-  anchor: 'Explore Our Services',
+  lede: 'We plan and manage paid advertising so more of the right buyers find you, more of them make an enquiry, and you can see what worked.',
+  anchor: 'See how the path works',
+} as const;
+
+/** Hero diagram: Capture, Convert, Enquiry along the path; Measure observes all of it. */
+export const DIAGRAM = {
+  entries: [
+    { k: 'They search', d: 'People already looking for what you sell' },
+    { k: 'They browse', d: 'People who were not looking yet' },
+  ],
+  stations: [
+    { k: 'Capture', d: 'Found by the right buyers' },
+    { k: 'Convert', d: 'Easy to enquire' },
+  ],
+  end: 'A qualified enquiry',
+  measure: { k: 'Measure', d: 'Watches every step and shows what worked' },
+  caption: 'How we plan the work. A diagram of the approach, not measured results.',
+} as const;
+
+export const PATH = {
+  eyebrow: 'The path',
+  intro: 'Traffic is not the finish line. We plan advertising around the whole path, so you can see where it works and where it breaks.',
+  rows: [
+    { k: 'Capture', q: 'Are the right buyers finding you?',
+      d: 'Google Ads reaches people searching for what you sell. Meta Ads introduces your offer to people who were not looking yet.',
+      sup: { lead: 'To be found beyond paid ads:', links: [{ href: '/seo', label: 'SEO' }, { href: '/ai-seo', label: 'AI search' }] } },
+    { k: 'Convert', q: 'Is it easy and worth their while to enquire?',
+      d: 'We review where people land after they click and tell you what we find, so more of the right visits become real enquiries.',
+      sup: { lead: 'When the page itself needs work:', links: [{ href: '/conversion-optimization', label: 'conversion optimisation' }, { href: '/lead-generation', label: 'lead generation' }] } },
+    { k: 'Measure', q: 'Can you see what worked?',
+      d: 'We tell you what needs measuring and what your website currently allows. You get a monthly performance report with ongoing work.',
+      sup: null },
+  ],
 } as const;
 
 export const CARDS = [
   { id: 'google', name: 'Google Ads', href: '/google-ads', badge: 'They search',
-    benefit: 'Reach people at the moment they search for what you sell.',
-    suits: ['Online courses', 'Specialist and local services', 'Products people search for'],
-    manage: 'We plan and manage campaigns around relevant searches, your advertising budget and the actions you want customers to take.' },
-  { id: 'meta', name: 'Meta Ads', href: '/social-media-ads', badge: 'They discover',
-    benefit: 'Introduce your offer to people who did not know to look for it.',
+    benefit: 'Be there when buyers search for what you sell.',
+    manage: 'We plan and manage campaigns around the searches that matter, your budget and the enquiry or purchase you want.',
+    suits: ['Online courses', 'Specialist and local services', 'Products people search for'] },
+  { id: 'meta', name: 'Meta Ads', href: '/social-media-ads', badge: 'They browse',
+    benefit: 'Introduce your offer to people who were not looking yet.',
+    manage: 'We plan and manage who sees your ads, ad testing and budget, and review where people land after they click.',
     suits: ['Apparel and D2C brands', 'Education and coaching', 'Real estate'],
-    manage: 'We plan and manage who sees your ads, how campaigns are organised, ad testing, budget pacing and a review of where people land after clicking.',
-    whatsapp: 'Option within Meta Ads: where it suits your business, ads can start a WhatsApp chat as well as sending people to your website or an enquiry form.',
-    note: 'Meta Ads means advertising on Facebook and Instagram. We do not manage your posting.' },
+    note: 'Meta Ads means Facebook and Instagram advertising. We do not manage your posting.' },
 ] as const;
 
-export const FIT = {
-  rows: [
-    { k: 'search', who: 'Customers already searching', then: 'Google Ads' },
-    { k: 'browse', who: 'Customers discovering offers', then: 'Meta Ads' },
-    { k: 'both', who: 'Both behaviours', then: 'We assess a coordinated approach' },
+export const ILLUSTRATION_NOTE = 'Illustration of how an ad can appear. Not a client ad.';
+
+export const WHICH = {
+  lead: 'Which one first?',
+  body: 'Search suits buyers who already know what they want. Meta suits offers buyers need to discover. Not every business needs both, so we check your offer, margins, follow-up and measurement before recommending anything.',
+  audiences: [
+    { href: '/who-we-help/d2c', label: 'D2C and Ecommerce' },
+    { href: '/who-we-help/education', label: 'Education and Training' },
+    { href: '/who-we-help/real-estate', label: 'Real Estate' },
+    { href: '/who-we-help/enquiry-led-businesses', label: 'Enquiry-Led Businesses' },
   ],
-  caveat: 'Not every business needs both. Advertising works best when these are in place. We check them before recommending anything.',
-  checks: ['A clear offer', 'Margins that support paying to win customers', 'Prompt follow-up of enquiries', 'A way to see what happens next'],
 } as const;
 
-export const SCOPE = {
-  included: ['Planning campaigns around your offer and customers', 'Running them and adjusting your budget as performance calls for it', 'Testing different ads', 'Setting up tracking for meaningful enquiry actions, where technically possible', 'Reviewing where people land and telling you what we find', 'A monthly performance report with ongoing work, and review calls where agreed in your proposal'],
-  separate: ['Website, landing-page and tracking changes', 'Creative beyond the agreed designs, such as reels, video and scripting'],
-  separateNote: 'For Meta Ads, your proposal sets a defined number of static ad designs. The number is agreed in the proposal.',
-} as const;
-
-/** Verified descriptions from the live case pages and /work index (26 October 2026). Wanderlooms has no individual page. */
+/** Verified descriptions from the live case pages (26 October 2026). Service and industry are separate tags.
+ * Wanderlooms has no individual page and no approved service evidence, so it carries an industry tag only and no link. */
 export const WORK = [
-  { id: 'anybodycanbake', name: 'AnyBodyCanBake', channel: 'Google Ads', sector: 'Online baking courses',
-    line: 'Google Ads for a Pune online baking school, aimed at more students for its eggless and healthy baking courses.',
+  { id: 'anybodycanbake', name: 'AnyBodyCanBake', service: 'Google Ads', industry: 'Education and training',
+    line: 'AnyBodyCanBake, a Pune online baking school, needed more students for its eggless and healthy baking courses.',
     href: '/portfolio/google-ads-for-online-courses', cta: 'Read the Google Ads case study' },
-  { id: 'wanderlooms', name: 'Wanderlooms', channel: 'Meta Ads', sector: 'Adventure apparel',
-    line: 'Meta advertising for an adventure apparel brand featured on Shark Tank India.', href: null, cta: null },
-  { id: 'om-sai', name: 'Om Sai Developer', channel: 'Meta Ads', sector: 'Real estate, Mumbai',
-    line: 'Meta ads for a Mumbai real estate developer, focused on enquiries from people interested in the project.',
+  { id: 'om-sai', name: 'Om Sai Developer', service: 'Meta Ads', industry: 'Real estate',
+    line: 'A Chembur developer needed enquiries from people interested in its project.',
     href: '/portfolio/om-sai-developer-meta-ads', cta: 'Read the Meta Ads case study' },
+  { id: 'wanderlooms', name: 'Wanderlooms', service: null, industry: 'Adventure apparel',
+    line: 'An adventure apparel brand featured on Shark Tank India.', href: null, cta: null },
 ] as const;
 
-export const PROCESS = {
+export const TERMS = {
+  included: ['Planning campaigns around your offer and customers', 'Running them and adjusting your budget as results call for it', 'Testing different ads', 'Reviewing where people land and what we find', 'A monthly performance report with ongoing work, and review calls where your proposal agrees them'],
+  separate: 'Website, landing page and tracking changes. Creative beyond the agreed designs, such as reels, video and scripting. For Meta Ads, your proposal sets a defined number of static ad designs.',
+  cost: { spend: 'Ad spend', spendD: 'is paid directly to the platform. Our', fee: 'management fee', feeD: 'is charged separately and shaped by the work involved. Quotes are tailored.' },
+  fit: 'Advertising tends to work when you already sell or are close, can follow up enquiries promptly, know roughly what a customer is worth and can invest enough to learn what works. It may be premature if your offer is untested or you cannot follow up yet. No one can honestly guarantee results.',
+  stepsLead: 'Every engagement follows the same five steps. Nothing starts until you approve it.',
   steps: ['Assess', 'Plan', 'Launch', 'Test', 'Review'],
-  copy: 'Every engagement follows the same five steps, so you always know what is happening and what comes next. Nothing starts until you approve it.',
-} as const;
-
-export const COST = {
-  items: [
-    { t: 'Ad spend', d: 'Paid directly to the platform.' },
-    { t: 'Management fee', d: 'Charged separately, and shaped by the work involved.' },
-    { t: 'Separately scoped work', d: 'Website or tracking changes, and creative beyond the agreed designs.' },
-  ],
-  ready: ['You already sell, or are close', 'You can follow up enquiries promptly', 'You know roughly what a customer is worth', 'You can invest enough to learn what works'],
-  premature: ['Your offer is untested', 'You cannot follow up enquiries yet', 'You need guaranteed results, which no one can honestly promise'],
 } as const;
 
 export const SERVICES_FAQS = [
   { question: 'Should I start with Google Ads or Meta Ads?', answer: 'It depends on how your customers buy. Google Ads suits people already searching. Meta Ads suits people discovering offers. We look at your offer, margins and follow-up before recommending either, or both.' },
   { question: 'Can you work on campaigns we already run?', answer: 'Yes. Tell us what is running now and we will discuss what to review before suggesting a plan.' },
-  { question: 'Can you run Click-to-WhatsApp ads?', answer: 'Where WhatsApp suits how your customers prefer to ask, Meta ads can start a chat. Your team needs to reply promptly. We will discuss whether it fits.' },
   { question: 'Who creates the ad creative?', answer: 'For Meta, your proposal includes a defined number of static ad designs. Reels, video, scripting and anything beyond that are scoped separately. For Google Ads, managing the ads is part of our work.' },
   { question: 'How are fees handled?', answer: 'Ad spend goes directly to the platform. Our fee is separate and depends on the work involved, so every quote is tailored.' },
   { question: 'Can you guarantee sales or a return?', answer: 'No. We agree the work, measurement and responsibilities clearly. Results also depend on your offer, pricing, website, competition and follow-up.' },
 ] as const;
 
 export const CLOSE = {
-  h: 'Tell us about your business and what you want advertising to achieve.',
-  body: 'Share what you sell, who buys it and where you want to grow. We will reply by email or WhatsApp to talk it through. Nothing starts until you approve it.',
+  h: 'Judge us on the enquiries, not the traffic.',
+  body: 'Tell us about your business and what you want advertising to achieve. We will reply by email or WhatsApp to talk it through. Nothing starts until you approve it.',
 } as const;

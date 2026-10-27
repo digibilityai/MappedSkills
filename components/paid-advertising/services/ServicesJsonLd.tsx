@@ -5,7 +5,7 @@ import { CARDS, SERVICES_FAQS } from './content';
 
 const safe = (o: unknown) => JSON.stringify(o).replace(/</g, '\\u003c');
 
-/** /services structured data, each node matching visible content: BreadcrumbList, FAQPage (the six visible questions) and
+/** /services structured data, each node matching visible content: BreadcrumbList, FAQPage (the five visible questions) and
  * one Service per core service. areaServed is a Country (India). No prices, ratings, reviews or client figures. */
 export function ServicesJsonLd() {
   const base = siteMetadata.baseUrl;

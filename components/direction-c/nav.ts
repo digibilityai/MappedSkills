@@ -36,7 +36,7 @@ export const PROBLEM_LINK: NavLink = {
   label: 'Understand Our Pricing Approach',
 };
 
-/** "Who We Help" dropdown: the four audience pages, then the homepage overview section. */
+/** "Who We Help" dropdown: the four audience pages only. */
 export const WHO_WE_HELP_LABEL = 'Who We Help';
 export const WHO_WE_HELP_LINKS: NavLink[] = [
   { href: '/who-we-help/d2c', label: 'D2C and Ecommerce', desc: 'Products sold online to customers directly.' },
@@ -44,7 +44,8 @@ export const WHO_WE_HELP_LINKS: NavLink[] = [
   { href: '/who-we-help/real-estate', label: 'Real Estate', desc: 'Property developers and Channel Partners.' },
   { href: '/who-we-help/enquiry-led-businesses', label: 'Enquiry-Led Businesses', desc: 'Customers who ask before they buy.' },
 ];
-export const WHO_WE_HELP_OVERVIEW: NavLink = { href: '/#who-we-help', label: 'See how we help each business' };
+/** Plain-link target for the no-JavaScript fallback only; it is not listed in the dropdown or the mobile menu. */
+export const WHO_WE_HELP_NOJS_HREF = '/#who-we-help';
 export const WHO_WE_HELP_ROUTES = new Set(WHO_WE_HELP_LINKS.map((l) => l.href));
 
 /** Primary navigation after Services and Who We Help. */

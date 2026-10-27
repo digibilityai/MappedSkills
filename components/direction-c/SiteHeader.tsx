@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react';
+import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type PointerEvent as ReactPointerEvent } from 'react';
 import { Logo } from '@/components/Logo';
 import { cn } from '@/lib/utils';
 import {
@@ -13,6 +13,10 @@ import {
   SERVICE_GROUPS,
   SERVICES_HUB,
   SERVICE_ROUTES,
+  WHO_WE_HELP_LABEL,
+  WHO_WE_HELP_LINKS,
+  WHO_WE_HELP_OVERVIEW,
+  WHO_WE_HELP_ROUTES,
 } from '@/components/direction-c/nav';
 import { siteMetadata } from '@/lib/metadata';
 
@@ -42,6 +46,15 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [svcOpen, setSvcOpen] = useState(false);
   const [mSvcOpen, setMSvcOpen] = useState(false);
+  const [whoOpen, setWhoOpen] = useState(false);
+  const [mWhoOpen, setMWhoOpen] = useState(false);
+  const whoBtn = useRef<HTMLButtonElement>(null);
+  const whoItem = useRef<HTMLLIElement>(null);
+  const whoPanel = useRef<HTMLDivElement>(null);
+  const focusWhoFirst = useRef(false);
+  /* hover opens the panel; a click then pins it open instead of toggling it shut */
+  const whoHover = useRef(false);
+  const whoTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const menuBtn = useRef<HTMLButtonElement>(null);
   const svcBtn = useRef<HTMLButtonElement>(null);
   const svcItem = useRef<HTMLLIElement>(null);
@@ -56,17 +69,26 @@ export function SiteHeader() {
     setMenuOpen(false);
     setMSvcOpen(false);
     setSvcOpen(false);
+    setWhoOpen(false);
+    setMWhoOpen(false);
   }
 
   const closeMenu = () => {
     setMenuOpen(false);
     setMSvcOpen(false);
+    setMWhoOpen(false);
   };
 
   useEffect(() => {
-    if (!menuOpen && !svcOpen) return;
+    if (!menuOpen && !svcOpen && !whoOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== 'Escape') return;
+      if (whoOpen) {
+        setWhoOpen(false);
+        whoHover.current = false;
+        whoBtn.current?.focus();
+        return;
+      }
       if (svcOpen) {
         setSvcOpen(false);
         svcBtn.current?.focus();
@@ -80,6 +102,10 @@ export function SiteHeader() {
     };
     const outside = (e: Event) => {
       if (svcOpen && svcItem.current && !svcItem.current.contains(e.target as Node)) setSvcOpen(false);
+      if (whoOpen && whoItem.current && !whoItem.current.contains(e.target as Node)) {
+        setWhoOpen(false);
+        whoHover.current = false;
+      }
     };
     document.addEventListener('keydown', onKey);
     document.addEventListener('mousedown', outside);
@@ -89,7 +115,7 @@ export function SiteHeader() {
       document.removeEventListener('mousedown', outside);
       document.removeEventListener('focusin', outside);
     };
-  }, [menuOpen, svcOpen]);
+  }, [menuOpen, svcOpen, whoOpen]);
 
   /* Crossing the desktop breakpoint closes whichever pattern no longer applies. */
   useEffect(() => {
@@ -98,7 +124,11 @@ export function SiteHeader() {
       if (m.matches) {
         setMenuOpen(false);
         setMSvcOpen(false);
-      } else setSvcOpen(false);
+        setMWhoOpen(false);
+      } else {
+        setSvcOpen(false);
+        setWhoOpen(false);
+      }
     };
     mq.addEventListener('change', onChange);
     return () => mq.removeEventListener('change', onChange);
@@ -165,8 +195,68 @@ export function SiteHeader() {
     next?.focus();
   };
 
+  const whoLinks = () => Array.from(whoPanel.current?.querySelectorAll<HTMLAnchorElement>('a') ?? []);
+
+  useEffect(() => {
+    if (whoOpen && focusWhoFirst.current) whoPanel.current?.querySelector<HTMLAnchorElement>('a')?.focus();
+    focusWhoFirst.current = false;
+  }, [whoOpen]);
+  useEffect(() => () => clearTimeout(whoTimer.current), []);
+
+  const openWho = () => {
+    setSvcOpen(false);
+    setWhoOpen(true);
+  };
+  const onWhoBtnClick = () => {
+    if (whoOpen && whoHover.current) {
+      whoHover.current = false; // pin the hover-opened panel
+      return;
+    }
+    if (whoOpen) setWhoOpen(false);
+    else openWho();
+  };
+  const onWhoBtnKey = (e: ReactKeyboardEvent) => {
+    if (e.key !== 'ArrowDown') return;
+    e.preventDefault();
+    whoHover.current = false;
+    if (whoOpen) {
+      whoLinks()[0]?.focus();
+      return;
+    }
+    focusWhoFirst.current = true;
+    openWho();
+  };
+  const onWhoPanelKey = (e: ReactKeyboardEvent) => {
+    const links = whoLinks();
+    const i = links.indexOf(document.activeElement as HTMLAnchorElement);
+    if (i < 0) return;
+    let next: HTMLElement | null | undefined;
+    if (e.key === 'ArrowDown') next = links[(i + 1) % links.length];
+    else if (e.key === 'ArrowUp') next = i === 0 ? whoBtn.current : links[i - 1];
+    else if (e.key === 'Home') next = links[0];
+    else if (e.key === 'End') next = links[links.length - 1];
+    else return;
+    e.preventDefault();
+    next?.focus();
+  };
+  const onWhoEnter = (e: ReactPointerEvent) => {
+    if (e.pointerType !== 'mouse') return;
+    clearTimeout(whoTimer.current);
+    if (!whoOpen) whoHover.current = true;
+    openWho();
+  };
+  const onWhoLeave = (e: ReactPointerEvent) => {
+    if (e.pointerType !== 'mouse' || !whoHover.current) return;
+    clearTimeout(whoTimer.current);
+    whoTimer.current = setTimeout(() => {
+      whoHover.current = false;
+      setWhoOpen(false);
+    }, 160);
+  };
+
   const current = (href: string) => (pathname === href ? 'page' : undefined);
   const inServices = pathname ? SERVICE_ROUTES.has(pathname) : false;
+  const inWho = pathname ? WHO_WE_HELP_ROUTES.has(pathname) : false;
 
   return (
     <header className={cn('dc dc-hdr', menuOpen && 'dc-menu-open')}>
@@ -185,7 +275,10 @@ export function SiteHeader() {
                 aria-expanded={svcOpen}
                 aria-controls="dc-svc-panel"
                 data-current={inServices ? '' : undefined}
-                onClick={() => setSvcOpen((v) => !v)}
+                onClick={() => {
+                  setWhoOpen(false);
+                  setSvcOpen((v) => !v);
+                }}
                 onKeyDown={onSvcBtnKey}
               >
                 Services
@@ -246,6 +339,60 @@ export function SiteHeader() {
                 <style>{'.dc-svc-btn{display:none!important}'}</style>
                 <a className="dc-svc-nojs" href={SERVICES_HUB.href}>
                   Services
+                </a>
+              </noscript>
+            </li>
+            <li className="dc-nav-who" ref={whoItem} onPointerEnter={onWhoEnter} onPointerLeave={onWhoLeave}>
+              <button
+                ref={whoBtn}
+                type="button"
+                className="dc-svc-btn"
+                aria-expanded={whoOpen}
+                aria-controls="dc-who-panel"
+                data-current={inWho ? '' : undefined}
+                onClick={onWhoBtnClick}
+                onKeyDown={onWhoBtnKey}
+              >
+                {WHO_WE_HELP_LABEL}
+                <span className="dc-chev" aria-hidden="true" />
+              </button>
+              <div
+                ref={whoPanel}
+                className="dc-panel dc-panel-who"
+                id="dc-who-panel"
+                data-open={whoOpen}
+                inert={!whoOpen}
+                onKeyDown={onWhoPanelKey}
+                onClick={(e) => {
+                  if ((e.target as HTMLElement).closest('a')) {
+                    setWhoOpen(false);
+                    whoHover.current = false;
+                  }
+                }}
+              >
+                <ul className="dc-sp-links dc-who-links">
+                  {WHO_WE_HELP_LINKS.map((l) => (
+                    <li key={l.href}>
+                      <Link href={l.href} aria-current={current(l.href)}>
+                        <span className="t">{l.label}</span>
+                        <span className="d">{l.desc}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <div className="dc-panel-ft">
+                  <Link className="dc-all" href={WHO_WE_HELP_OVERVIEW.href}>
+                    {WHO_WE_HELP_OVERVIEW.label}{' '}
+                    <span className="dc-arr" aria-hidden="true">
+                      &rarr;
+                    </span>
+                  </Link>
+                </div>
+              </div>
+              <noscript>
+                <style>{'.dc-nav-who .dc-svc-btn{display:none!important}'}</style>
+                <a className="dc-svc-nojs" href={WHO_WE_HELP_OVERVIEW.href}>
+                  {WHO_WE_HELP_LABEL}
                 </a>
               </noscript>
             </li>
@@ -331,6 +478,33 @@ export function SiteHeader() {
                 </div>
                 <Link className="dc-m-ctx" href={PROBLEM_LINK.href} aria-current={current(PROBLEM_LINK.href)}>
                   {PROBLEM_LINK.label}
+                </Link>
+              </div>
+            </li>
+            <li>
+              <button
+                type="button"
+                className="dc-m-svc-btn"
+                aria-expanded={mWhoOpen}
+                aria-controls="dc-m-who"
+                data-current={inWho ? '' : undefined}
+                onClick={() => setMWhoOpen((v) => !v)}
+              >
+                <span className="dc-m-svc-lbl">{WHO_WE_HELP_LABEL}</span>
+                <span className="dc-pm" aria-hidden="true" />
+              </button>
+              <div className="dc-m-svc dc-m-who" id="dc-m-who" hidden={!mWhoOpen}>
+                <ul className="dc-m-who-list">
+                  {WHO_WE_HELP_LINKS.map((l) => (
+                    <li key={l.href}>
+                      <Link href={l.href} aria-current={current(l.href)}>
+                        {l.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <Link className="dc-m-ctx" href={WHO_WE_HELP_OVERVIEW.href}>
+                  {WHO_WE_HELP_OVERVIEW.label}
                 </Link>
               </div>
             </li>

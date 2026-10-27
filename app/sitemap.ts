@@ -90,6 +90,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/who-we-help/d2c',
     '/who-we-help/education',
     '/who-we-help/real-estate',
+    '/who-we-help/enquiry-led-businesses',
     '/lead-generation',
     '/conversion-optimization',
     // Diagnostic, method, cost

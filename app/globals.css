@@ -427,3 +427,14 @@
     color: var(--resolve-ink);
   }
 }
+
+/* Consent banner clearance: ConsentBanner publishes its height as --consent-h while it is open, so the fixed bar neither
+   hides the end of the page nor covers a focused control. Unset (and so zero) once a choice is made. */
+html { scroll-padding-bottom: var(--consent-h, 0px); }
+body { padding-bottom: var(--consent-h, 0px); }
+
+/* Consent banner on short phones: normal page flow at the top (no overlay), so it never covers the hero call to action.
+   Same element, same wording, same choices; taller phones and all wider screens keep the fixed bar. */
+@media (max-width: 767px) and (max-height: 739px) {
+  .consent-banner { position: static; max-height: none !important; overflow: visible !important; border-top-width: 0; border-bottom-width: 1px; }
+}

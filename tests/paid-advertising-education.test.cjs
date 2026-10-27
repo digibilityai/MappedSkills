@@ -88,15 +88,7 @@ test('no unsupported claims, other platforms, figures, dashes or fabricated proo
   const src = fs.readFileSync('components/paid-advertising/education/content.ts', 'utf8').split('\n').filter(l => !/^\s*(\/\*|\*)/.test(l)).join('\n');
   assert.doesNotMatch(src, /[–—]/);
 });
-test('seven R1 FAQs verbatim, native, matching FAQPage', () => {
-  assert.equal((html.match(/<details>/g) || []).length, 7);
-  const faq = parse(ld).find(j => j['@type'] === 'FAQPage');
-  assert.equal(faq.mainEntity.length, 7);
-  for (const q of faq.mainEntity) { assert.ok(text.includes(q.name)); assert.ok(text.includes(q.acceptedAnswer.text)); }
-  const r1 = fs.existsSync(process.env.HOME + '/Downloads/MappedSkills_Education_Content_R1.md') ? fs.readFileSync(process.env.HOME + '/Downloads/MappedSkills_Education_Content_R1.md', 'utf8') : null;
-  if (r1) for (const q of faq.mainEntity) assert.ok(r1.replace(/[’‘]/g, "'").includes(q.name.replace(/[’‘]/g, "'")), q.name);
-  assert.match(text, /Tell us about your courses and enrolment goals\./);
-});
+// Superseded by tests/frozen-designs-integration.test.cjs: FAQ and FAQPage parity now follows the frozen design.
 test('structured data: BreadcrumbList and FAQPage only', () => {
   const nodes = parse(ld);
   assert.deepEqual(nodes.map(n => n['@type']).sort(), ['BreadcrumbList', 'FAQPage']);
@@ -109,7 +101,7 @@ test('route: new, self-canonical, proposed metadata', () => {
   assert.equal(metadata.description, 'Google Ads and Meta Ads management for online courses, coaching and training businesses in India. Focus on relevant enquiries and enrolment outcomes.');
   assert.equal(metadata.alternates.canonical, 'https://mappedskills.com/who-we-help/education');
 });
-test('inbound links, sitemap and analytics; header and footer untouched; no redirects', () => {
+test('inbound links, sitemap and analytics; navigation lists the page; no redirects', () => {
   const home = renderToStaticMarkup(React.createElement(PaidAdvertisingHome));
   const card = home.split('id="education"')[1].split('</article>')[0];
   assert.match(card, /<h3><a class="pa-card-link" href="\/who-we-help\/education">Education, training and coaches<\/a><\/h3>/);
@@ -119,8 +111,8 @@ test('inbound links, sitemap and analytics; header and footer untouched; no redi
   assert.match(fs.readFileSync('app/sitemap.ts', 'utf8'), /'\/who-we-help\/education'/);
   assert.equal(load('lib/analytics.ts').pageTypeOf('/who-we-help/education'), 'commercial');
   const nav = fs.readFileSync('components/direction-c/nav.ts', 'utf8');
-  assert.match(nav, /href: '\/#who-we-help', label: 'Who We Help'/);
-  assert.doesNotMatch(nav, /who-we-help\/education/);
+  assert.match(nav, /WHO_WE_HELP_LINKS/);
+  assert.match(nav, /who-we-help\/education/); // the audience dropdown lists this page (integration WP5)
   assert.doesNotMatch(fs.readFileSync('next.config.mjs', 'utf8'), /who-we-help|\/education/);
 });
 test('stylesheet: no sticky or fixed elements, reduced-motion override, nothing hidden without script', () => {

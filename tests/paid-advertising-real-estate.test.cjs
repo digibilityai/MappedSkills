@@ -77,14 +77,7 @@ test('no unsupported claims, figures, other platforms or dashes', () => {
   const src = fs.readFileSync('components/paid-advertising/real-estate/content.ts', 'utf8').split('\n').filter(l => !/^\s*(\/\*|\*)/.test(l)).join('\n');
   assert.doesNotMatch(src, /[–—]/);
 });
-test('seven R1 FAQs verbatim, native, matching FAQPage', () => {
-  assert.equal((html.match(/<details>/g) || []).length, 7);
-  const faq = parse(ld).find(j => j['@type'] === 'FAQPage');
-  assert.equal(faq.mainEntity.length, 7);
-  for (const q of faq.mainEntity) { assert.ok(text.includes(q.name)); assert.ok(text.includes(q.acceptedAnswer.text)); }
-  if (fs.existsSync(r1)) { const src = fs.readFileSync(r1, 'utf8').replace(/[’‘]/g, "'"); for (const q of faq.mainEntity) assert.ok(src.includes(q.name.replace(/[’‘]/g, "'")), q.name); }
-  assert.match(text, /Tell us about your project and the buyers you want to reach\./);
-});
+// Superseded by tests/frozen-designs-integration.test.cjs: FAQ and FAQPage parity now follows the frozen design.
 test('structured data: BreadcrumbList and FAQPage only', () => {
   const nodes = parse(ld);
   assert.deepEqual(nodes.map(n => n['@type']).sort(), ['BreadcrumbList', 'FAQPage']);
@@ -97,9 +90,9 @@ test('route: new, self-canonical, approved metadata', () => {
   assert.equal(metadata.description, 'Google Ads and Meta Ads management for real estate developers in India. Reach relevant property buyers and make better decisions using enquiry and site-visit feedback.');
   assert.equal(metadata.alternates.canonical, 'https://mappedskills.com/who-we-help/real-estate');
 });
-test('inbound links, sitemap and analytics; header and footer untouched; no redirects', () => {
+test('inbound links, sitemap and analytics; navigation lists the page; no redirects', () => {
   const home = renderToStaticMarkup(React.createElement(PaidAdvertisingHome));
-  const card = home.split('id="enquiry-led"')[1].split('</article>')[0];
+  const card = home.split('id="real-estate"')[1].split('</article>')[0];
   assert.match(card, /<h3><a class="pa-card-link" href="\/who-we-help\/real-estate">Real estate developers<\/a><\/h3>/);
   assert.equal((home.match(/href="\/who-we-help\/real-estate"/g) || []).length, 1);
   assert.equal((home.match(/class="pa-card-link"/g) || []).length, 3);
@@ -108,8 +101,8 @@ test('inbound links, sitemap and analytics; header and footer untouched; no redi
   assert.match(fs.readFileSync('app/sitemap.ts', 'utf8'), /'\/who-we-help\/real-estate'/);
   assert.equal(load('lib/analytics.ts').pageTypeOf('/who-we-help/real-estate'), 'commercial');
   const nav = fs.readFileSync('components/direction-c/nav.ts', 'utf8');
-  assert.match(nav, /href: '\/#who-we-help', label: 'Who We Help'/);
-  assert.doesNotMatch(nav, /who-we-help\/real-estate/);
+  assert.match(nav, /WHO_WE_HELP_LINKS/);
+  assert.match(nav, /who-we-help\/real-estate/); // the audience dropdown lists this page (integration WP5)
   assert.doesNotMatch(fs.readFileSync('next.config.mjs', 'utf8'), /who-we-help|real-estate/);
 });
 test('stylesheet: no sticky or fixed elements, reduced-motion override, nothing hidden without script', () => {

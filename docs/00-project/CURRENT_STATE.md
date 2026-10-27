@@ -958,6 +958,9 @@ Gates 1, 3 and 4 artifacts were delivered and their conclusions were consumed by
 
 **Gates 5, 6 and 7 are PASSED — 2026-09-01**, recorded as `DEC-010`, `DEC-011` and `DEC-012`. **Gates 8, 9, 9A and 9B are PASSED**, recorded as `DEC-013`, `DEC-014`, `DEC-015` and `DEC-016`. **Gate 10 is PASSED — 2026-09-04**, recorded as `DEC-019`. **No gate from 11 onwards is passed, approached or implied.**
 
+## Frozen paid-advertising designs: local integration (2026-10-27)
+The seven frozen designs (homepage R3, Google Ads R4.1, Meta Ads R2.2, D2C R1.1, Education R2B, Real Estate R2.1, Enquiry-Led R1.1) are integrated locally on branch `integration/frozen-designs-wp0-7` (base `3e0e921`, which is the production release of 2026-10-26, run 40329305830). Not pushed, merged or deployed. See `DEC-085` and `docs/website-integration-audit/INTEGRATION_RESULTS.md`.
+
 ## Production Website
 **OWNER-SUPPLIED FACT:** the production website visitors use is **`https://mappedskills.com`**.
 

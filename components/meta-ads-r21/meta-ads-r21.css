@@ -1,0 +1,9 @@
+/* Meta Ads R2.1: homepage client artwork inside the R2 cards. Scoped to `.mr21`. Mirrors the homepage's own crop and logo treatment. */
+.mr21 .mr21-photo { object-fit: cover; }
+.mr21 .mr2-card--om-sai .mr21-photo { object-position: 52% 50%; }
+.mr21 .mr2-card--wanderlooms .mr21-photo { object-position: 62% 50%; }
+.mr21-logo { position: absolute; top: var(--sp-1); left: var(--sp-1); display: flex; align-items: center; justify-content: center; padding: 10px 14px; border-radius: 8px; background: var(--c-paper); }
+.mr21-logo img { display: block; height: auto; }
+.mr21-logo--wanderlooms img { width: clamp(110px, 12vw, 160px); }
+.mr21-logo--om-sai { padding: 0; overflow: hidden; } .mr21-logo--om-sai img { width: clamp(84px, 8vw, 104px); }
+@media (max-width: 420px) { .mr21 .mr2-label { font-size: .7rem; } }

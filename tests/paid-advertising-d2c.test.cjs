@@ -7,13 +7,10 @@ const React = require('react');
 const { renderToStaticMarkup } = require('react-dom/server');
 Module._extensions['.css'] = () => {};
 const { PaidAdvertisingD2C } = load('components/paid-advertising/d2c/PaidAdvertisingD2C.tsx');
-const { D2CJsonLd } = load('components/paid-advertising/d2c/D2CJsonLd.tsx');
 const { PaidAdvertisingHome } = load('components/paid-advertising/home/PaidAdvertisingHome.tsx');
 const { PaidAdvertisingServices } = load('components/paid-advertising/services/PaidAdvertisingServices.tsx');
 const html = renderToStaticMarkup(React.createElement(PaidAdvertisingD2C));
-const ld = renderToStaticMarkup(React.createElement(D2CJsonLd));
 const text = html.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&#x27;/g, "'").replace(/\s+/g, ' ');
-const parse = (s) => [...s.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => JSON.parse(m[1].replace(/\\u003c/g, '<')));
 
 test('one H1 and the seven approved sections in order', () => {
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
@@ -83,24 +80,14 @@ test('no unsupported claims, other platforms, dashes or figures', () => {
   const src = fs.readFileSync('components/paid-advertising/d2c/content.ts', 'utf8').split('\n').filter(l => !/^\s*(\/\*|\*)/.test(l)).join('\n');
   assert.doesNotMatch(src, /[–—]/);
 });
-test('seven native FAQs matching FAQPage; the budget FAQ links to pricing', () => {
-  assert.equal((html.match(/<details>/g) || []).length, 7);
-  const nodes = parse(ld);
-  assert.deepEqual(nodes.map(n => n['@type']).sort(), ['BreadcrumbList', 'FAQPage']);
-  const faq = nodes.find(n => n['@type'] === 'FAQPage');
-  for (const q of faq.mainEntity) { assert.ok(text.includes(q.name)); assert.ok(text.includes(q.acceptedAnswer.text)); }
-  assert.match(html, /How much should I spend, and what can I expect\?[\s\S]*?href="\/pricing">Understand Our Pricing Approach/);
-  assert.deepEqual(nodes.find(n => n['@type'] === 'BreadcrumbList').itemListElement.map(c => c.name), ['Home', 'D2C brands']);
-  assert.doesNotMatch(ld, /"Service"|"(price|offers|aggregateRating|review)"/i);
-  assert.match(text, /Tell us about your products and your store\./);
-});
+// Superseded by tests/frozen-designs-integration.test.cjs: FAQ and FAQPage parity now follows the frozen design.
 test('route: new, self-canonical, approved metadata', () => {
   const { metadata } = load('app/(pages)/who-we-help/d2c/page.tsx');
   assert.equal(metadata.title, 'Paid Advertising for D2C Brands in India | MappedSkills');
   assert.equal(metadata.description, 'Google Ads and Meta Ads management for D2C brands in India, with customer acquisition costs and business economics in focus. Discuss your advertising.');
   assert.equal(metadata.alternates.canonical, 'https://mappedskills.com/who-we-help/d2c');
 });
-test('approved inbound links: homepage D2C card and one /services link; sitemap and analytics mapping; header and footer untouched', () => {
+test('approved inbound links: homepage D2C card and one /services link; sitemap and analytics mapping; navigation lists the page', () => {
   const home = renderToStaticMarkup(React.createElement(PaidAdvertisingHome));
   const d2cCard = home.split('id="d2c"')[1].split('</article>')[0];
   assert.match(d2cCard, /<h3><a class="pa-card-link" href="\/who-we-help\/d2c">D2C brands<\/a><\/h3>/);
@@ -111,8 +98,8 @@ test('approved inbound links: homepage D2C card and one /services link; sitemap 
   assert.match(fs.readFileSync('app/sitemap.ts', 'utf8'), /'\/who-we-help\/d2c'/);
   assert.equal(load('lib/analytics.ts').pageTypeOf('/who-we-help/d2c'), 'commercial');
   const nav = fs.readFileSync('components/direction-c/nav.ts', 'utf8');
-  assert.match(nav, /href: '\/#who-we-help', label: 'Who We Help'/);
-  assert.doesNotMatch(nav, /who-we-help\/d2c/);
+  assert.match(nav, /WHO_WE_HELP_LINKS/);
+  assert.match(nav, /who-we-help\/d2c/); // the audience dropdown lists this page (integration WP5)
   assert.doesNotMatch(fs.readFileSync('app/sitemap.ts', 'utf8'), /'\/(portfolio\/)?google-ads-for-ecommerce'|'\/d2c'|'\/ecommerce-marketing'/);
 });
 test('stylesheet: no sticky or fixed elements, reduced-motion override, nothing hidden without script', () => {

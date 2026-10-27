@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { createMetadata } from '@/lib/metadata';
 import { CplusPage } from '@/components/cplus/CplusPage';
-import { ThanksBody } from '@/components/cplus/contact/ContactBody';
+import { ThanksB2 } from '@/components/b2/Contact';
 
 /**
  * `/thank-you` — the approved C+ Thank you design (proto/direction-c-plus 0a8b611) in production, without the
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 export default function ThankYouPage() {
   return (
     <CplusPage>
-      <ThanksBody />
+      <ThanksB2 />
     </CplusPage>
   );
 }

@@ -451,3 +451,9 @@
 /* Footer: two groups share one column cell (Who We Help under Services, More services under Insights); "More services" is a quiet group with a one-line note. */
 .dc-ftr-stack { display: grid; align-content: start; gap: 32px; min-width: 0; }
 .dc-ftr .dc-ftr-note { margin: 0 0 6px; font-size: .82rem; line-height: 1.45; color: var(--dc-on-ink-dim); }
+
+/* B2: footer links are at least 44px tall on touch-width layouts (WCAG 2.5.8 target size, with margin). */
+@media (max-width: 1080px) {
+  .dc-ftr li a, .dc-ftr .dc-contact dd a { min-height: 44px; }
+  .dc-ftr .dc-contact dd { min-height: 44px; }
+}

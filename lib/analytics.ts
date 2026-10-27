@@ -104,6 +104,7 @@ const COMMERCIAL_PATHS = new Set([
   '/who-we-help/d2c',
   '/who-we-help/education',
   '/who-we-help/real-estate',
+  '/who-we-help/enquiry-led-businesses',
   '/lead-generation',
   '/conversion-optimization',
 ]);

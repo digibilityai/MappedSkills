@@ -8,7 +8,7 @@ import { ConsentBanner } from '@/components/analytics/ConsentBanner'
 import { GoogleTagManager } from '@/lib/gtm'
 import { MetaPixel } from '@/lib/meta-pixel'
 import { generateOrganizationSchema } from '@/lib/schema'
-import { CONSENT_BOOTSTRAP_SCRIPT } from '@/lib/consent'
+import { CONSENT_BOOTSTRAP_SCRIPT, CONSENT_PENDING_SCRIPT } from '@/lib/consent'
 import { ChromeSwitch } from '@/components/direction-c/ChromeSwitch'
 import { SiteHeader } from '@/components/direction-c/SiteHeader'
 import { SiteFooter } from '@/components/direction-c/SiteFooter'
@@ -73,7 +73,7 @@ export default function RootLayout({
   const organizationSchema = generateOrganizationSchema();
 
   return (
-    <html lang="en" className={`${bricolage.variable} ${manrope.variable}`}>
+    <html lang="en" className={`${bricolage.variable} ${manrope.variable}`} suppressHydrationWarning>
       <head>
         {/*
           SESSION 33 — PHASE H2 — GOOGLE CONSENT MODE v2 DEFAULTS.
@@ -95,6 +95,8 @@ export default function RootLayout({
           it is a literal from `lib/consent.ts`; nothing is interpolated.
         */}
         <script dangerouslySetInnerHTML={{ __html: CONSENT_BOOTSTRAP_SCRIPT }} />
+        {/* Sets `data-consent-pending` on <html> before first paint when no choice is stored (see lib/consent.ts). */}
+        <script dangerouslySetInnerHTML={{ __html: CONSENT_PENDING_SCRIPT }} />
         {/*
           SESSION 33 — PHASE I — ONE global entity, not two.
 

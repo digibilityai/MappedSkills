@@ -1,0 +1,135 @@
+/* Real Estate R2: scoped to `.rer2`. Builds on the approved R3 stylesheet (`.rv3`). Calm, once-only motion; nothing loops, nothing
+   is sticky. Remove by deleting components/real-estate-r2 and app/real-estate-preview-r2. */
+.rer2 section { padding-block: var(--sec); }
+.rer2 .rv3-hero { padding-block: clamp(36px, 4.5vw, 72px) clamp(44px, 5vw, 80px); }
+.rer2 .rv3-hero h1 { max-width: 14ch; }
+.rer2-lede { margin-top: var(--sp-2); max-width: 46ch; color: var(--c-dim); font-size: clamp(1.05rem, 1.4vw, 1.25rem); line-height: 1.5; font-weight: 600; }
+.rv3-dark .rer2-lede { color: var(--c-on-dark-soft); }
+.rer2 .rv3-intro { color: var(--c-dim); }
+.rer2 .rv3-dark .rv3-intro { color: var(--c-on-dark-soft); }
+.rer2-tick { width: 20px; height: 20px; flex: none; color: var(--c-tang-dark); }
+.rer2-ic { width: 32px; height: 32px; flex: none; color: var(--c-tang-dark); }
+.rer2-tag { font: 800 .72rem/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--c-tang-deep); }
+
+/* ---- 1. Hero illustration ---- */
+.rer2-fig { max-width: 560px; justify-self: end; width: 100%; }
+.rer2-art { display: block; width: 100%; height: auto; }
+.rer2-card { fill: #1B1822; stroke: var(--c-rule-dark); stroke-width: 1.5; }
+.rer2-card--hi { stroke: var(--c-gap); }
+.rer2-dot { fill: var(--c-tang); }
+.rer2-tk { stroke: var(--c-deep); stroke-width: 2.400; }
+.rer2-tx { fill: var(--c-on-dark); font: 700 16px var(--f-body); }
+.rer2-tx--b { fill: var(--c-deep); font-size: 13px; font-weight: 800; }
+.rer2-tx--s { fill: var(--c-on-dark-soft); font-size: 13px; }
+.rer2-line { fill: #3A3544; }
+.rer2-img { fill: #2A2633; }
+.rer2-bld { stroke: var(--c-gap); stroke-width: 2.500; }
+.rer2-btn { fill: var(--c-tang); }
+.rer2-stroke { stroke: var(--c-on-dark); stroke-width: 2.600; }
+.rer2-chip { fill: #15121B; stroke: var(--c-tang); stroke-width: 1.8; stroke-dasharray: 6 5; }
+.rer2-link { stroke: var(--c-gap); stroke-width: 2; stroke-dasharray: 4 6; fill: none; }
+.rer2-link--on { stroke: var(--c-tang); }
+/* Present from the first frame as a quiet outline, then each step comes to full strength once. About 2.4 s. */
+.rer2-n { opacity: .3; animation: rer2-in .5s var(--ease) forwards; }
+.rer2-link { opacity: 0; animation: rer2-in .4s var(--ease) forwards; }
+.rer2-f1 { animation-delay: .1s; } .rer2-f2 { animation-delay: .25s; } .rer2-f3 { animation-delay: .4s; } .rer2-f4 { animation-delay: .55s; }
+.rer2-enq { animation-delay: 1.2s; } .rer2-out { animation-delay: 1.9s; }
+@keyframes rer2-in { to { opacity: 1; } }
+
+/* ---- 2. Audiences ---- */
+.rer2-aud { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(14px, 2vw, 28px); }
+.rer2-aud-c { padding: clamp(20px, 2.6vw, 36px); border: 1px solid var(--c-line); border-radius: 20px; background: var(--c-ground); display: flex; flex-direction: column; gap: 10px; }
+.rer2-aud-c--broker { background: var(--c-paper); border: 2px solid var(--c-ink); }
+.rer2-aud-c h3 { font-size: clamp(1.4rem, 2.2vw, 1.9rem); }
+.rer2-aud-d { font-weight: 600; font-size: 1.04rem; line-height: 1.5; }
+.rer2-aud-u { margin-top: auto; padding-top: 12px; border-top: 1px dashed var(--c-line); font-size: .92rem; font-weight: 700; color: var(--c-dim); line-height: 1.45; }
+
+/* ---- 3. One buyer journey ---- */
+.rer2-jny { --gap: clamp(12px, 2vw, 28px); background: #15121B; border: 1px solid var(--c-rule-dark); border-radius: 20px; padding: clamp(24px, 3.4vw, 48px) clamp(18px, 2.6vw, 40px); }
+.rer2-jny ol { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--gap); }
+.rer2-jny li { position: relative; padding-top: 34px; display: grid; gap: 6px; align-content: start; }
+.rer2-jny li::before { content: ''; position: absolute; left: 0; top: 0; width: 20px; height: 20px; background: var(--c-deep); border: 2px solid var(--c-tang); border-radius: 50%; }
+.rer2-jny li.is-may::before { border-style: dashed; }
+.rer2-jny li:last-child::before { left: -3px; top: -3px; width: 26px; height: 26px; background: rgba(255, 91, 4, .16); }
+/* The line between two steps belongs to the earlier step: solid while the buyer acts, dashed once it depends on a conversation. */
+.rer2-jny li:not(:last-child)::after { content: ''; position: absolute; left: 26px; top: 9px; width: calc(100% + var(--gap) - 32px); border-top: 2px solid var(--c-gap); transform-origin: left center; }
+.rer2-jny li:nth-child(n+3):not(:last-child)::after { border-top-style: dashed; border-top-color: var(--c-tang); }
+.rer2-jny b { display: flex; align-items: center; gap: 8px; font-size: clamp(1.05rem, 1.5vw, 1.3rem); color: #fff; }
+.rer2-jny b .rer2-ic { width: 22px; height: 22px; color: var(--c-tang); }
+.rer2-jny span { font-weight: 600; font-size: .94rem; color: var(--c-on-dark-soft); line-height: 1.45; max-width: 24ch; }
+/* Once only, when first mostly in view: each step lights in turn and draws the line to the next, ending on the visit. */
+[data-arm].rer2-jny li { opacity: .3; }
+[data-arm].rer2-jny li::after { transform: scaleX(0); }
+[data-arm][data-play].rer2-jny li { opacity: 1; transition: opacity .45s ease; transition-delay: calc(var(--i) * .5s + .1s); }
+[data-arm][data-play].rer2-jny li::after { transform: scaleX(1); transition: transform .5s var(--ease); transition-delay: calc(var(--i) * .5s + .35s); }
+
+/* ---- 4. Platforms ---- */
+.rer2-roles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(14px, 2vw, 28px); }
+.rer2-roles > li { padding: clamp(20px, 2.4vw, 34px); border: 1px solid var(--c-line); border-radius: 20px; background: var(--c-ground); display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.rer2-roles h3 { font-size: clamp(1.3rem, 2vw, 1.7rem); }
+.rer2-role-d { font-weight: 600; line-height: 1.5; }
+.rer2-role-f { width: 100%; margin-top: auto; padding-top: 12px; border-top: 1px dashed var(--c-line); display: grid; gap: 8px; }
+.rer2-role-f li { font-size: .94rem; font-weight: 700; color: var(--c-dim); line-height: 1.45; }
+
+/* ---- 5. Decisions and who does what ---- */
+.rer2-checks { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--sp-2) clamp(16px, 2vw, 32px); }
+.rer2-checks li { display: grid; gap: 12px; align-content: start; padding-top: 16px; border-top: 2px solid var(--c-ink); }
+.rer2-checks h3 { font-size: 1.18rem; } .rer2-checks p { margin-top: 4px; color: var(--c-dim); font-weight: 600; line-height: 1.5; font-size: .94rem; }
+.rer2-who3 { margin-top: var(--sp-4); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 20px); }
+.rer2-w { padding: clamp(16px, 2vw, 26px); border-radius: 16px; display: grid; gap: 6px; align-content: start; }
+.rer2-w h3 { font-size: 1.2rem; } .rer2-w p { font-weight: 600; line-height: 1.5; font-size: .96rem; }
+.rer2-w--we { background: var(--c-ink); color: #fff; } .rer2-w--we p { color: var(--c-on-dark-soft); }
+.rer2-w--you { background: var(--c-paper); border: 2px solid var(--c-ink); } .rer2-w--you p { color: var(--c-dim); }
+
+/* ---- 6. Measurement ---- */
+.rer2-ms-grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: var(--sp-4) clamp(32px, 6vw, 96px); align-items: start; }
+.rer2-ms h2 { max-width: 14ch; }
+.rer2-warn { margin-top: var(--sp-3); padding: 16px 20px; border-left: 4px solid var(--c-tang); background: rgba(255, 91, 4, .08); border-radius: 0 12px 12px 0; }
+.rer2-warn h3 { font-size: 1.3rem; color: var(--c-tang); } .rer2-warn p { margin-top: 4px; font-weight: 600; color: var(--c-on-dark-soft); }
+.rer2-ladder { display: grid; gap: 12px; }
+.rer2-ladder li { display: flex; gap: 16px; align-items: flex-start; padding: 16px 18px; border: 1px solid var(--c-rule-dark); border-radius: 14px; background: #15121B; margin-left: calc(var(--i) * clamp(10px, 2vw, 28px)); }
+.rer2-ladder li:last-child { border-color: var(--c-tang); border-style: dashed; }
+.rer2-ladder-n { flex: none; width: 8px; height: 8px; margin-top: .55em; border-radius: 2px; background: var(--c-tang); }
+.rer2-ladder h3 { font-size: 1.12rem; } .rer2-ladder p { margin-top: 2px; color: var(--c-on-dark-soft); font-size: .92rem; font-weight: 600; }
+
+/* ---- 7. Client work ---- */
+.rer2-card-w { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); border: 1px solid var(--c-line); border-radius: 20px; overflow: hidden; background: var(--c-ground); }
+.rer2-w-img { position: relative; min-height: clamp(260px, 28vw, 400px); background: #1B1822; }
+.rer2-case-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rer2-w-note { position: absolute; left: 16px; bottom: 16px; padding: 4px 10px; border-radius: 6px; background: rgba(15, 13, 20, .78); color: #fff; font-size: .78rem; font-weight: 700; }
+.rer2-w-body { padding: clamp(20px, 3vw, 44px); display: flex; flex-direction: column; justify-content: center; gap: 10px; align-items: flex-start; }
+.rer2-w-body h3 { font-size: clamp(1.8rem, 3vw, 2.6rem); }
+.rer2-w-text { font-size: 1.08rem; font-weight: 600; }
+.rer2-w-did { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 20px; font-weight: 700; }
+.rer2-w-did li { display: flex; gap: 8px; align-items: center; }
+.rer2-w-links { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+
+/* ---- Responsive ---- */
+@media (max-width: 1100px) {
+  .rer2-checks { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 860px) {
+  .rer2-fig { justify-self: stretch; max-width: none; }
+  .rer2-aud, .rer2-roles, .rer2-who3, .rer2-ms-grid, .rer2-card-w { grid-template-columns: 1fr; }
+  .rer2-checks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rer2 section { padding-block: clamp(40px, 10vw, 56px); }
+  /* The journey turns vertical; each line segment draws downward. */
+  .rer2-jny ol { grid-template-columns: 1fr; gap: 20px; padding-left: 36px; }
+  .rer2-jny li { padding-top: 0; }
+  .rer2-jny li::before { left: -36px; top: 1px; }
+  .rer2-jny li:last-child::before { left: -39px; top: 0; }
+  .rer2-jny li:not(:last-child)::after { left: -27px; top: 28px; width: 0; height: calc(100% - 8px); border-top: 0; border-left: 2px solid var(--c-gap); transform-origin: top center; }
+  .rer2-jny li:nth-child(n+3):not(:last-child)::after { border-left-style: dashed; border-left-color: var(--c-tang); }
+  [data-arm].rer2-jny li::after { transform: scaleY(0); }
+  [data-arm][data-play].rer2-jny li::after { transform: scaleY(1); }
+  .rer2-ladder li { margin-left: calc(var(--i) * 8px); }
+}
+@media (max-width: 560px) {
+  .rer2-checks, .rer2-w-did { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rer2-n, .rer2-link { animation: none; opacity: 1; }
+  .rer2 .rer2-jny li, .rer2 .rer2-jny li::after { transition: none; }
+}
+/* Neutralise an inherited list-item bottom margin so equal-height card rows stay equal. */
+.rer2.rv3 li, .rer2.rv3 li:not(:last-child) { margin-bottom: 0; }

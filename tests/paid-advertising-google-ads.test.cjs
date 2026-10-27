@@ -76,15 +76,7 @@ test('fit lists and the Meta Ads link', () => {
   assert.match(text, /May be premature/);
   assert.match(html, /href="\/social-media-ads"/);
 });
-test('seven native FAQs with the contact-process question, matching FAQPage', () => {
-  assert.equal((html.match(/<details>/g) || []).length, 7);
-  assert.match(text, /What happens when I contact MappedSkills\?/);
-  assert.doesNotMatch(text, /What happens after someone clicks\?/);
-  const faq = parse(ld).find(j => j['@type'] === 'FAQPage');
-  assert.equal(faq.mainEntity.length, 7);
-  for (const q of faq.mainEntity) { assert.ok(text.includes(q.name)); assert.ok(text.includes(q.acceptedAnswer.text)); }
-  assert.match(text, /Already running Google Ads, or thinking about it\?/);
-});
+// Superseded by tests/frozen-designs-integration.test.cjs: FAQ and FAQPage parity now follows the frozen design.
 test('structured data: one Service node identical to the one /services emits, India as Country, no ratings or prices', () => {
   const nodes = parse(ld);
   assert.deepEqual(nodes.map(n => n['@type']).sort(), ['FAQPage', 'Service']);

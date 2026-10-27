@@ -284,3 +284,13 @@ export function ensureConsentDefault(): void {
     /* Measurement never breaks the page. */
   }
 }
+
+/**
+ * PRE-PAINT FLAG FOR THE IN-FLOW BANNER (layout shift fix). On short phones the banner is the first block of the page rather
+ * than an overlay, and it is only rendered once the stored choice has been read in React. This inline script reads the same key
+ * before first paint and, only when there is NO stored choice (or storage is unreadable), sets `data-consent-pending` on the root
+ * element. `app/globals.css` reserves the banner's height while the flag is set, and `ConsentBanner` removes the flag in the same
+ * commit that mounts the banner, so the page does not move. Returning visitors never get the flag, so they get no reserved
+ * space. It sets no cookie, writes no storage, sends nothing and never changes consent state or the denied default.
+ */
+export const CONSENT_PENDING_SCRIPT = `(function(){try{var v=window.localStorage.getItem(${JSON.stringify(CONSENT_STORAGE_KEY)});if(v!=='granted'&&v!=='denied')document.documentElement.setAttribute('data-consent-pending','')}catch(e){document.documentElement.setAttribute('data-consent-pending','')}})();`;

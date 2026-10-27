@@ -1,0 +1,26 @@
+/* Meta Ads R2.2: simplified "Why Meta Ads". Scoped to `.mr22`. One headline, one sentence, one thread; no cards, icons or motion. */
+.mr22-why { padding-block: var(--sec); }
+.mr22-head h2 { max-width: 20ch; font-size: clamp(2rem, 4vw, 3.4rem); }
+.mr22-lede { margin-top: var(--sp-2); max-width: 40ch; color: var(--c-dim); font-size: clamp(1.05rem, 1.5vw, 1.3rem); line-height: 1.5; font-weight: 600; }
+.mr22-thread { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(20px, 4vw, 64px); margin-top: var(--sp-4); }
+.mr22-thread::before { content: ''; position: absolute; top: 6px; left: 0; right: 0; border-top: 1.5px solid var(--c-gap); }
+.mr22-thread li { position: relative; padding-top: 34px; }
+.mr22-dot { position: absolute; top: 0; left: 0; width: 13px; height: 13px; border-radius: 50%; background: var(--c-ground); border: 2px solid var(--c-gap); }
+.mr22-thread li:last-child .mr22-dot { background: var(--c-tang); border-color: var(--c-tang); }
+.mr22-thread li:nth-child(2) .mr22-dot { border-color: var(--c-ink); }
+.mr22-thread h3 { font-size: clamp(1.3rem, 2vw, 1.7rem); }
+.mr22-thread p { margin-top: 6px; max-width: 26ch; color: var(--c-dim); line-height: 1.5; font-weight: 600; }
+.mr22-note { margin-top: var(--sp-3); color: var(--c-dim); font-size: .85rem; }
+@media (max-width: 760px) {
+  .mr22-why { padding-block: clamp(40px, 10vw, 56px); }
+  .mr22-thread { grid-template-columns: 1fr; row-gap: var(--sp-2); margin-top: var(--sp-3); padding-left: 32px; }
+  .mr22-thread::before { top: 6px; bottom: 6px; left: 6px; right: auto; border-top: 0; border-left: 1.5px solid var(--c-gap); }
+  .mr22-thread li { padding-top: 0; }
+  .mr22-dot { top: 6px; left: -32px; }
+  .mr22-thread p { max-width: none; }
+}
+
+/* The homepage caption rule `.rv3-hero-fig small` also matched the labels inside the ad mock-up and turned them #B7B0BF
+   (about 2 to 1 on white). Restore the colours the mock-up was designed with (integration, contrast correction). */
+.rv3-hero-fig.mr1-hero-fig .mr1-hhead small, .rv3-hero-fig.mr1-hero-fig .mr1-hcta small { color: #5C5665; }
+.rv3-hero-fig.mr1-hero-fig .mr1-field small { color: var(--c-dim); }

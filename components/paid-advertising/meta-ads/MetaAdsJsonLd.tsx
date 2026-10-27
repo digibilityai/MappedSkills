@@ -1,11 +1,11 @@
 import { siteMetadata } from '@/lib/metadata';
 import { generateFAQSchema } from '@/lib/schema';
 import { CARDS } from '../services/content';
-import { META_FAQS } from './content';
+import { FAQS as META_FAQS } from '@/components/meta-ads-r22/content';
 
 const safe = (o: unknown) => JSON.stringify(o).replace(/</g, '\\u003c');
 
-/** /social-media-ads structured data added by the paid-advertising revamp: FAQPage (the seven visible questions) and the one
+/** /social-media-ads structured data added by the paid-advertising revamp: FAQPage (the visible questions of the frozen design) and the one
  * Meta Ads Service node, the same entity (same @id and fields) as the one /services emits. The existing BreadcrumbList
  * (route file) is unchanged. */
 export function MetaAdsJsonLd() {
@@ -24,7 +24,7 @@ export function MetaAdsJsonLd() {
   };
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safe(generateFAQSchema([...META_FAQS])) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safe(generateFAQSchema(META_FAQS.map(({ question, answer }) => ({ question, answer })))) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safe(service) }} />
     </>
   );

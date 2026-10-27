@@ -1,0 +1,19 @@
+/* Meta Ads R2: refined client-work section only. Every rule is scoped to `.mr2`; layered on R1 (`.mr1`) and R3 (`.rv3`). */
+.mr2-work { padding-block: var(--sec); }
+.mr2-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); align-items: stretch; }
+.mr2-card { height: 100%; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--c-line); border-radius: 8px; background: var(--c-ground); transition: border-color .2s, box-shadow .2s; }
+.mr2-card--link:hover, .mr2-card--link:focus-within { border-color: var(--c-tang-dark); box-shadow: 0 12px 28px rgba(20, 18, 25, .08); }
+.mr2-img { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #E8E2D6; border-bottom: 1px solid var(--c-line); }
+.mr2-img .mr1-scene { transition: transform .5s var(--ease); }
+.mr2-card--link:hover .mr1-scene { transform: scale(1.03); }
+.mr2-label { position: absolute; left: 12px; bottom: 12px; max-width: calc(100% - 24px); padding: 5px 10px; border-radius: 999px; background: rgba(255, 253, 249, .94); border: 1px solid var(--c-line); color: var(--c-ink); font: 700 .74rem/1.3 var(--f-body); }
+.mr2-body { display: flex; flex: 1; flex-direction: column; gap: var(--sp-1); padding: clamp(20px, 2.4vw, 32px); }
+.mr2-tag { font: 800 .72rem/1.3 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--c-tang-deep); }
+.mr2-body h3 { font-size: clamp(1.5rem, 2.3vw, 2rem); }
+.mr2-text { max-width: 50ch; line-height: 1.55; color: var(--c-ink); }
+.mr2-foot { margin-top: auto; padding-top: var(--sp-1); border-top: 1px solid var(--c-line); }
+.mr2-fact { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; color: var(--c-dim); }
+.mr2-strip { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px var(--sp-3); margin-top: var(--sp-3); padding: 6px clamp(16px, 2vw, 28px); border: 1px solid var(--c-line); border-radius: 8px; background: var(--c-ground); }
+.mr2-strip p { font-weight: 600; color: var(--c-dim); }
+@media (max-width: 860px) { .mr2-cards { grid-template-columns: 1fr; } .mr2-img { aspect-ratio: 16 / 10; } }
+@media (prefers-reduced-motion: reduce) { .mr2-card, .mr2-img .mr1-scene { transition: none; } .mr2-card--link:hover .mr1-scene { transform: none; } }

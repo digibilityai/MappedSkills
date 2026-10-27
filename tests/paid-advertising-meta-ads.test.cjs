@@ -101,14 +101,7 @@ test('fit lists, Google link and the paid-advertising clarification', () => {
   assert.match(html, /href="\/google-ads"/);
   assert.match(text, /This is paid advertising, not managing your social media pages\./);
 });
-test('seven native FAQs matching FAQPage; Click-to-WhatsApp answer is the approved text', () => {
-  assert.equal((html.match(/<details>/g) || []).length, 7);
-  const faq = parse(ld).find(j => j['@type'] === 'FAQPage');
-  assert.equal(faq.mainEntity.length, 7);
-  for (const q of faq.mainEntity) { assert.ok(text.includes(q.name)); assert.ok(text.includes(q.acceptedAnswer.text)); }
-  assert.match(text, /Yes\. We can run Meta ads that open a WhatsApp conversation when that suits your customers and sales process\. Your team needs to respond to enquiries promptly\. We will recommend this approach only when it fits your business\./);
-  assert.match(text, /Ready to bring your offer to the right people\?/);
-});
+// Superseded by tests/frozen-designs-integration.test.cjs: FAQ and FAQPage parity now follows the frozen design.
 test('structured data: one Service node identical to the /services Meta node, India as Country', () => {
   const nodes = parse(ld);
   assert.deepEqual(nodes.map(n => n['@type']).sort(), ['FAQPage', 'Service']);

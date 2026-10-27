@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Logo } from '@/components/Logo';
 import { ConsentPreferencesLink } from '@/components/analytics/ConsentPreferencesLink';
 import { siteMetadata } from '@/lib/metadata';
-import { CONTACT_LINK, FOOTER_COMPANY, FOOTER_INSIGHTS, FOOTER_SERVICES, type NavLink } from '@/components/direction-c/nav';
+import { CONTACT_LINK, FOOTER_COMPANY, FOOTER_INSIGHTS, FOOTER_MORE_SERVICES, FOOTER_SERVICES, FOOTER_WHO, MORE_SERVICES_NOTE, type NavLink } from '@/components/direction-c/nav';
 
 /**
  * DIRECTION C — footer (navigation redesign, R2 prototype:
@@ -19,10 +19,11 @@ import { CONTACT_LINK, FOOTER_COMPANY, FOOTER_INSIGHTS, FOOTER_SERVICES, type Na
  * structured data, /contact and the other pages).
  * No commercial CTA strip (Session 33 F10: each page closes once).
  */
-function Column({ id, title, links }: { id: string; title: string; links: NavLink[] }) {
+function Column({ id, title, links, note }: { id: string; title: string; links: NavLink[]; note?: string }) {
   return (
     <nav aria-labelledby={id}>
       <h2 id={id}>{title}</h2>
+      {note && <p className="dc-ftr-note">{note}</p>}
       <ul>
         {links.map((l, i) => (
           <li key={l.href}>
@@ -50,9 +51,15 @@ export function SiteFooter() {
           </div>
 
           <div className="dc-ftr-cols">
-            <Column id="dc-f-svc" title="Services" links={FOOTER_SERVICES} />
+            <div className="dc-ftr-stack">
+              <Column id="dc-f-svc" title="Services" links={FOOTER_SERVICES} />
+              <Column id="dc-f-who" title="Who We Help" links={FOOTER_WHO} />
+            </div>
             <Column id="dc-f-co" title="Company" links={FOOTER_COMPANY} />
-            <Column id="dc-f-ins" title="Insights" links={FOOTER_INSIGHTS} />
+            <div className="dc-ftr-stack">
+              <Column id="dc-f-ins" title="Insights" links={FOOTER_INSIGHTS} />
+              <Column id="dc-f-more" title="More services" links={FOOTER_MORE_SERVICES} note={MORE_SERVICES_NOTE} />
+            </div>
             <section className="dc-contact" aria-labelledby="dc-f-ct">
               <h2 id="dc-f-ct">Contact</h2>
               <dl>

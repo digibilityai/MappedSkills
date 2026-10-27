@@ -1,11 +1,11 @@
 import { breadcrumbJsonLd } from '@/components/commercial/primitives';
 import { generateFAQSchema } from '@/lib/schema';
-import { EDU_FAQS } from './content';
+import { FAQS as EDU_FAQS } from '@/components/education-r2/content';
 
 const safe = (o: unknown) => JSON.stringify(o).replace(/</g, '\\u003c');
 
 /** /who-we-help/education structured data: BreadcrumbList (Home, Education businesses; no /who-we-help hub) and FAQPage matching
- * the seven visible questions. No Service node, ratings, prices, reviews or results. */
+ * the visible questions of the frozen design. No Service node, ratings, prices, reviews or results. */
 export function EducationJsonLd() {
   return (
     <>

@@ -441,3 +441,14 @@
 @media (max-width: 599px) {
   .dc-hdr .dc-right > .dc-btn-primary { display: none; }
 }
+
+/* "Who We Help" disclosure (homepage visual R2): same disclosure pattern as Services, narrower panel. */
+.dc-panel-who { width: 24rem; left: -8px; }
+.dc-who-links { grid-template-columns: 1fr; gap: 2px; padding: 14px 28px 8px; }
+.dc-m-who-list > li > a { display: flex; align-items: center; min-height: 44px; padding-left: 17px; font: 600 1.02rem/1.25 var(--dc-f-body); color: var(--dc-ink); text-decoration: none; border-left: 1px solid var(--dc-line); margin-left: 4px; }
+.dc-m-who-list > li > a:hover, .dc-m-who-list > li > a[aria-current="page"] { color: var(--dc-tang-small); }
+.dc-m-who .dc-m-ctx { margin-left: 21px; }
+
+/* Footer: two groups share one column cell (Who We Help under Services, More services under Insights); "More services" is a quiet group with a one-line note. */
+.dc-ftr-stack { display: grid; align-content: start; gap: 32px; min-width: 0; }
+.dc-ftr .dc-ftr-note { margin: 0 0 6px; font-size: .82rem; line-height: 1.45; color: var(--dc-on-ink-dim); }

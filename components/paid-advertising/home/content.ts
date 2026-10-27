@@ -10,7 +10,7 @@ export const TILES: Record<TileId, { src: string; alt: string }> = {
 export const AUDIENCES = [
   { id: 'd2c', title: 'D2C brands', image: 'apparel', href: '/who-we-help/d2c', body: 'Bring your products to relevant customers and assess advertising alongside purchases, cost per purchase and your store’s ability to convert.' },
   { id: 'education', title: 'Education, training and coaches', image: 'baking', href: '/who-we-help/education', body: 'Reach people considering your programme. Build a journey that fits how they enrol, through direct purchases or enquiries followed by a conversation.' },
-  { id: 'enquiry-led', title: 'Real estate developers', image: 'property', href: '/who-we-help/real-estate', body: 'Put your projects in front of prospective buyers and give them a clear next step towards an enquiry or site visit.' },
+  { id: 'real-estate', title: 'Real estate developers', image: 'property', href: '/who-we-help/real-estate', body: 'Put your projects in front of prospective buyers and give them a clear next step towards an enquiry or site visit.' },
 ] as const;
 export const SERVICES = [
   { name: 'Google Ads', href: '/google-ads', type: 'search', body: 'Reach people searching for the products, services or solutions you offer. We plan campaigns around relevant demand, your offer and the action you want customers to take.' },

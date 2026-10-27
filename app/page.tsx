@@ -1,5 +1,5 @@
 import { createMetadata } from '@/lib/metadata';
-import { PaidAdvertisingHome } from '@/components/paid-advertising/home/PaidAdvertisingHome';
+import { ResolveHomeR3 } from '@/components/resolve-home-r3/ResolveHomeR3';
 
 // Must be a literal — Next.js cannot follow imported identifiers for route segment config
 export const revalidate = 60;
@@ -10,8 +10,8 @@ export const metadata = createMetadata(
   '/'
 );
 
-/** Paid-advertising revamp: copy and visual approved 26 October 2026.
- * Existing canonical, revalidation, shared consent and form integrations are retained. */
+/** Paid-advertising revamp: THE RESOLVE R3 homepage design (frozen 27 October 2026). The live title, description, canonical,
+ * revalidation, shared consent and form integrations are retained; the H1 is unchanged. */
 export default function Home() {
-  return <PaidAdvertisingHome />;
+  return <ResolveHomeR3 />;
 }

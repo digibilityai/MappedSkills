@@ -36,9 +36,19 @@ export const PROBLEM_LINK: NavLink = {
   label: 'Understand Our Pricing Approach',
 };
 
-/** Primary navigation after Services. */
+/** "Who We Help" dropdown: the four audience pages, then the homepage overview section. */
+export const WHO_WE_HELP_LABEL = 'Who We Help';
+export const WHO_WE_HELP_LINKS: NavLink[] = [
+  { href: '/who-we-help/d2c', label: 'D2C and Ecommerce', desc: 'Products sold online to customers directly.' },
+  { href: '/who-we-help/education', label: 'Education and Training', desc: 'Programmes, training and coaching.' },
+  { href: '/who-we-help/real-estate', label: 'Real Estate', desc: 'Property developers and Channel Partners.' },
+  { href: '/who-we-help/enquiry-led-businesses', label: 'Enquiry-Led Businesses', desc: 'Customers who ask before they buy.' },
+];
+export const WHO_WE_HELP_OVERVIEW: NavLink = { href: '/#who-we-help', label: 'See how we help each business' };
+export const WHO_WE_HELP_ROUTES = new Set(WHO_WE_HELP_LINKS.map((l) => l.href));
+
+/** Primary navigation after Services and Who We Help. */
 export const PRIMARY_LINKS: NavLink[] = [
-  { href: '/#who-we-help', label: 'Who We Help' },
   { href: '/work', label: 'Our Work' },
   { href: '/how-it-works', label: 'How We Work' },
   { href: '/about', label: 'About' },
@@ -53,6 +63,19 @@ const CAPABILITIES: NavLink[] = SERVICE_GROUPS.flatMap((g) => g.links);
 
 /** Footer services: the hub and the two core advertising services. */
 export const FOOTER_SERVICES: NavLink[] = [SERVICES_HUB, ...CAPABILITIES];
+
+/** Footer "Who We Help" group: the same four audience pages as the header. */
+export const FOOTER_WHO: NavLink[] = WHO_WE_HELP_LINKS.map(({ href, label }) => ({ href, label }));
+
+/** Footer "More services" group (D3): earlier, non-core service pages that stay live and indexed. Core work is Google Ads
+ * and Meta Ads; these are listed so the pages remain reachable and are described accurately. */
+export const MORE_SERVICES_NOTE = 'Earlier service pages. Our core work is Google Ads and Meta Ads.';
+export const FOOTER_MORE_SERVICES: NavLink[] = [
+  { href: '/lead-generation', label: 'Lead generation' },
+  { href: '/seo', label: 'SEO' },
+  { href: '/ai-seo', label: 'AI search' },
+  { href: '/conversion-optimization', label: 'Conversion optimisation' },
+];
 
 /** Footer "Company" column. */
 export const FOOTER_COMPANY: NavLink[] = [

@@ -96,7 +96,7 @@ export function HowItWorks() {
         </div>
       </section>
 
-      <section className="b2-sec" aria-labelledby="hw-part">
+      <section className="b2-sec b2-dark" aria-labelledby="hw-part">
         <div className="pa-wrap b2-two">
           <div>
             <p className="pa-eyebrow">Your part</p>

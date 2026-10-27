@@ -90,7 +90,7 @@ export function Pricing() {
         </div>
       </section>
 
-      <section className="b2-sec b2-paper" aria-labelledby="pr-prop">
+      <section className="b2-sec b2-dark" aria-labelledby="pr-prop">
         <div className="pa-wrap b2-two">
           <div>
             <p className="pa-eyebrow">Before you commit</p>

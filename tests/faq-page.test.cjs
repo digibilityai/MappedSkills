@@ -37,7 +37,9 @@ test('every live anchor survives', () => {
     'q-is-geo-or-aeo-a-separate-discipline-from-seo',
   ];
   for (const id of live) assert.ok(copy.includes(`'${id}'`), id);
-  assert.equal([...copy.matchAll(/\bid: 'q-/g)].length, 14);
+  // B2 adds four questions (which first, readiness, campaigns already running, ad creative): 14 live ids + 4.
+  for (const id of ['q-which-first', 'q-is-my-business-ready', 'q-campaigns-we-already-run', 'q-who-creates-the-ad-creative']) assert.ok(copy.includes(`'${id}'`), id);
+  assert.equal([...copy.matchAll(/\bid: 'q-/g)].length, 18);
 });
 
 test('FQ-D3 verbatim and FQ-D7 qualifications', () => {

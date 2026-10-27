@@ -1,6 +1,5 @@
 import { createMetadata } from '@/lib/metadata';
-import { CplusPage } from '@/components/cplus/CplusPage';
-import { AboutBody } from '@/components/cplus/about/AboutBody';
+import { About } from '@/components/b2/About';
 
 /**
  * `/about`: the owner-approved G1 About design, frozen at R4 (DEC-060; docs/about-redesign/g1/). Title and description
@@ -15,9 +14,5 @@ export const metadata = createMetadata(
 );
 
 export default function AboutPage() {
-  return (
-    <CplusPage>
-      <AboutBody />
-    </CplusPage>
-  );
+  return <About />;
 }

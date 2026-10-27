@@ -1,6 +1,5 @@
 import { createMetadata } from '@/lib/metadata';
-import { CplusPage } from '@/components/cplus/CplusPage';
-import { FaqBody } from '@/components/cplus/faq/FaqBody';
+import { Faq } from '@/components/b2/Faq';
 import { QAS, plainAnswer } from '@/components/cplus/faq/faqData';
 
 /**
@@ -17,7 +16,7 @@ export const metadata = createMetadata(
 
 export default function FaqPage() {
   return (
-    <CplusPage>
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -32,7 +31,7 @@ export default function FaqPage() {
           }),
         }}
       />
-      <FaqBody />
-    </CplusPage>
+      <Faq />
+    </>
   );
 }

@@ -22,14 +22,43 @@ export type Qa = {
   more?: { href: string; label: string };
 };
 
-export type FaqGroup = { id: string; legacyId: string; title: string; line: string; items: Qa[] };
+export type FaqGroup = { id: string; legacyId?: string; title: string; line: string; items: Qa[] };
 
 export const FAQ_GROUPS: FaqGroup[] = [
   {
+    id: 'fit',
+    title: 'Is it right for us?',
+    line: 'Where to start, and when to wait.',
+    items: [
+      {
+        id: 'q-which-first',
+        q: 'Should I start with Google Ads or Meta Ads?',
+        direct: 'It depends on your buyers.',
+        body: [
+          'Search suits buyers who already know what they want. Meta suits offers buyers need to discover. Not every business needs both, so we check your offer, margins, follow-up and measurement before recommending anything.',
+        ],
+      },
+      {
+        id: 'q-is-my-business-ready',
+        q: 'Is my business ready for paid advertising?',
+        direct: 'Often, if you already sell or are close.',
+        body: [
+          'Advertising tends to work when you already sell or are close, can follow up enquiries promptly, know roughly what a customer is worth and can invest enough to learn what works. It may be premature if your offer is untested or you cannot follow up yet.',
+        ],
+      },
+      {
+        id: 'q-campaigns-we-already-run',
+        q: 'Can you work on campaigns we already run?',
+        direct: 'Yes.',
+        body: ['Tell us what is running now and we will discuss what to review before suggesting a plan.'],
+      },
+    ],
+  },
+  {
     id: 'pricing',
     legacyId: 'g-commercial',
-    title: 'Pricing',
-    line: 'What it costs and what you pay for.',
+    title: 'Cost and commitment',
+    line: 'What you pay, to whom, and for how long.',
     items: [
       {
         id: 'q-what-does-this-cost-and-what-changes-that-number',
@@ -54,13 +83,21 @@ export const FAQ_GROUPS: FaqGroup[] = [
           'Some projects have a defined scope and finish line; ongoing services need enough time to measure progress and make improvements. We’ll explain the proposed duration and terms before you commit.',
         ],
       },
+      {
+        id: 'q-who-creates-the-ad-creative',
+        q: 'Who creates the ad creative?',
+        direct: 'It depends on the service.',
+        body: [
+          'For Meta, your proposal includes a defined number of static ad designs. Reels, video, scripting and anything beyond that are scoped separately. For Google Ads, managing the ads is part of our work.',
+        ],
+      },
     ],
   },
   {
     id: 'results',
     legacyId: 'g-outcome',
     title: 'Results',
-    line: 'What to expect, and what we won’t promise.',
+    line: 'What to expect, and what we will not promise.',
     items: [
       {
         id: 'q-why-wont-you-guarantee-results',
@@ -83,12 +120,13 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         id: 'q-how-long-before-anything-changes',
         q: 'How long before we see a difference?',
-        direct: 'It depends on the channel.',
+        direct: 'It depends on your offer, market, budget and how quickly enquiries are answered, so we do not promise dates.',
         rows: [
-          { t: 'Paid search', d: 'Campaigns can start producing measurable activity fairly quickly. How soon, and what results follow, varies.' },
-          { t: 'Organic search', d: 'Usually 12 months or more. We say so before you commit.' },
+          { t: 'Google Ads', d: 'Campaigns can start producing measurable activity fairly quickly. How soon, and what results follow, varies.' },
+          { t: 'Meta Ads', d: 'We test ads and report what we learn each month, so you can see what is changing. We do not give a date for results.' },
           { t: 'A broken enquiry form', d: 'Simple problems can be fixed quickly. Complex ones depend on what we find, the access we have and what needs to be built.' },
         ],
+        body: ['Before we change anything we record where you are starting from, then report what changes each month.'],
       },
     ],
   },
@@ -96,7 +134,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
     id: 'measurement',
     legacyId: 'g-measurement',
     title: 'Measurement',
-    line: 'How we count enquiries, and what tracking can’t see.',
+    line: 'How we count enquiries and what tracking cannot see.',
     items: [
       {
         id: 'q-how-do-you-know-an-enquiry-came-from-your-work-and-what-cant-you-tell',
@@ -122,7 +160,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
     id: 'working-together',
     legacyId: 'g-fit',
     title: 'Working together',
-    line: 'Who we suit, how it starts and what you get.',
+    line: 'How it starts, what we need and what stays yours.',
     items: [
       {
         id: 'q-who-is-this-for-and-who-is-it-not-for',
@@ -159,8 +197,8 @@ export const FAQ_GROUPS: FaqGroup[] = [
   {
     id: 'ai-search',
     legacyId: 'g-ai-search',
-    title: 'AI search',
-    line: 'ChatGPT, AI answers and the new acronyms.',
+    title: 'Beyond paid advertising',
+    line: 'AI search, kept so existing links still work.',
     items: [
       {
         id: 'q-can-you-get-our-business-into-chatgpt-and-ai-answers',

@@ -113,7 +113,7 @@ const FORM_ERRORS: Record<string, string> = {
   too_large:
     'That is longer than this form can accept, so it was not saved. Shorten the last box and try again.',
   network:
-    'We could not reach the server, so your enquiry has not been saved. Check your connection and try again.',
+    'We couldn’t confirm that your enquiry was received. Nothing you typed has been lost. Check your connection and send it again.',
   unknown:
     'Something went wrong at our end and your enquiry was not saved. Nothing you typed has been lost — try again.',
 };
@@ -397,7 +397,8 @@ export function ContactForm({ labelledBy }: { labelledBy?: string } = {}) {
       }
       shouldFocusSummaryRef.current = true;
     } catch {
-      // Nothing reached the server, so nothing was saved and no conversion is emitted. Every value is still in state.
+      // The outcome is unknown (a dropped connection can follow a successful save), so the text says it could not be confirmed, no
+      // conversion is emitted and every value is still in state. The idempotency key is kept, so sending again cannot create a second row.
       setFormError(formErrorText('network', sentIntent));
       track(EVENTS.LEAD_FORM_VALIDATION_ERROR, {
         ...pageContext(sentIntent),

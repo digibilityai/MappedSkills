@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { CplusPage } from '@/components/cplus/CplusPage';
-import { ContactBody } from '@/components/cplus/contact/ContactBody';
+import { ContactB2 } from '@/components/b2/Contact';
 
 /**
  * `/contact` — the one contact page (C1, DEC-071), with two visitor intentions: "Send an enquiry" (default) and
@@ -20,7 +20,7 @@ import { ContactBody } from '@/components/cplus/contact/ContactBody';
 export default function ContactLayout({ children }: { children: ReactNode }) {
   return (
     <CplusPage>
-      <ContactBody />
+      <ContactB2 />
       {children}
     </CplusPage>
   );

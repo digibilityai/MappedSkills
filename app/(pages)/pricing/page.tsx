@@ -1,6 +1,5 @@
 import { createMetadata } from '@/lib/metadata';
-import { CplusPage } from '@/components/cplus/CplusPage';
-import { PricingBody } from '@/components/cplus/pricing/PricingBody';
+import { Pricing } from '@/components/b2/Pricing';
 
 /**
  * `/pricing`: the owner-approved G1 R0 Pricing design (DEC-061; docs/pricing-redesign/g1/). Fully customised pricing: no
@@ -16,9 +15,5 @@ export const metadata = createMetadata(
 );
 
 export default function Page() {
-  return (
-    <CplusPage>
-      <PricingBody />
-    </CplusPage>
-  );
+  return <Pricing />;
 }

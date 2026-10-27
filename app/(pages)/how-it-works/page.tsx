@@ -1,6 +1,5 @@
 import { createMetadata } from '@/lib/metadata';
-import { CplusPage } from '@/components/cplus/CplusPage';
-import { MethodBody } from '@/components/cplus/how-it-works/MethodBody';
+import { HowItWorks } from '@/components/b2/HowItWorks';
 
 /**
  * `/how-it-works`: the owner-approved G1 R2 design (DEC-058). Title and description are the approved HW-D08 strings
@@ -14,9 +13,5 @@ export const metadata = createMetadata(
 );
 
 export default function HowItWorksPage() {
-  return (
-    <CplusPage>
-      <MethodBody />
-    </CplusPage>
-  );
+  return <HowItWorks />;
 }

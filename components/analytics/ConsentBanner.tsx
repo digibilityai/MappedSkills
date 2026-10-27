@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 
 import { useConsent } from '@/components/analytics/ConsentProvider';
 
@@ -49,6 +49,12 @@ import { useConsent } from '@/components/analytics/ConsentProvider';
  */
 export function ConsentBanner() {
   const { hydrated, isOpen, accept, reject } = useConsent();
+
+  // Release the space reserved by `data-consent-pending` in the same commit that mounts the banner (or that finds nothing to
+  // ask), before paint, so the banner replaces the reserved block without moving the page.
+  useLayoutEffect(() => {
+    if (hydrated) document.documentElement.removeAttribute('data-consent-pending');
+  }, [hydrated, isOpen]);
 
   if (!hydrated || !isOpen) return null;
   return <OpenBanner accept={accept} reject={reject} />;

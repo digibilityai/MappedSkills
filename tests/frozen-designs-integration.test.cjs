@@ -164,3 +164,29 @@ test('contrast corrections keep their fixes: captions use the dim token, mock-up
   assert.doesNotMatch(rel, /opacity/, 'non-relevant rows are subdued by colour, not by opacity');
   assert.match(rel, /color: var\(--c-dim\)/);
 });
+
+test('consent banner reserves its space before paint on first visits only, without touching consent state', () => {
+  const vm = require('node:vm');
+  const { CONSENT_PENDING_SCRIPT, CONSENT_STORAGE_KEY } = load('lib/consent.ts');
+  const run = (stored, throws) => {
+    const attrs = {}; const writes = [];
+    const ctx = { window: { localStorage: { getItem: (k) => { assert.equal(k, CONSENT_STORAGE_KEY); if (throws) throw new Error('blocked'); return stored; }, setItem: (...a) => writes.push(a) } }, document: { documentElement: { setAttribute: (k, v) => { attrs[k] = v; } } } };
+    vm.runInNewContext(CONSENT_PENDING_SCRIPT, ctx);
+    return { attrs, writes };
+  };
+  assert.deepEqual(run(null).attrs, { 'data-consent-pending': '' }, 'no stored choice: flag set');
+  assert.deepEqual(run('bogus').attrs, { 'data-consent-pending': '' }, 'unrecognised value: asked again');
+  assert.deepEqual(run(undefined, true).attrs, { 'data-consent-pending': '' }, 'unreadable storage: asked, so reserved');
+  assert.deepEqual(run('granted').attrs, {}, 'returning visitor: no reserved space');
+  assert.deepEqual(run('denied').attrs, {}, 'returning visitor: no reserved space');
+  assert.deepEqual(run(null).writes, [], 'writes nothing');
+  assert.doesNotMatch(CONSENT_PENDING_SCRIPT, /cookie|fetch|XMLHttp|dataLayer|gtag/);
+  const layout = fs.readFileSync('app/layout.tsx', 'utf8');
+  assert.match(layout, /__html: CONSENT_PENDING_SCRIPT/);
+  assert.match(layout, /CONSENT_BOOTSTRAP_SCRIPT \}\} \/>/, 'the existing denied-default bootstrap is untouched and still present');
+  assert.ok(layout.indexOf('CONSENT_BOOTSTRAP_SCRIPT }}') < layout.indexOf('__html: CONSENT_PENDING_SCRIPT'));
+  const banner = fs.readFileSync('components/analytics/ConsentBanner.tsx', 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+  assert.match(banner, /useLayoutEffect\(\(\) => \{\s*if \(hydrated\) document\.documentElement\.removeAttribute\('data-consent-pending'\)/);
+  const css = fs.readFileSync('app/globals.css', 'utf8');
+  for (const [mq, h] of [['max-width: 767px', 151], ['max-width: 402px', 169], ['max-width: 339px', 191]]) assert.match(css, new RegExp(`@media \\(${mq}\\) and \\(max-height: 739px\\)[\\s\\S]*?html\\[data-consent-pending\\] body \\{ padding-top: ${h}px; \\}`));
+});

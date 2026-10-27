@@ -210,3 +210,23 @@ Yes for a local commit on this branch: base SHA matches, working tree contains o
 
 Superseded statements: section 10.1 (banner not met) and the 10.2 note on the 1.8 to 1 rows are resolved by this section; section 10.6 point 1 is replaced by the layout shift risk above.
 
+## 12. Consent banner layout shift fixed (27 October 2026, fourth pass)
+
+Cause: on short phones the banner is in the page flow, but it is only rendered after React has read the stored choice, which is after first paint, so first-time visitors saw the page jump down by the banner height.
+
+Fix (smallest reliable): a second inline script (`CONSENT_PENDING_SCRIPT`, `lib/consent.ts`, placed after the unchanged consent bootstrap) reads the same storage key before first paint and, only when no valid choice is stored, sets `data-consent-pending` on `<html>`. CSS reserves the banner's measured height (151, 169 or 191px by width) at the top of `body` while the flag is set, only on phones up to 767px wide and 739px high. `ConsentBanner` removes the flag in a layout effect in the same commit that mounts the banner, so the banner replaces the reserved block before paint. `<html>` gets `suppressHydrationWarning` because a script sets an attribute on it. The script writes nothing, sets no cookie, sends nothing and does not touch consent state or the denied default. Returning visitors never get the flag, so no space is reserved for them.
+
+| First-visit CLS (3 runs each, prod build) | Before | After |
+|---|---|---|
+| 320x568 | 0.337 | 0 |
+| 320x640 | 0.299 | 0 |
+| 360x640 | 0.263 | 0 |
+| 390x664 | 0.254 | 0 |
+| 390x739 | 0.228 | 0 |
+| 390x844, 1440x900 (fixed bar) | 0 | 0 |
+| Returning visitor (granted or denied) | 0, padding 0 | 0, padding 0, flag never set |
+
+Also checked with 6x CPU and slow network at 360x640, 320x568, 339x600, 403x700 and 404x700: CLS 0 (one run at 403 wide showed 0.02 until the width step was moved from 403 to 402; fixed). No console errors in the production build. Consent interactions unchanged: tab order Privacy Policy, Accept, Reject; storage `granted` or `denied`; banner stays gone after reload; fixed bar and its clearance unchanged on taller phones and desktop; no overflow and no covered hero button at any viewport tested. The hero button now sits below the first screen on short phones on a first visit (banner above it), which was the owner's chosen trade-off.
+
+Remaining limitations: the reserved heights are measured per width band, so unusual text scaling or zoom can leave a small residual shift; before the page script runs, first-time short-phone visitors see a blank strip the height of the banner for a moment (longer on slow connections); a hydration check was made in the production build only.
+

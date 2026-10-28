@@ -14,7 +14,7 @@ const all = B2.map((n) => code(src[n])).join('\n') + code(read('components/cplus
 
 test('metadata, canonical and thank-you robots are unchanged', () => {
   assert.match(read('app/(pages)/how-it-works/page.tsx'), /'How It Works: From First Call to Monthly Review \| MappedSkills'[\s\S]*'\/how-it-works'/);
-  assert.match(read('app/(pages)/pricing/page.tsx'), /'Pricing \| Tailored Digital Marketing Quotes \| MappedSkills'[\s\S]*'\/pricing'/);
+  assert.match(read('app/(pages)/pricing/page.tsx'), /'Google Ads & Meta Ads Pricing \| MappedSkills'[\s\S]*'\/pricing'/);
   assert.match(read('app/(pages)/about/page.tsx'), /'About MappedSkills \| Our Approach'[\s\S]*'\/about'/);
   assert.match(read('app/(pages)/about/page.tsx'), /How MappedSkills plans and manages Google Ads and Meta Ads, and why we judge it on enquiries\./);
   assert.match(read('components/b2/b2.css'), /\.b2-path \.t \{ background: var\(--resolve-accent\); color: var\(--resolve-ink\); \}/);

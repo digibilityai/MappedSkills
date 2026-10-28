@@ -4,7 +4,7 @@ import { HeroFeedAnim } from '../meta-ads-r1/HeroFeedAnim';
 import { FormatSelector } from '../meta-ads-r21/FormatSelector';
 import { JourneyMeta } from '../meta-ads-r1/JourneyMeta';
 import Image from 'next/image';
-import { HERO, INTENT, FORMATS, JOURNEY, MANAGE, MEASURE, WORK, PROCESS, FAQS, CLOSE } from './content';
+import { HERO, INTENT, FORMATS, JOURNEY, MANAGE, MEASURE, WORK, PROCESS, FAQS, CLOSE, PRICE } from './content';
 import '@/components/resolve-home-r3/resolve-home-r3.css';
 import '../meta-ads-r1/meta-ads-r1.css';
 import '../meta-ads-r2/meta-ads-r2.css';
@@ -123,6 +123,33 @@ export function MetaAdsR22() {
         </li>)}
       </ul>
       <div className="mr2-strip" {...REVEAL}><p>{WORK.note}</p><TextLink href={WORK.all.href}>{WORK.all.label}</TextLink></div>
+    </div></section>
+
+    {/* 7b. Ink Deep: the approved monthly management plan, with the full scope in a closed disclosure */}
+    <section id="pricing" className="mr22-price rv3-dark" aria-labelledby="mr22-price-h"><div className="rv3-wrap">
+      <div className="mr22-price-grid">
+        <div {...REVEAL}>
+          <p className="rv3-eyebrow">{PRICE.eyebrow}</p><H2 id="mr22-price-h" parts={PRICE.h2} />
+          <p className="rv3-intro">{PRICE.lede}</p>
+          <ul className="mr22-points">{PRICE.points.map((p) => <li key={p}><Tick />{p}</li>)}</ul>
+          <div className="rv3-actions"><Cta href="/contact">{PRICE.cta}</Cta><TextLink href={PRICE.compare.href} dark>{PRICE.compare.label}</TextLink></div>
+        </div>
+        <div className="mr22-card" {...REVEAL}>
+          <p className="mr22-card-k">{PRICE.card.label}</p>
+          <p className="mr22-fee"><b>{PRICE.card.fee}</b> <span>{PRICE.card.per}</span></p>
+          <ul className="mr22-figs">{PRICE.card.figs.map((f) => <li key={f}>{f}</li>)}</ul>
+          <p className="mr22-card-note">{PRICE.card.note}</p>
+        </div>
+      </div>
+      <div className="rv3-faq mr22-scope" {...REVEAL}>
+        <details className="mr22-disclosure">
+          <summary><h3>{PRICE.scope.summary}</h3><span aria-hidden="true">+</span></summary>
+          <div className="mr22-scope-body">
+            <ul>{PRICE.scope.items.map((i) => <li key={i}><Tick />{i}</li>)}</ul>
+            <div><h4>{PRICE.scope.notesLabel}</h4><ul>{PRICE.scope.notes.map((n) => <li key={n}>{n}</li>)}</ul></div>
+          </div>
+        </details>
+      </div>
     </div></section>
 
     {/* 8. Ground: the engagement process */}

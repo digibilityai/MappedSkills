@@ -24,3 +24,32 @@
    (about 2 to 1 on white). Restore the colours the mock-up was designed with (integration, contrast correction). */
 .rv3-hero-fig.mr1-hero-fig .mr1-hhead small, .rv3-hero-fig.mr1-hero-fig .mr1-hcta small { color: #5C5665; }
 .rv3-hero-fig.mr1-hero-fig .mr1-field small { color: var(--c-dim); }
+
+/* ---- Pricing summary (approved Meta Ads plan). Reuses R3 tokens; the full scope is a native details element ---- */
+.mr22 .mr22-price { padding-block: clamp(48px, 5.5vw, 88px); }
+.mr22 .mr22-price-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: var(--sp-4) clamp(32px, 5vw, 80px); align-items: start; }
+.mr22 .mr22-price h2 { max-width: 16ch; }
+.mr22 .mr22-points { margin-top: var(--sp-2); display: grid; gap: 10px; }
+.mr22 .mr22-points li, .mr22 .mr22-scope-body li { display: flex; gap: 10px; align-items: flex-start; }
+.mr22 .mr22-points .mr1-tick, .mr22 .mr22-scope-body .mr1-tick { color: var(--c-tang); margin-top: 3px; }
+.mr22 .mr22-card { background: var(--c-paper); color: var(--c-ink); border-radius: 16px; padding: clamp(20px, 2.6vw, 34px); box-shadow: 0 18px 40px rgba(0, 0, 0, .3); }
+.mr22 .mr22-card-k { font: 800 .74rem/1.4 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--c-tang-deep); }
+.mr22 .mr22-fee { margin-top: 8px; }
+.mr22 .mr22-fee b { font: 800 clamp(2.4rem, 4vw, 3.4rem)/1 var(--f-head); letter-spacing: -.03em; }
+.mr22 .mr22-fee span { color: var(--c-dim); font-weight: 700; }
+.mr22 .mr22-figs { margin-top: var(--sp-2); border-top: 2px solid var(--c-ink); }
+.mr22 .mr22-figs li { padding: 11px 0; border-bottom: 1px solid var(--c-line); font-weight: 700; }
+.mr22 .mr22-card-note { margin-top: var(--sp-1); color: var(--c-dim); font-size: .95rem; }
+.mr22 .mr22-scope { margin-top: var(--sp-4); }
+.mr22 .mr22-scope summary h3 { color: #fff; font-size: clamp(1.3rem, 2vw, 1.7rem); }
+.mr22 .mr22-scope summary { min-height: 72px; }
+.mr22 .mr22-scope summary:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.mr22 .mr22-scope summary span { transition: none; }
+.mr22 .mr22-scope-body { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-3) clamp(28px, 5vw, 72px); padding-block: 8px; }
+.mr22 .mr22-scope-body ul { display: grid; gap: 10px; color: var(--c-on-dark-soft); }
+.mr22 .mr22-scope-body h4 { color: #fff; font-size: 1.05rem; margin-bottom: 10px; }
+.mr22 .mr22-scope-body div ul li { display: list-item; list-style: disc; margin-left: 1.1em; }
+@media (max-width: 1080px) {
+  .mr22 .mr22-price-grid, .mr22 .mr22-scope-body { grid-template-columns: 1fr; }
+}
+.mr22 .mr22-price .rv3-intro { color: var(--c-on-dark-soft); }

@@ -45,7 +45,7 @@ for (const r of ROUTES) {
   test(`${r.path}: FAQPage questions and answers equal the visible FAQ; breadcrumb as approved`, () => {
     const nodes = flat(ldNodes(html));
     const faq = nodes.find((n) => n['@type'] === 'FAQPage');
-    const visible = [...html.matchAll(/<details(?![^>]*ga41-disclosure)[^>]*>\s*<summary[^>]*>([\s\S]*?)<\/summary>([\s\S]*?)<\/details>/g)].map((m) => decode(m[1].replace(/<span aria-hidden="true">[\s\S]*?<\/span>/g, '').replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim());
+    const visible = [...html.matchAll(/<details(?![^>]*-disclosure)[^>]*>\s*<summary[^>]*>([\s\S]*?)<\/summary>([\s\S]*?)<\/details>/g)].map((m) => decode(m[1].replace(/<span aria-hidden="true">[\s\S]*?<\/span>/g, '').replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim());
     if (r.path === '/') { assert.equal(faq, undefined, 'the homepage has no FAQPage (unchanged)'); return; }
     assert.ok(faq, 'FAQPage present');
     const body = decode(html.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ');

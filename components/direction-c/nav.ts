@@ -33,7 +33,7 @@ export const SERVICES_HUB: NavLink = {
 /** Secondary, contextual link at the foot of the Services panel and section. */
 export const PROBLEM_LINK: NavLink = {
   href: '/pricing',
-  label: 'Understand Our Pricing Approach',
+  label: 'View Plans & Pricing',
 };
 
 /** "Who We Help" dropdown: the four audience pages only. */

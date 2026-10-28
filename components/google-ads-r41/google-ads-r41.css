@@ -48,3 +48,31 @@
   .ga41 .ga4-stage { aspect-ratio: .72; --ax: 38%; --ay: 22%; --bx: 58%; --by: 88%; }
   .ga41 .ga4-serp { width: 100%; } .ga41 .ga4-land { width: 82%; font-size: 1em; }
 }
+
+/* ---- Pricing summary (approved Google Ads plan). Reuses R3 tokens; the full scope is a native details element ---- */
+.ga41 .ga41-price { padding-block: clamp(48px, 5.5vw, 88px); }
+.ga41 .ga41-price-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: var(--sp-4) clamp(32px, 5vw, 80px); align-items: start; }
+.ga41 .ga41-price h2 { max-width: 16ch; }
+.ga41 .ga41-points { margin-top: var(--sp-2); display: grid; gap: 10px; }
+.ga41 .ga41-points li, .ga41 .ga41-scope-body li { display: flex; gap: 10px; align-items: flex-start; }
+.ga41 .ga41-points .ga3-tick, .ga41 .ga41-scope-body .ga3-tick { color: var(--c-tang); margin-top: 3px; }
+.ga41 .ga41-card { background: var(--c-paper); color: var(--c-ink); border-radius: 16px; padding: clamp(20px, 2.6vw, 34px); box-shadow: 0 18px 40px rgba(0, 0, 0, .3); }
+.ga41 .ga41-card-k { font: 800 .74rem/1.4 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--c-tang-deep); }
+.ga41 .ga41-fee { margin-top: 8px; }
+.ga41 .ga41-fee b { font: 800 clamp(2.4rem, 4vw, 3.4rem)/1 var(--f-head); letter-spacing: -.03em; }
+.ga41 .ga41-fee span { color: var(--c-dim); font-weight: 700; }
+.ga41 .ga41-figs { margin-top: var(--sp-2); border-top: 2px solid var(--c-ink); }
+.ga41 .ga41-figs li { padding: 11px 0; border-bottom: 1px solid var(--c-line); font-weight: 700; }
+.ga41 .ga41-card-note { margin-top: var(--sp-1); color: var(--c-dim); font-size: .95rem; }
+.ga41 .ga41-scope { margin-top: var(--sp-4); }
+.ga41 .ga41-scope summary h3 { color: #fff; font-size: clamp(1.3rem, 2vw, 1.7rem); }
+.ga41 .ga41-scope summary { min-height: 72px; }
+.ga41 .ga41-scope summary:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.ga41 .ga41-scope summary span { transition: none; }
+.ga41 .ga41-scope-body { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-3) clamp(28px, 5vw, 72px); padding-block: 8px; }
+.ga41 .ga41-scope-body ul { display: grid; gap: 10px; color: var(--c-on-dark-soft); }
+.ga41 .ga41-scope-body h4 { color: #fff; font-size: 1.05rem; margin-bottom: 10px; }
+.ga41 .ga41-scope-body div ul li { display: list-item; list-style: disc; margin-left: 1.1em; }
+@media (max-width: 1080px) {
+  .ga41 .ga41-price-grid, .ga41 .ga41-scope-body { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,27 @@
+/* /how-it-works Stage 1 (DEC-086): compact hero, two-tone H2s, one-shot 400 ms rail entrance (removed under reduced motion).
+   Kept out of b2.css so the b2 motion policy test (no keyframes there) is unchanged. Loaded after b2.css. */
+html .b2 .b2-em { color: var(--v-burnt); font-style: normal; }
+html .b2 .b2-dark .b2-em, html .b2 .b2-hero .b2-em { color: var(--v-tang); }
+html .b2 .b2-hero.hw-hero { padding-block: clamp(32px, 3.4vw, 48px) clamp(36px, 4vw, 56px); gap: clamp(28px, 4vw, 56px); }
+html .b2 .hw-hero h1 { font-size: clamp(2.5rem, 4.4vw, 4rem); }
+html .b2 .hw-hero .b2-lede { margin-top: 18px; }
+html .b2 .hw-hero .pa-actions { margin-top: 24px; }
+.b2 .hw-rail { padding: clamp(16px, 1.8vw, 24px); }
+.b2 .hw-rail ol { display: grid; grid-template-rows: repeat(4, auto); grid-auto-flow: column; column-gap: 20px; }
+.b2 .hw-rail ol::before { display: none; }
+.b2 .hw-rail li { grid-template-columns: 32px 1fr; column-gap: 12px; padding-block: 7px; }
+.b2 .hw-rail li::after { content: ""; position: absolute; left: 15px; top: 40px; bottom: -6px; width: 2px; background: var(--resolve-ink); }
+.b2 .hw-rail li:nth-child(4)::after, .b2 .hw-rail li:last-child::after { display: none; }
+.b2 .hw-rail li.gate::after { top: 38px; }
+.b2 .hw-rail b { font-size: 1rem; }
+.b2 .hw-rail span.d { font-size: .8125rem; line-height: 1.35; }
+.b2 .hw-rail .b2-loop { margin-top: 8px; padding: 10px 12px; }
+.b2 .hw-rail .b2-cap { margin-top: 10px; }
+@media (prefers-reduced-motion: no-preference) {
+  .b2 .hw-rail li { animation: hw-rise 400ms ease-out both; animation-delay: calc(var(--i, 0) * 70ms + 120ms); }
+  @keyframes hw-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+}
+@media (max-width: 560px) {
+  .b2 .hw-rail ol { grid-template-rows: none; grid-auto-flow: row; }
+  .b2 .hw-rail li:nth-child(4)::after { display: block; }
+}

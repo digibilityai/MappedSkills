@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Logo } from '@/components/Logo';
 import { ConsentPreferencesLink } from '@/components/analytics/ConsentPreferencesLink';
 import { siteMetadata } from '@/lib/metadata';
-import { CONTACT_LINK, FOOTER_COMPANY, FOOTER_INSIGHTS, FOOTER_MORE_SERVICES, FOOTER_SERVICES, FOOTER_WHO, MORE_SERVICES_NOTE, type NavLink } from '@/components/direction-c/nav';
+import { CONTACT_LINK, FOOTER_COMPANY, FOOTER_INSIGHTS, FOOTER_SERVICES, FOOTER_WHO, type NavLink } from '@/components/direction-c/nav';
 
 /**
  * DIRECTION C — footer (navigation redesign, R2 prototype:
@@ -18,12 +18,13 @@ import { CONTACT_LINK, FOOTER_COMPANY, FOOTER_INSIGHTS, FOOTER_MORE_SERVICES, FO
  * line. (Press is back in Insights: DEC-076.) Those details are untouched elsewhere (lib/metadata.ts `offices`,
  * structured data, /contact and the other pages).
  * No commercial CTA strip (Session 33 F10: each page closes once).
+ * The "More services" group is removed (founder decision, supersedes DEC-085 D3: see DEC-086); the supporting services stay
+ * reachable from /services and contextual links. The footer is dark on every route (global default in app/direction-c.css).
  */
-function Column({ id, title, links, note }: { id: string; title: string; links: NavLink[]; note?: string }) {
+function Column({ id, title, links }: { id: string; title: string; links: NavLink[] }) {
   return (
     <nav aria-labelledby={id}>
       <h2 id={id}>{title}</h2>
-      {note && <p className="dc-ftr-note">{note}</p>}
       <ul>
         {links.map((l, i) => (
           <li key={l.href}>
@@ -40,7 +41,7 @@ function Column({ id, title, links, note }: { id: string; title: string; links: 
 export function SiteFooter() {
   const year = new Date().getFullYear();
   return (
-    <footer className="dc dc-ftr pa-footer">
+    <footer className="dc dc-ftr">
       <div className="dc-wrap">
         <div className="dc-ftr-top">
           <div className="dc-brand">
@@ -56,10 +57,7 @@ export function SiteFooter() {
               <Column id="dc-f-who" title="Who We Help" links={FOOTER_WHO} />
             </div>
             <Column id="dc-f-co" title="Company" links={FOOTER_COMPANY} />
-            <div className="dc-ftr-stack">
-              <Column id="dc-f-ins" title="Insights" links={FOOTER_INSIGHTS} />
-              <Column id="dc-f-more" title="More services" links={FOOTER_MORE_SERVICES} note={MORE_SERVICES_NOTE} />
-            </div>
+            <Column id="dc-f-ins" title="Insights" links={FOOTER_INSIGHTS} />
             <section className="dc-contact" aria-labelledby="dc-f-ct">
               <h2 id="dc-f-ct">Contact</h2>
               <dl>

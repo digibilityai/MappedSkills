@@ -90,13 +90,12 @@ test('navigation: four audience pages in the Who We Help dropdown, in order, wit
   for (const l of nav.WHO_WE_HELP_LINKS) assert.match(header, new RegExp(`href="${l.href}"`));
 });
 
-test('footer: Who We Help group and a discreet, accurate More services group (D3)', () => {
+test('footer: Who We Help group; no More services group (DEC-086 supersedes DEC-085 D3)', () => {
   const footer = renderToStaticMarkup(React.createElement(load('components/direction-c/SiteFooter.tsx').SiteFooter));
   const grp = (id) => footer.split(`id="${id}"`)[1].split('</nav>')[0];
   const hrefs = (s) => [...s.matchAll(/href="([^"]+)"/g)].map((m) => m[1]);
   assert.deepEqual(hrefs(grp('dc-f-who')), ['/who-we-help/d2c', '/who-we-help/education', '/who-we-help/real-estate', '/who-we-help/enquiry-led-businesses']);
-  assert.deepEqual(hrefs(grp('dc-f-more')), ['/lead-generation', '/seo', '/ai-seo', '/conversion-optimization']);
-  assert.match(grp('dc-f-more'), /Supporting services\. Our core work is Google Ads and Meta Ads\./);
+  assert.ok(!footer.includes('dc-f-more') && !/More services/i.test(footer));
   assert.deepEqual(hrefs(grp('dc-f-svc')), ['/services', '/google-ads', '/social-media-ads']);
 });
 

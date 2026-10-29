@@ -2364,3 +2364,23 @@ Use this file only for meaningful project decisions.
 - **How We Work:** the hero is compacted to fit above the fold at 1440x900, 1366x768 and 1280x720 where practical (mobile is not forced into one viewport). Approved workflow, approval gate and accuracy statements are kept; selective two-tone headings use approved THE RESOLVE colours.
 - **Also decided by the founder for later stages (recorded, not yet implemented):** artwork where approved and honest text-led fallbacks elsewhere for case studies; restrained Resolve styling for legal pages without content change; dark Resolve heroes with two-tone headings for individual case studies; revised About copy may be drafted for review but is not approved until reviewed.
 - **Read with:** `DEC-085`, `DEC-070`, `DEC-076`.
+
+### DEC-087 — THE RESOLVE Stage 1: How We Work story rework visually approved
+- **Date:** 2026-10-29.
+- **OWNER APPROVAL (visual, local):** the founder approved the `/how-it-works` rework at commit `84bc2b4` on `feat/resolve-sitewide-alignment`, after a browser review of the local preview at `localhost:3450`. It supersedes the compact-hero treatment in `DEC-086`, which the founder had said read like an editorial article.
+- **What was approved:**
+  - **Narrative:** the page runs as six acts, each opening with a prospective client's question.
+  - **Hero:** a route diagram split into "before you say yes" (dashed) and "after you say yes" (solid), with the approval gate as a burnt band between them and a return loop from Review to Plan.
+  - **Rhythm:** sections alternate dark, ground and paper, then end on the existing closing band.
+  - **Motion:** once-only motion that follows the homepage conventions, guarded by `tests/how-it-works-resolve.test.cjs`.
+  - **New copy:** the act headlines, the "You ask" questions, the zone labels, "Your approval" and the four beats in act 1.
+- **Unchanged:** the H1, metadata, URL, CTAs, approved workflow facts, responsibilities, approval boundaries and the frozen dark footer.
+- **Verified locally:**
+  - **Hero fit:** the hero ends inside the first screen at 1440x900, 1366x768 and 1280x720.
+  - **Content grid:** matches the homepage at 1440, 1366, 1280, 390 and 360, with no horizontal overflow.
+  - **Checks:** `npm test` passes 497 with 1 pre-existing skip; typecheck and lint pass.
+- **Not verified:**
+  - Reduced motion was checked in code and tests only; it was not emulated in a browser.
+  - Animation timing was not watched in a visible browser pane.
+- **NOT authorised:** push, PR, merge and production deployment. Stage 2 does not start until the founder instructs it.
+- **Read with:** `DEC-086`.

@@ -1,5 +1,12 @@
 /* /how-it-works Stage 1 (DEC-086): compact hero, two-tone H2s, one-shot 400 ms rail entrance (removed under reduced motion).
    Kept out of b2.css so the b2 motion policy test (no keyframes there) is unchanged. Loaded after b2.css. */
+/* Content width and gutters: the homepage rule (.rv3-wrap in resolve-home-r3.css), the same --dc-wrap/--dc-pad the header and
+   footer use. Only the inner container changes; section backgrounds stay full bleed. */
+.b2.hw .pa-wrap { width: calc(min(var(--dc-wrap, 1360px), 100%) - 2 * var(--dc-pad, 16px)); }
+@media (max-width: 760px) {
+  /* The full-bleed approval gate assumed a 20px gutter; it now bleeds by exactly the shared gutter. */
+  .b2.hw .b2-gate { margin-inline: calc(-1 * var(--dc-pad, 16px)); padding-inline: var(--dc-pad, 16px); }
+}
 html .b2 .b2-em { color: var(--v-burnt); font-style: normal; }
 html .b2 .b2-dark .b2-em, html .b2 .b2-hero .b2-em { color: var(--v-tang); }
 html .b2 .b2-hero.hw-hero { padding-block: clamp(32px, 3.4vw, 48px) clamp(36px, 4vw, 56px); gap: clamp(28px, 4vw, 56px); }

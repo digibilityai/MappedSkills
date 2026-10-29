@@ -14,7 +14,8 @@ import './how-it-works.css';
  *
  * Stage 1 Resolve alignment (DEC-086): compact two-column rail so the hero fits the fold at desktop sizes; selective
  * two-tone H2s; the monthly review precedes "your part" so the page reads begin, approve, each month, what we need
- * (dark, paper, ground, dark, paper, burnt). No copy was added or changed.
+ * (dark, paper, ground, dark, paper, burnt). No copy was added or changed. Content width and gutters follow the
+ * homepage (`.rv3-wrap`, `--dc-wrap` and `--dc-pad`), the same as the header and footer; backgrounds stay full bleed.
  */
 const RAIL = [
   { n: '1', t: 'Assess', d: 'We look at how things work today' },
@@ -55,7 +56,7 @@ const QS = [
 
 export function HowItWorks() {
   return (
-    <div className="pa b2">
+    <div className="pa b2 hw">
       <PaReveal />
       <section className="b2-hero hw-hero pa-wrap" aria-labelledby="hw-h1">
         <div>

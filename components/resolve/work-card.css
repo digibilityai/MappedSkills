@@ -1,0 +1,42 @@
+/* Shared case-study card (THE RESOLVE). Values mirror the frozen homepage "Featured work" (.rv3-w*) so the two read as one
+   system; the homepage itself is not changed. Scoped to .rs-wc / .rs-wc-grid. Breakpoints: 1080 and 760 (the homepage). */
+.rs-wc-grid { --rs-gap: clamp(32px, 4vw, 64px); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--rs-gap); align-items: start; }
+.rs-wc { min-width: 0; color: #141219; }
+.rs-wc-lead { grid-column: 1 / span 7; }
+.rs-wc-side { grid-column: 9 / span 4; margin-top: clamp(0px, 7vw, 112px); }
+.rs-wc-img { container-type: inline-size; position: relative; aspect-ratio: 1.55; overflow: hidden; background: #DED6C8; border-radius: 4px; }
+.rs-wc-side .rs-wc-img { aspect-ratio: 1.2; }
+.rs-wc-img > img { object-fit: cover; object-position: 52% 50%; }
+.rs-wc-logo { position: absolute; top: clamp(10px, 1.2vw, 16px); left: clamp(10px, 1.2vw, 16px); display: flex; align-items: center; justify-content: center; padding: 10px 14px; border-radius: 8px; background: #FFFDF9; }
+.rs-wc-logo img { display: block; height: auto; }
+.rs-wc-logo-wide img { width: clamp(110px, 12vw, 160px); }
+.rs-wc-logo-square { padding: 0; overflow: hidden; }
+.rs-wc-logo-square img { width: clamp(84px, 8vw, 104px); }
+html .rs-wc-note { margin: 8px 0 0; font-size: .78rem; line-height: 1.5; color: #5C5665; }
+
+/* Text-led fallback: same proportions, the channel and the client name as type over the field of anonymous marks. */
+.rs-wc-text { display: flex; flex-direction: column; justify-content: space-between; padding: clamp(18px, 2vw, 28px); background-color: #0F0D14;
+  background-image: radial-gradient(circle, rgba(207, 200, 214, .28) 1.6px, transparent 2px); background-size: 22px 22px; background-position: 11px 11px; }
+.rs-wc-text::after { content: ''; position: absolute; right: 18%; top: 34%; width: 14px; height: 14px; border-radius: 50%; background: #FF5B04; box-shadow: 0 0 0 7px rgba(255, 91, 4, .22); }
+.rs-wc-chan { align-self: flex-start; padding: 6px 12px; border-radius: 999px; background: #FF5B04; color: #141219; font: 800 .7rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+.rs-wc-name { position: relative; z-index: 1; color: #fff; font: 800 min(3.4rem, 9.5cqi)/.95 var(--font-bricolage), sans-serif; letter-spacing: -.04em; text-wrap: balance; overflow-wrap: anywhere; }
+
+html .rs-wc-eyebrow { margin: clamp(16px, 2vw, 28px) 0 10px; font: 800 .74rem/1.4 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #A83400; }
+/* html prefix on the text rules: page scopes such as `.pa h3` and `.pa p` load after this file and must not override them */
+html .rs-wc h3 { margin: 0; font: 800 clamp(1.6rem, 2.5vw, 2.3rem)/1.05 var(--font-bricolage), sans-serif; letter-spacing: -.025em; color: #141219; text-wrap: balance; }
+html .rs-wc-body { margin: 12px 0 6px; max-width: 46ch; line-height: 1.6; color: #5C5665; }
+.rs-wc-cta { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 800; color: #A83400; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 6px; }
+.rs-wc-cta span { transition: transform .18s cubic-bezier(.16, 1, .3, 1); }
+.rs-wc-cta:hover span { transform: translate(2px, -2px); }
+.rs-wc-cta:focus-visible { outline: 3px solid #A83400; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .rs-wc-cta span { transition: none; } }
+
+@media (max-width: 1080px) {
+  .rs-wc-lead { grid-column: 1 / -1; }
+  .rs-wc-side { grid-column: 4 / span 9; margin-top: clamp(32px, 4vw, 64px); }
+  .rs-wc-side .rs-wc-img { aspect-ratio: 1.57; }
+}
+@media (max-width: 760px) {
+  .rs-wc-grid { display: flex; flex-direction: column; }
+  .rs-wc-lead .rs-wc-img, .rs-wc-side .rs-wc-img { aspect-ratio: 1.25; }
+}

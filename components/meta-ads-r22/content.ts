@@ -14,3 +14,56 @@ export const INTENT = {
   ],
   note: 'Illustrative possibilities, not a guaranteed sequence.',
 } as const;
+
+/** Approved Meta Ads working price (Pricing R3, commit 0a8561e). No setup fees, GST terms, minimum budgets, contract commitments,
+ * guarantees or add-on prices are stated, because none were approved. */
+export const PRICE = {
+  eyebrow: 'Meta Ads pricing',
+  h2: ['One monthly fee ', 'for a clearly defined scope'],
+  lede: 'The management fee covers the work listed here. Your ad spend is paid separately, directly to Meta.',
+  points: [
+    'The fee covers the monthly scope listed here.',
+    'Ad spend is paid separately, to Meta.',
+    'Extra campaigns, creatives or technical work are quoted separately.',
+    'Extra work starts only after you approve the quote.',
+  ],
+  card: {
+    label: 'Meta Ads management',
+    fee: '₹14,999',
+    per: 'a month',
+    figs: [
+      '3 active campaigns',
+      '3 static creatives',
+      '1 carousel, up to 5 cards',
+      'Weekly optimisation',
+      'Monthly report and review',
+    ],
+    note: 'Ad spend is not included in this fee.',
+  },
+  cta: 'Discuss Your Meta Ads',
+  compare: { href: '/pricing', label: 'Compare Google, Meta and combined plans' },
+  scope: {
+    summary: 'Everything included each month',
+    items: [
+      'Up to 3 concurrently active campaigns',
+      'Up to 6 ad sets',
+      '3 static ad creatives',
+      '1 carousel, up to 5 cards',
+      'Up to 6 new ad-copy variations',
+      'Campaign monitoring every business day',
+      'Weekly optimisation reviews',
+      '1 monthly performance report',
+      '1 monthly client review',
+      'Basic tracking review',
+      'Landing-page recommendations',
+      '1 revision round per creative',
+    ],
+    notesLabel: 'Good to know',
+    notes: [
+      'Reels and videos are supplied by you or quoted separately.',
+      'Creative allowances reset every month and do not carry forward.',
+      'New tracking implementation, landing-page development, additional campaigns and extra creative production are quoted separately.',
+      'Quoted work starts only after you approve the quote.',
+    ],
+  },
+} as const;

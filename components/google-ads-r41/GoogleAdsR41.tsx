@@ -3,7 +3,7 @@ import { RvReveal3 } from '@/components/resolve-home-r3/RvReveal3';
 import { HeroSearchAnim } from '../google-ads-r4/HeroSearchAnim';
 import { CampaignSelector } from './CampaignSelector';
 import { JourneyTrack } from '../google-ads-r4/JourneyTrack';
-import { HERO, INTENT, MANAGE, TYPES, JOURNEY, MEASURE, WORK, PROCESS, FAQS, CLOSE } from './content';
+import { HERO, INTENT, MANAGE, TYPES, JOURNEY, MEASURE, WORK, PROCESS, FAQS, CLOSE, PRICE } from './content';
 import '@/components/resolve-home-r3/resolve-home-r3.css';
 import '../google-ads-r3/google-ads-r3.css';
 import '../google-ads-r4/google-ads-r4.css';
@@ -87,6 +87,33 @@ export function GoogleAdsR41() {
       <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">{JOURNEY.eyebrow}</p><H2 id="ga41-jny-h" parts={JOURNEY.h2} /></header>
       <JourneyTrack />
       <p className="ga4-tools" {...REVEAL}>{JOURNEY.tools}</p>
+    </div></section>
+
+    {/* 5b. Ink Deep: the approved monthly management plan, with the full scope one tap away */}
+    <section id="pricing" className="ga41-price rv3-dark" aria-labelledby="ga41-price-h"><div className="rv3-wrap">
+      <div className="ga41-price-grid">
+        <div {...REVEAL}>
+          <p className="rv3-eyebrow">{PRICE.eyebrow}</p><H2 id="ga41-price-h" parts={PRICE.h2} />
+          <p className="rv3-intro ga3-intro-dark">{PRICE.lede}</p>
+          <ul className="ga41-points">{PRICE.points.map((p) => <li key={p}><Tick />{p}</li>)}</ul>
+          <div className="rv3-actions"><Cta href="/contact">{PRICE.cta}</Cta><TextLink href={PRICE.compare.href} dark>{PRICE.compare.label}</TextLink></div>
+        </div>
+        <div className="ga41-card" {...REVEAL}>
+          <p className="ga41-card-k">{PRICE.card.label}</p>
+          <p className="ga41-fee"><b>{PRICE.card.fee}</b> <span>{PRICE.card.per}</span></p>
+          <ul className="ga41-figs">{PRICE.card.figs.map((f) => <li key={f}>{f}</li>)}</ul>
+          <p className="ga41-card-note">{PRICE.card.note}</p>
+        </div>
+      </div>
+      <div className="rv3-faq ga41-scope" {...REVEAL}>
+        <details className="ga41-disclosure">
+          <summary><h3>{PRICE.scope.summary}</h3><span aria-hidden="true">+</span></summary>
+          <div className="ga41-scope-body">
+            <ul>{PRICE.scope.items.map((i) => <li key={i}><Tick />{i}</li>)}</ul>
+            <div><h4>{PRICE.scope.notesLabel}</h4><ul>{PRICE.scope.notes.map((n) => <li key={n}>{n}</li>)}</ul></div>
+          </div>
+        </details>
+      </div>
     </div></section>
 
     {/* 6. Paper: measurement, simplified */}

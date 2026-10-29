@@ -150,7 +150,7 @@ export const PROCESS = {
   ],
   link: { href: '/how-it-works', label: 'See How We Work' },
   cost: 'Meta ad spend is paid directly to Meta. Our management fee is charged separately.',
-  costLink: { href: '/pricing', label: 'Understand Our Pricing Approach' },
+  costLink: { href: '/pricing', label: 'View Our Plans & Pricing' },
 } as const;
 
 export const FAQS = [

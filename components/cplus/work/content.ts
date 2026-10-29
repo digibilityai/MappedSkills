@@ -46,8 +46,29 @@ export const WORK = {
     next: 'Next',
   },
   note: {
-    h: 'Good work deserves honest evidence.',
     body: 'We share what we did and what we can substantiate. Where results aren’t independently verified, we don’t present them as proven outcomes.',
+  },
+  /** THE RESOLVE Stage 3 (proposal for founder review): chapter labels, the hero route and the evidence rules. */
+  resolve: {
+    route: {
+      k: 'Every case study follows the same route',
+      steps: [
+        { b: 'The challenge', t: 'What the business brought to us' },
+        { b: 'What we did', t: 'The decisions and the work' },
+        { b: 'What changed', t: 'Only what we can substantiate' },
+      ],
+      cap: 'How each case study is organised. It shows no results.',
+    },
+    featured: { ch: 'Start here', a: 'One story,', b: 'told end to end.' },
+    library: { ch: 'The library', a: 'Every case study,', b: 'in one place.' },
+    evidence: { ch: 'Our evidence rule', a: 'Good work', b: 'deserves honest evidence.' },
+    rules: {
+      figures: 'Figures keep their context',
+      outcomes: 'Outcomes show their basis',
+      art: 'Artwork is labelled',
+      artBody: 'Where a case study uses conceptual artwork, the card says so beneath the image.',
+    },
+    count: (n: number) => `${n} published case ${n === 1 ? 'study' : 'studies'}`,
   },
   close: {
     kicker: 'Have a problem like these?',

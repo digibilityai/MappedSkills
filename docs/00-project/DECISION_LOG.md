@@ -2384,3 +2384,12 @@ Use this file only for meaningful project decisions.
   - Animation timing was not watched in a visible browser pane.
 - **NOT authorised:** push, PR, merge and production deployment. Stage 2 does not start until the founder instructs it.
 - **Read with:** `DEC-086`.
+
+### DEC-088 — THE RESOLVE Stage 2: About page visually approved
+- **Date:** 2026-10-29.
+- **OWNER APPROVAL (visual, local):** the founder approved the `/about` page at commit `2339397` on `feat/resolve-sitewide-alignment` (Stage 2 at `2b64975` plus the headline and AnyBodyCanBake corrections in `2339397`).
+- **What was approved:** the THE RESOLVE About story (dark hero with the conceptual "What we answer to" field, then The problem, How we decide, Working together and The work, then the closing band); the new About copy proposed in Stage 2; the shared case-study card `components/resolve/WorkCard` with its conceptual-artwork disclosure and its text-only fallback for a study without approved artwork (AnyBodyCanBake).
+- **Unchanged:** the H1, metadata, URL, owner facts and CTAs recorded for `/about`, and the frozen dark footer.
+- **Not approved by this entry:** Stage 3 (`/work`, its pagination and `/portfolio/[slug]`), which needs its own founder visual approval.
+- **NOT authorised:** push, PR, merge and production deployment.
+- **Read with:** `DEC-086`, `DEC-087`.

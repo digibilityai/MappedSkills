@@ -51,7 +51,7 @@ test('a bold number is a figure only when short; a long bold sentence with a dig
 });
 
 test('the study view and the pages never call a figure verified, and never add a field or a number', () => {
-  const files = ['components/case-study/CaseStudyTemplate.tsx', 'lib/case-study-outcomes.ts', 'components/cplus/work/WorkCards.tsx'];
+  const files = ['components/case-study/CaseStudyTemplate.tsx', 'lib/case-study-outcomes.ts', 'components/b2/work-cards.ts', 'components/b2/Work.tsx', 'components/b2/WorkLibrary.tsx'];
   for (const f of files) {
     const src = read(f).replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
     assert.doesNotMatch(src, /verified|proven|guarantee|Measured result/i, f);

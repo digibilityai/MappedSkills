@@ -1,0 +1,164 @@
+/* /work and /work/page/[n]: THE RESOLVE story (Stage 3). Scoped to `.b2.wk`, loaded after b2.css and the shared card
+   (components/resolve/work-card.css). Same motion policy as /about and /how-it-works: once only, decorative parts only
+   (nodes and connectors), transforms and opacity; the settled state is the base style; every keyframe sits inside
+   `prefers-reduced-motion: no-preference`, and reduced motion clears it explicitly. */
+
+.b2.wk { --ease: cubic-bezier(.16, 1, .3, 1); --wk-rule-dark: #2C2833; }
+/* Content width and gutters: the homepage rule (.rv3-wrap), the same --dc-wrap/--dc-pad the header and footer use. */
+.b2.wk .pa-wrap { width: calc(min(var(--dc-wrap, 1360px), 100%) - 2 * var(--dc-pad, 16px)); }
+.b2.wk ul > li, .b2.wk ol > li { margin: 0; }
+
+/* ---- Grounds and two-tone headings (light: Ink plus burnt; dark: white plus tangerine) ---- */
+.b2.wk .wk-act { padding-block: var(--v-sec); }
+.b2.wk .wk-ground { background: var(--v-ground); }
+.b2.wk .b2-paper { border-block: 1px solid var(--v-line); }
+.b2.wk .wk-dark { background: var(--v-deep); color: var(--v-on-dark); }
+html .b2.wk .wk-dark :where(h1, h2, h3) { color: #fff; }
+html .b2.wk .wk-dark p { color: var(--v-soft); }
+html .b2.wk .wk-dark .b2-lede { color: var(--v-on-dark); }
+html .b2.wk .b2-em { color: var(--v-burnt); font-style: normal; }
+html .b2.wk .wk-dark .b2-em { color: var(--v-tang); }
+html .b2.wk .wk-dark :focus-visible { outline-color: #fff; }
+
+/* ---- Chapter head: number, name, the answer as the H2 ---- */
+.b2.wk .wk-head { margin-bottom: clamp(28px, 3vw, 48px); }
+.b2.wk .wk-head .b2-h2 { max-width: 20ch; }
+.b2.wk .wk-head .b2-h2:focus { outline: none; }
+.b2.wk .wk-head .b2-lede { margin-top: 18px; max-width: 44em; }
+.b2.wk .wk-ch { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: var(--resolve-dim); font: 800 .72rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+.b2.wk .wk-ch span { display: inline-flex; align-items: center; gap: 12px; color: var(--v-burnt); font: 800 1rem/1 var(--font-bricolage), sans-serif; letter-spacing: -.01em; }
+.b2.wk .wk-ch span::after { content: ''; width: 28px; height: 2px; background: currentColor; }
+html .b2.wk .wk-dark .wk-ch { color: var(--v-tang); }
+
+/* =====================================================================================================================
+   Hero: the approved H1 and lede, and the route every case study follows (challenge, the work, what changed).
+   ===================================================================================================================== */
+.b2.wk .wk-hero { padding-block: clamp(24px, 2.6vw, 40px) clamp(40px, 4.4vw, 72px); }
+.b2.wk .wk-crumb ol { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 clamp(28px, 3.4vw, 52px); padding: 0; list-style: none; font-size: .875rem; color: var(--v-soft); }
+.b2.wk .wk-crumb a { color: var(--v-soft); text-decoration: underline; text-underline-offset: 4px; }
+.b2.wk .wk-crumb a:hover { color: #fff; }
+.b2.wk .wk-crumb [aria-current] { color: #fff; font-weight: 700; }
+.b2.wk .wk-hero-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 32px); align-items: end; }
+.b2.wk .wk-hero-copy { grid-column: 1 / span 7; }
+html .b2.wk .wk-hero h1 { max-width: none; font-size: clamp(2.5rem, 4.4vw, 4.3rem); line-height: .99; color: #fff; }
+html .b2.wk .wk-hero h1 span { display: block; color: var(--v-tang); }
+html .b2.wk .wk-hero .b2-lede { margin-top: 22px; max-width: 32em; font-size: clamp(1.02rem, 1.3vw, 1.2rem); }
+html .b2.wk .wk-count { display: flex; align-items: center; gap: 10px; margin-top: 26px; color: #fff; font: 800 .74rem/1.4 var(--font-manrope), sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+.b2.wk .wk-count::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--v-tang); }
+.b2.wk .wk-count span { color: var(--v-soft); }
+
+.b2.wk .wk-route { --g: clamp(12px, 1.4vw, 20px); grid-column: 8 / span 5; margin: 0; padding: clamp(20px, 2.2vw, 32px); border: 1px solid var(--wk-rule-dark); border-radius: 6px; background: linear-gradient(180deg, #17141E, var(--v-deep)); }
+html .b2.wk .wk-route-k { color: var(--v-soft); font: 800 .66rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+.b2.wk .wk-route ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--g); margin: 22px 0 0; padding: 0; list-style: none; }
+.b2.wk .wk-route li { position: relative; display: flex; flex-direction: column; gap: 6px; min-width: 0; padding-top: 46px; }
+.b2.wk .wk-route li::before { content: ''; position: absolute; top: 15px; left: 38px; right: calc(-1 * var(--g) + 4px); height: 2px; background: var(--v-tang); transform-origin: left; }
+.b2.wk .wk-route li:nth-child(2)::before { background: repeating-linear-gradient(90deg, var(--v-tang) 0 7px, transparent 7px 12px); }
+.b2.wk .wk-route li:last-child::before { content: none; }
+.b2.wk .wk-node { position: absolute; top: 0; left: 0; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--v-tang); color: var(--v-ink); font: 800 .8rem/1 var(--font-manrope), sans-serif; }
+.b2.wk .wk-route li:last-child .wk-node { background: var(--v-deep); border: 2px dashed var(--v-tang); color: var(--v-tang); }
+.b2.wk .wk-route b { color: #fff; font: 800 clamp(1.05rem, 1.4vw, 1.3rem)/1.15 var(--font-bricolage), sans-serif; letter-spacing: -.01em; }
+html .b2.wk .wk-route li > span:not(.wk-node) { color: var(--v-soft); font-size: .875rem; line-height: 1.45; }
+.b2.wk .wk-route figcaption { margin-top: 18px; padding-top: 12px; border-top: 1px solid var(--wk-rule-dark); color: #B7B0BF; font-size: .78rem; font-weight: 600; line-height: 1.45; }
+
+/* =====================================================================================================================
+   The work: the opening pair in the homepage lead and side composition, then the library on the shared cards.
+   ===================================================================================================================== */
+.b2.wk .wk-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 2.4vw, 36px); margin: 0; padding: 0; list-style: none; }
+.b2.wk .wk-grid > li { display: flex; min-width: 0; }
+/* No orphan card: two or four studies sit two by two; a single last card on a row of three takes the whole row. */
+@media (min-width: 1081px) {
+  .b2.wk .wk-grid:has(> li:nth-child(2):last-child), .b2.wk .wk-grid:has(> li:nth-child(4):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .b2.wk .wk-grid:not(:has(> li:nth-child(4):last-child)) > li:nth-child(3n + 1):last-child:not(:first-child) { grid-column: 1 / -1; }
+}
+.b2.wk .wk-grid .rs-wc { display: flex; flex-direction: column; flex: 1; grid-column: auto; margin-top: 0; }
+.b2.wk .wk-grid .rs-wc-cta { margin-top: auto; align-self: flex-start; }
+.b2.wk .wk-grid .rs-wc-img { aspect-ratio: 1.45; }
+html .b2.wk .wk-grid .rs-wc h3 { font-size: clamp(1.45rem, 2vw, 1.9rem); }
+.b2.wk .wk-empty { color: var(--resolve-dim); font-size: 1.125rem; }
+
+/* Search and filters (from CONTROLS_MIN_STUDIES studies), status, pages */
+.b2.wk .wk-ctl { display: grid; gap: 14px; margin-bottom: 18px; }
+.b2.wk .wk-ctl[hidden] { display: none; }
+.b2.wk .wk-ctl-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.b2.wk .wk-q { flex: 1 1 320px; display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 14px; border: 1px solid var(--v-ink); border-radius: 6px; background: var(--v-paper); color: var(--v-ink); }
+.b2.wk .wk-q:focus-within { outline: 3px solid var(--v-burnt); outline-offset: 2px; }
+.b2.wk .wk-q input { flex: 1; min-width: 0; min-height: 44px; border: 0; background: transparent; color: var(--v-ink); font: inherit; outline: none; }
+.b2.wk .wk-q input::placeholder { color: var(--resolve-dim); }
+.b2.wk .wk-sel { display: flex; align-items: center; gap: 10px; }
+.b2.wk .wk-k { color: var(--resolve-dim); font: 800 .7rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+.b2.wk .wk-sel select { min-height: 48px; padding: 0 14px; border: 1px solid var(--v-ink); border-radius: 6px; background: var(--v-paper); color: var(--v-ink); font: inherit; }
+.b2.wk .wk-sel select:focus-visible { outline: 3px solid var(--v-burnt); outline-offset: 2px; }
+.b2.wk .wk-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.b2.wk .wk-chips button { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 16px; border: 1px solid var(--v-ink); border-radius: 999px; background: transparent; color: var(--v-ink); font-size: .875rem; font-weight: 700; cursor: pointer; }
+.b2.wk .wk-chips button[aria-pressed='true'] { background: var(--v-ink); color: #fff; }
+.b2.wk .wk-chips button:focus-visible { outline: 3px solid var(--v-burnt); outline-offset: 2px; }
+.b2.wk .wk-n { font-size: .75rem; opacity: .8; }
+html .b2.wk .wk-status { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; margin: 0 0 clamp(20px, 2.2vw, 30px); color: var(--resolve-dim); font-size: .875rem; font-weight: 700; }
+.b2.wk .wk-status:empty { display: none; }
+.b2.wk .wk-clear { min-height: 44px; padding: 0; border: 0; background: none; color: var(--v-burnt); font-weight: 800; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.b2.wk .wk-clear:focus-visible { outline: 3px solid var(--v-burnt); outline-offset: 3px; }
+.b2.wk .wk-nomatch { padding: clamp(22px, 2.6vw, 36px); border: 1px solid var(--v-line); border-top: 4px solid var(--v-burnt); border-radius: 4px; background: var(--v-paper); }
+html .b2.wk .wk-nomatch-h { color: var(--v-ink); font: 800 clamp(1.3rem, 2vw, 1.7rem)/1.15 var(--font-bricolage), sans-serif; }
+html .b2.wk .wk-nomatch p:not(.wk-nomatch-h) { margin-top: 8px; color: var(--resolve-dim); }
+
+.b2.wk .wk-pager { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; margin-top: clamp(32px, 4vw, 56px); padding-top: 20px; border-top: 1px solid var(--v-line); }
+.b2.wk .wk-pager ol { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.b2.wk .wk-pg { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 44px; min-height: 44px; padding: 0 14px; border: 1px solid var(--v-line); border-radius: 6px; background: var(--v-paper); color: var(--v-ink); font: inherit; font-weight: 800; text-decoration: none; cursor: pointer; }
+.b2.wk a.wk-pg:hover, .b2.wk button.wk-pg:not(:disabled):hover { border-color: var(--v-ink); }
+.b2.wk .wk-pg:focus-visible { outline: 3px solid var(--v-burnt); outline-offset: 2px; }
+.b2.wk .wk-pg.is-on { border-color: var(--v-ink); background: var(--v-ink); color: #fff; }
+.b2.wk .wk-pg.is-off { color: var(--resolve-dim); cursor: default; }
+.b2.wk .wk-gap { display: grid; place-items: center; min-width: 24px; color: var(--resolve-dim); }
+html .b2.wk .wk-pg-of { color: var(--resolve-dim); font-size: .875rem; font-weight: 700; }
+
+/* =====================================================================================================================
+   The evidence rule (dark)
+   ===================================================================================================================== */
+.b2.wk .wk-rules { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 48px); margin: 0; padding: 0; list-style: none; }
+.b2.wk .wk-rules li { display: flex; flex-direction: column; gap: 8px; padding-top: 18px; border-top: 1px solid #4A4553; }
+.b2.wk .wk-rules b { color: #fff; font: 800 clamp(1.25rem, 1.8vw, 1.6rem)/1.15 var(--font-bricolage), sans-serif; letter-spacing: -.015em; }
+.b2.wk .wk-rules span { color: var(--v-soft); line-height: 1.55; }
+
+/* ---- Entrances: the shared PaReveal, staggered by --i ---- */
+.b2.wk [data-reveal] { transition-delay: calc(var(--i, 0) * 80ms); }
+
+/* =====================================================================================================================
+   Motion. The hero route plays once on load (the first screen, as on the homepage and /about): each step's node, then
+   the connector to the next. It settles in under two seconds. Nothing else moves except the shared entrances.
+   ===================================================================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  .b2.wk .wk-route .wk-node { animation: wk-pop .5s var(--ease) both; animation-delay: calc(var(--i) * 420ms + 200ms); }
+  .b2.wk .wk-route li::before { animation: wk-line .45s ease-out both; animation-delay: calc(var(--i) * 420ms + 480ms); }
+
+  @keyframes wk-pop { from { opacity: .2; transform: scale(.7); } }
+  @keyframes wk-line { from { transform: scaleX(0); } }
+  @keyframes wk-linev { from { transform: scaleY(0); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .b2.wk *, .b2.wk *::before, .b2.wk *::after { animation: none !important; transition: none !important; }
+}
+
+/* =====================================================================================================================
+   Responsive: Medium 761 to 1080, Narrow up to 760 (the homepage breakpoints).
+   ===================================================================================================================== */
+@media (max-width: 1080px) {
+  .b2.wk .wk-hero-grid { display: block; }
+  .b2.wk .wk-route { margin-top: clamp(28px, 4vw, 44px); }
+  .b2.wk .wk-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .b2.wk .wk-grid > li:nth-child(odd):last-child:not(:first-child) { grid-column: 1 / -1; }
+  .b2.wk .wk-rules { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .b2.wk .wk-rules li { padding-block: 16px; }
+}
+@media (max-width: 760px) {
+  .b2.wk .wk-route ol { grid-template-columns: minmax(0, 1fr); row-gap: 18px; }
+  .b2.wk .wk-route li { padding: 4px 0 0 48px; }
+  .b2.wk .wk-route li::before { top: 38px; bottom: -14px; left: 15px; right: auto; width: 2px; height: auto; transform-origin: top; }
+  .b2.wk .wk-route li:nth-child(2)::before { background: repeating-linear-gradient(180deg, var(--v-tang) 0 7px, transparent 7px 12px); }
+  .b2.wk .wk-route li::before { animation-name: wk-linev; }
+  .b2.wk .wk-grid { grid-template-columns: minmax(0, 1fr); }
+  .b2.wk .wk-pager { justify-content: center; }
+  .b2.wk .wk-pg-of { width: 100%; text-align: center; order: -1; }
+}
+
+/* the closing band's kicker */
+html .b2.wk .wk-close-k { margin-bottom: 14px; color: #fff; font: 800 .74rem/1.4 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; }

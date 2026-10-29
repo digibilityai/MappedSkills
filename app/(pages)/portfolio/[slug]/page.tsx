@@ -7,7 +7,6 @@ import { CTASection } from '@/components/CTASection';
 import { Card } from '@/components/ui/card';
 import { CaseStudyContent } from '@/components/case-study/CaseStudyContent';
 import { CaseStudyTemplate } from '@/components/case-study/CaseStudyTemplate';
-import { CplusPage } from '@/components/cplus/CplusPage';
 import { createMetadata } from '@/lib/metadata';
 import { isCaseStudyProofWithheld } from '@/lib/case-study-proof';
 import { getCaseStudyService } from '@/lib/case-study-services';
@@ -94,20 +93,18 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
     : Boolean(caseStudy.review && !proofWithheld);
 
   /**
-   * The new template (G7 design) is a complete page of its own: hero, the three sections, navigation back to `/work` and
+   * The new template (G7 design, THE RESOLVE presentation since Stage 3) is a complete page of its own: hero, the three sections, navigation back to `/work` and
    * on to the next study, and the close. The legacy template below is unchanged.
    */
   if (isNewLayout && caseStudy.newLayout) {
     return (
-      <CplusPage>
-        <CaseStudyTemplate
-          study={caseStudy}
-          content={caseStudy.newLayout}
-          service={relatedService ? { title: relatedService.title, link: relatedService.link } : null}
-          showTestimonial={showTestimonial}
-          next={await getNextCaseStudy(caseStudy.slug)}
-        />
-      </CplusPage>
+      <CaseStudyTemplate
+        study={caseStudy}
+        content={caseStudy.newLayout}
+        service={relatedService ? { title: relatedService.title, link: relatedService.link } : null}
+        showTestimonial={showTestimonial}
+        next={await getNextCaseStudy(caseStudy.slug)}
+      />
     );
   }
 

@@ -65,7 +65,8 @@ test('frozen pages do not render the R1 roots', () => {
 });
 
 test('How it works and Pricing opt in to the dark mid-section', () => {
-  assert.match(read('components/b2/HowItWorks.tsx'), /b2-sec b2-dark" aria-labelledby="hw-part"/);
+  // How it works (DEC-086 rework): the dark mid-section is the approval gate; "your part" moved to the ground.
+  assert.match(read('components/b2/HowItWorks.tsx'), /hw-gate hw-dark" aria-labelledby="hw-gate-h"/);
   assert.match(read('components/b2/Pricing.tsx'), /b2-sec b2-dark" aria-labelledby="pr-prop"/);
 });
 

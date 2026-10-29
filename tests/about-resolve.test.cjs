@@ -31,6 +31,7 @@ test('owner facts, H1, CTAs and the closing band are kept', () => {
   assert.ok(about.includes('We commit to the work and how we do it, not guaranteed outcomes.'));
   assert.match(about, /<ActionLink \/><ActionLink href="\/how-it-works" variant="text">See how we work<\/ActionLink>/);
   assert.match(about, /<Band id="ab-close"/);
+  assert.match(about, /<h2 id="ab-bel" className="b2-h2">Traffic is not the finish line\. <span className="b2-em">Enquiries are\.<\/span><\/h2>/);
   for (const h of ['/google-ads', '/social-media-ads', '/how-it-works', '/work', '/press']) assert.ok(about.includes(`"${h}"`), h);
 });
 
@@ -46,9 +47,10 @@ test('case studies: approved copy and routes, no outcomes, artwork only from the
   assert.match(copy, /anybodycanbake: \{[^}]*cta: 'Read the Google Ads case study',\s*\},/s, 'AnyBodyCanBake has no artwork and uses the fallback');
 });
 
-test('shared card: disclosure under artwork, text-led fallback otherwise, one text CTA', () => {
+test('shared card: disclosure under artwork, a text-only card otherwise, one text CTA', () => {
   assert.match(card, /<p className="rs-wc-note">\{a\.note\}<\/p>/);
-  assert.match(card, /className="rs-wc-img rs-wc-text" aria-hidden="true"/);
+  assert.match(card, /\$\{a \? '' : ' rs-wc-textonly'\}/, 'a study without artwork is a text-only card');
+  assert.doesNotMatch(card, /rs-wc-text"|rs-wc-name|rs-wc-chan/, 'no image-shaped stand-in for missing artwork');
   assert.strictEqual((card.match(/<Link /g) || []).length, 1);
 });
 

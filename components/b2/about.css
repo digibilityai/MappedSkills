@@ -61,9 +61,8 @@ html .b2.ab .ab-field-say { margin-top: 16px; color: #fff; font: 800 clamp(1.05r
 .b2.ab .ab-field figcaption { margin-top: 10px; color: #B7B0BF; font-size: .78rem; font-weight: 600; line-height: 1.45; }
 
 /* =====================================================================================================================
-   01 The problem: the statement, then the three beliefs as a rising staircase.
+   01 The problem: the headline (the shared b2-h2 scale, as every chapter), then the three beliefs as a rising staircase.
    ===================================================================================================================== */
-html .b2.ab .ab-big { font-size: clamp(2.6rem, 6vw, 5.4rem); line-height: .98; letter-spacing: -.04em; max-width: 13ch; }
 .b2.ab .ab-stairs { --g: clamp(20px, 3vw, 48px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--g); margin: 0; padding: 0; list-style: none; }
 .b2.ab .ab-stairs li { position: relative; padding-top: 34px; }
 .b2.ab .ab-stairs li:nth-child(2) { margin-top: clamp(0px, 4vw, 56px); }

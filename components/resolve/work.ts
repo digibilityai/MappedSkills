@@ -14,7 +14,6 @@ export type WorkArt = {
 export type WorkStudy = {
   id: string;
   eyebrow: string;
-  channel: string;
   title: string;
   body: string;
   href: string;
@@ -26,7 +25,6 @@ export const STUDIES: Record<'om-sai' | 'anybodycanbake', WorkStudy> = {
   'om-sai': {
     id: 'om-sai',
     eyebrow: 'Meta Ads · Real estate',
-    channel: 'Meta Ads',
     title: 'Om Sai Developer',
     body: 'A Chembur developer that needed enquiries from people interested in its project.',
     href: '/portfolio/om-sai-developer-meta-ads',
@@ -41,7 +39,6 @@ export const STUDIES: Record<'om-sai' | 'anybodycanbake', WorkStudy> = {
   anybodycanbake: {
     id: 'anybodycanbake',
     eyebrow: 'Google Ads · Education and training',
-    channel: 'Google Ads',
     title: 'AnyBodyCanBake',
     body: 'A Pune online baking school that needed more students for its eggless and healthy baking courses.',
     href: '/portfolio/google-ads-for-online-courses',

@@ -76,7 +76,7 @@ export function About() {
         <div className="pa-wrap">
           <header className="ab-head" data-reveal>
             <p className="ab-ch"><span>01</span>The problem</p>
-            <h2 id="ab-bel" className="ab-big">Traffic is not the finish line. <span className="b2-em">Enquiries are.</span></h2>
+            <h2 id="ab-bel" className="b2-h2">Traffic is not the finish line. <span className="b2-em">Enquiries are.</span></h2>
             <p className="b2-lede">Advertising can look busy and still bring nothing to follow up. A report full of clicks rarely says whether anyone asked to buy.</p>
           </header>
           <p className="ab-sub">What we believe</p>

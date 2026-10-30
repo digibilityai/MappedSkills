@@ -255,3 +255,71 @@ html .b2.cs .ct-sub { margin-top: 12px; color: var(--v-ink); font: 800 1.25rem/1
   .b2.cs .ct-next-a { padding-left: 0; border-left: 0; border-top: 1px solid var(--v-line); }
   .b2.cs .ct-art-img { aspect-ratio: 1.3; }
 }
+
+/* =====================================================================================================================
+   Stage 3 revision: the stage (artwork or conceptual illustration, continuing the dark hero), the dark middle chapter,
+   and the entrances. The stage carries only artwork that is approved (Om Sai) or a code-drawn conceptual illustration
+   (components/case-study/CaseArt.tsx), each with its note. Everything settles to the base style; reduced motion clears it.
+   ===================================================================================================================== */
+.b2.cs .ct-stage { margin: 0; padding-block: 0 clamp(36px, 4.4vw, 68px); background: var(--v-deep); color: var(--v-on-dark); }
+.b2.cs .ct-stage-frame { position: relative; aspect-ratio: 2.6; overflow: hidden; border-radius: 4px; background: #17141E; box-shadow: inset 0 0 0 1px var(--cs-rule-dark); isolation: isolate; }
+.b2.cs .ct-stage-frame > svg { position: absolute; inset: 0; }
+.b2.cs .ct-stage-img { position: absolute; inset: 0; overflow: hidden; background: #DED6C8; }
+.b2.cs .ct-stage-img > img { object-fit: cover; object-position: 52% 45%; }
+.b2.cs .ct-stage-frame::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, transparent 55%, rgba(15, 13, 20, .32)); }
+/* the client's name, large and outlined behind the foreground; decorative, cropped by the frame */
+.b2.cs .ct-stage-mark { position: absolute; z-index: 2; left: 2.2%; right: 2%; bottom: -.1em; overflow: hidden; pointer-events: none; white-space: nowrap; color: transparent; -webkit-text-stroke: 1.5px rgba(255, 91, 4, .72); font: 800 clamp(2.6rem, 9vw, 9.5rem)/.86 var(--font-bricolage), sans-serif; letter-spacing: -.04em; text-transform: uppercase; }
+.b2.cs .ct-stage-tick { position: absolute; z-index: 3; width: 28px; height: 28px; pointer-events: none; border: 0 solid var(--v-tang); }
+.b2.cs .ct-stage-tick.is-a { top: 14px; right: 14px; border-width: 3px 3px 0 0; }
+.b2.cs .ct-stage-tick.is-b { top: 14px; left: 14px; border-width: 3px 0 0 3px; }
+.b2.cs .ct-stage-img + .ct-stage-tick, .b2.cs .ct-stage-frame.is-photo .ct-stage-tick.is-b { display: none; }
+.b2.cs .ct-art-logo { z-index: 3; }
+html .b2.cs .ct-stage figcaption { margin-top: 10px; color: var(--v-soft); font-size: .78rem; line-height: 1.5; }
+
+/* the middle chapter, "What we did", on Ink Deep */
+.b2.cs .ct-band.is-deep { background: var(--v-deep); color: var(--v-on-dark); border-block: 0; }
+html .b2.cs .ct-band.is-deep .ct-h2, html .b2.cs .ct-band.is-deep .ct-take, html .b2.cs .ct-band.is-deep .ct-bullets strong { color: #fff; }
+.b2.cs .ct-band.is-deep .ct-num { color: var(--v-tang); }
+html .b2.cs .ct-band.is-deep .ct-prose, html .b2.cs .ct-band.is-deep .ct-bullets > li, html .b2.cs .ct-band.is-deep .ct-sec.is-led .ct-prose { color: var(--v-soft); }
+html .b2.cs .ct-band.is-deep .ct-sec.is-led > .ct-prose:first-child > p:first-child, html .b2.cs .ct-band.is-deep .ct-prose p { color: var(--v-on-dark); }
+.b2.cs .ct-band.is-deep .ct-bullets > li::before { background: var(--v-tang); }
+.b2.cs .ct-band.is-deep .ct-bullets > li { padding-bottom: clamp(14px, 1.6vw, 20px); border-bottom: 1px solid var(--cs-rule-dark); }
+.b2.cs .ct-band.is-deep .ct-bullets > li:last-child { border-bottom: 0; }
+.b2.cs .ct-band.is-deep .ct-prose a, .b2.cs .ct-band.is-deep .ct-bullets a { color: var(--v-tang); }
+.b2.cs .ct-band.is-deep :focus-visible { outline-color: #fff; }
+/* a tangerine bar before each takeaway, drawn with its reveal */
+.b2.cs .ct-take { position: relative; padding-left: 22px; }
+.b2.cs .ct-take::before { content: ''; position: absolute; left: 0; top: .14em; bottom: .14em; width: 5px; border-radius: 3px; background: var(--v-burnt); transform-origin: top; transition: transform .8s var(--ease) .2s; }
+.b2.cs .ct-band.is-deep .ct-take::before { background: var(--v-tang); }
+.b2.cs .ct-take[data-pending]::before { transform: scaleY(0); }
+.b2.cs .ct-band-h .ct-num::after { transform-origin: left; transition: width .7s var(--ease) .15s; }
+.b2.cs .ct-band-h[data-pending] .ct-num::after { width: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* the first screen builds in, once */
+  .b2.cs .ct-chips, .b2.cs .ct-client, .b2.cs .ct-h1, .b2.cs .ct-lede, .b2.cs .ct-hero-b { animation: cs-up .9s var(--ease) both; }
+  .b2.cs .ct-client { animation-delay: .08s; }
+  .b2.cs .ct-h1 { animation-delay: .16s; }
+  .b2.cs .ct-lede { animation-delay: .3s; }
+  .b2.cs .ct-hero-b { animation-delay: .42s; }
+  .b2.cs .ct-h1 span { background: linear-gradient(90deg, var(--v-tang) 0 0) 0 100% / 0 3px no-repeat; animation: cs-under 1s var(--ease) .9s forwards; }
+  /* the photograph is revealed from the top, and settles from a slightly larger frame as it crosses the screen */
+  .b2.cs .ct-stage-frame.is-photo .ct-stage-img { animation: cs-wipe 1.1s var(--ease) both; }
+  .b2.cs .ct-stage-frame.is-photo[data-anim='armed'] .ct-stage-img { animation: none; clip-path: inset(0 0 100% 0); }
+  .b2.cs .ct-stage-mark { animation: cs-mark 1.2s var(--ease) .3s both; }
+  .b2.cs .ct-stage-frame[data-anim='armed'] .ct-stage-mark { animation: none; opacity: 0; }
+  @supports (animation-timeline: view()) {
+    .b2.cs .ct-stage-frame.is-photo .ct-stage-img > img { animation: cs-settle linear both; animation-timeline: view(); }
+  }
+  @keyframes cs-up { from { opacity: 0; transform: translateY(22px); } }
+  @keyframes cs-under { to { background-size: 100% 3px; } }
+  @keyframes cs-wipe { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+  @keyframes cs-mark { from { opacity: 0; transform: translateX(-4%); } }
+  @keyframes cs-settle { from { transform: scale(1.14) translateY(2%); } to { transform: scale(1) translateY(-2%); } }
+}
+@media (max-width: 1080px) { .b2.cs .ct-stage-frame { aspect-ratio: 2; } }
+@media (max-width: 760px) { .b2.cs .ct-stage-frame { aspect-ratio: 1.3; } .b2.cs .ct-take { padding-left: 16px; } }
+/* light illustrations (InsurYo, Home Décor): a burnt outline, no dark wash, so the name stays legible and quiet */
+.b2.cs .ct-stage-frame[data-motif='insurance']::after, .b2.cs .ct-stage-frame[data-motif='home']::after { content: none; }
+.b2.cs .ct-stage-frame[data-motif='insurance'] .ct-stage-mark, .b2.cs .ct-stage-frame[data-motif='home'] .ct-stage-mark { -webkit-text-stroke: 1.5px rgba(143, 44, 0, .6); }
+.b2.cs .ct-stage-frame[data-motif='insurance'] .ct-stage-tick, .b2.cs .ct-stage-frame[data-motif='home'] .ct-stage-tick { border-color: var(--v-burnt); }

@@ -43,12 +43,9 @@ html .b2.wk .wk-dark .wk-ch { color: var(--v-tang); }
 html .b2.wk .wk-hero h1 { max-width: none; font-size: clamp(2.5rem, 4.4vw, 4.3rem); line-height: .99; color: #fff; }
 html .b2.wk .wk-hero h1 span { display: block; color: var(--v-tang); }
 html .b2.wk .wk-hero .b2-lede { margin-top: 22px; max-width: 32em; font-size: clamp(1.02rem, 1.3vw, 1.2rem); }
-html .b2.wk .wk-count { display: flex; align-items: center; gap: 10px; margin-top: 26px; color: #fff; font: 800 .74rem/1.4 var(--font-manrope), sans-serif; letter-spacing: .14em; text-transform: uppercase; }
-.b2.wk .wk-count::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--v-tang); }
-.b2.wk .wk-count span { color: var(--v-soft); }
 
 .b2.wk .wk-route { --g: clamp(12px, 1.4vw, 20px); grid-column: 8 / span 5; margin: 0; padding: clamp(20px, 2.2vw, 32px); border: 1px solid var(--wk-rule-dark); border-radius: 6px; background: linear-gradient(180deg, #17141E, var(--v-deep)); }
-html .b2.wk .wk-route-k { color: var(--v-soft); font: 800 .66rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+html .b2.wk .wk-route-k { color: var(--v-soft); font: 800 .6875rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; }
 .b2.wk .wk-route ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--g); margin: 22px 0 0; padding: 0; list-style: none; }
 .b2.wk .wk-route li { position: relative; display: flex; flex-direction: column; gap: 6px; min-width: 0; padding-top: 46px; }
 .b2.wk .wk-route li::before { content: ''; position: absolute; top: 15px; left: 38px; right: calc(-1 * var(--g) + 4px); height: 2px; background: var(--v-tang); transform-origin: left; }
@@ -114,10 +111,6 @@ html .b2.wk .wk-pg-of { color: var(--resolve-dim); font-size: .875rem; font-weig
 /* =====================================================================================================================
    The evidence rule (dark)
    ===================================================================================================================== */
-.b2.wk .wk-rules { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 48px); margin: 0; padding: 0; list-style: none; }
-.b2.wk .wk-rules li { display: flex; flex-direction: column; gap: 8px; padding-top: 18px; border-top: 1px solid #4A4553; }
-.b2.wk .wk-rules b { color: #fff; font: 800 clamp(1.25rem, 1.8vw, 1.6rem)/1.15 var(--font-bricolage), sans-serif; letter-spacing: -.015em; }
-.b2.wk .wk-rules span { color: var(--v-soft); line-height: 1.55; }
 
 /* ---- Entrances: the shared PaReveal, staggered by --i ---- */
 .b2.wk [data-reveal] { transition-delay: calc(var(--i, 0) * 80ms); }
@@ -146,9 +139,7 @@ html .b2.wk .wk-pg-of { color: var(--resolve-dim); font-size: .875rem; font-weig
   .b2.wk .wk-route { margin-top: clamp(28px, 4vw, 44px); }
   .b2.wk .wk-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .b2.wk .wk-grid > li:nth-child(odd):last-child:not(:first-child) { grid-column: 1 / -1; }
-  .b2.wk .wk-rules { grid-template-columns: minmax(0, 1fr); gap: 0; }
-  .b2.wk .wk-rules li { padding-block: 16px; }
-}
+    }
 @media (max-width: 760px) {
   .b2.wk .wk-route ol { grid-template-columns: minmax(0, 1fr); row-gap: 18px; }
   .b2.wk .wk-route li { padding: 4px 0 0 48px; }
@@ -162,3 +153,49 @@ html .b2.wk .wk-pg-of { color: var(--resolve-dim); font-size: .875rem; font-weig
 
 /* the closing band's kicker */
 html .b2.wk .wk-close-k { margin-bottom: 14px; color: #fff; font: 800 .74rem/1.4 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+
+/* =====================================================================================================================
+   Stage 3 revision: a hero with an ambient glow and the six studies as a strip of conceptual tiles, cards with their
+   own illustrations, and staggered entrances. Illustrations are code-drawn and conceptual (components/case-study/
+   CaseArt.tsx); Om Sai keeps its approved artwork. The strip is decorative (aria-hidden): the cards below carry the links.
+   ===================================================================================================================== */
+.b2.wk .wk-hero { position: relative; overflow: hidden; background: radial-gradient(60% 90% at 88% 0%, rgba(255, 91, 4, .16), transparent 70%), var(--v-deep); }
+.b2.wk .wk-hero > .pa-wrap { position: relative; }
+
+/* hero showcase: the five clients' own logos (as registered; no recolouring, cropping or stretching) in ONE shared, low-profile
+   warm-light band on the dark hero. No per-logo cards, borders or shadows; logos are centred on one line so they align by weight. */
+.b2.wk .wk-mosaic { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-evenly; gap: 14px clamp(24px, 4vw, 64px); margin: clamp(28px, 3.4vw, 48px) 0 0; padding: clamp(16px, 1.8vw, 24px) clamp(20px, 3vw, 48px); list-style: none; border-radius: 4px; background: #F2ECE0; }
+.b2.wk .wk-mosaic li { display: flex; align-items: center; justify-content: center; min-height: 40px; }
+.b2.wk .wk-mosaic .cl-tile { width: auto; height: auto; padding: 0; background: transparent; }
+.b2.wk .wk-mosaic .cl-tile > img { width: auto; height: auto; }
+.b2.wk .wk-mosaic .cl-wide > img { max-height: 30px; }
+.b2.wk .wk-mosaic .cl-mid > img { max-height: 42px; }
+.b2.wk .wk-mosaic .cl-square > img { max-height: 48px; }
+
+/* cards: the illustration areas get the numbered, staggered treatment */
+.b2.wk .wk-open .rs-wc:nth-child(2) { transition-delay: .12s; }
+.b2.wk .wk-grid .rs-wc-img { aspect-ratio: 1.4; }
+.b2.wk .rs-wc-lead .rs-wc-img { aspect-ratio: 1.7; }
+.b2.wk .rs-wc-img { border-radius: 4px; box-shadow: 0 1px 0 rgba(20, 18, 25, .06), 0 18px 40px -26px rgba(20, 18, 25, .55); }
+.b2.wk .wk-open .rs-wc-eyebrow, .b2.wk .wk-grid .rs-wc-eyebrow { margin-top: clamp(14px, 1.6vw, 22px); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .b2.wk .wk-hero h1, .b2.wk .wk-hero .b2-lede { animation: wk-up .9s var(--ease) both; }
+  .b2.wk .wk-hero .b2-lede { animation-delay: .14s; }
+  @keyframes wk-up { from { opacity: 0; translate: 0 22px; } }
+}
+@media (max-width: 1080px) {
+  .b2.wk .rs-wc-lead .rs-wc-img { aspect-ratio: 1.55; }
+}
+@media (max-width: 760px) {
+  .b2.wk .wk-grid .rs-wc-img, .b2.wk .rs-wc-lead .rs-wc-img { aspect-ratio: 1.3; }
+}
+.b2.wk .rs-wc-art { outline: 1px solid rgba(20, 18, 25, .14); outline-offset: -1px; }
+
+/* the shared band below desktop: the same band, logos wrapped and centred */
+@media (max-width: 760px) {
+  .b2.wk .wk-mosaic { gap: 14px 28px; padding: 18px 20px; }
+  .b2.wk .wk-mosaic .cl-wide > img { max-height: 26px; }
+  .b2.wk .wk-mosaic .cl-mid > img { max-height: 36px; }
+  .b2.wk .wk-mosaic .cl-square > img { max-height: 42px; }
+}

@@ -1,6 +1,6 @@
 import { contentfulGraphql, CONTENTFUL_REVALIDATE_SECONDS, getContentfulDeliveryConfig } from '@/lib/contentful/client';
 import { GET_ALL_CASE_STUDIES_QUERY } from '@/lib/contentful/queries';
-import { selectPublic } from '@/lib/case-study-eligibility';
+import { selectPublic, UNLISTED_CASE_STUDY_IDS } from '@/lib/case-study-eligibility';
 import { orderStudies } from '@/lib/case-study-library';
 import { isCaseStudyProofWithheld } from '@/lib/case-study-proof';
 import { mapContentfulCaseStudyToCms, normalizeCaseStudySlug } from '@/lib/contentful/mappers';
@@ -74,8 +74,12 @@ export async function fetchContentfulCaseStudySlugs(): Promise<string[]> {
   return Array.from(new Set((await fetchContentfulCaseStudies()).map((s) => s.slug)));
 }
 
+/**
+ * The case studies offered for discovery: the sitemap's source. Unlisted studies (`UNLISTED_CASE_STUDY_IDS`) are left out;
+ * their page stays public (HTTP 200) but is not advertised.
+ */
 export async function getCaseStudyListCards(): Promise<CmsCaseStudyCard[]> {
-  const studies = await fetchContentfulCaseStudies();
+  const studies = (await fetchContentfulCaseStudies()).filter((s) => !UNLISTED_CASE_STUDY_IDS.has(s.id));
   return studies.map((study) => ({
     slug: study.slug,
     title: study.title,
@@ -99,7 +103,8 @@ export async function getCaseStudyListCards(): Promise<CmsCaseStudyCard[]> {
  * Any public study can be next, legacy or new template. `null` when `slug` is the only public study.
  */
 export async function getNextCaseStudy(slug: string): Promise<{ href: string; title: string; client: string } | null> {
-  const studies = await fetchContentfulCaseStudies();
+  // unlisted studies are not offered as the next study (their own page still links on to a listed one)
+  const studies = (await fetchContentfulCaseStudies()).filter((s) => s.slug === slug || !UNLISTED_CASE_STUDY_IDS.has(s.id));
   const i = studies.findIndex((s) => s.slug === slug);
   const next = i < 0 || studies.length < 2 ? null : studies[(i + 1) % studies.length];
   if (!next) return null;

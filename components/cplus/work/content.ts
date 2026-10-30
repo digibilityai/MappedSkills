@@ -34,6 +34,7 @@ export const WORK = {
     anyService: 'All services',
     more: 'More case studies',
     status: 'Matching case studies',
+    showing: 'Showing matching case studies',
     clear: 'Clear filters',
     showAll: 'Show all case studies',
     noMatch: 'No case studies match your search.',

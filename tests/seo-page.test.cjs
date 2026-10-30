@@ -48,8 +48,7 @@ test('the illustrative review panel carries no numerals', () => {
   const meas = copy.slice(copy.indexOf('tiles: ['), copy.indexOf('comKicker'));
   assert.ok(copy.includes("measTag: 'Illustrative layout. No real figures.'"));
   assert.ok(!/\d/.test(meas), 'review panel copy must contain no digits');
-  const marks = body.slice(body.indexOf('function TileMark'), body.indexOf('export function SeoBody'));
-  assert.ok(!/<text/.test(marks), 'review marks must not draw text or numbers');
+  assert.ok(!/<text/.test(body), 'illustrations must not draw text or numbers');
 });
 
 test('FAQ answers are the approved wording, closed on load', () => {
@@ -75,42 +74,43 @@ test('heading structure: one h1 and an h2 per section', () => {
   assert.ok((body.match(/<h2\b/g) || []).length >= 8);
 });
 
-/* ---- Direction B: structure, motion rules and proof boundaries ---- */
+/* ---- THE RESOLVE composition (Stage 4 Batch 2A): structure, motion rules and proof boundaries ---- */
 const css = read('components/cplus/seo/seo.css');
-const seq = read('components/cplus/seo/Sequence.tsx');
 const seoDir = path.join(__dirname, '..', 'components/cplus/seo');
 
-test('Sequence is the only client component and has no timers or loops', () => {
+test('the page has no client component of its own; it reuses the approved once-only sequence helpers', () => {
   const clients = fs.readdirSync(seoDir).filter((f) => /\.tsx?$/.test(f) && /^['"]use client['"]/.test(read('components/cplus/seo/' + f).trimStart()));
-  assert.deepStrictEqual(clients, ['Sequence.tsx']);
-  for (const banned of ['setTimeout', 'setInterval', 'while (true)', 'for (;;)']) assert.ok(!seq.includes(banned), `Sequence must not use ${banned}`);
-  assert.ok(seq.includes("data-seq={trigger === 'load' ? 'idle' : undefined}"));
-  assert.ok(seq.includes('prefers-reduced-motion: reduce'));
+  assert.deepStrictEqual(clients, []);
+  assert.ok(body.includes('<HwSequence scope=".sk" />') && body.includes('<PaReveal />'));
+  assert.ok(body.includes('className="pa b2 sk"'));
 });
 
-test('seo.css has no looping, pinned or scroll-linked motion', () => {
-  assert.ok(!/infinite/.test(css), 'no infinite animation');
-  assert.ok(!/position:\s*(sticky|fixed)/.test(css), 'no sticky or fixed positioning');
-  assert.ok(!/animation-timeline|scroll-timeline|view-timeline/.test(css), 'no scroll-linked animation');
-  assert.ok(!/import\s/.test(css.replace(/\/\*[\s\S]*?\*\//g, '')), 'no css imports');
+test('seo.css is scoped to .b2.sk and has no looping, pinned or scroll-linked motion', () => {
+  const code = css.replace(/\/\*[\s\S]*?\*\//g, '');
+  assert.ok(!/infinite/.test(code), 'no infinite animation');
+  assert.ok(!/position:\s*(sticky|fixed)/.test(code), 'no sticky or fixed positioning');
+  assert.ok(!/animation-timeline|scroll-timeline|view-timeline/.test(code), 'no scroll-linked animation');
+  assert.ok(!/import\s/.test(code), 'no css imports');
+  for (const rule of code.matchAll(/(^|\})\s*([^{}@]+)\{/g)) {
+    for (const part of rule[2].replace(/:(where|is)\([^)]*\)/g, '').split(',')) {
+      const sel = part.trim();
+      if (!sel || /^(from|to|\d+%|\d+% )/.test(sel) || /^[\d.]+%$/.test(sel)) continue;
+      assert.match(sel, /\.sk\b/, `unscoped selector: ${sel}`);
+    }
+  }
 });
 
-test('every idle (start) state is gated to motion-allowed visitors', () => {
-  const gated = css.slice(css.indexOf('@media (prefers-reduced-motion: no-preference)'));
-  const before = css.slice(0, css.indexOf('@media (prefers-reduced-motion: no-preference)'));
-  assert.ok(gated.length > 0 && before.length > 0);
-  assert.ok(!/data-seq="idle"/.test(before), 'no idle styling outside the no-preference block');
-  assert.ok(!/data-seq="run"/.test(before), 'no run styling outside the no-preference block');
+test('every start (armed or running) state and keyframe is gated to motion-allowed visitors', () => {
+  const at = css.indexOf('@media (prefers-reduced-motion: no-preference)');
+  assert.ok(at > 0);
+  const before = css.slice(0, at);
+  assert.ok(!/data-anim=/.test(before), 'no armed/play styling outside the no-preference block');
+  assert.ok(!/@keyframes|animation:/.test(before.replace(/\/\*[\s\S]*?\*\//g, '')), 'no animation outside the no-preference block');
+  assert.ok(css.includes('@media (prefers-reduced-motion: reduce)'));
 });
 
-test('each motion sequence uses Sequence and the hero plays on load', () => {
-  assert.ok(body.includes('<Sequence trigger="load">'));
-  assert.ok((body.match(/<Sequence\b/g) || []).length === 3, 'hero, problems trail and staircase');
-  assert.ok(body.includes('data-rv=""'), 'existing reveal on sheet, commitments and projects');
-});
-
-test('all nine sections are labelled and keep their approved headings', () => {
-  for (const id of ['sx-h1', 'sx-h-prob', 'sx-h-work', 'sx-h-how', 'sx-h-meas', 'sx-h-com', 'sx-h-proj', 'sx-h-qs', 'sx-h-close']) {
+test('every section is labelled and keeps its approved heading', () => {
+  for (const id of ['sk-h1', 'sk-h-prob', 'sk-h-work', 'sk-h-how', 'sk-h-meas', 'sk-h-com', 'sk-h-proj', 'sk-h-qs', 'sk-h-close']) {
     assert.ok(body.includes(`id="${id}"`), `${id} heading present`);
   }
   assert.ok(copy.includes("howH: { a: 'Four steps,', b: 'in this order.' }"));
@@ -124,13 +124,19 @@ test('dropped labels stay dropped; project stub is the approved sentence', () =>
 });
 
 test('the project section has no links and the decorative art is hidden from assistive technology', () => {
-  const proj = body.slice(body.indexOf('7 — projects'), body.indexOf('8 — questions'));
-  assert.ok(!/<Link|href=/.test(proj), 'project entries must not link anywhere');
-  assert.ok(/className="sx-trail" aria-hidden="true"/.test(body));
-  assert.ok(/className="sx-route-art" aria-hidden="true"/.test(body));
+  const proj = body.slice(body.indexOf('06, Paper'), body.indexOf('07, Ground'));
+  assert.ok(!/<Link|<ActionLink|href=/.test(proj), 'project entries must not link anywhere');
+  assert.ok(/<ol className="sk-route" aria-label=\{S\.trailLabel\}>/.test(body));
+  assert.ok((body.match(/className="sk-viz" aria-hidden="true"/g) || []).length === 4, 'all four hero pictures are decorative');
+  assert.ok(/className="sk-gate" aria-hidden="true"/.test(body));
 });
 
 test('the headline keeps its last words together (no single-word last line in Firefox)', () => {
-  assert.ok(body.includes('<span className="sx-h1-end">{S.h1.c}</span>'));
-  assert.ok(/\.sx-h1-end\s*\{\s*white-space:\s*nowrap;\s*\}/.test(css));
+  assert.ok(body.includes('<span className="sk-nw">{S.h1.c}</span>'));
+  assert.ok(/span\.sk-nw \{[^}]*white-space: nowrap;/.test(css));
+});
+
+test('the page keeps SEO as a supporting service: no claim that it replaces or outranks the core services', () => {
+  assert.ok(!/core service|our core|primary service/i.test(copy));
+  assert.ok(copy.includes('Many businesses benefit from both.'));
 });

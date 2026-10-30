@@ -1,0 +1,63 @@
+/* Client logo tiles (Stage 3B). Neutral light tiles, logos shown as supplied (contain, never stretched or recoloured).
+   Values match the THE RESOLVE tokens (paper #FFFDF9, line #DED6C8, ink #141219); no dependency on a page scope. */
+.cl-tile { display: flex; align-items: center; justify-content: center; box-sizing: border-box; background: #FFFDF9; }
+.cl-tile > img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+
+/* the homepage showcase: three compact rows of logos set directly on the light section ground (no stage, strips, shadows,
+   markers or per-logo boxes). Transparent logo copies sit on the paper; a mark with its own intentional ground (black or
+   pink) keeps just that ground at the logo's own size. Each logo sits in a flexible cell (wide marks get more room) so a row
+   can never overflow. */
+.cl-bands { display: grid; gap: clamp(14px, 1.6vw, 22px); }
+.cl-band { display: flex; align-items: center; margin: 0; padding: 0; list-style: none; }
+.cl-band > li { flex: var(--g, 1) 1 0; min-width: 0; margin: 0; padding-inline: clamp(8px, 1vw, 14px); display: flex; justify-content: center; }
+.cl-band .cl-tile { background: transparent; width: 100%; height: clamp(54px, 4.9vw, 72px); }
+.cl-band .cl-tile > img { max-width: 100%; }
+.cl-band .cl-tile > img[src*='ekoching'], .cl-band .cl-tile > img[src*='hut-n-homes'], .cl-band .cl-tile > img[src*='marshal'], .cl-band .cl-tile > img[src*='advit-prints'] { border-radius: 2px; }
+/* balanced optical sizing by shape (natural size stays the ceiling): wide marks by height, near-square by both */
+.cl-band .cl-wide > img { max-height: 40px; }
+.cl-band .cl-mid > img { max-width: 92%; max-height: 50px; }
+.cl-band .cl-square > img { max-width: 80%; max-height: 62px; }
+
+/* desktop: rows are staggered (row 2 inset, row 3 shorter) and drift a few pixels in opposite directions with the scroll,
+   bounded, container-level only. Each row is narrower than its container by at least the drift range (22 px each side). */
+@media (min-width: 1081px) {
+  .cl-band-1 { width: calc(100% - 44px); margin-left: 22px; }
+  .cl-band-2 { width: calc(100% - 92px); margin-left: 70px; }
+  .cl-band-3 { width: calc(100% - 68px); margin-left: 22px; }
+}
+@media (min-width: 1081px) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    @keyframes cl-drift-a { from { translate: -22px 0; } to { translate: 22px 0; } }
+    @keyframes cl-drift-b { from { translate: 22px 0; } to { translate: -22px 0; } }
+    .cl-band-1, .cl-band-3 { animation: cl-drift-a linear both; animation-timeline: view(); }
+    .cl-band-2 { animation: cl-drift-b linear both; animation-timeline: view(); }
+  }
+}
+
+/* below desktop: a tight static grid (three columns of logos, no drift) */
+@media (max-width: 1080px) {
+  .cl-bands { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
+  .cl-band { flex-direction: column; align-items: stretch; }
+  .cl-band > li { flex: none; padding: 6px 6px; }
+  .cl-band .cl-tile { height: 52px; }
+  .cl-band .cl-wide > img { max-height: 32px; }
+  .cl-band .cl-mid > img { max-height: 42px; }
+  .cl-band .cl-square > img { max-height: 50px; }
+}
+
+/* the chip laid over a case-study illustration (same sizes as the existing Om Sai chip) */
+.cl-v-chip { position: absolute; top: clamp(10px, 1.2vw, 16px); left: clamp(10px, 1.2vw, 16px); z-index: 4; padding: 10px 14px; border-radius: 8px; }
+.cl-v-chip.cl-wide > img, .cl-v-chip.cl-mid > img { width: clamp(100px, 11vw, 150px); }
+.cl-v-chip.cl-square { padding: 0; overflow: hidden; }
+.cl-v-chip.cl-square > img { width: clamp(72px, 7vw, 100px); }
+
+/* the homepage section: the light Paper ground (Ground before it, the process section after), the heading with a restrained
+   outlined ghost word beside it (decorative, fainter and smaller than the heading) */
+.rv3-clients { position: relative; overflow-x: clip; padding-block: clamp(36px, 4vw, 56px); }
+.rv3-clients .rv3-head { position: relative; z-index: 1; margin-bottom: clamp(18px, 2vw, 28px); }
+.rv3-clients .rv3-head h2 { font-size: clamp(1.9rem, 3.2vw, 2.9rem); line-height: 1.03; }
+.cl-ghost { position: absolute; z-index: 0; right: clamp(0px, 2vw, 32px); top: clamp(6px, 1vw, 16px); color: transparent; -webkit-text-stroke: 1.5px #E7DFD1; font: 800 clamp(2.6rem, 6vw, 5.6rem)/.8 var(--font-bricolage), sans-serif; letter-spacing: -.04em; text-transform: uppercase; pointer-events: none; user-select: none; white-space: nowrap; }
+.cl-note { position: relative; z-index: 1; margin: clamp(14px, 1.6vw, 22px) 0 0; color: #5C5665; font-size: .8125rem; line-height: 1.5; }
+/* one-time entrance: the heading, then the rows in sequence (the shared reveal; static under reduced motion) */
+.rv3-clients .cl-band[data-rv] { transition-delay: calc(var(--i, 1) * 140ms + 120ms); }
+@media (max-width: 760px) { .cl-ghost { font-size: 2.4rem; right: 0; top: 4px; } }

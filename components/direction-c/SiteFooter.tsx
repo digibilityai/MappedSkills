@@ -24,7 +24,7 @@ import { CONTACT_LINK, FOOTER_COMPANY, FOOTER_INSIGHTS, FOOTER_SERVICES, FOOTER_
 function Column({ id, title, links }: { id: string; title: string; links: NavLink[] }) {
   return (
     <nav aria-labelledby={id}>
-      <h2 id={id}>{title}</h2>
+      <p id={id} className="dc-ftr-h">{title}</p>
       <ul>
         {links.map((l, i) => (
           <li key={l.href}>
@@ -59,7 +59,7 @@ export function SiteFooter() {
             <Column id="dc-f-co" title="Company" links={FOOTER_COMPANY} />
             <Column id="dc-f-ins" title="Insights" links={FOOTER_INSIGHTS} />
             <section className="dc-contact" aria-labelledby="dc-f-ct">
-              <h2 id="dc-f-ct">Contact</h2>
+              <p id="dc-f-ct" className="dc-ftr-h">Contact</p>
               <dl>
                 <div>
                   <dt>Email</dt>

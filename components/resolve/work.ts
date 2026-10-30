@@ -4,11 +4,14 @@
  * homepage (conceptual, and disclosed as such); a study without approved artwork gets the text-led fallback.
  * The frozen homepage keeps its own copy of the Om Sai artwork data and is not changed.
  */
+import type { Motif } from '../case-study/CaseArt';
+import type { Client } from '@/lib/clients';
+
 export type WorkArt = {
   src: string;
   alt: string;
   note: string;
-  logo: { src: string; alt: string; w: number; h: number; fit: 'wide' | 'square' };
+  logo?: { src: string; alt: string; w: number; h: number; fit: 'wide' | 'square' };
 };
 
 export type WorkStudy = {
@@ -19,6 +22,10 @@ export type WorkStudy = {
   href: string;
   cta: string;
   art?: WorkArt;
+  /** A code-drawn conceptual illustration (listing only, set by components/b2/work-cards.ts); About does not set it. */
+  motif?: Motif;
+  /** The client's logo from the register (lib/clients.ts), laid over the illustration on /work only. */
+  clientLogo?: Client;
 };
 
 export const STUDIES: Record<'om-sai' | 'anybodycanbake', WorkStudy> = {

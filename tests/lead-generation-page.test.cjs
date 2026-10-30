@@ -43,8 +43,10 @@ test('no guarantee or quality claims; no review call; no every-route promise', (
 test('approved operating wording is present', () => {
   assert.match(copy, /Enquiries from potential customers, sent straight to your team\./);
   assert.match(copy, /We bring potential customers to you\./);
-  assert.match(copy, /a: 'Enquiries go', b: 'straight to your team\.'/);
-  assert.match(copy, /Enquiries go to your own form, CRM or WhatsApp, depending on your setup\./);
+  // DEC-095: the merged "how an enquiry reaches you" section (its heading and intro) is removed; stop 2 carries the destinations.
+  assert.match(copy, /Into your own form, CRM or WhatsApp\./);
+  assert.match(copy, /We don’t call your enquiries to qualify them\./);
+  assert.match(copy, /Your team has the sales conversation\./);
   assert.match(copy, /We build campaigns around them\./);
   assert.match(copy, /You tell us who you want to reach\./);
   assert.match(copy, /a: 'We manage the campaigns\.', b: 'Your team handles the enquiries\.'/);
@@ -66,4 +68,13 @@ test('what happens next uses only confirmed facts (no time, price or guarantee)'
   const next = /next: \[([\s\S]*?)\n    \],/.exec(copy)[1];
   assert.match(next, /We reply by email or WhatsApp/);
   assert.doesNotMatch(next, /hour|day|£|\$|₹|free|guarantee|within/i);
+});
+
+test('six scenes (DEC-095): the merged section and the duplicate steps are gone; the kept statements remain', () => {
+  const ids = [...body.matchAll(/aria-labelledby="(lg-[^"]+)"/g)].map((m) => m[1]);
+  assert.deepEqual(ids, ['lg-h1', 'lg-h-prob', 'lg-h-do', 'lg-h-bd', 'lg-h-qs', 'lg-h-close']);
+  assert.doesNotMatch(copy, /reachH|reachIntro|reachLabel|probCap|They tell you what they need|The three steps/);
+  assert.match(copy, /We capture a starting point first, so whatever happens next is measurable rather than arguable\./);
+  assert.doesNotMatch(code(journeys), /ReachJourney/);
+  assert.equal((body.match(/<h1\b/g) || []).length, 1);
 });

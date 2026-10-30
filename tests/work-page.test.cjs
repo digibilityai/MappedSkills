@@ -64,7 +64,7 @@ test('removed: the C+ view, the hero index, the R3 filter bar and "Check us"', (
 
 test('studies come from Contentful: no fixed count, no hard-coded client facts', () => {
   assert.match(page, /const library = \(await loadLibraryPage\(1\)\)!;/);
-  assert.match(read('components/cplus/work/load.ts'), /libraryStudies\(await fetchContentfulCaseStudies\(\), FEATURED_SLUG\)/);
+  assert.match(read('components/cplus/work/load.ts'), /libraryStudies\(\(await fetchContentfulCaseStudies\(\)\)\.filter\(\(s\) => !UNLISTED_CASE_STUDY_IDS\.has\(s\.id\)\), FEATURED_SLUG\)/);
   assert.doesNotMatch(all, /Ameba Software|AnybodyCanBake|AnyBodyCanBake|Om Sai|Home decor|Chandigarh|Bangalore|Pune|Chembur|\b(two|three|four|five|six) (projects|case studies|studies)\b/i);
   assert.doesNotMatch(all.replace(/placeholder=\{S\.library\.searchHint\}/g, ''), /placeholder/i);
   assert.match(copy, /count: \(n: number\) =>/);
@@ -75,7 +75,8 @@ test('withheld proof cannot reach the page (DEC-031); cards carry no outcome, fi
   assert.match(code(studies), /study\.sections\.problemStatement/);
   assert.doesNotMatch(copy, /\d+\s*%|₹|ROI|testimonial|guarantee|★/i);
   // a card is the approved card (About) or eyebrow, client, challenge and link; nothing else from the study
-  assert.doesNotMatch(code(cards), /outcomes|figures|review|quote|art:/);
+  assert.doesNotMatch(code(cards), /outcomes|figures|review|quote/);
+  assert.match(code(cards), /imageSlotsFor\(s\.href\)\.card/, 'the card image comes from the listing slot only');
   assert.match(code(cards), /title: s\.client,\s*body: s\.challenge,\s*href: s\.href,/);
 });
 
@@ -126,9 +127,61 @@ test('case study (Stage 3): only a reported figure leads the hero; without figur
   // the headline keeps the study's own words: split, never rewritten
   assert.match(src, /return i > 0 \? \[title\.slice\(0, i\), title\.slice\(i \+ 1\)\] : \[title, ''\];/);
   // artwork only from the approved card set, with its disclosure
-  assert.match(src, /Object\.values\(STUDIES\)\.find\(\(c\) => c\.href === href\)\?\.art \?\? null/);
-  assert.match(src, /<figcaption>\{art\.note\}<\/figcaption>/);
+  assert.match(src, /imageSlotsFor\(study\.href\)\.feature/);
+  assert.match(src, /\{stage\?\.note \? <figcaption>\{stage\.note\}<\/figcaption> : null\}/);
   // the existing actions stay
   assert.match(src, /<ActionLink href=\{CONTACT_HREF\} variant="dark">\s*Contact us/);
   assert.match(src, /<ActionLink href=\{BOOKING_HREF\} variant="text">\s*Request a call/);
+});
+
+test('Stage 3 revision: illustrations are conceptual, labelled, code-drawn and limited to known studies; the title preview is development-only', () => {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const rd = (f) => fs.readFileSync(path.join(__dirname, '..', f), 'utf8');
+  const art = rd('components/case-study/CaseArt.tsx');
+  assert.match(art, /export const MOTIF_NOTE = 'Conceptual illustration drawn for this page\. Not client artwork, a screenshot or a result\.';/);
+  assert.doesNotMatch(art, /<image|<text|href="http|xlink/i, 'no raster image, text or external reference in an illustration');
+  assert.strictEqual(Object.keys(art.match(/MOTIF_BY_HREF: Record<string, Motif> = \{([\s\S]*?)\};/)[1].match(/'\/portfolio\/[^']+'/g)).length, 5);
+  for (const f of ['components/resolve/WorkCard.tsx', 'lib/case-study-images.ts']) assert.match(rd(f), /MOTIF_NOTE/, f);
+  assert.doesNotMatch(rd('components/b2/About.tsx'), /motifFor|CaseArt/, 'About does not draw illustrations');
+  assert.doesNotMatch(rd('components/resolve/work.ts'), /^\s+motif:/m, 'the approved About cards set no motif');
+  const t = rd('lib/case-study-preview-titles.ts');
+  assert.match(t, /process\.env\.NODE_ENV !== 'development'\) return title;/);
+});
+
+test('Stage 3B: two independent image slots per study (listing 8:5, detail 16:9), conceptual placeholders disclosed, no Contentful change', () => {
+  const rd = (f) => require('node:fs').readFileSync(require('node:path').join(__dirname, '..', f), 'utf8');
+  const img = rd('lib/case-study-images.ts');
+  assert.match(img, /card: \{ w: 1600, h: 1000, ratio: '8:5' \}/);
+  assert.match(img, /feature: \{ w: 1920, h: 1080, ratio: '16:9' \}/);
+  // every retained study has its own card entry and its own feature entry (so either can be replaced alone)
+  for (const h of ['om-sai-developer-meta-ads', 'classpe-social-media-strategy', 'insuryo-organic-growth', 'google-ads-for-online-courses', 'seo-ameba-software']) {
+    assert.match(img, new RegExp(`'/portfolio/${h}': \\{ card: [^\\n]*feature: `), h);
+  }
+  assert.match(img, /kind: 'conceptual', motif, note: MOTIF_NOTE/);
+  assert.match(img, /NOT queried or read today/);
+  // Contentful is untouched: no image field is requested
+  assert.doesNotMatch(rd('lib/contentful/queries.ts'), /listingImage|featureImage/);
+});
+
+test('Stage 3B: Home Decor is unlisted everywhere discovery happens, noindex follow, URL and canonical kept', () => {
+  const rd = (f) => require('node:fs').readFileSync(require('node:path').join(__dirname, '..', f), 'utf8');
+  assert.match(rd('lib/contentful/case-studies.ts'), /getCaseStudyListCards[^]*?filter\(\(s\) => !UNLISTED_CASE_STUDY_IDS\.has\(s\.id\)\)/);
+  const page = rd('app/(pages)/portfolio/[slug]/page.tsx');
+  assert.match(page, /UNLISTED_CASE_STUDY_IDS\.has\(caseStudy\.id\) \? \{ \.\.\.metadata, robots: \{ index: false, follow: true, googleBot: \{ index: false, follow: true \} \} \} : metadata/);
+  assert.match(page, /createMetadata\(caseStudy\.metaTitle, caseStudy\.metaDescription, caseStudy\.href\)/, 'canonical comes from createMetadata, unchanged');
+  assert.match(rd('lib/case-study-eligibility.ts'), /UNLISTED_CASE_STUDY_IDS[^]*'4zQL4P8SR2xogxHN4qFfUl'/);
+});
+
+test('/work final refinements: client logos in the hero, no case-study counts, no evidence-rule section', () => {
+  const rd = (f) => require('node:fs').readFileSync(require('node:path').join(__dirname, '..', f), 'utf8');
+  const work = rd('components/b2/Work.tsx');
+  assert.match(work, /clientForHref\(s\.href\)/);
+  assert.match(work, /<ClientLogo client=\{client!\} variant="tile" \/>/);
+  assert.doesNotMatch(work, /CaseArt|R\.count|wk-count|wk-h-ev|wk-rules|R\.evidence|R\.rules/);
+  const lib = rd('components/b2/WorkLibrary.tsx');
+  assert.doesNotMatch(lib, /case \$\{|case stud|results\.length\} of \$\{total\}/, 'no count is composed in the status line');
+  assert.match(lib, /S\.library\.showing/);
+  const css = rd('components/b2/work.css');
+  assert.doesNotMatch(css, /wk-rules|wk-count/);
 });

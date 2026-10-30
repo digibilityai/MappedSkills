@@ -337,13 +337,13 @@ export function SiteHeader() {
                   {SERVICE_GROUPS.map((group, gi) => (
                     <section className="dc-sp-row" key={group.stage} aria-labelledby={`dc-st-${group.mark}`}>
                       <div className="dc-sp-hd">
-                        <h2 className="dc-label" id={`dc-st-${group.mark}`}>
+                        <p className="dc-label" id={`dc-st-${group.mark}`}>
                           <span className={cn('dc-mk', group.mark)} aria-hidden="true" />
                           {group.stage}
                           <span className="dc-sp-num" aria-hidden="true">
                             {String(gi + 1).padStart(2, '0')}
                           </span>
-                        </h2>
+                        </p>
                         <p className="dc-sp-line">{group.line}</p>
                       </div>
                       <ul className="dc-sp-links">
@@ -490,10 +490,10 @@ export function SiteHeader() {
                 <div className="dc-m-stages">
                   {SERVICE_GROUPS.map((group) => (
                     <div className="dc-m-stage" key={group.stage}>
-                      <h2 className="dc-label" id={`dc-m-${group.mark}`}>
+                      <p className="dc-label" id={`dc-m-${group.mark}`}>
                         <span className={cn('dc-mk', group.mark)} aria-hidden="true" />
                         {group.stage} <span className="s">{group.line.replace(/\.$/, '')}</span>
-                      </h2>
+                      </p>
                       <ul aria-labelledby={`dc-m-${group.mark}`}>
                         {group.links.map((l) => (
                           <li key={l.href}>

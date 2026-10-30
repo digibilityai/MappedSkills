@@ -113,15 +113,15 @@ function OpenBanner({ accept, reject }: { accept: () => void; reject: () => void
             Android text scaling), the buttons move below the message instead of squeezing it to one word per line.
             At normal size the row still fits on one line, so the layout is unchanged. */}
         <div className="min-w-0 md:flex-1 md:basis-[20rem]">
-          {/* A real heading, so the region has a programmatic name and shows up
-              in a screen reader's heading list. Sized down deliberately: the
-              global `h2` scale is display type and would shout here. */}
-          <h2
+          {/* The region's accessible name (`aria-labelledby` above). A paragraph, not a heading: this is a dialog-style
+              notice, not a section of the page's outline, so it stays out of the screen reader's heading list. The
+              `font-heading` and tracking utilities reproduce what the global `h2` rule supplied, so the look is unchanged. */}
+          <p
             id="consent-banner-title"
-            className="!text-sm !font-extrabold !leading-snug text-resolve-ink md:!text-base"
+            className="font-heading tracking-[-0.035em] !text-sm !font-extrabold !leading-snug text-resolve-ink md:!text-base"
           >
             Analytics cookies
-          </h2>
+          </p>
           <p className="mt-0.5 max-w-[var(--resolve-measure)] text-[13px] leading-snug text-resolve-ink md:mt-1 md:text-sm md:leading-relaxed">
             We would like to measure how this site is used, so we can improve it. Analytics stay off
             unless you accept. No advertising or personalisation cookies are set either way.{' '}

@@ -48,7 +48,7 @@ html .b2.ab .ab-hero .b2-lede { margin-top: 20px; max-width: 34em; font-size: cl
 
 .b2.ab .ab-field { grid-column: 7 / span 6; margin: 0; }
 .b2.ab .ab-field-in { display: grid; grid-template-columns: minmax(0, 1fr) clamp(36px, 4vw, 64px) minmax(120px, .5fr); align-items: center; gap: clamp(12px, 1.4vw, 20px); padding: clamp(20px, 2.2vw, 32px); border: 1px solid var(--ab-rule-dark); border-radius: 6px; background: linear-gradient(180deg, #17141E, var(--v-deep)); }
-html .b2.ab .ab-field-k { margin-bottom: 14px; color: var(--v-soft); font: 800 .66rem/1 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+html .b2.ab .ab-field-k { margin-bottom: 14px; color: var(--v-soft); font: 800 .6875rem/1 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; }
 html .b2.ab .ab-field-out .ab-field-k { color: var(--v-tang); }
 .b2.ab .ab-marks { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: clamp(8px, 1vw, 14px); margin: 0; padding: 0; list-style: none; }
 .b2.ab .ab-marks li { aspect-ratio: 1; max-width: 14px; border-radius: 50%; background: var(--ab-mark); }

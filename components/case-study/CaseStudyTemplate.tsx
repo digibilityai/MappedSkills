@@ -7,7 +7,10 @@ import { BOOKING_HREF, CONTACT_HREF } from '@/components/direction-c/primitives'
 import { ActionLink } from '@/components/paid-advertising/ActionLink';
 import { PaReveal } from '@/components/paid-advertising/PaReveal';
 import { HwSequence } from '@/components/b2/HwSequence';
-import { STUDIES } from '@/components/resolve/work';
+import { ClientLogo } from '@/components/clients/ClientLogo';
+import { clientForHref } from '@/lib/clients';
+import { CaseArt } from './CaseArt';
+import { imageSlotsFor } from '@/lib/case-study-images';
 import { SECTORS } from '@/lib/case-study-library';
 import { splitImpact, type Outcome } from '@/lib/case-study-outcomes';
 import { linkTargetProps } from '@/lib/internal-links';
@@ -138,7 +141,7 @@ function Blocks({ doc }: { doc: Document }) {
     groups.push(
       <ul role="list" key={`l${k}`} className="ct-bullets">
         {(b.content as Block[]).map((li, i) => (
-          <li key={i}>{documentToReactComponents({ nodeType: 'document', data: {}, content: li.content } as unknown as Document, options)}</li>
+          <li key={i} data-reveal style={{ '--i': i % 4 } as CSSProperties}>{documentToReactComponents({ nodeType: 'document', data: {}, content: li.content } as unknown as Document, options)}</li>
         ))}
       </ul>,
     );
@@ -152,7 +155,7 @@ function SectionBody({ doc }: { doc: Document }) {
   const { headline, rest } = takeaway(doc);
   return (
     <>
-      {headline ? <p className="ct-take">{headline}</p> : null}
+      {headline ? <p className="ct-take" data-reveal>{headline}</p> : null}
       <div className={headline ? 'ct-sec is-led' : 'ct-sec'}>
         <Blocks doc={rest} />
       </div>
@@ -170,8 +173,6 @@ function twoTone(title: string): [string, string] {
   return i > 0 ? [title.slice(0, i), title.slice(i + 1)] : [title, ''];
 }
 
-/** Approved artwork for a study (the same entry the shared case-study card uses), or none. */
-const artFor = (href: string) => Object.values(STUDIES).find((c) => c.href === href)?.art ?? null;
 
 const Mk = ({ kind }: { kind: 'figure' | 'statement' }) => <span className={`ct-mk is-${kind}`} aria-hidden="true" />;
 
@@ -237,7 +238,11 @@ export function CaseStudyTemplate({ study, content: c, service, showTestimonial,
     figures.length && statements.length ? 'Reported figures and documented outcomes' : figures.length ? 'Reported figures' : 'What we can document';
   const impactTitle = figures.length ? 'The impact' : 'Where it stands';
   const [h1a, h1b] = twoTone(study.title);
-  const art = artFor(study.href);
+  // the stage image is the study's detail slot (lib/case-study-images.ts): real artwork, or a disclosed conceptual placeholder
+  const stage = imageSlotsFor(study.href).feature;
+  const art = stage?.kind === 'image' ? stage : null;
+  const motif = stage?.kind === 'conceptual' ? stage.motif : null;
+  const logoClient = art?.logo ? null : clientForHref(study.href);
   const route = [
     ['problem', 'The problem'],
     ['did', 'What we did'],
@@ -313,16 +318,30 @@ export function CaseStudyTemplate({ study, content: c, service, showTestimonial,
           </div>
         </header>
 
-        {art ? (
-          <figure className="ct-art">
+        {art || motif ? (
+          <figure className="ct-stage">
             <div className="pa-wrap">
-              <div className="ct-art-img">
-                <Image src={art.src} alt={art.alt} fill sizes="(min-width: 1440px) 1328px, 100vw" />
-                <span className="ct-art-logo">
-                  <Image src={art.logo.src} alt={art.logo.alt} width={art.logo.w} height={art.logo.h} />
+              <div className={`ct-stage-frame ca-host${art ? ' is-photo' : ' is-par'}`} data-hw-seq data-motif={motif ?? undefined}>
+                {art ? (
+                  <div className="ct-stage-img">
+                    <Image src={art.src} alt={art.alt} fill sizes="(min-width: 1440px) 1328px, 100vw" priority={false} />
+                    {art.logo ? (
+                      <span className="ct-art-logo">
+                        <Image src={art.logo.src} alt={art.logo.alt} width={art.logo.w} height={art.logo.h} />
+                      </span>
+                    ) : null}
+                  </div>
+                ) : motif ? (
+                  <CaseArt motif={motif} />
+                ) : null}
+                {logoClient ? <ClientLogo client={logoClient} variant="chip" /> : null}
+                <span className="ct-stage-mark" aria-hidden="true">
+                  {client}
                 </span>
+                <span className="ct-stage-tick is-a" aria-hidden="true" />
+                <span className="ct-stage-tick is-b" aria-hidden="true" />
               </div>
-              <figcaption>{art.note}</figcaption>
+              {stage?.note ? <figcaption>{stage.note}</figcaption> : null}
             </div>
           </figure>
         ) : null}
@@ -331,7 +350,7 @@ export function CaseStudyTemplate({ study, content: c, service, showTestimonial,
           <SectionBody doc={c.problem} />
         </Band>
 
-        <Band id="did" n={2} title="What we did" tone="paper">
+        <Band id="did" n={2} title="What we did" tone="deep">
           <SectionBody doc={c.whatWeDid} />
         </Band>
 
@@ -512,7 +531,7 @@ function Band({
   id: string;
   n: number;
   title: string;
-  tone: 'ground' | 'paper';
+  tone: 'ground' | 'paper' | 'deep';
   children: ReactNode;
   after?: ReactNode;
 }) {

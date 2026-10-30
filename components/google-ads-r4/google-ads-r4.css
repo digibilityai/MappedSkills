@@ -63,7 +63,7 @@
 .ga4-lane { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.15fr) minmax(0, 1.3fr) minmax(0, 1.1fr); column-gap: clamp(28px, 4vw, 64px); align-items: start; padding-block: var(--sp-3); border-top: 1px solid var(--c-line); position: relative; }
 .ga4-lane:first-child { border-top: 2px solid var(--c-ink); } .ga4-lane:last-child { border-bottom: 1px solid var(--c-line); }
 .ga4-lane-who { font: 800 clamp(1.15rem, 1.7vw, 1.5rem)/1.15 var(--f-head); letter-spacing: -.02em; color: var(--c-ink); }
-.ga4-lane-lbl { display: block; margin-bottom: 8px; font: 800 .68rem/1.3 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--c-tang-deep); }
+.ga4-lane-lbl { display: block; margin-bottom: 8px; font: 800 .6875rem/1.3 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--c-tang-deep); }
 .ga4-pill { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: #fff; border: 1px solid #dfe1e5; border-radius: 999px; box-shadow: 0 1px 4px rgba(32, 33, 36, .12); font: 600 .98rem/1.3 Arial, Helvetica, sans-serif; color: #202124; }
 .ga4-pill svg { width: 16px; height: 16px; flex: none; fill: none; stroke: #5f6368; stroke-width: 2; }
 .ga4-lane-c, .ga4-lane-n { line-height: 1.5; color: var(--c-ink); font-weight: 600; position: relative; }
@@ -100,7 +100,7 @@
 /* ---- 5. Connected buyer journey ---- */
 .ga4-jt { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: clamp(16px, 2.4vw, 40px); }
 .ga4-js { position: relative; padding-top: 86px; }
-.ga4-js-who { position: absolute; top: 0; left: 0; font: 800 .68rem/1.3 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--c-dim); }
+.ga4-js-who { position: absolute; top: 0; left: 0; font: 800 .6875rem/1.3 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--c-dim); }
 .ga4-js--ms .ga4-js-who { color: var(--c-tang-deep); }
 .ga4-js-dot { position: absolute; top: 34px; left: 0; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--c-paper); border: 2px solid var(--c-ink); font: 800 1.1rem var(--f-head); z-index: 1; }
 .ga4-js--ms .ga4-js-dot { background: var(--c-tang-deep); border-color: var(--c-tang-deep); color: #fff; }

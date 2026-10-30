@@ -150,7 +150,7 @@
 .mr1-jny .rv3-head h2 { max-width: 20ch; }
 .mr1-jt { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: clamp(16px, 2.4vw, 40px); }
 .mr1-js { position: relative; padding-top: 128px; }
-.mr1-js-who { position: absolute; top: 0; left: 0; right: 0; font: 800 .68rem/1.3 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--c-dim); }
+.mr1-js-who { position: absolute; top: 0; left: 0; right: 0; font: 800 .6875rem/1.3 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--c-dim); }
 .mr1-js--ms .mr1-js-who { color: var(--c-tang-deep); }
 .mr1-js::before { content: ''; position: absolute; top: 38px; left: 0; width: calc(100% + clamp(16px, 2.4vw, 40px)); height: 6px; border-radius: 3px; background: var(--c-ink); }
 .mr1-js--you::before { background: repeating-linear-gradient(90deg, var(--c-gap) 0 10px, transparent 10px 16px); }

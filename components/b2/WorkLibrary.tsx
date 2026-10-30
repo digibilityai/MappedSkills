@@ -106,13 +106,8 @@ export function WorkLibrary({ items, page, pages, total, facets }: WorkLibraryPr
     setClientPage(1);
   };
 
-  const status = !filtering
-    ? `${total} case ${total === 1 ? 'study' : 'studies'}${pages > 1 ? `, page ${page} of ${pages}` : ''}`
-    : state === 'failed'
-      ? S.library.failed
-      : !all
-        ? S.library.loading
-        : `${results.length} of ${total} case ${total === 1 ? 'study' : 'studies'} match${results.length > 1 && resultPages > 1 ? `, page ${shownPage} of ${resultPages}` : ''}`;
+  // No case-study count is shown anywhere on /work. While filtering, the live region says only whether matches are shown.
+  const status = !filtering ? '' : state === 'failed' ? S.library.failed : !all ? S.library.loading : results.length ? S.library.showing : '';
 
   const opening = !filtering && page === 1 ? items.slice(0, 2) : [];
   const rest = !filtering && page === 1 ? items.slice(opening.length) : items;

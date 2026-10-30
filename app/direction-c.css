@@ -388,7 +388,7 @@
 .dc-ftr-chain span { display: inline-flex; align-items: center; gap: 8px; }
 .dc-ftr-chain .sep { color: var(--dc-gap); letter-spacing: 0; }
 .dc-ftr-cols { grid-column: 5 / span 8; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .95fr) minmax(0, .8fr) minmax(0, 1.25fr); column-gap: var(--dc-col-gap); row-gap: 40px; }
-.dc-ftr h2 { font: 700 .72rem/1.4 var(--dc-f-body); letter-spacing: .15em; text-transform: uppercase; color: var(--dc-on-ink-dim); padding-bottom: 12px; margin-bottom: 8px; border-bottom: 1px solid var(--dc-rule-on-ink); }
+.dc-ftr h2, .dc-ftr .dc-ftr-h { font: 700 .72rem/1.4 var(--dc-f-body); letter-spacing: .15em; text-transform: uppercase; color: var(--dc-on-ink-dim); padding-bottom: 12px; margin-bottom: 8px; border-bottom: 1px solid var(--dc-rule-on-ink); }
 /* overflow-wrap: a long word at 200% text may be wider than its column at 320px; let it break */
 .dc-ftr li a { display: flex; align-items: center; gap: .45em; min-height: 40px; padding-block: 6px; overflow-wrap: anywhere; color: var(--dc-on-ink); text-decoration: none; line-height: 1.3; transition: color var(--dc-d-fast); }
 .dc-ftr li a.hub { font-weight: 700; }
@@ -437,7 +437,7 @@
 /* Global footer (Resolve alignment, Stage 1): the approved dark footer is the default on every route. Ink #0F0D14, dark wordmark, AA link colours, tangerine focus ring, circular social icons. Supersedes the light variant and the per-page overrides. */
 footer.dc-ftr { background: #0F0D14; --dc-on-ink: #FFFDF9; --dc-on-ink-soft: #E0DAE6; --dc-on-ink-dim: #CFC8D6; border-top: 0; }
 footer.dc-ftr .dc-brand img { content: url('/mappedskills-wordmark-dark-bg.svg'); }
-footer.dc-ftr h2 { color: #fff; border-bottom-color: #4A4553; }
+footer.dc-ftr h2, footer.dc-ftr .dc-ftr-h { color: #fff; border-bottom-color: #4A4553; }
 footer.dc-ftr a, footer.dc-ftr li a, footer.dc-ftr .dc-base a, footer.dc-ftr .dc-base button { color: #FFFDF9; }
 footer.dc-ftr a:hover, footer.dc-ftr li a:hover, footer.dc-ftr .dc-base a:hover, footer.dc-ftr .dc-base button:hover { color: #fff; text-decoration: underline; text-decoration-color: #FF5B04; text-decoration-thickness: 2px; text-underline-offset: 5px; }
 footer.dc-ftr a:focus-visible, footer.dc-ftr button:focus-visible { outline: 3px solid #FF5B04; outline-offset: 3px; border-radius: 2px; }

@@ -208,7 +208,7 @@ body:has(.rv3) .dc-hdr .dc-btn-primary .dc-mk { background: rgba(255, 255, 255, 
 body:has(.rv3) .dc-ftr { background: #0F0D14; --dc-on-ink: #FFFDF9; --dc-on-ink-soft: #E0DAE6; --dc-on-ink-dim: #CFC8D6; border-top: 0; }
 /* the shared footer renders the ink-text wordmark on Ink Deep; swap in the existing white-text variant for this variant only */
 body:has(.rv3) .dc-ftr .dc-brand img { content: url('/mappedskills-wordmark-dark-bg.svg'); }
-body:has(.rv3) .dc-ftr h2 { color: #fff; border-bottom-color: #4A4553; }
+body:has(.rv3) .dc-ftr h2, body:has(.rv3) .dc-ftr .dc-ftr-h { color: #fff; border-bottom-color: #4A4553; }
 body:has(.rv3) .dc-ftr a, body:has(.rv3) .dc-ftr li a, body:has(.rv3) .dc-ftr .dc-base a, body:has(.rv3) .dc-ftr .dc-base button { color: #FFFDF9; }
 body:has(.rv3) .dc-ftr a:hover, body:has(.rv3) .dc-ftr li a:hover, body:has(.rv3) .dc-ftr .dc-base a:hover, body:has(.rv3) .dc-ftr .dc-base button:hover { color: #fff; text-decoration: underline; text-decoration-color: #FF5B04; text-decoration-thickness: 2px; text-underline-offset: 5px; }
 body:has(.rv3) .dc-ftr a:focus-visible, body:has(.rv3) .dc-ftr button:focus-visible { outline: 3px solid #FF5B04; outline-offset: 3px; border-radius: 2px; }

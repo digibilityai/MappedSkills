@@ -100,98 +100,23 @@ export function FourPlaces() {
   );
 }
 
-/* ------------------------------------------------------------------ 3. how we work */
 const Tick = ({ s = 20 }: { s?: number }) => (
   <svg viewBox="0 0 24 24" width={s} height={s} aria-hidden="true" focusable="false"><path d="M4.5 12.5l5 5 10-11" /></svg>
 );
 
-export function HowWeWork() {
-  const [ref, q] = useSequence<HTMLDivElement>(4, OPTS);
-  const a = at(q, 4);
-  const fig = (j: number) => `co-fig${a === j ? ' is-on' : ''}`;
+/* ------------------------------------------------------------------ 3. one method, five steps (DEC-097) */
+export function MethodJourney() {
+  const [ref, q] = useSequence<HTMLOListElement>(CO.method.length, OPTS);
   return (
-    <div ref={ref} className={cls(q, 'co-work')} {...root(q, 4)}>
-      <ol className="co-wl">
-        {CO.steps.map((st, j) => (
-          <li key={st.t} className={`co-ws ${q.state(j)}`} data-i="" aria-current={q.on(j) ? 'step' : undefined}>
-            <Num q={q} j={j} label={st.label.replace(/^Step /, '')} />
-            <div>
-              <h3 className="co-ws-t">{st.t}</h3>
-              <p className="co-ws-d">{st.d}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-
-      <div className="co-stage co-tile co-tile-cream" aria-hidden="true">
-        <div className={fig(0)}>
-          <p className="co-fig-k">1 · A test enquiry</p>
-          <div className="co-fig-row">
-            <div className="co-phone"><i /><i /><i className="co-short" /><b>Send</b></div>
-            <span className="co-fig-arw" />
-            <div className="co-inbox"><span className="co-inbox-h">Your inbox</span><span className="co-row co-row-new"><Tick s={18} />Test enquiry arrived</span><span className="co-row" /><span className="co-row" /></div>
-          </div>
-          <p className="co-fig-q">Did it arrive?</p>
-        </div>
-        <div className={fig(1)}>
-          <p className="co-fig-k">2 · What we found, biggest first</p>
-          <ol className="co-rank">
-            <li className="is-first"><span>The form asks too much</span><em>Fix first</em></li>
-            <li><span>Prices are hard to find</span></li>
-            <li><span>The page is slow on phones</span></li>
-          </ol>
-          <p className="co-fig-note">Example list.</p>
-        </div>
-        <div className={fig(2)}>
-          <p className="co-fig-k">3 · The agreed changes</p>
-          <ul className="co-done">
-            {['The form', 'The booking page', 'The reply people get', 'The tracking'].map((t) => (
-              <li key={t}><Tick />{t}</li>
-            ))}
-          </ul>
-          <p className="co-fig-note">Example. What changes depends on what we find.</p>
-        </div>
-        <div className={fig(3)}>
-          <p className="co-fig-k">4 · Measured the same way</p>
-          <div className="co-ba">
-            <div className="co-ba-c"><span className="co-ba-l">Before</span><span className="co-ba-v">Starting point recorded</span></div>
-            <span className="co-ba-vs">then</span>
-            <div className="co-ba-c co-ba-after"><span className="co-ba-l">After</span><span className="co-ba-v">Compared with the start</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ 4. improve, measure, review (CO-D06 as revised) */
-export function ImproveMeasureReview() {
-  const [ref, q] = useSequence<HTMLDivElement>(3, OPTS);
-  const m = CO.measSteps;
-  return (
-    <div ref={ref} className={cls(q, 'co-meas')} data-reveal="dim" {...root(q, 3)}>
-      <ol className="co-ml co-flow">
-        <li className={`co-tile co-tile-cream co-mi ${q.state(0)}`} data-i="" aria-current={q.on(0) ? 'step' : undefined}>
-          <Num q={q} j={0} label={m[0].label} />
-          <div className="co-mi-art co-mini-page" aria-hidden="true"><i /><i className="co-short" /><b className="co-new">New</b></div>
-          <p className="co-mi-t">{m[0].t}</p>
-          <p className="co-mi-d">{m[0].d}</p>
+    <ol ref={ref} className={cls(q, 'co-method')} aria-label={CO.workKicker} {...root(q, CO.method.length)}>
+      {CO.method.map((st, j) => (
+        <li key={st.t} className={`co-ms${j >= 2 ? ' co-ms-run' : ''} ${q.state(j)}`} data-i="" aria-current={q.on(j) ? 'step' : undefined}>
+          <Num q={q} j={j} label={st.label} />
+          <h3 className="co-ms-t">{st.t}</h3>
+          <p className="co-ms-d">{st.d}</p>
         </li>
-        <li className={`co-tile co-tile-cream co-mi ${q.state(1)}`} data-i="" aria-current={q.on(1) ? 'step' : undefined}>
-          <Num q={q} j={1} label={m[1].label} />
-          <div className="co-mi-art co-bars" aria-hidden="true"><i /><i /><i /><i /></div>
-          <p className="co-mi-t">{m[1].t}</p>
-          <p className="co-mi-d">{m[1].d}</p>
-        </li>
-        <li className={`co-tile co-tile-ink co-mi ${q.state(2)}`} data-i="" aria-current={q.on(2) ? 'step' : undefined}>
-          <Num q={q} j={2} label={m[2].label} />
-          <div className="co-mi-art co-cmp" aria-hidden="true"><span>Before</span><svg viewBox="0 0 32 24" width="32" height="24" focusable="false"><path d="M2 8h26m-6-6 6 6-6 6M30 17H4m6-6-6 6 6 6" /></svg><span>After</span></div>
-          <p className="co-mi-t">{m[2].t}</p>
-          <p className="co-mi-d">{m[2].d}</p>
-        </li>
-      </ol>
-      <p className="px-cap co-meas-cap">{CO.measCaption}</p>
-    </div>
+      ))}
+    </ol>
   );
 }
 
@@ -200,7 +125,7 @@ export function OwnForm() {
   const [ref, q] = useSequence<HTMLDivElement>(5, OPTS);
   const p = CO.proof;
   return (
-    <div ref={ref} className={cls(q, 'co-proof')} data-reveal="cum" {...root(q, 5)}>
+    <div ref={ref} className={cls(q, 'co-proof')} data-reveal="dim" {...root(q, 5)}>
       <ol className="co-pl co-flow">
         <li className={`co-pi ${q.state(0)}`} data-i="" aria-current={q.on(0) ? 'step' : undefined}>
           <Num q={q} j={0} label={p[0].label} />

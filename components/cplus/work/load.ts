@@ -1,3 +1,4 @@
+import { UNLISTED_CASE_STUDY_IDS } from '@/lib/case-study-eligibility';
 import { facets } from '@/lib/case-study-library';
 import { fetchContentfulCaseStudies } from '@/lib/contentful/case-studies';
 import { FEATURED_SLUG } from './content';
@@ -5,7 +6,7 @@ import { libraryPage, libraryStudies } from './studies';
 
 /** The whole public library in its one order, and the filter options. Shared by `/work`, its pages and its index. */
 export async function loadLibrary() {
-  const all = libraryStudies(await fetchContentfulCaseStudies(), FEATURED_SLUG);
+  const all = libraryStudies((await fetchContentfulCaseStudies()).filter((s) => !UNLISTED_CASE_STUDY_IDS.has(s.id)), FEATURED_SLUG);
   return { all, facets: facets(all) };
 }
 

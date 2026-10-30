@@ -37,21 +37,16 @@ export const CO = {
   start: { href: '/problems/traffic-but-no-enquiries', label: 'Not sure where you’re losing them?', note: 'Start with three free checks you can do yourself.' },
 
   workKicker: 'How we work',
-  workH: { a: 'First we find the problem.', b: 'Then we fix that problem.' },
-  steps: [
-    { label: 'Step 1: Find the problem', t: 'Find the problem', d: 'We use your website like a customer, and send test enquiries to see if they arrive.' },
-    { label: 'Step 2: Plan the fix', t: 'Plan the fix', d: 'We start with the biggest problem.' },
-    { label: 'Step 3: Make the change', t: 'Make the change', d: 'We make the agreed changes, with your input where needed.' },
-    { label: 'Step 4: Check the results', t: 'Check the results', d: 'We note where things stand first, so we can compare honestly.' },
-  ],
-
   measKicker: 'How do we know a change worked?',
   measH: { a: 'We make improvements.', b: 'Then we measure what changes.' },
   measBody: 'We check how visitors respond after the changes and compare the results with what was happening before.',
-  measSteps: [
-    { label: '1: Improve', t: 'Improve', d: 'We make the agreed changes.' },
-    { label: '2: Measure', t: 'Measure', d: 'We see how visitors respond.' },
-    { label: '3: Review', t: 'Review', d: 'We compare it with what came before.' },
+  /* DEC-097: one five-step method (How we work merged with improve, measure, review) */
+  method: [
+    { label: '1: Find the problem', t: 'Find the problem', d: 'We use your website like a customer, and send test enquiries to see if they arrive.' },
+    { label: '2: Plan the fix', t: 'Plan the fix', d: 'We start with the biggest problem.' },
+    { label: '3: Improve', t: 'Improve', d: 'We make the agreed changes, with your input where needed.' },
+    { label: '4: Measure', t: 'Measure', d: 'We see how visitors respond.' },
+    { label: '5: Review', t: 'Review', d: 'We compare it with what came before. We note where things stand first, so we can compare honestly.' },
   ],
   measCaption: 'We tell you what we saw. We don’t claim more than we can prove.',
   noBench: 'We don’t quote “typical” improvements or industry averages.',

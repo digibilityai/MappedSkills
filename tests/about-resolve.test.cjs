@@ -49,7 +49,7 @@ test('case studies: approved copy and routes, no outcomes, artwork only from the
 
 test('shared card: disclosure under artwork, a text-only card otherwise, one text CTA', () => {
   assert.match(card, /<p className="rs-wc-note">\{a\.note\}<\/p>/);
-  assert.match(card, /\$\{a \? '' : ' rs-wc-textonly'\}/, 'a study without artwork is a text-only card');
+  assert.match(card, /\$\{a \|\| s\.motif \? '' : ' rs-wc-textonly'\}/, 'a study with neither artwork nor an illustration is a text-only card');
   assert.doesNotMatch(card, /rs-wc-text"|rs-wc-name|rs-wc-chan/, 'no image-shaped stand-in for missing artwork');
   assert.strictEqual((card.match(/<Link /g) || []).length, 1);
 });

@@ -2393,3 +2393,161 @@ Use this file only for meaningful project decisions.
 - **Not approved by this entry:** Stage 3 (`/work`, its pagination and `/portfolio/[slug]`), which needs its own founder visual approval.
 - **NOT authorised:** push, PR, merge and production deployment.
 - **Read with:** `DEC-086`, `DEC-087`.
+
+### DEC-089 — THE RESOLVE Stage 3: /work and the five retained case-study detail pages approved
+- **Date recorded:** 2026-10-29. The founder's approval is reported in the Stage 4 Batch 1 instruction; no separate approval date or commit is recorded for it, and none is asserted here.
+- **OWNER APPROVAL (visual, local):** the founder approved the Stage 3 work on `feat/resolve-sitewide-alignment` (HEAD `783ddfd` plus the uncommitted Stage 3 and 3B changes): the THE RESOLVE `/work` library (`/work`, `/work/page/[n]`) and the five retained case-study detail pages (`/portfolio/[slug]`).
+- **The five founder-approved case-study URLs:**
+  - `/portfolio/om-sai-developer-meta-ads`
+  - `/portfolio/google-ads-for-online-courses`
+  - `/portfolio/classpe-social-media-strategy`
+  - `/portfolio/insuryo-organic-growth`
+  - `/portfolio/seo-ameba-software`
+- **Excluded from public discovery:** `/portfolio/seo-for-home-decor-brand` is not one of the five. It stays out of the `/work` library, the "next case study" link and the sitemap; the page is `noindex, follow` and its existing canonical is preserved.
+- **Included in the approval:** the final shared warm-light hero logo band on the case-study pages, and the Home Decor SEO case-study treatment (reachable at its own address; see the exclusion above; `UNLISTED_CASE_STUDY_IDS` in `lib/case-study-eligibility.ts`).
+- **Not expanded by this entry:** no new case study, no Contentful change, no new claim of results. Eligibility remains governed by `lib/case-study-eligibility.ts` and the owner's permission register.
+- **NOT authorised:** push, PR, merge, deployment, Contentful changes.
+- **Read with:** `DEC-086`, `DEC-087`, `DEC-088`, `DEC-090`.
+
+### DEC-090 — THE RESOLVE Stage 3B: homepage client showcase approved
+- **Date recorded:** 2026-10-29. Approval reported in the Stage 4 Batch 1 instruction; no separate approval date or commit is recorded, and none is asserted here.
+- **OWNER APPROVAL (visual, local):** the homepage client showcase, driven by the client-logo register `lib/clients.ts` (`docs/work-redesign/stage3b/CLIENT_LOGO_REGISTER.md`).
+- **What was approved:** **32 authorised displayed logos**; **Vibgyor High excluded** (written permission NO; `display: 'blocked'`, its file is not in `public/`); the corrected **ClassPe transparent logo** (`/images/clients/classpe.webp`).
+- **Not an evidence claim:** a displayed logo means "a business MappedSkills has worked with" only. It is not evidence of any Google Ads, Meta Ads or SEO engagement; services are listed only where the repository documents them.
+- **NOT authorised:** push, PR, merge, deployment, Contentful changes.
+- **Read with:** `DEC-089`.
+
+### DEC-091 — THE RESOLVE Stage 4A planning approved with refinements; Stage 4 Batch 1 authorised (local)
+- **Date recorded:** 2026-10-29.
+- **OWNER APPROVAL (planning):** the Stage 4A canonical design-system and page-register report, with these refinements:
+  - THE RESOLVE is the visual authority; the approved homepage is the canonical typography reference.
+  - Approved contextual variations and existing light/dark colour usage are kept. Dark heroes are not forced onto every page.
+  - Dual-colour emphasis highlights a meaningful customer outcome or contrast, not arbitrarily the final words.
+  - No large new design-system framework. Frozen pages remain visually unchanged.
+  - Footer and consent heading-semantic corrections are authorised if appearance is preserved.
+  - `/pricing` and `/faq` are preserved for targeted QA only. Supporting-service and editorial visual alignment is reserved for later batches.
+- **Batch 1 scope (local only):** this record; the conventions reference `docs/resolve-sitewide/TYPOGRAPHY_AND_HEADLINE_CONVENTIONS.md`; heading-semantics corrections in the footer, consent banner and navigation panels; regression verification.
+- **Typography clarification (documentation closeout):**
+  - The proposed H4–H6 visual scale is **provisionally accepted**. It is not permission for global CSS overrides, and it changes no frozen page.
+  - Heading levels must reflect document structure; a level is never chosen for its size.
+  - Eyebrow styling does not automatically imply H6.
+  - Breadcrumb and form-text values remain subject to verification against the actual components.
+- **Not decided here (still open from Stage 4A):** the `/portfolio` redirect-or-404 question, supporting-service labels, legal-page styling, the `/press` footer link.
+- **NOT authorised:** Batch 2 onward, push, PR, merge, deployment, Contentful changes.
+- **Read with:** `DEC-086` to `DEC-090`.
+
+### DEC-092: THE RESOLVE Stage 4 Batch 2A: /seo visually approved and frozen
+- **Date recorded:** 2026-10-29. The founder's approval is reported in the Stage 4 Batch 2B instruction; no separate approval date or commit is recorded for it, and none is asserted here.
+- **OWNER APPROVAL (visual, local):** the nine-scene THE RESOLVE `/seo` page on `feat/resolve-sitewide-alignment` (HEAD `783ddfd` plus uncommitted work), including the mobile fold refinement (Problems, Approach with its continuation, Measurement). The page is **frozen**: `app/(pages)/seo/page.tsx`, `components/cplus/seo/` and `tests/seo-page.test.cjs` are not to change without a new instruction.
+- **Unchanged:** the URL, canonical, robots, metadata, `BreadcrumbList` and global structured data, the internal links, the CTA destinations and every claim recorded for `/seo`. SEO remains a supporting service; Google Ads and Meta Ads remain the core services.
+- **Authorised next:** Stage 4 Batch 2B, `/ai-seo` design, local only. Not started by this entry: `/lead-generation` and `/conversion-optimization`.
+- **NOT authorised:** push, PR, merge, deployment, Contentful changes.
+- **Read with:** `DEC-089` to `DEC-091`.
+
+### DEC-093: /ai-seo capability statements confirmed as established delivery capabilities
+- **Date recorded:** 2026-10-29. The founder's confirmation is reported in the Stage 4 Batch 2B final-correction instruction; no separate confirmation date is recorded for it, and none is asserted here.
+- **FOUNDER CONFIRMATION:** MappedSkills currently delivers (1) directory and third-party listing work and (2) ongoing AI visibility reviews. These are established delivery capabilities.
+- **Effect on `/ai-seo`:** the `DEC-054` wording for both is retained as approved (the lede and Step 4 "Be where answers come from"; Step 5 "Check again, honestly"; the FAQ answers). It is not weakened to exploratory or advisory-only language. `DEC-054` and `DEC-092` are not altered by this entry.
+- **What this does NOT authorise:** any guarantee or promise of AI citations, rankings or recommendations; any claim of performance improvement; any client result. The internal dated 28-question test (0 of 28) remains a labelled, dated record in its closed disclosure and is not client success evidence.
+- **Evidence status:** the confirmation is the founder's statement. No client engagement document was added to the repository by this entry.
+- **NOT authorised:** push, PR, merge, deployment, Contentful changes.
+- **Read with:** `DEC-054`, `DEC-092`.
+
+### DEC-094: THE RESOLVE Stage 4 Batch 2B: /ai-seo visually approved and frozen
+- **Date recorded:** 2026-10-29. The founder's approval is reported in the Stage 4 Batch 2C instruction; no separate approval date or commit is recorded for it, and none is asserted here.
+- **OWNER APPROVAL (visual, local):** the THE RESOLVE `/ai-seo` page on `feat/resolve-sitewide-alignment` (HEAD `783ddfd` plus uncommitted work), with the mobile and desktop fold refinements. The page is **frozen**: `app/(pages)/ai-seo/page.tsx` and `components/cplus/ai-seo/` are not to change without a new instruction.
+- **Unchanged:** the `DEC-054` content, nine-section order, four interactive stories, evidence disclosure, URL, canonical, robots, metadata, `BreadcrumbList` and global structured data, internal links and CTA destinations. The capability statements follow `DEC-093`.
+- **Authorised next:** Stage 4 Batch 2C, `/lead-generation`, local only.
+- **NOT authorised:** push, PR, merge, deployment, Contentful changes.
+- **Read with:** `DEC-054`, `DEC-092`, `DEC-093`.
+
+### DEC-095: /lead-generation six-scene consolidation approved (Stage 4 Batch 2C)
+- **Date recorded:** 2026-10-29. The founder's approval is reported in the Stage 4 Batch 2C implementation instruction; no separate approval date is recorded for it, and none is asserted here.
+- **FOUNDER APPROVAL:** the six-scene consolidation of `/lead-generation` (hero, problem, journey, responsibility, expectations, close), local only, with these refinements: (1) "What we do" and "How an enquiry reaches you" are merged; (2) measurement is Option A, so the existing monthly campaign performance report and starting-point statements sit inside the responsibility scene, with no separate measurement scene and no invented metrics; (3) the hero may use question-based framing about whether enquiries are the right ones, with the H1, lede, example enquiry and both CTAs preserved and no implied guarantee of enquiry quality; (4) journeys keep about 2 seconds per step (`DEC-057` item 7); (5) the closing five-step "what happens next" stays accessible but is not a dominant journey.
+- **Approved removals (duplicates only):** the section kicker and heading "How an enquiry reaches you" / "Enquiries go straight to your team."; its intro "Enquiries go to your own form, CRM or WhatsApp, depending on your setup."; its three steps (titles and descriptions) and the label "The three steps"; the bare "Illustration." caption on the problem scene. Kept: "You tell us who you want to reach. We build campaigns around them." and "We don't call your enquiries to qualify them. Your team has the sales conversation."
+- **Tests:** `tests/lead-generation-page.test.cjs` is updated only for the removed strings above. All other assertions, including proof, claim, dash and SEO safeguards, are unchanged.
+- **Unchanged:** the URL, title, canonical, robots, H1, approved meta description (LG-D19), `BreadcrumbList` and global structured data, internal links, CTA destinations, the operating facts of `DEC-057` (no guarantee, no manual review of client enquiries). Google Ads and Meta Ads remain the core services.
+- **NOT authorised:** push, PR, merge, deployment, Contentful changes; `/conversion-optimization`.
+- **Read with:** `DEC-057`, `DEC-092`, `DEC-094`.
+
+### DEC-096: THE RESOLVE Stage 4 Batch 2C: /lead-generation visually approved
+- **Date recorded:** 2026-10-29. The founder's approval is reported in the Stage 4 Batch 2D instruction; no separate approval date or commit is recorded for it, and none is asserted here.
+- **OWNER APPROVAL (visual, local):** the six-scene THE RESOLVE `/lead-generation` page on `feat/resolve-sitewide-alignment` (HEAD `783ddfd` plus uncommitted work), as consolidated under `DEC-095`, including the final QA correction that keeps a not-yet-reached journey step at 70% opacity for legible contrast.
+- **Unchanged:** the URL, title, canonical, robots, H1, approved meta description, `BreadcrumbList` and global structured data, internal links, CTA destinations and the `DEC-057` operating facts. `DEC-095` is not altered by this entry.
+- **Files to treat as approved:** `app/(pages)/lead-generation/page.tsx`, `components/cplus/lead-generation/` and `tests/lead-generation-page.test.cjs`.
+- **Authorised next:** Stage 4 Batch 2D, `/conversion-optimization`, local only.
+- **NOT authorised:** push, PR, merge, deployment, Contentful changes.
+- **Read with:** `DEC-057`, `DEC-092`, `DEC-094`, `DEC-095`.
+
+### DEC-097: /conversion-optimization five-scene consolidation approved (Stage 4 Batch 2D)
+- **Date recorded:** 2026-10-29. The founder's approval ("Approve merge") is reported in the Stage 4 Batch 2D conversation; no separate approval date is recorded for it, and none is asserted here.
+- **FOUNDER APPROVAL:** the merge proposed in the Batch 2D audit, local only. "How we work" and "Improve, measure, review" become one five-step method scene: Find the problem, Plan the fix, Improve, Measure, Review. The page has five scenes: hero, four places, method, our own form, close. This amends the `DEC-055` CO-D06 visual progression only in that Improve, Measure and Review now share one journey with the two diagnosis steps.
+- **Removed (duplicates):** the heading "First we find the problem. Then we fix that problem."; the steps "Make the change" and "Check the results" (titles and descriptions), whose content is carried by Improve and Review.
+- **Merged descriptions:** Improve, "We make the agreed changes, with your input where needed." (the `DEC-055` CO-D05 sentence, kept verbatim); Review, "We compare it with what came before. We note where things stand first, so we can compare honestly."
+- **Kept unchanged:** the H1, metadata, the headline "We make improvements. Then we measure what changes.", its supporting sentence, the caption "We tell you what we saw. We don't claim more than we can prove.", the no-benchmarks note, the method link, the verdict "It can help with 2 and 3. It won't fix 1 or 4.", the own-form evidence ("Our own enquiry form wasn't working."), "What happens next", CTAs and links. No new operational or performance claim is added; formal A/B testing is still not described as routine.
+- **Timing:** 1.5 seconds between steps and the other `DEC-055` journey settings are unchanged.
+- **Tests:** `tests/conversion-page.test.cjs` is updated only for the removed strings; its other assertions are unchanged.
+- **NOT authorised:** push, PR, merge, deployment, Contentful changes.
+- **Read with:** `DEC-055`, `DEC-056`, `DEC-096`.
+
+### DEC-098: THE RESOLVE Stage 4 Batch 2D: /conversion-optimization visually approved; Stage 5 sitewide QA authorised
+- **Date recorded:** 2026-10-30. The founder's approval is reported in the Stage 5 instruction ("the approved MappedSkills website redesign" with Batch 2C and Batch 2D approvals to be recorded); no separate approval date or commit is recorded for it, and none is asserted here. The Batch 2C `/lead-generation` approval is already recorded as `DEC-096` and is not duplicated.
+- **OWNER APPROVAL (visual, local):** the five-scene THE RESOLVE `/conversion-optimization` page on `feat/resolve-sitewide-alignment` (HEAD `783ddfd` plus uncommitted work), as consolidated under `DEC-097`, including the final QA corrections made in the Batch 2D acceptance pass: the takeaway card text colours, a not-yet-reached step at 86% opacity (instead of 70%) for AA contrast, a lighter label colour on the dimmed verdict tile, burnt focus rings on cream and paper scenes, 24px proof step buttons on mobile and the "Our inbox" label spacing in the own-form art.
+- **Unchanged:** the URL, title, canonical, robots, H1, metadata, `BreadcrumbList` and global structured data, internal links, CTA destinations and the `DEC-055` content. `DEC-097` is not altered by this entry.
+- **Files to treat as approved:** `app/(pages)/conversion-optimization/page.tsx`, `components/cplus/conversion-optimization/` and `tests/conversion-page.test.cjs`.
+- **Authorised next:** Stage 5, sitewide QA and acceptance evidence (verification only, local). Defects are reported, not fixed automatically.
+- **NOT authorised:** commit, push, PR, merge, deployment, Contentful changes, production configuration changes.
+- **Read with:** `DEC-055`, `DEC-056`, `DEC-096`, `DEC-097`.
+
+### DEC-099: Monthly agency management fees for Google Ads and Meta Ads approved for publication
+- **Date:** 2026-10-30.
+- **FOUNDER APPROVAL (explicit):** the founder explicitly approved, in the Stage 5 session on 2026-10-30, these monthly agency management fees for publication:
+  - Google Ads: INR 14,999 per month.
+  - Meta Ads: INR 14,999 per month.
+  - Google Ads and Meta Ads combined: INR 26,999 per month.
+- **Advertising spend is excluded** from these fees.
+- **Not stated and not approved by this entry:** setup fees, minimum ad budgets, GST treatment, contract terms, guarantees and add-on prices. No additional commercial term is introduced here.
+- **Implementation context (historical, not the approval evidence):** the existing implementation was merged to `main` as PR #65 (`401b45e`, 2026-10-29), which describes the same three amounts and the monthly scope. That PR description and the `components/pricing-r2/content.ts` file header are the implementing session's own statements; this entry, not the PR, is the approval record. The published amounts were not changed by this entry.
+- **Published on:** `/pricing`, `/google-ads` and `/social-media-ads` (`components/pricing-r2/content.ts`, `components/google-ads-r41/content.ts`, `components/meta-ads-r22/content.ts`).
+- **Effect on QA:** resolves Stage 5 finding D-10 (`docs/resolve-sitewide/qa/STAGE5_QA_REPORT.md`).
+- **NOT authorised:** release, commit, push, PR, merge, deployment, Contentful changes, production configuration changes.
+- **Read with:** `DEC-098`.
+
+### DEC-100: Stage 5C accepted (design, content and local implementation); Stage 5D pre-release verification authorised
+- **Date:** 2026-10-30 (the founder's explicit acceptance, given in the Stage 5D instruction).
+- **FOUNDER ACCEPTANCE (explicit):** Stage 5C is accepted. **Approved scope:** design, content and local implementation of the THE RESOLVE sitewide alignment on `feat/resolve-sitewide-alignment` (HEAD `783ddfd` plus uncommitted work), as evidenced in `docs/resolve-sitewide/qa/STAGE5_QA_REPORT.md`. This acceptance is not a release authorisation.
+- **P3 dispositions (from the Stage 5 QA register):**
+  - `D-04` (mock UI text under 11px): pre-release accessibility review.
+  - `D-05` (interactive targets under 24px): pre-release accessibility review.
+  - `D-06` (metadata length): accepted, nonblocking editorial follow-up.
+  - `D-07` (unused `Text` import): accepted, nonblocking code-cleanup follow-up.
+  - `D-08` (long dashes in CMS blog posts): accepted, nonblocking CMS editorial follow-up.
+  - `D-11` (`/contact/call` indexing): SEO decision pending the founder; no directive may change without approval.
+- **Authorised next:** Stage 5D, pre-release verification and minimal targeted remediation of `D-04` and `D-05`, local only.
+- **Release verification remains separate:** production canonical, JSON-LD and sitemap after the release build; real form submission and downstream delivery; CRM and WhatsApp; analytics and consent events; browser, device and screen-reader coverage as appropriate.
+- **NOT authorised:** commit, push, PR, merge, deployment, Contentful changes, production configuration changes.
+- **Read with:** `DEC-098`, `DEC-099`.
+
+### DEC-101: Stage 5D remediation D-11 to D-14 authorised; accessibility exception to the DEC-096 70% unplayed state
+- **Date:** 2026-10-30 (the founder's explicit authorisation, given in the Stage 5D remediation instruction). No earlier approval date is claimed.
+- **FOUNDER AUTHORISATION (explicit):**
+  - `D-12`: a minimal `/seo` correction for the mobile text-scaling horizontal overflow.
+  - `D-13`: a minimal `/ai-seo` correction for the "Illustrative example" mini-table overflow.
+  - `D-14`: minimal WCAG 2.2 AA contrast corrections for not-yet-reached sequence steps.
+  - `D-11`: `/contact/call` closed as by design.
+  - Decorative ad mock text: sub-11px text may be retained only where it is genuinely nonessential and hidden from assistive technology.
+- **D-11 (closed, by design):** `/contact/call` is an intentional permanent (308) redirect to `/contact?intent=call`. The target returns 200 with canonical `/contact`, and the redirect route is not in the sitemap. Routing, robots and canonical directives are unchanged.
+- **D-12 root cause and fix:** at 150% root text the `/seo` "Clear communication" heading in the two-column `.sk-pledges` grid (mobile rule) is wider than its column and widens the page (394px at 390, 379px at 360). The mobile grid is now `repeat(auto-fit, minmax(min(100%, 8rem), 1fr))`: unchanged two columns at normal text, one column once enlarged text leaves under 8rem per column. Desktop is untouched (the rule is inside the mobile media query).
+- **D-13 root cause and fix:** `.ax-trk td { white-space: nowrap }` kept the tracking table at 338px of content in a 390px viewport at 150% text (page 431px). Cells may now wrap at 480px and narrower (the existing rule only did so at 380px). All table content is kept; the 481px and wider layout is untouched.
+- **D-14 fixes (smallest scoped, per page, from measured contrast):** the unplayed state, not the settled state, was below AA.
+  - `/seo` step entrance start `0.25` to `0.86`.
+  - `/lead-generation` unreached step `0.70` to `0.86`.
+  - `/ai-seo` report example pictures `0.72` to `0.88`. The journey steps (`0.70`) already measure above AA and are unchanged.
+  - `/how-it-works` route and cycle node entrance `0.25 / 0.30` to `0.86`; "You receive" panel `0.35` to `0.86`. The aria-hidden timeline marker dot (`0.20`) carries no text and is unchanged.
+  - Timing, sequencing, manual controls and reduced-motion handling are unchanged.
+- **EXCEPTION TO DEC-096 (accessibility-driven, recorded here, not silent):** `DEC-096` approved a 70% not-yet-reached state on `/lead-generation`. At 70% the small numerals and labels measured below 4.5:1 on some grounds, so the founder-authorised `D-14` raises it to 86%. This supersedes only that opacity value; the rest of `DEC-096` stands.
+- **Accepted exception (decorative mock text):** sub-11px text remains only inside illustrations that are `role="img"` with an `aria-label` carrying the same information, or `aria-hidden`. The `/google-ads` Performance Max diagram labels (Search, Shopping, Display, YouTube, Maps at 10.5px) are the one such case found.
+- **Unchanged:** headlines, copy, CTAs and destinations, pricing, metadata, canonicals, robots, sitemap and structured data.
+- **Files:** `components/cplus/seo/seo.css`, `components/cplus/ai-seo/ai-seo.css`, `components/cplus/lead-generation/lead-gen.css`, `components/b2/how-it-works.css`, `tests/stage5d-accessibility.test.cjs`, this file, `docs/resolve-sitewide/qa/STAGE5_QA_REPORT.md`.
+- **NOT authorised:** commit, push, PR, merge, deployment, Contentful changes, production configuration changes.
+- **Read with:** `DEC-096`, `DEC-100`.

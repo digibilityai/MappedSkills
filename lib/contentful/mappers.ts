@@ -31,6 +31,7 @@ import {
 } from '@/lib/contentful/case-study-sections';
 import { createHeadingIdAllocator, nodeText } from '@/lib/contentful/heading-ids';
 import { LEGACY_CASE_STUDY_IDS, LEGACY_IDS_ON_NEW_TEMPLATE } from '@/lib/case-study-eligibility';
+import { previewTitle } from '@/lib/case-study-preview-titles';
 import { asListingOrder, asSector, asService, periodLabel } from '@/lib/case-study-library';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://mappedskills.com';
@@ -179,6 +180,7 @@ export function mapContentfulCaseStudyToCms(entry: ContentfulCaseStudy): CmsCase
   if (!entry.slug || !entry.title) return null;
 
   const contentfulSlug = entry.slug.trim();
+  const title = previewTitle(contentfulSlug, entry.title.trim());
   const slug = normalizeCaseStudySlug(contentfulSlug);
   if (!slug) return null;
 
@@ -208,7 +210,7 @@ export function mapContentfulCaseStudyToCms(entry: ContentfulCaseStudy): CmsCase
     id: entry.sys.id,
     slug,
     contentfulSlug,
-    title: entry.title.trim(),
+    title,
     clientName: entry.clientName?.clientName?.trim() || '',
     clientDate: entry.clientName?.date?.trim() || '',
     industry,
@@ -225,12 +227,12 @@ export function mapContentfulCaseStudyToCms(entry: ContentfulCaseStudy): CmsCase
     highlightResult,
     summary: newSummary || summary,
     href: `/portfolio/${slug}`,
-    metaTitle: `${entry.title.trim()} | Case Study | MappedSkills`,
+    metaTitle: `${title} | Case Study | MappedSkills`,
     metaDescription:
       newSummary ||
       summary ||
       highlightResult ||
-      `Case study: ${entry.title.trim()}${industry ? ` — ${industry}` : ''}`,
+      `Case study: ${title}${industry ? ` — ${industry}` : ''}`,
     layout: 'legacy',
     library: {
       sector: asSector(entry.sector),

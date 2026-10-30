@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { CONTACT_HREF, Mark } from '@/components/direction-c/primitives';
+import { CONTACT_HREF } from '@/components/direction-c/primitives';
 import { AI_PLAIN } from './content';
 import { SCENARIO_STEP_MS, StepNumber, useSequence } from './Sequence';
 
@@ -78,9 +78,9 @@ export function Scenario() {
           <h3 className="ax-sc-t ax-sc-big">{YOU.t}</h3>
           <p className="ax-sc-p">{YOU.p}</p>
           <p className="ax-sc-act">
-            <Link href={CONTACT_HREF} className="dc-btn dc-btn-primary">
-              <Mark />
+            <Link href={CONTACT_HREF} className="pa-action pa-action--primary">
               {YOU.cta}
+              <span aria-hidden="true">{'\u2197'}</span>
             </Link>
           </p>
         </div>

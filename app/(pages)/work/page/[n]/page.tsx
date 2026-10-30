@@ -3,8 +3,7 @@ import { notFound, permanentRedirect } from 'next/navigation';
 import { createMetadata } from '@/lib/metadata';
 import type { CrumbStep } from '@/components/direction-c/primitives';
 import { routeTrailJsonLd } from '@/components/routes/primitives';
-import { CplusPage } from '@/components/cplus/CplusPage';
-import { WorkBody } from '@/components/cplus/work/WorkBody';
+import { Work } from '@/components/b2/Work';
 import { loadLibrary, loadLibraryPage } from '@/components/cplus/work/load';
 import { pageCount } from '@/lib/case-study-library';
 
@@ -47,9 +46,9 @@ export default async function WorkLibraryPage({ params }: Props) {
   if (!library) notFound();
 
   return (
-    <CplusPage>
+    <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: routeTrailJsonLd(TRAIL) }} />
-      <WorkBody library={library} />
-    </CplusPage>
+      <Work library={library} />
+    </>
   );
 }

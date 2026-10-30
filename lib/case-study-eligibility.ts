@@ -142,3 +142,13 @@ export function selectPublic<
   }
   return out;
 }
+
+/**
+ * NOT LISTED ON /work (founder decision, Stage 3B). These studies stay published and reachable at their own address; they
+ * are left out of the /work library (its cards, count, search, filters and pages), the "next case study" link and the
+ * sitemap, and their page is `noindex, follow` (app/(pages)/portfolio/[slug]/page.tsx). The URL stays HTTP 200 with its
+ * canonical, and Contentful is unchanged. Immutable entry IDs.
+ */
+export const UNLISTED_CASE_STUDY_IDS: ReadonlySet<string> = new Set([
+  '4zQL4P8SR2xogxHN4qFfUl', // eCommerce home decor brand (seo-for-home-decor-brand)
+]);

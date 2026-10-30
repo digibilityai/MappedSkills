@@ -2,14 +2,14 @@ import type { Metadata } from 'next';
 import { createMetadata } from '@/lib/metadata';
 import type { CrumbStep } from '@/components/direction-c/primitives';
 import { routeTrailJsonLd } from '@/components/routes/primitives';
-import { CplusPage } from '@/components/cplus/CplusPage';
-import { WorkBody } from '@/components/cplus/work/WorkBody';
+import { Work } from '@/components/b2/Work';
 import { loadLibraryPage } from '@/components/cplus/work/load';
 
 export const revalidate = 60;
 
 /**
- * `/work` — the owner-approved C+ G1 R3 design (docs/work-redesign/g1-r3/), implemented in G2.
+ * `/work` — THE RESOLVE Stage 3 (`components/b2/Work.tsx`), replacing the C+ G1 R3 view; data, order and rules below
+ * are unchanged from G2 and G7.
  *
  * - The URL, title, description and indexing (SEO-001) are unchanged.
  * - The studies are the published Contentful entries, read by the same listing query as before (one request) and
@@ -38,9 +38,9 @@ export default async function WorkPage() {
   const library = (await loadLibraryPage(1))!;
 
   return (
-    <CplusPage>
+    <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: routeTrailJsonLd(TRAIL) }} />
-      <WorkBody library={library} />
-    </CplusPage>
+      <Work library={library} />
+    </>
   );
 }

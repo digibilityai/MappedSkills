@@ -68,16 +68,6 @@ export const FOOTER_SERVICES: NavLink[] = [SERVICES_HUB, ...CAPABILITIES];
 /** Footer "Who We Help" group: the same four audience pages as the header. */
 export const FOOTER_WHO: NavLink[] = WHO_WE_HELP_LINKS.map(({ href, label }) => ({ href, label }));
 
-/** Footer "More services" group (D3): earlier, non-core service pages that stay live and indexed. Core work is Google Ads
- * and Meta Ads; these are listed so the pages remain reachable and are described accurately. */
-export const MORE_SERVICES_NOTE = 'Supporting services. Our core work is Google Ads and Meta Ads.';
-export const FOOTER_MORE_SERVICES: NavLink[] = [
-  { href: '/lead-generation', label: 'Lead generation' },
-  { href: '/seo', label: 'SEO' },
-  { href: '/ai-seo', label: 'AI search' },
-  { href: '/conversion-optimization', label: 'Conversion optimisation' },
-];
-
 /** Footer "Company" column. */
 export const FOOTER_COMPANY: NavLink[] = [
   { href: '/how-it-works', label: 'How it works' },

@@ -7,8 +7,8 @@ import { CTASection } from '@/components/CTASection';
 import { Card } from '@/components/ui/card';
 import { CaseStudyContent } from '@/components/case-study/CaseStudyContent';
 import { CaseStudyTemplate } from '@/components/case-study/CaseStudyTemplate';
-import { CplusPage } from '@/components/cplus/CplusPage';
 import { createMetadata } from '@/lib/metadata';
+import { UNLISTED_CASE_STUDY_IDS } from '@/lib/case-study-eligibility';
 import { isCaseStudyProofWithheld } from '@/lib/case-study-proof';
 import { getCaseStudyService } from '@/lib/case-study-services';
 import { SERVICES } from '@/lib/services';
@@ -57,7 +57,9 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
     };
   }
 
-  return createMetadata(caseStudy.metaTitle, caseStudy.metaDescription, caseStudy.href);
+  const metadata = createMetadata(caseStudy.metaTitle, caseStudy.metaDescription, caseStudy.href);
+  // An unlisted study (founder decision, Stage 3B) stays reachable and keeps its canonical, but asks search engines not to index it.
+  return UNLISTED_CASE_STUDY_IDS.has(caseStudy.id) ? { ...metadata, robots: { index: false, follow: true, googleBot: { index: false, follow: true } } } : metadata;
 }
 
 export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
@@ -94,20 +96,18 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
     : Boolean(caseStudy.review && !proofWithheld);
 
   /**
-   * The new template (G7 design) is a complete page of its own: hero, the three sections, navigation back to `/work` and
+   * The new template (G7 design, THE RESOLVE presentation since Stage 3) is a complete page of its own: hero, the three sections, navigation back to `/work` and
    * on to the next study, and the close. The legacy template below is unchanged.
    */
   if (isNewLayout && caseStudy.newLayout) {
     return (
-      <CplusPage>
-        <CaseStudyTemplate
-          study={caseStudy}
-          content={caseStudy.newLayout}
-          service={relatedService ? { title: relatedService.title, link: relatedService.link } : null}
-          showTestimonial={showTestimonial}
-          next={await getNextCaseStudy(caseStudy.slug)}
-        />
-      </CplusPage>
+      <CaseStudyTemplate
+        study={caseStudy}
+        content={caseStudy.newLayout}
+        service={relatedService ? { title: relatedService.title, link: relatedService.link } : null}
+        showTestimonial={showTestimonial}
+        next={await getNextCaseStudy(caseStudy.slug)}
+      />
     );
   }
 

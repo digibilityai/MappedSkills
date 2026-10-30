@@ -59,3 +59,14 @@ test('what happens next uses only confirmed facts (no time, price or guarantee)'
   assert.match(next, /We reply by email or WhatsApp\./);
   assert.doesNotMatch(next, /hour|day|£|\$|₹|free|guarantee|within/i);
 });
+
+test('five scenes (DEC-097): the merged method has five steps; the duplicate heading and steps are gone', () => {
+  const ids = [...body.matchAll(/aria-labelledby="((?:co-|b-close)[^"]+)"/g)].map((m) => m[1]);
+  assert.deepEqual(ids, ['co-h1', 'co-h-four', 'co-h-meas', 'co-h-own', 'b-close-h']);
+  assert.equal((copy.match(/label: '\d: (Find the problem|Plan the fix|Improve|Measure|Review)'/g) || []).length, 5);
+  assert.doesNotMatch(copy, /First we find the problem|Make the change|Check the results|measSteps|workH/);
+  assert.match(copy, /We compare it with what came before\. We note where things stand first, so we can compare honestly\./);
+  assert.match(copy, /We see how visitors respond\./);
+  assert.doesNotMatch(code(journeys), /HowWeWork|ImproveMeasureReview/);
+  assert.equal((body.match(/<h1\b/g) || []).length, 1);
+});

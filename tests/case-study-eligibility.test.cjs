@@ -191,16 +191,17 @@ test('detail, /work cards, sitemap entries and static params list exactly the sa
   const s = setup(items, { newFields: '1' });
   const cards = (await s.api.getCaseStudyListCards()).map((c) => c.slug).sort();
   const params = (await s.api.getCaseStudyStaticParams()).map((p) => p.slug).sort();
-  assert.deepStrictEqual(cards, ['example-study', 'google-ads-for-online-courses', 'seo-ameba-software', 'seo-for-home-decor-brand']);
-  assert.deepStrictEqual(params, cards);
-  for (const slug of cards) assert.ok(await s.api.getCaseStudyDetail(slug), slug);
+  // sitemap cards leave out the unlisted Home Decor study; its page (params, detail) stays public
+  assert.deepStrictEqual(cards, ['example-study', 'google-ads-for-online-courses', 'seo-ameba-software']);
+  assert.deepStrictEqual(params, [...cards, 'seo-for-home-decor-brand'].sort());
+  for (const slug of params) assert.ok(await s.api.getCaseStudyDetail(slug), slug);
   for (const slug of ['half-done', 'dup']) assert.strictEqual(await s.api.getCaseStudyDetail(slug), null, slug);
   const sitemap = read('app/sitemap.ts'); const work = read('app/(pages)/work/page.tsx');
   // Sitemap reads the cards; /work (G7 library) reads fetchContentfulCaseStudies() through one loader, the same set.
   const loader = read('components/cplus/work/load.ts');
-  assert.ok(sitemap.includes('getCaseStudyListCards()') && work.includes('loadLibraryPage(1)') && loader.includes('libraryStudies(await fetchContentfulCaseStudies(), FEATURED_SLUG)'));
+  assert.ok(sitemap.includes('getCaseStudyListCards()') && work.includes('loadLibraryPage(1)') && loader.includes('libraryStudies((await fetchContentfulCaseStudies()).filter((s) => !UNLISTED_CASE_STUDY_IDS.has(s.id)), FEATURED_SLUG)'));
   const { featured, rest } = load('components/cplus/work/studies.ts').splitStudies(await s.api.fetchContentfulCaseStudies(), 'seo-ameba-software');
-  assert.deepStrictEqual([featured, ...rest].map((w) => w.slug).sort(), cards);
+  assert.deepStrictEqual([featured, ...rest].map((w) => w.slug).sort(), params);
   const detail = await s.api.getCaseStudyDetail('example-study');
   assert.strictEqual(detail.layout, 'new');
   assert.strictEqual(detail.newLayout.impact.content[0].content[0].value, 'The impact, as approved.');

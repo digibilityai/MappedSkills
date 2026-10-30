@@ -16,10 +16,11 @@ import {
   asService,
   type LibraryFilter,
 } from '@/lib/case-study-library';
-import { WORK as S } from './content';
-import { Card, Featured } from './WorkCards';
-import type { WorkStudy } from './studies';
-import type { WorkLibraryProps } from './WorkBody';
+import { WORK as S } from '../cplus/work/content';
+import type { WorkStudy } from '../cplus/work/studies';
+import { WorkCard } from '../resolve/WorkCard';
+import { toCard } from './work-cards';
+import type { WorkLibraryProps } from './Work';
 
 const EMPTY: LibraryFilter = { q: '', sector: null, service: null };
 const noop = () => () => {};
@@ -32,6 +33,9 @@ const useHydrated = () => useSyncExternalStore(noop, () => true, () => false);
  * same ordered list the pages are cut from — loaded on first use. Filter state lives in the query string (shareable;
  * the canonical stays `/work`). Below `CONTROLS_MIN_STUDIES` studies the controls are not rendered at all, and without
  * JavaScript they stay hidden (G1 R3 rule): the numbered pages then list every study.
+ *
+ * THE RESOLVE (Stage 3): on page 1, unfiltered, the first two studies open the work in the homepage lead and side
+ * composition (paper); the library follows on the shared case-study cards (ground). Filtering replaces both with results.
  */
 export function WorkLibrary({ items, page, pages, total, facets }: WorkLibraryProps) {
   const showControls = total >= CONTROLS_MIN_STUDIES && (facets.sectors.length > 0 || facets.services.length > 0 || total > PAGE_SIZE);
@@ -102,76 +106,93 @@ export function WorkLibrary({ items, page, pages, total, facets }: WorkLibraryPr
     setClientPage(1);
   };
 
-  const status = !filtering
-    ? `${total} case ${total === 1 ? 'study' : 'studies'}${pages > 1 ? `, page ${page} of ${pages}` : ''}`
-    : state === 'failed'
-      ? S.library.failed
-      : !all
-        ? S.library.loading
-        : `${results.length} of ${total} case ${total === 1 ? 'study' : 'studies'} match${results.length > 1 && resultPages > 1 ? `, page ${shownPage} of ${resultPages}` : ''}`;
+  // No case-study count is shown anywhere on /work. While filtering, the live region says only whether matches are shown.
+  const status = !filtering ? '' : state === 'failed' ? S.library.failed : !all ? S.library.loading : results.length ? S.library.showing : '';
+
+  const opening = !filtering && page === 1 ? items.slice(0, 2) : [];
+  const rest = !filtering && page === 1 ? items.slice(opening.length) : items;
+  const L = S.resolve.library;
+  const css = (i: number) => ({ '--i': i }) as React.CSSProperties;
 
   return (
-    <div className="wk-coll">
-      {!filtering && page === 1 && items[0] ? <Featured study={items[0]} /> : null}
-
-      <div className="wk-lib">
-        {showControls ? (
-          <form className="wk-ctl" role="search" aria-label={S.library.controls} hidden={!hydrated} onSubmit={(e) => e.preventDefault()}>
-            <div className="wk-ctl-row">
-              <label className="wk-q" htmlFor="wk-q">
-                <span className="px-sr">{S.library.search}</span>
-                <svg aria-hidden="true" viewBox="0 0 20 20" width="18" height="18">
-                  <circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" strokeWidth="2" />
-                  <path d="M13 13l5 5" stroke="currentColor" strokeWidth="2" />
-                </svg>
-                <input
-                  id="wk-q"
-                  type="search"
-                  value={filter.q}
-                  placeholder={S.library.searchHint}
-                  autoComplete="off"
-                  maxLength={100}
-                  onFocus={load}
-                  onChange={(e) => update({ q: e.target.value })}
-                />
-              </label>
-              {facets.sectors.length ? (
-                <label className="wk-sel" htmlFor="wk-industry">
-                  <span className="wk-k">{S.library.industry}</span>
-                  <select id="wk-industry" value={filter.sector ?? ''} onChange={(e) => update({ sector: asSector(e.target.value) })}>
-                    <option value="">{S.library.anyIndustry}</option>
-                    {facets.sectors.map((o) => (
-                      <option key={o.value} value={o.value}>
-                        {o.label} ({o.count})
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              ) : null}
+    <>
+      {opening.length ? (
+        <section className="wk-act b2-paper" aria-labelledby="wk-h-feat">
+          <div className="pa-wrap">
+            <header className="wk-head" data-reveal>
+              <p className="wk-ch"><span>01</span>{S.resolve.featured.ch}</p>
+              <h2 id="wk-h-feat" className="b2-h2">{S.resolve.featured.a} <span className="b2-em">{S.resolve.featured.b}</span></h2>
+            </header>
+            <div className="rs-wc-grid wk-open">
+              <WorkCard s={toCard(opening[0])} lead />
+              {opening[1] ? <WorkCard s={toCard(opening[1])} /> : null}
             </div>
-            {facets.services.length ? (
-              <div className="wk-chips" role="group" aria-label={S.library.service}>
-                <button type="button" aria-pressed={!filter.service} onClick={() => update({ service: null })}>
-                  {S.library.anyService}
-                </button>
-                {facets.services.map((o) => {
-                  const route = asService(`/${o.value}`);
-                  return (
-                    <button key={o.value} type="button" aria-pressed={filter.service === route} onClick={() => update({ service: filter.service === route ? null : route })}>
-                      {o.label} <span className="wk-n">{o.count}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            ) : null}
-          </form>
-        ) : null}
+          </div>
+        </section>
+      ) : null}
 
-        <div className="wk-status">
-          <h2 className="wk-status-h" tabIndex={-1} ref={resultsRef}>
-            {filtering ? S.library.status : page === 1 ? S.library.more : `Case studies, page ${page}`}
-          </h2>
-          <p role="status" aria-live="polite">
+      <section className="wk-act wk-ground" aria-labelledby="wk-h-lib">
+        <div className="pa-wrap">
+          <header className="wk-head wk-lib-head" data-reveal>
+            <p className="wk-ch">{opening.length ? <span>02</span> : null}{L.ch}</p>
+            <h2 id="wk-h-lib" className="b2-h2" tabIndex={-1} ref={resultsRef}>
+              {filtering ? S.library.status : page === 1 ? <>{L.a} <span className="b2-em">{L.b}</span></> : <>Case studies, <span className="b2-em">page {page}.</span></>}
+            </h2>
+          </header>
+
+          {showControls ? (
+            <form className="wk-ctl" role="search" aria-label={S.library.controls} hidden={!hydrated} onSubmit={(e) => e.preventDefault()}>
+              <div className="wk-ctl-row">
+                <label className="wk-q" htmlFor="wk-q">
+                  <span className="sr-only">{S.library.search}</span>
+                  <svg aria-hidden="true" viewBox="0 0 20 20" width="18" height="18">
+                    <circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" strokeWidth="2" />
+                    <path d="M13 13l5 5" stroke="currentColor" strokeWidth="2" />
+                  </svg>
+                  <input
+                    id="wk-q"
+                    type="search"
+                    value={filter.q}
+                    placeholder={S.library.searchHint}
+                    autoComplete="off"
+                    maxLength={100}
+                    onFocus={load}
+                    onChange={(e) => update({ q: e.target.value })}
+                  />
+                </label>
+                {facets.sectors.length ? (
+                  <label className="wk-sel" htmlFor="wk-industry">
+                    <span className="wk-k">{S.library.industry}</span>
+                    <select id="wk-industry" value={filter.sector ?? ''} onChange={(e) => update({ sector: asSector(e.target.value) })}>
+                      <option value="">{S.library.anyIndustry}</option>
+                      {facets.sectors.map((o) => (
+                        <option key={o.value} value={o.value}>
+                          {o.label} ({o.count})
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                ) : null}
+              </div>
+              {facets.services.length ? (
+                <div className="wk-chips" role="group" aria-label={S.library.service}>
+                  <button type="button" aria-pressed={!filter.service} onClick={() => update({ service: null })}>
+                    {S.library.anyService}
+                  </button>
+                  {facets.services.map((o) => {
+                    const route = asService(`/${o.value}`);
+                    return (
+                      <button key={o.value} type="button" aria-pressed={filter.service === route} onClick={() => update({ service: filter.service === route ? null : route })}>
+                        {o.label} <span className="wk-n">{o.count}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              ) : null}
+            </form>
+          ) : null}
+
+          <p className="wk-status" role="status" aria-live="polite">
             {showControls ? (hydrated ? status : '') : status}
             {filtering ? (
               <button type="button" className="wk-clear" onClick={clear}>
@@ -179,40 +200,43 @@ export function WorkLibrary({ items, page, pages, total, facets }: WorkLibraryPr
               </button>
             ) : null}
           </p>
-        </div>
 
-        {!filtering ? (
-          <>
-            <Grid studies={page === 1 ? items.slice(1) : items} />
+          {!filtering ? (
+            <>
+              <Grid studies={rest} css={css} />
+              <ServerPager page={page} pages={pages} />
+            </>
+          ) : state === 'failed' ? (
             <ServerPager page={page} pages={pages} />
-          </>
-        ) : state === 'failed' ? (
-          <ServerPager page={page} pages={pages} />
-        ) : !all ? null : results.length ? (
-          <>
-            <Grid studies={pageSlice(results, shownPage)} />
-            <ClientPager page={shownPage} pages={resultPages} onPage={goTo} />
-          </>
-        ) : (
-          <div className="wk-nomatch">
-            <p className="wk-nomatch-h">{S.library.noMatch}</p>
-            <p>{S.library.noMatchHint}</p>
-            <button type="button" className="wk-clear" onClick={clear}>
-              {S.library.showAll}
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
+          ) : !all ? null : results.length ? (
+            <>
+              <Grid studies={pageSlice(results, shownPage)} css={css} />
+              <ClientPager page={shownPage} pages={resultPages} onPage={goTo} />
+            </>
+          ) : (
+            <div className="wk-nomatch">
+              <p className="wk-nomatch-h">{S.library.noMatch}</p>
+              <p>{S.library.noMatchHint}</p>
+              <button type="button" className="wk-clear" onClick={clear}>
+                {S.library.showAll}
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+    </>
   );
 }
 
-function Grid({ studies }: { studies: WorkStudy[] }) {
+/** The library cards: the shared case-study card, text-only unless the study has approved artwork. */
+function Grid({ studies, css }: { studies: WorkStudy[]; css: (i: number) => React.CSSProperties }) {
   if (!studies.length) return null;
   return (
-    <ul className="wk-grid">
+    <ul className="wk-grid" role="list">
       {studies.map((s, i) => (
-        <Card key={s.slug} study={s} wide={i === 3} />
+        <li key={s.slug} style={css(i % 3)}>
+          <WorkCard s={toCard(s)} sizes="(min-width: 1081px) 420px, (min-width: 761px) 45vw, 100vw" />
+        </li>
       ))}
     </ul>
   );
@@ -267,12 +291,12 @@ function Pager({ page, pages, onPage, label }: { page: number; pages: number; on
             <li key={n}>
               {n === page ? (
                 <span className="wk-pg is-on" aria-current="page">
-                  <span className="px-sr">Page </span>
+                  <span className="sr-only">Page </span>
                   {n}
                 </span>
               ) : (
                 <PageItem n={n} cls="wk-pg" onPage={onPage}>
-                  <span className="px-sr">Page </span>
+                  <span className="sr-only">Page </span>
                   {n}
                 </PageItem>
               )}

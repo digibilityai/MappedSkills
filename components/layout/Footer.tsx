@@ -127,12 +127,12 @@ export function Footer() {
               {/*
                 SESSION 33 — PHASE I. These were `<h4>` under the removed CTA
                 strip's `<h2>`, which produced a 2 → 4 jump in the outline of
-                EVERY page. They are `<h2>` now — always valid after a page's
-                single `<h1>`, and no jump on any route. The `!` prefixes hold
+                EVERY page. They were `<h2>` then and are plain labels now
+                (Stage 4 Batch 1: a group title is not a section heading). The `!` prefixes hold
                 the size and weight against the global display scale for `h2`
                 in `app/globals.css`; the rendered appearance is unchanged.
               */}
-              <h2 className="!text-sm !font-bold !leading-tight font-heading uppercase tracking-wider text-white/90 mb-4">Services</h2>
+              <p className="!text-sm !font-bold !leading-tight font-heading uppercase tracking-wider text-white/90 mb-4">Services</p>
               <ul className="space-y-1">
                 <li>
                   <Link
@@ -190,7 +190,7 @@ export function Footer() {
 
             {/* Column 3: Company */}
             <div>
-              <h2 className="!text-sm !font-bold !leading-tight font-heading uppercase tracking-wider text-white/90 mb-4">Company</h2>
+              <p className="!text-sm !font-bold !leading-tight font-heading uppercase tracking-wider text-white/90 mb-4">Company</p>
               <ul className="space-y-1">
                 <li>
                   <Link
@@ -307,7 +307,7 @@ export function Footer() {
 
             {/* Column 4: Contact */}
             <div>
-              <h2 className="!text-sm !font-bold !leading-tight font-heading uppercase tracking-wider text-white/90 mb-4">Contact</h2>
+              <p className="!text-sm !font-bold !leading-tight font-heading uppercase tracking-wider text-white/90 mb-4">Contact</p>
               <ul className="space-y-4 mb-6">
                 <li>
                   <p className="text-xs text-white/80 uppercase tracking-wider mb-1">Email</p>

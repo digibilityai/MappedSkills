@@ -1,0 +1,53 @@
+/* Conceptual case-study illustrations (components/case-study/CaseArt.tsx). Each study has its own tones from the brand
+   family. The settled drawing is the base style; the entrance plays once when the host scrolls in (`.ca-host`, armed by
+   HwSequence), only under `prefers-reduced-motion: no-preference`. Parallax is scroll-linked CSS where supported, a few
+   pixels of drift, never a loop. */
+.ca { display: block; width: 100%; height: 100%; --ca-bg: #0F0D14; --ca-line: #F7F3EC; --ca-ac: #FF5B04; --ca-fill: #1D1A26; --ca-dim: #6A6475; --ca-dot: rgba(247, 243, 236, .16); }
+.ca.m-baking { --ca-bg: #A83400; --ca-line: #FFFDF9; --ca-ac: #FFB58A; --ca-fill: #8F2C00; --ca-dim: #E9A27C; --ca-dot: rgba(255, 253, 249, .2); }
+.ca.m-coaching { --ca-bg: #0F0D14; --ca-line: #F7F3EC; --ca-ac: #FF5B04; --ca-fill: #1D1A26; --ca-dim: #6A6475; }
+.ca.m-insurance { --ca-bg: #F7F3EC; --ca-line: #141219; --ca-ac: #A83400; --ca-fill: #EADFCB; --ca-dim: #9A8E7C; --ca-dot: rgba(20, 18, 25, .16); }
+.ca.m-software { --ca-bg: #141219; --ca-line: #FFFDF9; --ca-ac: #FF5B04; --ca-fill: #26222F; --ca-dim: #7D7690; }
+.ca.m-home { --ca-bg: #DED6C8; --ca-line: #141219; --ca-ac: #A83400; --ca-fill: #F7F3EC; --ca-dim: #8C8272; --ca-dot: rgba(20, 18, 25, .14); }
+
+.ca-bg { fill: var(--ca-bg); }
+.ca-dots path { fill: none; stroke: var(--ca-dot); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1 23; }
+.ca path, .ca rect, .ca circle, .ca ellipse { vector-effect: none; }
+.ca .l { fill: none; stroke: var(--ca-line); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.ca .d { fill: var(--ca-dim); stroke: none; }
+.ca path.d, .ca circle.d.ca-draw { fill: none; stroke: var(--ca-dim); stroke-width: 2.5; stroke-linecap: round; }
+.ca .f { fill: var(--ca-fill); stroke: var(--ca-line); stroke-width: 3; stroke-linejoin: round; }
+.ca .a { fill: var(--ca-ac); stroke: none; }
+.ca .a.o { opacity: .28; }
+.ca .o:not(.a) { fill: var(--ca-line); stroke: none; }
+.ca .dash { stroke-dasharray: 6 12; }
+
+/* animated parts: transform-box so scales and rises are about the shape itself */
+.ca-rise, .ca-pop { transform-box: fill-box; transform-origin: center; }
+.ca .leaf { transform-origin: 100% 100%; }
+.ca .leaf.r { transform-origin: 0 100%; }
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes ca-rise { from { opacity: 0; transform: translateY(26px); } }
+  @keyframes ca-pop { from { opacity: 0; transform: scale(.5); } }
+  @keyframes ca-draw { from { stroke-dashoffset: 1; } }
+  .ca-host .ca-rise { animation: ca-rise .9s cubic-bezier(.16, 1, .3, 1) both; animation-delay: calc(var(--d, 0) * 110ms + 120ms); }
+  .ca-host .ca-pop { animation: ca-pop .7s cubic-bezier(.34, 1.4, .64, 1) both; animation-delay: calc(var(--d, 0) * 110ms + 120ms); }
+  .ca-host .ca-draw:not(.dash) { stroke-dasharray: 1; animation: ca-draw 1.3s cubic-bezier(.4, 0, .2, 1) both; animation-delay: calc(var(--d, 0) * 110ms + 120ms); }
+  .ca-host .ca-draw.dash { animation: ca-fade .9s ease-out both; animation-delay: calc(var(--d, 0) * 110ms + 120ms); }
+  @keyframes ca-fade { from { opacity: 0; } }
+  /* waiting below the first screen: nothing drawn yet; released once by HwSequence */
+  .ca-host[data-anim='armed'] .ca-rise, .ca-host[data-anim='armed'] .ca-pop, .ca-host[data-anim='armed'] .ca-draw { animation: none; opacity: 0; }
+
+  /* a few pixels of depth between the layers while the picture crosses the screen (progressive enhancement) */
+  @supports (animation-timeline: view()) {
+    @keyframes ca-par1 { from { translate: 0 16px; } to { translate: 0 -16px; } }
+    @keyframes ca-par2 { from { translate: 0 28px; } to { translate: 0 -28px; } }
+    @keyframes ca-par3 { from { translate: 0 -10px; } to { translate: 0 10px; } }
+    .ca-host.is-par .ca-p1 { animation: ca-par1 linear both; animation-timeline: view(); }
+    .ca-host.is-par .ca-p2 { animation: ca-par2 linear both; animation-timeline: view(); }
+    .ca-host.is-par .ca-p3 { animation: ca-par3 linear both; animation-timeline: view(); }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ca *, .ca-host * { animation: none !important; transition: none !important; }
+}

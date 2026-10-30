@@ -1,0 +1,200 @@
+/* /about: THE RESOLVE story (Stage 2). Scoped to `.b2.ab`, loaded after b2.css; kept out of b2.css so the shared B2 motion
+   policy (no keyframes there) stays as it is for the other B2 pages. Same motion policy as /how-it-works and the homepage:
+   once only, decorative parts only (marks, connectors, nodes), transforms and opacity; the settled state is the base style;
+   every keyframe sits inside `prefers-reduced-motion: no-preference`, and reduced motion clears it explicitly. */
+
+.b2.ab { --ease: cubic-bezier(.16, 1, .3, 1); --ab-dash: #8E8798; --ab-rule-dark: #2C2833; --ab-mark: #3A3544; }
+/* Content width and gutters: the homepage rule (.rv3-wrap), the same --dc-wrap/--dc-pad the header and footer use. */
+.b2.ab .pa-wrap { width: calc(min(var(--dc-wrap, 1360px), 100%) - 2 * var(--dc-pad, 16px)); }
+
+/* ---- Grounds and two-tone headings (light: Ink plus burnt; dark: white plus tangerine) ---- */
+.b2.ab .ab-act { padding-block: var(--v-sec); }
+.b2.ab .ab-ground { background: var(--v-ground); }
+.b2.ab .b2-paper { border-block: 1px solid var(--v-line); }
+.b2.ab .ab-dark { background: var(--v-deep); color: var(--v-on-dark); }
+html .b2.ab .ab-dark :where(h1, h2, h3) { color: #fff; }
+html .b2.ab .ab-dark p { color: var(--v-soft); }
+html .b2.ab .ab-dark .b2-lede { color: var(--v-on-dark); }
+html .b2.ab .b2-em { color: var(--v-burnt); font-style: normal; }
+html .b2.ab .ab-dark .b2-em { color: var(--v-tang); }
+html .b2.ab .ab-dark .pa-action--text { color: var(--v-tang); }
+html .b2.ab .ab-dark .pa-action--text:hover { color: #fff; }
+html .b2.ab .ab-dark .pa-action--primary { border-color: rgba(255, 255, 255, .18); }
+html .b2.ab .ab-dark :focus-visible { outline-color: #fff; }
+
+/* ---- Chapter head: number, name, the answer as the H2 ---- */
+.b2.ab .ab-head { margin-bottom: clamp(28px, 3vw, 48px); }
+.b2.ab .ab-head .b2-h2 { max-width: 20ch; }
+.b2.ab .ab-head .b2-lede { margin-top: 18px; max-width: 44em; }
+.b2.ab .ab-ch { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: var(--resolve-dim); font: 800 .72rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+.b2.ab .ab-ch span { display: inline-flex; align-items: center; gap: 12px; color: var(--v-burnt); font: 800 1rem/1 var(--font-bricolage), sans-serif; letter-spacing: -.01em; }
+.b2.ab .ab-ch span::after { content: ''; width: 28px; height: 2px; background: currentColor; }
+html .b2.ab .ab-dark .ab-ch { color: var(--v-soft); }
+.b2.ab .ab-dark .ab-ch span { color: var(--v-tang); }
+.b2.ab .ab-sub { margin: 0 0 18px; color: var(--resolve-dim); font: 800 .72rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+html .b2.ab .ab-sub-dark { color: var(--v-tang); margin-top: clamp(40px, 4vw, 64px); }
+
+/* =====================================================================================================================
+   Hero: the promise, and the Resolve idea: a field of anonymous visits, a few people who ask.
+   ===================================================================================================================== */
+.b2.ab .ab-hero { padding-block: clamp(32px, 3.6vw, 56px) clamp(36px, 4vw, 64px); }
+.b2.ab .ab-hero-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 32px); align-items: center; }
+.b2.ab .ab-hero-copy { grid-column: 1 / span 6; }
+.b2.ab .ab-hero .pa-eyebrow { color: var(--v-tang); margin-bottom: 16px; }
+html .b2.ab .ab-hero h1 { font-size: clamp(2.5rem, 4.5vw, 4.3rem); line-height: .99; max-width: 13ch; color: #fff; }
+html .b2.ab .ab-hero h1 span { color: var(--v-tang); }
+html .b2.ab .ab-hero .b2-lede { margin-top: 20px; max-width: 34em; font-size: clamp(1.02rem, 1.3vw, 1.2rem); }
+.b2.ab .ab-hero .pa-actions { margin-top: 26px; }
+
+.b2.ab .ab-field { grid-column: 7 / span 6; margin: 0; }
+.b2.ab .ab-field-in { display: grid; grid-template-columns: minmax(0, 1fr) clamp(36px, 4vw, 64px) minmax(120px, .5fr); align-items: center; gap: clamp(12px, 1.4vw, 20px); padding: clamp(20px, 2.2vw, 32px); border: 1px solid var(--ab-rule-dark); border-radius: 6px; background: linear-gradient(180deg, #17141E, var(--v-deep)); }
+html .b2.ab .ab-field-k { margin-bottom: 14px; color: var(--v-soft); font: 800 .6875rem/1 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+html .b2.ab .ab-field-out .ab-field-k { color: var(--v-tang); }
+.b2.ab .ab-marks { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: clamp(8px, 1vw, 14px); margin: 0; padding: 0; list-style: none; }
+.b2.ab .ab-marks li { aspect-ratio: 1; max-width: 14px; border-radius: 50%; background: var(--ab-mark); }
+.b2.ab .ab-marks li.on { background: var(--v-tang); box-shadow: 0 0 0 4px rgba(255, 91, 4, .22); }
+.b2.ab .ab-field-arrow { position: relative; height: 2px; background: var(--v-tang); transform-origin: left; }
+.b2.ab .ab-field-arrow::after { content: ''; position: absolute; right: -2px; top: -6px; border-left: 10px solid var(--v-tang); border-block: 7px solid transparent; }
+.b2.ab .ab-asked { display: flex; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.b2.ab .ab-asked li { width: 26px; height: 26px; border-radius: 50%; background: var(--v-tang); box-shadow: 0 0 0 3px var(--v-deep), 0 0 0 5px rgba(255, 91, 4, .45); }
+html .b2.ab .ab-field-say { margin-top: 16px; color: #fff; font: 800 clamp(1.05rem, 1.5vw, 1.35rem)/1.15 var(--font-bricolage), sans-serif; letter-spacing: -.01em; }
+.b2.ab .ab-field figcaption { margin-top: 10px; color: #B7B0BF; font-size: .78rem; font-weight: 600; line-height: 1.45; }
+
+/* =====================================================================================================================
+   01 The problem: the headline (the shared b2-h2 scale, as every chapter), then the three beliefs as a rising staircase.
+   ===================================================================================================================== */
+.b2.ab .ab-stairs { --g: clamp(20px, 3vw, 48px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--g); margin: 0; padding: 0; list-style: none; }
+.b2.ab .ab-stairs li { position: relative; padding-top: 34px; }
+.b2.ab .ab-stairs li:nth-child(2) { margin-top: clamp(0px, 4vw, 56px); }
+.b2.ab .ab-stairs li:nth-child(3) { margin-top: clamp(0px, 8vw, 112px); }
+.b2.ab .ab-stairs li::before { content: ''; position: absolute; left: 0; right: 0; top: 13px; height: 2px; background: var(--v-ink); transform-origin: left; }
+.b2.ab .ab-stairs li:last-child::before { background: var(--v-burnt); }
+.b2.ab .ab-step { position: absolute; left: 0; top: 0; z-index: 1; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--v-ink); color: #fff; font: 800 .8rem/1 var(--font-manrope), sans-serif; }
+.b2.ab .ab-stairs li:last-child .ab-step { background: var(--v-burnt); }
+html .b2.ab .ab-stairs h3 { font-size: clamp(1.4rem, 2.2vw, 2rem); line-height: 1.08; color: var(--v-ink); }
+.b2.ab .ab-stairs p { margin-top: 10px; max-width: 34ch; color: var(--resolve-dim); }
+
+/* =====================================================================================================================
+   02 How we decide: Capture, Convert, Measure (the homepage ownership strip), with the two services inside Capture.
+   ===================================================================================================================== */
+.b2.ab .ab-ccm { display: grid; grid-template-columns: minmax(0, 2.4fr) minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(14px, 2vw, 32px); margin: 0; padding: 0; list-style: none; align-items: start; }
+.b2.ab .ab-ccm > li { position: relative; padding-top: 18px; }
+.b2.ab .ab-ccm > li::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--v-burnt); transform-origin: left; }
+.b2.ab .ab-ccm > li.conv::before { background: repeating-linear-gradient(90deg, var(--ab-dash) 0 7px, transparent 7px 12px); }
+.b2.ab .ab-stage { display: flex; flex-direction: column; gap: 8px; }
+.b2.ab .ab-stage b { color: var(--v-ink); font: 800 clamp(1.3rem, 2.2vw, 2rem)/1 var(--font-bricolage), sans-serif; letter-spacing: -.03em; text-transform: uppercase; }
+html .b2.ab .ab-stage span { color: var(--v-burnt); font: 800 .7rem/1.45 var(--font-manrope), sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+html .b2.ab .conv .ab-stage span { color: var(--resolve-dim); }
+.b2.ab .ab-svc { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 22px; }
+.b2.ab .ab-svc > div { display: flex; flex-direction: column; gap: 8px; padding: clamp(20px, 2.4vw, 32px); border: 1px solid var(--v-ink); background: var(--v-paper); }
+.b2.ab .ab-svc > div + div { border-left: 0; background: var(--v-deep); color: var(--v-on-dark); }
+.b2.ab .ab-svc .t { color: var(--v-burnt); font: 800 .7rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+.b2.ab .ab-svc > div + div .t { color: var(--v-tang); }
+html .b2.ab .ab-svc h3 { font-size: clamp(1.7rem, 2.6vw, 2.4rem); color: var(--v-ink); }
+html .b2.ab .ab-svc > div + div h3 { color: #fff; }
+html .b2.ab .ab-svc p { color: var(--v-ink); }
+html .b2.ab .ab-svc > div + div p { color: var(--v-soft); }
+html .b2.ab .ab-svc > div + div .pa-action--text { color: var(--v-tang); }
+html .b2.ab .ab-svc > div + div :focus-visible { outline-color: #fff; }
+.b2.ab .ab-svc .pa-action { margin-top: auto; align-self: flex-start; }
+.b2.ab .ab-also { max-width: 46em; margin-top: clamp(24px, 2.6vw, 36px); }
+
+/* =====================================================================================================================
+   03 Working together: our part and yours, with your approval as the gate between them.
+   ===================================================================================================================== */
+.b2.ab .ab-pact { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(200px, .8fr) minmax(0, 1fr); align-items: center; gap: clamp(16px, 2vw, 32px); }
+.b2.ab .ab-pact::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: repeating-linear-gradient(90deg, var(--v-tang) 0 8px, transparent 8px 14px); transform-origin: center; }
+.b2.ab .ab-part { position: relative; padding: clamp(22px, 2.6vw, 36px); border-radius: 6px; }
+.b2.ab .ab-part b { display: block; margin-bottom: 8px; font: 800 .72rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+html .b2.ab .ab-part p { font: 800 clamp(1.4rem, 2.4vw, 2.2rem)/1.1 var(--font-bricolage), sans-serif; letter-spacing: -.025em; }
+.b2.ab .ab-part.ours { background: var(--v-paper); border-top: 5px solid var(--v-tang); }
+.b2.ab .ab-part.ours b { color: var(--v-burnt); }
+html .b2.ab .ab-part.ours p { color: var(--v-ink); }
+.b2.ab .ab-part.yours { background: var(--v-deep); border: 2px dashed var(--ab-dash); }
+.b2.ab .ab-part.yours b { color: var(--v-soft); }
+html .b2.ab .ab-part.yours p { color: #fff; }
+.b2.ab .ab-gate { position: relative; display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 16px 8px; background: var(--v-deep); text-align: center; }
+.b2.ab .ab-dia { width: 56px; height: 56px; border-radius: 8px; background: var(--v-tang); box-shadow: 0 0 0 8px var(--v-deep), 0 0 0 10px rgba(255, 91, 4, .35); transform: rotate(45deg); }
+html .b2.ab .ab-gate p { max-width: 20ch; color: #fff; font: 700 clamp(1rem, 1.3vw, 1.15rem)/1.35 var(--font-bricolage), sans-serif; }
+.b2.ab .ab-count { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 48px); margin: 0; padding: 0; list-style: none; }
+.b2.ab .ab-count li { display: flex; flex-direction: column; gap: 8px; padding-top: 18px; border-top: 1px solid #4A4553; }
+.b2.ab .ab-count b { color: #fff; font: 800 clamp(1.25rem, 1.8vw, 1.6rem)/1.15 var(--font-bricolage), sans-serif; letter-spacing: -.015em; }
+.b2.ab .ab-count span { color: var(--v-soft); line-height: 1.55; }
+.b2.ab .ab-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 32px; margin-top: clamp(28px, 3vw, 44px); padding-top: 18px; border-top: 1px solid var(--ab-rule-dark); }
+html .b2.ab .ab-foot p { color: #fff; font-weight: 700; }
+
+/* =====================================================================================================================
+   04 The work: shared case-study cards (components/resolve/WorkCard).
+   ===================================================================================================================== */
+.b2.ab .ab-work-top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 8px 32px; margin-bottom: clamp(28px, 3vw, 48px); }
+.b2.ab .ab-work-top .ab-head { margin-bottom: 0; }
+html .b2.ab .ab-press { margin-top: clamp(36px, 4vw, 56px); padding-top: 18px; border-top: 1px solid var(--v-line); color: var(--resolve-dim); font-size: .9375rem; }
+.b2.ab .ab-press a { color: var(--v-burnt); font-weight: 700; text-underline-offset: 4px; }
+
+/* ---- Entrances: the shared PaReveal, staggered by --i ---- */
+.b2.ab [data-reveal] { transition-delay: calc(var(--i, 0) * 80ms); }
+
+/* =====================================================================================================================
+   Motion. The hero field plays once on load (the first screen, as on the homepage). The other diagrams are armed by
+   HwSequence only when they start below the fold and play once on entering view. The hero settles in under three seconds.
+   ===================================================================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  .b2.ab .ab-marks li { animation: ab-in .4s ease both; animation-delay: calc(var(--r) * 90ms + var(--k) * 25ms + 150ms); }
+  .b2.ab .ab-marks li.on { animation: ab-in .4s ease both, ab-on .7s var(--ease) both; animation-delay: calc(var(--r) * 90ms + var(--k) * 25ms + 150ms), 1150ms; }
+  .b2.ab .ab-field-arrow { animation: ab-line .5s ease-out 1500ms both; }
+  .b2.ab .ab-field-arrow::after { animation: ab-in .2s ease 1950ms both; }
+  .b2.ab .ab-asked li { animation: ab-pop .5s var(--ease) both; }
+  .b2.ab .ab-asked li:nth-child(1) { animation-delay: 1900ms; }
+  .b2.ab .ab-asked li:nth-child(2) { animation-delay: 2020ms; }
+  .b2.ab .ab-asked li:nth-child(3) { animation-delay: 2140ms; }
+
+  .b2.ab .ab-stairs[data-anim='armed'] li::before { transform: scaleX(0); }
+  .b2.ab .ab-stairs[data-anim='armed'] .ab-step { opacity: .2; transform: scale(.7); }
+  .b2.ab .ab-stairs[data-anim='play'] .ab-step { animation: ab-pop .5s var(--ease) both; animation-delay: calc(var(--i) * 380ms); }
+  .b2.ab .ab-stairs[data-anim='play'] li::before { animation: ab-line .5s ease-out both; animation-delay: calc(var(--i) * 380ms + 180ms); }
+
+  .b2.ab .ab-ccm[data-anim='armed'] > li::before { transform: scaleX(0); }
+  .b2.ab .ab-ccm[data-anim='play'] > li::before { animation: ab-line .5s ease-out both; animation-delay: calc(var(--i) * 420ms + 100ms); }
+
+  .b2.ab .ab-pact[data-anim='armed']::before { transform: scaleX(0); }
+  .b2.ab .ab-pact[data-anim='armed'] .ab-dia { opacity: 0; }
+  .b2.ab .ab-pact[data-anim='play']::before { animation: ab-line .6s ease-out .1s both; }
+  .b2.ab .ab-pact[data-anim='play'] .ab-dia { animation: ab-gate .7s var(--ease) .6s both; }
+
+  @keyframes ab-in { from { opacity: 0; } }
+  @keyframes ab-on { from { background: var(--ab-mark); box-shadow: none; } 55% { box-shadow: 0 0 0 9px rgba(255, 91, 4, .32); } }
+  @keyframes ab-line { from { transform: scaleX(0); } }
+  @keyframes ab-linev { from { transform: scaleY(0); } }
+  @keyframes ab-pop { from { opacity: .2; transform: scale(.7); } }
+  @keyframes ab-gate { from { opacity: 0; transform: rotate(45deg) scale(.6); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .b2.ab *, .b2.ab *::before, .b2.ab *::after { animation: none !important; transition: none !important; }
+}
+
+/* =====================================================================================================================
+   Responsive: Medium 761 to 1080, Narrow up to 760 (the homepage breakpoints).
+   ===================================================================================================================== */
+@media (max-width: 1080px) {
+  .b2.ab .ab-hero-grid { display: block; }
+  .b2.ab .ab-field { margin-top: clamp(28px, 4vw, 44px); }
+  .b2.ab .ab-ccm { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
+  .b2.ab .ab-ccm > li.cap { grid-column: 1 / -1; }
+  .b2.ab .ab-count { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .b2.ab .ab-count li { padding-block: 16px; }
+}
+@media (max-width: 760px) {
+  .b2.ab .ab-field-in { grid-template-columns: minmax(0, 1fr); }
+  .b2.ab .ab-field-arrow { width: 2px; height: 32px; margin-left: 12px; transform-origin: top; }
+  .b2.ab .ab-field-arrow::after { right: auto; left: -6px; top: auto; bottom: -2px; border-block: 0; border-top: 10px solid var(--v-tang); border-inline: 7px solid transparent; }
+  .b2.ab .ab-stairs { grid-template-columns: minmax(0, 1fr); row-gap: 28px; }
+  .b2.ab .ab-stairs li:nth-child(2), .b2.ab .ab-stairs li:nth-child(3) { margin-top: 0; }
+  .b2.ab .ab-ccm { grid-template-columns: minmax(0, 1fr); }
+  .b2.ab .ab-svc { grid-template-columns: minmax(0, 1fr); }
+  .b2.ab .ab-svc > div + div { border-left: 1px solid var(--v-ink); border-top: 0; }
+  .b2.ab .ab-pact { grid-template-columns: minmax(0, 1fr); }
+  .b2.ab .ab-pact::before { left: 50%; right: auto; top: 0; bottom: 0; width: 2px; height: auto; background: repeating-linear-gradient(180deg, var(--v-tang) 0 8px, transparent 8px 14px); }
+  .b2.ab .ab-pact[data-anim='armed']::before { transform: scaleY(0); }
+  .b2.ab .ab-pact[data-anim='play']::before { animation-name: ab-linev; }
+  .b2.ab .ab-field-arrow { animation-name: ab-linev; }
+}

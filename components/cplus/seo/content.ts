@@ -1,5 +1,5 @@
 /**
- * C+ SEO (/seo) — customer-facing copy. Redesigned page (owner-approved Phase 1 proposal and editorial changes,
+ * C+ SEO (/seo): customer-facing copy. Redesigned page (owner-approved Phase 1 proposal and editorial changes,
  * 2026-10-15; docs/seo-redesign/PHASE_1_AUDIT_AND_PROPOSAL.md). Rules this copy follows:
  *   - no ranking, traffic, enquiry, revenue or ROI promises, and no figures of any kind;
  *   - the two projects are separate, historical SEO projects delivered by MappedSkills, with no results published;
@@ -25,9 +25,9 @@ export const SEO_PLAIN = {
     { key: 'page', name: 'Your page' },
     { key: 'enquiry', name: 'An enquiry', tag: 'What we judge it on' },
   ],
-  trailCap: 'Illustration.',
+  trailCap: 'Illustration. It shows no results.',
 
-  /* 2 — customer questions */
+  /* 2: customer questions */
   probKicker: 'Sound familiar?',
   probH: { a: 'Where SEO', b: 'usually goes wrong.' },
   problems: [
@@ -44,20 +44,13 @@ export const SEO_PLAIN = {
       a: 'Rankings and visits are not the same as enquiries. We focus on what changed for the business.',
     },
   ],
-  /* 2 — structure of the trail drawing (layout only; no copy). x = position along the trail, in percent. */
-  trailMap: {
-    stations: [
-      { name: 'A search', x: 3 },
-      { name: 'A result', x: 24 },
-      { name: 'Your page', x: 36 },
-      { name: 'An enquiry', x: 52, end: true },
-    ],
-    breaks: [13, 41, 69],
-    elsewhere: 'somebody else',
-  },
+  /* the word the hero picture uses for whoever else is shown above you */
+  trailMap: { elsewhere: 'somebody else' },
+  /* where on the route each break sits (the first is between a search and a result, and so on) */
+  probTags: ['Between a search and a result', 'Between your page and an enquiry', 'After the enquiry'],
   probLink: { label: 'Have the traffic but not the enquiries? Start here', href: '/problems/traffic-but-no-enquiries' },
 
-  /* 3 — what the work includes */
+  /* 3: what the work includes */
   workKicker: 'The work',
   workH: { a: 'What our SEO work', b: 'includes.' },
   workSub: 'Scoped to what your business needs. Not every engagement includes every item.',
@@ -89,7 +82,7 @@ export const SEO_PLAIN = {
     },
   ],
 
-  /* 4 — how we work */
+  /* 4: how we work */
   howKicker: 'How we work',
   howH: { a: 'Four steps,', b: 'in this order.' },
   howLabel: 'How we work, in four steps',
@@ -101,9 +94,9 @@ export const SEO_PLAIN = {
   ],
   howLink: { label: 'See the full process', href: '/how-it-works' },
 
-  /* 5 — measurement: an illustrative layout only */
+  /* 5: measurement: an illustrative layout only */
   measKicker: 'Measurement',
-  measH: { a: 'What an SEO performance', b: 'review can cover.' },
+  measH: { a: 'What an SEO', b: 'performance review', c: 'can cover.' },
   measTag: 'Illustrative layout. No real figures.',
   tiles: [
     { key: 'vis', t: 'Relevant search visibility', d: 'Where you appear for the searches that matter.' },
@@ -115,7 +108,7 @@ export const SEO_PLAIN = {
   measNote: 'Some enquiries arrive with no clear source. We show those separately instead of counting them as SEO.',
   measLink: { label: 'How we track enquiries', href: '/how-it-works' },
 
-  /* 6 — commitments */
+  /* 6: commitments */
   comKicker: 'What you can expect',
   comH: { a: 'Clear work.', b: 'Visible progress.' },
   comLine: 'We identify what needs improving, act on agreed priorities and show you what changed.',
@@ -127,7 +120,7 @@ export const SEO_PLAIN = {
   ],
   comNote: 'SEO takes consistent work. We’ll explain what needs attention first and what progress you can realistically expect.',
 
-  /* 7 — two separate historical SEO projects (no results are published; no case-study links exist) */
+  /* 7: two separate historical SEO projects (no results are published; no case-study links exist) */
   projKicker: 'SEO projects',
   projH: { a: 'SEO work', b: 'we’ve delivered.' },
   projIntro: 'Two historical projects where MappedSkills delivered the SEO work.',
@@ -152,7 +145,7 @@ export const SEO_PLAIN = {
     },
   ],
 
-  /* 8 — questions */
+  /* 8: questions */
   qKicker: 'Questions',
   qH: { a: 'Common', b: 'questions.' },
   questions: [

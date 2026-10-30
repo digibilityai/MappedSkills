@@ -5,7 +5,7 @@ import { useSequence, type Sequence } from '../ai-seo/Sequence';
 import { LG } from './content';
 
 /**
- * The four animated journeys on /lead-generation (owner-approved G1 design, DEC-057). They use the shared /ai-seo
+ * The three animated journeys on /lead-generation (owner-approved G1 design, DEC-057). They use the shared /ai-seo
  * sequencer (../ai-seo/Sequence, unchanged) with this page's timing: 2 seconds between steps (owner instruction, not the
  * 1.5 s of /ai-seo and /conversion-optimization), and step 1 on screen from the start (never a blank block). Each plays
  * once, keeps the finished state, has no pause, play or replay control, and stops when a visitor selects a step.
@@ -39,6 +39,7 @@ export function HeroJourney() {
   const h = LG.hero;
   return (
     <figure ref={ref} className={cls(q, 'lx-hero-fig')} aria-labelledby="lx-hero-cap" {...root(q, 3)}>
+      <p className="lx-hero-q">{h.q}</p>
       <div className="lx-enq" aria-hidden="true">
         <div className="lx-enq-top">
           <span className="lx-enq-k">{h.label}</span>
@@ -80,7 +81,7 @@ export function HeroJourney() {
   );
 }
 
-/* ------------------------------------------------------------------ 3. what we do: one path, four stops */
+/* ------------------------------------------------------------------ 3. the journey: one path, four stops */
 const ART: ReactNode[] = [
   <svg key="a" className="lx-art" viewBox="0 0 120 72" aria-hidden="true" focusable="false">
     <g className="lx-s"><circle cx="18" cy="22" r="7" /><path d="M6 46c0-8 5-12 12-12s12 4 12 12" /><circle cx="44" cy="22" r="7" /><path d="M32 46c0-8 5-12 12-12s12 4 12 12" /></g>
@@ -119,25 +120,7 @@ export function PathJourney() {
   );
 }
 
-/* ------------------------------------------------------------------ 4. how an enquiry reaches you: three steps */
-export function ReachJourney() {
-  const [ref, q] = useSequence<HTMLDivElement>(3, OPTS);
-  return (
-    <div ref={ref} className={cls(q, 'lx-sort')} {...root(q, 3)}>
-      <ol className="lx-gates" aria-label={LG.reachLabel}>
-        {LG.reach.map((s, j) => (
-          <li key={s.t} className={`lx-tile ${j === 2 ? 'lx-tile-ink' : 'lx-tile-cream'} lx-gate ${q.state(j)}`} data-i="" aria-current={q.on(j) ? 'step' : undefined}>
-            <Num q={q} j={j} label={s.t} />
-            <h3 className="lx-gate-t">{s.t}</h3>
-            <p className="lx-gate-d">{s.d}</p>
-          </li>
-        ))}
-      </ol>
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ 7. what happens next */
+/* ------------------------------------------------------------------ 6. what happens next (compact, not a dominant journey) */
 export function NextJourney() {
   const [ref, q] = useSequence<HTMLOListElement>(5, OPTS);
   return (

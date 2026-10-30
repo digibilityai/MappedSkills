@@ -25,6 +25,7 @@ export const LG = {
       { f: 'Needs', v: 'A quote for an office fit-out' },
       { f: 'Contact', v: 'Work email and WhatsApp' },
     ],
+    q: 'Are they the right ones?',
     hand: 'Your sales team',
     listLabel: 'How an enquiry reaches your team',
     steps: [
@@ -45,7 +46,6 @@ export const LG = {
     t: 'It’s busy, but not with buyers',
     d: 'More of the same only means more sorting.',
   },
-  probCap: 'Illustration.',
   probLine: { a: 'Each needs a different fix.', b: 'We find out which one you have first.' },
 
   /* 3: what we do (paper): one path, four stops */
@@ -60,16 +60,7 @@ export const LG = {
     { t: 'See where it came from', d: 'Where we can tell, which work brought it in.' },
   ],
 
-  /* 4: how an enquiry reaches you (ground): the same three steps */
-  reachKicker: 'How an enquiry reaches you',
-  reachH: { a: 'Enquiries go', b: 'straight to your team.' },
-  reachIntro: 'Enquiries go to your own form, CRM or WhatsApp, depending on your setup.',
-  reachLabel: 'The three steps',
-  reach: [
-    { t: 'Someone sees your ad', d: 'Your campaign reaches the people you want to reach.' },
-    { t: 'They send an enquiry', d: 'They tell you what they need.' },
-    { t: 'Your team receives it', d: 'In your own form, CRM or WhatsApp.' },
-  ],
+  /* the two operating statements kept from the merged "how an enquiry reaches you" section (DEC-095) */
   facts: [
     { b: 'You tell us who you want to reach.', t: 'We build campaigns around them.' },
     { b: 'We don’t call your enquiries to qualify them.', t: 'Your team has the sales conversation.' },
@@ -88,7 +79,11 @@ export const LG = {
   notPromisedK: 'We won’t promise',
   notPromised: ['A set number of enquiries', 'A fixed cost per lead', 'How many become sales'],
   notPromisedWhy: 'These depend on your market and your sales team too.',
-  get: { k: 'What you do get', t: 'You receive a monthly report on campaign performance.' },
+  get: {
+    k: 'What you do get',
+    t: 'You receive a monthly report on campaign performance.',
+    start: 'We capture a starting point first, so whatever happens next is measurable rather than arguable.',
+  },
   bdLink: { label: 'See how we work', href: '/how-it-works' },
 
   /* 6: questions (paper) */

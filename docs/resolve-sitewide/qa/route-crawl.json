@@ -1,0 +1,718 @@
+[
+ {
+  "route": "/",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "",
+  "h1n": 1,
+  "h1": "Paid advertising built around how your customers buy.",
+  "desc": 139,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/services",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/services",
+  "h1n": 1,
+  "h1": "Reach more of the right customers with Google Ads and Meta A",
+  "desc": 151,
+  "ld": [
+   "Organization",
+   "BreadcrumbList",
+   "FAQPage",
+   "Service",
+   "Service"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/seo",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/seo",
+  "h1n": 1,
+  "h1": "SEO that is judged on the enquiries it produces.",
+  "desc": 147,
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/ai-seo",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/ai-seo",
+  "h1n": 1,
+  "h1": "When buyers ask AI, is your business in the\u00a0answer?",
+  "desc": 194,
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/google-ads",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/google-ads",
+  "h1n": 1,
+  "h1": "Reach customers when they\u2019re looking for what you sell.",
+  "desc": 171,
+  "ld": [
+   "Organization",
+   "BreadcrumbList",
+   "FAQPage",
+   "Service"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/social-media-ads",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/social-media-ads",
+  "h1n": 1,
+  "h1": "Turn attention on Facebook and Instagram into business oppor",
+  "desc": 192,
+  "ld": [
+   "Organization",
+   "BreadcrumbList",
+   "FAQPage",
+   "Service"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/who-we-help/d2c",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/who-we-help/d2c",
+  "h1n": 1,
+  "h1": "More orders matter. So does what they cost.",
+  "desc": 150,
+  "ld": [
+   "Organization",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/who-we-help/education",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/who-we-help/education",
+  "h1n": 1,
+  "h1": "Find learners who are ready for what you teach.",
+  "desc": 149,
+  "ld": [
+   "Organization",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/who-we-help/real-estate",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/who-we-help/real-estate",
+  "h1n": 1,
+  "h1": "More property enquiries. More of the right buyers.",
+  "desc": 167,
+  "ld": [
+   "Organization",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/who-we-help/enquiry-led-businesses",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/who-we-help/enquiry-led-businesses",
+  "h1n": 1,
+  "h1": "More enquiries are good. Better conversations are worth more",
+  "desc": 157,
+  "ld": [
+   "Organization",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/lead-generation",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/lead-generation",
+  "h1n": 1,
+  "h1": "Lead generation, where the unit is an enquiry you can actual",
+  "desc": 142,
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/conversion-optimization",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/conversion-optimization",
+  "h1n": 1,
+  "h1": "Plenty of visitors, not enough enquiries? We find out why.",
+  "desc": 170,
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/problems/traffic-but-no-enquiries",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/problems/traffic-but-no-enquiries",
+  "h1n": 1,
+  "h1": "People visit your website. So why don\u2019t they get in touch?",
+  "desc": 128,
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/how-it-works",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/how-it-works",
+  "h1n": 1,
+  "h1": "No mystery about what happens next.",
+  "desc": 155,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/pricing",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/pricing",
+  "h1n": 1,
+  "h1": "One fixed monthly fee for Google and Meta ads management.",
+  "desc": 171,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/about",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/about",
+  "h1n": 1,
+  "h1": "An advertising agency that answers to your enquiries.",
+  "desc": 93,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/faq",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/faq",
+  "h1n": 1,
+  "h1": "What owners ask before they start.",
+  "desc": 212,
+  "ld": [
+   "Organization",
+   "FAQPage"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/contact",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/contact",
+  "h1n": 1,
+  "h1": "Let\u2019s talk about your business.",
+  "desc": 120,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/work",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/work",
+  "h1n": 1,
+  "h1": "Real work. Judge it for yourself.",
+  "desc": 83,
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/blog",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/blog",
+  "h1n": 1,
+  "h1": "Marketing guides, written plainly.",
+  "desc": 117,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/research",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/research",
+  "h1n": 1,
+  "h1": "We look at real business websites. Then we publish what we f",
+  "desc": 150,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/press",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/press",
+  "h1n": 1,
+  "h1": "News from MappedSkills, on the record.",
+  "desc": 102,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/blog/content-marketing-services-in-pune",
+  "code": 200,
+  "robots": "",
+  "canon": "/blog/content-marketing-services-in-pune",
+  "h1n": 1,
+  "h1": "Content Marketing Services in Pune | Boost Your Business Now",
+  "desc": 136,
+  "ld": [
+   "Organization",
+   "Article",
+   "BreadcrumbList"
+  ],
+  "og": 9
+ },
+ {
+  "route": "/blog/building-an-email-list",
+  "code": 200,
+  "robots": "",
+  "canon": "/blog/building-an-email-list",
+  "h1n": 1,
+  "h1": "Building an Email List: A Comprehensive Guide",
+  "desc": 134,
+  "ld": [
+   "Organization",
+   "Article",
+   "BreadcrumbList"
+  ],
+  "og": 9
+ },
+ {
+  "route": "/blog/importance-of-content-writing",
+  "code": 200,
+  "robots": "",
+  "canon": "/blog/importance-of-content-writing",
+  "h1n": 1,
+  "h1": "The Importance of Content Writing: A Guide for Business Owne",
+  "desc": 126,
+  "ld": [
+   "Organization",
+   "Article",
+   "BreadcrumbList"
+  ],
+  "og": 9
+ },
+ {
+  "route": "/blog/performance-marketing-vs-digital-marketing",
+  "code": 200,
+  "robots": "",
+  "canon": "/blog/performance-marketing-vs-digital-marketing",
+  "h1n": 1,
+  "h1": "Performance Marketing vs. Digital Marketing: Which is Right ",
+  "desc": 111,
+  "ld": [
+   "Organization",
+   "Article",
+   "BreadcrumbList"
+  ],
+  "og": 9
+ },
+ {
+  "route": "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers",
+  "code": 200,
+  "robots": "",
+  "canon": "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers",
+  "h1n": 1,
+  "h1": "7 Proven Strategies of Digital Marketing for Real Estate Dev",
+  "desc": 112,
+  "ld": [
+   "Organization",
+   "Article",
+   "BreadcrumbList"
+  ],
+  "og": 9
+ },
+ {
+  "route": "/blog/seo-company-in-pune",
+  "code": 200,
+  "robots": "",
+  "canon": "/blog/seo-company-in-pune",
+  "h1n": 1,
+  "h1": "Best SEO Company in Pune for Businesses That Want Qualified ",
+  "desc": 147,
+  "ld": [
+   "Organization",
+   "Article",
+   "BreadcrumbList"
+  ],
+  "og": 9
+ },
+ {
+  "route": "/blog/facebook-advertising-agency-pune",
+  "code": 200,
+  "robots": "",
+  "canon": "/blog/facebook-advertising-agency-pune",
+  "h1n": 1,
+  "h1": "Facebook Advertising Agency in Pune for Facebook &amp; Insta",
+  "desc": 138,
+  "ld": [
+   "Organization",
+   "Article",
+   "BreadcrumbList"
+  ],
+  "og": 9
+ },
+ {
+  "route": "/portfolio/om-sai-developer-meta-ads",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/portfolio/om-sai-developer-meta-ads",
+  "h1n": 1,
+  "h1": "Meta ads for a real estate developer in Mumbai",
+  "desc": 169,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/portfolio/classpe-social-media-strategy",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/portfolio/classpe-social-media-strategy",
+  "h1n": 1,
+  "h1": "Social media strategy and content for a personalised coachin",
+  "desc": 158,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/portfolio/insuryo-organic-growth",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/portfolio/insuryo-organic-growth",
+  "h1n": 1,
+  "h1": "Purpose-led organic growth for an insurance-assistance start",
+  "desc": 170,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/portfolio/seo-ameba-software",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/portfolio/seo-ameba-software",
+  "h1n": 1,
+  "h1": "SEO for Ameba Software: Tech Company",
+  "desc": 168,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/portfolio/google-ads-for-online-courses",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/portfolio/google-ads-for-online-courses",
+  "h1n": 1,
+  "h1": "Google Ads for Online Courses",
+  "desc": 160,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/research/marketing-measurement-gap-indian-business-websites",
+  "code": 200,
+  "robots": "",
+  "canon": "/research/marketing-measurement-gap-indian-business-websites",
+  "h1n": 1,
+  "h1": "The Marketing Measurement Gap: What 120 Indian Business Webs",
+  "desc": 134,
+  "ld": [
+   "Organization",
+   "Report",
+   "BreadcrumbList"
+  ],
+  "og": 7
+ },
+ {
+  "route": "/research/industry-benchmarks",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/research/industry-benchmarks",
+  "h1n": 1,
+  "h1": "Industry Benchmarks",
+  "desc": 47,
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/press/marketing-measurement-gap-indian-websites",
+  "code": 200,
+  "robots": "",
+  "canon": "/press/marketing-measurement-gap-indian-websites",
+  "h1n": 1,
+  "h1": "MappedSkills Research Finds No Observable Google Analytics o",
+  "desc": 156,
+  "ld": [
+   "Organization",
+   "NewsArticle",
+   "BreadcrumbList"
+  ],
+  "og": 7
+ },
+ {
+  "route": "/contact/call",
+  "code": 200,
+  "robots": "index, follow",
+  "canon": "/contact",
+  "h1n": 1,
+  "h1": "Let\u2019s talk about your business.",
+  "desc": 124,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/thank-you",
+  "code": 200,
+  "robots": "noindex, nofollow",
+  "canon": "/thank-you",
+  "h1n": 1,
+  "h1": "Sending an enquiry?",
+  "desc": 79,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/privacy-policy",
+  "code": 200,
+  "robots": "noindex, nofollow",
+  "canon": "/privacy-policy",
+  "h1n": 1,
+  "h1": "Privacy Policy",
+  "desc": 143,
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/terms",
+  "code": 200,
+  "robots": "noindex, nofollow",
+  "canon": "/terms",
+  "h1n": 1,
+  "h1": "Terms and Conditions",
+  "desc": 134,
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/launch-checklist",
+  "code": 200,
+  "robots": "noindex, nofollow",
+  "canon": "",
+  "h1n": 1,
+  "h1": "Launch QA Checklist",
+  "desc": 181,
+  "ld": [
+   "Organization"
+  ],
+  "og": 0
+ },
+ {
+  "route": "/portfolio/seo-for-home-decor-brand",
+  "code": 200,
+  "robots": "noindex, follow",
+  "canon": "/portfolio/seo-for-home-decor-brand",
+  "h1n": 1,
+  "h1": "SEO for eCommerce Home Decor Brand",
+  "desc": 163,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/work/page/2",
+  "code": 404,
+  "robots": "noindex",
+  "canon": "/404",
+  "h1n": 0,
+  "h1": "",
+  "desc": 72,
+  "ld": [],
+  "og": 8
+ },
+ {
+  "route": "/this-does-not-exist",
+  "code": 404,
+  "robots": "noindex",
+  "canon": "/404",
+  "h1n": 1,
+  "h1": "That page is not here.",
+  "desc": 72,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/portfolio/not-approved-x",
+  "code": 404,
+  "robots": "noindex",
+  "canon": "/404",
+  "h1n": 0,
+  "h1": "",
+  "desc": 72,
+  "ld": [],
+  "og": 8
+ },
+ {
+  "route": "/work/index.json",
+  "code": 200,
+  "robots": "",
+  "canon": "",
+  "h1n": 0,
+  "h1": "",
+  "desc": 0,
+  "ld": [],
+  "og": 0
+ },
+ {
+  "route": "/google-ads-for-ecommerce",
+  "code": 404,
+  "robots": "noindex",
+  "canon": "/404",
+  "h1n": 1,
+  "h1": "That page is not here.",
+  "desc": 72,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/d2c",
+  "code": 404,
+  "robots": "noindex",
+  "canon": "/404",
+  "h1n": 1,
+  "h1": "That page is not here.",
+  "desc": 72,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/ecommerce-marketing",
+  "code": 404,
+  "robots": "noindex",
+  "canon": "/404",
+  "h1n": 1,
+  "h1": "That page is not here.",
+  "desc": 72,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/enquiry-led",
+  "code": 404,
+  "robots": "noindex",
+  "canon": "/404",
+  "h1n": 1,
+  "h1": "That page is not here.",
+  "desc": 72,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ },
+ {
+  "route": "/who-we-help",
+  "code": 404,
+  "robots": "noindex",
+  "canon": "/404",
+  "h1n": 1,
+  "h1": "That page is not here.",
+  "desc": 72,
+  "ld": [
+   "Organization"
+  ],
+  "og": 8
+ }
+]

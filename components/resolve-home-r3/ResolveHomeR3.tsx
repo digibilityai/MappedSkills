@@ -5,6 +5,7 @@ import { HeroFlow, JourneyArt } from './ArtR3';
 import { PathFlow } from './PathFlow';
 import { GoogleSerp, MetaFeed } from './AdsR3';
 import { RvReveal3 } from './RvReveal3';
+import { ClientLogoWall } from '@/components/clients/ClientLogoWall';
 import './resolve-home-r3.css';
 
 /**
@@ -126,8 +127,16 @@ export function ResolveHomeR3() {
       </div>
     </div></section>
 
+    {/* Stage 3B: the clients whose logos may be shown (lib/clients.ts). Logos show who, never a result or a service. */}
+    <section className="rv3-clients rv3-paper" aria-labelledby="rv3-clients-h"><div className="rv3-wrap">
+      <span className="cl-ghost" aria-hidden="true">Clients</span>
+      <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">Our clients</p><h2 id="rv3-clients-h">Businesses <em>we’ve worked with</em></h2></header>
+      <ClientLogoWall />
+      <p className="cl-note">Businesses we’ve worked with, across different services. A logo shows who, not a result or a particular service.</p>
+    </div></section>
+
     {/* 6. Paper: process, reporting and who is responsible for what */}
-    <section className="rv3-proc rv3-paper" aria-labelledby="rv3-proc-h"><div className="rv3-wrap">
+    <section className="rv3-proc rv3-ground" aria-labelledby="rv3-proc-h"><div className="rv3-wrap">
       <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">How we work together</p><h2 id="rv3-proc-h">Clear reporting. <em>Practical next steps.</em></h2><p className="rv3-intro">Review the results relevant to your objective, what the available data shows and what needs attention next.</p></header>
       <ol className="rv3-steps" {...REVEAL}>{STEPS.map((s, i) => <li key={s.title} style={{ '--i': i } as React.CSSProperties}><span className="rv3-step-n" aria-hidden="true">{i + 1}</span><h3>{s.title}</h3><p>{s.body}</p></li>)}</ol>
       <div className="rv3-flow-wrap" {...REVEAL}>

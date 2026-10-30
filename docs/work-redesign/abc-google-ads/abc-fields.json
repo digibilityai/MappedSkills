@@ -1,0 +1,452 @@
+{
+  "entryId": "6Ycb7aYvXrslOXKchQnqmi",
+  "note": "Owner-run field package, final wording (DEC-102, 2026-10-30). Rich text fields are Contentful rich-text JSON. NOT applied to Contentful. Contentful is the source of truth for these fields; lib/case-study-local-preview.ts is a development-only mirror.",
+  "codeHeldNotInContentful": {
+    "metaDescription": "Google Ads for AnybodyCanBake’s online baking courses: 1,410 paid enrolments attributed to it and ₹66.36 lakh in reported revenue, Feb 2020 to Aug 2021.",
+    "note": "no Contentful field exists; held in lib/case-study-presentation.ts"
+  },
+  "fields": {
+    "title": "1,410 paid enrolments attributed to Google Ads",
+    "slug": "google-ads-for-online-courses",
+    "clientName": {
+      "clientName": "AnybodyCanBake, Pune, India",
+      "date": ""
+    },
+    "industryName": "Education and training",
+    "summary": "AnybodyCanBake wanted direct purchases for its online baking courses. MappedSkills managed Search and Display campaigns and made changes to keywords, ads, targeting and landing pages. From February 2020 to August 2021, Google Ads was credited with 1,410 paid enrolments and ₹66.36 lakh in reported revenue.",
+    "problem": {
+      "nodeType": "document",
+      "data": {},
+      "content": [
+        {
+          "nodeType": "paragraph",
+          "data": {},
+          "content": [
+            {
+              "nodeType": "text",
+              "value": "Turning interest in online baking into paid enrolments",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "data": {}
+            }
+          ]
+        },
+        {
+          "nodeType": "paragraph",
+          "data": {},
+          "content": [
+            {
+              "nodeType": "text",
+              "value": "AnybodyCanBake needed to reach potential learners and turn their interest into direct course purchases. There were no earlier recorded Google Ads campaigns to provide a performance baseline.",
+              "marks": [],
+              "data": {}
+            }
+          ]
+        },
+        {
+          "nodeType": "unordered-list",
+          "data": {},
+          "content": [
+            {
+              "nodeType": "list-item",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "paragraph",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "text",
+                      "value": "Reach relevant learners:",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "nodeType": "text",
+                      "value": " The advertising needed to connect with people interested in the school’s online baking offering.",
+                      "marks": [],
+                      "data": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "nodeType": "list-item",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "paragraph",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "text",
+                      "value": "Give people a reason to enrol:",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "nodeType": "text",
+                      "value": " The ads and landing pages needed to help prospective learners understand the offer and take the next step.",
+                      "marks": [],
+                      "data": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "nodeType": "list-item",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "paragraph",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "text",
+                      "value": "Measure purchases:",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "nodeType": "text",
+                      "value": " The objective was paid enrolments, rather than clicks or enquiry volume alone.",
+                      "marks": [],
+                      "data": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "whatWeDid": {
+      "nodeType": "document",
+      "data": {},
+      "content": [
+        {
+          "nodeType": "paragraph",
+          "data": {},
+          "content": [
+            {
+              "nodeType": "text",
+              "value": "Work on the ads and the page together",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "data": {}
+            }
+          ]
+        },
+        {
+          "nodeType": "paragraph",
+          "data": {},
+          "content": [
+            {
+              "nodeType": "text",
+              "value": "We managed Google Search and Display campaigns with direct course purchases as the objective. The work covered both how people reached the website and the pages they saw after clicking.",
+              "marks": [],
+              "data": {}
+            }
+          ]
+        },
+        {
+          "nodeType": "unordered-list",
+          "data": {},
+          "content": [
+            {
+              "nodeType": "list-item",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "paragraph",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "text",
+                      "value": "Keyword changes:",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "nodeType": "text",
+                      "value": " We revised the keywords used in the campaigns to support the course-purchase objective.",
+                      "marks": [],
+                      "data": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "nodeType": "list-item",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "paragraph",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "text",
+                      "value": "Ad and targeting changes:",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "nodeType": "text",
+                      "value": " We changed the ads and targeting to improve how the learning offer was presented to potential students.",
+                      "marks": [],
+                      "data": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "nodeType": "list-item",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "paragraph",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "text",
+                      "value": "Landing page changes:",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "nodeType": "text",
+                      "value": " We changed the landing pages as part of the same campaign effort, rather than treating the ad click as the end of the journey.",
+                      "marks": [],
+                      "data": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "impact": {
+      "nodeType": "document",
+      "data": {},
+      "content": [
+        {
+          "nodeType": "paragraph",
+          "data": {},
+          "content": [
+            {
+              "nodeType": "text",
+              "value": "1,410 paid enrolments and ₹66.36 lakh in reported revenue",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "data": {}
+            }
+          ]
+        },
+        {
+          "nodeType": "paragraph",
+          "data": {},
+          "content": [
+            {
+              "nodeType": "text",
+              "value": "Across February 2020 to August 2021, the reported Google Ads results were 1,410 paid enrolments and ₹66,36,000 in revenue on ₹12,66,390 of advertising spend.",
+              "marks": [],
+              "data": {}
+            }
+          ]
+        },
+        {
+          "nodeType": "unordered-list",
+          "data": {},
+          "content": [
+            {
+              "nodeType": "list-item",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "paragraph",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "text",
+                      "value": "5.24×",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "nodeType": "text",
+                      "value": " return on advertising spend. About ₹5.24 of reported revenue for each ₹1 of advertising spend. Calculated from the reported totals, February 2020 to August 2021.",
+                      "marks": [],
+                      "data": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "nodeType": "list-item",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "paragraph",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "text",
+                      "value": "1,410",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "nodeType": "text",
+                      "value": " paid enrolments attributed to Google Ads, February 2020 to August 2021.",
+                      "marks": [],
+                      "data": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "nodeType": "list-item",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "paragraph",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "text",
+                      "value": "₹66,36,000",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "nodeType": "text",
+                      "value": " in reported revenue, excluding refunds, February 2020 to August 2021.",
+                      "marks": [],
+                      "data": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "nodeType": "list-item",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "paragraph",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "text",
+                      "value": "₹12,66,390",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "nodeType": "text",
+                      "value": " in advertising spend, February 2020 to August 2021.",
+                      "marks": [],
+                      "data": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "nodeType": "list-item",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "paragraph",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "text",
+                      "value": "₹898.15",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "data": {}
+                    },
+                    {
+                      "nodeType": "text",
+                      "value": " cost per paid enrolment. Advertising spend divided by paid enrolments, calculated from the reported totals.",
+                      "marks": [],
+                      "data": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "evidenceNote": "Engagement details and results were supplied by MappedSkills founder Amit Gupta, who confirmed the figures from business records and reconciled enrolments and revenue with Google Ads advertising data. Figures cover February 2020 to August 2021, and revenue excludes refunds. Cost per enrolment and ROAS are calculated from the reported totals. These are whole-period results, not a before-and-after comparison. They have not been independently audited and do not show how much revenue advertising alone caused. ROAS reflects reported revenue divided by advertising spend; it does not represent profit or include management fees and other business costs.",
+    "showTestimonial": false,
+    "sector": "education",
+    "serviceKey": "/google-ads",
+    "periodStart": "2020-02-01",
+    "periodEnd": "2021-08-31"
+  }
+}

@@ -143,6 +143,13 @@ html .b2.cs .ct-res-c { max-width: 44ch; color: var(--v-on-dark); font-size: .93
 html .b2.cs .ct-said-k { display: flex; align-items: center; gap: 8px; color: var(--cs-dim); font: 800 .6875rem/1.2 var(--font-manrope), sans-serif; letter-spacing: .14em; text-transform: uppercase; }
 html .b2.cs .ct-said-t { color: var(--v-ink); font: 800 clamp(1.2rem, 1.6vw, 1.5rem)/1.15 var(--font-bricolage), sans-serif; letter-spacing: -.02em; text-wrap: balance; }
 html .b2.cs .ct-said-c { color: var(--cs-dim); font-size: .9375rem; line-height: 1.55; }
+/* a supplied image inside the impact: whole, uncropped, never wider than itself, openable at full size */
+.b2.cs .ct-media { margin: clamp(28px, 3vw, 44px) 0 0; }
+.b2.cs .ct-media-a { display: block; width: fit-content; max-width: 100%; margin-inline: auto; border: 1px solid var(--v-line); border-radius: 4px; overflow: hidden; background: var(--v-paper); line-height: 0; }
+.b2.cs .ct-media-a:focus-visible { outline: 3px solid var(--v-burnt); outline-offset: 3px; }
+.b2.cs .ct-media-a img { display: block; width: 100%; max-width: 1100px; height: auto; }
+html .b2.cs .ct-media figcaption { max-width: 1100px; margin: 10px auto 0; color: var(--cs-dim); font-size: .875rem; line-height: 1.5; }
+html .b2.cs .ct-media figcaption a { color: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 /* the explanation after the outcomes and the evidence basis line up with the section copy */
 .b2.cs .ct-impact-tail { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 32px); }
 .b2.cs .ct-impact-tail > * { grid-column: 5 / span 8; }
@@ -274,6 +281,11 @@ html .b2.cs .ct-sub { margin-top: 12px; color: var(--v-ink); font: 800 1.25rem/1
 .b2.cs .ct-stage-tick.is-b { top: 14px; left: 14px; border-width: 3px 0 0 3px; }
 .b2.cs .ct-stage-img + .ct-stage-tick, .b2.cs .ct-stage-frame.is-photo .ct-stage-tick.is-b { display: none; }
 .b2.cs .ct-art-logo { z-index: 3; }
+/* artwork that carries its own text: shown whole at its own ratio, centred, with nothing laid over it */
+.b2.cs .ct-stage-frame.is-whole { aspect-ratio: 16 / 9; max-width: 1100px; margin-inline: auto; }
+.b2.cs .ct-stage-frame.is-whole .ct-stage-img > img { object-fit: contain; object-position: 50% 50%; }
+.b2.cs .ct-stage-frame.is-whole::after, .b2.cs .ct-stage-frame.is-whole .ct-stage-mark, .b2.cs .ct-stage-frame.is-whole .ct-stage-tick { display: none; }
+.b2.cs .ct-stage:has(.is-whole) figcaption { max-width: 1100px; margin-inline: auto; }
 html .b2.cs .ct-stage figcaption { margin-top: 10px; color: var(--v-soft); font-size: .78rem; line-height: 1.5; }
 
 /* the middle chapter, "What we did", on Ink Deep */

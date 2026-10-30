@@ -231,7 +231,8 @@ test('testimonial: new layout needs showTestimonial, a quote and no withholding;
   assert.ok(!read('components/case-study/CaseStudyTemplate.tsx').includes('★'));
   assert.ok(page.includes('isCaseStudyProofWithheld(caseStudy.slug)'), 'proof withholding retained');
   const { isCaseStudyProofWithheld } = load('lib/case-study-proof.ts');
-  for (const slug of ['seo-ameba-software', 'portfolio/seo-ameba-software', 'seo-for-home-decor-brand', 'google-ads-for-online-courses']) assert.ok(isCaseStudyProofWithheld(slug), slug);
+  for (const slug of ['seo-ameba-software', 'portfolio/seo-ameba-software', 'seo-for-home-decor-brand']) assert.ok(isCaseStudyProofWithheld(slug), slug);
+  assert.ok(!isCaseStudyProofWithheld('google-ads-for-online-courses'), 'DEC-102: this one study is released from withholding; the others stay withheld');
 });
 
 test('withheld legacy studies stay withheld on /work: no result line', async () => {

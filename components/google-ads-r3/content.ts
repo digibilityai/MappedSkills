@@ -158,9 +158,9 @@ export const MEASURE = {
 export const WORK = {
   eyebrow: 'Relevant work',
   h2: ['Google Ads for ', 'an online baking school'],
-  name: 'AnyBodyCanBake',
+  name: 'AnybodyCanBake',
   tags: ['Google Ads', 'Online baking courses', 'Pune'],
-  challenge: 'AnyBodyCanBake is a Pune online baking school that teaches eggless and healthy baking. It needed more students, on a small budget, in a crowded online education market.',
+  challenge: 'AnybodyCanBake is a Pune online baking school that teaches eggless and healthy baking. It needed more students, on a small budget, in a crowded online education market.',
   approach: [
     { k: 'Keyword research', d: 'The searches people use when looking for online baking courses.' },
     { k: 'Ad copy and creative', d: 'Written around what the audience cared about and the problems they wanted to solve.' },
@@ -168,7 +168,7 @@ export const WORK = {
     { k: 'Ongoing optimisation', d: 'Campaign performance reviewed regularly and adjusted.' },
   ],
   delivered: ['Ads matched to course searches', 'Targeting focused on the right learners', 'Campaigns that were managed, not just launched'],
-  honest: 'The case study describes the work and what it put in place. It claims no result.',
+  honest: 'The case study reports whole-period totals for the engagement, not a before-and-after comparison.',
   link: { href: '/portfolio/google-ads-for-online-courses', label: 'Read the case study' },
   all: { href: '/work', label: 'View All Case Studies' },
 } as const;

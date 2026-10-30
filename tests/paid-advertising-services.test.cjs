@@ -70,7 +70,7 @@ test('client work: separate service and industry tags, verified links only, Wand
   const cards = work.split('<article').slice(1);
   assert.equal(cards.length, 3);
   const [bake, omsai, wander] = cards;
-  assert.match(bake, /AnyBodyCanBake/);
+  assert.match(bake, /AnybodyCanBake/);
   assert.match(bake, /x2-tag--svc[^>]*><span class="v">Service <\/span>Google Ads/);
   assert.match(bake, /x2-tag--ind[^>]*><span class="v">Industry <\/span>Education and training/);
   assert.match(bake, /href="\/portfolio\/google-ads-for-online-courses"/);

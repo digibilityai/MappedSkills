@@ -117,11 +117,11 @@ export const WORK = {
   item: {
     img: { src: '/images/paid-advertising/tile-baking.webp', alt: 'A cake being finished on a stand', note: 'Conceptual artwork. Not an actual campaign creative.' },
     tag: 'Google Ads · Online baking education',
-    name: 'AnyBodyCanBake',
+    name: 'AnybodyCanBake',
     body: 'MappedSkills ran Google Ads for a Pune online baking school offering specialist eggless and healthy baking courses. The work connected relevant course searches with the school’s specialised programmes.',
     did: ['Keyword research', 'Ad copy and creative', 'Audience targeting', 'Ongoing optimisation'],
   },
-  note: 'The published case does not include enrolment or commercial figures, so we do not claim any.',
+  note: 'The case study reports whole-period totals for the engagement, not a before-and-after comparison.',
   link: { label: 'Read the case study', href: '/portfolio/google-ads-for-online-courses' },
   all: { label: 'See all our work', href: '/work' },
 } as const;

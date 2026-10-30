@@ -28,7 +28,8 @@ export function createMetadata(
   title: string,
   description: string,
   path: string = '/',
-  image?: string | null
+  image?: string | null,
+  imageAlt?: string
 ): Metadata {
   const url = `${baseUrl}${path}`;
   const fullTitle = `${title}`;
@@ -64,7 +65,7 @@ export function createMetadata(
       images: [
         {
           url: ogImageUrl,
-          alt: title,
+          alt: imageAlt || title,
         },
       ],
     },

@@ -19,7 +19,7 @@ export function WorkCard({ s, lead = false, sizes }: { s: WorkStudy; lead?: bool
       {a && (
         <>
           <div className="rs-wc-img">
-            <Image src={a.src} alt={a.alt} fill sizes={sizes ?? (lead ? '(min-width: 1081px) 740px, 100vw' : '(min-width: 1081px) 440px, (min-width: 761px) 70vw, 100vw')} />
+            <Image src={a.src} alt={a.alt} style={a.position ? { objectPosition: a.position } : undefined} fill sizes={sizes ?? (lead ? '(min-width: 1081px) 740px, 100vw' : '(min-width: 1081px) 440px, (min-width: 761px) 70vw, 100vw')} />
             {a.logo ? <span className={`rs-wc-logo rs-wc-logo-${a.logo.fit}`}><Image src={a.logo.src} alt={a.logo.alt} width={a.logo.w} height={a.logo.h} /></span> : null}
           </div>
           {a.note ? <p className="rs-wc-note">{a.note}</p> : null}

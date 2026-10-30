@@ -103,10 +103,13 @@ test('the listing card text carries no figure, and the study keeps its address a
   assert.match(page, /createMetadata\(caseStudy\.metaTitle, presentationFor\(caseStudy\.href\)\.metaDescription \?\? caseStudy\.metaDescription, caseStudy\.href, og\?\.src, og\?\.alt\)/);
 });
 
-test('the template shows an image whole, without the outlined name, ticks, gradient or client logo laid over it', () => {
+test('the template shows an image whole on the same stage as Om Sai: same frame, outlined client name behind it, no gradient over it, no logo chip', () => {
   const css = read('components/case-study/case-study.css');
-  assert.match(css, /\.ct-stage-frame\.is-whole \{ aspect-ratio: 16 \/ 9/);
-  assert.match(css, /is-whole::after[^}]*display: none/);
+  assert.doesNotMatch(css, /is-whole \{[^}]*aspect-ratio/, 'the stage keeps the shared 2.6, 2 and 1.3 ratios');
+  assert.match(css, /is-whole \.ct-stage-img > img \{ object-fit: contain/);
+  assert.match(css, /is-whole::after \{ display: none; \}/);
+  assert.match(css, /is-whole \.ct-stage-mark \{ z-index: 0; \}/);
+  assert.doesNotMatch(css, /is-whole[^{]*ct-stage-mark[^{]*\{[^}]*display: none/);
   assert.match(read('components/case-study/CaseStudyTemplate.tsx'), /art\?\.logo \|\| art\?\.whole \? null : clientForHref/);
 });
 

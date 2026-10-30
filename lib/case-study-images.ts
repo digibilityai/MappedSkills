@@ -39,6 +39,10 @@ export type ImageSlot =
        * which sits on the left, is never cut. Other slots are unchanged.
        */
       whole?: boolean;
+      /** A second file for narrow screens (<= 760px); `src` is then the wide derivative. Same artwork, same wording. */
+      narrow?: { src: string; w: number; h: number };
+      /** The sharing (Open Graph) image when it should differ from `src`. */
+      ogSrc?: string;
       /** CSS `object-position` for a cropped card (default: the centre). */
       position?: string;
       /** Also the study's social sharing (Open Graph) image. Set only where the artwork is approved for it. */
@@ -71,7 +75,13 @@ const abcAlt = {
   feature: 'AnybodyCanBake, Google Ads. Helping baking learners take the next step. 1,410 paid enrolments and a 5.24 times return on advertising spend, February 2020 to August 2021. A laptop showing a baking video beside dough, flour and fresh bread.',
 };
 const abcListing = (): ImageSlot => ({ kind: 'image', src: '/images/resolve-r3/anybodycanbake-listing.webp', w: 1586, h: 992, alt: abcAlt.listing, whole: true, position: '0% 50%' });
-const abcFeature = (): ImageSlot => ({ kind: 'image', src: '/images/resolve-r3/anybodycanbake-feature.webp', w: 1672, h: 941, alt: abcAlt.feature, whole: true, og: true });
+// The detail stage is 2.6:1 on desktop, so the approved 16:9 artwork has a 2.6:1 derivative (1672 x 643): the same text blocks and
+// figures moved up and scaled together, and the photograph cropped, so the lower fifth is free for the client name. Narrow screens
+// (1.3:1 stage) show the approved 16:9 original whole. The sharing image is the original.
+const abcFeature = (): ImageSlot => ({
+  kind: 'image', src: '/images/resolve-r3/anybodycanbake-feature-wide.webp', w: 1672, h: 643, alt: abcAlt.feature, whole: true, og: true,
+  narrow: { src: '/images/resolve-r3/anybodycanbake-feature.webp', w: 1672, h: 941 }, ogSrc: '/images/resolve-r3/anybodycanbake-feature.webp',
+});
 
 /** The slots by page address. A study with no entry has no image in either slot (text-only card, no stage). */
 const SLOTS: Record<string, ImageSlots> = {

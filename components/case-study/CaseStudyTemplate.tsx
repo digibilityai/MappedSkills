@@ -327,7 +327,8 @@ export function CaseStudyTemplate({ study, content: c, service, showTestimonial,
               <div className={`ct-stage-frame ca-host${art ? ' is-photo' : ' is-par'}${whole ? ' is-whole' : ''}`} data-hw-seq data-motif={motif ?? undefined}>
                 {art ? (
                   <div className="ct-stage-img">
-                    <Image src={art.src} alt={art.alt} fill sizes={whole ? '(min-width: 1180px) 1100px, 100vw' : '(min-width: 1440px) 1328px, 100vw'} priority={false} />
+                    <Image className={art.narrow ? 'ct-img-wide' : undefined} src={art.src} alt={art.alt} fill sizes="(min-width: 1440px) 1328px, 100vw" priority={false} />
+                    {art.narrow ? <Image className="ct-img-narrow" src={art.narrow.src} alt={art.alt} fill sizes="100vw" priority={false} /> : null}
                     {art.logo ? (
                       <span className="ct-art-logo">
                         <Image src={art.logo.src} alt={art.logo.alt} width={art.logo.w} height={art.logo.h} />

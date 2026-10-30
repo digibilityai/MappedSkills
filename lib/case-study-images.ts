@@ -25,7 +25,25 @@ export const SLOT_SPEC = {
 } as const;
 
 export type ImageSlot =
-  | { kind: 'image'; src: string; w?: number; h?: number; alt: string; note?: string; logo?: WorkArt['logo'] }
+  | {
+      kind: 'image';
+      src: string;
+      w?: number;
+      h?: number;
+      alt: string;
+      note?: string;
+      logo?: WorkArt['logo'];
+      /**
+       * Artwork that carries its own text (headline, figures, footer). The stage then shows it WHOLE at its own ratio, with no
+       * outlined client name, ticks or gradient laid over it, and a card crops it from the right (`position`) so the text,
+       * which sits on the left, is never cut. Other slots are unchanged.
+       */
+      whole?: boolean;
+      /** CSS `object-position` for a cropped card (default: the centre). */
+      position?: string;
+      /** Also the study's social sharing (Open Graph) image. Set only where the artwork is approved for it. */
+      og?: boolean;
+    }
   | { kind: 'conceptual'; motif: Motif; note: string };
 
 export type ImageSlots = { card: ImageSlot | null; feature: ImageSlot | null };
@@ -44,12 +62,23 @@ const omSai = (): ImageSlot => {
   return { kind: 'image', src: a.src, w: 1080, h: 688, alt: a.alt, note: a.note, logo: a.logo };
 };
 
+/**
+ * AnybodyCanBake (Google Ads). Supplied, owner-approved artwork (2026-10-30): listing 1586 x 992 (8:5), detail 1672 x 941 (16:9).
+ * Both carry baked text (headline figures), so they are never cropped through it. The files are used as supplied.
+ */
+const abcAlt = {
+  listing: 'AnybodyCanBake, Google Ads. 1,410 paid enrolments. Google Ads for an online baking school. Hands kneading dough on a floured worktop beside bowls of flour, eggs and butter.',
+  feature: 'AnybodyCanBake, Google Ads. Helping baking learners take the next step. 1,410 paid enrolments and a 5.24 times return on advertising spend, February 2020 to August 2021. A laptop showing a baking video beside dough, flour and fresh bread.',
+};
+const abcListing = (): ImageSlot => ({ kind: 'image', src: '/images/resolve-r3/anybodycanbake-listing.webp', w: 1586, h: 992, alt: abcAlt.listing, whole: true, position: '0% 50%' });
+const abcFeature = (): ImageSlot => ({ kind: 'image', src: '/images/resolve-r3/anybodycanbake-feature.webp', w: 1672, h: 941, alt: abcAlt.feature, whole: true, og: true });
+
 /** The slots by page address. A study with no entry has no image in either slot (text-only card, no stage). */
 const SLOTS: Record<string, ImageSlots> = {
   '/portfolio/om-sai-developer-meta-ads': { card: omSai(), feature: omSai() },
   '/portfolio/classpe-social-media-strategy': { card: placeholder('/portfolio/classpe-social-media-strategy'), feature: placeholder('/portfolio/classpe-social-media-strategy') },
   '/portfolio/insuryo-organic-growth': { card: placeholder('/portfolio/insuryo-organic-growth'), feature: placeholder('/portfolio/insuryo-organic-growth') },
-  '/portfolio/google-ads-for-online-courses': { card: placeholder('/portfolio/google-ads-for-online-courses'), feature: placeholder('/portfolio/google-ads-for-online-courses') },
+  '/portfolio/google-ads-for-online-courses': { card: abcListing(), feature: abcFeature() },
   '/portfolio/seo-ameba-software': { card: placeholder('/portfolio/seo-ameba-software'), feature: placeholder('/portfolio/seo-ameba-software') },
   // unlisted (not on /work) but live: only its own page uses its stage
   '/portfolio/seo-for-home-decor-brand': { card: null, feature: placeholder('/portfolio/seo-for-home-decor-brand') },

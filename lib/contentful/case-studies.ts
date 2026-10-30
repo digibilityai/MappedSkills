@@ -2,6 +2,7 @@ import { contentfulGraphql, CONTENTFUL_REVALIDATE_SECONDS, getContentfulDelivery
 import { GET_ALL_CASE_STUDIES_QUERY } from '@/lib/contentful/queries';
 import { selectPublic, UNLISTED_CASE_STUDY_IDS } from '@/lib/case-study-eligibility';
 import { orderStudies } from '@/lib/case-study-library';
+import { localPreviewActive, withLocalPreview } from '@/lib/case-study-local-preview';
 import { isCaseStudyProofWithheld } from '@/lib/case-study-proof';
 import { mapContentfulCaseStudyToCms, normalizeCaseStudySlug } from '@/lib/contentful/mappers';
 import type {
@@ -40,7 +41,7 @@ export class CaseStudyFetchError extends Error {}
  * into 404s for a revalidate cycle; a build that cannot read Contentful fails instead of shipping an empty library.
  */
 async function fetchAllCaseStudiesRaw(): Promise<CmsCaseStudy[]> {
-  if (!getContentfulDeliveryConfig()) return [];
+  if (!getContentfulDeliveryConfig()) return localPreviewActive() ? filterNull(withLocalPreview([]).map(mapContentfulCaseStudyToCms)) : [];
   const items: ContentfulCaseStudy[] = [];
   for (let page = 0; page < MAX_FETCH_PAGES; page += 1) {
     const data = await contentfulGraphql<CaseStudyCollectionResponse>(
@@ -56,7 +57,7 @@ async function fetchAllCaseStudiesRaw(): Promise<CmsCaseStudy[]> {
     const total = typeof collection.total === 'number' ? collection.total : items.length;
     if (batch.length < CASE_STUDY_FETCH_PAGE || items.length >= total) break;
   }
-  return filterNull(items.map(mapContentfulCaseStudyToCms));
+  return filterNull(withLocalPreview(items).map(mapContentfulCaseStudyToCms));
 }
 
 /** The public studies in library order: listing priority first, then newest first-published (Contentful order). */

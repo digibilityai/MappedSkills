@@ -12,6 +12,8 @@ export type WorkArt = {
   alt: string;
   note: string;
   logo?: { src: string; alt: string; w: number; h: number; fit: 'wide' | 'square' };
+  /** CSS `object-position` of the card image (default: the centre), for artwork whose text must not be cropped. */
+  position?: string;
 };
 
 export type WorkStudy = {
@@ -46,8 +48,8 @@ export const STUDIES: Record<'om-sai' | 'anybodycanbake', WorkStudy> = {
   anybodycanbake: {
     id: 'anybodycanbake',
     eyebrow: 'Google Ads · Education and training',
-    title: 'AnyBodyCanBake',
-    body: 'A Pune online baking school that needed more students for its eggless and healthy baking courses.',
+    title: 'AnybodyCanBake',
+    body: 'A Pune online baking school that wanted direct course purchases from Google Ads.',
     href: '/portfolio/google-ads-for-online-courses',
     cta: 'Read the Google Ads case study',
   },

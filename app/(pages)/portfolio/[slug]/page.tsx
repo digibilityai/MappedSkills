@@ -8,6 +8,8 @@ import { Card } from '@/components/ui/card';
 import { CaseStudyContent } from '@/components/case-study/CaseStudyContent';
 import { CaseStudyTemplate } from '@/components/case-study/CaseStudyTemplate';
 import { createMetadata } from '@/lib/metadata';
+import { imageSlotsFor } from '@/lib/case-study-images';
+import { presentationFor } from '@/lib/case-study-presentation';
 import { UNLISTED_CASE_STUDY_IDS } from '@/lib/case-study-eligibility';
 import { isCaseStudyProofWithheld } from '@/lib/case-study-proof';
 import { getCaseStudyService } from '@/lib/case-study-services';
@@ -57,7 +59,10 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
     };
   }
 
-  const metadata = createMetadata(caseStudy.metaTitle, caseStudy.metaDescription, caseStudy.href);
+  // a study whose detail image is approved as its sharing image (`og` in lib/case-study-images.ts) uses it; every other study keeps the site default
+  const feature = imageSlotsFor(caseStudy.href).feature;
+  const og = feature?.kind === 'image' && feature.og ? feature : null;
+  const metadata = createMetadata(caseStudy.metaTitle, presentationFor(caseStudy.href).metaDescription ?? caseStudy.metaDescription, caseStudy.href, og?.src, og?.alt);
   // An unlisted study (founder decision, Stage 3B) stays reachable and keeps its canonical, but asks search engines not to index it.
   return UNLISTED_CASE_STUDY_IDS.has(caseStudy.id) ? { ...metadata, robots: { index: false, follow: true, googleBot: { index: false, follow: true } } } : metadata;
 }

@@ -34,7 +34,8 @@
 const PROOF_WITHHELD_SLUGS: ReadonlySet<string> = new Set([
   'seo-ameba-software',
   'seo-for-home-decor-brand',
-  'google-ads-for-online-courses',
+  // 'google-ads-for-online-courses' was removed on 2026-10-30 (DEC-102): owner attested the figures from business records, their
+  // reconciliation with Google Ads data, that revenue excludes refunds, and permission to publish figures and images.
 ]);
 
 /**

@@ -42,7 +42,7 @@ const c = (key: string, name: string, source: string, logo: ClientLogo, extra: P
 
 export const CLIENTS: readonly Client[] = [
   {
-    key: 'anybodycanbake', name: 'AnyBodyCanBake', source: 'Anybody-Can-Bake-Logo.png', display: 'show',
+    key: 'anybodycanbake', name: 'AnybodyCanBake', source: 'Anybody-Can-Bake-Logo.png', display: 'show',
     logo: { src: '/images/clients/anybodycanbake.png', w: 544, h: 180, fit: 'wide' },
     services: ['google-ads', 'seo'], evidence: 'Google Ads case study (WORK-027); historical SEO project (components/cplus/seo/content.ts)',
     caseStudy: '/portfolio/google-ads-for-online-courses',

@@ -28,6 +28,6 @@ export function toCard(s: WorkStudy): CardStudy {
       };
   // the card's image comes from the study's listing slot (lib/case-study-images.ts): real artwork, or a disclosed conceptual placeholder
   const slot = imageSlotsFor(s.href).card;
-  if (slot?.kind === 'image') return { ...base, art: { src: slot.src, alt: slot.alt, note: slot.note ?? '', logo: slot.logo } };
+  if (slot?.kind === 'image') return { ...base, art: { src: slot.src, alt: slot.alt, note: slot.note ?? '', logo: slot.logo, position: slot.position } };
   return { ...base, motif: slot?.kind === 'conceptual' ? slot.motif : undefined, clientLogo: clientForHref(s.href) ?? undefined };
 }

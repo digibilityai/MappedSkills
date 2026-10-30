@@ -68,8 +68,8 @@ export const WHICH = {
 /** Verified descriptions from the live case pages (26 October 2026). Service and industry are separate tags.
  * Wanderlooms has no individual page and no approved service evidence, so it carries an industry tag only and no link. */
 export const WORK = [
-  { id: 'anybodycanbake', name: 'AnyBodyCanBake', service: 'Google Ads', industry: 'Education and training',
-    line: 'AnyBodyCanBake, a Pune online baking school, needed more students for its eggless and healthy baking courses.',
+  { id: 'anybodycanbake', name: 'AnybodyCanBake', service: 'Google Ads', industry: 'Education and training',
+    line: 'AnybodyCanBake, a Pune online baking school, wanted direct course purchases from Google Ads.',
     href: '/portfolio/google-ads-for-online-courses', cta: 'Read the Google Ads case study' },
   { id: 'om-sai', name: 'Om Sai Developer', service: 'Meta Ads', industry: 'Real estate',
     line: 'A Chembur developer needed enquiries from people interested in its project.',

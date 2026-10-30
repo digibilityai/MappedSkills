@@ -130,7 +130,8 @@ test('case study (Stage 3): only a reported figure leads the hero; without figur
   assert.match(src, /imageSlotsFor\(study\.href\)\.feature/);
   assert.match(src, /\{stage\?\.note \? <figcaption>\{stage\.note\}<\/figcaption> : null\}/);
   // the existing actions stay
-  assert.match(src, /<ActionLink href=\{CONTACT_HREF\} variant="dark">\s*Contact us/);
+  // (a study with approved closing copy in lib/case-study-presentation.ts shows that copy and its one button instead)
+  assert.match(src, /<ActionLink href=\{CONTACT_HREF\} variant="dark">\s*\{close \? close\.cta : 'Contact us'\}/);
   assert.match(src, /<ActionLink href=\{BOOKING_HREF\} variant="text">\s*Request a call/);
 });
 
@@ -169,7 +170,7 @@ test('Stage 3B: Home Decor is unlisted everywhere discovery happens, noindex fol
   assert.match(rd('lib/contentful/case-studies.ts'), /getCaseStudyListCards[^]*?filter\(\(s\) => !UNLISTED_CASE_STUDY_IDS\.has\(s\.id\)\)/);
   const page = rd('app/(pages)/portfolio/[slug]/page.tsx');
   assert.match(page, /UNLISTED_CASE_STUDY_IDS\.has\(caseStudy\.id\) \? \{ \.\.\.metadata, robots: \{ index: false, follow: true, googleBot: \{ index: false, follow: true \} \} \} : metadata/);
-  assert.match(page, /createMetadata\(caseStudy\.metaTitle, caseStudy\.metaDescription, caseStudy\.href\)/, 'canonical comes from createMetadata, unchanged');
+  assert.match(page, /createMetadata\(caseStudy\.metaTitle, presentationFor\(caseStudy\.href\)\.metaDescription \?\? caseStudy\.metaDescription, caseStudy\.href, og\?\.src, og\?\.alt\)/, 'canonical comes from createMetadata, unchanged');
   assert.match(rd('lib/case-study-eligibility.ts'), /UNLISTED_CASE_STUDY_IDS[^]*'4zQL4P8SR2xogxHN4qFfUl'/);
 });
 

@@ -2551,3 +2551,14 @@ Use this file only for meaningful project decisions.
 - **Files:** `components/cplus/seo/seo.css`, `components/cplus/ai-seo/ai-seo.css`, `components/cplus/lead-generation/lead-gen.css`, `components/b2/how-it-works.css`, `tests/stage5d-accessibility.test.cjs`, this file, `docs/resolve-sitewide/qa/STAGE5_QA_REPORT.md`.
 - **NOT authorised:** commit, push, PR, merge, deployment, Contentful changes, production configuration changes.
 - **Read with:** `DEC-096`, `DEC-100`.
+
+### DEC-102: AnybodyCanBake spelling restored; AnybodyCanBake Google Ads case study revision (LOCAL, not released)
+- **Date:** 2026-10-30. **Status:** local preview on `feat/abc-google-ads-case-study`; nothing committed, deployed or published; Contentful not edited.
+- **OWNER REQUIREMENT (founder, 2026-10-30):** the brand spelling is **AnybodyCanBake**. This **supersedes the spelling ruling recorded in `DEC-073`** (2026-10-22, "AnyBodyCanBake") and `G6_P4_BRAND_SPELLING_PLAN.md`. Supplied image artwork is not edited for spelling.
+- **OWNER REQUIREMENT:** the revised case study (headline "1,410 paid enrolments attributed to Google Ads" (changed from "through" at release so the headline matches the documented attribution basis), whole-period totals, no before-and-after claim, no testimonial), the dashboard bars drawn in proportion to the reported totals (the only artwork edit), a short meta description separate from the full introduction, and narrow corrections to `/google-ads`, `/who-we-help/education` and `/services` where they said no figures are published.
+- **OWNER ATTESTATIONS (2026-10-30, treated as owner attestations, not independent audits):** (1) permission to publish all three supplied images and the five reported figures; (2) the figures are confirmed from business records; (3) enrolments and revenue were reconciled with Google Ads advertising data; (4) revenue excludes refunds.
+- **APPROVED REPORTED FIGURES (whole period, February 2020 to August 2021):** 1,410 enrolments; INR 66,36,000 revenue; INR 12,66,390 ad spend; INR 898.15 cost per enrolment and 5.24x revenue-to-ad-spend ratio (both calculated from the reported totals). Not to be described as independently audited, as a before-and-after comparison, or as proof that advertising alone caused the revenue.
+- **PROOF WITHHOLDING:** `lib/case-study-proof.ts` no longer lists `google-ads-for-online-courses`. `seo-ameba-software` and `seo-for-home-decor-brand` stay withheld. Other restricted studies are unchanged.
+- **META:** the short search and sharing description is held in code (`lib/case-study-presentation.ts`, 152 characters) because Contentful has no separate field; the visible introduction (`summary`) is not shortened for it.
+- **NOT authorised:** commit, push, PR, merge, deployment, Contentful write or publish. Those need a separate release authorisation.
+- **Read with:** `DEC-073`, `DEC-012`.

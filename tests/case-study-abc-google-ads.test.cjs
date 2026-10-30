@@ -75,7 +75,9 @@ test('the supplied images are in place at their own pixels and are the study\'s 
   assert.strictEqual(slots.card.kind, 'image');
   assert.strictEqual(slots.feature.kind, 'image');
   assert.match(slots.card.src, /anybodycanbake-listing\.webp$/);
-  assert.match(slots.feature.src, /anybodycanbake-feature\.webp$/);
+  assert.match(slots.feature.src, /anybodycanbake-feature-wide\.webp$/, 'desktop and tablet: the 2.6:1 derivative');
+  assert.match(slots.feature.narrow.src, /anybodycanbake-feature\.webp$/, 'narrow screens: the approved 16:9 original');
+  assert.match(slots.feature.ogSrc, /anybodycanbake-feature\.webp$/, 'sharing: the approved original');
   assert.strictEqual(slots.card.position, '0% 50%', 'the card crops from the right so the baked text on the left is never cut');
   assert.ok(slots.feature.whole && slots.feature.og);
   assert.ok(slots.card.alt.length > 40 && slots.feature.alt.length > 40);
@@ -100,15 +102,15 @@ test('the listing card text carries no figure, and the study keeps its address a
   assert.doesNotMatch(body, /\d|eggless|healthy/);
   assert.strictEqual(W.STUDIES.anybodycanbake.href, HREF);
   const page = read('app/(pages)/portfolio/[slug]/page.tsx');
-  assert.match(page, /createMetadata\(caseStudy\.metaTitle, presentationFor\(caseStudy\.href\)\.metaDescription \?\? caseStudy\.metaDescription, caseStudy\.href, og\?\.src, og\?\.alt\)/);
+  assert.match(page, /caseStudy\.href, og\?\.ogSrc \?\? og\?\.src, og\?\.alt\)/);
 });
 
 test('the template shows an image whole on the same stage as Om Sai: same frame, outlined client name behind it, no gradient over it, no logo chip', () => {
   const css = read('components/case-study/case-study.css');
   assert.doesNotMatch(css, /is-whole \{[^}]*aspect-ratio/, 'the stage keeps the shared 2.6, 2 and 1.3 ratios');
+  assert.doesNotMatch(css, /is-whole \.ct-stage-mark \{ z-index: 0/, 'the client name is in the foreground, as on Om Sai');
   assert.match(css, /is-whole \.ct-stage-img > img \{ object-fit: contain/);
   assert.match(css, /is-whole::after \{ display: none; \}/);
-  assert.match(css, /is-whole \.ct-stage-mark \{ z-index: 0; \}/);
   assert.doesNotMatch(css, /is-whole[^{]*ct-stage-mark[^{]*\{[^}]*display: none/);
   assert.match(read('components/case-study/CaseStudyTemplate.tsx'), /art\?\.logo \|\| art\?\.whole \? null : clientForHref/);
 });

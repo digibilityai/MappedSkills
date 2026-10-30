@@ -170,7 +170,7 @@ test('Stage 3B: Home Decor is unlisted everywhere discovery happens, noindex fol
   assert.match(rd('lib/contentful/case-studies.ts'), /getCaseStudyListCards[^]*?filter\(\(s\) => !UNLISTED_CASE_STUDY_IDS\.has\(s\.id\)\)/);
   const page = rd('app/(pages)/portfolio/[slug]/page.tsx');
   assert.match(page, /UNLISTED_CASE_STUDY_IDS\.has\(caseStudy\.id\) \? \{ \.\.\.metadata, robots: \{ index: false, follow: true, googleBot: \{ index: false, follow: true \} \} \} : metadata/);
-  assert.match(page, /createMetadata\(caseStudy\.metaTitle, presentationFor\(caseStudy\.href\)\.metaDescription \?\? caseStudy\.metaDescription, caseStudy\.href, og\?\.src, og\?\.alt\)/, 'canonical comes from createMetadata, unchanged');
+  assert.match(page, /createMetadata\(caseStudy\.metaTitle, presentationFor\(caseStudy\.href\)\.metaDescription \?\? caseStudy\.metaDescription, caseStudy\.href, og\?\.ogSrc \?\? og\?\.src, og\?\.alt\)/, 'canonical comes from createMetadata, unchanged');
   assert.match(rd('lib/case-study-eligibility.ts'), /UNLISTED_CASE_STUDY_IDS[^]*'4zQL4P8SR2xogxHN4qFfUl'/);
 });
 

@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
   // a study whose detail image is approved as its sharing image (`og` in lib/case-study-images.ts) uses it; every other study keeps the site default
   const feature = imageSlotsFor(caseStudy.href).feature;
   const og = feature?.kind === 'image' && feature.og ? feature : null;
-  const metadata = createMetadata(caseStudy.metaTitle, presentationFor(caseStudy.href).metaDescription ?? caseStudy.metaDescription, caseStudy.href, og?.src, og?.alt);
+  const metadata = createMetadata(caseStudy.metaTitle, presentationFor(caseStudy.href).metaDescription ?? caseStudy.metaDescription, caseStudy.href, og?.ogSrc ?? og?.src, og?.alt);
   // An unlisted study (founder decision, Stage 3B) stays reachable and keeps its canonical, but asks search engines not to index it.
   return UNLISTED_CASE_STUDY_IDS.has(caseStudy.id) ? { ...metadata, robots: { index: false, follow: true, googleBot: { index: false, follow: true } } } : metadata;
 }

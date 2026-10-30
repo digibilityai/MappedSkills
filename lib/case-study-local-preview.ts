@@ -67,7 +67,7 @@ export const abcPreviewEntry = (): ContentfulCaseStudy => ({
   title: '1,410 paid enrolments attributed to Google Ads',
   slug: 'google-ads-for-online-courses',
   clientName: { clientName: 'AnybodyCanBake, Pune, India', date: '' },
-  industry: { name: 'Education and training' },
+  industry: { name: 'Online Baking Academy' }, // the existing shared industry entry, kept; the broader classification is `sector` = education
   summary: ABC_SUMMARY,
   problem: { json: ABC_PROBLEM },
   whatWeDid: { json: ABC_WHAT_WE_DID },

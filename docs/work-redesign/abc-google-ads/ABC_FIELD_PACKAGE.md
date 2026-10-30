@@ -1,6 +1,6 @@
 # AnybodyCanBake (Google Ads): revised case study, field package and release notes
 
-**Updated 2026-10-30 (DEC-102):** spelling is AnybodyCanBake (supersedes DEC-073); `summary` is the full 306 character introduction (the short meta description is separate, in code); `clientName` becomes "AnybodyCanBake, Pune, India". `abc-fields.json` is synchronised.
+**Updated 2026-10-30 (DEC-102):** spelling is AnybodyCanBake (supersedes DEC-073); `summary` is the full 306 character introduction (the short meta description is separate, in code); the client entry's display name becomes "AnybodyCanBake, Pune, India". `abc-fields.json` is synchronised.
 
 ## Evidence and permission (cleared 2026-10-30 by owner attestation, not independent audit)
 
@@ -23,7 +23,7 @@ Why order matters: new code with the old Contentful copy would show the figures 
 5. Verify live: page, `/work` card, `/google-ads`, `/who-we-help/education`, `/services`, the sharing image URL (`/images/resolve-r3/anybodycanbake-feature.webp`), meta description, canonical, no horizontal scroll at 390px.
 6. Rollback: Contentful, restore the previous published version; code, redeploy the previous BUILD_ID.
 
-Fields to change on entry `6Ycb7aYvXrslOXKchQnqmi` (values in `abc-fields.json`): `title`, `summary`, `problem`, `whatWeDid`, `impact`, `evidenceNote`, `clientName` ("AnybodyCanBake, Pune, India"), `industry` (link to an entry named "Education and training"), `sector` = `education`, `serviceKey` = `/google-ads`, `periodStart` = 2020-02-01, `periodEnd` = 2021-08-31, `showTestimonial` unticked, `review` link empty. Legacy `content` and `conclusion` are not read by the new template and can stay.
+Fields to change on entry `6Ycb7aYvXrslOXKchQnqmi` (values in `abc-fields.json`): `title`, `summary`, `problem`, `whatWeDid`, `impact`, `evidenceNote`, `sector` = `education` (shows "Education and training" as the broader classification beside the retained "Online Baking Academy" industry link, which is not edited), `serviceKey` = `/google-ads`, `periodStart` = 2020-02-01, `periodEnd` = 2021-08-31, `showTestimonial` unticked, `review` link empty. Also, on the study's own client entry `4qzD1vSg28WOKWKhCD64Vc`: display name `clientName` = "AnybodyCanBake, Pune, India" (the owner-run tool refuses to edit it if any other entry links to it). Legacy `content` and `conclusion` are not read by the new template and can stay.
 
 ## Rules this package follows
 

@@ -9,10 +9,8 @@
     "title": "1,410 paid enrolments attributed to Google Ads",
     "slug": "google-ads-for-online-courses",
     "clientName": {
-      "clientName": "AnybodyCanBake, Pune, India",
-      "date": ""
+      "note": "not a study field: it is a link to the client entry above"
     },
-    "industryName": "Education and training",
     "summary": "AnybodyCanBake wanted direct purchases for its online baking courses. MappedSkills managed Search and Display campaigns and made changes to keywords, ads, targeting and landing pages. From February 2020 to August 2021, Google Ads was credited with 1,410 paid enrolments and ₹66.36 lakh in reported revenue.",
     "problem": {
       "nodeType": "document",
@@ -448,5 +446,10 @@
     "serviceKey": "/google-ads",
     "periodStart": "2020-02-01",
     "periodEnd": "2021-08-31"
+  },
+  "linkedEntries": {
+    "clientEntryId": "4qzD1vSg28WOKWKhCD64Vc",
+    "clientName": "AnybodyCanBake, Pune, India",
+    "note": "Display name only, on the study's own client entry (checked exclusive to this study by the tool). The industry link (\"Online Baking Academy\") is retained and not edited; \"Education and training\" shows as the sector (field `sector` = education)."
   }
 }

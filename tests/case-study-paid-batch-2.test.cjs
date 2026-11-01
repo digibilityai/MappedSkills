@@ -246,7 +246,24 @@ test('corrected dashboards: the four periods, the Talreja label and the INR equi
   for (const [k, v] of Object.entries(period)) { const alt = B.paidCaseFor(`/portfolio/${k}`).dashboard.alt; assert.ok(alt.includes(v), k); assert.doesNotMatch(alt, /date range not supplied/i, k); }
   const t = B.paidCaseFor('/portfolio/talreja-talreja-google-ads').dashboard.alt;
   assert.match(t, /Average first contracted fee revenue per engagement shows ₹30,000/); assert.doesNotMatch(t, /Lifetime Value/); assert.match(t, /INR equivalent/);
-  for (const k of Object.keys(period)) assert.ok(fs.existsSync(path.join(root, 'docs/work-redesign/paid-case-batch/source-originals/dashboards', `${k}-dashboard.before-edit.webp`)), `${k}: the pre-edit copy is kept`);
+  // THE ORIGINALS ARE COMMITTED (docs/work-redesign/paid-case-batch/source-originals/dashboards, 0.3 MB) AND PINNED BY SHA-256, so this check runs the same from a clean
+  // checkout: each pre-edit copy is byte-identical to the one that was supplied and approved, each approved edited artwork is byte-identical to the one reviewed, and the
+  // two differ (the correction really is on the artwork). Re-approving either file means changing its hash here on purpose.
+  const sha = (f) => require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(root, f))).digest('hex');
+  const PINNED = {
+    'advit-prints-meta-ads': ['9bfd5238780bc379384b4a7b1353607fa47b8f45e9b15ae68307679fd35e5889', '86c68025fc6d8ac75a0cacdd504c16cbbd0fa8943073ae23be4ef602151082b6'],
+    'meticulous-business-plan-google-ads': ['28018ffc6191e9a53aafb5106c0a4d5ba65bfc92c59a2b29730d772338c9cd91', '62774146b3173ff94067dc51a84028871d46d11238c0f1c7d30458a82b92762d'],
+    'bblewrap-google-ads': ['05b28b4c59e4f135fc22ceb89fa633c27f7c693fd9e49cfc47b0fa149b63969f', 'ac79a5fe7b4100090ee8140740857c8e705510ff1f732b33496e9329888bb81f'],
+    'talreja-talreja-google-ads': ['ef5a446ab9ad8fe18df32d7729b8dbdb5a5669637cace61572ce9e01f7aa5b5f', 'd8438df8eab2f9c85cfa6761641ce435a5c3e4fc7aeaa8a710040a34ba8ef3a7'],
+    'anybodycanbake-seo': ['72810a897334db30e73d3bc568cf92182aa8709dcc1affeab8a1aafca193d7aa', '693ac7d6de77fc489b0d69218820f4074dbdabe7c36a726a1579eb2157d689df'],
+  };
+  for (const [k, [before, after]] of Object.entries(PINNED)) {
+    const orig = `docs/work-redesign/paid-case-batch/source-originals/dashboards/${k}-dashboard.before-edit.webp`; const art = `public/images/case-studies/${k}-dashboard.webp`;
+    assert.ok(fs.existsSync(path.join(root, orig)), `${k}: the pre-edit copy is committed`);
+    assert.strictEqual(sha(orig), before, `${k}: the supplied pre-edit copy is unchanged`);
+    assert.strictEqual(sha(art), after, `${k}: the approved edited artwork is unchanged`);
+    assert.notStrictEqual(before, after, `${k}: the edit is on the artwork`);
+  }
 });
 
 test('Advit Prints stage uses the existing deeper outline stroke (the insurance and home treatment) and no other batch stage changes', () => {

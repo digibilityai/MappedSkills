@@ -1,0 +1,379 @@
+{
+ "out": {
+  "1440/contact": {
+   "banner": true,
+   "walk": {
+    "stops": 40,
+    "noRing": [],
+    "behindBanner": []
+   },
+   "scrollBy": 0,
+   "menu": {
+    "opens": true,
+    "stops": 8,
+    "noRing": [],
+    "nativeScrollInMenu": false,
+    "scrollBy": 0,
+    "closesOnEscape": true
+   },
+   "form": {
+    "values": {
+     "name": "Test Name",
+     "email": "test@example.com",
+     "phone": "9999999999",
+     "message": "Hello",
+     "service": ""
+    },
+    "scrollBy": 0,
+    "ring": true
+   },
+   "rejectHides": true,
+   "persists": true,
+   "afterClientNav": {
+    "scrollBy": 0,
+    "banner": true
+   }
+  },
+  "1440/work": {
+   "banner": true,
+   "walk": {
+    "stops": 40,
+    "noRing": [],
+    "behindBanner": []
+   },
+   "scrollBy": 0,
+   "menu": {
+    "opens": true,
+    "stops": 8,
+    "noRing": [],
+    "nativeScrollInMenu": false,
+    "scrollBy": 0,
+    "closesOnEscape": true
+   },
+   "rejectHides": true,
+   "persists": true,
+   "afterClientNav": {
+    "scrollBy": 0,
+    "banner": true
+   }
+  },
+  "1440/social-media-ads": {
+   "banner": true,
+   "walk": {
+    "stops": 40,
+    "noRing": [],
+    "behindBanner": [
+     "Feed Ads",
+     "Read the case study↗",
+     "See our work↗",
+     "Discuss Your Meta Ads↗"
+    ]
+   },
+   "scrollBy": 0,
+   "menu": {
+    "opens": true,
+    "stops": 8,
+    "noRing": [],
+    "nativeScrollInMenu": true,
+    "scrollBy": 0,
+    "closesOnEscape": true
+   },
+   "rejectHides": true,
+   "persists": true,
+   "afterClientNav": {
+    "scrollBy": 0,
+    "banner": true
+   }
+  },
+  "1440/blog": {
+   "banner": true,
+   "walk": {
+    "stops": 40,
+    "noRing": [],
+    "behindBanner": []
+   },
+   "scrollBy": 5,
+   "menu": {
+    "opens": true,
+    "stops": 8,
+    "noRing": [],
+    "nativeScrollInMenu": false,
+    "scrollBy": 0,
+    "closesOnEscape": true
+   },
+   "rejectHides": true,
+   "persists": true
+  },
+  "1440/press": {
+   "banner": true,
+   "walk": {
+    "stops": 40,
+    "noRing": [],
+    "behindBanner": []
+   },
+   "scrollBy": 6,
+   "menu": {
+    "opens": true,
+    "stops": 8,
+    "noRing": [],
+    "nativeScrollInMenu": false,
+    "scrollBy": 0,
+    "closesOnEscape": true
+   },
+   "rejectHides": true,
+   "persists": true
+  },
+  "390/contact": {
+   "banner": true,
+   "walk": {
+    "stops": 40,
+    "noRing": [],
+    "behindBanner": [
+     "email",
+     "Request a call"
+    ]
+   },
+   "scrollBy": 0,
+   "menu": {
+    "opens": true,
+    "stops": 8,
+    "noRing": [],
+    "nativeScrollInMenu": true,
+    "scrollBy": 0,
+    "closesOnEscape": true
+   },
+   "form": {
+    "values": {
+     "name": "Test Name",
+     "email": "test@example.com",
+     "phone": "9999999999",
+     "message": "Hello",
+     "service": ""
+    },
+    "scrollBy": 0,
+    "ring": true
+   },
+   "rejectHides": true,
+   "persists": true,
+   "afterClientNav": {
+    "scrollBy": 0,
+    "banner": true
+   }
+  },
+  "390/work": {
+   "banner": true,
+   "walk": {
+    "stops": 39,
+    "noRing": [],
+    "behindBanner": []
+   },
+   "scrollBy": 0,
+   "menu": {
+    "opens": true,
+    "stops": 8,
+    "noRing": [],
+    "nativeScrollInMenu": true,
+    "scrollBy": 0,
+    "closesOnEscape": true
+   },
+   "rejectHides": true,
+   "persists": true,
+   "afterClientNav": {
+    "scrollBy": 0,
+    "banner": true
+   }
+  },
+  "390/social-media-ads": {
+   "banner": true,
+   "walk": {
+    "stops": 40,
+    "noRing": [],
+    "behindBanner": [
+     "Feed Ads",
+     "If your customers are alre",
+     "Read the case study↗",
+     "See our work↗"
+    ]
+   },
+   "scrollBy": 0,
+   "menu": {
+    "opens": true,
+    "stops": 8,
+    "noRing": [],
+    "nativeScrollInMenu": true,
+    "scrollBy": 0,
+    "closesOnEscape": true
+   },
+   "rejectHides": true,
+   "persists": true,
+   "afterClientNav": {
+    "scrollBy": 0,
+    "banner": true
+   }
+  },
+  "390/blog": {
+   "banner": true,
+   "walk": {
+    "stops": 40,
+    "noRing": [],
+    "behindBanner": []
+   },
+   "scrollBy": 10,
+   "menu": {
+    "opens": true,
+    "stops": 8,
+    "noRing": [],
+    "nativeScrollInMenu": true,
+    "scrollBy": 0,
+    "closesOnEscape": true
+   },
+   "rejectHides": true,
+   "persists": true
+  },
+  "390/press": {
+   "banner": true,
+   "walk": {
+    "stops": 40,
+    "noRing": [],
+    "behindBanner": []
+   },
+   "scrollBy": 7,
+   "menu": {
+    "opens": true,
+    "stops": 8,
+    "noRing": [],
+    "nativeScrollInMenu": true,
+    "scrollBy": 0,
+    "closesOnEscape": true
+   },
+   "rejectHides": true,
+   "persists": true
+  },
+  "360/contact": {
+   "banner": true,
+   "walk": {
+    "stops": 40,
+    "noRing": [],
+    "behindBanner": [
+     "Request a call"
+    ]
+   },
+   "scrollBy": 0,
+   "menu": {
+    "opens": true,
+    "stops": 8,
+    "noRing": [],
+    "nativeScrollInMenu": true,
+    "scrollBy": 0,
+    "closesOnEscape": true
+   },
+   "form": {
+    "values": {
+     "name": "Test Name",
+     "email": "test@example.com",
+     "phone": "9999999999",
+     "message": "Hello",
+     "service": ""
+    },
+    "scrollBy": 0,
+    "ring": true
+   },
+   "rejectHides": true,
+   "persists": true,
+   "afterClientNav": {
+    "scrollBy": 0,
+    "banner": true
+   }
+  },
+  "360/work": {
+   "banner": true,
+   "walk": {
+    "stops": 39,
+    "noRing": [],
+    "behindBanner": []
+   },
+   "scrollBy": 0,
+   "menu": {
+    "opens": true,
+    "stops": 8,
+    "noRing": [],
+    "nativeScrollInMenu": true,
+    "scrollBy": 0,
+    "closesOnEscape": true
+   },
+   "rejectHides": true,
+   "persists": true,
+   "afterClientNav": {
+    "scrollBy": 0,
+    "banner": true
+   }
+  },
+  "360/social-media-ads": {
+   "banner": true,
+   "walk": {
+    "stops": 40,
+    "noRing": [],
+    "behindBanner": [
+     "Feed Ads",
+     "If your customers are alre",
+     "Read the case study↗",
+     "See our work↗"
+    ]
+   },
+   "scrollBy": 0,
+   "menu": {
+    "opens": true,
+    "stops": 8,
+    "noRing": [],
+    "nativeScrollInMenu": true,
+    "scrollBy": 0,
+    "closesOnEscape": true
+   },
+   "rejectHides": true,
+   "persists": true,
+   "afterClientNav": {
+    "scrollBy": 0,
+    "banner": true
+   }
+  },
+  "360/blog": {
+   "banner": true,
+   "walk": {
+    "stops": 40,
+    "noRing": [],
+    "behindBanner": []
+   },
+   "scrollBy": 10,
+   "menu": {
+    "opens": true,
+    "stops": 8,
+    "noRing": [],
+    "nativeScrollInMenu": true,
+    "scrollBy": 0,
+    "closesOnEscape": true
+   },
+   "rejectHides": true,
+   "persists": true
+  },
+  "360/press": {
+   "banner": true,
+   "walk": {
+    "stops": 40,
+    "noRing": [],
+    "behindBanner": []
+   },
+   "scrollBy": 7,
+   "menu": {
+    "opens": true,
+    "stops": 8,
+    "noRing": [],
+    "nativeScrollInMenu": true,
+    "scrollBy": 0,
+    "closesOnEscape": true
+   },
+   "rejectHides": true,
+   "persists": true
+  }
+ },
+ "defects": []
+}

@@ -1,0 +1,58 @@
+{
+ "blog-listing-desktop": {
+  "h": 3398,
+  "rail": 0
+ },
+ "blog-detail-desktop": {
+  "h": 7290,
+  "rail": 0
+ },
+ "press-listing-desktop": {
+  "h": 2833,
+  "rail": 0
+ },
+ "press-detail-desktop": {
+  "h": 5860,
+  "rail": 0
+ },
+ "research-listing-desktop": {
+  "h": 4492,
+  "rail": 0
+ },
+ "research-detail-desktop": {
+  "h": 14808,
+  "rail": 0
+ },
+ "research-detail-nav-open-desktop": {
+  "h": 14808,
+  "rail": 0
+ },
+ "blog-listing-mobile": {
+  "h": 5784,
+  "rail": 0
+ },
+ "blog-detail-mobile": {
+  "h": 9394,
+  "rail": 763
+ },
+ "press-listing-mobile": {
+  "h": 4019,
+  "rail": 0
+ },
+ "press-detail-mobile": {
+  "h": 7940,
+  "rail": 1071
+ },
+ "research-listing-mobile": {
+  "h": 6620,
+  "rail": 0
+ },
+ "research-detail-mobile": {
+  "h": 22603,
+  "rail": 3004
+ },
+ "research-detail-nav-open-mobile": {
+  "h": 23436,
+  "rail": 3004
+ }
+}

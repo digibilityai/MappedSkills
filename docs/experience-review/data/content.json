@@ -1,0 +1,137 @@
+{
+ "blog": {
+  "h1": "Marketing guides, written plainly.",
+  "lede": "Practical reads on search, ads, content and turning website visits into enquiries — for business owners deciding what to do next.",
+  "cards": [
+   {
+    "t": "7 Proven Strategies of Digital Marketing for Real Estate Developers",
+    "cat": "FEATURED READ · REAL ESTATE · 13 MIN READ",
+    "x": "Boost sales with Digital Marketing for Real Estate Strategies—SEO to lead generation, MappedSkills gets results.",
+    "img": "https://images.ctfassets.net/owww06rzpjnj/4XTbYWClKHjQR4s2dNqbGZ/be798754fcbbc371eb0e297acd43fef3/Mappedskills_Digital-Marketing-Strategies-for-Real-Estate.webp",
+    "w": 1200,
+    "h": 600,
+    "href": "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers"
+   },
+   {
+    "t": "Content Marketing Services in Pune | Boost Your Business Now",
+    "cat": "CONTENT MARKETING\n6 MIN READ",
+    "x": "Explore top content marketing services in Pune. Drive traffic, boost engagement, and achieve your business goals with expert strategies.",
+    "img": "https://images.ctfassets.net/owww06rzpjnj/DaZDs4Sdt7PkGkPmQSRHJ/f86f377333da5bf6db9dec80ee6cd3c9/MappedSkills_Content_Marketing_Services_Cost_of_Content_Creation.webp",
+    "w": 1200,
+    "h": 600,
+    "href": "/blog/content-marketing-services-in-pune"
+   },
+   {
+    "t": "Building an Email List: A Comprehensive Guide",
+    "cat": "EMAIL MARKETING\n3 MIN READ",
+    "x": "Unlock the potential of email marketing! Explore proven strategies and actionable tips to grow your email list for maximum engagement.",
+    "img": "https://images.ctfassets.net/owww06rzpjnj/4JhD04rM8Z8AhDq5pr0A2J/2f1f15492161bc6ce60b35fab5fd284b/blog-details-img.webp",
+    "w": 1290,
+    "h": 720,
+    "href": "/blog/building-an-email-list"
+   },
+   {
+    "t": "The Importance of Content Writing: A Guide for Business Owners and Marketing Managers",
+    "cat": "BRAND STRATEGY\n5 MIN READ",
+    "x": "Learn the importance of content writing and why it is essential for marketing success, brand growth, SEO, and lead generation.",
+    "href": "/blog/importance-of-content-writing"
+   },
+   {
+    "t": "Performance Marketing vs. Digital Marketing: Which is Right for Your Business?",
+    "cat": "INSIGHTS\n4 MIN READ",
+    "x": "Performance Marketing vs. Digital Marketing, their pros and cons, and which approach is best for your business.",
+    "img": "https://images.ctfassets.net/owww06rzpjnj/4JhD04rM8Z8AhDq5pr0A2J/2f1f15492161bc6ce60b35fab5fd284b/blog-details-img.webp",
+    "w": 1290,
+    "h": 720,
+    "href": "/blog/performance-marketing-vs-digital-marketing"
+   },
+   {
+    "t": "Best SEO Company in Pune for Businesses That Want Qualified Leads, Not Just Rankings",
+    "cat": "CONTENT MARKETING\n9 MIN READ",
+    "x": "Looking for an SEO company in Pune? MappedSkills helps businesses improve rankings, organic traffic, qualified leads, technical SEO, and local SEO.",
+    "img": "https://images.ctfassets.net/owww06rzpjnj/61hi8K3M07Udh4v9RTIQh6/a34547cb2fd2e923a684ca84879d9bcb/Best_SEO_Company_in_Pune.jpeg",
+    "w": 1200,
+    "h": 600,
+    "href": "/blog/seo-company-in-pune"
+   },
+   {
+    "t": "Facebook Advertising Agency in Pune for Facebook & Instagram Ads That Drive Qualified Leads",
+    "cat": "PPC\n8 MIN READ",
+    "x": "Looking for a Facebook advertising agency in Pune? We help you plan, launch, and optimize FB and Insta ad campaigns for leads & sales.",
+    "href": "/blog/facebook-advertising-agency-pune"
+   }
+  ]
+ },
+ "press": {
+  "h1": "News from MappedSkills, on the record.",
+  "lede": "Our press releases and announcements, newest first. Writing a story? Email us for comment or background.",
+  "feat": {
+   "t": "MappedSkills Research Finds No Observable Google Analytics on 42.5% of 120 Indian Business Websites Audited",
+   "k": "LATEST ANNOUNCEMENT ·\nOCTOBER 23, 2026",
+   "x": "New study finds that 97.5% of audited websites preserved campaign tracking parameters, while advertising measurement technologies were less consistently observable.",
+   "img": "https://images.ctfassets.net/owww06rzpjnj/92E06UhFkGK9msNpEtkuz/eb080feeecfcd99b8811cc8376f6f815/42.5-__Websites_Without_Google_Analytics.webp",
+   "w": 1719,
+   "h": 915
+  },
+  "recs": [
+   "ORIGINAL RESEARCH | MappedSkills Research | What we checked, how many, when, and where the evidence stops. | →",
+   "THE COMPANY | About MappedSkills | What we do, how we work and what we promise our clients. | →"
+  ]
+ },
+ "research": {
+  "h1": "We look at real business websites. Then we publish what we find.",
+  "lede": "MappedSkills Research looks at how businesses are found, measured and converted. Every report says what we checked, when, how many, and where the evidence stops.",
+  "lead": "THE HEADLINE FINDING\n\n42.5%\n\nMore than 4 in 10 audited websites had no observable Google Analytics.\n51\nno observable Google Analytics\n69\nthe other websites audited\nEach square is one audited website. Each row of 12 is one tenth of the sample. The 69 plain squares are every other website audited, as described in the finding.\n\nAmong the 120 websites audited, Google Analytics was not observed on 51 (42.5%) and was observable on 67 (55.8%). Two websites were classified as Unable to Determine.\n\nn=120 Indian business websites · MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+  "report": "01\nTHE FULL REPORT\n\nThe Marketing Measurement Gap: What 120 Indian Business Websites Reveal About Analytics and Advertising Measurement\n\nAmong the 120 Indian business websites audited, more than 4 in 10 had no observable Google Analytics, yet 97.5% preserved the UTM parameters used in testing.\n\nPublished\nOctober 5, 2026\nResearch period\n2025-2026\nGeography\nIndia\nSample size\n120\nCategory\nIndustry Benchmarks\nAuthor\nAmit Gupta\nRead the full report\nMethodology\nLimitations\n\nWHAT THIS MEANS FOR YOU\n\nIf your website can’t see where visitors come from, it’s hard to tell which marketing brings enquiries.\n\nWHAT IT DOESN’T MEAN\n\nIt doesn’t mean these businesses had no measurement at all. Some may use tools that can’t be seen from outside.",
+  "more": [
+   "35.8% | Meta Pixel was observable on just over one-third of audited websites. | Among the 120 websites audited, Meta Pixel was observable on 43. | SAMPLE n=120 Indian business websites SOURCE MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "27.5% | Google Ads-related measurement was observable on fewer than 3 in 10 websites. | Among the 120 websites audited, Google Ads-related measurement was observable on 33. | SAMPLE n=120 Indian business websites SOURCE MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "97.5% | Almost all audited websites preserved the UTM parameters used during testing. | Among the 120 websites audited, 117 preserved the UTM parameters used during testing. This does not show that these businesses actively use UTMs in their campaigns; it shows that the websites preserved the parameters supplied in the audit. | SAMPLE n=120 Indian business websites SOURCE MSR-001 Audit Protocol v1.1. Harmless predefined UTM parameters.",
+   "66.7% vs 6.7% | Observable Meta Pixel presence varied sharply across sectors. | Observable Meta Pixel presence by sector: Fashion 66.7%; Jewellery 60%; Technology 10%; Manufacturing 6.7%. | SAMPLE n=30 websites per sector (Fashion, Jewellery, Technology, Manufacturing) SOURCE MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only."
+  ],
+  "method": [
+   "01 | What we looked at | The sample, where there is one.",
+   "02 | When and where | The period and the geography each report covers.",
+   "03 | Where it stops | The limits of what we saw. Findings are never restated as guarantees."
+  ],
+  "close": "Not sure what your marketing is actually measuring? | We can help you understand what’s visible, what’s missing and what to look at next. | Talk to MappedSkills | Request a call ↗"
+ },
+ "report": {
+  "h1": "The Marketing Measurement Gap: What 120 Indian Business Websites Reveal About Analytics and Advertising Measurement",
+  "facts": "Author | Amit Gupta | Published | October 5, 2026 | Research period | 2025-2026 | Geography | India | Sample size | 120 | Research ID | MSR-001",
+  "chapters": [
+   "Key findings",
+   "Executive summary",
+   "Why We Conducted This Research",
+   "Finding 1 More Than 4 in 10 Audited Websites Had No Observable Google Analytics",
+   "Finding 2 Advertising Measurement Was Even Less Commonly Observable",
+   "Finding 3 97.5% of Websites Preserved Our Test UTM Parameters",
+   "Finding 4 Advertising Measurement Varied Sharply by Sector",
+   "Finding 5 Technology Did Not Lead the Sample on Observable Google Analytics",
+   "What About Conversion Measurement?",
+   "What Does the Marketing Measurement Gap Mean?",
+   "What Founders and CEOs Should Ask",
+   "A Note From Amit Gupta",
+   "Methodology",
+   "Limitations",
+   "Cite this report"
+  ],
+  "words": 1810
+ },
+ "release": {
+  "h1": "MappedSkills Research Finds No Observable Google Analytics on 42.5% of 120 Indian Business Websites Audited",
+  "chapters": [
+   "Key findings",
+   "Why this matters for businesses",
+   "A note from the founder",
+   "About the research",
+   "About MappedSkills",
+   "Media enquiries"
+  ],
+  "figs": [
+   "42.5% | More than 4 in 10 audited websites had no observable Google Analytics. | Among the 120 websites audited, Google Analytics was not observed on 51 (42.5%) and was observable on 67 (55.8%). Two websites were classified as Unable to Determine. | SAMPLE n=120 Indian business websites | SOURCE MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "97.5% | Almost all audited websites preserved the UTM parameters used during testing. | Among the 120 websites audited, 117 preserved the UTM parameters used during testing. This does not show that these businesses actively use UTMs in their campaigns; it shows that the websites preserved the parameters supplied in the audit. | SAMPLE n=120 Indian business websites | SOURCE MSR-001 Audit Protocol v1.1. Harmless predefined UTM parameters.",
+   "120 | Indian business websites audited across four sectors. | 30 websites each from Manufacturing, Jewellery, Fashion and Technology, purposively selected and examined during 2025–2026. | SAMPLE n=120 Indian business websites | SOURCE MSR-001 Audit Protocol v1.1."
+  ]
+ }
+}

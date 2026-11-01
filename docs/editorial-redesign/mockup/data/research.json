@@ -1,0 +1,389 @@
+{
+ "title": "MappedSkills Research",
+ "blocks": [
+  {
+   "t": "h1",
+   "x": "We look at real business websites. Then we publish what we find.",
+   "cls": "b-h1 rs-h1"
+  },
+  {
+   "t": "p",
+   "x": "MappedSkills Research looks at how businesses are found, measured and converted. Every report says what we checked, when, how many, and where the evidence stops.",
+   "cls": "b-lede rs-lede"
+  },
+  {
+   "t": "p",
+   "x": "Latest report The Marketing Measurement Gap ↓ October 5, 2026",
+   "cls": "rs-latest"
+  },
+  {
+   "t": "p",
+   "x": "The headline finding",
+   "cls": "b-kicker"
+  },
+  {
+   "t": "p",
+   "x": "42.5%",
+   "cls": "rs-stat rs-stat-xl"
+  },
+  {
+   "t": "h2",
+   "x": "More than 4 in 10 audited websites had no observable Google Analytics.",
+   "cls": "b-h2 rs-lead-h"
+  },
+  {
+   "t": "li",
+   "x": "51 no observable Google Analytics",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "69 the other websites audited",
+   "cls": ""
+  },
+  {
+   "t": "figcaption",
+   "x": "Each square is one audited website. Each row of 12 is one tenth of the sample. The 69 plain squares are every other website audited, as described in the finding.",
+   "cls": "px-cap px-cap-ink rs-cap"
+  },
+  {
+   "t": "p",
+   "x": "Among the 120 websites audited, Google Analytics was not observed on 51 (42.5%) and was observable on 67 (55.8%). Two websites were classified as Unable to Determine.",
+   "cls": "rs-lead-d"
+  },
+  {
+   "t": "dt",
+   "x": "What this means for you",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "If your website can’t see where visitors come from, it’s hard to tell which marketing brings enquiries.",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "What it doesn’t mean",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "It doesn’t mean these businesses had no measurement at all. Some may use tools that can’t be seen from outside.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "n=120 Indian business websites · MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "cls": "rs-meta rs-meta-ink"
+  },
+  {
+   "t": "p",
+   "x": "From the same study",
+   "cls": "b-kicker"
+  },
+  {
+   "t": "h2",
+   "x": "What else we found.",
+   "cls": "b-h2 rs-h2"
+  },
+  {
+   "t": "li",
+   "x": "35.8%Meta Pixel was observable on just over one-third of audited websites.Among the 120 websites audited, Meta Pixel was observable on 43.Sample n=120 Indian business websites Source MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "cls": "rs-row"
+  },
+  {
+   "t": "p",
+   "x": "35.8%",
+   "cls": "rs-stat"
+  },
+  {
+   "t": "h3",
+   "x": "Meta Pixel was observable on just over one-third of audited websites.",
+   "cls": "rs-row-h"
+  },
+  {
+   "t": "p",
+   "x": "Among the 120 websites audited, Meta Pixel was observable on 43.",
+   "cls": "rs-row-d"
+  },
+  {
+   "t": "p",
+   "x": "Sample n=120 Indian business websites Source MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "cls": "rs-meta"
+  },
+  {
+   "t": "li",
+   "x": "27.5%Google Ads-related measurement was observable on fewer than 3 in 10 websites.Among the 120 websites audited, Google Ads-related measurement was observable on 33.Sample n=120 Indian business websites Source MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "cls": "rs-row"
+  },
+  {
+   "t": "p",
+   "x": "27.5%",
+   "cls": "rs-stat"
+  },
+  {
+   "t": "h3",
+   "x": "Google Ads-related measurement was observable on fewer than 3 in 10 websites.",
+   "cls": "rs-row-h"
+  },
+  {
+   "t": "p",
+   "x": "Among the 120 websites audited, Google Ads-related measurement was observable on 33.",
+   "cls": "rs-row-d"
+  },
+  {
+   "t": "p",
+   "x": "Sample n=120 Indian business websites Source MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "cls": "rs-meta"
+  },
+  {
+   "t": "li",
+   "x": "97.5%Almost all audited websites preserved the UTM parameters used during testing.Among the 120 websites audited, 117 preserved the UTM parameters used during testing. This does not show that these businesses actively use UTMs in their campaigns; it shows that the websites preserved the parameters supplied in the audit.Sample n=120 Indian business websites Source MSR-001 Audit Protocol v1.1. Harmless predefined UTM parameters.",
+   "cls": "rs-row"
+  },
+  {
+   "t": "p",
+   "x": "97.5%",
+   "cls": "rs-stat"
+  },
+  {
+   "t": "h3",
+   "x": "Almost all audited websites preserved the UTM parameters used during testing.",
+   "cls": "rs-row-h"
+  },
+  {
+   "t": "p",
+   "x": "Among the 120 websites audited, 117 preserved the UTM parameters used during testing. This does not show that these businesses actively use UTMs in their campaigns; it shows that the websites preserved the parameters supplied in the audit.",
+   "cls": "rs-row-d"
+  },
+  {
+   "t": "p",
+   "x": "Sample n=120 Indian business websites Source MSR-001 Audit Protocol v1.1. Harmless predefined UTM parameters.",
+   "cls": "rs-meta"
+  },
+  {
+   "t": "li",
+   "x": "66.7% vs 6.7%Observable Meta Pixel presence varied sharply across sectors.Observable Meta Pixel presence by sector: Fashion 66.7%; Jewellery 60%; Technology 10%; Manufacturing 6.7%.Sample n=30 websites per sector (Fashion, Jewellery, Technology, Manufacturing) Source MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "cls": "rs-row"
+  },
+  {
+   "t": "p",
+   "x": "66.7% vs 6.7%",
+   "cls": "rs-stat rs-stat-pair"
+  },
+  {
+   "t": "h3",
+   "x": "Observable Meta Pixel presence varied sharply across sectors.",
+   "cls": "rs-row-h"
+  },
+  {
+   "t": "p",
+   "x": "Observable Meta Pixel presence by sector: Fashion 66.7%; Jewellery 60%; Technology 10%; Manufacturing 6.7%.",
+   "cls": "rs-row-d"
+  },
+  {
+   "t": "p",
+   "x": "Sample n=30 websites per sector (Fashion, Jewellery, Technology, Manufacturing) Source MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "cls": "rs-meta"
+  },
+  {
+   "t": "p",
+   "x": "The full report",
+   "cls": "b-kicker"
+  },
+  {
+   "t": "h2",
+   "x": "The Marketing Measurement Gap: What 120 Indian Business Websites Reveal About Analytics and Advertising Measurement",
+   "cls": "rs-card-h"
+  },
+  {
+   "t": "p",
+   "x": "Among the 120 Indian business websites audited, more than 4 in 10 had no observable Google Analytics, yet 97.5% preserved the UTM parameters used in testing.",
+   "cls": "rs-card-x"
+  },
+  {
+   "t": "p",
+   "x": "Read the full reportMethodology →Limitations →",
+   "cls": "rs-card-a"
+  },
+  {
+   "t": "dt",
+   "x": "Published",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "October 5, 2026",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "Research period",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "2025-2026",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "Geography",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "India",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "Sample size",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "120",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "Category",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "Industry Benchmarks",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "Author",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "Amit Gupta",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "How we work",
+   "cls": "b-kicker"
+  },
+  {
+   "t": "h2",
+   "x": "What we checked. What we can’t claim.",
+   "cls": "rs-method-h"
+  },
+  {
+   "t": "li",
+   "x": "What we looked atThe sample, where there is one.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "What we looked at",
+   "cls": "rs-step-t"
+  },
+  {
+   "t": "p",
+   "x": "The sample, where there is one.",
+   "cls": "rs-step-d"
+  },
+  {
+   "t": "li",
+   "x": "When and whereThe period and the geography each report covers.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "When and where",
+   "cls": "rs-step-t"
+  },
+  {
+   "t": "p",
+   "x": "The period and the geography each report covers.",
+   "cls": "rs-step-d"
+  },
+  {
+   "t": "li",
+   "x": "Where it stopsThe limits of what we saw. Findings are never restated as guarantees.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Where it stops",
+   "cls": "rs-step-t"
+  },
+  {
+   "t": "p",
+   "x": "The limits of what we saw. Findings are never restated as guarantees.",
+   "cls": "rs-step-d"
+  },
+  {
+   "t": "h2",
+   "x": "For journalists",
+   "cls": "rs-label"
+  },
+  {
+   "t": "p",
+   "x": "For media enquiries, embargoed materials, or comment, email info@mappedskills.com or use the contact form.",
+   "cls": ""
+  },
+  {
+   "t": "h2",
+   "x": "Not sure what your marketing is actually measuring?",
+   "cls": "b-h2"
+  },
+  {
+   "t": "p",
+   "x": "We can help you understand what’s visible, what’s missing and what to look at next.",
+   "cls": "b-lede"
+  }
+ ],
+ "links": [
+  {
+   "h": "/",
+   "x": "Home"
+  },
+  {
+   "h": "#rs-report",
+   "x": "The Marketing Measurement Gap ↓"
+  },
+  {
+   "h": "/research/marketing-measurement-gap-indian-business-websites",
+   "x": "Read the full report"
+  },
+  {
+   "h": "/research/marketing-measurement-gap-indian-business-websites#methodology",
+   "x": "Methodology →"
+  },
+  {
+   "h": "/research/marketing-measurement-gap-indian-business-websites#limitations",
+   "x": "Limitations →"
+  },
+  {
+   "h": "mailto:info@mappedskills.com?subject=Media%20enquiry%3A%20MappedSkills%20Research",
+   "x": "info@mappedskills.com"
+  },
+  {
+   "h": "/contact",
+   "x": "Media enquiry →"
+  },
+  {
+   "h": "/press",
+   "x": "Newsroom →"
+  },
+  {
+   "h": "/contact",
+   "x": "Talk to MappedSkills"
+  },
+  {
+   "h": "/contact?intent=call",
+   "x": "Request a call"
+  }
+ ],
+ "imgs": [],
+ "cards": []
+}

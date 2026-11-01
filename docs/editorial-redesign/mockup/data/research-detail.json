@@ -1,0 +1,1294 @@
+{
+ "title": "Marketing Measurement Gap: 120 Indian Websites Studied",
+ "blocks": [
+  {
+   "t": "p",
+   "x": "Research report · Industry Benchmarks",
+   "cls": "b-kicker rr-kicker"
+  },
+  {
+   "t": "h1",
+   "x": "The Marketing Measurement Gap: What 120 Indian Business Websites Reveal About Analytics and Advertising Measurement",
+   "cls": "b-h1 rr-h1"
+  },
+  {
+   "t": "p",
+   "x": "Among the 120 Indian business websites audited, more than 4 in 10 had no observable Google Analytics, yet 97.5% preserved the UTM parameters used in testing.",
+   "cls": "b-lede rr-lede"
+  },
+  {
+   "t": "dt",
+   "x": "Author",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "Amit Gupta",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "Published",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "October 5, 2026",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "Research period",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "2025-2026",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "Geography",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "India",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "Sample size",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "120",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "Research ID",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "MSR-001",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Key findings",
+   "cls": "b-kicker"
+  },
+  {
+   "t": "h2",
+   "x": "What the research found.",
+   "cls": "b-h2 rs-h2"
+  },
+  {
+   "t": "li",
+   "x": "42.5%More than 4 in 10 audited websites had no observable Google Analytics.Among the 120 websites audited, Google Analytics was not observed on 51 (42.5%) and was observable on 67 (55.8%). Two websites were classified as Unable to Determine.Sample n=120 Indian business websites Source MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "cls": "rs-row"
+  },
+  {
+   "t": "p",
+   "x": "42.5%",
+   "cls": "rs-stat rr-stat-lead"
+  },
+  {
+   "t": "h3",
+   "x": "More than 4 in 10 audited websites had no observable Google Analytics.",
+   "cls": "rs-row-h"
+  },
+  {
+   "t": "p",
+   "x": "Among the 120 websites audited, Google Analytics was not observed on 51 (42.5%) and was observable on 67 (55.8%). Two websites were classified as Unable to Determine.",
+   "cls": "rs-row-d"
+  },
+  {
+   "t": "p",
+   "x": "Sample n=120 Indian business websites Source MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "cls": "rs-meta"
+  },
+  {
+   "t": "li",
+   "x": "35.8%Meta Pixel was observable on just over one-third of audited websites.Among the 120 websites audited, Meta Pixel was observable on 43.Sample n=120 Indian business websites Source MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "cls": "rs-row"
+  },
+  {
+   "t": "p",
+   "x": "35.8%",
+   "cls": "rs-stat"
+  },
+  {
+   "t": "h3",
+   "x": "Meta Pixel was observable on just over one-third of audited websites.",
+   "cls": "rs-row-h"
+  },
+  {
+   "t": "p",
+   "x": "Among the 120 websites audited, Meta Pixel was observable on 43.",
+   "cls": "rs-row-d"
+  },
+  {
+   "t": "p",
+   "x": "Sample n=120 Indian business websites Source MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "cls": "rs-meta"
+  },
+  {
+   "t": "li",
+   "x": "27.5%Google Ads-related measurement was observable on fewer than 3 in 10 websites.Among the 120 websites audited, Google Ads-related measurement was observable on 33.Sample n=120 Indian business websites Source MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "cls": "rs-row"
+  },
+  {
+   "t": "p",
+   "x": "27.5%",
+   "cls": "rs-stat"
+  },
+  {
+   "t": "h3",
+   "x": "Google Ads-related measurement was observable on fewer than 3 in 10 websites.",
+   "cls": "rs-row-h"
+  },
+  {
+   "t": "p",
+   "x": "Among the 120 websites audited, Google Ads-related measurement was observable on 33.",
+   "cls": "rs-row-d"
+  },
+  {
+   "t": "p",
+   "x": "Sample n=120 Indian business websites Source MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "cls": "rs-meta"
+  },
+  {
+   "t": "li",
+   "x": "97.5%Almost all audited websites preserved the UTM parameters used during testing.Among the 120 websites audited, 117 preserved the UTM parameters used during testing. This does not show that these businesses actively use UTMs in their campaigns; it shows that the websites preserved the parameters supplied in the audit.Sample n=120 Indian business websites Source MSR-001 Audit Protocol v1.1. Harmless predefined UTM parameters.",
+   "cls": "rs-row"
+  },
+  {
+   "t": "p",
+   "x": "97.5%",
+   "cls": "rs-stat"
+  },
+  {
+   "t": "h3",
+   "x": "Almost all audited websites preserved the UTM parameters used during testing.",
+   "cls": "rs-row-h"
+  },
+  {
+   "t": "p",
+   "x": "Among the 120 websites audited, 117 preserved the UTM parameters used during testing. This does not show that these businesses actively use UTMs in their campaigns; it shows that the websites preserved the parameters supplied in the audit.",
+   "cls": "rs-row-d"
+  },
+  {
+   "t": "p",
+   "x": "Sample n=120 Indian business websites Source MSR-001 Audit Protocol v1.1. Harmless predefined UTM parameters.",
+   "cls": "rs-meta"
+  },
+  {
+   "t": "li",
+   "x": "66.7% vs 6.7%Observable Meta Pixel presence varied sharply across sectors.Observable Meta Pixel presence by sector: Fashion 66.7%; Jewellery 60%; Technology 10%; Manufacturing 6.7%.Sample n=30 websites per sector (Fashion, Jewellery, Technology, Manufacturing) Source MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "cls": "rs-row"
+  },
+  {
+   "t": "p",
+   "x": "66.7% vs 6.7%",
+   "cls": "rs-stat rs-stat-pair"
+  },
+  {
+   "t": "h3",
+   "x": "Observable Meta Pixel presence varied sharply across sectors.",
+   "cls": "rs-row-h"
+  },
+  {
+   "t": "p",
+   "x": "Observable Meta Pixel presence by sector: Fashion 66.7%; Jewellery 60%; Technology 10%; Manufacturing 6.7%.",
+   "cls": "rs-row-d"
+  },
+  {
+   "t": "p",
+   "x": "Sample n=30 websites per sector (Fashion, Jewellery, Technology, Manufacturing) Source MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "cls": "rs-meta"
+  },
+  {
+   "t": "p",
+   "x": "The full report",
+   "cls": "b-kicker"
+  },
+  {
+   "t": "h2",
+   "x": "Executive summary",
+   "cls": "rr-h2"
+  },
+  {
+   "t": "p",
+   "x": "MappedSkills Research audited 120 Indian business websites across Manufacturing, Jewellery, Fashion and Technology to examine publicly observable marketing measurement infrastructure. Google Analytics was observable on 55.8% of the websites, Meta Pixel on 35.8%, and Google Ads-related measurement on 27.5%. At the same time, 97.5% of the websites preserved the UTM parameters used during testing. The findings reveal a gap between websites' ability to receive campaign information and the observable measurement infrastructure surrounding that traffic.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Businesses invest in Google Ads, Meta Ads, SEO, social media and other digital channels to bring potential customers to their websites.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "But there is a question that often gets less attention:",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Once that traffic reaches the website, how well is the measurement infrastructure set up to understand it?",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "MappedSkills Research examined 120 Indian business websites across Manufacturing, Jewellery, Fashion and Technology to study the marketing measurement infrastructure that could be publicly observed.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "The results reveal a noticeable gap.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Most websites in our audit could successfully preserve campaign tracking parameters. But basic analytics and advertising-specific measurement technologies were far less consistently observable.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "We call this The Marketing Measurement Gap.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "This contrast sits at the heart of the study.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Most websites could preserve campaign information when traffic arrived. But the measurement technologies visible around that traffic were much less consistent.",
+   "cls": ""
+  },
+  {
+   "t": "h2",
+   "x": "Why We Conducted This Research",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "For many businesses, digital marketing has become an important customer-acquisition channel.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Money is spent generating website visits, enquiries, calls, WhatsApp conversations and purchases.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "This makes measurement increasingly important.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A founder or CEO should ideally be able to answer questions such as:",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Where did our website visitors come from?",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Which campaigns generated meaningful customer actions?",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Which advertising channels are contributing to enquiries or sales?",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Are we able to connect marketing activity with business outcomes?",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Where should the next rupee of marketing budget be spent?",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Before answering those questions, however, the underlying measurement infrastructure needs to exist.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "We therefore decided to examine what could actually be observed on business websites.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Rather than surveying companies about what they believed they had implemented, we audited publicly observable website infrastructure using a predefined protocol.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "The study covered 120 websites, with 30 each from Manufacturing, Jewellery, Fashion and Technology.",
+   "cls": ""
+  },
+  {
+   "t": "h2",
+   "x": "Finding 1: More Than 4 in 10 Audited Websites Had No Observable Google Analytics",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Google Analytics was observable on 67 of 120 websites, or 55.8%.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "It was not observed on 51 of 120 websites, or 42.5%.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "The remaining two websites could not be reliably determined.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "This was one of the clearest findings in the study.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Google Analytics is commonly used as a foundation for understanding website traffic and visitor behaviour. Yet more than four in ten websites in our sample did not show observable evidence of it under our audit protocol.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "This does not mean those businesses had no measurement whatsoever. A business could use another analytics system, server-side infrastructure or technology that was not publicly observable through our defined audit.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "What the study establishes is narrower:",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Google Analytics was not publicly observable on 42.5% of the websites we audited.",
+   "cls": "rr-take"
+  },
+  {
+   "t": "h2",
+   "x": "Finding 2: Advertising Measurement Was Even Less Commonly Observable",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "As we moved from general website analytics toward advertising-specific measurement technologies, observable adoption became lower.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Across the 120 websites:",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Google Analytics55.8%",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Meta Pixel35.8%",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Google Ads-related measurement27.5%",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Google Tag Manager23.3%",
+   "cls": ""
+  },
+  {
+   "t": "figcaption",
+   "x": "Published chart Horizontal bar chart showing Google Analytics at 55.8%, Meta Pixel at 35.8%, Google Ads measurement at 27.5%, and Google Tag Manager at 23.3% across 120 audited websites. Open the chart image",
+   "cls": "rr-barcap"
+  },
+  {
+   "t": "p",
+   "x": "Meta Pixel was observable on 43 websites, while Google Ads-related measurement was observable on 33.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Google Tag Manager was observable on 28.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "These technologies perform different functions, so these numbers should not be interpreted as stages of a literal measurement funnel.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "They do, however, show a clear descriptive pattern in our sample:",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Basic analytics was more commonly observable than several advertising-specific and tag-management technologies.",
+   "cls": "rr-take"
+  },
+  {
+   "t": "p",
+   "x": "For businesses investing significantly in digital acquisition, this raises an important question:",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Is the measurement infrastructure receiving the same attention as the campaigns generating the traffic?",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Basic analytics was more commonly observable than advertising-specific and tag-management technologies. These technologies serve different purposes and should not be interpreted as stages of a sequential funnel.",
+   "cls": "rr-note"
+  },
+  {
+   "t": "h2",
+   "x": "Finding 3: 97.5% of Websites Preserved Our Test UTM Parameters",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "One of the most interesting findings was not about a missing technology.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "It was about something that worked.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "During the audit, we used harmless predefined UTM parameters to test how websites handled campaign-tagged traffic.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "117 of 120 websites, or 97.5%, preserved those UTM parameters.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "We also found that 111 of 120 websites, or 92.5%, handled the campaign parameters without an observable issue under our test.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "This distinction is important.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "The result does not mean 97.5% of these businesses actively use UTMs in their marketing campaigns.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "We did not measure that.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "It means their websites generally preserved the campaign parameters we supplied during the audit.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "That creates an interesting contrast.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "The websites were overwhelmingly capable of retaining the campaign identifiers used in our test, while observable analytics and advertising measurement technologies were much less consistently present.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "UTM preservation does not establish that the business actively uses UTM tracking.",
+   "cls": "rr-note"
+  },
+  {
+   "t": "p",
+   "x": "In simple terms:",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "The ability to receive campaign information was widespread. The observable measurement layer around that traffic was not.",
+   "cls": "rr-take"
+  },
+  {
+   "t": "h2",
+   "x": "Finding 4: Advertising Measurement Varied Sharply by Sector",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Some of the largest differences in the study appeared when we compared sectors.",
+   "cls": ""
+  },
+  {
+   "t": "h3",
+   "x": "Observable Meta Pixel by Sector",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Fashion66.7%",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Jewellery60.0%",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Technology10.0%",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Manufacturing6.7%",
+   "cls": ""
+  },
+  {
+   "t": "figcaption",
+   "x": "Published chart Horizontal bar chart showing observable Meta Pixel presence across Fashion 66.7%, Jewellery 60%, Technology 10%, and Manufacturing 6.7%. Open the chart image",
+   "cls": "rr-barcap"
+  },
+  {
+   "t": "p",
+   "x": "Within our sample, Meta Pixel was observable on 20 of the 30 Fashion websites and 18 of the 30 Jewellery websites.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "By comparison, it was observable on three Technology websites and two Manufacturing websites.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "That is a substantial difference.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Observable Meta measurement varied sharply across the four sector samples. The comparison describes the websites audited and should not be interpreted as a population estimate for each Indian industry.",
+   "cls": "rr-note"
+  },
+  {
+   "t": "p",
+   "x": "A similar pattern appeared in Google Ads-related measurement.",
+   "cls": ""
+  },
+  {
+   "t": "h3",
+   "x": "Observable Google Ads Measurement by Sector",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Jewellery43.3%",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Fashion40.0%",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Technology16.7%",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Manufacturing10.0%",
+   "cls": ""
+  },
+  {
+   "t": "figcaption",
+   "x": "Published chart Horizontal bar chart showing observable Google Ads-related measurement across Jewellery 43.3%, Fashion 40%, Technology 16.7%, and Manufacturing 10%. Open the chart image",
+   "cls": "rr-barcap"
+  },
+  {
+   "t": "p",
+   "x": "Google Ads-related measurement was more commonly observable in the Jewellery and Fashion samples than in Technology and Manufacturing.",
+   "cls": "rr-note"
+  },
+  {
+   "t": "p",
+   "x": "These findings do not establish that Fashion or Jewellery businesses are better at marketing measurement.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Nor do they tell us why the differences exist.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Business models, customer journeys, advertising-channel preferences and website technology could all potentially contribute, but this study was not designed to establish the cause.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "What we can confidently say is:",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Observable advertising measurement infrastructure differed considerably across the four sectors in our sample.",
+   "cls": "rr-take"
+  },
+  {
+   "t": "h2",
+   "x": "Finding 5: Technology Did Not Lead the Sample on Observable Google Analytics",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "One result was particularly interesting.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Given the nature of the sector, some readers might expect Technology businesses to show the highest observable adoption of analytics infrastructure.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "That was not what we found.",
+   "cls": ""
+  },
+  {
+   "t": "h3",
+   "x": "Observable Google Analytics by Sector",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Jewellery60.0%",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Fashion60.0%",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Manufacturing56.7%",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Technology46.7%",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Technology had the lowest observable Google Analytics presence among the four sectors in our sample.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Google Analytics was observed on 14 of the 30 Technology websites.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Again, this should not be interpreted as evidence that India's Technology sector has weaker marketing capabilities.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Our sample contained only 30 purposively selected Technology businesses and was not designed to statistically represent the entire industry.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "It does, however, make the result worth examining further in future research.",
+   "cls": ""
+  },
+  {
+   "t": "h2",
+   "x": "What About Conversion Measurement?",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "This was the most difficult part of the study to evaluate responsibly.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A website can contain a form, WhatsApp button, phone number or checkout without revealing whether the final conversion is being measured.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Confirming some conversion events would require actions such as submitting an enquiry form, sending a WhatsApp message, completing a purchase, or making a phone call.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "We deliberately did not perform those actions.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Our audit protocol prohibited fake enquiries, purchases, WhatsApp messages and phone calls simply for research purposes.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Instead, we looked for meaningful conversion measurement that could be positively observed through safe, non-committing interactions.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Under this protocol, explicit meaningful conversion measurement was positively observable on 3 of the 120 websites.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "The other 117 were classified as Unable to Determine, not as having no conversion measurement.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "That distinction matters.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Therefore, this study does not conclude that only 2.5% of businesses track conversions.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "It concludes that definitive conversion measurement was difficult to establish through a safe public website audit without completing the underlying business action.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "This limitation is intentionally preserved rather than converting uncertainty into a more dramatic statistic.",
+   "cls": ""
+  },
+  {
+   "t": "h2",
+   "x": "What Does the Marketing Measurement Gap Mean?",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "The findings point toward an important distinction.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Generating digital traffic and measuring digital traffic are different capabilities.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A business can run advertising campaigns successfully.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Its website can receive visitors.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Campaign parameters can reach the website intact.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Customers can fill forms, call, send WhatsApp messages or purchase products.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "But that alone does not tell management whether the entire journey is being measured in a way that supports good business decisions.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "We define the Marketing Measurement Gap as:",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "The difference between a business's ability to generate digital traffic and its ability to reliably measure what that traffic produces.",
+   "cls": "rr-take"
+  },
+  {
+   "t": "p",
+   "x": "This study does not attempt to calculate the financial value of that gap.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "It does suggest that measurement deserves greater attention alongside traffic generation.",
+   "cls": ""
+  },
+  {
+   "t": "h2",
+   "x": "What Founders and CEOs Should Ask",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "The purpose of this research is not to encourage businesses to install every marketing technology available.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "More tools do not automatically produce better measurement.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Instead, businesses investing meaningfully in digital marketing should be able to answer a few basic questions.",
+   "cls": ""
+  },
+  {
+   "t": "h3",
+   "x": "1. Do we know where our website traffic comes from?",
+   "cls": "rr-q"
+  },
+  {
+   "t": "p",
+   "x": "Not approximately. Reliably.",
+   "cls": ""
+  },
+  {
+   "t": "h3",
+   "x": "2. Can we connect important customer actions to their acquisition source?",
+   "cls": "rr-q"
+  },
+  {
+   "t": "p",
+   "x": "That might include an enquiry, demo request, phone call, WhatsApp conversation or purchase.",
+   "cls": ""
+  },
+  {
+   "t": "h3",
+   "x": "3. Are our advertising platforms receiving the measurement signals they need?",
+   "cls": "rr-q"
+  },
+  {
+   "t": "p",
+   "x": "This matters when campaigns are being evaluated or optimised.",
+   "cls": ""
+  },
+  {
+   "t": "h3",
+   "x": "4. Can management see marketing outcomes rather than only clicks and traffic?",
+   "cls": "rr-q"
+  },
+  {
+   "t": "p",
+   "x": "More traffic is not automatically better marketing.",
+   "cls": ""
+  },
+  {
+   "t": "h3",
+   "x": "5. When marketing performance changes, do we have enough measurement to understand why?",
+   "cls": "rr-q"
+  },
+  {
+   "t": "p",
+   "x": "That is ultimately where measurement becomes useful.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "The objective is not more dashboards. It is better decisions.",
+   "cls": ""
+  },
+  {
+   "t": "h2",
+   "x": "A Note From Amit Gupta",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Businesses often focus on generating more traffic, more leads and more campaigns. But before increasing marketing spend, there is a simpler question founders should ask: can we reliably measure what happens after someone clicks? Our study suggests that the measurement layer deserves much more attention.",
+   "cls": "rr-quote"
+  },
+  {
+   "t": "p",
+   "x": "- Amit Gupta, Founder, MappedSkills Marketing",
+   "cls": "rr-quote-by"
+  },
+  {
+   "t": "p",
+   "x": "One of the most interesting findings wasn't that websites couldn't accept campaign tracking parameters. Almost all of them could. The bigger gap appeared in the observable measurement infrastructure around that traffic.",
+   "cls": "rr-quote"
+  },
+  {
+   "t": "p",
+   "x": "Methodology",
+   "cls": "b-kicker"
+  },
+  {
+   "t": "h2",
+   "x": "How the audit was done.",
+   "cls": "rr-h2"
+  },
+  {
+   "t": "h3",
+   "x": "Research Question",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "How consistently is marketing measurement infrastructure publicly observable across Indian business websites receiving digital traffic?",
+   "cls": ""
+  },
+  {
+   "t": "h3",
+   "x": "Audit Design",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "MappedSkills Research audited 120 Indian business websites across four sectors: Manufacturing, Jewellery, Fashion and Technology, with 30 websites in each sector.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "The sample was purposively constructed to provide sector and geographic diversity among eligible independent small and mid-sized Indian businesses.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "The study examined publicly observable marketing measurement infrastructure using a predefined audit protocol.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "The audit included website accessibility, observable conversion paths, Google Analytics, Google Tag Manager, Meta Pixel, Google Ads-related measurement, other observable measurement technologies, campaign parameter preservation, campaign parameter handling, and safely observable conversion measurement.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Publicly delivered website behaviour, source information and network activity were examined where appropriate under the protocol.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Harmless predefined UTM parameters were used to test campaign parameter preservation.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "No purchases were made. No enquiry forms were submitted for research purposes. No WhatsApp messages were sent. No phone calls were placed. No private systems, analytics accounts, advertising accounts, CRM systems or administrative systems were accessed.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Research ID: MSR-001. Research type: Data Story. Audit protocol: MSR-001 Audit Protocol v1.1.",
+   "cls": ""
+  },
+  {
+   "t": "h3",
+   "x": "How to Interpret Observable and Not Observed",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "YES",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "Qualifying evidence observed.",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "NO",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "Checked under the defined protocol and qualifying evidence was not observed.",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "UTD",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "Unable to Determine reliably because of technical limitations, access restrictions, ambiguity, or the need to complete a real customer action.",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "N/A",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "Not applicable.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Limitations",
+   "cls": "b-kicker"
+  },
+  {
+   "t": "h2",
+   "x": "What this study can’t tell you.",
+   "cls": "rr-h2"
+  },
+  {
+   "t": "p",
+   "x": "First, the 120 websites were selected using structured purposive sampling, not probability sampling. The results therefore describe the websites audited and should not be interpreted as statistically representative of every Indian small or mid-sized business.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Second, the research examined publicly observable website infrastructure. Some businesses may use server-side measurement, private systems or other technologies that could not be detected through the audit.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Third, the research does not evaluate the accuracy or quality of data inside a company's analytics, advertising or CRM platforms. Detecting a technology does not prove that it is configured correctly. Similarly, not detecting a particular technology does not establish that the business has no alternative measurement capability.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Finally, the study deliberately avoided completing real business conversions solely for testing. This limited our ability to definitively determine conversion measurement on many websites.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "These limitations are an intentional part of the research design and should be considered when interpreting the findings.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Cite this report",
+   "cls": "b-kicker"
+  },
+  {
+   "t": "h2",
+   "x": "How to reference this report.",
+   "cls": "rr-h2"
+  },
+  {
+   "t": "p",
+   "x": "Canonical URL: http://localhost:3500/research/marketing-measurement-gap-indian-business-websites",
+   "cls": "rr-canon"
+  },
+  {
+   "t": "p",
+   "x": "Copy citationCopy link",
+   "cls": "rr-copy"
+  },
+  {
+   "t": "p",
+   "x": "Author Amit Gupta",
+   "cls": "rr-author"
+  },
+  {
+   "t": "h2",
+   "x": "For journalists",
+   "cls": "rs-label"
+  },
+  {
+   "t": "p",
+   "x": "For media enquiries, embargoed materials, or comment, email info@mappedskills.com or use the contact form.",
+   "cls": ""
+  },
+  {
+   "t": "h2",
+   "x": "Not sure what your marketing is actually measuring?",
+   "cls": "b-h2"
+  },
+  {
+   "t": "p",
+   "x": "We can help you understand what’s visible, what’s missing and what to look at next.",
+   "cls": "b-lede"
+  }
+ ],
+ "links": [
+  {
+   "h": "/",
+   "x": "Home"
+  },
+  {
+   "h": "/research",
+   "x": "Research"
+  },
+  {
+   "h": "/research/industry-benchmarks",
+   "x": "Industry Benchmarks"
+  },
+  {
+   "h": "/about",
+   "x": "Amit Gupta"
+  },
+  {
+   "h": "#findings",
+   "x": "Key findings ↓"
+  },
+  {
+   "h": "#methodology",
+   "x": "Methodology ↓"
+  },
+  {
+   "h": "#limitations",
+   "x": "Limitations ↓"
+  },
+  {
+   "h": "#cite",
+   "x": "Cite this report ↓"
+  },
+  {
+   "h": "#findings",
+   "x": "Key findings"
+  },
+  {
+   "h": "#executive-summary",
+   "x": "Executive summary"
+  },
+  {
+   "h": "#body-1",
+   "x": "Why We Conducted This Research"
+  },
+  {
+   "h": "#body-2",
+   "x": "Finding 1More Than 4 in 10 Audited Websites Had No Observable Google Analytics"
+  },
+  {
+   "h": "#body-3",
+   "x": "Finding 2Advertising Measurement Was Even Less Commonly Observable"
+  },
+  {
+   "h": "#body-4",
+   "x": "Finding 397.5% of Websites Preserved Our Test UTM Parameters"
+  },
+  {
+   "h": "#body-5",
+   "x": "Finding 4Advertising Measurement Varied Sharply by Sector"
+  },
+  {
+   "h": "#body-6",
+   "x": "Finding 5Technology Did Not Lead the Sample on Observable Google Analytics"
+  },
+  {
+   "h": "#body-7",
+   "x": "What About Conversion Measurement?"
+  },
+  {
+   "h": "#body-8",
+   "x": "What Does the Marketing Measurement Gap Mean?"
+  },
+  {
+   "h": "#body-9",
+   "x": "What Founders and CEOs Should Ask"
+  },
+  {
+   "h": "#body-10",
+   "x": "A Note From Amit Gupta"
+  },
+  {
+   "h": "#methodology",
+   "x": "Methodology"
+  },
+  {
+   "h": "#limitations",
+   "x": "Limitations"
+  },
+  {
+   "h": "#cite",
+   "x": "Cite this report"
+  },
+  {
+   "h": "https://images.ctfassets.net/owww06rzpjnj/5h8lkHlLnuSyvSbUjKI2Ql/c1991b219a7770ad7a0ca794440cd6d2/Observable_Marketing_Measurement_Across_120_Websites.webp",
+   "x": "Open the chart image"
+  },
+  {
+   "h": "https://images.ctfassets.net/owww06rzpjnj/1P7PyqkafstdkgA09nUqbi/2724b144a967f9e80da0fd0f14427c17/Observable_Meta_Pixel_Presence_by_Industry.webp",
+   "x": "Open the chart image"
+  },
+  {
+   "h": "https://images.ctfassets.net/owww06rzpjnj/6X5bTHWTVbKal1kQJnq3gC/f842be718520b97c1ca40e1653deaad5/Observable_Google_Ads_Measurement_by_Industry.webp",
+   "x": "Open the chart image"
+  },
+  {
+   "h": "http://localhost:3500/research/marketing-measurement-gap-indian-business-websites",
+   "x": "http://localhost:3500/research/marketing-measurement-gap-indian-business-websites"
+  },
+  {
+   "h": "/about",
+   "x": "Amit Gupta"
+  },
+  {
+   "h": "mailto:info@mappedskills.com?subject=Media%20enquiry%3A%20The%20Marketing%20Measurement%20Gap%3A%20What%20120%20Indian%20Business%20Websites%20Reveal%20About%20Analytics%20and%20Advertising%20Measurement",
+   "x": "info@mappedskills.com"
+  },
+  {
+   "h": "/contact",
+   "x": "Media enquiry →"
+  },
+  {
+   "h": "/contact",
+   "x": "Talk to MappedSkills"
+  },
+  {
+   "h": "/contact?intent=call",
+   "x": "Request a call"
+  },
+  {
+   "h": "/conversion-optimization",
+   "x": "How conversion work starts →"
+  }
+ ],
+ "imgs": [
+  {
+   "s": "https://images.ctfassets.net/owww06rzpjnj/6S9G6xuEBe9jlewzIC3VZV/61491f0b890da332238a5f31e8e5e814/UTM_Tracking_Measurement_Comparison.webp",
+   "cs": "",
+   "a": "Receiving campaign information is not the same as measuring it. It contrasts 97.5% of websites that preserved the UTM parameters used in the test with 55.8% that had observable Google Analytics. A note states that UTM preservation does not establish that the business actively uses UTM tracking.",
+   "w": 0,
+   "h": 0
+  }
+ ],
+ "cards": []
+}

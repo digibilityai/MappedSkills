@@ -1,0 +1,155 @@
+{
+ "title": "Press | MappedSkills",
+ "blocks": [
+  {
+   "t": "h1",
+   "x": "News from MappedSkills, on the record.",
+   "cls": "b-h1 pr-h1"
+  },
+  {
+   "t": "p",
+   "x": "Our press releases and announcements, newest first. Writing a story? Email us for comment or background.",
+   "cls": "b-lede pr-lede"
+  },
+  {
+   "t": "p",
+   "x": "Media contactinfo@mappedskills.comHow to reach us ↓",
+   "cls": "pr-desk"
+  },
+  {
+   "t": "p",
+   "x": "Press releases",
+   "cls": "b-kicker"
+  },
+  {
+   "t": "h2",
+   "x": "Latest news.",
+   "cls": "b-h2 pr-h2"
+  },
+  {
+   "t": "li",
+   "x": "October 23, 2026MappedSkills Research Finds No Observable Google Analytics on 42.5% of 120 Indian Business Websites AuditedNew study finds that 97.5% of audited websites preserved campaign tracking parameters, while advertising measurement technologies were less consistently observable.→",
+   "cls": "pr-row"
+  },
+  {
+   "t": "p",
+   "x": "October 23, 2026",
+   "cls": "pr-date"
+  },
+  {
+   "t": "h3",
+   "x": "MappedSkills Research Finds No Observable Google Analytics on 42.5% of 120 Indian Business Websites Audited",
+   "cls": "pr-row-h"
+  },
+  {
+   "t": "p",
+   "x": "New study finds that 97.5% of audited websites preserved campaign tracking parameters, while advertising measurement technologies were less consistently observable.",
+   "cls": "pr-row-x"
+  },
+  {
+   "t": "p",
+   "x": "Background",
+   "cls": "b-kicker"
+  },
+  {
+   "t": "h2",
+   "x": "Useful for your story.",
+   "cls": "b-h2 pr-h2"
+  },
+  {
+   "t": "li",
+   "x": "Original researchMappedSkills ResearchWhat we checked, how many, when, and where the evidence stops.See the research →",
+   "cls": "pr-tile"
+  },
+  {
+   "t": "p",
+   "x": "Original research",
+   "cls": "pr-label"
+  },
+  {
+   "t": "h3",
+   "x": "MappedSkills Research",
+   "cls": "pr-tile-h"
+  },
+  {
+   "t": "p",
+   "x": "What we checked, how many, when, and where the evidence stops.",
+   "cls": "pr-tile-d"
+  },
+  {
+   "t": "li",
+   "x": "The companyAbout MappedSkillsWhat we do, how we work and what we promise our clients.About us →",
+   "cls": "pr-tile"
+  },
+  {
+   "t": "p",
+   "x": "The company",
+   "cls": "pr-label"
+  },
+  {
+   "t": "h3",
+   "x": "About MappedSkills",
+   "cls": "pr-tile-h"
+  },
+  {
+   "t": "p",
+   "x": "What we do, how we work and what we promise our clients.",
+   "cls": "pr-tile-d"
+  },
+  {
+   "t": "h2",
+   "x": "Working on a story? Talk to us.",
+   "cls": "b-h2"
+  },
+  {
+   "t": "p",
+   "x": "Email us for comment or background. Tell us your publication and your deadline.",
+   "cls": "b-lede"
+  },
+  {
+   "t": "p",
+   "x": "info@mappedskills.com",
+   "cls": "pr-close-mail"
+  }
+ ],
+ "links": [
+  {
+   "h": "/",
+   "x": "Home"
+  },
+  {
+   "h": "mailto:info@mappedskills.com?subject=Media%20enquiry%3A%20MappedSkills",
+   "x": "info@mappedskills.com"
+  },
+  {
+   "h": "#pr-media",
+   "x": "How to reach us ↓"
+  },
+  {
+   "h": "/press/marketing-measurement-gap-indian-websites",
+   "x": "MappedSkills Research Finds No Observable Google Analytics on 42.5% of 120 Indian Business Websites Audited"
+  },
+  {
+   "h": "/research",
+   "x": "MappedSkills Research"
+  },
+  {
+   "h": "/about",
+   "x": "About MappedSkills"
+  },
+  {
+   "h": "mailto:info@mappedskills.com?subject=Media%20enquiry%3A%20MappedSkills",
+   "x": "info@mappedskills.com"
+  },
+  {
+   "h": "mailto:info@mappedskills.com?subject=Media%20enquiry%3A%20MappedSkills",
+   "x": "Email a media enquiry"
+  },
+  {
+   "h": "/contact",
+   "x": "Use the contact form"
+  }
+ ],
+ "imgs": [],
+ "cards": []
+}

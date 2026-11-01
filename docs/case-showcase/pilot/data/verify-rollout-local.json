@@ -1,0 +1,1663 @@
+{
+ "1440/google-ads": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 935,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?service=google-ads",
+  "viewAllLabel": "View all Google Ads case studies ↗",
+  "list": [
+   {
+    "name": "AnybodyCanBake",
+    "href": "/portfolio/google-ads-for-online-courses",
+    "links": 1,
+    "fig": "5.24×",
+    "text": "GOOGLE ADS · EDUCATION AND TRAINING AnybodyCanBake 5.24× return on advertising spend. About ₹5.24 of reported revenue for each ₹1 of advertising spend. Calculated from the reported totals, February 2020 to August 2021. Revenue return is not profit. Feb 2020 – Aug 2021 Read the case study : AnybodyCanBake ↗",
+    "img": {
+     "ok": true,
+     "alt": "AnybodyCanBake, Google Ads. 1,410 paid enrolments. Google Ads for an online baking school. Hands kneading dough on a floured worktop beside bowls of flour, eggs and butter.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Meticulous Business Plan",
+    "href": "/portfolio/meticulous-business-plan-google-ads",
+    "links": 1,
+    "fig": "27",
+    "text": "GOOGLE ADS · PROFESSIONAL SERVICES Meticulous Business Plan 27 signed engagements, April 2026 to September 2026. Apr 2026 – Sep 2026 Read the case study : Meticulous Business Plan ↗",
+    "img": {
+     "ok": true,
+     "alt": "Meticulous Business Plan, Google Ads. 27 signed engagements. 3.38 times revenue ROAS. An illustrative scene of a person at a desk reviewing printed pages with charts beside a laptop and a search result panel.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Bakersville",
+    "href": "/portfolio/bakersville-google-ads",
+    "links": 1,
+    "fig": "4,324",
+    "text": "GOOGLE ADS · ECOMMERCE AND RETAIL Bakersville 4,324 products sold, November 2025 to August 2026. Not assumed to equal orders or unique customers. Nov 2025 – Aug 2026 Read the case study : Bakersville ↗",
+    "img": {
+     "ok": true,
+     "alt": "Bakersville, Google Ads. 4,324 products sold, November 2025 to August 2026. An illustrative flat lay of baking ingredients and decorating tools with a faint search motif.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": false,
+   "cols": 3,
+   "display": "grid",
+   "btns": "none"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {}
+ },
+ "1440/who-we-help/d2c": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 941,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?industry=ecommerce-retail",
+  "viewAllLabel": "View all eCommerce and retail case studies ↗",
+  "list": [
+   {
+    "name": "Klenzmo",
+    "href": "/portfolio/klenzmo-meta-ads",
+    "links": 1,
+    "fig": "3,957",
+    "text": "META ADS · ECOMMERCE AND RETAIL Klenzmo 3,957 products sold, September 2024 to March 2025. Not labelled as orders, purchases or unique customers. Sep 2024 – Mar 2025 Read the case study : Klenzmo ↗",
+    "img": {
+     "ok": true,
+     "alt": "Klenzmo, Meta Ads. 3,957 products sold, September 2024 to March 2025. An illustrative still life of folded cleaning cloths, a glass of water and a wooden brush.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Bakersville",
+    "href": "/portfolio/bakersville-google-ads",
+    "links": 1,
+    "fig": "4,324",
+    "text": "GOOGLE ADS · ECOMMERCE AND RETAIL Bakersville 4,324 products sold, November 2025 to August 2026. Not assumed to equal orders or unique customers. Nov 2025 – Aug 2026 Read the case study : Bakersville ↗",
+    "img": {
+     "ok": true,
+     "alt": "Bakersville, Google Ads. 4,324 products sold, November 2025 to August 2026. An illustrative flat lay of baking ingredients and decorating tools with a faint search motif.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Advit Prints",
+    "href": "/portfolio/advit-prints-meta-ads",
+    "links": 1,
+    "fig": "874",
+    "text": "META ADS · ECOMMERCE AND RETAIL Advit Prints 874 attributed orders from Meta Ads, February 2024 to August 2024. Feb 2024 – Aug 2024 Read the case study : Advit Prints ↗",
+    "img": {
+     "ok": true,
+     "alt": "Advit Prints, Meta Ads. 874 attributed orders. ₹411.90 cost per order. An illustrative scene of a floral handblock printed throw over an armchair beside printed cushions.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": false,
+   "cols": 3,
+   "display": "grid",
+   "btns": "none"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {}
+ },
+ "1440/who-we-help/education": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 989,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?industry=education",
+  "viewAllLabel": "View all education case studies ↗",
+  "list": [
+   {
+    "name": "AnybodyCanBake",
+    "href": "/portfolio/google-ads-for-online-courses",
+    "links": 1,
+    "fig": "5.24×",
+    "text": "GOOGLE ADS · EDUCATION AND TRAINING AnybodyCanBake 5.24× return on advertising spend. About ₹5.24 of reported revenue for each ₹1 of advertising spend. Calculated from the reported totals, February 2020 to August 2021. Revenue return is not profit. Feb 2020 – Aug 2021 Read the case study : AnybodyCanBake ↗",
+    "img": {
+     "ok": true,
+     "alt": "AnybodyCanBake, Google Ads. 1,410 paid enrolments. Google Ads for an online baking school. Hands kneading dough on a floured worktop beside bowls of flour, eggs and butter.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "EKoching",
+    "href": "/portfolio/ekoching-google-ads",
+    "links": 1,
+    "fig": "178",
+    "text": "GOOGLE ADS · EDUCATION AND TRAINING EKoching 178 attributed paid enrolments, August 2021 to September 2022. Aug 2021 – Sep 2022 Read the case study : EKoching ↗",
+    "img": {
+     "ok": true,
+     "alt": "EKoching, Google Ads. 178 paid enrolments, August 2021 to September 2022. An illustrative scene of a student at a laptop with a notebook and a search motif.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Bakedemy",
+    "href": "/portfolio/bakedemy-meta-ads",
+    "links": 1,
+    "fig": "738",
+    "text": "META ADS · EDUCATION AND TRAINING Bakedemy 738 paid enrolments, October 2020 to March 2024. Oct 2020 – Mar 2024 Read the case study : Bakedemy ↗",
+    "img": {
+     "ok": true,
+     "alt": "Bakedemy, Meta Ads. 738 paid enrolments. 4.10 times revenue ROAS. An illustrative scene of a baking tutorial video on a tablet beside piped cupcakes and hands holding a piping bag.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": false,
+   "cols": 3,
+   "display": "grid",
+   "btns": "none"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {}
+ },
+ "1440/who-we-help/real-estate": {
+  "sections": 1,
+  "problems": [],
+  "cards": 2,
+  "h": 998,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?industry=real-estate",
+  "viewAllLabel": "View all real estate case studies ↗",
+  "list": [
+   {
+    "name": "Om Sai Developer",
+    "href": "/portfolio/om-sai-developer-meta-ads",
+    "links": 1,
+    "fig": "₹2,786 → ₹271",
+    "text": "META ADS · REAL ESTATE Om Sai Developer ₹2,786 → ₹271 cost per lead, a 90.27% reduction. Reported before-and-after comparison. Sep 2024 – Feb 2026 Read the case study : Om Sai Developer ↗",
+    "img": {
+     "ok": true,
+     "alt": "Conceptual artwork of a contemporary residential tower with landscaped balconies at dusk",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "HutnHomes",
+    "href": "/portfolio/hutnhomes-meta-ads",
+    "links": 1,
+    "fig": "329",
+    "text": "META ADS · REAL ESTATE HutnHomes 329 site visits, September 2023 to December 2024. Whether visits were attended has not been confirmed. Sep 2023 – Dec 2024 Read the case study : HutnHomes ↗",
+    "img": {
+     "ok": true,
+     "alt": "HutnHomes, Meta Ads. 329 site visits and 23 reported sales, September 2023 to December 2024. An illustrative scene of a landscaped residential building in warm evening light.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": false,
+   "cols": 2,
+   "display": "grid",
+   "btns": "none"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {}
+ },
+ "1440/who-we-help/enquiry-led-businesses": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 950,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work",
+  "viewAllLabel": "View all case studies ↗",
+  "list": [
+   {
+    "name": "Meticulous Business Plan",
+    "href": "/portfolio/meticulous-business-plan-google-ads",
+    "links": 1,
+    "fig": "27",
+    "text": "GOOGLE ADS · PROFESSIONAL SERVICES Meticulous Business Plan 27 signed engagements, April 2026 to September 2026. Apr 2026 – Sep 2026 Read the case study : Meticulous Business Plan ↗",
+    "img": {
+     "ok": true,
+     "alt": "Meticulous Business Plan, Google Ads. 27 signed engagements. 3.38 times revenue ROAS. An illustrative scene of a person at a desk reviewing printed pages with charts beside a laptop and a search result panel.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Phoenix Laundry",
+    "href": "/portfolio/phoenix-laundry-google-ads",
+    "links": 1,
+    "fig": "640",
+    "text": "GOOGLE ADS · LOCAL SERVICES Phoenix Laundry 640 new customers, December 2025 to 30 October 2026. Dec 2025 – Oct 2026 Read the case study : Phoenix Laundry ↗",
+    "img": {
+     "ok": true,
+     "alt": "Phoenix Laundry, Google Ads. 640 new customers, December 2025 to 30 October 2026. An illustrative garment-care scene of pressed shirts on a rail beside folded clothes.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Talreja & Talreja",
+    "href": "/portfolio/talreja-talreja-google-ads",
+    "links": 1,
+    "fig": "19",
+    "text": "GOOGLE ADS · PROFESSIONAL SERVICES Talreja & Talreja 19 signed engagements, March 2022 to September 2022. Mar 2022 – Sep 2022 Read the case study : Talreja & Talreja ↗",
+    "img": {
+     "ok": true,
+     "alt": "Talreja & Talreja, Google Ads. 19 signed engagements. ₹9,473.68 cost per engagement. An illustrative professional desk with advisory documents, a pen, a notebook and a consultation calendar.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": false,
+   "cols": 3,
+   "display": "grid",
+   "btns": "none"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {}
+ },
+ "820/google-ads": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 923,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?service=google-ads",
+  "viewAllLabel": "View all Google Ads case studies ↗",
+  "list": [
+   {
+    "name": "AnybodyCanBake",
+    "href": "/portfolio/google-ads-for-online-courses",
+    "links": 1,
+    "fig": "5.24×",
+    "text": "GOOGLE ADS · EDUCATION AND TRAINING AnybodyCanBake 5.24× return on advertising spend. About ₹5.24 of reported revenue for each ₹1 of advertising spend. Calculated from the reported totals, February 2020 to August 2021. Revenue return is not profit. Feb 2020 – Aug 2021 Read the case study : AnybodyCanBake ↗",
+    "img": {
+     "ok": true,
+     "alt": "AnybodyCanBake, Google Ads. 1,410 paid enrolments. Google Ads for an online baking school. Hands kneading dough on a floured worktop beside bowls of flour, eggs and butter.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Meticulous Business Plan",
+    "href": "/portfolio/meticulous-business-plan-google-ads",
+    "links": 1,
+    "fig": "27",
+    "text": "GOOGLE ADS · PROFESSIONAL SERVICES Meticulous Business Plan 27 signed engagements, April 2026 to September 2026. Apr 2026 – Sep 2026 Read the case study : Meticulous Business Plan ↗",
+    "img": {
+     "ok": true,
+     "alt": "Meticulous Business Plan, Google Ads. 27 signed engagements. 3.38 times revenue ROAS. An illustrative scene of a person at a desk reviewing printed pages with charts beside a laptop and a search result panel.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Bakersville",
+    "href": "/portfolio/bakersville-google-ads",
+    "links": 1,
+    "fig": "4,324",
+    "text": "GOOGLE ADS · ECOMMERCE AND RETAIL Bakersville 4,324 products sold, November 2025 to August 2026. Not assumed to equal orders or unique customers. Nov 2025 – Aug 2026 Read the case study : Bakersville ↗",
+    "img": {
+     "ok": true,
+     "alt": "Bakersville, Google Ads. 4,324 products sold, November 2025 to August 2026. An illustrative flat lay of baking ingredients and decorating tools with a faint search motif.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 474,
+    "status": "Case 2 of 3",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 3"
+   },
+   "keyboard": {
+    "x": 474,
+    "ring": "3px",
+    "status": "Case 2 of 3"
+   }
+  }
+ },
+ "820/who-we-help/d2c": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 885,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?industry=ecommerce-retail",
+  "viewAllLabel": "View all eCommerce and retail case studies ↗",
+  "list": [
+   {
+    "name": "Klenzmo",
+    "href": "/portfolio/klenzmo-meta-ads",
+    "links": 1,
+    "fig": "3,957",
+    "text": "META ADS · ECOMMERCE AND RETAIL Klenzmo 3,957 products sold, September 2024 to March 2025. Not labelled as orders, purchases or unique customers. Sep 2024 – Mar 2025 Read the case study : Klenzmo ↗",
+    "img": {
+     "ok": true,
+     "alt": "Klenzmo, Meta Ads. 3,957 products sold, September 2024 to March 2025. An illustrative still life of folded cleaning cloths, a glass of water and a wooden brush.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Bakersville",
+    "href": "/portfolio/bakersville-google-ads",
+    "links": 1,
+    "fig": "4,324",
+    "text": "GOOGLE ADS · ECOMMERCE AND RETAIL Bakersville 4,324 products sold, November 2025 to August 2026. Not assumed to equal orders or unique customers. Nov 2025 – Aug 2026 Read the case study : Bakersville ↗",
+    "img": {
+     "ok": true,
+     "alt": "Bakersville, Google Ads. 4,324 products sold, November 2025 to August 2026. An illustrative flat lay of baking ingredients and decorating tools with a faint search motif.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Advit Prints",
+    "href": "/portfolio/advit-prints-meta-ads",
+    "links": 1,
+    "fig": "874",
+    "text": "META ADS · ECOMMERCE AND RETAIL Advit Prints 874 attributed orders from Meta Ads, February 2024 to August 2024. Feb 2024 – Aug 2024 Read the case study : Advit Prints ↗",
+    "img": {
+     "ok": true,
+     "alt": "Advit Prints, Meta Ads. 874 attributed orders. ₹411.90 cost per order. An illustrative scene of a floral handblock printed throw over an armchair beside printed cushions.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 474,
+    "status": "Case 2 of 3",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 3"
+   },
+   "keyboard": {
+    "x": 474,
+    "ring": "3px",
+    "status": "Case 2 of 3"
+   }
+  }
+ },
+ "820/who-we-help/education": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 933,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?industry=education",
+  "viewAllLabel": "View all education case studies ↗",
+  "list": [
+   {
+    "name": "AnybodyCanBake",
+    "href": "/portfolio/google-ads-for-online-courses",
+    "links": 1,
+    "fig": "5.24×",
+    "text": "GOOGLE ADS · EDUCATION AND TRAINING AnybodyCanBake 5.24× return on advertising spend. About ₹5.24 of reported revenue for each ₹1 of advertising spend. Calculated from the reported totals, February 2020 to August 2021. Revenue return is not profit. Feb 2020 – Aug 2021 Read the case study : AnybodyCanBake ↗",
+    "img": {
+     "ok": true,
+     "alt": "AnybodyCanBake, Google Ads. 1,410 paid enrolments. Google Ads for an online baking school. Hands kneading dough on a floured worktop beside bowls of flour, eggs and butter.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "EKoching",
+    "href": "/portfolio/ekoching-google-ads",
+    "links": 1,
+    "fig": "178",
+    "text": "GOOGLE ADS · EDUCATION AND TRAINING EKoching 178 attributed paid enrolments, August 2021 to September 2022. Aug 2021 – Sep 2022 Read the case study : EKoching ↗",
+    "img": {
+     "ok": true,
+     "alt": "EKoching, Google Ads. 178 paid enrolments, August 2021 to September 2022. An illustrative scene of a student at a laptop with a notebook and a search motif.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Bakedemy",
+    "href": "/portfolio/bakedemy-meta-ads",
+    "links": 1,
+    "fig": "738",
+    "text": "META ADS · EDUCATION AND TRAINING Bakedemy 738 paid enrolments, October 2020 to March 2024. Oct 2020 – Mar 2024 Read the case study : Bakedemy ↗",
+    "img": {
+     "ok": true,
+     "alt": "Bakedemy, Meta Ads. 738 paid enrolments. 4.10 times revenue ROAS. An illustrative scene of a baking tutorial video on a tablet beside piped cupcakes and hands holding a piping bag.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 474,
+    "status": "Case 2 of 3",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 3"
+   },
+   "keyboard": {
+    "x": 474,
+    "ring": "3px",
+    "status": "Case 2 of 3"
+   }
+  }
+ },
+ "820/who-we-help/real-estate": {
+  "sections": 1,
+  "problems": [],
+  "cards": 2,
+  "h": 890,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?industry=real-estate",
+  "viewAllLabel": "View all real estate case studies ↗",
+  "list": [
+   {
+    "name": "Om Sai Developer",
+    "href": "/portfolio/om-sai-developer-meta-ads",
+    "links": 1,
+    "fig": "₹2,786 → ₹271",
+    "text": "META ADS · REAL ESTATE Om Sai Developer ₹2,786 → ₹271 cost per lead, a 90.27% reduction. Reported before-and-after comparison. Sep 2024 – Feb 2026 Read the case study : Om Sai Developer ↗",
+    "img": {
+     "ok": true,
+     "alt": "Conceptual artwork of a contemporary residential tower with landscaped balconies at dusk",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "HutnHomes",
+    "href": "/portfolio/hutnhomes-meta-ads",
+    "links": 1,
+    "fig": "329",
+    "text": "META ADS · REAL ESTATE HutnHomes 329 site visits, September 2023 to December 2024. Whether visits were attended has not been confirmed. Sep 2023 – Dec 2024 Read the case study : HutnHomes ↗",
+    "img": {
+     "ok": true,
+     "alt": "HutnHomes, Meta Ads. 329 site visits and 23 reported sales, September 2023 to December 2024. An illustrative scene of a landscaped residential building in warm evening light.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 180,
+    "status": "Case 2 of 2",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 2"
+   },
+   "keyboard": {
+    "x": 180,
+    "ring": "3px",
+    "status": "Case 2 of 2"
+   }
+  }
+ },
+ "820/who-we-help/enquiry-led-businesses": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 861,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work",
+  "viewAllLabel": "View all case studies ↗",
+  "list": [
+   {
+    "name": "Meticulous Business Plan",
+    "href": "/portfolio/meticulous-business-plan-google-ads",
+    "links": 1,
+    "fig": "27",
+    "text": "GOOGLE ADS · PROFESSIONAL SERVICES Meticulous Business Plan 27 signed engagements, April 2026 to September 2026. Apr 2026 – Sep 2026 Read the case study : Meticulous Business Plan ↗",
+    "img": {
+     "ok": true,
+     "alt": "Meticulous Business Plan, Google Ads. 27 signed engagements. 3.38 times revenue ROAS. An illustrative scene of a person at a desk reviewing printed pages with charts beside a laptop and a search result panel.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Phoenix Laundry",
+    "href": "/portfolio/phoenix-laundry-google-ads",
+    "links": 1,
+    "fig": "640",
+    "text": "GOOGLE ADS · LOCAL SERVICES Phoenix Laundry 640 new customers, December 2025 to 30 October 2026. Dec 2025 – Oct 2026 Read the case study : Phoenix Laundry ↗",
+    "img": {
+     "ok": true,
+     "alt": "Phoenix Laundry, Google Ads. 640 new customers, December 2025 to 30 October 2026. An illustrative garment-care scene of pressed shirts on a rail beside folded clothes.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Talreja & Talreja",
+    "href": "/portfolio/talreja-talreja-google-ads",
+    "links": 1,
+    "fig": "19",
+    "text": "GOOGLE ADS · PROFESSIONAL SERVICES Talreja & Talreja 19 signed engagements, March 2022 to September 2022. Mar 2022 – Sep 2022 Read the case study : Talreja & Talreja ↗",
+    "img": {
+     "ok": true,
+     "alt": "Talreja & Talreja, Google Ads. 19 signed engagements. ₹9,473.68 cost per engagement. An illustrative professional desk with advisory documents, a pen, a notebook and a consultation calendar.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 474,
+    "status": "Case 2 of 3",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 3"
+   },
+   "keyboard": {
+    "x": 474,
+    "ring": "3px",
+    "status": "Case 2 of 3"
+   }
+  }
+ },
+ "390/google-ads": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 891,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?service=google-ads",
+  "viewAllLabel": "View all Google Ads case studies ↗",
+  "list": [
+   {
+    "name": "AnybodyCanBake",
+    "href": "/portfolio/google-ads-for-online-courses",
+    "links": 1,
+    "fig": "5.24×",
+    "text": "GOOGLE ADS · EDUCATION AND TRAINING AnybodyCanBake 5.24× return on advertising spend. About ₹5.24 of reported revenue for each ₹1 of advertising spend. Calculated from the reported totals, February 2020 to August 2021. Revenue return is not profit. Feb 2020 – Aug 2021 Read the case study : AnybodyCanBake ↗",
+    "img": {
+     "ok": true,
+     "alt": "AnybodyCanBake, Google Ads. 1,410 paid enrolments. Google Ads for an online baking school. Hands kneading dough on a floured worktop beside bowls of flour, eggs and butter.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Meticulous Business Plan",
+    "href": "/portfolio/meticulous-business-plan-google-ads",
+    "links": 1,
+    "fig": "27",
+    "text": "GOOGLE ADS · PROFESSIONAL SERVICES Meticulous Business Plan 27 signed engagements, April 2026 to September 2026. Apr 2026 – Sep 2026 Read the case study : Meticulous Business Plan ↗",
+    "img": {
+     "ok": true,
+     "alt": "Meticulous Business Plan, Google Ads. 27 signed engagements. 3.38 times revenue ROAS. An illustrative scene of a person at a desk reviewing printed pages with charts beside a laptop and a search result panel.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Bakersville",
+    "href": "/portfolio/bakersville-google-ads",
+    "links": 1,
+    "fig": "4,324",
+    "text": "GOOGLE ADS · ECOMMERCE AND RETAIL Bakersville 4,324 products sold, November 2025 to August 2026. Not assumed to equal orders or unique customers. Nov 2025 – Aug 2026 Read the case study : Bakersville ↗",
+    "img": {
+     "ok": true,
+     "alt": "Bakersville, Google Ads. 4,324 products sold, November 2025 to August 2026. An illustrative flat lay of baking ingredients and decorating tools with a faint search motif.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 308,
+    "status": "Case 2 of 3",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 3"
+   },
+   "keyboard": {
+    "x": 308,
+    "ring": "3px",
+    "status": "Case 2 of 3"
+   }
+  }
+ },
+ "390/who-we-help/d2c": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 854,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?industry=ecommerce-retail",
+  "viewAllLabel": "View all eCommerce and retail case studies ↗",
+  "list": [
+   {
+    "name": "Klenzmo",
+    "href": "/portfolio/klenzmo-meta-ads",
+    "links": 1,
+    "fig": "3,957",
+    "text": "META ADS · ECOMMERCE AND RETAIL Klenzmo 3,957 products sold, September 2024 to March 2025. Not labelled as orders, purchases or unique customers. Sep 2024 – Mar 2025 Read the case study : Klenzmo ↗",
+    "img": {
+     "ok": true,
+     "alt": "Klenzmo, Meta Ads. 3,957 products sold, September 2024 to March 2025. An illustrative still life of folded cleaning cloths, a glass of water and a wooden brush.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Bakersville",
+    "href": "/portfolio/bakersville-google-ads",
+    "links": 1,
+    "fig": "4,324",
+    "text": "GOOGLE ADS · ECOMMERCE AND RETAIL Bakersville 4,324 products sold, November 2025 to August 2026. Not assumed to equal orders or unique customers. Nov 2025 – Aug 2026 Read the case study : Bakersville ↗",
+    "img": {
+     "ok": true,
+     "alt": "Bakersville, Google Ads. 4,324 products sold, November 2025 to August 2026. An illustrative flat lay of baking ingredients and decorating tools with a faint search motif.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Advit Prints",
+    "href": "/portfolio/advit-prints-meta-ads",
+    "links": 1,
+    "fig": "874",
+    "text": "META ADS · ECOMMERCE AND RETAIL Advit Prints 874 attributed orders from Meta Ads, February 2024 to August 2024. Feb 2024 – Aug 2024 Read the case study : Advit Prints ↗",
+    "img": {
+     "ok": true,
+     "alt": "Advit Prints, Meta Ads. 874 attributed orders. ₹411.90 cost per order. An illustrative scene of a floral handblock printed throw over an armchair beside printed cushions.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 308,
+    "status": "Case 2 of 3",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 3"
+   },
+   "keyboard": {
+    "x": 308,
+    "ring": "3px",
+    "status": "Case 2 of 3"
+   }
+  }
+ },
+ "390/who-we-help/education": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 869,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?industry=education",
+  "viewAllLabel": "View all education case studies ↗",
+  "list": [
+   {
+    "name": "AnybodyCanBake",
+    "href": "/portfolio/google-ads-for-online-courses",
+    "links": 1,
+    "fig": "5.24×",
+    "text": "GOOGLE ADS · EDUCATION AND TRAINING AnybodyCanBake 5.24× return on advertising spend. About ₹5.24 of reported revenue for each ₹1 of advertising spend. Calculated from the reported totals, February 2020 to August 2021. Revenue return is not profit. Feb 2020 – Aug 2021 Read the case study : AnybodyCanBake ↗",
+    "img": {
+     "ok": true,
+     "alt": "AnybodyCanBake, Google Ads. 1,410 paid enrolments. Google Ads for an online baking school. Hands kneading dough on a floured worktop beside bowls of flour, eggs and butter.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "EKoching",
+    "href": "/portfolio/ekoching-google-ads",
+    "links": 1,
+    "fig": "178",
+    "text": "GOOGLE ADS · EDUCATION AND TRAINING EKoching 178 attributed paid enrolments, August 2021 to September 2022. Aug 2021 – Sep 2022 Read the case study : EKoching ↗",
+    "img": {
+     "ok": true,
+     "alt": "EKoching, Google Ads. 178 paid enrolments, August 2021 to September 2022. An illustrative scene of a student at a laptop with a notebook and a search motif.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Bakedemy",
+    "href": "/portfolio/bakedemy-meta-ads",
+    "links": 1,
+    "fig": "738",
+    "text": "META ADS · EDUCATION AND TRAINING Bakedemy 738 paid enrolments, October 2020 to March 2024. Oct 2020 – Mar 2024 Read the case study : Bakedemy ↗",
+    "img": {
+     "ok": true,
+     "alt": "Bakedemy, Meta Ads. 738 paid enrolments. 4.10 times revenue ROAS. An illustrative scene of a baking tutorial video on a tablet beside piped cupcakes and hands holding a piping bag.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 308,
+    "status": "Case 2 of 3",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 3"
+   },
+   "keyboard": {
+    "x": 308,
+    "ring": "3px",
+    "status": "Case 2 of 3"
+   }
+  }
+ },
+ "390/who-we-help/real-estate": {
+  "sections": 1,
+  "problems": [],
+  "cards": 2,
+  "h": 804,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?industry=real-estate",
+  "viewAllLabel": "View all real estate case studies ↗",
+  "list": [
+   {
+    "name": "Om Sai Developer",
+    "href": "/portfolio/om-sai-developer-meta-ads",
+    "links": 1,
+    "fig": "₹2,786 → ₹271",
+    "text": "META ADS · REAL ESTATE Om Sai Developer ₹2,786 → ₹271 cost per lead, a 90.27% reduction. Reported before-and-after comparison. Sep 2024 – Feb 2026 Read the case study : Om Sai Developer ↗",
+    "img": {
+     "ok": true,
+     "alt": "Conceptual artwork of a contemporary residential tower with landscaped balconies at dusk",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "HutnHomes",
+    "href": "/portfolio/hutnhomes-meta-ads",
+    "links": 1,
+    "fig": "329",
+    "text": "META ADS · REAL ESTATE HutnHomes 329 site visits, September 2023 to December 2024. Whether visits were attended has not been confirmed. Sep 2023 – Dec 2024 Read the case study : HutnHomes ↗",
+    "img": {
+     "ok": true,
+     "alt": "HutnHomes, Meta Ads. 329 site visits and 23 reported sales, September 2023 to December 2024. An illustrative scene of a landscaped residential building in warm evening light.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 243,
+    "status": "Case 2 of 2",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 2"
+   },
+   "keyboard": {
+    "x": 243,
+    "ring": "3px",
+    "status": "Case 2 of 2"
+   }
+  }
+ },
+ "390/who-we-help/enquiry-led-businesses": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 799,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work",
+  "viewAllLabel": "View all case studies ↗",
+  "list": [
+   {
+    "name": "Meticulous Business Plan",
+    "href": "/portfolio/meticulous-business-plan-google-ads",
+    "links": 1,
+    "fig": "27",
+    "text": "GOOGLE ADS · PROFESSIONAL SERVICES Meticulous Business Plan 27 signed engagements, April 2026 to September 2026. Apr 2026 – Sep 2026 Read the case study : Meticulous Business Plan ↗",
+    "img": {
+     "ok": true,
+     "alt": "Meticulous Business Plan, Google Ads. 27 signed engagements. 3.38 times revenue ROAS. An illustrative scene of a person at a desk reviewing printed pages with charts beside a laptop and a search result panel.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Phoenix Laundry",
+    "href": "/portfolio/phoenix-laundry-google-ads",
+    "links": 1,
+    "fig": "640",
+    "text": "GOOGLE ADS · LOCAL SERVICES Phoenix Laundry 640 new customers, December 2025 to 30 October 2026. Dec 2025 – Oct 2026 Read the case study : Phoenix Laundry ↗",
+    "img": {
+     "ok": true,
+     "alt": "Phoenix Laundry, Google Ads. 640 new customers, December 2025 to 30 October 2026. An illustrative garment-care scene of pressed shirts on a rail beside folded clothes.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Talreja & Talreja",
+    "href": "/portfolio/talreja-talreja-google-ads",
+    "links": 1,
+    "fig": "19",
+    "text": "GOOGLE ADS · PROFESSIONAL SERVICES Talreja & Talreja 19 signed engagements, March 2022 to September 2022. Mar 2022 – Sep 2022 Read the case study : Talreja & Talreja ↗",
+    "img": {
+     "ok": true,
+     "alt": "Talreja & Talreja, Google Ads. 19 signed engagements. ₹9,473.68 cost per engagement. An illustrative professional desk with advisory documents, a pen, a notebook and a consultation calendar.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 308,
+    "status": "Case 2 of 3",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 3"
+   },
+   "keyboard": {
+    "x": 308,
+    "ring": "3px",
+    "status": "Case 2 of 3"
+   }
+  }
+ },
+ "360/google-ads": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 899,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?service=google-ads",
+  "viewAllLabel": "View all Google Ads case studies ↗",
+  "list": [
+   {
+    "name": "AnybodyCanBake",
+    "href": "/portfolio/google-ads-for-online-courses",
+    "links": 1,
+    "fig": "5.24×",
+    "text": "GOOGLE ADS · EDUCATION AND TRAINING AnybodyCanBake 5.24× return on advertising spend. About ₹5.24 of reported revenue for each ₹1 of advertising spend. Calculated from the reported totals, February 2020 to August 2021. Revenue return is not profit. Feb 2020 – Aug 2021 Read the case study : AnybodyCanBake ↗",
+    "img": {
+     "ok": true,
+     "alt": "AnybodyCanBake, Google Ads. 1,410 paid enrolments. Google Ads for an online baking school. Hands kneading dough on a floured worktop beside bowls of flour, eggs and butter.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Meticulous Business Plan",
+    "href": "/portfolio/meticulous-business-plan-google-ads",
+    "links": 1,
+    "fig": "27",
+    "text": "GOOGLE ADS · PROFESSIONAL SERVICES Meticulous Business Plan 27 signed engagements, April 2026 to September 2026. Apr 2026 – Sep 2026 Read the case study : Meticulous Business Plan ↗",
+    "img": {
+     "ok": true,
+     "alt": "Meticulous Business Plan, Google Ads. 27 signed engagements. 3.38 times revenue ROAS. An illustrative scene of a person at a desk reviewing printed pages with charts beside a laptop and a search result panel.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Bakersville",
+    "href": "/portfolio/bakersville-google-ads",
+    "links": 1,
+    "fig": "4,324",
+    "text": "GOOGLE ADS · ECOMMERCE AND RETAIL Bakersville 4,324 products sold, November 2025 to August 2026. Not assumed to equal orders or unique customers. Nov 2025 – Aug 2026 Read the case study : Bakersville ↗",
+    "img": {
+     "ok": true,
+     "alt": "Bakersville, Google Ads. 4,324 products sold, November 2025 to August 2026. An illustrative flat lay of baking ingredients and decorating tools with a faint search motif.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 283,
+    "status": "Case 2 of 3",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 3"
+   },
+   "keyboard": {
+    "x": 283,
+    "ring": "3px",
+    "status": "Case 2 of 3"
+   }
+  }
+ },
+ "360/who-we-help/d2c": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 839,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?industry=ecommerce-retail",
+  "viewAllLabel": "View all eCommerce and retail case studies ↗",
+  "list": [
+   {
+    "name": "Klenzmo",
+    "href": "/portfolio/klenzmo-meta-ads",
+    "links": 1,
+    "fig": "3,957",
+    "text": "META ADS · ECOMMERCE AND RETAIL Klenzmo 3,957 products sold, September 2024 to March 2025. Not labelled as orders, purchases or unique customers. Sep 2024 – Mar 2025 Read the case study : Klenzmo ↗",
+    "img": {
+     "ok": true,
+     "alt": "Klenzmo, Meta Ads. 3,957 products sold, September 2024 to March 2025. An illustrative still life of folded cleaning cloths, a glass of water and a wooden brush.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Bakersville",
+    "href": "/portfolio/bakersville-google-ads",
+    "links": 1,
+    "fig": "4,324",
+    "text": "GOOGLE ADS · ECOMMERCE AND RETAIL Bakersville 4,324 products sold, November 2025 to August 2026. Not assumed to equal orders or unique customers. Nov 2025 – Aug 2026 Read the case study : Bakersville ↗",
+    "img": {
+     "ok": true,
+     "alt": "Bakersville, Google Ads. 4,324 products sold, November 2025 to August 2026. An illustrative flat lay of baking ingredients and decorating tools with a faint search motif.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Advit Prints",
+    "href": "/portfolio/advit-prints-meta-ads",
+    "links": 1,
+    "fig": "874",
+    "text": "META ADS · ECOMMERCE AND RETAIL Advit Prints 874 attributed orders from Meta Ads, February 2024 to August 2024. Feb 2024 – Aug 2024 Read the case study : Advit Prints ↗",
+    "img": {
+     "ok": true,
+     "alt": "Advit Prints, Meta Ads. 874 attributed orders. ₹411.90 cost per order. An illustrative scene of a floral handblock printed throw over an armchair beside printed cushions.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 283,
+    "status": "Case 2 of 3",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 3"
+   },
+   "keyboard": {
+    "x": 283,
+    "ring": "3px",
+    "status": "Case 2 of 3"
+   }
+  }
+ },
+ "360/who-we-help/education": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 911,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?industry=education",
+  "viewAllLabel": "View all education case studies ↗",
+  "list": [
+   {
+    "name": "AnybodyCanBake",
+    "href": "/portfolio/google-ads-for-online-courses",
+    "links": 1,
+    "fig": "5.24×",
+    "text": "GOOGLE ADS · EDUCATION AND TRAINING AnybodyCanBake 5.24× return on advertising spend. About ₹5.24 of reported revenue for each ₹1 of advertising spend. Calculated from the reported totals, February 2020 to August 2021. Revenue return is not profit. Feb 2020 – Aug 2021 Read the case study : AnybodyCanBake ↗",
+    "img": {
+     "ok": true,
+     "alt": "AnybodyCanBake, Google Ads. 1,410 paid enrolments. Google Ads for an online baking school. Hands kneading dough on a floured worktop beside bowls of flour, eggs and butter.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "EKoching",
+    "href": "/portfolio/ekoching-google-ads",
+    "links": 1,
+    "fig": "178",
+    "text": "GOOGLE ADS · EDUCATION AND TRAINING EKoching 178 attributed paid enrolments, August 2021 to September 2022. Aug 2021 – Sep 2022 Read the case study : EKoching ↗",
+    "img": {
+     "ok": true,
+     "alt": "EKoching, Google Ads. 178 paid enrolments, August 2021 to September 2022. An illustrative scene of a student at a laptop with a notebook and a search motif.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Bakedemy",
+    "href": "/portfolio/bakedemy-meta-ads",
+    "links": 1,
+    "fig": "738",
+    "text": "META ADS · EDUCATION AND TRAINING Bakedemy 738 paid enrolments, October 2020 to March 2024. Oct 2020 – Mar 2024 Read the case study : Bakedemy ↗",
+    "img": {
+     "ok": true,
+     "alt": "Bakedemy, Meta Ads. 738 paid enrolments. 4.10 times revenue ROAS. An illustrative scene of a baking tutorial video on a tablet beside piped cupcakes and hands holding a piping bag.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 283,
+    "status": "Case 2 of 3",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 3"
+   },
+   "keyboard": {
+    "x": 283,
+    "ring": "3px",
+    "status": "Case 2 of 3"
+   }
+  }
+ },
+ "360/who-we-help/real-estate": {
+  "sections": 1,
+  "problems": [],
+  "cards": 2,
+  "h": 789,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?industry=real-estate",
+  "viewAllLabel": "View all real estate case studies ↗",
+  "list": [
+   {
+    "name": "Om Sai Developer",
+    "href": "/portfolio/om-sai-developer-meta-ads",
+    "links": 1,
+    "fig": "₹2,786 → ₹271",
+    "text": "META ADS · REAL ESTATE Om Sai Developer ₹2,786 → ₹271 cost per lead, a 90.27% reduction. Reported before-and-after comparison. Sep 2024 – Feb 2026 Read the case study : Om Sai Developer ↗",
+    "img": {
+     "ok": true,
+     "alt": "Conceptual artwork of a contemporary residential tower with landscaped balconies at dusk",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "HutnHomes",
+    "href": "/portfolio/hutnhomes-meta-ads",
+    "links": 1,
+    "fig": "329",
+    "text": "META ADS · REAL ESTATE HutnHomes 329 site visits, September 2023 to December 2024. Whether visits were attended has not been confirmed. Sep 2023 – Dec 2024 Read the case study : HutnHomes ↗",
+    "img": {
+     "ok": true,
+     "alt": "HutnHomes, Meta Ads. 329 site visits and 23 reported sales, September 2023 to December 2024. An illustrative scene of a landscaped residential building in warm evening light.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 224,
+    "status": "Case 2 of 2",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 2"
+   },
+   "keyboard": {
+    "x": 224,
+    "ring": "3px",
+    "status": "Case 2 of 2"
+   }
+  }
+ },
+ "360/who-we-help/enquiry-led-businesses": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 817,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work",
+  "viewAllLabel": "View all case studies ↗",
+  "list": [
+   {
+    "name": "Meticulous Business Plan",
+    "href": "/portfolio/meticulous-business-plan-google-ads",
+    "links": 1,
+    "fig": "27",
+    "text": "GOOGLE ADS · PROFESSIONAL SERVICES Meticulous Business Plan 27 signed engagements, April 2026 to September 2026. Apr 2026 – Sep 2026 Read the case study : Meticulous Business Plan ↗",
+    "img": {
+     "ok": true,
+     "alt": "Meticulous Business Plan, Google Ads. 27 signed engagements. 3.38 times revenue ROAS. An illustrative scene of a person at a desk reviewing printed pages with charts beside a laptop and a search result panel.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Phoenix Laundry",
+    "href": "/portfolio/phoenix-laundry-google-ads",
+    "links": 1,
+    "fig": "640",
+    "text": "GOOGLE ADS · LOCAL SERVICES Phoenix Laundry 640 new customers, December 2025 to 30 October 2026. Dec 2025 – Oct 2026 Read the case study : Phoenix Laundry ↗",
+    "img": {
+     "ok": true,
+     "alt": "Phoenix Laundry, Google Ads. 640 new customers, December 2025 to 30 October 2026. An illustrative garment-care scene of pressed shirts on a rail beside folded clothes.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Talreja & Talreja",
+    "href": "/portfolio/talreja-talreja-google-ads",
+    "links": 1,
+    "fig": "19",
+    "text": "GOOGLE ADS · PROFESSIONAL SERVICES Talreja & Talreja 19 signed engagements, March 2022 to September 2022. Mar 2022 – Sep 2022 Read the case study : Talreja & Talreja ↗",
+    "img": {
+     "ok": true,
+     "alt": "Talreja & Talreja, Google Ads. 19 signed engagements. ₹9,473.68 cost per engagement. An illustrative professional desk with advisory documents, a pen, a notebook and a consultation calendar.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "leftover": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 283,
+    "status": "Case 2 of 3",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 3"
+   },
+   "keyboard": {
+    "x": 283,
+    "ring": "3px",
+    "status": "Case 2 of 3"
+   }
+  }
+ }
+}

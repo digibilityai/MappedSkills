@@ -23,7 +23,8 @@ test('simplified section: approved headline, one sentence, three ideas, caveat, 
   assert.ok(t.split(' ').length < 70);
 });
 test('R2.1 scroll fix and homepage imagery preserved', () => {
-  assert.ok(/resolve-r3(\/|%2F)omsai-work\.webp/.test(h22) && /resolve-r3(\/|%2F)wanderlooms-work\.webp/.test(h22));
+  // DEC-115: the bespoke Om Sai and Wanderlooms cards are replaced by the shared case showcase, which shows each study's own listing image
+  assert.ok(!/omsai-work|wanderlooms-work/.test(h22) && /<CaseShowcase data=\{showcase\} \/>/.test(fs.readFileSync('components/meta-ads-r22/MetaAdsR22.tsx', 'utf8')));
   assert.ok(!/\.scrollIntoView\(/.test(fs.readFileSync('components/meta-ads-r21/FormatSelector.tsx', 'utf8').replace(/\/\*[\s\S]*?\*\//g, '')));
   assert.match(fs.readFileSync('components/meta-ads-r22/MetaAdsR22.tsx', 'utf8'), /meta-ads-r21\/FormatSelector/);
 });

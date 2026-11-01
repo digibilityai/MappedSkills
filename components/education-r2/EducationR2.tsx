@@ -1,3 +1,4 @@
+import { CaseShowcase, type ShowcaseData } from '@/components/case-showcase/CaseShowcase';
 import Link from 'next/link';
 import Image from 'next/image';
 import { RvReveal3 } from '@/components/resolve-home-r3/RvReveal3';
@@ -77,7 +78,7 @@ function HeroArt() {
   </svg>;
 }
 
-export function EducationR2() {
+export function EducationR2({ showcase }: { showcase?: ShowcaseData | null }) {
   return <div className="rv3 edr2">
     <RvReveal3 />
 
@@ -203,7 +204,8 @@ export function EducationR2() {
       </div>
     </div></section>
 
-    {/* 9. Paper: AnyBodyCanBake, the only education example. No figures. */}
+    {/* Case studies: ONE showcase (DEC-116). The page's existing card stays only while no study is public, so a page never loses its proof. */}
+    {showcase ? <CaseShowcase data={showcase} /> : (
     <section id="client-work" className="edr2-wk rv3-paper" aria-labelledby="edr2-wk-h"><div className="rv3-wrap">
       <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">{WORK.eyebrow}</p><H2 id="edr2-wk-h" parts={WORK.h2} /></header>
       <article className="edr2-card-w" {...REVEAL}>
@@ -221,6 +223,7 @@ export function EducationR2() {
         </div>
       </article>
     </div></section>
+    )}
 
     {/* 10. Ink Deep: questions. */}
     <section className="rv3-fit rv3-dark" aria-labelledby="edr2-faq-h"><div className="rv3-wrap rv3-fit-grid">

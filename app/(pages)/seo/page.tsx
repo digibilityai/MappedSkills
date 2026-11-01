@@ -1,6 +1,8 @@
 import { createMetadata } from '@/lib/metadata';
 import { BreadcrumbJsonLd } from '@/components/cplus/BreadcrumbJsonLd';
 import { SeoBody } from '@/components/cplus/seo/SeoBody';
+import { loadCaseShowcase } from '@/components/case-showcase/CaseShowcase';
+import { SEO_SHOWCASE } from '@/components/cplus/seo/showcase';
 
 /**
  * `/seo`: the THE RESOLVE SEO page (Stage 4 Batch 2A; was the C+ Direction B page). The URL, canonical, Open Graph/Twitter generation, the global
@@ -13,11 +15,13 @@ export const metadata = createMetadata(
   '/seo'
 );
 
-export default function Page() {
+export default async function Page() {
+  /* resolved on the server from the public library only (no Suspense: the whole page is in the first HTML and hydrates in one pass) */
+  const showcase = await loadCaseShowcase(SEO_SHOWCASE);
   return (
     <>
       <BreadcrumbJsonLd label="Search" path="/seo" />
-      <SeoBody />
+      <SeoBody showcase={showcase} />
     </>
   );
 }

@@ -1,13 +1,18 @@
-// Guards for the redesigned /seo page: approved metadata, owner-approved proof rules and link set (no framework needed).
+// Guards for the /seo seven-scene redesign (owner-approved 2026-10-31): approved metadata, scene order, proof rules and
+// publication gating, link set and motion rules (no framework needed).
 const test = require('node:test');
 const assert = require('node:assert');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const read = (p) => fs.readFileSync(path.join(__dirname, '..', p), 'utf8');
+const root = path.join(__dirname, '..');
+const read = (p) => fs.readFileSync(path.join(root, p), 'utf8');
 const content = read('components/cplus/seo/content.ts');
 const body = read('components/cplus/seo/SeoBody.tsx');
+const showcase = read('components/cplus/seo/showcase.ts');
+const showcaseView = read('components/case-showcase/CaseShowcase.tsx');
 const page = read('app/(pages)/seo/page.tsx');
+const css = read('components/cplus/seo/seo.css');
 const copy = content.replace(/\/\*[\s\S]*?\*\//g, '');
 
 test('metadata is the owner-approved wording and the canonical path is unchanged', () => {
@@ -27,28 +32,86 @@ test('hero keeps the core proposition and uses at most two supporting sentences'
   assert.strictEqual((lede.match(/'[^']*'/g) || []).length, 2);
 });
 
-test('the two projects are separate, correctly named and carry no results or links', () => {
-  const projects = copy.slice(copy.indexOf('projects: ['), copy.indexOf('qKicker'));
-  assert.strictEqual((projects.match(/name: /g) || []).length, 2);
-  assert.ok(projects.includes("name: 'Anybody Can Bake'"));
-  assert.ok(projects.includes("name: 'Bakedemy'"));
-  assert.strictEqual((projects.match(/state: 'Results not yet published\.'/g) || []).length, 2);
-  assert.strictEqual((projects.match(/role: 'SEO delivered by MappedSkills\.'/g) || []).length, 2);
-  assert.ok(!/href/.test(projects), 'project cards must not link anywhere');
-  assert.ok(!/<Link[^>]*>[^<]*(case study|Read)/i.test(body), 'no case-study links');
-});
-
-test('excluded claims never appear on the page', () => {
-  for (const banned of ['Sonia', 'Gupta', 'tutor', 'Leela', 'Oberoi', 'celebrit', 'television', 'testimonial', 'closed', 'case study', '12-month', '12 months', 'guarantee you', 'ROI']) {
-    assert.ok(!copy.toLowerCase().includes(banned.toLowerCase()), `"${banned}" must not appear in the page copy`);
+test('seven scenes in the approved order; the route graphic appears only in the hero', () => {
+  const order = ['sk-h1', 'sk-h-prob', 'sk-h-work', 'sk-h-proof', 'sk-h-how', 'sk-h-qs', 'sk-h-close'];
+  let at = -1;
+  for (const id of order) {
+    const i = id === 'sk-h-proof' ? body.indexOf('<CaseShowcase data={showcase} />') : body.indexOf(`id="${id}"`);
+    assert.ok(i > at, `${id} present and in order`);
+    at = i;
   }
+  assert.strictEqual((body.match(/<h1\b/g) || []).length, 1);
+  assert.strictEqual((body.match(/<ol className="sk-route"/g) || []).length, 1, 'the route is drawn once');
+  assert.ok(!/sk-strip|sk-stages|sk-band-art|sk-sheet|sk-pledges|sk-pj/.test(body + css), 'removed scenes and the repeated route are gone');
 });
 
-test('the illustrative review panel carries no numerals', () => {
-  const meas = copy.slice(copy.indexOf('tiles: ['), copy.indexOf('comKicker'));
-  assert.ok(copy.includes("measTag: 'Illustrative layout. No real figures.'"));
-  assert.ok(!/\d/.test(meas), 'review panel copy must contain no digits');
-  assert.ok(!/<text/.test(body), 'illustrations must not draw text or numbers');
+test('removed content stays removed: review sheet, pledges, projects list, Bakedemy, auto-populating cards', () => {
+  assert.ok(!/Illustrative layout|Results not yet published|Anybody Can Bake|Bakedemy|Historical SEO project/i.test(copy + body));
+  assert.ok(!/RelatedCaseCards|<Suspense/.test(body), 'no auto-populating card section and no streamed boundary');
+  assert.ok(!/Defined priorities|Transparent reporting/.test(copy));
+});
+
+test('the problems are the three approved questions and the work is three plain lines led by search intent', () => {
+  for (const q of ['Your competitors appear in Google. Why don’t you?', 'Your website gets visitors. Why aren’t they contacting you?', 'Your SEO reports look positive. What has actually improved?']) {
+    assert.ok(copy.includes(q), q);
+  }
+  const work = copy.slice(copy.indexOf('work: ['), copy.indexOf('proofKicker'));
+  assert.strictEqual((work.match(/k: '/g) || []).length, 3);
+  assert.ok(copy.includes("workIntent: 'Different searches come from different needs: learning, comparing, choosing.'"));
+});
+
+test('AnybodyCanBake proof: the approved SEO figures, period, caveat and link, spelled AnybodyCanBake', () => {
+  const acb = copy.slice(copy.indexOf('acb: {'), copy.indexOf('ameba: {'));
+  assert.ok(acb.includes("name: 'AnybodyCanBake'"));
+  assert.ok(acb.includes("lead: { big: '46.15%', rest: 'more tracked organic course enquiries' }"));
+  assert.ok(acb.includes("enquiries: { from: '91', to: '133'"));
+  assert.ok(acb.includes("{ label: 'Organic clicks', from: '16,400', to: '20,580', pct: '+25.49%' }"));
+  assert.ok(acb.includes("{ label: 'Nonbrand organic clicks', from: '15,348', to: '20,039', pct: '+30.56%' }"));
+  assert.ok(acb.includes("period: 'May–July 2026 versus August–October 2026'"));
+  assert.ok(/not proof that the work alone caused the change/.test(acb) && /not been independently checked/.test(acb));
+  assert.ok(acb.includes("href: '/portfolio/anybodycanbake-seo'"));
+  // the growth figures follow from the supplied totals
+  const pct = (a, b) => ((b / a - 1) * 100).toFixed(2);
+  assert.strictEqual(pct(16400, 20580), '25.49');
+  assert.strictEqual(pct(15348, 20039), '30.56');
+  assert.strictEqual(pct(91, 133), '46.15');
+  // and match the case study's own record
+  const fixture = read('lib/case-study-local-batch.ts');
+  for (const f of ['16,400', '20,580', '15,348', '20,039', '25.49%', '30.56%', '46.15%']) assert.ok(fixture.includes(f), `${f} is in the case study`);
+  // never the Google Ads case
+  assert.ok(!/google-ads-for-online-courses|1,410|66,36,000|5\.24|898\.15/.test(copy + body), 'no Google Ads case or figure on /seo');
+  assert.ok(!/AnyBodyCanBake/.test(copy + body));
+  // the same approved figure, period and caveat are what the page's showcase card shows (DEC-115)
+  for (const f of ["v: '46.15%'", 'from 91 to 133', "period: 'May–July 2026 versus August–October 2026'", 'not proof that the work alone caused the change', 'not been independently checked', "ACB = '/portfolio/anybodycanbake-seo'"]) assert.ok(showcase.includes(f), f);
+});
+
+test('Ameba Software (showcase): its own approved entry supplies any figure; the page adds only the qualification and the held summary', () => {
+  const am = copy.slice(copy.indexOf('  ameba: {'), copy.indexOf('  amebaHeld: {'));
+  assert.ok(am.includes("href: '/portfolio/seo-ameba-software'"));
+  // the owner-supplied final figures remain recorded in the copy (31 October 2026): clicks 7,300 to 12,800 (+75.34%), enquiries 34 to 53 (+55.88%)
+  for (const f of ['7,300', '12,800', '+75.34%', '34 to 53', '+55.88%', 'two three-month periods', 'not proof that the work alone caused the change']) assert.ok(am.includes(f), f);
+  const ameba = showcase.slice(showcase.indexOf("'/portfolio/seo-ameba-software': {"));
+  assert.ok(!/outcome:/.test(ameba), 'the page never supplies an Ameba figure: it comes from the library entry, which is empty while its proof is withheld');
+  assert.ok(ameba.includes('A comparison of two three-month periods, not proof that the work alone caused the change.'));
+  assert.ok(ameba.includes('We do not publish figures for this engagement.'), 'the held summary keeps the restriction');
+  assert.ok(!/200%|30\+|18 keyword|testimonial|★|star|TechWave|Softwares|71\.92/i.test(showcase + showcaseView), 'no quote, rating or old claim');
+});
+
+test('proof is gated on the case studies being published: no unpublished link, figure or empty section', () => {
+  assert.ok(showcaseView.includes("from '../cplus/work/load'") && /await loadLibrary\(\)/.test(showcaseView), 'reads the public library only');
+  assert.ok(/catch \{\s*return null;/.test(showcaseView), 'an unreadable library shows no proof');
+  assert.ok(!/local-preview|local-batch|withLocalPreview/.test(showcase + showcaseView + body + page), 'no preview-data import');
+  assert.ok(/await loadCaseShowcase\(SEO_SHOWCASE\)/.test(page) && /<SeoBody showcase=\{showcase\} \/>/.test(page));
+  assert.ok(body.includes('<CaseShowcase data={showcase} />'), 'one showcase section');
+  assert.ok(body.includes("const showProof = !!showcase && showcase.cards.length > 0;"), 'the section itself is omitted when neither case is published');
+  assert.ok(/const nHow = showProof \? '04' : '03'/.test(body), 'later chapters renumber');
+  assert.ok(showcase.includes('S.proofHAlt') && copy.includes('proofHAlt'), 'a heading that does not promise results when the AnybodyCanBake case is absent');
+  assert.ok(!fs.existsSync(path.join(root, 'components/cplus/seo/proof.ts')), 'the old proof loader is gone');
+});
+
+test('the proof figures are text, static and drawn by the shared showcase', () => {
+  assert.ok(!/<text|<canvas|count-?up|data-count/i.test(body + css + showcaseView + read('components/case-showcase/case-showcase.css')));
+  assert.ok(showcaseView.includes('<p className="cs-fig">{s.fig.v}</p>') && showcaseView.includes('<p className="cs-def">{s.fig.c}</p>'));
 });
 
 test('FAQ answers are the approved wording, closed on load', () => {
@@ -59,26 +122,38 @@ test('FAQ answers are the approved wording, closed on load', () => {
   assert.ok(!/<details[^>]*\bopen\b/.test(body));
 });
 
+test('no guarantee, traffic or sales promise anywhere on the page; SEO stays a supporting service', () => {
+  for (const banned of ['guarantee you', 'ROI', 'will rank', 'guaranteed', 'testimonial', 'Sonia', 'celebrit']) {
+    assert.ok(!copy.toLowerCase().includes(banned.toLowerCase()), `"${banned}" must not appear`);
+  }
+  assert.ok(copy.includes('not a promise for yours'));
+  assert.ok(!/core service|our core|primary service/i.test(copy));
+  assert.ok(copy.includes('Many businesses benefit from both.'));
+});
+
 test('every internal link is an approved existing destination', () => {
   const hrefs = new Set([...copy.matchAll(/href: '([^']+)'/g)].map((m) => m[1]));
-  const allowed = new Set(['/problems/traffic-but-no-enquiries', '/how-it-works', '/google-ads', '/ai-seo', '/conversion-optimization', '/services']);
+  const allowed = new Set(['/problems/traffic-but-no-enquiries', '/how-it-works', '/google-ads', '/ai-seo', '/services', '/portfolio/anybodycanbake-seo', '/portfolio/seo-ameba-software']);
   for (const h of hrefs) assert.ok(allowed.has(h), `unexpected link ${h}`);
-  for (const h of ['/google-ads', '/ai-seo', '/conversion-optimization', '/services', '/how-it-works', '/problems/traffic-but-no-enquiries']) {
-    assert.ok(fs.existsSync(path.join(__dirname, '..', 'app/(pages)', h.slice(1), 'page.tsx')), `${h} route exists`);
+  assert.strictEqual((body.match(/href=\{S\.howLink\.href\}/g) || []).length, 1, 'one process link');
+  for (const h of ['/google-ads', '/ai-seo', '/services', '/how-it-works', '/problems/traffic-but-no-enquiries']) {
+    assert.ok(fs.existsSync(path.join(root, 'app/(pages)', h.slice(1), 'page.tsx')), `${h} route exists`);
   }
+  assert.ok(fs.existsSync(path.join(root, 'app/(pages)/portfolio/[slug]/page.tsx')), 'case-study detail route exists');
   assert.ok(body.includes('CONTACT_HREF') && body.includes('BOOKING_HREF'));
 });
 
-test('heading structure: one h1 and an h2 per section', () => {
+test('heading structure: one h1, an h2 per section and the case names as h3', () => {
   assert.strictEqual((body.match(/<h1\b/g) || []).length, 1);
-  assert.ok((body.match(/<h2\b/g) || []).length >= 8);
+  assert.strictEqual((body.match(/<h2\b/g) || []).length, 5, 'five here, the sixth is the showcase');
+  assert.ok(showcaseView.includes('<h2 id={id}>') && showcaseView.includes('<h3 className="cs-name" id={nameId}>'));
+  assert.ok(showcase.includes("id: 'sk-h-proof'"), 'the existing anchor is kept');
 });
 
-/* ---- THE RESOLVE composition (Stage 4 Batch 2A): structure, motion rules and proof boundaries ---- */
-const css = read('components/cplus/seo/seo.css');
-const seoDir = path.join(__dirname, '..', 'components/cplus/seo');
+/* ---- THE RESOLVE composition: structure, motion rules ---- */
+const seoDir = path.join(root, 'components/cplus/seo');
 
-test('the page has no client component of its own; it reuses the approved once-only sequence helpers', () => {
+test('the page has no client component of its own; it reuses the approved once-only helpers', () => {
   const clients = fs.readdirSync(seoDir).filter((f) => /\.tsx?$/.test(f) && /^['"]use client['"]/.test(read('components/cplus/seo/' + f).trimStart()));
   assert.deepStrictEqual(clients, []);
   assert.ok(body.includes('<HwSequence scope=".sk" />') && body.includes('<PaReveal />'));
@@ -109,34 +184,12 @@ test('every start (armed or running) state and keyframe is gated to motion-allow
   assert.ok(css.includes('@media (prefers-reduced-motion: reduce)'));
 });
 
-test('every section is labelled and keeps its approved heading', () => {
-  for (const id of ['sk-h1', 'sk-h-prob', 'sk-h-work', 'sk-h-how', 'sk-h-meas', 'sk-h-com', 'sk-h-proj', 'sk-h-qs', 'sk-h-close']) {
-    assert.ok(body.includes(`id="${id}"`), `${id} heading present`);
-  }
-  assert.ok(copy.includes("howH: { a: 'Four steps,', b: 'in this order.' }"));
-  assert.strictEqual((body.match(/<h1\b/g) || []).length, 1);
-});
-
-test('dropped labels stay dropped; project stub is the approved sentence', () => {
-  assert.ok(!/what the report counts/i.test(body + copy), 'no "what the report counts" label');
-  assert.ok(copy.includes("state: 'Results not yet published.'"));
-  assert.ok(!/<h3[^>]*>\s*Results\s*</.test(body));
-});
-
-test('the project section has no links and the decorative art is hidden from assistive technology', () => {
-  const proj = body.slice(body.indexOf('06, Paper'), body.indexOf('07, Ground'));
-  assert.ok(!/<Link|<ActionLink|href=/.test(proj), 'project entries must not link anywhere');
-  assert.ok(/<ol className="sk-route" aria-label=\{S\.trailLabel\}>/.test(body));
-  assert.ok((body.match(/className="sk-viz" aria-hidden="true"/g) || []).length === 4, 'all four hero pictures are decorative');
-  assert.ok(/className="sk-gate" aria-hidden="true"/.test(body));
-});
-
 test('the headline keeps its last words together (no single-word last line in Firefox)', () => {
   assert.ok(body.includes('<span className="sk-nw">{S.h1.c}</span>'));
   assert.ok(/span\.sk-nw \{[^}]*white-space: nowrap;/.test(css));
 });
 
-test('the page keeps SEO as a supporting service: no claim that it replaces or outranks the core services', () => {
-  assert.ok(!/core service|our core|primary service/i.test(copy));
-  assert.ok(copy.includes('Many businesses benefit from both.'));
+test('the local case-study previews cannot reach a build or a deployment (production behaviour)', () => {
+  const preview = read('lib/case-study-local-preview.ts');
+  assert.ok(/process\.env\.NODE_ENV === 'development' && process\.env\.CASE_STUDY_LOCAL_PREVIEW === '1'/.test(preview));
 });

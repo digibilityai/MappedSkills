@@ -1,3 +1,4 @@
+import { CaseShowcase, type ShowcaseData } from '@/components/case-showcase/CaseShowcase';
 import Link from 'next/link';
 import { RvReveal3 } from '@/components/resolve-home-r3/RvReveal3';
 import { InViewOnce } from './InViewOnce';
@@ -75,7 +76,7 @@ function CaseArt() {
   </svg>;
 }
 
-export function RealEstateR2() {
+export function RealEstateR2({ showcase }: { showcase?: ShowcaseData | null }) {
   return <div className="rv3 rer2">
     <RvReveal3 />
 
@@ -157,7 +158,8 @@ export function RealEstateR2() {
       </div>
     </div></section>
 
-    {/* 7. Paper: Om Sai, verified developer context only. No figures, no testimonial, no broker evidence. */}
+    {/* Case studies: ONE showcase (DEC-116). The page's existing card stays only while no study is public, so a page never loses its proof. */}
+    {showcase ? <CaseShowcase data={showcase} /> : (
     <section id="client-work" className="rer2-wk rv3-paper" aria-labelledby="rer2-wk-h"><div className="rv3-wrap">
       <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">{WORK.eyebrow}</p><H2 id="rer2-wk-h" parts={WORK.h2} /></header>
       <article className="rer2-card-w" {...REVEAL}>
@@ -171,6 +173,7 @@ export function RealEstateR2() {
         </div>
       </article>
     </div></section>
+    )}
 
     {/* 8. Ink Deep: questions. */}
     <section className="rv3-fit rv3-dark" aria-labelledby="rer2-faq-h"><div className="rv3-wrap rv3-fit-grid">

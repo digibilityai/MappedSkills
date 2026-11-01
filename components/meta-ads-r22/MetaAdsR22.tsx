@@ -1,10 +1,10 @@
+import { CaseShowcase, type ShowcaseData } from '@/components/case-showcase/CaseShowcase';
 import Link from 'next/link';
 import { RvReveal3 } from '@/components/resolve-home-r3/RvReveal3';
 import { HeroFeedAnim } from '../meta-ads-r1/HeroFeedAnim';
 import { FormatSelector } from '../meta-ads-r21/FormatSelector';
 import { JourneyMeta } from '../meta-ads-r1/JourneyMeta';
-import Image from 'next/image';
-import { HERO, INTENT, FORMATS, JOURNEY, MANAGE, MEASURE, WORK, PROCESS, FAQS, CLOSE, PRICE } from './content';
+import { HERO, INTENT, FORMATS, JOURNEY, MANAGE, MEASURE, PROCESS, FAQS, CLOSE, PRICE } from './content';
 import '@/components/resolve-home-r3/resolve-home-r3.css';
 import '../meta-ads-r1/meta-ads-r1.css';
 import '../meta-ads-r2/meta-ads-r2.css';
@@ -29,7 +29,7 @@ function TextLink({ href, children, dark = false }: { href: string; children: Re
 const H2 = ({ id, parts }: { id: string; parts: readonly [string, string] }) => <h2 id={id}>{parts[0]}<em>{parts[1]}</em></h2>;
 const Tick = () => <svg className="mr1-tick" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="m4.5 10.5 3.6 3.6 7.4-8" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 
-export function MetaAdsR22() {
+export function MetaAdsR22({ showcase }: { showcase?: ShowcaseData | null }) {
   return <div className="rv3 mr1 mr2 mr21 mr22">
     <RvReveal3 />
 
@@ -104,26 +104,8 @@ export function MetaAdsR22() {
       </div>
     </div></section>
 
-    {/* 7. Paper: relevant client work, two editorial cards (R2). Conceptual illustrations only, never client imagery. */}
-    <section className="mr2-work rv3-paper" aria-labelledby="mr1-work-h"><div className="rv3-wrap">
-      <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">{WORK.eyebrow}</p><H2 id="mr1-work-h" parts={WORK.h2} /></header>
-      <ul className="mr2-cards">
-        {WORK.items.map((w) => <li key={w.id} className={`mr2-card mr2-card--${w.id}${w.link ? ' mr2-card--link' : ''}`} {...REVEAL}>
-          <div className="mr2-img">
-            <Image className="mr21-photo" src={w.img.src} alt={w.img.alt} fill sizes="(min-width: 861px) 604px, 100vw" />
-            <span className={`mr21-logo mr21-logo--${w.id}`}><Image src={w.logo.src} alt={w.logo.alt} width={w.logo.w} height={w.logo.h} /></span>
-            <span className="mr2-label">{w.img.note}</span>
-          </div>
-          <div className="mr2-body">
-            <p className="mr2-tag">{w.tag}</p>
-            <h3>{w.name}</h3>
-            <p className="mr2-text">{w.body}</p>
-            <p className="mr2-foot">{w.link ? <Link className="rv3-tl mr2-cta" href={w.link.href}>{w.link.label}<span aria-hidden="true">↗</span></Link> : <span className="mr2-fact">{w.fact}</span>}</p>
-          </div>
-        </li>)}
-      </ul>
-      <div className="mr2-strip" {...REVEAL}><p>{WORK.note}</p><TextLink href={WORK.all.href}>{WORK.all.label}</TextLink></div>
-    </div></section>
+    {/* 7. Paper: the one case-study showcase (DEC-115): replaces the two bespoke cards and the auto-populating "More Meta Ads case studies" list. The heading keeps its id (mr1-work-h); the old list's id (mr22-more-h) stays as an alias. */}
+    <CaseShowcase data={showcase} />
 
     {/* 7b. Ink Deep: the approved monthly management plan, with the full scope in a closed disclosure */}
     <section id="pricing" className="mr22-price rv3-dark" aria-labelledby="mr22-price-h"><div className="rv3-wrap">

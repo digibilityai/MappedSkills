@@ -1,4 +1,6 @@
 import { createMetadata } from '@/lib/metadata';
+import { loadCaseShowcase } from '@/components/case-showcase/CaseShowcase';
+import { GOOGLE_ADS_SHOWCASE } from '@/components/google-ads-r41/showcase';
 import { BreadcrumbJsonLd } from '@/components/cplus/BreadcrumbJsonLd';
 import { GoogleAdsR41 } from '@/components/google-ads-r41/GoogleAdsR41';
 import { GoogleAdsJsonLd } from '@/components/paid-advertising/google-ads/GoogleAdsJsonLd';
@@ -17,12 +19,13 @@ export const metadata = createMetadata(
   '/google-ads'
 );
 
-export default function Page() {
+export default async function Page() {
+  const showcase = await loadCaseShowcase(GOOGLE_ADS_SHOWCASE);
   return (
     <>
       <BreadcrumbJsonLd label="Paid search" path="/google-ads" />
       <GoogleAdsJsonLd />
-      <GoogleAdsR41 />
+      <GoogleAdsR41 showcase={showcase} />
     </>
   );
 }

@@ -3,22 +3,24 @@ import { ActionLink } from '../../paid-advertising/ActionLink';
 import { PaReveal } from '../../paid-advertising/PaReveal';
 import { HwSequence } from '../../b2/HwSequence';
 import { BOOKING_HREF, CONTACT_HREF } from '@/components/direction-c/primitives';
+import { CaseShowcase, type ShowcaseData } from '@/components/case-showcase/CaseShowcase';
 import { SEO_PLAIN as S } from './content';
 import '../../paid-advertising/paid-advertising.css';
 import '../../b2/b2.css';
 import './seo.css';
 
 /**
- * /seo as a THE RESOLVE story (Stage 4 Batch 2A, third pass: one fold, one message, one emotion). Same copy, claims, links
- * and service boundaries as the approved Direction B page (content.ts); only the composition changed. Every primary section
- * is one scene that is designed to fit one screen. The intensity follows the visitor's decision: the hero shows the pain
- * (your page is not in the results, so no enquiry arrives), the problems are three related breaks in sequence (medium), the
- * approach is the moment the route connects (high), the process is quiet (low), the review contrasts what is easy to count
- * with what matters (high), trust is calm, and the close is decisive (high). Conceptual and unquantified: nothing here
- * shows results.
+ * /seo as a seven-scene THE RESOLVE story (narrative redesign, owner-approved 2026-10-31; supersedes DEC-092 for this scope).
+ * One section answers one question: the hero says what this is; "where SEO usually goes wrong" names the three breaks; "the
+ * work" matches each search to a page that answers it; one composed proof section shows two SEO case studies; "how it runs"
+ * says what happens if you start; the approved questions; one closing action. The route graphic appears only in the hero.
  *
- * Motion is once-only and decorative, the homepage convention: the settled state is the base style, so no script and
- * reduced motion show the finished picture.
+ * Proof is the shared case showcase (DEC-115), loaded by the page from the public library only (`./showcase.ts`): AnybodyCanBake with its
+ * owner-approved SEO figure, period and qualification, and Ameba Software with its own approved entry (a summary, no figure, until its proof is
+ * released). A case that is not published produces no card and no link; with neither, the section is not rendered and the later sections renumber.
+ *
+ * Motion is the approved once-only reveal and sequence helpers: the settled state is the base style, so no script and reduced
+ * motion show the finished page. Nothing counts up, loops, pins or hijacks scroll.
  * Metadata, canonical, breadcrumb and structured data live in `app/(pages)/seo/page.tsx` and are not touched here.
  */
 
@@ -68,13 +70,18 @@ function Viz({ k }: { k: string }) {
   );
 }
 
-export function SeoBody() {
+export function SeoBody({ showcase = null }: { showcase?: ShowcaseData | null }) {
+  const showProof = !!showcase && showcase.cards.length > 0;
+  /* chapter numbers follow the sections that are actually rendered */
+  const nHow = showProof ? '04' : '03';
+  const nQs = showProof ? '05' : '04';
+
   return (
     <div className="pa b2 sk">
       <PaReveal />
       <HwSequence scope=".sk" />
 
-      {/* Hero, Ink Deep: the promise, and the route from a search to an enquiry */}
+      {/* Hero, Ink Deep: the promise, and the route from a search to an enquiry (the only place the route is drawn) */}
       <section className="sk-hero sk-dark" aria-labelledby="sk-h1">
         <div className="pa-wrap sk-hero-grid">
           <div className="sk-hero-copy">
@@ -125,7 +132,7 @@ export function SeoBody() {
         </div>
       </section>
 
-      {/* 01, Ground: where a search breaks before it reaches an enquiry */}
+      {/* 01, Ground: where a search breaks before it reaches an enquiry (the three approved questions) */}
       <section className="sk-act sk-ground sk-prob" aria-labelledby="sk-h-prob">
         <div className="pa-wrap">
           <header className="sk-head" data-reveal>
@@ -155,58 +162,47 @@ export function SeoBody() {
         </div>
       </section>
 
-      {/* 02, Ink Deep: the moment of understanding. The four things the work does are the four stations of the route; the
-          line goes from broken (dashed, hollow) to connected (solid, lit). */}
-      <section className="sk-act sk-dark sk-approach" aria-labelledby="sk-h-work">
-        <div className="pa-wrap">
-          <div className="sk-scene">
-            <header className="sk-head" data-reveal>
-              <p className="sk-ch">
-                <span>02</span>
-                {S.workKicker}
-              </p>
-              <h2 id="sk-h-work" className="b2-h2">
-                {S.workH.a} {S.workH.b}
-              </h2>
-              <p className="sk-sub">{S.workSub}</p>
-            </header>
-            {/* Narrow screens only: the whole route in one glance (the same four stations as the hero), then a way down to the detail. */}
-            <div className="sk-strip" aria-hidden="true" data-hw-seq>
-              {S.trail.map((st, i) => (
-                <span key={st.key} className={i === 3 ? 'is-end' : undefined} style={css({ '--i': i })}>
-                  <i>{i + 1}</i>
-                  <em>{st.name}</em>
+      {/* 02, Ink Deep: what the work is, led by search intent. Three typographic rows, no route, no cards. */}
+      <section className="sk-act sk-dark sk-work" aria-labelledby="sk-h-work">
+        <div className="pa-wrap sk-work-in">
+          <header className="sk-head" data-reveal>
+            <p className="sk-ch">
+              <span>02</span>
+              {S.workKicker}
+            </p>
+            <h2 id="sk-h-work" className="b2-h2">
+              {S.workH.a} <span className="b2-em">{S.workH.b}</span>
+            </h2>
+            <p className="sk-intent">{S.workIntent}</p>
+            <p className="sk-sub">{S.workSub}</p>
+          </header>
+          <ol className="sk-lines" data-reveal>
+            {S.work.map((w, i) => (
+              <li key={w.k}>
+                <span className="sk-ln" aria-hidden="true">
+                  {i + 1}
                 </span>
-              ))}
-            </div>
-            <a className="sk-cont" href="#sk-stages">
-              What each stage includes <span aria-hidden="true">{'\u2193'}</span>
-            </a>
-          </div>
-          <ol id="sk-stages" className="sk-stages" data-hw-seq>
-            {S.groups.map((g, i) => (
-              <li key={g.key} className={i === 3 ? 'is-end' : undefined} style={css({ '--i': i })}>
-                <span className="sk-node" aria-hidden="true" />
-                <h3>{g.t}</h3>
-                <p className="sk-sd">{g.d}</p>
-                <ul className="sk-items">
-                  {g.items.map((it) => (
-                    <li key={it}>{it}</li>
-                  ))}
-                </ul>
-                {g.also && <p className="sk-also">{g.also}</p>}
+                <div>
+                  <h3>{w.k}</h3>
+                  <p className="sk-ld">{w.d}</p>
+                  {w.also && <p className="sk-also">{w.also}</p>}
+                </div>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      {/* 03, Paper: the order we work in */}
-      <section className="sk-act sk-paper" aria-labelledby="sk-h-how">
+      {/* 03, Paper: the one case-study showcase (DEC-115), replacing the composed proof section. Same heading id (sk-h-proof); each case keeps its own
+          figure, period and qualification; a case that is not published produces no card, and with none the section is not rendered. */}
+      <CaseShowcase data={showcase} />
+
+      {/* 04, Ground: how it runs. Four quiet steps; the monthly report and review call is the last. */}
+      <section className="sk-act sk-ground sk-how" aria-labelledby="sk-h-how">
         <div className="pa-wrap">
           <header className="sk-head" data-reveal>
             <p className="sk-ch">
-              <span>03</span>
+              <span>{nHow}</span>
               {S.howKicker}
             </p>
             <h2 id="sk-h-how" className="b2-h2">
@@ -224,131 +220,24 @@ export function SeoBody() {
               </li>
             ))}
           </ol>
-          <p className="sk-more">
-            <ActionLink href={S.howLink.href} variant="text">
-              {S.howLink.label}
-            </ActionLink>
-          </p>
-        </div>
-      </section>
-
-      {/* 04, Ground: what a review can cover. What is easy to count is small and quiet; what matters is large and lit.
-          One illustrative sheet, with withheld (hatched) fills; no figures. */}
-      <section className="sk-act sk-ground sk-measure" aria-labelledby="sk-h-meas">
-        <div className="pa-wrap sk-meas">
-          <header className="sk-head sk-meas-h" data-reveal>
-            <p className="sk-ch">
-              <span>04</span>
-              {S.measKicker}
-            </p>
-            <h2 id="sk-h-meas" className="b2-h2">
-              {S.measH.a} <span className="b2-em">{S.measH.b}</span> {S.measH.c}
-            </h2>
-          </header>
-          <figure className="sk-sheet" data-reveal>
-            <figcaption className="sk-stamp">{S.measTag}</figcaption>
-            <ul>
-              {S.tiles.map((t) => (
-                <li key={t.key} className={t.lead ? 'lead' : undefined}>
-                  <div>
-                    <h3>{t.t}</h3>
-                    <p>{t.d}</p>
-                  </div>
-                  {t.key === 'next' ? (
-                    <div className="sk-nx" aria-hidden="true">
-                      {S.nextRows.map((r, i) => (
-                        <span key={r}>
-                          <b className={i === 1 ? 'is-next' : undefined}>{i === 0 ? '✓' : '→'}</b>
-                          {r}
-                          <i />
-                        </span>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="sk-bar" aria-hidden="true" />
-                  )}
-                </li>
-              ))}
-            </ul>
-          </figure>
-          <div className="sk-meas-n">
-            <p className="sk-sub">{S.measNote}</p>
+          <div className="sk-how-n" data-reveal>
+            <p className="sk-how-line">{S.howLine}</p>
+            <p className="sk-sub">{S.howNote}</p>
             <p className="sk-more">
-              <ActionLink href={S.measLink.href} variant="text">
-                {S.measLink.label}
+              <ActionLink href={S.howLink.href} variant="text">
+                {S.howLink.label}
               </ActionLink>
             </p>
           </div>
         </div>
       </section>
 
-      {/* 05, Ink Deep: what you can expect */}
-      <section className="sk-act sk-dark" aria-labelledby="sk-h-com">
-        <div className="pa-wrap sk-com">
-          <header className="sk-head" data-reveal>
-            <p className="sk-ch">
-              <span>05</span>
-              {S.comKicker}
-            </p>
-            <h2 id="sk-h-com" className="b2-h2">
-              {S.comH.a} <span className="b2-em">{S.comH.b}</span>
-            </h2>
-            <p className="sk-answer">{S.comLine}</p>
-            <p className="sk-sub">{S.comNote}</p>
-          </header>
-          <ul className="sk-pledges" data-reveal>
-            {S.commitments.map((c, i) => (
-              <li key={c.t} className={i === S.commitments.length - 1 ? 'is-end' : undefined}>
-                <span className="sk-pm" aria-hidden="true" />
-                <h3>{c.t}</h3>
-                <p>{c.d}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* 06, Paper: two separate historical SEO projects, set as index entries; no results, no links */}
-      <section className="sk-act sk-paper" aria-labelledby="sk-h-proj">
-        <div className="pa-wrap">
-          <header className="sk-head" data-reveal>
-            <p className="sk-ch">
-              <span>06</span>
-              {S.projKicker}
-            </p>
-            <h2 id="sk-h-proj" className="b2-h2">
-              {S.projH.a} {S.projH.b}
-            </h2>
-            <p className="sk-sub">{S.projIntro}</p>
-          </header>
-          <ul className="sk-pj" data-reveal>
-            {S.projects.map((p) => (
-              <li key={p.key}>
-                <span className="sk-pj-i" aria-hidden="true">
-                  {p.initial}
-                </span>
-                <div className="sk-pj-b">
-                  <h3>{p.name}</h3>
-                  <p className="sk-pj-field">{p.field}</p>
-                  <p className="sk-pj-role">
-                    {p.role} <span className="sk-pj-tag">{p.tag}</span>
-                  </p>
-                </div>
-                <p className="sk-pj-state">
-                  <span>{p.state}</span>
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* 07, Ground: four native disclosures, closed on load (the approved FAQ pattern) */}
-      <section className="sk-act sk-ground" aria-labelledby="sk-h-qs">
+      {/* 05, Paper: four native disclosures, closed on load (the approved FAQ pattern) */}
+      <section className="sk-act sk-paper" aria-labelledby="sk-h-qs">
         <div className="pa-wrap sk-q">
           <header className="sk-head" data-reveal>
             <p className="sk-ch">
-              <span>07</span>
+              <span>{nQs}</span>
               {S.qKicker}
             </p>
             <h2 id="sk-h-qs" className="b2-h2">
@@ -393,17 +282,6 @@ export function SeoBody() {
                 {S.secondary}
               </ActionLink>
             </div>
-          </div>
-          <div className="sk-band-art" aria-hidden="true" data-hw-seq>
-            <i />
-            <i />
-            <i />
-            <b>
-              <svg viewBox="0 0 64 44" focusable="false">
-                <rect x="2" y="2" width="60" height="40" rx="4" />
-                <path d="M4 6l28 20L60 6" />
-              </svg>
-            </b>
           </div>
           <nav className="sk-rel" aria-label={S.related.label}>
             <span className="sk-rel-k" aria-hidden="true">

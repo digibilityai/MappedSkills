@@ -6,13 +6,17 @@ import { readFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import * as T from '../release.mjs';
 
-const SRC = JSON.parse(readFileSync(`${homedir()}/gitrepo/MappedSkills-six-cases/docs/case-release/manifest/manifest.json`, 'utf8'));
+const SRC = JSON.parse(readFileSync(process.env.RELEASE_MANIFEST ?? `${homedir()}/gitrepo/MappedSkills-six-cases/docs/case-release/manifest/manifest.json`, 'utf8'));
 const env = Object.fromEntries(readFileSync(`${homedir()}/gitrepo/MappedSkills-six-cases/.env.local`, 'utf8').split('\n').map((l) => l.split(/=(.*)/s)).filter((x) => x[0]));
 const CDA = async (p) => (await fetch(`https://cdn.contentful.com/spaces/${env.CONTENTFUL_SPACE_ID}/environments/master${p}${p.includes('?') ? '&' : '?'}access_token=${env.CONTENTFUL_ACCESS_TOKEN}`)).json();
 const L = 'en-US';
 
 async function seed() {
-  const cts = (await CDA('/content_types')).items.map((c) => ({ sys: { id: c.sys.id }, fields: c.fields }));
+  // The Delivery API does NOT expose rich-text validations; the Management API does, and the live caseStudies schema is: enabledNodeTypes
+  // ["unordered-list", "ordered-list"] ("Only paragraphs and lists are allowed") on every rich-text field (found by the owner-run check on 2026-11-01:
+  // "node type heading-3 is not enabled"). The fake schema carries that constraint so the rehearsal cannot pass what the real check rejects.
+  const RT = [{ enabledNodeTypes: ['unordered-list', 'ordered-list'], message: 'Only paragraphs and lists are allowed' }];
+  const cts = (await CDA('/content_types')).items.map((c) => ({ sys: { id: c.sys.id }, fields: c.fields.map((f) => (f.type === 'RichText' && c.sys.id === 'caseStudies' ? { ...f, validations: RT } : f)) }));
   const store = new Map(); const pub = new Map();
   for (const t of ['caseStudies', 'caseClient', 'caseIndustry', 'caseCompanySize', 'caseTargetAudience', 'caseGeographicTarget', 'caseTestimonial']) for (const i of (await CDA(`/entries?content_type=${t}&limit=200`)).items) {
     const fields = Object.fromEntries(Object.entries(i.fields).map(([k, v]) => [k, { [L]: v }]));

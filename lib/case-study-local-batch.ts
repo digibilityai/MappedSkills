@@ -1,5 +1,5 @@
 import type { ContentfulCaseStudy } from '@/lib/contentful/types';
-import { doc, h3, li, p, ul } from '@/lib/case-study-doc-builders';
+import { doc, li, p, ul } from '@/lib/case-study-doc-builders';
 
 /**
  * DEVELOPMENT-PREVIEW ONLY. The copy of the six paid-advertising case studies supplied on 30 October 2026 (AnybodyCanBake Meta Ads,
@@ -82,7 +82,7 @@ const SPECS: Spec[] = [
         li({ b: '₹42,78,961' }, ' in advertising spend across September 2021 to October 2026.'),
         li({ b: '₹1,099.42' }, ' advertising cost per paid enrolment. Advertising spend divided by paid enrolments, calculated from the whole-period totals.'),
       ),
-      h3('A return to profitability with continued adaptation'),
+      p({ b: 'A return to profitability with continued adaptation' }),
       p('Amit reports that price revisions and international expansion helped restore profitability. The engagement continues as online learning interest picks up again. These aggregate figures do not imply that results improved every month or that every phase was profitable.'),
     ),
     evidenceNote:
@@ -238,7 +238,7 @@ const SPECS: Spec[] = [
         li({ b: '₹7,68,000' }, ' in reported revenue generated, December 2025 to 30 October 2026.'),
         li({ b: '1.92×' }, ' revenue return on ad spend. Reported revenue divided by advertising spend, calculated from the reported totals. Revenue return is not profit.'),
       ),
-      h3('Customer lifetime value is a separate business estimate'),
+      p({ b: 'Customer lifetime value is a separate business estimate' }),
       p('The business supplied an average customer lifetime value of ₹50,000. It is an estimate with no method, horizon or revenue-versus-profit basis supplied. It is not realised revenue from these 640 customers and is not included in the revenue or ROAS figures above.'),
     ),
     evidenceNote:

@@ -2701,13 +2701,17 @@
        ]
       },
       {
-       "nodeType": "heading-3",
+       "nodeType": "paragraph",
        "data": {},
        "content": [
         {
          "nodeType": "text",
          "value": "A return to profitability with continued adaptation",
-         "marks": [],
+         "marks": [
+          {
+           "type": "bold"
+          }
+         ],
          "data": {}
         }
        ]
@@ -4197,13 +4201,17 @@
        ]
       },
       {
-       "nodeType": "heading-3",
+       "nodeType": "paragraph",
        "data": {},
        "content": [
         {
          "nodeType": "text",
          "value": "Customer lifetime value is a separate business estimate",
-         "marks": [],
+         "marks": [
+          {
+           "type": "bold"
+          }
+         ],
          "data": {}
         }
        ]

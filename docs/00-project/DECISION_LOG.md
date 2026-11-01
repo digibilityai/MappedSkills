@@ -2731,3 +2731,12 @@ Use this file only for meaningful project decisions.
 - **Read with:** `DEC-085`, `DEC-090`, `DEC-091`, `DEC-111`, `DEC-112`, `DEC-115`, `DEC-116`.
 - **ROLLBACK REFERENCE:** previous live release BUILD_ID `_pWpnXMkHfVZIUzx1uK7N` (main `0551b89`, run 41316916791), kept on the host by the swap model.
 - **LIVE VERIFICATION (2026-11-01):** `/`, `/google-ads`, `/social-media-ads`, both featured case studies return 200 with self canonicals; GTM-K8ZQPMXP inlined in the layout chunk; consent banner shown first, GTM script absent until Accept analytics, loaded after; mobile menu lists both featured case links. **NOT RUN:** real-device, Safari, Firefox, screen-reader checks. **KNOWN LIMITATION:** DEC-085 banner-over-CTA at 1280 x 720.
+
+### DEC-119: B0 Brand DNA 4.0 canonical foundation (documentation only; PENDING owner review)
+- **Date:** 2026-11-01. **Status:** B0 PROPOSED in a documentation-only PR; not merged until the owner reviews it. Resolves the housekeeping risk raised as OD-01 in the site-wide audit once merged.
+- **CANONICAL FILE LOCATIONS (on `main` once this PR merges):**
+  - Specification, revision 4, as approved under DEC-118: `docs/brand-dna/v4/BRAND_DNA_4_PROPOSAL.md` (SHA-256 `d10c03607e5a45dcb61e79fe438a3aec5129bce04fbf21ce54694706d6e94939`) and `docs/brand-dna/v4/BRAND_DNA_4_PROPOSAL.pdf`. Added byte for byte; the content was not edited. The two copies on disk before this PR (primary checkout and `MappedSkills-brand-dna4`) had the same Markdown hash; the PDFs differ only in a one second creation timestamp.
+  - Site-wide audit and implementation plan (reference only, not a decision): `docs/brand-dna/v4/sitewide-audit/SITEWIDE_BRAND_DNA4_AUDIT.md` (SHA-256 `61676a305ec088bb9d3817c5597233eddc3236a01df8fe33e81c886f5429b6f8`).
+- **Not added:** homepage audit and implementation screenshots, generated PDFs and other artefacts under `docs/brand-dna/v4/`.
+- **UNCHANGED:** DEC-118 (direction approved, OPEN items D-04 values, D-06 card wording, D-09, D-11, D-12 H4 and H5 roles stay OPEN). OD-02 to OD-14 in the audit stay OPEN. Batches B1 to B7 are not authorised. No application code, route, CMS content, redirect or production configuration changed; nothing deployed.
+- **Read with:** `DEC-091`, `DEC-118`.

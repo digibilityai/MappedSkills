@@ -28,21 +28,25 @@ const flat = (nodes) => nodes.flatMap((n) => (n['@graph'] ? n['@graph'] : [n]));
 for (const r of ROUTES) {
   const src = fs.readFileSync(r.file, 'utf8');
   const mod = load(r.file);
-  const html = renderToStaticMarkup(React.createElement(mod.default));
-  test(`${r.path}: renders the frozen design, with live metadata and a self-canonical`, () => {
-    assert.match(src, new RegExp(`<${r.component} />`));
+  /* a page may be async (it resolves its case showcase on the server first): await it, then render the element */
+  const htmlP = (async () => renderToStaticMarkup(mod.default.constructor.name === 'AsyncFunction' ? await mod.default() : React.createElement(mod.default)))();
+  test(`${r.path}: renders the frozen design, with live metadata and a self-canonical`, async () => {
+    const html = await htmlP;
+    assert.match(src, new RegExp(`<${r.component}( showcase=\\{showcase\\})? />`));
     assert.equal(mod.metadata.title, r.title);
     assert.equal(mod.metadata.alternates.canonical.replace(/\/$/, ''), `https://mappedskills.com${r.path === '/' ? '' : r.path}`);
     assert.equal((html.match(/<h1\b/g) || []).length, 1);
   });
-  test(`${r.path}: rendered markup is the frozen design, not the superseded page component`, () => {
+  test(`${r.path}: rendered markup is the frozen design, not the superseded page component`, async () => {
+    const html = await htmlP;
     assert.ok(html.includes(MARKERS[r.path]), `design marker ${MARKERS[r.path]}`);
     assert.doesNotMatch(html, /class="pa[ -]/, 'no superseded paid-advertising markup');
     assert.doesNotMatch(src, /components\/paid-advertising\/[a-z-]+\/PaidAdvertising/, 'wrapper does not import the superseded component');
     assert.match(html, /href="\/contact"/);
     assert.doesNotMatch(html, /[–—]/);
   });
-  test(`${r.path}: FAQPage questions and answers equal the visible FAQ; breadcrumb as approved`, () => {
+  test(`${r.path}: FAQPage questions and answers equal the visible FAQ; breadcrumb as approved`, async () => {
+    const html = await htmlP;
     const nodes = flat(ldNodes(html));
     const faq = nodes.find((n) => n['@type'] === 'FAQPage');
     const visible = [...html.matchAll(/<details(?![^>]*-disclosure)[^>]*>\s*<summary[^>]*>([\s\S]*?)<\/summary>([\s\S]*?)<\/details>/g)].map((m) => decode(m[1].replace(/<span aria-hidden="true">[\s\S]*?<\/span>/g, '').replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim());

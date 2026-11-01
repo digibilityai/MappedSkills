@@ -47,7 +47,7 @@ test('approved H1, lede, evidence note and close; two-tone headings', () => {
   assert.match(copy, /h1: \{ a: 'Real work\.', b: 'Judge it for yourself\.' \}/);
   assert.match(body, /<h1 id="wk-h1">\{S\.hero\.h1\.a\} <span>\{S\.hero\.h1\.b\}<\/span><\/h1>/);
   assert.match(copy, /lede: 'Explore the challenges businesses brought to us, what we changed, and how we approached the work\.'/);
-  assert.match(copy, /evidence: \{ ch: 'Our evidence rule', a: 'Good work', b: 'deserves honest evidence\.' \}/);
+  assert.doesNotMatch(copy, /evidence: \{|route: \{|featured: \{/, 'R2: the route panel, "start here" and evidence-rule copy are removed from the page');
   assert.match(copy, /h: 'Tell us what you’re trying to fix\.'/);
   assert.match(copy, /body: 'Tell us what you’re working towards\. We’ll help you figure out where to start\.'/);
   assert.match(copy, /primary: 'Contact us'/);
@@ -67,40 +67,46 @@ test('studies come from Contentful: no fixed count, no hard-coded client facts',
   assert.match(read('components/cplus/work/load.ts'), /libraryStudies\(\(await fetchContentfulCaseStudies\(\)\)\.filter\(\(s\) => !UNLISTED_CASE_STUDY_IDS\.has\(s\.id\)\), FEATURED_SLUG\)/);
   assert.doesNotMatch(all, /Ameba Software|AnybodyCanBake|AnyBodyCanBake|Om Sai|Home decor|Chandigarh|Bangalore|Pune|Chembur|\b(two|three|four|five|six) (projects|case studies|studies)\b/i);
   assert.doesNotMatch(all.replace(/placeholder=\{S\.library\.searchHint\}/g, ''), /placeholder/i);
-  assert.match(copy, /count: \(n: number\) =>/);
+  assert.doesNotMatch(copy, /count: \(n: number\) =>/, 'the count line is composed from the library total, never a fixed number');
 });
 
-test('withheld proof cannot reach the page (DEC-031); cards carry no outcome, figure or quote', () => {
-  assert.doesNotMatch(code(studies).replace(/study\.newLayout\.summary/g, ''), /resultsMetrics|beforeAfter|highlightResult|review|businessGoals|summary|conclusion/);
+test('withheld proof cannot reach the page (DEC-031); a card shows only a study\u2019s own lead figure, never a withheld one, a quote or a rating', () => {
+  assert.doesNotMatch(code(studies).replace(/study\.newLayout\.summary/g, ''), /resultsMetrics|beforeAfter|highlightResult|review|businessGoals|conclusion/);
   assert.match(code(studies), /study\.sections\.problemStatement/);
+  assert.match(code(studies), /isCaseStudyProofWithheld\(study\.slug, studyCopy\(study\)\)/, 'the lead figure is dropped while a study\u2019s proof is withheld');
+  assert.match(code(studies), /top\.kind === 'figure'/, 'only a figure the editor emphasised, as written');
   assert.doesNotMatch(copy, /\d+\s*%|₹|ROI|testimonial|guarantee|★/i);
-  // a card is the approved card (About) or eyebrow, client, challenge and link; nothing else from the study
-  assert.doesNotMatch(code(cards), /outcomes|figures|review|quote/);
-  assert.match(code(cards), /imageSlotsFor\(s\.href\)\.card/, 'the card image comes from the listing slot only');
-  assert.match(code(cards), /title: s\.client,\s*body: s\.challenge,\s*href: s\.href,/);
+  assert.doesNotMatch(code(cards), /review|quote|testimonial|rating/);
+  assert.match(code(cards), /imageSlotsFor\(s\.href, undefined, s\.finalCopy\)\.card/, 'the card image comes from the listing slot only');
+  assert.match(code(cards), /title: s\.client,\s*body: copy\?\.body \?\? s\.challenge,\s*href: s\.href,/);
 });
 
-test('the shared case-study card is reused, text-only unless the study has approved artwork', () => {
-  assert.match(lib, /import \{ WorkCard \} from '\.\.\/resolve\/WorkCard';/);
-  assert.match(lib, /<WorkCard s=\{toCard\(opening\[0\]\)\} lead \/>/);
-  assert.match(lib, /<WorkCard s=\{toCard\(s\)\}/);
+test('R2: the library has its own card; the shared WorkCard (home, about, service pages) is unchanged and not used by /work', () => {
+  assert.match(lib, /import \{ WorkLibCard \} from '\.\/WorkLibCard';/);
+  assert.doesNotMatch(lib, /WorkCard\b(?!\w)(?<!WorkLibCard)/);
+  assert.doesNotMatch(lib, /resolve\/WorkCard/);
+  const shared = read('components/resolve/WorkCard.tsx');
+  assert.match(shared, /rs-wc-cta/); assert.match(shared, /\{s\.eyebrow\}/, 'the shared card still has its eyebrow and call to action');
+  const c = code(read('components/b2/WorkLibCard.tsx'));
+  assert.doesNotMatch(c, /eyebrow|industry|Read the|Read case|fill\b|objectFit|scale\(|zoom/i, 'no eyebrow, no repeated link text, no crop or zoom');
+  assert.match(c, /width=\{c\.art\.w\} height=\{c\.art\.h\}/, 'the image keeps its own ratio');
+  assert.equal((c.match(/<Link /g) || []).length, 1, 'one link per card');
   assert.match(code(cards), /const APPROVED = Object\.values\(STUDIES\);/);
 });
 
-test('motion: keyframes only under no-preference, reduced motion clears it, nothing loops or sticks', () => {
-  for (const [f, s] of [['work.css', css], ['case-study.css', tplCss]]) {
-    const src = code(s);
-    assert.doesNotMatch(src, /infinite|position:\s*sticky|position:\s*fixed/, f);
-    const outside = src.replace(/@media \(prefers-reduced-motion: no-preference\) \{[\s\S]*?\n\}/g, '');
-    assert.doesNotMatch(outside, /@keyframes/, `${f}: keyframes outside no-preference`);
-    assert.match(src, /@media \(prefers-reduced-motion: reduce\) \{\s*\.b2\.(wk|cs) \*, \.b2\.\1 \*::before, \.b2\.\1 \*::after \{ animation: none !important; transition: none !important; \}/, f);
-  }
+test('motion: nothing loops, sticks or zooms; the only transition is a 150 ms underline, removed for reduced motion', () => {
+  const src = code(css);
+  assert.doesNotMatch(src, /infinite|position:\s*sticky|position:\s*fixed|@keyframes|scale\(|(?<![-\w])transform:/);
+  assert.match(src, /@media \(prefers-reduced-motion: reduce\) \{ \.b2\.wk \.wl-n a \{ transition: none; \} \}/);
+  const src2 = code(tplCss);
+  assert.doesNotMatch(src2, /infinite|position:\s*sticky|position:\s*fixed/, 'case-study.css');
+  assert.doesNotMatch(src2.replace(/@media \(prefers-reduced-motion: no-preference\) \{[\s\S]*?\n\}/g, ''), /@keyframes/, 'case-study.css: keyframes outside no-preference');
 });
 
 test('the page stylesheets are scoped to their pages', () => {
   for (const [s, scope] of [[css, '.b2.wk'], [tplCss, '.b2.cs']]) {
     const sels = code(s).replace(/@keyframes[^{]+\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}/g, '').match(/(^|\}|\{)\s*([^{}@]+)\{/g) || [];
-    assert.ok(sels.length > 40, String(sels.length));
+    assert.ok(sels.length > 30, String(sels.length));
     for (const sel of sels.map((x) => x.replace(/^[}{]?\s*/, '').replace(/\{$/, '').trim())) {
       for (const part of sel.split(/,(?![^(]*\))/)) assert.ok(part.trim().replace(/^html /, '').startsWith(scope), part);
     }
@@ -127,7 +133,7 @@ test('case study (Stage 3): only a reported figure leads the hero; without figur
   // the headline keeps the study's own words: split, never rewritten
   assert.match(src, /return i > 0 \? \[title\.slice\(0, i\), title\.slice\(i \+ 1\)\] : \[title, ''\];/);
   // artwork only from the approved card set, with its disclosure
-  assert.match(src, /imageSlotsFor\(study\.href\)\.feature/);
+  assert.match(src, /imageSlotsFor\(study\.href, undefined, finalCopy\)\.feature/);
   assert.match(src, /\{stage\?\.note \? <figcaption>\{stage\.note\}<\/figcaption> : null\}/);
   // the existing actions stay
   // (a study with approved closing copy in lib/case-study-presentation.ts shows that copy and its one button instead)
@@ -143,7 +149,8 @@ test('Stage 3 revision: illustrations are conceptual, labelled, code-drawn and l
   assert.match(art, /export const MOTIF_NOTE = 'Conceptual illustration drawn for this page\. Not client artwork, a screenshot or a result\.';/);
   assert.doesNotMatch(art, /<image|<text|href="http|xlink/i, 'no raster image, text or external reference in an illustration');
   assert.strictEqual(Object.keys(art.match(/MOTIF_BY_HREF: Record<string, Motif> = \{([\s\S]*?)\};/)[1].match(/'\/portfolio\/[^']+'/g)).length, 5);
-  for (const f of ['components/resolve/WorkCard.tsx', 'lib/case-study-images.ts']) assert.match(rd(f), /MOTIF_NOTE/, f);
+  // the note stays on the detail-page stage (lib/case-study-images.ts); owner decision 31 October 2026: no disclosure beneath a /work card image
+  assert.match(rd('lib/case-study-images.ts'), /MOTIF_NOTE/); assert.doesNotMatch(rd('components/resolve/WorkCard.tsx'), /MOTIF_NOTE/);
   assert.doesNotMatch(rd('components/b2/About.tsx'), /motifFor|CaseArt/, 'About does not draw illustrations');
   assert.doesNotMatch(rd('components/resolve/work.ts'), /^\s+motif:/m, 'the approved About cards set no motif');
   const t = rd('lib/case-study-preview-titles.ts');
@@ -170,19 +177,23 @@ test('Stage 3B: Home Decor is unlisted everywhere discovery happens, noindex fol
   assert.match(rd('lib/contentful/case-studies.ts'), /getCaseStudyListCards[^]*?filter\(\(s\) => !UNLISTED_CASE_STUDY_IDS\.has\(s\.id\)\)/);
   const page = rd('app/(pages)/portfolio/[slug]/page.tsx');
   assert.match(page, /UNLISTED_CASE_STUDY_IDS\.has\(caseStudy\.id\) \? \{ \.\.\.metadata, robots: \{ index: false, follow: true, googleBot: \{ index: false, follow: true \} \} \} : metadata/);
-  assert.match(page, /createMetadata\(caseStudy\.metaTitle, presentationFor\(caseStudy\.href\)\.metaDescription \?\? caseStudy\.metaDescription, caseStudy\.href, og\?\.ogSrc \?\? og\?\.src, og\?\.alt\)/, 'canonical comes from createMetadata, unchanged');
+  assert.match(page, /createMetadata\(caseStudy\.metaTitle, presentationFor\(caseStudy\.href, finalCopy\)\.metaDescription \?\? caseStudy\.metaDescription, caseStudy\.href, og\?\.ogSrc \?\? og\?\.src, og\?\.alt\)/, 'canonical comes from createMetadata, unchanged');
   assert.match(rd('lib/case-study-eligibility.ts'), /UNLISTED_CASE_STUDY_IDS[^]*'4zQL4P8SR2xogxHN4qFfUl'/);
 });
 
-test('/work final refinements: client logos in the hero, no case-study counts, no evidence-rule section', () => {
+test('/work R2 (31 October 2026): two columns, no logo strip, route panel or "start here", a visible count, a service select, one link per card', () => {
   const rd = (f) => require('node:fs').readFileSync(require('node:path').join(__dirname, '..', f), 'utf8');
   const work = rd('components/b2/Work.tsx');
-  assert.match(work, /clientForHref\(s\.href\)/);
-  assert.match(work, /<ClientLogo client=\{client!\} variant="tile" \/>/);
-  assert.doesNotMatch(work, /CaseArt|R\.count|wk-count|wk-h-ev|wk-rules|R\.evidence|R\.rules/);
+  assert.doesNotMatch(work, /ClientLogo|clientForHref|wk-mosaic|wk-route|CaseArt|PaReveal|HwSequence|S\.resolve/);
   const lib = rd('components/b2/WorkLibrary.tsx');
-  assert.doesNotMatch(lib, /case \$\{|case stud|results\.length\} of \$\{total\}/, 'no count is composed in the status line');
-  assert.match(lib, /S\.library\.showing/);
+  assert.match(lib, /id="wk-service"/); assert.doesNotMatch(lib, /wk-chips|aria-pressed/, 'service chips are replaced by a select');
+  assert.match(lib, /className="wk-count" role="status" aria-live="polite"/);
+  assert.match(lib, /Showing \$\{\(p - 1\) \* PAGE_SIZE \+ 1\}/);
+  assert.doesNotMatch(lib, /opening|S\.resolve/, 'one grid: no separate opening pair');
   const css = rd('components/b2/work.css');
-  assert.doesNotMatch(css, /wk-rules|wk-count/);
+  assert.match(css, /\.b2\.wk \.wk-grid \{ display: grid; grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
+  assert.match(css, /@media \(max-width: 720px\)[\s\S]*\.wk-grid \{ grid-template-columns: 1fr;/);
+  assert.match(css, /\.wl-n a::after \{ content: ''; position: absolute; inset: 0; \}/);
+  assert.match(css, /\.wl-n a:focus-visible::after \{ outline: 3px solid var\(--v-tang\);/);
+  assert.doesNotMatch(css, /wk-rules|wk-mosaic|wk-route|radial-gradient|box-shadow/);
 });

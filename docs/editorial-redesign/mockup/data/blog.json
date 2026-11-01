@@ -1,0 +1,114 @@
+{
+ "title": "Writing | MappedSkills",
+ "blocks": [
+  {
+   "t": "p",
+   "x": "Blog",
+   "cls": "b-kicker"
+  },
+  {
+   "t": "h1",
+   "x": "Marketing guides, written plainly.",
+   "cls": "b-h1 bl-h1"
+  },
+  {
+   "t": "p",
+   "x": "Practical reads on search, ads, content and turning website visits into enquiries — for business owners deciding what to do next.",
+   "cls": "b-lede bl-lede"
+  },
+  {
+   "t": "h2",
+   "x": "7 guides",
+   "cls": "bl-count"
+  },
+  {
+   "t": "li",
+   "x": "Content Marketing · 6 min readContent Marketing Services in Pune | Boost Your Business NowExplore top content marketing services in Pune. Drive traffic, boost engagement, and achieve your business goals with expert strategies.Read",
+   "cls": "bl-row"
+  },
+  {
+   "t": "li",
+   "x": "Email Marketing · 3 min readBuilding an Email List: A Comprehensive GuideUnlock the potential of email marketing! Explore proven strategies and actionable tips to grow your email list for maximum engagement.Read",
+   "cls": "bl-row"
+  },
+  {
+   "t": "li",
+   "x": "Brand Strategy · 5 min readThe Importance of Content Writing: A Guide for Business Owners and Marketing ManagersLearn the importance of content writing and why it is essential for marketing success, brand growth, SEO, and lead generation.Read",
+   "cls": "bl-row"
+  },
+  {
+   "t": "li",
+   "x": "Insights · 4 min readPerformance Marketing vs. Digital Marketing: Which is Right for Your Business?Performance Marketing vs. Digital Marketing, their pros and cons, and which approach is best for your business.Read",
+   "cls": "bl-row"
+  },
+  {
+   "t": "li",
+   "x": "Real Estate · 13 min read7 Proven Strategies of Digital Marketing for Real Estate DevelopersBoost sales with Digital Marketing for Real Estate Strategies—SEO to lead generation, MappedSkills gets results.Read",
+   "cls": "bl-row"
+  },
+  {
+   "t": "li",
+   "x": "Content Marketing · 9 min readBest SEO Company in Pune for Businesses That Want Qualified Leads, Not Just RankingsLooking for an SEO company in Pune? MappedSkills helps businesses improve rankings, organic traffic, qualified leads, technical SEO, and local SEO.Read",
+   "cls": "bl-row"
+  },
+  {
+   "t": "li",
+   "x": "PPC · 8 min readFacebook Advertising Agency in Pune for Facebook & Instagram Ads That Drive Qualified LeadsLooking for a Facebook advertising agency in Pune? We help you plan, launch, and optimize FB and Insta ad campaigns for leads & sales.Read",
+   "cls": "bl-row"
+  },
+  {
+   "t": "h2",
+   "x": "Reading about a problem you have?",
+   "cls": "b-h2"
+  },
+  {
+   "t": "p",
+   "x": "Tell us what’s happening with your marketing. If we’re not the right fit, we’ll say so.",
+   "cls": "b-lede"
+  }
+ ],
+ "links": [
+  {
+   "h": "/",
+   "x": "Home"
+  },
+  {
+   "h": "/blog/content-marketing-services-in-pune",
+   "x": "Content Marketing · 6 min readContent Marketing Services in Pune | Boost Your Business NowExplore top content marketing services in Pune. Dr"
+  },
+  {
+   "h": "/blog/building-an-email-list",
+   "x": "Email Marketing · 3 min readBuilding an Email List: A Comprehensive GuideUnlock the potential of email marketing! Explore proven strategies "
+  },
+  {
+   "h": "/blog/importance-of-content-writing",
+   "x": "Brand Strategy · 5 min readThe Importance of Content Writing: A Guide for Business Owners and Marketing ManagersLearn the importance of cont"
+  },
+  {
+   "h": "/blog/performance-marketing-vs-digital-marketing",
+   "x": "Insights · 4 min readPerformance Marketing vs. Digital Marketing: Which is Right for Your Business?Performance Marketing vs. Digital Marketi"
+  },
+  {
+   "h": "/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers",
+   "x": "Real Estate · 13 min read7 Proven Strategies of Digital Marketing for Real Estate DevelopersBoost sales with Digital Marketing for Real Esta"
+  },
+  {
+   "h": "/blog/seo-company-in-pune",
+   "x": "Content Marketing · 9 min readBest SEO Company in Pune for Businesses That Want Qualified Leads, Not Just RankingsLooking for an SEO company"
+  },
+  {
+   "h": "/blog/facebook-advertising-agency-pune",
+   "x": "PPC · 8 min readFacebook Advertising Agency in Pune for Facebook & Instagram Ads That Drive Qualified LeadsLooking for a Facebook advertisin"
+  },
+  {
+   "h": "/contact",
+   "x": "Tell us about your business"
+  },
+  {
+   "h": "/contact?intent=call",
+   "x": "Request a call"
+  }
+ ],
+ "imgs": [],
+ "cards": []
+}

@@ -16,5 +16,5 @@ export async function loadLibraryPage(page: number) {
   const p = libraryPage(all, page);
   if (page < 1 || page > p.pages) return null;
   const evidence = { figures: all.some((s) => s.figures > 0), outcomes: all.some((s) => s.outcomes.length > 0) };
-  return { items: p.items, page, pages: p.pages, total: p.total, facets: f, evidence };
+  return { items: p.items, hrefs: all.map((x) => x.href), page, pages: p.pages, total: p.total, facets: f, evidence };
 }

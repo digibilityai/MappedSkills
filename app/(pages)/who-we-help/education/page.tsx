@@ -1,4 +1,6 @@
 import { createMetadata } from '@/lib/metadata';
+import { loadCaseShowcase } from '@/components/case-showcase/CaseShowcase';
+import { EDUCATION_SHOWCASE } from '@/components/education-r2/showcase';
 import { EducationR2 } from '@/components/education-r2/EducationR2';
 import { EducationJsonLd } from '@/components/paid-advertising/education/EducationJsonLd';
 
@@ -14,11 +16,12 @@ export const metadata = createMetadata(
   '/who-we-help/education'
 );
 
-export default function Page() {
+export default async function Page() {
+  const showcase = await loadCaseShowcase(EDUCATION_SHOWCASE);
   return (
     <>
       <EducationJsonLd />
-      <EducationR2 />
+      <EducationR2 showcase={showcase} />
     </>
   );
 }

@@ -1,9 +1,11 @@
 /**
- * C+ SEO (/seo): customer-facing copy. Redesigned page (owner-approved Phase 1 proposal and editorial changes,
- * 2026-10-15; docs/seo-redesign/PHASE_1_AUDIT_AND_PROPOSAL.md). Rules this copy follows:
- *   - no ranking, traffic, enquiry, revenue or ROI promises, and no figures of any kind;
- *   - the two projects are separate, historical SEO projects delivered by MappedSkills, with no results published;
- *   - the review panel is an illustrative layout, not data.
+ * C+ SEO (/seo): customer-facing copy. Seven-scene narrative redesign (owner-approved proposal, U1 to U3, 2026-10-31;
+ * docs/seo-redesign/narrative-r1/SEO_NARRATIVE_AUDIT_AND_PROPOSAL.md). Rules this copy follows:
+ *   - no ranking, traffic, enquiry, revenue or ROI promises;
+ *   - the AnybodyCanBake figures are the owner-approved SEO case figures only (never the Google Ads case), always with their
+ *     period and measurement caveat, and are shown only while that case study is published (see ./proof.ts);
+ *   - Ameba Software shows only the owner-supplied final figures of 31 October 2026 (organic clicks, tracked organic enquiries, two
+ *     three-month periods, with the comparison caveat); no ranking, impression, quote or rating, and no calendar dates are added.
  */
 
 export const SEO_PLAIN = {
@@ -17,7 +19,7 @@ export const SEO_PLAIN = {
   primary: 'Tell us what you’re trying to fix',
   secondary: 'Book a call',
 
-  /* hero illustration: the trail from a search to an enquiry */
+  /* hero illustration: the trail from a search to an enquiry (the route graphic appears only in the hero) */
   trailLabel: 'From a search to an enquiry',
   trail: [
     { key: 'search', name: 'A search' },
@@ -26,8 +28,9 @@ export const SEO_PLAIN = {
     { key: 'enquiry', name: 'An enquiry', tag: 'What we judge it on' },
   ],
   trailCap: 'Illustration. It shows no results.',
+  trailMap: { elsewhere: 'somebody else' },
 
-  /* 2: customer questions */
+  /* 1: clicks are not customers (the three approved questions) */
   probKicker: 'Sound familiar?',
   probH: { a: 'Where SEO', b: 'usually goes wrong.' },
   problems: [
@@ -44,46 +47,78 @@ export const SEO_PLAIN = {
       a: 'Rankings and visits are not the same as enquiries. We focus on what changed for the business.',
     },
   ],
-  /* the word the hero picture uses for whoever else is shown above you */
-  trailMap: { elsewhere: 'somebody else' },
-  /* where on the route each break sits (the first is between a search and a result, and so on) */
   probTags: ['Between a search and a result', 'Between your page and an enquiry', 'After the enquiry'],
   probLink: { label: 'Have the traffic but not the enquiries? Start here', href: '/problems/traffic-but-no-enquiries' },
 
-  /* 3: what the work includes */
+  /* 2: what we work on, led by search intent */
   workKicker: 'The work',
-  workH: { a: 'What our SEO work', b: 'includes.' },
+  workH: { a: 'Match each search to', b: 'a page that answers it.' },
+  workIntent: 'Different searches come from different needs: learning, comparing, choosing.',
   workSub: 'Scoped to what your business needs. Not every engagement includes every item.',
-  groups: [
+  work: [
     {
-      key: 'search',
-      t: 'Find the right searches',
-      d: 'Work out which searches are worth going after.',
-      items: ['Search intent', 'Relevant opportunities', 'Competitor research'],
+      k: 'Find the right searches',
+      d: 'Search intent, relevant opportunities and competitor research.',
     },
     {
-      key: 'result',
-      t: 'Make your website easier to find',
-      d: 'Help search engines find, understand and navigate your site.',
-      items: ['Technical SEO', 'Indexing', 'Site structure', 'Internal links'],
+      k: 'Make your site easy to find and use',
+      d: 'Technical SEO, indexing, site structure and internal links.',
       also: 'Also: page speed, structured data, protecting rankings during a site rebuild.',
     },
     {
-      key: 'page',
-      t: 'Create and improve useful pages',
-      d: 'Pages that answer what searchers came to find.',
-      items: ['Service pages', 'Content', 'On-page optimisation'],
+      k: 'Build pages that answer, and make contact easy',
+      d: 'Service pages, content, on-page optimisation, landing-page improvements and conversion opportunities.',
     },
-    {
-      key: 'enquiry',
-      t: 'Turn visibility into enquiries',
-      d: 'Make it easier for visitors to get in touch, and see it happen.',
-      items: ['Landing-page improvements', 'Conversion opportunities', 'Measurement'],
-    },
-  ],
+  ] as { k: string; d: string; also?: string }[],
 
-  /* 4: how we work */
-  howKicker: 'How we work',
+  /* 3: one composed proof section */
+  proofKicker: 'SEO case studies',
+  proofH: { a: 'Here is what changed,', b: 'and how we measured it.' },
+  /* used when the AnybodyCanBake case is not published */
+  proofHAlt: { a: 'SEO work', b: 'we’ve delivered.' },
+  acb: {
+    name: 'AnybodyCanBake',
+    meta: 'Pune · Education and training · SEO',
+    lead: { big: '46.15%', rest: 'more tracked organic course enquiries' },
+    enquiries: { from: '91', to: '133', label: 'Tracked organic course enquiries' },
+    period: 'May–July 2026 versus August–October 2026',
+    support: [
+      { label: 'Organic clicks', from: '16,400', to: '20,580', pct: '+25.49%' },
+      { label: 'Nonbrand organic clicks', from: '15,348', to: '20,039', pct: '+30.56%' },
+    ],
+    body: 'A baking website can attract recipe readers without making its courses easy to find. We separated recipe searches from course searches, made the content easier to navigate and measured beyond traffic.',
+    read: 'Enquiries grew faster than clicks. That is the result for one business, not a promise for yours.',
+    caveat:
+      'This is a comparison of two periods, not proof that the work alone caused the change. The figures were supplied by MappedSkills and have not been independently checked against Search Console or analytics exports.',
+    link: { label: 'Read the AnybodyCanBake SEO case study', href: '/portfolio/anybodycanbake-seo' },
+  },
+  ameba: {
+    name: 'Ameba Software',
+    meta: 'Chandigarh · B2B software · SEO',
+    problem:
+      'A B2B software company that needed to be found when buyers searched for solutions. Limited content, weak page targeting and technical issues held back its organic demand.',
+    did: 'We targeted commercial search intent, improved priority service pages, strengthened the technical foundations and planned content around buyer questions.',
+    /* the owner-supplied final figures (31 October 2026); no calendar dates were supplied for the two three-month periods */
+    limit:
+      'Organic clicks rose from 7,300 to 12,800 (+75.34%) and tracked organic enquiries from 34 to 53 (+55.88%), comparing two three-month periods. This is a comparison, not proof that the work alone caused the change.',
+    link: { label: 'Read the Ameba Software case study', href: '/portfolio/seo-ameba-software' },
+  },
+
+  /* Ameba Software as it stands until its Contentful entry carries the final copy: no figure, the proof restriction kept. Used unless
+     NEXT_PUBLIC_CASE_FINAL_FOUR=1 (see lib/case-study-final-four.ts, finalFourReleased). THE RELEASE deletes this block and the switch. */
+  amebaHeld: {
+    name: 'Ameba Software',
+    meta: 'Chandigarh · B2B software · SEO',
+    problem:
+      'A B2B software company that wasn’t being found in search for the solutions it sells. Its pages loaded slowly, its meta tags were unoptimised and it had little content to be found for.',
+    did: 'We fixed the technical foundations, targeted key pages at high-intent software searches, planned an ongoing content programme and earned links from technology sites.',
+    limit:
+      'We do not publish traffic, ranking or enquiry figures for this engagement, because we have not been able to verify them against Ameba Software’s own records.',
+    link: { label: 'Read the Ameba Software case study', href: '/portfolio/seo-ameba-software' },
+  },
+
+  /* 4: how it runs */
+  howKicker: 'How it runs',
   howH: { a: 'Four steps,', b: 'in this order.' },
   howLabel: 'How we work, in four steps',
   steps: [
@@ -92,60 +127,11 @@ export const SEO_PLAIN = {
     { k: 'Improve', d: 'We make the agreed improvements.' },
     { k: 'Measure', d: 'A monthly report and review call show what changed.' },
   ],
+  howLine: 'SEO takes consistent work. We’ll explain what needs attention first and what progress you can realistically expect.',
+  howNote: 'Some enquiries arrive with no clear source. We show those separately instead of counting them as SEO.',
   howLink: { label: 'See the full process', href: '/how-it-works' },
 
-  /* 5: measurement: an illustrative layout only */
-  measKicker: 'Measurement',
-  measH: { a: 'What an SEO', b: 'performance review', c: 'can cover.' },
-  measTag: 'Illustrative layout. No real figures.',
-  tiles: [
-    { key: 'vis', t: 'Relevant search visibility', d: 'Where you appear for the searches that matter.' },
-    { key: 'visits', t: 'Organic website visits', d: 'How many people arrive from search.' },
-    { key: 'enq', t: 'Enquiries from organic search', d: 'What those visits turned into.', lead: true },
-    { key: 'next', t: 'Improvements and next priorities', d: 'What we completed and what comes next.' },
-  ],
-  nextRows: ['Completed', 'Next'],
-  measNote: 'Some enquiries arrive with no clear source. We show those separately instead of counting them as SEO.',
-  measLink: { label: 'How we track enquiries', href: '/how-it-works' },
-
-  /* 6: commitments */
-  comKicker: 'What you can expect',
-  comH: { a: 'Clear work.', b: 'Visible progress.' },
-  comLine: 'We identify what needs improving, act on agreed priorities and show you what changed.',
-  commitments: [
-    { t: 'Defined priorities', d: 'Know what we’re working on.' },
-    { t: 'Clear communication', d: 'Know what’s happening and why.' },
-    { t: 'Transparent reporting', d: 'See what changed.' },
-    { t: 'Regular reviews', d: 'Agree what comes next.' },
-  ],
-  comNote: 'SEO takes consistent work. We’ll explain what needs attention first and what progress you can realistically expect.',
-
-  /* 7: two separate historical SEO projects (no results are published; no case-study links exist) */
-  projKicker: 'SEO projects',
-  projH: { a: 'SEO work', b: 'we’ve delivered.' },
-  projIntro: 'Two historical projects where MappedSkills delivered the SEO work.',
-  projects: [
-    {
-      key: 'acb',
-      name: 'Anybody Can Bake',
-      initial: 'A',
-      tag: 'Historical SEO project',
-      field: 'Eggless and healthy baking education.',
-      role: 'SEO delivered by MappedSkills.',
-      state: 'Results not yet published.',
-    },
-    {
-      key: 'bkd',
-      name: 'Bakedemy',
-      initial: 'B',
-      tag: 'Historical SEO project',
-      field: 'Cake decoration and cake design education.',
-      role: 'SEO delivered by MappedSkills.',
-      state: 'Results not yet published.',
-    },
-  ],
-
-  /* 8: questions */
+  /* 5: questions */
   qKicker: 'Questions',
   qH: { a: 'Common', b: 'questions.' },
   questions: [
@@ -179,7 +165,6 @@ export const SEO_PLAIN = {
     links: [
       { label: 'Google Ads', href: '/google-ads' },
       { label: 'AI search', href: '/ai-seo' },
-      { label: 'Conversion optimization', href: '/conversion-optimization' },
       { label: 'All services', href: '/services' },
     ],
   },

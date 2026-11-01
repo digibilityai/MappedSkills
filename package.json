@@ -11,7 +11,7 @@
     "pack:cpanel": "powershell -ExecutionPolicy Bypass -File ./scripts/pack-cpanel.ps1",
     "verify:cpanel": "node scripts/verify-server-files.cjs",
     "verify:build": "node scripts/verify-build-output.cjs",
-    "verify:build:production": "node scripts/verify-build-output.cjs --require-gtm",
+    "verify:build:production": "node scripts/verify-build-output.cjs --require-gtm --site-url=https://mappedskills.com",
     "typecheck": "tsc --noEmit",
     "db:verify": "node scripts/db-migrate.cjs --verify",
     "db:status": "node scripts/db-migrate.cjs --status",

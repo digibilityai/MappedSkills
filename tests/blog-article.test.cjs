@@ -72,10 +72,11 @@ test('contents list and rendered headings share the allocator, in the same order
   assert.match(m, /const id = idFor\(raw\);\s*const text = raw\.trim\(\);\s*if \(!text\) continue;/, 'allocate before skipping an empty heading');
   const r = code(rich);
   assert.match(r, /const idFor = createHeadingIdAllocator\(\);/);
-  assert.match(r, /\[BLOCKS\.HEADING_2\]: \(node, children\) => <h2 id=\{idFor\(nodeText\(node\)\)\}>/);
-  assert.match(r, /\[BLOCKS\.HEADING_3\]: \(node, children\) => <h3 id=\{idFor\(nodeText\(node\)\)\}>/);
+  assert.match(r, /\[BLOCKS\.HEADING_2\]: \(node, children\) => \{\s*order\.afterH2\(\);\s*return <h2 id=\{idFor\(nodeText\(node\)\)\}>/);
+  assert.match(r, /\[BLOCKS\.HEADING_3\]: \(node, children\) => \{\s*order\.afterH3\(\);\s*return <h3 id=\{idFor\(nodeText\(node\)\)\}>/);
   assert.equal((r.match(/idFor\(/g) || []).length, 2, 'only H2 and H3 take ids');
-  assert.match(code(body), /href=\{`#\$\{item\.id\}`\}/);
+  assert.match(code(read('components/editorial/OnThisPage.tsx')), /href=\{`#\$\{i\.id\}`\}/);
+  assert.match(code(body), /<OnThisPage items=\{contents\.map/);
   assert.match(code(body), /const contents = mainHeadings\(post\.tableOfContents\);/);
 });
 
@@ -108,8 +109,8 @@ test('one close: the approved /blog copy and CTA pair', () => {
     assert.ok(content.includes(s), s);
     assert.ok(blogContent.includes(s), 'same as /blog: ' + s);
   }
-  assert.equal((code(body).match(/<ActionPair /g) || []).length, 1);
-  assert.match(body, /<ActionPair primaryLabel=\{c\.primary\} secondaryLabel=\{c\.secondary\} \/>/);
+  assert.equal((code(body).match(/<EdClose /g) || []).length, 1);
+  assert.match(body, /<EdClose id="b-close-h" h=\{c\.h\} body=\{c\.body\} primary=\{c\.primary\} secondary=\{c\.secondary\} \/>/);
   assert.ok(!/href="\/(contact|schedule-call)"/.test(code(body)), 'no other contact or booking link in the template');
 });
 
@@ -118,19 +119,20 @@ test('related services and related articles are kept', () => {
   assert.match(b, /\{services\.length > 0 && \(/);
   assert.match(b, /services\.map\(\(s\) =>/);
   assert.match(b, /href=\{s\.link\}/);
-  assert.match(b, /\{related\.length > 0 && \(/);
+  assert.match(b, /\{keep \? \(/);
   assert.match(b, /related\.map\(\(r\) =>/);
   assert.ok(read('lib/blog-services.ts').includes("'seo-company-in-pune': ['/seo']"), 'approved per-slug map unchanged');
 });
 
-test('contents: rail at wide, closed native disclosure below, both only with two or more items', () => {
-  const b = code(body);
-  assert.match(b, /const hasContents = contents\.length >= 2;/);
-  assert.match(b, /<nav className="ba-rail" aria-labelledby="ba-toc-l">/);
-  assert.match(b, /<details className="ba-tocm">/);
-  assert.ok(!/<details[^>]* open/.test(b), 'mobile panel starts closed');
-  assert.match(css, /@media \(min-width: 1081px\) \{\s*\.ba-rail \{ display: block; position: sticky; top: 24px;/);
-  assert.match(css, /@media \(min-width: 1081px\) \{ \.ba-tocm \{ display: none; \} \}/);
+test('contents: static list at wide, closed native disclosure below, both only with two or more items', () => {
+  const o = code(read('components/editorial/OnThisPage.tsx'));
+  const ed = read('components/editorial/editorial.css');
+  assert.match(o, /if \(total < 2\) return null;/);
+  assert.match(o, /<nav className="ed-otp-d"/);
+  assert.match(o, /<details className="ed-otp-m">/);
+  assert.ok(!/<details[^>]* open/.test(o), 'mobile panel starts closed');
+  assert.match(ed, /\.ed-otp-d \{ display: block; \} \.ed-otp-m \{ display: none; \}/);
+  assert.ok(!/position:\s*sticky/.test(ed.slice(ed.indexOf('.ed-otp-d'), ed.indexOf('.ed-otp-d') + 800)), 'nothing sticky');
 });
 
 test('share line keeps the destinations and sends no analytics', () => {
@@ -168,5 +170,5 @@ test('RichTextContent is not used by the article route and keeps its classes', (
   /* /press/[slug] used to import it too; Press Detail G2 moved that page to its own renderer, and this file stays untouched. */
   const live = read('components/blog/RichTextContent.tsx');
   assert.match(live, /className="scroll-mt-28 text-2xl sm:text-3xl font-bold font-heading tracking-tight mt-10 mb-4"/);
-  assert.ok(!/className=/.test(code(rich).replace(/className="ba-(prose|table)"/g, '')), 'article renderer adds no utility classes');
+  assert.ok(!/className=/.test(code(rich).replace(/className="ba-(prose|table|h4)"/g, '')), 'article renderer adds no utility classes (ba-h4 only restores the h4 look of a promoted heading)');
 });

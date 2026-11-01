@@ -1,0 +1,538 @@
+{
+ "motion/blog/opening": {
+  "k": {
+   "from": 0,
+   "to": 1,
+   "startMs": 50,
+   "endMs": 350,
+   "ms": 300,
+   "monotonic": true
+  },
+  "h1": {
+   "from": 0,
+   "to": 1,
+   "startMs": 117,
+   "endMs": 433,
+   "ms": 317,
+   "monotonic": true
+  },
+  "h1y": {
+   "from": 10,
+   "to": 0,
+   "startMs": 117,
+   "endMs": 433,
+   "ms": 317,
+   "monotonic": true
+  },
+  "em": {
+   "from": 0,
+   "to": 1,
+   "startMs": 350,
+   "endMs": 650,
+   "ms": 300,
+   "monotonic": true
+  },
+  "lede": {
+   "from": 0,
+   "to": 1,
+   "startMs": 250,
+   "endMs": 550,
+   "ms": 300,
+   "monotonic": true
+  },
+  "act": null,
+  "wipe": {
+   "from": 100,
+   "to": 0,
+   "startMs": 200,
+   "endMs": 683,
+   "ms": 483,
+   "monotonic": true
+  },
+  "frames": {
+   "frames": 91,
+   "medianMs": 16.7,
+   "p95Ms": 16.7,
+   "maxMs": 16.8
+  }
+ },
+ "motion/press/opening": {
+  "k": {
+   "from": 0,
+   "to": 1,
+   "startMs": 67,
+   "endMs": 350,
+   "ms": 283,
+   "monotonic": true
+  },
+  "h1": {
+   "from": 0,
+   "to": 1,
+   "startMs": 117,
+   "endMs": 433,
+   "ms": 317,
+   "monotonic": true
+  },
+  "h1y": {
+   "from": 10,
+   "to": 0,
+   "startMs": 117,
+   "endMs": 433,
+   "ms": 317,
+   "monotonic": true
+  },
+  "em": {
+   "from": 0,
+   "to": 1,
+   "startMs": 350,
+   "endMs": 650,
+   "ms": 300,
+   "monotonic": true
+  },
+  "lede": {
+   "from": 0,
+   "to": 1,
+   "startMs": 250,
+   "endMs": 550,
+   "ms": 300,
+   "monotonic": true
+  },
+  "act": {
+   "from": 0,
+   "to": 1,
+   "startMs": 350,
+   "endMs": 650,
+   "ms": 300,
+   "monotonic": true
+  },
+  "wipe": {
+   "from": 100,
+   "to": 0,
+   "startMs": 200,
+   "endMs": 683,
+   "ms": 483,
+   "monotonic": true
+  },
+  "frames": {
+   "frames": 90,
+   "medianMs": 16.7,
+   "p95Ms": 16.7,
+   "maxMs": 33.3
+  }
+ },
+ "motion/research/opening": {
+  "k": {
+   "from": 0,
+   "to": 1,
+   "startMs": 50,
+   "endMs": 350,
+   "ms": 300,
+   "monotonic": true
+  },
+  "h1": {
+   "from": 0,
+   "to": 1,
+   "startMs": 117,
+   "endMs": 433,
+   "ms": 317,
+   "monotonic": true
+  },
+  "h1y": {
+   "from": 10,
+   "to": 0,
+   "startMs": 117,
+   "endMs": 433,
+   "ms": 317,
+   "monotonic": true
+  },
+  "em": {
+   "from": 0,
+   "to": 1,
+   "startMs": 350,
+   "endMs": 650,
+   "ms": 300,
+   "monotonic": true
+  },
+  "lede": {
+   "from": 0,
+   "to": 1,
+   "startMs": 250,
+   "endMs": 550,
+   "ms": 300,
+   "monotonic": true
+  },
+  "act": {
+   "from": 0,
+   "to": 1,
+   "startMs": 350,
+   "endMs": 650,
+   "ms": 300,
+   "monotonic": true
+  },
+  "wipe": null,
+  "frames": {
+   "frames": 90,
+   "medianMs": 16.7,
+   "p95Ms": 16.8,
+   "maxMs": 33.4
+  }
+ },
+ "motion/article/opening": {
+  "k": null,
+  "h1": {
+   "from": 0,
+   "to": 1,
+   "startMs": 117,
+   "endMs": 433,
+   "ms": 317,
+   "monotonic": true
+  },
+  "h1y": {
+   "from": 10,
+   "to": 0,
+   "startMs": 117,
+   "endMs": 433,
+   "ms": 317,
+   "monotonic": true
+  },
+  "em": null,
+  "lede": {
+   "from": 0,
+   "to": 1,
+   "startMs": 250,
+   "endMs": 550,
+   "ms": 300,
+   "monotonic": true
+  },
+  "act": null,
+  "wipe": null,
+  "frames": {
+   "frames": 90,
+   "medianMs": 16.7,
+   "p95Ms": 16.7,
+   "maxMs": 33.4
+  }
+ },
+ "motion/research/headlineChart": {
+  "progress": {
+   "from": 0,
+   "to": 1,
+   "startMs": 410,
+   "endMs": 744,
+   "ms": 333,
+   "monotonic": true
+  },
+  "valuesReadableEveryFrame": true,
+  "startState": 0,
+  "frames": {
+   "frames": 156,
+   "medianMs": 16.7,
+   "p95Ms": 16.7,
+   "maxMs": 16.8
+  }
+ },
+ "motion/research/otherChart": {
+  "progress": {
+   "from": 0,
+   "to": 1,
+   "startMs": 1054,
+   "endMs": 1337,
+   "ms": 283,
+   "monotonic": true
+  },
+  "valuesReadableEveryFrame": true,
+  "startState": 0,
+  "frames": {
+   "frames": 156,
+   "medianMs": 16.7,
+   "p95Ms": 16.8,
+   "maxMs": 16.8
+  }
+ },
+ "motion/research/sectorBars": {
+  "progress": {
+   "from": 0,
+   "to": 1,
+   "startMs": 444,
+   "endMs": 928,
+   "ms": 483,
+   "monotonic": true
+  },
+  "valuesReadableEveryFrame": true,
+  "startState": 0,
+  "frames": {
+   "frames": 156,
+   "medianMs": 16.7,
+   "p95Ms": 16.7,
+   "maxMs": 16.8
+  }
+ },
+ "reduced/blog/opening": {
+  "k": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "h1": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "h1y": {
+   "from": 0,
+   "to": 0,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "em": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "lede": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "act": null,
+  "wipe": {
+   "from": 0,
+   "to": 0,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "frames": {
+   "frames": 90,
+   "medianMs": 16.7,
+   "p95Ms": 16.7,
+   "maxMs": 33.3
+  }
+ },
+ "reduced/press/opening": {
+  "k": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "h1": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "h1y": {
+   "from": 0,
+   "to": 0,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "em": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "lede": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "act": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "wipe": {
+   "from": 0,
+   "to": 0,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "frames": {
+   "frames": 90,
+   "medianMs": 16.7,
+   "p95Ms": 16.8,
+   "maxMs": 33.4
+  }
+ },
+ "reduced/research/opening": {
+  "k": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "h1": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "h1y": {
+   "from": 0,
+   "to": 0,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "em": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "lede": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "act": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "wipe": null,
+  "frames": {
+   "frames": 90,
+   "medianMs": 16.7,
+   "p95Ms": 16.8,
+   "maxMs": 33.3
+  }
+ },
+ "reduced/article/opening": {
+  "k": null,
+  "h1": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "h1y": {
+   "from": 0,
+   "to": 0,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "em": null,
+  "lede": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "act": null,
+  "wipe": null,
+  "frames": {
+   "frames": 89,
+   "medianMs": 16.7,
+   "p95Ms": 16.7,
+   "maxMs": 33.4
+  }
+ },
+ "reduced/research/headlineChart": {
+  "progress": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "valuesReadableEveryFrame": true,
+  "startState": 1,
+  "frames": {
+   "frames": 130,
+   "medianMs": 16.7,
+   "p95Ms": 16.8,
+   "maxMs": 16.8
+  }
+ },
+ "reduced/research/otherChart": {
+  "progress": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "valuesReadableEveryFrame": true,
+  "startState": 1,
+  "frames": {
+   "frames": 129,
+   "medianMs": 16.7,
+   "p95Ms": 16.7,
+   "maxMs": 16.8
+  }
+ },
+ "reduced/research/sectorBars": {
+  "progress": {
+   "from": 1,
+   "to": 1,
+   "startMs": null,
+   "endMs": null,
+   "ms": 0,
+   "monotonic": true
+  },
+  "valuesReadableEveryFrame": true,
+  "startState": 1,
+  "frames": {
+   "frames": 129,
+   "medianMs": 16.7,
+   "p95Ms": 16.8,
+   "maxMs": 16.8
+  }
+ }
+}

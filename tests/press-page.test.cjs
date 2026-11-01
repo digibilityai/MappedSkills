@@ -28,15 +28,18 @@ test('empty state does not mention the CMS; no invented announcements', () => {
 });
 
 test('populated rows are dated, link to the release href, and render only when releases exist', () => {
-  assert.match(body, /releases\.length > 0/);
-  assert.match(body, /<Link href=\{r\.href\}>\{r\.headline\}<\/Link>/);
+  assert.match(body, /const \[lead, \.\.\.earlier\] = releases;/);
+  assert.match(body, /<Link href=\{lead\.href\}>\{lead\.headline\}<\/Link>/, 'latest announcement leads');
+  assert.match(body, /<Link href=\{r\.href\}>/);
+  assert.match(body, /<h3>\{r\.headline\}<\/h3>/);
   assert.match(body, /r\.publishedDate/);
   assert.match(body, /r\.excerpt \?/);
+  assert.match(body, /lead \? \(|lead && /, 'nothing renders without releases');
 });
 
 test('contextual links and the existing media mailto', () => {
   for (const h of ['/research', '/about']) assert.ok(content.includes(`href: '${h}'`) || body.includes(`href="${h}"`), h);
-  assert.match(body, /CONTACT_HREF/);
+  assert.match(body, /<EdClose id="pr-h-media"[^>]*primaryHref=\{mailto\}/);
   assert.match(content, /subject: 'Media enquiry: MappedSkills'/);
   assert.match(body, /siteMetadata\.email/);
 });

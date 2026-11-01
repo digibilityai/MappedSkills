@@ -12,7 +12,7 @@ export const ARTICLE = {
   by: 'By',
   updated: 'Updated',
   published: 'Published',
-  contents: 'In this article',
+  contents: 'On this page',
   sections: (n: number) => `${n} ${n === 1 ? 'section' : 'sections'}`,
   related: 'Related service',
   share: 'Share this article',
@@ -20,6 +20,8 @@ export const ARTICLE = {
   copied: 'Link copied',
   newTab: ' (opens in a new tab)',
   more: 'More on this topic',
+  /* R3: the keep-reading heading by count (two, one), and the blog-index link. */
+  keep: { ch: 'Keep reading', two: { a: 'Two more', b: 'guides.' }, one: { a: 'One more', b: 'guide.' }, all: 'All guides' },
   read: 'Read',
 
   close: {

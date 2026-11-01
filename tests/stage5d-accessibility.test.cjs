@@ -34,8 +34,9 @@ test('D-14: /ai-seo journey steps keep their measured passing 0.7 state', () => 
   assert.ok(opacityAfter(ai, '.ax-jr.ax-seq.is-armed:not(.is-static) .ax-st:not(.is-done):not(.is-on) .ax-st-t') >= 0.7);
 });
 
-test('D-12: /seo mobile pledges reflow to one column when enlarged text leaves under 8rem per column', () => {
-  assert.match(seo, /\.sk-pledges \{ grid-template-columns: repeat\(auto-fit, minmax\(min\(100%, 8rem\), 1fr\)\)/);
+test('D-12: /seo mobile proof rows keep shrinkable columns, so enlarged text cannot widen the page', () => {
+  assert.match(seo, /\.sk-sup li \{ grid-template-columns: minmax\(0, 1fr\) auto;/);
+  assert.match(seo, /\.sk-sup-l \{ grid-column: 1 \/ -1;/);
 });
 
 test('D-13: /ai-seo tracking table cells may wrap at 480px and narrower', () => {

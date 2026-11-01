@@ -1,5 +1,7 @@
 import { STUDIES, type WorkArt } from '@/components/resolve/work';
 import { MOTIF_NOTE, motifFor, type Motif } from '@/components/case-study/CaseArt';
+import { PAID_CASES, paidCaseImage } from '@/lib/case-study-paid-batch';
+import { activeFinalFour, finalFourImage } from '@/lib/case-study-final-four';
 
 /**
  * THE TWO IMAGE SLOTS OF A CASE STUDY (Stage 3B). Every study has two independent slots, so either can be replaced on its own
@@ -39,6 +41,13 @@ export type ImageSlot =
        * which sits on the left, is never cut. Other slots are unchanged.
        */
       whole?: boolean;
+      /**
+       * Artwork with baked text near its edges: no scroll-linked zoom on the stage (the template's `cs-settle` scales a photo up to 14%
+       * while it scrolls into view, which would crop the text). Set for the six paid-advertising studies.
+       */
+      still?: boolean;
+      /** The outlined client name over this stage uses the existing deeper rust stroke (as the insurance and home motifs do), for a photograph whose lower left is busy or orange. */
+      deepMark?: boolean;
       /** A second file for narrow screens (<= 760px); `src` is then the wide derivative. Same artwork, same wording. */
       narrow?: { src: string; w: number; h: number };
       /** The sharing (Open Graph) image when it should differ from `src`. */
@@ -83,12 +92,53 @@ const abcFeature = (): ImageSlot => ({
   narrow: { src: '/images/resolve-r3/anybodycanbake-feature.webp', w: 1672, h: 941 }, ogSrc: '/images/resolve-r3/anybodycanbake-feature.webp',
 });
 
+/**
+ * The six paid-advertising studies of the 30 October 2026 batch (`lib/case-study-paid-batch.ts`): each has its own supplied card, hero
+ * and sharing image, never another case's. Both carry baked text, so the card is cropped from the right and the stage shows the 2.6:1
+ * derivative on wide screens and the supplied 16:9 hero whole on narrow ones, exactly as for AnybodyCanBake (Google Ads).
+ */
+/** Stages whose lower left is printed fabric: the owner-reviewed readability issue of the Advit Prints name (31 October 2026). */
+const DEEP_MARK: ReadonlySet<string> = new Set(['advit-prints-meta-ads']);
+const batchSlots = (): Record<string, ImageSlots> =>
+  Object.fromEntries(
+    PAID_CASES.map((c) => [
+      c.href,
+      {
+        card: { kind: 'image', src: paidCaseImage(c.key, 'card'), w: 1586, h: 992, alt: c.alt.card, whole: true, position: '0% 50%' },
+        feature: {
+          kind: 'image', src: paidCaseImage(c.key, 'hero-wide'), w: 1672, h: 643, alt: c.alt.hero, whole: true, still: true, og: true, ...(DEEP_MARK.has(c.key) ? { deepMark: true } : {}),
+          narrow: { src: paidCaseImage(c.key, 'hero'), w: 1672, h: 941 }, ogSrc: paidCaseImage(c.key, 'hero'),
+        },
+      } satisfies ImageSlots,
+    ])
+  );
+
+/**
+ * The final four (31 October 2026, `lib/case-study-final-four.ts`): ClassPe, InsurYo, Ameba Software and Wanderlooms. Same slot shape as the
+ * paid batch, with each file's own supplied size. They REPLACE the conceptual placeholders the first three had, so none of them shows a
+ * conceptual-artwork note any more. For the three existing studies they apply only while the study's published copy is the final copy (see `finalFourActive`).
+ */
+const finalFourSlots = (released: readonly string[]): Record<string, ImageSlots> =>
+  Object.fromEntries(
+    activeFinalFour(released).map((c) => [
+      c.href,
+      {
+        card: { kind: 'image', src: finalFourImage(c.key, 'card'), ...c.size.card, alt: c.alt.card, whole: true, position: '0% 50%' },
+        feature: {
+          kind: 'image', src: finalFourImage(c.key, 'hero-wide'), w: 1672, h: 643, alt: c.alt.hero, whole: true, still: true, og: true,
+          narrow: { src: finalFourImage(c.key, 'hero'), ...c.size.hero }, ogSrc: finalFourImage(c.key, 'hero'),
+        },
+      } satisfies ImageSlots,
+    ])
+  );
+
 /** The slots by page address. A study with no entry has no image in either slot (text-only card, no stage). */
 const SLOTS: Record<string, ImageSlots> = {
   '/portfolio/om-sai-developer-meta-ads': { card: omSai(), feature: omSai() },
   '/portfolio/classpe-social-media-strategy': { card: placeholder('/portfolio/classpe-social-media-strategy'), feature: placeholder('/portfolio/classpe-social-media-strategy') },
   '/portfolio/insuryo-organic-growth': { card: placeholder('/portfolio/insuryo-organic-growth'), feature: placeholder('/portfolio/insuryo-organic-growth') },
   '/portfolio/google-ads-for-online-courses': { card: abcListing(), feature: abcFeature() },
+  ...batchSlots(),
   '/portfolio/seo-ameba-software': { card: placeholder('/portfolio/seo-ameba-software'), feature: placeholder('/portfolio/seo-ameba-software') },
   // unlisted (not on /work) but live: only its own page uses its stage
   '/portfolio/seo-for-home-decor-brand': { card: null, feature: placeholder('/portfolio/seo-for-home-decor-brand') },
@@ -97,7 +147,8 @@ const SLOTS: Record<string, ImageSlots> = {
 const fromAsset = (a: CmsImageAsset | null | undefined): ImageSlot | null =>
   a?.url ? { kind: 'image', src: a.url, w: a.width ?? undefined, h: a.height ?? undefined, alt: a.description?.trim() || a.title?.trim() || '' } : null;
 
-export function imageSlotsFor(href: string, cms?: CmsImageFields | null): ImageSlots {
-  const base = SLOTS[href] ?? { card: null, feature: null };
+export function imageSlotsFor(href: string, cms?: CmsImageFields | null, finalCopy = false): ImageSlots {
+  // the final four are read on each call (not at import); `finalCopy` is true only for a study whose published summary is the approved final summary
+  const base = finalFourSlots(finalCopy ? [href] : [])[href] ?? SLOTS[href] ?? { card: null, feature: null };
   return { card: fromAsset(cms?.listingImage) ?? base.card, feature: fromAsset(cms?.featureImage) ?? base.feature };
 }

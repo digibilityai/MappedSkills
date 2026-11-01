@@ -1,5 +1,9 @@
 import Link from 'next/link';
-import { BOOKING_HREF, CONTACT_HREF, Mark } from '@/components/direction-c/primitives';
+import { EdClose } from '@/components/editorial/EdClose';
+import { OnThisPage } from '@/components/editorial/OnThisPage';
+import { EdMotion } from '@/components/editorial/EdMotion';
+import { splitAfterMarker } from '@/lib/headline-emphasis';
+import { CONTACT_HREF } from '@/components/direction-c/primitives';
 import { isDocumentPopulated } from '@/lib/contentful/mappers';
 import { siteMetadata } from '@/lib/metadata';
 import type { CmsResearchFinding, CmsResearchReport } from '@/lib/contentful/types';
@@ -7,8 +11,10 @@ import { REPORT as R } from './content';
 import { ReportChapters, ReportProse, reportToc } from './ReportRichText';
 import { ReportCopy } from './ReportCopy';
 import { findUnrendered } from './report-rules';
+import { groupContents } from './chapters';
 import '../research/research.css';
 import './report.css';
+import '@/components/editorial/editorial.css';
 
 /**
  * C+ research report (`/research/[slug]`, report variant): the owner-approved Research Report G1 R1 design
@@ -23,36 +29,33 @@ import './report.css';
  * figure. `findUnrendered` reports any rich-text part this page cannot show, so a dropped embed never passes unnoticed.
  */
 
-/* A paired statistic ("66.7% vs 6.7%") is set smaller on one line, as on /research. */
-function Stat({ value, lead }: { value?: string; lead?: boolean }) {
-  const cls = lead ? 'rs-stat rr-stat-lead' : 'rs-stat';
-  if (!value) return <p className={cls} />;
+/* A paired statistic ("66.7% vs 6.7%") is set smaller on one line. */
+function Stat({ value }: { value?: string }) {
+  if (!value) return <p className="ed-fig v" />;
   const pair = /^(.+?)\s+(vs\.?)\s+(.+)$/i.exec(value);
-  if (!pair) return <p className={cls}>{value}</p>;
+  if (!pair) return <p className="ed-fig v">{value}</p>;
   return (
-    <p className={`${cls} rs-stat-pair`}>
+    <p className="ed-fig v is-pair">
       {pair[1]} <span>{pair[2]}</span> {pair[3]}
     </p>
   );
 }
 
-function Finding({ f, lead }: { f: CmsResearchFinding; lead: boolean }) {
+function Finding({ f }: { f: CmsResearchFinding }) {
   return (
-    <li className="rs-row">
-      <Stat value={f.statistic} lead={lead} />
-      <div className="rs-row-t">
-        <h3 className="rs-row-h">{f.headline}</h3>
-        {f.description ? <p className="rs-row-d">{f.description}</p> : null}
-      </div>
-      <p className="rs-meta">
+    <li>
+      <Stat value={f.statistic} />
+      <h3 className="c">{f.headline}</h3>
+      {f.description ? <p className="d">{f.description}</p> : null}
+      <p className="s">
         {f.baseSample ? (
           <>
-            <span className="rs-meta-k">{R.findings.sample}</span> {f.baseSample}{' '}
+            <b>{R.findings.sample}</b> {f.baseSample}{' '}
           </>
         ) : null}
         {f.sourceNote ? (
           <>
-            <span className="rs-meta-k">{R.findings.source}</span> {f.sourceNote}
+            <b>{R.findings.source}</b> {f.sourceNote}
           </>
         ) : null}
       </p>
@@ -83,8 +86,7 @@ export function ReportBody({ report }: { report: CmsResearchReport }) {
   }
 
   const colon = report.title.indexOf(':');
-  const head = colon > 0 ? report.title.slice(0, colon + 1) : report.title;
-  const tail = colon > 0 ? report.title.slice(colon + 1).trim() : '';
+  const split = splitAfterMarker(report.title);
   const shortTitle = colon > 0 ? report.title.slice(0, colon).trim() : report.title;
 
   const facts = (
@@ -98,6 +100,20 @@ export function ReportBody({ report }: { report: CmsResearchReport }) {
     ] as [string, string | undefined, string?][]
   ).filter(([, v]) => Boolean(v));
 
+  const contents = [
+    hasFindings && { id: 'findings', text: R.findings.kicker },
+    hasSummary && { id: 'executive-summary', text: R.summary.rail },
+    ...toc.map((t) => ({ id: t.id, text: `${t.label ? `${t.label} ` : ''}${t.title}` })),
+    hasMethod && { id: 'methodology', text: R.jump.methodology },
+    hasLimits && { id: 'limitations', text: R.jump.limitations },
+    { id: 'cite', text: R.jump.cite },
+  ].filter(Boolean) as { id: string; text: string }[];
+  /* Reading chapters: navigation and a plain label above each chapter's first heading. Headings, text and anchors are unchanged. */
+  const groups = groupContents(contents);
+  const chapterLabels: Record<string, string> = {};
+  groups?.forEach((g, i) => {
+    chapterLabels[g.items[0].id] = `Chapter ${i + 1} of ${groups.length} · ${g.label}`;
+  });
   const mailto = `mailto:${siteMetadata.email}?subject=${encodeURIComponent(`Media enquiry: ${report.title}`)}`;
   const jumps = [
     hasFindings ? [R.jump.findings, '#findings'] : null,
@@ -108,52 +124,34 @@ export function ReportBody({ report }: { report: CmsResearchReport }) {
 
   return (
     <>
-      {/* 1 — hero (ivory): report identity, no sales CTA. The H1 is the Contentful title, unchanged; only its setting changes. */}
-      <section className="b-hero rr-hero" aria-labelledby="rr-h1">
-        <div className="px-wrap">
-          <nav aria-label="Breadcrumb" className="b-crumb">
-            <ol>
-              <li>
-                <Link href="/">Home</Link>{' '}
-              </li>
-              <li>
-                <span aria-hidden="true">/</span> <Link href="/research">Research</Link>{' '}
-              </li>
-              {report.categoryName && report.categorySlug ? (
-                <li>
-                  <span aria-hidden="true">/</span> <Link href={`/research/${report.categorySlug}`}>{report.categoryName}</Link>{' '}
-                </li>
-              ) : null}
-              <li>
-                <span aria-hidden="true">/</span> <span aria-current="page">{shortTitle}</span>
-              </li>
-            </ol>
+      <section className="ed-hero rr-hero" aria-labelledby="rr-h1">
+        <div className="ed-w">
+          <nav aria-label="Breadcrumb" className="ed-crumb">
+            <Link href="/">Home</Link>
+            <Link href="/research">Research</Link>
+            {report.categoryName && report.categorySlug ? <Link href={`/research/${report.categorySlug}`}>{report.categoryName}</Link> : null}
+            <span aria-current="page">{shortTitle}</span>
           </nav>
-          <div className="rr-hero-g">
-            <div>
-              <p className="b-kicker rr-kicker">
+          <div className="ed-hg">
+            <div className="ed-hl">
+              <p className="ed-k">
                 {R.kickerPrefix}
-                {report.categoryName ? (
-                  <>
-                    {' '}
-                    <span aria-hidden="true">·</span> {report.categoryName}
-                  </>
-                ) : null}
+                {report.categoryName ? ` · ${report.categoryName}` : ''}
               </p>
-              <h1 id="rr-h1" className="b-h1 rr-h1">
-                {head}
-                {tail ? (
+              <h1 id="rr-h1">
+                {split.emphasis ? (
                   <>
-                    {' '}
-                    <span className="rr-h1-sub">{tail}</span>
+                    {split.before.trim()} <em>{split.emphasis}</em>
                   </>
-                ) : null}
+                ) : (
+                  report.title
+                )}
               </h1>
-              {report.excerpt ? <p className="b-lede rr-lede">{report.excerpt}</p> : null}
+              {report.excerpt ? <p className="ed-lede">{report.excerpt}</p> : null}
             </div>
-            <div className="rr-hero-side">
+            <div className="ed-hr ed-panel">
               {facts.length ? (
-                <dl className="rr-facts">
+                <dl className="ed-facts dk">
                   {facts.map(([k, v, href]) => (
                     <div key={k}>
                       <dt>{k}</dt>
@@ -162,10 +160,10 @@ export function ReportBody({ report }: { report: CmsResearchReport }) {
                   ))}
                 </dl>
               ) : null}
-              <nav className="rr-jump" aria-label={R.jump.label}>
+              <nav className="ed-jump" aria-label={R.jump.label}>
                 {jumps.map(([label, href]) => (
-                  <a key={href} className="rs-go" href={href}>
-                    <span className="rs-go-t">{label}</span> <span aria-hidden="true">↓</span>
+                  <a key={href} href={href}>
+                    {label} <span aria-hidden="true">↓</span>
                   </a>
                 ))}
               </nav>
@@ -174,17 +172,20 @@ export function ReportBody({ report }: { report: CmsResearchReport }) {
         </div>
       </section>
 
-      {/* 2 — key findings (paper): all of them in one ledger, in report order, as on /research. */}
       {hasFindings ? (
-        <section className="b-sec b-paper rs-more rr-more" id="findings" aria-labelledby="rr-h-more">
-          <div className="px-wrap">
-            <p className="b-kicker">{R.findings.kicker}</p>
-            <h2 id="rr-h-more" className="b-h2 rs-h2">
+        <section className="ed-band dark" id="findings" aria-labelledby="rr-h-more">
+          <div className="ed-w">
+            {chapterLabels.findings ? <p className="ed-chap">{chapterLabels.findings}</p> : null}
+            <p className="ed-ch">
+              <span>01</span>
+              {R.findings.kicker}
+            </p>
+            <h2 id="rr-h-more" className="ed-h2">
               {R.findings.h}
             </h2>
-            <ol className="rs-ledger">
-              {report.keyFindings.map((f, i) => (
-                <Finding key={f.id} f={f} lead={i === 0} />
+            <ol className="ed-ev ed-ev4 ed-evn">
+              {report.keyFindings.map((f) => (
+                <Finding key={f.id} f={f} />
               ))}
             </ol>
           </div>
@@ -195,42 +196,9 @@ export function ReportBody({ report }: { report: CmsResearchReport }) {
       {hasSummary || hasBody ? (
         <div className="rr-read">
           <div className="px-wrap rr-grid">
-            <nav className="rr-rail" aria-label={R.rail}>
-              <p className="rs-label">{R.rail}</p>
-              <ol className="rr-toc">
-                {hasFindings ? (
-                  <li>
-                    <a href="#findings">{R.findings.kicker}</a>
-                  </li>
-                ) : null}
-                {hasSummary ? (
-                  <li>
-                    <a href="#executive-summary">{R.summary.rail}</a>
-                  </li>
-                ) : null}
-                {toc.map((t) => (
-                  <li key={t.id}>
-                    <a href={`#${t.id}`}>
-                      {t.label ? <span className="rr-toc-n">{t.label}</span> : null}
-                      {t.title}
-                    </a>
-                  </li>
-                ))}
-                {hasMethod ? (
-                  <li>
-                    <a href="#methodology">{R.jump.methodology}</a>
-                  </li>
-                ) : null}
-                {hasLimits ? (
-                  <li>
-                    <a href="#limitations">{R.jump.limitations}</a>
-                  </li>
-                ) : null}
-                <li>
-                  <a href="#cite">{R.jump.cite}</a>
-                </li>
-              </ol>
-            </nav>
+            <aside className="rr-oa">
+              <OnThisPage items={contents} groups={groups} label={R.rail} />
+            </aside>
             <article className="rr-col" aria-label={R.summary.article} data-unrendered={unrendered.length || undefined}>
               {hasSummary && report.executiveSummaryJson ? (
                 <section id="executive-summary" className="rr-sum" aria-labelledby="rr-h-sum">
@@ -248,7 +216,7 @@ export function ReportBody({ report }: { report: CmsResearchReport }) {
               ) : null}
               {hasBody && report.contentJson ? (
                 <div className="rr-prose">
-                  <ReportChapters document={report.contentJson} links={report.contentLinks} />
+                  <ReportChapters document={report.contentJson} links={report.contentLinks} chapterLabels={chapterLabels} />
                 </div>
               ) : null}
             </article>
@@ -261,6 +229,7 @@ export function ReportBody({ report }: { report: CmsResearchReport }) {
         <section className="b-sec b-paper rr-method" id="methodology" aria-labelledby="rr-h-method">
           <div className="px-wrap rr-grid rr-grid-plain">
             <div className="rr-side-h">
+              {chapterLabels.methodology ? <p className="ed-chap">{chapterLabels.methodology}</p> : null}
               <p className="b-kicker">{R.method.kicker}</p>
               <h2 id="rr-h-method" className="rr-h2">
                 {R.method.h}
@@ -369,33 +338,15 @@ export function ReportBody({ report }: { report: CmsResearchReport }) {
             <Link className="rs-go" href={CONTACT_HREF}>
               <span className="rs-go-t">{R.media.link}</span> <span aria-hidden="true">→</span>
             </Link>
-          </div>
-        </div>
-      </aside>
-
-      {/* 7 — close: the shared tangerine close (the /research copy), the only conversion section. */}
-      <section className="b-close" aria-labelledby="rr-h-close">
-        <div className="px-wrap b-close-in">
-          <div>
-            <h2 id="rr-h-close" className="b-h2">
-              {R.close.h}
-            </h2>
-            <p className="b-lede">{R.close.body}</p>
-          </div>
-          <div className="dc-actions rr-close-a">
-            <Link href={CONTACT_HREF} className="dc-btn dc-btn-primary">
-              <Mark />
-              {R.close.primary}
-            </Link>
-            <Link href={BOOKING_HREF} className="dc-btn dc-btn-secondary">
-              {R.close.secondary}
-            </Link>
-            <Link className="rs-go rr-close-go" href="/conversion-optimization">
+            <Link className="rs-go" href="/conversion-optimization">
               <span className="rs-go-t">{R.close.tertiary}</span> <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>
-      </section>
+      </aside>
+
+      <EdMotion />
+      <EdClose id="rr-h-close" h={R.close.h} body={R.close.body} primary={R.close.primary} secondary={R.close.secondary} />
     </>
   );
 }

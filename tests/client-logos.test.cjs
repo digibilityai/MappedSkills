@@ -10,10 +10,10 @@ const reg = rd('lib/clients.ts');
 const entries = reg.split(/\n  (?:\{\n|\{ |c\()/).slice(1);
 const keyOf = (e) => /key: '([^']+)'/.exec(e)?.[1] ?? /^'([^']+)'/.exec(e)?.[1];
 
-test('register: 33 entries = the 31 supplied logos + Omsai and Wanderlooms (already in the repo); 32 shown, Vibgyor High blocked', () => {
+test('register: 35 entries = the 31 supplied logos + Omsai and Wanderlooms (already in the repo); 32 shown, Vibgyor High blocked', () => {
   const keys = entries.map(keyOf);
-  assert.strictEqual(keys.length, 33);
-  assert.strictEqual(new Set(keys).size, 33, 'no duplicate client');
+  assert.strictEqual(keys.length, 35);
+  assert.strictEqual(new Set(keys).size, 35, 'no duplicate client');
   const blocked = entries.filter((e) => /display: 'blocked'/.test(e)).map(keyOf);
   assert.deepEqual(blocked, ['vibgyor-high']);
   assert.match(reg, /const c = .*display: 'show'/);
@@ -24,7 +24,7 @@ test('register: 33 entries = the 31 supplied logos + Omsai and Wanderlooms (alre
 
 test('register: the web copies in public/images/clients are the 30 shown ZIP logos plus the transparent Omsai copy; the blocked one is never copied', () => {
   const files = fs.readdirSync(path.join(root, 'public/images/clients'));
-  assert.strictEqual(files.length, 31);
+  assert.strictEqual(files.length, 33, 'plus Bblewrap and Talreja & Talreja (31 October 2026)');
   for (const f of files) assert.ok(reg.includes(`/images/clients/${f}`), `${f} is in the register`);
   assert.ok(!files.some((f) => /vibgyor/i.test(f)));
   assert.doesNotMatch(reg, /vibgyor[^\n]*src:/i);

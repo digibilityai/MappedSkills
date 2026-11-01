@@ -1,0 +1,1004 @@
+{
+ "press@1440": {
+  "status": 200,
+  "title": "Press | MappedSkills",
+  "h1": "News from MappedSkills, on the record.",
+  "h2": [
+   "Latest news.",
+   "Useful for your story.",
+   "Working on a story? Talk to us."
+  ],
+  "canonical": "http://localhost:3500/press",
+  "robots": "index, follow",
+  "ld": [
+   "Organization"
+  ],
+  "height": 3130,
+  "overflowX": false,
+  "imgs": 0,
+  "sections": 4,
+  "links": 9,
+  "inputs": 0,
+  "maxParaPx": 1128,
+  "fonts": [
+   "dcDisplay",
+   "Manrope"
+  ],
+  "words": 148,
+  "errs": 0
+ },
+ "press-detail@1440": {
+  "status": 200,
+  "title": "No Observable Google Analytics on 42.5% of 120 Indian Sites",
+  "h1": "MappedSkills Research Finds No Observable Google Analytics on 42.5% of 120 Indian Business Websites Audited",
+  "h2": [
+   "The evidence in brief",
+   "Key findings",
+   "Why this matters for businesses",
+   "A note from the founder",
+   "About the research",
+   "About MappedSkills",
+   "Media enquiries",
+   "The Marketing Measurement Gap: What 120 Indian Business Webs",
+   "Press enquiries"
+  ],
+  "canonical": "http://localhost:3500/press/marketing-measurement-gap-indian-websites",
+  "ld": [
+   "Organization",
+   "NewsArticle",
+   "BreadcrumbList"
+  ],
+  "height": 6729,
+  "overflowX": false,
+  "imgs": 1,
+  "sections": 9,
+  "links": 10,
+  "inputs": 0,
+  "maxParaPx": 778,
+  "fonts": [
+   "Manrope",
+   "dcDisplay"
+  ],
+  "words": 844,
+  "errs": 0
+ },
+ "blog@1440": {
+  "status": 200,
+  "title": "Writing | MappedSkills",
+  "h1": "Marketing guides, written plainly.",
+  "h2": [
+   "7 guides",
+   "Reading about a problem you have?"
+  ],
+  "canonical": "http://localhost:3500/blog",
+  "robots": "index, follow",
+  "ld": [
+   "Organization"
+  ],
+  "height": 3355,
+  "overflowX": false,
+  "imgs": 0,
+  "sections": 3,
+  "links": 10,
+  "inputs": 0,
+  "maxParaPx": 1128,
+  "fonts": [
+   "Manrope",
+   "dcDisplay"
+  ],
+  "words": 309,
+  "errs": 0
+ },
+ "blog-detail@1440": {
+  "status": 200,
+  "title": "Performance Marketing vs. Digital Marketing",
+  "h1": "Performance Marketing vs. Digital Marketing: Which is Right for Your Business?",
+  "h2": [
+   "What is Performance Marketing in Digital Marketing?",
+   "How Performance Marketing Works",
+   "Conclusion",
+   "Reading about a problem you have?"
+  ],
+  "canonical": "http://localhost:3500/blog/performance-marketing-vs-digital-marketing",
+  "ld": [
+   "Organization",
+   "Article",
+   "BreadcrumbList"
+  ],
+  "height": 6149,
+  "overflowX": false,
+  "imgs": 0,
+  "sections": 3,
+  "links": 15,
+  "inputs": 0,
+  "maxParaPx": 736,
+  "fonts": [
+   "Manrope",
+   "dcDisplay"
+  ],
+  "words": 895,
+  "errs": 0
+ },
+ "research@1440": {
+  "status": 200,
+  "title": "MappedSkills Research",
+  "h1": "We look at real business websites. Then we publish what we find.",
+  "h2": [
+   "More than 4 in 10 audited websites had no observable Google ",
+   "What else we found.",
+   "The Marketing Measurement Gap: What 120 Indian Business Webs",
+   "What we checked. What we can’t claim.",
+   "For journalists",
+   "Not sure what your marketing is actually measuring?"
+  ],
+  "canonical": "http://localhost:3500/research",
+  "robots": "index, follow",
+  "ld": [
+   "Organization"
+  ],
+  "height": 5448,
+  "overflowX": false,
+  "imgs": 0,
+  "sections": 5,
+  "links": 10,
+  "inputs": 0,
+  "maxParaPx": 1128,
+  "fonts": [
+   "dcDisplay",
+   "Manrope"
+  ],
+  "words": 549,
+  "errs": 0
+ },
+ "research-detail@1440": {
+  "status": 200,
+  "title": "Marketing Measurement Gap: 120 Indian Websites Studied",
+  "h1": "The Marketing Measurement Gap: What 120 Indian Business Websites Reveal About Analytics and Advertising Measurement",
+  "h2": [
+   "What the research found.",
+   "Executive summary",
+   "Why We Conducted This Research",
+   "Finding 1: More Than 4 in 10 Audited Websites Had No Observa",
+   "Finding 2: Advertising Measurement Was Even Less Commonly Ob",
+   "Finding 3: 97.5% of Websites Preserved Our Test UTM Paramete",
+   "Finding 4: Advertising Measurement Varied Sharply by Sector",
+   "Finding 5: Technology Did Not Lead the Sample on Observable ",
+   "What About Conversion Measurement?",
+   "What Does the Marketing Measurement Gap Mean?",
+   "What Founders and CEOs Should Ask",
+   "A Note From Amit Gupta",
+   "How the audit was done.",
+   "What this study can’t tell you.",
+   "How to reference this report.",
+   "For journalists",
+   "Not sure what your marketing is actually measuring?"
+  ],
+  "canonical": "http://localhost:3500/research/marketing-measurement-gap-indian-business-websites",
+  "ld": [
+   "Organization",
+   "Report",
+   "BreadcrumbList"
+  ],
+  "height": 17611,
+  "overflowX": false,
+  "imgs": 1,
+  "sections": 17,
+  "links": 33,
+  "inputs": 0,
+  "maxParaPx": 1128,
+  "fonts": [
+   "Manrope",
+   "dcDisplay"
+  ],
+  "words": 2716,
+  "errs": 0
+ },
+ "research-benchmarks@1440": {
+  "status": 200,
+  "title": "Industry Benchmarks",
+  "h1": "Industry Benchmarks",
+  "h2": [
+   "Reports in this area"
+  ],
+  "canonical": "http://localhost:3500/research/industry-benchmarks",
+  "robots": "index, follow",
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "height": 1472,
+  "overflowX": false,
+  "imgs": 0,
+  "sections": 2,
+  "links": 3,
+  "inputs": 0,
+  "maxParaPx": 1336,
+  "fonts": [
+   "Manrope",
+   "Bricolage Grotesque"
+  ],
+  "words": 57,
+  "errs": 0
+ },
+ "work-p1@1440": {
+  "status": 200,
+  "title": "Work | MappedSkills",
+  "h1": "Real work. Judge it for yourself.",
+  "h2": [
+   "One story, told end to end.",
+   "Every case study, in one place.",
+   "Tell us what you’re trying to fix."
+  ],
+  "canonical": "http://localhost:3500/work",
+  "robots": "index, follow",
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "height": 6258,
+  "overflowX": false,
+  "imgs": 29,
+  "sections": 4,
+  "links": 17,
+  "inputs": 2,
+  "maxParaPx": 1248,
+  "fonts": [
+   "Bricolage Grotesque",
+   "Manrope"
+  ],
+  "words": 510,
+  "errs": 0
+ },
+ "work-p2@1440": {
+  "status": 200,
+  "title": "Work – page 2 | MappedSkills",
+  "h1": "Real work. Judge it for yourself.",
+  "h2": [
+   "Case studies, page 2.",
+   "Tell us what you’re trying to fix."
+  ],
+  "canonical": "http://localhost:3500/work/page/2",
+  "robots": "index, follow",
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "height": 3921,
+  "overflowX": false,
+  "imgs": 8,
+  "sections": 3,
+  "links": 13,
+  "inputs": 2,
+  "maxParaPx": 599,
+  "fonts": [
+   "Bricolage Grotesque",
+   "Manrope"
+  ],
+  "words": 396,
+  "errs": 0
+ },
+ "work-filtered@1440": {
+  "status": 200,
+  "title": "Work | MappedSkills",
+  "h1": "Real work. Judge it for yourself.",
+  "h2": [
+   "Matching case studies",
+   "Tell us what you’re trying to fix."
+  ],
+  "canonical": "http://localhost:3500/work",
+  "robots": "index, follow",
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "height": 3141,
+  "overflowX": false,
+  "imgs": 18,
+  "sections": 3,
+  "links": 5,
+  "inputs": 2,
+  "maxParaPx": 607,
+  "fonts": [
+   "Bricolage Grotesque",
+   "Manrope"
+  ],
+  "words": 203,
+  "errs": 0
+ },
+ "work-empty@1440": {
+  "status": 200,
+  "title": "Work | MappedSkills",
+  "h1": "Real work. Judge it for yourself.",
+  "h2": [
+   "Matching case studies",
+   "Tell us what you’re trying to fix."
+  ],
+  "canonical": "http://localhost:3500/work",
+  "robots": "index, follow",
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "height": 2702,
+  "overflowX": false,
+  "imgs": 16,
+  "sections": 3,
+  "links": 3,
+  "inputs": 2,
+  "maxParaPx": 599,
+  "fonts": [
+   "Bricolage Grotesque",
+   "Manrope"
+  ],
+  "words": 162,
+  "errs": 0
+ },
+ "press@390": {
+  "status": 200,
+  "title": "Press | MappedSkills",
+  "h1": "News from MappedSkills, on the record.",
+  "h2": [
+   "Latest news.",
+   "Useful for your story.",
+   "Working on a story? Talk to us."
+  ],
+  "canonical": "http://localhost:3500/press",
+  "robots": "index, follow",
+  "ld": [
+   "Organization"
+  ],
+  "height": 3656,
+  "overflowX": false,
+  "imgs": 0,
+  "sections": 4,
+  "links": 9,
+  "inputs": 0,
+  "maxParaPx": 358,
+  "fonts": [
+   "dcDisplay",
+   "Manrope"
+  ],
+  "words": 148,
+  "errs": 0
+ },
+ "press-detail@390": {
+  "status": 200,
+  "title": "No Observable Google Analytics on 42.5% of 120 Indian Sites",
+  "h1": "MappedSkills Research Finds No Observable Google Analytics on 42.5% of 120 Indian Business Websites Audited",
+  "h2": [
+   "The evidence in brief",
+   "Key findings",
+   "Why this matters for businesses",
+   "A note from the founder",
+   "About the research",
+   "About MappedSkills",
+   "Media enquiries",
+   "The Marketing Measurement Gap: What 120 Indian Business Webs",
+   "Press enquiries"
+  ],
+  "canonical": "http://localhost:3500/press/marketing-measurement-gap-indian-websites",
+  "ld": [
+   "Organization",
+   "NewsArticle",
+   "BreadcrumbList"
+  ],
+  "height": 8648,
+  "overflowX": false,
+  "imgs": 1,
+  "sections": 9,
+  "links": 10,
+  "inputs": 0,
+  "maxParaPx": 358,
+  "fonts": [
+   "Manrope",
+   "dcDisplay"
+  ],
+  "words": 844,
+  "errs": 0
+ },
+ "blog@390": {
+  "status": 200,
+  "title": "Writing | MappedSkills",
+  "h1": "Marketing guides, written plainly.",
+  "h2": [
+   "7 guides",
+   "Reading about a problem you have?"
+  ],
+  "canonical": "http://localhost:3500/blog",
+  "robots": "index, follow",
+  "ld": [
+   "Organization"
+  ],
+  "height": 4379,
+  "overflowX": false,
+  "imgs": 0,
+  "sections": 3,
+  "links": 10,
+  "inputs": 0,
+  "maxParaPx": 358,
+  "fonts": [
+   "Manrope",
+   "dcDisplay"
+  ],
+  "words": 323,
+  "errs": 0
+ },
+ "blog-detail@390": {
+  "status": 200,
+  "title": "Performance Marketing vs. Digital Marketing",
+  "h1": "Performance Marketing vs. Digital Marketing: Which is Right for Your Business?",
+  "h2": [
+   "What is Performance Marketing in Digital Marketing?",
+   "How Performance Marketing Works",
+   "Conclusion",
+   "Reading about a problem you have?"
+  ],
+  "canonical": "http://localhost:3500/blog/performance-marketing-vs-digital-marketing",
+  "ld": [
+   "Organization",
+   "Article",
+   "BreadcrumbList"
+  ],
+  "height": 8111,
+  "overflowX": false,
+  "imgs": 0,
+  "sections": 3,
+  "links": 15,
+  "inputs": 0,
+  "maxParaPx": 358,
+  "fonts": [
+   "Manrope",
+   "dcDisplay"
+  ],
+  "words": 885,
+  "errs": 0
+ },
+ "research@390": {
+  "status": 200,
+  "title": "MappedSkills Research",
+  "h1": "We look at real business websites. Then we publish what we find.",
+  "h2": [
+   "More than 4 in 10 audited websites had no observable Google ",
+   "What else we found.",
+   "The Marketing Measurement Gap: What 120 Indian Business Webs",
+   "What we checked. What we can’t claim.",
+   "For journalists",
+   "Not sure what your marketing is actually measuring?"
+  ],
+  "canonical": "http://localhost:3500/research",
+  "robots": "index, follow",
+  "ld": [
+   "Organization"
+  ],
+  "height": 7042,
+  "overflowX": false,
+  "imgs": 0,
+  "sections": 5,
+  "links": 10,
+  "inputs": 0,
+  "maxParaPx": 358,
+  "fonts": [
+   "dcDisplay",
+   "Manrope"
+  ],
+  "words": 545,
+  "errs": 0
+ },
+ "research-detail@390": {
+  "status": 200,
+  "title": "Marketing Measurement Gap: 120 Indian Websites Studied",
+  "h1": "The Marketing Measurement Gap: What 120 Indian Business Websites Reveal About Analytics and Advertising Measurement",
+  "h2": [
+   "What the research found.",
+   "Executive summary",
+   "Why We Conducted This Research",
+   "Finding 1: More Than 4 in 10 Audited Websites Had No Observa",
+   "Finding 2: Advertising Measurement Was Even Less Commonly Ob",
+   "Finding 3: 97.5% of Websites Preserved Our Test UTM Paramete",
+   "Finding 4: Advertising Measurement Varied Sharply by Sector",
+   "Finding 5: Technology Did Not Lead the Sample on Observable ",
+   "What About Conversion Measurement?",
+   "What Does the Marketing Measurement Gap Mean?",
+   "What Founders and CEOs Should Ask",
+   "A Note From Amit Gupta",
+   "How the audit was done.",
+   "What this study can’t tell you.",
+   "How to reference this report.",
+   "For journalists",
+   "Not sure what your marketing is actually measuring?"
+  ],
+  "canonical": "http://localhost:3500/research/marketing-measurement-gap-indian-business-websites",
+  "ld": [
+   "Organization",
+   "Report",
+   "BreadcrumbList"
+  ],
+  "height": 23357,
+  "overflowX": false,
+  "imgs": 1,
+  "sections": 17,
+  "links": 33,
+  "inputs": 0,
+  "maxParaPx": 358,
+  "fonts": [
+   "Manrope",
+   "dcDisplay"
+  ],
+  "words": 2619,
+  "errs": 0
+ },
+ "research-benchmarks@390": {
+  "status": 200,
+  "title": "Industry Benchmarks",
+  "h1": "Industry Benchmarks",
+  "h2": [
+   "Reports in this area"
+  ],
+  "canonical": "http://localhost:3500/research/industry-benchmarks",
+  "robots": "index, follow",
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "height": 2068,
+  "overflowX": false,
+  "imgs": 0,
+  "sections": 2,
+  "links": 3,
+  "inputs": 0,
+  "maxParaPx": 354,
+  "fonts": [
+   "Manrope",
+   "Bricolage Grotesque"
+  ],
+  "words": 57,
+  "errs": 0
+ },
+ "work-p1@390": {
+  "status": 200,
+  "title": "Work | MappedSkills",
+  "h1": "Real work. Judge it for yourself.",
+  "h2": [
+   "One story, told end to end.",
+   "Every case study, in one place.",
+   "Tell us what you’re trying to fix."
+  ],
+  "canonical": "http://localhost:3500/work",
+  "robots": "index, follow",
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "height": 9718,
+  "overflowX": false,
+  "imgs": 29,
+  "sections": 4,
+  "links": 17,
+  "inputs": 2,
+  "maxParaPx": 358,
+  "fonts": [
+   "Bricolage Grotesque",
+   "Manrope"
+  ],
+  "words": 510,
+  "errs": 0
+ },
+ "work-p2@390": {
+  "status": 200,
+  "title": "Work – page 2 | MappedSkills",
+  "h1": "Real work. Judge it for yourself.",
+  "h2": [
+   "Case studies, page 2.",
+   "Tell us what you’re trying to fix."
+  ],
+  "canonical": "http://localhost:3500/work/page/2",
+  "robots": "index, follow",
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "height": 7114,
+  "overflowX": false,
+  "imgs": 8,
+  "sections": 3,
+  "links": 13,
+  "inputs": 2,
+  "maxParaPx": 358,
+  "fonts": [
+   "Bricolage Grotesque",
+   "Manrope"
+  ],
+  "words": 396,
+  "errs": 0
+ },
+ "work-filtered@390": {
+  "status": 200,
+  "title": "Work | MappedSkills",
+  "h1": "Real work. Judge it for yourself.",
+  "h2": [
+   "Matching case studies",
+   "Tell us what you’re trying to fix."
+  ],
+  "canonical": "http://localhost:3500/work",
+  "robots": "index, follow",
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "height": 4432,
+  "overflowX": false,
+  "imgs": 18,
+  "sections": 3,
+  "links": 5,
+  "inputs": 2,
+  "maxParaPx": 358,
+  "fonts": [
+   "Bricolage Grotesque",
+   "Manrope"
+  ],
+  "words": 203,
+  "errs": 0
+ },
+ "work-empty@390": {
+  "status": 200,
+  "title": "Work | MappedSkills",
+  "h1": "Real work. Judge it for yourself.",
+  "h2": [
+   "Matching case studies",
+   "Tell us what you’re trying to fix."
+  ],
+  "canonical": "http://localhost:3500/work",
+  "robots": "index, follow",
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "height": 3654,
+  "overflowX": false,
+  "imgs": 16,
+  "sections": 3,
+  "links": 3,
+  "inputs": 2,
+  "maxParaPx": 358,
+  "fonts": [
+   "Bricolage Grotesque",
+   "Manrope"
+  ],
+  "words": 162,
+  "errs": 0
+ },
+ "press@360": {
+  "status": 200,
+  "title": "Press | MappedSkills",
+  "h1": "News from MappedSkills, on the record.",
+  "h2": [
+   "Latest news.",
+   "Useful for your story.",
+   "Working on a story? Talk to us."
+  ],
+  "canonical": "http://localhost:3500/press",
+  "robots": "index, follow",
+  "ld": [
+   "Organization"
+  ],
+  "height": 3723,
+  "overflowX": false,
+  "imgs": 0,
+  "sections": 4,
+  "links": 9,
+  "inputs": 0,
+  "maxParaPx": 328,
+  "fonts": [
+   "dcDisplay",
+   "Manrope"
+  ],
+  "words": 148,
+  "errs": 0
+ },
+ "press-detail@360": {
+  "status": 200,
+  "title": "No Observable Google Analytics on 42.5% of 120 Indian Sites",
+  "h1": "MappedSkills Research Finds No Observable Google Analytics on 42.5% of 120 Indian Business Websites Audited",
+  "h2": [
+   "The evidence in brief",
+   "Key findings",
+   "Why this matters for businesses",
+   "A note from the founder",
+   "About the research",
+   "About MappedSkills",
+   "Media enquiries",
+   "The Marketing Measurement Gap: What 120 Indian Business Webs",
+   "Press enquiries"
+  ],
+  "canonical": "http://localhost:3500/press/marketing-measurement-gap-indian-websites",
+  "ld": [
+   "Organization",
+   "NewsArticle",
+   "BreadcrumbList"
+  ],
+  "height": 9087,
+  "overflowX": false,
+  "imgs": 1,
+  "sections": 9,
+  "links": 10,
+  "inputs": 0,
+  "maxParaPx": 328,
+  "fonts": [
+   "Manrope",
+   "dcDisplay"
+  ],
+  "words": 844,
+  "errs": 0
+ },
+ "blog@360": {
+  "status": 200,
+  "title": "Writing | MappedSkills",
+  "h1": "Marketing guides, written plainly.",
+  "h2": [
+   "7 guides",
+   "Reading about a problem you have?"
+  ],
+  "canonical": "http://localhost:3500/blog",
+  "robots": "index, follow",
+  "ld": [
+   "Organization"
+  ],
+  "height": 4498,
+  "overflowX": false,
+  "imgs": 0,
+  "sections": 3,
+  "links": 10,
+  "inputs": 0,
+  "maxParaPx": 328,
+  "fonts": [
+   "Manrope",
+   "dcDisplay"
+  ],
+  "words": 323,
+  "errs": 0
+ },
+ "blog-detail@360": {
+  "status": 200,
+  "title": "Performance Marketing vs. Digital Marketing",
+  "h1": "Performance Marketing vs. Digital Marketing: Which is Right for Your Business?",
+  "h2": [
+   "What is Performance Marketing in Digital Marketing?",
+   "How Performance Marketing Works",
+   "Conclusion",
+   "Reading about a problem you have?"
+  ],
+  "canonical": "http://localhost:3500/blog/performance-marketing-vs-digital-marketing",
+  "ld": [
+   "Organization",
+   "Article",
+   "BreadcrumbList"
+  ],
+  "height": 8414,
+  "overflowX": false,
+  "imgs": 0,
+  "sections": 3,
+  "links": 15,
+  "inputs": 0,
+  "maxParaPx": 328,
+  "fonts": [
+   "Manrope",
+   "dcDisplay"
+  ],
+  "words": 885,
+  "errs": 0
+ },
+ "research@360": {
+  "status": 200,
+  "title": "MappedSkills Research",
+  "h1": "We look at real business websites. Then we publish what we find.",
+  "h2": [
+   "More than 4 in 10 audited websites had no observable Google ",
+   "What else we found.",
+   "The Marketing Measurement Gap: What 120 Indian Business Webs",
+   "What we checked. What we can’t claim.",
+   "For journalists",
+   "Not sure what your marketing is actually measuring?"
+  ],
+  "canonical": "http://localhost:3500/research",
+  "robots": "index, follow",
+  "ld": [
+   "Organization"
+  ],
+  "height": 7285,
+  "overflowX": false,
+  "imgs": 0,
+  "sections": 5,
+  "links": 10,
+  "inputs": 0,
+  "maxParaPx": 328,
+  "fonts": [
+   "dcDisplay",
+   "Manrope"
+  ],
+  "words": 545,
+  "errs": 0
+ },
+ "research-detail@360": {
+  "status": 200,
+  "title": "Marketing Measurement Gap: 120 Indian Websites Studied",
+  "h1": "The Marketing Measurement Gap: What 120 Indian Business Websites Reveal About Analytics and Advertising Measurement",
+  "h2": [
+   "What the research found.",
+   "Executive summary",
+   "Why We Conducted This Research",
+   "Finding 1: More Than 4 in 10 Audited Websites Had No Observa",
+   "Finding 2: Advertising Measurement Was Even Less Commonly Ob",
+   "Finding 3: 97.5% of Websites Preserved Our Test UTM Paramete",
+   "Finding 4: Advertising Measurement Varied Sharply by Sector",
+   "Finding 5: Technology Did Not Lead the Sample on Observable ",
+   "What About Conversion Measurement?",
+   "What Does the Marketing Measurement Gap Mean?",
+   "What Founders and CEOs Should Ask",
+   "A Note From Amit Gupta",
+   "How the audit was done.",
+   "What this study can’t tell you.",
+   "How to reference this report.",
+   "For journalists",
+   "Not sure what your marketing is actually measuring?"
+  ],
+  "canonical": "http://localhost:3500/research/marketing-measurement-gap-indian-business-websites",
+  "ld": [
+   "Organization",
+   "Report",
+   "BreadcrumbList"
+  ],
+  "height": 24548,
+  "overflowX": false,
+  "imgs": 1,
+  "sections": 17,
+  "links": 33,
+  "inputs": 0,
+  "maxParaPx": 328,
+  "fonts": [
+   "Manrope",
+   "dcDisplay"
+  ],
+  "words": 2619,
+  "errs": 0
+ },
+ "research-benchmarks@360": {
+  "status": 200,
+  "title": "Industry Benchmarks",
+  "h1": "Industry Benchmarks",
+  "h2": [
+   "Reports in this area"
+  ],
+  "canonical": "http://localhost:3500/research/industry-benchmarks",
+  "robots": "index, follow",
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "height": 2130,
+  "overflowX": false,
+  "imgs": 0,
+  "sections": 2,
+  "links": 3,
+  "inputs": 0,
+  "maxParaPx": 324,
+  "fonts": [
+   "Manrope",
+   "Bricolage Grotesque"
+  ],
+  "words": 57,
+  "errs": 0
+ },
+ "work-p1@360": {
+  "status": 200,
+  "title": "Work | MappedSkills",
+  "h1": "Real work. Judge it for yourself.",
+  "h2": [
+   "One story, told end to end.",
+   "Every case study, in one place.",
+   "Tell us what you’re trying to fix."
+  ],
+  "canonical": "http://localhost:3500/work",
+  "robots": "index, follow",
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "height": 9513,
+  "overflowX": false,
+  "imgs": 29,
+  "sections": 4,
+  "links": 17,
+  "inputs": 2,
+  "maxParaPx": 328,
+  "fonts": [
+   "Bricolage Grotesque",
+   "Manrope"
+  ],
+  "words": 510,
+  "errs": 0
+ },
+ "work-p2@360": {
+  "status": 200,
+  "title": "Work – page 2 | MappedSkills",
+  "h1": "Real work. Judge it for yourself.",
+  "h2": [
+   "Case studies, page 2.",
+   "Tell us what you’re trying to fix."
+  ],
+  "canonical": "http://localhost:3500/work/page/2",
+  "robots": "index, follow",
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "height": 7026,
+  "overflowX": false,
+  "imgs": 8,
+  "sections": 3,
+  "links": 13,
+  "inputs": 2,
+  "maxParaPx": 328,
+  "fonts": [
+   "Bricolage Grotesque",
+   "Manrope"
+  ],
+  "words": 396,
+  "errs": 0
+ },
+ "work-filtered@360": {
+  "status": 200,
+  "title": "Work | MappedSkills",
+  "h1": "Real work. Judge it for yourself.",
+  "h2": [
+   "Matching case studies",
+   "Tell us what you’re trying to fix."
+  ],
+  "canonical": "http://localhost:3500/work",
+  "robots": "index, follow",
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "height": 4437,
+  "overflowX": false,
+  "imgs": 18,
+  "sections": 3,
+  "links": 5,
+  "inputs": 2,
+  "maxParaPx": 328,
+  "fonts": [
+   "Bricolage Grotesque",
+   "Manrope"
+  ],
+  "words": 203,
+  "errs": 0
+ },
+ "work-empty@360": {
+  "status": 200,
+  "title": "Work | MappedSkills",
+  "h1": "Real work. Judge it for yourself.",
+  "h2": [
+   "Matching case studies",
+   "Tell us what you’re trying to fix."
+  ],
+  "canonical": "http://localhost:3500/work",
+  "robots": "index, follow",
+  "ld": [
+   "Organization",
+   "BreadcrumbList"
+  ],
+  "height": 3706,
+  "overflowX": false,
+  "imgs": 16,
+  "sections": 3,
+  "links": 3,
+  "inputs": 2,
+  "maxParaPx": 328,
+  "fonts": [
+   "Bricolage Grotesque",
+   "Manrope"
+  ],
+  "words": 162,
+  "errs": 0
+ }
+}

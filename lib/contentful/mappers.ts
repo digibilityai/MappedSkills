@@ -137,6 +137,8 @@ export function mapContentfulPostToCms(post: ContentfulPost): CmsBlogPost | null
     readingTime: estimateReadingTime(contentJson, excerpt),
     featuredImageUrl,
     featuredImageAlt,
+    featuredImageWidth: post.featuredImage?.width || undefined,
+    featuredImageHeight: post.featuredImage?.height || undefined,
     tableOfContents,
     contentJson,
     contentLinks: post.content?.links,
@@ -149,20 +151,30 @@ export function mapContentfulPostToCms(post: ContentfulPost): CmsBlogPost | null
   };
 }
 
-export function mapContentfulPostToCard(post: ContentfulPost): CmsBlogCard | null {
-  const mapped = mapContentfulPostToCms(post);
-  if (!mapped) return null;
-
+/** A post as a listing card, with its image (when it has one) at its own size. The one place a card is built, so the list and related cards agree. */
+export function postToCard(mapped: CmsBlogPost): CmsBlogCard {
   return {
     slug: mapped.slug,
     title: mapped.title,
     excerpt: mapped.excerpt,
     category: mapped.category,
+    categorySlug: mapped.categorySlug,
     readingTime: mapped.readingTime,
     publishedDate: mapped.publishedDate,
+    updatedDate: mapped.updatedDate,
+    publishedAtISO: mapped.publishedAtISO,
+    updatedAtISO: mapped.updatedAtISO,
     href: `/blog/${mapped.slug}`,
     author: mapped.author.name,
+    ...(mapped.featuredImageUrl
+      ? { image: { url: mapped.featuredImageUrl, alt: mapped.featuredImageAlt, w: mapped.featuredImageWidth || 1200, h: mapped.featuredImageHeight || 600 } }
+      : {}),
   };
+}
+
+export function mapContentfulPostToCard(post: ContentfulPost): CmsBlogCard | null {
+  const mapped = mapContentfulPostToCms(post);
+  return mapped ? postToCard(mapped) : null;
 }
 
 /** Strip accidental `portfolio/` prefix from CMS slugs for clean /portfolio/[slug] routes. */
@@ -463,6 +475,9 @@ export function mapContentfulPressToCard(entry: ContentfulPressRelease): CmsPres
     excerpt: entry.excerpt?.trim() || '',
     publishedDate: formatContentfulDate(firstPublished) || 'Draft',
     href: `/press/${slug}`,
+    ...(entry.featuredImage?.url
+      ? { image: { url: entry.featuredImage.url, alt: entry.featuredImage.description?.trim() || entry.featuredImage.title?.trim() || headline, w: entry.featuredImage.width || 1200, h: entry.featuredImage.height || 630 } }
+      : {}),
   };
 }
 

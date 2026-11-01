@@ -1,5 +1,6 @@
 import { createMetadata } from '@/lib/metadata';
-import { getPressListCards } from '@/lib/contentful/press';
+import { getPressListCards, getPressReleaseBySlug } from '@/lib/contentful/press';
+import { splitLeadingFigures } from '@/components/cplus/press-release/release-rules';
 import { CplusPage } from '@/components/cplus/CplusPage';
 import { PressBody } from '@/components/cplus/press/PressBody';
 
@@ -17,10 +18,13 @@ export const metadata = createMetadata(
 
 export default async function PressIndexPage() {
   const releases = await getPressListCards();
+  /* The latest release's recorded findings (the same structured entries its own page uses), read once with the existing getter. Read-only; no new query. */
+  const latest = releases[0] ? await getPressReleaseBySlug(releases[0].slug) : null;
+  const figures = latest?.contentJson ? splitLeadingFigures(latest.contentJson, latest.contentLinks).figures : [];
 
   return (
     <CplusPage>
-      <PressBody releases={releases} />
+      <PressBody releases={releases} figures={figures} />
     </CplusPage>
   );
 }

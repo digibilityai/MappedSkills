@@ -266,7 +266,7 @@ export function reportToc(document: Document, idPrefix = 'body'): Toc {
 }
 
 /** The ten body chapters (any number): an unheaded intro, then one section per H2 with its `body-N` id. */
-export function ReportChapters({ document, links, idPrefix = 'body' }: { document: Document; links?: Links; idPrefix?: string }) {
+export function ReportChapters({ document, links, idPrefix = 'body', chapterLabels }: { document: Document; links?: Links; idPrefix?: string; chapterLabels?: Record<string, string> }) {
   const chapters = splitChapters(document);
   return (
     <>
@@ -284,6 +284,7 @@ export function ReportChapters({ document, links, idPrefix = 'body' }: { documen
         const quote = text.startsWith('A Note From');
         return (
           <section key={id} className={quote ? 'rr-ch rr-ch-note' : 'rr-ch'} aria-labelledby={id}>
+            {chapterLabels?.[id] ? <p className="ed-chap">{chapterLabels[id]}</p> : null}
             <h2 id={id}>
               {f ? (
                 <>

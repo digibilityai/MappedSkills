@@ -197,7 +197,7 @@ test('static pages and search agree: one order, 12 per page, featured first, fil
 test('the public index carries preview fields only: no withheld proof, body, review or audience', async () => {
   const s = setup([...legacyStudies(), ...syntheticStudies(8), ...hiddenStudies()]);
   const all = s.work().libraryStudies(await s.api.fetchContentfulCaseStudies(), 'seo-ameba-software');
-  const keys = ['slug', 'href', 'title', 'client', 'detail', 'industry', 'service', 'stage', 'challenge', 'changed', 'outcomes', 'figures', 'sector', 'serviceKey', 'period', 'search'];
+  const keys = ['slug', 'href', 'title', 'client', 'detail', 'industry', 'service', 'stage', 'challenge', 'changed', 'outcomes', 'figures', 'lead', 'sector', 'serviceKey', 'period', 'finalCopy', 'search'];
   for (const st of all) assert.deepStrictEqual(Object.keys(st).sort(), [...keys].sort());
   const json = JSON.stringify(all);
   for (const banned of ['LEGACY METRIC', 'LEGACY QUOTE', 'legacy audience', 'HIDDEN']) assert.ok(!json.includes(banned), banned);

@@ -1,3 +1,4 @@
+import { CaseShowcase, type ShowcaseData } from '@/components/case-showcase/CaseShowcase';
 import Link from 'next/link';
 import { RvReveal3 } from '@/components/resolve-home-r3/RvReveal3';
 import { HeroSearchAnim } from '../google-ads-r4/HeroSearchAnim';
@@ -28,7 +29,7 @@ const H2 = ({ id, parts }: { id: string; parts: readonly [string, string] }) => 
 const Tick = () => <svg className="ga3-tick" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="m4.5 10.5 3.6 3.6 7.4-8" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 const Mag = () => <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="8.5" cy="8.5" r="5.5" /><path d="m13 13 5 5" /></svg>;
 
-export function GoogleAdsR41() {
+export function GoogleAdsR41({ showcase }: { showcase?: ShowcaseData | null }) {
   return <div className="rv3 ga3 ga4 ga41">
     <RvReveal3 />
 
@@ -128,7 +129,8 @@ export function GoogleAdsR41() {
       </div>
     </div></section>
 
-    {/* 7. Ground: the verified case study, unchanged */}
+    {/* Case studies: ONE showcase (DEC-116). The page's existing card stays only while no study is public, so a page never loses its proof. */}
+    {showcase ? <CaseShowcase data={showcase} /> : (
     <section className="ga3-work rv3-ground" aria-labelledby="ga3-work-h"><div className="rv3-wrap">
       <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">{WORK.eyebrow}</p><H2 id="ga3-work-h" parts={WORK.h2} /></header>
       <div className="ga3-work-grid" {...REVEAL}>
@@ -143,6 +145,7 @@ export function GoogleAdsR41() {
         <div className="ga3-work-did"><h4>What we did</h4><ol>{WORK.approach.map((a, i) => <li key={a.k}><span aria-hidden="true">{i + 1}</span><div><b>{a.k}</b><p>{a.d}</p></div></li>)}</ol></div>
       </div>
     </div></section>
+    )}
 
     {/* 8. Paper: the engagement process */}
     <section className="rv3-proc rv3-paper" aria-labelledby="ga41-proc-h"><div className="rv3-wrap">

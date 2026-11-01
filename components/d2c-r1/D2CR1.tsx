@@ -1,3 +1,4 @@
+import { CaseShowcase, type ShowcaseData } from '@/components/case-showcase/CaseShowcase';
 import Link from 'next/link';
 import Image from 'next/image';
 import { RvReveal3 } from '@/components/resolve-home-r3/RvReveal3';
@@ -54,7 +55,7 @@ function HeroArt() {
   </svg>;
 }
 
-export function D2CR1() {
+export function D2CR1({ showcase }: { showcase?: ShowcaseData | null }) {
   return <div className="rv3 d2c1">
     <RvReveal3 />
 
@@ -164,7 +165,8 @@ export function D2CR1() {
       </div>
     </div></section>
 
-    {/* 7. Paper: Wanderlooms, unlinked, conceptual artwork disclosed. */}
+    {/* Case studies: ONE showcase (DEC-116). The page's existing card stays only while no study is public, so a page never loses its proof. */}
+    {showcase ? <CaseShowcase data={showcase} /> : (
     <section id="client-work" className="d2c1-wk rv3-paper" aria-labelledby="d2c1-wk-h"><div className="rv3-wrap">
       <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">{WORK.eyebrow}</p><H2 id="d2c1-wk-h" parts={WORK.h2} /></header>
       <article className="d2c1-card-w" {...REVEAL}>
@@ -183,6 +185,7 @@ export function D2CR1() {
         </div>
       </article>
     </div></section>
+    )}
 
     {/* 8. Ink Deep: questions. */}
     <section className="rv3-fit rv3-dark" aria-labelledby="d2c1-faq-h"><div className="rv3-wrap rv3-fit-grid">

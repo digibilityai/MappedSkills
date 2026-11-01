@@ -1,0 +1,101 @@
+PASS 1440 /work: 12 cards (want 12)
+PASS 1440 /work: one link per card
+PASS 1440 /work: 2 column(s) (want 2)
+PASS 1440 /work: images whole (max ratio drift 0.00%)
+PASS 1440 /work: min font 15px
+PASS 1440 /work: no overflow, 0 console errors, 0 broken images
+PASS 1440 /work: no eyebrow, logo strip, route panel or "Read case study" text
+PASS 1440 /work/page/2: 8 cards (want 8)
+PASS 1440 /work/page/2: one link per card
+PASS 1440 /work/page/2: 2 column(s) (want 2)
+PASS 1440 /work/page/2: images whole (max ratio drift 0.00%)
+PASS 1440 /work/page/2: min font 15px
+PASS 1440 /work/page/2: no overflow, 0 console errors, 0 broken images
+PASS 1440 /work/page/2: no eyebrow, logo strip, route panel or "Read case study" text
+PASS 820 /work: 12 cards (want 12)
+PASS 820 /work: one link per card
+PASS 820 /work: 2 column(s) (want 2)
+PASS 820 /work: images whole (max ratio drift 0.01%)
+PASS 820 /work: min font 15px
+PASS 820 /work: no overflow, 0 console errors, 0 broken images
+PASS 820 /work: no eyebrow, logo strip, route panel or "Read case study" text
+PASS 820 /work/page/2: 8 cards (want 8)
+PASS 820 /work/page/2: one link per card
+PASS 820 /work/page/2: 2 column(s) (want 2)
+PASS 820 /work/page/2: images whole (max ratio drift 0.00%)
+PASS 820 /work/page/2: min font 15px
+PASS 820 /work/page/2: no overflow, 0 console errors, 0 broken images
+PASS 820 /work/page/2: no eyebrow, logo strip, route panel or "Read case study" text
+PASS 390 /work: 12 cards (want 12)
+PASS 390 /work: one link per card
+PASS 390 /work: 1 column(s) (want 1)
+PASS 390 /work: images whole (max ratio drift 0.01%)
+PASS 390 /work: min font 15px
+PASS 390 /work: no overflow, 0 console errors, 0 broken images
+PASS 390 /work: no eyebrow, logo strip, route panel or "Read case study" text
+PASS 390 /work/page/2: 8 cards (want 8)
+PASS 390 /work/page/2: one link per card
+PASS 390 /work/page/2: 1 column(s) (want 1)
+PASS 390 /work/page/2: images whole (max ratio drift 0.01%)
+PASS 390 /work/page/2: min font 15px
+PASS 390 /work/page/2: no overflow, 0 console errors, 0 broken images
+PASS 390 /work/page/2: no eyebrow, logo strip, route panel or "Read case study" text
+PASS 360 /work: 12 cards (want 12)
+PASS 360 /work: one link per card
+PASS 360 /work: 1 column(s) (want 1)
+PASS 360 /work: images whole (max ratio drift 0.01%)
+PASS 360 /work: min font 15px
+PASS 360 /work: no overflow, 0 console errors, 0 broken images
+PASS 360 /work: no eyebrow, logo strip, route panel or "Read case study" text
+PASS 360 /work/page/2: 8 cards (want 8)
+PASS 360 /work/page/2: one link per card
+PASS 360 /work/page/2: 1 column(s) (want 1)
+PASS 360 /work/page/2: images whole (max ratio drift 0.01%)
+PASS 360 /work/page/2: min font 15px
+PASS 360 /work/page/2: no overflow, 0 console errors, 0 broken images
+PASS 360 /work/page/2: no eyebrow, logo strip, route panel or "Read case study" text
+PASS 1440: count line "20 case studies Showing 1–12"
+PASS 1440: Service = SEO -> Ameba Software, AnybodyCanBake
+PASS 1440: count "2 of 20 case studies match"
+PASS 1440: URL /work?service=seo
+PASS 1440: SEO + Education = AnybodyCanBake
+PASS 1440: combined URL /work?industry=education&service=seo
+PASS 1440: SEO + Real estate = empty state
+PASS 1440: "Show all" restores 12 cards and a clean URL
+PASS 1440: search wanderlooms -> Wanderlooms (Meta Ads)
+PASS 1440: empty search "0 of 20 case studies match"
+PASS 1440: Clear filters resets the controls
+PASS 1440: Education -> 7 cards; ClassPe has no service line
+PASS 1440: shared link restores (AnybodyCanBake, EKoching, Bakedemy)
+PASS 1440: card link opens /portfolio/google-ads-for-online-courses
+PASS 1440: back restores the filtered view (3 cards, /work?industry=education&service=google-ads)
+PASS 1440: forward returns to the case
+PASS 1440: Next -> /work/page/2, 8 cards, "20 case studies Showing 13–20"
+PASS 1440: Previous -> page 1
+PASS 1440: filter arriving on page 2 (8 results)
+PASS 1440: keyboard focus on a card link shows a 3px solid outline (rgb(255, 91, 4))
+PASS 1440: image has no transform (no zoom)
+PASS 1440: hover underlines the name in tangerine, image unchanged
+PASS 1440: no console errors across the run (0)
+PASS 390: count line "20 case studies Showing 1–12"
+PASS 390: Service = SEO -> Ameba Software, AnybodyCanBake
+PASS 390: count "2 of 20 case studies match"
+PASS 390: URL /work?service=seo
+PASS 390: SEO + Education = AnybodyCanBake
+PASS 390: combined URL /work?industry=education&service=seo
+PASS 390: SEO + Real estate = empty state
+PASS 390: "Show all" restores 12 cards and a clean URL
+PASS 390: search wanderlooms -> Wanderlooms (Meta Ads)
+PASS 390: empty search "0 of 20 case studies match"
+PASS 390: Clear filters resets the controls
+PASS 390: Education -> 7 cards; ClassPe has no service line
+PASS 390: shared link restores (AnybodyCanBake, EKoching, Bakedemy)
+PASS 390: card link opens /portfolio/google-ads-for-online-courses
+PASS 390: back restores the filtered view (3 cards, /work?industry=education&service=google-ads)
+PASS 390: forward returns to the case
+PASS 390: Next -> /work/page/2, 8 cards, "20 case studies Showing 13–20"
+PASS 390: Previous -> page 1
+PASS 390: filter arriving on page 2 (8 results)
+PASS 390: keyboard focus on a card link shows a 3px solid outline (rgb(255, 91, 4))
+PASS 390: no console errors across the run (0)
+FAIL count 0

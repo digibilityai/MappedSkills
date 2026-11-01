@@ -1,0 +1,620 @@
+{
+ "1440/social-media-ads": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 937,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?service=social-media-ads",
+  "viewAllLabel": "View all Meta Ads case studies ↗",
+  "list": [
+   {
+    "name": "Om Sai Developer",
+    "href": "/portfolio/om-sai-developer-meta-ads",
+    "links": 1,
+    "fig": "₹2,786 → ₹271",
+    "text": "META ADS · REAL ESTATE Om Sai Developer ₹2,786 → ₹271 cost per lead, a 90.27% reduction. Reported before-and-after comparison. Sep 2024 – Feb 2026 Read the case study : Om Sai Developer ↗",
+    "img": {
+     "ok": true,
+     "alt": "Conceptual artwork of a contemporary residential tower with landscaped balconies at dusk",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Klenzmo",
+    "href": "/portfolio/klenzmo-meta-ads",
+    "links": 1,
+    "fig": "3,957",
+    "text": "META ADS · ECOMMERCE AND RETAIL Klenzmo 3,957 products sold, September 2024 to March 2025. Not labelled as orders, purchases or unique customers. Sep 2024 – Mar 2025 Read the case study : Klenzmo ↗",
+    "img": {
+     "ok": true,
+     "alt": "Klenzmo, Meta Ads. 3,957 products sold, September 2024 to March 2025. An illustrative still life of folded cleaning cloths, a glass of water and a wooden brush.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "AnybodyCanBake",
+    "href": "/portfolio/anybodycanbake-meta-ads",
+    "links": 1,
+    "fig": "6.52×",
+    "text": "META ADS · EDUCATION AND TRAINING AnybodyCanBake 6.52× return on ad spend. Approximately ₹6.52 in reported revenue per ₹1 of advertising spend, calculated from the whole-period totals, September 2021 to October 2026. ROAS alone does not establish profit. Sep 2021 – Oct 2026 Read the case study : AnybodyCanBake ↗",
+    "img": {
+     "ok": true,
+     "alt": "AnybodyCanBake, Meta Ads. 3,892 paid enrolments. Working together since 2018; results September 2021 to October 2026. An illustrative baking-learning scene with a laptop showing a baking video beside dough, a rolling pin and pastries.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": false,
+   "cols": 3,
+   "display": "grid",
+   "btns": "none"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {}
+ },
+ "1440/seo": {
+  "sections": 1,
+  "problems": [],
+  "cards": 2,
+  "h": 1106,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?service=seo",
+  "viewAllLabel": "View all SEO case studies ↗",
+  "list": [
+   {
+    "name": "AnybodyCanBake",
+    "href": "/portfolio/anybodycanbake-seo",
+    "links": 1,
+    "fig": "46.15%",
+    "text": "SEO · EDUCATION AND TRAINING AnybodyCanBake 46.15% more tracked organic course enquiries, from 91 to 133. May–July 2026 versus August–October 2026 A comparison of two periods, not proof that the work alone caused the change. The figures were supplied by MappedSkills and have not been independently checked. Read the case study : AnybodyCanBake ↗",
+    "img": {
+     "ok": true,
+     "alt": "AnybodyCanBake, SEO. 25.49% more organic clicks. 46.15% more course enquiries. An illustrative scene of hands kneading dough on a baking workstation, with a search field leading to a recipe page and a course enquiry button.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Ameba Software",
+    "href": "/portfolio/seo-ameba-software",
+    "links": 1,
+    "fig": "75.34%",
+    "text": "SEO · SOFTWARE AND TECHNOLOGY Ameba Software 75.34% organic click growth. Organic clicks rose from 7,300 in the earlier three month period to 12,800 in the later one. A comparison of two three-month periods, not proof that the work alone caused the change. Read the case study : Ameba Software ↗",
+    "img": {
+     "ok": true,
+     "alt": "Ameba Software, SEO. 75.34% more organic clicks and 55.88% more organic enquiries. A software team reviewing a web page on a large screen.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": false,
+   "cols": 2,
+   "display": "grid",
+   "btns": "none"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {}
+ },
+ "820/social-media-ads": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 925,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?service=social-media-ads",
+  "viewAllLabel": "View all Meta Ads case studies ↗",
+  "list": [
+   {
+    "name": "Om Sai Developer",
+    "href": "/portfolio/om-sai-developer-meta-ads",
+    "links": 1,
+    "fig": "₹2,786 → ₹271",
+    "text": "META ADS · REAL ESTATE Om Sai Developer ₹2,786 → ₹271 cost per lead, a 90.27% reduction. Reported before-and-after comparison. Sep 2024 – Feb 2026 Read the case study : Om Sai Developer ↗",
+    "img": {
+     "ok": true,
+     "alt": "Conceptual artwork of a contemporary residential tower with landscaped balconies at dusk",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Klenzmo",
+    "href": "/portfolio/klenzmo-meta-ads",
+    "links": 1,
+    "fig": "3,957",
+    "text": "META ADS · ECOMMERCE AND RETAIL Klenzmo 3,957 products sold, September 2024 to March 2025. Not labelled as orders, purchases or unique customers. Sep 2024 – Mar 2025 Read the case study : Klenzmo ↗",
+    "img": {
+     "ok": true,
+     "alt": "Klenzmo, Meta Ads. 3,957 products sold, September 2024 to March 2025. An illustrative still life of folded cleaning cloths, a glass of water and a wooden brush.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "AnybodyCanBake",
+    "href": "/portfolio/anybodycanbake-meta-ads",
+    "links": 1,
+    "fig": "6.52×",
+    "text": "META ADS · EDUCATION AND TRAINING AnybodyCanBake 6.52× return on ad spend. Approximately ₹6.52 in reported revenue per ₹1 of advertising spend, calculated from the whole-period totals, September 2021 to October 2026. ROAS alone does not establish profit. Sep 2021 – Oct 2026 Read the case study : AnybodyCanBake ↗",
+    "img": {
+     "ok": true,
+     "alt": "AnybodyCanBake, Meta Ads. 3,892 paid enrolments. Working together since 2018; results September 2021 to October 2026. An illustrative baking-learning scene with a laptop showing a baking video beside dough, a rolling pin and pastries.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 474,
+    "status": "Case 2 of 3",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 3"
+   },
+   "keyboard": {
+    "x": 474,
+    "ring": "3px",
+    "status": "Case 2 of 3"
+   }
+  }
+ },
+ "820/seo": {
+  "sections": 1,
+  "problems": [],
+  "cards": 2,
+  "h": 975,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?service=seo",
+  "viewAllLabel": "View all SEO case studies ↗",
+  "list": [
+   {
+    "name": "AnybodyCanBake",
+    "href": "/portfolio/anybodycanbake-seo",
+    "links": 1,
+    "fig": "46.15%",
+    "text": "SEO · EDUCATION AND TRAINING AnybodyCanBake 46.15% more tracked organic course enquiries, from 91 to 133. May–July 2026 versus August–October 2026 A comparison of two periods, not proof that the work alone caused the change. The figures were supplied by MappedSkills and have not been independently checked. Read the case study : AnybodyCanBake ↗",
+    "img": {
+     "ok": true,
+     "alt": "AnybodyCanBake, SEO. 25.49% more organic clicks. 46.15% more course enquiries. An illustrative scene of hands kneading dough on a baking workstation, with a search field leading to a recipe page and a course enquiry button.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Ameba Software",
+    "href": "/portfolio/seo-ameba-software",
+    "links": 1,
+    "fig": "75.34%",
+    "text": "SEO · SOFTWARE AND TECHNOLOGY Ameba Software 75.34% organic click growth. Organic clicks rose from 7,300 in the earlier three month period to 12,800 in the later one. A comparison of two three-month periods, not proof that the work alone caused the change. Read the case study : Ameba Software ↗",
+    "img": {
+     "ok": true,
+     "alt": "Ameba Software, SEO. 75.34% more organic clicks and 55.88% more organic enquiries. A software team reviewing a web page on a large screen.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 180,
+    "status": "Case 2 of 2",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 2"
+   },
+   "keyboard": {
+    "x": 180,
+    "ring": "3px",
+    "status": "Case 2 of 2"
+   }
+  }
+ },
+ "390/social-media-ads": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 883,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?service=social-media-ads",
+  "viewAllLabel": "View all Meta Ads case studies ↗",
+  "list": [
+   {
+    "name": "Om Sai Developer",
+    "href": "/portfolio/om-sai-developer-meta-ads",
+    "links": 1,
+    "fig": "₹2,786 → ₹271",
+    "text": "META ADS · REAL ESTATE Om Sai Developer ₹2,786 → ₹271 cost per lead, a 90.27% reduction. Reported before-and-after comparison. Sep 2024 – Feb 2026 Read the case study : Om Sai Developer ↗",
+    "img": {
+     "ok": true,
+     "alt": "Conceptual artwork of a contemporary residential tower with landscaped balconies at dusk",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Klenzmo",
+    "href": "/portfolio/klenzmo-meta-ads",
+    "links": 1,
+    "fig": "3,957",
+    "text": "META ADS · ECOMMERCE AND RETAIL Klenzmo 3,957 products sold, September 2024 to March 2025. Not labelled as orders, purchases or unique customers. Sep 2024 – Mar 2025 Read the case study : Klenzmo ↗",
+    "img": {
+     "ok": true,
+     "alt": "Klenzmo, Meta Ads. 3,957 products sold, September 2024 to March 2025. An illustrative still life of folded cleaning cloths, a glass of water and a wooden brush.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "AnybodyCanBake",
+    "href": "/portfolio/anybodycanbake-meta-ads",
+    "links": 1,
+    "fig": "6.52×",
+    "text": "META ADS · EDUCATION AND TRAINING AnybodyCanBake 6.52× return on ad spend. Approximately ₹6.52 in reported revenue per ₹1 of advertising spend, calculated from the whole-period totals, September 2021 to October 2026. ROAS alone does not establish profit. Sep 2021 – Oct 2026 Read the case study : AnybodyCanBake ↗",
+    "img": {
+     "ok": true,
+     "alt": "AnybodyCanBake, Meta Ads. 3,892 paid enrolments. Working together since 2018; results September 2021 to October 2026. An illustrative baking-learning scene with a laptop showing a baking video beside dough, a rolling pin and pastries.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 308,
+    "status": "Case 2 of 3",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 3"
+   },
+   "keyboard": {
+    "x": 308,
+    "ring": "3px",
+    "status": "Case 2 of 3"
+   }
+  }
+ },
+ "390/seo": {
+  "sections": 1,
+  "problems": [],
+  "cards": 2,
+  "h": 960,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?service=seo",
+  "viewAllLabel": "View all SEO case studies ↗",
+  "list": [
+   {
+    "name": "AnybodyCanBake",
+    "href": "/portfolio/anybodycanbake-seo",
+    "links": 1,
+    "fig": "46.15%",
+    "text": "SEO · EDUCATION AND TRAINING AnybodyCanBake 46.15% more tracked organic course enquiries, from 91 to 133. May–July 2026 versus August–October 2026 A comparison of two periods, not proof that the work alone caused the change. The figures were supplied by MappedSkills and have not been independently checked. Read the case study : AnybodyCanBake ↗",
+    "img": {
+     "ok": true,
+     "alt": "AnybodyCanBake, SEO. 25.49% more organic clicks. 46.15% more course enquiries. An illustrative scene of hands kneading dough on a baking workstation, with a search field leading to a recipe page and a course enquiry button.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Ameba Software",
+    "href": "/portfolio/seo-ameba-software",
+    "links": 1,
+    "fig": "75.34%",
+    "text": "SEO · SOFTWARE AND TECHNOLOGY Ameba Software 75.34% organic click growth. Organic clicks rose from 7,300 in the earlier three month period to 12,800 in the later one. A comparison of two three-month periods, not proof that the work alone caused the change. Read the case study : Ameba Software ↗",
+    "img": {
+     "ok": true,
+     "alt": "Ameba Software, SEO. 75.34% more organic clicks and 55.88% more organic enquiries. A software team reviewing a web page on a large screen.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 243,
+    "status": "Case 2 of 2",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 2"
+   },
+   "keyboard": {
+    "x": 243,
+    "ring": "3px",
+    "status": "Case 2 of 2"
+   }
+  }
+ },
+ "360/social-media-ads": {
+  "sections": 1,
+  "problems": [],
+  "cards": 3,
+  "h": 925,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?service=social-media-ads",
+  "viewAllLabel": "View all Meta Ads case studies ↗",
+  "list": [
+   {
+    "name": "Om Sai Developer",
+    "href": "/portfolio/om-sai-developer-meta-ads",
+    "links": 1,
+    "fig": "₹2,786 → ₹271",
+    "text": "META ADS · REAL ESTATE Om Sai Developer ₹2,786 → ₹271 cost per lead, a 90.27% reduction. Reported before-and-after comparison. Sep 2024 – Feb 2026 Read the case study : Om Sai Developer ↗",
+    "img": {
+     "ok": true,
+     "alt": "Conceptual artwork of a contemporary residential tower with landscaped balconies at dusk",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Klenzmo",
+    "href": "/portfolio/klenzmo-meta-ads",
+    "links": 1,
+    "fig": "3,957",
+    "text": "META ADS · ECOMMERCE AND RETAIL Klenzmo 3,957 products sold, September 2024 to March 2025. Not labelled as orders, purchases or unique customers. Sep 2024 – Mar 2025 Read the case study : Klenzmo ↗",
+    "img": {
+     "ok": true,
+     "alt": "Klenzmo, Meta Ads. 3,957 products sold, September 2024 to March 2025. An illustrative still life of folded cleaning cloths, a glass of water and a wooden brush.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "AnybodyCanBake",
+    "href": "/portfolio/anybodycanbake-meta-ads",
+    "links": 1,
+    "fig": "6.52×",
+    "text": "META ADS · EDUCATION AND TRAINING AnybodyCanBake 6.52× return on ad spend. Approximately ₹6.52 in reported revenue per ₹1 of advertising spend, calculated from the whole-period totals, September 2021 to October 2026. ROAS alone does not establish profit. Sep 2021 – Oct 2026 Read the case study : AnybodyCanBake ↗",
+    "img": {
+     "ok": true,
+     "alt": "AnybodyCanBake, Meta Ads. 3,892 paid enrolments. Working together since 2018; results September 2021 to October 2026. An illustrative baking-learning scene with a laptop showing a baking video beside dough, a rolling pin and pastries.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 283,
+    "status": "Case 2 of 3",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 3"
+   },
+   "keyboard": {
+    "x": 283,
+    "ring": "3px",
+    "status": "Case 2 of 3"
+   }
+  }
+ },
+ "360/seo": {
+  "sections": 1,
+  "problems": [],
+  "cards": 2,
+  "h": 967,
+  "ox": false,
+  "headingId": true,
+  "alias": true,
+  "viewAll": "/work?service=seo",
+  "viewAllLabel": "View all SEO case studies ↗",
+  "list": [
+   {
+    "name": "AnybodyCanBake",
+    "href": "/portfolio/anybodycanbake-seo",
+    "links": 1,
+    "fig": "46.15%",
+    "text": "SEO · EDUCATION AND TRAINING AnybodyCanBake 46.15% more tracked organic course enquiries, from 91 to 133. May–July 2026 versus August–October 2026 A comparison of two periods, not proof that the work alone caused the change. The figures were supplied by MappedSkills and have not been independently checked. Read the case study : AnybodyCanBake ↗",
+    "img": {
+     "ok": true,
+     "alt": "AnybodyCanBake, SEO. 25.49% more organic clicks. 46.15% more course enquiries. An illustrative scene of hands kneading dough on a baking workstation, with a search field leading to a recipe page and a course enquiry button.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   },
+   {
+    "name": "Ameba Software",
+    "href": "/portfolio/seo-ameba-software",
+    "links": 1,
+    "fig": "75.34%",
+    "text": "SEO · SOFTWARE AND TECHNOLOGY Ameba Software 75.34% organic click growth. Organic clicks rose from 7,300 in the earlier three month period to 12,800 in the later one. A comparison of two three-month periods, not proof that the work alone caused the change. Read the case study : Ameba Software ↗",
+    "img": {
+     "ok": true,
+     "alt": "Ameba Software, SEO. 75.34% more organic clicks and 55.88% more organic enquiries. A software team reviewing a web page on a large screen.",
+     "skew": false
+    },
+    "okName": true,
+    "okHref": true,
+    "okFig": true,
+    "okIncl": true
+   }
+  ],
+  "track": {
+   "scrollable": true,
+   "cols": 3,
+   "display": "flex",
+   "btns": "flex"
+  },
+  "small": [],
+  "contrast": [],
+  "clipped": 0,
+  "nestedV": 0,
+  "visibleConceptual": false,
+  "errs": [],
+  "mob": {
+   "afterNext": {
+    "x": 224,
+    "status": "Case 2 of 2",
+    "prevEnabled": true
+   },
+   "afterPrev": {
+    "x": 0,
+    "status": "Case 1 of 2"
+   },
+   "keyboard": {
+    "x": 224,
+    "ring": "3px",
+    "status": "Case 2 of 2"
+   }
+  }
+ }
+}

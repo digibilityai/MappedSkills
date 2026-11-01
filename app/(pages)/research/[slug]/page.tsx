@@ -1,14 +1,11 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { createMetadata, resolveOgImageUrl, siteMetadata } from '@/lib/metadata';
 import { generateResearchReportSchema } from '@/lib/schema';
-import {
-  CommercialSection,
-  ChapterLabel,
-  Display,
-  Note,
-} from '@/components/commercial/primitives';
-import { RouteBreadcrumb, RouteHero, EntryList, routeTrailJsonLd } from '@/components/routes/primitives';
+import { routeTrailJsonLd } from '@/components/routes/primitives';
+import '@/components/editorial/editorial.css';
+import { EdMotion } from '@/components/editorial/EdMotion';
 import { CplusPage } from '@/components/cplus/CplusPage';
 import { ReportBody } from '@/components/cplus/research-report/ReportBody';
 import {
@@ -122,54 +119,77 @@ function CategoryPage({
   category: CmsResearchCategory;
   reports: CmsResearchCard[];
 }) {
+  const trail = [
+    { name: 'Home', href: '/' },
+    { name: 'Research', href: '/research' },
+    { name: category.name, href: category.href },
+  ];
   return (
-    <>
-      <RouteBreadcrumb
-        trail={[
-          { name: 'Home', href: '/' },
-          { name: 'Research', href: '/research' },
-          { name: category.name, href: category.href },
-        ]}
-      />
-      <RouteHero
-        eyebrow="Research"
-        title={<>{category.name}</>}
-        lede={category.description}
-        mode="editorial"
-      />
+    <CplusPage>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: routeTrailJsonLd(trail) }} />
+      <section className="ed-hero" aria-labelledby="rc-h1">
+        <div className="ed-w">
+          <nav aria-label="Breadcrumb" className="ed-crumb">
+            <Link href="/">Home</Link>
+            <Link href="/research">Research</Link>
+            <span aria-current="page">{category.name}</span>
+          </nav>
+          <div className="ed-hl">
+            <p className="ed-k">Research</p>
+            <h1 id="rc-h1">{category.name}</h1>
+            {category.description ? <p className="ed-lede">{category.description}</p> : null}
+          </div>
+        </div>
+      </section>
       {category.featuredImage?.url ? (
-        <CommercialSection tone="ground" rule={false}>
-          <figure className="m-0">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={category.featuredImage.url}
-              alt={category.featuredImage.description || category.featuredImage.title || category.name}
-              width={category.featuredImage.width}
-              height={category.featuredImage.height}
-              className="h-auto w-full rounded-lg border border-resolve-line"
-            />
-          </figure>
-        </CommercialSection>
+        <section className="ed-band">
+          <div className="ed-w">
+            <figure className="m-0">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={category.featuredImage.url}
+                alt={category.featuredImage.description || category.featuredImage.title || category.name}
+                width={category.featuredImage.width}
+                height={category.featuredImage.height}
+                style={{ height: 'auto', width: '100%' }}
+              />
+            </figure>
+          </div>
+        </section>
       ) : null}
-      <CommercialSection tone="paper">
-        <ChapterLabel>Reports in this area</ChapterLabel>
-        {reports.length > 0 ? (
-          <EntryList
-            entries={reports.map((report) => ({
-              href: report.href,
-              title: report.title,
-              meta: report.publishedDate,
-              summary: report.excerpt,
-            }))}
-          />
-        ) : (
-          <>
-            <Display>Nothing is published in this area yet.</Display>
-            <Note>When a report is filed under this category, it will appear here.</Note>
-          </>
-        )}
-      </CommercialSection>
-    </>
+      <section className="ed-band paper" aria-labelledby="rc-h-list">
+        <div className="ed-w">
+          <p className="ed-ch">
+            <span>01</span>
+            <span id="rc-h-list">Reports in this area</span>
+          </p>
+          {reports.length > 0 ? (
+            <ul className="ed-rec">
+              {reports.map((r) => (
+                <li key={r.href}>
+                  <Link href={r.href}>
+                    <p className="ty">{r.publishedDate}</p>
+                    <div>
+                      <h2>{r.title}</h2>
+                      {r.excerpt ? <p>{r.excerpt}</p> : null}
+                    </div>
+                    <span className="ar" aria-hidden="true">
+                      →
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <>
+              <h2 className="ed-h2">Nothing is published in this area yet.</h2>
+              <p className="ed-dek">When a report is filed under this category, it will appear here.</p>
+            </>
+          )}
+        </div>
+      </section>
+      <EdMotion />
+    </CplusPage>
   );
 }
 

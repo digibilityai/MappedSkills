@@ -1,4 +1,6 @@
 import { createMetadata } from '@/lib/metadata';
+import { loadCaseShowcase } from '@/components/case-showcase/CaseShowcase';
+import { ENQUIRY_LED_SHOWCASE } from '@/components/enquiry-led-r11/showcase';
 import { EnquiryLedR11 } from '@/components/enquiry-led-r11/EnquiryLedR11';
 import { EnquiryLedJsonLd } from '@/components/enquiry-led-r11/EnquiryLedJsonLd';
 import { META } from '@/components/enquiry-led-r11/content';
@@ -11,11 +13,12 @@ import { META } from '@/components/enquiry-led-r11/content';
  */
 export const metadata = createMetadata(META.title, META.description, '/who-we-help/enquiry-led-businesses');
 
-export default function Page() {
+export default async function Page() {
+  const showcase = await loadCaseShowcase(ENQUIRY_LED_SHOWCASE);
   return (
     <>
       <EnquiryLedJsonLd />
-      <EnquiryLedR11 />
+      <EnquiryLedR11 showcase={showcase} />
     </>
   );
 }

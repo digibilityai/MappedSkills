@@ -1,6 +1,9 @@
 import { createMetadata } from '@/lib/metadata';
 import { BreadcrumbJsonLd } from '@/components/cplus/BreadcrumbJsonLd';
 import { MetaAdsR22 } from '@/components/meta-ads-r22/MetaAdsR22';
+import { loadCaseShowcase } from '@/components/case-showcase/CaseShowcase';
+import { META_SHOWCASE } from '@/components/meta-ads-r22/showcase';
+import { BannerFocus } from '@/components/editorial/BannerFocus';
 import { MetaAdsJsonLd } from '@/components/paid-advertising/meta-ads/MetaAdsJsonLd';
 
 /**
@@ -17,12 +20,15 @@ export const metadata = createMetadata(
   '/social-media-ads'
 );
 
-export default function Page() {
+export default async function Page() {
+  /* the case showcase is resolved on the server (public library only), so the whole page is in the first HTML */
+  const showcase = await loadCaseShowcase(META_SHOWCASE);
   return (
     <>
       <BreadcrumbJsonLd label="Paid social" path="/social-media-ads" />
       <MetaAdsJsonLd />
-      <MetaAdsR22 />
+      <MetaAdsR22 showcase={showcase} />
+      <BannerFocus />
     </>
   );
 }

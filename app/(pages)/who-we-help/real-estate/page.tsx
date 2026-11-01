@@ -1,4 +1,6 @@
 import { createMetadata } from '@/lib/metadata';
+import { loadCaseShowcase } from '@/components/case-showcase/CaseShowcase';
+import { REAL_ESTATE_SHOWCASE } from '@/components/real-estate-r2/showcase';
 import { RealEstateR2 } from '@/components/real-estate-r2/RealEstateR2';
 import { RealEstateJsonLd } from '@/components/paid-advertising/real-estate/RealEstateJsonLd';
 
@@ -14,11 +16,12 @@ export const metadata = createMetadata(
   '/who-we-help/real-estate'
 );
 
-export default function Page() {
+export default async function Page() {
+  const showcase = await loadCaseShowcase(REAL_ESTATE_SHOWCASE);
   return (
     <>
       <RealEstateJsonLd />
-      <RealEstateR2 />
+      <RealEstateR2 showcase={showcase} />
     </>
   );
 }

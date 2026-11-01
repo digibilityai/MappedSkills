@@ -1,0 +1,646 @@
+{
+ "title": "Work | MappedSkills",
+ "blocks": [
+  {
+   "t": "h1",
+   "x": "Real work. Judge it for yourself.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Explore the challenges businesses brought to us, what we changed, and how we approached the work.",
+   "cls": "b2-lede"
+  },
+  {
+   "t": "p",
+   "x": "Every case study follows the same route",
+   "cls": "wk-route-k"
+  },
+  {
+   "t": "li",
+   "x": "1The challengeWhat the business brought to us",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "2What we didThe decisions and the work",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "3What changedOnly what we can substantiate",
+   "cls": ""
+  },
+  {
+   "t": "figcaption",
+   "x": "How each case study is organised. It shows no results.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Meta Ads · Real estate",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "Om Sai Developer",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A Chembur developer that needed enquiries from people interested in its project.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "p",
+   "x": "Education and training",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "ClassPe",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A coaching brand whose social strategy and content explain its personalised approach to prospective students.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "li",
+   "x": "Financial services and insuranceInsurYoAn early-stage company that needed a clear mission and practical routes to the organisations that could help deliver it.Read the case study↗",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Financial services and insurance",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "InsurYo",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "An early-stage company that needed a clear mission and practical routes to the organisations that could help deliver it.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "li",
+   "x": "SEO · Software and technologyAmeba SoftwareA B2B software company whose search work is followed through to relevant clicks and tracked organic enquiries.Read the SEO case study↗",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "SEO · Software and technology",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "Ameba Software",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A B2B software company whose search work is followed through to relevant clicks and tracked organic enquiries.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "li",
+   "x": "Google Ads · Education and trainingAnybodyCanBakeA Pune online baking school that wanted direct course purchases from Google Ads.Read the Google Ads case study↗",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Google Ads · Education and training",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "AnybodyCanBake",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A Pune online baking school that wanted direct course purchases from Google Ads.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "li",
+   "x": "Meta Ads · Education and trainingAnybodyCanBakeA Pune online baking school whose Meta advertising has been adapted since 2018 as learning preferences changed.Read the Meta Ads case study↗",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Meta Ads · Education and training",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "AnybodyCanBake",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A Pune online baking school whose Meta advertising has been adapted since 2018 as learning preferences changed.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "li",
+   "x": "Google Ads · Education and trainingEKochingA coaching institute whose Google Ads results are followed through to paid enrolments, not enquiries alone.Read the Google Ads case study↗",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Google Ads · Education and training",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "EKoching",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A coaching institute whose Google Ads results are followed through to paid enrolments, not enquiries alone.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "li",
+   "x": "Meta Ads · D2C and ecommerceKlenzmoA specialist cleaning brand whose Meta advertising is measured against products sold and advertising spend.Read the Meta Ads case study↗",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Meta Ads · D2C and ecommerce",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "Klenzmo",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A specialist cleaning brand whose Meta advertising is measured against products sold and advertising spend.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "li",
+   "x": "Google Ads · D2C and ecommerceBakersvilleA baking-supplies business whose Google advertising is measured against products sold and advertising spend.Read the Google Ads case study↗",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Google Ads · D2C and ecommerce",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "Bakersville",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A baking-supplies business whose Google advertising is measured against products sold and advertising spend.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "li",
+   "x": "Google Ads · Local servicesPhoenix LaundryA laundry business whose Google Ads results are followed from enquiries to new customers, with repeat business in view.Read the Google Ads case study↗",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Google Ads · Local services",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "Phoenix Laundry",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A laundry business whose Google Ads results are followed from enquiries to new customers, with repeat business in view.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "li",
+   "x": "Meta Ads · Real estateHutnHomesA property business whose Meta advertising is followed from qualified leads to site visits and reported sales.Read the Meta Ads case study↗",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Meta Ads · Real estate",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "HutnHomes",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A property business whose Meta advertising is followed from qualified leads to site visits and reported sales.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "li",
+   "x": "SEO · Education and trainingAnybodyCanBakeAn online baking school whose organic search results are followed through to course enquiries, not clicks alone.Read the SEO case study↗",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "SEO · Education and training",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "AnybodyCanBake",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "An online baking school whose organic search results are followed through to course enquiries, not clicks alone.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "p",
+   "x": "Have a problem like these?",
+   "cls": "wk-close-k"
+  },
+  {
+   "t": "h2",
+   "x": "Tell us what you’re trying to fix.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Tell us what you’re working towards. We’ll help you figure out where to start.",
+   "cls": ""
+  }
+ ],
+ "links": [
+  {
+   "h": "/",
+   "x": "Home"
+  },
+  {
+   "h": "/portfolio/om-sai-developer-meta-ads",
+   "x": "Read the Meta Ads case study↗"
+  },
+  {
+   "h": "/portfolio/classpe-social-media-strategy",
+   "x": "Read the case study↗"
+  },
+  {
+   "h": "/portfolio/insuryo-organic-growth",
+   "x": "Read the case study↗"
+  },
+  {
+   "h": "/portfolio/seo-ameba-software",
+   "x": "Read the SEO case study↗"
+  },
+  {
+   "h": "/portfolio/google-ads-for-online-courses",
+   "x": "Read the Google Ads case study↗"
+  },
+  {
+   "h": "/portfolio/anybodycanbake-meta-ads",
+   "x": "Read the Meta Ads case study↗"
+  },
+  {
+   "h": "/portfolio/ekoching-google-ads",
+   "x": "Read the Google Ads case study↗"
+  },
+  {
+   "h": "/portfolio/klenzmo-meta-ads",
+   "x": "Read the Meta Ads case study↗"
+  },
+  {
+   "h": "/portfolio/bakersville-google-ads",
+   "x": "Read the Google Ads case study↗"
+  },
+  {
+   "h": "/portfolio/phoenix-laundry-google-ads",
+   "x": "Read the Google Ads case study↗"
+  },
+  {
+   "h": "/portfolio/hutnhomes-meta-ads",
+   "x": "Read the Meta Ads case study↗"
+  },
+  {
+   "h": "/portfolio/anybodycanbake-seo",
+   "x": "Read the SEO case study↗"
+  },
+  {
+   "h": "/work/page/2",
+   "x": "Page 2"
+  },
+  {
+   "h": "/work/page/2",
+   "x": "Next →"
+  },
+  {
+   "h": "/contact",
+   "x": "Contact us↗"
+  },
+  {
+   "h": "/contact?intent=call",
+   "x": "Request a call↗"
+  }
+ ],
+ "imgs": [
+  {
+   "s": "/images/clients/omsai-group.webp",
+   "cs": "http://localhost:3500/images/clients/omsai-group.webp",
+   "a": "Omsai Group",
+   "w": 336,
+   "h": 232
+  },
+  {
+   "s": "/images/clients/classpe.webp",
+   "cs": "http://localhost:3500/images/clients/classpe.webp",
+   "a": "ClassPe",
+   "w": 600,
+   "h": 153
+  },
+  {
+   "s": "/images/clients/insuryo-family.webp",
+   "cs": "http://localhost:3500/images/clients/insuryo-family.webp",
+   "a": "InsurYo",
+   "w": 477,
+   "h": 396
+  },
+  {
+   "s": "/images/clients/ameba-software.png",
+   "cs": "http://localhost:3500/images/clients/ameba-software.png",
+   "a": "Ameba Software",
+   "w": 225,
+   "h": 117
+  },
+  {
+   "s": "/images/clients/anybodycanbake.png",
+   "cs": "http://localhost:3500/images/clients/anybodycanbake.png",
+   "a": "AnybodyCanBake",
+   "w": 544,
+   "h": 180
+  },
+  {
+   "s": "/images/clients/ekoching.webp",
+   "cs": "http://localhost:3500/images/clients/ekoching.webp",
+   "a": "Ekoching",
+   "w": 225,
+   "h": 224
+  },
+  {
+   "s": "/images/clients/klenzmo.webp",
+   "cs": "http://localhost:3500/images/clients/klenzmo.webp",
+   "a": "Klenzmo",
+   "w": 329,
+   "h": 104
+  },
+  {
+   "s": "/images/clients/bakersville.webp",
+   "cs": "http://localhost:3500/images/clients/bakersville.webp",
+   "a": "Bakersville India",
+   "w": 800,
+   "h": 292
+  },
+  {
+   "s": "/images/clients/phoenix-laundry.webp",
+   "cs": "http://localhost:3500/images/clients/phoenix-laundry.webp",
+   "a": "Phoenix Laundry",
+   "w": 800,
+   "h": 481
+  },
+  {
+   "s": "/images/clients/hut-n-homes.webp",
+   "cs": "http://localhost:3500/images/clients/hut-n-homes.webp",
+   "a": "Hut N Homes",
+   "w": 384,
+   "h": 143
+  },
+  {
+   "s": "/images/clients/advit-prints.webp",
+   "cs": "http://localhost:3500/images/clients/advit-prints.webp",
+   "a": "Advit Prints",
+   "w": 800,
+   "h": 799
+  },
+  {
+   "s": "/images/clients/mbp.webp",
+   "cs": "http://localhost:3500/images/clients/mbp.webp",
+   "a": "Meticulous Business Plan",
+   "w": 800,
+   "h": 456
+  },
+  {
+   "s": "/images/clients/libros.webp",
+   "cs": "http://localhost:3500/images/clients/libros.webp",
+   "a": "Libros",
+   "w": 677,
+   "h": 579
+  },
+  {
+   "s": "/images/clients/bakedemy.webp",
+   "cs": "http://localhost:3500/images/clients/bakedemy.webp",
+   "a": "Bakedemy",
+   "w": 800,
+   "h": 502
+  },
+  {
+   "s": "/images/clients/bblewrap.webp",
+   "cs": "http://localhost:3500/images/clients/bblewrap.webp",
+   "a": "Bblewrap",
+   "w": 800,
+   "h": 219
+  },
+  {
+   "s": "/images/clients/talreja-talreja.webp",
+   "cs": "http://localhost:3500/images/clients/talreja-talreja.webp",
+   "a": "Talreja & Talreja",
+   "w": 800,
+   "h": 130
+  },
+  {
+   "s": "/images/resolve-r3/omsai-work.webp",
+   "cs": "http://localhost:3500/images/resolve-r3/omsai-work.webp",
+   "a": "Conceptual artwork of a contemporary residential tower with landscaped balconies at dusk",
+   "w": 1080,
+   "h": 688
+  },
+  {
+   "s": "/images/resolve-r3/omsai-logo.jpg",
+   "cs": "http://localhost:3500/images/resolve-r3/omsai-logo.jpg",
+   "a": "Omsai Group",
+   "w": 400,
+   "h": 400
+  },
+  {
+   "s": "/images/case-studies/classpe-social-media-card.webp",
+   "cs": "http://localhost:3500/images/case-studies/classpe-social-media-card.webp",
+   "a": "ClassPe, Social Media Management. Approximately 95% student growth in four months. A mentor and a student at a desk with a laptop and a notebook, beside a content planning board.",
+   "w": 1586,
+   "h": 992
+  },
+  {
+   "s": "/images/case-studies/insuryo-organic-growth-card.webp",
+   "cs": "http://localhost:3500/images/case-studies/insuryo-organic-growth-card.webp",
+   "a": "InsurYo, Organic Growth Strategy. 4 major project wins, from an idea-stage business. Three people at a table in a bright room, one pointing at a document.",
+   "w": 1586,
+   "h": 992
+  },
+  {
+   "s": "/images/case-studies/ameba-software-seo-card.webp",
+   "cs": "http://localhost:3500/images/case-studies/ameba-software-seo-card.webp",
+   "a": "Ameba Software, SEO. 75.34% more organic clicks and 55.88% more organic enquiries. A software team reviewing a web page on a large screen.",
+   "w": 1586,
+   "h": 992
+  },
+  {
+   "s": "/images/resolve-r3/anybodycanbake-listing.webp",
+   "cs": "http://localhost:3500/images/resolve-r3/anybodycanbake-listing.webp",
+   "a": "AnybodyCanBake, Google Ads. 1,410 paid enrolments. Google Ads for an online baking school. Hands kneading dough on a floured worktop beside bowls of flour, eggs and butter.",
+   "w": 1586,
+   "h": 992
+  },
+  {
+   "s": "/images/case-studies/anybodycanbake-meta-ads-card.webp",
+   "cs": "",
+   "a": "AnybodyCanBake, Meta Ads. 3,892 paid enrolments. Working together since 2018; results September 2021 to October 2026. An illustrative baking-learning scene with a laptop showing a baking video beside dough, a rolling pin and pastries.",
+   "w": 0,
+   "h": 0
+  },
+  {
+   "s": "/images/case-studies/ekoching-google-ads-card.webp",
+   "cs": "",
+   "a": "EKoching, Google Ads. 178 paid enrolments, August 2021 to September 2022. An illustrative scene of a student at a laptop with a notebook and a search motif.",
+   "w": 0,
+   "h": 0
+  },
+  {
+   "s": "/images/case-studies/klenzmo-meta-ads-card.webp",
+   "cs": "",
+   "a": "Klenzmo, Meta Ads. 3,957 products sold, September 2024 to March 2025. An illustrative still life of folded cleaning cloths, a glass of water and a wooden brush.",
+   "w": 0,
+   "h": 0
+  },
+  {
+   "s": "/images/case-studies/bakersville-google-ads-card.webp",
+   "cs": "",
+   "a": "Bakersville, Google Ads. 4,324 products sold, November 2025 to August 2026. An illustrative flat lay of baking ingredients and decorating tools with a faint search motif.",
+   "w": 0,
+   "h": 0
+  },
+  {
+   "s": "/images/case-studies/phoenix-laundry-google-ads-card.webp",
+   "cs": "",
+   "a": "Phoenix Laundry, Google Ads. 640 new customers, December 2025 to 30 October 2026. An illustrative garment-care scene of pressed shirts on a rail beside folded clothes.",
+   "w": 0,
+   "h": 0
+  },
+  {
+   "s": "/images/case-studies/hutnhomes-meta-ads-card.webp",
+   "cs": "",
+   "a": "HutnHomes, Meta Ads. 329 site visits and 23 reported sales, September 2023 to December 2024. An illustrative scene of a landscaped residential building in warm evening light.",
+   "w": 0,
+   "h": 0
+  },
+  {
+   "s": "/images/case-studies/anybodycanbake-seo-card.webp",
+   "cs": "",
+   "a": "AnybodyCanBake, SEO. 25.49% more organic clicks. 46.15% more course enquiries. An illustrative scene of hands kneading dough on a baking workstation, with a search field leading to a recipe page and a course enquiry button.",
+   "w": 0,
+   "h": 0
+  }
+ ],
+ "cards": [
+  {
+   "h": "/portfolio/om-sai-developer-meta-ads",
+   "x": "Read the Meta Ads case study↗",
+   "img": "/images/resolve-r3/omsai-work.webp",
+   "alt": "Conceptual artwork of a contemporary residential tower with landscaped balconies at dusk",
+   "block": "META ADS · REAL ESTATE\n\nOm Sai Developer\n\nA Chembur developer that needed enquiries from people interested in its project.\n\nRead the Meta Ads case study\n↗"
+  },
+  {
+   "h": "/portfolio/classpe-social-media-strategy",
+   "x": "Read the case study↗",
+   "img": "/images/case-studies/classpe-social-media-card.webp",
+   "alt": "ClassPe, Social Media Management. Approximately 95% student growth in four months. A mentor and a student at a desk with a laptop and a notebook, beside a content planning board.",
+   "block": "EDUCATION AND TRAINING\n\nClassPe\n\nA coaching brand whose social strategy and content explain its personalised approach to prospective students.\n\nRead the case study\n↗"
+  },
+  {
+   "h": "/portfolio/insuryo-organic-growth",
+   "x": "Read the case study↗",
+   "img": "/images/case-studies/insuryo-organic-growth-card.webp",
+   "alt": "InsurYo, Organic Growth Strategy. 4 major project wins, from an idea-stage business. Three people at a table in a bright room, one pointing at a document.",
+   "block": "FINANCIAL SERVICES AND INSURANCE\n\nInsurYo\n\nAn early-stage company that needed a clear mission and practical routes to the organisations that could help deliver it.\n\nRead the case study\n↗"
+  },
+  {
+   "h": "/portfolio/seo-ameba-software",
+   "x": "Read the SEO case study↗",
+   "img": "/images/case-studies/ameba-software-seo-card.webp",
+   "alt": "Ameba Software, SEO. 75.34% more organic clicks and 55.88% more organic enquiries. A software team reviewing a web page on a large screen.",
+   "block": "SEO · SOFTWARE AND TECHNOLOGY\n\nAmeba Software\n\nA B2B software company whose search work is followed through to relevant clicks and tracked organic enquiries.\n\nRead the SEO case study\n↗"
+  },
+  {
+   "h": "/portfolio/google-ads-for-online-courses",
+   "x": "Read the Google Ads case study↗",
+   "img": "/images/resolve-r3/anybodycanbake-listing.webp",
+   "alt": "AnybodyCanBake, Google Ads. 1,410 paid enrolments. Google Ads for an online baking school. Hands kneading dough on a floured worktop beside bowls of flour, eggs and butter.",
+   "block": "GOOGLE ADS · EDUCATION AND TRAINING\n\nAnybodyCanBake\n\nA Pune online baking school that wanted direct course purchases from Google Ads.\n\nRead the Google Ads case study\n↗"
+  },
+  {
+   "h": "/portfolio/anybodycanbake-meta-ads",
+   "x": "Read the Meta Ads case study↗",
+   "img": "/images/case-studies/anybodycanbake-meta-ads-card.webp",
+   "alt": "AnybodyCanBake, Meta Ads. 3,892 paid enrolments. Working together since 2018; results September 2021 to October 2026. An illustrative baking-learning scene with a laptop showing a baking video beside dough, a rolling pin and pastries.",
+   "block": "META ADS · EDUCATION AND TRAINING\n\nAnybodyCanBake\n\nA Pune online baking school whose Meta advertising has been adapted since 2018 as learning preferences changed.\n\nRead the Meta Ads case study\n↗"
+  },
+  {
+   "h": "/portfolio/ekoching-google-ads",
+   "x": "Read the Google Ads case study↗",
+   "img": "/images/case-studies/ekoching-google-ads-card.webp",
+   "alt": "EKoching, Google Ads. 178 paid enrolments, August 2021 to September 2022. An illustrative scene of a student at a laptop with a notebook and a search motif.",
+   "block": "GOOGLE ADS · EDUCATION AND TRAINING\n\nEKoching\n\nA coaching institute whose Google Ads results are followed through to paid enrolments, not enquiries alone.\n\nRead the Google Ads case study\n↗"
+  },
+  {
+   "h": "/portfolio/klenzmo-meta-ads",
+   "x": "Read the Meta Ads case study↗",
+   "img": "/images/case-studies/klenzmo-meta-ads-card.webp",
+   "alt": "Klenzmo, Meta Ads. 3,957 products sold, September 2024 to March 2025. An illustrative still life of folded cleaning cloths, a glass of water and a wooden brush.",
+   "block": "META ADS · D2C AND ECOMMERCE\n\nKlenzmo\n\nA specialist cleaning brand whose Meta advertising is measured against products sold and advertising spend.\n\nRead the Meta Ads case study\n↗"
+  },
+  {
+   "h": "/portfolio/bakersville-google-ads",
+   "x": "Read the Google Ads case study↗",
+   "img": "/images/case-studies/bakersville-google-ads-card.webp",
+   "alt": "Bakersville, Google Ads. 4,324 products sold, November 2025 to August 2026. An illustrative flat lay of baking ingredients and decorating tools with a faint search motif.",
+   "block": "GOOGLE ADS · D2C AND ECOMMERCE\n\nBakersville\n\nA baking-supplies business whose Google advertising is measured against products sold and advertising spend.\n\nRead the Google Ads case study\n↗"
+  },
+  {
+   "h": "/portfolio/phoenix-laundry-google-ads",
+   "x": "Read the Google Ads case study↗",
+   "img": "/images/case-studies/phoenix-laundry-google-ads-card.webp",
+   "alt": "Phoenix Laundry, Google Ads. 640 new customers, December 2025 to 30 October 2026. An illustrative garment-care scene of pressed shirts on a rail beside folded clothes.",
+   "block": "GOOGLE ADS · LOCAL SERVICES\n\nPhoenix Laundry\n\nA laundry business whose Google Ads results are followed from enquiries to new customers, with repeat business in view.\n\nRead the Google Ads case study\n↗"
+  },
+  {
+   "h": "/portfolio/hutnhomes-meta-ads",
+   "x": "Read the Meta Ads case study↗",
+   "img": "/images/case-studies/hutnhomes-meta-ads-card.webp",
+   "alt": "HutnHomes, Meta Ads. 329 site visits and 23 reported sales, September 2023 to December 2024. An illustrative scene of a landscaped residential building in warm evening light.",
+   "block": "META ADS · REAL ESTATE\n\nHutnHomes\n\nA property business whose Meta advertising is followed from qualified leads to site visits and reported sales.\n\nRead the Meta Ads case study\n↗"
+  },
+  {
+   "h": "/portfolio/anybodycanbake-seo",
+   "x": "Read the SEO case study↗",
+   "img": "/images/case-studies/anybodycanbake-seo-card.webp",
+   "alt": "AnybodyCanBake, SEO. 25.49% more organic clicks. 46.15% more course enquiries. An illustrative scene of hands kneading dough on a baking workstation, with a search field leading to a recipe page and a course enquiry button.",
+   "block": "SEO · EDUCATION AND TRAINING\n\nAnybodyCanBake\n\nAn online baking school whose organic search results are followed through to course enquiries, not clicks alone.\n\nRead the SEO case study\n↗"
+  }
+ ]
+}

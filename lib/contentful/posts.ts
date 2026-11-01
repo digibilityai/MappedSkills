@@ -7,9 +7,11 @@ import {
 } from '@/lib/contentful/queries';
 import {
   mapContentfulPostToCard,
+  postToCard,
   mapContentfulPostToCms,
 } from '@/lib/contentful/mappers';
 import type { CmsBlogCard, CmsBlogPost, ContentfulPost } from '@/lib/contentful/types';
+import { selectRelated } from '@/lib/blog-related';
 
 type PostCollectionResponse = {
   postCollection?: {
@@ -92,16 +94,7 @@ export async function fetchContentfulRelatedPosts(
 /** List posts from Contentful only. */
 export async function getBlogListPosts(): Promise<CmsBlogCard[]> {
   const contentfulPosts = await fetchContentfulPosts();
-  return contentfulPosts.map((post) => ({
-    slug: post.slug,
-    title: post.title,
-    excerpt: post.excerpt,
-    category: post.category,
-    readingTime: post.readingTime,
-    publishedDate: post.publishedDate,
-    href: `/blog/${post.slug}`,
-    author: post.author.name,
-  }));
+  return contentfulPosts.map(postToCard);
 }
 
 /** Detail post from Contentful only. */
@@ -114,8 +107,9 @@ export async function getBlogStaticParams(): Promise<Array<{ slug: string }>> {
   return contentfulSlugs.map((slug) => ({ slug }));
 }
 
+/** Same topic first, then newest, never the current article, at most two (lib/blog-related.ts). Reads the listing the blog index already reads. */
 export async function getRelatedBlogCards(post: CmsBlogPost): Promise<CmsBlogCard[]> {
-  return fetchContentfulRelatedPosts(post.categorySlug, post.slug, 3);
+  return selectRelated(post, await getBlogListPosts());
 }
 
 export { CONTENTFUL_REVALIDATE_SECONDS };

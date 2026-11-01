@@ -4,6 +4,7 @@ import { selectPublic, UNLISTED_CASE_STUDY_IDS } from '@/lib/case-study-eligibil
 import { orderStudies } from '@/lib/case-study-library';
 import { localPreviewActive, withLocalPreview } from '@/lib/case-study-local-preview';
 import { isCaseStudyProofWithheld } from '@/lib/case-study-proof';
+import { studyCopy } from '@/lib/case-study-release';
 import { mapContentfulCaseStudyToCms, normalizeCaseStudySlug } from '@/lib/contentful/mappers';
 import type {
   CmsCaseStudy,
@@ -41,7 +42,13 @@ export class CaseStudyFetchError extends Error {}
  * into 404s for a revalidate cycle; a build that cannot read Contentful fails instead of shipping an empty library.
  */
 async function fetchAllCaseStudiesRaw(): Promise<CmsCaseStudy[]> {
-  if (!getContentfulDeliveryConfig()) return localPreviewActive() ? filterNull(withLocalPreview([]).map(mapContentfulCaseStudyToCms)) : [];
+  if (!getContentfulDeliveryConfig()) {
+    if (localPreviewActive()) {
+      console.warn('[case-study preview] Contentful is not configured (CONTENTFUL_SPACE_ID / CONTENTFUL_ACCESS_TOKEN are empty), so only the preview studies are listed. Existing studies such as Om Sai, ClassPe and InsurYo cannot load until read credentials are in .env.local.');
+      return filterNull(withLocalPreview([]).map(mapContentfulCaseStudyToCms));
+    }
+    return [];
+  }
   const items: ContentfulCaseStudy[] = [];
   for (let page = 0; page < MAX_FETCH_PAGES; page += 1) {
     const data = await contentfulGraphql<CaseStudyCollectionResponse>(
@@ -93,7 +100,7 @@ export async function getCaseStudyListCards(): Promise<CmsCaseStudyCard[]> {
      * listed case study the card shows no result line; nothing replaces it.
      * See `lib/case-study-proof.ts`.
      */
-    result: isCaseStudyProofWithheld(study.slug) || study.layout === 'new' ? '' : study.highlightResult,
+    result: isCaseStudyProofWithheld(study.slug, studyCopy(study)) || study.layout === 'new' ? '' : study.highlightResult,
     summary: study.summary,
     href: study.href,
   }));

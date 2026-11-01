@@ -1,0 +1,422 @@
+{
+ "title": "No Observable Google Analytics on 42.5% of 120 Indian Sites",
+ "blocks": [
+  {
+   "t": "p",
+   "x": "MappedSkills Research · Press release",
+   "cls": "pd-kicker"
+  },
+  {
+   "t": "h1",
+   "x": "MappedSkills Research Finds No Observable Google Analytics on 42.5% of 120 Indian Business Websites Audited",
+   "cls": "b-h1 pd-h1"
+  },
+  {
+   "t": "p",
+   "x": "New study finds that 97.5% of audited websites preserved campaign tracking parameters, while advertising measurement technologies were less consistently observable.",
+   "cls": "b-lede pd-lede"
+  },
+  {
+   "t": "dt",
+   "x": "Published",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "October 23, 2026",
+   "cls": ""
+  },
+  {
+   "t": "time",
+   "x": "October 23, 2026",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "Related research",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "The Marketing Measurement Gap: What 120 Indian Business Websites Reveal About Analytics and Advertising Measurement",
+   "cls": ""
+  },
+  {
+   "t": "h2",
+   "x": "The evidence in brief",
+   "cls": "pd-label pd-ev-h"
+  },
+  {
+   "t": "li",
+   "x": "42.5%More than 4 in 10 audited websites had no observable Google Analytics.Among the 120 websites audited, Google Analytics was not observed on 51 (42.5%) and was observable on 67 (55.8%). Two websites were classified as Unable to Determine.Sample n=120 Indian business websitesSource MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "cls": "pd-ev-i pd-ev-lead"
+  },
+  {
+   "t": "p",
+   "x": "42.5%",
+   "cls": "pd-stat"
+  },
+  {
+   "t": "p",
+   "x": "More than 4 in 10 audited websites had no observable Google Analytics.",
+   "cls": "pd-ev-t"
+  },
+  {
+   "t": "p",
+   "x": "Among the 120 websites audited, Google Analytics was not observed on 51 (42.5%) and was observable on 67 (55.8%). Two websites were classified as Unable to Determine.",
+   "cls": "pd-ev-d"
+  },
+  {
+   "t": "p",
+   "x": "Sample n=120 Indian business websitesSource MSR-001 Audit Protocol v1.1. Publicly observable infrastructure only.",
+   "cls": "pd-ev-m"
+  },
+  {
+   "t": "li",
+   "x": "97.5%Almost all audited websites preserved the UTM parameters used during testing.Among the 120 websites audited, 117 preserved the UTM parameters used during testing. This does not show that these businesses actively use UTMs in their campaigns; it shows that the websites preserved the parameters supplied in the audit.Sample n=120 Indian business websitesSource MSR-001 Audit Protocol v1.1. Harmless predefined UTM parameters.",
+   "cls": "pd-ev-i"
+  },
+  {
+   "t": "p",
+   "x": "97.5%",
+   "cls": "pd-stat"
+  },
+  {
+   "t": "p",
+   "x": "Almost all audited websites preserved the UTM parameters used during testing.",
+   "cls": "pd-ev-t"
+  },
+  {
+   "t": "p",
+   "x": "Among the 120 websites audited, 117 preserved the UTM parameters used during testing. This does not show that these businesses actively use UTMs in their campaigns; it shows that the websites preserved the parameters supplied in the audit.",
+   "cls": "pd-ev-d"
+  },
+  {
+   "t": "p",
+   "x": "Sample n=120 Indian business websitesSource MSR-001 Audit Protocol v1.1. Harmless predefined UTM parameters.",
+   "cls": "pd-ev-m"
+  },
+  {
+   "t": "li",
+   "x": "120Indian business websites audited across four sectors.30 websites each from Manufacturing, Jewellery, Fashion and Technology, purposively selected and examined during 2025–2026.Sample n=120 Indian business websitesSource MSR-001 Audit Protocol v1.1.",
+   "cls": "pd-ev-i"
+  },
+  {
+   "t": "p",
+   "x": "120",
+   "cls": "pd-stat"
+  },
+  {
+   "t": "p",
+   "x": "Indian business websites audited across four sectors.",
+   "cls": "pd-ev-t"
+  },
+  {
+   "t": "p",
+   "x": "30 websites each from Manufacturing, Jewellery, Fashion and Technology, purposively selected and examined during 2025–2026.",
+   "cls": "pd-ev-d"
+  },
+  {
+   "t": "p",
+   "x": "Sample n=120 Indian business websitesSource MSR-001 Audit Protocol v1.1.",
+   "cls": "pd-ev-m"
+  },
+  {
+   "t": "p",
+   "x": "Each figure describes only the sample named beneath it. How the research was done",
+   "cls": "pd-ev-n"
+  },
+  {
+   "t": "p",
+   "x": "The release",
+   "cls": "pd-side pd-label"
+  },
+  {
+   "t": "p",
+   "x": "PUNE, INDIA — MappedSkills Research has published The Marketing Measurement Gap, a study of 120 Indian business websites examining how consistently marketing analytics and advertising measurement technologies could be publicly observed.",
+   "cls": "pd-first"
+  },
+  {
+   "t": "p",
+   "x": "The research found that 42.5% of the audited websites (51 out of 120) showed no observable Google Analytics under the study's audit protocol. Google Analytics was observable on 55.8% (67 websites), while two websites could not be reliably classified.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "At the same time, 97.5% of the websites (117 out of 120) preserved the campaign tracking parameters used during testing.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "The findings highlight an important distinction: a website's ability to receive campaign information does not necessarily mean the measurement technologies surrounding that traffic are observable.",
+   "cls": ""
+  },
+  {
+   "t": "h2",
+   "x": "Key findings",
+   "cls": "pd-side pd-h2"
+  },
+  {
+   "t": "p",
+   "x": "The study examined 30 websites each from Manufacturing, Jewellery, Fashion and Technology.",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Google AnalyticsObservable on 55.8% of audited websites.",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Meta PixelObservable on 35.8%.",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Google Ads-related measurementObservable on 27.5%.",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Campaign tracking97.5% preserved the predefined UTM parameters used during testing.",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Sector differencesMeta Pixel was observable on 66.7% of Fashion websites and 60% of Jewellery websites, compared with 10% of Technology websites and 6.7% of Manufacturing websites.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "These findings describe the websites included in the study. They are not estimates for all Indian businesses.",
+   "cls": ""
+  },
+  {
+   "t": "h2",
+   "x": "Why this matters for businesses",
+   "cls": "pd-side pd-h2"
+  },
+  {
+   "t": "p",
+   "x": "Companies invest in Google Ads, social media, SEO and other digital channels to attract potential customers.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "But generating website traffic and understanding what that traffic produces are two different things.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A website may receive campaign-tagged visitors while its publicly observable analytics and advertising measurement infrastructure remains limited.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "For business owners, the practical question is not whether every available tracking tool has been installed. It is whether the business can reliably understand where enquiries and sales come from and use that information to make better marketing decisions.",
+   "cls": ""
+  },
+  {
+   "t": "h2",
+   "x": "A note from the founder",
+   "cls": "pd-side pd-qh"
+  },
+  {
+   "t": "p",
+   "x": "Businesses often focus on generating more traffic, more leads and more campaigns. But before increasing marketing spend, there is a simpler question founders should ask: can we reliably measure what happens after someone clicks? Our study suggests that the measurement layer deserves much more attention.",
+   "cls": ""
+  },
+  {
+   "t": "figcaption",
+   "x": "Amit Gupta Founder, MappedSkills Marketing",
+   "cls": "pd-q-by"
+  },
+  {
+   "t": "h2",
+   "x": "About the research",
+   "cls": "pd-side pd-h2"
+  },
+  {
+   "t": "p",
+   "x": "MappedSkills Research examined 120 purposively selected Indian business websites during 2025–2026 using a predefined audit protocol.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "The study assessed publicly observable technologies and website behaviour, including Google Analytics, Google Tag Manager, Meta Pixel, Google Ads-related measurement and campaign parameter handling.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "The research did not access private analytics accounts or submit test enquiries, make purchases, send WhatsApp messages or place phone calls.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Because the sample was not randomly selected, its results should not be treated as representative of all Indian businesses. Technologies that could not be publicly observed may still exist through server-side or private measurement systems.",
+   "cls": "pd-limit"
+  },
+  {
+   "t": "p",
+   "x": "Read the full research report:",
+   "cls": "pd-next-l"
+  },
+  {
+   "t": "p",
+   "x": "The Marketing Measurement Gap: What 120 Indian Business Websites Reveal About Analytics and Advertising Measurement →",
+   "cls": "pd-next"
+  },
+  {
+   "t": "dt",
+   "x": "Research ID",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "MSR-001",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "Original report published",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "October 5, 2026",
+   "cls": ""
+  },
+  {
+   "t": "h2",
+   "x": "About MappedSkills",
+   "cls": "pd-side pd-h2 pd-h2-s"
+  },
+  {
+   "t": "p",
+   "x": "MappedSkills Marketing helps businesses attract relevant visitors, turn more website visits into enquiries, and measure the path from marketing activity to business outcomes.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Its work brings together search visibility, paid advertising, conversion optimisation, lead generation and marketing measurement.",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "Website",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "https://mappedskills.com",
+   "cls": ""
+  },
+  {
+   "t": "h2",
+   "x": "Media enquiries",
+   "cls": "pd-side pd-h2 pd-h2-s"
+  },
+  {
+   "t": "p",
+   "x": "MappedSkills Marketing",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "Email",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "info@mappedskills.com",
+   "cls": ""
+  },
+  {
+   "t": "dt",
+   "x": "Location",
+   "cls": ""
+  },
+  {
+   "t": "dd",
+   "x": "Pune, India",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Read next",
+   "cls": "pd-label"
+  },
+  {
+   "t": "h2",
+   "x": "The Marketing Measurement Gap: What 120 Indian Business Websites Reveal About Analytics and Advertising Measurement",
+   "cls": "pd-close-h"
+  },
+  {
+   "t": "p",
+   "x": "Among the 120 Indian business websites audited, more than 4 in 10 had no observable Google Analytics, yet 97.5% preserved the UTM parameters used in testing.",
+   "cls": "pd-close-x"
+  },
+  {
+   "t": "h2",
+   "x": "Press enquiries",
+   "cls": "pd-label"
+  },
+  {
+   "t": "p",
+   "x": "Writing about this release? Email info@mappedskills.com for comment or background.",
+   "cls": ""
+  }
+ ],
+ "links": [
+  {
+   "h": "/",
+   "x": "Home"
+  },
+  {
+   "h": "/press",
+   "x": "Press"
+  },
+  {
+   "h": "/research/marketing-measurement-gap-indian-business-websites",
+   "x": "The Marketing Measurement Gap: What 120 Indian Business Websites Reveal About Analytics and Advertising Measurement"
+  },
+  {
+   "h": "/research/marketing-measurement-gap-indian-business-websites#methodology",
+   "x": "How the research was done"
+  },
+  {
+   "h": "https://mappedskills.com/research/marketing-measurement-gap-indian-business-websites",
+   "x": "The Marketing Measurement Gap: What 120 Indian Business Websites Reveal About Analytics and Advertising Measurement →"
+  },
+  {
+   "h": "mailto:info@mappedskills.com",
+   "x": "info@mappedskills.com"
+  },
+  {
+   "h": "/research/marketing-measurement-gap-indian-business-websites",
+   "x": "The Marketing Measurement Gap: What 120 Indian Business Websites Reveal About Analytics and Advertising Measurement"
+  },
+  {
+   "h": "/research/marketing-measurement-gap-indian-business-websites",
+   "x": "Read the complete research report"
+  },
+  {
+   "h": "mailto:info@mappedskills.com?subject=Media%20enquiry%3A%20MappedSkills%20Research%20Finds%20No%20Observable%20Google%20Analytics%20on%2042.5%25%20of%20120%20Indian%20Business%20Websites%20Audited",
+   "x": "info@mappedskills.com"
+  },
+  {
+   "h": "/contact",
+   "x": "Contact MappedSkills →"
+  }
+ ],
+ "imgs": [
+  {
+   "s": "https://images.ctfassets.net/owww06rzpjnj/92E06UhFkGK9msNpEtkuz/eb080feeecfcd99b8811cc8376f6f815/42.5-__Websites_Without_Google_Analytics.webp",
+   "cs": "https://images.ctfassets.net/owww06rzpjnj/92E06UhFkGK9msNpEtkuz/eb080feeecfcd99b8811cc8376f6f815/42.5-__Websites_Without_Google_Analytics.webp",
+   "a": "42.5%. More than 4 in 10 audited websites had no observable Google Analytics. 51 of 120 websites; two additional websites were classified as Unable to Determine.",
+   "w": 1719,
+   "h": 915
+  }
+ ],
+ "cards": []
+}

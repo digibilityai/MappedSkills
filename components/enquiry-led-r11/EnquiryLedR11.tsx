@@ -1,3 +1,4 @@
+import { CaseShowcase, type ShowcaseData } from '@/components/case-showcase/CaseShowcase';
 import Link from 'next/link';
 import { RvReveal3 } from '@/components/resolve-home-r3/RvReveal3';
 import { InViewOnce } from './InViewOnce';
@@ -66,7 +67,7 @@ function MetaScene() {
   </svg>;
 }
 
-export function EnquiryLedR11() {
+export function EnquiryLedR11({ showcase }: { showcase?: ShowcaseData | null }) {
   return <div className="rv3 e11">
     <RvReveal3 />
 
@@ -193,6 +194,8 @@ export function EnquiryLedR11() {
         <p className="e11-learn-n">{METHOD.learn.note}</p>
       </div>
     </div></section>
+
+    <CaseShowcase data={showcase} />
 
     {/* 8. Ink Deep: questions. */}
     <section className="rv3-fit rv3-dark" aria-labelledby="e11-faq-h"><div className="rv3-wrap rv3-fit-grid">

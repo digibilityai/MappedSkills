@@ -3,6 +3,8 @@
  *
  *   node scripts/verify-build-output.cjs                 # structural checks
  *   node scripts/verify-build-output.cjs --require-gtm   # + container ID compiled in
+ *   node scripts/verify-build-output.cjs --site-url=https://mappedskills.com   # + every canonical link uses that origin (a build made with a local
+ *                                                                               #   NEXT_PUBLIC_SITE_URL would ship localhost canonicals)
  *
  * WHY THIS EXISTS. Two production defects shipped from green builds in
  * September 2026, and a green build could not have caught either:
@@ -29,6 +31,7 @@ const path = require('path');
 
 const root = process.cwd();
 const requireGtm = process.argv.includes('--require-gtm');
+const siteUrl = ((process.argv.find((a) => a.startsWith('--site-url=')) || '').slice('--site-url='.length) || '').replace(/\/+$/, '');
 const appDir = path.join(root, '.next', 'server', 'app');
 const staticDir = path.join(root, '.next', 'static');
 const failures = [];
@@ -86,6 +89,11 @@ for (const file of htmlFiles) {
   const empty = h1s.filter((t) => t.length === 0).length;
   if (h1s.length !== 1 || empty > 0) {
     fail(`${rel}: expected exactly one non-empty <h1>, found ${h1s.length} (${empty} empty)`);
+  }
+  if (siteUrl) {
+    for (const m of html.matchAll(/<link[^>]*rel="canonical"[^>]*href="([^"]*)"/g)) {
+      if (!m[1].startsWith(siteUrl + '/') && m[1] !== siteUrl) fail(`${rel}: canonical ${m[1]} is not on ${siteUrl}`);
+    }
   }
   checkedPages += 1;
 

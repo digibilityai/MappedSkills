@@ -1,0 +1,385 @@
+{
+ "title": "Work – page 2 | MappedSkills",
+ "blocks": [
+  {
+   "t": "h1",
+   "x": "Real work. Judge it for yourself.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Explore the challenges businesses brought to us, what we changed, and how we approached the work.",
+   "cls": "b2-lede"
+  },
+  {
+   "t": "p",
+   "x": "Every case study follows the same route",
+   "cls": "wk-route-k"
+  },
+  {
+   "t": "li",
+   "x": "1The challengeWhat the business brought to us",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "2What we didThe decisions and the work",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "3What changedOnly what we can substantiate",
+   "cls": ""
+  },
+  {
+   "t": "figcaption",
+   "x": "How each case study is organised. It shows no results.",
+   "cls": ""
+  },
+  {
+   "t": "li",
+   "x": "Meta Ads · D2C and ecommerceAdvit PrintsA handblock textile brand whose Meta advertising is measured against attributed orders and order revenue.Read the Meta Ads case study↗",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Meta Ads · D2C and ecommerce",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "Advit Prints",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A handblock textile brand whose Meta advertising is measured against attributed orders and order revenue.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "li",
+   "x": "Google Ads · Professional servicesMeticulous Business PlanA business plan service whose Google Ads results are judged by qualified enquiries and signed work, not enquiry volume.Read the Google Ads case study↗",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Google Ads · Professional services",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "Meticulous Business Plan",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A business plan service whose Google Ads results are judged by qualified enquiries and signed work, not enquiry volume.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "li",
+   "x": "Meta Ads · Online LibraryLibros LibraryAn online library whose Meta advertising is followed from membership enquiries to new paid memberships.Read the Meta Ads case study↗",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Meta Ads · Online Library",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "Libros Library",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "An online library whose Meta advertising is followed from membership enquiries to new paid memberships.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "li",
+   "x": "Google Ads · Education and trainingBakedemyA baking education business whose Google Ads results are followed from course enquiries to paid enrolments.Read the Google Ads case study↗",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Google Ads · Education and training",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "Bakedemy",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A baking education business whose Google Ads results are followed from course enquiries to paid enrolments.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "li",
+   "x": "Meta Ads · Education and trainingBakedemyA baking education business whose Meta advertising is followed from course enquiries to paid enrolments.Read the Meta Ads case study↗",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Meta Ads · Education and training",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "Bakedemy",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A baking education business whose Meta advertising is followed from course enquiries to paid enrolments.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "li",
+   "x": "Google Ads · Professional servicesBblewrapA design consultancy whose Google Ads results are followed from project enquiries to qualified briefs and signed projects.Read the Google Ads case study↗",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Google Ads · Professional services",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "Bblewrap",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A design consultancy whose Google Ads results are followed from project enquiries to qualified briefs and signed projects.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "li",
+   "x": "Google Ads · Professional servicesTalreja & TalrejaA professional services firm whose Google Ads results are followed from enquiries to qualified consultations and signed engagements.Read the Google Ads case study↗",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Google Ads · Professional services",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "Talreja & Talreja",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "A professional services firm whose Google Ads results are followed from enquiries to qualified consultations and signed engagements.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "li",
+   "x": "Meta Ads · D2C and ecommerceWanderloomsAn adventure apparel brand whose Meta advertising is measured against attributed orders and order revenue.Read the Meta Ads case study↗",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Meta Ads · D2C and ecommerce",
+   "cls": "rs-wc-eyebrow"
+  },
+  {
+   "t": "h3",
+   "x": "Wanderlooms",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "An adventure apparel brand whose Meta advertising is measured against attributed orders and order revenue.",
+   "cls": "rs-wc-body"
+  },
+  {
+   "t": "p",
+   "x": "Have a problem like these?",
+   "cls": "wk-close-k"
+  },
+  {
+   "t": "h2",
+   "x": "Tell us what you’re trying to fix.",
+   "cls": ""
+  },
+  {
+   "t": "p",
+   "x": "Tell us what you’re working towards. We’ll help you figure out where to start.",
+   "cls": ""
+  }
+ ],
+ "links": [
+  {
+   "h": "/",
+   "x": "Home"
+  },
+  {
+   "h": "/portfolio/advit-prints-meta-ads",
+   "x": "Read the Meta Ads case study↗"
+  },
+  {
+   "h": "/portfolio/meticulous-business-plan-google-ads",
+   "x": "Read the Google Ads case study↗"
+  },
+  {
+   "h": "/portfolio/libros-library-meta-ads",
+   "x": "Read the Meta Ads case study↗"
+  },
+  {
+   "h": "/portfolio/bakedemy-google-ads",
+   "x": "Read the Google Ads case study↗"
+  },
+  {
+   "h": "/portfolio/bakedemy-meta-ads",
+   "x": "Read the Meta Ads case study↗"
+  },
+  {
+   "h": "/portfolio/bblewrap-google-ads",
+   "x": "Read the Google Ads case study↗"
+  },
+  {
+   "h": "/portfolio/talreja-talreja-google-ads",
+   "x": "Read the Google Ads case study↗"
+  },
+  {
+   "h": "/portfolio/wanderlooms-meta-ads",
+   "x": "Read the Meta Ads case study↗"
+  },
+  {
+   "h": "/work",
+   "x": "← Previous"
+  },
+  {
+   "h": "/work",
+   "x": "Page 1"
+  },
+  {
+   "h": "/contact",
+   "x": "Contact us↗"
+  },
+  {
+   "h": "/contact?intent=call",
+   "x": "Request a call↗"
+  }
+ ],
+ "imgs": [
+  {
+   "s": "/images/case-studies/advit-prints-meta-ads-card.webp",
+   "cs": "http://localhost:3500/images/case-studies/advit-prints-meta-ads-card.webp",
+   "a": "Advit Prints, Meta Ads. 874 attributed orders. ₹411.90 cost per order. An illustrative scene of a floral handblock printed throw over an armchair beside printed cushions.",
+   "w": 1586,
+   "h": 992
+  },
+  {
+   "s": "/images/case-studies/meticulous-business-plan-google-ads-card.webp",
+   "cs": "http://localhost:3500/images/case-studies/meticulous-business-plan-google-ads-card.webp",
+   "a": "Meticulous Business Plan, Google Ads. 27 signed engagements. 3.38 times revenue ROAS. An illustrative scene of a person at a desk reviewing printed pages with charts beside a laptop and a search result panel.",
+   "w": 1586,
+   "h": 992
+  },
+  {
+   "s": "/images/case-studies/libros-library-meta-ads-card.webp",
+   "cs": "http://localhost:3500/images/case-studies/libros-library-meta-ads-card.webp",
+   "a": "Libros Library, Meta Ads. 540 new paid memberships. ₹400 cost per new member. An illustrative reading corner where one person hands a book to another beside an armchair, bookshelves and a library bag.",
+   "w": 1586,
+   "h": 992
+  },
+  {
+   "s": "/images/case-studies/bakedemy-google-ads-card.webp",
+   "cs": "http://localhost:3500/images/case-studies/bakedemy-google-ads-card.webp",
+   "a": "Bakedemy, Google Ads. 627 paid enrolments. 3.92 times revenue ROAS. An illustrative scene of a learner browsing baking courses on a laptop beside dough, a rolling pin and piping tips.",
+   "w": 1586,
+   "h": 992
+  },
+  {
+   "s": "/images/case-studies/bakedemy-meta-ads-card.webp",
+   "cs": "http://localhost:3500/images/case-studies/bakedemy-meta-ads-card.webp",
+   "a": "Bakedemy, Meta Ads. 738 paid enrolments. 4.10 times revenue ROAS. An illustrative scene of a baking tutorial video on a tablet beside piped cupcakes and hands holding a piping bag.",
+   "w": 1586,
+   "h": 992
+  },
+  {
+   "s": "/images/case-studies/bblewrap-google-ads-card.webp",
+   "cs": "http://localhost:3500/images/case-studies/bblewrap-google-ads-card.webp",
+   "a": "Bblewrap, Google Ads. 6 signed design projects. ₹12 lakh project revenue. An illustrative design studio desk with identity prints, packaging prototypes and sample cards.",
+   "w": 1586,
+   "h": 992
+  },
+  {
+   "s": "/images/case-studies/talreja-talreja-google-ads-card.webp",
+   "cs": "http://localhost:3500/images/case-studies/talreja-talreja-google-ads-card.webp",
+   "a": "Talreja & Talreja, Google Ads. 19 signed engagements. ₹9,473.68 cost per engagement. An illustrative professional desk with advisory documents, a pen, a notebook and a consultation calendar.",
+   "w": 1586,
+   "h": 992
+  },
+  {
+   "s": "/images/case-studies/wanderlooms-meta-ads-card.webp",
+   "cs": "http://localhost:3500/images/case-studies/wanderlooms-meta-ads-card.webp",
+   "a": "Wanderlooms, Meta Ads. 6,607 attributed orders and 3.12× revenue ROAS. Travellers in outdoor jackets with parked motorcycles at a hillside road trip stop.",
+   "w": 1585,
+   "h": 992
+  }
+ ],
+ "cards": [
+  {
+   "h": "/portfolio/advit-prints-meta-ads",
+   "x": "Read the Meta Ads case study↗",
+   "img": "/images/case-studies/advit-prints-meta-ads-card.webp",
+   "alt": "Advit Prints, Meta Ads. 874 attributed orders. ₹411.90 cost per order. An illustrative scene of a floral handblock printed throw over an armchair beside printed cushions.",
+   "block": "META ADS · D2C AND ECOMMERCE\n\nAdvit Prints\n\nA handblock textile brand whose Meta advertising is measured against attributed orders and order revenue.\n\nRead the Meta Ads case study\n↗"
+  },
+  {
+   "h": "/portfolio/meticulous-business-plan-google-ads",
+   "x": "Read the Google Ads case study↗",
+   "img": "/images/case-studies/meticulous-business-plan-google-ads-card.webp",
+   "alt": "Meticulous Business Plan, Google Ads. 27 signed engagements. 3.38 times revenue ROAS. An illustrative scene of a person at a desk reviewing printed pages with charts beside a laptop and a search result panel.",
+   "block": "GOOGLE ADS · PROFESSIONAL SERVICES\n\nMeticulous Business Plan\n\nA business plan service whose Google Ads results are judged by qualified enquiries and signed work, not enquiry volume.\n\nRead the Google Ads case study\n↗"
+  },
+  {
+   "h": "/portfolio/libros-library-meta-ads",
+   "x": "Read the Meta Ads case study↗",
+   "img": "/images/case-studies/libros-library-meta-ads-card.webp",
+   "alt": "Libros Library, Meta Ads. 540 new paid memberships. ₹400 cost per new member. An illustrative reading corner where one person hands a book to another beside an armchair, bookshelves and a library bag.",
+   "block": "META ADS · ONLINE LIBRARY\n\nLibros Library\n\nAn online library whose Meta advertising is followed from membership enquiries to new paid memberships.\n\nRead the Meta Ads case study\n↗"
+  },
+  {
+   "h": "/portfolio/bakedemy-google-ads",
+   "x": "Read the Google Ads case study↗",
+   "img": "/images/case-studies/bakedemy-google-ads-card.webp",
+   "alt": "Bakedemy, Google Ads. 627 paid enrolments. 3.92 times revenue ROAS. An illustrative scene of a learner browsing baking courses on a laptop beside dough, a rolling pin and piping tips.",
+   "block": "GOOGLE ADS · EDUCATION AND TRAINING\n\nBakedemy\n\nA baking education business whose Google Ads results are followed from course enquiries to paid enrolments.\n\nRead the Google Ads case study\n↗"
+  },
+  {
+   "h": "/portfolio/bakedemy-meta-ads",
+   "x": "Read the Meta Ads case study↗",
+   "img": "/images/case-studies/bakedemy-meta-ads-card.webp",
+   "alt": "Bakedemy, Meta Ads. 738 paid enrolments. 4.10 times revenue ROAS. An illustrative scene of a baking tutorial video on a tablet beside piped cupcakes and hands holding a piping bag.",
+   "block": "META ADS · EDUCATION AND TRAINING\n\nBakedemy\n\nA baking education business whose Meta advertising is followed from course enquiries to paid enrolments.\n\nRead the Meta Ads case study\n↗"
+  },
+  {
+   "h": "/portfolio/bblewrap-google-ads",
+   "x": "Read the Google Ads case study↗",
+   "img": "/images/case-studies/bblewrap-google-ads-card.webp",
+   "alt": "Bblewrap, Google Ads. 6 signed design projects. ₹12 lakh project revenue. An illustrative design studio desk with identity prints, packaging prototypes and sample cards.",
+   "block": "GOOGLE ADS · PROFESSIONAL SERVICES\n\nBblewrap\n\nA design consultancy whose Google Ads results are followed from project enquiries to qualified briefs and signed projects.\n\nRead the Google Ads case study\n↗"
+  },
+  {
+   "h": "/portfolio/talreja-talreja-google-ads",
+   "x": "Read the Google Ads case study↗",
+   "img": "/images/case-studies/talreja-talreja-google-ads-card.webp",
+   "alt": "Talreja & Talreja, Google Ads. 19 signed engagements. ₹9,473.68 cost per engagement. An illustrative professional desk with advisory documents, a pen, a notebook and a consultation calendar.",
+   "block": "GOOGLE ADS · PROFESSIONAL SERVICES\n\nTalreja & Talreja\n\nA professional services firm whose Google Ads results are followed from enquiries to qualified consultations and signed engagements.\n\nRead the Google Ads case study\n↗"
+  },
+  {
+   "h": "/portfolio/wanderlooms-meta-ads",
+   "x": "Read the Meta Ads case study↗",
+   "img": "/images/case-studies/wanderlooms-meta-ads-card.webp",
+   "alt": "Wanderlooms, Meta Ads. 6,607 attributed orders and 3.12× revenue ROAS. Travellers in outdoor jackets with parked motorcycles at a hillside road trip stop.",
+   "block": "META ADS · D2C AND ECOMMERCE\n\nWanderlooms\n\nAn adventure apparel brand whose Meta advertising is measured against attributed orders and order revenue.\n\nRead the Meta Ads case study\n↗"
+  }
+ ]
+}

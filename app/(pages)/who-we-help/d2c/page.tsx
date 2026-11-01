@@ -1,4 +1,6 @@
 import { createMetadata } from '@/lib/metadata';
+import { loadCaseShowcase } from '@/components/case-showcase/CaseShowcase';
+import { D2C_SHOWCASE } from '@/components/d2c-r1/showcase';
 import { D2CR1 } from '@/components/d2c-r1/D2CR1';
 import { D2CJsonLd } from '@/components/paid-advertising/d2c/D2CJsonLd';
 
@@ -14,11 +16,12 @@ export const metadata = createMetadata(
   '/who-we-help/d2c'
 );
 
-export default function Page() {
+export default async function Page() {
+  const showcase = await loadCaseShowcase(D2C_SHOWCASE);
   return (
     <>
       <D2CJsonLd />
-      <D2CR1 />
+      <D2CR1 showcase={showcase} />
     </>
   );
 }

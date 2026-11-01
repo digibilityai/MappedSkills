@@ -1,0 +1,398 @@
+{
+ "1440/contact": {
+  "res": {
+   "pointer": {
+    "straddles": true,
+    "top": 747,
+    "bottom": 799,
+    "bn": 773,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "touch": {
+    "straddles": true,
+    "top": 747,
+    "bottom": 799,
+    "bn": 773,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "keyboard": {
+    "straddles": true,
+    "top": 747,
+    "bottom": 751,
+    "bn": 773,
+    "scrollBy": 1,
+    "visible": true,
+    "moved": true
+   }
+  },
+  "okPtr": true,
+  "okKb": true
+ },
+ "1440/social-media-ads": {
+  "res": {
+   "pointer": {
+    "straddles": true,
+    "top": 749,
+    "bottom": 797,
+    "bn": 773,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "touch": {
+    "straddles": true,
+    "top": 749,
+    "bottom": 797,
+    "bn": 773,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "keyboard": {
+    "straddles": true,
+    "top": 749,
+    "bottom": 751,
+    "bn": 773,
+    "scrollBy": 1,
+    "visible": true,
+    "moved": true
+   }
+  },
+  "okPtr": true,
+  "okKb": true
+ },
+ "1440/blog": {
+  "res": {
+   "pointer": {
+    "straddles": true,
+    "top": 733,
+    "bottom": 813,
+    "bn": 773,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "touch": {
+    "straddles": true,
+    "top": 733,
+    "bottom": 813,
+    "bn": 773,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "keyboard": {
+    "straddles": true,
+    "top": 733,
+    "bottom": 751,
+    "bn": 773,
+    "scrollBy": 1,
+    "visible": true,
+    "moved": true
+   }
+  },
+  "okPtr": true,
+  "okKb": true
+ },
+ "1440/press": {
+  "res": {
+   "pointer": {
+    "straddles": true,
+    "top": 723,
+    "bottom": 824,
+    "bn": 773,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "touch": {
+    "straddles": true,
+    "top": 723,
+    "bottom": 824,
+    "bn": 773,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "keyboard": {
+    "straddles": true,
+    "top": 723,
+    "bottom": 751,
+    "bn": 773,
+    "scrollBy": 1,
+    "visible": true,
+    "moved": true
+   }
+  },
+  "okPtr": true,
+  "okKb": true
+ },
+ "390/contact": {
+  "res": {
+   "pointer": {
+    "straddles": true,
+    "top": 649,
+    "bottom": 701,
+    "bn": 676,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "touch": {
+    "straddles": true,
+    "top": 649,
+    "bottom": 701,
+    "bn": 676,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "keyboard": {
+    "straddles": true,
+    "top": 649,
+    "bottom": 653,
+    "bn": 676,
+    "scrollBy": 1,
+    "visible": true,
+    "moved": true
+   }
+  },
+  "okPtr": true,
+  "okKb": true
+ },
+ "390/social-media-ads": {
+  "res": {
+   "pointer": {
+    "straddles": true,
+    "top": 651,
+    "bottom": 699,
+    "bn": 676,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "touch": {
+    "straddles": true,
+    "top": 651,
+    "bottom": 699,
+    "bn": 676,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "keyboard": {
+    "straddles": true,
+    "top": 651,
+    "bottom": 653,
+    "bn": 676,
+    "scrollBy": 1,
+    "visible": true,
+    "moved": true
+   }
+  },
+  "okPtr": true,
+  "okKb": true
+ },
+ "390/blog": {
+  "res": {
+   "pointer": {
+    "straddles": true,
+    "top": 635,
+    "bottom": 715,
+    "bn": 676,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "touch": {
+    "straddles": true,
+    "top": 635,
+    "bottom": 715,
+    "bn": 676,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "keyboard": {
+    "straddles": true,
+    "top": 635,
+    "bottom": 653,
+    "bn": 676,
+    "scrollBy": 1,
+    "visible": true,
+    "moved": true
+   }
+  },
+  "okPtr": true,
+  "okKb": true
+ },
+ "390/press": {
+  "res": {
+   "pointer": {
+    "straddles": true,
+    "top": 585,
+    "bottom": 766,
+    "bn": 676,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "touch": {
+    "straddles": true,
+    "top": 585,
+    "bottom": 766,
+    "bn": 676,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "keyboard": {
+    "straddles": true,
+    "top": 585,
+    "bottom": 654,
+    "bn": 676,
+    "scrollBy": 1,
+    "visible": true,
+    "moved": true
+   }
+  },
+  "okPtr": true,
+  "okKb": true
+ },
+ "360/contact": {
+  "res": {
+   "pointer": {
+    "straddles": true,
+    "top": 606,
+    "bottom": 658,
+    "bn": 632,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "touch": {
+    "straddles": true,
+    "top": 606,
+    "bottom": 658,
+    "bn": 632,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "keyboard": {
+    "straddles": true,
+    "top": 606,
+    "bottom": 610,
+    "bn": 632,
+    "scrollBy": 1,
+    "visible": true,
+    "moved": true
+   }
+  },
+  "okPtr": true,
+  "okKb": true
+ },
+ "360/social-media-ads": {
+  "res": {
+   "pointer": {
+    "straddles": true,
+    "top": 607,
+    "bottom": 655,
+    "bn": 632,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "touch": {
+    "straddles": true,
+    "top": 607,
+    "bottom": 655,
+    "bn": 632,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "keyboard": {
+    "straddles": true,
+    "top": 607,
+    "bottom": 609,
+    "bn": 632,
+    "scrollBy": 1,
+    "visible": true,
+    "moved": true
+   }
+  },
+  "okPtr": true,
+  "okKb": true
+ },
+ "360/blog": {
+  "res": {
+   "pointer": {
+    "straddles": true,
+    "top": 578,
+    "bottom": 684,
+    "bn": 632,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "touch": {
+    "straddles": true,
+    "top": 578,
+    "bottom": 684,
+    "bn": 632,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "keyboard": {
+    "straddles": true,
+    "top": 578,
+    "bottom": 609,
+    "bn": 632,
+    "scrollBy": 1,
+    "visible": true,
+    "moved": true
+   }
+  },
+  "okPtr": true,
+  "okKb": true
+ },
+ "360/press": {
+  "res": {
+   "pointer": {
+    "straddles": true,
+    "top": 541,
+    "bottom": 721,
+    "bn": 632,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "touch": {
+    "straddles": true,
+    "top": 541,
+    "bottom": 721,
+    "bn": 632,
+    "scrollBy": 0,
+    "visible": true,
+    "moved": false
+   },
+   "keyboard": {
+    "straddles": true,
+    "top": 541,
+    "bottom": 609,
+    "bn": 632,
+    "scrollBy": 1,
+    "visible": true,
+    "moved": true
+   }
+  },
+  "okPtr": true,
+  "okKb": true
+ }
+}

@@ -4,13 +4,35 @@ const test = require('node:test');
 const assert = require('node:assert');
 const fs = require('node:fs');
 const path = require('node:path');
-const { execFileSync } = require('node:child_process');
+const crypto = require('node:crypto');
 const { load } = require('./helpers/ts-loader.cjs');
 
 const root = path.join(__dirname, '..');
 const read = (p) => fs.readFileSync(path.join(root, p), 'utf8');
 const code = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
-const head = (p) => execFileSync('git', ['show', `HEAD:${p}`], { cwd: root, encoding: 'utf8' });
+const sha = (t) => crypto.createHash('sha256').update(t).digest('hex');
+/* THE PRESERVATION BASELINE IS COMMITTED, NOT READ FROM GIT. The redesign must leave these things exactly as they were before it (main at 1ebf7ba, 30 Oct 2026):
+   the metadata, canonicals, robots and JSON-LD of the editorial routes, and every existing Contentful query line. They are pinned here by SHA-256 (route files and
+   metadata blocks) and by a committed copy of the earlier query file (tests/fixtures/baseline/), so the check means the same in any checkout, including CI's, and
+   fails the moment an approved-unchanged thing changes. Approving such a change means updating the pin on purpose. */
+const BASELINE = {
+  unchangedRouteFiles: {
+    'app/(pages)/blog/page.tsx': '033b446b4469165d18b37c2f3e8454979003f442e53f6d29f096e4f0c2be35f3',
+    'app/(pages)/blog/[slug]/page.tsx': 'db34a686ad9f65f3e9636b8aa2263479fd1042a7f80ee51c0b9ee4333622bbcd',
+    'app/(pages)/press/[slug]/page.tsx': '50bf22ee98ea6c7f794cda9507d68f5b7211492ec1452c3d3ffad85f474eb6c2',
+    'app/(pages)/research/page.tsx': '6db062d6b3ab10ff9809f04e937ba1cbf5d4a56fc428f503a3f096d3d4622b9f',
+  },
+  pressMetadataBlock: '34efba5d4efc4d3c0715c82dbdc2892b9d2477fa5b5b187555144947a39a14b5',
+  researchSlugMetadataBlock: 'd2c5e41f81f019106f4fc0fc9efb394b4b0b93ae0a87b5b155a645dfac78cf12',
+  queriesFixture: 'tests/fixtures/baseline/contentful-queries.at-1ebf7ba.txt',
+};
+const pressMeta = (s) => s.slice(s.indexOf('export const metadata'), s.indexOf('export default'));
+const researchMeta = (s) => s.slice(s.indexOf('export async function generateMetadata'), s.indexOf('function CategoryPage'));
+/** Every non-empty line of the earlier query file that is no longer present, counting repeats (a line that occurs twice must still occur twice): an existing query line removed or altered. */
+const removedQueryLines = (baselineText, currentText) => {
+  const have = new Map(); for (const l of currentText.split('\n')) have.set(l, (have.get(l) ?? 0) + 1);
+  return baselineText.split('\n').filter((l) => l.trim() && (have.get(l) ?? 0) > 0 ? (have.set(l, have.get(l) - 1), false) : l.trim() !== '');
+};
 const { selectRelated, RELATED_LIMIT } = load('lib/blog-related.ts');
 const { splitAfterMarker } = load('lib/headline-emphasis.ts');
 
@@ -77,28 +99,38 @@ test('report anchors are all still present', () => {
 });
 
 test('metadata, canonicals, robots and JSON-LD sources are unchanged in the route files', () => {
-  for (const p of ['app/(pages)/blog/page.tsx', 'app/(pages)/blog/[slug]/page.tsx', 'app/(pages)/press/[slug]/page.tsx', 'app/(pages)/research/page.tsx']) {
-    assert.strictEqual(read(p), head(p), p);
-  }
+  for (const [p, want] of Object.entries(BASELINE.unchangedRouteFiles)) assert.strictEqual(sha(read(p)), want, `${p}: an approved-unchanged route file changed`);
   /* /press: only the additive read of the latest release's recorded findings (existing getter); metadata untouched */
-  const pm = (s) => s.slice(s.indexOf('export const metadata'), s.indexOf('export default'));
-  assert.strictEqual(pm(read('app/(pages)/press/page.tsx')), pm(head('app/(pages)/press/page.tsx')));
+  assert.strictEqual(sha(pressMeta(read('app/(pages)/press/page.tsx'))), BASELINE.pressMetadataBlock, '/press metadata block changed');
   assert.match(read('app/(pages)/press/page.tsx'), /getPressReleaseBySlug\(releases\[0\]\.slug\)/);
   assert.ok(!/ContentfulGraphql|contentfulGraphql|fetch\(/.test(code(read('app/(pages)/press/page.tsx'))), 'no new query');
   const cur = read('app/(pages)/research/[slug]/page.tsx');
-  const old = head('app/(pages)/research/[slug]/page.tsx');
-  const meta = (s) => s.slice(s.indexOf('export async function generateMetadata'), s.indexOf('function CategoryPage'));
-  assert.ok(meta(cur).length > 500);
-  assert.strictEqual(meta(cur), meta(old), 'research slug metadata and report JSON-LD are untouched');
+  assert.ok(researchMeta(cur).length > 500);
+  assert.strictEqual(sha(researchMeta(cur)), BASELINE.researchSlugMetadataBlock, 'research slug metadata and report JSON-LD are untouched');
   assert.match(cur, /routeTrailJsonLd\(trail\)/, 'category breadcrumb JSON-LD kept');
 });
 
 test('data fetching and Contentful queries are unchanged except the approved additive fields', () => {
-  const q = read('lib/contentful/queries.ts');
-  const now = new Set(q.split('\n'));
-  const removed = head('lib/contentful/queries.ts').split('\n').filter((l) => l.trim() && !now.has(l));
-  assert.deepStrictEqual(removed, [], 'no existing query line was removed or altered');
+  const base = read(BASELINE.queriesFixture);
+  assert.ok(base.split('\n').length > 400, 'the committed baseline is the whole earlier query file');
+  assert.deepStrictEqual(removedQueryLines(base, read('lib/contentful/queries.ts')), [], 'no existing query line was removed or altered');
   assert.ok(!/mutation|publish\(|createEntry/i.test(code(read('lib/contentful/posts.ts'))), 'read-only');
+});
+
+test('the preservation checks fail on an unintended change (each guard is proven, not assumed)', () => {
+  const route = read('app/(pages)/blog/page.tsx');
+  assert.notStrictEqual(sha(route.replace(/createMetadata\(\s*(['"`])/, '$&X')), BASELINE.unchangedRouteFiles['app/(pages)/blog/page.tsx'], 'a changed title in an unchanged route file is caught');
+  assert.notStrictEqual(sha(route + '\n'), BASELINE.unchangedRouteFiles['app/(pages)/blog/page.tsx'], 'even a whitespace-only edit is caught');
+  const press = read('app/(pages)/press/page.tsx');
+  assert.notStrictEqual(sha(pressMeta(press.replace("'Press | MappedSkills'", "'Press | Changed'"))), BASELINE.pressMetadataBlock, 'an edit inside the press metadata block is caught');
+  assert.strictEqual(sha(pressMeta(press.replace('export default', 'export default // redesigned body'))), BASELINE.pressMetadataBlock, 'a change AFTER the metadata block (the redesigned body) is allowed');
+  const rs = read('app/(pages)/research/[slug]/page.tsx');
+  assert.notStrictEqual(sha(researchMeta(rs.replace('generateMetadata', 'generateMetadata /* x */ '))), BASELINE.researchSlugMetadataBlock, 'an edit to the research slug metadata block is caught');
+  const base = read(BASELINE.queriesFixture); const q = read('lib/contentful/queries.ts');
+  const lines = q.split('\n'); const i = lines.findIndex((l) => /postCollection/.test(l));
+  assert.ok(i > 0); assert.deepStrictEqual(removedQueryLines(base, [...lines.slice(0, i), ...lines.slice(i + 1)].join('\n')).length > 0, true, 'a deleted query line is caught');
+  assert.deepStrictEqual(removedQueryLines(base, q.replace(/order: sys_firstPublishedAt_DESC/, 'order: sys_firstPublishedAt_ASC')).length > 0, true, 'an altered query line is caught');
+  assert.deepStrictEqual(removedQueryLines(base, q + '\n  extraField'), [], 'an ADDED line (an approved additive field) is allowed');
 });
 
 test('images are shown whole and nothing is stretched', () => {

@@ -1,0 +1,478 @@
+export const POST_CARD_FRAGMENT = `
+  sys {
+    id
+    firstPublishedAt
+    publishedAt
+  }
+  title
+  seoTitle
+  keyword
+  slug
+  excerpt
+  author {
+    name
+    description
+    profile {
+      url
+      title
+      description
+    }
+  }
+  category {
+    name
+    slug
+  }
+  featuredImage {
+    url
+    title
+    description
+    width
+    height
+  }
+  content {
+    json
+  }
+`;
+
+export const POST_DETAIL_FRAGMENT = `
+  ${POST_CARD_FRAGMENT}
+  content {
+    json
+    links {
+      assets {
+        block {
+          sys { id }
+          url
+          title
+          description
+          width
+          height
+        }
+      }
+    }
+  }
+`;
+
+export const GET_ALL_POSTS_QUERY = `
+  query GetAllPosts($limit: Int = 100, $preview: Boolean = false) {
+    postCollection(preview: $preview, limit: $limit, order: sys_firstPublishedAt_DESC) {
+      total
+      items {
+        ${POST_CARD_FRAGMENT}
+      }
+    }
+  }
+`;
+
+export const GET_POST_BY_SLUG_QUERY = `
+  query GetPostBySlug($slug: String!, $limit: Int = 1, $preview: Boolean = false) {
+    postCollection(preview: $preview, where: { slug: $slug }, limit: $limit) {
+      items {
+        ${POST_DETAIL_FRAGMENT}
+      }
+    }
+  }
+`;
+
+export const GET_RELATED_POSTS_QUERY = `
+  query GetRelatedPosts($categorySlug: String, $excludeSlug: String!, $limit: Int = 3, $preview: Boolean = false) {
+    postCollection(
+      preview: $preview
+      where: { slug_not: $excludeSlug, category: { slug: $categorySlug } }
+      limit: $limit
+      order: sys_firstPublishedAt_DESC
+    ) {
+      items {
+        ${POST_CARD_FRAGMENT}
+      }
+    }
+  }
+`;
+
+export const GET_POST_SLUGS_QUERY = `
+  query GetPostSlugs($limit: Int = 100, $preview: Boolean = false) {
+    postCollection(preview: $preview, limit: $limit, order: sys_firstPublishedAt_DESC) {
+      items {
+        slug
+      }
+    }
+  }
+`;
+
+/**
+ * The six simplified-G6 fields do not exist in Contentful until the (separately authorised) schema migration runs.
+ * Requesting a missing field makes the WHOLE GraphQL query fail, so they are requested only when the build/runtime
+ * sets CONTENTFUL_CASE_STUDY_NEW_FIELDS=1. Unset (the default), behaviour is exactly the legacy-three behaviour.
+ *
+ * G7 adds five optional library fields (sector, serviceKey, periodStart, periodEnd, listingOrder) behind the SAME
+ * flag. ORDER OF OPERATIONS: the G7 schema migration must be applied to the environment before the flag is turned on,
+ * or the query fails (and, since G7, the case-study pages keep their last good version instead of going empty).
+ */
+export const CASE_STUDY_NEW_FIELDS_ENABLED = process.env.CONTENTFUL_CASE_STUDY_NEW_FIELDS === '1';
+
+const CASE_STUDY_NEW_FIELDS_FRAGMENT = CASE_STUDY_NEW_FIELDS_ENABLED
+  ? `
+  summary
+  problem {
+    json
+  }
+  whatWeDid {
+    json
+  }
+  impact {
+    json
+  }
+  evidenceNote
+  showTestimonial
+  sector
+  serviceKey
+  periodStart
+  periodEnd
+  listingOrder`
+  : '';
+
+export const CASE_STUDY_CARD_FRAGMENT = `
+  sys {
+    id
+    firstPublishedAt
+    publishedAt
+    publishedVersion
+  }
+  title
+  slug
+  clientName {
+    clientName
+    date
+  }
+  industry {
+    name
+  }
+  size {
+    size
+  }
+  audience {
+    audience
+  }
+  targetArea {
+    target
+  }
+  review {
+    name
+    testimonial
+  }
+  content {
+    json
+  }
+  conclusion {
+    json
+  }${CASE_STUDY_NEW_FIELDS_FRAGMENT}
+`;
+
+export const CASE_STUDY_DETAIL_FRAGMENT = `
+  ${CASE_STUDY_CARD_FRAGMENT}
+`;
+
+export const GET_ALL_CASE_STUDIES_QUERY = `
+  query GetAllCaseStudies($limit: Int = 100, $skip: Int = 0, $preview: Boolean = false) {
+    caseStudiesCollection(preview: $preview, limit: $limit, skip: $skip, order: [sys_firstPublishedAt_DESC, sys_id_ASC]) {
+      total
+      items {
+        ${CASE_STUDY_CARD_FRAGMENT}
+      }
+    }
+  }
+`;
+
+export const GET_CASE_STUDY_BY_SLUG_QUERY = `
+  query GetCaseStudyBySlug($slugs: [String!]!, $limit: Int = 1, $preview: Boolean = false) {
+    caseStudiesCollection(preview: $preview, where: { slug_in: $slugs }, limit: $limit) {
+      items {
+        ${CASE_STUDY_DETAIL_FRAGMENT}
+      }
+    }
+  }
+`;
+
+export const GET_CASE_STUDY_SLUGS_QUERY = `
+  query GetCaseStudySlugs($limit: Int = 100, $preview: Boolean = false) {
+    caseStudiesCollection(preview: $preview, limit: $limit, order: sys_firstPublishedAt_DESC) {
+      items {
+        slug
+      }
+    }
+  }
+`;
+
+export const ASSET_FIELDS = `
+  sys { id }
+  url
+  title
+  description
+  width
+  height
+  contentType
+  fileName
+`;
+
+export const AUTHOR_FIELDS = `
+  name
+  description
+  profile {
+    ${ASSET_FIELDS}
+  }
+`;
+
+export const RESEARCH_CATEGORY_FIELDS = `
+  sys { id }
+  researchCategoryName
+  slug
+  description
+  seoTitle
+  metaDescription
+  featuredImage {
+    ${ASSET_FIELDS}
+  }
+`;
+
+export const RESEARCH_FINDING_FIELDS = `
+  sys { id }
+  internalName
+  statistic
+  findingHeadline
+  description
+  explanation {
+    json
+  }
+  chartImage {
+    ${ASSET_FIELDS}
+  }
+  chartAltText
+  baseSample
+  sourceNote
+`;
+
+export const RESEARCH_REPORT_CARD_FRAGMENT = `
+  sys {
+    id
+    firstPublishedAt
+    publishedAt
+  }
+  title
+  researchId
+  seoTitle
+  metaDescription
+  slug
+  excerpt
+  featured
+  researchPeriod
+  geography
+  sampleSize
+  researchCategory {
+    researchCategoryName
+    slug
+  }
+  author {
+    ${AUTHOR_FIELDS}
+  }
+  featuredImage {
+    ${ASSET_FIELDS}
+  }
+`;
+
+export const RICH_TEXT_WITH_LINKS = `
+  json
+  links {
+    assets {
+      block {
+        ${ASSET_FIELDS}
+      }
+    }
+    entries {
+      block {
+        __typename
+        ... on ResearchFinding {
+          ${RESEARCH_FINDING_FIELDS}
+        }
+      }
+    }
+  }
+`;
+
+export const GET_ALL_RESEARCH_REPORTS_QUERY = `
+  query GetAllResearchReports($limit: Int = 100, $preview: Boolean = false) {
+    researchReportCollection(preview: $preview, limit: $limit, order: sys_firstPublishedAt_DESC) {
+      total
+      items {
+        ${RESEARCH_REPORT_CARD_FRAGMENT}
+      }
+    }
+  }
+`;
+
+export const GET_FEATURED_RESEARCH_REPORTS_QUERY = `
+  query GetFeaturedResearchReports($limit: Int = 6, $preview: Boolean = false) {
+    researchReportCollection(preview: $preview, where: { featured: true }, limit: $limit, order: sys_firstPublishedAt_DESC) {
+      items {
+        ${RESEARCH_REPORT_CARD_FRAGMENT}
+      }
+    }
+  }
+`;
+
+export const GET_RESEARCH_REPORT_BY_SLUG_QUERY = `
+  query GetResearchReportBySlug($slug: String!, $limit: Int = 1, $preview: Boolean = false) {
+    researchReportCollection(preview: $preview, where: { slug: $slug }, limit: $limit) {
+      items {
+        ${RESEARCH_REPORT_CARD_FRAGMENT}
+        executiveSummary { ${RICH_TEXT_WITH_LINKS} }
+        content { ${RICH_TEXT_WITH_LINKS} }
+        methodology { ${RICH_TEXT_WITH_LINKS} }
+        limitations { ${RICH_TEXT_WITH_LINKS} }
+        keyFindingsCollection(limit: 20, preview: $preview) {
+          items {
+            ${RESEARCH_FINDING_FIELDS}
+          }
+        }
+        reportPdf { ${ASSET_FIELDS} }
+        dataFile { ${ASSET_FIELDS} }
+        mediaAssetsCollection(limit: 20, preview: $preview) {
+          items { ${ASSET_FIELDS} }
+        }
+        relatedResearchCollection(limit: 6, preview: $preview) {
+          items {
+            title
+            slug
+            excerpt
+            researchCategory {
+              researchCategoryName
+              slug
+            }
+            sys { firstPublishedAt }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_RESEARCH_REPORT_SLUGS_QUERY = `
+  query GetResearchReportSlugs($limit: Int = 100, $preview: Boolean = false) {
+    researchReportCollection(preview: $preview, limit: $limit, order: sys_firstPublishedAt_DESC) {
+      items { slug }
+    }
+  }
+`;
+
+export const GET_RESEARCH_REPORTS_BY_CATEGORY_QUERY = `
+  query GetResearchReportsByCategory($categorySlug: String!, $limit: Int = 100, $preview: Boolean = false) {
+    researchReportCollection(
+      preview: $preview
+      where: { researchCategory: { slug: $categorySlug } }
+      limit: $limit
+      order: sys_firstPublishedAt_DESC
+    ) {
+      items {
+        ${RESEARCH_REPORT_CARD_FRAGMENT}
+      }
+    }
+  }
+`;
+
+export const GET_ALL_RESEARCH_CATEGORIES_QUERY = `
+  query GetAllResearchCategories($limit: Int = 20, $preview: Boolean = false) {
+    researchCategoryCollection(preview: $preview, limit: $limit, order: researchCategoryName_ASC) {
+      items {
+        ${RESEARCH_CATEGORY_FIELDS}
+      }
+    }
+  }
+`;
+
+export const GET_RESEARCH_CATEGORY_BY_SLUG_QUERY = `
+  query GetResearchCategoryBySlug($slug: String!, $limit: Int = 1, $preview: Boolean = false) {
+    researchCategoryCollection(preview: $preview, where: { slug: $slug }, limit: $limit) {
+      items {
+        ${RESEARCH_CATEGORY_FIELDS}
+      }
+    }
+  }
+`;
+
+export const GET_RESEARCH_CATEGORY_SLUGS_QUERY = `
+  query GetResearchCategorySlugs($limit: Int = 20, $preview: Boolean = false) {
+    researchCategoryCollection(preview: $preview, limit: $limit) {
+      items { slug }
+    }
+  }
+`;
+
+export const GET_LATEST_RESEARCH_FINDINGS_QUERY = `
+  query GetLatestResearchFindings($limit: Int = 8, $preview: Boolean = false) {
+    researchFindingCollection(preview: $preview, limit: $limit, order: sys_firstPublishedAt_DESC) {
+      items {
+        ${RESEARCH_FINDING_FIELDS}
+        linkedFrom {
+          researchReportCollection(limit: 1, preview: $preview) {
+            items { slug title }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const PRESS_RELEASE_CARD_FRAGMENT = `
+  sys {
+    id
+    firstPublishedAt
+    publishedAt
+  }
+  headline
+  seoTitle
+  metaDescription
+  slug
+  excerpt
+  featuredImage {
+    ${ASSET_FIELDS}
+  }
+  author {
+    ${AUTHOR_FIELDS}
+  }
+  relatedResearch {
+    title
+    slug
+    excerpt
+  }
+`;
+
+export const GET_ALL_PRESS_RELEASES_QUERY = `
+  query GetAllPressReleases($limit: Int = 100, $preview: Boolean = false) {
+    pressReleaseCollection(preview: $preview, limit: $limit, order: sys_firstPublishedAt_DESC) {
+      items {
+        ${PRESS_RELEASE_CARD_FRAGMENT}
+      }
+    }
+  }
+`;
+
+export const GET_PRESS_RELEASE_BY_SLUG_QUERY = `
+  query GetPressReleaseBySlug($slug: String!, $limit: Int = 1, $preview: Boolean = false) {
+    pressReleaseCollection(preview: $preview, where: { slug: $slug }, limit: $limit) {
+      items {
+        ${PRESS_RELEASE_CARD_FRAGMENT}
+        content { ${RICH_TEXT_WITH_LINKS} }
+        mediaAssetsCollection(limit: 20, preview: $preview) {
+          items { ${ASSET_FIELDS} }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_PRESS_RELEASE_SLUGS_QUERY = `
+  query GetPressReleaseSlugs($limit: Int = 100, $preview: Boolean = false) {
+    pressReleaseCollection(preview: $preview, limit: $limit, order: sys_firstPublishedAt_DESC) {
+      items { slug }
+    }
+  }
+`;

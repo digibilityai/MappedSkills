@@ -1,3 +1,9 @@
+> ## CASE-STUDY RELEASE COMPLETE — 1 NOVEMBER 2026 (`DEC-117`)
+>
+> Live: `main` `0551b89` (BUILD `_pWpnXMkHfVZIUzx1uK7N`, workflow run 41316916791) with 20 published, listed case studies (Home Decor published, unlisted)
+> and the /work R2, editorial (blog, press, research) and case-showcase redesigns. Contentful publication of 39 entries done and verified (67 of 67).
+> Rollback snapshot and tooling retained. Real-device, Safari, Firefox and screen-reader checks not run. Read `docs/case-release/RELEASE_RECORD.md`.
+
 # Current Project State
 
 > ## PAID-ADVERTISING REVAMP — CURRENT OWNER DIRECTION, 26 OCTOBER 2026

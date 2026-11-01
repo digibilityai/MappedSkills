@@ -1,6 +1,6 @@
 # Case-study release: plan, checklist and owner commands (DEC-117, revised)
 
-Status: LOCAL, release on hold. Nothing committed, pushed, merged, deployed or published. **No write to Contentful**: all access was read-only (public Delivery API, public website GETs, one read-only host check, in-memory rehearsal).
+**Status: COMPLETE (released 2026-11-01); see `RELEASE_RECORD.md`.** Original status at preparation time: LOCAL, release on hold. Nothing committed, pushed, merged, deployed or published. **No write to Contentful**: all access was read-only (public Delivery API, public website GETs, one read-only host check, in-memory rehearsal).
 
 ## 1. What each step releases
 | Step | Releases | Does not release |

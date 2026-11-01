@@ -35,7 +35,7 @@
 .rv3 h2 em, .rv3 h1 em { font-style: normal; color: var(--c-tang-dark); }
 .rv3-dark h1, .rv3-dark h2, .rv3-dark h3 { color: #fff; }
 .rv3-dark h1 em, .rv3-dark h2 em { color: var(--c-tang); }
-.rv3-eyebrow { font: 800 .74rem/1.4 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--c-tang-deep); margin-bottom: var(--sp-1); }
+.rv3-eyebrow { font: 800 .75rem/1.4 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--c-tang-deep); margin-bottom: var(--sp-1); }
 .rv3-dark .rv3-eyebrow { color: var(--c-tang); }
 .rv3-head { margin-bottom: var(--sp-4); }
 .rv3-head h2 { font-size: clamp(2rem, 4vw, 3.5rem); max-width: 18ch; }
@@ -65,7 +65,7 @@
 .rv3-hero-fig figcaption { margin-top: var(--sp-1); padding-top: 14px; border-top: 1px solid var(--c-rule-dark); }
 .rv3-hero-fig ol { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px 14px; counter-reset: s; font-size: .84rem; font-weight: 700; color: #fff; line-height: 1.35; }
 .rv3-hero-fig ol li { counter-increment: s; } .rv3-hero-fig ol li::before { content: counter(s) '. '; color: var(--c-tang); }
-.rv3-hero-fig small { display: block; margin-top: 10px; color: #B7B0BF; font-weight: 600; font-size: .8rem; }
+.rv3-hero-fig small { display: block; margin-top: 10px; color: #B7B0BF; font-weight: 600; font-size: .875rem; line-height: 1.45; }
 
 /* hero story: the final state is the base style, so no-JS, reduced motion and the settled frame are all the same readable picture.
    The sequence (about 4.4s, once): dots arrive, attention glows, interactions draw to the ad, outcomes resolve. */
@@ -94,7 +94,7 @@
 .rv3-ccm li { display: flex; flex-direction: column; gap: 6px; padding: 10px 0 0; border-top: 3px solid var(--c-ink); }
 .rv3-ccm .rv3-ccm-capture { grid-column: 1 / span 2; border-top-color: var(--c-tang-deep); } .rv3-ccm .rv3-ccm-convert { grid-column: 3 / span 2; border-top-style: dashed; border-top-color: var(--c-gap); } .rv3-ccm .rv3-ccm-measure { grid-column: 5; border-top-color: var(--c-tang-deep); }
 .rv3-ccm b { font: 800 clamp(1.3rem, 2.2vw, 2rem)/1 var(--f-head); letter-spacing: -.03em; text-transform: uppercase; }
-.rv3-ccm span { font: 800 .7rem/1.45 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--c-dim); }
+.rv3-ccm span { font: 800 .75rem/1.45 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--c-dim); }
 .rv3-ccm-capture span, .rv3-ccm-measure span { color: var(--c-tang-deep); }
 .rv3-stage-art { display: block; width: 100%; max-width: 180px; height: auto; margin-bottom: 12px; }
 .rv3-j h3 { font-size: clamp(1.05rem, 1.4vw, 1.25rem); line-height: 1.2; letter-spacing: -.015em; }
@@ -117,18 +117,13 @@
 .rv3-a--1 { grid-column: 1 / span 6; grid-row: 1 / span 2; } .rv3-a--1 .rv3-a-img { flex: 1; min-height: 320px; } .rv3-a--1 h3 { font-size: clamp(1.6rem, 2.7vw, 2.5rem); }
 .rv3-a--2 { grid-column: 7 / span 6; } .rv3-a--3 { grid-column: 7 / span 6; margin-left: clamp(0px, 3.5vw, 56px); }
 .rv3-a--2, .rv3-a--3 { flex-direction: row; } .rv3-a--2 .rv3-a-img, .rv3-a--3 .rv3-a-img { flex: 0 0 40%; min-height: 190px; } .rv3-a--2 .rv3-a-body, .rv3-a--3 .rv3-a-body { flex: 1; min-width: 0; }
-/* clearly temporary: a hatched panel (the DNA's honesty fill) that names the photograph still to be supplied */
-.rv3-ph { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; padding: var(--sp-2); color: var(--c-ink);
-  background: repeating-linear-gradient(135deg, var(--c-ground) 0 12px, #EDE6D9 12px 13px); border: 1px dashed var(--c-gap); }
-.rv3-ph-tag { position: absolute; top: var(--sp-1); left: var(--sp-1); padding: 3px 9px; border-radius: 999px; background: var(--c-ink); color: #fff; font: 800 .66rem/1.4 var(--f-body); letter-spacing: .1em; text-transform: uppercase; }
-.rv3-ph p { font: 800 1rem/1.25 var(--f-head); } .rv3-ph small { color: var(--c-dim); font-size: .82rem; line-height: 1.4; }
 
 /* ---- 4. Services: believable advertising situations ---- */
-.rv3-s-n { display: block; margin-bottom: 12px; font: 800 .74rem/1 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: #B7B0BF; }
+.rv3-s-n { display: block; margin-bottom: 12px; font: 800 .75rem/1 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: #B7B0BF; }
 .rv3-s h3 { font-size: clamp(2rem, 3.4vw, 3.2rem); }
 .rv3-s-copy p { margin-top: 14px; max-width: 46ch; color: var(--c-on-dark-soft); font-size: 1.05rem; } .rv3-s-copy .rv3-tl { margin-top: 10px; }
 .rv3-s-demo { display: flex; flex-direction: column; gap: 10px; }
-.rv3-s-cap { color: #B7B0BF !important; font-size: .8rem !important; margin: 0 !important; }
+.rv3-s-cap { color: #B7B0BF !important; font-size: .875rem !important; line-height: 1.45 !important; margin: 0 !important; }
 /* Google search results */
 .rv3-serp { width: 100%; max-width: 560px; padding: 16px clamp(14px, 2vw, 22px) 18px; background: #fff; color: #202124; border-radius: 12px; font-family: Arial, Helvetica, sans-serif; }
 .rv3-serp-bar { display: flex; align-items: center; gap: 10px; padding: 9px 16px; border: 1px solid #dfe1e5; border-radius: 999px; font-size: 14px; box-shadow: 0 1px 4px rgba(32, 33, 36, .12); }
@@ -163,7 +158,7 @@
 .rv3-logo { position: absolute; top: var(--sp-1); left: var(--sp-1); display: flex; align-items: center; justify-content: center; padding: 10px 14px; border-radius: 8px; background: var(--c-paper); }
 .rv3-logo img { display: block; height: auto; }
 .rv3-logo--wanderlooms img { width: clamp(110px, 12vw, 160px); } .rv3-logo--om-sai { padding: 0; overflow: hidden; } .rv3-logo--om-sai img { width: clamp(84px, 8vw, 104px); }
-.rv3-w-note { margin-top: 8px; font-size: .78rem; color: var(--c-dim); }
+.rv3-w-note { margin-top: 8px; font-size: .875rem; color: var(--c-dim); }
 .rv3-w .rv3-eyebrow { margin: var(--sp-2) 0 10px; }
 .rv3-w h3 { font-size: clamp(1.6rem, 2.5vw, 2.3rem); } .rv3-w-body { margin: 12px 0 6px; max-width: 46ch; color: var(--c-dim); }
 
@@ -173,11 +168,6 @@
 .rv3-step-n { display: block; margin-bottom: var(--sp-1); font: 800 clamp(2.2rem, 4vw, 3.8rem)/1 var(--f-head); letter-spacing: -.05em; }
 .rv3-steps li:last-child { border-top-color: var(--c-tang-deep); } .rv3-steps li:last-child .rv3-step-n { color: var(--c-tang-dark); }
 .rv3-steps h3 { font-size: clamp(1.15rem, 1.6vw, 1.4rem); } .rv3-steps p { margin-top: 8px; color: var(--c-dim); font-size: .95rem; }
-.rv3-flow-h { font-size: clamp(1.1rem, 1.6vw, 1.4rem); letter-spacing: -.015em; }
-.rv3-glyph { width: 48px; height: 48px; margin-bottom: 8px; background: var(--c-paper); border: 2px solid var(--c-ink); border-radius: 50%; padding: 8px; position: relative; z-index: 1; }
-.g-l { fill: none; stroke: var(--c-ink); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; } .g-s { fill: var(--c-line); } .g-acc { fill: var(--c-tang); }
-.g-gap { fill: none; stroke: var(--c-gap); stroke-width: 2.4; stroke-dasharray: 3 5; stroke-linecap: round; }
-.rv3-flow-foot { margin-top: var(--sp-2); padding-top: var(--sp-1); border-top: 1px solid var(--c-line); max-width: 70ch; color: var(--c-dim); font-size: .95rem; }
 .rv3-proc-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 32px; margin-top: var(--sp-3); font-weight: 700; }
 
 /* ---- 7. Pricing and questions ---- */
@@ -244,10 +234,10 @@ body:has(.rv3) .dc-ftr .dc-base, body:has(.rv3) .dc-ftr .dc-brand > p, body:has(
 .rv3-ccm { margin-bottom: var(--sp-4); }
 .rv3-ccm li { border-top-width: 2px; gap: 8px; padding-top: 14px; }
 .rv3-ccm b { font-size: clamp(1.15rem, 1.7vw, 1.5rem); }
-.rv3-ccm span { font-weight: 700; letter-spacing: .1em; font-size: .68rem; }
+.rv3-ccm span { font-weight: 700; letter-spacing: .1em; font-size: .75rem; }
 .rv3-j-list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: clamp(20px, 3vw, 48px); align-items: start; }
 .rv3-j { position: relative; display: flex; flex-direction: column; padding: 0; }
-.rv3-j-tag { display: none; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; margin: 0 0 8px; font: 800 .7rem/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--c-tang-deep); }
+.rv3-j-tag { display: none; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; margin: 0 0 8px; font: 800 .75rem/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--c-tang-deep); }
 .rv3-j-tag i { font-style: normal; letter-spacing: .04em; text-transform: none; font-weight: 700; color: var(--c-dim); }
 .rv3-j--you .rv3-j-tag { color: var(--c-dim); }
 .rv3-j-n { display: block; margin: 0 0 14px; font: 800 .8rem/1 var(--f-body); letter-spacing: .16em; color: var(--c-dim); }
@@ -275,32 +265,6 @@ body:has(.rv3) .dc-ftr .dc-base, body:has(.rv3) .dc-ftr .dc-brand > p, body:has(
   .rv3-serp-org:last-child { display: none; }
 }
 
-/* ---- Buyer path: ownership legend and a once-only animated diagram (final state is the base style) ---- */
-.rv3-flow-wrap { margin-top: var(--sp-4); padding: var(--sp-3) clamp(20px, 3vw, 44px); background: var(--c-ground); border: 1px solid var(--c-line); border-radius: 4px; }
-.rv3-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; margin-top: var(--sp-1); font: 700 .8rem/1.4 var(--f-body); color: var(--c-dim); }
-.rv3-legend li { display: inline-flex; align-items: center; gap: 8px; }
-.rv3-legend i { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--c-ink); background: var(--c-paper); }
-.rv3-legend .ms { border-color: var(--c-tang-deep); background: var(--c-tang-deep); } .rv3-legend .you { border-style: dashed; border-color: var(--c-gap); }
-.rv3-pflow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin-top: var(--sp-3); }
-.rv3-pf { position: relative; display: flex; flex-direction: column; gap: 6px; padding-right: var(--sp-2); }
-.rv3-glyph { width: 56px; height: 56px; padding: 11px; margin-bottom: 10px; position: relative; z-index: 1; border-radius: 50%; background: var(--c-paper); border: 2px solid var(--c-ink); }
-.rv3-pf--ms .rv3-glyph { border-color: var(--c-tang-deep); background: #fff; }
-.rv3-pf--you .rv3-glyph { border-style: dashed; border-color: var(--c-gap); }
-.rv3-pf::before { content: ''; position: absolute; left: 66px; right: 10px; top: 27px; height: 2px; background: var(--c-ink); transform-origin: left; }
-.rv3-pf::after { content: ''; position: absolute; right: 4px; top: 21px; border-left: 9px solid var(--c-ink); border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
-.rv3-pf:last-child::before, .rv3-pf:last-child::after { display: none; }
-.rv3-pf b { font-size: 1rem; line-height: 1.25; }
-.rv3-pf span { font: 800 .7rem/1.4 var(--f-body); letter-spacing: .1em; text-transform: uppercase; color: var(--c-tang-deep); }
-.rv3-pf--you span, .rv3-pf--buyer span { color: var(--c-dim); }
-.rv3-pflow[data-anim='armed'] .rv3-glyph { opacity: .3; transform: scale(.88); }
-.rv3-pflow[data-anim='armed'] .rv3-pf::before { transform: scaleX(0); } .rv3-pflow[data-anim='armed'] .rv3-pf::after { opacity: 0; }
-.rv3-pflow[data-anim='play'] .rv3-glyph { animation: r3-node .55s var(--ease) both; animation-delay: calc(var(--i) * .75s); }
-.rv3-pflow[data-anim='play'] .rv3-pf::before { animation: r3-line .45s ease both; animation-delay: calc(var(--i) * .75s + .4s); }
-.rv3-pflow[data-anim='play'] .rv3-pf::after { animation: r3-fade .25s ease both; animation-delay: calc(var(--i) * .75s + .8s); }
-@keyframes r3-node { from { opacity: .3; transform: scale(.88); } 50% { box-shadow: 0 0 0 7px rgba(255, 91, 4, .28); } }
-@keyframes r3-line { from { transform: scaleX(0); } }
-@keyframes r3-linev { from { transform: scaleY(0); } }
-@keyframes r3-fade { from { opacity: 0; } }
 
 /* ---- Footer: more air, social platform icons (verified destinations unchanged) ---- */
 body:has(.rv3) .dc-ftr { padding-block: clamp(72px, 8vw, 120px) clamp(32px, 4vw, 56px); }
@@ -320,8 +284,6 @@ body:has(.rv3) .dc-ftr .dc-base a[href*='instagram.com'] { --ico: url("data:imag
   .rv3-j-tag { display: flex; }
   .rv3-j-list { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: var(--sp-4); }
   .rv3-svc-grid { gap: var(--sp-4); }
-  .rv3-pflow { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: var(--sp-3); }
-  .rv3-pf:nth-child(3)::before, .rv3-pf:nth-child(3)::after { display: none; }
 }
 @media (max-width: 760px) {
   .rv3-j-list { grid-template-columns: 1fr; row-gap: 0; }
@@ -333,14 +295,6 @@ body:has(.rv3) .dc-ftr .dc-base a[href*='instagram.com'] { --ico: url("data:imag
   .rv3-j-tag, .rv3-stage-art, .rv3-j h3, .rv3-j p { grid-column: 2; }
   .rv3-stage-art { max-width: 104px; margin: 0 0 10px; }
   .rv3-svc-grid { grid-template-columns: 1fr; gap: var(--sp-4); } .rv3-feed { margin-inline: auto; max-width: 300px; }
-  .rv3-pflow { grid-template-columns: 1fr; row-gap: 0; margin-top: var(--sp-2); }
-  .rv3-pf { display: grid; grid-template-columns: 56px minmax(0, 1fr); column-gap: var(--sp-2); row-gap: 2px; padding: 0 0 var(--sp-3); }
-  .rv3-glyph { grid-row: 1 / span 2; margin: 0; } .rv3-pf b { grid-column: 2; align-self: end; } .rv3-pf span { grid-column: 2; }
-  .rv3-pf::before, .rv3-pf:nth-child(3)::before { display: block; left: 27px; right: auto; top: 58px; bottom: 2px; width: 2px; height: auto; transform-origin: top; }
-  .rv3-pf::after, .rv3-pf:nth-child(3)::after { display: none; }
-  .rv3-pflow[data-anim='armed'] .rv3-pf::before { transform: scaleY(0); }
-  .rv3-pflow[data-anim='play'] .rv3-pf::before { animation-name: r3-linev; }
-  .rv3-pf:last-child::before { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -356,3 +310,20 @@ body:has(.rv3) .dc-ftr .dc-base a[href*='instagram.com'] { --ico: url("data:imag
   .rv3-aud .rv3-head > .rv3-eyebrow, .rv3-aud .rv3-head > h2 { grid-column: 1; }
   .rv3-aud .rv3-head > .rv3-aud-more { grid-column: 2; grid-row: 1 / span 2; margin: 0 0 .4em; }
 }
+
+/* =====================================================================================================================
+   Brand DNA 4.0 refinements (DEC-118): labels at least 12 px and explanatory captions at least 14 px (above), the responsibility
+   statement closing the journey, and the featured case studies from the public library. Spacing tokens unchanged.
+   ===================================================================================================================== */
+
+/* Journey: the one responsibility statement (it used to sit under the removed buyer-path diagram) */
+.rv3-j-foot { margin-top: var(--sp-4); padding-top: var(--sp-2); border-top: 1px solid var(--c-line); max-width: 70ch; color: var(--c-dim); font-size: 1rem; }
+
+/* Featured work: each case's approved listing artwork, shown whole at its own proportions (its names and figures are part of it) */
+.rv3-w-art { overflow: hidden; border-radius: 4px; background: var(--c-line); }
+.rv3-w-art img { display: block; width: 100%; height: auto; }
+.rv3-w-fig { margin-top: 10px; font: 800 clamp(1.8rem, 3vw, 2.6rem)/1 var(--f-head); letter-spacing: -.03em; color: var(--c-tang-dark); }
+.rv3-w--case .rv3-w-body { margin: 8px 0 6px; }
+
+/* Client wall note: an explanatory caption, 14 px on the homepage only (the shared wall styles elsewhere are unchanged) */
+.rv3 .cl-note { font-size: .875rem; }

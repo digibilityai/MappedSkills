@@ -66,8 +66,11 @@ for (const r of ROUTES) {
   });
 }
 
-test('homepage: Reporting Policy A wording replaces the monthly-reporting promise; audience ids no longer collide', () => {
-  const html = renderToStaticMarkup(React.createElement(load('app/page.tsx').default));
+/* the homepage is async (it reads its featured case studies on the server first): await it, then render */
+const homeHtml = async () => renderToStaticMarkup(await load('app/page.tsx').default());
+
+test('homepage: Reporting Policy A wording replaces the monthly-reporting promise; audience ids no longer collide', async () => {
+  const html = await homeHtml();
   const text = decode(html.replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ');
   assert.match(text, /You receive a monthly performance report with ongoing management, and review calls as agreed in your proposal\./);
   assert.doesNotMatch(text, /monthly reporting and a review call/);
@@ -129,9 +132,9 @@ test('application copy of the frozen designs has no long or double dashes', () =
   }
 });
 
-test('Enquiry-Led is reachable from the homepage, the header, the footer and the sitemap', () => {
+test('Enquiry-Led is reachable from the homepage, the header, the footer and the sitemap', async () => {
   const target = 'href="/who-we-help/enquiry-led-businesses"';
-  const home = renderToStaticMarkup(React.createElement(load('app/page.tsx').default));
+  const home = await homeHtml();
   assert.ok(home.includes(target), 'homepage');
   assert.match(home, /<header class="rv3-head"[^>]*>[\s\S]*?rv3-aud-more[\s\S]*?<\/header>/, 'pointer sits in the audience heading, adding no row on wide screens');
   assert.ok(renderToStaticMarkup(React.createElement(load('components/direction-c/SiteHeader.tsx').SiteHeader)).includes(target), 'header');

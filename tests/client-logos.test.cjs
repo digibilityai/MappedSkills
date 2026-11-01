@@ -40,7 +40,8 @@ test('register: verified services only; display authorisation is not a service c
 
 test('homepage: the section is titled and uses the register wall; there is no marquee', () => {
   const home = rd('components/resolve-home-r3/ResolveHomeR3.tsx');
-  assert.match(home, /Businesses <em>we’ve worked with<\/em>/);
+  // Brand DNA 4.0 (DEC-118): a label heading, so one colour (no emphasis)
+  assert.match(home, /<h2 id="rv3-clients-h">Businesses we’ve worked with<\/h2>/);
   assert.match(home, /<ClientLogoWall \/>/);
   const strip = (t) => t.replace(/\/\*[\s\S]*?\*\//g, '');
   const css = strip(rd('components/clients/client-logos.css'));

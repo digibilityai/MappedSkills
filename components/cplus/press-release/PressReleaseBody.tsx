@@ -1,6 +1,8 @@
 import Link from 'next/link';
-import { Fragment, type ReactNode } from 'react';
-import { CONTACT_HREF, Mark } from '@/components/direction-c/primitives';
+import { Fragment } from 'react';
+import { CONTACT_HREF } from '@/components/direction-c/primitives';
+import { OnThisPage } from '@/components/editorial/OnThisPage';
+import { EdMotion } from '@/components/editorial/EdMotion';
 import { isDocumentPopulated } from '@/lib/contentful/mappers';
 import { siteMetadata } from '@/lib/metadata';
 import type { CmsPressRelease } from '@/lib/contentful/types';
@@ -9,6 +11,7 @@ import { RELEASE as R } from './content';
 import { headingText, ReleaseNodes, releaseOptions, renderInline } from './ReleaseRichText';
 import { assignHeadingIds, chaptersOf, classifyChapters, isPairStatistic, splitHeadlineEmphasis, splitLeadingFigures, type Classified, type Figure } from './release-rules';
 import './release.css';
+import '@/components/editorial/editorial.css';
 
 /* A headline over this many characters is set one step smaller and wider so it cannot fill a phone screen (the field's length; no prose matching). */
 export const LONG_HEADLINE = 130;
@@ -41,13 +44,25 @@ function Stat({ value }: { value: string }) {
   );
 }
 
-function EvidenceStrip({ figures, methodHref }: { figures: Figure[]; methodHref?: string }) {
+/**
+ * The evidence band (R3): the structured headline figures with their sample and source, on deep ink. When the release has a "Key findings" chapter it is
+ * merged into this band (one section, not two): the band's heading is that chapter's heading and keeps its anchor, and `pd-h-ev`, the old anchor of the
+ * separate evidence block, is kept as an alias here. A row of that chapter that only restates a displayed headline figure is not repeated.
+ */
+function EvidenceBand({ figures, methodHref, merged, ids, links }: { figures: Figure[]; methodHref?: string; merged: Classified | null; ids: HeadingIds; links: CmsPressRelease['contentLinks'] }) {
   const allSampled = figures.every((f) => f.baseSample);
+  const mid = merged?.chapter.heading ? ids.get(merged.chapter.heading) : undefined;
+  const nodes = merged ? withoutRestatedRows(merged.chapter.nodes, figures) : [];
   return (
-    <section className="pd-ev" aria-labelledby="pd-h-ev">
-      <div className="px-wrap">
-        <h2 id="pd-h-ev" className="pd-label pd-ev-h">
+    <section className="ed-band dark pd-ev" aria-labelledby={mid ?? 'pd-h-ev'}>
+      <div className="ed-w">
+        {mid ? <span id="pd-h-ev" aria-hidden="true" /> : null}
+        <p className="ed-ch">
+          <span>02</span>
           {R.evidence.h}
+        </p>
+        <h2 id={mid ?? 'pd-h-ev'} className="ed-h2">
+          {merged ? renderInline(merged.chapter.heading!, releaseOptions(links)) : R.evidence.h}
         </h2>
         <ul className="pd-ev-l" data-n={figures.length}>
           {figures.map((f, i) => (
@@ -72,6 +87,11 @@ function EvidenceStrip({ figures, methodHref }: { figures: Figure[]; methodHref?
             </li>
           ))}
         </ul>
+        {merged && nodes.length ? (
+          <div className="pd-ev-more pd-prose">
+            <ReleaseNodes nodes={nodes} links={links} ids={ids} />
+          </div>
+        ) : null}
         {allSampled || methodHref ? (
           <p className="pd-ev-n">
             {allSampled ? <>{R.evidence.note} </> : null}
@@ -81,6 +101,20 @@ function EvidenceStrip({ figures, methodHref }: { figures: Figure[]; methodHref?
       </div>
     </section>
   );
+}
+
+const plain = (n: RtNode | undefined): string => (!n ? '' : typeof n.value === 'string' ? n.value : (n.content ?? []).map(plain).join(' '));
+/** Lists in the merged chapter lose only an item that contains a displayed figure's exact statistic (the item restates the figure above it). A list left empty is kept whole. */
+function withoutRestatedRows(nodes: RtNode[], figures: Figure[]): RtNode[] {
+  const stats = figures.map((f) => f.statistic).filter((st) => st && st.includes('%'));
+  const escapeRe = (t: string) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const restated = (item: RtNode) => stats.some((st) => new RegExp(`(^|[^\\w.])${escapeRe(st)}($|[^\\w])`).test(plain(item)));
+  return nodes.map((n) => {
+    if (n.nodeType !== 'unordered-list' && n.nodeType !== 'ordered-list') return n;
+    const items = n.content ?? [];
+    const kept = items.filter((i) => !restated(i));
+    return kept.length && kept.length < items.length ? { ...n, content: kept } : n;
+  });
 }
 
 type HeadingIds = ReturnType<typeof assignHeadingIds>;
@@ -133,20 +167,63 @@ export function PressReleaseBody({ release }: { release: CmsPressRelease }) {
     );
   }
 
-  /* Consecutive chapters of the same plain kind share one container; a quotation or method chapter is its own stage. */
-  const groups: { kind: 'plain' | 'back' | 'quote' | 'method'; run?: number; items: Classified[] }[] = [];
-  for (const c of classified) {
-    const kind = c.kind === 'main' ? 'plain' : c.kind;
-    const last = groups[groups.length - 1];
-    if (last && last.kind === kind && last.run === c.run && (kind === 'plain' || kind === 'back' || kind === 'method')) last.items.push(c);
-    else groups.push({ kind, run: c.run, items: [c] });
-  }
-
   const mailto = `mailto:${siteMetadata.email}?subject=${encodeURIComponent(R.press.subject + release.headline)}`;
   const featuredAlt = image?.description || image?.title || release.headline;
   const files = release.mediaAssets;
-  /* Two-colour H1 (the C+ `.b-named` pattern): the phrase the headline shares with its related report's title, else one colour. */
+  /* Two-colour H1: the phrase the headline shares with its related report's title, else one colour. Styling only; the heading text is the recorded headline. */
   const headline = splitHeadlineEmphasis(release.headline, related?.title) ?? { before: release.headline, emphasis: '', after: '' };
+
+  const headingIdOf = (c: Classified) => (c.chapter.heading ? headingIds.get(c.chapter.heading) : undefined);
+  const isKeyFindings = (c: Classified) => c.kind === 'main' && !!c.chapter.heading && /^key findings\b/i.test(headingText(c.chapter.heading));
+  /* Key findings merge into the evidence band when the release has structured headline figures. */
+  const merged = figures.length > 0 ? classified.find(isKeyFindings) ?? null : null;
+  const rest2 = classified.filter((c) => c !== merged);
+  /* The trailing run of method and back-matter chapters is the supporting material, shown as separate cards after the release. */
+  let cut = rest2.length;
+  while (cut > 0 && (rest2[cut - 1].kind === 'method' || rest2[cut - 1].kind === 'back')) cut -= 1;
+  const flow = rest2.slice(0, cut);
+  const support = rest2.slice(cut);
+  const pre = merged ? flow.filter((c) => c.index < merged.index) : [];
+  const post = merged ? flow.filter((c) => c.index > merged.index) : flow;
+
+  const renderChapter = (c: Classified) => {
+    if (c.kind === 'quote') {
+      const q = c.quote!;
+      const id = headingIdOf(c);
+      return (
+        <section key={c.index} className="pd-quote" aria-labelledby={id}>
+          <div className="pd-row">
+            <h2 id={id} className="pd-side pd-qh">
+              {headingText(c.chapter.heading)}
+            </h2>
+            <figure className="pd-q">
+              <blockquote className="pd-q-b">
+                <p>{q.quote}</p>
+              </blockquote>
+              <figcaption className="pd-q-by">
+                <span className="pd-q-n">{q.name}</span>
+                {q.role ? <span className="pd-q-r"> {q.role}</span> : null}
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+      );
+    }
+    return <Chapter key={c.index} c={c} links={links} ids={headingIds} small={c.kind !== 'main'} />;
+  };
+
+  /* "On this page": the headings that exist, in reading order, each to its existing anchor. */
+  const toc = [
+    ...pre.filter((c) => c.chapter.heading).map(headingItem),
+    ...(figures.length > 0 ? [{ id: merged ? headingIdOf(merged)! : 'pd-h-ev', text: merged ? headingText(merged.chapter.heading) : R.evidence.h }] : []),
+    ...post.filter((c) => c.chapter.heading).map(headingItem),
+    ...support.filter((c) => c.chapter.heading).map(headingItem),
+    ...(author ? [{ id: 'pd-h-author', text: R.author.h }] : []),
+    ...(files.length > 0 ? [{ id: 'pd-h-files', text: R.media.h }] : []),
+  ];
+  function headingItem(c: Classified) {
+    return { id: headingIdOf(c)!, text: headingText(c.chapter.heading) };
+  }
 
   const meta = (
     <dl className="pd-meta">
@@ -171,202 +248,159 @@ export function PressReleaseBody({ release }: { release: CmsPressRelease }) {
     </dl>
   );
 
-  const headingIdOf = (c: Classified) => (c.chapter.heading ? headingIds.get(c.chapter.heading) : undefined);
-  const body: ReactNode[] = groups.map((g, gi) => {
-    if (g.kind === 'quote') {
-      const c = g.items[0];
-      const q = c.quote!;
-      const id = headingIdOf(c);
-      return (
-        <section key={gi} className="pd-quote" aria-labelledby={id}>
-          <div className="px-wrap pd-row">
-            <h2 id={id} className="pd-side pd-qh">
-              {headingText(c.chapter.heading)}
-            </h2>
-            <figure className="pd-q">
-              <span className="pd-q-g" aria-hidden="true">
-                “
-              </span>
-              <blockquote className="pd-q-b">
-                <p>{q.quote}</p>
-              </blockquote>
-              <figcaption className="pd-q-by">
-                <span className="pd-q-rule" aria-hidden="true" />
-                <span className="pd-q-n">{q.name}</span>
-                {q.role ? <span className="pd-q-r"> {q.role}</span> : null}
-              </figcaption>
-            </figure>
+  const shell = (list: Classified[], first: boolean) =>
+    list.length === 0 && !first ? null : (
+      <section className="ed-body pd-read" aria-label={first ? R.article : undefined}>
+        <div className="ed-w">
+          <div className="ed-shell">
+            <aside className="ed-rail" aria-hidden={first ? undefined : true}>
+              {first ? <OnThisPage items={toc} /> : null}
+            </aside>
+            <div className="ed-col pd-art">{list.map(renderChapter)}</div>
           </div>
-        </section>
-      );
-    }
-    if (g.kind === 'method') {
-      return (
-        <div key={gi} className="pd-method">
-          {g.items.map((c, k) => {
-            const id = headingIdOf(c);
-            return (
-              <section key={c.index} aria-labelledby={id}>
-                <div className="px-wrap">
-                  <div className={k === 0 ? 'pd-row pd-sec pd-sec-first' : 'pd-row pd-sec'}>
-                    <h2 id={id} className="pd-side pd-h2">
-                      {renderInline(c.chapter.heading!, releaseOptions(links))}
-                    </h2>
-                    <div className="pd-prose">
-                      <ReleaseNodes nodes={c.chapter.nodes} links={links} ids={headingIds} method />
-                    </div>
-                  </div>
-                </div>
-              </section>
-            );
-          })}
         </div>
-      );
-    }
-    return (
-      <div key={gi} className="px-wrap pd-grp">
-        {g.items.map((c) => (
-          <Fragment key={c.index}>
-            <Chapter c={c} links={links} ids={headingIds} small={g.kind === 'back'} />
-          </Fragment>
-        ))}
-      </div>
+      </section>
     );
-  });
 
   return (
     <>
-      {/* 1 — hero (ivory): identity, the Contentful headline unchanged, the excerpt, and the featured image as a framed figure. */}
-      <section className={image?.url ? 'b-hero pd-hero' : 'b-hero pd-hero pd-hero-solo'} aria-labelledby="pd-h1">
-        <div className="px-wrap">
-          <nav aria-label="Breadcrumb" className="b-crumb pd-crumb">
-            <ol>
-              <li>
-                <Link href="/">Home</Link>{' '}
-              </li>
-              <li>
-                <span aria-hidden="true">/</span> <Link href="/press">Press</Link>{' '}
-              </li>
-              <li>
-                <span aria-hidden="true">/</span> <span aria-current="page" className="pd-crumb-cur">{release.headline}</span>
-              </li>
-            </ol>
+      <section className="ed-hero pd-hero" aria-labelledby="pd-h1">
+        <div className="ed-w">
+          <nav aria-label="Breadcrumb" className="ed-crumb pd-crumb">
+            <Link href="/">Home</Link>
+            <Link href="/press">Press</Link>
+            <span aria-current="page">{release.headline}</span>
           </nav>
-          <div className={image?.url ? 'pd-hero-g' : 'pd-hero-g pd-hero-g-solo'}>
-            <div className="pd-hero-t">
-              <p className="pd-kicker">
-                <span className="pd-mk" aria-hidden="true" />
-                {related ? R.kicker.research : R.kicker.general} <span aria-hidden="true">·</span> {R.kickerKind}
-              </p>
-              <h1 id="pd-h1" className={release.headline.length > LONG_HEADLINE ? 'b-h1 pd-h1 pd-h1-long' : 'b-h1 pd-h1'}>
+          <div className="ed-hg">
+            <div className="ed-hl wide">
+              <p className="ed-k">{related ? R.kicker.research : R.kicker.general}</p>
+              <ul className="ed-chips" aria-label="About this release">
+                <li>
+                  <span className="ed-chip">{R.kickerKind}</span>
+                </li>
+                <li>
+                  <span className="ed-chip plain">{release.publishedAtISO ? <time dateTime={release.publishedAtISO}>{release.publishedDate}</time> : release.publishedDate}</span>
+                </li>
+              </ul>
+              <h1 id="pd-h1" className={release.headline.length > LONG_HEADLINE ? 'long pd-h1-long' : 'long'}>
                 {headline.emphasis ? (
                   <>
                     {headline.before}
-                    <span className="b-named">{headline.emphasis}</span>
+                    <em>{headline.emphasis}</em>
                     {headline.after}
                   </>
                 ) : (
                   release.headline
                 )}
               </h1>
-              {release.excerpt ? <p className="b-lede pd-lede">{release.excerpt}</p> : null}
+              {release.excerpt ? <p className="ed-lede">{release.excerpt}</p> : null}
+              <div className="ed-act">
+                <a className="ed-btn" href={related ? related.href : mailto}>
+                  {related ? R.close.primary : R.press.h}
+                </a>
+                <a className="ed-link" href="#pr-media">
+                  {R.press.h}
+                </a>
+              </div>
             </div>
-            {image?.url ? (
-              <div className="pd-hero-s">
-                <figure className="pd-fig">
+            <div className="ed-hr narrow ed-ann ed-feat pd-hero-s">
+              {image?.url ? (
+                <figure className="pd-fig ed-shot ed-wipe">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={image.url} alt={featuredAlt} width={image.width} height={image.height} fetchPriority="high" decoding="async" />
                 </figure>
-                {meta}
-              </div>
-            ) : (
-              <div className="pd-facts">{meta}</div>
-            )}
+              ) : null}
+              <div className="t">{meta}</div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 2 — the evidence strip (paper): only complete, structured findings at the head of the body; otherwise not drawn. */}
-      {figures.length > 0 ? <EvidenceStrip figures={figures} methodHref={related ? `${related.href}#methodology` : undefined} /> : null}
+      {hasBody ? shell(pre, true) : null}
 
-      {/* 3 — the release: side-heading rows, a quotation stage and a method band where the content has them. */}
-      {hasBody ? (
-        <article className="pd-read pd-art" aria-label={R.article}>
-          {body}
-        </article>
+      {figures.length > 0 ? <EvidenceBand figures={figures} methodHref={related ? `${related.href}#methodology` : undefined} merged={merged} ids={headingIds} links={links} /> : null}
+
+      {hasBody ? shell(post, pre.length === 0 && figures.length === 0) : null}
+
+      {support.length > 0 || author || files.length > 0 ? (
+        <section className="ed-band paper pd-support" aria-label="Supporting material">
+          <div className="ed-w">
+            <div className="ed-sup ed-sup-3">
+              {support.map((c) => {
+                const id = headingIdOf(c);
+                const media = /media|press/i.test(headingText(c.chapter.heading));
+                return (
+                  <section key={c.index} className={media ? 'ed-note dk' : 'ed-note'} aria-labelledby={id}>
+                    <h2 id={id} className="ed-pk pd-h2-s">
+                      {renderInline(c.chapter.heading!, releaseOptions(links))}
+                    </h2>
+                    <div className="pd-prose pd-prose-s">
+                      <ReleaseNodes nodes={c.chapter.nodes} links={links} ids={headingIds} method={c.kind === 'method'} />
+                    </div>
+                  </section>
+                );
+              })}
+              {author ? (
+                <section className="ed-note" aria-labelledby="pd-h-author">
+                  <h2 id="pd-h-author" className="ed-pk">
+                    {R.author.h}
+                  </h2>
+                  <div className="pd-author">
+                    <span className="pd-author-n">{author.name}</span>
+                    {author.description ? <span className="pd-author-r">{author.description}</span> : null}
+                    {author.profileUrl ? (
+                      <a className="pd-go" href={author.profileUrl}>
+                        <span className="pd-go-t">{R.author.profile}</span> <span aria-hidden="true">→</span>
+                      </a>
+                    ) : null}
+                  </div>
+                </section>
+              ) : null}
+              {files.length > 0 ? (
+                <section className="ed-note" aria-labelledby="pd-h-files">
+                  <h2 id="pd-h-files" className="ed-pk">
+                    {R.media.h}
+                  </h2>
+                  <ul className="pd-files">
+                    {files.map((a) => (
+                      <li key={a.url}>
+                        <a href={a.url}>{a.title || a.fileName || R.media.fallback}</a>
+                        {a.description ? <span>{a.description}</span> : null}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ) : null}
+            </div>
+          </div>
+        </section>
       ) : null}
 
-      {author || files.length > 0 ? (
-        <div className="px-wrap pd-grp pd-extra">
-          {author ? (
-            <section className="pd-row pd-sec" aria-labelledby="pd-h-author">
-              <h2 id="pd-h-author" className="pd-side pd-h2 pd-h2-s">
-                {R.author.h}
-              </h2>
-              <div className="pd-prose pd-prose-s">
-                <div className="pd-author">
-                  <span className="pd-author-n">{author.name}</span>
-                  {author.description ? <span className="pd-author-r">{author.description}</span> : null}
-                  {author.profileUrl ? (
-                    <a className="pd-go" href={author.profileUrl}>
-                      <span className="pd-go-t">{R.author.profile}</span> <span aria-hidden="true">→</span>
-                    </a>
-                  ) : null}
-                </div>
-              </div>
-            </section>
-          ) : null}
-          {files.length > 0 ? (
-            <section className="pd-row pd-sec" aria-labelledby="pd-h-files">
-              <h2 id="pd-h-files" className="pd-side pd-h2 pd-h2-s">
-                {R.media.h}
-              </h2>
-              <div className="pd-prose pd-prose-s">
-                <ul className="pd-files">
-                  {files.map((a) => (
-                    <li key={a.url}>
-                      <a href={a.url}>{a.title || a.fileName || R.media.fallback}</a>
-                      {a.description ? <span>{a.description}</span> : null}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </section>
-          ) : null}
-        </div>
-      ) : null}
-
-      {/* 4 — the closing journey: one editorial action (the related report, else the newsroom) and one quiet media action. */}
-      <section className="pd-close" aria-labelledby="pd-h-close">
-        <div className="px-wrap pd-close-g">
-          <div className="pd-close-p">
-            <p className="pd-label">{related ? R.close.kicker : R.close.fallbackKicker}</p>
-            <h2 id="pd-h-close" className="pd-close-h">
-              {related ? (
-                <Link className="pd-close-a" href={related.href}>
-                  {related.title}
-                </Link>
-              ) : (
-                R.close.fallbackH
-              )}
-            </h2>
-            {related?.excerpt ? <p className="pd-close-x">{related.excerpt}</p> : null}
-            <Link className="dc-btn dc-btn-primary" href={related ? related.href : '/press'}>
-              <Mark />
+      <EdMotion />
+      <section className="ed-close pd-close" id="pr-media" aria-labelledby="pd-h-close">
+        <div className="ed-w">
+          <p className="ed-k">{related ? R.close.kicker : R.close.fallbackKicker}</p>
+          <h2 id="pd-h-close">
+            {related ? (
+              <Link className="pd-close-a" href={related.href}>
+                {related.title}
+              </Link>
+            ) : (
+              R.close.fallbackH
+            )}
+          </h2>
+          {related?.excerpt ? <p>{related.excerpt}</p> : null}
+          <div className="ed-act">
+            <Link className="ed-btn" href={related ? related.href : '/press'}>
               {related ? R.close.primary : R.close.fallbackPrimary}
             </Link>
-          </div>
-          <aside className="pd-close-s" aria-labelledby="pd-h-press">
-            <h2 id="pd-h-press" className="pd-label">
-              {R.press.h}
-            </h2>
-            <p>
-              {R.press.body} <a href={mailto}>{siteMetadata.email}</a> {R.press.tail}
-            </p>
-            <Link className="pd-go" href={CONTACT_HREF}>
-              <span className="pd-go-t">{R.press.link}</span> <span aria-hidden="true">→</span>
+            <Link className="ed-link" href={CONTACT_HREF}>
+              {R.press.link} <span aria-hidden="true">↗</span>
             </Link>
-          </aside>
+          </div>
+          <p className="ed-close-s">
+            {R.press.body} <a href={mailto}>{siteMetadata.email}</a> {R.press.tail}
+          </p>
         </div>
       </section>
     </>

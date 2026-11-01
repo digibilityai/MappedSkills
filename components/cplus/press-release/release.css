@@ -52,7 +52,7 @@
 .pd-stat-pair span { font-size: .5em; font-weight: 700; color: var(--dc-dim); }
 .pd-ev-t { margin-top: 14px; font: 800 clamp(1.1rem, 1rem + .45vw, 1.35rem)/1.22 var(--dc-f-title); letter-spacing: -.01em; max-width: 26ch; }
 .pd-ev-d { margin-top: 10px; font-size: .9375rem; line-height: 1.55; color: color-mix(in srgb, var(--dc-ink) 82%, transparent); max-width: 40ch; }
-.pd-ev-m { margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--dc-line); font-size: .8125rem; line-height: 1.5; color: var(--dc-dim); }
+.pd-ev-m { margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--dc-line); font-size: .875rem; line-height: 1.5; color: var(--dc-dim); }
 .pd-ev-k { margin-right: 4px; font: 700 .75rem/1 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-ink); }
 .pd-ev-n { margin-top: 18px; max-width: 70ch; font-size: .9375rem; line-height: 1.5; color: var(--dc-dim); }
 

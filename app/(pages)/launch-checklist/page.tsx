@@ -140,7 +140,7 @@ export default function LaunchChecklistPage() {
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Environment Variables Required</h2>
           <div className="bg-card border border-border rounded-lg p-6 font-mono text-sm">
-            <div className="space-y-2 text-muted-foreground">
+            <div className="space-y-2 text-muted-foreground break-all">
               <div>NEXT_PUBLIC_SITE_URL=https://mappedskills.com</div>
               <div>NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX</div>
               <div>NEXT_PUBLIC_GA4_ID=G-XXXXXXXXXX</div>

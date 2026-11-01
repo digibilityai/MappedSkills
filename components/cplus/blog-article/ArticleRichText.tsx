@@ -4,7 +4,7 @@ import { BLOCKS, INLINES, type Block, type Document, type Inline } from '@conten
 import type { ContentfulAsset, ContentfulEmbeddedEntry, ContentfulRichText } from '@/lib/contentful/types';
 import { linkTargetProps } from '@/lib/internal-links';
 import { mapContentfulFindingToCms } from '@/lib/contentful/mappers';
-import { createHeadingIdAllocator, nodeText } from '@/lib/contentful/heading-ids';
+import { createHeadingIdAllocator, createHeadingOrderTracker, nodeText } from '@/lib/contentful/heading-ids';
 import { ResearchFindingEmbed } from '@/components/research/ResearchFindingEmbed';
 
 /**
@@ -47,12 +47,21 @@ export function ArticleRichText({ document, links }: Props) {
   const assets = assetMap(links);
   const entries = entryMap(links);
   const idFor = createHeadingIdAllocator();
+  /* Heading order (DEC-113): a recorded h4 that comes straight after an h2, with no h3 between, would skip a level. It is rendered as an h3 with the
+     same look (`ba-h4`), the same text and no id, so no anchor is added, moved or renamed. Every other heading renders exactly as recorded. */
+  const order = createHeadingOrderTracker();
 
   const options: Options = {
     renderNode: {
-      [BLOCKS.HEADING_2]: (node, children) => <h2 id={idFor(nodeText(node))}>{children}</h2>,
-      [BLOCKS.HEADING_3]: (node, children) => <h3 id={idFor(nodeText(node))}>{children}</h3>,
-      [BLOCKS.HEADING_4]: (_node, children) => <h4>{children}</h4>,
+      [BLOCKS.HEADING_2]: (node, children) => {
+        order.afterH2();
+        return <h2 id={idFor(nodeText(node))}>{children}</h2>;
+      },
+      [BLOCKS.HEADING_3]: (node, children) => {
+        order.afterH3();
+        return <h3 id={idFor(nodeText(node))}>{children}</h3>;
+      },
+      [BLOCKS.HEADING_4]: (_node, children) => (order.h4IsUnderH2() ? <h3 className="ba-h4">{children}</h3> : <h4>{children}</h4>),
       [BLOCKS.HEADING_5]: (_node, children) => <h5>{children}</h5>,
       [BLOCKS.HEADING_6]: (_node, children) => <h6>{children}</h6>,
       [BLOCKS.PARAGRAPH]: (_node, children) => <p>{children}</p>,

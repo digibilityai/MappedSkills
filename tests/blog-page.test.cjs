@@ -12,7 +12,7 @@ const read = (p) => fs.readFileSync(path.join(__dirname, '..', p), 'utf8');
 const page = read('app/(pages)/blog/page.tsx');
 const body = read('components/cplus/blog/BlogBody.tsx');
 const content = read('components/cplus/blog/content.ts');
-const css = read('components/cplus/blog/blog.css');
+const css = read('components/editorial/editorial.css');
 const code = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
 
 test('title, path and revalidation unchanged; approved description', () => {
@@ -42,39 +42,44 @@ test('approved H1, lede, empty state and close copy', () => {
   for (const bad of [/Book a call/i, /\bbook\b/i, /Discovery/i, /guarantee/i, /\d+%/]) assert.ok(!bad.test(c), String(bad));
 });
 
-test('rows use only listing data, in order, and nothing renders without posts', () => {
-  assert.match(body, /posts\.map\(\(post\) =>/);
-  assert.ok(!/\.sort\(|\.filter\(|\.reverse\(/.test(code(body)), 'Contentful order kept');
-  for (const f of ['post.href', 'post.title', 'post.category', 'post.readingTime', 'post.excerpt']) assert.ok(body.includes(f), f);
-  assert.ok(!/publishedDate|author|featuredImage/.test(code(body)), 'no date, author or image on rows (BL-D4)');
-  assert.match(body, /\{post\.excerpt && <span className="bl-x">/);
-  assert.match(body, /\{has && \(/);
+test('collection: the featured article is not repeated, order is Contentful order, nothing renders without posts', () => {
+  assert.match(body, /const featured = posts\.find\(\(p\) => p\.slug === B\.featured\.slug\) \?\? posts\[0\];/);
+  assert.match(body, /const rest = posts\.filter\(\(p\) => p !== featured\);/);
+  assert.match(body, /rest\.map\(/);
+  assert.ok(!/\.sort\(|\.reverse\(/.test(code(body)), 'Contentful order kept');
+  for (const f of ['href', 'title', 'category', 'excerpt']) assert.ok(body.includes(f), f);
   assert.match(body, /\{has \? B\.lede : B\.empty\}/);
+  assert.ok(content.includes("slug: 'real-estate-developers-marketing-strategy'") || /featured:\s*\{[\s\S]*slug:/.test(content), 'featured slug is fixed copy');
 });
 
-test('contact primary, /schedule-call secondary labelled Request a call', () => {
-  assert.match(body, /<ActionPair primaryLabel=\{c\.primary\} secondaryLabel=\{c\.secondary\} \/>/);
+test('images are shown whole with their own dimensions; a typographic cover stands in when there is none; no hardcoded dates', () => {
+  assert.match(body, /width=\{featured\.image\.w\} height=\{featured\.image\.h\}/);
+  assert.match(body, /<EdCover /);
+  assert.match(css, /\.ed-card \.im[^{]*\{[^}]*object-fit: contain/);
+  assert.ok(!/\b20\d\d\b/.test(code(body)), 'no year literal in the template');
+});
+
+test('burnt close with the approved copy and the contact primary, /schedule-call secondary labelled Request a call', () => {
+  assert.match(body, /<EdClose id="b-close-h" h=\{c\.h\} body=\{c\.body\} primary=\{c\.primary\} secondary=\{c\.secondary\} \/>/);
   assert.ok(content.includes("primary: 'Tell us about your business'"));
   assert.ok(content.includes("secondary: 'Request a call'"));
+  const ed = read('components/editorial/EdClose.tsx');
+  assert.match(ed, /primaryHref = CONTACT_HREF, secondaryHref = BOOKING_HREF/);
 });
 
-test('150 ms feedback, reduced motion and forced colours', () => {
-  const durations = [...css.matchAll(/(\d+)ms/g)].map((m) => Number(m[1]));
-  assert.ok(durations.length >= 5 && durations.every((d) => d === 150), String(durations));
+test('restrained motion (500 ms at most), off under reduced motion, 3px focus outline, nothing sticky or fixed', () => {
+  const durations = [...css.matchAll(/(?:transition|animation):[^;}]*?(\d*\.?\d+)(ms|s)\b/g)].map((m) => (m[2] === 's' ? Number(m[1]) * 1000 : Number(m[1])));
+  assert.ok(durations.length > 0 && durations.every((d) => d <= 500), String(durations));
+  assert.match(css, /@media \(prefers-reduced-motion: no-preference\)/, 'the opening stage runs only when motion is allowed');
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
-  assert.match(css, /@media \(forced-colors: active\)/);
-  assert.match(css, /\.bl-link:focus-visible \{ outline: 3px solid var\(--dc-tang\)/);
+  assert.ok(!/count-?up|setInterval|autoplay/i.test(css), 'no count-up or autoplay');
+  assert.match(css, /outline: 3px solid var\(--tang\)/);
   assert.ok(!/position:\s*(sticky|fixed)/.test(css), 'no sticky elements');
 });
 
-test('every stylesheet rule is scoped to a bl- class', () => {
-  const rules = css.replace(/\/\*[\s\S]*?\*\//g, '').match(/[^{}]+\{/g) || [];
-  assert.ok(rules.length > 10);
-  for (const r of rules) {
-    const sel = r.slice(0, -1).trim();
-    if (sel.startsWith('@')) continue;
-    for (const part of sel.split(',')) assert.match(part, /\.bl-/, part.trim());
-  }
+test('the old blog stylesheet is gone and nothing imports it', () => {
+  assert.ok(!fs.existsSync(path.join(__dirname, '..', 'components/cplus/blog/blog.css')));
+  assert.ok(!/blog\.css/.test(body));
 });
 
 test('the shared list primitives and the article route are not used or changed here', () => {

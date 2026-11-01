@@ -1,4 +1,5 @@
 import { createMetadata } from '@/lib/metadata';
+import { BannerFocus } from '@/components/editorial/BannerFocus';
 
 /**
  * `/contact`, enquiry first. The page body is in `layout.tsx` (shared with the call-request state); this route only
@@ -10,6 +11,7 @@ export const metadata = createMetadata(
   '/contact'
 );
 
+/* The body is in layout.tsx; this route only mounts the shared keyboard-focus guard for the first-visit consent banner (DEC-114). */
 export default function ContactPage() {
-  return null;
+  return <BannerFocus />;
 }

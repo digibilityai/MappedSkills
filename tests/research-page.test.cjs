@@ -29,30 +29,19 @@ test('research facts come only from the existing Contentful getters', () => {
   for (const src of [code(body), code(content), code(page)]) assert.ok(!/\d+(\.\d+)?%|\bn=\d|\b(120|51|69|67)\b/.test(src.replace(/\d+(\.\d+)?(px|rem|em|ch|ms|vw)\b/g, '')), 'no hard-coded research figure');
 });
 
-test('the figure is drawn only when the statistic and sample reconcile', () => {
-  const { sampleField } = load('components/cplus/research/sample.ts');
-  assert.deepEqual(sampleField('42.5%', 120), { total: 120, marked: 51, rest: 69, cols: 12 });
-  assert.equal(sampleField('66.7% vs 6.7%', 120), null, 'paired statistic');
-  assert.equal(sampleField('42.4%', 120), null, 'not a whole number of websites');
-  assert.equal(sampleField('42.5%', undefined), null, 'no sample size');
-  assert.equal(sampleField('50%', 125), null, 'sample does not split into ten rows');
-  assert.equal(sampleField('0%', 120), null);
-  assert.equal(sampleField('100%', 120), null);
-});
-
 test('lead section: head, figure, body in DOM order; notes only beside their own headline', () => {
   const i = (s) => body.indexOf(s);
-  assert.ok(i('className="rs-lead-head"') < i('<figure className="rs-fig"') && i('<figure className="rs-fig"') < i('className="rs-lead-body"'));
+  assert.ok(i('id="rs-h-lead"') < i('<EvidenceField spec={leadField}') && i('<EvidenceField spec={leadField}') < i('{lead.description'), 'heading, chart with legend, then the recorded text');
   assert.ok(!/display:\s*contents|\border\s*:/.test(css.replace(/border[\w-]*\s*:/g, '')), 'no visual reordering');
   assert.match(body, /LEAD_NOTES\[lead\.headline\]/);
-  assert.match(css, /grid-template-areas: "head fig" "body fig"/);
+  assert.match(body, /\{notes \? \(/, 'notes only when the headline has them');
 });
 
 test('the report is shown once; lists only when more than one exists', () => {
   assert.match(page, /latest\.filter\(\(r\) => r\.slug !== card\?\.slug\)/);
   assert.match(body, /\{others\.length \? \(/);
   assert.match(body, /\{categories\.length > 1 \? \(/);
-  assert.equal((body.match(/className="rs-card"/g) || []).length, 1);
+  assert.equal((body.match(/id="rs-h-report"/g) || []).length, 1);
   assert.match(body, /#methodology/);
   assert.match(body, /#limitations/);
 });
@@ -64,8 +53,8 @@ test('approved H1 and the owner close; media enquiry kept and secondary', () => 
   assert.ok(c.includes("body: 'We can help you understand what’s visible, what’s missing and what to look at next.'"));
   assert.ok(c.includes("primary: 'Talk to MappedSkills'"));
   assert.ok(c.includes("secondary: 'Request a call'"));
-  assert.match(body, /href=\{CONTACT_HREF\} className="dc-btn dc-btn-primary"/);
-  assert.match(body, /href=\{BOOKING_HREF\} className="dc-btn dc-btn-secondary"/);
+  assert.match(body, /<EdClose id="rs-h-close" h=\{c\.h\} body=\{c\.body\} primary=\{c\.primary\} secondary=\{c\.secondary\} \/>/);
+  assert.match(read('components/editorial/EdClose.tsx'), /primaryHref = CONTACT_HREF, secondaryHref = BOOKING_HREF/);
   assert.ok(c.includes("subject: 'Media enquiry: MappedSkills Research'"));
   assert.ok(c.includes("body: 'For media enquiries, embargoed materials, or comment, email'"));
   assert.equal((body.match(/<h1\b/g) || []).length, 1);

@@ -80,9 +80,9 @@ test('scoped CSS: pd- only, 150 ms feedback, reduced motion, no sticky, no scrip
 });
 
 test('breadcrumb keeps the full headline in the DOM; the hero H1 is the headline unchanged', () => {
-  assert.match(body, /aria-current="page" className="pd-crumb-cur">\{release\.headline\}/);
-  assert.match(body, /<h1 id="pd-h1" className=\{release\.headline\.length > LONG_HEADLINE \? 'b-h1 pd-h1 pd-h1-long' : 'b-h1 pd-h1'\}>/);
-  assert.match(body, /\{headline\.before\}\s*<span className="b-named">\{headline\.emphasis\}<\/span>\s*\{headline\.after\}[\s\S]*release\.headline\s*\)\}\s*<\/h1>/, 'the h1 is the headline in up to three exact slices');
+  assert.match(body, /<span aria-current="page">\{release\.headline\}<\/span>/);
+  assert.match(body, /<h1 id="pd-h1" className=\{release\.headline\.length > LONG_HEADLINE \? 'long pd-h1-long' : 'long'\}>/);
+  assert.match(body, /\{headline\.before\}\s*<em>\{headline\.emphasis\}<\/em>\s*\{headline\.after\}[\s\S]*release\.headline\s*\)\}\s*<\/h1>/, 'the h1 is the headline in up to three exact slices');
 });
 
 /* ------------------------------------------------------------- strip rules -- */
@@ -236,9 +236,10 @@ test('render: a general announcement (no image, no related research, no findings
   const d = docOf([P('PUNE, INDIA — News.'), H2('What changed'), P('Detail.')]);
   const h = html({ contentJson: d.document, contentLinks: d.links, featuredImage: undefined, relatedResearch: undefined, author: { name: 'A Writer', description: 'Editor' }, mediaAssets: [{ url: 'https://x/f.zip', title: 'Pack', description: 'A file', isImage: false }] });
   assert.ok(!h.includes('<img'), 'no image');
-  assert.ok(h.includes('pd-hero-g pd-hero-g-solo') && h.includes('pd-facts'), 'facts take the image column');
-  assert.ok(!h.includes('Related research') && !h.includes('pd-ev'), 'no related row, no strip');
+  assert.ok(h.includes('pd-hero-s') && h.includes('pd-meta'), 'facts take the image column');
+  assert.ok(!h.includes('Related research') && !h.includes('pd-ev'), 'no related row, no evidence band');
   assert.ok(h.includes('See all press releases') && h.includes('href="/press"'), 'closing falls back to the newsroom');
+  assert.ok(h.includes('class="ed-hero pd-hero"') && h.includes('class="ed-close pd-close"'), 'dark hero and burnt close');
   assert.ok(h.includes('A Writer') && h.includes('Pack') && h.includes('pd-dateline'));
   assert.ok(h.includes('Press enquiries') && h.includes('mailto:'), 'the media action is always present');
   assert.ok(h.includes('subject=Media%20enquiry%3A%20A%20Headline'));
@@ -267,11 +268,11 @@ test('render: quotation, method band, ledger and read-next appear only when thei
   ];
   const d = docOf(doc);
   const h = html({ contentJson: d.document, contentLinks: d.links });
-  for (const c of ['pd-ledger', 'pd-quote', 'pd-q-b', 'pd-method', 'pd-limit', 'pd-next-l', 'pd-colophon', 'pd-prose pd-prose-s']) assert.ok(h.includes(c), c);
+  for (const c of ['pd-ledger', 'pd-quote', 'pd-q-b', 'pd-support', 'pd-limit', 'pd-next-l', 'pd-colophon', 'pd-prose pd-prose-s']) assert.ok(h.includes(c), c);
   assert.ok(h.includes('<blockquote class="pd-q-b"><p>A quotation that is long enough to count as one.</p>'));
   const plain = docOf([P('Opening.'), H2('Key findings'), UL(li('A plain bullet.'), li('Another.')), H2('Why it matters'), P('Text.')]);
   const hp = html({ contentJson: plain.document, contentLinks: plain.links });
-  for (const c of ['pd-ledger', 'pd-quote', 'pd-method', 'pd-limit', 'pd-colophon', 'pd-dateline']) assert.ok(!hp.includes(c), `${c} must not appear`);
+  for (const c of ['pd-ledger', 'pd-quote', 'pd-support', 'pd-limit', 'pd-colophon', 'pd-dateline']) assert.ok(!hp.includes(c), `${c} must not appear`);
   assert.ok(hp.includes('<ul><li><p>A plain bullet.</p></li>') || hp.includes('A plain bullet.'));
 });
 
@@ -288,14 +289,14 @@ test('render: a chapter heading is one h2 (never a heading nested in a heading);
   const d = docOf([embed('n'), P('Body.'), H2('First chapter'), P('More.')], [noStat]);
   const h = html({ contentJson: d.document, contentLinks: d.links });
   assert.ok(!/<h2[^>]*>\s*<h[1-6]/.test(h), 'no nested heading');
-  assert.strictEqual(count(h, /<h2/g), 3, 'chapter, closing and press enquiries');
+  assert.strictEqual(count(h, /<h2/g), 2, 'chapter and closing');
   assert.ok(h.includes('Headline n') && h.includes('pd-embed') && !h.includes('<h3'), 'the finding is shown as plain lines');
 });
 
 /* ------------------------------------------------- G2 review refinements -- */
 
 test('kicker: "MappedSkills Research" only with related research (structured data), "MappedSkills" otherwise', () => {
-  const kicker = (h) => (/<p class="pd-kicker">[\s\S]*?<\/p>/.exec(h) || [''])[0].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const kicker = (h) => ((/<p class="ed-k">[\s\S]*?<\/p>/.exec(h) || [''])[0] + ' · Press release').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
   const withResearch = html({});
   const without = html({ relatedResearch: undefined });
   assert.strictEqual(kicker(withResearch), 'MappedSkills Research · Press release');
@@ -309,11 +310,11 @@ test('kicker: "MappedSkills Research" only with related research (structured dat
 });
 
 test('no featured image: the hero closes up (solo modifier); with an image it is the unchanged research hero', () => {
-  assert.ok(html({ featuredImage: undefined }).includes('class="b-hero pd-hero pd-hero-solo"'));
+  const none = html({ featuredImage: undefined });
+  assert.ok(!none.includes('<img') && none.includes('pd-meta'), 'the facts panel stands in for the image');
   const withImage = html({});
-  assert.ok(withImage.includes('class="b-hero pd-hero"') && !withImage.includes('pd-hero-solo'));
-  assert.match(css, /\.px-h \.pd-hero\.pd-hero-solo \{ padding-block-end: clamp\(20px, 2\.5vw, 36px\); \}/);
-  assert.match(css, /\.pd-hero-solo \+ \.pd-read/);
+  assert.ok(withImage.includes('<img') && withImage.includes('class="pd-fig ed-shot ed-wipe"'), 'the release graphic is shown whole');
+  assert.match(read('components/editorial/editorial.css'), /\.pd-fig img[^{]*\{[^}]*height: auto/);
 });
 
 test('long headline: one step smaller and wider only above the threshold; the published MSR-001-length headline is untouched', () => {
@@ -322,9 +323,9 @@ test('long headline: one step smaller and wider only above the threshold; the pu
   assert.ok(msr.length < LONG_HEADLINE, `the published headline (${msr.length}) stays at the standard size`);
   assert.ok(!html({ headline: msr }).includes('pd-h1-long'));
   const long = 'A very long headline '.repeat(10).trim();
-  assert.ok(long.length > LONG_HEADLINE && html({ headline: long }).includes('class="b-h1 pd-h1 pd-h1-long"'));
+  assert.ok(long.length > LONG_HEADLINE && html({ headline: long }).includes('class="long pd-h1-long"'));
   assert.ok(html({ headline: long }).includes(`>${long}</h1>`), 'the h1 text is never truncated');
-  assert.match(css, /\.pd-h1\.pd-h1-long \{ font-size: clamp\(1\.5rem,/, 'never below 24px');
+  assert.match(read('components/editorial/editorial.css'), /\.pd-h1-long[^{]*\{[^}]*font-size: clamp\(1\.5rem,/, 'never below 24px');
 });
 
 test('mobile strip: text sizes stay at or above 15px; nothing hidden; short figures sit beside their headline, wide ones stay stacked', () => {
@@ -421,16 +422,17 @@ test('F4: consecutive method chapters share one section; a quotation ends it and
   assert.deepStrictEqual(run([...m('About the research'), H2('Why it matters'), P('Plain text that is long enough.'), ...m('Limitations')]), ['method1', 'main', 'main'], 'the OD-3 fallback after an ordinary chapter is unchanged');
 });
 
-test('F4: rendering follows the runs: one band for consecutive method chapters, two bands when a quotation separates them', () => {
+test('F4: the trailing run of method chapters is the supporting cards; a quotation ends the run and stays in reading order', () => {
   const m = (h) => [H2(h), P('Method paragraph text that is long enough.')];
   const one = docOf([P('Intro.'), ...m('About the research'), ...m('Limitations')]);
   const h1 = html({ contentJson: one.document, contentLinks: one.links });
-  assert.strictEqual(count(h1, /class="pd-method"/g), 1);
-  assert.strictEqual(count(h1, /pd-row pd-sec/g), 2, 'two sections inside the one band');
+  assert.strictEqual(count(h1, /pd-support/g), 1);
+  assert.strictEqual(count(h1, /pd-h2-s/g), 2, 'both method chapters sit in the supporting section');
   const two = docOf([P('Intro.'), ...m('About the research'), ...quoteChapter('A note from the founder'), ...m('Limitations')]);
   const h2 = html({ contentJson: two.document, contentLinks: two.links });
-  assert.strictEqual(count(h2, /class="pd-method"/g), 2, 'two separate bands');
-  assert.ok(h2.indexOf('class="pd-method"') < h2.indexOf('class="pd-quote"') && h2.indexOf('class="pd-quote"') < h2.lastIndexOf('class="pd-method"'), 'band, quotation, band in document order');
+  assert.strictEqual(count(h2, /class="pd-quote"/g), 1);
+  assert.strictEqual(count(h2, /pd-support/g), 1);
+  assert.ok(h2.indexOf('About the research') < h2.indexOf('class="pd-quote"') && h2.indexOf('class="pd-quote"') < h2.indexOf('pd-support'), 'document order kept');
   assert.deepStrictEqual(idsOf(h2), ['about-the-research', 'a-note-from-the-founder', 'limitations']);
 });
 
@@ -475,8 +477,8 @@ test('H1 render: one h1, two colours, the exact Contentful text, no duplicated h
   const h = html({ headline: MSR_H, relatedResearch: RELATED });
   const inner = h1Of(h);
   assert.strictEqual(count(h, /<h1/g), 1);
-  assert.strictEqual(count(inner, /class="b-named"/g), 1);
-  assert.ok(inner.includes('<span class="b-named">120 Indian Business Websites</span>'));
+  assert.strictEqual(count(inner, /<em>/g), 1);
+  assert.ok(inner.includes('<em>120 Indian Business Websites</em>'));
   assert.strictEqual(textOf(inner), MSR_H, 'the h1 text is the headline exactly');
   assert.strictEqual(count(textOf(h), new RegExp(esc(MSR_H), 'g')), 2, 'the headline text occurs only in the h1 and the breadcrumb');
   assert.ok(h.includes('aria-labelledby="pd-h1"'));
@@ -497,8 +499,8 @@ test('H1 emphasis: nothing release-specific is hard-coded; SEO title, metadata a
 });
 
 test('H1 emphasis: it uses the shared C+ .b-named colour (no new colour rule); a long headline keeps its size modifier', () => {
-  assert.ok(!/b-named/.test(css), 'release.css adds no .b-named rule; the shared .px-b .b-named (tangerine display) applies');
+  assert.match(read('components/editorial/editorial.css'), /\.ed-hero h1 em/, 'the emphasis is the shared tangerine hero rule');
   const long = `Long headline words Indian Business Websites ${'x '.repeat(70)}`.trim();
   const h = html({ headline: long, relatedResearch: RELATED });
-  assert.ok(h.includes('pd-h1-long') && h1Of(h).includes('b-named'));
+  assert.ok(h.includes('pd-h1-long') && h1Of(h).includes('<em>'));
 });

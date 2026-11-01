@@ -11,8 +11,14 @@ export const RESEARCH = {
     lede: 'MappedSkills Research looks at how businesses are found, measured and converted. Every report says what we checked, when, how many, and where the evidence stops.',
     latest: 'Latest report',
   },
-  lead: { kicker: 'The headline finding' },
-  more: { kicker: 'From the same study', h: 'What else we found.', sample: 'Sample', source: 'Source' },
+  lead: {
+    kicker: 'The headline finding',
+    /* "What we found across 120 websites.": the number is the report's recorded sample size, never typed here; without one the heading is "What we found." */
+    h: (sample?: number) => (sample ? { a: 'What we found', b: `across ${sample} websites.` } : { a: 'What we found', b: '' }),
+    see: 'See what we found',
+  },
+  means: { kicker: 'What it means', h: { a: 'Read the number.', b: 'Then read its limits.' }, yes: 'What this means for you', no: 'What it doesn’t mean' },
+  more: { kicker: 'From the same study', h: 'What else we found.', dek: 'More findings from the same study. Each square is one audited website.', sample: 'Sample', source: 'Source' },
   report: {
     kicker: 'The full report',
     read: 'Read the full report',

@@ -5,11 +5,16 @@
 export const PRESS = {
   crumb: 'Press',
   hero: {
+    kicker: 'Newsroom',
     h1: { a: 'News from MappedSkills,', b: 'on the record.' },
     lede: 'Our press releases and announcements, newest first. Writing a story? Email us for comment or background.',
     contact: 'Media contact',
     reach: 'How to reach us',
   },
+  /* R3 (2026-10-31) */
+  latest: { k: 'Latest announcement', cta: 'Read the release', desk: 'Email the media desk' },
+  figures: { kicker: 'From the release', h: { a: 'The figures,', b: 'each with its source.' }, dek: 'Each figure is printed with its sample and source, as recorded in the release.', link: 'Read the full release' },
+  earlier: { ch: 'Earlier announcements', a: 'Earlier', b: 'news.' },
   news: {
     kicker: 'Press releases',
     h: 'Latest news.',

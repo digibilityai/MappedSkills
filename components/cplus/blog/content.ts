@@ -15,6 +15,9 @@ export const BLOG = {
   empty: 'Nothing is published here yet.',
   count: (n: number) => `${n} ${n === 1 ? 'guide' : 'guides'}`,
   read: 'Read',
+  /* R3 (2026-10-31): the featured read, then the collection. */
+  featured: { kicker: 'Featured read', cta: 'Read the article', slug: '7-proven-strategies-of-digital-marketing-for-real-estate-developers' },
+  collection: { ch: 'The collection', a: 'Every guide,', b: 'in one place.' },
 
   close: {
     h: 'Reading about a problem you have?',

@@ -49,6 +49,16 @@ export function createHeadingIdAllocator(): (text: string) => string {
 }
 
 /**
+ * Heading order for the article renderer (DEC-113). A recorded H4 that comes straight after an H2, with no H3 between, would skip a level;
+ * `h4IsUnderH2()` says so, so the renderer can give it the next level down (same text, same look, no id). It adds no ids and moves none.
+ * Call `afterH2()` and `afterH3()` as those headings render, in document order.
+ */
+export function createHeadingOrderTracker(): { afterH2: () => void; afterH3: () => void; h4IsUnderH2: () => boolean } {
+  let underH2 = false;
+  return { afterH2: () => { underH2 = true; }, afterH3: () => { underH2 = false; }, h4IsUnderH2: () => underH2 };
+}
+
+/**
  * The approved "main headings" rule for the contents list (BL-D6 G1, D-2): the H2s when an article has at least three;
  * otherwise its H2s and H3s together. H4 and below are never listed.
  */

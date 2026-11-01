@@ -29,7 +29,7 @@ test('metadata, JSON-LD identity and routing are unchanged', () => {
   assert.match(page, /\{ name: report\.title, href: `\/research\/\$\{report\.slug\}` \}/, 'BreadcrumbList keeps the full title');
   assert.match(page, /export const revalidate = 60;/);
   assert.match(page, /getResearchStaticParams/);
-  assert.match(body, /\{head\}[\s\S]*rr-h1-sub/, 'H1 text is the title, split inside one h1');
+  assert.match(body, /splitAfterMarker\(report\.title\)[\s\S]*<h1 id="rr-h1">[\s\S]*<em>\{split\.emphasis\}<\/em>/, 'H1 text is the title, split inside one h1');
 });
 
 test('no research figure or sentence is hard-coded', () => {
@@ -101,7 +101,7 @@ test('OD-10 guard: every dropped or unsupported embedded part is reported', () =
 });
 
 test('close, media, copy and motion', () => {
-  assert.match(code(body), /CONTACT_HREF[\s\S]*BOOKING_HREF[\s\S]*\/conversion-optimization/);
+  assert.match(code(body), /CONTACT_HREF[\s\S]*\/conversion-optimization[\s\S]*<EdClose id="rr-h-close"/);
   assert.match(body, /Media enquiry: \$\{report\.title\}/);
   assert.ok(!/transition:[^;]*[^1]\d{3}ms|animation/.test(css.replace(/150ms/g, '')), '150 ms feedback only, no animation');
   assert.match(css, /prefers-reduced-motion: reduce[\s\S]*transition: none/);

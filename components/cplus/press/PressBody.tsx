@@ -1,128 +1,207 @@
+import Image from 'next/image';
 import Link from 'next/link';
-import { CONTACT_HREF, Mark } from '@/components/direction-c/primitives';
+import { EdClose } from '@/components/editorial/EdClose';
+import { EdMotion } from '@/components/editorial/EdMotion';
 import { siteMetadata } from '@/lib/metadata';
 import type { CmsPressCard } from '@/lib/contentful/types';
-import { Breadcrumb } from '../Breadcrumb';
+import type { Figure } from '@/components/cplus/press-release/release-rules';
+import { RELEASE as R } from '@/components/cplus/press-release/content';
 import { PRESS as S } from './content';
-import './press.css';
+import '@/components/editorial/editorial.css';
 
 /**
- * C+ Press (/press): the owner-approved G1 design (docs/press-redesign/g1/). Hero → latest news (an honest empty state,
- * else one dated row per release) → background links → the media enquiry close. Server component, no client JavaScript.
- * The media address is the existing one (`siteMetadata.email`), confirmed by the owner as the final media contact.
+ * C+ Press (/press), editorial direction R3 (owner-approved 2026-10-31): a deep-ink newsroom hero whose visual is the latest announcement (its own
+ * release graphic whole, date, headline, summary, one button), compact dated records for any earlier releases, compact background records, and the
+ * burnt media enquiry close. With no release the hero says so honestly and points to the research. Server component, no client code. The media address is
+ * the existing one (`siteMetadata.email`), confirmed by the owner as the final media contact.
  */
-export function PressBody({ releases }: { releases: CmsPressCard[] }) {
+export function PressBody({ releases, figures = [] }: { releases: CmsPressCard[]; figures?: Figure[] }) {
   const mailto = `mailto:${siteMetadata.email}?subject=${encodeURIComponent(S.media.subject)}`;
+  const [lead, ...earlier] = releases;
+  const hasFigs = Boolean(lead) && figures.length > 0;
+  let n = 0;
+  const ch = () => String(++n).padStart(2, '0');
+  const tone = (i: number) => (i % 2 === 0 ? 'ed-band paper' : 'ed-band');
+  let band = 0;
   return (
     <>
-      {/* 1: hero (ivory) */}
-      <section className="b-hero pr-hero" aria-labelledby="pr-h1">
-        <div className="px-wrap">
-          <Breadcrumb current={S.crumb} />
-          <div className="pr-hero-g">
-            <h1 id="pr-h1" className="b-h1 pr-h1">
-              {S.hero.h1.a} <span className="b-named">{S.hero.h1.b}</span>
-            </h1>
-            <div>
-              <p className="b-lede pr-lede">{S.hero.lede}</p>
-              <p className="pr-desk">
-                <span className="pr-label">{S.hero.contact}</span>
-                <a className="pr-mail" href={mailto}>
+      <section className="ed-hero" aria-labelledby="pr-h1">
+        <div className="ed-w">
+          <nav aria-label="Breadcrumb" className="ed-crumb">
+            <Link href="/">Home</Link>
+            <span aria-current="page">{S.crumb}</span>
+          </nav>
+          <div className="ed-hg">
+            <div className="ed-hl">
+              <p className="ed-k">{S.hero.kicker}</p>
+              <h1 id="pr-h1">
+                {S.hero.h1.a} <em>{S.hero.h1.b}</em>
+              </h1>
+              <p className="ed-lede">{S.hero.lede}</p>
+              <div className="ed-act">
+                <a className="ed-btn" href={mailto}>
+                  {S.latest.desk}
+                </a>
+                <a className="ed-link" href={mailto}>
                   {siteMetadata.email}
                 </a>
-                <a className="pr-go" href={`#${S.media.id}`}>
-                  <span className="pr-go-t">{S.hero.reach}</span> <span aria-hidden="true">↓</span>
-                </a>
-              </p>
+              </div>
             </div>
+            {lead ? (
+              <article className="ed-hr ed-feat ed-ann" aria-labelledby="pr-lead-h">
+                {lead.image ? (
+                  <div className="ed-shot ed-wipe">
+                    <Image src={lead.image.url} alt={lead.image.alt} width={lead.image.w} height={lead.image.h} sizes="(min-width: 1081px) 640px, 100vw" priority />
+                  </div>
+                ) : null}
+                <div className="t">
+                  <p className="ed-pk">
+                    {S.latest.k} · <time>{lead.publishedDate}</time>
+                  </p>
+                  <h2 id="pr-lead-h">
+                    <Link href={lead.href}>{lead.headline}</Link>
+                  </h2>
+                  {lead.excerpt ? <p className="x">{lead.excerpt}</p> : null}
+                  <div className="ed-act">
+                    <Link className="ed-btn" href={lead.href}>
+                      {S.latest.cta}
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            ) : (
+              <div className="ed-hr ed-panel">
+                <p className="ed-pk">{S.news.kicker}</p>
+                <h2>{S.news.empty.h}</h2>
+                <p className="x">{S.news.empty.body}</p>
+                <p className="x">{S.news.empty.until}</p>
+                <div className="ed-act">
+                  <Link className="ed-btn" href="/research">
+                    {S.news.empty.link}
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* 2: latest news (paper) */}
-      <section className="b-sec b-paper pr-news" aria-labelledby="pr-h-news">
-        <div className="px-wrap">
-          <p className="b-kicker">{S.news.kicker}</p>
-          <h2 id="pr-h-news" className="b-h2 pr-h2">
-            {S.news.h}
-          </h2>
-          {releases.length > 0 ? (
-            <ol className="pr-list">
-              {releases.map((r) => (
-                <li key={r.slug} className="pr-row">
-                  <p className="pr-date">{r.publishedDate}</p>
-                  <div>
-                    <h3 className="pr-row-h">
-                      <Link href={r.href}>{r.headline}</Link>
-                    </h3>
-                    {r.excerpt ? <p className="pr-row-x">{r.excerpt}</p> : null}
-                  </div>
-                  <span className="pr-row-a" aria-hidden="true">
-                    →
-                  </span>
+      {hasFigs && lead ? (
+        <section className={tone(band++)} aria-labelledby="pr-h-figs">
+          <div className="ed-w">
+            <div className="ed-head">
+              <div>
+                <p className="ed-ch">
+                  <span>{ch()}</span>
+                  {S.figures.kicker}
+                </p>
+                <h2 id="pr-h-figs" className="ed-h2">
+                  {S.figures.h.a} <em>{S.figures.h.b}</em>
+                </h2>
+                <p className="ed-dek">{S.figures.dek}</p>
+              </div>
+              <Link className="ed-link dk" href={lead.href}>
+                {S.figures.link} <span aria-hidden="true">↗</span>
+              </Link>
+            </div>
+            <ol className="ed-figs">
+              {figures.map((f, i) => (
+                <li key={`${f.id}-${i}`}>
+                  <p className="ed-fig v">{f.statistic}</p>
+                  <h3 className="c">{f.headline}</h3>
+                  {f.description ? <p className="d">{f.description}</p> : null}
+                  {f.baseSample || f.sourceNote ? (
+                    <p className="s">
+                      {f.baseSample ? (
+                        <>
+                          <b>{R.evidence.sample}</b> {f.baseSample}{' '}
+                        </>
+                      ) : null}
+                      {f.sourceNote ? (
+                        <>
+                          <b>{R.evidence.source}</b> {f.sourceNote}
+                        </>
+                      ) : null}
+                    </p>
+                  ) : null}
                 </li>
               ))}
             </ol>
-          ) : (
-            <div className="pr-empty">
-              <p className="pr-empty-h">{S.news.empty.h}</p>
-              <p className="pr-empty-b">{S.news.empty.body}</p>
-              <p className="pr-empty-b">{S.news.empty.until}</p>
-              <Link className="pr-go" href="/research">
-                <span className="pr-go-t">{S.news.empty.link}</span> <span aria-hidden="true">→</span>
-              </Link>
-            </div>
-          )}
-        </div>
-      </section>
+          </div>
+        </section>
+      ) : null}
 
-      {/* 3: background (ivory) */}
-      <section className="b-sec pr-bg" aria-labelledby="pr-h-bg">
-        <div className="px-wrap">
-          <p className="b-kicker">{S.background.kicker}</p>
-          <h2 id="pr-h-bg" className="b-h2 pr-h2">
-            {S.background.h.a} <span className="b-named">{S.background.h.b}</span>
-          </h2>
-          <ul className="pr-tiles">
+      {earlier.length > 0 ? (
+        <section className={tone(band++)} aria-labelledby="pr-h-news">
+          <div className="ed-w">
+            <div className="ed-head">
+              <div>
+                <p className="ed-ch">
+                  <span>{ch()}</span>
+                  {S.earlier.ch}
+                </p>
+                <h2 id="pr-h-news" className="ed-h2">
+                  {S.earlier.a} <em>{S.earlier.b}</em>
+                </h2>
+              </div>
+            </div>
+            <ol className="ed-rec">
+              {earlier.map((r) => (
+                <li key={r.slug}>
+                  <Link href={r.href}>
+                    <p className="ty">
+                      {S.news.kicker}
+                      <small>{r.publishedDate}</small>
+                    </p>
+                    <div>
+                      <h3>{r.headline}</h3>
+                      {r.excerpt ? <p>{r.excerpt}</p> : null}
+                    </div>
+                    <span className="ar" aria-hidden="true">
+                      →
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      ) : null}
+
+      <section className={tone(band++)} aria-labelledby="pr-h-bg">
+        <div className="ed-w">
+          <div className="ed-head">
+            <div>
+              <p className="ed-ch">
+                <span>{ch()}</span>
+                {S.background.kicker}
+              </p>
+              <h2 id="pr-h-bg" className="ed-h2">
+                {S.background.h.a} <em>{S.background.h.b}</em>
+              </h2>
+            </div>
+          </div>
+          <ul className="ed-rec">
             {S.background.tiles.map((t) => (
-              <li key={t.href} className="pr-tile">
-                <p className="pr-label">{t.label}</p>
-                <h3 className="pr-tile-h">
-                  <Link href={t.href}>{t.title}</Link>
-                </h3>
-                <p className="pr-tile-d">{t.body}</p>
-                <span className="pr-tile-a" aria-hidden="true">
-                  {t.cta}
-                </span>
+              <li key={t.href}>
+                <Link href={t.href}>
+                  <p className="ty">{t.label}</p>
+                  <div>
+                    <h3>{t.title}</h3>
+                    <p>{t.body}</p>
+                  </div>
+                  <span className="ar" aria-hidden="true">
+                    →
+                  </span>
+                </Link>
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      {/* 4: media enquiry close (tangerine, the shared C+ close) */}
-      <section className="b-close pr-close" id={S.media.id} aria-labelledby="pr-h-media" tabIndex={-1}>
-        <div className="px-wrap b-close-in">
-          <div>
-            <h2 id="pr-h-media" className="b-h2">
-              {S.media.h}
-            </h2>
-            <p className="b-lede">{S.media.body}</p>
-            <p className="pr-close-mail">
-              <a href={mailto}>{siteMetadata.email}</a>
-            </p>
-          </div>
-          <div className="dc-actions">
-            <a className="dc-btn dc-btn-primary" href={mailto}>
-              <Mark />
-              {S.media.primary}
-            </a>
-            <Link className="dc-btn dc-btn-secondary" href={CONTACT_HREF}>
-              {S.media.secondary}
-            </Link>
-          </div>
-        </div>
-      </section>
+      <EdMotion />
+      <EdClose id="pr-h-media" h={S.media.h} body={S.media.body} primary={S.media.primary} secondary={S.media.secondary} primaryHref={mailto} />
     </>
   );
 }

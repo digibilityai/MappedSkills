@@ -12,7 +12,7 @@
 .cl-band > li { flex: var(--g, 1) 1 0; min-width: 0; margin: 0; padding-inline: clamp(8px, 1vw, 14px); display: flex; justify-content: center; }
 .cl-band .cl-tile { background: transparent; width: 100%; height: clamp(54px, 4.9vw, 72px); }
 .cl-band .cl-tile > img { max-width: 100%; }
-.cl-band .cl-tile > img[src*='ekoching'], .cl-band .cl-tile > img[src*='hut-n-homes'], .cl-band .cl-tile > img[src*='marshal'], .cl-band .cl-tile > img[src*='advit-prints'] { border-radius: 2px; }
+.cl-band .cl-tile > img[src*='ekoching'], .cl-band .cl-tile > img[src*='hut-n-homes'], .cl-band .cl-tile > img[src*='marshal'], .cl-band .cl-tile > img[src*='advit-prints'], .cl-band .cl-tile > img[src*='bblewrap'] { border-radius: 2px; }
 /* balanced optical sizing by shape (natural size stays the ceiling): wide marks by height, near-square by both */
 .cl-band .cl-wide > img { max-height: 40px; }
 .cl-band .cl-mid > img { max-width: 92%; max-height: 50px; }

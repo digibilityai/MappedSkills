@@ -10,6 +10,7 @@ import { CaseStudyTemplate } from '@/components/case-study/CaseStudyTemplate';
 import { createMetadata } from '@/lib/metadata';
 import { imageSlotsFor } from '@/lib/case-study-images';
 import { presentationFor } from '@/lib/case-study-presentation';
+import { hasFinalCopy, studyCopy } from '@/lib/case-study-release';
 import { UNLISTED_CASE_STUDY_IDS } from '@/lib/case-study-eligibility';
 import { isCaseStudyProofWithheld } from '@/lib/case-study-proof';
 import { getCaseStudyService } from '@/lib/case-study-services';
@@ -60,9 +61,10 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
   }
 
   // a study whose detail image is approved as its sharing image (`og` in lib/case-study-images.ts) uses it; every other study keeps the site default
-  const feature = imageSlotsFor(caseStudy.href).feature;
+  const finalCopy = hasFinalCopy(caseStudy.slug, studyCopy(caseStudy));
+  const feature = imageSlotsFor(caseStudy.href, undefined, finalCopy).feature;
   const og = feature?.kind === 'image' && feature.og ? feature : null;
-  const metadata = createMetadata(caseStudy.metaTitle, presentationFor(caseStudy.href).metaDescription ?? caseStudy.metaDescription, caseStudy.href, og?.ogSrc ?? og?.src, og?.alt);
+  const metadata = createMetadata(caseStudy.metaTitle, presentationFor(caseStudy.href, finalCopy).metaDescription ?? caseStudy.metaDescription, caseStudy.href, og?.ogSrc ?? og?.src, og?.alt);
   // An unlisted study (founder decision, Stage 3B) stays reachable and keeps its canonical, but asks search engines not to index it.
   return UNLISTED_CASE_STUDY_IDS.has(caseStudy.id) ? { ...metadata, robots: { index: false, follow: true, googleBot: { index: false, follow: true } } } : metadata;
 }
@@ -80,7 +82,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
    * published proof does not meet `DEC-012`. See `lib/case-study-proof.ts`.
    * Any case study not on that list renders exactly as before.
    */
-  const proofWithheld = isCaseStudyProofWithheld(caseStudy.slug);
+  const proofWithheld = isCaseStudyProofWithheld(caseStudy.slug, studyCopy(caseStudy));
 
   /**
    * WORK-027 — the one approved related service for this study, or `null`.

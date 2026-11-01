@@ -32,17 +32,33 @@
 
 /** Normalised route slugs (no `portfolio/` prefix, no surrounding slashes). */
 const PROOF_WITHHELD_SLUGS: ReadonlySet<string> = new Set([
-  'seo-ameba-software',
+  'seo-ameba-software', // see PROOF_RELEASED_BY_FINAL_FOUR below
   'seo-for-home-decor-brand',
   // 'google-ads-for-online-courses' was removed on 2026-10-30 (DEC-102): owner attested the figures from business records, their
   // reconciliation with Google Ads data, that revenue excludes refunds, and permission to publish figures and images.
 ]);
 
 /**
+ * AMEBA SOFTWARE (31 October 2026). The owner supplied final figures for this case (organic clicks 7,300 to 12,800, +75.34%; nonbrand clicks
+ * 5,200 to 8,940, +71.92%; tracked organic enquiries 34 to 53, +55.88%; two three-month periods) in the final case study set. For THIS case
+ * only they supersede WORK-011/012/013 (scope and source: docs/work-redesign/final-four/FINAL_FOUR_REPORT.md, decision log DEC-106).
+ *
+ * The supersession takes effect only for an entry whose published title, summary, problem, what-we-did, impact and evidence note are ALL the approved final copy (`hasFinalCopy`, lib/case-study-release.ts; DEC-117):
+ * the gate is the content, so until the Contentful entry carries the final copy a production build still withholds the entry's old, unevidenced proof
+ * exactly as before, and the moment it does the figures are released. No environment variable is involved. This set and `PROOF_WITHHELD_SLUGS` entry are
+ * retired together once the release is confirmed live.
+ */
+const PROOF_RELEASED_BY_FINAL_FOUR: ReadonlySet<string> = new Set(['seo-ameba-software']);
+
+import { hasFinalCopy, type CopyFields } from '@/lib/case-study-release';
+
+/**
  * True when this case study's quantitative proof, derived headline figure and
  * testimonial must not be rendered publicly.
  */
-export function isCaseStudyProofWithheld(slug: string | null | undefined): boolean {
+export function isCaseStudyProofWithheld(slug: string | null | undefined, copy?: CopyFields | null): boolean {
   if (!slug) return false;
-  return PROOF_WITHHELD_SLUGS.has(slug.replace(/^portfolio\//i, '').replace(/^\/+|\/+$/g, ''));
+  const route = slug.replace(/^portfolio\//i, '').replace(/^\/+|\/+$/g, '');
+  if (PROOF_RELEASED_BY_FINAL_FOUR.has(route) && hasFinalCopy(route, copy)) return false;
+  return PROOF_WITHHELD_SLUGS.has(route);
 }

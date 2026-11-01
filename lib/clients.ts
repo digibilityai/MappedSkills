@@ -35,6 +35,8 @@ export type Client = {
   evidence?: string;
   /** The case study's page address, where the client's identity is confirmed by the case-study record. */
   caseStudy?: string;
+  /** The client's own website, only where the owner has confirmed it. Not rendered as a link anywhere yet. */
+  website?: string;
 };
 
 /** A supplied logo that the founder authorised for display (general client relationship; no service is implied). */
@@ -75,30 +77,33 @@ export const CLIENTS: readonly Client[] = [
     services: [], evidence: 'DEC-080/081 (service unreconciled)',
   },
   { key: 'vibgyor-high', name: 'Vibgyor High', source: 'Vibgyor.svg', display: 'blocked', logo: null, services: [], evidence: 'Written permission NO (owner fact 2026-09-19, LINK_ROUTING_OWNER_REVIEW §0.21)' },
-  c('advit-prints', 'Advit Prints', 'Advit Prints.jpg', { src: '/images/clients/advit-prints.webp', w: 800, h: 799, fit: 'square' }),
+  c('advit-prints', 'Advit Prints', 'Advit Prints.jpg', { src: '/images/clients/advit-prints.webp', w: 800, h: 799, fit: 'square' }, { caseStudy: '/portfolio/advit-prints-meta-ads' }),
   c('asset-creators', 'Asset Creators', 'Asset Creators Logo & Colours 2026 - 4.png', { src: '/images/clients/asset-creators.webp', w: 800, h: 391, fit: 'mid' }),
   c('bptp', 'BPTP', 'BPTP.png', { src: '/images/clients/bptp.webp', w: 576, h: 146, fit: 'wide' }),
-  c('bakedemy', 'Bakedemy', 'Bakedemy.png', { src: '/images/clients/bakedemy.webp', w: 800, h: 502, fit: 'mid' }, {services: ['seo'], evidence: 'Historical SEO project (components/cplus/seo/content.ts)' }),
-  c('bakersville', 'Bakersville India', 'Bakersville.png', { src: '/images/clients/bakersville.webp', w: 800, h: 292, fit: 'wide' }),
+  c('bakedemy', 'Bakedemy', 'Bakedemy.png', { src: '/images/clients/bakedemy.webp', w: 800, h: 502, fit: 'mid' }, {services: ['seo'], evidence: 'Historical SEO project (components/cplus/seo/content.ts)', caseStudy: '/portfolio/bakedemy-google-ads' }),
+  c('bakersville', 'Bakersville India', 'Bakersville.png', { src: '/images/clients/bakersville.webp', w: 800, h: 292, fit: 'wide' }, { caseStudy: '/portfolio/bakersville-google-ads' }),
   c('dolphin-group', 'Dolphin Group', 'Dolphin group.png', { src: '/images/clients/dolphin-group.webp', w: 287, h: 171, fit: 'mid' }),
-  c('ekoching', 'Ekoching', 'EKoching.png', { src: '/images/clients/ekoching.webp', w: 225, h: 224, fit: 'square' }),
+  c('ekoching', 'Ekoching', 'EKoching.png', { src: '/images/clients/ekoching.webp', w: 225, h: 224, fit: 'square' }, { caseStudy: '/portfolio/ekoching-google-ads' }),
   c('flaunt-basket', 'Flaunt Basket', 'Flaunt Basket.webp', { src: '/images/clients/flaunt-basket.webp', w: 284, h: 87, fit: 'wide' }),
   c('geek', 'Geek', 'Geek.png', { src: '/images/clients/geek.webp', w: 432, h: 117, fit: 'wide' }),
   c('gems-international-school', 'Gems International School', 'Gems International School.png', { src: '/images/clients/gems-international-school.webp', w: 194, h: 76, fit: 'mid' }),
-  c('hut-n-homes', 'Hut N Homes', 'Hutnhomes.jpg', { src: '/images/clients/hut-n-homes.webp', w: 384, h: 143, fit: 'wide' }),
+  c('hut-n-homes', 'Hut N Homes', 'Hutnhomes.jpg', { src: '/images/clients/hut-n-homes.webp', w: 384, h: 143, fit: 'wide' }, { caseStudy: '/portfolio/hutnhomes-meta-ads' }),
   c('kiyaan-gold', 'Kiyaan Gold', 'Kiyaan Gold.png', { src: '/images/clients/kiyaan-gold.webp', w: 800, h: 733, fit: 'square' }),
   c('kiyaan-silver', 'Kiyaan Silver', 'Kiyaan Silver.png', { src: '/images/clients/kiyaan-silver.webp', w: 96, h: 97, fit: 'square' }),
-  c('klenzmo', 'Klenzmo', 'Klenzmo.png', { src: '/images/clients/klenzmo.webp', w: 329, h: 104, fit: 'wide' }),
-  c('libros', 'Libros', 'Libros Library.png', { src: '/images/clients/libros.webp', w: 677, h: 579, fit: 'square' }),
-  c('mbp', 'MBP', 'MBP.png', { src: '/images/clients/mbp.webp', w: 99, h: 57, fit: 'mid' }),
+  c('klenzmo', 'Klenzmo', 'Klenzmo.png', { src: '/images/clients/klenzmo.webp', w: 329, h: 104, fit: 'wide' }, { caseStudy: '/portfolio/klenzmo-meta-ads' }),
+  c('libros', 'Libros', 'Libros Library.png', { src: '/images/clients/libros.webp', w: 677, h: 579, fit: 'square' }, { caseStudy: '/portfolio/libros-library-meta-ads' }),
+  c('mbp', 'Meticulous Business Plan', 'MBP.png', { src: '/images/clients/mbp.webp', w: 800, h: 456, fit: 'mid' }, { caseStudy: '/portfolio/meticulous-business-plan-google-ads' }),
   c('marshal', 'Marshal', 'Marshal Logo - 1.png', { src: '/images/clients/marshal.webp', w: 292, h: 300, fit: 'square' }),
   c('nuyan-events', 'Nuyan Events', 'Nuyan_Logo.png', { src: '/images/clients/nuyan-events.webp', w: 382, h: 277, fit: 'mid' }),
   c('olambit', 'Olambit', 'Olambit.png', { src: '/images/clients/olambit.webp', w: 166, h: 54, fit: 'wide' }),
   c('ossoro', 'Ossoro', 'Ossoro-Flavors.png', { src: '/images/clients/ossoro.webp', w: 695, h: 587, fit: 'square' }),
-  c('phoenix-laundry', 'Phoenix Laundry', 'Phoenix-Laundry.png', { src: '/images/clients/phoenix-laundry.webp', w: 800, h: 481, fit: 'mid' }),
+  c('phoenix-laundry', 'Phoenix Laundry', 'Phoenix-Laundry.png', { src: '/images/clients/phoenix-laundry.webp', w: 800, h: 481, fit: 'mid' }, { caseStudy: '/portfolio/phoenix-laundry-google-ads' }),
   c('prakrta', 'Prakrta', 'Prakrta.png', { src: '/images/clients/prakrta.webp', w: 800, h: 562, fit: 'mid' }),
   c('sunget', 'Sunget', 'Sunget Logo.png', { src: '/images/clients/sunget.webp', w: 294, h: 77, fit: 'wide' }),
   c('trinexa-global', 'Trinexa Global', 'Trinexa Global.png', { src: '/images/clients/trinexa-global.webp', w: 633, h: 337, fit: 'mid' }),
+  // supplied and approved by the owner on 31 October 2026 for their case studies; an approved logo does not confirm Talreja's legal entity; the owner confirmed the website on 31 October 2026 (stored in `website`, no link is rendered and no further claim is made)
+  c('bblewrap', 'Bblewrap', 'bblewrap-logo.jpg', { src: '/images/clients/bblewrap.webp', w: 800, h: 219, fit: 'wide' }, { caseStudy: '/portfolio/bblewrap-google-ads' }),
+  c('talreja-talreja', 'Talreja & Talreja', 'talreja-talreja-logo.jpg', { src: '/images/clients/talreja-talreja.webp', w: 800, h: 130, fit: 'wide' }, { caseStudy: '/portfolio/talreja-talreja-google-ads', website: 'https://talrejaandtalreja.com/' }),
   c('agarwal-veneers', 'Agarwal Veneers', 'agarwal veneers logo .png', { src: '/images/clients/agarwal-veneers.webp', w: 800, h: 719, fit: 'square' }),
   c('entie', 'Entie', 'entie logo.png', { src: '/images/clients/entie.webp', w: 800, h: 633, fit: 'square' }),
 ];

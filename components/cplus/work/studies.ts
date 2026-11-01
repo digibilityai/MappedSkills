@@ -1,5 +1,7 @@
 import { excerptFromDocument } from '@/lib/contentful/case-study-sections';
 import { getCaseStudyService } from '@/lib/case-study-services';
+import { isCaseStudyProofWithheld } from '@/lib/case-study-proof';
+import { hasFinalCopy, studyCopy } from '@/lib/case-study-release';
 import { caseStudyStage } from '@/lib/case-study-stage';
 import { plainStatements, splitImpact } from '@/lib/case-study-outcomes';
 import { SERVICES } from '@/lib/services';
@@ -34,6 +36,10 @@ import type { CmsCaseStudy } from '@/lib/contentful/types';
  *   or for the three legacy studies their owner-approved service (WORK-027, `lib/case-study-services.ts`), and its
  *   stage in the site navigation. A study with no service shows neither; nothing is inferred or substituted;
  * - sector and period (G7): optional editor metadata, validated in `lib/case-study-library.ts`;
+ * - lead (R2, 31 October 2026): the study's own first outcome when it is a figure, exactly as the editor wrote it (the bold figure and
+ *   the text after it, which carries the metric definition and the period), for the library card. Nothing is computed or reworded. It is
+ *   `null` for a study without a figure first (the card then shows the short approved summary) and always `null` while the study's proof is
+ *   withheld (`lib/case-study-proof.ts`), so withheld proof cannot reach a card;
  * - search: the normalised text the library search matches (client, industry, sector, service, title, challenge).
  */
 export type WorkStudy = {
@@ -49,9 +55,13 @@ export type WorkStudy = {
   changed: string[];
   outcomes: string[];
   figures: number;
+  /** The lead figure and its definition and period, from the study's own outcome list; null when there is none or proof is withheld. */
+  lead: { v: string; c: string } | null;
   sector: SectorKey | null;
   serviceKey: ServiceRoute | null;
   period: string;
+  /** True when the published copy (title, summary, problem, what we did, impact, evidence note) is the approved final copy (`lib/case-study-release.ts`): the code-resident final artwork and copy may then be used. */
+  finalCopy: boolean;
   search: string;
 };
 
@@ -84,6 +94,9 @@ export function toWorkStudy(study: CmsCaseStudy, challengeSentences: number): Wo
   const outcomes = split ? plainStatements(split.outcomes).slice(0, MAX_OUTCOMES) : [];
   const sector = study.library.sector;
   const serviceKey = service ? service.link : null;
+  const top = split?.outcomes[0];
+  const lead = top && top.kind === 'figure' && top.context && !isCaseStudyProofWithheld(study.slug, studyCopy(study)) ? { v: top.lead, c: top.context } : null;
+  const finalCopy = hasFinalCopy(study.slug, studyCopy(study));
 
   return {
     slug: study.slug,
@@ -98,9 +111,11 @@ export function toWorkStudy(study: CmsCaseStudy, challengeSentences: number): Wo
     changed: (study.sections.servicesProvided ?? []).map((c) => tidy(c.title)).filter(Boolean).slice(0, MAX_ITEMS),
     outcomes,
     figures: split ? split.outcomes.filter((o) => o.kind === 'figure').length : 0,
+    lead,
     sector,
     serviceKey,
     period: study.library.period,
+    finalCopy,
     search: normalise(
       [client, rest.join(' '), study.title, study.industry, sector ? SECTORS[sector] : '', serviceKey ? SERVICE_FILTERS[serviceKey] : '', service?.title ?? '', challenge, ...outcomes].join(' ')
     ),

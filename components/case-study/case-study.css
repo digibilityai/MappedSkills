@@ -14,7 +14,7 @@
 .b2.cs .ct-hero { background: var(--v-deep); color: var(--v-on-dark); padding-block: clamp(20px, 2.2vw, 36px) clamp(20px, 2.4vw, 36px); }
 .b2.cs .ct-hero :focus-visible { outline-color: #fff; }
 .b2.cs .ct-crumb { font-size: .875rem; color: var(--v-soft); }
-.b2.cs .ct-crumb a { color: var(--v-soft); text-decoration: underline; text-underline-offset: 4px; }
+.b2.cs .ct-crumb a { color: var(--v-soft); text-decoration: underline; text-underline-offset: 4px; display: inline-block; padding-block: 3px; } /* 24 px tap target (WCAG 2.2) */
 .b2.cs .ct-crumb a:hover { color: #fff; }
 .b2.cs .ct-crumb [aria-current] { color: #fff; font-weight: 700; }
 .b2.cs .ct-hero-g { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 32px); align-items: center; padding-block: clamp(20px, 2.6vw, 44px) clamp(20px, 2.4vw, 36px); }
@@ -143,21 +143,15 @@ html .b2.cs .ct-res-c { max-width: 44ch; color: var(--v-on-dark); font-size: .93
 html .b2.cs .ct-said-k { display: flex; align-items: center; gap: 8px; color: var(--cs-dim); font: 800 .6875rem/1.2 var(--font-manrope), sans-serif; letter-spacing: .14em; text-transform: uppercase; }
 html .b2.cs .ct-said-t { color: var(--v-ink); font: 800 clamp(1.2rem, 1.6vw, 1.5rem)/1.15 var(--font-bricolage), sans-serif; letter-spacing: -.02em; text-wrap: balance; }
 html .b2.cs .ct-said-c { color: var(--cs-dim); font-size: .9375rem; line-height: 1.55; }
-/* a supplied image inside the impact: whole, uncropped, never wider than itself, openable at full size */
+/* a supplied image inside the impact: an ordinary responsive image, whole and uncropped (no link, no caption) */
 .b2.cs .ct-media { margin: clamp(28px, 3vw, 44px) 0 0; }
-.b2.cs .ct-media-a { display: block; width: fit-content; max-width: 100%; margin-inline: auto; border: 1px solid var(--v-line); border-radius: 4px; overflow: hidden; background: var(--v-paper); line-height: 0; }
-.b2.cs .ct-media-a:focus-visible { outline: 3px solid var(--v-burnt); outline-offset: 3px; }
-.b2.cs .ct-media-a img { display: block; width: 100%; max-width: 1100px; height: auto; }
-html .b2.cs .ct-media figcaption { max-width: 1100px; margin: 10px auto 0; color: var(--cs-dim); font-size: .875rem; line-height: 1.5; }
-html .b2.cs .ct-media figcaption a { color: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
-/* the explanation after the outcomes and the evidence basis line up with the section copy */
+.b2.cs .ct-media img { display: block; width: 100%; max-width: 1100px; height: auto; margin-inline: auto; border: 1px solid var(--v-line); border-radius: 4px; background: var(--v-paper); }
+/* the explanation after the outcomes lines up with the section copy */
 .b2.cs .ct-impact-tail { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 32px); }
 .b2.cs .ct-impact-tail > * { grid-column: 5 / span 8; }
 .b2.cs .ct-impact-tail .ct-prose { margin-top: 28px; font-size: 1.0625rem; }
 .b2.cs .ct-impact-tail .ct-bullets { margin-top: clamp(28px, 3vw, 40px); }
 .b2.cs .ct-impact-tail .ct-prose > p:first-child { font-size: inherit; line-height: inherit; }
-.b2.cs .ct-evidence { margin-top: 28px; max-width: 64ch; padding: 4px 0 4px 20px; border-left: 3px dashed var(--cs-dim); }
-html .b2.cs .ct-evidence p { margin-top: 8px; color: var(--cs-dim); font-size: .9375rem; line-height: 1.6; }
 
 /* ---------------------------------------------------------------- prompt -- */
 .b2.cs .ct-prompt { background: var(--v-deep); color: var(--v-on-dark); }
@@ -288,6 +282,8 @@ html .b2.cs .ct-sub { margin-top: 12px; color: var(--v-ink); font: 800 1.25rem/1
 .b2.cs .ct-stage-frame.is-whole .ct-stage-img > img { object-fit: contain; object-position: 50% 50%; }
 .b2.cs .ct-stage-frame.is-whole::after { display: none; }
 .b2.cs .ct-img-narrow { display: none; }
+/* artwork with text near its edges stays still: no scroll-linked zoom that would crop the text */
+.b2.cs .ct-stage-frame.is-still.is-photo .ct-stage-img > img { animation: none; transform: none; }
 @media (max-width: 760px) { .b2.cs .ct-img-wide { display: none; } .b2.cs .ct-img-narrow { display: block; } }
 html .b2.cs .ct-stage figcaption { margin-top: 10px; color: var(--v-soft); font-size: .78rem; line-height: 1.5; }
 
@@ -336,5 +332,5 @@ html .b2.cs .ct-band.is-deep .ct-sec.is-led > .ct-prose:first-child > p:first-ch
 @media (max-width: 760px) { .b2.cs .ct-stage-frame { aspect-ratio: 1.3; } .b2.cs .ct-take { padding-left: 16px; } }
 /* light illustrations (InsurYo, Home Décor): a burnt outline, no dark wash, so the name stays legible and quiet */
 .b2.cs .ct-stage-frame[data-motif='insurance']::after, .b2.cs .ct-stage-frame[data-motif='home']::after { content: none; }
-.b2.cs .ct-stage-frame[data-motif='insurance'] .ct-stage-mark, .b2.cs .ct-stage-frame[data-motif='home'] .ct-stage-mark { -webkit-text-stroke: 1.5px rgba(143, 44, 0, .6); }
+.b2.cs .ct-stage-frame[data-motif='insurance'] .ct-stage-mark, .b2.cs .ct-stage-frame[data-motif='home'] .ct-stage-mark, .b2.cs .ct-stage-frame[data-mark='deep'] .ct-stage-mark { -webkit-text-stroke: 1.5px rgba(143, 44, 0, .6); }
 .b2.cs .ct-stage-frame[data-motif='insurance'] .ct-stage-tick, .b2.cs .ct-stage-frame[data-motif='home'] .ct-stage-tick { border-color: var(--v-burnt); }

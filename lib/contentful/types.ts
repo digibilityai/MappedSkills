@@ -96,6 +96,9 @@ export type CmsBlogPost = {
   readingTime: string;
   featuredImageUrl: string;
   featuredImageAlt: string;
+  /** The image's own pixel size when Contentful reports it, so it can be shown whole at its own ratio. */
+  featuredImageWidth?: number;
+  featuredImageHeight?: number;
   tableOfContents: TocItem[];
   contentJson: Document | null;
   contentLinks?: ContentfulRichText['links'];
@@ -123,6 +126,12 @@ export type CmsBlogCard = {
   publishedDate: string;
   href: string;
   author?: string;
+  /** Editorial listing (R3): topic key, recorded dates, and the article's own featured image, all from the same listing query. */
+  categorySlug?: string;
+  updatedDate?: string;
+  publishedAtISO?: string;
+  updatedAtISO?: string;
+  image?: { url: string; alt: string; w: number; h: number };
 };
 
 /** Raw Contentful case study entry (GraphQL) */
@@ -442,6 +451,8 @@ export type CmsPressCard = {
   excerpt: string;
   publishedDate: string;
   href: string;
+  /** The release's own featured image (already in the listing query), shown whole on the newsroom's lead announcement. */
+  image?: { url: string; alt: string; w: number; h: number };
 };
 
 export type CmsPressRelease = {

@@ -229,7 +229,7 @@ test('testimonial: new layout needs showTestimonial, a quote and no withholding;
   // the new template is returned before the legacy markup, and neither it nor its stylesheet can draw a star (WORK-026)
   assert.ok(page.indexOf('<CaseStudyTemplate') > 0 && page.indexOf('<CaseStudyTemplate') < page.indexOf('★'), 'no stars on the new layout (WORK-026)');
   assert.ok(!read('components/case-study/CaseStudyTemplate.tsx').includes('★'));
-  assert.ok(page.includes('isCaseStudyProofWithheld(caseStudy.slug)'), 'proof withholding retained');
+  assert.ok(page.includes('isCaseStudyProofWithheld(caseStudy.slug, studyCopy(caseStudy))'), 'proof withholding retained');
   const { isCaseStudyProofWithheld } = load('lib/case-study-proof.ts');
   for (const slug of ['seo-ameba-software', 'portfolio/seo-ameba-software', 'seo-for-home-decor-brand']) assert.ok(isCaseStudyProofWithheld(slug), slug);
   assert.ok(!isCaseStudyProofWithheld('google-ads-for-online-courses'), 'DEC-102: this one study is released from withholding; the others stay withheld');

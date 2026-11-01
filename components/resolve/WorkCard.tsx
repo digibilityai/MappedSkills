@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { WorkStudy } from './work';
-import { CaseArt, MOTIF_NOTE } from '../case-study/CaseArt';
+import { CaseArt } from '../case-study/CaseArt';
 import { ClientLogo } from '../clients/ClientLogo';
 import './work-card.css';
 
@@ -31,7 +31,6 @@ export function WorkCard({ s, lead = false, sizes }: { s: WorkStudy; lead?: bool
             <CaseArt motif={s.motif} />
             {s.clientLogo ? <ClientLogo client={s.clientLogo} variant="chip" /> : null}
           </div>
-          <p className="rs-wc-note">{MOTIF_NOTE}</p>
         </>
       ) : null}
       <p className="rs-wc-eyebrow">{s.eyebrow}</p>

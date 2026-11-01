@@ -64,7 +64,7 @@ test('the preview fixture is inert outside development with the flag, and never 
   assert.strictEqual(run({ NODE_ENV: 'production', CASE_STUDY_LOCAL_PREVIEW: '1' }), 0);
   assert.strictEqual(run({ NODE_ENV: 'test', CASE_STUDY_LOCAL_PREVIEW: '1' }), 0);
   assert.strictEqual(run({ NODE_ENV: 'development', CASE_STUDY_LOCAL_PREVIEW: undefined }), 0);
-  assert.strictEqual(run({ NODE_ENV: 'development', CASE_STUDY_LOCAL_PREVIEW: '1' }), 1);
+  assert.strictEqual(run({ NODE_ENV: 'development', CASE_STUDY_LOCAL_PREVIEW: '1' }), 19, 'this study, the fourteen studies of the paid case batches and the final four (appended because this list has no Contentful entries)');
 });
 
 test('the supplied images are in place at their own pixels and are the study\'s listing, detail and sharing images', () => {
@@ -82,6 +82,7 @@ test('the supplied images are in place at their own pixels and are the study\'s 
   assert.ok(slots.feature.whole && slots.feature.og);
   assert.ok(slots.card.alt.length > 40 && slots.feature.alt.length > 40);
   // only this study opts into the sharing image; Om Sai and the rest keep the site default
+  // (the final four of 31 October 2026 opt in with their own artwork only behind the release switch; see case-study-final-four.test.cjs)
   for (const h of ['/portfolio/om-sai-developer-meta-ads', '/portfolio/classpe-social-media-strategy', '/portfolio/insuryo-organic-growth', '/portfolio/seo-ameba-software', '/portfolio/seo-for-home-decor-brand']) {
     assert.ok(!I.imageSlotsFor(h).feature?.og, h);
   }
@@ -91,7 +92,7 @@ test('presentation extras exist only for this study: the dashboard in the impact
   const X = load('lib/case-study-presentation.ts');
   const x = X.presentationFor(HREF);
   assert.match(x.impactMedia.src, /anybodycanbake-dashboard\.webp$/);
-  assert.strictEqual(x.impactMedia.caption, 'Recreated agency dashboard showing reported campaign totals, February 2020 to August 2021.');
+  assert.strictEqual(x.impactMedia.caption, undefined, 'owner instruction 2026-10-30: no visible dashboard caption');
   assert.deepStrictEqual(x.close, { title: 'Want more paid enrolments for your courses?', body: 'Tell us what you teach and what you want your advertising to achieve.', cta: 'Discuss Your Advertising' });
   assert.deepStrictEqual(X.presentationFor('/portfolio/om-sai-developer-meta-ads'), {});
 });

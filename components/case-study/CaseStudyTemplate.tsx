@@ -12,6 +12,7 @@ import { clientForHref } from '@/lib/clients';
 import { CaseArt } from './CaseArt';
 import { imageSlotsFor } from '@/lib/case-study-images';
 import { presentationFor } from '@/lib/case-study-presentation';
+import { hasFinalCopy } from '@/lib/case-study-release';
 import { SECTORS } from '@/lib/case-study-library';
 import { splitImpact, type Outcome } from '@/lib/case-study-outcomes';
 import { linkTargetProps } from '@/lib/internal-links';
@@ -240,10 +241,11 @@ export function CaseStudyTemplate({ study, content: c, service, showTestimonial,
   const impactTitle = figures.length ? 'The impact' : 'Where it stands';
   const [h1a, h1b] = twoTone(study.title);
   // the stage image is the study's detail slot (lib/case-study-images.ts): real artwork, or a disclosed conceptual placeholder
-  const stage = imageSlotsFor(study.href).feature;
+  const finalCopy = hasFinalCopy(study.slug, { title: study.title, ...c });
+  const stage = imageSlotsFor(study.href, undefined, finalCopy).feature;
   const art = stage?.kind === 'image' ? stage : null;
   const whole = Boolean(art?.whole);
-  const { impactMedia, close } = presentationFor(study.href);
+  const { impactMedia, close } = presentationFor(study.href, finalCopy);
   const motif = stage?.kind === 'conceptual' ? stage.motif : null;
   const logoClient = art?.logo || art?.whole ? null : clientForHref(study.href);
   const route = [
@@ -324,7 +326,7 @@ export function CaseStudyTemplate({ study, content: c, service, showTestimonial,
         {art || motif ? (
           <figure className="ct-stage">
             <div className="pa-wrap">
-              <div className={`ct-stage-frame ca-host${art ? ' is-photo' : ' is-par'}${whole ? ' is-whole' : ''}`} data-hw-seq data-motif={motif ?? undefined}>
+              <div className={`ct-stage-frame ca-host${art ? ' is-photo' : ' is-par'}${whole ? ' is-whole' : ''}${art?.still ? ' is-still' : ''}`} data-hw-seq data-motif={motif ?? undefined} data-mark={art?.deepMark ? 'deep' : undefined}>
                 {art ? (
                   <div className="ct-stage-img">
                     <Image className={art.narrow ? 'ct-img-wide' : undefined} src={art.src} alt={art.alt} fill sizes="(min-width: 1440px) 1328px, 100vw" priority={false} />
@@ -364,7 +366,7 @@ export function CaseStudyTemplate({ study, content: c, service, showTestimonial,
           title={impactTitle}
           tone="ground"
           after={
-            split || c.evidenceNote || impactMedia ? (
+            split || impactMedia ? (
               <div className="ct-impact-w">
                 {split ? (
                   <div id="ct-outcomes" className="ct-results">
@@ -411,28 +413,14 @@ export function CaseStudyTemplate({ study, content: c, service, showTestimonial,
                 ) : null}
                 {impactMedia ? (
                   <figure className="ct-media">
-                    <a className="ct-media-a" href={impactMedia.src} target="_blank" rel="noopener noreferrer">
-                      <Image src={impactMedia.src} alt={impactMedia.alt} width={impactMedia.w} height={impactMedia.h} sizes="(min-width: 1440px) 1328px, 100vw" />
-                    </a>
-                    <figcaption>
-                      {impactMedia.caption}{' '}
-                      <a href={impactMedia.src} target="_blank" rel="noopener noreferrer" aria-label={`Open the dashboard image at full size, opens in a new tab. ${impactMedia.caption}`}>
-                        Open full size
-                      </a>
-                    </figcaption>
+                    <Image src={impactMedia.src} alt={impactMedia.alt} width={impactMedia.w} height={impactMedia.h} sizes="(min-width: 1440px) 1328px, 100vw" />
                   </figure>
                 ) : null}
-                <div className="ct-impact-tail">
-                  {split ? <Blocks doc={split.after} /> : null}
-                  {c.evidenceNote ? (
-                    <aside className="ct-evidence" aria-labelledby="ct-h-ev">
-                      <h3 id="ct-h-ev" className="ct-label">
-                        Evidence basis
-                      </h3>
-                      <p>{c.evidenceNote}</p>
-                    </aside>
-                  ) : null}
-                </div>
+                {split && split.after.content?.length ? (
+                  <div className="ct-impact-tail">
+                    <Blocks doc={split.after} />
+                  </div>
+                ) : null}
               </div>
             ) : null
           }
@@ -511,7 +499,7 @@ export function CaseStudyTemplate({ study, content: c, service, showTestimonial,
               <ActionLink href={CONTACT_HREF} variant="dark">
                 {close ? close.cta : 'Contact us'}
               </ActionLink>
-              {close ? null : (
+              {close && !close.secondary ? null : (
                 <ActionLink href={BOOKING_HREF} variant="text">
                   Request a call
                 </ActionLink>
@@ -533,7 +521,7 @@ function Spotlight({ o, total }: { o: Outcome; total: number }) {
       <Figure lead={o.lead} size="l" />
       {o.context ? <p className="ct-spot-c">{o.context}</p> : null}
       <a className="ct-spot-a" href="#ct-outcomes">
-        {total > 1 ? `All ${total} outcomes and evidence` : 'See the evidence'} <Arrow down />
+        {total > 1 ? `All ${total} outcomes` : 'See the outcome'} <Arrow down />
       </a>
     </aside>
   );

@@ -1,5 +1,7 @@
-import type { Document } from '@contentful/rich-text-types';
 import type { ContentfulCaseStudy } from '@/lib/contentful/types';
+import { doc, li, p, ul } from '@/lib/case-study-doc-builders';
+import { batchPreviewEntries } from '@/lib/case-study-local-batch';
+import { applyFinalFour } from '@/lib/case-study-local-final-four';
 
 /**
  * DEVELOPMENT-PREVIEW ONLY. The revised AnybodyCanBake (Google Ads) study as Contentful fields, so the founder can review
@@ -14,14 +16,6 @@ import type { ContentfulCaseStudy } from '@/lib/contentful/types';
  * package. Nothing here is invented; no testimonial is included.
  */
 export const ABC_ENTRY_ID = '6Ycb7aYvXrslOXKchQnqmi';
-
-type Run = string | { b: string };
-const t = (value: string, bold = false) => ({ nodeType: 'text', value, marks: bold ? [{ type: 'bold' }] : [], data: {} });
-const runs = (parts: Run[]) => parts.map((p) => (typeof p === 'string' ? t(p) : t(p.b, true)));
-const p = (...parts: Run[]) => ({ nodeType: 'paragraph', data: {}, content: runs(parts) });
-const li = (...parts: Run[]) => ({ nodeType: 'list-item', data: {}, content: [p(...parts)] });
-const ul = (...items: ReturnType<typeof li>[]) => ({ nodeType: 'unordered-list', data: {}, content: items });
-const doc = (...content: unknown[]) => ({ nodeType: 'document', data: {}, content }) as unknown as Document;
 
 export const ABC_SUMMARY =
   'AnybodyCanBake wanted direct purchases for its online baking courses. MappedSkills managed Search and Display campaigns and made changes to keywords, ads, targeting and landing pages. From February 2020 to August 2021, Google Ads was credited with 1,410 paid enrolments and ₹66.36 lakh in reported revenue.';
@@ -53,7 +47,7 @@ export const ABC_IMPACT = doc(
   p({ b: '1,410 paid enrolments and ₹66.36 lakh in reported revenue' }),
   p('Across February 2020 to August 2021, the reported Google Ads results were 1,410 paid enrolments and ₹66,36,000 in revenue on ₹12,66,390 of advertising spend.'),
   ul(
-    li({ b: '5.24×' }, ' return on advertising spend. About ₹5.24 of reported revenue for each ₹1 of advertising spend. Calculated from the reported totals, February 2020 to August 2021.'),
+    li({ b: '5.24×' }, ' return on advertising spend. About ₹5.24 of reported revenue for each ₹1 of advertising spend. Calculated from the reported totals, February 2020 to August 2021. Revenue return is not profit.'),
     li({ b: '1,410' }, ' paid enrolments attributed to Google Ads, February 2020 to August 2021.'),
     li({ b: '₹66,36,000' }, ' in reported revenue, excluding refunds, February 2020 to August 2021.'),
     li({ b: '₹12,66,390' }, ' in advertising spend, February 2020 to August 2021.'),
@@ -85,8 +79,16 @@ const enabled = () => process.env.NODE_ENV === 'development' && process.env.CASE
 /** Outside the local preview this returns its input unchanged. */
 export function withLocalPreview(entries: ContentfulCaseStudy[]): ContentfulCaseStudy[] {
   if (!enabled()) return entries;
-  const others = entries.filter((e) => e.sys.id !== ABC_ENTRY_ID);
-  return [...others, abcPreviewEntry()];
+  // MERGE, never replace: every entry that is already there (Contentful) keeps its place, content and order. The revised
+  // AnybodyCanBake (Google Ads) fields replace that one entry in place (or are added when it is absent), and the six studies of the
+  // paid case batch are added after the existing ones. IDs of the batch are not Contentful IDs, so they cannot overwrite anything.
+  const batch = batchPreviewEntries();
+  const batchIds = new Set(batch.map((b) => b.sys.id));
+  const abc = abcPreviewEntry();
+  const merged = entries.filter((e) => !batchIds.has(e.sys.id)).map((e) => (e.sys.id === ABC_ENTRY_ID ? abc : e));
+  if (!merged.some((e) => e.sys.id === ABC_ENTRY_ID)) merged.push(abc);
+  // The final four (31 October 2026): ClassPe, InsurYo and Ameba Software replace their published entries in place (same position), Wanderlooms is appended.
+  return applyFinalFour([...merged, ...batch]);
 }
 
 export const localPreviewActive = enabled;

@@ -76,14 +76,3 @@ export function JourneyArt({ n }: { n: 1 | 2 | 3 | 4 | 5 }) {
     </>}
   </Stage>;
 }
-
-/** Five linked stages for the responsibility flow: small, meaningful glyphs. */
-export function FlowGlyph({ n }: { n: 1 | 2 | 3 | 4 | 5 }) {
-  return <svg className="rv3-glyph" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
-    {n === 1 && <><circle className="g-l" cx="19" cy="19" r="9" /><path className="g-l" d="m26 26 10 10" /><circle className="g-acc" cx="19" cy="19" r="3" /></>}
-    {n === 2 && <><rect className="g-l" x="9" y="8" width="30" height="32" rx="4" /><rect className="g-s" x="14" y="14" width="20" height="10" rx="2" /><rect className="g-acc" x="14" y="30" width="14" height="5" rx="2.5" /></>}
-    {n === 3 && <><rect className="g-l" x="6" y="9" width="36" height="30" rx="4" /><path className="g-l" d="M6 17h36" /><rect className="g-s" x="12" y="23" width="14" height="10" rx="2" /><path className="g-l" d="M31 25h6M31 31h6" /></>}
-    {n === 4 && <><path className="g-l" d="M8 10h32a3 3 0 0 1 3 3v16a3 3 0 0 1-3 3H21l-8 7v-7H8a3 3 0 0 1-3-3V13a3 3 0 0 1 3-3z" /><circle className="g-acc" cx="34" cy="21" r="5" /></>}
-    {n === 5 && <><circle className="g-l" cx="9" cy="32" r="4" /><circle className="g-l" cx="22" cy="18" r="4" /><circle className="g-l" cx="35" cy="28" r="4" /><path className="g-l" d="m12 29 7-8M25 20l7 5" /><path className="g-gap" d="M6 42h36" /></>}
-  </svg>;
-}

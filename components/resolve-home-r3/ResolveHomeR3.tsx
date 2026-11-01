@@ -2,18 +2,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { AUDIENCES, FAQS, SERVICES, STEPS, TILES, WORK } from '@/components/paid-advertising/home/content';
 import { HeroFlow, JourneyArt } from './ArtR3';
-import { PathFlow } from './PathFlow';
 import { GoogleSerp, MetaFeed } from './AdsR3';
 import { RvReveal3 } from './RvReveal3';
 import { ClientLogoWall } from '@/components/clients/ClientLogoWall';
+import type { ShowcaseData } from '@/components/case-showcase/CaseShowcase';
 import './resolve-home-r3.css';
 
 /**
- * THE RESOLVE R3: targeted corrections on R2 (journey, services in one scroll, animated buyer path, footer) (a DESIGN EXPERIMENT, not an approved brand or positioning change).
- * Copy, client names, links and case-study limits come from the approved R3.1 content module. Isolated: scoped to `.rv3`.
- * Remove: see docs/homepage-visual-r2/resolve-r3/REMOVAL.md.
- * Background rhythm: Ink Deep, Ground, Paper, Ink Deep, Ground, Paper, Ink Deep, then the closing band.
- * Heading rule: dark sections white plus tangerine emphasis; light sections Ink plus tangerine emphasis.
+ * THE RESOLVE R3, the approved homepage (frozen 27 October 2026, DEC-085; client showcase DEC-090), with the Brand DNA 4.0 refinements
+ * (DEC-118): 12 px labels and 14 px captions, the two featured case studies read from the public library and linked to their own pages,
+ * the repeated buyer-path diagram removed (its scope sentence now closes the journey), and meaning-led headline emphasis.
+ * Copy, client names and links come from the approved content module. Isolated: scoped to `.rv3`.
+ * Background rhythm: Ink Deep, Ground, Paper, Ink Deep, Ground, Paper, Ground, Ink Deep, then the closing band.
+ * Heading rule: dark sections white plus tangerine emphasis; light sections Ink plus tangerine emphasis; emphasis only where a phrase
+ * carries the outcome or the contrast, otherwise one colour.
  */
 const REVEAL = { 'data-rv': '' } as const;
 
@@ -38,10 +40,14 @@ const WORK_ASSETS = {
   'om-sai': { src: '/images/resolve-r3/omsai-work.webp', alt: 'Conceptual artwork of a contemporary residential tower with landscaped balconies at dusk', logo: '/images/resolve-r3/omsai-logo.jpg', logoAlt: 'Omsai Group', logoW: 400, logoH: 400, note: 'Conceptual artwork. Not a photograph of the project.' },
 } as const;
 
-/* The Om Sai case study route is not published (404). Until the owner confirms the URL, this card goes to the live /work page. */
+/* Fallback only: when the public library cannot be read, the earlier approved cards show with their conceptual artwork and go to /work. */
 const WORK_HREF: Record<string, { href: string; cta: string }> = { 'om-sai': { href: '/work', cta: 'Explore Our Work' } };
 
-export function ResolveHomeR3() {
+/** "Read the Google Ads Case Study": the service comes from the card's own eyebrow ("Google Ads · Education"). */
+const caseCta = (eyebrow: string) => { const s = eyebrow.split(' · ')[0].trim(); return s ? `Read the ${s} Case Study` : 'Read the Case Study'; };
+
+export function ResolveHomeR3({ showcase = null }: { showcase?: ShowcaseData | null }) {
+  const cases = showcase?.cards ?? [];
   return <div className="rv3">
     <RvReveal3 />
 
@@ -69,11 +75,11 @@ export function ResolveHomeR3() {
 
     {/* 2. Ground: the buyer journey, tied to Capture, Convert, Measure */}
     <section className="rv3-journey rv3-ground" aria-labelledby="rv3-journey-h"><div className="rv3-wrap">
-      <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">How a buyer reaches you</p><h2 id="rv3-journey-h">From a search or a scroll <em>to an enquiry or a sale.</em></h2></header>
+      <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">How a buyer reaches you</p><h2 id="rv3-journey-h">From a search or a scroll <em>to an enquiry or a sale</em></h2></header>
       <ul className="rv3-ccm" aria-hidden="true">
         <li className="rv3-ccm-capture"><b>Capture</b><span>MappedSkills plans and manages the advertising</span></li>
         <li className="rv3-ccm-convert"><b>Convert</b><span>Your business: offer, website and follow up</span></li>
-        <li className="rv3-ccm-measure"><b>Measure</b><span>MappedSkills reviews</span></li>
+        <li className="rv3-ccm-measure"><b>Measure</b><span>MappedSkills tests and reviews</span></li>
       </ul>
       <ol className="rv3-j-list" aria-label="How a buyer reaches your business through advertising">
         {JOURNEY.map((s, i) => <li key={s.title} className={`rv3-j rv3-j--${s.who}`} style={{ '--i': i } as React.CSSProperties} {...REVEAL}>
@@ -83,9 +89,11 @@ export function ResolveHomeR3() {
           <h3>{s.title}</h3><p>{s.body}</p>
         </li>)}
       </ol>
+      {/* The one responsibility statement (formerly under the process section's buyer-path diagram, removed as a repeat of this journey) */}
+      <p className="rv3-j-foot" {...REVEAL}>MappedSkills plans, manages, tests and reviews advertising within the agreed scope. Your business owns the offer, the website and the follow up.</p>
     </div></section>
 
-    {/* 3. Paper: who we help (asymmetric; photography where approved, labelled placeholders where not yet supplied) */}
+    {/* 3. Paper: who we help (asymmetric: one lead card, two offset; approved conceptual imagery) */}
     <section id="who-we-help" className="rv3-aud rv3-paper" aria-labelledby="rv3-aud-h"><div className="rv3-wrap">
       <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">Who we help</p><h2 id="rv3-aud-h">Advertising for <em>the way your business sells</em></h2><p className="rv3-aud-more"><TextLink href="/who-we-help/enquiry-led-businesses">See how we help enquiry-led businesses</TextLink></p></header>
       <div className="rv3-aud-grid">
@@ -111,11 +119,18 @@ export function ResolveHomeR3() {
       </div>
     </div></section>
 
-    {/* 5. Ground: featured work with the supplied conceptual artwork and the official logos */}
+    {/* 5. Ground: featured work. One case per core service from the public library: its approved listing artwork shown whole (the names and
+        figures are part of the artwork), its figure or summary, and a link to its own page. No logo chip over artwork that already names the client. */}
     <section id="featured-work" className="rv3-work rv3-ground" aria-labelledby="rv3-work-h"><div className="rv3-wrap">
-      <div className="rv3-work-top"><header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">Featured work</p><h2 id="rv3-work-h">See <em>the work</em> behind the offer</h2></header><TextLink href="/work">View All Case Studies</TextLink></div>
+      <div className="rv3-work-top"><header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">Featured work</p><h2 id="rv3-work-h">See the work behind the offer</h2></header><TextLink href="/work">View All Case Studies</TextLink></div>
       <div className="rv3-work-grid">
-        {WORK.map((w, i) => { const a = WORK_ASSETS[w.id]; const link = WORK_HREF[w.id] ?? { href: w.href, cta: w.cta };
+        {cases.length ? cases.map((c, i) => <article key={c.slug} className={`rv3-w rv3-w--${i + 1} rv3-w--case`} {...REVEAL}>
+          {c.art && <div className="rv3-w-art"><Image src={c.art.src} alt={c.art.alt} width={c.art.w} height={c.art.h} sizes={i === 0 ? '(min-width: 1081px) 740px, 100vw' : '(min-width: 1081px) 440px, (min-width: 761px) 70vw, 100vw'} /></div>}
+          {c.eyebrow && <p className="rv3-eyebrow">{c.eyebrow}</p>}<h3>{c.client}</h3>
+          {/* the definition already states its period, so no separate period line */}
+          {c.fig ? <><p className="rv3-w-fig">{c.fig.v}</p><p className="rv3-w-body">{c.fig.c}</p></> : <p className="rv3-w-body">{c.summary}</p>}
+          <TextLink href={c.href}>{caseCta(c.eyebrow)}</TextLink>
+        </article>) : WORK.map((w, i) => { const a = WORK_ASSETS[w.id]; const link = WORK_HREF[w.id] ?? { href: w.href, cta: w.cta };
           return <article key={w.id} className={`rv3-w rv3-w--${i + 1}`} {...REVEAL}>
             <div className="rv3-w-img">
               <Image src={a.src} alt={a.alt} fill sizes={i === 0 ? '(min-width: 1081px) 740px, 100vw' : '(min-width: 1081px) 440px, (min-width: 761px) 70vw, 100vw'} />
@@ -127,30 +142,25 @@ export function ResolveHomeR3() {
       </div>
     </div></section>
 
-    {/* Stage 3B: the clients whose logos may be shown (lib/clients.ts). Logos show who, never a result or a service. */}
+    {/* 6. Paper: the clients whose logos may be shown (Stage 3B, lib/clients.ts). Logos show who, never a result or a service. */}
     <section className="rv3-clients rv3-paper" aria-labelledby="rv3-clients-h"><div className="rv3-wrap">
       <span className="cl-ghost" aria-hidden="true">Clients</span>
-      <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">Our clients</p><h2 id="rv3-clients-h">Businesses <em>we’ve worked with</em></h2></header>
+      <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">Our clients</p><h2 id="rv3-clients-h">Businesses we’ve worked with</h2></header>
       <ClientLogoWall />
       <p className="cl-note">Businesses we’ve worked with, across different services. A logo shows who, not a result or a particular service.</p>
     </div></section>
 
-    {/* 6. Paper: process, reporting and who is responsible for what */}
+    {/* 7. Ground: process and reporting (who is responsible for what is stated once, in the journey) */}
     <section className="rv3-proc rv3-ground" aria-labelledby="rv3-proc-h"><div className="rv3-wrap">
       <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">How we work together</p><h2 id="rv3-proc-h">Clear reporting. <em>Practical next steps.</em></h2><p className="rv3-intro">Review the results relevant to your objective, what the available data shows and what needs attention next.</p></header>
       <ol className="rv3-steps" {...REVEAL}>{STEPS.map((s, i) => <li key={s.title} style={{ '--i': i } as React.CSSProperties}><span className="rv3-step-n" aria-hidden="true">{i + 1}</span><h3>{s.title}</h3><p>{s.body}</p></li>)}</ol>
-      <div className="rv3-flow-wrap" {...REVEAL}>
-        <h3 className="rv3-flow-h">How the advertising connects to the buyer’s path</h3>
-        <PathFlow />
-        <p className="rv3-flow-foot">MappedSkills plans, manages, tests and reviews advertising within the agreed scope. Your business owns the offer, the website and the follow up.</p>
-      </div>
       <div className="rv3-proc-foot"><p>You receive a monthly performance report with ongoing management, and review calls as agreed in your proposal.</p><TextLink href="/how-it-works">See How We Work</TextLink></div>
     </div></section>
 
-    {/* 7. Ink Deep: pricing and the questions a buyer asks first */}
+    {/* 8. Ink Deep: pricing and the questions a buyer asks first */}
     <section className="rv3-fit rv3-dark" aria-label="Pricing and questions"><div className="rv3-wrap rv3-fit-grid">
       <div className="rv3-fit-price" {...REVEAL}>
-        <p className="rv3-eyebrow">Pricing</p><h2 id="rv3-price-h">Know what your <em>proposal includes</em></h2>
+        <p className="rv3-eyebrow">Pricing</p><h2 id="rv3-price-h">Know what your <em>proposal includes.</em></h2>
         <p>Advertising spend and our management fee are separate.</p>
         <p>Each Meta proposal includes a defined allowance of static ad designs. Reels, AI video production, scripting, landing-page implementation and technical fixes can be scoped separately where needed.</p>
         <TextLink href="/pricing" dark>Understand Our Pricing Approach</TextLink>
@@ -161,7 +171,7 @@ export function ResolveHomeR3() {
       </div>
     </div></section>
 
-    {/* 8. Closing band: Tangerine Deep with white type (white on Tangerine fails contrast) */}
+    {/* 9. Closing band: Tangerine Deep with white type (white on Tangerine fails contrast) */}
     <section className="rv3-close" aria-labelledby="rv3-close-h"><div className="rv3-wrap rv3-close-in" {...REVEAL}>
       <div><h2 id="rv3-close-h">Tell us what you want advertising to achieve.</h2><p>Share your business, current situation and growth goal. We’ll use that context to begin the conversation.</p></div>
       <Cta tone="paper" />

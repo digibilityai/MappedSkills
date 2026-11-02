@@ -67,7 +67,7 @@ test('AnybodyCanBake proof: the approved SEO figures, period, caveat and link, s
   assert.ok(acb.includes("enquiries: { from: '91', to: '133'"));
   assert.ok(acb.includes("{ label: 'Organic clicks', from: '16,400', to: '20,580', pct: '+25.49%' }"));
   assert.ok(acb.includes("{ label: 'Nonbrand organic clicks', from: '15,348', to: '20,039', pct: '+30.56%' }"));
-  assert.ok(acb.includes("period: 'May–July 2026 versus August–October 2026'"));
+  assert.ok(acb.includes("period: 'May to July 2026 versus August to October 2026'"));
   assert.ok(/not proof that the work alone caused the change/.test(acb) && /not been independently checked/.test(acb));
   assert.ok(acb.includes("href: '/portfolio/anybodycanbake-seo'"));
   // the growth figures follow from the supplied totals
@@ -82,7 +82,7 @@ test('AnybodyCanBake proof: the approved SEO figures, period, caveat and link, s
   assert.ok(!/google-ads-for-online-courses|1,410|66,36,000|5\.24|898\.15/.test(copy + body), 'no Google Ads case or figure on /seo');
   assert.ok(!/AnyBodyCanBake/.test(copy + body));
   // the same approved figure, period and caveat are what the page's showcase card shows (DEC-115)
-  for (const f of ["v: '46.15%'", 'from 91 to 133', "period: 'May–July 2026 versus August–October 2026'", 'not proof that the work alone caused the change', 'not been independently checked', "ACB = '/portfolio/anybodycanbake-seo'"]) assert.ok(showcase.includes(f), f);
+  for (const f of ["v: '46.15%'", 'from 91 to 133', "period: 'May to July 2026 versus August to October 2026'", 'not proof that the work alone caused the change', 'not been independently checked', "ACB = '/portfolio/anybodycanbake-seo'"]) assert.ok(showcase.includes(f), f);
 });
 
 test('Ameba Software (showcase): its own approved entry supplies any figure; the page adds only the qualification and the held summary', () => {

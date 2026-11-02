@@ -2,10 +2,10 @@
    b2.css (tokens `--v-*`, the FAQ and band components). Same policy as /about and /how-it-works: motion is once-only and
    decorative, transforms and opacity only; the settled state is the base style, so no script and reduced motion show the
    finished picture. Nothing is sticky, fixed, looping or scroll-linked, and nothing snaps or hijacks scroll.
-   Scenes use `min-height` against the visible fold, never a fixed height, so text zoom, longer text and short screens grow
+   Scenes size to their content (no viewport-tied height), so text zoom, longer text and short screens grow
    the scene instead of clipping it. Light: Ink plus burnt; dark: white plus tangerine. */
 
-.b2.sk { --ease: cubic-bezier(.16, 1, .3, 1); --sk-rule: #2C2833; --sk-mark: #3A3544; --sk-dash: #8E8798; --sk-panel: #15121B; --sk-hdr: 77px; --sk-fold: calc(100svh - var(--sk-hdr)); }
+.b2.sk { --ease: cubic-bezier(.16, 1, .3, 1); --sk-rule: #2C2833; --sk-mark: #3A3544; --sk-dash: #8E8798; --sk-panel: #15121B; --sk-hdr: 77px; }
 @media (max-width: 1023px) { .b2.sk { --sk-hdr: 65px; } }
 /* Content width and gutters: the homepage rule (.rv3-wrap), the same --dc-wrap/--dc-pad the header and footer use. */
 .b2.sk .pa-wrap { width: calc(min(var(--dc-wrap, 1360px), 100%) - 2 * var(--dc-pad, 16px)); margin-inline: auto; }
@@ -26,15 +26,14 @@ html .b2.sk .sk-dark .pa-action--primary { border-color: rgba(255, 255, 255, .18
 html .b2.sk .sk-dark :focus-visible { outline-color: #fff; }
 .b2.sk :where(.sk-ground, .sk-paper) :focus-visible { outline: 3px solid var(--v-burnt); outline-offset: 3px; }
 
-/* The scenes that carry the most weight fill the visible fold and centre their content. Content taller than the fold grows it. */
-/* The hero and the close fill the visible fold and centre their content. Content taller than the fold grows it. */
-.b2.sk :where(.sk-hero, .sk-band) { min-height: var(--sk-fold); display: flex; align-items: center; }
+/* The hero and the close size to their content; no height is tied to the viewport. */
+.b2.sk :where(.sk-hero, .sk-band) { display: flex; align-items: center; }
 .b2.sk :where(.sk-hero, .sk-band) > .pa-wrap { flex: 0 1 auto; }
 
 /* ---- Chapter head: number, name, the answer as the H2 ---- */
 .b2.sk .sk-head { margin-bottom: clamp(24px, 3vw, 44px); }
 .b2.sk .sk-head .b2-h2 { max-width: 20ch; }
-.b2.sk .sk-ch { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: var(--resolve-dim); font: 800 .72rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+.b2.sk .sk-ch { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: var(--resolve-dim); font: 800 .75rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; }
 .b2.sk .sk-ch span { display: inline-flex; align-items: center; gap: 12px; color: var(--v-burnt); font: 800 1rem/1 var(--font-bricolage), sans-serif; letter-spacing: -.01em; }
 .b2.sk .sk-ch span::after { content: ''; width: 28px; height: 2px; background: currentColor; }
 html .b2.sk .sk-dark .sk-ch { color: var(--v-soft); }
@@ -46,7 +45,9 @@ html .b2.sk .sk-dark .sk-sub { color: var(--v-soft); }
    Hero (high): the pain. A customer searches, somebody else is in the results, your page is not, so no enquiry arrives.
    The route is solid only as far as the results; after that it is dashed and hollow.
    ===================================================================================================================== */
-.b2.sk .sk-hero { padding-block: clamp(24px, 4vh, 64px); }
+.b2.sk .sk-hero { padding-block: 36px; }
+/* the shared eyebrow label meets the 12 px floor on this page (the base rule sits below it on phones) */
+html .b2.sk .pa-eyebrow { font-size: .75rem; }
 .b2.sk .sk-hero-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 32px); align-items: center; }
 .b2.sk .sk-hero-copy { grid-column: 1 / span 6; min-width: 0; }
 .b2.sk .sk-crumb { margin-bottom: 20px; color: var(--v-soft); font-size: .8125rem; }
@@ -62,14 +63,14 @@ html .b2.sk .sk-hero .b2-lede { margin-top: 20px; max-width: 34em; font-size: cl
 
 .b2.sk .sk-fig { grid-column: 7 / span 6; margin: 0; min-width: 0; }
 .b2.sk .sk-panel { padding: clamp(18px, 2.4vw, 36px); border: 1px solid var(--sk-rule); border-radius: 10px; background: var(--sk-panel); }
-.b2.sk .sk-route { --sk-gap: clamp(18px, 3.2vh, 34px); display: grid; row-gap: var(--sk-gap); margin: 0; padding: 0; list-style: none; }
+.b2.sk .sk-route { --sk-gap: 28px; display: grid; row-gap: var(--sk-gap); margin: 0; padding: 0; list-style: none; }
 .b2.sk .sk-st { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1.15fr); align-items: start; column-gap: clamp(12px, 1.4vw, 22px); }
 .b2.sk .sk-st:not(:last-child)::after { content: ''; position: absolute; left: 21px; top: 44px; bottom: calc(-1 * var(--sk-gap)); width: 2px; background: repeating-linear-gradient(to bottom, var(--sk-dash) 0 6px, transparent 6px 12px); }
 .b2.sk .sk-st:nth-child(1)::after { background: var(--v-tang); transform-origin: top; }
 .b2.sk .sk-node { width: 44px; height: 44px; border-radius: 50%; border: 2px solid #fff; background: var(--sk-panel); }
 .b2.sk .sk-st-tx { display: grid; justify-items: start; gap: 8px; min-width: 0; padding-top: 6px; }
 .b2.sk .sk-st-t { color: #fff; font: 800 clamp(1.2rem, 1.8vw, 1.6rem)/1.15 var(--font-bricolage), sans-serif; letter-spacing: -.01em; }
-.b2.sk .sk-st-tag { padding: 4px 10px; border-radius: 999px; background: var(--v-tang); color: var(--v-ink); font: 800 .6875rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+.b2.sk .sk-st-tag { padding: 4px 10px; border-radius: 999px; background: var(--v-tang); color: var(--v-ink); font: 800 .75rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .12em; text-transform: uppercase; }
 /* the ghost stations: your page and the enquiry that never arrives */
 .b2.sk .sk-st.is-ghost .sk-node { border-style: dashed; border-color: var(--sk-dash); background: transparent; }
 .b2.sk .sk-st.is-ghost .sk-st-t { color: #B7B0BF; }
@@ -89,7 +90,7 @@ html .b2.sk .sk-hero .b2-lede { margin-top: 20px; max-width: 34em; font-size: cl
 .b2.sk .sk-v-env { display: block; width: 72px; height: auto; }
 .b2.sk .sk-v-env rect { fill: none; stroke: var(--v-tang); stroke-width: 2; stroke-dasharray: 5 4; }
 .b2.sk .sk-v-env path { fill: none; stroke: var(--v-tang); stroke-width: 2; stroke-dasharray: 5 4; stroke-linejoin: round; }
-.b2.sk .sk-fig figcaption { margin-top: 10px; color: #B7B0BF; font-size: .78rem; font-weight: 600; line-height: 1.45; }
+.b2.sk .sk-fig figcaption { margin-top: 10px; color: #B7B0BF; font-size: .875rem; font-weight: 600; line-height: 1.45; }
 
 /* =====================================================================================================================
    01 Where a search breaks (medium): three related breaks in sequence along one line, each a burnt gate.
@@ -98,7 +99,7 @@ html .b2.sk .sk-hero .b2-lede { margin-top: 20px; max-width: 34em; font-size: cl
 .b2.sk .sk-breaks::before { content: ''; position: absolute; background: var(--v-ink); transform-origin: top; }
 .b2.sk .sk-breaks li { position: relative; }
 .b2.sk .sk-gate { position: absolute; width: 28px; height: 28px; border-radius: 4px; background: var(--v-burnt); transform: rotate(45deg) scale(.78); }
-.b2.sk .sk-tag { color: var(--resolve-accent-dark); font: 800 .72rem/1.4 var(--font-manrope), sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+.b2.sk .sk-tag { color: var(--resolve-accent-dark); font: 800 .75rem/1.4 var(--font-manrope), sans-serif; letter-spacing: .12em; text-transform: uppercase; }
 html .b2.sk .sk-breaks h3 { color: var(--v-ink); font-size: clamp(1.4rem, 2.1vw, 1.95rem); line-height: 1.12; letter-spacing: -.015em; text-wrap: balance; }
 html .b2.sk .sk-breaks .sk-a { margin-top: 10px; color: var(--resolve-dim); font-size: 1.02rem; line-height: 1.6; }
 @media (min-width: 1081px) {
@@ -154,7 +155,7 @@ html .b2.sk .sk-lines .sk-also { margin-top: 10px; max-width: 46ch; color: #B7B0
 html .b2.sk .sk-stage .sk-lead { margin-top: clamp(16px, 2vw, 28px); color: #fff; font-size: clamp(1.4rem, 2.3vw, 2.1rem); line-height: 1.1; letter-spacing: -.015em; text-wrap: balance; }
 .b2.sk .sk-big { display: block; margin-bottom: 6px; color: var(--v-tang); font-size: clamp(3.6rem, 9vw, 8rem); line-height: .92; letter-spacing: -.04em; }
 .b2.sk .sk-enq { display: grid; gap: 4px; margin-top: clamp(18px, 2.4vw, 32px); }
-.b2.sk .sk-enq-l { color: var(--v-soft); font: 700 .8125rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+.b2.sk .sk-enq-l { color: var(--v-soft); font: 700 .875rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .06em; text-transform: uppercase; }
 .b2.sk .sk-enq-v { color: #fff; font: 800 clamp(1.9rem, 3.4vw, 3rem)/1.05 var(--font-bricolage), sans-serif; letter-spacing: -.02em; }
 .b2.sk .sk-rest { display: block; max-width: 16ch; }
 .b2.sk .sk-arr { color: var(--v-tang); }
@@ -164,7 +165,7 @@ html .b2.sk .sk-stage .sk-lead { margin-top: clamp(16px, 2vw, 28px); color: #fff
 .b2.sk .sk-sup-l { color: var(--v-soft); font-weight: 600; }
 .b2.sk .sk-sup-v { color: #fff; font: 800 1.1rem/1.2 var(--font-bricolage), sans-serif; }
 .b2.sk .sk-sup-p { min-width: 4.6em; color: var(--v-tang); font: 800 1.1rem/1.2 var(--font-bricolage), sans-serif; text-align: right; }
-.b2.sk .sk-cav { margin: auto 0 0; padding-top: clamp(18px, 2vw, 28px); max-width: 60ch; color: var(--v-soft); font-size: .8125rem; line-height: 1.55; }
+.b2.sk .sk-cav { margin: auto 0 0; padding-top: clamp(18px, 2vw, 28px); max-width: 60ch; color: var(--v-soft); font-size: .875rem; line-height: 1.55; }
 .b2.sk .sk-case-tx { display: flex; flex-direction: column; justify-content: center; gap: clamp(18px, 2vw, 28px); }
 html .b2.sk .sk-case-tx .sk-body { color: var(--v-ink); font-size: clamp(1.08rem, 1.45vw, 1.28rem); line-height: 1.55; }
 html .b2.sk .sk-case-tx .sk-read { padding-left: 16px; border-left: 4px solid var(--v-burnt); color: var(--v-ink); font: 800 clamp(1.1rem, 1.5vw, 1.35rem)/1.3 var(--font-bricolage), sans-serif; }
@@ -174,7 +175,7 @@ html .b2.sk .sk-case-tx .sk-read { padding-left: 16px; border-left: 4px solid va
 .b2.sk .sk-case + .sk-ameba { margin-top: clamp(36px, 4.4vw, 64px); }
 .b2.sk .sk-ameba > * { min-width: 0; }
 html .b2.sk .sk-ameba h3 { color: var(--v-ink); font-size: clamp(1.6rem, 2.8vw, 2.5rem); line-height: 1.05; letter-spacing: -.02em; }
-html .b2.sk .sk-am-meta { margin-top: 6px; color: var(--resolve-dim); font: 700 .8125rem/1.4 var(--font-manrope), sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+html .b2.sk .sk-am-meta { margin-top: 6px; color: var(--resolve-dim); font: 700 .875rem/1.4 var(--font-manrope), sans-serif; letter-spacing: .06em; text-transform: uppercase; }
 html .b2.sk .sk-am-b p { max-width: 52ch; color: var(--v-ink); line-height: 1.55; }
 html .b2.sk .sk-am-b p + p { margin-top: 10px; }
 html .b2.sk .sk-am-b .sk-am-limit { padding-top: 12px; color: var(--resolve-dim); font-size: .9rem; }
@@ -202,9 +203,9 @@ html .b2.sk .sk-how-line { grid-row: 1 / span 2; max-width: 28ch; color: var(--v
    ===================================================================================================================== */
 .b2.sk .sk-band-in { display: grid; grid-template-columns: minmax(0, 1fr); }
 .b2.sk .sk-band-copy { min-width: 0; max-width: 46rem; }
-.b2.sk .sk-band-k { margin-bottom: 14px; color: #fff; font: 800 .72rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+.b2.sk .sk-band-k { margin-bottom: 14px; color: #fff; font: 800 .75rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; }
 .b2.sk .sk-rel { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 24px; margin-top: clamp(24px, 3vw, 44px); padding-top: 18px; border-top: 2px solid rgba(255, 255, 255, .5); color: #fff; }
-.b2.sk .sk-rel-k { font: 800 .72rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+.b2.sk .sk-rel-k { font: 800 .75rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .14em; text-transform: uppercase; }
 .b2.sk .sk-rel ul { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0; padding: 0; list-style: none; }
 .b2.sk .sk-rel a { color: #fff; font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
 .b2.sk .sk-rel a:hover { text-decoration-thickness: 4px; }
@@ -246,7 +247,7 @@ html .b2.sk .sk-how-line { grid-row: 1 / span 2; max-width: 28ch; color: var(--v
   /* problems: a short vertical sequence */
   html .b2.sk .sk-breaks h3 { font-size: 1.15rem; }
   html .b2.sk .sk-breaks .sk-a { margin-top: 4px; font-size: .92rem; line-height: 1.45; }
-  .b2.sk .sk-tag { font-size: .6875rem; }
+  .b2.sk .sk-tag { font-size: .75rem; }
   .b2.sk .sk-more { margin-top: 12px; }
   .b2.sk .sk-breaks li { padding-block: 12px; }
   .b2.sk .sk-breaks li:first-child { padding-top: 0; }
@@ -316,4 +317,21 @@ html .b2.sk .sk-how-line { grid-row: 1 / span 2; max-width: 28ch; color: var(--v
 }
 @media (prefers-reduced-motion: reduce) {
   .b2.sk *, .b2.sk *::before, .b2.sk *::after { animation: none !important; transition: none !important; }
+}
+
+/* B5A V2 hero refinement (owner-approved, B5A V2 review): the hero space is redistributed, not added to; no fixed or viewport-tied height. */
+@media (min-width: 1024px) {
+  .b2.sk .sk-hero { padding-block: 32px; }
+  .b2.sk .sk-crumb { margin-bottom: 12px; }
+  html .b2.sk .sk-hero .b2-lede { margin-top: 24px; }
+  .b2.sk .sk-hero .pa-actions { margin-top: 32px; }
+  .b2.sk .sk-route { --sk-gap: 16px; }
+  .b2.sk .sk-panel { padding: 20px 28px; }
+}
+@media (max-width: 700px) {
+  .b2.sk .sk-hero .pa-eyebrow { margin-bottom: 10px; }
+  html .b2.sk .sk-hero .b2-lede { margin-top: 14px; }
+  .b2.sk .sk-hero .pa-actions { margin-top: 20px; }
+  .b2.sk .sk-hero .pa-action--primary { padding-inline: 18px; } /* one line at 360 px, 52 px tall */
+  .b2.sk .sk-fig { margin-top: 12px; }
 }

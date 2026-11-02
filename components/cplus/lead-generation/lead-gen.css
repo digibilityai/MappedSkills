@@ -1,13 +1,13 @@
 /* /lead-generation: THE RESOLVE, six scenes (Stage 4 Batch 2C, DEC-095, on the DEC-057 content). Scoped to `.b2.lg`, loaded
    after b2.css (tokens `--v-*`). Motion policy as on /about, /seo and /ai-seo: calm, decorative, transforms and opacity
    only, once only; the settled state is the base style, so no script and reduced motion show every step complete.
-   Nothing is sticky, fixed, looping or scroll-linked; nothing snaps scroll. Scenes use `min-height` against the visible
-   fold, never a fixed height. Light: Ink plus burnt. Dark: white plus tangerine. A tile is paper or Ink Deep. */
+   Nothing is sticky, fixed, looping or scroll-linked; nothing snaps scroll. Scenes size to their content, never a
+   viewport-tied height. Light: Ink plus burnt. Dark: white plus tangerine. A tile is paper or Ink Deep. */
 
-.b2.lg { --ease: cubic-bezier(.16, 1, .3, 1); --lg-rule: #2C2833; --lg-mark: #3A3544; --lg-dash: #8E8798; --lg-panel: #15121B; --lg-hdr: 77px; --lg-fold: calc(100svh - var(--lg-hdr)); }
+.b2.lg { --ease: cubic-bezier(.16, 1, .3, 1); --lg-rule: #2C2833; --lg-mark: #3A3544; --lg-dash: #8E8798; --lg-panel: #15121B; --lg-hdr: 77px; }
 @media (max-width: 1023px) { .b2.lg { --lg-hdr: 65px; } }
 .b2.lg .pa-wrap { width: calc(min(var(--dc-wrap, 1360px), 100%) - 2 * var(--dc-pad, 16px)); margin-inline: auto; }
-.b2.lg .px-cap { margin-top: 12px; font-size: .8125rem; line-height: 1.4; color: var(--resolve-dim); }
+.b2.lg .px-cap { margin-top: 12px; font-size: .875rem; line-height: 1.4; color: var(--resolve-dim); }
 html .b2.lg .lg-dark .px-cap { color: #B7B0BF; }
 
 /* ---- Grounds, headings, actions ---- */
@@ -22,7 +22,7 @@ html .b2.lg .b2-em { color: var(--resolve-accent-deep); font-style: normal; }
 html .b2.lg .lg-dark .b2-em { color: var(--v-tang); }
 .b2.lg :where(.lg-ground, .lg-paper) :focus-visible { outline: 3px solid var(--v-burnt); outline-offset: 3px; }
 html .b2.lg .lg-dark :focus-visible, html .b2.lg .lg-band :focus-visible { outline-color: #fff; }
-.b2.lg :where(.lg-hero, .lg-prob, .lg-do, .lg-band) { min-height: var(--lg-fold); display: flex; align-items: center; }
+.b2.lg :where(.lg-hero, .lg-prob, .lg-do, .lg-band) { display: flex; align-items: center; }
 .b2.lg :where(.lg-hero, .lg-prob, .lg-do, .lg-band) > .pa-wrap { flex: 0 1 auto; }
 .b2.lg .lg-k { margin-bottom: 14px; color: var(--resolve-accent-dark); }
 html .b2.lg .lg-dark .lg-k { color: var(--v-tang); }
@@ -60,7 +60,9 @@ html .b2.lg .lg-band .dc-btn-secondary:hover { background: #fff; color: var(--v-
 /* =====================================================================================================================
    1 The doubt (high): one example enquiry arrives. The question is the picture.
    ===================================================================================================================== */
-.b2.lg .lg-hero { padding-block: clamp(24px, 4vh, 64px); }
+.b2.lg .lg-hero { padding-block: 36px; }
+/* the shared eyebrow label meets the 12 px floor on this page (the base rule sits below it on phones) */
+html .b2.lg .pa-eyebrow { font-size: .75rem; }
 .b2.lg .lg-hero-g { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2.4vw, 40px); align-items: center; }
 .b2.lg .lg-hero-tx { grid-column: 1 / span 6; min-width: 0; }
 .b2.lg .lx-hero-fig { grid-column: 7 / span 6; margin: 0; display: grid; gap: 14px; min-width: 0; }
@@ -75,12 +77,12 @@ html .b2.lg .lg-hero .b2-lede { margin-top: 20px; max-width: 34em; font-size: cl
 html .b2.lg .lg-dark p.lx-hero-q { color: var(--v-tang); }
 .b2.lg .lx-enq { position: relative; padding: 16px 18px 20px; border-radius: 10px; background: var(--v-paper); color: var(--v-ink); }
 .b2.lg .lx-enq-top { display: flex; align-items: center; gap: 10px; padding-bottom: 10px; border-bottom: 2px solid var(--v-ink); }
-.b2.lg .lx-enq-k { margin-right: auto; font: 800 .72rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--v-ink); }
+.b2.lg .lx-enq-k { margin-right: auto; font: 800 .75rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--v-ink); }
 .b2.lg .lx-chip { display: none; padding: 5px 10px; border-radius: 999px; background: var(--v-ink); color: #fff; font: 800 .75rem/1 var(--font-bricolage), sans-serif; }
 .b2.lg .lx-chip-3 { background: var(--v-tang); color: var(--v-ink); }
 .b2.lg .lx-enq-f { margin: 0; display: grid; transition: opacity .4s; }
 .b2.lg .lx-enq-f > div { display: grid; grid-template-columns: 6.2rem minmax(0, 1fr); gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--v-line); align-items: baseline; }
-.b2.lg .lx-enq-f dt { font: 700 .8125rem/1.3 var(--font-manrope), sans-serif; color: var(--resolve-dim); }
+.b2.lg .lx-enq-f dt { font: 700 .875rem/1.3 var(--font-manrope), sans-serif; color: var(--resolve-dim); }
 .b2.lg .lx-enq-f dd { margin: 0; font: 700 1rem/1.3 var(--font-manrope), sans-serif; color: var(--v-ink); }
 .b2.lg .lx-ad { margin: 12px 0 0; width: fit-content; max-width: 100%; display: flex; align-items: center; gap: 10px; padding: 9px 14px; border-radius: 999px; background: var(--v-deep); color: #fff; font: 700 .9375rem/1.25 var(--font-manrope), sans-serif; }
 html .b2.lg .lg-dark .lx-ad { color: #fff; }
@@ -107,12 +109,12 @@ html .b2.lg .lx-hj-s p { margin: 0; color: #fff; }
 .b2.lg .lx-tile { margin: 0; padding: clamp(16px, 1.8vw, 26px); border: 1px solid var(--v-line); border-radius: 10px; min-width: 0; }
 .b2.lg .lx-tile-cream { background: var(--v-paper); color: var(--v-ink); }
 .b2.lg .lx-tile-ink { background: var(--v-deep); color: var(--v-on-dark); border-color: var(--lg-rule); }
-.b2.lg .lx-tl { margin: 0; font: 800 .72rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--resolve-accent-dark); }
+.b2.lg .lx-tl { margin: 0; font: 800 .75rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--resolve-accent-dark); }
 .b2.lg .lx-tile-ink .lx-tl { color: var(--v-tang); }
 .b2.lg .lx-box { display: flex; flex-direction: column; gap: 12px; }
 .b2.lg .lx-inbox { border: 1px solid var(--v-line); border-radius: 8px; padding: 12px; display: grid; gap: 8px; background: var(--v-ground); }
 .b2.lg .lx-inbox-h { font: 800 1rem/1 var(--font-bricolage), sans-serif; }
-.b2.lg .lx-row { display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 10px; border-radius: 6px; font: 700 .8125rem/1 var(--font-manrope), sans-serif; font-style: normal; }
+.b2.lg .lx-row { display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 10px; border-radius: 6px; font: 700 .875rem/1 var(--font-manrope), sans-serif; font-style: normal; }
 .b2.lg .lx-row-real { border: 1.5px solid var(--v-ink); background: var(--v-paper); box-shadow: inset 5px 0 0 var(--v-tang); padding-left: 14px; }
 .b2.lg .lx-row-empty { border: 1.5px dashed var(--v-line); }
 .b2.lg .lx-pile { list-style: none; margin: 0; padding: 14px 4px; min-height: 150px; display: flex; flex-wrap: wrap; align-content: center; gap: 10px; }
@@ -203,17 +205,17 @@ html .b2.lg .lx-relay-mark p { margin: 0; max-width: 9ch; text-align: center; fo
 .b2.lg .fq-a { max-width: 66ch; margin: 0 0 20px; padding: 2px 0 2px 18px; border-left: 3px solid var(--v-burnt); font-size: 1.05rem; line-height: 1.6; color: var(--v-ink); }
 .b2.lg .fq-a p { margin: 0; }
 .b2.lg .lg-related { margin-top: 22px; color: var(--resolve-dim); line-height: 1.7; }
-.b2.lg .lg-related a { display: inline-block; min-height: 24px; color: var(--v-ink); font-weight: 700; text-underline-offset: 4px; }
+.b2.lg .lg-related a { display: inline-flex; align-items: center; min-height: 44px; color: var(--v-ink); font-weight: 700; text-underline-offset: 4px; }
 
 /* =====================================================================================================================
    6 The next business action (high): one decision first. What happens next stays, quietly.
    ===================================================================================================================== */
 .b2.lg .lg-band .pa-wrap { max-width: none; }
-.b2.lg .lg-band-k { margin-bottom: 14px; color: #fff; font: 800 .72rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+.b2.lg .lg-band-k { margin-bottom: 14px; color: #fff; font: 800 .75rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; }
 html .b2.lg .lg-band h2 { max-width: 16ch; font-size: clamp(2.2rem, 4.6vw, 4.2rem); line-height: 1; letter-spacing: -.025em; }
-.b2.lg .lx-close-2 { display: block; color: #FFD6BA; }
+.b2.lg .lx-close-2 { display: block; color: #fff; }
 html .b2.lg .lg-band p { max-width: 36em; }
-.b2.lg .lx-next-k { margin: clamp(28px, 3.6vw, 48px) 0 0; font: 800 .72rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #fff; }
+.b2.lg .lx-next-k { margin: clamp(28px, 3.6vw, 48px) 0 0; font: 800 .75rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #fff; }
 .b2.lg .lx-next { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
 .b2.lg .lx-next li { display: flex; align-items: flex-start; gap: 10px; padding: 12px 0 0; border-top: 2px solid rgba(255, 255, 255, .5); background: transparent; border-radius: 0; border-inline: 0; border-bottom: 0; }
 html .b2.lg .lg-band .lx-next p { margin: 0; max-width: none; font: 700 .95rem/1.3 var(--font-manrope), sans-serif; color: #fff; }
@@ -255,7 +257,7 @@ html .b2.lg .lg-band .lx-next p { margin: 0; max-width: none; font: 700 .95rem/1
   .b2.lg .lx-hj-s { flex-direction: column; align-items: flex-start; gap: 6px; padding: 8px; }
   .b2.lg .lx-hj-s b { font-size: .8rem; line-height: 1.15; }
   .b2.lg .lx-hj-s .lx-n { width: 26px; height: 26px; font-size: .75rem; }
-  .b2.lg .lx-hero-fig .lx-cap { font-size: .72rem; margin-top: 0; }
+  .b2.lg .lx-hero-fig .lx-cap { font-size: .75rem; margin-top: 0; }
   /* problem */
   .b2.lg .lg-prob .b2-h2 { font-size: 1.9rem; }
   .b2.lg .lg-pair { margin-top: 14px; gap: 10px; }
@@ -308,9 +310,9 @@ html .b2.lg .lg-band .lx-next p { margin: 0; max-width: none; font: 700 .95rem/1
 @media (max-width: 380px) {
   html .b2.lg .lg-hero h1 { font-size: 1.85rem; }
   .b2.lg .lg-hero { padding-block: 8px 12px; }
-  .b2.lg .lx-enq-top .lx-enq-k { font-size: .66rem; }
+  .b2.lg .lx-enq-top .lx-enq-k { font-size: .75rem; }
   .b2.lg .lg-do .b2-h2 { font-size: 1.65rem; }
-  .b2.lg .lg-hero .dc-btn { min-height: 46px; }
+  .b2.lg .lg-hero .dc-btn { min-height: 52px; }
   .b2.lg .lx-ad { display: none; }
   .b2.lg .lg-do, .b2.lg .lg-bd { padding-block: 32px; }
   .b2.lg .lx-stop { padding: 8px 10px; }
@@ -337,4 +339,33 @@ html .b2.lg .lg-band .lx-next p { margin: 0; max-width: none; font: 700 .95rem/1
 @media (prefers-reduced-motion: reduce) {
   .b2.lg *, .b2.lg *::before, .b2.lg *::after { animation: none !important; transition: none !important; }
   .b2.lg .is-on > .lx-n { transform: none; }
+}
+
+/* B5A V2 hero refinement (owner-approved, B5A V2 review): the hero space is redistributed, not added to; no fixed or viewport-tied height. */
+/* the "Your sales team" pill sits in the card's flow, bottom right, instead of straddling its edge */
+.b2.lg .lx-hand { position: static; margin: 8px 0 0 auto; width: fit-content; }
+@media (min-width: 1024px) {
+  .b2.lg .lg-hero { padding-block: 32px; }
+  .b2.lg .lg-crumb { margin-bottom: 12px; }
+  html .b2.lg .lg-hero .b2-lede { margin-top: 24px; }
+  .b2.lg .dc-actions { margin-top: 32px; }
+  .b2.lg .lg-hero-tx { grid-column: 1 / span 7; }
+  .b2.lg .lx-hero-fig { grid-column: 8 / span 5; gap: 10px; }
+  .b2.lg .lx-enq { padding: 12px 16px 14px; }
+  .b2.lg .lx-enq-f > div { grid-template-columns: 5.2rem minmax(0, 1fr); gap: 8px; padding-block: 4px; }
+  .b2.lg .lx-ad { margin-top: 8px; padding-block: 7px; }
+  .b2.lg .lx-hj { margin-top: 8px; }
+}
+@media (max-width: 700px) {
+  .b2.lg .lg-hero .pa-eyebrow { margin-bottom: 10px; }
+  html .b2.lg .lg-hero .b2-lede { margin-top: 14px; }
+  .b2.lg .dc-actions { margin-top: 20px; }
+  .b2.lg .lx-hero-fig { margin-top: 14px; gap: 6px; }
+  .b2.lg .lx-enq { padding: 8px 12px 10px; }
+  .b2.lg .lx-enq-top { padding-bottom: 6px; }
+  .b2.lg .lx-enq-f > div { grid-template-columns: 5rem minmax(0, 1fr); padding-block: 3px; }
+  .b2.lg .lx-ad { margin-top: 6px; padding-block: 4px; }
+  .b2.lg .lx-hand { margin-top: 4px; padding-block: 5px; }
+  .b2.lg .lx-hj { margin-top: 6px; gap: 6px; }
+  .b2.lg .lx-hj-s { padding: 6px 10px; }
 }

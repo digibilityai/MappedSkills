@@ -81,7 +81,7 @@ export const SEO_PLAIN = {
     meta: 'Pune · Education and training · SEO',
     lead: { big: '46.15%', rest: 'more tracked organic course enquiries' },
     enquiries: { from: '91', to: '133', label: 'Tracked organic course enquiries' },
-    period: 'May–July 2026 versus August–October 2026',
+    period: 'May to July 2026 versus August to October 2026',
     support: [
       { label: 'Organic clicks', from: '16,400', to: '20,580', pct: '+25.49%' },
       { label: 'Nonbrand organic clicks', from: '15,348', to: '20,039', pct: '+30.56%' },

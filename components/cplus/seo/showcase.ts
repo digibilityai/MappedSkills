@@ -20,7 +20,7 @@ export const SEO_SHOWCASE: ShowcaseConfig = {
   overrides: {
     [ACB]: {
       outcome: { v: '46.15%', c: 'more tracked organic course enquiries, from 91 to 133.' },
-      period: 'May–July 2026 versus August–October 2026',
+      period: 'May to July 2026 versus August to October 2026',
       note: 'A comparison of two periods, not proof that the work alone caused the change. The figures were supplied by MappedSkills and have not been independently checked.',
     },
     '/portfolio/seo-ameba-software': {

@@ -118,7 +118,7 @@ html .b2.ai .ai-dark button.ax-st-n:focus-visible { outline-color: #fff; }
    3 Industry examples (low): four industries, four beats each. Calm. The last beat is the visitor's own question.
    ===================================================================================================================== */
 .b2.ai .ax-chips { margin-top: clamp(20px, 2.6vw, 32px); display: flex; flex-wrap: wrap; gap: 10px; }
-.b2.ai .ax-chip { flex: 0 0 auto; white-space: nowrap; min-height: 44px; padding: 0 20px; border: 1.5px solid var(--v-ink); border-radius: 999px; background: transparent; color: var(--v-ink); font: 800 1rem/1 var(--font-bricolage), sans-serif; cursor: pointer; transition: background-color .2s, color .2s; }
+.b2.ai .ax-chip { min-height: 44px; padding: 0 20px; border: 1.5px solid var(--v-ink); border-radius: 999px; background: transparent; color: var(--v-ink); font: 800 1rem/1 var(--font-bricolage), sans-serif; cursor: pointer; transition: background-color .2s, color .2s; }
 .b2.ai .ax-chip[aria-pressed="true"] { background: var(--v-ink); color: #fff; }
 .b2.ai .ax-ind-p { margin-top: clamp(18px, 2.2vw, 28px); }
 .b2.ai .ax-ind-p[hidden] { display: none; }

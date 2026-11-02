@@ -89,7 +89,12 @@ test('hero spacing is a fixed value and the shared eyebrow label is held to 12 p
   assert.match(css.seo, /--sk-gap: 28px;/);
 });
 
-test('/ai-seo: industry tabs never shrink or wrap their label (Manufacturing stays whole at 360 and 390)', () => {
-  assert.match(css['ai-seo'], /\.ax-chip \{ flex: 0 0 auto; white-space: nowrap; min-height: 44px;/);
-  assert.match(css['ai-seo'], /\.ax-chips \{[^}]*flex-wrap: wrap/, 'the tabs still wrap to a second row');
+test('/ai-seo: the industry tab rule is unchanged from main and the tabs still wrap', () => {
+  assert.match(css['ai-seo'], /\.ax-chip \{ min-height: 44px; padding: 0 20px;/);
+  assert.doesNotMatch(css['ai-seo'], /\.ax-chip \{[^}]*white-space: nowrap/);
+  assert.match(css['ai-seo'], /\.ax-chips \{[^}]*flex-wrap: wrap/);
+});
+
+test('/conversion-optimization: the start link has a 44 px hit area that adds no layout space', () => {
+  assert.match(css['conversion-optimization'], /\.co-start-a::after \{ content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 44px; transform: translateY\(-50%\); \}/);
 });

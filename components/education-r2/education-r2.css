@@ -41,7 +41,7 @@
 .edr2-ch-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--sp-4) clamp(32px, 6vw, 96px); align-items: center; }
 .edr2-ch h2 { font-size: clamp(2rem, 3.8vw, 3.2rem); max-width: 14ch; }
 .edr2-chart { background: var(--c-ground); border: 1px solid var(--c-line); border-radius: 18px; padding: clamp(18px, 2.4vw, 32px); }
-.edr2-chart-l { font: 800 .74rem/1.4 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--c-dim); margin-bottom: 6px; }
+.edr2-chart-l { font: 800 .75rem/1.4 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--c-dim); margin-bottom: 6px; }
 .edr2-chart li { padding-block: 14px; border-top: 1px dashed var(--c-line); }
 .edr2-chart li:first-child { border-top: 0; }
 .edr2-chart h3 { font-size: 1.1rem; letter-spacing: -.01em; }
@@ -49,10 +49,10 @@
 .edr2-bar { display: block; height: 12px; border-radius: 6px; background: #EFE9DD; overflow: hidden; }
 .edr2-bar i { display: block; height: 100%; border-radius: 6px; }
 .edr2-bar--e i { background: var(--c-gap); } .edr2-bar--s i { background: var(--c-tang); }
-.edr2-legend { margin-top: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: .86rem; font-weight: 700; }
+.edr2-legend { margin-top: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: .875rem; font-weight: 700; }
 .edr2-sw { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
 .edr2-sw--e { background: var(--c-gap); } .edr2-sw--s { background: var(--c-tang); margin-left: 10px; }
-.edr2-cap { margin-top: 8px; font-size: .82rem; color: var(--c-dim); }
+.edr2-cap { margin-top: 8px; font-size: .875rem; color: var(--c-dim); }
 [data-arm] .edr2-bar i { transform: scaleX(0); transform-origin: left center; }
 [data-arm][data-play] .edr2-bar i { transform: scaleX(1); transition: transform .7s var(--ease) calc(var(--r, 0) * .3s + .1s); }
 [data-arm][data-play] .edr2-bar--s i { transition-delay: calc(var(--r, 0) * .3s + .45s); }
@@ -62,7 +62,7 @@
 .edr2-entries { display: grid; gap: var(--sp-2); }
 .edr2-entries li { display: flex; gap: 16px; padding: clamp(16px, 2vw, 26px); border: 1px solid var(--c-line); border-radius: 16px; background: var(--c-paper); }
 .edr2-entries h3 { font-size: 1.3rem; } .edr2-entries p { margin-top: 4px; font-weight: 600; color: var(--c-dim); line-height: 1.45; }
-.edr2-tag { display: inline-block; margin-top: 10px; font: 800 .72rem/1.4 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--c-tang-deep); }
+.edr2-tag { display: inline-block; margin-top: 10px; font: 800 .75rem/1.4 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--c-tang-deep); }
 .edr2-weigh { padding: clamp(18px, 2.4vw, 32px); border-radius: 16px; background: var(--c-ink); color: #fff; }
 .edr2-weigh h3 { font-size: 1.25rem; }
 .edr2-weigh ul { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
@@ -73,7 +73,7 @@
 .edr2-path-in { height: 100%; display: flex; flex-direction: column; }
 .edr2-path ol { flex: 1; align-content: start; }
 .edr2-path { background: #15121B; border: 1px solid var(--c-rule-dark); border-radius: 18px; padding: clamp(18px, 2.2vw, 30px); }
-.edr2-chan { display: inline-block; align-self: flex-start; padding: 4px 12px; border-radius: 999px; font: 800 .72rem/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--c-deep); background: var(--c-on-dark); }
+.edr2-chan { display: inline-block; align-self: flex-start; padding: 4px 12px; border-radius: 999px; font: 800 .75rem/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--c-deep); background: var(--c-on-dark); }
 .edr2-path--b .edr2-chan { background: var(--c-tang); }
 .edr2-path--c .edr2-chan { background: transparent; color: var(--c-on-dark); border: 1.5px solid var(--c-on-dark); }
 .edr2-path h3 { margin-top: 14px; min-height: 2.4em; font-size: clamp(1.25rem, 1.7vw, 1.55rem); }
@@ -101,10 +101,10 @@
 /* ---- 5. Channels ---- */
 .edr2-roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: clamp(12px, 1.6vw, 20px); }
 .edr2-roles li { padding: clamp(16px, 1.8vw, 24px); border: 1px solid var(--c-line); border-radius: 16px; background: var(--c-ground); display: flex; flex-direction: column; gap: 8px; }
-.edr2-plat { font: 800 .72rem/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--c-tang-deep); }
+.edr2-plat { font: 800 .75rem/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--c-tang-deep); }
 .edr2-roles h3 { font-size: 1.25rem; }
 .edr2-role-d { font-weight: 600; font-size: .96rem; line-height: 1.45; }
-.edr2-role-f { margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--c-line); font-size: .86rem; color: var(--c-dim); font-weight: 600; line-height: 1.45; }
+.edr2-role-f { margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--c-line); font-size: .875rem; color: var(--c-dim); font-weight: 600; line-height: 1.45; }
 .edr2-role-f strong { color: var(--c-ink); }
 .edr2-links { margin-top: var(--sp-3); display: flex; flex-wrap: wrap; gap: 8px 28px; }
 
@@ -121,7 +121,7 @@
 .edr2-h-col { padding: clamp(18px, 2vw, 28px); border-radius: 18px; display: flex; flex-direction: column; gap: 8px; }
 .edr2-h-col h3 { font-size: clamp(1.3rem, 1.8vw, 1.6rem); }
 .edr2-h-col p { font-weight: 600; line-height: 1.45; }
-.edr2-h-tag { font: 800 .72rem/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; }
+.edr2-h-tag { font: 800 .75rem/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; }
 .edr2-h-us { background: var(--c-ink); color: #fff; }
 .edr2-h-us .edr2-h-tag { color: var(--c-tang); } .edr2-h-us p:not(.edr2-h-tag) { color: var(--c-on-dark-soft); }
 .edr2-h-us ul { margin-top: 6px; display: grid; gap: 8px; }
@@ -130,7 +130,7 @@
 .edr2-h-act .edr2-h-tag, .edr2-h-you .edr2-h-tag { color: var(--c-tang-deep); }
 .edr2-h-act ul { display: grid; gap: 8px; margin-top: 4px; }
 .edr2-h-act li { padding: 9px 14px; border: 1.5px dashed var(--c-tang-dark); border-radius: 12px; font-weight: 800; background: var(--c-paper); }
-.edr2-h-sm { margin-top: auto; padding-top: 6px; font-size: .86rem; color: var(--c-dim); }
+.edr2-h-sm { margin-top: auto; padding-top: 6px; font-size: .875rem; color: var(--c-dim); }
 .edr2-h-you { border: 2px solid var(--c-ink); background: var(--c-ground); }
 .edr2-h-you > p:not(.edr2-h-tag) { color: var(--c-dim); }
 .edr2-h-cases { display: grid; gap: 10px; margin-top: 6px; }

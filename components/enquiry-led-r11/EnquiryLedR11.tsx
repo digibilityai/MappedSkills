@@ -162,7 +162,7 @@ export function EnquiryLedR11({ showcase }: { showcase?: ShowcaseData | null }) 
 
     {/* 6. Ground: five connected choices that assemble one ad. Numbers link each choice to its part of the ad. */}
     <section className="e11-dc rv3-ground" aria-labelledby="e11-dc-h"><div className="rv3-wrap">
-      <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">{DECISIONS.eyebrow}</p><H2 id="e11-dc-h" parts={DECISIONS.h2} /><p className="rv3-intro">{DECISIONS.lede}</p></header>
+      <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">{DECISIONS.eyebrow}</p><h2 id="e11-dc-h">{DECISIONS.h2.join('')}</h2><p className="rv3-intro">{DECISIONS.lede}</p></header>
       <InViewOnce className="e11-dec" threshold={0.25}>
         <ol className="e11-dec-list">{DECISIONS.items.map((d, i) => <li key={d.k} className={`e11-d e11-d--${d.k}`} style={at(i)}>
           <span className="e11-d-n" aria-hidden="true">{i + 1}</span>
@@ -200,10 +200,10 @@ export function EnquiryLedR11({ showcase }: { showcase?: ShowcaseData | null }) 
     {/* 8. Ink Deep: questions. */}
     <section className="rv3-fit rv3-dark" aria-labelledby="e11-faq-h"><div className="rv3-wrap rv3-fit-grid">
       <div className="rv3-fit-price" {...REVEAL}>
-        <p className="rv3-eyebrow">Questions</p><h2 id="e11-faq-h">A few questions <em>before we talk</em></h2>
+        <p className="rv3-eyebrow">Questions</p><h2 id="e11-faq-h">A few questions before we talk</h2>
         <p>Cannot find your question? Ask us when you get in touch.</p>
       </div>
-      <div className="rv3-faq" {...REVEAL}>{FAQS.map((f) => <details key={f.question}><summary>{f.question}<span aria-hidden="true">+</span></summary><p>{f.answer}{'link' in f && f.link && <> <Link className="rv3-tl" href={f.link.href}>{f.link.label}<span aria-hidden="true">↗</span></Link></>}</p></details>)}</div>
+      <div className="rv3-faq" {...REVEAL}>{FAQS.map((f) => <details key={f.question}><summary>{f.question}<span aria-hidden="true">+</span></summary><p>{f.answer}{'link' in f && f.link && <> <Link className="rv3-tl rv3-tl--dark" href={f.link.href}>{f.link.label}<span aria-hidden="true">↗</span></Link></>}</p></details>)}</div>
     </div></section>
 
     {/* 9. Closing band, one CTA. */}

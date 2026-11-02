@@ -138,7 +138,7 @@ export function RealEstateR2({ showcase }: { showcase?: ShowcaseData | null }) {
 
     {/* 5. Ground: campaign decisions and who does what. */}
     <section className="rer2-dc rv3-ground" aria-labelledby="rer2-dc-h"><div className="rv3-wrap">
-      <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">{DECISIONS.eyebrow}</p><H2 id="rer2-dc-h" parts={DECISIONS.h2} /><p className="rv3-intro">{DECISIONS.lede}</p></header>
+      <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">{DECISIONS.eyebrow}</p><h2 id="rer2-dc-h">{DECISIONS.h2.join('')}</h2><p className="rv3-intro">{DECISIONS.lede}</p></header>
       <ul className="rer2-checks">{DECISIONS.items.map((c) => <li key={c.t} {...REVEAL}><Icon k={c.k} /><div><h3>{c.t}</h3><p>{c.d}</p></div></li>)}</ul>
       <div className="rer2-who3" role="group" aria-label="Who does what">
         <div className="rer2-w rer2-w--we" {...REVEAL}><h3>{DECISIONS.who.we.t}</h3><p>{DECISIONS.who.we.d}</p></div>
@@ -178,10 +178,10 @@ export function RealEstateR2({ showcase }: { showcase?: ShowcaseData | null }) {
     {/* 8. Ink Deep: questions. */}
     <section className="rv3-fit rv3-dark" aria-labelledby="rer2-faq-h"><div className="rv3-wrap rv3-fit-grid">
       <div className="rv3-fit-price" {...REVEAL}>
-        <p className="rv3-eyebrow">Questions</p><h2 id="rer2-faq-h">A few questions <em>before we talk</em></h2>
+        <p className="rv3-eyebrow">Questions</p><h2 id="rer2-faq-h">A few questions before we talk</h2>
         <p>Cannot find your question? Ask us when you get in touch.</p>
       </div>
-      <div className="rv3-faq" {...REVEAL}>{FAQS.map((f) => <details key={f.question}><summary>{f.question}<span aria-hidden="true">+</span></summary><p>{f.answer}{'link' in f && f.link && <> <Link className="rv3-tl" href={f.link.href}>{f.link.label}<span aria-hidden="true">↗</span></Link></>}</p></details>)}</div>
+      <div className="rv3-faq" {...REVEAL}>{FAQS.map((f) => <details key={f.question}><summary>{f.question}<span aria-hidden="true">+</span></summary><p>{f.answer}{'link' in f && f.link && <> <Link className="rv3-tl rv3-tl--dark" href={f.link.href}>{f.link.label}<span aria-hidden="true">↗</span></Link></>}</p></details>)}</div>
     </div></section>
 
     {/* 9. Closing band, one CTA. */}

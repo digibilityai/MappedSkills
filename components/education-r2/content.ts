@@ -13,6 +13,7 @@ export const HERO = {
   h1: ['Find learners who are ', 'ready for what you teach.'],
   lede: 'Reach people looking for courses like yours, help others discover your programmes, and judge advertising by enquiries, purchases and enrolments, not clicks alone.',
   cta: 'Discuss Your Advertising',
+  /** `href` is the fallback: the hero uses the showcase's verified View all target (the filtered `/work` when it can be honoured), B3-03. */
   secondary: { label: 'See our work', href: '/work' },
   caption: 'Illustrative scene with a generic course. Not every learner enrols.',
   steps: ['Searches for a course', 'Finds one while browsing', 'Weighs it up', 'May buy, enquire or register'],

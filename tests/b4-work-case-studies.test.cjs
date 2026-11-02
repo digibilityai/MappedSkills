@@ -103,11 +103,41 @@ test('B4-05: service labels and filter order', () => {
   assert.strictEqual(L.filterStudies([mk(null)], { q: '', sector: null, service: '/social-media-ads' }).length, 0);
 });
 
-test('B4-04: the default order is untouched by B4 (no reorder implemented)', () => {
-  const lib = read('lib/case-study-library.ts');
-  assert.match(lib, /export function orderStudies<T>/);
-  assert.deepStrictEqual(L.orderStudies(['a', 'b', 'c'], (s) => ({ a: null, b: 2, c: 1 }[s])), ['c', 'b', 'a']);
+// The 20 public studies in the order served before the B4 reorder (live /work/index.json, 2 November 2026).
+const LIVE = ['om-sai-developer-meta-ads', 'classpe-social-media-strategy', 'insuryo-organic-growth', 'seo-ameba-software', 'google-ads-for-online-courses', 'anybodycanbake-meta-ads', 'ekoching-google-ads', 'klenzmo-meta-ads', 'bakersville-google-ads', 'phoenix-laundry-google-ads', 'hutnhomes-meta-ads', 'anybodycanbake-seo', 'advit-prints-meta-ads', 'meticulous-business-plan-google-ads', 'libros-library-meta-ads', 'bakedemy-google-ads', 'bakedemy-meta-ads', 'bblewrap-google-ads', 'talreja-talreja-google-ads', 'wanderlooms-meta-ads'];
+const APPROVED_12 = ['om-sai-developer-meta-ads', 'google-ads-for-online-courses', 'anybodycanbake-meta-ads', 'ekoching-google-ads', 'klenzmo-meta-ads', 'bakersville-google-ads', 'phoenix-laundry-google-ads', 'hutnhomes-meta-ads', 'seo-ameba-software', 'anybodycanbake-seo', 'classpe-social-media-strategy', 'insuryo-organic-growth'];
+const SERVICE = { 'om-sai-developer-meta-ads': '/social-media-ads', 'classpe-social-media-strategy': null, 'insuryo-organic-growth': null, 'seo-ameba-software': '/seo', 'google-ads-for-online-courses': '/google-ads', 'anybodycanbake-meta-ads': '/social-media-ads', 'anybodycanbake-seo': '/seo' };
+
+test('B4-04: the approved lead order, owner-approved, code only', () => {
+  assert.deepStrictEqual([...L.APPROVED_LEAD_ORDER], APPROVED_12);
+  for (const slug of APPROVED_12) assert.ok(LIVE.includes(slug), `${slug} matches a published study`);
+  const out = L.leadOrdered(LIVE, (s) => s);
+  assert.deepStrictEqual(out.slice(0, 12), APPROVED_12, 'exact first 12');
+  assert.deepStrictEqual(out.slice(12), LIVE.slice(12), 'positions 13 to 20 keep their relative order');
+  assert.strictEqual(out.length, LIVE.length);
+  assert.deepStrictEqual([...out].sort(), [...LIVE].sort(), 'nothing added or removed');
+  assert.ok(out.indexOf('classpe-social-media-strategy') < 12 && out.indexOf('insuryo-organic-growth') < 12, 'ClassPe and InsurYo stay on page 1');
+  assert.deepStrictEqual(L.leadOrdered(out, (s) => s), out, 'idempotent');
+  assert.ok(!out.includes('seo-for-home-decor-brand'), 'the unlisted study is not promoted');
+  assert.deepStrictEqual(L.leadOrdered(['x', 'klenzmo-meta-ads', 'om-sai-developer-meta-ads'], (s) => s), ['om-sai-developer-meta-ads', 'klenzmo-meta-ads', 'x'], 'a slug that is not published is skipped, never invented');
+  const cs = read('lib/contentful/case-studies.ts');
+  assert.match(cs, /leadOrdered\(orderStudies\(selectPublic\(await fetchAllCaseStudiesRaw\(\)\), \(s\) => s\.library\.listingOrder\), \(s\) => s\.slug\)/);
+  assert.doesNotMatch(read('lib/case-study-library.ts').split('export function leadOrdered')[1].split('export function orderStudies')[0], /contentful|fetch|listingOrder/i);
   assert.doesNotMatch(read('lib/case-study-eligibility.ts'), /classpe|insuryo/i);
+});
+
+test('B4-04: filters, search and paging behave on the approved order', () => {
+  const out = L.leadOrdered(LIVE, (s) => s);
+  const rows = out.map((slug) => ({ slug, search: slug.replace(/-/g, ' '), sector: null, serviceKey: slug in SERVICE ? SERVICE[slug] : slug.includes('google-ads') ? '/google-ads' : '/social-media-ads' }));
+  for (const svc of ['/google-ads', '/social-media-ads']) {
+    const hit = L.filterStudies(rows, { q: '', sector: null, service: svc }).map((r) => r.slug);
+    assert.ok(!hit.includes('classpe-social-media-strategy') && !hit.includes('insuryo-organic-growth'), svc);
+    assert.deepStrictEqual(hit, out.filter((x) => hit.includes(x)), 'a filter only narrows and keeps the order');
+  }
+  assert.deepStrictEqual(L.filterStudies(rows, { q: 'bakedemy', sector: null, service: null }).map((r) => r.slug), ['bakedemy-google-ads', 'bakedemy-meta-ads']);
+  assert.deepStrictEqual(L.pageSlice(out, 1), APPROVED_12);
+  assert.deepStrictEqual(L.pageSlice(out, 2), LIVE.slice(12));
+  assert.strictEqual(L.pageCount(out.length), 2);
 });
 
 test('B4-06: case-study BreadcrumbList, page 2 title, sitemap and unchanged indexing rules', () => {

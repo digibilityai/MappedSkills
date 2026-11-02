@@ -1,7 +1,7 @@
 import { contentfulGraphql, CONTENTFUL_REVALIDATE_SECONDS, getContentfulDeliveryConfig } from '@/lib/contentful/client';
 import { GET_ALL_CASE_STUDIES_QUERY } from '@/lib/contentful/queries';
 import { selectPublic, UNLISTED_CASE_STUDY_IDS } from '@/lib/case-study-eligibility';
-import { orderStudies } from '@/lib/case-study-library';
+import { leadOrdered, orderStudies } from '@/lib/case-study-library';
 import { localPreviewActive, withLocalPreview } from '@/lib/case-study-local-preview';
 import { isCaseStudyProofWithheld } from '@/lib/case-study-proof';
 import { studyCopy } from '@/lib/case-study-release';
@@ -67,9 +67,9 @@ async function fetchAllCaseStudiesRaw(): Promise<CmsCaseStudy[]> {
   return filterNull(withLocalPreview(items).map(mapContentfulCaseStudyToCms));
 }
 
-/** The public studies in library order: listing priority first, then newest first-published (Contentful order). */
+/** The public studies in library order: the owner-approved lead order (B4), then listing priority, then newest first-published (Contentful order). */
 export async function fetchContentfulCaseStudies(): Promise<CmsCaseStudy[]> {
-  return orderStudies(selectPublic(await fetchAllCaseStudiesRaw()), (s) => s.library.listingOrder);
+  return leadOrdered(orderStudies(selectPublic(await fetchAllCaseStudiesRaw()), (s) => s.library.listingOrder), (s) => s.slug);
 }
 
 export async function fetchContentfulCaseStudyBySlug(slug: string): Promise<CmsCaseStudy | null> {

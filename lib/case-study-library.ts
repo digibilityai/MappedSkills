@@ -86,6 +86,34 @@ export function periodLabel(start?: string | null, end?: string | null): string 
  */
 export const plainRange = (text: string): string => text.replace(/\s*[\u2013\u2014]\s*/g, ' to ');
 
+/**
+ * The owner-approved lead order of the library (B4, DEC-122): these studies come first, in this order, ahead of the listing-priority order.
+ * Every other study keeps its existing relative order after them. Keyed by stable slug; a slug with no published study is skipped (nothing is
+ * invented), and no study is ever removed. Code only: no Contentful field or `listingOrder` value is read or written for this.
+ */
+export const APPROVED_LEAD_ORDER: readonly string[] = [
+  'om-sai-developer-meta-ads',
+  'google-ads-for-online-courses',
+  'anybodycanbake-meta-ads',
+  'ekoching-google-ads',
+  'klenzmo-meta-ads',
+  'bakersville-google-ads',
+  'phoenix-laundry-google-ads',
+  'hutnhomes-meta-ads',
+  'seo-ameba-software',
+  'anybodycanbake-seo',
+  'classpe-social-media-strategy',
+  'insuryo-organic-growth',
+];
+
+export function leadOrdered<T>(studies: readonly T[], slug: (s: T) => string): T[] {
+  const rank = new Map(APPROVED_LEAD_ORDER.map((s, i) => [s, i] as const));
+  return studies
+    .map((s, i) => ({ s, i, r: rank.get(slug(s)) ?? Infinity }))
+    .sort((x, y) => (x.r === y.r ? x.i - y.i : x.r - y.r))
+    .map(({ s }) => s);
+}
+
 /** Stable sort: listing priority first, the rest keep their incoming order. */
 export function orderStudies<T>(studies: readonly T[], listingOrder: (s: T) => number | null): T[] {
   return studies

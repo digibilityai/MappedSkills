@@ -174,8 +174,11 @@ test('static pages and search agree: one order, 12 per page, featured first, fil
   assert.strictEqual(all.length, 59);
   assert.strictEqual(PAGE_SIZE, 12);
   assert.strictEqual(pageCount(all.length), 5);
-  assert.strictEqual(all[0].slug, 'synthetic-study-07', 'listing priority 1 is featured');
-  assert.strictEqual(all[1].slug, 'synthetic-study-13', 'listing priority 2 comes next');
+  const { APPROVED_LEAD_ORDER } = lib();
+  const rest = all.filter((x) => !APPROVED_LEAD_ORDER.includes(x.slug));
+  assert.deepStrictEqual(all.slice(0, all.length - rest.length).map((x) => x.slug), APPROVED_LEAD_ORDER.filter((slug) => all.some((x) => x.slug === slug)), 'the owner-approved lead order comes first (B4)');
+  assert.strictEqual(rest[0].slug, 'synthetic-study-07', 'then listing priority 1');
+  assert.strictEqual(rest[1].slug, 'synthetic-study-13', 'listing priority 2 comes next');
   const pages = Array.from({ length: 5 }, (_, i) => libraryPage(all, i + 1).items).flat();
   assert.deepStrictEqual(pages.map((x) => x.slug), all.map((x) => x.slug), 'the pages, joined, are the index');
   assert.strictEqual(libraryPage(all, 5).items.length, 11);
@@ -191,7 +194,8 @@ test('static pages and search agree: one order, 12 per page, featured first, fil
   assert.ok(all.length >= CONTROLS_MIN_STUDIES);
   // Without a listing priority, the approved featured slug leads, as before G7.
   const plain = setup([...legacyStudies(), ...syntheticStudies(4).map((x) => ({ ...x, listingOrder: null }))]);
-  assert.strictEqual(plain.work().libraryStudies(await plain.api.fetchContentfulCaseStudies(), 'seo-ameba-software')[0].slug, 'seo-ameba-software');
+  const plainAll = plain.work().libraryStudies(await plain.api.fetchContentfulCaseStudies(), 'seo-ameba-software');
+  assert.ok(plainAll.findIndex((x) => x.slug === 'seo-ameba-software') < plainAll.findIndex((x) => x.slug.startsWith('synthetic-study')), 'the approved studies lead the unprioritised ones');
 });
 
 test('the public index carries preview fields only: no withheld proof, body, review or audience', async () => {

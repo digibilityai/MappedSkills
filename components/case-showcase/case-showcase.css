@@ -10,11 +10,12 @@ section.cs.cs--dark { background: #0F0D14; color: #fff; border-block: 0; }
 .cs .cs-eyebrow-k { margin: 0 0 14px; color: #A83400; font: 800 .75rem/1.3 var(--font-manrope), Manrope, sans-serif; letter-spacing: .16em; text-transform: uppercase; }
 .cs.cs--dark .cs-eyebrow-k { color: #FF5B04; }
 .cs .cs-head h2 { margin: 0; max-width: 24ch; font: 800 clamp(2rem, 1.2rem + 2.6vw, 3.1rem)/1.05 var(--font-bricolage), "Bricolage Grotesque", sans-serif; letter-spacing: -.025em; color: inherit; text-wrap: balance; }
-.cs .cs-head h2 em { font-style: normal; color: #D94400; }
-.cs.cs--dark .cs-head h2 em { color: #FF5B04; }
+/* Brand DNA 4.0 A4 and D-10: emphasis follows meaning. "work we have done" names no outcome, so the heading is one colour. */
+.cs .cs-head h2 em { font-style: normal; color: inherit; }
+.cs .cs-eyebrow-k .cs-num { margin-right: .9em; }
 .cs .cs-rule { display: block; width: 72px; height: 3px; margin-top: 20px; background: #FF5B04; transform-origin: left; }
 
-.cs .cs-all { grid-area: all; align-self: end; padding-bottom: 6px; color: #A83400; font: 800 1rem/1.3 var(--font-manrope), Manrope, sans-serif; text-decoration: underline; text-decoration-color: #FF5B04; text-decoration-thickness: 3px; text-underline-offset: 6px; white-space: nowrap; transition: color .15s; }
+.cs .cs-all { grid-area: all; align-self: end; display: inline-flex; align-items: center; min-height: 44px; color: #A83400; font: 800 1rem/1.3 var(--font-manrope), Manrope, sans-serif; text-decoration: underline; text-decoration-color: #FF5B04; text-decoration-thickness: 3px; text-underline-offset: 6px; white-space: nowrap; transition: color .15s; }
 .cs.cs--dark .cs-all { color: #fff; }
 .cs .cs-all:hover { color: #141219; } .cs.cs--dark .cs-all:hover { color: #FF5B04; }
 .cs .cs-all:focus-visible, .cs .cs-cta:focus-visible, .cs .cs-btns button:focus-visible { outline: 3px solid #FF5B04; outline-offset: 3px; }
@@ -51,7 +52,7 @@ section.cs.cs--dark { background: #0F0D14; color: #fff; border-block: 0; }
 /* below 1081px: a swipeable row; the next card shows; buttons; never moves by itself */
 @media (max-width: 1080px) {
   .cs .cs-wrap { grid-template-areas: "head btns" "track track" "all all"; row-gap: 24px; }
-  .cs .cs-all { justify-self: start; padding-bottom: 0; }
+  .cs .cs-all { justify-self: start; }
   .cs .cs-btns { display: flex; }
   .cs .cs-track { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: 8px; scrollbar-width: thin; }
   .cs .cs-track > li { flex: 0 0 min(82%, 460px); scroll-snap-align: start; }

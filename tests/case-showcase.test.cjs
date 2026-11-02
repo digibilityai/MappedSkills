@@ -166,3 +166,37 @@ test('rollout: the existing card is kept only while the showcase has nothing to 
     for (const id of ids) assert.ok(src.includes(`'${id}'`), `${dir}: anchor ${id} kept`);
   }
 });
+
+// --- B1 shared components (Brand DNA 4.0 revision 4: A3 label floor, A4 and D-10 emphasis by meaning, A9 no long dashes, A12 targets) ---
+test('B1: showcase dates and eyebrow carry no long dash, and a range reads "to"', () => {
+  const { plainRange } = load('lib/case-study-library.ts');
+  assert.strictEqual(plainRange('Apr 2026 \u2013 Sep 2026'), 'Apr 2026 to Sep 2026');
+  assert.strictEqual(plainRange('May\u2013July 2026 versus August\u2014October 2026'), 'May to July 2026 versus August to October 2026');
+  assert.strictEqual(plainRange('Since Nov 2025'), 'Since Nov 2025', 'no dash, no change');
+  assert.strictEqual(plainRange(''), '');
+  const tsx = code(read('components/case-showcase/CaseShowcase.tsx'));
+  assert.ok(!/[\u2013\u2014]/.test(tsx), 'no long dash in the component output');
+  assert.match(tsx, /plainRange\(o\.period \?\? s\.period\)/, 'every period passes through the shared formatter');
+});
+
+test('B1: showcase heading is one colour and "View all" is a 44 px target', () => {
+  const css = read('components/case-showcase/case-showcase.css');
+  assert.match(css, /\.cs \.cs-head h2 em \{[^}]*color: inherit/, 'the heading is not split into two colours');
+  assert.ok(!/cs-head h2 em \{[^}]*#(?:D94400|FF5B04)/i.test(css));
+  assert.match(css, /\.cs \.cs-all \{[^}]*min-height: 44px/);
+});
+
+test('B1: header and footer labels are at least 12 px, footer notes at least 14 px', () => {
+  const css = read('app/direction-c.css');
+  const size = (re) => { const m = css.match(re); assert.ok(m, String(re)); return Number(m[1]); };
+  assert.ok(size(/\.dc-hdr \.dc-label \{ font-size: (\.\d+)rem/) >= 0.75, 'header label');
+  assert.ok(size(/\.dc-ftr h2, \.dc-ftr \.dc-ftr-h \{ font: 700 (\.\d+)rem/) >= 0.75, 'footer group label');
+  assert.ok(size(/\.dc-ftr \.dc-brand > \.dc-ftr-chain \{[^}]*font: 700 (\.\d+)rem/) >= 0.75, 'footer chain label');
+  assert.ok(size(/\.dc-ftr \.dc-base \{[^}]*font-size: (\.\d+)rem/) >= 0.875, 'footer base line');
+});
+
+test('B1: the footer email link is a 44 px target that adds no footer height', () => {
+  const css = read('app/direction-c.css');
+  assert.match(css, /\.dc-ftr \.dc-contact dd a \{[^}]*min-height: 44px; margin-block: -6px;/);
+  assert.match(css, /\.dc-ftr \.dc-contact dd \{[^}]*min-height: 32px/, 'the row keeps its 32 px height');
+});

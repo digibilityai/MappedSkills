@@ -214,7 +214,7 @@
 /* flex-wrap: at 320px with 200% text the right cluster cannot fit beside the logo; it drops to a second row
    instead of pushing the page wider than the viewport. At normal text sizes everything fits and nothing wraps. */
 .dc-hdr .dc-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; min-height: 76px; }
-.dc-hdr .dc-label { font-size: .74rem; }
+.dc-hdr .dc-label { font-size: .75rem; }
 .dc-hdr .dc-mk, .dc-ftr .dc-mk { width: 9px; height: 9px; vertical-align: 0; }
 /* solid: ≥3:1 on ground and paper (the page mark is .42 opacity, 1.95:1) */
 .dc-hdr .dc-mk.anon, .dc-ftr .dc-mk.anon { background: var(--dc-control); opacity: 1; }
@@ -384,11 +384,11 @@
 /* DEC-069: the footer wordmark stays 28px */
 .dc-ftr .dc-brand img { height: 28px; width: auto; }
 .dc-ftr .dc-brand > p { margin-top: 18px; max-width: 34ch; line-height: 1.6; }
-.dc-ftr .dc-brand > .dc-ftr-chain { max-width: none; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 26px; font: 700 .7rem/1 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-on-ink-dim); }
+.dc-ftr .dc-brand > .dc-ftr-chain { max-width: none; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 26px; font: 700 .75rem/1 var(--dc-f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dc-on-ink-dim); }
 .dc-ftr-chain span { display: inline-flex; align-items: center; gap: 8px; }
 .dc-ftr-chain .sep { color: var(--dc-gap); letter-spacing: 0; }
 .dc-ftr-cols { grid-column: 5 / span 8; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .95fr) minmax(0, .8fr) minmax(0, 1.25fr); column-gap: var(--dc-col-gap); row-gap: 40px; }
-.dc-ftr h2, .dc-ftr .dc-ftr-h { font: 700 .72rem/1.4 var(--dc-f-body); letter-spacing: .15em; text-transform: uppercase; color: var(--dc-on-ink-dim); padding-bottom: 12px; margin-bottom: 8px; border-bottom: 1px solid var(--dc-rule-on-ink); }
+.dc-ftr h2, .dc-ftr .dc-ftr-h { font: 700 .75rem/1.4 var(--dc-f-body); letter-spacing: .15em; text-transform: uppercase; color: var(--dc-on-ink-dim); padding-bottom: 12px; margin-bottom: 8px; border-bottom: 1px solid var(--dc-rule-on-ink); }
 /* overflow-wrap: a long word at 200% text may be wider than its column at 320px; let it break */
 .dc-ftr li a { display: flex; align-items: center; gap: .45em; min-height: 40px; padding-block: 6px; overflow-wrap: anywhere; color: var(--dc-on-ink); text-decoration: none; line-height: 1.3; transition: color var(--dc-d-fast); }
 .dc-ftr li a.hub { font-weight: 700; }
@@ -396,11 +396,11 @@
 .dc-ftr .dc-contact dl > div { padding-block: 6px 4px; }
 .dc-ftr .dc-contact dt { font-size: .76rem; font-weight: 600; letter-spacing: .02em; color: var(--dc-on-ink-dim); }
 .dc-ftr .dc-contact dd { display: flex; align-items: center; min-height: 32px; color: var(--dc-on-ink); line-height: 1.35; overflow-wrap: anywhere; }
-.dc-ftr .dc-contact dd a { display: inline-flex; align-items: center; min-height: 32px; min-width: 0; color: inherit; text-decoration: none; overflow-wrap: anywhere; }
+.dc-ftr .dc-contact dd a { display: inline-flex; align-items: center; min-height: 44px; margin-block: -6px; /* 44 px target, 32 px of layout: the extra 12 px overlaps the row's padding */ min-width: 0; color: inherit; text-decoration: none; overflow-wrap: anywhere; }
 .dc-ftr .dc-contact .go { display: inline-flex; align-items: center; gap: .5em; min-height: 44px; margin-top: 8px; color: var(--dc-on-ink); font-weight: 700; text-decoration: none; }
 .dc-ftr .dc-contact .go .u { text-decoration: underline; text-decoration-color: var(--dc-tang-display); text-decoration-thickness: 1.5px; text-underline-offset: 6px; }
 .dc-ftr .dc-contact .go:hover { color: var(--dc-tang); }
-.dc-ftr .dc-base { display: flex; flex-wrap: wrap; gap: 4px 28px; justify-content: space-between; align-items: center; margin-top: 64px; padding-top: 14px; border-top: 1px solid var(--dc-rule-on-ink); font-size: .86rem; }
+.dc-ftr .dc-base { display: flex; flex-wrap: wrap; gap: 4px 28px; justify-content: space-between; align-items: center; margin-top: 64px; padding-top: 14px; border-top: 1px solid var(--dc-rule-on-ink); font-size: .875rem; }
 .dc-ftr .dc-base-links { display: flex; flex-wrap: wrap; gap: 0 20px; }
 .dc-ftr .dc-base a, .dc-ftr .dc-base button { display: inline-flex; align-items: center; min-height: 44px; padding-inline: 2px; color: var(--dc-on-ink-soft); text-decoration: none; background: none; border: 0; font: inherit; cursor: pointer; }
 .dc-ftr .dc-base a:hover, .dc-ftr .dc-base button:hover { color: var(--dc-tang); }

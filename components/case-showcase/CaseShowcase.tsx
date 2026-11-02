@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { SECTORS, type SectorKey, type ServiceRoute } from '@/lib/case-study-library';
+import { plainRange, SECTORS, type SectorKey, type ServiceRoute } from '@/lib/case-study-library';
 import { relatedStudies, type Audience } from '@/lib/case-study-related';
 import { toLibCard } from '../b2/work-cards';
 import { loadLibrary } from '../cplus/work/load';
@@ -95,7 +95,7 @@ export async function loadCaseShowcase(c: ShowcaseConfig): Promise<ShowcaseData 
         client: s.client,
         eyebrow: [lib.service, s.sector ? SECTORS[s.sector] : s.industry].filter(Boolean).join(' · '),
         art: lib.art ? { src: lib.art.src, alt: lib.art.alt, w: lib.art.w, h: lib.art.h } : null,
-        fig: lead ? { v: lead.v, c: lead.c, period: o.period ?? s.period, note: o.note ?? '' } : null,
+        fig: lead ? { v: lead.v, c: lead.c, period: plainRange(o.period ?? s.period), note: o.note ?? '' } : null,
         summary: o.summary ?? lib.summary,
       };
     });
@@ -117,7 +117,7 @@ export function CaseShowcase({ data }: { data: ShowcaseData | null | undefined }
       <div className={`cs-wrap ${data.wrapClass}`.trim()}>
         <header className="cs-head">
           <p className="cs-eyebrow-k">
-            {data.number ? <span>{data.number} — </span> : null}
+            {data.number ? <span className="cs-num">{data.number}</span> : null}
             {data.eyebrow}
           </p>
           <h2 id={id}>

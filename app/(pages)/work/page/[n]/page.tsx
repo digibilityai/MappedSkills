@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const n = parse((await params).n);
   if (!n || n < 2 || !(await loadLibraryPage(n))) return { title: 'Page Not Found', robots: 'noindex, nofollow' };
   return createMetadata(
-    `Work – page ${n} | MappedSkills`,
+    `Work, page ${n} | MappedSkills`,
     'Explore selected MappedSkills client projects, marketing challenges and approaches.',
     `/work/page/${n}`
   );

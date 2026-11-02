@@ -54,8 +54,8 @@ export const WORK = {
     kicker: 'Have a problem like these?',
     h: 'Tell us what you’re trying to fix.',
     body: 'Tell us what you’re working towards. We’ll help you figure out where to start.',
-    primary: 'Contact us',
-    secondary: 'Request a call',
+    primary: 'Discuss Your Advertising',
+    secondary: 'Request a Call',
   },
 } as const;
 

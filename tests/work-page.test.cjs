@@ -50,8 +50,8 @@ test('approved H1, lede, evidence note and close; two-tone headings', () => {
   assert.doesNotMatch(copy, /evidence: \{|route: \{|featured: \{/, 'R2: the route panel, "start here" and evidence-rule copy are removed from the page');
   assert.match(copy, /h: 'Tell us what you’re trying to fix\.'/);
   assert.match(copy, /body: 'Tell us what you’re working towards\. We’ll help you figure out where to start\.'/);
-  assert.match(copy, /primary: 'Contact us'/);
-  assert.match(copy, /secondary: 'Request a call'/);
+  assert.match(copy, /primary: 'Discuss Your Advertising'/);
+  assert.match(copy, /secondary: 'Request a Call'/);
   assert.match(body, /<ActionLink href=\{CONTACT_HREF\} variant="dark">\{S\.close\.primary\}<\/ActionLink>/);
   assert.match(body, /<ActionLink href=\{BOOKING_HREF\} variant="text">\{S\.close\.secondary\}<\/ActionLink>/);
 });
@@ -130,15 +130,15 @@ test('case study (Stage 3): only a reported figure leads the hero; without figur
   assert.match(src, /const impactTitle = figures\.length \? 'The impact' : 'Where it stands';/);
   assert.match(src, /: 'What we can document';/);
   assert.match(src, /\{figures\.length \? \(\s*<p className="ct-said-k">/);
-  // the headline keeps the study's own words: split, never rewritten
-  assert.match(src, /return i > 0 \? \[title\.slice\(0, i\), title\.slice\(i \+ 1\)\] : \[title, ''\];/);
+  // the headline keeps the study's own words: split into runs by lib/case-study-headline.ts, never rewritten (B4-02)
+  assert.match(src, /const h1 = headlineRuns\(study\.slug, study\.title\);/);
   // artwork only from the approved card set, with its disclosure
   assert.match(src, /imageSlotsFor\(study\.href, undefined, finalCopy\)\.feature/);
   assert.match(src, /\{stage\?\.note \? <figcaption>\{stage\.note\}<\/figcaption> : null\}/);
   // the existing actions stay
   // (a study with approved closing copy in lib/case-study-presentation.ts shows that copy and its one button instead)
-  assert.match(src, /<ActionLink href=\{CONTACT_HREF\} variant="dark">\s*\{close \? close\.cta : 'Contact us'\}/);
-  assert.match(src, /<ActionLink href=\{BOOKING_HREF\} variant="text">\s*Request a call/);
+  assert.match(src, /<ActionLink href=\{CONTACT_HREF\} variant="dark">\s*\{closeLabel\(service\?\.link\)\}/);
+  assert.match(src, /<ActionLink href=\{BOOKING_HREF\} variant="text">\s*Request a Call/);
 });
 
 test('Stage 3 revision: illustrations are conceptual, labelled, code-drawn and limited to known studies; the title preview is development-only', () => {

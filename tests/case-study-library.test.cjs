@@ -215,7 +215,7 @@ test('library helpers: services equal the catalogue, unknown values ignored, no 
   assert.strictEqual(L.asListingOrder(0), null);
   assert.strictEqual(L.asListingOrder(2.5), null);
   assert.strictEqual(L.periodLabel(null, '2026-02-01'), '');
-  assert.strictEqual(L.periodLabel('2024-09-12', '2026-02-28'), 'Sep 2024 – Feb 2026');
+  assert.strictEqual(L.periodLabel('2024-09-12', '2026-02-28'), 'Sep 2024 to Feb 2026');
   assert.strictEqual(L.periodLabel('2025-11-01', null), 'Since Nov 2025');
   const state = { q: 'real estate', sector: 'real-estate', service: '/google-ads', page: 3 };
   assert.deepStrictEqual(L.parseLibraryQuery(L.libraryQuery(state)), state);

@@ -13,7 +13,9 @@ import { CaseArt } from './CaseArt';
 import { imageSlotsFor } from '@/lib/case-study-images';
 import { presentationFor } from '@/lib/case-study-presentation';
 import { hasFinalCopy } from '@/lib/case-study-release';
-import { SECTORS } from '@/lib/case-study-library';
+import { SECTORS, caseServiceLabel } from '@/lib/case-study-library';
+import { headlineRuns } from '@/lib/case-study-headline';
+import { routeTrailJsonLd } from '@/components/routes/primitives';
 import { splitImpact, type Outcome } from '@/lib/case-study-outcomes';
 import { linkTargetProps } from '@/lib/internal-links';
 import type { CmsCaseStudy } from '@/lib/contentful/types';
@@ -37,8 +39,8 @@ import './case-study.css';
  * and always shown with everything the editor wrote after it. A before → after figure is laid out as its two values;
  * its type is sized to its length so it never leaves its block.
  *
- * THE RESOLVE (Stage 3). A dark hero with a two-tone headline (the study's own title, split before its first "for"; the
- * words are unchanged), the case file beside it, and a route to the three sections that plays once on load. The hero
+ * THE RESOLVE (Stage 3). A dark hero with the study's own title as the headline (B4: the reported result in the display
+ * colour where the title states one, otherwise one colour; `lib/case-study-headline.ts`; the words are unchanged), the case file beside it, and a route to the three sections that plays once on load. The hero
  * spotlight shows a reported figure only: a statement of work done is not presented as a result there. Without reported
  * figures the third section is titled "Where it stands" and its statements are "What we can document", so delivery is
  * never dressed as an outcome. Artwork appears only where it is already approved (components/resolve/work.ts), with its
@@ -169,12 +171,15 @@ const Arrow = ({ down }: { down?: boolean }): ReactNode => <span aria-hidden="tr
 
 const KIND = { figure: 'Reported figure', statement: 'Documented outcome' } as const;
 
-/** The title in two tones: the words before its first " for " in white, the rest in tangerine. No " for ": one tone. */
-function twoTone(title: string): [string, string] {
-  const i = title.search(/\s(?:for|attributed to)\s/i);
-  return i > 0 ? [title.slice(0, i), title.slice(i + 1)] : [title, ''];
-}
+/**
+ * The closing button (B4-03, OD-06): named for the service only where the study's classification is Google Ads or Meta Ads;
+ * every other published study (SEO, ClassPe, InsurYo, the unlisted Home Decor study) says "Discuss Your Advertising".
+ */
+const closeLabel = (route: string | undefined): string =>
+  route === '/google-ads' ? 'Discuss Your Google Ads' : route === '/social-media-ads' ? 'Discuss Your Meta Ads' : 'Discuss Your Advertising';
 
+
+const GENERAL_CTA = 'Discuss Your Advertising';
 
 const Mk = ({ kind }: { kind: 'figure' | 'statement' }) => <span className={`ct-mk is-${kind}`} aria-hidden="true" />;
 
@@ -230,16 +235,17 @@ export function CaseStudyTemplate({ study, content: c, service, showTestimonial,
   const place = rest.join(', ');
   const sector = study.library.sector ? SECTORS[study.library.sector] : '';
   const chips = [sector || study.industry, study.library.period].filter(Boolean);
+  const serviceName = service ? caseServiceLabel(service.link, service.title) : '';
   const ctx = [
     { k: 'Client', v: [client, place].filter(Boolean).join(', ') },
     { k: 'Industry', v: study.industry },
-    { k: 'Service', v: service?.title ?? '', href: service?.link },
+    { k: 'Service', v: serviceName, href: service?.link },
     { k: 'Period', v: study.library.period },
   ].filter((x) => x.v);
   const boardTitle =
     figures.length && statements.length ? 'Reported figures and documented outcomes' : figures.length ? 'Reported figures' : 'What we can document';
   const impactTitle = figures.length ? 'The impact' : 'Where it stands';
-  const [h1a, h1b] = twoTone(study.title);
+  const h1 = headlineRuns(study.slug, study.title);
   // the stage image is the study's detail slot (lib/case-study-images.ts): real artwork, or a disclosed conceptual placeholder
   const finalCopy = hasFinalCopy(study.slug, { title: study.title, ...c });
   const stage = imageSlotsFor(study.href, undefined, finalCopy).feature;
@@ -259,6 +265,16 @@ export function CaseStudyTemplate({ study, content: c, service, showTestimonial,
 
   return (
     <div className="pa b2 cs">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: routeTrailJsonLd([
+            { name: 'Home', href: '/' },
+            { name: 'Case studies', href: '/work' },
+            { name: client, href: study.href },
+          ]),
+        }}
+      />
       <PaReveal />
       <HwSequence scope=".cs" />
       <article className="ct" aria-labelledby="ct-h1">
@@ -273,7 +289,7 @@ export function CaseStudyTemplate({ study, content: c, service, showTestimonial,
                 <p className="ct-chips">
                   {service ? (
                     <Link className="ct-chip is-svc" href={service.link}>
-                      {service.title}
+                      {serviceName}
                     </Link>
                   ) : null}
                   {chips.map((x) => (
@@ -284,13 +300,15 @@ export function CaseStudyTemplate({ study, content: c, service, showTestimonial,
                 </p>
                 <p className="ct-client">{client}</p>
                 <h1 id="ct-h1" className="ct-h1">
-                  {h1a}
-                  {h1b ? (
+                  {h1.em ? (
                     <>
-                      {' '}
-                      <span>{h1b}</span>
+                      {h1.before}
+                      <span>{h1.em}</span>
+                      {h1.after}
                     </>
-                  ) : null}
+                  ) : (
+                    h1.before
+                  )}
                 </h1>
                 <p className="ct-lede">{c.summary}</p>
               </div>
@@ -436,7 +454,7 @@ export function CaseStudyTemplate({ study, content: c, service, showTestimonial,
               <strong>Recognise this problem?</strong> Tell us what you’re trying to fix.
             </p>
             <Link href={CONTACT_HREF} className="ct-prompt-a">
-              Contact us <Arrow />
+              {GENERAL_CTA} <Arrow />
             </Link>
           </div>
         </aside>
@@ -484,26 +502,24 @@ export function CaseStudyTemplate({ study, content: c, service, showTestimonial,
         {/* close: the THE RESOLVE closing band (burnt), with this study's service when it has one */}
         <section className="b2-band ct-close" aria-labelledby="ct-h-close">
           <div className="pa-wrap">
-            <p className="ct-close-k">{service ? `${service.title} · Case study` : 'Have a problem like this one?'}</p>
+            <p className="ct-close-k">{service ? `${serviceName} · Case study` : 'Have a problem like this one?'}</p>
             <h2 id="ct-h-close">{close ? close.title : 'Tell us what you’re trying to fix.'}</h2>
             <p>
               {close ? close.body : 'Tell us what you’re working towards. We’ll help you figure out where to start.'}
               {service && !close ? (
                 <>
                   {' '}
-                  This case study is part of our <Link href={service.link}>{service.title}</Link> work.
+                  This case study is part of our <Link href={service.link}>{serviceName}</Link> work.
                 </>
               ) : null}
             </p>
             <div className="pa-actions">
               <ActionLink href={CONTACT_HREF} variant="dark">
-                {close ? close.cta : 'Contact us'}
+                {closeLabel(service?.link)}
               </ActionLink>
-              {close && !close.secondary ? null : (
-                <ActionLink href={BOOKING_HREF} variant="text">
-                  Request a call
-                </ActionLink>
-              )}
+              <ActionLink href={BOOKING_HREF} variant="text">
+                Request a Call
+              </ActionLink>
             </div>
           </div>
         </section>

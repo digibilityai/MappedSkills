@@ -33,16 +33,23 @@ export const SECTORS = {
 } as const;
 export type SectorKey = keyof typeof SECTORS;
 
-/** Service routes and their short filter names. Must stay equal to the keys of `SERVICES` in `lib/services.ts` (tested). */
+/** Service routes and their short filter names, in filter order (Google Ads, Meta Ads, SEO, then the rest; B4-05). Must stay equal to the keys of `SERVICES` in `lib/services.ts` (tested). */
 export const SERVICE_FILTERS = {
+  '/google-ads': 'Google Ads',
+  '/social-media-ads': 'Meta Ads',
   '/seo': 'SEO',
   '/ai-seo': 'AI search',
-  '/google-ads': 'Google Ads',
-  '/social-media-ads': 'Social media ads',
   '/conversion-optimization': 'Conversion optimisation',
   '/lead-generation': 'Lead generation',
 } as const;
 export type ServiceRoute = keyof typeof SERVICE_FILTERS;
+
+/**
+ * The visitor-facing service name on a case-study page and in the library (B4-05): "Google Ads", "Meta Ads", "SEO" for the three
+ * advertising and search services, the catalogue title for any other. The route (the internal taxonomy key) is unchanged.
+ */
+export const caseServiceLabel = (route: string | null | undefined, fallback: string): string =>
+  route === '/google-ads' ? 'Google Ads' : route === '/social-media-ads' ? 'Meta Ads' : route === '/seo' ? 'SEO' : fallback;
 
 export const asSector = (v: unknown): SectorKey | null =>
   typeof v === 'string' && Object.prototype.hasOwnProperty.call(SECTORS, v) ? (v as SectorKey) : null;
@@ -71,7 +78,7 @@ export function periodLabel(start?: string | null, end?: string | null): string 
   if (!a) return '';
   const b = end ? month(end) : null;
   if (!b) return `Since ${a}`;
-  return a === b ? a : `${a} – ${b}`;
+  return a === b ? a : `${a} to ${b}`;
 }
 
 /**

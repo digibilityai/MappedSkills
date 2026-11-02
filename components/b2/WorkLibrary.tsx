@@ -108,7 +108,7 @@ export function WorkLibrary({ items, page, pages, total, facets }: WorkLibraryPr
 
   // The count line (R2): "20 case studies" and the range on a numbered page; while filtering, "2 of 20 case studies match". The unfiltered line
   // comes from props, so the server HTML and the first client render agree.
-  const rangeOf = (n: number, p: number) => (n > PAGE_SIZE || p > 1 ? `Showing ${(p - 1) * PAGE_SIZE + 1}–${Math.min(p * PAGE_SIZE, n)}` : '');
+  const rangeOf = (n: number, p: number) => (n > PAGE_SIZE || p > 1 ? `Showing ${(p - 1) * PAGE_SIZE + 1} to ${Math.min(p * PAGE_SIZE, n)}` : '');
   const noun = (n: number) => `case stud${n === 1 ? 'y' : 'ies'}`;
   const count: { a: React.ReactNode; b: string } = !filtering
     ? { a: <><b>{total}</b> {noun(total)}</>, b: rangeOf(total, page) }

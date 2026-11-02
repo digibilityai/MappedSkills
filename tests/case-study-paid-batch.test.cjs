@@ -293,7 +293,7 @@ test('the fixtures are inert outside development with the flag, and are reachabl
 
 test('the shared template and the existing studies are unchanged where they should be', () => {
   const t = read('components/case-study/CaseStudyTemplate.tsx');
-  assert.match(t, /<ActionLink href=\{BOOKING_HREF\} variant="text">\s*Request a call/);
+  assert.match(t, /<ActionLink href=\{BOOKING_HREF\} variant="text">\s*Request a Call/);
   assert.match(t, /art\?\.still \? ' is-still' : ''/);
   const css = read('components/case-study/case-study.css');
   assert.match(css, /is-still\.is-photo \.ct-stage-img > img \{ animation: none; transform: none; \}/);

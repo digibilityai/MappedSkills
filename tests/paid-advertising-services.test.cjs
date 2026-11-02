@@ -22,7 +22,7 @@ const jsonLd = [...ld.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<
 test('/services has one H1 and the six approved R2 main sections in order', () => {
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
   const labels = [...html.matchAll(/<section[^>]*aria-labelledby="([^"]+)"/g)].map(m => m[1]);
-  assert.deepEqual(labels, ['sx-h1', 'sx-path', 'sx-services', 'sx-work', 'sx-terms', 'sx-faq', 'sx-close']);
+  assert.deepEqual(labels, ['sx-h1', 'sx-path', 'sx-services', 'sx-which', 'sx-work', 'sx-terms', 'sx-faq', 'sx-close']);
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
   assert.equal(new Set(ids).size, ids.length);
   for (const l of labels) assert.ok(ids.includes(l), l);
@@ -37,27 +37,57 @@ test('hero copy and service copy follow R2; Google Ads and Meta Ads stay the two
   assert.doesNotMatch(text, /WhatsApp chat/);
   for (const h of ['/google-ads', '/social-media-ads', '/how-it-works', '/pricing', '/contact', '/work', '/seo', '/ai-seo', '/conversion-optimization', '/lead-generation', '/who-we-help/d2c', '/who-we-help/education', '/who-we-help/real-estate', '/who-we-help/enquiry-led-businesses']) assert.match(html, new RegExp('href="' + h.replace(/\//g, '\\/') + '"'), h);
 });
-test('hero diagram: Capture, Convert and the enquiry on the path, Measure observing it; the framework rows stay Capture, Convert, Measure', () => {
+test('hero diagram: two journeys (Google Ads, Meta Ads) converge through Capture and Convert to an enquiry; Measure frames the path; the framework rows stay Capture, Convert, Measure', () => {
   const fig = html.split('<figure')[1].split('</figure>')[0];
-  const stations = fig.split('x2-stations')[1].split('</ol>')[0];
-  assert.deepEqual([...stations.matchAll(/<b>([^<]+)<\/b>/g)].map(m => m[1]), ['Capture', 'Convert', 'A qualified enquiry']);
-  assert.doesNotMatch(stations, /Measure/);
-  assert.match(fig, /x2-measure"><b>Measure<\/b>/);
-  assert.match(fig, /not measured results/);
+  const lanes = fig.split('x3-lanes')[1].split('</ol>')[0];
+  assert.deepEqual([...lanes.matchAll(/<span class="x3-pill">([^<]+)<\/span><b>([^<]+)<\/b>/g)].map(m => m[1] + ' ' + m[2]), ['They search Google Ads', 'They browse Meta Ads']);
+  const spine = fig.split('x3-spine')[1].split('</ol>')[0];
+  assert.deepEqual([...spine.matchAll(/<b>([^<]+)<\/b>/g)].map(m => m[1]), ['Capture', 'Convert', 'A qualified enquiry']);
+  assert.doesNotMatch(spine, /Measure/);
+  assert.match(fig, /class="x3-measured"[\s\S]*class="x3-measure"><b>Measure<\/b>/);
+  assert.match(fig, /not measured results/, 'the diagram is labelled an approach, not results');
+  assert.match(fig, /<svg class="x3-merge"[^>]*aria-hidden="true"/);
   const rows = html.split('x2-rows')[1].split('</ol>')[0];
   assert.deepEqual([...rows.matchAll(/<h3>([^<]+)<\/h3>/g)].map(m => m[1]), ['Capture', 'Convert', 'Measure']);
+  const css = fs.readFileSync('components/paid-advertising/services/services.css', 'utf8');
+  const motion = css.split('@media (prefers-reduced-motion: no-preference) {\n  .x3-lanes')[1];
+  assert.ok(motion, 'diagram motion only without a reduced-motion preference');
+  assert.doesNotMatch(css.match(/\.x3-[^{]*\{[^}]*\}/g).join(''), /infinite|alternate/, 'plays once');
 });
 test('supporting capabilities appear only in context, labelled Supporting', () => {
   const rows = html.split('x2-rows')[1].split('</ol>')[0];
   assert.equal((rows.match(/<b>Supporting<\/b>/g) || []).length, 2);
   assert.doesNotMatch(text, /Earlier service pages/);
 });
-test('ad mockups on /services are neutral illustrations, labelled as not client ads, and appear once each', () => {
+test('ad mockups on /services are neutral illustrations shown once each, without the repeated caption (B2 R2)', () => {
   assert.equal((html.match(/pa-platform--search/g) || []).length, 1);
   assert.equal((html.match(/pa-platform--social/g) || []).length, 1);
+  assert.match(html, /class="pa-platform pa-platform--search" aria-hidden="true"/);
+  assert.match(html, /class="pa-platform pa-platform--social" aria-hidden="true"/);
   assert.doesNotMatch(text, /Eggless Baking Courses|live guidance|free demo|Free demo|Syllabus/i);
   assert.match(text, /Your headline appears here/);
-  assert.equal((text.match(/Illustration of how an ad can appear\. Not a client ad\./g) || []).length, 2);
+  assert.doesNotMatch(text, /Not a client ad/);
+});
+test('which one first: a decision section between the two core services, not every business needs both, audiences kept', () => {
+  const sec = html.split('aria-labelledby="sx-which"')[1].split('aria-labelledby="sx-work"')[0];
+  assert.match(sec, /<h2 id="sx-which">Which one first\?<\/h2>/);
+  const opts = sec.split('<article').slice(1);
+  assert.equal(opts.length, 2);
+  assert.match(opts[0], /<h3 id="sx-opt-google">Google Ads<\/h3><p class="x2-opt-role">Captures existing search demand\.<\/p>/);
+  assert.match(opts[0], /href="\/google-ads"/);
+  assert.match(opts[1], /<h3 id="sx-opt-meta">Meta Ads<\/h3><p class="x2-opt-role">Reaches and influences relevant audiences\.<\/p>/);
+  assert.match(opts[1], /href="\/social-media-ads"/);
+  assert.match(sec, /<b>Not every business needs both\.<\/b> We check your offer, margins, follow-up and measurement before recommending either, or both\./);
+  assert.deepEqual([...sec.matchAll(/href="(\/who-we-help\/[^"]+)"/g)].map(m => m[1]), ['/who-we-help/d2c', '/who-we-help/education', '/who-we-help/real-estate', '/who-we-help/enquiry-led-businesses']);
+  assert.doesNotMatch(html.split('aria-labelledby="sx-services"')[1].split('aria-labelledby="sx-which"')[0], /Which one first/);
+});
+test('the defensive fit paragraph is removed; the five steps and the How We Work link stay', () => {
+  assert.doesNotMatch(text, /Advertising tends to work when|No one can honestly guarantee/);
+  assert.doesNotMatch(html, /x2-fit/);
+  const steps = html.split('class="x2-steps"')[1].split('</div>')[0];
+  assert.deepEqual([...steps.matchAll(/<\/span>([A-Za-z]+)<\/li>/g)].map(m => m[1]), ['Assess', 'Plan', 'Launch', 'Test', 'Review']);
+  assert.match(steps, /href="\/how-it-works"/);
+  assert.match(fs.readFileSync('components/paid-advertising/services/services.css', 'utf8'), /\.x2-steps li \{ margin: 0;/);
 });
 test('no other platforms, free offers, response times, figures or invented proof', () => {
   assert.doesNotMatch(text, /YouTube|Amazon|Flipkart|quick[- ]commerce|LinkedIn Ads|ChatGPT|Apple/i);
@@ -95,7 +125,7 @@ test('SEO & Organic Visibility is one supporting block below the core services, 
   const core = html.split('aria-labelledby="sx-services"')[1].split('</section>')[0];
   const seo = core.split('class="x2-seo"')[1];
   assert.ok(seo, 'inside the core services section');
-  assert.ok(core.indexOf('x2-seo') > core.indexOf('x2-which'), 'after the two core services');
+  assert.ok(core.indexOf('x2-seo') > core.lastIndexOf('</article>'), 'after the two core services');
   assert.match(seo, /<p class="x2-seo-k">Supporting service<\/p><h3 id="sx-seo">SEO &amp; Organic Visibility<\/h3>/);
   assert.match(seo, /href="\/seo">Explore SEO/);
   assert.doesNotMatch(seo.replace(/<[^>]+>/g, ' '), /\d|%/, 'no SEO metrics');

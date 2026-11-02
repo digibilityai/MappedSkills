@@ -67,3 +67,34 @@ Not run: Safari, Firefox, real devices, screen readers, Lighthouse/Core Web Vita
 3. "Also: SEO" in the desktop panel and mobile menu; SEO at the end of the footer Services column.
 4. `/services` showcase showing figures from the two case studies (5.24x for AnybodyCanBake, 6,607 orders for Wanderlooms), as `/work` shows them.
 5. Open for a later decision: pricing summary-card heading level, pricing button colour, OD-03 emphasis colour.
+
+## R2: owner visual corrections to `/services` (2 November 2026)
+
+The owner reviewed the B2 `/services` preview and asked for six corrections. Only `/services` changed; the other pages, the navigation, the metadata and the case showcase are untouched. Where this section differs from the tables above, this section is current. The SEO block now follows the two core service cards directly, because "Which one first?" became its own section.
+
+| # | Correction | What changed |
+|---|---|---|
+| 1 | Hero graphic | Redesigned as two journeys converging on an enquiry. "They search" with Google Ads and "They browse" with Meta Ads are equal lanes on one row; their labels share a top edge at every width (measured at 1440 and 360). Two curves merge into one path: Capture, Convert, then "A qualified enquiry". Measure is the dashed frame around the whole path. The "approach, not measured results" caption stays. Motion is CSS only and plays once on load (lanes, then the merge, then the stations, about 1.5 s); it is off under reduced motion, and all content is present without it. Headline, colours and CTAs are unchanged. |
+| 2 | Core service cards | The two cards are now equal, top-aligned and the same height, with the Meta card no longer offset 64 px. Mock-ups are smaller (300 px, Meta image 2.1:1), the padding is tighter and the CTA sits at the foot of each card. Measured core section height: 1,217 px at 1440, down from 1,824 px, or 1,583 px without the former "Which one first?" block that moved out. At 360 it is 2,247 px, down from 3,149 px. A chip in each card was rendering taller because of a site-wide list margin; fixed. |
+| 3 | Which one first? | Now its own section on the ground colour, between the core services and the case showcase. It is a two-way choice: Google Ads "Captures existing search demand." or Meta Ads "Reaches and influences relevant audiences.", each linked to its service page. Below it, "Not every business needs both." with the audience links as 44 px pills. The wording reuses the page's approved positioning; no new capability is added. |
+| 4 | Illustration captions | The two "Illustration of how an ad can appear. Not a client ad." captions are removed. The mock-ups stay `aria-hidden` with placeholder text ("Your headline appears here", "Your Brand"). The hero diagram's "not measured results" note and every case-study figure, period and qualification are kept. |
+| 5 | Defensive paragraph | "Advertising tends to work when..." is removed along with its styles. The section now runs from the cost cards straight to the steps strip with the standard gap. |
+| 6 | Five-step strip | All five steps share one baseline at 1440 and 1280. The cause was the site-wide list rule, which gives every item except the last a 12 px margin, so "Review" sat lower. The "See How We Work" link is unchanged. |
+
+**Verification (production build, `next start`).**
+
+| Check | Result |
+|---|---|
+| `npm test` | 635 tests: 634 pass, 1 skipped (pre-existing) |
+| `npm run typecheck` | Clean |
+| Lint | 0 errors (14 warnings, all pre-existing) |
+| `npm run build`, `verify:build` | OK, 59 pages |
+| SEO snapshot against `main` | No difference (18 routes, robots.txt, sitemap, redirects) |
+| Overflow and clipping | 0 overflow at 1440, 1280, 390 and 360; no clipped text in `main` |
+| Labels and captions | Labels at least 12 px and captions at least 14 px, except platform mock-up text |
+| Keyboard | `/services` 118 stops at 1440 and 110 at 390, every one with a visible ring that nothing covers |
+| Reduced motion | Nothing pending or animating |
+| Normal motion | The hero animation finishes within 3 s and leaves nothing hidden |
+| Links and conversion | The only link change is one more link each to `/google-ads` and `/social-media-ads`, from the decision cards. Conversion destinations, case-study eligibility and tracking are unchanged |
+
+Evidence: `r2-services/before` and `r2-services/after` (hero, core, which, terms and steps at 1440 and 360, plus the hero at 390). The full set of 28 before and 28 after captures at four widths is regenerated with `node capture.mjs <baseUrl> <outDir> 1440,1280,390,360 services`.

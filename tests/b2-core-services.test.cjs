@@ -75,7 +75,7 @@ test('type floors: labels at least 12 px and explanatory captions at least 14 px
   assert.match(mr, /\.mr22 \.mr1-cap, \.mr22 \.mr22-note \{ font-size: \.875rem; \}/);
   const sx = code(read('components/paid-advertising/services/services.css'));
   for (const r of [/\.sx-badge \{[^}]*font-size: \.75rem/, /\.x2-sup b \{[^}]*font-size: \.75rem/, /html \.pa-sx \.pa-eyebrow \{ font-size: \.75rem; \}/, /\.x2-seo-k \{[^}]*font-size: \.75rem/]) assert.match(sx, r);
-  for (const r of [/\.sx-note \{[^}]*font-size: \.875rem/, /\.x2-path figcaption \{[^}]*font-size: \.875rem/, /\.x2-illus \{[^}]*font-size: \.875rem/]) assert.match(sx, r);
+  for (const r of [/\.sx-note \{[^}]*font-size: \.875rem/, /\.x3-flow figcaption \{[^}]*font-size: \.875rem/, /\.x3-d \{[^}]*font-size: \.875rem/, /\.x3-measure \{[^}]*font-size: \.875rem/]) assert.match(sx, r);
   const pr = code(read('components/pricing-r2/pricing-r2.css'));
   assert.match(pr, /\.prr \.prr-fig-q, \.prr \.prr-plan-k, \.prr \.prr-row dt, \.prr \.prr-table thead th, \.prr \.prr-cad-when, \.prr \.prr-quoted, \.prr \.prr-outside-label, \.prr \.prr-dest-to \{ font-size: \.75rem; \}/);
   assert.match(pr, /\.prr \.prr-cap \{ font-size: \.875rem; \}/);

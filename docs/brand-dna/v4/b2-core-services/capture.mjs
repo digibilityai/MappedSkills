@@ -1,11 +1,12 @@
-// Usage: node capture.mjs <baseUrl> <outDir> [widths=1440,390]. Saves the B2 sections and the navigation as JPEGs named <width>-<page>-<part>.jpg.
+// Usage: node capture.mjs <baseUrl> <outDir> [widths=1440,390] [pages=all, comma list of keys; "nav" for the navigation]. Saves the B2 sections and the navigation as JPEGs named <width>-<page>-<part>.jpg.
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { open, sleep } from './cdp.mjs';
-const [base, out, ws = '1440,390'] = process.argv.slice(2);
+const [base, out, ws = '1440,390', only = ''] = process.argv.slice(2);
+const want = (k) => !only || only.split(',').includes(k);
 mkdirSync(out, { recursive: true });
 const L = (id) => `section[aria-labelledby="${id}"]`;
 const PAGES = {
-  services: ['/services', { hero: L('sx-h1'), core: '#services', work: L('sx-work'), faq: L('sx-faq') }],
+  services: ['/services', { hero: L('sx-h1'), core: '#services', which: L('sx-which'), work: L('sx-work'), terms: L('sx-terms'), steps: '.x2-steps', faq: L('sx-faq') }],
   'google-ads': ['/google-ads', { intent: L('ga41-intent-h'), types: L('ga41-types-h'), journey: L('ga41-jny-h'), price: L('ga41-price-h'), faq: L('ga41-faq-h') }],
   'social-media-ads': ['/social-media-ads', { journey: L('mr1-jny-h'), measure: L('mr1-mea-h'), price: L('mr22-price-h'), faq: L('mr1-faq-h') }],
   pricing: ['/pricing', { hero: L('prr-h1'), plans: L('prr-h-plans'), included: L('prr-h-included'), split: L('prr-h-split'), faq: L('prr-h-faq') }],
@@ -21,9 +22,11 @@ const shot = async (name, sel) => {
 for (const w of ws.split(',').map(Number)) {
   await b.size(w, w > 700 ? 900 : 844);
   for (const [key, [path, parts]] of Object.entries(PAGES)) {
+    if (!want(key)) continue;
     await b.go(base + path);
     for (const [part, sel] of Object.entries(parts)) await shot(`${w}-${key}-${part}`, sel);
   }
+  if (!want('nav')) continue;
   // navigation on /seo, which must now mark Services current
   await b.go(base + '/seo');
   await b.ev('scrollTo(0,0)');

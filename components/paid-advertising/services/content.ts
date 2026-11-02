@@ -9,11 +9,12 @@ export const HERO = {
   anchor: 'See how the path works',
 } as const;
 
-/** Hero diagram: Capture, Convert, Enquiry along the path; Measure observes all of it. */
+/** Hero diagram (B2 R2): two customer journeys, one per core service, converge through Capture and Convert towards an enquiry;
+ * Measure frames the whole path. An approach, not results: the caption says so. */
 export const DIAGRAM = {
   entries: [
-    { k: 'They search', d: 'People already looking for what you sell' },
-    { k: 'They browse', d: 'People who were not looking yet' },
+    { id: 'search', k: 'They search', ch: 'Google Ads', d: 'People already looking for what you sell' },
+    { id: 'browse', k: 'They browse', ch: 'Meta Ads', d: 'People who were not looking yet' },
   ],
   stations: [
     { k: 'Capture', d: 'Found by the right buyers' },
@@ -52,11 +53,21 @@ export const CARDS = [
     note: 'Meta Ads means Facebook and Instagram advertising. We do not manage your posting.' },
 ] as const;
 
-export const ILLUSTRATION_NOTE = 'Illustration of how an ad can appear. Not a client ad.';
-
+/** "Which one first?" (B2 R2): its own decision section. The wording is the page's approved positioning (the former paragraph and
+ * the first FAQ answer): search suits buyers who already know what they want, Meta suits offers buyers need to discover, and not
+ * every business needs both. */
 export const WHICH = {
-  lead: 'Which one first?',
-  body: 'Search suits buyers who already know what they want. Meta suits offers buyers need to discover. Not every business needs both, so we check your offer, margins, follow-up and measurement before recommending anything.',
+  eyebrow: 'Choosing where to start',
+  h: 'Which one first?',
+  lead: 'It depends on how your customers buy.',
+  options: [
+    { id: 'google', cue: 'They search', when: 'Your buyers already know what they want', name: 'Google Ads', role: 'Captures existing search demand.',
+      d: 'Your ads appear when people search for what you sell.', href: '/google-ads', cta: 'Explore Google Ads' },
+    { id: 'meta', cue: 'They browse', when: 'Your buyers need to discover your offer', name: 'Meta Ads', role: 'Reaches and influences relevant audiences.',
+      d: 'Your offer is introduced on Facebook and Instagram to people who were not looking yet.', href: '/social-media-ads', cta: 'Explore Meta Ads' },
+  ],
+  both: { k: 'Not every business needs both.', d: 'We check your offer, margins, follow-up and measurement before recommending either, or both.' },
+  audLabel: 'By business type',
   audiences: [
     { href: '/who-we-help/d2c', label: 'D2C and Ecommerce' },
     { href: '/who-we-help/education', label: 'Education and Training' },
@@ -80,7 +91,6 @@ export const TERMS = {
   included: ['Planning campaigns around your offer and customers', 'Running them and adjusting your budget as results call for it', 'Testing different ads', 'Reviewing where people land and what we find', 'A monthly performance report with ongoing work, and review calls where your proposal agrees them'],
   separate: 'Website, landing page and tracking changes. Creative beyond the agreed designs, such as reels, video and scripting. For Meta Ads, your proposal sets a defined number of static ad designs.',
   cost: { spend: 'Ad spend', spendD: 'is paid directly to the platform. Our', fee: 'management fee', feeD: 'is charged separately and shaped by the work involved. Quotes are tailored.' },
-  fit: 'Advertising tends to work when you already sell or are close, can follow up enquiries promptly, know roughly what a customer is worth and can invest enough to learn what works. It may be premature if your offer is untested or you cannot follow up yet. No one can honestly guarantee results.',
   stepsLead: 'Every engagement follows the same five steps. Nothing starts until you approve it.',
   steps: ['Assess', 'Plan', 'Launch', 'Test', 'Review'],
 } as const;

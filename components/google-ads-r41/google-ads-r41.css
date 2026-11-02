@@ -76,3 +76,7 @@
 @media (max-width: 1080px) {
   .ga41 .ga41-price-grid, .ga41 .ga41-scope-body { grid-template-columns: 1fr; }
 }
+/* B2 Brand DNA 4.0 (A3, D-03), frozen R4.1 otherwise unchanged: labels at least 12 px, explanatory captions at least 14 px.
+   The platform mock-ups (search result, landing page, enquiry) keep platform sizes (A3: treated as images). */
+.ga41 .ga4-lane-lbl, .ga41 .ga4-js-who, .ga41 .ga4-panel dt, .ga41 .ga41-card-k { font-size: .75rem; }
+.ga41 .ga4-cap { font-size: .875rem; }

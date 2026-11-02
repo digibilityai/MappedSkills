@@ -53,3 +53,7 @@
   .mr22 .mr22-price-grid, .mr22 .mr22-scope-body { grid-template-columns: 1fr; }
 }
 .mr22 .mr22-price .rv3-intro { color: var(--c-on-dark-soft); }
+/* B2 Brand DNA 4.0 (A3, D-03), frozen R2.2 otherwise unchanged: labels at least 12 px, explanatory captions at least 14 px.
+   The feed and landing-page mock-ups keep platform sizes (A3: treated as images). */
+.mr22 .mr1-panel dt, .mr22 .mr1-js-who, .mr22 .mr1-outs-l, .mr22 .mr1-sig-l, .mr22 .mr22-card-k { font-size: .75rem; }
+.mr22 .mr1-cap, .mr22 .mr22-note { font-size: .875rem; }

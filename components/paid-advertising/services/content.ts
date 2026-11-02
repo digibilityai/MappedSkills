@@ -1,7 +1,7 @@
 /** /services R2, owner-approved design direction with four final corrections (27 October 2026).
  * Evidence notes: docs/paid-advertising-revamp/SERVICES_R1_NOTES.md. No YouTube, no other platform, no free audit,
- * no response times, no figures, no Click-to-WhatsApp (delivery unconfirmed). Case cards are the verified entries that
- * were already on this page; the shared tag-matched case-study system is a separate requirement (not built here).
+ * no response times, no figures, no Click-to-WhatsApp (delivery unconfirmed). The work section is the shared case showcase
+ * (showcase.ts, B2 DEC-120), which reads the public case-study library.
  */
 export const HERO = {
   eyebrow: 'Google Ads and Meta Ads for Indian businesses',
@@ -9,11 +9,12 @@ export const HERO = {
   anchor: 'See how the path works',
 } as const;
 
-/** Hero diagram: Capture, Convert, Enquiry along the path; Measure observes all of it. */
+/** Hero diagram (B2 R2): two customer journeys, one per core service, converge through Capture and Convert towards an enquiry;
+ * Measure frames the whole path. An approach, not results: the caption says so. */
 export const DIAGRAM = {
   entries: [
-    { k: 'They search', d: 'People already looking for what you sell' },
-    { k: 'They browse', d: 'People who were not looking yet' },
+    { id: 'search', k: 'They search', ch: 'Google Ads', d: 'People already looking for what you sell' },
+    { id: 'browse', k: 'They browse', ch: 'Meta Ads', d: 'People who were not looking yet' },
   ],
   stations: [
     { k: 'Capture', d: 'Found by the right buyers' },
@@ -52,11 +53,21 @@ export const CARDS = [
     note: 'Meta Ads means Facebook and Instagram advertising. We do not manage your posting.' },
 ] as const;
 
-export const ILLUSTRATION_NOTE = 'Illustration of how an ad can appear. Not a client ad.';
-
+/** "Which one first?" (B2 R2): its own decision section. The wording is the page's approved positioning (the former paragraph and
+ * the first FAQ answer): search suits buyers who already know what they want, Meta suits offers buyers need to discover, and not
+ * every business needs both. */
 export const WHICH = {
-  lead: 'Which one first?',
-  body: 'Search suits buyers who already know what they want. Meta suits offers buyers need to discover. Not every business needs both, so we check your offer, margins, follow-up and measurement before recommending anything.',
+  eyebrow: 'Choosing where to start',
+  h: 'Which one first?',
+  lead: 'It depends on how your customers buy.',
+  options: [
+    { id: 'google', cue: 'They search', when: 'Your buyers already know what they want', name: 'Google Ads', role: 'Captures existing search demand.',
+      d: 'Your ads appear when people search for what you sell.', href: '/google-ads', cta: 'Explore Google Ads' },
+    { id: 'meta', cue: 'They browse', when: 'Your buyers need to discover your offer', name: 'Meta Ads', role: 'Reaches and influences relevant audiences.',
+      d: 'Your offer is introduced on Facebook and Instagram to people who were not looking yet.', href: '/social-media-ads', cta: 'Explore Meta Ads' },
+  ],
+  both: { k: 'Not every business needs both.', d: 'We check your offer, margins, follow-up and measurement before recommending either, or both.' },
+  audLabel: 'By business type',
   audiences: [
     { href: '/who-we-help/d2c', label: 'D2C and Ecommerce' },
     { href: '/who-we-help/education', label: 'Education and Training' },
@@ -65,24 +76,21 @@ export const WHICH = {
   ],
 } as const;
 
-/** Verified descriptions from the live case pages (26 October 2026). Service and industry are separate tags.
- * Wanderlooms has no individual page and no approved service evidence, so it carries an industry tag only and no link. */
-export const WORK = [
-  { id: 'anybodycanbake', name: 'AnybodyCanBake', service: 'Google Ads', industry: 'Education and training',
-    line: 'AnybodyCanBake, a Pune online baking school, wanted direct course purchases from Google Ads.',
-    href: '/portfolio/google-ads-for-online-courses', cta: 'Read the Google Ads case study' },
-  { id: 'om-sai', name: 'Om Sai Developer', service: 'Meta Ads', industry: 'Real estate',
-    line: 'A Chembur developer needed enquiries from people interested in its project.',
-    href: '/portfolio/om-sai-developer-meta-ads', cta: 'Read the Meta Ads case study' },
-  { id: 'wanderlooms', name: 'Wanderlooms', service: null, industry: 'Adventure apparel',
-    line: 'An adventure apparel brand featured on Shark Tank India.', href: null, cta: null },
-] as const;
+/** SEO as a supporting service (B2, DEC-120): one simplified block below the two core services, not a third core card. The body is the approved
+ * /seo description; the SEO case studies and their figures stay on /seo (no cards, no metrics here). */
+export const SEO_SUPPORT = {
+  label: 'Supporting service',
+  name: 'SEO & Organic Visibility',
+  body: 'We help your business appear for relevant searches, improve the pages visitors land on and measure whether organic search brings genuine enquiries.',
+  proof: 'Our published SEO case studies are on the SEO page.',
+  href: '/seo',
+  cta: 'Explore SEO',
+} as const;
 
 export const TERMS = {
   included: ['Planning campaigns around your offer and customers', 'Running them and adjusting your budget as results call for it', 'Testing different ads', 'Reviewing where people land and what we find', 'A monthly performance report with ongoing work, and review calls where your proposal agrees them'],
   separate: 'Website, landing page and tracking changes. Creative beyond the agreed designs, such as reels, video and scripting. For Meta Ads, your proposal sets a defined number of static ad designs.',
   cost: { spend: 'Ad spend', spendD: 'is paid directly to the platform. Our', fee: 'management fee', feeD: 'is charged separately and shaped by the work involved. Quotes are tailored.' },
-  fit: 'Advertising tends to work when you already sell or are close, can follow up enquiries promptly, know roughly what a customer is worth and can invest enough to learn what works. It may be premature if your offer is untested or you cannot follow up yet. No one can honestly guarantee results.',
   stepsLead: 'Every engagement follows the same five steps. Nothing starts until you approve it.',
   steps: ['Assess', 'Plan', 'Launch', 'Test', 'Review'],
 } as const;

@@ -3,32 +3,44 @@ import { ActionLink } from '../ActionLink';
 import { SectionHeading } from '../SectionHeading';
 import { PaReveal } from '../PaReveal';
 import { SearchAdMockup, MetaAdMockup } from '../AdMockups';
-import { DIAGRAM, HERO, PATH, CARDS, ILLUSTRATION_NOTE, WHICH, WORK, TERMS, SERVICES_FAQS, CLOSE } from './content';
+import { CaseShowcase, type ShowcaseData } from '@/components/case-showcase/CaseShowcase';
+import type { CSSProperties } from 'react';
+import { DIAGRAM, HERO, PATH, CARDS, WHICH, SEO_SUPPORT, TERMS, SERVICES_FAQS, CLOSE } from './content';
 import '../paid-advertising.css';
 import './services.css';
 
 const Tick = () => <svg className="pa-tick" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="m4.5 10.5 3.6 3.6 7.4-8" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 
-export function PaidAdvertisingServices() {
+/** `showcase` is resolved on the server by the route (`loadCaseShowcase(SERVICES_SHOWCASE)`); null or absent hides the work section. */
+export function PaidAdvertisingServices({ showcase }: { showcase?: ShowcaseData | null } = {}) {
   return <div className="pa pa-sx">
     <PaReveal />
     {/* 1 Hero: one conceptual diagram. Capture and Convert lead to the enquiry; Measure observes the whole path. */}
     <section className="pa-hero pa-wrap" aria-labelledby="sx-h1">
       <div className="pa-hero-copy">
         <p className="pa-eyebrow">{HERO.eyebrow}</p>
-        <h1 id="sx-h1">Reach more of the right customers with <span>Google Ads and Meta Ads.</span></h1>
+        {/* Brand DNA 4.0 A4.1: the emphasis carries the customer outcome, not the product names (wording unchanged) */}
+        <h1 id="sx-h1">Reach more of <span>the right customers</span> with Google Ads and Meta Ads.</h1>
         <p className="pa-lede">{HERO.lede}</p>
         <div className="pa-actions"><ActionLink /><ActionLink href="#path" variant="text">{HERO.anchor}</ActionLink></div>
       </div>
       <div className="pa-hero-visual">
-        <figure className="x2-path" aria-labelledby="x2-cap">
-          <ol className="x2-in">{DIAGRAM.entries.map(e => <li key={e.k}><span>{e.k}</span>{e.d}</li>)}</ol>
-          <svg className="x2-merge" viewBox="0 0 100 18" aria-hidden="true" focusable="false"><path d="M25 0 C25 10, 44 12, 50 17" /><path d="M75 0 C75 10, 56 12, 50 17" /></svg>
-          <ol className="x2-stations">
-            {DIAGRAM.stations.map(s => <li key={s.k}><b>{s.k}</b><span>{s.d}</span></li>)}
-            <li className="x2-station-end"><b>{DIAGRAM.end}</b></li>
-          </ol>
-          <div className="x2-measure"><b>{DIAGRAM.measure.k}</b><span>{DIAGRAM.measure.d}</span></div>
+        {/* B2 R2: two journeys (one per core service) converge through Capture and Convert towards an enquiry; Measure frames the
+            whole path. Plays once on load (CSS only, off under reduced motion); everything is present without it. */}
+        <figure className="x3-flow" aria-labelledby="x2-cap">
+          <div className="x3-measured">
+            <ol className="x3-lanes" aria-label="Two ways customers arrive">
+              {DIAGRAM.entries.map(e => <li key={e.id} className={`x3-lane x3-lane--${e.id}`}><span className="x3-pill">{e.k}</span><b>{e.ch}</b><span className="x3-d">{e.d}</span></li>)}
+            </ol>
+            <svg className="x3-merge" viewBox="0 0 200 48" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+              <path d="M50 0 C50 28, 100 22, 100 48" /><path d="M150 0 C150 28, 100 22, 100 48" />
+            </svg>
+            <ol className="x3-spine" aria-label="The shared path">
+              {DIAGRAM.stations.map((st, i) => <li key={st.k} className="x3-st" style={{ '--i': i } as CSSProperties}><b>{st.k}</b> <span>{st.d}</span></li>)}
+              <li className="x3-end" style={{ '--i': DIAGRAM.stations.length } as CSSProperties}><b>{DIAGRAM.end}</b></li>
+            </ol>
+            <p className="x3-measure"><b>{DIAGRAM.measure.k}</b> <span>{DIAGRAM.measure.d}</span></p>
+          </div>
           <figcaption id="x2-cap">{DIAGRAM.caption}</figcaption>
         </figure>
       </div>
@@ -52,7 +64,7 @@ export function PaidAdvertisingServices() {
     <section id="services" className="pa-section pa-ink" aria-labelledby="sx-services"><div className="pa-wrap">
       <SectionHeading id="sx-services" eyebrow="Our core services">Two ways to <span className="pa-em">capture demand</span></SectionHeading>
       <div className="x2-cards">{CARDS.map(c => <article key={c.id} className={`pa-service sx-card sx-card--${c.id} x2-card x2-card--${c.id}`} data-reveal>
-        <div className="sx-card-visual">{c.id === 'google' ? <SearchAdMockup illustrative /> : <MetaAdMockup illustrative />}<p className="x2-illus">{ILLUSTRATION_NOTE}</p></div>
+        <div className="sx-card-visual">{c.id === 'google' ? <SearchAdMockup illustrative /> : <MetaAdMockup illustrative />}</div>
         <div className="sx-card-copy">
           <p className="sx-badge">{c.badge}</p>
           <h3>{c.name}</h3>
@@ -63,20 +75,40 @@ export function PaidAdvertisingServices() {
           <ActionLink href={c.href} variant="text">Explore {c.name}</ActionLink>
         </div>
       </article>)}</div>
-      <div className="x2-which"><p><b>{WHICH.lead}</b> {WHICH.body}</p>
-        <ul className="x2-aud" aria-label="Advertising by business type">{WHICH.audiences.map(a => <li key={a.href}><Link href={a.href}>{a.label}</Link></li>)}</ul></div>
+      {/* SEO as a supporting service (B2, DEC-120): below the two core services and visibly secondary; its case studies stay on /seo */}
+      <aside className="x2-seo" aria-labelledby="sx-seo" data-reveal>
+        <p className="x2-seo-k">{SEO_SUPPORT.label}</p>
+        <h3 id="sx-seo">{SEO_SUPPORT.name}</h3>
+        <p className="x2-seo-d">{SEO_SUPPORT.body} {SEO_SUPPORT.proof}</p>
+        <ActionLink href={SEO_SUPPORT.href} variant="text">{SEO_SUPPORT.cta}</ActionLink>
+      </aside>
     </div></section>
 
-    {/* 4 Work: service and industry are separate tags. Cards are the verified entries; no outcome figures. */}
-    <section id="our-work" className="pa-section pa-wrap" aria-labelledby="sx-work">
-      <div className="pa-section-top"><SectionHeading id="sx-work" eyebrow="Our work">The work <span className="pa-em">behind the offer</span></SectionHeading><ActionLink href="/work" variant="text">View All Case Studies</ActionLink></div>
-      <div className="x2-work">
-        <article className="x2-case x2-case--lead" data-reveal><CaseBody w={WORK[0]} /></article>
-        <div className="x2-case-side">
-          {WORK.slice(1).map(c => <article key={c.id} className={`x2-case${c.href ? '' : ' x2-case--info'}`} data-reveal><CaseBody w={c} /></article>)}
-        </div>
+    {/* 3b Which one first: a decision between the two core services, then "not every business needs both" and the audiences */}
+    <section id="which-first" className="pa-section pa-wrap x2-decide" aria-labelledby="sx-which">
+      <div className="x2-decide-head">
+        <SectionHeading id="sx-which" eyebrow={WHICH.eyebrow}>{WHICH.h}</SectionHeading>
+        <p className="x2-decide-lead">{WHICH.lead}</p>
+      </div>
+      <div className="x2-fork">
+        {WHICH.options.map((o, i) => <article key={o.id} className={`x2-opt x2-opt--${o.id}`} aria-labelledby={`sx-opt-${o.id}`} data-reveal>
+          {i === 1 && <span className="x2-or" aria-hidden="true">or</span>}
+          <p className="x2-opt-cue"><span className="x3-pill">{o.cue}</span><span>{o.when}</span></p>
+          <h3 id={`sx-opt-${o.id}`}>{o.name}</h3>
+          <p className="x2-opt-role">{o.role}</p>
+          <p className="x2-opt-d">{o.d}</p>
+          <ActionLink href={o.href} variant="text">{o.cta}</ActionLink>
+        </article>)}
+      </div>
+      <div className="x2-both" data-reveal>
+        <p><b>{WHICH.both.k}</b> {WHICH.both.d}</p>
+        <div className="x2-aud-row"><p className="x2-aud-k" id="sx-aud">{WHICH.audLabel}</p>
+          <ul className="x2-aud" aria-labelledby="sx-aud">{WHICH.audiences.map(a => <li key={a.href}><Link href={a.href}>{a.label}</Link></li>)}</ul></div>
       </div>
     </section>
+
+    {/* 4 Work: the shared case showcase (DEC-115, DEC-116), one Google Ads and one Meta Ads case from the public library */}
+    <CaseShowcase data={showcase} />
 
     {/* 5 Working with us: scope, cost and fit, then the five steps */}
     <section className="pa-section pa-wrap" aria-labelledby="sx-terms">
@@ -88,7 +120,6 @@ export function PaidAdvertisingServices() {
           <div className="x2-cost" data-reveal><h3>Costs</h3><p><b>{TERMS.cost.spend}</b> {TERMS.cost.spendD} <b>{TERMS.cost.fee}</b> {TERMS.cost.feeD}</p><ActionLink href="/pricing" variant="text">Understand Our Pricing Approach</ActionLink></div>
         </div>
       </div>
-      <p className="x2-fit" data-reveal>{TERMS.fit}</p>
       <div className="x2-steps" data-reveal><p>{TERMS.stepsLead}</p>
         <ol>{TERMS.steps.map((s, i) => <li key={s}><span aria-hidden="true">{i + 1}</span>{s}</li>)}</ol>
         <ActionLink href="/how-it-works" variant="text">See How We Work</ActionLink></div>
@@ -96,20 +127,10 @@ export function PaidAdvertisingServices() {
 
     {/* 6 FAQ and final CTA */}
     <section className="pa-section pa-wrap sx-faq-wrap" aria-labelledby="sx-faq">
-      <SectionHeading id="sx-faq" eyebrow="Questions">A few questions <span className="pa-em">before we talk</span></SectionHeading>
+      <SectionHeading id="sx-faq" eyebrow="Questions">A few questions before we talk</SectionHeading>
       <div className="pa-faq sx-faq" data-reveal>{SERVICES_FAQS.map(f => <details key={f.question}><summary>{f.question}<span aria-hidden="true">+</span></summary><p>{f.answer}</p></details>)}</div>
     </section>
     <section className="pa-close pa-wrap" aria-labelledby="sx-close" data-reveal><div><h2 id="sx-close">{CLOSE.h}</h2><p>{CLOSE.body}</p></div><ActionLink variant="dark" /></section>
   </div>;
 }
 
-function CaseBody({ w }: { w: typeof WORK[number] }) {
-  return <>
-    <p className="x2-tags">
-      {w.service && <span className="x2-tag x2-tag--svc"><span className="v">Service </span>{w.service}</span>}
-      <span className="x2-tag x2-tag--ind"><span className="v">Industry </span>{w.industry}</span>
-    </p>
-    <h3>{w.name}</h3><p>{w.line}</p>
-    {w.href && <ActionLink href={w.href} variant="text">{w.cta}</ActionLink>}
-  </>;
-}

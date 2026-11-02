@@ -13,6 +13,7 @@ import {
   SERVICE_GROUPS,
   SERVICES_HUB,
   SERVICE_ROUTES,
+  SUPPORTING_SERVICE,
   WHO_WE_HELP_LABEL,
   WHO_WE_HELP_LINKS,
   WHO_WE_HELP_NOJS_HREF,
@@ -30,8 +31,8 @@ const DESKTOP_QUERY = '(min-width: 64em)';
  *
  * - NOT STICKY. `position: relative`, in normal flow (DEC-018 §4.5; DEC-030).
  * - Desktop (≥64em): Services is ONE disclosure button. Its compact panel lists
- *   the services by stage, then "All services" (/services) and the contextual
- *   problem link. A disclosure of links, not `role="menu"`: closed links are
+ *   the services by stage, a secondary "Also: SEO" link, then "All services"
+ *   (/services) and the contextual problem link. A disclosure of links, not `role="menu"`: closed links are
  *   `inert`, Tab keeps its normal order, ArrowDown on the button opens the
  *   panel, Up/Down/Home/End move through its links, Escape closes and returns
  *   focus, and an outside click or focus closes it. Without JavaScript the
@@ -359,6 +360,12 @@ export function SiteHeader() {
                     </section>
                   ))}
                 </div>
+                {/* B2 (DEC-120): SEO is a supporting service, one secondary link below the two core services */}
+                <p className="dc-sp-also">
+                  <Link className="dc-also" href={SUPPORTING_SERVICE.href} aria-current={current(SUPPORTING_SERVICE.href)}>
+                    <span className="k">Also:</span> <span className="t">{SUPPORTING_SERVICE.label}</span>
+                  </Link>
+                </p>
                 <div className="dc-panel-ft">
                   <Link className="dc-all" href={SERVICES_HUB.href} aria-current={current(SERVICES_HUB.href)}>
                     {SERVICES_HUB.label} <span className="s">{SERVICES_HUB.desc}</span>{' '}
@@ -506,6 +513,9 @@ export function SiteHeader() {
                     </div>
                   ))}
                 </div>
+                <Link className="dc-m-also" href={SUPPORTING_SERVICE.href} aria-current={current(SUPPORTING_SERVICE.href)}>
+                  <span className="k">Also:</span> <span className="t">{SUPPORTING_SERVICE.label}</span>
+                </Link>
                 <Link className="dc-m-ctx" href={PROBLEM_LINK.href} aria-current={current(PROBLEM_LINK.href)}>
                   {PROBLEM_LINK.label}
                 </Link>

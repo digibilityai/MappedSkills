@@ -74,6 +74,11 @@ export function periodLabel(start?: string | null, end?: string | null): string 
   return a === b ? a : `${a} – ${b}`;
 }
 
+/**
+ * A date range written without a long dash (Brand DNA 4.0 A9, OD-13): an en dash or em dash between two dates becomes " to ", so "Apr 2026" and "Sep 2026" read "Apr 2026 to Sep 2026". Text without a dash is returned as it is. `periodLabel` itself is unchanged (it also feeds /work and the case pages, batch B4).
+ */
+export const plainRange = (text: string): string => text.replace(/\s*[\u2013\u2014]\s*/g, ' to ');
+
 /** Stable sort: listing priority first, the rest keep their incoming order. */
 export function orderStudies<T>(studies: readonly T[], listingOrder: (s: T) => number | null): T[] {
   return studies

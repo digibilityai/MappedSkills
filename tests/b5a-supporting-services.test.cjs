@@ -98,3 +98,29 @@ test('/ai-seo: the industry tab rule is unchanged from main and the tabs still w
 test('/conversion-optimization: the start link has a 44 px hit area that adds no layout space', () => {
   assert.match(css['conversion-optimization'], /\.co-start-a::after \{ content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 44px; transform: translateY\(-50%\); \}/);
 });
+
+test('V2 heroes: copy-rhythm and compaction rules are in the production CSS (no !important, no fixed hero height)', () => {
+  const v2 = (k) => css[k].slice(css[k].indexOf('B5A V2 hero refinement'));
+  for (const k of Object.keys(FILES)) {
+    assert.ok(css[k].includes('B5A V2 hero refinement'), k);
+    assert.doesNotMatch(v2(k), /!important/);
+    assert.doesNotMatch(v2(k), /(?<![\w-])(min-)?height:\s*\d+(vh|svh)/);
+  }
+  assert.match(v2('seo'), /\.sk-hero \.pa-action--primary \{ padding-inline: 18px; \}/);
+  assert.match(v2('ai-seo'), /\.ax-chat \{ justify-self: end; width: 100%; max-width: 460px; \}/);
+  assert.match(v2('lead-generation'), /\.lx-hand \{ position: static; margin: 8px 0 0 auto; width: fit-content; \}/);
+  assert.match(v2('lead-generation'), /\.lg-hero-tx \{ grid-column: 1 \/ span 7; \}[\s\S]*\.lx-hero-fig \{ grid-column: 8 \/ span 5;/);
+  assert.match(v2('conversion-optimization'), /\.co-sb-art \{ width: 104px; height: 66px; \}/);
+});
+
+test('/ai-seo Balanced Option B: 0.25 s step transitions and 0.3 s progress bars; other pages keep their own timings', () => {
+  const a = css['ai-seo'];
+  assert.match(a, /\.ax-seq \[data-i\] \{ transition: opacity \.25s, transform \.25s, box-shadow \.25s; \}/);
+  assert.match(a, /\.ax-jr::after \{[^}]*transition: width \.3s ease;/);
+  assert.match(a, /\.ax-rp::after \{[^}]*transition: width \.3s ease;/);
+  assert.doesNotMatch(a, /transition: [^;]*\.45s/);
+  assert.match(read('components/cplus/conversion-optimization/Journeys.tsx'), /OPTS = \{ stepMs: 1500, first: 0, dwellMs: 150 \}/);
+  assert.match(read('components/cplus/lead-generation/Journeys.tsx'), /OPTS = \{ stepMs: 2000, first: 0, dwellMs: 300 \}/);
+  assert.match(read('components/cplus/how-it-works/Journeys.tsx'), /OPTS = \{ stepMs: 1500, first: 0, dwellMs: 300 \}/);
+  assert.match(read('components/cplus/services/Interactive.tsx'), /OPTS = \{ stepMs: 1500, first: 0, dwellMs: 300 \}/);
+});

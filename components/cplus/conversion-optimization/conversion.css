@@ -331,3 +331,22 @@ html .b2.co .co-band .co-next p { margin: 0; max-width: none; font: 700 .95rem/1
   .b2.co *, .b2.co *::before, .b2.co *::after { animation: none !important; transition: none !important; }
   .b2.co .is-on > .co-n, .b2.co .is-on .co-stn-top > .co-n { transform: none; }
 }
+
+/* B5A V2 hero refinement (owner-approved, B5A V2 review): the hero space is redistributed, not added to; no fixed or viewport-tied height. */
+@media (min-width: 1024px) {
+  .b2.co .co-hero { padding-block: 32px; }
+  .b2.co .co-crumb { margin-bottom: 12px; }
+  html .b2.co .co-hero .b2-lede { margin-top: 24px; }
+  .b2.co .dc-actions { margin-top: 32px; }
+  .b2.co .co-story { gap: 12px; }
+  .b2.co .co-sb { grid-template-columns: 36px 104px minmax(0, 1fr); gap: 14px; padding: 10px 16px; }
+  .b2.co .co-sb-art { width: 104px; height: 66px; }
+  .b2.co .co-sb:not(:last-child)::after { height: 10px; }
+}
+@media (max-width: 700px) {
+  html .b2.co .co-hero .b2-lede { margin-top: 14px; }
+  .b2.co .dc-actions { margin-top: 20px; }
+  .b2.co .co-hero-fig { margin-top: 20px; }
+  .b2.co .co-story { gap: 8px; }
+  .b2.co .co-sb { padding: 6px 12px; }
+}

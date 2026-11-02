@@ -340,3 +340,32 @@ html .b2.lg .lg-band .lx-next p { margin: 0; max-width: none; font: 700 .95rem/1
   .b2.lg *, .b2.lg *::before, .b2.lg *::after { animation: none !important; transition: none !important; }
   .b2.lg .is-on > .lx-n { transform: none; }
 }
+
+/* B5A V2 hero refinement (owner-approved, B5A V2 review): the hero space is redistributed, not added to; no fixed or viewport-tied height. */
+/* the "Your sales team" pill sits in the card's flow, bottom right, instead of straddling its edge */
+.b2.lg .lx-hand { position: static; margin: 8px 0 0 auto; width: fit-content; }
+@media (min-width: 1024px) {
+  .b2.lg .lg-hero { padding-block: 32px; }
+  .b2.lg .lg-crumb { margin-bottom: 12px; }
+  html .b2.lg .lg-hero .b2-lede { margin-top: 24px; }
+  .b2.lg .dc-actions { margin-top: 32px; }
+  .b2.lg .lg-hero-tx { grid-column: 1 / span 7; }
+  .b2.lg .lx-hero-fig { grid-column: 8 / span 5; gap: 10px; }
+  .b2.lg .lx-enq { padding: 12px 16px 14px; }
+  .b2.lg .lx-enq-f > div { grid-template-columns: 5.2rem minmax(0, 1fr); gap: 8px; padding-block: 4px; }
+  .b2.lg .lx-ad { margin-top: 8px; padding-block: 7px; }
+  .b2.lg .lx-hj { margin-top: 8px; }
+}
+@media (max-width: 700px) {
+  .b2.lg .lg-hero .pa-eyebrow { margin-bottom: 10px; }
+  html .b2.lg .lg-hero .b2-lede { margin-top: 14px; }
+  .b2.lg .dc-actions { margin-top: 20px; }
+  .b2.lg .lx-hero-fig { margin-top: 14px; gap: 6px; }
+  .b2.lg .lx-enq { padding: 8px 12px 10px; }
+  .b2.lg .lx-enq-top { padding-bottom: 6px; }
+  .b2.lg .lx-enq-f > div { grid-template-columns: 5rem minmax(0, 1fr); padding-block: 3px; }
+  .b2.lg .lx-ad { margin-top: 6px; padding-block: 4px; }
+  .b2.lg .lx-hand { margin-top: 4px; padding-block: 5px; }
+  .b2.lg .lx-hj { margin-top: 6px; gap: 6px; }
+  .b2.lg .lx-hj-s { padding: 6px 10px; }
+}

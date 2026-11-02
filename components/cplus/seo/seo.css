@@ -318,3 +318,20 @@ html .b2.sk .sk-how-line { grid-row: 1 / span 2; max-width: 28ch; color: var(--v
 @media (prefers-reduced-motion: reduce) {
   .b2.sk *, .b2.sk *::before, .b2.sk *::after { animation: none !important; transition: none !important; }
 }
+
+/* B5A V2 hero refinement (owner-approved, B5A V2 review): the hero space is redistributed, not added to; no fixed or viewport-tied height. */
+@media (min-width: 1024px) {
+  .b2.sk .sk-hero { padding-block: 32px; }
+  .b2.sk .sk-crumb { margin-bottom: 12px; }
+  html .b2.sk .sk-hero .b2-lede { margin-top: 24px; }
+  .b2.sk .sk-hero .pa-actions { margin-top: 32px; }
+  .b2.sk .sk-route { --sk-gap: 16px; }
+  .b2.sk .sk-panel { padding: 20px 28px; }
+}
+@media (max-width: 700px) {
+  .b2.sk .sk-hero .pa-eyebrow { margin-bottom: 10px; }
+  html .b2.sk .sk-hero .b2-lede { margin-top: 14px; }
+  .b2.sk .sk-hero .pa-actions { margin-top: 20px; }
+  .b2.sk .sk-hero .pa-action--primary { padding-inline: 18px; } /* one line at 360 px, 52 px tall */
+  .b2.sk .sk-fig { margin-top: 12px; }
+}

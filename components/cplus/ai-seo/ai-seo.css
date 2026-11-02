@@ -97,7 +97,7 @@ html .b2.ai .ax-you b { display: block; color: #fff; font: 800 1.05rem/1.2 var(-
 .b2.ai .ax-size b { color: var(--v-ink); }
 
 /* shared sequencing (JS adds .is-armed; without JavaScript every element is shown complete) */
-.b2.ai .ax-seq [data-i] { transition: opacity .3s, transform .3s, box-shadow .3s; }
+.b2.ai .ax-seq [data-i] { transition: opacity .25s, transform .25s, box-shadow .25s; }
 .b2.ai .ax-seq.is-armed[data-reveal="cum"]:not(.is-all) [data-i]:not(.is-seen) { opacity: 0; visibility: hidden; transform: translateY(10px); }
 .b2.ai button.ax-st-n { appearance: none; padding: 0; cursor: pointer; }
 .b2.ai button.ax-st-n:focus-visible, .b2.ai .ax-chip:focus-visible { outline: 3px solid var(--v-burnt); outline-offset: 4px; }
@@ -112,7 +112,7 @@ html .b2.ai .ai-dark button.ax-st-n:focus-visible { outline-color: #fff; }
 .b2.ai .ai-dark .ax-st-t { color: #fff; }
 .b2.ai .ax-st-d { margin-top: 8px; color: var(--resolve-dim); line-height: 1.5; font-size: .95rem; }
 .b2.ai .ai-dark .ax-st-d { color: var(--v-soft); }
-.b2.ai .ax-st > * { transition: opacity .3s; }
+.b2.ai .ax-st > * { transition: opacity .25s; }
 
 /* =====================================================================================================================
    3 Industry examples (low): four industries, four beats each. Calm. The last beat is the visitor's own question.
@@ -191,7 +191,7 @@ html .b2.ai .ax-sc-you .pa-action--primary { border-color: rgba(255, 255, 255, .
 .b2.ai .ax-jr { list-style: none; margin: clamp(28px, 3.6vw, 48px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; position: relative; --ax-p: 100; }
 .b2.ai .ax-jr::before, .b2.ai .ax-jr::after { content: ""; position: absolute; left: 24px; top: 23px; height: 3px; }
 .b2.ai .ax-jr::before { right: calc((100% - 56px) / 5 - 24px); background: repeating-linear-gradient(90deg, var(--ai-dash) 0 8px, transparent 8px 14px); }
-.b2.ai .ax-jr::after { width: calc((100% - (100% - 56px) / 5) * var(--ax-p) / 100); background: var(--v-tang); transition: width .45s ease; }
+.b2.ai .ax-jr::after { width: calc((100% - (100% - 56px) / 5) * var(--ax-p) / 100); background: var(--v-tang); transition: width .3s ease; }
 .b2.ai .ax-st { position: relative; z-index: 1; min-width: 0; padding: 0 0 4px; }
 .b2.ai .ax-st.is-done .ax-st-n { background: #fff; color: var(--v-ink); }
 .b2.ai .ax-st.is-on .ax-st-n { background: var(--v-tang); border-color: var(--v-tang); color: var(--v-ink); transform: scale(1.1); }
@@ -230,14 +230,14 @@ html .b2.ai .ai-dark .fq-d summary:focus-visible { outline-color: #fff; }
 .b2.ai .ax-rp { list-style: none; margin: clamp(26px, 3.2vw, 44px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; position: relative; --ax-p: 100; }
 .b2.ai .ax-rp::before, .b2.ai .ax-rp::after { content: ""; position: absolute; left: 24px; top: 23px; height: 3px; }
 .b2.ai .ax-rp::before { right: calc((100% - 48px) / 3 - 24px); background: repeating-linear-gradient(90deg, var(--v-line) 0 8px, transparent 8px 14px); }
-.b2.ai .ax-rp::after { width: calc((100% - (100% - 48px) / 3) * var(--ax-p) / 100); background: var(--v-burnt); transition: width .45s ease; }
+.b2.ai .ax-rp::after { width: calc((100% - (100% - 48px) / 3) * var(--ax-p) / 100); background: var(--v-burnt); transition: width .3s ease; }
 .b2.ai .ax-rp-i { position: relative; z-index: 1; min-width: 0; }
 .b2.ai .ax-rp .ax-st-d { max-width: 30ch; }
 .b2.ai .ax-rp-i.is-done .ax-st-n { background: var(--v-ink); color: #fff; }
 .b2.ai .ax-rp-i.is-on .ax-st-n { background: var(--v-burnt); border-color: var(--v-burnt); color: #fff; transform: scale(1.1); }
 .b2.ai .ax-rp-i.is-on .ax-st-t, .b2.ai .ax-rp-i.is-on .ax-st-w { color: var(--resolve-accent-dark); }
 .b2.ai .ax-rp.is-armed:not(.is-static) .ax-rp-i:not(.is-done):not(.is-on) .ax-rp-b { opacity: .88; } /* DEC-101: .72 measured 3.2:1 for the example pictures */
-.b2.ai .ax-rp-b { transition: opacity .3s; }
+.b2.ai .ax-rp-b { transition: opacity .25s; }
 .b2.ai .ax-mini { margin-top: 16px; padding: 16px; background: var(--v-ground); border: 1px solid var(--v-line); border-radius: 10px; min-height: 9rem; display: grid; align-items: center; }
 .b2.ai .ax-rp-i.is-on .ax-mini { border-color: var(--v-burnt); box-shadow: 0 0 0 3px rgba(168, 52, 0, .15); }
 .b2.ai .ax-q-m { margin: 0; width: fit-content; max-width: 100%; border-radius: 16px 16px 16px 4px; font-size: 1.0625rem; }
@@ -471,4 +471,27 @@ html .b2.ai .ai-band p { max-width: 36em; }
   .b2.ai .ai-ind { padding-block: 36px; }
   .b2.ai .ax-bt { padding: 10px; }
   .b2.ai .ax-ind-cap { margin-top: 10px; }
+}
+
+/* B5A V2 hero refinement (owner-approved, B5A V2 review): the hero space is redistributed, not added to; no fixed or viewport-tied height. */
+@media (min-width: 1024px) {
+  .b2.ai .ai-hero { padding-block: 32px; }
+  .b2.ai .ai-crumb { margin-bottom: 12px; }
+  html .b2.ai .ai-hero .b2-lede { margin-top: 24px; }
+  .b2.ai .ai-hero .pa-actions { margin-top: 32px; }
+  .b2.ai .ax-chat { justify-self: end; width: 100%; max-width: 460px; }
+  .b2.ai .ax-chat-win { padding: 18px 20px; }
+  .b2.ai .ax-a { padding-top: 12px; }
+  .b2.ai .ax-a-l { gap: 8px; margin-top: 8px; }
+}
+@media (max-width: 700px) {
+  .b2.ai .ai-hero .pa-eyebrow { margin-bottom: 10px; }
+  html .b2.ai .ai-hero .b2-lede { margin-top: 14px; }
+  .b2.ai .ai-hero .pa-actions { margin-top: 20px; }
+  .b2.ai .ax-chat { margin-top: 12px; }
+  .b2.ai .ax-chat-win { padding: 10px 12px; }
+  .b2.ai .ax-a { padding-top: 6px; }
+  .b2.ai .ax-a-l { gap: 2px; margin-top: 4px; }
+  html .b2.ai .ax-you { margin-top: 6px; padding: 5px 10px; }
+  .b2.ai .ax-chat .px-cap { margin-top: 4px; }
 }

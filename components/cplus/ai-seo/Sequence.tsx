@@ -2,12 +2,13 @@
 
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type MouseEventHandler, type RefObject } from 'react';
 
-/** Owner rule (R3 approval, 2026-10-16): 1.5 seconds between steps in every animated sequence on this page. */
-export const STEP_MS = 1500;
-/** The scenario story is quicker: 1 second between steps, and its first step is on screen from the start. */
-export const SCENARIO_STEP_MS = 1000;
+/** /ai-seo timing, owner-approved Balanced Option B (supersedes the R3 1.5 s rule of DEC-054 for /ai-seo only; see DEC-123): 0.5 s between steps.
+ *  Other pages pass their own stepMs and dwellMs and are unaffected. */
+export const STEP_MS = 500;
+/** The scenario story is a little quicker: 0.43 s between steps, and its first step is on screen from the start. */
+export const SCENARIO_STEP_MS = 430;
 /** The block must stay in view this long before it starts (the same dwell as the Google Ads demonstrations). */
-export const DWELL_MS = 400;
+export const DWELL_MS = 200;
 /** Share of the block that counts as "in view"; for very tall blocks (phones) 45% of the window is enough. */
 const ENTER_RATIO = 0.4;
 const ENTER_WINDOW = 0.45;

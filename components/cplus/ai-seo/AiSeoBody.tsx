@@ -187,7 +187,7 @@ export function AiSeoBody() {
         </div>
       </section>
 
-      {/* 5, Ink Deep, medium: five steps, auto-advance every 1.5 s, plays once; the numbers are buttons */}
+      {/* 5, Ink Deep, medium: five steps, auto-advance every 0.5 s (DEC-123), plays once; the numbers are buttons */}
       <section className="ai-act ai-dark ai-jr-sec" aria-labelledby="as-h-jr">
         <div className="pa-wrap">
           <div className="ai-scene">

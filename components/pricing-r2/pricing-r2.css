@@ -1003,3 +1003,10 @@
     transform: none;
   }
 }
+
+/* B2 Brand DNA 4.0 (A3, D-03, A12): labels at least 12 px, explanatory captions at least 14 px, buttons 52 px tall, the standalone
+   FAQ link a 44 px target. Prices, plans, copy, colours and headings unchanged. */
+.prr .prr-fig-q, .prr .prr-plan-k, .prr .prr-row dt, .prr .prr-table thead th, .prr .prr-cad-when, .prr .prr-quoted, .prr .prr-outside-label, .prr .prr-dest-to { font-size: .75rem; }
+.prr .prr-cap { font-size: .875rem; }
+.prr .prr-btn { min-height: 52px; }
+.prr .prr-more a { display: inline-flex; align-items: center; min-height: 44px; }

@@ -103,7 +103,7 @@ test('footer: Who We Help group; no More services group (DEC-086 supersedes DEC-
   const hrefs = (s) => [...s.matchAll(/href="([^"]+)"/g)].map((m) => m[1]);
   assert.deepEqual(hrefs(grp('dc-f-who')), ['/who-we-help/d2c', '/who-we-help/education', '/who-we-help/real-estate', '/who-we-help/enquiry-led-businesses']);
   assert.ok(!footer.includes('dc-f-more') && !/More services/i.test(footer));
-  assert.deepEqual(hrefs(grp('dc-f-svc')), ['/services', '/google-ads', '/social-media-ads']);
+  assert.deepEqual(hrefs(grp('dc-f-svc')), ['/services', '/google-ads', '/social-media-ads', '/seo'], 'B2 (DEC-120): SEO is the last, supporting service');
 });
 
 test('dev-only hooks are gone and nothing production-facing depends on superseded rounds', () => {

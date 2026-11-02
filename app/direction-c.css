@@ -277,6 +277,14 @@
 .dc-all:hover, .dc-all[aria-current="page"] { color: var(--dc-tang-small); text-decoration: none; }
 .dc-ctx, .dc-m-ctx { display: inline-flex; align-items: center; gap: .45em; min-height: 44px; font-size: .86rem; font-weight: 600; color: var(--dc-dim); text-decoration: underline; text-decoration-color: var(--dc-control); text-underline-offset: 4px; }
 .dc-ctx:hover, .dc-m-ctx:hover { color: var(--dc-ink); text-decoration-color: currentColor; }
+/* B2 (DEC-120): SEO as a supporting service. One quiet secondary link, aligned with the core service links and visibly below them. */
+.dc-sp-also { margin: -8px 0 0; padding: 0 28px 10px calc(28px + 11.875rem + 1.5rem); }
+.dc-also, .dc-m-also { display: inline-flex; align-items: center; gap: .4em; min-height: 44px; font-size: .9rem; font-weight: 700; color: var(--dc-ink); text-decoration: none; }
+.dc-also .k, .dc-m-also .k { font-weight: 600; color: var(--dc-dim); }
+.dc-also .t, .dc-m-also .t { text-decoration: underline; text-decoration-color: var(--dc-control); text-underline-offset: 4px; }
+.dc-also:hover, .dc-also[aria-current="page"], .dc-m-also:hover, .dc-m-also[aria-current="page"] { color: var(--dc-tang-small); text-decoration: none; }
+.dc-also:hover .t, .dc-also[aria-current="page"] .t, .dc-m-also:hover .t, .dc-m-also[aria-current="page"] .t { text-decoration-color: currentColor; }
+.dc-m-also { display: flex; width: max-content; margin-top: 10px; }
 /* menu button (below 64em) */
 .dc-menu-btn { flex: none; display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 16px 0 14px; border: 1.5px solid var(--dc-ink); border-radius: 999px; background: transparent; font-weight: 700; font-size: .95rem; color: var(--dc-ink); cursor: pointer; transition: background-color var(--dc-d-fast), color var(--dc-d-fast); }
 .dc-menu-btn:hover { background: var(--dc-ink); color: var(--dc-on-ink); }

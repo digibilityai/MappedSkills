@@ -157,7 +157,7 @@ export function GoogleAdsR41({ showcase }: { showcase?: ShowcaseData | null }) {
     {/* 9. Ink Deep: questions */}
     <section className="rv3-fit rv3-dark" aria-labelledby="ga41-faq-h"><div className="rv3-wrap rv3-fit-grid">
       <div className="rv3-fit-price" {...REVEAL}>
-        <p className="rv3-eyebrow">Questions</p><h2 id="ga41-faq-h">A few questions <em>before we talk</em></h2>
+        <p className="rv3-eyebrow">Questions</p><h2 id="ga41-faq-h">A few questions before we talk</h2>
         <p>Cannot find your question? Ask us when you get in touch.</p>
       </div>
       <div className="rv3-faq" {...REVEAL}>{FAQS.map((f) => <details key={f.question}><summary>{f.question}<span aria-hidden="true">+</span></summary><p>{f.answer}</p></details>)}</div>

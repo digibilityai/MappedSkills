@@ -9,7 +9,12 @@ Module._extensions['.css'] = () => {};
 const { PaidAdvertisingServices } = load('components/paid-advertising/services/PaidAdvertisingServices.tsx');
 const { ServicesJsonLd } = load('components/paid-advertising/services/ServicesJsonLd.tsx');
 const { PaidAdvertisingHome } = load('components/paid-advertising/home/PaidAdvertisingHome.tsx');
-const html = renderToStaticMarkup(React.createElement(PaidAdvertisingServices));
+/* B2 (DEC-120): the work section is the shared case showcase, resolved by the route; a two-card fixture stands in for the public library */
+const card = (slug, client, eyebrow) => ({ slug, href: `/portfolio/${slug}`, client, eyebrow, art: null, fig: null, summary: `${client} summary.` });
+const SHOWCASE = { id: 'sx-work', aliases: ['our-work'], eyebrow: 'Our work', heading: ['The work ', 'behind the offer'], tone: 'light', wrapClass: 'pa-wrap',
+  cards: [card('google-ads-for-online-courses', 'AnybodyCanBake', 'Google Ads · Education and training'), card('wanderlooms-meta-ads', 'Wanderlooms', 'Meta Ads · Apparel')],
+  viewAll: { href: '/work', label: 'View all case studies' } };
+const html = renderToStaticMarkup(React.createElement(PaidAdvertisingServices, { showcase: SHOWCASE }));
 const ld = renderToStaticMarkup(React.createElement(ServicesJsonLd));
 const text = html.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&#x27;/g, "'").replace(/\s+/g, ' ');
 const jsonLd = [...ld.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => JSON.parse(m[1].replace(/\\u003c/g, '<')));
@@ -65,23 +70,41 @@ test('copy contains no long dashes and no double hyphens', () => {
   const src = fs.readFileSync('components/paid-advertising/services/content.ts', 'utf8').split('\n').filter(l => !/^\s*(\/\*|\*)/.test(l)).join('\n');
   assert.doesNotMatch(src, /[–—]/);
 });
-test('client work: separate service and industry tags, verified links only, Wanderlooms unlinked with no service tag', () => {
-  const work = html.split('id="sx-work"')[1].split('id="sx-terms"')[0];
-  const cards = work.split('<article').slice(1);
-  assert.equal(cards.length, 3);
-  const [bake, omsai, wander] = cards;
-  assert.match(bake, /AnybodyCanBake/);
-  assert.match(bake, /x2-tag--svc[^>]*><span class="v">Service <\/span>Google Ads/);
-  assert.match(bake, /x2-tag--ind[^>]*><span class="v">Industry <\/span>Education and training/);
-  assert.match(bake, /href="\/portfolio\/google-ads-for-online-courses"/);
-  assert.match(omsai, /Service <\/span>Meta Ads/);
-  assert.match(omsai, /href="\/portfolio\/om-sai-developer-meta-ads"/);
-  assert.match(wander, /Wanderlooms/);
-  assert.match(wander, /featured on Shark Tank India\./);
-  assert.doesNotMatch(wander, /x2-tag--svc|Meta/);
-  assert.doesNotMatch(wander.split('</article>')[0], /<a\b/);
-  assert.match(html, /href="\/work"[^>]*>View All Case Studies/);
-  assert.doesNotMatch(work, /<img/);
+test('client work: the shared case showcase replaces the bespoke cards, one Google Ads and one Meta Ads case, no SEO cards (B2, DEC-120)', () => {
+  const work = html.split('aria-labelledby="sx-work"')[1].split('aria-labelledby="sx-terms"')[0];
+  assert.match(html, /<section class="cs cs--light cs--two" aria-labelledby="sx-work"/);
+  assert.match(work, /id="our-work" class="cs-anchor"/, 'the old section id still lands here');
+  assert.match(work, /<h2 id="sx-work">The work <em>behind the offer<\/em><\/h2>/);
+  assert.deepEqual([...work.matchAll(/class="cs-cta" href="([^"]+)"/g)].map(m => m[1]), ['/portfolio/google-ads-for-online-courses', '/portfolio/wanderlooms-meta-ads']);
+  assert.match(work, /class="cs-all" href="\/work"/);
+  assert.doesNotMatch(html, /x2-case|x2-tag|x2-work/, 'bespoke cards removed');
+  assert.doesNotMatch(work, /\/portfolio\/(anybodycanbake-seo|seo-ameba-software)|SEO/);
+  const { SERVICES_SHOWCASE } = load('components/paid-advertising/services/showcase.ts');
+  assert.deepEqual(SERVICES_SHOWCASE.preferred, ['/portfolio/google-ads-for-online-courses', '/portfolio/wanderlooms-meta-ads']);
+  assert.equal(SERVICES_SHOWCASE.fillService, undefined, 'no fill: nothing else, and no SEO case, can enter');
+  assert.deepEqual(SERVICES_SHOWCASE.viewAll, { label: 'View all case studies' });
+  assert.equal(SERVICES_SHOWCASE.id, 'sx-work');
+});
+test('with no eligible case the work section is absent and the rest of the page is unchanged', () => {
+  const none = renderToStaticMarkup(React.createElement(PaidAdvertisingServices, { showcase: null }));
+  assert.doesNotMatch(none, /sx-work|cs-card/);
+  assert.equal(none.replace(/<section class="cs[\s\S]*?<\/section>/, ''), none);
+  assert.equal(html.replace(/<section class="cs [\s\S]*?(?=<section class="pa-section pa-wrap" aria-labelledby="sx-terms")/, ''), none);
+});
+test('SEO & Organic Visibility is one supporting block below the core services, linked to /seo, with no SEO figures', () => {
+  const core = html.split('aria-labelledby="sx-services"')[1].split('</section>')[0];
+  const seo = core.split('class="x2-seo"')[1];
+  assert.ok(seo, 'inside the core services section');
+  assert.ok(core.indexOf('x2-seo') > core.indexOf('x2-which'), 'after the two core services');
+  assert.match(seo, /<p class="x2-seo-k">Supporting service<\/p><h3 id="sx-seo">SEO &amp; Organic Visibility<\/h3>/);
+  assert.match(seo, /href="\/seo">Explore SEO/);
+  assert.doesNotMatch(seo.replace(/<[^>]+>/g, ' '), /\d|%/, 'no SEO metrics');
+  assert.doesNotMatch(seo, /<img|portfolio/, 'no SEO case cards');
+  assert.equal((core.match(/<article/g) || []).length, 2, 'Google Ads and Meta Ads stay the only core service cards');
+});
+test('Brand DNA 4.0 emphasis: the H1 emphasises the outcome and the FAQ heading is one colour (wording unchanged)', () => {
+  assert.match(html, /<h1 id="sx-h1">Reach more of <span>the right customers<\/span> with Google Ads and Meta Ads\.<\/h1>/);
+  assert.match(html, /<h2 id="sx-faq">A few questions before we talk<\/h2>/);
 });
 test('management scope separates included work from separately scoped work and qualifies reporting and creative', () => {
   assert.match(text, /Included in management/);

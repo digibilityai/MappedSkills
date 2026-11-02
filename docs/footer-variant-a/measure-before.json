@@ -1,0 +1,82 @@
+{
+ "1440/privacy-policy": {
+  "h": 784,
+  "links": 24,
+  "navLinks": 16,
+  "hrefs": 23,
+  "minNavH": 44,
+  "overlaps": [],
+  "hs": false,
+  "offscreen": 0
+ },
+ "1440/": {
+  "h": 784,
+  "links": 24,
+  "navLinks": 16,
+  "hrefs": 23,
+  "minNavH": 44,
+  "overlaps": [],
+  "hs": false,
+  "offscreen": 0
+ },
+ "1440/pricing": {
+  "h": 784,
+  "links": 24,
+  "navLinks": 16,
+  "hrefs": 23,
+  "minNavH": 44,
+  "overlaps": [],
+  "hs": false,
+  "offscreen": 0
+ },
+ "1440/services": {
+  "h": 784,
+  "links": 23,
+  "navLinks": 16,
+  "hrefs": 23,
+  "minNavH": 44,
+  "overlaps": [],
+  "hs": false,
+  "offscreen": 0
+ },
+ "1280/privacy-policy": {
+  "h": 757,
+  "links": 24,
+  "navLinks": 16,
+  "hrefs": 23,
+  "minNavH": 44,
+  "overlaps": [],
+  "hs": false,
+  "offscreen": 0
+ },
+ "1100/privacy-policy": {
+  "h": 825,
+  "links": 24,
+  "navLinks": 16,
+  "hrefs": 23,
+  "minNavH": 44,
+  "overlaps": [],
+  "hs": false,
+  "offscreen": 0
+ },
+ "390/privacy-policy": {
+  "h": 1412,
+  "links": 24,
+  "navLinks": 16,
+  "hrefs": 23,
+  "minNavH": 44,
+  "overlaps": [],
+  "hs": false,
+  "offscreen": 0
+ },
+ "360/privacy-policy": {
+  "h": 1449,
+  "links": 24,
+  "navLinks": 16,
+  "hrefs": 23,
+  "minNavH": 44,
+  "overlaps": [],
+  "hs": false,
+  "offscreen": 0
+ }
+}

@@ -338,3 +338,15 @@ html .b2.cs .ct-band.is-deep .ct-sec.is-led > .ct-prose:first-child > p:first-ch
 .b2.cs .ct-stage-frame[data-motif='insurance']::after, .b2.cs .ct-stage-frame[data-motif='home']::after { content: none; }
 .b2.cs .ct-stage-frame[data-motif='insurance'] .ct-stage-mark, .b2.cs .ct-stage-frame[data-motif='home'] .ct-stage-mark, .b2.cs .ct-stage-frame[data-mark='deep'] .ct-stage-mark { -webkit-text-stroke: 1.5px rgba(143, 44, 0, .6); }
 .b2.cs .ct-stage-frame[data-motif='insurance'] .ct-stage-tick, .b2.cs .ct-stage-frame[data-motif='home'] .ct-stage-tick { border-color: var(--v-burnt); }
+
+/* Print: every entrance is shown in its settled state, whatever the reader's scroll position when they printed. Elements
+   still waiting below the first screen (`data-pending` from PaReveal, `data-anim='armed'` from HwSequence) would otherwise
+   print hidden: the stage photograph clipped away, the client name and artwork at zero opacity, takeaways and lists blank. */
+@media print {
+  .b2.cs [data-reveal][data-pending] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .b2.cs .ct-take[data-pending]::before, .b2.cs .ct-said[data-anim='armed'] > li::before { transform: none !important; }
+  .b2.cs .ct-band-h[data-pending] .ct-num::after { width: 28px !important; }
+  .b2.cs .ct-stage-frame[data-anim='armed'] .ct-stage-img { clip-path: none !important; }
+  .b2.cs .ct-stage-frame[data-anim='armed'] .ct-stage-mark,
+  .b2.cs .ca-host[data-anim='armed'] .ca-rise, .b2.cs .ca-host[data-anim='armed'] .ca-pop, .b2.cs .ca-host[data-anim='armed'] .ca-draw { opacity: 1 !important; }
+}

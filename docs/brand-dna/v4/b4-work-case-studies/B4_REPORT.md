@@ -102,3 +102,16 @@ All 12 slugs match published studies in the live public index (`/work/index.json
 - **Owner decision 1:** a Contentful-backed render of Home Decor (and of Om Sai with its live text) is still needed, by the owner or with an authorised read-only environment.
 - **Owner decision 2 (resolved):** the portfolio order was approved and implemented (section 7).
 - **Note:** the closing label follows the study's service classification in the CMS, not a separate "verified" flag. If "verified" must mean something stricter, say so.
+
+## 9. Final verification (2 November 2026, before merge authorisation)
+
+Two defects were found and fixed with the smallest change and a regression test each. No visual design, copy, claim, classification or CMS value changed.
+
+| Finding | Fix | Test |
+|:-|:-|:-|
+| **Print hid content.** Printing a case study without scrolling first left every below-the-fold entrance in its waiting state: the stage photograph clipped to nothing (`clip-path: inset(0 0 100% 0)`), the outlined client name at zero opacity, and 7 to 12 takeaways, headings and list items at zero opacity. | A `@media print` block in `components/case-study/case-study.css` shows each waiting state settled. Screen motion for normal visitors is unchanged. | `tests/b4-work-case-studies.test.cjs` (fails without the fix) |
+| **Approved order not guaranteed.** `/work` moved `FEATURED_SLUG` (`seo-ameba-software`) to first place whenever no published study had a listing priority, ahead of the approved order. Production is unaffected today (the live order shows listing priorities exist), but clearing them would put Ameba first. The local preview data has none, so the section 7 statement that the browser showed the approved sequence was inaccurate: it showed Ameba first. | `libraryStudies` keeps the first study first when it is an approved lead. | `tests/case-study-library.test.cjs` (fails without the fix) |
+
+**Accessibility and motion (local preview, Playwright, 1440 and 390, `/work`, `/work/page/2` and the AnybodyCanBake Google Ads, Klenzmo, Ameba Software and ClassPe studies):** with JavaScript, after scrolling, every stage image is unclipped and every image decoded; with reduced motion nothing is armed or pending and the stage is unclipped at load; with JavaScript off nothing is armed or pending, text, navigation and images render; in print (after the fix) the stage, client name and all text are visible. No horizontal overflow in any mode. The only zero-opacity text in every mode is the closed header menu panels.
+
+**Published content (public live pages, 2 November 2026, served by `main` code):** `/work/index.json` lists 20 studies, all 12 approved slugs present; B4 ordering applied to it gives the approved first 12 and keeps 13 to 20 in their existing order. Om Sai Developer: title "Meta ads for a Chembur housing developer", service route `/social-media-ads` (shown as "Meta Ads" by B4), "Reported before-and-after comparison" on each figure, artwork disclosed as conceptual. Home Decor: `noindex, follow`, self-canonical, absent from the index, the sitemap, `/work`, `/work/page/2` and the Om Sai page. **Not verified:** Om Sai and Home Decor rendered through the B4 template with their published content (no Contentful read access in this session).

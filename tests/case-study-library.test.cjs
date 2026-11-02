@@ -198,6 +198,16 @@ test('static pages and search agree: one order, 12 per page, featured first, fil
   assert.ok(plainAll.findIndex((x) => x.slug === 'seo-ameba-software') < plainAll.findIndex((x) => x.slug.startsWith('synthetic-study')), 'the approved studies lead the unprioritised ones');
 });
 
+test('B4: the approved lead order holds on /work even when no study has a listing priority', async () => {
+  const s = setup([...legacyStudies(), ...syntheticStudies(4).map((x) => ({ ...x, listingOrder: null }))]);
+  const all = s.work().libraryStudies(await s.api.fetchContentfulCaseStudies(), 'seo-ameba-software');
+  const { APPROVED_LEAD_ORDER } = lib();
+  const present = APPROVED_LEAD_ORDER.filter((slug) => all.some((x) => x.slug === slug));
+  assert.deepStrictEqual(present, ['google-ads-for-online-courses', 'seo-ameba-software']);
+  assert.deepStrictEqual(all.slice(0, present.length).map((x) => x.slug), present, 'the featured slug does not jump ahead of the approved order');
+  assert.ok(all.slice(present.length).every((x) => !APPROVED_LEAD_ORDER.includes(x.slug)));
+});
+
 test('the public index carries preview fields only: no withheld proof, body, review or audience', async () => {
   const s = setup([...legacyStudies(), ...syntheticStudies(8), ...hiddenStudies()]);
   const all = s.work().libraryStudies(await s.api.fetchContentfulCaseStudies(), 'seo-ameba-software');

@@ -177,3 +177,18 @@ test('B4-01: typography floors on the case-study template and /work', () => {
   assert.match(read('app/globals.css'), /--resolve-accent-deep: #D94400;/);
   assert.match(read('components/case-study/case-study.css'), /\.ct-prompt-a \{[^}]*min-height: 52px;[^}]*border-radius: 999px/);
 });
+
+test('B4: printing a case study shows every entrance settled (nothing armed or pending prints hidden)', () => {
+  const css = read('components/case-study/case-study.css');
+  const print = css.slice(css.indexOf('@media print {'));
+  assert.ok(css.includes('@media print {'), 'case-study.css has a print block');
+  // each hidden start state set by PaReveal (data-pending) or HwSequence (data-anim=armed) is reversed for print
+  assert.match(print, /\[data-reveal\]\[data-pending\] \{ opacity: 1 !important; transform: none !important;/);
+  assert.match(print, /\.ct-stage-frame\[data-anim='armed'\] \.ct-stage-img \{ clip-path: none !important; \}/);
+  for (const sel of [".ct-stage-frame[data-anim='armed'] .ct-stage-mark", ".ca-host[data-anim='armed'] .ca-rise", ".ca-host[data-anim='armed'] .ca-pop", ".ca-host[data-anim='armed'] .ca-draw"]) {
+    assert.ok(print.includes(sel), `print restores ${sel}`);
+  }
+  assert.ok(print.includes(".ct-said[data-anim='armed'] > li::before") && print.includes('.ct-take[data-pending]::before'), 'print draws the card rules and takeaway bars');
+  // the screen motion itself is unchanged: the armed clip still exists for normal visitors
+  assert.match(css, /\.ct-stage-frame\.is-photo\[data-anim='armed'\] \.ct-stage-img \{ animation: none; clip-path: inset\(0 0 100% 0\); \}/);
+});

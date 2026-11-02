@@ -66,7 +66,7 @@ export function D2CR1({ showcase }: { showcase?: ShowcaseData | null }) {
           <p className="rv3-eyebrow">{HERO.eyebrow}</p>
           <h1 id="d2c1-h1">{HERO.h1[0]}<em>{HERO.h1[1]}</em></h1>
           <p className="rv3-lede">{HERO.lede}</p>
-          <div className="rv3-actions"><Cta>{HERO.cta}</Cta><TextLink href={HERO.secondary.href} dark>{HERO.secondary.label}</TextLink></div>
+          <div className="rv3-actions"><Cta>{HERO.cta}</Cta><TextLink href={showcase?.viewAll.href ?? HERO.secondary.href} dark>{HERO.secondary.label}</TextLink></div>
         </div>
         <figure className="rv3-hero-fig d2c1-fig">
           <HeroArt />
@@ -190,7 +190,7 @@ export function D2CR1({ showcase }: { showcase?: ShowcaseData | null }) {
     {/* 8. Ink Deep: questions. */}
     <section className="rv3-fit rv3-dark" aria-labelledby="d2c1-faq-h"><div className="rv3-wrap rv3-fit-grid">
       <div className="rv3-fit-price" {...REVEAL}>
-        <p className="rv3-eyebrow">Questions</p><h2 id="d2c1-faq-h">A few questions <em>before we talk</em></h2>
+        <p className="rv3-eyebrow">Questions</p><h2 id="d2c1-faq-h">A few questions before we talk</h2>
         <p>Cannot find your question? Ask us when you get in touch.</p>
       </div>
       <div className="rv3-faq" {...REVEAL}>{FAQS.map((f) => <details key={f.question}><summary>{f.question}<span aria-hidden="true">+</span></summary><p>{f.answer}</p></details>)}</div>

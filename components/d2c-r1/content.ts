@@ -13,6 +13,7 @@ export const HERO = {
   h1: ['More orders matter. ', 'So does what they cost.'],
   lede: 'We manage Google Ads and Meta Ads that reach relevant shoppers, and judge them by purchases, what each customer costs to win and what your business can afford.',
   cta: 'Discuss Your Advertising',
+  /** `href` is the fallback: the hero uses the showcase's verified View all target (the filtered `/work` when it can be honoured), B3-03. */
   secondary: { label: 'See our work', href: '/work' },
   caption: 'Illustrative journey with a generic store. Not every shopper buys.',
   steps: ['Finds a product', 'Visits the store', 'Considers buying'],

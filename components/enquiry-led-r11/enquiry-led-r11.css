@@ -13,7 +13,7 @@
 /* ---- 1. Hero: an inbox of mixed enquiries, one of which becomes a conversation (about 2.5 s, once) ---- */
 .e11-art { width: 100%; max-width: 540px; justify-self: end; align-self: center; margin: 0; }
 .e11-inbox { background: #221E2B; border: 1.5px solid #4A4456; border-radius: 20px; padding: clamp(14px, 1.8vw, 22px); }
-.e11-inbox-h { font: 800 .74rem/1 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--c-gap); margin-bottom: 12px; }
+.e11-inbox-h { font: 800 .75rem/1 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--c-gap); margin-bottom: 12px; }
 .e11-inbox ul { display: grid; gap: 6px; }
 .e11-hrow { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border: 1.5px solid transparent; border-radius: 12px; font-weight: 700; font-size: .95rem; line-height: 1.3; color: var(--c-on-dark); }
 .e11-hdot { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--c-gap); }
@@ -22,7 +22,7 @@
 .e11-hrow--on .e11-hdot { background: var(--c-tang); box-shadow: 0 0 0 4px rgba(255, 91, 4, .22); }
 .e11-convo { position: relative; margin-top: 34px; padding-left: clamp(20px, 3vw, 40px); display: grid; gap: 10px; animation: e11-rise .7s var(--ease) 1.8s backwards; }
 .e11-convo::before { content: ''; position: absolute; left: 30px; top: -34px; height: 34px; width: 0; border-left: 2px dashed var(--c-tang); }
-.e11-convo-h { font: 800 .74rem/1 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--c-tang); }
+.e11-convo-h { font: 800 .75rem/1 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--c-tang); }
 .e11-b { display: grid; gap: 8px; padding: 14px 18px; border-radius: 18px; width: 72%; }
 .e11-b--b { width: 64%; }
 .e11-b i { display: block; height: 8px; border-radius: 4px; }
@@ -45,7 +45,7 @@
 .e11-rows { display: grid; gap: 8px; }
 .e11-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 1.5px solid var(--c-line); border-radius: 12px; background: var(--c-ground); font-weight: 700; line-height: 1.3; transition: opacity .35s var(--ease), border-color .35s, background-color .35s; }
 .e11-row-dot { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--c-gap); transition: background-color .35s; }
-.e11-row-tag { margin-left: auto; padding: 3px 10px; border-radius: 999px; background: var(--c-tang-deep); color: #fff; font: 800 .72rem/1.3 var(--f-body); letter-spacing: .06em; text-transform: uppercase; opacity: 0; transition: opacity .35s; }
+.e11-row-tag { margin-left: auto; padding: 3px 10px; border-radius: 999px; background: var(--c-tang-deep); color: #fff; font: 800 .75rem/1.3 var(--f-body); letter-spacing: .06em; text-transform: uppercase; opacity: 0; transition: opacity .35s; }
 /* Subdued, not faded: opacity would drop the text to about 1.8 to 1. A muted brand colour, lighter weight, a dashed outline and no fill keep
    the same de-emphasis while the words stay at WCAG AA contrast (about 6 to 1). */
 .e11-view:has(#e11-relv:checked) .e11-row:not(.e11-row--rel) { color: var(--c-dim); font-weight: 600; background: transparent; border-style: dashed; }
@@ -62,10 +62,10 @@
 /* ---- 3. Recognise your business: the customer's own words ---- */
 .e11-asks { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sp-2); }
 .e11-asks li { padding: 18px 20px 20px; background: var(--c-paper); border: 1px solid var(--c-line); border-radius: 20px 20px 20px 6px; }
-.e11-ask-l { font: 800 .72rem/1.3 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--c-tang-deep); }
+.e11-ask-l { font: 800 .75rem/1.3 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--c-tang-deep); }
 .e11-ask-q { margin-top: 10px; font: 800 clamp(1.1rem, 1.5vw, 1.3rem)/1.25 var(--f-head); letter-spacing: -.01em; }
 .e11-ex { margin-top: var(--sp-4); display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
-.e11-ex-l { font: 800 .74rem/1.4 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--c-tang-deep); }
+.e11-ex-l { font: 800 .75rem/1.4 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--c-tang-deep); }
 .e11-ex ul { display: flex; flex-wrap: wrap; gap: 8px; }
 .e11-ex li { padding: 6px 14px; border: 1px solid var(--c-line); border-radius: 999px; background: var(--c-paper); font-weight: 700; font-size: .92rem; }
 .e11-else { margin-top: var(--sp-3); padding-top: var(--sp-2); border-top: 1px dashed var(--c-line); display: flex; flex-wrap: wrap; gap: 4px 32px; }
@@ -106,7 +106,7 @@
 .e11-s-bar, .e11-s-card { fill: #fff; stroke: var(--c-line); stroke-width: 1.5; }
 .e11-s-ln { fill: #DED6C8; } .e11-s-ink { fill: var(--c-ink); } .e11-s-img { fill: #EFE9DD; } .e11-s-pill { fill: var(--c-tang); }
 .e11-s-st { stroke: var(--c-ink); stroke-width: 2.2; }
-.e11-plat { font: 800 .74rem/1.4 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--c-tang-deep); }
+.e11-plat { font: 800 .75rem/1.4 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--c-tang-deep); }
 .e11-plat span { color: var(--c-dim); letter-spacing: .08em; }
 .e11-plat span::before { content: ' · '; }
 .e11-mo h3 { margin-top: 6px; font-size: clamp(1.35rem, 1.9vw, 1.7rem); letter-spacing: -.015em; }
@@ -114,7 +114,7 @@
 .e11-mo-f { margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--c-line); color: var(--c-dim); font-weight: 600; }
 .e11-mo-f strong { color: var(--c-ink); }
 .e11-bridge { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; padding: 16px 20px; border: 1px dashed var(--c-gap); border-radius: 16px; }
-.e11-bridge-l { font: 800 .74rem/1.4 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--c-dim); }
+.e11-bridge-l { font: 800 .75rem/1.4 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--c-dim); }
 .e11-bridge ol { display: flex; flex-wrap: wrap; gap: 8px 30px; }
 .e11-bridge li { position: relative; padding: 7px 16px; border: 1.5px solid var(--c-tang-dark); border-radius: 999px; font-weight: 800; font-size: .92rem; background: var(--c-paper); }
 .e11-bridge li:not(:last-child)::after { content: '→'; position: absolute; right: -24px; top: 50%; transform: translateY(-52%); color: var(--c-tang-dark); font-weight: 800; }
@@ -219,3 +219,8 @@
   .e11-hrow--dim, .e11-hrow--on, .e11-convo, .e11-b--b { animation: none; }
   .e11 .e11-dot, .e11 .e11-talk, .e11 .e11-st-text, .e11 .e11-s-res, .e11 .e11-s-q, .e11 .e11-bridge li, .e11 .e11-p, .e11 .e11-d, .e11 .e11-steps li, .e11 .e11-loop, .e11 .e11-row, .e11 .e11-row-tag, .e11 .e11-row-dot { transition: none; }
 }
+
+/* B3-05: on this page the case showcase follows the Paper "How we work" section, so it takes the Ground background and its cards are raised on
+ * Paper with the Line border (A5, A13). Page-scoped: the shared showcase component, its content and its eligibility rules are unchanged. */
+.e11 section.cs { background: var(--c-ground); }
+.e11 .cs .cs-card { background: var(--c-paper); }

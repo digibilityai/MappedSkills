@@ -45,7 +45,7 @@
 .d2c1-fig figcaption { display: grid; gap: 10px; }
 .d2c1-cap-steps { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: .84rem; font-weight: 700; color: #fff; counter-reset: s; }
 .d2c1-cap-steps li { counter-increment: s; } .d2c1-cap-steps li::before { content: counter(s) '. '; color: var(--c-tang); }
-.d2c1-ledger { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: .84rem; font-weight: 700; color: #fff; }
+.d2c1-ledger { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: .875rem; font-weight: 700; color: #fff; }
 .d2c1-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
 .d2c1-dot--won { background: var(--c-on-dark); } .d2c1-dot--cost { background: var(--c-tang); margin-left: 10px; }
 
@@ -55,7 +55,7 @@
 .d2c1-ch h2 { font-size: clamp(2rem, 3.8vw, 3.2rem); max-width: 14ch; }
 .d2c1-bound { margin-top: var(--sp-2); padding-left: 14px; border-left: 3px solid var(--c-tang); max-width: 44ch; font-weight: 700; }
 .d2c1-receipt { background: var(--c-paper); border: 1px solid var(--c-line); border-radius: 18px; padding: clamp(18px, 2.4vw, 32px); }
-.d2c1-receipt-l { font: 800 .74rem/1.4 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--c-dim); margin-bottom: 6px; }
+.d2c1-receipt-l { font: 800 .75rem/1.4 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--c-dim); margin-bottom: 6px; }
 .d2c1-rr { display: grid; grid-template-columns: minmax(0, 1fr) minmax(70px, 28%); gap: 14px; align-items: center; padding-block: 10px; border-top: 1px dashed var(--c-line); }
 .d2c1-rr:first-of-type { border-top: 0; }
 .d2c1-rr h3 { font-size: 1.02rem; letter-spacing: -.01em; }
@@ -67,12 +67,12 @@
 .d2c1-rr--left { border-top: 2px solid var(--c-ink); margin-top: 4px; }
 .d2c1-rr--left h3 { font-size: 1.2rem; }
 .d2c1-bar--q { background: transparent; border: 2px dashed var(--c-gap); } .d2c1-bar--q i { display: none; }
-.d2c1-receipt-c { margin-top: 10px; font-size: .82rem; color: var(--c-dim); }
+.d2c1-receipt-c { margin-top: 10px; font-size: .875rem; color: var(--c-dim); }
 
 /* ---- 3. Buying paths ---- */
 .d2c1-paths { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 2vw, 28px); }
 .d2c1-path { background: #15121B; border: 1px solid var(--c-rule-dark); border-radius: 18px; padding: clamp(18px, 2.2vw, 30px); }
-.d2c1-chan { display: inline-block; padding: 4px 12px; border-radius: 999px; font: 800 .72rem/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--c-deep); background: var(--c-on-dark); }
+.d2c1-chan { display: inline-block; padding: 4px 12px; border-radius: 999px; font: 800 .75rem/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--c-deep); background: var(--c-on-dark); }
 .d2c1-path--meta .d2c1-chan { background: var(--c-tang); }
 .d2c1-path h3 { margin-top: 14px; font-size: clamp(1.25rem, 1.7vw, 1.55rem); }
 .d2c1-path ol { position: relative; margin-top: 18px; padding-left: 26px; display: grid; gap: 16px; }
@@ -84,10 +84,10 @@
 /* ---- 4. Roles and who does what ---- */
 .d2c1-roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: clamp(12px, 1.6vw, 20px); }
 .d2c1-roles li { padding: clamp(16px, 1.8vw, 24px); border: 1px solid var(--c-line); border-radius: 16px; background: var(--c-ground); display: flex; flex-direction: column; gap: 8px; }
-.d2c1-plat { font: 800 .72rem/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--c-tang-deep); }
+.d2c1-plat { font: 800 .75rem/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--c-tang-deep); }
 .d2c1-roles h3 { font-size: 1.25rem; }
 .d2c1-role-d { color: var(--c-ink); font-weight: 600; font-size: .96rem; line-height: 1.45; }
-.d2c1-role-f { margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--c-line); font-size: .86rem; color: var(--c-dim); font-weight: 600; line-height: 1.45; }
+.d2c1-role-f { margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--c-line); font-size: .875rem; color: var(--c-dim); font-weight: 600; line-height: 1.45; }
 .d2c1-role-f strong { color: var(--c-ink); }
 .d2c1-also { margin-top: var(--sp-3); display: flex; flex-wrap: wrap; gap: 10px 32px; align-items: center; justify-content: space-between; font-weight: 600; color: var(--c-dim); }
 .d2c1-links { display: flex; flex-wrap: wrap; gap: 8px 24px; }
@@ -96,6 +96,14 @@
 .d2c1-split li { padding-block: 6px; font-weight: 600; border-top: 1px dashed var(--c-line); }
 .d2c1-split li:first-child { border-top: 0; }
 .d2c1-split-sep { grid-column: 1 / -1; font-size: .9rem; color: var(--c-dim); font-weight: 600; }
+/* B3-04: the site-wide `li` rule gives every item but the last a bottom margin, so four of the five role cards were 12px shorter and every list row
+ * carried 12px of extra space. Reset it here; cards and rows now take their own height. */
+.d2c1-roles li, .d2c1-split li { margin: 0; }
+@media (min-width: 1081px) {
+  /* B3-04: each ownership list flows into two columns on wide screens, so the split is shorter without losing an item. */
+  .d2c1-split ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 28px); }
+  .d2c1-split li:nth-child(2) { border-top: 0; }
+}
 
 /* ---- 5. Readiness ---- */
 .d2c1-checks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-2) clamp(20px, 3vw, 48px); }
@@ -153,6 +161,10 @@
 }
 @media (max-width: 560px) {
   .d2c1-checks { grid-template-columns: 1fr; }
+  /* B3-04: the platform label sits beside the campaign name instead of on its own line (source order unchanged). */
+  .d2c1-roles li { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "t p" "d d" "f f"; column-gap: 12px; align-items: baseline; }
+  .d2c1-roles li > .d2c1-plat { grid-area: p; text-align: right; } .d2c1-roles li > h3 { grid-area: t; }
+  .d2c1-roles li > .d2c1-role-d { grid-area: d; } .d2c1-roles li > .d2c1-role-f { grid-area: f; }
   .d2c1-cmp { grid-template-columns: 1fr; } .d2c1-cmp-x { justify-self: center; }
   .d2c1-rr { grid-template-columns: minmax(0, 1fr) 64px; gap: 10px; }
 }

@@ -6,9 +6,11 @@ import { caseStudyStage } from '@/lib/case-study-stage';
 import { plainStatements, splitImpact } from '@/lib/case-study-outcomes';
 import { SERVICES } from '@/lib/services';
 import {
+  APPROVED_LEAD_ORDER,
   PAGE_SIZE,
   SECTORS,
   SERVICE_FILTERS,
+  caseServiceLabel,
   normalise,
   pageCount,
   pageSlice,
@@ -105,7 +107,7 @@ export function toWorkStudy(study: CmsCaseStudy, challengeSentences: number): Wo
     client,
     detail: rest.join(', '),
     industry,
-    service: service?.title ?? null,
+    service: service ? caseServiceLabel(service.link, service.title) : null,
     stage,
     challenge,
     changed: (study.sections.servicesProvided ?? []).map((c) => tidy(c.title)).filter(Boolean).slice(0, MAX_ITEMS),
@@ -123,13 +125,15 @@ export function toWorkStudy(study: CmsCaseStudy, challengeSentences: number): Wo
 }
 
 /**
- * The library as one ordered list: the featured study first (the lowest listing priority if any study has one,
- * otherwise `featuredSlug`, otherwise the first), then the rest in library order. Page 1 shows the featured study and
- * the next eleven; `/work/index.json` holds the same list in the same order, so pages and search agree.
+ * The library as one ordered list: the featured study first (the first study when it is an owner-approved lead (B4) or
+ * when any study has a listing priority, otherwise `featuredSlug`, otherwise the first), then the rest in library order.
+ * Page 1 shows the featured study and the next eleven; `/work/index.json` holds the same list in the same order, so pages
+ * and search agree.
  */
 export function libraryStudies(studies: CmsCaseStudy[], featuredSlug: string): WorkStudy[] {
+  const leads = studies[0] !== undefined && APPROVED_LEAD_ORDER.includes(studies[0].slug);
   const featured =
-    (studies.some((s) => s.library.listingOrder !== null) ? studies[0] : studies.find((s) => s.slug === featuredSlug)) ??
+    (leads || studies.some((s) => s.library.listingOrder !== null) ? studies[0] : studies.find((s) => s.slug === featuredSlug)) ??
     studies[0];
   if (!featured) return [];
   return [toWorkStudy(featured, 2), ...studies.filter((s) => s !== featured).map((s) => toWorkStudy(s, 1))];

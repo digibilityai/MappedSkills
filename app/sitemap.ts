@@ -3,6 +3,7 @@ import { getBlogListPosts } from '@/lib/contentful/posts';
 import { getCaseStudyListCards } from '@/lib/contentful/case-studies';
 import { getResearchCategories, getResearchListCards } from '@/lib/contentful/research';
 import { getPressListCards } from '@/lib/contentful/press';
+import { pageCount, pageHref } from '@/lib/case-study-library';
 
 /**
  * SESSION 33 — PHASE I — the sitemap, rebuilt from the routes that are actually
@@ -127,6 +128,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...indexablePaths.map((path) => ({ url: `${baseUrl}${path}` })),
     ...blogPosts.map((post) => ({ url: `${baseUrl}/blog/${post.slug}` })),
+    // Numbered library pages 2 and on are indexable and self-canonical (G7), so they are listed; page 1 is `/work` above.
+    ...Array.from({ length: pageCount(caseStudies.length) - 1 }, (_, i) => ({ url: `${baseUrl}${pageHref(i + 2)}` })),
     ...caseStudies.map((study) => ({ url: `${baseUrl}${study.href}` })),
     ...researchReports.map((report) => ({ url: `${baseUrl}${report.href}` })),
     ...researchCategories.map((category) => ({ url: `${baseUrl}${category.href}` })),

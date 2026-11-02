@@ -171,7 +171,7 @@ test('through the real mapper and library: four public studies, correct tags, an
   assert.strictEqual(pub.find((s) => s.slug === 'classpe-social-media-strategy').library.period, 'Since Jul 2026');
   assert.strictEqual(pub.find((s) => s.slug === 'insuryo-organic-growth').library.period, 'Since Sep 2025');
   assert.strictEqual(pub.find((s) => s.slug === 'seo-ameba-software').library.period, '');
-  assert.strictEqual(pub.find((s) => s.slug === 'wanderlooms-meta-ads').library.period, 'Apr 2026 – Sep 2026');
+  assert.strictEqual(pub.find((s) => s.slug === 'wanderlooms-meta-ads').library.period, 'Apr 2026 to Sep 2026');
 });
 
 test('images: each case has its own card, hero and 2.6:1 hero; only Ameba Software and Wanderlooms have a dashboard; no conceptual note or caption', () => {

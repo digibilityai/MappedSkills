@@ -33,16 +33,23 @@ export const SECTORS = {
 } as const;
 export type SectorKey = keyof typeof SECTORS;
 
-/** Service routes and their short filter names. Must stay equal to the keys of `SERVICES` in `lib/services.ts` (tested). */
+/** Service routes and their short filter names, in filter order (Google Ads, Meta Ads, SEO, then the rest; B4-05). Must stay equal to the keys of `SERVICES` in `lib/services.ts` (tested). */
 export const SERVICE_FILTERS = {
+  '/google-ads': 'Google Ads',
+  '/social-media-ads': 'Meta Ads',
   '/seo': 'SEO',
   '/ai-seo': 'AI search',
-  '/google-ads': 'Google Ads',
-  '/social-media-ads': 'Social media ads',
   '/conversion-optimization': 'Conversion optimisation',
   '/lead-generation': 'Lead generation',
 } as const;
 export type ServiceRoute = keyof typeof SERVICE_FILTERS;
+
+/**
+ * The visitor-facing service name on a case-study page and in the library (B4-05): "Google Ads", "Meta Ads", "SEO" for the three
+ * advertising and search services, the catalogue title for any other. The route (the internal taxonomy key) is unchanged.
+ */
+export const caseServiceLabel = (route: string | null | undefined, fallback: string): string =>
+  route === '/google-ads' ? 'Google Ads' : route === '/social-media-ads' ? 'Meta Ads' : route === '/seo' ? 'SEO' : fallback;
 
 export const asSector = (v: unknown): SectorKey | null =>
   typeof v === 'string' && Object.prototype.hasOwnProperty.call(SECTORS, v) ? (v as SectorKey) : null;
@@ -71,13 +78,41 @@ export function periodLabel(start?: string | null, end?: string | null): string 
   if (!a) return '';
   const b = end ? month(end) : null;
   if (!b) return `Since ${a}`;
-  return a === b ? a : `${a} – ${b}`;
+  return a === b ? a : `${a} to ${b}`;
 }
 
 /**
  * A date range written without a long dash (Brand DNA 4.0 A9, OD-13): an en dash or em dash between two dates becomes " to ", so "Apr 2026" and "Sep 2026" read "Apr 2026 to Sep 2026". Text without a dash is returned as it is. `periodLabel` itself is unchanged (it also feeds /work and the case pages, batch B4).
  */
 export const plainRange = (text: string): string => text.replace(/\s*[\u2013\u2014]\s*/g, ' to ');
+
+/**
+ * The owner-approved lead order of the library (B4, DEC-122): these studies come first, in this order, ahead of the listing-priority order.
+ * Every other study keeps its existing relative order after them. Keyed by stable slug; a slug with no published study is skipped (nothing is
+ * invented), and no study is ever removed. Code only: no Contentful field or `listingOrder` value is read or written for this.
+ */
+export const APPROVED_LEAD_ORDER: readonly string[] = [
+  'om-sai-developer-meta-ads',
+  'google-ads-for-online-courses',
+  'anybodycanbake-meta-ads',
+  'ekoching-google-ads',
+  'klenzmo-meta-ads',
+  'bakersville-google-ads',
+  'phoenix-laundry-google-ads',
+  'hutnhomes-meta-ads',
+  'seo-ameba-software',
+  'anybodycanbake-seo',
+  'classpe-social-media-strategy',
+  'insuryo-organic-growth',
+];
+
+export function leadOrdered<T>(studies: readonly T[], slug: (s: T) => string): T[] {
+  const rank = new Map(APPROVED_LEAD_ORDER.map((s, i) => [s, i] as const));
+  return studies
+    .map((s, i) => ({ s, i, r: rank.get(slug(s)) ?? Infinity }))
+    .sort((x, y) => (x.r === y.r ? x.i - y.i : x.r - y.r))
+    .map(({ s }) => s);
+}
 
 /** Stable sort: listing priority first, the rest keep their incoming order. */
 export function orderStudies<T>(studies: readonly T[], listingOrder: (s: T) => number | null): T[] {

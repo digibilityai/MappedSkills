@@ -194,3 +194,9 @@ test('B1: header and footer labels are at least 12 px, footer notes at least 14 
   assert.ok(size(/\.dc-ftr \.dc-brand > \.dc-ftr-chain \{[^}]*font: 700 (\.\d+)rem/) >= 0.75, 'footer chain label');
   assert.ok(size(/\.dc-ftr \.dc-base \{[^}]*font-size: (\.\d+)rem/) >= 0.875, 'footer base line');
 });
+
+test('B1: the footer email link is a 44 px target that adds no footer height', () => {
+  const css = read('app/direction-c.css');
+  assert.match(css, /\.dc-ftr \.dc-contact dd a \{[^}]*min-height: 44px; margin-block: -6px;/);
+  assert.match(css, /\.dc-ftr \.dc-contact dd \{[^}]*min-height: 32px/, 'the row keeps its 32 px height');
+});

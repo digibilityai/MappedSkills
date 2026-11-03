@@ -5,7 +5,7 @@
  *   BASE_URL=http://127.0.0.1:3621 node tests/e2e/release-f2-f3.e2e.cjs [--shots <dir>]
  *
  * F2: /ai-seo has no horizontal overflow and the third reporting card's table stays inside its card (360 to 1440px).
- * F3: the open mobile menu moves focus in, cycles Tab and Shift+Tab inside the header, makes the page behind it inert,
+ * F3: the open mobile menu moves focus in, cycles Tab and Shift+Tab inside the header (and the consent banner while it shows), makes the page behind it inert,
  *     closes on Escape (focus back on the trigger) and on link selection (focus is not stolen).
  * Nothing is submitted. Refuses any BASE_URL that is not loopback. Exit code 1 if any check fails.
  */
@@ -34,7 +34,7 @@ async function open(browser, width, path) {
 const where = (page) =>
   page.evaluate(() => {
     const a = document.activeElement;
-    return a.closest('#dc-mnav') ? 'menu:' + (a.textContent || '').trim().slice(0, 24) : a.classList.contains('dc-menu-btn') ? 'trigger' : a.closest('header') ? 'header:' + (a.textContent || '').trim().slice(0, 12) : 'PAGE:' + a.tagName;
+    return a.closest('.consent-banner') ? 'banner:' + (a.textContent || '').trim().slice(0, 24) : a.closest('#dc-mnav') ? 'menu:' + (a.textContent || '').trim().slice(0, 24) : a.classList.contains('dc-menu-btn') ? 'trigger' : a.closest('header') ? 'header:' + (a.textContent || '').trim().slice(0, 12) : 'PAGE:' + a.tagName;
   });
 
 async function f2(browser) {
@@ -69,14 +69,14 @@ async function f3(browser) {
       await page.keyboard.press('Tab');
       fwd.push(await where(page));
     }
-    check(`F3 ${w}px Tab never leaves the header`, fwd.every((x) => !x.startsWith('PAGE')), fwd.join(' > '));
+    check(`F3 ${w}px Tab never leaves the header or banner`, fwd.every((x) => !x.startsWith('PAGE')), fwd.join(' > '));
     check(`F3 ${w}px Tab wraps through the trigger`, fwd.includes('trigger'), fwd.join(' > '));
     const rev = [];
     for (let i = 0; i < 12; i++) {
       await page.keyboard.press('Shift+Tab');
       rev.push(await where(page));
     }
-    check(`F3 ${w}px Shift+Tab never leaves the header`, rev.every((x) => !x.startsWith('PAGE')), rev.join(' > '));
+    check(`F3 ${w}px Shift+Tab never leaves the header or banner`, rev.every((x) => !x.startsWith('PAGE')), rev.join(' > '));
     await page.keyboard.press('Escape');
     check(`F3 ${w}px Escape closes the menu`, (await trigger.getAttribute('aria-expanded')) === 'false');
     check(`F3 ${w}px Escape returns focus to the trigger`, (await where(page)) === 'trigger', await where(page));
@@ -100,6 +100,37 @@ async function f3(browser) {
   check('F3 link selection does not move focus to the trigger', (await where(page)) !== 'trigger', await where(page));
   check('F3 inert cleared after navigation', await page.evaluate(() => !document.getElementById('main').inert));
   await page.close();
+
+  /* Consent banner (fresh state): it precedes the header, is not inert, and stays inside the Tab cycle while the menu is open. */
+  for (const w of [360, 390, 768]) {
+    const ctx = await browser.newContext({ viewport: { width: w, height: 900 } });
+    const b = await ctx.newPage();
+    const problems = [];
+    b.on('pageerror', (e) => problems.push(e.message));
+    await b.goto(BASE + '/', { waitUntil: 'networkidle' });
+    await b.waitForFunction(() => Object.keys(document.querySelector('.dc-menu-btn')).some((k) => k.startsWith('__react')));
+    await b.locator('.dc-menu-btn').click();
+    const seen = [];
+    for (let i = 0; i < 16; i++) {
+      await b.keyboard.press('Tab');
+      seen.push(await b.evaluate(() => (document.activeElement.closest('.consent-banner') ? 'banner:' + document.activeElement.textContent.trim() : document.activeElement.closest('#main, footer') ? 'PAGE' : 'ok')));
+    }
+    check(`F3 ${w}px banner: Privacy Policy, Accept and Reject reachable by Tab with the menu open`, ['banner:Privacy Policy', 'banner:Accept analytics', 'banner:Reject analytics'].every((x) => seen.includes(x)), seen.join(' > '));
+    check(`F3 ${w}px banner: Tab never reaches main or footer`, !seen.includes('PAGE'));
+    const rev = [];
+    for (let i = 0; i < 16; i++) {
+      await b.keyboard.press('Shift+Tab');
+      rev.push(await b.evaluate(() => (document.activeElement.closest('.consent-banner') ? 'banner' : document.activeElement.closest('#main, footer') ? 'PAGE' : 'ok')));
+    }
+    check(`F3 ${w}px banner: Shift+Tab stays in banner and header`, rev.includes('banner') && !rev.includes('PAGE'));
+    await b.getByRole('button', { name: 'Reject analytics' }).focus();
+    await b.keyboard.press('Enter');
+    await b.waitForTimeout(150);
+    check(`F3 ${w}px banner: after a choice the banner is gone, the menu stays open and focus is in it`, await b.evaluate(() => !document.querySelector('.consent-banner') && document.querySelector('.dc-menu-btn').getAttribute('aria-expanded') === 'true' && !!document.activeElement.closest('#dc-mnav') && document.getElementById('main').inert));
+    check(`F3 ${w}px banner: choice stored as denied`, (await b.evaluate(() => localStorage.getItem('ms.consent.v1'))) === 'denied');
+    check(`F3 ${w}px banner: no page errors`, problems.length === 0, problems.join(' | '));
+    await ctx.close();
+  }
 
   const d = await open(browser, 1024, '/');
   check('F3 1024px desktop nav shown, mobile trigger hidden', await d.page.evaluate(() => getComputedStyle(document.querySelector('.dc-menu-btn')).display === 'none' && document.querySelector('.dc-nav').getClientRects().length > 0));

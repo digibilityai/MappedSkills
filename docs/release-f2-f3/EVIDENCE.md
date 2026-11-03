@@ -37,6 +37,18 @@ Screenshot: menu-open-390.png.
 
 ## Checks run
 
-- `tests/e2e/release-f2-f3.e2e.cjs`: 87 of 87 pass (F2 at 12 widths; F3 at 360, 390, 768 and 1024px, resize across the breakpoint, no console errors).
-- `npm test`: 672 pass, 0 fail, 1 skipped (includes `tests/release-f2-f3.test.cjs` and the Footer Variant A test).
+- `tests/e2e/release-f2-f3.e2e.cjs`: 105 of 105 pass (F2 at 12 widths; F3 at 360, 390, 768 and 1024px, resize across the breakpoint, consent banner at 360, 390 and 768px, no console errors).
+- `npm test`: 678 pass, 0 fail, 1 skipped (includes `tests/release-f2-f3.test.cjs` and the Footer Variant A test).
 - `npx tsc --noEmit`: clean. `npm run lint`: 0 errors (14 existing warnings). `npm run build`: passed.
+
+## F3 follow-up: consent banner while the menu is open
+
+Finding (independent acceptance): with a fresh consent state the banner is visible but Tab never reached it while the menu was open, because the trap covered only the header and the banner precedes the header in the document.
+
+Fix (`SiteHeader.tsx`): the Tab boundary is now the consent banner (when present) plus the header, handled by one document-level keydown listener while the menu is open; the header `onKeyDown` handler is removed. The banner stays non-inert, as its own component documents. If a consent choice removes the banner and the focused button, focus moves to the first menu control. `ConsentBanner`, consent wording, defaults, analytics and GTM are untouched.
+
+Fresh state, 360/390/768px, forward from the open menu: Services > Who We Help > Our Work > How We Work > About > Discuss Your Advertising > Request a call > email > Privacy Policy > Accept analytics > Reject analytics > logo > Close menu > Services. Reverse mirrors it. With consent already accepted or rejected the sequence is exactly the earlier one (no banner).
+
+Matrix run against a production build (360, 390 and 768px; fresh at 900 and 700px viewport height, accepted, rejected): 159 of 159 checks. Covered Tab and Shift+Tab, Accept and Reject by keyboard and Reject by mouse (stored value, banner removed, menu still open and inert behind, focus on Services, trap then identical to the no-banner sequence), Escape, Close menu, both disclosures expanded and collapsed, no focus in main, footer or hidden controls, no console errors. Chrome's "preloaded but not used" resource hint warning appears on any plain page reload and is unrelated to the menu.
+
+F2 files are unchanged in this commit; the F2 e2e checks (12 widths) still pass.

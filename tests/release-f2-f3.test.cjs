@@ -22,14 +22,17 @@ test('F2: the tracking table wraps and tightens only between 768px and 1023px', 
 });
 
 test('F3: opening the mobile menu moves focus in and makes the page behind it inert', () => {
-  assert.match(header, /getElementById\('dc-mnav'\)\?\.querySelector<HTMLElement>\('a\[href\], button'\)\?\.focus\(\)/);
+  assert.match(header, /getElementById\('dc-mnav'\)\?\.querySelector<HTMLElement>\('a\[href\], button'\)/);
+  assert.match(header, /firstControl\(\)\?\.focus\(\);\n\s+const behind/);
   assert.match(header, /'#main, body > footer'/);
   assert.match(header, /setAttribute\('inert', ''\)/);
   assert.match(header, /removeAttribute\('inert'\)/);
 });
 
-test('F3: Tab and Shift+Tab wrap inside the header while the menu is open', () => {
-  assert.match(header, /onKeyDown=\{onHeaderKey\}/);
+test('F3: Tab and Shift+Tab wrap inside the consent banner and header while the menu is open', () => {
+  assert.match(header, /document\.addEventListener\('keydown', onTab\)/);
+  assert.match(header, /\[banner\(\), header\.current\]/);
+  assert.doesNotMatch(header, /onKeyDown=\{onHeaderKey\}/);
   assert.match(header, /e\.shiftKey && document\.activeElement === first/);
   assert.match(header, /!e\.shiftKey && document\.activeElement === last/);
 });
@@ -38,4 +41,10 @@ test('F3: Escape still returns focus to the Menu button, and links do not take f
   assert.match(header, /setMenuOpen\(false\);\s*setMSvcOpen\(false\);\s*menuBtn\.current\?\.focus\(\);/);
   const closeMenu = header.slice(header.indexOf('const closeMenu'), header.indexOf('useEffect'));
   assert.doesNotMatch(closeMenu, /focus\(/);
+});
+
+test('F3: the banner is not made inert, and focus returns to the menu when a consent choice removes it', () => {
+  assert.doesNotMatch(header, /'#main, body > footer, [^']*consent/);
+  assert.match(header, /new MutationObserver/);
+  assert.match(header, /hadBanner && !has && \(!document\.activeElement \|\| document\.activeElement === document\.body\)\) firstControl\(\)\?\.focus\(\)/);
 });

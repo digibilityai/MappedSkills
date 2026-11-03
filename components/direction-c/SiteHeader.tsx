@@ -124,6 +124,34 @@ export function SiteHeader() {
     };
   }, [menuOpen, svcOpen, whoOpen]);
 
+  /* The open mobile menu behaves as a modal: focus moves into it, the page behind it
+     (main and footer) is inert, and Tab is kept inside the header (see onHeaderKey).
+     Escape and the Menu button return focus to the trigger; a chosen link does not. */
+  useEffect(() => {
+    if (!menuOpen) return;
+    document.getElementById('dc-mnav')?.querySelector<HTMLElement>('a[href], button')?.focus();
+    const behind = Array.from(document.querySelectorAll<HTMLElement>('#main, body > footer'));
+    behind.forEach((el) => el.setAttribute('inert', ''));
+    return () => behind.forEach((el) => el.removeAttribute('inert'));
+  }, [menuOpen]);
+
+  const onHeaderKey = (e: ReactKeyboardEvent<HTMLElement>) => {
+    if (e.key !== 'Tab' || !menuOpen) return;
+    const tabbable = Array.from(e.currentTarget.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')).filter(
+      (el) => el.getClientRects().length > 0,
+    );
+    const first = tabbable[0];
+    const last = tabbable[tabbable.length - 1];
+    if (!first || !last) return;
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  };
+
   /* Crossing the desktop breakpoint closes whichever pattern no longer applies. */
   useEffect(() => {
     const mq = window.matchMedia(DESKTOP_QUERY);
@@ -298,7 +326,7 @@ export function SiteHeader() {
   const inWho = pathname ? WHO_WE_HELP_ROUTES.has(pathname) : false;
 
   return (
-    <header className={cn('dc dc-hdr', menuOpen && 'dc-menu-open')}>
+    <header className={cn('dc dc-hdr', menuOpen && 'dc-menu-open')} onKeyDown={onHeaderKey}>
       <div className="dc-wrap dc-bar">
         <span className="dc-logo">
           <Logo priority />

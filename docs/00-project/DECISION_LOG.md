@@ -2785,3 +2785,12 @@ Use this file only for meaningful project decisions.
 - **APPROVED FOR A SEPARATE FUTURE PR (not implemented here):** the desktop five-column footer, Variant A (no target overlap; about 633 px at 1440 against 784 px). It is a shared sitewide component and needs its own implementation and review.
 - **NOT CHANGED (deliberately):** page URLs, H1s, titles, descriptions, canonicals, robots, Open Graph, `BreadcrumbList`, CTA wording and destinations, service positioning, case-study metrics and qualifiers, footer, navigation, analytics and consent behaviour, Contentful content, B5B.
 - **Read with:** `DEC-054`, `DEC-092`, `DEC-094`, `DEC-096`, `DEC-098`, `DEC-111`, `DEC-118`, `DEC-119`, `DEC-120`.
+
+### DEC-124: Desktop five-column footer Variant A implemented (draft PR; not merged, not deployed)
+- **Date:** 2026-11-03. **Status:** implemented on `feat/desktop-footer-variant-a` from `main` `06c5549`; draft PR awaiting owner review. Nothing merged or deployed; no migration; no Contentful write. Separate from PR #80.
+- **OWNER APPROVAL (B5A V2 design review, recorded in `DEC-123` as a separate future PR):** the desktop five-column footer, Variant A (44 px link pitch, no target overlap).
+- **IMPLEMENTED (CSS only, `app/direction-c.css`, from 1024 px):** columns Brand, Services, Who We Help, Company (Insights stacked beneath) and Contact. The doubled `dc` class outranks the page-scoped `body:has(...) .dc-ftr` rules in `b2.css`, `services.css` and `resolve-home-r3.css`, so every route renders the same footer. The base row keeps its existing spacing, as in the approved reference.
+- **MEASURED (privacy-policy route, Chromium):** 784 to 633 px at 1440, 757 to 623 px at 1280, 825 to 613 px at 1100; 633 px also on `/`, `/services` and `/pricing` at 1440. All 24 footer links present, minimum link target 44 px, no overlapping targets, no horizontal scroll. 390 px and 360 px heights unchanged (1412 and 1449 px).
+- **NOT CHANGED:** footer markup, link set, destinations, accessible names, contact, legal and social links, analytics and consent behaviour, mobile and tablet footer, header and navigation, page copy, metadata, CTAs, B5A pages, B5B.
+- **Evidence:** `docs/footer-variant-a/` (before and after screenshots, `measure-before.json`, `measure-after.json`); test `tests/footer-variant-a.test.cjs`.
+- **Read with:** `DEC-086`, `DEC-120`, `DEC-123`.

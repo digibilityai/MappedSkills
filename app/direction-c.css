@@ -480,3 +480,21 @@ footer.dc-ftr .dc-base a[href*='instagram.com'] { --ico: url("data:image/svg+xml
   .dc-ftr li a, .dc-ftr .dc-contact dd a { min-height: 44px; }
   .dc-ftr .dc-contact dd { min-height: 44px; }
 }
+
+/* Footer Variant A (DEC-124): five desktop columns from 1024px. Brand, Services, Who We Help, Company (with Insights
+   stacked beneath) and Contact. Links keep a 44px pitch so targets never overlap. The doubled class outranks the page-scoped `body:has(...) .dc-ftr` footer rules in b2.css, services.css and resolve-home-r3.css. Below 1024px the existing layout applies. */
+@media (min-width: 1024px) {
+  html footer.dc.dc-ftr { padding-block: 40px 12px; }
+  html footer.dc.dc-ftr .dc-ftr-top { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.25fr); grid-template-rows: auto auto; column-gap: clamp(24px, 2.4vw, 40px); row-gap: 0; align-items: start; }
+  html footer.dc.dc-ftr .dc-ftr-cols, html footer.dc.dc-ftr .dc-ftr-stack { display: contents; }
+  html footer.dc.dc-ftr .dc-brand { grid-column: 1; grid-row: 1; display: block; }
+  html footer.dc.dc-ftr nav[aria-labelledby="dc-f-svc"] { grid-column: 2; grid-row: 1; }
+  html footer.dc.dc-ftr nav[aria-labelledby="dc-f-who"] { grid-column: 3; grid-row: 1; }
+  html footer.dc.dc-ftr nav[aria-labelledby="dc-f-co"] { grid-column: 4; grid-row: 1; }
+  html footer.dc.dc-ftr nav[aria-labelledby="dc-f-ins"] { grid-column: 4; grid-row: 2; margin-top: 16px; }
+  html footer.dc.dc-ftr .dc-contact { grid-column: 5; grid-row: 1; }
+  html footer.dc.dc-ftr .dc-brand > p { max-width: 30ch; margin-top: 12px; }
+  html footer.dc.dc-ftr .dc-ftr-h { padding-bottom: 8px; margin-bottom: 4px; }
+  html footer.dc.dc-ftr li a { min-height: 44px; padding-block: 0; }
+  html footer.dc.dc-ftr .dc-contact .go { margin-top: 4px; }
+}

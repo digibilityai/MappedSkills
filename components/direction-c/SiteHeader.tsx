@@ -58,6 +58,7 @@ export function SiteHeader() {
   const whoTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const svcHover = useRef(false);
   const svcTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const header = useRef<HTMLElement>(null);
   const menuBtn = useRef<HTMLButtonElement>(null);
   const svcBtn = useRef<HTMLButtonElement>(null);
   const svcItem = useRef<HTMLLIElement>(null);
@@ -123,6 +124,53 @@ export function SiteHeader() {
       document.removeEventListener('focusin', outside);
     };
   }, [menuOpen, svcOpen, whoOpen]);
+
+  /* The open mobile menu behaves as a modal: focus moves into it, the page behind it
+     (main and footer) is inert, and Tab is kept inside the header and, while it is on
+     screen, the consent banner, which precedes the header in the document and is not
+     inert so its choices stay reachable by keyboard. Escape and the Menu button return
+     focus to the trigger; a chosen link does not. */
+  useEffect(() => {
+    if (!menuOpen) return;
+    const firstControl = () => document.getElementById('dc-mnav')?.querySelector<HTMLElement>('a[href], button');
+    firstControl()?.focus();
+    const behind = Array.from(document.querySelectorAll<HTMLElement>('#main, body > footer'));
+    behind.forEach((el) => el.setAttribute('inert', ''));
+
+    const banner = () => document.querySelector<HTMLElement>('.consent-banner');
+    const onTab = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+      const tabbable = [banner(), header.current]
+        .flatMap((root) => (root ? Array.from(root.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')) : []))
+        .filter((el) => el.getClientRects().length > 0);
+      const first = tabbable[0];
+      const last = tabbable[tabbable.length - 1];
+      if (!first || !last) return;
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener('keydown', onTab);
+
+    /* A consent choice removes the banner and the focused button with it; keep focus in the open menu. */
+    let hadBanner = banner() !== null;
+    const watch = new MutationObserver(() => {
+      const has = banner() !== null;
+      if (hadBanner && !has && (!document.activeElement || document.activeElement === document.body)) firstControl()?.focus();
+      hadBanner = has;
+    });
+    watch.observe(document.body, { childList: true });
+
+    return () => {
+      document.removeEventListener('keydown', onTab);
+      watch.disconnect();
+      behind.forEach((el) => el.removeAttribute('inert'));
+    };
+  }, [menuOpen]);
 
   /* Crossing the desktop breakpoint closes whichever pattern no longer applies. */
   useEffect(() => {
@@ -298,7 +346,7 @@ export function SiteHeader() {
   const inWho = pathname ? WHO_WE_HELP_ROUTES.has(pathname) : false;
 
   return (
-    <header className={cn('dc dc-hdr', menuOpen && 'dc-menu-open')}>
+    <header ref={header} className={cn('dc dc-hdr', menuOpen && 'dc-menu-open')}>
       <div className="dc-wrap dc-bar">
         <span className="dc-logo">
           <Logo priority />

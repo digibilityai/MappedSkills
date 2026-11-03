@@ -238,7 +238,7 @@ html .b2.ai .ai-dark .fq-d summary:focus-visible { outline-color: #fff; }
 .b2.ai .ax-rp-i.is-on .ax-st-t, .b2.ai .ax-rp-i.is-on .ax-st-w { color: var(--resolve-accent-dark); }
 .b2.ai .ax-rp.is-armed:not(.is-static) .ax-rp-i:not(.is-done):not(.is-on) .ax-rp-b { opacity: .88; } /* DEC-101: .72 measured 3.2:1 for the example pictures */
 .b2.ai .ax-rp-b { transition: opacity .25s; }
-.b2.ai .ax-mini { margin-top: 16px; padding: 16px; background: var(--v-ground); border: 1px solid var(--v-line); border-radius: 10px; min-height: 9rem; display: grid; align-items: center; }
+.b2.ai .ax-mini { margin-top: 16px; padding: 16px; background: var(--v-ground); border: 1px solid var(--v-line); border-radius: 10px; min-height: 9rem; display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; }
 .b2.ai .ax-rp-i.is-on .ax-mini { border-color: var(--v-burnt); box-shadow: 0 0 0 3px rgba(168, 52, 0, .15); }
 .b2.ai .ax-q-m { margin: 0; width: fit-content; max-width: 100%; border-radius: 16px 16px 16px 4px; font-size: 1.0625rem; }
 .b2.ai .ax-cmp { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
@@ -417,7 +417,9 @@ html .b2.ai .ai-band p { max-width: 36em; }
   .b2.ai .ax-tile { padding: 12px 14px; }
 }
 /* D-13: cells may wrap on narrow phones so enlarged text never widens the page */
+/* the three cards sit side by side from 768px and the third card is only about 218px wide until 1023px, narrower than the nowrap table */
 @media (max-width: 480px) { .b2.ai .ax-trk td { white-space: normal; } }
+@media (min-width: 768px) and (max-width: 1023px) { .b2.ai .ax-trk td { white-space: normal; } .b2.ai .ax-trk thead th { letter-spacing: .04em; } .b2.ai .ax-trk th, .b2.ai .ax-trk td { padding: 8px 4px; } .b2.ai .ax-mini { padding: 12px; } }
 @media (max-width: 380px) { .b2.ai .ax-trk td { white-space: normal; } .b2.ai .ax-trk { font-size: .875rem; } .b2.ai .ax-trk thead th { font-size: .75rem; letter-spacing: .04em; } .b2.ai .ax-trk th, .b2.ai .ax-trk td { padding: 7px 3px; } }
 @media (forced-colors: active) {
   .b2.ai .ax-chat-win, .b2.ai .ax-tile, .b2.ai .ax-mini, .b2.ai .ax-rec { border: 2px solid CanvasText; }

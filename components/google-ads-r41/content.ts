@@ -28,7 +28,7 @@ export const TYPES = {
   lede: 'We manage all five. Most businesses need one or two.',
 } as const;
 
-/** Approved Google Ads working price (Pricing R3, commit 0a8561e). No setup fees, GST terms, minimum budgets, contract periods,
+/** Approved Google Ads working price (Pricing R3, commit 0a8561e). No setup fees, minimum budgets, contract periods,
  * guarantees or add-on prices are stated, because none were approved. */
 export const PRICE = {
   eyebrow: 'Google Ads pricing',
@@ -43,7 +43,7 @@ export const PRICE = {
   card: {
     label: 'Google Ads management',
     fee: '₹14,999',
-    per: 'a month',
+    per: 'a month, excluding GST',
     figs: [
       'Up to 2 campaigns active at a time',
       'Up to 6 ad groups',

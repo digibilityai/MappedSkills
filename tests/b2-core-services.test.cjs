@@ -88,6 +88,12 @@ test('pricing: buttons 52 px and the FAQ link a 44 px target; prices, plans and 
   const body = read('components/pricing-r2/PricingR2Body.tsx');
   assert.strictEqual((body.match(/<h2\b/g) || []).length, 9, 'heading structure: the original eight plus the SEO plans section');
   assert.match(read('app/(pages)/pricing/page.tsx'), /₹14,999\/month each, or both at ₹26,999\/month/);
+  const pricingCopy = read('components/pricing-r2/content.ts');
+  assert.match(pricingCopy, /primary: 'Discuss Your Growth'/);
+  assert.match(pricingCopy, /h2: 'Tell us what you want your marketing to achieve\.'/);
+  assert.doesNotMatch(pricingCopy, /Discuss Your Advertising|Tell us where your advertising is today/);
+  assert.match(pricingCopy, /For Google Ads and Meta Ads plans, the fee covers/);
+  assert.match(pricingCopy, /SEO packages have their own monthly deliverables/);
 });
 
 test('B2 copy adds no long or double dashes', () => {

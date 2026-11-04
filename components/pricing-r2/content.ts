@@ -218,8 +218,8 @@ export const PRICING_R2 = {
     items: [
       {
         q: 'What does the management fee cover?',
-        direct: 'The work listed in your plan: running and optimising your ads, weekly reviews, monitoring every business day, and a monthly report and meeting.',
-        body: 'Each plan lists its campaigns, designs and ad copy above. Anything beyond the list is quoted separately and approved by you first.',
+        direct: 'For Google Ads and Meta Ads plans, the fee covers the work listed in your plan: running and optimising your ads, weekly reviews, monitoring every business day, and a monthly report and meeting.',
+        body: 'Each Google Ads or Meta Ads plan lists its campaigns, designs and ad copy above. SEO packages have their own monthly deliverables, listed in the SEO section. Anything beyond the list is quoted separately and approved by you first.',
       },
       {
         q: 'Is the ad budget part of your fee?',
@@ -257,12 +257,12 @@ export const PRICING_R2 = {
 
   close: {
     kicker: 'Not sure which plan fits?',
-    h2: 'Tell us where your advertising is today.',
-    body: 'We will tell you which plan fits your business and what it covers.',
+    h2: 'Tell us what you want your marketing to achieve.',
+    body: 'We will tell you which plan or package fits your business and what it covers.',
   },
 
   links: {
-    primary: 'Discuss Your Advertising',
+    primary: 'Discuss Your Growth',
     secondary: 'Request a call',
   },
 } as const;

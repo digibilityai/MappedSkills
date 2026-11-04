@@ -64,7 +64,7 @@ export const SEO_PLAIN = {
     {
       k: 'Technical SEO',
       d: 'We fix what stops search engines finding and understanding your pages: indexing, site structure, internal links and page speed.',
-      also: 'Also: structured data, and protecting rankings during a site rebuild.',
+      also: 'Also: structured data. Major website rebuilds and migrations are separately scoped and quoted; routine technical SEO does not include managing a migration.',
     },
     {
       k: 'Content and on-page optimisation',

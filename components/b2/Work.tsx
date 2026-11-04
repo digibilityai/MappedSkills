@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { BOOKING_HREF, CONTACT_HREF } from '@/components/direction-c/primitives';
 import { ActionLink } from '../paid-advertising/ActionLink';
 import { WORK as S } from '../cplus/work/content';
@@ -36,12 +35,6 @@ export function Work({ library }: { library: WorkLibraryProps }) {
     <div className="pa b2 wk">
       <section className="wk-top" aria-labelledby="wk-h1">
         <div className="pa-wrap">
-          <nav aria-label="Breadcrumb" className="wk-crumb">
-            <ol>
-              <li><Link href="/">Home</Link></li>
-              <li><span aria-hidden="true">/</span> <span aria-current="page">{S.crumb}</span></li>
-            </ol>
-          </nav>
           <h1 id="wk-h1">{S.hero.h1.a} <span>{S.hero.h1.b}</span></h1>
           <p className="b2-lede">{S.hero.lede}</p>
         </div>

@@ -72,19 +72,6 @@ export function AiSeoBody() {
       <section className="ai-hero ai-dark" aria-labelledby="as-h1">
         <div className="pa-wrap ai-hero-g">
           <div className="ai-hero-tx">
-            <nav aria-label="Breadcrumb" className="ai-crumb">
-              <ol>
-                <li>
-                  <Link href="/">Home</Link>{' '}
-                </li>
-                <li>
-                  <span aria-hidden="true">/</span> What we do{' '}
-                </li>
-                <li>
-                  <span aria-hidden="true">/</span> <span aria-current="page">{S.crumb}</span>
-                </li>
-              </ol>
-            </nav>
             <p className="pa-eyebrow">{S.kicker}</p>
             <h1 id="as-h1">
               <Hx h={S.h1} />

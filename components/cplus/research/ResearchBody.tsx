@@ -76,10 +76,6 @@ export function ResearchBody({ data }: { data: ResearchHubData }) {
     <>
       <section className="ed-hero" aria-labelledby="rs-h1">
         <div className="ed-w">
-          <nav aria-label="Breadcrumb" className="ed-crumb">
-            <Link href="/">Home</Link>
-            <span aria-current="page">{S.crumb}</span>
-          </nav>
           <div className="ed-hg">
             <div className="ed-hl wide">
               <p className="ed-k">{S.crumb}</p>

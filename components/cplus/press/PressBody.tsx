@@ -27,10 +27,6 @@ export function PressBody({ releases, figures = [] }: { releases: CmsPressCard[]
     <>
       <section className="ed-hero" aria-labelledby="pr-h1">
         <div className="ed-w">
-          <nav aria-label="Breadcrumb" className="ed-crumb">
-            <Link href="/">Home</Link>
-            <span aria-current="page">{S.crumb}</span>
-          </nav>
           <div className="ed-hg">
             <div className="ed-hl">
               <p className="ed-k">{S.hero.kicker}</p>

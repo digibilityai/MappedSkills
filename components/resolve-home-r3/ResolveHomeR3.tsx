@@ -66,7 +66,6 @@ export function ResolveHomeR3({ showcase = null }: { showcase?: ShowcaseData | n
             <ol>
               <li>Many potential buyers</li><li>Relevant attention</li><li>A visit or interaction</li><li>An enquiry or a purchase</li>
             </ol>
-            <small>Conceptual illustration. It shows no results.</small>
           </figcaption>
         </figure>
       </div>

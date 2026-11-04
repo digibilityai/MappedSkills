@@ -38,7 +38,8 @@ test('WK-D5: one trail, Home → Case studies, for the breadcrumb and the Breadc
     assert.match(src, /routeTrailJsonLd\(TRAIL\)/);
     assert.match(src, /<Work library=\{library\} \/>/);
   }
-  assert.match(body, /<nav aria-label="Breadcrumb" className="wk-crumb">[\s\S]*?<Link href="\/">Home<\/Link>[\s\S]*?aria-current="page">\{S\.crumb\}/);
+  // Batch 2: /work is a top-level index, so the visible breadcrumb is gone; the BreadcrumbList above stays
+  assert.doesNotMatch(body, /aria-label="Breadcrumb"/);
   assert.match(copy, /crumb: 'Case studies'/);
   assert.match(nav, /\| `\/work` \| \*\*Yes\*\* \| Home → Case studies/);
 });
@@ -151,7 +152,7 @@ test('Stage 3 revision: illustrations are conceptual, labelled, code-drawn and l
   assert.strictEqual(Object.keys(art.match(/MOTIF_BY_HREF: Record<string, Motif> = \{([\s\S]*?)\};/)[1].match(/'\/portfolio\/[^']+'/g)).length, 5);
   // the note stays on the detail-page stage (lib/case-study-images.ts); owner decision 31 October 2026: no disclosure beneath a /work card image
   assert.match(rd('lib/case-study-images.ts'), /MOTIF_NOTE/); assert.doesNotMatch(rd('components/resolve/WorkCard.tsx'), /MOTIF_NOTE/);
-  assert.doesNotMatch(rd('components/b2/About.tsx'), /motifFor|CaseArt/, 'About does not draw illustrations');
+  assert.match(rd('components/b2/About.tsx'), /motifFor/, 'Batch 2: About gives AnybodyCanBake the same /work card illustration so both cards carry equal weight');
   assert.doesNotMatch(rd('components/resolve/work.ts'), /^\s+motif:/m, 'the approved About cards set no motif');
   const t = rd('lib/case-study-preview-titles.ts');
   assert.match(t, /process\.env\.NODE_ENV !== 'development'\) return title;/);

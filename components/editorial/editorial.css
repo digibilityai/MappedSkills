@@ -8,7 +8,9 @@
 .ed-w { width: 100%; max-width: 1440px; margin-inline: auto; padding-inline: clamp(16px, 3.4vw, 48px); }
 
 /* hero */
-.ed-hero { background: var(--deep); color: var(--ond); padding: 72px 0 86px; }
+.ed-hero { background: var(--deep); color: var(--ond); padding: clamp(56px, 6.4vw, 92px) 0 clamp(56px, 6vw, 84px); border-bottom: 1px solid #2a2632; }
+/* Index heroes (press, blog, research) carry no visible breadcrumb: one shared rhythm, kicker, headline and lede measure. */
+.ed-hero .ed-hl .ed-lede { max-width: 34em; }
 .ed-crumb { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 44px; font-size: .875rem; color: var(--soft); }
 .ed-crumb a { color: var(--soft); text-decoration: underline; text-underline-offset: 4px; } .ed-crumb span + span::before, .ed-crumb a + span::before, .ed-crumb a + a::before { content: '/'; margin-right: 8px; }
 .ed-hg { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 48px clamp(20px, 2.2vw, 32px); align-items: center; }
@@ -123,7 +125,7 @@
   .ed-ev4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 720px) {
-  .ed-hero { padding: 36px 0 52px; } .ed-crumb { margin-bottom: 28px; }
+  .ed-hero { padding: 44px 0 52px; } .ed-crumb { margin-bottom: 28px; }
   .ed-grid { grid-template-columns: 1fr; } .ed-sup { grid-template-columns: 1fr; } .ed-three { grid-template-columns: 1fr; }
   .ed-ev, .ed-ev4 { grid-template-columns: 1fr; } .ed-ev > div, .ed-ev > div + div { padding: 20px 0; border-left: 0; border-bottom: 1px solid #3a3544; }
   .ed-cards5 { grid-template-columns: 1fr; } .ed-two-s { grid-template-columns: 1fr; }

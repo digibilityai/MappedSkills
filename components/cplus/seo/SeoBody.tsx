@@ -87,19 +87,6 @@ export function SeoBody({ showcase = null }: { showcase?: ShowcaseData | null })
       <section className="sk-hero sk-dark" aria-labelledby="sk-h1">
         <div className="pa-wrap sk-hero-grid">
           <div className="sk-hero-copy">
-            <nav aria-label="Breadcrumb" className="sk-crumb">
-              <ol>
-                <li>
-                  <Link href="/">Home</Link>{' '}
-                </li>
-                <li>
-                  <span aria-hidden="true">/</span> What we do{' '}
-                </li>
-                <li>
-                  <span aria-hidden="true">/</span> <span aria-current="page">{S.crumb}</span>
-                </li>
-              </ol>
-            </nav>
             <p className="pa-eyebrow">{S.kicker}</p>
             <h1 id="sk-h1">
               {S.h1.a} <span>{S.h1.b}</span> <span className="sk-nw">{S.h1.c}</span>

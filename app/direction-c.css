@@ -265,6 +265,7 @@
 .dc-sp-line { margin-top: 8px; font: 700 1.15rem/1.15 var(--dc-f-title); letter-spacing: -.015em; overflow-wrap: anywhere; }
 .dc-sp-row:nth-child(3) .dc-sp-line { color: var(--dc-tang-small); } /* 6.55:1: the line is under the large-text threshold */
 .dc-sp-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 20px; }
+.dc-sp-row .dc-sp-links { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .dc-sp-links a { display: block; padding: 8px 10px 9px; margin-inline: -10px; border-radius: 4px; text-decoration: none; color: var(--dc-ink); transition: background-color var(--dc-d-fast); }
 .dc-sp-links .t { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: .98rem; line-height: 1.3; }
 .dc-sp-links .d { display: block; margin-top: 2px; font-size: .84rem; line-height: 1.4; color: var(--dc-dim); }

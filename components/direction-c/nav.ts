@@ -1,11 +1,12 @@
-/** Paid-advertising navigation approved 26 October 2026.
+/** Navigation: Google Ads, Meta Ads and SEO as three equal core services (Batch 1, positioning update).
+ * Originally approved 26 October 2026.
  * Shared by the header, mobile menu and footer. Existing routes are retained
  * until the migration batch; historical service pages remain accessible.
  */
 
 export type NavLink = { href: string; label: string; desc?: string };
 export type NavGroup = {
-  stage: 'Paid advertising';
+  stage: string;
   mark: 'anon' | 'named' | 'owned';
   /** the approved stage line, e.g. "Get found." */
   line: string;
@@ -14,12 +15,13 @@ export type NavGroup = {
 
 export const SERVICE_GROUPS: NavGroup[] = [
   {
-    stage: 'Paid advertising',
+    stage: 'Core services',
     mark: 'anon',
-    line: 'Built around your business goals.',
+    line: 'Three ways to reach the right customers.',
     links: [
       { href: '/google-ads', label: 'Google Ads', desc: 'Reach people looking for what you offer.' },
       { href: '/social-media-ads', label: 'Meta Ads', desc: 'Bring your offer to customers on Facebook and Instagram.' },
+      { href: '/seo', label: 'SEO', desc: 'Be found by customers searching for what you offer.' },
     ],
   },
 ];
@@ -27,13 +29,8 @@ export const SERVICE_GROUPS: NavGroup[] = [
 export const SERVICES_HUB: NavLink = {
   href: '/services',
   label: 'All services',
-  desc: 'Explore Google Ads and Meta Ads management.',
+  desc: 'Explore Google Ads, Meta Ads and SEO.',
 };
-
-/** SEO as a supporting service (B2, DEC-120): one secondary "Also: SEO" link after the two core services in the
-    Services panel and the mobile menu, and the last link of the footer Services column. It is never listed as a core
-    service, and AI search, lead generation and conversion optimisation stay out of the primary navigation. */
-export const SUPPORTING_SERVICE: NavLink = { href: '/seo', label: 'SEO' };
 
 /** Secondary, contextual link at the foot of the Services panel and section. */
 export const PROBLEM_LINK: NavLink = {
@@ -60,15 +57,15 @@ export const PRIMARY_LINKS: NavLink[] = [
   { href: '/about', label: 'About' },
 ];
 
-export const CONTACT_LINK: NavLink = { href: '/contact', label: 'Discuss Your Advertising' };
+export const CONTACT_LINK: NavLink = { href: '/contact', label: 'Discuss Your Growth' };
 /** Secondary action in the mobile and tablet menu only (DEC-062 destination). */
 export const CALL_LINK: NavLink = { href: '/contact?intent=call', label: 'Request a call' };
 
 /** Capability routes: the Services column of the footer and the routes that mark "Services" current. */
 const CAPABILITIES: NavLink[] = SERVICE_GROUPS.flatMap((g) => g.links);
 
-/** Footer services: the hub, the two core advertising services, then SEO as the supporting service. */
-export const FOOTER_SERVICES: NavLink[] = [SERVICES_HUB, ...CAPABILITIES, SUPPORTING_SERVICE];
+/** Footer services: the hub, then the three core services (Google Ads, Meta Ads, SEO). */
+export const FOOTER_SERVICES: NavLink[] = [SERVICES_HUB, ...CAPABILITIES];
 
 /** Footer "Who We Help" group: the same four audience pages as the header. */
 export const FOOTER_WHO: NavLink[] = WHO_WE_HELP_LINKS.map(({ href, label }) => ({ href, label }));
@@ -97,5 +94,5 @@ export const FOOTER_INSIGHTS: NavLink[] = [
     chrome together. (Replaces the Gate 2 allow-list `DIRECTION_C_ROUTES`.) */
 export const LEGACY_CHROME_ROUTES: ReadonlySet<string> = new Set<string>([]);
 
-/** Routes that mark "Services" current: the hub, the two core services and the supporting SEO page. */
-export const SERVICE_ROUTES = new Set([SERVICES_HUB.href, ...CAPABILITIES.map((l) => l.href), SUPPORTING_SERVICE.href]);
+/** Routes that mark "Services" current: the hub and the three core services. */
+export const SERVICE_ROUTES = new Set([SERVICES_HUB.href, ...CAPABILITIES.map((l) => l.href)]);

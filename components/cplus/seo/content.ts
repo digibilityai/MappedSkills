@@ -53,23 +53,32 @@ export const SEO_PLAIN = {
   /* 2: what we work on, led by search intent */
   workKicker: 'The work',
   workH: { a: 'Match each search to', b: 'a page that answers it.' },
-  workIntent: 'Different searches come from different needs: learning, comparing, choosing.',
-  workSub: 'Scoped to what your business needs. Not every engagement includes every item.',
+  workIntent: 'Different searches come from different needs: learning, comparing, choosing. Commercial searches, where a customer is close to choosing, matter most.',
+  workSub: 'Each plan sets how much of this we do every month. See the packages below.',
+  workLink: { label: 'See SEO packages and pricing', href: '#packages' },
   work: [
     {
-      k: 'Find the right searches',
-      d: 'Search intent, relevant opportunities and competitor research.',
+      k: 'Keyword research and page mapping',
+      d: 'We find the searches your customers use when they are learning, comparing and choosing, then map each one to the page that should answer it.',
     },
     {
-      k: 'Make your site easy to find and use',
-      d: 'Technical SEO, indexing, site structure and internal links.',
-      also: 'Also: page speed, structured data, protecting rankings during a site rebuild.',
+      k: 'Technical SEO',
+      d: 'We fix what stops search engines finding and understanding your pages: indexing, site structure, internal links and page speed.',
+      also: 'Also: structured data, and protecting rankings during a site rebuild.',
     },
     {
-      k: 'Build pages that answer, and make contact easy',
-      d: 'Service pages, content, on-page optimisation, landing-page improvements and conversion opportunities.',
+      k: 'Content and on-page optimisation',
+      d: 'We improve existing pages and create new content that answers customer questions and makes the next step clear.',
     },
-  ] as { k: string; d: string; also?: string }[],
+    {
+      k: 'Selective authority building',
+      d: 'We research relevant sites and make personalised outreach. We do not buy links.',
+    },
+    {
+      k: 'Reporting and measurement',
+      d: 'A monthly report shows what changed and what we are doing next, with enquiries tracked in GA4 and Search Console where accessible.',
+    },
+] as { k: string; d: string; also?: string }[],
 
   /* 3: one composed proof section */
   proofKicker: 'SEO case studies',
@@ -131,7 +140,19 @@ export const SEO_PLAIN = {
   howNote: 'Some enquiries arrive with no clear source. We show those separately instead of counting them as SEO.',
   howLink: { label: 'See the full process', href: '/how-it-works' },
 
-  /* 5: questions */
+  /* 5: packages and pricing (data: components/seo-packages/data.ts) */
+  pkgKicker: 'SEO packages',
+  pkgH: { a: 'Clear monthly packages,', b: 'with allowances you can see.' },
+  pkgIntro: 'Choose the package that fits the size of your site and the market you compete in. Every package is a defined monthly scope, reported on each month.',
+  pkgCompareLabel: 'Full comparison of monthly deliverables',
+  pkgDefHeading: 'What the allowances mean',
+  pkgTermsHeading: 'Terms',
+  pkgExtraHeading: 'Separate scope and quotation',
+  auditKicker: 'Not ready for a retainer?',
+  auditLead: 'Start with a standalone audit. It gives you a prioritised 90-day roadmap you can use with us or on your own.',
+  pkgCta: 'Discuss an SEO package',
+
+  /* 6: questions */
   qKicker: 'Questions',
   qH: { a: 'Common', b: 'questions.' },
   questions: [
@@ -145,7 +166,24 @@ export const SEO_PLAIN = {
     },
     {
       q: 'What does monthly SEO work include?',
-      a: 'We work on agreed priorities, report on what changed and review the next steps with you each month.',
+      a: 'Each package sets monthly allowances for keywords, page optimisation, new content, technical fixes and outreach, plus monthly reporting. The full list is in the packages above.',
+      link: { label: 'See the package comparison', href: '#packages' },
+    },
+    {
+      q: 'Is there a minimum commitment?',
+      a: 'SEO retainers have a minimum engagement of six months, because search work takes time to show in your data.',
+    },
+    {
+      q: 'Do your prices include GST?',
+      a: 'No. All SEO prices exclude GST.',
+    },
+    {
+      q: 'What happens to the audit fee if I continue with you?',
+      a: 'The SEO Audit & Roadmap fee is fully credited against your first SEO retainer invoice when you sign within 90 days of audit completion. The credit is applied once and is not refundable in cash.',
+    },
+    {
+      q: 'Do the packages include a website redesign, migration or paid ads?',
+      a: 'No. Website redesign, migrations, additional websites, international SEO, large ecommerce catalogues and paid advertising management need a separate scope and quotation.',
     },
     {
       q: 'How do SEO and Google Ads work together?',

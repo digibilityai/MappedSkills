@@ -1,6 +1,10 @@
+import {
+  SEO_AUDIT, SEO_COMPARE, SEO_DEFINITIONS, SEO_EXTRA_NOTE, SEO_EXTRA_SCOPE, SEO_GST_NOTE, SEO_PLANS, SEO_TERMS, SEO_CARD_KEYS,
+} from '@/components/seo-packages/data';
+
 /**
- * `/pricing` copy. Fees and monthly scope are the founder-approved working prices for this implementation. No setup fees,
- * minimum ad budgets, GST treatment, contract terms, guarantees or add-on prices are stated, because none were approved.
+ * `/pricing` copy. Fees and monthly scope are the founder-approved working prices for this implementation. All prices exclude GST. SEO packages come from
+ * components/seo-packages/data.ts (shared with /seo). No setup fees, minimum ad budgets, guarantees or add-on prices are stated, because none were approved.
  *
  * Tone: plain English for a business owner who is not a marketer. Visual benchmark: How It Works R2.2.
  */
@@ -8,25 +12,28 @@
 export const PRICING_R2 = {
   hero: {
     kicker: 'Pricing',
-    h1: { a: 'One fixed monthly fee', b: 'for Google and Meta ads management.' },
-    lede: 'Each plan has a clear list of what we deliver every month. Extra work is quoted and approved by you first. Your ad spend is paid separately, to the platform.',
+    h1: { a: 'One fixed monthly fee', b: 'for Google Ads, Meta Ads and SEO.' },
+    lede: 'Each plan has a clear list of what we deliver every month. Extra work is quoted and approved by you first. Your ad spend is paid separately, to the platform. All prices exclude GST.',
     ledgerLabel: 'Monthly management fee',
     ledger: [
       { k: 'Google Ads', v: '₹14,999', unit: 'a month' },
       { k: 'Meta Ads', v: '₹14,999', unit: 'a month' },
       { k: 'Google Ads + Meta Ads', v: '₹26,999', unit: 'a month' },
+      { k: 'SEO Foundation', v: '₹19,999', unit: 'a month' },
+      { k: 'SEO Growth', v: '₹34,999', unit: 'a month' },
+      { k: 'SEO Scale', v: '₹59,999', unit: 'a month' },
     ],
-    ledgerNote: 'Ad spend is not included in these fees.',
+    ledgerNote: 'Ad spend is not included in these fees. All prices exclude GST.',
     parts: [
       { n: '1', t: 'Fixed monthly fee', d: 'You pay the same fee each month for a defined scope.' },
       { n: '2', t: 'Deliverables listed', d: 'Every plan lists exactly what we do and make for you.' },
       { n: '3', t: 'Extra work is quoted', d: 'Anything beyond the plan is quoted, and you approve it before it starts.' },
-      { n: '4', t: 'Ad spend is separate', d: 'You pay your ad budget directly to Google or Meta, not to us.' },
+      { n: '4', t: 'Ad spend is separate', d: 'You pay your ad budget directly to Google or Meta, not to us. SEO has no ad spend.' },
     ],
   },
 
   plans: {
-    kicker: 'Compare the plans',
+    kicker: 'Google Ads and Meta Ads plans',
     h2: { a: 'One fee for each plan,', b: 'with the same list to compare.' },
     intro: 'The five things most buyers compare are on each card. The full scope is in the table below the cards.',
     items: [
@@ -98,8 +105,28 @@ export const PRICING_R2 = {
     },
   },
 
+  seo: {
+    kicker: 'SEO plans',
+    h2: { a: 'Three monthly SEO packages,', b: 'and a standalone audit.' },
+    intro: 'Each package sets what we do every month. The full comparison is below, and the detail of each activity is on the SEO page.',
+    gst: SEO_GST_NOTE,
+    plans: SEO_PLANS,
+    cardKeys: SEO_CARD_KEYS,
+    compare: { label: 'SEO package comparison', heads: SEO_PLANS.map((p) => p.name), rows: SEO_COMPARE },
+    definitions: SEO_DEFINITIONS,
+    termsLabel: 'Terms and exclusions',
+    terms: SEO_TERMS,
+    extraLabel: 'Separate scope and quotation',
+    extra: SEO_EXTRA_SCOPE,
+    extraNote: SEO_EXTRA_NOTE,
+    audit: SEO_AUDIT,
+    auditKicker: 'Standalone audit',
+    detail: { href: '/seo', label: 'See how SEO works and what each package does' },
+    cta: 'Discuss SEO',
+  },
+
   included: {
-    kicker: 'What management includes',
+    kicker: 'What ad management includes',
     h2: { a: 'The same rhythm', b: 'every month.' },
     cadence: [
       {
@@ -131,7 +158,7 @@ export const PRICING_R2 = {
   },
 
   creative: {
-    kicker: 'Creative work',
+    kicker: 'Ad creative work',
     h2: { a: 'Static designs and carousels are included.', b: 'Reels and videos are not.' },
     included: {
       label: 'Included in each plan',
@@ -149,7 +176,7 @@ export const PRICING_R2 = {
   },
 
   extra: {
-    kicker: 'What costs extra',
+    kicker: 'What costs extra on ad plans',
     h2: { a: 'Need more than your plan includes?', b: 'We quote it first.' },
     intro: 'Work beyond your plan is quoted separately. We quote first, and nothing starts until you approve.',
     items: [
@@ -198,6 +225,21 @@ export const PRICING_R2 = {
         q: 'Is the ad budget part of your fee?',
         direct: 'No. Your ad budget is paid directly to Google or Meta.',
         body: 'Our management fee is separate from what you spend on ads.',
+      },
+      {
+        q: 'Do your prices include GST?',
+        direct: 'No. All prices on this page exclude GST.',
+        body: 'GST is added to the invoice at the applicable rate.',
+      },
+      {
+        q: 'Is there a minimum term for SEO?',
+        direct: 'Yes. SEO retainers have a minimum engagement of six months.',
+        body: 'Search work takes time to show in your data. Google Ads and Meta Ads plans do not have this SEO minimum.',
+      },
+      {
+        q: 'How does the SEO Audit & Roadmap fee work if I continue with you?',
+        direct: 'It is fully credited against your first SEO retainer invoice when you sign within 90 days of audit completion.',
+        body: 'The credit is applied once and is not refundable in cash.',
       },
       {
         q: 'Who creates the ad designs?',

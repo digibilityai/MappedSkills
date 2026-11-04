@@ -6,15 +6,15 @@ import { CARDS, SERVICES_FAQS } from './content';
 const safe = (o: unknown) => JSON.stringify(o).replace(/</g, '\\u003c');
 
 /** /services structured data, each node matching visible content: BreadcrumbList, FAQPage (the five visible questions) and
- * one Service per core service. areaServed is a Country (India). No prices, ratings, reviews or client figures. */
+ * one Service per core service (Google Ads, Meta Ads and SEO). areaServed is a Country (India). No prices, ratings, reviews or client figures. */
 export function ServicesJsonLd() {
   const base = siteMetadata.baseUrl;
   const services = CARDS.map((c) => ({
     '@context': 'https://schema.org',
     '@type': 'Service',
-    '@id': `${base}/services#${c.id}-ads`,
-    name: `${c.name} management`,
-    serviceType: `${c.name} management`,
+    '@id': c.id === 'seo' ? `${base}/services#seo` : `${base}/services#${c.id}-ads`,
+    name: c.id === 'seo' ? 'SEO services' : `${c.name} management`,
+    serviceType: c.id === 'seo' ? 'SEO services' : `${c.name} management`,
     description: c.benefit,
     url: `${base}${c.href}`,
     provider: { '@id': `${base}/#organization` },

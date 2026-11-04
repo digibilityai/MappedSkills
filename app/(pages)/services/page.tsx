@@ -12,8 +12,8 @@ import { loadCaseShowcase } from '@/components/case-showcase/CaseShowcase';
  * root layout. B2 (DEC-120): the work section is the shared case showcase, resolved here from the public library.
  */
 export const metadata = createMetadata(
-  'Google Ads and Meta Ads Management in India | MappedSkills',
-  'Reach customers who are searching and customers who are browsing. MappedSkills plans and manages Google Ads and Meta Ads for growing Indian businesses.',
+  'Google Ads, Meta Ads & SEO Services | MappedSkills',
+  'Reach customers who are searching, scrolling and comparing. MappedSkills manages Google Ads, Meta Ads and SEO for growing Indian businesses, for real enquiries.',
   '/services'
 );
 

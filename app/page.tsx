@@ -7,8 +7,8 @@ import { ResolveHomeR3 } from '@/components/resolve-home-r3/ResolveHomeR3';
 export const revalidate = 60;
 
 export const metadata = createMetadata(
-  'Google Ads & Meta Ads for Growing Businesses | MappedSkills',
-  'Google Ads and Meta Ads management for growing D2C, education and enquiry-led businesses. Discuss your advertising goals with MappedSkills.',
+  'Performance Marketing & SEO Agency in India | MappedSkills',
+  'MappedSkills is a performance marketing and SEO agency in India. We manage Google Ads, Meta Ads and SEO for businesses that want more commercially meaningful enquiries, not just more traffic.',
   '/'
 );
 

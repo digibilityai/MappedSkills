@@ -15,6 +15,7 @@ export const AUDIENCES = [
 export const SERVICES = [
   { name: 'Google Ads', href: '/google-ads', type: 'search', body: 'Reach people searching for the products, services or solutions you offer. We plan campaigns around relevant demand, your offer and the action you want customers to take.' },
   { name: 'Meta Ads', href: '/social-media-ads', type: 'social', body: 'Introduce your offer through Facebook and Instagram advertising. We develop campaign tests around your audience, message, creative and purchase or enquiry journey.' },
+  { name: 'SEO', href: '/seo', type: 'organic', body: 'Be found by customers who search for what you offer. We map the searches that matter to your business, fix what holds your pages back and build content that answers what customers ask.' },
 ] as const;
 export const WORK = [
   { id: 'wanderlooms', eyebrow: 'Meta Ads · Adventure apparel', title: 'Wanderlooms', body: 'Meta advertising for an adventure apparel brand featured on Shark Tank India.',

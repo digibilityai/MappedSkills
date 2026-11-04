@@ -29,18 +29,20 @@ test('/services has one H1 and the six approved R2 main sections in order', () =
   assert.match(html, /href="#path"/);
   assert.match(html, /id="path"/);
 });
-test('hero copy and service copy follow R2; Google Ads and Meta Ads stay the two core services', () => {
-  assert.match(text, /Reach more of the right customers with Google Ads and Meta Ads\./);
-  assert.match(text, /We plan and manage paid advertising so more of the right buyers find you/);
+test('hero copy and service copy follow R2; Google Ads, Meta Ads and SEO are the three core services', () => {
+  assert.match(text, /Reach more of the right customers with Google Ads, Meta Ads and SEO\./);
+  assert.match(text, /We plan and manage Google Ads, Meta Ads and SEO so more of the right buyers find you/);
+  assert.match(text, /We plan keywords and pages around what customers search for/);
+  assert.match(text, /SEO builds over time\. We do not guarantee rankings, traffic or enquiries\./);
   assert.match(text, /We plan and manage campaigns around the searches that matter, your budget and the enquiry or purchase you want\./);
   assert.match(text, /Meta Ads means Facebook and Instagram advertising\. We do not manage your posting\./);
   assert.doesNotMatch(text, /WhatsApp chat/);
   for (const h of ['/google-ads', '/social-media-ads', '/how-it-works', '/pricing', '/contact', '/work', '/seo', '/ai-seo', '/conversion-optimization', '/lead-generation', '/who-we-help/d2c', '/who-we-help/education', '/who-we-help/real-estate', '/who-we-help/enquiry-led-businesses']) assert.match(html, new RegExp('href="' + h.replace(/\//g, '\\/') + '"'), h);
 });
-test('hero diagram: two journeys (Google Ads, Meta Ads) converge through Capture and Convert to an enquiry; Measure frames the path; the framework rows stay Capture, Convert, Measure', () => {
+test('hero diagram: three journeys (Google Ads, Meta Ads, SEO) converge through Capture and Convert to an enquiry; Measure frames the path; the framework rows stay Capture, Convert, Measure', () => {
   const fig = html.split('<figure')[1].split('</figure>')[0];
   const lanes = fig.split('x3-lanes')[1].split('</ol>')[0];
-  assert.deepEqual([...lanes.matchAll(/<span class="x3-pill">([^<]+)<\/span><b>([^<]+)<\/b>/g)].map(m => m[1] + ' ' + m[2]), ['They search Google Ads', 'They browse Meta Ads']);
+  assert.deepEqual([...lanes.matchAll(/<span class="x3-pill">([^<]+)<\/span><b>([^<]+)<\/b>/g)].map(m => m[1] + ' ' + m[2]), ['They search Google Ads', 'They browse Meta Ads', 'They compare SEO']);
   const spine = fig.split('x3-spine')[1].split('</ol>')[0];
   assert.deepEqual([...spine.matchAll(/<b>([^<]+)<\/b>/g)].map(m => m[1]), ['Capture', 'Convert', 'A qualified enquiry']);
   assert.doesNotMatch(spine, /Measure/);
@@ -64,20 +66,23 @@ test('ad mockups on /services are neutral illustrations shown once each, without
   assert.equal((html.match(/pa-platform--social/g) || []).length, 1);
   assert.match(html, /class="pa-platform pa-platform--search" aria-hidden="true"/);
   assert.match(html, /class="pa-platform pa-platform--social" aria-hidden="true"/);
+  assert.equal((html.match(/pa-platform--organic/g) || []).length, 1, 'one illustrative organic result for SEO');
   assert.doesNotMatch(text, /Eggless Baking Courses|live guidance|free demo|Free demo|Syllabus/i);
   assert.match(text, /Your headline appears here/);
   assert.doesNotMatch(text, /Not a client ad/);
 });
-test('which one first: a decision section between the two core services, not every business needs both, audiences kept', () => {
+test('which one first: a decision section between the three core services, not every business needs all three, audiences kept', () => {
   const sec = html.split('aria-labelledby="sx-which"')[1].split('aria-labelledby="sx-work"')[0];
   assert.match(sec, /<h2 id="sx-which">Which one first\?<\/h2>/);
   const opts = sec.split('<article').slice(1);
-  assert.equal(opts.length, 2);
+  assert.equal(opts.length, 3);
   assert.match(opts[0], /<h3 id="sx-opt-google">Google Ads<\/h3><p class="x2-opt-role">Captures existing search demand\.<\/p>/);
   assert.match(opts[0], /href="\/google-ads"/);
   assert.match(opts[1], /<h3 id="sx-opt-meta">Meta Ads<\/h3><p class="x2-opt-role">Reaches and influences relevant audiences\.<\/p>/);
   assert.match(opts[1], /href="\/social-media-ads"/);
-  assert.match(sec, /<b>Not every business needs both\.<\/b> We check your offer, margins, follow-up and measurement before recommending either, or both\./);
+  assert.match(opts[2], /<h3 id="sx-opt-seo">SEO<\/h3><p class="x2-opt-role">Builds lasting visibility in search\.<\/p>/);
+  assert.match(opts[2], /href="\/seo"/);
+  assert.match(sec, /<b>Not every business needs all three\.<\/b> We check your offer, margins, follow-up and measurement before recommending one, two or all three\./);
   assert.deepEqual([...sec.matchAll(/href="(\/who-we-help\/[^"]+)"/g)].map(m => m[1]), ['/who-we-help/d2c', '/who-we-help/education', '/who-we-help/real-estate', '/who-we-help/enquiry-led-businesses']);
   assert.doesNotMatch(html.split('aria-labelledby="sx-services"')[1].split('aria-labelledby="sx-which"')[0], /Which one first/);
 });
@@ -121,19 +126,19 @@ test('with no eligible case the work section is absent and the rest of the page 
   assert.equal(none.replace(/<section class="cs[\s\S]*?<\/section>/, ''), none);
   assert.equal(html.replace(/<section class="cs [\s\S]*?(?=<section class="pa-section pa-wrap" aria-labelledby="sx-terms")/, ''), none);
 });
-test('SEO & Organic Visibility is one supporting block below the core services, linked to /seo, with no SEO figures', () => {
+test('SEO is the third core service card with equal weight, linked to /seo, with no SEO figures or case cards', () => {
   const core = html.split('aria-labelledby="sx-services"')[1].split('</section>')[0];
-  const seo = core.split('class="x2-seo"')[1];
-  assert.ok(seo, 'inside the core services section');
-  assert.ok(core.indexOf('x2-seo') > core.lastIndexOf('</article>'), 'after the two core services');
-  assert.match(seo, /<p class="x2-seo-k">Supporting service<\/p><h3 id="sx-seo">SEO &amp; Organic Visibility<\/h3>/);
+  assert.equal((core.match(/<article/g) || []).length, 3, 'Google Ads, Meta Ads and SEO are the three core service cards');
+  assert.doesNotMatch(core, /x2-seo|Supporting service|SEO &amp; Organic Visibility/, 'no separate supporting-service block');
+  const seo = core.split('<article').slice(1).find(a => a.includes('sx-card--seo'));
+  assert.ok(seo, 'SEO card');
+  assert.match(seo, /<h3>SEO<\/h3>/);
   assert.match(seo, /href="\/seo">Explore SEO/);
-  assert.doesNotMatch(seo.replace(/<[^>]+>/g, ' '), /\d|%/, 'no SEO metrics');
+  assert.doesNotMatch(seo.replace(/^[^>]*>/, '').replace(/<[^>]+>/g, ' '), /\d|%/, 'no SEO metrics');
   assert.doesNotMatch(seo, /<img|portfolio/, 'no SEO case cards');
-  assert.equal((core.match(/<article/g) || []).length, 2, 'Google Ads and Meta Ads stay the only core service cards');
 });
 test('Brand DNA 4.0 emphasis: the H1 emphasises the outcome and the FAQ heading is one colour (wording unchanged)', () => {
-  assert.match(html, /<h1 id="sx-h1">Reach more of <span>the right customers<\/span> with Google Ads and Meta Ads\.<\/h1>/);
+  assert.match(html, /<h1 id="sx-h1">Reach more of <span>the right customers<\/span> with Google Ads, Meta Ads and SEO\.<\/h1>/);
   assert.match(html, /<h2 id="sx-faq">A few questions before we talk<\/h2>/);
 });
 test('management scope separates included work from separately scoped work and qualifies reporting and creative', () => {
@@ -141,20 +146,20 @@ test('management scope separates included work from separately scoped work and q
   assert.match(text, /Agreed separately/);
   assert.match(text, /review calls where your proposal agrees them/);
   assert.match(text, /defined number of static ad designs/);
-  assert.match(text, /Ad spend is paid directly to the platform\. Our management fee is charged separately/);
+  assert.match(text, /Ad spend is paid directly to the platform\. Our management fee is charged separately and set by the plan you choose\. All prices exclude GST/);
 });
-test('FAQ: five native details that match the FAQPage markup exactly', () => {
-  assert.equal((html.match(/<details>/g) || []).length, 5);
+test('FAQ: six native details that match the FAQPage markup exactly', () => {
+  assert.equal((html.match(/<details>/g) || []).length, 6);
   const faq = jsonLd.find(j => j['@type'] === 'FAQPage');
-  assert.equal(faq.mainEntity.length, 5);
+  assert.equal(faq.mainEntity.length, 6);
   for (const q of faq.mainEntity) {
     assert.ok(text.includes(q.name), q.name);
     assert.ok(text.includes(q.acceptedAnswer.text), q.name);
   }
 });
-test('structured data: breadcrumb, FAQ and two India Country services, no prices or ratings', () => {
+test('structured data: breadcrumb, FAQ and three India Country services, no prices or ratings', () => {
   const types = jsonLd.map(j => j['@type']).sort();
-  assert.deepEqual(types, ['BreadcrumbList', 'FAQPage', 'Service', 'Service']);
+  assert.deepEqual(types, ['BreadcrumbList', 'FAQPage', 'Service', 'Service', 'Service']);
   for (const s of jsonLd.filter(j => j['@type'] === 'Service')) {
     assert.deepEqual(s.areaServed, { '@type': 'Country', name: 'India' });
     assert.match(s.provider['@id'], /#organization$/);
@@ -166,7 +171,7 @@ test('structured data: breadcrumb, FAQ and two India Country services, no prices
 test('route keeps /services canonical with the provisional metadata', () => {
   const { metadata } = load('app/(pages)/services/page.tsx');
   assert.equal(metadata.alternates.canonical, 'https://mappedskills.com/services');
-  assert.equal(metadata.title, 'Google Ads and Meta Ads Management in India | MappedSkills');
+  assert.equal(metadata.title, 'Google Ads, Meta Ads & SEO Services | MappedSkills');
   assert.ok(metadata.description.length <= 160);
   assert.equal(metadata.openGraph.url, 'https://mappedskills.com/services');
 });

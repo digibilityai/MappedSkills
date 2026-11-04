@@ -68,9 +68,9 @@ test('FAQs work without a client-side toggle script and every section label reso
   assert.equal(ids.size, [...html.matchAll(/\bid="([^"]+)"/g)].length);
   for (const m of html.matchAll(/aria-labelledby="([^"]+)"/g)) assert.ok(ids.has(m[1]), m[1]);
 });
-test('navigation promotes only Google and Meta and retains the contact route', () => {
+test('navigation promotes only Google Ads, Meta Ads and SEO and retains the contact route', () => {
   const nav = load('components/direction-c/nav.ts');
-  assert.deepEqual(nav.SERVICE_GROUPS.flatMap(g => g.links.map(l => l.href)), ['/google-ads','/social-media-ads']);
+  assert.deepEqual(nav.SERVICE_GROUPS.flatMap(g => g.links.map(l => l.href)), ['/google-ads','/social-media-ads','/seo']);
   assert.equal(nav.CONTACT_LINK.href, '/contact');
 });
 test('historical SEO and lead-generation cases retain their classification after menu changes', () => {

@@ -51,13 +51,14 @@ test('removed content stays removed: review sheet, pledges, projects list, Baked
   assert.ok(!/Defined priorities|Transparent reporting/.test(copy));
 });
 
-test('the problems are the three approved questions and the work is three plain lines led by search intent', () => {
+test('the problems are the three approved questions and the work is five plain lines led by search intent', () => {
   for (const q of ['Your competitors appear in Google. Why don’t you?', 'Your website gets visitors. Why aren’t they contacting you?', 'Your SEO reports look positive. What has actually improved?']) {
     assert.ok(copy.includes(q), q);
   }
   const work = copy.slice(copy.indexOf('work: ['), copy.indexOf('proofKicker'));
-  assert.strictEqual((work.match(/k: '/g) || []).length, 3);
-  assert.ok(copy.includes("workIntent: 'Different searches come from different needs: learning, comparing, choosing.'"));
+  assert.strictEqual((work.match(/k: '/g) || []).length, 5);
+  for (const k of ['Keyword research and page mapping', 'Technical SEO', 'Content and on-page optimisation', 'Selective authority building', 'Reporting and measurement']) assert.ok(work.includes(`k: '${k}'`), k);
+  assert.ok(copy.includes("workIntent: 'Different searches come from different needs: learning, comparing, choosing."));
 });
 
 test('AnybodyCanBake proof: the approved SEO figures, period, caveat and link, spelled AnybodyCanBake', () => {
@@ -117,22 +118,24 @@ test('the proof figures are text, static and drawn by the shared showcase', () =
 test('FAQ answers are the approved wording, closed on load', () => {
   assert.ok(content.includes("a: 'It depends on your website, competition and what needs improving. We’ll explain the priorities and realistic timelines before you start.'"));
   assert.ok(content.includes("a: 'No one can guarantee Google rankings. We commit to agreed improvements, clear reporting and regular reviews.'"));
-  assert.ok(content.includes("a: 'We work on agreed priorities, report on what changed and review the next steps with you each month.'"));
+  assert.ok(content.includes("a: 'Each package sets monthly allowances for keywords, page optimisation, new content, technical fixes and outreach, plus monthly reporting. The full list is in the packages above.'"));
+  assert.ok(content.includes("a: 'SEO retainers have a minimum engagement of six months, because search work takes time to show in your data.'"));
+  assert.ok(content.includes("a: 'No. All SEO prices exclude GST.'"));
   assert.ok(content.includes("a: 'Google Ads can generate visibility quickly. SEO builds visibility over time. Many businesses benefit from both.'"));
   assert.ok(!/<details[^>]*\bopen\b/.test(body));
 });
 
-test('no guarantee, traffic or sales promise anywhere on the page; SEO stays a supporting service', () => {
+test('no guarantee, traffic or sales promise anywhere on the page', () => {
   for (const banned of ['guarantee you', 'ROI', 'will rank', 'guaranteed', 'testimonial', 'Sonia', 'celebrit']) {
     assert.ok(!copy.toLowerCase().includes(banned.toLowerCase()), `"${banned}" must not appear`);
   }
   assert.ok(copy.includes('not a promise for yours'));
-  assert.ok(!/core service|our core|primary service/i.test(copy));
   assert.ok(copy.includes('Many businesses benefit from both.'));
 });
 
 test('every internal link is an approved existing destination', () => {
   const hrefs = new Set([...copy.matchAll(/href: '([^']+)'/g)].map((m) => m[1]));
+  hrefs.delete('#packages'); // in-page anchor to the packages section
   const allowed = new Set(['/problems/traffic-but-no-enquiries', '/how-it-works', '/google-ads', '/ai-seo', '/services', '/portfolio/anybodycanbake-seo', '/portfolio/seo-ameba-software']);
   for (const h of hrefs) assert.ok(allowed.has(h), `unexpected link ${h}`);
   assert.strictEqual((body.match(/href=\{S\.howLink\.href\}/g) || []).length, 1, 'one process link');
@@ -193,3 +196,57 @@ test('the local case-study previews cannot reach a build or a deployment (produc
   const preview = read('lib/case-study-local-preview.ts');
   assert.ok(/process\.env\.NODE_ENV === 'development' && process\.env\.CASE_STUDY_LOCAL_PREVIEW === '1'/.test(preview));
 });
+
+/* Batch 1: SEO packages, audit, terms and exclusions (single source: components/seo-packages/data.ts, shared with /pricing) */
+{
+  const { renderToStaticMarkup } = require('react-dom/server');
+  const React = require('react');
+  const Module = require('node:module');
+  Module._extensions['.css'] = () => {};
+  const realLoad = Module._load;
+  Module._load = function (request, ...rest) {
+    if (request === 'next/font/local' || request === 'next/font/google') return () => ({ className: '', variable: '', style: {} });
+    return realLoad.call(this, request, ...rest);
+  };
+  const { load } = require('./helpers/ts-loader.cjs');
+  const data = load('components/seo-packages/data.ts');
+  const { SeoBody } = load('components/cplus/seo/SeoBody.tsx');
+  const html = renderToStaticMarkup(React.createElement(SeoBody, { showcase: null }));
+  const text = html.replace(/<[^>]+>/g, ' ').replace(/&#x27;/g, "'").replace(/\s+/g, ' ');
+
+  test('SEO packages: approved prices, GST wording, minimum term and audit credit', () => {
+    assert.deepStrictEqual(data.SEO_PLANS.map((p) => [p.name, p.fee]), [['SEO Foundation', '₹19,999'], ['SEO Growth', '₹34,999'], ['SEO Scale', '₹59,999']]);
+    assert.deepStrictEqual([data.SEO_AUDIT.name, data.SEO_AUDIT.fee, data.SEO_AUDIT.per], ['SEO Audit & Roadmap', '₹14,999', 'one time']);
+    assert.match(text, /All prices exclude GST\./);
+    assert.match(text, /minimum engagement of six months/);
+    assert.match(data.SEO_AUDIT.credit, /fully credited against your first SEO retainer invoice when you sign within 90 days of audit completion\. The credit is applied once and is not refundable in cash\./);
+    assert.match(text, /Audit implementation is not included\./);
+  });
+
+  test('SEO packages: the approved monthly deliverables for Foundation, Growth and Scale', () => {
+    const row = (k) => data.SEO_COMPARE.find((r) => r.k === k).v;
+    assert.deepStrictEqual(row('Active target keywords'), ['Up to 15', 'Up to 30', 'Up to 60']);
+    assert.deepStrictEqual(row('Initial page mapping'), ['Up to 10 pages', 'Up to 25 pages', 'Up to 50 pages']);
+    assert.deepStrictEqual(row('Competitors analysed'), ['2', '3', '5']);
+    assert.deepStrictEqual(row('Existing pages optimised each month'), ['Up to 2', 'Up to 4', 'Up to 8']);
+    assert.deepStrictEqual(row('New content pieces each month'), ['1', '2', '4']);
+    assert.deepStrictEqual(row('Eligible technical issues resolved each month'), ['Up to 3', 'Up to 6', 'Up to 12']);
+    assert.deepStrictEqual(row('Outreach prospects researched each month'), ['5', '10', '20']);
+    assert.deepStrictEqual(row('Personalised outreach attempts each month'), ['3', '8', '15']);
+    assert.deepStrictEqual(row('Backlink profile review'), ['Quarterly', 'Monthly', 'Monthly']);
+    assert.deepStrictEqual(row('Google Business Profile'), ['1 location', '1 location', 'Up to 2 locations']);
+    assert.deepStrictEqual(row('Performance reporting'), ['Monthly', 'Monthly', 'Monthly']);
+    assert.deepStrictEqual(row('Strategy review'), ['Quarterly', 'Monthly', 'Monthly']);
+    assert.strictEqual(data.SEO_AUDIT.includes.length, 8);
+  });
+
+  test('SEO packages: no guarantees, no bought links, exclusions need separate scope, one H1 and no long dashes', () => {
+    assert.match(text, /do not guarantee backlinks, rankings, traffic, enquiries or revenue/);
+    assert.match(text, /do not buy links or use purchased-link schemes/);
+    for (const x of ['Major website development or redesign', 'Website migrations', 'Paid advertising management', 'Multilingual or international SEO expansion']) assert.ok(text.includes(x), x);
+    assert.match(text, /All additional work needs your approval before it starts\./);
+    assert.strictEqual((html.match(/<h1\b/g) || []).length, 1);
+    assert.doesNotMatch(JSON.stringify(data), /[–—]|--/);
+    assert.doesNotMatch(text, /[–—]|--/);
+  });
+}

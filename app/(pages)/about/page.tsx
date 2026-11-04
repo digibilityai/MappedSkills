@@ -8,8 +8,8 @@ import { About } from '@/components/b2/About';
  * this top-level route emits no BreadcrumbList. The Direction C header and footer come from the root layout.
  */
 export const metadata = createMetadata(
-  'About MappedSkills | Our Approach',
-  'How MappedSkills plans and manages Google Ads and Meta Ads, and why we judge it on enquiries.',
+  'About MappedSkills | Performance Marketing & SEO Agency',
+  'How MappedSkills plans and manages Google Ads, Meta Ads and SEO for growing businesses, and why we judge the work on commercially meaningful enquiries.',
   '/about'
 );
 

@@ -8,8 +8,8 @@ import { PricingR2Body } from '@/components/pricing-r2/PricingR2Body';
  * emits no page-level structured data. The Direction C header and footer come from the root layout.
  */
 export const metadata = createMetadata(
-  'Google Ads & Meta Ads Pricing | MappedSkills',
-  'Explore MappedSkills advertising management plans. Google Ads and Meta Ads at ₹14,999/month each, or both at ₹26,999/month. See included work and separately quoted extras.',
+  'Google Ads, Meta Ads & SEO Pricing | MappedSkills',
+  'MappedSkills pricing, excluding GST. Google Ads and Meta Ads at ₹14,999/month each, or both at ₹26,999/month. SEO from ₹19,999/month. See what each plan includes.',
   '/pricing'
 );
 

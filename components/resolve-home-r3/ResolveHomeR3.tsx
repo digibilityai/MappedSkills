@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { AUDIENCES, FAQS, SERVICES, STEPS, TILES, WORK } from '@/components/paid-advertising/home/content';
 import { HeroFlow, JourneyArt } from './ArtR3';
-import { GoogleSerp, MetaFeed } from './AdsR3';
+import { GoogleSerp, MetaFeed, OrganicSerp } from './AdsR3';
 import { RvReveal3 } from './RvReveal3';
 import { ClientLogoWall } from '@/components/clients/ClientLogoWall';
 import type { ShowcaseData } from '@/components/case-showcase/CaseShowcase';
@@ -55,17 +55,16 @@ export function ResolveHomeR3({ showcase = null }: { showcase?: ShowcaseData | n
     <section className="rv3-hero rv3-dark" aria-labelledby="rv3-h1">
       <div className="rv3-wrap rv3-hero-grid">
         <div className="rv3-hero-copy">
-          <p className="rv3-eyebrow">Paid advertising for growing Indian businesses</p>
-          <h1 id="rv3-h1">Paid advertising built around how <em>your customers buy.</em></h1>
-          <p className="rv3-lede">We plan and manage Google Ads and Meta Ads campaigns for businesses with an offer already selling.</p>
-          <p className="rv3-support">From discovering your offer to purchasing or making an enquiry, we plan campaigns around the steps your customers take.</p>
+          <p className="rv3-eyebrow">Performance Marketing &amp; SEO Agency</p>
+          <h1 id="rv3-h1">More of the right customers. <em>Not just more traffic.</em></h1>
+          <p className="rv3-lede">Google Ads, Meta Ads and SEO built around how your customers find, evaluate and choose your business.</p>
           <div className="rv3-actions"><Cta /><TextLink href="/work" dark>Explore Our Work</TextLink></div>
         </div>
         <figure className="rv3-hero-fig">
           <HeroFlow />
           <figcaption>
             <ol>
-              <li>Many potential buyers</li><li>Relevant attention</li><li>An ad interaction</li><li>An enquiry or a purchase</li>
+              <li>Many potential buyers</li><li>Relevant attention</li><li>A visit or interaction</li><li>An enquiry or a purchase</li>
             </ol>
             <small>Conceptual illustration. It shows no results.</small>
           </figcaption>
@@ -110,11 +109,11 @@ export function ResolveHomeR3({ showcase = null }: { showcase?: ShowcaseData | n
 
     {/* 4. Ink Deep: services, with believable advertising situations */}
     <section className="rv3-svc rv3-dark" aria-labelledby="rv3-svc-h"><div className="rv3-wrap">
-      <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">Our core services</p><h2 id="rv3-svc-h">Two core services. An approach <em>shaped around your business.</em></h2></header>
+      <header className="rv3-head" {...REVEAL}><p className="rv3-eyebrow">Our core services</p><h2 id="rv3-svc-h">Three core services. An approach <em>shaped around your business.</em></h2></header>
       <div className="rv3-svc-grid">
         {SERVICES.map((s, i) => <article key={s.name} className={`rv3-s rv3-s--${i + 1}`} {...REVEAL}>
-          <div className="rv3-s-copy"><span className="rv3-s-n" aria-hidden="true">{i === 0 ? 'Search' : 'Social'}</span><h3>{s.name}</h3><p>{s.body}</p><TextLink href={s.href} dark>Explore {s.name}</TextLink></div>
-          <div className="rv3-s-demo">{s.type === 'search' ? <GoogleSerp /> : <MetaFeed />}<p className="rv3-s-cap">Illustrative example with a generic business. Not a client campaign.</p></div>
+          <div className="rv3-s-copy"><span className="rv3-s-n" aria-hidden="true">{s.type === 'search' ? 'Paid search' : s.type === 'social' ? 'Paid social' : 'Organic search'}</span><h3>{s.name}</h3><p>{s.body}</p><TextLink href={s.href} dark>Explore {s.name}</TextLink></div>
+          <div className="rv3-s-demo">{s.type === 'search' ? <GoogleSerp /> : s.type === 'social' ? <MetaFeed /> : <OrganicSerp />}<p className="rv3-s-cap">Illustrative example with a generic business. Not a client campaign.</p></div>
         </article>)}
       </div>
     </div></section>

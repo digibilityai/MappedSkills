@@ -16,6 +16,18 @@ export function SearchAdMockup({ illustrative = false }: { illustrative?: boolea
     <div className="pa-organic"><span /><span className="pa-organic-short" /></div>
   </div>;
 }
+/** Organic result template for SEO (illustrative, no real ranking claim): a search bar, one organic result and a quieter second one. */
+export function OrganicMockup() {
+  return <div className="pa-platform pa-platform--organic" aria-hidden="true">
+    <div className="pa-search-bar"><svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="8.5" cy="8.5" r="5.5" /><path d="m13 13 4.5 4.5" /></svg><span>what your customer searches for</span></div>
+    <div className="pa-ad">
+      <p className="pa-ad-site"><i />Your Business <span>yourbusiness.com › guides</span></p>
+      <p className="pa-ad-title">A page that answers the question</p>
+      <p className="pa-ad-copy">A short description of the page appears here, written for the person searching.</p>
+    </div>
+    <div className="pa-organic"><span /><span className="pa-organic-short" /></div>
+  </div>;
+}
 export function MetaAdMockup({ illustrative = false }: { illustrative?: boolean } = {}) {
   return <div className="pa-platform pa-platform--social" aria-hidden="true">
     <div className="pa-post-head"><i /><div><b>Your Brand</b><small>Sponsored · Facebook and Instagram</small></div></div>

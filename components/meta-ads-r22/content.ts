@@ -15,7 +15,7 @@ export const INTENT = {
   note: 'Illustrative possibilities, not a guaranteed sequence.',
 } as const;
 
-/** Approved Meta Ads working price (Pricing R3, commit 0a8561e). No setup fees, GST terms, minimum budgets, contract commitments,
+/** Approved Meta Ads working price (Pricing R3, commit 0a8561e). No setup fees, minimum budgets, contract commitments,
  * guarantees or add-on prices are stated, because none were approved. */
 export const PRICE = {
   eyebrow: 'Meta Ads pricing',
@@ -30,7 +30,7 @@ export const PRICE = {
   card: {
     label: 'Meta Ads management',
     fee: '₹14,999',
-    per: 'a month',
+    per: 'a month, excluding GST',
     figs: [
       '3 active campaigns',
       '3 static creatives',

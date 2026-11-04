@@ -28,7 +28,8 @@ const DESKTOP_QUERY = '(min-width: 64em)';
  * DIRECTION C — header and navigation (navigation redesign, R2 prototype:
  * docs/nav-redesign/prototype/index.html).
  *
- * - NOT STICKY. `position: relative`, in normal flow (DEC-018 §4.5; DEC-030).
+ * - Sticky and compact (Batch 3). `position: sticky; top: 0`; `data-compact` is set after a short scroll (see the
+ *   scroll effect below). The menu opens inside the header, which scrolls on short screens.
  * - Desktop (≥64em): Services is ONE disclosure button. Its compact panel lists
  *   the three core services, then "All services"
  *   (/services) and the contextual problem link. A disclosure of links, not `role="menu"`: closed links are
@@ -170,6 +171,24 @@ export function SiteHeader() {
       behind.forEach((el) => el.removeAttribute('inert'));
     };
   }, [menuOpen]);
+
+  /* Compact state: one attribute on the header, no state and no re-render. Passive listener, removed on unmount.
+     Hysteresis (compact past 48px, expanded again below 8px) stops flicker near the threshold. */
+  useEffect(() => {
+    const el = header.current;
+    if (!el) return;
+    let compact = false;
+    const update = () => {
+      const y = window.scrollY;
+      const next = compact ? y > 8 : y > 48;
+      if (next === compact) return;
+      compact = next;
+      el.toggleAttribute('data-compact', next);
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, []);
 
   /* Crossing the desktop breakpoint closes whichever pattern no longer applies. */
   useEffect(() => {

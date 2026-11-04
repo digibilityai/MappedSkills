@@ -1010,3 +1010,12 @@
 .prr .prr-cap { font-size: .875rem; }
 .prr .prr-btn { min-height: 52px; }
 .prr .prr-more a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* SEO plans (Batch 1): panels on a Ground section, readable labels inside light panels, the audit panel below the grid */
+#seo-pricing .prr-panel { background: var(--resolve-paper); }
+#seo-pricing .prr-panel .prr-outside-label { margin-top: 22px; color: var(--resolve-dim); }
+#seo-pricing .prr-panel .prr-outside-list { color: var(--resolve-ink); font-size: .95rem; }
+#seo-pricing .prr-audit { margin-top: 20px; }
+#seo-pricing .prr-audit .prr-plan-fee { margin: 10px 0 16px; }
+#seo-pricing .prr-audit > p:last-child { margin-top: 16px; }
+@media (max-width: 860px) { #seo-pricing .prr-creative { grid-template-columns: 1fr; } }

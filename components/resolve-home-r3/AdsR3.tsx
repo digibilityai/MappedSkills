@@ -32,3 +32,16 @@ export function MetaFeed() {
     </div>
   </div>;
 }
+
+export function OrganicSerp() {
+  return <div className="rv3-serp" role="img" aria-label="Illustrative Google search results page: a buyer searches for a product and sees a business page and a guide in the organic results.">
+    <div className="rv3-serp-bar"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" /><path d="m13 13 5 5" /></svg><span>how to choose a riding jacket</span></div>
+    <div className="rv3-serp-tabs" aria-hidden="true"><b>All</b><span>Shopping</span><span>Images</span><span>News</span></div>
+    <div className="rv3-serp-res rv3-serp-res--brand">
+      <p className="rv3-serp-site"><i aria-hidden="true" />Your Brand <span>https://www.yourbrand.com › guides</span></p>
+      <p className="rv3-serp-title">How to Choose a Riding Jacket: Fabric, Fit and Weather</p>
+      <p className="rv3-serp-desc">A practical guide to jackets for long rides, with sizing help and the questions to ask before you buy.</p>
+    </div>
+    <div className="rv3-serp-res"><p className="rv3-serp-site"><i aria-hidden="true" />example.com <span>› reviews</span></p><p className="rv3-serp-title rv3-serp-title--org">Touring jackets compared</p><p className="rv3-serp-desc">What to look for in fabric, fit and ventilation.</p></div>
+  </div>;
+}

@@ -82,7 +82,7 @@ export function generateOrganizationSchema() {
     email: siteMetadata.email,
     telephone: pune.phoneDisplay,
     description:
-      'We help businesses get found by the buyers already looking for what they sell, turn more of those visits into real enquiries, and measure the whole path so they can see what worked.',
+      'MappedSkills is a performance marketing and SEO agency in India. We manage Google Ads, Meta Ads and SEO for businesses that want more commercially meaningful enquiries, not just more traffic.',
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer service',

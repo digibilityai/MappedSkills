@@ -1,0 +1,48 @@
+/* SEO packages block on /seo. Scoped to `.b2.sk`; uses the --v-* tokens from b2.css. Static: no motion of its own. */
+.b2.sk .sk-pkg .sk-intent { max-width: 62ch; }
+.b2.sk .skp-plans { list-style: none; margin: 0 0 clamp(28px, 3vw, 44px); padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); align-items: stretch; }
+.b2.sk .skp-plan { display: flex; flex-direction: column; gap: 10px; padding: clamp(20px, 2.2vw, 30px); background: var(--v-ground); border: 1px solid var(--v-line); border-top: 4px solid var(--v-ink); border-radius: 4px; }
+.b2.sk .skp-plan.is-featured { border-top-color: var(--v-burnt); }
+.b2.sk .skp-plan h3 { font: 800 clamp(1.3rem, 1.8vw, 1.6rem)/1.15 var(--font-bricolage), sans-serif; color: var(--v-ink); }
+.b2.sk .skp-fee { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin: 0; }
+.b2.sk .skp-fee b { font: 800 clamp(1.8rem, 2.6vw, 2.4rem)/1 var(--font-bricolage), sans-serif; color: var(--v-ink); }
+.b2.sk .skp-fee span { color: var(--resolve-dim); font-size: .95rem; }
+.b2.sk .skp-fit { margin: 0; color: var(--v-ink); font-size: .98rem; line-height: 1.5; }
+.b2.sk .skp-plan dl { margin: auto 0 0; padding-top: 6px; display: grid; gap: 0; }
+.b2.sk .skp-plan dl div { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-top: 1px solid var(--v-line); font-size: .92rem; line-height: 1.4; }
+.b2.sk .skp-plan dt { color: var(--resolve-dim); }
+.b2.sk .skp-plan dd { margin: 0; text-align: right; font-weight: 700; color: var(--v-ink); }
+.b2.sk .skp-table-wrap { overflow-x: auto; margin-bottom: clamp(28px, 3vw, 44px); background: var(--v-ground); border: 1px solid var(--v-line); border-radius: 4px; }
+.b2.sk .skp-table { width: 100%; border-collapse: collapse; font-size: .95rem; line-height: 1.4; }
+.b2.sk .skp-table caption { padding: 16px 18px 8px; text-align: left; font: 800 .75rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; color: var(--resolve-dim); }
+.b2.sk .skp-table th, .b2.sk .skp-table td { padding: 11px 18px; text-align: left; border-top: 1px solid var(--v-line); vertical-align: top; color: var(--v-ink); }
+.b2.sk .skp-table thead th { font-weight: 800; }
+.b2.sk .skp-table tbody th { font-weight: 600; width: 34%; }
+.b2.sk .skp-notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 2.4vw, 36px); margin-bottom: clamp(28px, 3vw, 44px); }
+.b2.sk .skp-notes h3, .b2.sk .skp-audit h3 { font: 800 1.1rem/1.2 var(--font-bricolage), sans-serif; color: var(--v-ink); margin-bottom: 10px; }
+.b2.sk .skp-notes ul, .b2.sk .skp-audit ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.b2.sk .skp-notes li, .b2.sk .skp-audit li { position: relative; padding-left: 18px; font-size: .95rem; line-height: 1.5; color: var(--v-ink); }
+.b2.sk .skp-notes li::before, .b2.sk .skp-audit li::before { content: ''; position: absolute; left: 0; top: .6em; width: 7px; height: 7px; background: var(--v-burnt); }
+.b2.sk .skp-notes p { margin-top: 10px; font-size: .92rem; color: var(--resolve-dim); }
+.b2.sk .skp-audit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 48px); padding: clamp(22px, 3vw, 40px); background: var(--v-deep); color: var(--v-on-dark); border-radius: 4px; margin-bottom: clamp(24px, 3vw, 36px); }
+html .b2.sk .skp-audit h3, html .b2.sk .skp-audit .skp-fee b, html .b2.sk .skp-audit li { color: #fff; }
+html .b2.sk .skp-audit p, html .b2.sk .skp-audit .skp-fee span { color: var(--v-soft); }
+html .b2.sk .skp-audit .skp-audit-k { color: var(--v-tang); font: 800 .75rem/1.3 var(--font-manrope), sans-serif; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 10px; }
+.b2.sk .skp-audit li::before { background: var(--v-tang); }
+.b2.sk .skp-audit .skp-fee { margin-bottom: 12px; }
+.b2.sk .skp-audit .skp-credit { margin-top: 12px; }
+.b2.sk .skp-audit .skp-excl { margin-top: 14px; font-weight: 700; }
+.b2.sk .skp-pl { margin-left: 18px; color: var(--v-burnt); font-weight: 700; }
+@media (max-width: 1023px) {
+  .b2.sk .skp-plans, .b2.sk .skp-notes, .b2.sk .skp-audit { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .b2.sk .skp-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .b2.sk .skp-table, .b2.sk .skp-table tbody, .b2.sk .skp-table tr, .b2.sk .skp-table th, .b2.sk .skp-table td { display: block; }
+  .b2.sk .skp-table tr { border-top: 1px solid var(--v-line); padding: 8px 0; }
+  .b2.sk .skp-table th, .b2.sk .skp-table td { border: 0; padding: 4px 16px; }
+  .b2.sk .skp-table tbody th { width: auto; font-weight: 800; }
+  .b2.sk .skp-table td { display: flex; justify-content: space-between; gap: 12px; }
+  .b2.sk .skp-table td::before { content: attr(data-label); color: var(--resolve-dim); }
+  .b2.sk .skp-pl { display: block; margin: 14px 0 0; }
+}

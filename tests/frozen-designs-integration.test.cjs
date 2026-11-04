@@ -12,7 +12,7 @@ Module._extensions['.css'] = () => {};
  * navigation, footer, sitemap, and the removal of dev-only hooks. */
 
 const ROUTES = [
-  { path: '/', file: 'app/page.tsx', component: 'ResolveHomeR3', title: 'Google Ads & Meta Ads for Growing Businesses | MappedSkills', crumbs: null },
+  { path: '/', file: 'app/page.tsx', component: 'ResolveHomeR3', title: 'Performance Marketing & SEO Agency in India | MappedSkills', crumbs: null },
   { path: '/google-ads', file: 'app/(pages)/google-ads/page.tsx', component: 'GoogleAdsR41', title: 'Google Ads Measured on the Enquiries, Not the Clicks | MappedSkills', crumbs: 'Paid search' },
   { path: '/social-media-ads', file: 'app/(pages)/social-media-ads/page.tsx', component: 'MetaAdsR22', title: 'Paid Social, Judged on the Enquiries It Produces | MappedSkills', crumbs: 'Paid social' },
   { path: '/who-we-help/d2c', file: 'app/(pages)/who-we-help/d2c/page.tsx', component: 'D2CR1', title: 'Paid Advertising for D2C Brands in India | MappedSkills', crumbs: 'D2C brands' },
@@ -92,7 +92,7 @@ test('navigation: four audience pages in the Who We Help dropdown, in order, wit
   assert.deepEqual(nav.WHO_WE_HELP_LINKS.map((l) => l.href), ['/who-we-help/d2c', '/who-we-help/education', '/who-we-help/real-estate', '/who-we-help/enquiry-led-businesses']);
   assert.equal(nav.WHO_WE_HELP_ROUTES.size, 4);
   assert.deepEqual(nav.PRIMARY_LINKS.map((l) => l.href), ['/work', '/how-it-works', '/about']);
-  assert.equal(nav.CONTACT_LINK.label, 'Discuss Your Advertising');
+  assert.equal(nav.CONTACT_LINK.label, 'Discuss Your Growth');
   const header = renderToStaticMarkup(React.createElement(load('components/direction-c/SiteHeader.tsx').SiteHeader));
   for (const l of nav.WHO_WE_HELP_LINKS) assert.match(header, new RegExp(`href="${l.href}"`));
 });
@@ -103,7 +103,7 @@ test('footer: Who We Help group; no More services group (DEC-086 supersedes DEC-
   const hrefs = (s) => [...s.matchAll(/href="([^"]+)"/g)].map((m) => m[1]);
   assert.deepEqual(hrefs(grp('dc-f-who')), ['/who-we-help/d2c', '/who-we-help/education', '/who-we-help/real-estate', '/who-we-help/enquiry-led-businesses']);
   assert.ok(!footer.includes('dc-f-more') && !/More services/i.test(footer));
-  assert.deepEqual(hrefs(grp('dc-f-svc')), ['/services', '/google-ads', '/social-media-ads', '/seo'], 'B2 (DEC-120): SEO is the last, supporting service');
+  assert.deepEqual(hrefs(grp('dc-f-svc')), ['/services', '/google-ads', '/social-media-ads', '/seo'], 'Batch 1: SEO is the third core service');
 });
 
 test('dev-only hooks are gone and nothing production-facing depends on superseded rounds', () => {

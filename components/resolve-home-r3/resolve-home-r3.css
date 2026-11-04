@@ -130,11 +130,12 @@
 .rv3-serp-bar svg { width: 16px; height: 16px; fill: none; stroke: #5f6368; stroke-width: 2; flex: none; }
 .rv3-serp-tabs { display: flex; gap: 18px; margin: 14px 0 12px; padding-bottom: 8px; border-bottom: 1px solid #ebebeb; font-size: 13px; color: #5f6368; }
 .rv3-serp-tabs b { color: #1a73e8; font-weight: 600; border-bottom: 3px solid #1a73e8; padding-bottom: 7px; margin-bottom: -9px; }
-.rv3-serp-ad, .rv3-serp-org { padding-top: 6px; } .rv3-serp-org { margin-top: 14px; }
+.rv3-serp-ad, .rv3-serp-org, .rv3-serp-res { padding-top: 6px; } .rv3-serp-org, .rv3-serp-res + .rv3-serp-res { margin-top: 14px; }
 .rv3-serp-spon { font-size: 13px; line-height: 1.3; } .rv3-serp-spon b { font-weight: 700; color: #202124; }
 .rv3-serp-site { display: flex; align-items: center; gap: 8px; margin-top: 4px; font-size: 13px; line-height: 1.3; color: #202124; flex-wrap: wrap; } .rv3-serp-site span { color: #4d5156; }
 .rv3-serp-site i { width: 22px; height: 22px; border-radius: 50%; background: var(--c-tang-deep); flex: none; }
-.rv3-serp-org .rv3-serp-site i { background: #bdc1c6; }
+.rv3-serp-org .rv3-serp-site i, .rv3-serp-res + .rv3-serp-res .rv3-serp-site i { background: #bdc1c6; }
+.rv3-serp-res + .rv3-serp-res .rv3-serp-title { color: #1a0dab; }
 .rv3-serp-title { margin-top: 4px; color: #1a0dab; font-size: clamp(17px, 2vw, 20px); line-height: 1.3; } .rv3-serp-title--org { font-size: clamp(16px, 1.8vw, 18px); }
 .rv3-serp-desc { margin-top: 3px; font-size: 14px; line-height: 1.5; color: #4d5156; }
 .rv3-serp-links { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 8px; font-size: 14px; color: #1a0dab; }
@@ -249,9 +250,9 @@ body:has(.rv3) .dc-ftr .dc-base, body:has(.rv3) .dc-ftr .dc-brand > p, body:has(
 .rv3-svc { padding-block: clamp(48px, 4.4vw, 64px); }
 .rv3-svc .rv3-head { margin-bottom: var(--sp-3); }
 .rv3-svc .rv3-head h2 { max-width: 30ch; font-size: clamp(1.9rem, 3vw, 2.7rem); }
-.rv3-svc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-3) clamp(32px, 4vw, 64px); align-items: start; }
+.rv3-svc-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-3) clamp(24px, 3vw, 48px); align-items: start; }
 .rv3-s { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-2); padding-top: 20px; border-top: 2px solid var(--c-rule-dark); }
-.rv3-s--1 { border-top-color: var(--c-tang); }
+.rv3-s { border-top-color: var(--c-tang); } /* three core services, equal prominence */
 .rv3-s h3 { font-size: clamp(1.8rem, 2.6vw, 2.4rem); }
 .rv3-s-copy p { font-size: 1rem; margin-top: 12px; }
 .rv3-s-n { margin-bottom: 10px; }
@@ -261,7 +262,6 @@ body:has(.rv3) .dc-ftr .dc-base, body:has(.rv3) .dc-ftr .dc-brand > p, body:has(
 .rv3-feed { width: 100%; max-width: 280px; margin: 0; }
 .rv3-feed-img { aspect-ratio: 5 / 4; }
 @media (min-width: 1200px) {
-  .rv3-s { grid-template-columns: minmax(0, 1fr) minmax(0, 300px); column-gap: var(--sp-3); align-items: start; }
   .rv3-serp-org:last-child { display: none; }
 }
 
@@ -283,7 +283,8 @@ body:has(.rv3) .dc-ftr .dc-base a[href*='instagram.com'] { --ico: url("data:imag
 @media (max-width: 1080px) {
   .rv3-j-tag { display: flex; }
   .rv3-j-list { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: var(--sp-4); }
-  .rv3-svc-grid { gap: var(--sp-4); }
+  .rv3-svc-grid { grid-template-columns: 1fr; gap: var(--sp-4); }
+  .rv3-feed { margin-inline: auto; max-width: 300px; }
 }
 @media (max-width: 760px) {
   .rv3-j-list { grid-template-columns: 1fr; row-gap: 0; }
@@ -294,7 +295,7 @@ body:has(.rv3) .dc-ftr .dc-base a[href*='instagram.com'] { --ico: url("data:imag
   .rv3-j--ms .rv3-j-n { border-color: var(--c-tang-deep); } .rv3-j--you .rv3-j-n { border-style: dashed; border-color: var(--c-gap); }
   .rv3-j-tag, .rv3-stage-art, .rv3-j h3, .rv3-j p { grid-column: 2; }
   .rv3-stage-art { max-width: 104px; margin: 0 0 10px; }
-  .rv3-svc-grid { grid-template-columns: 1fr; gap: var(--sp-4); } .rv3-feed { margin-inline: auto; max-width: 300px; }
+  .rv3-feed { margin-inline: auto; max-width: 300px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

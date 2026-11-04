@@ -5,6 +5,7 @@ import { HwSequence } from '../../b2/HwSequence';
 import { BOOKING_HREF, CONTACT_HREF } from '@/components/direction-c/primitives';
 import { CaseShowcase, type ShowcaseData } from '@/components/case-showcase/CaseShowcase';
 import { SEO_PLAIN as S } from './content';
+import { SeoPackages } from '../../seo-packages/SeoPackages';
 import '../../paid-advertising/paid-advertising.css';
 import '../../b2/b2.css';
 import './seo.css';
@@ -74,7 +75,8 @@ export function SeoBody({ showcase = null }: { showcase?: ShowcaseData | null })
   const showProof = !!showcase && showcase.cards.length > 0;
   /* chapter numbers follow the sections that are actually rendered */
   const nHow = showProof ? '04' : '03';
-  const nQs = showProof ? '05' : '04';
+  const nPkg = showProof ? '05' : '04';
+  const nQs = showProof ? '06' : '05';
 
   return (
     <div className="pa b2 sk">
@@ -175,6 +177,11 @@ export function SeoBody({ showcase = null }: { showcase?: ShowcaseData | null })
             </h2>
             <p className="sk-intent">{S.workIntent}</p>
             <p className="sk-sub">{S.workSub}</p>
+            <p className="sk-more">
+              <ActionLink href={S.workLink.href} variant="text">
+                {S.workLink.label}
+              </ActionLink>
+            </p>
           </header>
           <ol className="sk-lines" data-reveal>
             {S.work.map((w, i) => (
@@ -232,8 +239,14 @@ export function SeoBody({ showcase = null }: { showcase?: ShowcaseData | null })
         </div>
       </section>
 
-      {/* 05, Paper: four native disclosures, closed on load (the approved FAQ pattern) */}
-      <section className="sk-act sk-paper" aria-labelledby="sk-h-qs">
+      {/* 05, Paper: packages, comparison, audit, terms and exclusions (data: components/seo-packages/data.ts) */}
+      <SeoPackages
+        chapter={nPkg}
+        copy={{ kicker: S.pkgKicker, h: S.pkgH, intro: S.pkgIntro, compareLabel: S.pkgCompareLabel, defHeading: S.pkgDefHeading, termsHeading: S.pkgTermsHeading, extraHeading: S.pkgExtraHeading, auditKicker: S.auditKicker, auditLead: S.auditLead, cta: S.pkgCta }}
+      />
+
+      {/* 06, Ground: native disclosures, closed on load (the approved FAQ pattern) */}
+      <section className="sk-act sk-ground" aria-labelledby="sk-h-qs">
         <div className="pa-wrap sk-q">
           <header className="sk-head" data-reveal>
             <p className="sk-ch">

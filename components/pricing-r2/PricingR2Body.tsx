@@ -157,6 +157,115 @@ export function PricingR2Body() {
         </div>
       </section>
 
+      {/* 2b. SEO: three packages, the one full comparison, the standalone audit, terms and exclusions */}
+      <section id="seo-pricing" className="prr-sec prr-ground" aria-labelledby="prr-h-seo">
+        <div className="prr-w">
+          <p className="prr-eyebrow">{P.seo.kicker}</p>
+          <h2 id="prr-h-seo" className="prr-h2">
+            {P.seo.h2.a} <span className="prr-accent-text">{P.seo.h2.b}</span>
+          </h2>
+          <p className="prr-intro">{P.seo.intro} {P.seo.gst}</p>
+
+          <div className="prr-plans">
+            {P.seo.plans.map((plan, i) => {
+              const featured = 'featured' in plan && plan.featured;
+              return (
+                <article key={plan.id} className={'prr-plan' + (featured ? ' is-combined' : '')} data-prr-reveal="" style={{ '--i': i } as CSSProperties}>
+                  <div className="prr-plan-head">
+                    <p className="prr-plan-k">SEO</p>
+                    <h3 className="prr-plan-t">{plan.name}</h3>
+                    <p className="prr-plan-fee">
+                      <span className="prr-plan-amt">{plan.fee}</span>
+                      <span className="prr-plan-per">{plan.per}</span>
+                    </p>
+                    <p className="prr-plan-note">{plan.fit}</p>
+                  </div>
+                  <dl className="prr-rows">
+                    {P.seo.compare.rows.filter((r) => (P.seo.cardKeys as readonly string[]).includes(r.k)).map((r) => (
+                      <div key={r.k} className="prr-row">
+                        <dt>{r.k}</dt>
+                        <dd>{r.v[i]}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <Link href={CONTACT_HREF} className={'prr-btn ' + (featured ? 'prr-btn-primary' : 'prr-btn-ghost-ink')}>
+                    {P.seo.cta}
+                  </Link>
+                </article>
+              );
+            })}
+          </div>
+
+          <div className="prr-compare" data-prr-reveal="">
+            <table className="prr-table">
+              <caption className="prr-table-cap">{P.seo.compare.label}</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Included</th>
+                  {P.seo.compare.heads.map((h) => (
+                    <th key={h} scope="col">
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {P.seo.compare.rows.map((r) => (
+                  <tr key={r.k}>
+                    <th scope="row">{r.k}</th>
+                    {r.v.map((v, i) => (
+                      <td key={i} data-label={P.seo.compare.heads[i]}>
+                        {v}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="prr-creative">
+            <div className="prr-panel" data-prr-reveal="">
+              <h3 className="prr-panel-t">What the allowances mean</h3>
+              <ul className="prr-check">
+                {P.seo.definitions.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="prr-panel" data-prr-reveal="">
+              <h3 className="prr-panel-t">{P.seo.termsLabel}</h3>
+              <ul className="prr-check">
+                {P.seo.terms.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <p className="prr-outside-label">{P.seo.extraLabel}</p>
+              <p className="prr-outside-list">{P.seo.extra.join(', ')}. {P.seo.extraNote}</p>
+            </div>
+          </div>
+
+          <article className="prr-panel prr-audit" aria-labelledby="prr-h-audit" data-prr-reveal="">
+            <p className="prr-plan-k">{P.seo.auditKicker}</p>
+            <h3 id="prr-h-audit" className="prr-panel-t">{P.seo.audit.name}</h3>
+            <p className="prr-plan-fee">
+              <span className="prr-plan-amt">{P.seo.audit.fee}</span>
+              <span className="prr-plan-per">{P.seo.audit.per}</span>
+            </p>
+            <ul className="prr-check">
+              {P.seo.audit.includes.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <p>{P.seo.audit.excludes} {P.seo.audit.credit}</p>
+          </article>
+
+          <p className="prr-related">
+            <Link href={P.seo.detail.href}>{P.seo.detail.label}</Link>.
+          </p>
+        </div>
+      </section>
+
       {/* 3. What management includes: rhythm and scope */}
       <section className="prr-sec prr-ground" aria-labelledby="prr-h-included">
         <div className="prr-w prr-included-grid">

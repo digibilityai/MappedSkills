@@ -2,10 +2,10 @@ import Link from 'next/link';
 import { ActionLink } from '../ActionLink';
 import { SectionHeading } from '../SectionHeading';
 import { PaReveal } from '../PaReveal';
-import { SearchAdMockup, MetaAdMockup } from '../AdMockups';
+import { SearchAdMockup, MetaAdMockup, OrganicMockup } from '../AdMockups';
 import { CaseShowcase, type ShowcaseData } from '@/components/case-showcase/CaseShowcase';
 import type { CSSProperties } from 'react';
-import { DIAGRAM, HERO, PATH, CARDS, WHICH, SEO_SUPPORT, TERMS, SERVICES_FAQS, CLOSE } from './content';
+import { DIAGRAM, HERO, PATH, CARDS, WHICH, TERMS, SERVICES_FAQS, CLOSE } from './content';
 import '../paid-advertising.css';
 import './services.css';
 
@@ -20,7 +20,7 @@ export function PaidAdvertisingServices({ showcase }: { showcase?: ShowcaseData 
       <div className="pa-hero-copy">
         <p className="pa-eyebrow">{HERO.eyebrow}</p>
         {/* Brand DNA 4.0 A4.1: the emphasis carries the customer outcome, not the product names (wording unchanged) */}
-        <h1 id="sx-h1">Reach more of <span>the right customers</span> with Google Ads and Meta Ads.</h1>
+        <h1 id="sx-h1">Reach more of <span>the right customers</span> with Google Ads, Meta Ads and SEO.</h1>
         <p className="pa-lede">{HERO.lede}</p>
         <div className="pa-actions"><ActionLink /><ActionLink href="#path" variant="text">{HERO.anchor}</ActionLink></div>
       </div>
@@ -29,11 +29,11 @@ export function PaidAdvertisingServices({ showcase }: { showcase?: ShowcaseData 
             whole path. Plays once on load (CSS only, off under reduced motion); everything is present without it. */}
         <figure className="x3-flow" aria-labelledby="x2-cap">
           <div className="x3-measured">
-            <ol className="x3-lanes" aria-label="Two ways customers arrive">
+            <ol className="x3-lanes" aria-label="Three ways customers arrive">
               {DIAGRAM.entries.map(e => <li key={e.id} className={`x3-lane x3-lane--${e.id}`}><span className="x3-pill">{e.k}</span><b>{e.ch}</b><span className="x3-d">{e.d}</span></li>)}
             </ol>
             <svg className="x3-merge" viewBox="0 0 200 48" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-              <path d="M50 0 C50 28, 100 22, 100 48" /><path d="M150 0 C150 28, 100 22, 100 48" />
+              <path d="M33 0 C33 28, 100 22, 100 48" /><path d="M100 0 L100 48" /><path d="M167 0 C167 28, 100 22, 100 48" />
             </svg>
             <ol className="x3-spine" aria-label="The shared path">
               {DIAGRAM.stations.map((st, i) => <li key={st.k} className="x3-st" style={{ '--i': i } as CSSProperties}><b>{st.k}</b> <span>{st.d}</span></li>)}
@@ -62,9 +62,9 @@ export function PaidAdvertisingServices({ showcase }: { showcase?: ShowcaseData 
 
     {/* 3 Core services: the only place the two illustrative ad mockups appear */}
     <section id="services" className="pa-section pa-ink" aria-labelledby="sx-services"><div className="pa-wrap">
-      <SectionHeading id="sx-services" eyebrow="Our core services">Two ways to <span className="pa-em">capture demand</span></SectionHeading>
+      <SectionHeading id="sx-services" eyebrow="Our core services">Three ways to <span className="pa-em">reach demand</span></SectionHeading>
       <div className="x2-cards">{CARDS.map(c => <article key={c.id} className={`pa-service sx-card sx-card--${c.id} x2-card x2-card--${c.id}`} data-reveal>
-        <div className="sx-card-visual">{c.id === 'google' ? <SearchAdMockup illustrative /> : <MetaAdMockup illustrative />}</div>
+        <div className="sx-card-visual">{c.id === 'google' ? <SearchAdMockup illustrative /> : c.id === 'meta' ? <MetaAdMockup illustrative /> : <OrganicMockup />}</div>
         <div className="sx-card-copy">
           <p className="sx-badge">{c.badge}</p>
           <h3>{c.name}</h3>
@@ -75,16 +75,9 @@ export function PaidAdvertisingServices({ showcase }: { showcase?: ShowcaseData 
           <ActionLink href={c.href} variant="text">Explore {c.name}</ActionLink>
         </div>
       </article>)}</div>
-      {/* SEO as a supporting service (B2, DEC-120): below the two core services and visibly secondary; its case studies stay on /seo */}
-      <aside className="x2-seo" aria-labelledby="sx-seo" data-reveal>
-        <p className="x2-seo-k">{SEO_SUPPORT.label}</p>
-        <h3 id="sx-seo">{SEO_SUPPORT.name}</h3>
-        <p className="x2-seo-d">{SEO_SUPPORT.body} {SEO_SUPPORT.proof}</p>
-        <ActionLink href={SEO_SUPPORT.href} variant="text">{SEO_SUPPORT.cta}</ActionLink>
-      </aside>
     </div></section>
 
-    {/* 3b Which one first: a decision between the two core services, then "not every business needs both" and the audiences */}
+    {/* 3b Which one first: a decision between the three core services, then "not every business needs both" and the audiences */}
     <section id="which-first" className="pa-section pa-wrap x2-decide" aria-labelledby="sx-which">
       <div className="x2-decide-head">
         <SectionHeading id="sx-which" eyebrow={WHICH.eyebrow}>{WHICH.h}</SectionHeading>
@@ -92,7 +85,7 @@ export function PaidAdvertisingServices({ showcase }: { showcase?: ShowcaseData 
       </div>
       <div className="x2-fork">
         {WHICH.options.map((o, i) => <article key={o.id} className={`x2-opt x2-opt--${o.id}`} aria-labelledby={`sx-opt-${o.id}`} data-reveal>
-          {i === 1 && <span className="x2-or" aria-hidden="true">or</span>}
+          {i > 0 && <span className="x2-or" aria-hidden="true">or</span>}
           <p className="x2-opt-cue"><span className="x3-pill">{o.cue}</span><span>{o.when}</span></p>
           <h3 id={`sx-opt-${o.id}`}>{o.name}</h3>
           <p className="x2-opt-role">{o.role}</p>

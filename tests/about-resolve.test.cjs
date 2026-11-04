@@ -25,7 +25,7 @@ function mediaBlock(q) {
 }
 
 test('owner facts, H1, CTAs and the closing band are kept', () => {
-  assert.match(about, /<h1 id="ab-h1">An advertising agency that <span>answers to your enquiries\.<\/span><\/h1>/);
+  assert.match(about, /<h1 id="ab-h1">A performance marketing and SEO agency that <span>answers to your enquiries\.<\/span><\/h1>/);
   assert.ok(about.includes('We are independently operated'));
   assert.ok(about.includes('You approve the approach and scope before we begin.'));
   assert.ok(about.includes('We commit to the work and how we do it, not guaranteed outcomes.'));

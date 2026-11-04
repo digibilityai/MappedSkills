@@ -19,9 +19,9 @@ const nav = load('components/direction-c/nav.ts');
 const { SiteHeader } = load('components/direction-c/SiteHeader.tsx');
 const header = (p) => { globalThis.__b2Path = p; return renderToStaticMarkup(React.createElement(SiteHeader)); };
 
-test('navigation: Google Ads and Meta Ads stay the only core services; SEO is one supporting link; no other service is promoted', () => {
-  assert.deepStrictEqual(nav.SERVICE_GROUPS.flatMap((g) => g.links.map((l) => l.href)), ['/google-ads', '/social-media-ads']);
-  assert.deepStrictEqual(nav.SUPPORTING_SERVICE, { href: '/seo', label: 'SEO' });
+test('navigation: Google Ads, Meta Ads and SEO are the three equal core services; no other service is promoted', () => {
+  assert.deepStrictEqual(nav.SERVICE_GROUPS.flatMap((g) => g.links.map((l) => l.href)), ['/google-ads', '/social-media-ads', '/seo']);
+  assert.strictEqual(nav.SUPPORTING_SERVICE, undefined, 'SEO is no longer a supporting service');
   assert.deepStrictEqual(nav.PRIMARY_LINKS.map((l) => l.href), ['/work', '/how-it-works', '/about']);
   assert.deepStrictEqual(nav.FOOTER_SERVICES.map((l) => l.href), ['/services', '/google-ads', '/social-media-ads', '/seo']);
   assert.strictEqual(nav.FOOTER_SERVICES.at(-1).label, 'SEO');
@@ -29,15 +29,15 @@ test('navigation: Google Ads and Meta Ads stay the only core services; SEO is on
   for (const r of ['/ai-seo', '/lead-generation', '/conversion-optimization']) assert.ok(!html.includes(`href="${r}"`), r);
 });
 
-test('desktop panel: "Also: SEO" sits after the two core services and before the hub; mobile menu has the same link', () => {
+test('desktop panel: SEO is the third core service, with no "Also" label, before the hub; mobile menu has the same links', () => {
   const html = header('/');
   const panel = html.split('id="dc-svc-panel"')[1].split('<noscript>')[0];
   const order = [...panel.matchAll(/href="([^"]+)"/g)].map((m) => m[1]);
   assert.deepStrictEqual(order, ['/google-ads', '/social-media-ads', '/seo', '/services', '/pricing']);
-  assert.match(panel, /<p class="dc-sp-also"><a class="dc-also" href="\/seo"><span class="k">Also:<\/span> <span class="t">SEO<\/span><\/a><\/p>/);
+  assert.doesNotMatch(panel, /Also:|dc-also/);
   const menu = html.split('id="dc-m-svc"')[1].split('id="dc-m-who"')[0];
   assert.deepStrictEqual([...menu.matchAll(/href="([^"]+)"/g)].map((m) => m[1]), ['/services', '/google-ads', '/social-media-ads', '/seo', '/pricing']);
-  assert.match(menu, /<a class="dc-m-also" href="\/seo"><span class="k">Also:<\/span> <span class="t">SEO<\/span><\/a>/);
+  assert.doesNotMatch(menu, /Also:|dc-m-also/);
   assert.strictEqual((html.match(/href="\/seo"/g) || []).length, 2, 'once on desktop, once on mobile');
 });
 
@@ -86,12 +86,17 @@ test('pricing: buttons 52 px and the FAQ link a 44 px target; prices, plans and 
   assert.match(pr, /\.prr \.prr-btn \{ min-height: 52px; \}/);
   assert.match(pr, /\.prr \.prr-more a \{ display: inline-flex; align-items: center; min-height: 44px; \}/);
   const body = read('components/pricing-r2/PricingR2Body.tsx');
-  assert.strictEqual((body.match(/<h2\b/g) || []).length, 8, 'heading structure unchanged');
+  assert.strictEqual((body.match(/<h2\b/g) || []).length, 9, 'heading structure: the original eight plus the SEO plans section');
   assert.match(read('app/(pages)/pricing/page.tsx'), /₹14,999\/month each, or both at ₹26,999\/month/);
+  const pricingCopy = read('components/pricing-r2/content.ts');
+  assert.match(pricingCopy, /primary: 'Discuss Your Growth'/);
+  assert.match(pricingCopy, /h2: 'Tell us what you want your marketing to achieve\.'/);
+  assert.doesNotMatch(pricingCopy, /Discuss Your Advertising|Tell us where your advertising is today/);
+  assert.match(pricingCopy, /For Google Ads and Meta Ads plans, the fee covers/);
+  assert.match(pricingCopy, /SEO packages have their own monthly deliverables/);
 });
 
 test('B2 copy adds no long or double dashes', () => {
-  const { SEO_SUPPORT } = load('components/paid-advertising/services/content.ts');
   const { SERVICES_SHOWCASE } = load('components/paid-advertising/services/showcase.ts');
-  assert.doesNotMatch(JSON.stringify([SEO_SUPPORT, SERVICES_SHOWCASE, nav.SUPPORTING_SERVICE, nav.FOOTER_SERVICES]), /[–—]|--/);
+  assert.doesNotMatch(JSON.stringify([SERVICES_SHOWCASE, nav.FOOTER_SERVICES]), /[–—]|--/);
 });

@@ -74,7 +74,7 @@ test('the buyer-path diagram is gone; its scope sentence and "tests and reviews"
 });
 
 test('headline emphasis by meaning, punctuation by sentence', () => {
-  assert.match(html, /<h1 id="rv3-h1">Paid advertising built around how <em>your customers buy\.<\/em><\/h1>/, 'hero unchanged');
+  assert.match(html, /<h1 id="rv3-h1">More of the right customers\. <em>Not just more traffic\.<\/em><\/h1>/, 'Batch 1 hero');
   assert.match(html, /<h2 id="rv3-journey-h">From a search or a scroll <em>to an enquiry or a sale<\/em><\/h2>/);
   assert.match(html, /<h2 id="rv3-work-h">See the work behind the offer<\/h2>/);
   assert.match(html, /<h2 id="rv3-clients-h">Businesses we’ve worked with<\/h2>/);

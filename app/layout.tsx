@@ -51,8 +51,8 @@ const manrope = Manrope({
   document head.
 */
 export const metadata: Metadata = {
-  title: 'MappedSkills | Judge Us on the Enquiries, Not the Traffic',
-  description: 'We help businesses get found by the buyers already looking for what they sell, turn more of those visits into real enquiries, and measure the whole path so they can see what worked.',
+  title: 'Performance Marketing & SEO Agency in India | MappedSkills',
+  description: 'MappedSkills is a performance marketing and SEO agency in India. We manage Google Ads, Meta Ads and SEO for businesses that want more commercially meaningful enquiries, not just more traffic.',
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },

@@ -210,7 +210,7 @@
 /* NAVIGATION REDESIGN — docs/nav-redesign/prototype/index.html (R2). Values follow the prototype; the
    logo sizes follow DEC-069. Breakpoints are in em (16px base) so enlarged browser text moves to the menu
    before the bar crowds: 64em = 1024px desktop navigation, 37.5em = 600px, 22.5em = 360px. */
-.dc-hdr { position: relative; background: var(--dc-ground); border-bottom: 1px solid var(--dc-line); z-index: 5; }
+.dc-hdr { position: sticky; top: 0; background: var(--dc-ground); border-bottom: 1px solid var(--dc-line); z-index: 100; }
 /* flex-wrap: at 320px with 200% text the right cluster cannot fit beside the logo; it drops to a second row
    instead of pushing the page wider than the viewport. At normal text sizes everything fits and nothing wraps. */
 .dc-hdr .dc-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; min-height: 76px; }
@@ -481,6 +481,33 @@ footer.dc-ftr .dc-base a[href*='instagram.com'] { --ico: url("data:image/svg+xml
   .dc-ftr li a, .dc-ftr .dc-contact dd a { min-height: 44px; }
   .dc-ftr .dc-contact dd { min-height: 44px; }
 }
+
+/* Batch 3: compact sticky header. The header stays at the top while scrolling. `data-compact` is set by SiteHeader after
+   a short scroll (a passive listener that touches one attribute, no re-render). Only the bar's height and the CTA change; the
+   logo, links, labels and destinations do not. The header's footprint in the page flow stays constant (the height removed
+   is given back as bottom margin, transitioned in step), so nothing below it moves when the state changes.
+   --dc-bar-h / --dc-bar-hc: bar height at the top / when compact. --dc-hdr-sp: space reserved for in-page anchors. */
+:root { --dc-bar-h: 76px; --dc-bar-hc: 60px; --dc-hdr-sp: 76px; }
+.dc-hdr { margin-bottom: 0; transition: margin-bottom var(--dc-d-fast) var(--dc-e-state); }
+.dc-hdr .dc-bar { transition: min-height var(--dc-d-fast) var(--dc-e-state); }
+.dc-hdr[data-compact] { margin-bottom: calc(var(--dc-bar-h) - var(--dc-bar-hc)); }
+.dc-hdr[data-compact] .dc-bar { min-height: var(--dc-bar-hc); }
+@media (min-width: 64em) { .dc-hdr[data-compact] .dc-bar .dc-btn { min-height: 40px; } }
+@media (max-width: 37.4375em) { :root { --dc-bar-h: 64px; --dc-bar-hc: 56px; --dc-hdr-sp: 68px; } }
+@media (min-width: 37.5em) and (max-width: 63.9375em) { :root { --dc-bar-h: 72px; --dc-bar-hc: 56px; --dc-hdr-sp: 68px; } }
+/* in-page anchors and keyboard focus land below the compact bar (shared; no per-page offsets) */
+html { scroll-padding-top: var(--dc-hdr-sp); }
+/* open mobile menu: it scrolls inside the header, so a tall menu on a short screen is never out of reach, and the
+   consent bar (fixed, bottom) does not cover its last links. */
+.dc-hdr.dc-menu-open { max-height: calc(100vh - var(--consent-h, 0px)); max-height: calc(100dvh - var(--consent-h, 0px)); overflow-y: auto; overscroll-behavior: contain; }
+.dc-hdr.dc-menu-open .dc-m-inner { min-height: 0; }
+/* very short viewports (landscape phones, large text zoom): a sticky bar would take too much of the screen */
+@media (max-height: 30em) {
+  .dc-hdr { position: relative; margin-bottom: 0 !important; }
+  .dc-hdr[data-compact] .dc-bar { min-height: var(--dc-bar-h); }
+  :root { --dc-hdr-sp: 0px; }
+}
+@media (prefers-reduced-motion: reduce) { .dc-hdr, .dc-hdr .dc-bar { transition: none; } }
 
 /* Footer Variant A (DEC-124): five desktop columns from 1024px. Brand, Services, Who We Help, Company (with Insights
    stacked beneath) and Contact. Links keep a 44px pitch so targets never overlap. The doubled class outranks the page-scoped `body:has(...) .dc-ftr` footer rules in b2.css, services.css and resolve-home-r3.css. Below 1024px the existing layout applies. */

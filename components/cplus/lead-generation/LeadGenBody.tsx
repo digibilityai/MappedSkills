@@ -35,19 +35,6 @@ export function LeadGenBody() {
       <section className="lg-hero lg-dark" aria-labelledby="lg-h1">
         <div className="pa-wrap lg-hero-g">
           <div className="lg-hero-tx">
-            <nav aria-label="Breadcrumb" className="lg-crumb">
-              <ol>
-                <li>
-                  <Link href="/">Home</Link>{' '}
-                </li>
-                <li>
-                  <span aria-hidden="true">/</span> What we do{' '}
-                </li>
-                <li>
-                  <span aria-hidden="true">/</span> <span aria-current="page">{LG.crumb}</span>
-                </li>
-              </ol>
-            </nav>
             <p className="pa-eyebrow">{LG.kicker}</p>
             <h1 id="lg-h1">
               <Hx h={LG.h1} />

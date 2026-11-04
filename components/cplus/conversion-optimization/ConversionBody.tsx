@@ -30,19 +30,6 @@ export function ConversionBody() {
       <section className="co-hero co-dark" aria-labelledby="co-h1">
         <div className="pa-wrap co-hero-g">
           <div className="co-hero-tx">
-            <nav aria-label="Breadcrumb" className="co-crumb">
-              <ol>
-                <li>
-                  <Link href="/">Home</Link>{' '}
-                </li>
-                <li>
-                  <span aria-hidden="true">/</span> What we do{' '}
-                </li>
-                <li>
-                  <span aria-hidden="true">/</span> <span aria-current="page">{CO.crumb}</span>
-                </li>
-              </ol>
-            </nav>
             <h1 id="co-h1">
               <Hx h={CO.h1} />
             </h1>

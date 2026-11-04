@@ -27,7 +27,7 @@ export const SEO_PLAIN = {
     { key: 'page', name: 'Your page' },
     { key: 'enquiry', name: 'An enquiry', tag: 'What we judge it on' },
   ],
-  trailCap: 'Illustration. It shows no results.',
+  trailCap: 'The route from a search to an enquiry.',
   trailMap: { elsewhere: 'somebody else' },
 
   /* 1: clicks are not customers (the three approved questions) */

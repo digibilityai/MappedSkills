@@ -36,8 +36,8 @@ test('owner facts, H1, CTAs and the closing band are kept', () => {
 });
 
 test('case studies: approved copy and routes, no outcomes, artwork only from the homepage set', () => {
-  assert.match(about, /<WorkCard s=\{STUDIES\['om-sai'\]\} lead \/>/);
-  assert.match(about, /<WorkCard s=\{STUDIES\.anybodycanbake\} \/>/);
+  assert.match(about, /<WorkCard s=\{STUDIES\['om-sai'\]\} equal \/>/);
+  assert.match(about, /<WorkCard s=\{ABC_CARD\} equal \/>/, 'Batch 2: both cards carry equal weight');
   assert.ok(work.includes("href: '/portfolio/om-sai-developer-meta-ads'"));
   assert.ok(work.includes("href: '/portfolio/google-ads-for-online-courses'"));
   const copy = work.replace(/\/\*[\s\S]*?\*\//g, '');

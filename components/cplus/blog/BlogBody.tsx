@@ -27,10 +27,6 @@ export function BlogBody({ posts }: { posts: CmsBlogCard[] }) {
     <>
       <section className="ed-hero" aria-labelledby="bl-h1">
         <div className="ed-w">
-          <nav aria-label="Breadcrumb" className="ed-crumb">
-            <Link href="/">Home</Link>
-            <span aria-current="page">{B.crumb}</span>
-          </nav>
           <div className="ed-hg">
             <div className="ed-hl">
               <p className="ed-k">{B.kicker}</p>

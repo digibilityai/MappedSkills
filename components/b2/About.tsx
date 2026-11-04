@@ -3,6 +3,8 @@ import { ActionLink } from '../paid-advertising/ActionLink';
 import { PaReveal } from '../paid-advertising/PaReveal';
 import { WorkCard } from '../resolve/WorkCard';
 import { STUDIES } from '../resolve/work';
+import { motifFor } from '../case-study/CaseArt';
+import { clientForHref } from '@/lib/clients';
 import { Band } from './Band';
 import { HwSequence } from './HwSequence';
 import '../paid-advertising/paid-advertising.css';
@@ -33,6 +35,14 @@ const COUNT = [
 /* The field: 60 anonymous marks; three of them become enquiries. Positions are fixed so the picture is the same for everyone. */
 const FIELD = Array.from({ length: 60 }, (_, i) => i);
 const ASKED = new Set([14, 37, 51]);
+
+/* AnybodyCanBake has no approved photograph or card artwork that avoids result figures, so it takes the same code-drawn conceptual
+   illustration and logo chip the /work card uses (no card disclosure, as on /work; the detail page keeps its note), in the same frame as Om Sai Developer's artwork. */
+const ABC_CARD = {
+  ...STUDIES.anybodycanbake,
+  motif: motifFor(STUDIES.anybodycanbake.href) ?? undefined,
+  clientLogo: clientForHref(STUDIES.anybodycanbake.href) ?? undefined,
+};
 
 const css = (v: Record<string, string | number>) => v as React.CSSProperties;
 
@@ -66,7 +76,7 @@ export function About() {
                 <p className="ab-field-say">What we answer to</p>
               </div>
             </div>
-            <figcaption id="ab-field-cap">Many visits, a few people who ask. Conceptual illustration. It shows no results.</figcaption>
+            <figcaption id="ab-field-cap">Many visits, a few people who ask.</figcaption>
           </figure>
         </div>
       </section>
@@ -152,9 +162,9 @@ export function About() {
             </header>
             <ActionLink href="/work" variant="text">Explore our work</ActionLink>
           </div>
-          <div className="rs-wc-grid">
-            <WorkCard s={STUDIES['om-sai']} lead />
-            <WorkCard s={STUDIES.anybodycanbake} />
+          <div className="rs-wc-grid rs-wc-grid-eq">
+            <WorkCard s={STUDIES['om-sai']} equal />
+            <WorkCard s={ABC_CARD} equal />
           </div>
           <p className="ab-press">For journalists: press releases and our media contact are in the <Link href="/press">newsroom</Link>.</p>
         </div>

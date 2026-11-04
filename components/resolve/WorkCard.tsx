@@ -12,14 +12,14 @@ import './work-card.css';
  * so nothing stands in for artwork that does not exist. No imagery is invented and no outcome is shown. Use inside
  * `.rs-wc-grid` (lead, then side).
  */
-export function WorkCard({ s, lead = false, sizes }: { s: WorkStudy; lead?: boolean; sizes?: string }) {
+export function WorkCard({ s, lead = false, equal = false, sizes }: { s: WorkStudy; lead?: boolean; equal?: boolean; sizes?: string }) {
   const a = s.art;
   return (
-    <article className={`rs-wc ${lead ? 'rs-wc-lead' : 'rs-wc-side'}${a || s.motif ? '' : ' rs-wc-textonly'}${s.motif && !a ? ' rs-wc-motif' : ''}`} aria-labelledby={`rs-wc-${s.id}`} data-reveal>
+    <article className={`rs-wc ${equal ? 'rs-wc-eq' : lead ? 'rs-wc-lead' : 'rs-wc-side'}${a || s.motif ? '' : ' rs-wc-textonly'}${s.motif && !a ? ' rs-wc-motif' : ''}`} aria-labelledby={`rs-wc-${s.id}`} data-reveal>
       {a && (
         <>
           <div className="rs-wc-img">
-            <Image src={a.src} alt={a.alt} style={a.position ? { objectPosition: a.position } : undefined} fill sizes={sizes ?? (lead ? '(min-width: 1081px) 740px, 100vw' : '(min-width: 1081px) 440px, (min-width: 761px) 70vw, 100vw')} />
+            <Image src={a.src} alt={a.alt} style={a.position ? { objectPosition: a.position } : undefined} fill sizes={sizes ?? (equal ? '(min-width: 761px) 46vw, 100vw' : lead ? '(min-width: 1081px) 740px, 100vw' : '(min-width: 1081px) 440px, (min-width: 761px) 70vw, 100vw')} />
             {a.logo ? <span className={`rs-wc-logo rs-wc-logo-${a.logo.fit}`}><Image src={a.logo.src} alt={a.logo.alt} width={a.logo.w} height={a.logo.h} /></span> : null}
           </div>
           {a.note ? <p className="rs-wc-note">{a.note}</p> : null}

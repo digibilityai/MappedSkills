@@ -34,7 +34,8 @@
 .x3-st b { font: 800 1rem/1.2 var(--font-bricolage), sans-serif; color: var(--resolve-ink); margin-right: 4px; }
 .x3-end b { display: block; padding: 12px 24px; border-radius: 999px; background: var(--resolve-accent); color: var(--resolve-ink); font: 800 1.15rem/1.2 var(--font-bricolage), sans-serif; box-shadow: 0 0 0 6px rgba(255, 91, 4, .16); }
 .x3-measure { position: absolute; left: 16px; right: 16px; bottom: 10px; margin: 0 !important; font-size: .875rem; line-height: 1.35; color: var(--resolve-dim) !important; text-align: center; }
-.x3-measure b { color: var(--resolve-accent-deep); text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; margin-right: 6px; }
+/* F-06 (R4): 12px label, so the ramp's small-text step (accent-dark) is used; accent-deep measured 4.32:1 on paper */
+.x3-measure b { color: var(--resolve-accent-dark); text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; margin-right: 6px; }
 .x3-flow figcaption { margin-top: 12px; font-size: .875rem; line-height: 1.4; color: var(--resolve-dim); }
 @media (prefers-reduced-motion: no-preference) {
   .x3-lanes li { animation: x3-in .5s cubic-bezier(.2,.7,.2,1) both; }

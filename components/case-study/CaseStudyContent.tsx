@@ -36,9 +36,15 @@ const proseOptions: Options = {
     /* Contentful tables — every live case study contains one. The table
        scrolls inside its own container rather than overflowing the viewport.
        RECONCILIATION PORT (from `main` 86406fa / 64ecf03, shadow dropped);
-       recorded separately from this file's pre-existing layout changes. */
+       recorded separately from this file's pre-existing layout changes.
+       F-05 (R4): the scroll container is focusable and named, so keyboard users can scroll it with the arrow keys. */
     [BLOCKS.TABLE]: (_node, children) => (
-      <div className="my-6 w-full max-w-full overflow-x-auto rounded-lg border border-border">
+      <div
+        className="my-6 w-full max-w-full overflow-x-auto rounded-lg border border-border"
+        role="region"
+        aria-label="Table, scrolls sideways"
+        tabIndex={0}
+      >
         <table className="w-full min-w-[500px] border-collapse text-left">
           <tbody>{children}</tbody>
         </table>
@@ -61,10 +67,11 @@ const proseOptions: Options = {
       const href = node.data?.uri as string | undefined;
       return (
         /* WORK-005 — same tab for internal links, including absolute
-           mappedskills.com URLs. See `lib/internal-links.ts`. */
+           mappedskills.com URLs. See `lib/internal-links.ts`.
+           F-04 (R4): a persistent underline, so links do not rely on colour alone (WCAG 1.4.1). */
         <a
           href={href}
-          className="text-accent hover:underline underline-offset-4"
+          className="text-accent underline underline-offset-4 hover:decoration-2"
           {...linkTargetProps(href)}
         >
           {children}
@@ -293,7 +300,12 @@ export function CaseStudyContent({
               <h2 className="text-3xl font-bold font-heading tracking-tight mb-8">
                 Before & After Comparisons
               </h2>
-              <div className="overflow-x-auto rounded-xl border border-border/60">
+              <div
+                className="overflow-x-auto rounded-xl border border-border/60"
+                role="region"
+                aria-label="Before and after comparisons, scrolls sideways"
+                tabIndex={0}
+              >
                 <table className="w-full min-w-[560px] border-collapse text-left">
                   <thead>
                     <tr className="bg-foreground text-background">

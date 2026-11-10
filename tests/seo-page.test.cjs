@@ -220,7 +220,7 @@ test('the local case-study previews cannot reach a build or a deployment (produc
     assert.match(text, /All prices exclude GST\./);
     assert.match(text, /minimum engagement of six months/);
     assert.match(content, /Major website rebuilds and migrations are separately scoped and quoted; routine technical SEO does not include managing a migration\./);
-    assert.match(data.SEO_AUDIT.credit, /fully credited against your first SEO retainer invoice when you sign within 90 days of audit completion\. The credit is applied once and is not refundable in cash\./);
+    assert.match(data.SEO_AUDIT.credit, /fully credited against your first SEO retainer invoice when you sign within 30 days of audit completion\. The credit is applied once and is not refundable in cash\./);
     assert.match(text, /Audit implementation is not included\./);
   });
 

@@ -8,6 +8,8 @@
  *     three-month periods, with the comparison caveat); no ranking, impression, quote or rating, and no calendar dates are added.
  */
 
+import { SEO_AUDIT_CREDIT_CONDITION, SEO_AUDIT_CREDIT_TERM } from '@/components/seo-packages/data';
+
 export const SEO_PLAIN = {
   crumb: 'Search',
   kicker: 'Organic search',
@@ -179,7 +181,7 @@ export const SEO_PLAIN = {
     },
     {
       q: 'What happens to the audit fee if I continue with you?',
-      a: 'The SEO Audit & Roadmap fee is fully credited against your first SEO retainer invoice when you sign within 90 days of audit completion. The credit is applied once and is not refundable in cash.',
+      a: `The SEO Audit & Roadmap fee is ${SEO_AUDIT_CREDIT_TERM}. ${SEO_AUDIT_CREDIT_CONDITION}`,
     },
     {
       q: 'Do the packages include a website redesign, migration or paid ads?',

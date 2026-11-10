@@ -1,0 +1,571 @@
+{
+  "axe": {
+    "before(live) /portfolio/google-ads-for-online-courses": [],
+    "before(live) /portfolio/google-ads-for-online-courses regions": [],
+    "before(live) /portfolio/google-ads-for-online-courses links": [],
+    "before(live) /services": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          ".x3-measure > b",
+          ".x2-opt--google > .pa-action--text.pa-action[href$=\"google-ads\"]",
+          ".x2-opt--meta > .pa-action--text.pa-action[href$=\"social-media-ads\"]",
+          ".x2-opt--seo > .pa-action--text.pa-action[href$=\"seo\"]"
+        ]
+      }
+    ],
+    "before(live) /pricing": [],
+    "before(live) /seo": [],
+    "after(local) /portfolio/google-ads-for-online-courses": [],
+    "after(local) /portfolio/google-ads-for-online-courses regions": [],
+    "after(local) /portfolio/google-ads-for-online-courses links": [],
+    "after(local) /services": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          ".x2-opt--google > .pa-action--text.pa-action[href$=\"google-ads\"]",
+          ".x2-opt--meta > .pa-action--text.pa-action[href$=\"social-media-ads\"]",
+          ".x2-opt--seo > .pa-action--text.pa-action[href$=\"seo\"]"
+        ]
+      }
+    ],
+    "after(local) /pricing": [],
+    "after(local) /seo": []
+  },
+  "menu": {
+    "before(live) 360": {
+      "closed": {
+        "logoX": 16,
+        "logoY": 10,
+        "toggleX": 300,
+        "toggleY": 10,
+        "toggleW": 44
+      },
+      "open": {
+        "logoX": 87,
+        "logoY": 10,
+        "toggleX": 229,
+        "toggleY": 10,
+        "toggleW": 44
+      },
+      "expandedOpen": "true",
+      "toggleName": "Close menu",
+      "focusAfterOpen": "Services",
+      "menuScroll": {
+        "scrollable": false,
+        "before": 0,
+        "after": 0,
+        "overflowY": "auto"
+      },
+      "afterTabs": {
+        "logoX": 87,
+        "logoY": 10,
+        "toggleX": 229,
+        "toggleY": 10,
+        "toggleW": 44
+      },
+      "expandedAfterEsc": "false",
+      "focusAfterEsc": true,
+      "closedAgain": {
+        "logoX": 16,
+        "logoY": 10,
+        "toggleX": 300,
+        "toggleY": 10,
+        "toggleW": 44
+      }
+    },
+    "before(live) 390": {
+      "closed": {
+        "logoX": 16,
+        "logoY": 10,
+        "toggleX": 330,
+        "toggleY": 10,
+        "toggleW": 44
+      },
+      "open": {
+        "logoX": 102,
+        "logoY": 10,
+        "toggleX": 244,
+        "toggleY": 10,
+        "toggleW": 44
+      },
+      "expandedOpen": "true",
+      "toggleName": "Close menu",
+      "focusAfterOpen": "Services",
+      "menuScroll": {
+        "scrollable": false,
+        "before": 0,
+        "after": 0,
+        "overflowY": "auto"
+      },
+      "afterTabs": {
+        "logoX": 102,
+        "logoY": 10,
+        "toggleX": 244,
+        "toggleY": 10,
+        "toggleW": 44
+      },
+      "expandedAfterEsc": "false",
+      "focusAfterEsc": true,
+      "closedAgain": {
+        "logoX": 16,
+        "logoY": 10,
+        "toggleX": 330,
+        "toggleY": 10,
+        "toggleW": 44
+      }
+    },
+    "before(live) 768": {
+      "closed": {
+        "logoX": 31,
+        "logoY": 14,
+        "toggleX": 638,
+        "toggleY": 14,
+        "toggleW": 99
+      },
+      "open": {
+        "logoX": 227,
+        "logoY": 14,
+        "toggleX": 397,
+        "toggleY": 14,
+        "toggleW": 145
+      },
+      "expandedOpen": "true",
+      "toggleName": "Close menu",
+      "focusAfterOpen": "Services",
+      "menuScroll": {
+        "scrollable": false,
+        "before": 0,
+        "after": 0,
+        "overflowY": "auto"
+      },
+      "afterTabs": {
+        "logoX": 227,
+        "logoY": 14,
+        "toggleX": 397,
+        "toggleY": 14,
+        "toggleW": 145
+      },
+      "expandedAfterEsc": "false",
+      "focusAfterEsc": true,
+      "closedAgain": {
+        "logoX": 31,
+        "logoY": 14,
+        "toggleX": 638,
+        "toggleY": 14,
+        "toggleW": 99
+      }
+    },
+    "after(local) 360": {
+      "closed": {
+        "logoX": 16,
+        "logoY": 10,
+        "toggleX": 300,
+        "toggleY": 10,
+        "toggleW": 44
+      },
+      "open": {
+        "logoX": 16,
+        "logoY": 10,
+        "toggleX": 300,
+        "toggleY": 10,
+        "toggleW": 44
+      },
+      "expandedOpen": "true",
+      "toggleName": "Close menu",
+      "focusAfterOpen": "Services",
+      "menuScroll": {
+        "scrollable": false,
+        "before": 0,
+        "after": 0,
+        "overflowY": "auto"
+      },
+      "afterTabs": {
+        "logoX": 16,
+        "logoY": 10,
+        "toggleX": 300,
+        "toggleY": 10,
+        "toggleW": 44
+      },
+      "expandedAfterEsc": "false",
+      "focusAfterEsc": true,
+      "closedAgain": {
+        "logoX": 16,
+        "logoY": 10,
+        "toggleX": 300,
+        "toggleY": 10,
+        "toggleW": 44
+      }
+    },
+    "after(local) 390": {
+      "closed": {
+        "logoX": 16,
+        "logoY": 10,
+        "toggleX": 330,
+        "toggleY": 10,
+        "toggleW": 44
+      },
+      "open": {
+        "logoX": 16,
+        "logoY": 10,
+        "toggleX": 330,
+        "toggleY": 10,
+        "toggleW": 44
+      },
+      "expandedOpen": "true",
+      "toggleName": "Close menu",
+      "focusAfterOpen": "Services",
+      "menuScroll": {
+        "scrollable": false,
+        "before": 0,
+        "after": 0,
+        "overflowY": "auto"
+      },
+      "afterTabs": {
+        "logoX": 16,
+        "logoY": 10,
+        "toggleX": 330,
+        "toggleY": 10,
+        "toggleW": 44
+      },
+      "expandedAfterEsc": "false",
+      "focusAfterEsc": true,
+      "closedAgain": {
+        "logoX": 16,
+        "logoY": 10,
+        "toggleX": 330,
+        "toggleY": 10,
+        "toggleW": 44
+      }
+    },
+    "after(local) 768": {
+      "closed": {
+        "logoX": 31,
+        "logoY": 14,
+        "toggleX": 638,
+        "toggleY": 14,
+        "toggleW": 99
+      },
+      "open": {
+        "logoX": 31,
+        "logoY": 14,
+        "toggleX": 593,
+        "toggleY": 14,
+        "toggleW": 145
+      },
+      "expandedOpen": "true",
+      "toggleName": "Close menu",
+      "focusAfterOpen": "Services",
+      "menuScroll": {
+        "scrollable": false,
+        "before": 0,
+        "after": 0,
+        "overflowY": "auto"
+      },
+      "afterTabs": {
+        "logoX": 31,
+        "logoY": 14,
+        "toggleX": 593,
+        "toggleY": 14,
+        "toggleW": 145
+      },
+      "expandedAfterEsc": "false",
+      "focusAfterEsc": true,
+      "closedAgain": {
+        "logoX": 31,
+        "logoY": 14,
+        "toggleX": 638,
+        "toggleY": 14,
+        "toggleW": 99
+      }
+    }
+  },
+  "meta": {
+    "before(live) /": {
+      "status": 200,
+      "title": "Performance Marketing & SEO Agency in India | MappedSkills",
+      "desc": "MappedSkills is a performance marketing and SEO agency in India. We manage Google Ads, Meta Ads and SEO for businesses that want more commercially meaningful enquiries, not just more traffic.",
+      "canonical": "https://mappedskills.com/",
+      "robots": "index, follow",
+      "ogUrl": "https://mappedskills.com",
+      "ogImage": "https://mappedskills.com/ms_icon.webp",
+      "jsonld": "Organization"
+    },
+    "before(live) /services": {
+      "status": 200,
+      "title": "Google Ads, Meta Ads & SEO Services | MappedSkills",
+      "desc": "Reach customers who are searching, scrolling and comparing. MappedSkills manages Google Ads, Meta Ads and SEO for growing Indian businesses, for real enquiries.",
+      "canonical": "https://mappedskills.com/services",
+      "robots": "index, follow",
+      "ogUrl": "https://mappedskills.com/services",
+      "ogImage": "https://mappedskills.com/ms_icon.webp",
+      "jsonld": "Organization,BreadcrumbList,FAQPage,Service,Service,Service"
+    },
+    "before(live) /pricing": {
+      "status": 200,
+      "title": "Google Ads, Meta Ads & SEO Pricing | MappedSkills",
+      "desc": "MappedSkills pricing, excluding GST. Google Ads and Meta Ads at ₹14,999/month each, or both at ₹26,999/month. SEO from ₹19,999/month. See what each plan includes.",
+      "canonical": "https://mappedskills.com/pricing",
+      "robots": "index, follow",
+      "ogUrl": "https://mappedskills.com/pricing",
+      "ogImage": "https://mappedskills.com/ms_icon.webp",
+      "jsonld": "Organization"
+    },
+    "before(live) /seo": {
+      "status": 200,
+      "title": "SEO Judged on the Enquiries It Produces | MappedSkills",
+      "desc": "We help your business appear for relevant searches, improve the pages visitors land on and measure whether organic search brings genuine enquiries.",
+      "canonical": "https://mappedskills.com/seo",
+      "robots": "index, follow",
+      "ogUrl": "https://mappedskills.com/seo",
+      "ogImage": "https://mappedskills.com/ms_icon.webp",
+      "jsonld": "Organization,BreadcrumbList"
+    },
+    "before(live) /portfolio/google-ads-for-online-courses": {
+      "status": 200,
+      "title": "1,410 paid enrolments attributed to Google Ads | Case Study | MappedSkills",
+      "desc": "Google Ads for AnybodyCanBake’s online baking courses: 1,410 paid enrolments attributed to it and ₹66.36 lakh in reported revenue, Feb 2020 to Aug 2021.",
+      "canonical": "https://mappedskills.com/portfolio/google-ads-for-online-courses",
+      "robots": "index, follow",
+      "ogUrl": "https://mappedskills.com/portfolio/google-ads-for-online-courses",
+      "ogImage": "https://mappedskills.com/images/resolve-r3/anybodycanbake-feature.webp",
+      "jsonld": "Organization,BreadcrumbList"
+    },
+    "before(live) /google-ads": {
+      "status": 200,
+      "title": "Google Ads Measured on the Enquiries, Not the Clicks | MappedSkills",
+      "desc": "Account structure, search terms, ad copy, bidding and budget — plus the page the click lands on, whether the enquiry completes, and whether you can see where it came from.",
+      "canonical": "https://mappedskills.com/google-ads",
+      "robots": "index, follow",
+      "ogUrl": "https://mappedskills.com/google-ads",
+      "ogImage": "https://mappedskills.com/ms_icon.webp",
+      "jsonld": "Organization,BreadcrumbList,FAQPage,Service"
+    },
+    "before(live) /social-media-ads": {
+      "status": 200,
+      "title": "Paid Social, Judged on the Enquiries It Produces | MappedSkills",
+      "desc": "We run paid social advertising, and we will tell you when it is the wrong channel for your business. Where it fits, it is one demand source inside the same measured outcome as everything else.",
+      "canonical": "https://mappedskills.com/social-media-ads",
+      "robots": "index, follow",
+      "ogUrl": "https://mappedskills.com/social-media-ads",
+      "ogImage": "https://mappedskills.com/ms_icon.webp",
+      "jsonld": "Organization,BreadcrumbList,FAQPage,Service"
+    },
+    "before(live) /sitemap.xml": {
+      "status": 200,
+      "len": 4092,
+      "urls": 53,
+      "locs": "/|/about|/ai-seo|/blog|/blog/7-proven-strategies-of-digital-marketing-for-real-estate-developers|/blog/building-an-email-list|/blog/content-marketing-services-in-pune|/blog/facebook-advertising-agency-pune|/blog/importance-of-content-writing|/blog/performance-marketing-vs-digital-marketing|/blog/seo-company-in-pune|/contact|/conversion-optimization|/faq|/google-ads|/how-it-works|/lead-generation|/portfolio/advit-prints-meta-ads|/portfolio/anybodycanbake-meta-ads|/portfolio/anybodycanbake-seo|/portfolio/bakedemy-google-ads|/portfolio/bakedemy-meta-ads|/portfolio/bakersville-google-ads|/portfolio/bblewrap-google-ads|/portfolio/classpe-social-media-strategy|/portfolio/ekoching-google-ads|/portfolio/google-ads-for-online-courses|/portfolio/hutnhomes-meta-ads|/portfolio/insuryo-organic-growth|/portfolio/klenzmo-meta-ads|/portfolio/libros-library-meta-ads|/portfolio/meticulous-business-plan-google-ads|/portfolio/om-sai-developer-meta-ads|/portfolio/phoenix-laundry-google-ads|/portfolio/seo-ameba-software|/portfolio/talreja-talreja-google-ads|/portfolio/wanderlooms-meta-ads|/press|/press/marketing-measurement-gap-indian-websites|/pricing|/problems/traffic-but-no-enquiries|/research|/research/industry-benchmarks|/research/marketing-measurement-gap-indian-business-websites|/seo|/services|/social-media-ads|/who-we-help/d2c|/who-we-help/education|/who-we-help/enquiry-led-businesses|/who-we-help/real-estate|/work|/work/page/2"
+    },
+    "before(live) /robots.txt": {
+      "status": 200,
+      "len": 318,
+      "urls": 0,
+      "body": "User-Agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /api/\n\nUser-Agent: Bingbot\nAllow: /\nDisallow: /admin/\nDisallow: /api/\nCrawl-delay: 1\n\nUser-Agent: MJ12bot\nDisallow: /\n\nUser-Agent: AhrefsBot\nDisallow: /\n\nUser-Agent: SemrushBot\nDisallow: /\n\nHost: https://mappedskills.com\nSitemap: https://mappedskills.com/sitemap.xml\n"
+    },
+    "after(local) /": {
+      "status": 200,
+      "title": "Performance Marketing & SEO Agency in India | MappedSkills",
+      "desc": "MappedSkills is a performance marketing and SEO agency in India. We manage Google Ads, Meta Ads and SEO for businesses that want more commercially meaningful enquiries, not just more traffic.",
+      "canonical": "http://localhost:3000/",
+      "robots": "index, follow",
+      "ogUrl": "http://localhost:3000",
+      "ogImage": "http://localhost:3000/ms_icon.webp",
+      "jsonld": "Organization"
+    },
+    "after(local) /services": {
+      "status": 200,
+      "title": "Google Ads, Meta Ads & SEO Services | MappedSkills",
+      "desc": "Reach customers who are searching, scrolling and comparing. MappedSkills manages Google Ads, Meta Ads and SEO for growing Indian businesses, for real enquiries.",
+      "canonical": "http://localhost:3000/services",
+      "robots": "index, follow",
+      "ogUrl": "http://localhost:3000/services",
+      "ogImage": "http://localhost:3000/ms_icon.webp",
+      "jsonld": "Organization,BreadcrumbList,FAQPage,Service,Service,Service"
+    },
+    "after(local) /pricing": {
+      "status": 200,
+      "title": "Google Ads, Meta Ads & SEO Pricing | MappedSkills",
+      "desc": "MappedSkills pricing, excluding GST. Google Ads and Meta Ads at ₹14,999/month each, or both at ₹26,999/month. SEO from ₹19,999/month. See what each plan includes.",
+      "canonical": "http://localhost:3000/pricing",
+      "robots": "index, follow",
+      "ogUrl": "http://localhost:3000/pricing",
+      "ogImage": "http://localhost:3000/ms_icon.webp",
+      "jsonld": "Organization"
+    },
+    "after(local) /seo": {
+      "status": 200,
+      "title": "SEO Judged on the Enquiries It Produces | MappedSkills",
+      "desc": "We help your business appear for relevant searches, improve the pages visitors land on and measure whether organic search brings genuine enquiries.",
+      "canonical": "http://localhost:3000/seo",
+      "robots": "index, follow",
+      "ogUrl": "http://localhost:3000/seo",
+      "ogImage": "http://localhost:3000/ms_icon.webp",
+      "jsonld": "Organization,BreadcrumbList"
+    },
+    "after(local) /portfolio/google-ads-for-online-courses": {
+      "status": 404,
+      "title": "Page Not Found | MappedSkills",
+      "desc": "The page you were looking for is not here. These are the pages that are.",
+      "canonical": "http://localhost:3000/404",
+      "robots": "noindex",
+      "ogUrl": "http://localhost:3000/404",
+      "ogImage": "http://localhost:3000/ms_icon.webp",
+      "jsonld": ""
+    },
+    "after(local) /google-ads": {
+      "status": 200,
+      "title": "Google Ads Measured on the Enquiries, Not the Clicks | MappedSkills",
+      "desc": "Account structure, search terms, ad copy, bidding and budget — plus the page the click lands on, whether the enquiry completes, and whether you can see where it came from.",
+      "canonical": "http://localhost:3000/google-ads",
+      "robots": "index, follow",
+      "ogUrl": "http://localhost:3000/google-ads",
+      "ogImage": "http://localhost:3000/ms_icon.webp",
+      "jsonld": "Organization,BreadcrumbList,FAQPage,Service"
+    },
+    "after(local) /social-media-ads": {
+      "status": 200,
+      "title": "Paid Social, Judged on the Enquiries It Produces | MappedSkills",
+      "desc": "We run paid social advertising, and we will tell you when it is the wrong channel for your business. Where it fits, it is one demand source inside the same measured outcome as everything else.",
+      "canonical": "http://localhost:3000/social-media-ads",
+      "robots": "index, follow",
+      "ogUrl": "http://localhost:3000/social-media-ads",
+      "ogImage": "http://localhost:3000/ms_icon.webp",
+      "jsonld": "Organization,BreadcrumbList,FAQPage,Service"
+    },
+    "after(local) /sitemap.xml": {
+      "status": 200,
+      "len": 1406,
+      "urls": 22,
+      "locs": "/|/about|/ai-seo|/blog|/contact|/conversion-optimization|/faq|/google-ads|/how-it-works|/lead-generation|/press|/pricing|/problems/traffic-but-no-enquiries|/research|/seo|/services|/social-media-ads|/who-we-help/d2c|/who-we-help/education|/who-we-help/enquiry-led-businesses|/who-we-help/real-estate|/work"
+    },
+    "after(local) /robots.txt": {
+      "status": 200,
+      "len": 312,
+      "urls": 0,
+      "body": "User-Agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /api/\n\nUser-Agent: Bingbot\nAllow: /\nDisallow: /admin/\nDisallow: /api/\nCrawl-delay: 1\n\nUser-Agent: MJ12bot\nDisallow: /\n\nUser-Agent: AhrefsBot\nDisallow: /\n\nUser-Agent: SemrushBot\nDisallow: /\n\nHost: http://localhost:3000\nSitemap: http://localhost:3000/sitemap.xml\n"
+    }
+  },
+  "text": {
+    "before(live) /pricing": {
+      "credit30": 0,
+      "credit90": 1,
+      "gst": 3,
+      "sixMonths": 1,
+      "notRefundable": 1,
+      "prices": [
+        [
+          "₹14,999",
+          7
+        ],
+        [
+          "₹26,999",
+          3
+        ],
+        [
+          "₹19,999",
+          3
+        ],
+        [
+          "₹34,999",
+          3
+        ],
+        [
+          "₹59,999",
+          3
+        ]
+      ],
+      "adSpend": 12
+    },
+    "before(live) /seo": {
+      "credit30": 0,
+      "credit90": 1,
+      "gst": 1,
+      "sixMonths": 1,
+      "notRefundable": 1,
+      "prices": [
+        [
+          "₹14,999",
+          1
+        ],
+        [
+          "₹26,999",
+          0
+        ],
+        [
+          "₹19,999",
+          2
+        ],
+        [
+          "₹34,999",
+          2
+        ],
+        [
+          "₹59,999",
+          2
+        ]
+      ],
+      "adSpend": 0
+    },
+    "after(local) /pricing": {
+      "credit30": 1,
+      "credit90": 0,
+      "gst": 3,
+      "sixMonths": 1,
+      "notRefundable": 1,
+      "prices": [
+        [
+          "₹14,999",
+          7
+        ],
+        [
+          "₹26,999",
+          3
+        ],
+        [
+          "₹19,999",
+          3
+        ],
+        [
+          "₹34,999",
+          3
+        ],
+        [
+          "₹59,999",
+          3
+        ]
+      ],
+      "adSpend": 12
+    },
+    "after(local) /seo": {
+      "credit30": 1,
+      "credit90": 0,
+      "gst": 1,
+      "sixMonths": 1,
+      "notRefundable": 1,
+      "prices": [
+        [
+          "₹14,999",
+          1
+        ],
+        [
+          "₹26,999",
+          0
+        ],
+        [
+          "₹19,999",
+          2
+        ],
+        [
+          "₹34,999",
+          2
+        ],
+        [
+          "₹59,999",
+          2
+        ]
+      ],
+      "adSpend": 0
+    }
+  }
+}

@@ -501,7 +501,9 @@ html { scroll-padding-top: var(--dc-hdr-sp); }
    consent bar (fixed, bottom) does not cover its last links. */
 /* The header itself does not scroll: the bar (logo, Close) stays put and only the menu panel scrolls beneath it. */
 .dc-hdr.dc-menu-open { display: flex; flex-direction: column; max-height: calc(100vh - var(--consent-h, 0px)); max-height: calc(100dvh - var(--consent-h, 0px)); overflow: hidden; }
-.dc-hdr.dc-menu-open .dc-bar { flex: none; }
+/* F-03 (R4): the bar is also .dc-wrap (margin-inline: auto). In this column flex box auto margins shrink it to its
+   content and centre it, which pulled the logo and Close inward. width: 100% keeps them where they were when closed. */
+.dc-hdr.dc-menu-open .dc-bar { flex: none; width: 100%; }
 .dc-hdr.dc-menu-open .dc-mnav { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
 .dc-hdr.dc-menu-open .dc-m-inner { min-height: 0; }
 /* very short viewports (landscape phones, large text zoom): a sticky bar would take too much of the screen */

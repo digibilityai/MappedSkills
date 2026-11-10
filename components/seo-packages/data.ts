@@ -11,6 +11,12 @@ export const SEO_PLANS = [
   { id: 'scale', name: 'SEO Scale', fee: '₹59,999', per: 'a month', fit: 'For a larger site or a competitive market that needs more pages worked on every month.' },
 ] as const;
 
+/** Audit credit window (Founder decision, R4 corrections, 2026-11-11): 30 days after audit completion. Single source for every page. */
+export const SEO_AUDIT_CREDIT_DAYS = 30;
+/** The credit term, without a subject, so each page can lead into it. */
+export const SEO_AUDIT_CREDIT_TERM = `fully credited against your first SEO retainer invoice when you sign within ${SEO_AUDIT_CREDIT_DAYS} days of audit completion`;
+export const SEO_AUDIT_CREDIT_CONDITION = 'The credit is applied once and is not refundable in cash.';
+
 export const SEO_AUDIT = {
   name: 'SEO Audit & Roadmap',
   fee: '₹14,999',
@@ -26,7 +32,7 @@ export const SEO_AUDIT = {
     'One findings walkthrough',
   ],
   excludes: 'Audit implementation is not included.',
-  credit: 'The audit fee is fully credited against your first SEO retainer invoice when you sign within 90 days of audit completion. The credit is applied once and is not refundable in cash.',
+  credit: `The audit fee is ${SEO_AUDIT_CREDIT_TERM}. ${SEO_AUDIT_CREDIT_CONDITION}`,
 } as const;
 
 /** Rows of the package comparison. Order: Foundation, Growth, Scale. */

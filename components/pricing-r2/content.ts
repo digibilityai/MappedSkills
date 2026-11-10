@@ -1,5 +1,5 @@
 import {
-  SEO_AUDIT, SEO_COMPARE, SEO_DEFINITIONS, SEO_EXTRA_NOTE, SEO_EXTRA_SCOPE, SEO_GST_NOTE, SEO_PLANS, SEO_TERMS, SEO_CARD_KEYS,
+  SEO_AUDIT, SEO_AUDIT_CREDIT_CONDITION, SEO_AUDIT_CREDIT_TERM, SEO_COMPARE, SEO_DEFINITIONS, SEO_EXTRA_NOTE, SEO_EXTRA_SCOPE, SEO_GST_NOTE, SEO_PLANS, SEO_TERMS, SEO_CARD_KEYS,
 } from '@/components/seo-packages/data';
 
 /**
@@ -238,8 +238,8 @@ export const PRICING_R2 = {
       },
       {
         q: 'How does the SEO Audit & Roadmap fee work if I continue with you?',
-        direct: 'It is fully credited against your first SEO retainer invoice when you sign within 90 days of audit completion.',
-        body: 'The credit is applied once and is not refundable in cash.',
+        direct: `It is ${SEO_AUDIT_CREDIT_TERM}.`,
+        body: SEO_AUDIT_CREDIT_CONDITION,
       },
       {
         q: 'Who creates the ad designs?',
